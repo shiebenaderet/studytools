@@ -1,0 +1,11 @@
+{
+    "units": [
+        {
+            "id": "early-republic",
+            "title": "Early Republic Study Tool",
+            "subtitle": "Get ready to ace your test! Learn vocabulary, practice questions, and track your progress.",
+            "theme": { "primary": "#0d9488" },
+            "activityCount": 13
+        }
+    ]
+}

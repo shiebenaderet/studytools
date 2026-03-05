@@ -295,3 +295,46 @@ document.addEventListener('DOMContentLoaded', () => StudyEngine.init());
 document.addEventListener('click', (e) => {
     if (e.target.id === 'modal-overlay') StudyEngine.closeModal();
 });
+
+// Accessibility: keyboard shortcuts
+document.addEventListener('keydown', (e) => {
+    const tag = (e.target.tagName || '').toLowerCase();
+    const isInput = tag === 'input' || tag === 'textarea' || tag === 'select' || e.target.isContentEditable;
+
+    // Escape closes any open modal
+    if (e.key === 'Escape') {
+        StudyEngine.closeModal();
+        return;
+    }
+
+    // Don't process shortcuts when typing in an input
+    if (isInput) return;
+
+    // ? key shows keyboard shortcuts help modal
+    if (e.key === '?') {
+        e.preventDefault();
+        StudyEngine.showModal(
+            '<div class="modal-header"><h2>Keyboard Shortcuts</h2>' +
+            '<button class="close-btn" onclick="StudyEngine.closeModal()">&times;</button></div>' +
+            '<div class="shortcuts-list">' +
+            '<div class="shortcut-item"><span class="shortcut-key">?</span><div class="shortcut-description">Show this help</div></div>' +
+            '<div class="shortcut-item"><span class="shortcut-key">Esc</span><div class="shortcut-description">Close any open modal</div></div>' +
+            '<div class="shortcut-item"><span class="shortcut-key">1</span><div class="shortcut-description">Go to Home</div></div>' +
+            '<div class="shortcut-item"><span class="shortcut-key">2</span><div class="shortcut-description">Go to Study</div></div>' +
+            '<div class="shortcut-item"><span class="shortcut-key">3</span><div class="shortcut-description">Go to Practice</div></div>' +
+            '<div class="shortcut-item"><span class="shortcut-key">4</span><div class="shortcut-description">Go to Games</div></div>' +
+            '<div class="shortcut-item"><span class="shortcut-key">5</span><div class="shortcut-description">Go to Tools</div></div>' +
+            '</div>'
+        );
+        return;
+    }
+
+    // Number keys 1-5 switch nav groups (only when no activity is active)
+    if (!StudyEngine.activeActivity && e.key >= '1' && e.key <= '5') {
+        const navButtons = document.querySelectorAll('#main-nav .nav-btn');
+        const index = parseInt(e.key) - 1;
+        if (navButtons[index]) {
+            navButtons[index].click();
+        }
+    }
+});
