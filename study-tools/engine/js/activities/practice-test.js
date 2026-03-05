@@ -13,9 +13,19 @@ StudyEngine.registerActivity({
     _container: null,
     _questions: null,
 
+    _shuffleArray(arr) {
+        for (var i = arr.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+        return arr;
+    },
+
     render(container, config) {
         this._container = container;
-        this._questions = config.practiceQuestions || [];
+        this._questions = this._shuffleArray((config.practiceQuestions || []).slice());
         this._currentIndex = 0;
         this._submitted = false;
 
@@ -236,6 +246,7 @@ StudyEngine.registerActivity({
         this._answers = {};
         this._submitted = false;
         this._currentIndex = 0;
+        this._shuffleArray(this._questions);
         this._saveProgress();
         this.displayQuestion();
     },
