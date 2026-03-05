@@ -17,6 +17,7 @@ StudyEngine.registerActivity({
     _config: null,
     _correctCount: 0,
     _wrongCount: 0,
+    _wrongStreak: 0,
     _finishOrder: [],
 
     render(container, config) {
@@ -249,6 +250,31 @@ StudyEngine.registerActivity({
         });
         inputArea.appendChild(input);
 
+        // Hint area (shows after wrong attempts)
+        var hintArea = document.createElement('div');
+        hintArea.id = 'race-hint';
+        hintArea.style.marginTop = '8px';
+        hintArea.style.fontSize = '0.9em';
+        hintArea.style.color = '#f59e0b';
+        hintArea.style.minHeight = '1.2em';
+        inputArea.appendChild(hintArea);
+
+        // Skip button (shows after 3 wrong attempts)
+        var skipBtn = document.createElement('button');
+        skipBtn.className = 'nav-button';
+        skipBtn.id = 'race-skip-btn';
+        skipBtn.style.marginTop = '8px';
+        skipBtn.style.display = 'none';
+        skipBtn.style.background = '#ef4444';
+        skipBtn.style.color = 'white';
+        skipBtn.style.fontSize = '0.85em';
+        skipBtn.style.padding = '6px 16px';
+        skipBtn.textContent = 'Skip (reveal answer)';
+        skipBtn.addEventListener('click', function() {
+            self._skipTerm();
+        });
+        inputArea.appendChild(skipBtn);
+
         raceArea.appendChild(inputArea);
     },
 
@@ -301,6 +327,8 @@ StudyEngine.registerActivity({
     _showDefinition() {
         if (this._currentTermIndex >= this._terms.length) return;
 
+        this._wrongStreak = 0;
+
         var term = this._terms[this._currentTermIndex];
         var defText = document.getElementById('race-definition-text');
         if (defText) defText.textContent = term.definition;
@@ -309,6 +337,12 @@ StudyEngine.registerActivity({
         if (progressText) {
             progressText.textContent = 'Question ' + (this._currentTermIndex + 1) + ' of ' + this._terms.length;
         }
+
+        // Clear hint and hide skip button
+        var hintEl = document.getElementById('race-hint');
+        if (hintEl) hintEl.textContent = '';
+        var skipBtn = document.getElementById('race-skip-btn');
+        if (skipBtn) skipBtn.style.display = 'none';
     },
 
     _checkAnswer(input) {
@@ -319,6 +353,7 @@ StudyEngine.registerActivity({
         var expected = this._terms[this._currentTermIndex].term;
         if (StudyUtils.normalizeTerm(value) === StudyUtils.normalizeTerm(expected)) {
             this._correctCount++;
+            this._wrongStreak = 0;
             this._advancePlayer();
             input.value = '';
 
@@ -330,13 +365,58 @@ StudyEngine.registerActivity({
             }
         } else {
             this._wrongCount++;
+            this._wrongStreak++;
+
             // Flash red border briefly
             input.style.borderColor = '#ef4444';
             setTimeout(function() {
                 input.style.borderColor = '';
             }, 500);
             input.select();
+
+            // Progressive hints
+            var hintEl = document.getElementById('race-hint');
+            var skipBtn = document.getElementById('race-skip-btn');
+
+            if (this._wrongStreak === 1 && hintEl) {
+                hintEl.textContent = 'Hint: The term has ' + expected.length + ' characters';
+            } else if (this._wrongStreak === 2 && hintEl) {
+                hintEl.textContent = 'Hint: Starts with "' + expected.charAt(0).toUpperCase() + '"';
+            } else if (this._wrongStreak >= 3) {
+                // Show first half of the term
+                var revealed = expected.substring(0, Math.ceil(expected.length / 2));
+                if (hintEl) hintEl.textContent = 'Hint: "' + revealed + '..."';
+                if (skipBtn) skipBtn.style.display = 'inline-block';
+            }
         }
+    },
+
+    _skipTerm() {
+        if (!this._gameActive) return;
+        var expected = this._terms[this._currentTermIndex].term;
+
+        // Show the answer briefly
+        var hintEl = document.getElementById('race-hint');
+        if (hintEl) {
+            hintEl.style.color = '#ef4444';
+            hintEl.textContent = 'Answer: ' + expected;
+        }
+
+        var self = this;
+        setTimeout(function() {
+            if (hintEl) hintEl.style.color = '#f59e0b';
+            self._wrongStreak = 0;
+            self._advancePlayer();
+            var input = document.getElementById('race-input');
+            if (input) input.value = '';
+
+            if (self._playerProgress >= self._terms.length) {
+                self._checkRaceEnd();
+            } else {
+                self._showDefinition();
+                if (input) input.focus();
+            }
+        }, 1500);
     },
 
     _advancePlayer() {

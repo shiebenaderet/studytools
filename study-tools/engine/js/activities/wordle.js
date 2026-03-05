@@ -23,11 +23,15 @@ StudyEngine.registerActivity({
     render(container, config) {
         this._container = container;
         this._filteredVocab = config.vocabulary
-            .map(v => {
-                const word = v.term.split(/\s+/)[0].replace(/[^a-zA-Z]/g, '');
-                return { vocab: v, word: word.toUpperCase() };
+            .filter(v => {
+                const cleaned = v.term.replace(/[^a-zA-Z]/g, '');
+                // Only single-word terms (no spaces) that are 4-8 letters
+                return !/\s/.test(v.term.trim()) && cleaned.length >= 4 && cleaned.length <= 8;
             })
-            .filter(item => item.word.length >= 4 && item.word.length <= 15);
+            .map(v => {
+                const word = v.term.replace(/[^a-zA-Z]/g, '').toUpperCase();
+                return { vocab: v, word: word };
+            });
 
         // Load saved stats
         const saved = ProgressManager.getActivityProgress(config.unit.id, 'wordle');
