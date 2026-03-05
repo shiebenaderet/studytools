@@ -44,10 +44,10 @@ StudyEngine.registerActivity({
 
         var candidates = vocabulary
             .map(function(v) {
-                var word = v.term.split(/\s+/)[0].replace(/[^a-zA-Z]/g, '').toUpperCase();
+                var word = v.term.replace(/[^a-zA-Z]/g, '').toUpperCase();
                 return { word: word, vocab: v };
             })
-            .filter(function(item) { return item.word.length >= 3; });
+            .filter(function(item) { return item.word.length >= 3 && item.word.length <= 18; });
 
         candidates.sort(function(a, b) { return b.word.length - a.word.length; });
 

@@ -53,6 +53,22 @@ StudyEngine.registerActivity({
         progressInfo.appendChild(progressText);
         wrapper.appendChild(progressInfo);
 
+        // Year toggle button
+        const toggleDiv = document.createElement('div');
+        toggleDiv.style.marginBottom = '12px';
+        toggleDiv.style.textAlign = 'center';
+
+        const toggleBtn = document.createElement('button');
+        toggleBtn.className = 'nav-button';
+        toggleBtn.id = 'timeline-year-toggle';
+        toggleBtn.textContent = this._showYears ? 'Hide Years (Challenge Mode)' : 'Show Years (Easy Mode)';
+        toggleBtn.addEventListener('click', () => {
+            this._showYears = !this._showYears;
+            this.render(this._container, this._config);
+        });
+        toggleDiv.appendChild(toggleBtn);
+        wrapper.appendChild(toggleDiv);
+
         // Unordered container (shuffled event cards)
         const unorderedLabel = document.createElement('h3');
         unorderedLabel.textContent = 'Events to Place:';
@@ -160,10 +176,12 @@ StudyEngine.registerActivity({
         card.draggable = true;
         card.dataset.eventId = event.id;
 
-        const year = document.createElement('div');
-        year.className = 'timeline-item-year';
-        year.textContent = event.year;
-        card.appendChild(year);
+        if (this._showYears) {
+            const year = document.createElement('div');
+            year.className = 'timeline-item-year';
+            year.textContent = event.year;
+            card.appendChild(year);
+        }
 
         const titleEl = document.createElement('div');
         titleEl.className = 'timeline-item-title';
