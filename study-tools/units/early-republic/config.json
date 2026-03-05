@@ -1,0 +1,412 @@
+{
+    "unit": {
+        "id": "early-republic",
+        "title": "Early Republic Study Tool",
+        "subtitle": "Get ready to ace your test! Learn vocabulary, practice questions, and track your progress.",
+        "essentialQuestion": "How did the first leaders shape the country we live in today?",
+        "teacherEmail": "benaderets885@edmonds.wednet.edu",
+        "theme": {
+            "primary": "#0d9488",
+            "secondary": "#065f46",
+            "accent": "#f59e0b"
+        }
+    },
+    "activities": [
+        "flashcards",
+        "practice-test",
+        "short-answer",
+        "timeline",
+        "wordle",
+        "hangman",
+        "flip-match",
+        "typing-race",
+        "fill-in-blank",
+        "term-catcher",
+        "lightning-round",
+        "crossword"
+    ],
+    "vocabulary": [
+        { "term": "Inauguration", "definition": "The formal ceremony where a president takes the oath of office", "example": "George Washington's inauguration in 1789 set the first precedent for how presidents take office", "category": "Washington's First Decisions" },
+        { "term": "Cabinet", "definition": "A group of advisors appointed by the President to lead executive departments", "example": "Washington's Cabinet included Thomas Jefferson (State), Alexander Hamilton (Treasury), and Henry Knox (War)", "category": "Washington's First Decisions" },
+        { "term": "Precedent", "definition": "An action or decision that becomes an example for the future", "example": "Washington set the precedent of serving only two terms as president", "category": "Washington's First Decisions" },
+        { "term": "Federalist", "definition": "Someone who supported a strong federal government; led by Hamilton", "example": "Federalists like Hamilton wanted a strong central government and a national bank", "category": "Washington's First Decisions" },
+        { "term": "Anti-Federalist", "definition": "Someone who opposed a strong federal government; favored states' rights", "example": "Anti-Federalists feared a powerful central government would threaten individual liberties", "category": "Washington's First Decisions" },
+        { "term": "National Bank", "definition": "Hamilton's proposed central bank to manage the nation's finances", "example": "Hamilton argued the National Bank was necessary to print currency and manage debt", "category": "Washington's First Decisions" },
+        { "term": "Tariff", "definition": "A tax on imported goods, used to raise government revenue", "example": "Hamilton proposed tariffs on imports to protect American manufacturing", "category": "Washington's First Decisions" },
+        { "term": "Dept. of Treasury", "definition": "Executive department handling finances; first led by Alexander Hamilton", "example": "Hamilton used the Dept. of Treasury to create plans for paying off the national debt", "category": "Washington's First Decisions" },
+        { "term": "Dept. of State", "definition": "Executive department handling foreign affairs; first led by Thomas Jefferson", "example": "Jefferson led the Dept. of State, managing America's relationships with other countries", "category": "Washington's First Decisions" },
+        { "term": "Dept. of War", "definition": "Executive department handling military affairs; first led by Henry Knox", "example": "Henry Knox led the Dept. of War, overseeing the nation's small military", "category": "Washington's First Decisions" },
+        { "term": "Whiskey Rebellion", "definition": "A 1794 uprising by farmers protesting the federal tax on whiskey", "example": "Washington sent the army to crush the Whiskey Rebellion, proving the federal government could enforce its laws", "category": "Washington's First Decisions" },
+        { "term": "Jay's Treaty", "definition": "A 1794 agreement with Britain that removed British forts but limited US trade", "example": "Jay's Treaty was unpopular because it didn't fully stop Britain from seizing American ships", "category": "Washington's First Decisions" },
+        { "term": "XYZ Affair", "definition": "An incident where French agents demanded bribes before negotiating with US diplomats", "example": "The XYZ Affair outraged Americans and led to an undeclared Quasi-War with France under President Adams", "category": "Washington's First Decisions" },
+        { "term": "Political Party", "definition": "An organized group that seeks to influence government policy by winning elections", "example": "America's first political parties — Federalists and Democratic-Republicans — formed from disagreements between Hamilton and Jefferson", "category": "Political Parties Are Born" },
+        { "term": "Democratic-Republican", "definition": "Political party led by Jefferson; favored limited federal power and farmers' interests", "example": "Democratic-Republicans believed the government should have limited power and support agriculture", "category": "Political Parties Are Born" },
+        { "term": "Strict Construction", "definition": "Belief that the government should only do what the Constitution specifically allows", "example": "Jefferson used strict construction to argue against the National Bank — the Constitution doesn't mention it", "category": "Political Parties Are Born" },
+        { "term": "Loose Construction", "definition": "Belief that the government has implied powers beyond what the Constitution explicitly states", "example": "Hamilton used loose construction to justify the National Bank under the 'Necessary and Proper' clause", "category": "Political Parties Are Born" },
+        { "term": "Standing Army", "definition": "A permanent military force maintained in peacetime", "example": "Federalists favored a large standing army, while Democratic-Republicans feared it could threaten liberty", "category": "Political Parties Are Born" },
+        { "term": "Primary Source", "definition": "A firsthand account or original document from the time period being studied", "example": "A letter written by Thomas Jefferson in 1803 about the Louisiana Purchase is a primary source", "category": "Political Parties Are Born" },
+        { "term": "SIFT Method", "definition": "A strategy for evaluating sources: Stop, Investigate the source, Find better coverage, Trace claims", "example": "Use the SIFT Method to check if a website about the Early Republic is reliable before citing it", "category": "Political Parties Are Born" },
+        { "term": "Secondary Source", "definition": "An account created after an event by someone who did not directly witness it", "example": "A textbook chapter about Washington's presidency is a secondary source", "category": "Political Parties Are Born" },
+        { "term": "Judicial Review", "definition": "The power of the Supreme Court to declare laws unconstitutional; established by Marbury v. Madison", "example": "Judicial review gave the Supreme Court real power to check Congress and the President", "category": "Exploring & Growing" },
+        { "term": "Marbury v. Madison", "definition": "The 1803 Supreme Court case that established the principle of judicial review", "example": "Chief Justice John Marshall's ruling in Marbury v. Madison created one of the most important checks and balances", "category": "Exploring & Growing" },
+        { "term": "Unconstitutional", "definition": "Something that violates or goes against the Constitution", "example": "In Marbury v. Madison, the Supreme Court declared a law unconstitutional for the first time", "category": "Exploring & Growing" },
+        { "term": "Haitian Revolution", "definition": "A successful slave revolt in Haiti (1791-1804) that influenced Napoleon's decision to sell Louisiana", "example": "The Haitian Revolution terrified Southern slaveholders but inspired people fighting for freedom worldwide", "category": "Exploring & Growing" },
+        { "term": "Louisiana Purchase", "definition": "The 1803 purchase of French territory that doubled the size of the United States", "example": "Jefferson bought the Louisiana Territory from Napoleon for $15 million, even though the Constitution didn't specifically allow it", "category": "Exploring & Growing" },
+        { "term": "Napoleon", "definition": "French emperor who sold the Louisiana Territory to the US to fund his European wars", "example": "Napoleon gave up his American empire after the Haitian Revolution made holding the territory too costly", "category": "Exploring & Growing" },
+        { "term": "Corps of Discovery", "definition": "The expedition led by Lewis and Clark to explore the Louisiana Territory", "example": "The Corps of Discovery traveled from 1804 to 1806, mapping the territory and documenting plants, animals, and peoples", "category": "Exploring & Growing" },
+        { "term": "Expedition", "definition": "A journey undertaken for a specific purpose, especially exploration", "example": "Jefferson sent Lewis and Clark on an expedition to find a water route to the Pacific Ocean", "category": "Exploring & Growing" },
+        { "term": "Sacagawea", "definition": "A Shoshone woman who served as interpreter and guide for the Lewis and Clark expedition", "example": "Sacagawea helped the Corps of Discovery communicate with Native nations and navigate the western territory", "category": "Exploring & Growing" },
+        { "term": "Barbary Pirates", "definition": "North African pirates who attacked American ships and demanded tribute payments", "example": "Jefferson refused to keep paying tribute to the Barbary Pirates and sent the navy to fight them instead", "category": "Exploring & Growing" },
+        { "term": "Tribute", "definition": "Payment made to a foreign power to prevent attacks or gain protection", "example": "Before Jefferson, the US paid tribute to North African states to protect American merchant ships", "category": "Exploring & Growing" },
+        { "term": "Impressment", "definition": "The British practice of forcing American sailors to serve in the Royal Navy", "example": "Impressment of American sailors was one of the key causes of the War of 1812", "category": "Exploring & Growing" },
+        { "term": "Embargo Act", "definition": "An 1807 law that banned all US trade with foreign nations to pressure Britain and France", "example": "The Embargo Act backfired — it hurt American merchants and farmers more than it hurt Britain or France", "category": "Exploring & Growing" },
+        { "term": "Dilemma", "definition": "A situation requiring a choice between two difficult or undesirable options", "example": "Jefferson faced a dilemma: buying Louisiana required loose construction, which he had always opposed", "category": "Exploring & Growing" },
+        { "term": "War Hawks", "definition": "Members of Congress who pushed for war with Britain in 1812; led by Henry Clay", "example": "War Hawks like Henry Clay wanted to defend American honor and expand into British Canada", "category": "War & National Pride" },
+        { "term": "Tecumseh", "definition": "Shawnee leader who built a confederation of Native nations to resist American expansion", "example": "Tecumseh tried to unite Native American nations to stop settlers from taking their land", "category": "War & National Pride" },
+        { "term": "Henry Clay", "definition": "Kentucky congressman and War Hawk who later proposed the American System", "example": "Henry Clay pushed for the War of 1812 and later created the American System to strengthen the economy", "category": "War & National Pride" },
+        { "term": "Fort McHenry", "definition": "Baltimore fort whose defense during a British bombardment inspired 'The Star-Spangled Banner'", "example": "Francis Scott Key watched the bombardment of Fort McHenry and wrote the national anthem after seeing the flag still flying", "category": "War & National Pride" },
+        { "term": "Treaty of Ghent", "definition": "The 1814 peace treaty that ended the War of 1812; returned things to prewar conditions", "example": "The Treaty of Ghent was basically a draw — no territory changed hands", "category": "War & National Pride" },
+        { "term": "Star-Spangled Banner", "definition": "The national anthem, written by Francis Scott Key after witnessing the battle at Fort McHenry", "example": "The Star-Spangled Banner became a symbol of American resilience and national pride", "category": "War & National Pride" },
+        { "term": "Nationalism", "definition": "A strong sense of pride and loyalty to one's country", "example": "After the War of 1812, a surge of nationalism made Americans feel united and proud", "category": "War & National Pride" },
+        { "term": "Era of Good Feelings", "definition": "A period of national unity and one-party rule following the War of 1812 (roughly 1817-1825)", "example": "The Era of Good Feelings saw the Federalist Party collapse, leaving only the Democratic-Republicans", "category": "War & National Pride" },
+        { "term": "Monroe Doctrine", "definition": "An 1823 policy warning European nations against further colonization in the Americas", "example": "The Monroe Doctrine told Europe to stay out of the Western Hemisphere, even though the US couldn't enforce it yet", "category": "War & National Pride" },
+        { "term": "American System", "definition": "Henry Clay's plan for economic growth: protective tariffs, a national bank, and internal improvements", "example": "The American System aimed to connect the North, South, and West into one strong national economy", "category": "War & National Pride" },
+        { "term": "McCulloch v. Maryland", "definition": "An 1819 Supreme Court case that upheld the national bank and strengthened federal power", "example": "McCulloch v. Maryland ruled that states could not tax federal institutions, reinforcing federal supremacy", "category": "War & National Pride" }
+    ],
+    "timelineEvents": [
+        { "id": 1, "title": "Washington's Inauguration", "year": "1789", "description": "George Washington takes the oath of office as the first U.S. President" },
+        { "id": 2, "title": "Bill of Rights Ratified", "year": "1791", "description": "First ten amendments to the Constitution are officially adopted" },
+        { "id": 3, "title": "Whiskey Rebellion", "year": "1794", "description": "Farmers revolt against federal whiskey tax; Washington sends the army" },
+        { "id": 4, "title": "Jay's Treaty", "year": "1794", "description": "Agreement with Britain to remove forts, but limited American trade" },
+        { "id": 5, "title": "XYZ Affair", "year": "1797", "description": "French agents demand bribes from American diplomats, outraging the nation" },
+        { "id": 6, "title": "Election of 1800", "year": "1800", "description": "First peaceful transfer of power between political parties; Jefferson wins" },
+        { "id": 7, "title": "Marbury v. Madison", "year": "1803", "description": "Supreme Court establishes the power of judicial review" },
+        { "id": 8, "title": "Louisiana Purchase", "year": "1803", "description": "U.S. buys the Louisiana Territory from France, doubling the nation's size" },
+        { "id": 9, "title": "War of 1812 Begins", "year": "1812", "description": "U.S. declares war on Britain over impressment and frontier conflicts" },
+        { "id": 10, "title": "Monroe Doctrine", "year": "1823", "description": "President Monroe warns Europe against further colonization in the Americas" }
+    ],
+    "practiceQuestions": [
+        {
+            "question": "Washington's Cabinet included heads of which three departments?",
+            "options": ["State, Treasury, and War", "Justice, Commerce, and Interior", "Treasury, Defense, and Education", "State, Labor, and Agriculture"],
+            "correct": 0,
+            "explanation": "Washington created the first Cabinet with three departments: State (led by Jefferson), Treasury (led by Hamilton), and War (led by Knox). These advisors helped the president make major decisions for the new nation.",
+            "topic": "Washington's First Decisions"
+        },
+        {
+            "question": "A 'precedent' is best defined as:",
+            "options": ["A law passed by Congress", "An action that becomes an example for the future", "A decision made by the Supreme Court", "A formal ceremony for a new president"],
+            "correct": 1,
+            "explanation": "A precedent is an action or decision that sets an example for future leaders. Washington set many precedents, like creating a Cabinet and serving only two terms, that future presidents followed.",
+            "topic": "Washington's First Decisions"
+        },
+        {
+            "question": "Alexander Hamilton proposed a National Bank to:",
+            "options": ["Give loans to farmers", "Print currency and manage the nation's finances", "Fund military expeditions", "Pay for roads and canals"],
+            "correct": 1,
+            "explanation": "Hamilton argued a National Bank was needed to print national currency, manage government debt, and expand capital in the growing economy. He used the 'Necessary and Proper' clause to justify it.",
+            "topic": "Washington's First Decisions"
+        },
+        {
+            "question": "The Whiskey Rebellion was significant because it showed that:",
+            "options": ["Farmers could successfully resist the government", "The federal government could enforce its laws", "Taxes on whiskey were unconstitutional", "Washington was an unpopular president"],
+            "correct": 1,
+            "explanation": "When frontier farmers in Pennsylvania revolted against the whiskey tax in 1794, Washington sent the army to crush the rebellion. This proved the new federal government had the power and will to enforce national laws.",
+            "topic": "Washington's First Decisions"
+        },
+        {
+            "question": "Jay's Treaty was unpopular among Americans because:",
+            "options": ["It gave too much land to Britain", "It didn't fully stop Britain from seizing American ships", "It required Americans to pay tribute", "It banned trade with France"],
+            "correct": 1,
+            "explanation": "Jay's Treaty (1794) got Britain to remove forts from American soil, but it didn't stop impressment or fully protect American trade. Only 2 of its main objectives were achieved, making it very unpopular.",
+            "topic": "Washington's First Decisions"
+        },
+        {
+            "question": "The XYZ Affair involved:",
+            "options": ["British soldiers attacking American ports", "French agents demanding bribes from American diplomats", "Spanish explorers claiming American territory", "Native Americans signing a peace treaty"],
+            "correct": 1,
+            "explanation": "In the XYZ Affair, French agents (called X, Y, and Z) demanded bribes before they would negotiate with American diplomats. This outraged Americans and led to an undeclared 'Quasi-War' with France.",
+            "topic": "Washington's First Decisions"
+        },
+        {
+            "question": "Hamilton (Federalist) and Jefferson (Democratic-Republican) disagreed most about:",
+            "options": ["Whether to have a president", "How much power the federal government should have", "Whether to expand westward", "Who should be vice president"],
+            "correct": 1,
+            "explanation": "The core disagreement was about federal power. Hamilton wanted a strong central government with implied powers (loose construction), while Jefferson wanted limited federal power with more authority to states (strict construction).",
+            "topic": "Political Parties Are Born"
+        },
+        {
+            "question": "Which political party favored a strong central government and was led by Hamilton?",
+            "options": ["Democratic-Republicans", "Federalists", "Whigs", "Anti-Federalists"],
+            "correct": 1,
+            "explanation": "The Federalist Party, led by Hamilton, favored a strong central government, a national bank, manufacturing, and a loose interpretation of the Constitution.",
+            "topic": "Political Parties Are Born"
+        },
+        {
+            "question": "'Strict construction' of the Constitution means:",
+            "options": ["The government can do anything that's not specifically banned", "The government should only do what the Constitution specifically allows", "The Constitution should be rewritten every 20 years", "Only the Supreme Court can interpret the Constitution"],
+            "correct": 1,
+            "explanation": "Strict construction means the government can only exercise powers explicitly stated in the Constitution. Jefferson used this argument against the National Bank, saying the Constitution never mentions creating a bank.",
+            "topic": "Political Parties Are Born"
+        },
+        {
+            "question": "Which group supported the Federalist Party?",
+            "options": ["Farmers and ordinary workers", "Businessmen and bankers", "Frontier settlers", "Enslaved people"],
+            "correct": 1,
+            "explanation": "Federalists were supported by businessmen, bankers, and merchants — people who benefited from a strong national economy and trade. Democratic-Republicans were supported by farmers and ordinary workers.",
+            "topic": "Political Parties Are Born"
+        },
+        {
+            "question": "The Election of 1800 was called the 'Revolution of 1800' because:",
+            "options": ["There was a violent uprising", "It was the first peaceful transfer of power between political parties", "It eliminated the Electoral College", "Thomas Jefferson refused to take office"],
+            "correct": 1,
+            "explanation": "The Election of 1800 was revolutionary because power transferred peacefully from the Federalist Party (Adams) to the Democratic-Republican Party (Jefferson). This proved American democracy could survive a change in leadership.",
+            "topic": "Political Parties Are Born"
+        },
+        {
+            "question": "Marbury v. Madison (1803) established the principle of:",
+            "options": ["Executive privilege", "Judicial review", "States' rights", "Separation of church and state"],
+            "correct": 1,
+            "explanation": "Chief Justice John Marshall's ruling in Marbury v. Madison established judicial review — the Supreme Court's power to declare laws unconstitutional. This gave the judiciary real power to check the other branches.",
+            "topic": "Exploring & Growing"
+        },
+        {
+            "question": "The Haitian Revolution influenced American history by:",
+            "options": ["Encouraging Americans to ban slavery immediately", "Causing Napoleon to sell the Louisiana Territory", "Starting a war between the US and France", "Leading to the Missouri Compromise"],
+            "correct": 1,
+            "explanation": "The Haitian Revolution (a successful slave revolt) made Napoleon lose interest in his American empire. Without Haiti as a base, he decided to sell the Louisiana Territory to fund his European wars instead.",
+            "topic": "Exploring & Growing"
+        },
+        {
+            "question": "Jefferson faced a dilemma with the Louisiana Purchase because:",
+            "options": ["He didn't want more land", "The Constitution didn't specifically give the president power to buy territory", "France refused to sell it", "Congress wanted to go to war with France instead"],
+            "correct": 1,
+            "explanation": "Jefferson believed in strict construction — the government should only do what the Constitution specifically allows. But the Constitution never mentions buying land. He decided the deal was too good to pass up, using loose construction to justify it.",
+            "topic": "Exploring & Growing"
+        },
+        {
+            "question": "The Louisiana Purchase was significant because it:",
+            "options": ["Ended the conflict with Britain", "Doubled the size of the United States", "Freed all enslaved people in the territory", "Created a new branch of government"],
+            "correct": 1,
+            "explanation": "The Louisiana Purchase (1803) bought the vast Louisiana Territory from France for $15 million, doubling the nation's size. This opened enormous western lands for exploration and settlement.",
+            "topic": "Exploring & Growing"
+        },
+        {
+            "question": "Sacagawea helped the Lewis and Clark expedition by:",
+            "options": ["Funding the expedition with her own money", "Serving as interpreter and guide through western territory", "Commanding the military escort", "Drawing the official maps of the territory"],
+            "correct": 1,
+            "explanation": "Sacagawea, a Shoshone woman, helped the Corps of Discovery communicate with Native nations and navigate the western territory. Her presence also signaled to other Native peoples that the expedition was peaceful.",
+            "topic": "Exploring & Growing"
+        },
+        {
+            "question": "Impressment was the British practice of:",
+            "options": ["Taxing American goods at high rates", "Forcing American sailors to serve in the Royal Navy", "Blocking American ports", "Printing false American currency"],
+            "correct": 1,
+            "explanation": "Impressment meant British naval ships would stop American vessels and force American sailors to serve in the Royal Navy. This was one of the main causes of the War of 1812.",
+            "topic": "Exploring & Growing"
+        },
+        {
+            "question": "The Embargo Act of 1807 backfired because it:",
+            "options": ["Caused Britain and France to declare war", "Hurt American merchants and farmers more than it hurt foreign nations", "Led to the Louisiana Purchase", "Made the National Bank fail"],
+            "correct": 1,
+            "explanation": "Jefferson's Embargo Act banned ALL US trade with foreign nations to pressure Britain and France. But it devastated American businesses and farmers who depended on exports, making it extremely unpopular at home.",
+            "topic": "Exploring & Growing"
+        },
+        {
+            "question": "War Hawks were members of Congress who:",
+            "options": ["Opposed the War of 1812", "Pushed for war with Britain to defend American honor and expand territory", "Wanted to make peace with Native Americans", "Supported the Embargo Act"],
+            "correct": 1,
+            "explanation": "War Hawks like Henry Clay and John C. Calhoun pushed for war with Britain in 1812. They wanted to defend American honor against impressment and expand into British Canada and Native American lands.",
+            "topic": "War & National Pride"
+        },
+        {
+            "question": "Tecumseh's confederation was an attempt to:",
+            "options": ["Help British traders in America", "Unite Native American nations to resist American expansion", "Create a new government in the West", "Sign a peace treaty with Washington"],
+            "correct": 1,
+            "explanation": "Tecumseh, a Shawnee leader, tried to unite many Native American nations into a confederation to resist settlers taking their land. He allied with the British, but his confederation was weakened at the Battle of Tippecanoe.",
+            "topic": "War & National Pride"
+        },
+        {
+            "question": "The Battle of Fort McHenry is significant because:",
+            "options": ["It ended the War of 1812", "It inspired Francis Scott Key to write 'The Star-Spangled Banner'", "It was the first battle of the war", "The British captured the fort"],
+            "correct": 1,
+            "explanation": "During the British bombardment of Fort McHenry in Baltimore (1814), Francis Scott Key watched from a ship and saw the American flag still flying at dawn. He wrote 'The Star-Spangled Banner,' which became the national anthem.",
+            "topic": "War & National Pride"
+        },
+        {
+            "question": "The Treaty of Ghent (1814) ended the War of 1812 by:",
+            "options": ["Giving Britain control of Canada", "Returning everything to prewar conditions — basically a draw", "Granting the US new territory", "Requiring Britain to pay war reparations"],
+            "correct": 1,
+            "explanation": "The Treaty of Ghent was essentially a draw — no territory changed hands and neither side gained or lost land. Despite this, Americans celebrated the war as a success because they had defended their independence.",
+            "topic": "War & National Pride"
+        },
+        {
+            "question": "After the War of 1812, the Federalist Party collapsed because:",
+            "options": ["They had supported the war too strongly", "They had opposed the war and were seen as unpatriotic", "They lost all their funding", "Their leaders moved to Britain"],
+            "correct": 1,
+            "explanation": "The Federalist Party had opposed the War of 1812, and after the surge of nationalism following the war, they were seen as unpatriotic. The party collapsed, leaving only the Democratic-Republicans.",
+            "topic": "War & National Pride"
+        },
+        {
+            "question": "The Monroe Doctrine (1823) warned European nations to:",
+            "options": ["Stay out of American trade deals", "Stop colonizing and interfering in the Western Hemisphere", "Return land they had taken from Native Americans", "Free all enslaved people in their colonies"],
+            "correct": 1,
+            "explanation": "President Monroe declared that the Americas were closed to further European colonization. While the US didn't have the military power to enforce it at the time, it became one of the most important principles in American foreign policy.",
+            "topic": "War & National Pride"
+        },
+        {
+            "question": "Henry Clay's American System included all of the following EXCEPT:",
+            "options": ["A national bank", "Protective tariffs", "Federal funding for internal improvements (roads, canals)", "Free land for settlers"],
+            "correct": 3,
+            "explanation": "The American System had three parts: a new National Bank, protective tariffs to help American manufacturing, and federal funding for internal improvements like roads and canals. Free land for settlers was not part of Clay's plan.",
+            "topic": "War & National Pride"
+        },
+        {
+            "question": "McCulloch v. Maryland (1819) was important because it:",
+            "options": ["Established freedom of speech", "Ruled that states could not tax federal institutions, strengthening federal power", "Gave the president the power to declare war", "Created the Electoral College"],
+            "correct": 1,
+            "explanation": "When Maryland tried to tax the Second National Bank, the Supreme Court ruled states cannot tax federal institutions. This reinforced federal supremacy over state law and used the 'Necessary and Proper' clause to justify the bank.",
+            "topic": "War & National Pride"
+        },
+        {
+            "question": "The 'Era of Good Feelings' refers to a period of:",
+            "options": ["War and conflict between the US and Britain", "National unity and one-party rule after the War of 1812", "Economic depression and widespread poverty", "Expansion of voting rights to all citizens"],
+            "correct": 1,
+            "explanation": "After the War of 1812, the Federalist Party collapsed, leaving the Democratic-Republicans as the only major party. This created a period of political unity called the 'Era of Good Feelings' (roughly 1817-1825).",
+            "topic": "War & National Pride"
+        },
+        {
+            "question": "Jefferson's Louisiana Purchase showed that even strong believers in strict construction:",
+            "options": ["Never change their minds", "Sometimes change when faced with real decisions and opportunities", "Always follow the Constitution exactly", "Must get Supreme Court approval first"],
+            "correct": 1,
+            "explanation": "Jefferson had always argued for strict construction, but buying Louisiana required using loose construction (the Constitution doesn't mention buying land). This showed that real-world decisions can challenge even deeply held beliefs.",
+            "topic": "Connections"
+        },
+        {
+            "question": "How does the debate between Hamilton and Jefferson connect to McCulloch v. Maryland?",
+            "options": ["They have no connection", "Both involved whether the federal government had the power to create a national bank", "Both were about the War of 1812", "Both involved territorial expansion"],
+            "correct": 1,
+            "explanation": "Hamilton and Jefferson disagreed about whether the National Bank was constitutional (loose vs. strict construction). McCulloch v. Maryland (1819) revisited this same question and ruled the bank WAS constitutional, siding with Hamilton's view.",
+            "topic": "Connections"
+        },
+        {
+            "question": "The essential question 'How did the first leaders shape the country we live in today?' is best answered by:",
+            "options": ["The first leaders had no lasting impact", "Their decisions about government power, political parties, expansion, and foreign policy created patterns we still follow", "Only Washington's decisions mattered", "Everything they did was later reversed"],
+            "correct": 1,
+            "explanation": "The first leaders' decisions — creating the Cabinet, establishing judicial review, forming political parties, expanding territory, and setting foreign policy principles like the Monroe Doctrine — created lasting patterns that still shape American government and politics today.",
+            "topic": "Connections"
+        }
+    ],
+    "shortAnswerQuestions": [
+        {
+            "question": "Hamilton vs. Jefferson: Pick ONE of the major disagreements between Hamilton and Jefferson (national bank, strict vs. loose construction, economic vision, or foreign policy). Explain what each side believed and why it mattered for the future of the country.",
+            "topic": "Political Parties Are Born",
+            "rubric": [
+                "Names a SPECIFIC disagreement (not just 'they disagreed')",
+                "Explains Hamilton's position with specific details",
+                "Explains Jefferson's position with specific details",
+                "Explains WHY this disagreement mattered for the future (3-4 sentences)",
+                "Uses vocabulary from the unit (strict/loose construction, etc.)"
+            ],
+            "exemplar": "Hamilton and Jefferson disagreed about whether to create a National Bank. Hamilton believed in loose construction — that the 'Necessary and Proper' clause gave Congress implied powers to create a bank to manage the nation's finances, print currency, and help businesses grow. Jefferson believed in strict construction — the Constitution doesn't mention a bank, so the government has no right to create one. He feared a powerful bank would benefit wealthy northerners at the expense of farmers. This mattered because it created the debate about federal power vs. states' rights that continues today, and it led to the formation of America's first political parties.",
+            "sentenceStarters": [
+                "Hamilton and Jefferson disagreed about...",
+                "Hamilton believed that...",
+                "Jefferson argued that...",
+                "This disagreement mattered because..."
+            ]
+        },
+        {
+            "question": "Jefferson's Dilemma: Explain the dilemma Jefferson faced with the Louisiana Purchase. What did he believe about the Constitution? What did he actually do? Why does this matter?",
+            "topic": "Exploring & Growing",
+            "rubric": [
+                "Explains Jefferson's belief in strict construction",
+                "Identifies the specific problem: Constitution doesn't mention buying land",
+                "Explains what Jefferson decided to do and why",
+                "Uses the word 'dilemma' correctly",
+                "Explains what this teaches us about real-world decision making (4-5 sentences)"
+            ],
+            "exemplar": "Jefferson faced a major dilemma with the Louisiana Purchase. He had always believed in strict construction — that the government should only do what the Constitution specifically allows. But Napoleon offered to sell the entire Louisiana Territory for $15 million, which would double the size of the nation. The problem was that the Constitution doesn't say anything about the president buying land from foreign countries. Jefferson decided the opportunity was too good to pass up and used loose construction to justify the purchase, even though it went against his own principles. This matters because it shows that even people with strong beliefs sometimes change when faced with real decisions — and that governing is more complicated than just following rules.",
+            "sentenceStarters": [
+                "Jefferson believed in strict construction, which means...",
+                "The dilemma was that...",
+                "He decided to...",
+                "This teaches us that..."
+            ]
+        },
+        {
+            "question": "Escalation to War: Trace the path from peaceful disagreements to the War of 1812. What events led to war? Why did peaceful solutions fail? Use at least 3 specific events in your answer.",
+            "topic": "War & National Pride",
+            "rubric": [
+                "Names at least 3 specific events that led to war",
+                "Explains HOW each event contributed to growing tensions",
+                "Describes WHY peaceful solutions (like the Embargo Act) failed",
+                "Shows understanding of escalation over time",
+                "Uses vocabulary: impressment, War Hawks, embargo (4-5 sentences)"
+            ],
+            "exemplar": "Several events escalated tensions between the US and Britain before the War of 1812. First, Britain kept impressing American sailors — forcing them to serve in the Royal Navy against their will. Jefferson tried a peaceful solution with the Embargo Act of 1807, which banned all US trade with foreign nations, but this backfired and hurt American businesses more than Britain. Britain was also supplying weapons to Native Americans on the frontier, which angered settlers. Finally, War Hawks in Congress like Henry Clay pushed for war to defend American honor and expand territory. Peaceful solutions failed because Britain refused to stop impressment and the Embargo Act destroyed the American economy. By 1812, war seemed like the only option left.",
+            "sentenceStarters": [
+                "Tensions between the US and Britain grew because...",
+                "Jefferson tried to solve this peacefully by...",
+                "This failed because...",
+                "War Hawks like Henry Clay pushed for war because...",
+                "By 1812, war seemed like the only option because..."
+            ]
+        },
+        {
+            "question": "Nationalism After 1812: How did the War of 1812 change how Americans felt about their country? Explain at least 3 specific ways nationalism grew after the war.",
+            "topic": "War & National Pride",
+            "rubric": [
+                "Defines or demonstrates understanding of nationalism",
+                "Names at least 3 specific examples of growing nationalism",
+                "Connects the war to these changes",
+                "Mentions specific events, policies, or symbols",
+                "4-5 complete sentences"
+            ],
+            "exemplar": "After the War of 1812, Americans felt a strong surge of nationalism — pride and loyalty to their country. First, the Federalist Party collapsed because they had opposed the war, leaving the Democratic-Republicans as the only party and creating the 'Era of Good Feelings.' Second, new national symbols emerged — the Star-Spangled Banner became a powerful anthem after Fort McHenry, and Americans celebrated the flag, the eagle, and shared national heroes. Third, Henry Clay proposed the American System to connect the economy with tariffs, a national bank, and roads and canals. Fourth, the Monroe Doctrine showed the world that America was confident enough to tell European nations to stay out of the Western Hemisphere. The war proved America could defend itself and made people think of themselves as Americans first.",
+            "sentenceStarters": [
+                "Nationalism means...",
+                "After the War of 1812, Americans felt...",
+                "One example of growing nationalism was...",
+                "Another example was...",
+                "The war changed America because..."
+            ]
+        },
+        {
+            "question": "Connections Across the Unit: Pick TWO events from different segments of this unit and explain how they are connected. How does the earlier event help explain the later one?",
+            "topic": "Connections",
+            "rubric": [
+                "Picks TWO specific events from DIFFERENT segments",
+                "Clearly explains the connection between them",
+                "Shows how the earlier event helped cause or explain the later one",
+                "Uses specific details from both events",
+                "Demonstrates understanding of cause-and-effect across time (4-5 sentences)"
+            ],
+            "exemplar": "The debate between Hamilton and Jefferson over the National Bank in the 1790s connects directly to the McCulloch v. Maryland case in 1819. Hamilton argued the bank was constitutional using the 'Necessary and Proper' clause (loose construction), while Jefferson said it wasn't mentioned in the Constitution (strict construction). Washington sided with Hamilton and created the bank. Decades later, when Maryland tried to tax the Second National Bank, the Supreme Court in McCulloch v. Maryland had to answer the same question — and they sided with Hamilton's view, ruling the bank was constitutional and states couldn't tax federal institutions. This shows how early disagreements about government power kept coming back throughout the Early Republic period.",
+            "sentenceStarters": [
+                "The first event I chose is... from the [segment name] segment.",
+                "The second event is... from the [segment name] segment.",
+                "These events are connected because...",
+                "The earlier event helped cause/explain the later one because...",
+                "This shows that..."
+            ]
+        }
+    ],
+    "fillInBlankSentences": [
+        { "sentence": "George Washington's ___ in 1789 set the example for how every future president would take the oath of office.", "answer": "Inauguration" },
+        { "sentence": "Washington appointed advisors to lead executive departments, forming the first presidential ___.", "answer": "Cabinet" },
+        { "sentence": "By serving only two terms, Washington set a ___ that future presidents followed for over 150 years.", "answer": "Precedent" },
+        { "sentence": "Hamilton proposed a ___ to print currency, manage government debt, and strengthen the economy.", "answer": "National Bank" },
+        { "sentence": "Hamilton wanted to place a ___ on imported goods to protect American manufacturing and raise revenue.", "answer": "Tariff" },
+        { "sentence": "Washington sent the army to crush the ___, proving the federal government could enforce its laws.", "answer": "Whiskey Rebellion" },
+        { "sentence": "Jefferson believed in ___, arguing that the government should only do what the Constitution specifically allows.", "answer": "Strict Construction" },
+        { "sentence": "Hamilton used ___ to justify the National Bank, claiming the government had implied powers under the 'Necessary and Proper' clause.", "answer": "Loose Construction" },
+        { "sentence": "In the 1803 case of ___, Chief Justice John Marshall established the Supreme Court's power of judicial review.", "answer": "Marbury v. Madison" },
+        { "sentence": "The ___ doubled the size of the United States when Jefferson bought the territory from France for $15 million.", "answer": "Louisiana Purchase" },
+        { "sentence": "___ helped Lewis and Clark communicate with Native nations and navigate the western territory during their expedition.", "answer": "Sacagawea" },
+        { "sentence": "The British practice of ___ forced American sailors to serve in the Royal Navy against their will.", "answer": "Impressment" },
+        { "sentence": "Jefferson's ___ banned all U.S. trade with foreign nations, but it hurt American businesses more than it hurt Britain or France.", "answer": "Embargo Act" },
+        { "sentence": "After the War of 1812, a wave of ___ swept across the country as Americans felt united and proud of their nation.", "answer": "Nationalism" },
+        { "sentence": "The ___ of 1823 warned European nations to stop colonizing and interfering in the Western Hemisphere.", "answer": "Monroe Doctrine" }
+    ]
+}
