@@ -1254,3 +1254,30 @@ header .essential-question {
 .lightning-leaderboard-table { width: 100%; border-collapse: collapse; }
 .lightning-leaderboard-table td, .lightning-leaderboard-table th { padding: 8px 12px; text-align: left; border-bottom: 1px solid #e5e7eb; }
 .lightning-leaderboard-table th { color: var(--primary); font-weight: 600; }
+
+/* CROSSWORD */
+.crossword-container { display: flex; gap: 20px; align-items: flex-start; }
+.crossword-grid-wrapper { flex-shrink: 0; }
+.crossword-grid { border-collapse: collapse; }
+.crossword-cell { width: 36px; height: 36px; position: relative; }
+.crossword-cell input { width: 100%; height: 100%; border: 1px solid #ccc; text-align: center; font-size: 1.1em; font-weight: bold; text-transform: uppercase; padding: 0; background: white; }
+.crossword-cell input:focus { outline: none; background: #e0f2fe; }
+.crossword-cell.black { background: #333; }
+.crossword-cell.black input { display: none; }
+.crossword-cell .cell-number { position: absolute; top: 1px; left: 2px; font-size: 0.6em; color: #666; z-index: 1; pointer-events: none; }
+.crossword-cell.highlighted input { background: #fef3c7; }
+.crossword-cell.active input { background: #bfdbfe; }
+.crossword-cell input.correct { background: #dcfce7; }
+.crossword-cell input.incorrect { background: #fee2e2; }
+.crossword-clues { flex: 1; max-height: 500px; overflow-y: auto; }
+.crossword-clues h3 { color: var(--primary); margin: 15px 0 10px; }
+.crossword-clue { padding: 8px 12px; cursor: pointer; border-radius: 6px; transition: background 0.2s; font-size: 0.9em; line-height: 1.4; }
+.crossword-clue:hover { background: #f0fdf4; }
+.crossword-clue.active { background: #dbeafe; }
+.crossword-clue-number { font-weight: bold; color: var(--primary); margin-right: 5px; }
+.crossword-controls { display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap; }
+@media (max-width: 768px) {
+    .crossword-container { flex-direction: column; }
+    .crossword-cell { width: 30px; height: 30px; }
+    .crossword-cell input { font-size: 0.9em; }
+}
