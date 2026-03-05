@@ -8,6 +8,7 @@ StudyEngine.registerActivity({
 
     _attempts: 0,
     _perfectCount: 0,
+    _showYears: false,
     _container: null,
     _config: null,
 
@@ -38,7 +39,7 @@ StudyEngine.registerActivity({
         const instructions = document.createElement('div');
         instructions.className = 'timeline-instructions';
         const instructionText = document.createElement('p');
-        instructionText.textContent = 'Drag the event cards from the list below and drop them into the numbered slots in the correct chronological order. When all slots are filled, click "Check Answer" to see how you did!';
+        instructionText.textContent = 'Place the event cards into the numbered slots in the correct chronological order. Drag and drop, or tap a card to select it then tap a slot to place it. Tap a placed card to remove it. When all slots are filled, click "Check Answer" to see how you did!';
         instructions.appendChild(instructionText);
         wrapper.appendChild(instructions);
 
@@ -91,6 +92,24 @@ StudyEngine.registerActivity({
             number.className = 'timeline-number';
             number.textContent = i;
             slot.appendChild(number);
+
+            // Tap-to-select: click a slot to place the selected card
+            slot.addEventListener('click', function() {
+                var selected = document.querySelector('.timeline-item.tap-selected');
+                if (!selected) return;
+
+                // If slot already has a card, move it back
+                var existing = slot.querySelector('.timeline-item');
+                if (existing) {
+                    existing.classList.remove('placed');
+                    var pool = document.getElementById('timeline-unordered');
+                    if (pool) pool.appendChild(existing);
+                }
+
+                selected.classList.remove('tap-selected');
+                selected.classList.add('placed');
+                slot.appendChild(selected);
+            });
 
             orderedContainer.appendChild(slot);
         }
@@ -155,6 +174,27 @@ StudyEngine.registerActivity({
         desc.className = 'timeline-item-desc';
         desc.textContent = event.description;
         card.appendChild(desc);
+
+        // Tap-to-select: click/tap to select a card or remove a placed card
+        card.addEventListener('click', function(e) {
+            // Don't interfere with drag
+            if (e.defaultPrevented) return;
+
+            // If this card is already placed, remove it back to pool
+            if (card.classList.contains('placed')) {
+                card.classList.remove('placed', 'tap-selected');
+                var pool = document.getElementById('timeline-unordered');
+                if (pool) pool.appendChild(card);
+                return;
+            }
+
+            // Toggle selection
+            var allCards = document.querySelectorAll('.timeline-item');
+            for (var i = 0; i < allCards.length; i++) {
+                allCards[i].classList.remove('tap-selected');
+            }
+            card.classList.add('tap-selected');
+        });
 
         return card;
     },

@@ -457,6 +457,12 @@ header .essential-question {
     border-color: var(--primary);
 }
 
+.timeline-item.tap-selected {
+    outline: 3px solid var(--accent, #f59e0b);
+    outline-offset: 2px;
+    transform: scale(1.02);
+}
+
 .timeline-item-year {
     font-weight: bold;
     color: var(--primary);

@@ -75,7 +75,7 @@ StudyEngine.registerActivity({
         const instructions = document.createElement('div');
         instructions.className = 'timeline-instructions';
         const instructionText = document.createElement('p');
-        instructionText.textContent = config.sortingData?.instruction || 'Drag each item to the correct category.';
+        instructionText.textContent = config.sortingData?.instruction || 'Sort each item into the correct category. Drag and drop, or tap an item to select it then tap a category to place it. Tap a placed item to remove it.';
         instructions.appendChild(instructionText);
         wrapper.appendChild(instructions);
 
@@ -142,6 +142,16 @@ StudyEngine.registerActivity({
             dropZone.style.minHeight = '60px';
             bucket.appendChild(dropZone);
 
+            // Tap-to-select: click a bucket/dropzone to place the selected card
+            dropZone.addEventListener('click', function() {
+                var selected = document.querySelector('.timeline-item.tap-selected');
+                if (!selected) return;
+
+                selected.classList.remove('tap-selected');
+                selected.classList.add('placed');
+                dropZone.appendChild(selected);
+            });
+
             bucketsContainer.appendChild(bucket);
         });
 
@@ -196,6 +206,27 @@ StudyEngine.registerActivity({
         textEl.className = 'timeline-item-title';
         textEl.textContent = item.text;
         card.appendChild(textEl);
+
+        // Tap-to-select: click/tap to select a card or remove a placed card
+        card.addEventListener('click', function(e) {
+            // Don't interfere with drag
+            if (e.defaultPrevented) return;
+
+            // If this card is already placed, remove it back to pool
+            if (card.classList.contains('placed')) {
+                card.classList.remove('placed', 'tap-selected');
+                var pool = document.getElementById('category-sort-pool');
+                if (pool) pool.appendChild(card);
+                return;
+            }
+
+            // Toggle selection
+            var allCards = document.querySelectorAll('#category-sort-pool .timeline-item, .category-sort-dropzone .timeline-item');
+            for (var i = 0; i < allCards.length; i++) {
+                allCards[i].classList.remove('tap-selected');
+            }
+            card.classList.add('tap-selected');
+        });
 
         return card;
     },
