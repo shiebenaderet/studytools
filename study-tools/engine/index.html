@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Tool</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header id="site-header">
+            <h1 id="site-title"><i class="fas fa-book-open"></i> <span id="title-text">Loading...</span></h1>
+            <div class="subtitle" id="site-subtitle"></div>
+            <div class="essential-question" id="site-question"></div>
+        </header>
+
+        <nav id="main-nav" class="nav-tabs"></nav>
+
+        <div id="sub-nav" class="sub-nav"></div>
+
+        <div id="home-section" class="section active">
+            <div class="stats-container" id="stats-container"></div>
+            <div class="home-cards" id="home-cards"></div>
+            <div class="badges-container" id="badges-container"></div>
+        </div>
+
+        <div id="activity-container" class="section"></div>
+
+        <div id="modal-overlay" class="modal"></div>
+
+        <div id="login-prompt" class="login-prompt hidden">
+            <button class="save-progress-btn" onclick="StudyEngine.showLoginModal()">
+                <i class="fas fa-save"></i> Save Progress
+            </button>
+        </div>
+    </div>
+
+    <script src="js/core/utils.js"></script>
+    <script src="js/core/progress.js"></script>
+    <script src="js/core/app.js"></script>
+</body>
+</html>
