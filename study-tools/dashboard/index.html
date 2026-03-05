@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+    <!-- Login Screen -->
+    <div id="login-screen" class="login-screen">
+        <div class="login-card">
+            <h1><i class="fas fa-chalkboard-teacher"></i> Teacher Dashboard</h1>
+            <p class="login-subtitle">Sign in to view student progress</p>
+            <form id="login-form" onsubmit="event.preventDefault(); Dashboard.login(this.email.value, this.password.value);">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="teacher@school.edu">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required placeholder="Password">
+                </div>
+                <div id="login-error" class="login-error hidden"></div>
+                <button type="submit" class="btn btn-primary btn-block">
+                    <i class="fas fa-sign-in-alt"></i> Sign In
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="dashboard hidden">
+        <header class="dashboard-header">
+            <h1><i class="fas fa-chalkboard-teacher"></i> Teacher Dashboard</h1>
+            <button class="btn btn-logout" onclick="Dashboard.logout()">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </header>
+
+        <!-- Filter Bar -->
+        <div class="filter-bar">
+            <div class="filter-group">
+                <label for="filter-class">Class</label>
+                <select id="filter-class">
+                    <option value="">All Classes</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="filter-date-start">From</label>
+                <input type="date" id="filter-date-start">
+            </div>
+            <div class="filter-group">
+                <label for="filter-date-end">To</label>
+                <input type="date" id="filter-date-end">
+            </div>
+            <button class="btn btn-primary btn-filter" onclick="Dashboard.applyFilters()">
+                <i class="fas fa-filter"></i> Apply
+            </button>
+        </div>
+
+        <!-- Tab Navigation -->
+        <nav class="tab-nav">
+            <button class="tab-btn active" data-tab="overview" onclick="Dashboard.switchTab('overview')">
+                <i class="fas fa-chart-pie"></i> Overview
+            </button>
+            <button class="tab-btn" data-tab="students" onclick="Dashboard.switchTab('students')">
+                <i class="fas fa-users"></i> Students
+            </button>
+            <button class="tab-btn" data-tab="units" onclick="Dashboard.switchTab('units')">
+                <i class="fas fa-book"></i> Units
+            </button>
+        </nav>
+
+        <!-- Tab Content -->
+        <div id="tab-overview" class="tab-content active">
+            <div id="overview-stats" class="stats-grid"></div>
+        </div>
+
+        <div id="tab-students" class="tab-content">
+            <div id="students-table-container"></div>
+        </div>
+
+        <div id="tab-units" class="tab-content">
+            <div id="units-chart-container"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script id="supabase-config">
+        // Replace these with your Supabase project values
+        const SUPABASE_URL = 'YOUR_SUPABASE_URL';
+        const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+    </script>
+    <script src="dashboard.js"></script>
+</body>
+</html>
