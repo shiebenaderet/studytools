@@ -2,6 +2,10 @@ const ProgressManager = {
     prefix: 'studytool_',
     studentInfo: null,
     dirty: {},
+    supabase: null,
+    studentId: null,
+    syncTimer: null,
+    sessionId: null,
 
     // --- localStorage tier ---
 
@@ -142,10 +146,116 @@ const ProgressManager = {
         }
     },
 
-    // --- Supabase sync (placeholder) ---
+    // --- Supabase sync ---
 
     markDirty(unitId, key) {
         this.dirty[`${unitId}:${key}`] = Date.now();
+    },
+
+    initSupabase() {
+        if (typeof SUPABASE_URL === 'undefined' || SUPABASE_URL === 'YOUR_SUPABASE_URL') return;
+        if (typeof supabase === 'undefined') return;
+        this.supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    },
+
+    async syncToSupabase() {
+        if (!this.supabase || !this.studentId) return;
+        try {
+            const dirtyKeys = Object.keys(this.dirty);
+            for (const compositeKey of dirtyKeys) {
+                const [unitId, key] = compositeKey.split(':');
+                const data = this.load(unitId, key);
+                if (data === null) continue;
+                const { error } = await this.supabase
+                    .from('progress')
+                    .upsert({
+                        student_id: this.studentId,
+                        unit_id: unitId,
+                        activity: key,
+                        data: data,
+                        updated_at: new Date().toISOString()
+                    }, { onConflict: 'student_id,unit_id,activity' });
+                if (!error) {
+                    delete this.dirty[compositeKey];
+                }
+            }
+        } catch (err) {
+            console.error('Supabase sync error:', err);
+        }
+    },
+
+    async syncFromSupabase() {
+        if (!this.supabase || !this.studentId) return;
+        try {
+            const { data: rows, error } = await this.supabase
+                .from('progress')
+                .select('*')
+                .eq('student_id', this.studentId);
+            if (error || !rows) return;
+            for (const row of rows) {
+                const localData = this.load(row.unit_id, row.activity);
+                const remoteTime = new Date(row.updated_at).getTime();
+                const localTime = localData && localData.updatedAt ? localData.updatedAt : 0;
+                if (remoteTime > localTime) {
+                    localStorage.setItem(this.getKey(row.unit_id, row.activity), JSON.stringify(row.data));
+                }
+            }
+        } catch (err) {
+            console.error('Supabase fetch error:', err);
+        }
+    },
+
+    startSyncLoop() {
+        if (this.syncTimer) clearInterval(this.syncTimer);
+        this.syncTimer = setInterval(() => this.syncToSupabase(), 30000);
+    },
+
+    async startSession() {
+        if (!this.supabase || !this.studentId) return;
+        try {
+            const unitId = (typeof StudyEngine !== 'undefined' && StudyEngine.config && StudyEngine.config.unit)
+                ? StudyEngine.config.unit.id
+                : 'unknown';
+            const { data, error } = await this.supabase
+                .from('sessions')
+                .insert({
+                    student_id: this.studentId,
+                    unit_id: unitId
+                })
+                .select('id')
+                .single();
+            if (!error && data) {
+                this.sessionId = data.id;
+            }
+        } catch (err) {
+            console.error('Session start error:', err);
+        }
+    },
+
+    async endSession() {
+        if (!this.supabase || !this.sessionId) return;
+        try {
+            const activitiesUsed = Object.keys(this.dirty).map(k => k.split(':')[1]);
+            const uniqueActivities = [...new Set(activitiesUsed)];
+            const sessionRow = await this.supabase
+                .from('sessions')
+                .select('started_at')
+                .eq('id', this.sessionId)
+                .single();
+            let durationSeconds = 0;
+            if (sessionRow.data && sessionRow.data.started_at) {
+                durationSeconds = Math.round((Date.now() - new Date(sessionRow.data.started_at).getTime()) / 1000);
+            }
+            await this.supabase
+                .from('sessions')
+                .update({
+                    duration_seconds: durationSeconds,
+                    activities_used: uniqueActivities
+                })
+                .eq('id', this.sessionId);
+        } catch (err) {
+            console.error('Session end error:', err);
+        }
     },
 
     // --- Login ---
@@ -178,7 +288,49 @@ const ProgressManager = {
         localStorage.setItem(`${this.prefix}studentInfo`, JSON.stringify(this.studentInfo));
         StudyEngine.closeModal();
 
-        // Supabase registration will be added later
+        // Supabase registration
+        if (this.supabase) {
+            try {
+                const { data: classRows, error: classError } = await this.supabase
+                    .from('classes')
+                    .select('id')
+                    .ilike('code', code)
+                    .limit(1);
+                if (classError || !classRows || classRows.length === 0) {
+                    alert('Invalid class code');
+                    return;
+                }
+                const classId = classRows[0].id;
+
+                const { data: existingStudents, error: studentError } = await this.supabase
+                    .from('students')
+                    .select('id')
+                    .eq('name', name)
+                    .eq('class_id', classId)
+                    .limit(1);
+                if (studentError) throw studentError;
+
+                if (existingStudents && existingStudents.length > 0) {
+                    this.studentId = existingStudents[0].id;
+                } else {
+                    const { data: newStudent, error: insertError } = await this.supabase
+                        .from('students')
+                        .insert({ name, class_id: classId })
+                        .select('id')
+                        .single();
+                    if (insertError) throw insertError;
+                    this.studentId = newStudent.id;
+                }
+
+                localStorage.setItem(`${this.prefix}studentId`, this.studentId);
+                this.startSyncLoop();
+                this.startSession();
+                this.syncToSupabase();
+            } catch (err) {
+                console.error('Supabase login error:', err);
+            }
+        }
+
         if (StudyEngine.config) {
             this.renderHomeStats(StudyEngine.config);
         }
@@ -193,8 +345,59 @@ const ProgressManager = {
                 this.studentInfo = null;
             }
         }
+        const storedId = localStorage.getItem(`${this.prefix}studentId`);
+        if (storedId) {
+            this.studentId = storedId;
+            this.initSupabase();
+            if (this.supabase) {
+                this.startSyncLoop();
+                this.syncFromSupabase();
+            }
+        }
     }
 };
 
 // Load student info immediately
+ProgressManager.initSupabase();
 ProgressManager.loadStudentInfo();
+
+// Save session and sync on page unload
+window.addEventListener('beforeunload', () => {
+    if (ProgressManager.supabase && ProgressManager.sessionId) {
+        try {
+            ProgressManager.endSession();
+        } catch (e) {
+            // best-effort
+        }
+    }
+    if (ProgressManager.supabase && ProgressManager.studentId) {
+        try {
+            const dirtyKeys = Object.keys(ProgressManager.dirty);
+            for (const compositeKey of dirtyKeys) {
+                const [unitId, key] = compositeKey.split(':');
+                const data = ProgressManager.load(unitId, key);
+                if (data === null) continue;
+                const body = JSON.stringify({
+                    student_id: ProgressManager.studentId,
+                    unit_id: unitId,
+                    activity: key,
+                    data: data,
+                    updated_at: new Date().toISOString()
+                });
+                fetch(`${SUPABASE_URL}/rest/v1/progress`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                        'Prefer': 'resolution=merge-duplicates'
+                    },
+                    body: body,
+                    keepalive: true
+                });
+            }
+        } catch (e) {
+            // best-effort
+        }
+    }
+});
