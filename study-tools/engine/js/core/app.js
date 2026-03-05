@@ -97,7 +97,17 @@ const StudyEngine = {
         const btn = document.createElement('button');
         btn.className = 'nav-btn';
         btn.dataset.group = id;
-        btn.textContent = label;
+
+        // Add icon if available
+        const icons = { home: 'fas fa-home', study: 'fas fa-book', practice: 'fas fa-clipboard-check', games: 'fas fa-gamepad', tools: 'fas fa-tools' };
+        if (icons[id]) {
+            const icon = document.createElement('i');
+            icon.className = icons[id];
+            btn.appendChild(icon);
+            btn.appendChild(document.createTextNode(' '));
+        }
+        btn.appendChild(document.createTextNode(label));
+
         btn.addEventListener('click', () => {
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
@@ -181,6 +191,31 @@ const StudyEngine = {
         container.classList.add('active');
         document.getElementById('home-section').classList.remove('active');
         document.getElementById('sub-nav').classList.remove('active');
+
+        // Add back button
+        const backBtn = document.createElement('button');
+        backBtn.className = 'nav-button';
+        backBtn.style.marginBottom = '16px';
+        const backIcon = document.createElement('i');
+        backIcon.className = 'fas fa-arrow-left';
+        backBtn.appendChild(backIcon);
+        backBtn.appendChild(document.createTextNode(' Back to Activities'));
+        backBtn.addEventListener('click', () => {
+            // Find which group this activity belongs to
+            const groups = { study: [], practice: [], games: [] };
+            Object.values(this.activities).forEach(a => {
+                const cat = a.category || 'games';
+                if (groups[cat]) groups[cat].push(a);
+            });
+            const groupId = activity.category || 'games';
+            this.showSubNav(groupId, groups[groupId]);
+            // Update nav active state
+            document.querySelectorAll('.nav-btn').forEach(b => {
+                b.classList.remove('active');
+                if (b.dataset.group === groupId) b.classList.add('active');
+            });
+        });
+        container.appendChild(backBtn);
 
         // Render and activate
         activity.render(container, this.config);
