@@ -1946,3 +1946,140 @@ header .essential-question {
     background: var(--primary);
     color: white;
 }
+
+/* --- Mastery Gating --- */
+
+.activity-card.locked {
+    opacity: 0.6;
+    cursor: not-allowed;
+    position: relative;
+    filter: grayscale(30%);
+}
+
+.activity-card.locked:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.activity-card.locked .card-button {
+    background: #999;
+    cursor: not-allowed;
+}
+
+.unlock-count {
+    font-size: 0.8rem;
+    color: var(--primary);
+    font-weight: 600;
+    margin-top: 4px;
+    padding: 4px 10px;
+    background: rgba(22, 105, 197, 0.08);
+    border-radius: 12px;
+    display: inline-block;
+}
+
+.mastery-progress-bar {
+    text-align: center;
+    margin-bottom: 16px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.mastery-progress-bar .progress-bar {
+    margin-top: 6px;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* --- Typing Practice --- */
+
+.typing-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.typing-passage-display {
+    font-size: 1.2rem;
+    line-height: 2;
+    padding: 24px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    min-height: 150px;
+    font-family: var(--font-body);
+}
+
+.typing-passage-display .word {
+    display: inline;
+    padding: 2px 0;
+    border-radius: 3px;
+    transition: background 0.15s;
+}
+
+.typing-passage-display .word.current {
+    background: rgba(22, 105, 197, 0.15);
+    border-bottom: 2px solid var(--primary);
+}
+
+.typing-passage-display .word.correct {
+    color: #22c55e;
+}
+
+.typing-passage-display .word.incorrect {
+    color: #ef4444;
+    text-decoration: underline;
+}
+
+.typing-passage-display .word.vocab-term {
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.typing-passage-display .word.vocab-term.correct {
+    color: #22c55e;
+    font-weight: 700;
+}
+
+.typing-passage-display .word.vocab-term.incorrect {
+    color: #ef4444;
+    font-weight: 700;
+}
+
+.typing-input-area {
+    width: 100%;
+    padding: 16px;
+    font-size: 1.2rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    font-family: var(--font-body);
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.typing-input-area:focus {
+    border-color: var(--primary);
+}
+
+.typing-stats {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin: 16px 0;
+    font-size: 0.95rem;
+}
+
+.typing-stat {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.typing-stat-value {
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.typing-category-select {
+    text-align: center;
+    margin-bottom: 20px;
+}

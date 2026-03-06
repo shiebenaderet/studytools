@@ -47,7 +47,7 @@ const StudyUtils = {
         return term.toLowerCase().trim().replace(/[^a-z0-9\s]/g, '');
     },
 
-    showToast(message, type) {
+    showToast(message, type, duration) {
         // type: 'success', 'error', 'info'
         const toast = document.createElement('div');
         toast.className = 'toast toast-' + (type || 'info');
@@ -60,6 +60,6 @@ const StudyUtils = {
         setTimeout(() => {
             toast.classList.remove('show');
             setTimeout(() => toast.remove(), 300);
-        }, 3000);
+        }, duration || 3000);
     }
 };
