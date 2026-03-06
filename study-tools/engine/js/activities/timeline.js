@@ -11,291 +11,289 @@ StudyEngine.registerActivity({
     _showYears: false,
     _container: null,
     _config: null,
+    _selectedCard: null,
+    _selectedSlot: null,
 
     render(container, config) {
         this._container = container;
         this._config = config;
+        this._selectedCard = null;
+        this._selectedSlot = null;
 
-        // Load saved progress
-        const saved = ProgressManager.getActivityProgress(config.unit.id, 'timeline');
+        var saved = ProgressManager.getActivityProgress(config.unit.id, 'timeline');
         this._attempts = saved?.attempts || 0;
         this._perfectCount = saved?.perfectCount || 0;
 
-        const events = config.timelineEvents;
+        var events = config.timelineEvents;
         if (!events || events.length === 0) return;
 
-        container.textContent = '';
+        var shuffled = this._shuffle([...events]);
 
-        // Main wrapper
-        const wrapper = document.createElement('div');
-        wrapper.className = 'timeline-container';
+        var wrapper = document.createElement('div');
+        wrapper.className = 'tl-wrapper';
+        wrapper.id = 'tl-wrapper';
 
-        // Title
-        const title = document.createElement('h2');
-        title.textContent = 'Timeline Challenge';
-        wrapper.appendChild(title);
+        // Header
+        var header = document.createElement('div');
+        header.className = 'tl-header';
+
+        var title = document.createElement('h2');
+        var titleIcon = document.createElement('i');
+        titleIcon.className = 'fas fa-history';
+        title.appendChild(titleIcon);
+        title.appendChild(document.createTextNode(' Timeline Challenge'));
+        header.appendChild(title);
+
+        var controls = document.createElement('div');
+        controls.className = 'tl-controls';
+
+        var toggleBtn = document.createElement('button');
+        toggleBtn.className = 'tl-toggle-btn';
+        toggleBtn.id = 'tl-year-toggle';
+        var eyeIcon = document.createElement('i');
+        eyeIcon.className = this._showYears ? 'fas fa-eye-slash' : 'fas fa-eye';
+        toggleBtn.appendChild(eyeIcon);
+        toggleBtn.appendChild(document.createTextNode(this._showYears ? ' Hide Years' : ' Show Years'));
+        var self = this;
+        toggleBtn.addEventListener('click', function() {
+            self._showYears = !self._showYears;
+            self.render(self._container, self._config);
+        });
+        controls.appendChild(toggleBtn);
+        header.appendChild(controls);
+        wrapper.appendChild(header);
 
         // Instructions
-        const instructions = document.createElement('div');
-        instructions.className = 'timeline-instructions';
-        const instructionText = document.createElement('p');
-        instructionText.textContent = 'Place the event cards into the numbered slots in the correct chronological order. Drag and drop, or tap a card to select it then tap a slot to place it. Tap a placed card to remove it. When all slots are filled, click "Check Answer" to see how you did!';
-        instructions.appendChild(instructionText);
-        wrapper.appendChild(instructions);
+        var instEl = document.createElement('p');
+        instEl.className = 'tl-instructions';
+        instEl.textContent = 'Tap an event, then tap a slot to place it. Tap a placed event to move it. Arrange all events from earliest to latest.';
+        wrapper.appendChild(instEl);
 
-        // Progress display
-        const progressInfo = document.createElement('div');
-        progressInfo.className = 'explanation';
-        progressInfo.style.marginBottom = '16px';
-        const progressText = document.createElement('p');
-        progressText.id = 'timeline-progress';
-        progressText.textContent = 'Attempts: ' + this._attempts + ' | Perfect scores: ' + this._perfectCount;
-        progressInfo.appendChild(progressText);
-        wrapper.appendChild(progressInfo);
+        // Stats
+        var stats = document.createElement('div');
+        stats.className = 'tl-stats';
+        stats.id = 'tl-stats';
+        stats.textContent = 'Attempts: ' + this._attempts + ' | Perfect: ' + this._perfectCount;
+        wrapper.appendChild(stats);
 
-        // Year toggle button
-        const toggleDiv = document.createElement('div');
-        toggleDiv.style.marginBottom = '12px';
-        toggleDiv.style.textAlign = 'center';
+        // Main layout
+        var layout = document.createElement('div');
+        layout.className = 'tl-layout';
 
-        const toggleBtn = document.createElement('button');
-        toggleBtn.className = 'nav-button';
-        toggleBtn.id = 'timeline-year-toggle';
-        toggleBtn.textContent = this._showYears ? 'Hide Years (Challenge Mode)' : 'Show Years (Easy Mode)';
-        toggleBtn.addEventListener('click', () => {
-            this._showYears = !this._showYears;
-            this.render(this._container, this._config);
-        });
-        toggleDiv.appendChild(toggleBtn);
-        wrapper.appendChild(toggleDiv);
+        // Card pool
+        var poolSection = document.createElement('div');
+        poolSection.className = 'tl-pool-section';
 
-        // Unordered container (shuffled event cards)
-        const unorderedLabel = document.createElement('h3');
-        unorderedLabel.textContent = 'Events to Place:';
-        wrapper.appendChild(unorderedLabel);
+        var poolLabel = document.createElement('div');
+        poolLabel.className = 'tl-section-label';
+        poolLabel.textContent = 'Events';
+        poolSection.appendChild(poolLabel);
 
-        const unorderedContainer = document.createElement('div');
-        unorderedContainer.className = 'timeline-items-container';
-        unorderedContainer.id = 'timeline-unordered';
+        var pool = document.createElement('div');
+        pool.className = 'tl-pool';
+        pool.id = 'tl-pool';
 
-        // Shuffle events
-        const shuffled = this._shuffle([...events]);
-
-        shuffled.forEach(event => {
-            const card = this._createEventCard(event);
-            unorderedContainer.appendChild(card);
-        });
-
-        wrapper.appendChild(unorderedContainer);
-
-        // Ordered container (drop slots)
-        const orderedLabel = document.createElement('h3');
-        orderedLabel.textContent = 'Timeline (Earliest to Latest):';
-        orderedLabel.style.marginTop = '24px';
-        wrapper.appendChild(orderedLabel);
-
-        const orderedContainer = document.createElement('div');
-        orderedContainer.className = 'timeline-ordered-container';
-        orderedContainer.id = 'timeline-ordered';
-
-        for (let i = 1; i <= events.length; i++) {
-            const slot = document.createElement('div');
-            slot.className = 'timeline-ordered-item';
-            slot.id = 'timeline-slot-' + i;
-            slot.dataset.slotIndex = i;
-
-            const number = document.createElement('div');
-            number.className = 'timeline-number';
-            number.textContent = i;
-            slot.appendChild(number);
-
-            // Tap-to-select: click a slot to place the selected card
-            slot.addEventListener('click', function() {
-                var selected = document.querySelector('.timeline-item.tap-selected');
-                if (!selected) return;
-
-                // If slot already has a card, move it back
-                var existing = slot.querySelector('.timeline-item');
-                if (existing) {
-                    existing.classList.remove('placed');
-                    var pool = document.getElementById('timeline-unordered');
-                    if (pool) pool.appendChild(existing);
-                }
-
-                selected.classList.remove('tap-selected');
-                selected.classList.add('placed');
-                slot.appendChild(selected);
-            });
-
-            orderedContainer.appendChild(slot);
+        for (var i = 0; i < shuffled.length; i++) {
+            pool.appendChild(this._createCard(shuffled[i]));
         }
 
-        wrapper.appendChild(orderedContainer);
+        poolSection.appendChild(pool);
+        layout.appendChild(poolSection);
+
+        // Timeline slots
+        var slotsSection = document.createElement('div');
+        slotsSection.className = 'tl-slots-section';
+
+        var slotsLabel = document.createElement('div');
+        slotsLabel.className = 'tl-section-label';
+        slotsLabel.textContent = 'Timeline (Earliest \u2192 Latest)';
+        slotsSection.appendChild(slotsLabel);
+
+        var slotsContainer = document.createElement('div');
+        slotsContainer.className = 'tl-slots';
+        slotsContainer.id = 'tl-slots';
+
+        for (var s = 0; s < events.length; s++) {
+            slotsContainer.appendChild(this._createSlot(s + 1));
+        }
+
+        slotsSection.appendChild(slotsContainer);
+        layout.appendChild(slotsSection);
+        wrapper.appendChild(layout);
 
         // Buttons
-        const buttonRow = document.createElement('div');
-        buttonRow.style.display = 'flex';
-        buttonRow.style.gap = '12px';
-        buttonRow.style.justifyContent = 'center';
-        buttonRow.style.marginTop = '20px';
+        var btnRow = document.createElement('div');
+        btnRow.className = 'tl-btn-row';
 
-        const checkBtn = document.createElement('button');
-        checkBtn.className = 'nav-button';
-        checkBtn.id = 'timeline-check-btn';
-        checkBtn.textContent = 'Check Answer';
-        checkBtn.addEventListener('click', () => this.checkAnswer());
-        buttonRow.appendChild(checkBtn);
+        var checkBtn = document.createElement('button');
+        checkBtn.className = 'tl-btn tl-btn-check';
+        var checkIcon = document.createElement('i');
+        checkIcon.className = 'fas fa-check';
+        checkBtn.appendChild(checkIcon);
+        checkBtn.appendChild(document.createTextNode(' Check Answer'));
+        checkBtn.addEventListener('click', function() { self.checkAnswer(); });
+        btnRow.appendChild(checkBtn);
 
-        const resetBtn = document.createElement('button');
-        resetBtn.className = 'nav-button';
-        resetBtn.id = 'timeline-reset-btn';
-        resetBtn.textContent = 'Reset';
-        resetBtn.addEventListener('click', () => this.reset());
-        buttonRow.appendChild(resetBtn);
+        var resetBtn = document.createElement('button');
+        resetBtn.className = 'tl-btn tl-btn-reset';
+        var resetIcon = document.createElement('i');
+        resetIcon.className = 'fas fa-redo';
+        resetBtn.appendChild(resetIcon);
+        resetBtn.appendChild(document.createTextNode(' Reset'));
+        resetBtn.addEventListener('click', function() { self.reset(); });
+        btnRow.appendChild(resetBtn);
 
-        wrapper.appendChild(buttonRow);
+        wrapper.appendChild(btnRow);
 
-        // Result display
-        const resultArea = document.createElement('div');
-        resultArea.id = 'timeline-result';
-        resultArea.className = 'explanation';
-        resultArea.style.marginTop = '16px';
-        resultArea.style.display = 'none';
-        wrapper.appendChild(resultArea);
+        // Result area
+        var result = document.createElement('div');
+        result.id = 'tl-result';
+        result.className = 'tl-result';
+        wrapper.appendChild(result);
 
         container.appendChild(wrapper);
-
-        // Initialize drag and drop
-        this.initDragDrop();
     },
 
-    _createEventCard(event) {
-        const card = document.createElement('div');
-        card.className = 'timeline-item';
-        card.id = 'timeline-event-' + event.id;
-        card.draggable = true;
+    _createCard(event) {
+        var card = document.createElement('div');
+        card.className = 'tl-card';
         card.dataset.eventId = event.id;
 
         if (this._showYears) {
-            const year = document.createElement('div');
-            year.className = 'timeline-item-year';
+            var year = document.createElement('span');
+            year.className = 'tl-card-year';
             year.textContent = event.year;
             card.appendChild(year);
         }
 
-        const titleEl = document.createElement('div');
-        titleEl.className = 'timeline-item-title';
+        var titleEl = document.createElement('span');
+        titleEl.className = 'tl-card-title';
         titleEl.textContent = event.title;
         card.appendChild(titleEl);
 
-        const desc = document.createElement('div');
-        desc.className = 'timeline-item-desc';
-        desc.textContent = event.description;
-        card.appendChild(desc);
+        if (event.description) {
+            card.title = event.description;
+        }
 
-        // Tap-to-select: click/tap to select a card or remove a placed card
+        var self = this;
         card.addEventListener('click', function(e) {
-            // Don't interfere with drag
-            if (e.defaultPrevented) return;
-
-            // If this card is already placed, remove it back to pool
-            if (card.classList.contains('placed')) {
-                card.classList.remove('placed', 'tap-selected');
-                var pool = document.getElementById('timeline-unordered');
-                if (pool) pool.appendChild(card);
-                return;
-            }
-
-            // Toggle selection
-            var allCards = document.querySelectorAll('.timeline-item');
-            for (var i = 0; i < allCards.length; i++) {
-                allCards[i].classList.remove('tap-selected');
-            }
-            card.classList.add('tap-selected');
+            e.stopPropagation();
+            self._handleCardClick(card);
         });
 
         return card;
     },
 
-    initDragDrop() {
-        const unordered = document.getElementById('timeline-unordered');
-        const ordered = document.getElementById('timeline-ordered');
-        if (!unordered || !ordered) return;
+    _createSlot(num) {
+        var slot = document.createElement('div');
+        slot.className = 'tl-slot';
+        slot.dataset.slotNum = num;
 
-        // Dragstart on all event cards
-        const cards = document.querySelectorAll('.timeline-item');
-        cards.forEach(card => {
-            card.addEventListener('dragstart', (e) => {
-                e.dataTransfer.setData('text/plain', card.id);
-                card.style.opacity = '0.5';
-            });
-            card.addEventListener('dragend', (e) => {
-                card.style.opacity = '1';
-            });
+        var number = document.createElement('div');
+        number.className = 'tl-slot-num';
+        number.textContent = num;
+        slot.appendChild(number);
+
+        var dropArea = document.createElement('div');
+        dropArea.className = 'tl-slot-drop';
+        dropArea.textContent = 'Tap to place';
+        slot.appendChild(dropArea);
+
+        var self = this;
+        slot.addEventListener('click', function(e) {
+            e.stopPropagation();
+            self._handleSlotClick(slot);
         });
 
-        // Drop slots in the ordered container
-        const slots = ordered.querySelectorAll('.timeline-ordered-item');
-        slots.forEach(slot => {
-            slot.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                slot.style.borderColor = 'var(--primary, #1669C5)';
-            });
-            slot.addEventListener('dragleave', (e) => {
-                slot.style.borderColor = '';
-            });
-            slot.addEventListener('drop', (e) => {
-                e.preventDefault();
-                slot.style.borderColor = '';
-                const cardId = e.dataTransfer.getData('text/plain');
-                const card = document.getElementById(cardId);
-                if (!card) return;
+        return slot;
+    },
 
-                // Check if slot already has an event card (not counting the number label)
-                const existingCard = slot.querySelector('.timeline-item');
-                if (existingCard) {
-                    // Move existing card back to unordered container
-                    existingCard.classList.remove('placed');
-                    unordered.appendChild(existingCard);
-                }
+    _handleCardClick(card) {
+        this._clearSelections();
 
-                // If the card was in another slot, that slot is now free
-                const previousSlot = card.closest('.timeline-ordered-item');
-                // No cleanup needed; we just move the card
+        var parentSlot = card.closest('.tl-slot');
+        if (parentSlot) {
+            card.classList.add('tl-selected');
+            parentSlot.classList.add('tl-slot-active');
+            this._selectedCard = card;
+            this._selectedSlot = parentSlot;
+        } else {
+            card.classList.add('tl-selected');
+            this._selectedCard = card;
+            this._selectedSlot = null;
+        }
+    },
 
-                card.classList.add('placed');
-                slot.appendChild(card);
-            });
-        });
+    _handleSlotClick(slot) {
+        var cardInSlot = slot.querySelector('.tl-card');
 
-        // Allow dropping back to unordered container
-        unordered.addEventListener('dragover', (e) => {
-            e.preventDefault();
-        });
-        unordered.addEventListener('drop', (e) => {
-            e.preventDefault();
-            const cardId = e.dataTransfer.getData('text/plain');
-            const card = document.getElementById(cardId);
-            if (!card) return;
-            card.classList.remove('placed');
-            unordered.appendChild(card);
-        });
+        if (!this._selectedCard) {
+            if (cardInSlot) {
+                this._clearSelections();
+                cardInSlot.classList.add('tl-selected');
+                slot.classList.add('tl-slot-active');
+                this._selectedCard = cardInSlot;
+                this._selectedSlot = slot;
+            }
+            return;
+        }
+
+        var pool = document.getElementById('tl-pool');
+
+        if (this._selectedSlot) {
+            if (cardInSlot && cardInSlot !== this._selectedCard) {
+                // Swap cards between slots
+                var tempSlot = this._selectedSlot;
+                tempSlot.querySelector('.tl-slot-drop').style.display = 'none';
+                slot.querySelector('.tl-slot-drop').style.display = 'none';
+                tempSlot.appendChild(cardInSlot);
+                slot.appendChild(this._selectedCard);
+            } else if (!cardInSlot) {
+                // Move to empty slot
+                slot.querySelector('.tl-slot-drop').style.display = 'none';
+                slot.appendChild(this._selectedCard);
+                this._selectedSlot.querySelector('.tl-slot-drop').style.display = '';
+            }
+        } else {
+            // From pool to slot
+            if (cardInSlot) {
+                cardInSlot.classList.remove('tl-selected');
+                pool.appendChild(cardInSlot);
+            }
+            slot.querySelector('.tl-slot-drop').style.display = 'none';
+            slot.appendChild(this._selectedCard);
+        }
+
+        this._clearSelections();
+        // Clear check result styling when user changes placement
+        var slots = document.querySelectorAll('.tl-slot');
+        slots.forEach(function(s) { s.classList.remove('tl-slot-correct', 'tl-slot-wrong'); });
+        var resultArea = document.getElementById('tl-result');
+        if (resultArea) { resultArea.style.display = 'none'; while (resultArea.firstChild) resultArea.removeChild(resultArea.firstChild); }
+    },
+
+    _clearSelections() {
+        var allCards = document.querySelectorAll('.tl-card.tl-selected');
+        for (var i = 0; i < allCards.length; i++) allCards[i].classList.remove('tl-selected');
+        var allSlots = document.querySelectorAll('.tl-slot.tl-slot-active');
+        for (var j = 0; j < allSlots.length; j++) allSlots[j].classList.remove('tl-slot-active');
+        this._selectedCard = null;
+        this._selectedSlot = null;
     },
 
     checkAnswer() {
-        const ordered = document.getElementById('timeline-ordered');
-        const resultArea = document.getElementById('timeline-result');
-        if (!ordered || !resultArea) return;
+        var slotsContainer = document.getElementById('tl-slots');
+        var resultArea = document.getElementById('tl-result');
+        if (!slotsContainer || !resultArea) return;
 
-        const events = this._config.timelineEvents;
-        const slots = ordered.querySelectorAll('.timeline-ordered-item');
+        var events = this._config.timelineEvents;
+        var slots = slotsContainer.querySelectorAll('.tl-slot');
 
-        // Check if all slots are filled
-        let allFilled = true;
-        const placedIds = [];
+        var allFilled = true;
+        var placedIds = [];
 
-        slots.forEach(slot => {
-            const card = slot.querySelector('.timeline-item');
+        slots.forEach(function(slot) {
+            var card = slot.querySelector('.tl-card');
             if (card) {
                 placedIds.push(parseInt(card.dataset.eventId, 10));
             } else {
@@ -303,52 +301,58 @@ StudyEngine.registerActivity({
             }
         });
 
+        while (resultArea.firstChild) resultArea.removeChild(resultArea.firstChild);
         resultArea.style.display = 'block';
-        resultArea.textContent = '';
 
         if (!allFilled) {
-            const msg = document.createElement('p');
-            msg.textContent = 'Please place all events into the timeline slots before checking your answer.';
-            msg.style.color = '#e74c3c';
-            resultArea.appendChild(msg);
+            resultArea.className = 'tl-result tl-result-warn';
+            resultArea.textContent = 'Place all events into the timeline before checking.';
             return;
         }
 
-        // Compare against correct order (ids 1, 2, 3, ... in order)
-        const correctOrder = events.map(ev => ev.id).sort((a, b) => a - b);
-        let correctCount = 0;
+        var correctOrder = events.map(function(ev) { return ev.id; }).sort(function(a, b) { return a - b; });
+        var correctCount = 0;
 
-        placedIds.forEach((id, index) => {
-            if (id === correctOrder[index]) {
-                correctCount++;
-                // Mark slot as correct
-                slots[index].style.borderColor = '#27ae60';
-            } else {
-                slots[index].style.borderColor = '#e74c3c';
-            }
-        });
+        for (var i = 0; i < placedIds.length; i++) {
+            var isCorrect = placedIds[i] === correctOrder[i];
+            if (isCorrect) correctCount++;
+            slots[i].classList.remove('tl-slot-correct', 'tl-slot-wrong');
+            slots[i].classList.add(isCorrect ? 'tl-slot-correct' : 'tl-slot-wrong');
+        }
 
         this._attempts++;
-        const isPerfect = correctCount === events.length;
+        var isPerfect = correctCount === events.length;
 
         if (isPerfect) {
             this._perfectCount++;
-            const msg = document.createElement('p');
-            msg.textContent = 'Perfect! You placed all ' + events.length + ' events in the correct order!';
-            msg.style.color = '#27ae60';
-            msg.style.fontWeight = 'bold';
-            resultArea.appendChild(msg);
+            resultArea.className = 'tl-result tl-result-success';
+
+            var successMsg = document.createElement('div');
+            successMsg.textContent = 'Perfect! All ' + events.length + ' events in the correct order!';
+            successMsg.style.fontWeight = '600';
+            successMsg.style.marginBottom = '10px';
+            resultArea.appendChild(successMsg);
+
+            var answerList = document.createElement('div');
+            answerList.className = 'tl-answer-list';
+            for (var a = 0; a < correctOrder.length; a++) {
+                var ev = events.find(function(e) { return e.id === correctOrder[a]; });
+                if (ev) {
+                    var row = document.createElement('div');
+                    row.className = 'tl-answer-row';
+                    row.textContent = ev.year + ' \u2014 ' + ev.title;
+                    answerList.appendChild(row);
+                }
+            }
+            resultArea.appendChild(answerList);
         } else {
-            const msg = document.createElement('p');
-            msg.textContent = 'You got ' + correctCount + ' out of ' + events.length + ' correct. Green borders show correct placements, red borders show incorrect ones. Try again!';
-            msg.style.color = '#e74c3c';
-            resultArea.appendChild(msg);
+            resultArea.className = 'tl-result tl-result-error';
+            resultArea.textContent = correctCount + ' of ' + events.length + ' correct. Green = right spot, red = wrong. Swap cards and try again!';
         }
 
-        // Update progress display
-        const progressEl = document.getElementById('timeline-progress');
-        if (progressEl) {
-            progressEl.textContent = 'Attempts: ' + this._attempts + ' | Perfect scores: ' + this._perfectCount;
+        var statsEl = document.getElementById('tl-stats');
+        if (statsEl) {
+            statsEl.textContent = 'Attempts: ' + this._attempts + ' | Perfect: ' + this._perfectCount;
         }
 
         this._saveProgress();
@@ -356,6 +360,8 @@ StudyEngine.registerActivity({
 
     reset() {
         if (this._container && this._config) {
+            var wrapper = document.getElementById('tl-wrapper');
+            if (wrapper) wrapper.remove();
             this.render(this._container, this._config);
         }
     },
@@ -368,9 +374,11 @@ StudyEngine.registerActivity({
     },
 
     _shuffle(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
+        for (var i = array.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var tmp = array[i];
+            array[i] = array[j];
+            array[j] = tmp;
         }
         return array;
     },
