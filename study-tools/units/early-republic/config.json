@@ -734,94 +734,105 @@
         {
             "question": "Hamilton vs. Jefferson: Pick ONE of the major disagreements between Hamilton and Jefferson (national bank, strict vs. loose construction, economic vision, or foreign policy). Explain what each side believed and why it mattered for the future of the country.",
             "topic": "Political Parties Are Born",
+            "keyTerms": ["Strict Construction", "Loose Construction", "National Bank", "Tariff", "Political Party", "Democratic-Republican"],
             "rubric": [
                 "Names a SPECIFIC disagreement (not just 'they disagreed')",
                 "Explains Hamilton's position with specific details",
                 "Explains Jefferson's position with specific details",
                 "Explains WHY this disagreement mattered for the future (3-4 sentences)",
-                "Uses vocabulary from the unit (strict/loose construction, etc.)"
+                "Uses vocabulary: strict construction, loose construction, political party"
             ],
             "exemplar": "Hamilton and Jefferson disagreed about whether to create a National Bank. Hamilton believed in loose construction — that the 'Necessary and Proper' clause gave Congress implied powers to create a bank to manage the nation's finances, print currency, and help businesses grow. Jefferson believed in strict construction — the Constitution doesn't mention a bank, so the government has no right to create one. He feared a powerful bank would benefit wealthy northerners at the expense of farmers. This mattered because it created the debate about federal power vs. states' rights that continues today, and it led to the formation of America's first political parties.",
             "sentenceStarters": [
                 "Hamilton and Jefferson disagreed about...",
-                "Hamilton believed that...",
-                "Jefferson argued that...",
-                "This disagreement mattered because..."
+                "Hamilton believed in loose construction, which means...",
+                "Jefferson argued for strict construction, meaning...",
+                "This disagreement mattered because it led to..."
             ]
         },
         {
             "question": "Jefferson's Dilemma: Explain the dilemma Jefferson faced with the Louisiana Purchase. What did he believe about the Constitution? What did he actually do? Why does this matter?",
             "topic": "Exploring & Growing",
+            "keyTerms": ["Dilemma", "Strict Construction", "Loose Construction", "Louisiana Purchase", "Napoleon"],
             "rubric": [
                 "Explains Jefferson's belief in strict construction",
                 "Identifies the specific problem: Constitution doesn't mention buying land",
-                "Explains what Jefferson decided to do and why",
+                "Explains what Jefferson decided to do and why (think about Napoleon's offer)",
                 "Uses the word 'dilemma' correctly",
                 "Explains what this teaches us about real-world decision making (4-5 sentences)"
             ],
             "exemplar": "Jefferson faced a major dilemma with the Louisiana Purchase. He had always believed in strict construction — that the government should only do what the Constitution specifically allows. But Napoleon offered to sell the entire Louisiana Territory for $15 million, which would double the size of the nation. The problem was that the Constitution doesn't say anything about the president buying land from foreign countries. Jefferson decided the opportunity was too good to pass up and used loose construction to justify the purchase, even though it went against his own principles. This matters because it shows that even people with strong beliefs sometimes change when faced with real decisions — and that governing is more complicated than just following rules.",
             "sentenceStarters": [
                 "Jefferson believed in strict construction, which means...",
-                "The dilemma was that...",
-                "He decided to...",
-                "This teaches us that..."
+                "The dilemma was that Napoleon offered...",
+                "Even though the Constitution doesn't mention..., Jefferson decided to...",
+                "This teaches us that leaders sometimes face..."
             ]
         },
         {
             "question": "Escalation to War: Trace the path from peaceful disagreements to the War of 1812. What events led to war? Why did peaceful solutions fail? Use at least 3 specific events in your answer.",
             "topic": "War & National Pride",
+            "keyTerms": ["Impressment", "Embargo Act", "War Hawks", "Henry Clay", "Tecumseh"],
             "rubric": [
                 "Names at least 3 specific events that led to war",
                 "Explains HOW each event contributed to growing tensions",
                 "Describes WHY peaceful solutions (like the Embargo Act) failed",
-                "Shows understanding of escalation over time",
-                "Uses vocabulary: impressment, War Hawks, embargo (4-5 sentences)"
+                "Shows understanding of how things escalated over time",
+                "Uses vocabulary: impressment, War Hawks, Embargo Act (4-5 sentences)"
             ],
             "exemplar": "Several events escalated tensions between the US and Britain before the War of 1812. First, Britain kept impressing American sailors — forcing them to serve in the Royal Navy against their will. Jefferson tried a peaceful solution with the Embargo Act of 1807, which banned all US trade with foreign nations, but this backfired and hurt American businesses more than Britain. Britain was also supplying weapons to Native Americans on the frontier, which angered settlers. Finally, War Hawks in Congress like Henry Clay pushed for war to defend American honor and expand territory. Peaceful solutions failed because Britain refused to stop impressment and the Embargo Act destroyed the American economy. By 1812, war seemed like the only option left.",
             "sentenceStarters": [
-                "Tensions between the US and Britain grew because...",
-                "Jefferson tried to solve this peacefully by...",
-                "This failed because...",
+                "Tensions between the US and Britain grew because of impressment, which means...",
+                "Jefferson tried to solve this peacefully with the Embargo Act, which...",
+                "The Embargo Act failed because...",
                 "War Hawks like Henry Clay pushed for war because...",
-                "By 1812, war seemed like the only option because..."
+                "By 1812, war seemed unavoidable because..."
             ]
         },
         {
             "question": "Nationalism After 1812: How did the War of 1812 change how Americans felt about their country? Explain at least 3 specific ways nationalism grew after the war.",
             "topic": "War & National Pride",
+            "keyTerms": ["Nationalism", "Era of Good Feelings", "Star-Spangled Banner", "Fort McHenry", "American System", "Monroe Doctrine", "Henry Clay"],
             "rubric": [
-                "Defines or demonstrates understanding of nationalism",
+                "Defines or shows understanding of nationalism",
                 "Names at least 3 specific examples of growing nationalism",
-                "Connects the war to these changes",
-                "Mentions specific events, policies, or symbols",
+                "Connects the war to these changes (think: Era of Good Feelings, Star-Spangled Banner, American System, Monroe Doctrine)",
+                "Uses specific vocabulary terms from the unit",
                 "4-5 complete sentences"
             ],
             "exemplar": "After the War of 1812, Americans felt a strong surge of nationalism — pride and loyalty to their country. First, the Federalist Party collapsed because they had opposed the war, leaving the Democratic-Republicans as the only party and creating the 'Era of Good Feelings.' Second, new national symbols emerged — the Star-Spangled Banner became a powerful anthem after Fort McHenry, and Americans celebrated the flag, the eagle, and shared national heroes. Third, Henry Clay proposed the American System to connect the economy with tariffs, a national bank, and roads and canals. Fourth, the Monroe Doctrine showed the world that America was confident enough to tell European nations to stay out of the Western Hemisphere. The war proved America could defend itself and made people think of themselves as Americans first.",
             "sentenceStarters": [
                 "Nationalism means...",
-                "After the War of 1812, Americans felt...",
-                "One example of growing nationalism was...",
-                "Another example was...",
-                "The war changed America because..."
+                "After the War of 1812, the Era of Good Feelings began because...",
+                "One example of growing nationalism was the Star-Spangled Banner, which...",
+                "Henry Clay's American System showed nationalism by...",
+                "The Monroe Doctrine was an example of nationalism because..."
             ]
         },
         {
-            "question": "Connections Across the Unit: Pick TWO events from different segments of this unit and explain how they are connected. How does the earlier event help explain the later one?",
+            "question": "Connections Across the Unit: Pick ONE of the event pairings below and explain how they are connected. How does the earlier event help explain the later one?",
             "topic": "Connections",
+            "keyTerms": ["Precedent", "Strict Construction", "Loose Construction", "Nationalism", "Impressment", "McCulloch v. Maryland"],
+            "connectionPairings": [
+                "National Bank debate (1790s) → McCulloch v. Maryland (1819): How did Hamilton's argument about loose construction win out decades later?",
+                "Whiskey Rebellion (1794) → War of 1812: How did the government's willingness to use force set a precedent?",
+                "Alien & Sedition Acts (1798) → Monroe Doctrine (1823): How did early debates about government power shape how confident America became?",
+                "Jefferson's strict construction beliefs → Louisiana Purchase (1803): How did real-world events force Jefferson to act against his own principles?"
+            ],
             "rubric": [
-                "Picks TWO specific events from DIFFERENT segments",
-                "Clearly explains the connection between them",
+                "Picks ONE of the suggested event pairings",
+                "Clearly explains what happened in BOTH events (use specific details)",
                 "Shows how the earlier event helped cause or explain the later one",
-                "Uses specific details from both events",
+                "Uses vocabulary terms that connect the two events",
                 "Demonstrates understanding of cause-and-effect across time (4-5 sentences)"
             ],
             "exemplar": "The debate between Hamilton and Jefferson over the National Bank in the 1790s connects directly to the McCulloch v. Maryland case in 1819. Hamilton argued the bank was constitutional using the 'Necessary and Proper' clause (loose construction), while Jefferson said it wasn't mentioned in the Constitution (strict construction). Washington sided with Hamilton and created the bank. Decades later, when Maryland tried to tax the Second National Bank, the Supreme Court in McCulloch v. Maryland had to answer the same question — and they sided with Hamilton's view, ruling the bank was constitutional and states couldn't tax federal institutions. This shows how early disagreements about government power kept coming back throughout the Early Republic period.",
             "sentenceStarters": [
-                "The first event I chose is... from the [segment name] segment.",
-                "The second event is... from the [segment name] segment.",
+                "The earlier event was..., which happened when...",
+                "The later event was..., which happened when...",
                 "These events are connected because...",
                 "The earlier event helped cause/explain the later one because...",
-                "This shows that..."
+                "This shows that in the Early Republic..."
             ]
         }
     ],

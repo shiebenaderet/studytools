@@ -81,6 +81,54 @@ StudyEngine.registerActivity({
         questionDiv.appendChild(document.createTextNode(q.question));
         contentArea.appendChild(questionDiv);
 
+        // Key Terms
+        if (q.keyTerms && q.keyTerms.length > 0) {
+            const termsDiv = document.createElement('div');
+            termsDiv.className = 'key-terms-box';
+
+            const termsTitle = document.createElement('div');
+            termsTitle.className = 'key-terms-title';
+            const termsIcon = document.createElement('i');
+            termsIcon.className = 'fas fa-key';
+            termsTitle.appendChild(termsIcon);
+            termsTitle.appendChild(document.createTextNode(' Key Terms to Use:'));
+            termsDiv.appendChild(termsTitle);
+
+            const termsList = document.createElement('div');
+            termsList.className = 'key-terms-list';
+            q.keyTerms.forEach(term => {
+                const chip = document.createElement('span');
+                chip.className = 'key-term-chip';
+                chip.textContent = term;
+                termsList.appendChild(chip);
+            });
+            termsDiv.appendChild(termsList);
+            contentArea.appendChild(termsDiv);
+        }
+
+        // Connection Pairings
+        if (q.connectionPairings && q.connectionPairings.length > 0) {
+            const pairDiv = document.createElement('div');
+            pairDiv.className = 'connection-pairings';
+
+            const pairTitle = document.createElement('div');
+            pairTitle.className = 'connection-pairings-title';
+            const pairIcon = document.createElement('i');
+            pairIcon.className = 'fas fa-link';
+            pairTitle.appendChild(pairIcon);
+            pairTitle.appendChild(document.createTextNode(' Choose One Pairing:'));
+            pairDiv.appendChild(pairTitle);
+
+            q.connectionPairings.forEach(pairing => {
+                const item = document.createElement('div');
+                item.className = 'connection-pairing-item';
+                item.textContent = pairing;
+                pairDiv.appendChild(item);
+            });
+            pairDiv.appendChild(document.createElement('br'));
+            contentArea.appendChild(pairDiv);
+        }
+
         // Rubric
         const rubricDiv = document.createElement('div');
         rubricDiv.className = 'rubric';
