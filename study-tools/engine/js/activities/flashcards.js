@@ -9,24 +9,48 @@ StudyEngine.registerActivity({
     // Internal state
     _currentIndex: 0,
     _isFlipped: false,
+    _hasFlipped: false,
     _displayedVocab: [],
     _mastered: [],
     _keyHandler: null,
 
     render(container, config) {
         // Initialize state
-        this._displayedVocab = [...config.vocabulary];
+        this._displayedVocab = [...MasteryManager.getUnlockedVocabulary(config.unit.id, config)];
         const saved = ProgressManager.getActivityProgress(config.unit.id, 'flashcards');
         this._mastered = saved?.mastered || [];
         this._currentIndex = 0;
         this._isFlipped = false;
+        this._hasFlipped = false;
 
-        // Build category filter options
-        const categories = [...new Set(config.vocabulary.map(v => v.category))];
+        // Build category filter options (only unlocked categories)
+        const categories = MasteryManager.getUnlockedCategories(config.unit.id, config);
 
         // Main wrapper
         const wrapper = document.createElement('div');
         wrapper.className = 'flashcard-container';
+
+        // --- Mastery progress bar ---
+        const unlockStatus = MasteryManager.getUnlockStatus(config.unit.id, config);
+        if (!unlockStatus.allUnlocked) {
+            const progressBar = document.createElement('div');
+            progressBar.className = 'mastery-progress-bar';
+            progressBar.id = 'fc-mastery-progress';
+
+            const progressLabel = document.createElement('span');
+            progressLabel.textContent = unlockStatus.unlockedCategories.length + '/' + unlockStatus.categories.length + ' categories unlocked';
+            progressBar.appendChild(progressLabel);
+
+            const bar = document.createElement('div');
+            bar.className = 'progress-bar';
+            const fill = document.createElement('div');
+            fill.className = 'progress-fill';
+            fill.style.width = Math.round((unlockStatus.unlockedCategories.length / unlockStatus.categories.length) * 100) + '%';
+            bar.appendChild(fill);
+            progressBar.appendChild(bar);
+
+            wrapper.appendChild(progressBar);
+        }
 
         // --- Controls row ---
         const controls = document.createElement('div');
@@ -216,13 +240,23 @@ StudyEngine.registerActivity({
         const isMastered = this._mastered.includes(card.term);
         if (isMastered) {
             masterBtn.style.opacity = '0.5';
+            masterBtn.disabled = true;
             masterBtn.textContent = '';
             const checkIcon = document.createElement('i');
             checkIcon.className = 'fas fa-check-double';
             masterBtn.appendChild(checkIcon);
             masterBtn.appendChild(document.createTextNode(' Mastered'));
+        } else if (!this._hasFlipped) {
+            masterBtn.style.opacity = '0.5';
+            masterBtn.disabled = true;
+            masterBtn.textContent = '';
+            const eyeIcon = document.createElement('i');
+            eyeIcon.className = 'fas fa-eye';
+            masterBtn.appendChild(eyeIcon);
+            masterBtn.appendChild(document.createTextNode(' Flip card first'));
         } else {
             masterBtn.style.opacity = '1';
+            masterBtn.disabled = false;
             masterBtn.textContent = '';
             const checkIcon = document.createElement('i');
             checkIcon.className = 'fas fa-check';
@@ -233,6 +267,9 @@ StudyEngine.registerActivity({
 
     flip() {
         this._isFlipped = !this._isFlipped;
+        if (this._isFlipped) {
+            this._hasFlipped = true;
+        }
         this.display();
     },
 
@@ -240,6 +277,7 @@ StudyEngine.registerActivity({
         if (this._currentIndex < this._displayedVocab.length - 1) {
             this._currentIndex++;
             this._isFlipped = false;
+            this._hasFlipped = false;
             this.display();
         } else {
             // Reached the last card — viewedAll
@@ -254,17 +292,24 @@ StudyEngine.registerActivity({
         if (this._currentIndex > 0) {
             this._currentIndex--;
             this._isFlipped = false;
+            this._hasFlipped = false;
             this.display();
         }
     },
 
     master() {
+        if (!this._hasFlipped) return;
         const card = this._displayedVocab[this._currentIndex];
         if (!card) return;
         const term = card.term;
         if (!this._mastered.includes(term)) {
             this._mastered.push(term);
             this._saveProgress();
+            const config = StudyEngine.config;
+            const unitId = config.unit.id;
+            if (MasteryManager.isCategoryMastered(unitId, config, card.category)) {
+                MasteryManager.showMasteryNudge(config, card.category);
+            }
         }
         this.next();
         // If we were on the last card, just refresh display
@@ -277,16 +322,19 @@ StudyEngine.registerActivity({
         this._displayedVocab = StudyUtils.shuffle(this._displayedVocab);
         this._currentIndex = 0;
         this._isFlipped = false;
+        this._hasFlipped = false;
         this.display();
     },
 
     filterByCategory(category) {
         const config = StudyEngine.config;
+        const unlocked = MasteryManager.getUnlockedVocabulary(config.unit.id, config);
         this._displayedVocab = category
-            ? config.vocabulary.filter(v => v.category === category)
-            : [...config.vocabulary];
+            ? unlocked.filter(v => v.category === category)
+            : [...unlocked];
         this._currentIndex = 0;
         this._isFlipped = false;
+        this._hasFlipped = false;
         this.display();
     },
 
