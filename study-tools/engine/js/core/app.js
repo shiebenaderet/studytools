@@ -154,7 +154,7 @@ const StudyEngine = {
 
         items.forEach(a => {
             const card = document.createElement('div');
-            card.className = 'card activity-card';
+            card.className = 'card activity-card category-' + (a.category || 'games');
             card.addEventListener('click', () => this.activateActivity(a.id));
 
             const cardTitle = document.createElement('h2');
