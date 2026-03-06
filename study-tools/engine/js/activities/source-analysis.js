@@ -26,6 +26,7 @@ StudyEngine.registerActivity({
                 year: 1796,
                 type: "primary",
                 format: "speech",
+                image: "iiif-public_gdcmassbookdig_washingtonsfarew02wash_washingtonsfarew02wash_0020-full-pct_50.0-0-default.jpg",
                 excerpt: "\"I have already intimated to you the danger of parties in the State... Let me now take a more comprehensive view, and warn you in the most solemn manner against the baneful effects of the spirit of party generally.\"",
                 context: "Published in newspapers across the country as Washington prepared to leave office after two terms.",
                 questions: [
@@ -42,13 +43,14 @@ StudyEngine.registerActivity({
                 ]
             },
             {
-                title: "Letter to John Adams",
+                title: "Letter to Elbridge Gerry",
                 creator: "Thomas Jefferson",
-                year: 1796,
+                year: 1797,
                 type: "primary",
                 format: "letter",
+                image: "jefferson_to_gerry(alternative letter).jpg",
                 excerpt: "\"The second office of this government is honorable and easy, the first is but a splendid misery.\"",
-                context: "Jefferson wrote this private letter to Adams as they competed in the 1796 presidential election.",
+                context: "Jefferson wrote this private letter to Elbridge Gerry, a fellow Democratic-Republican, reflecting on the presidency after the 1796 election.",
                 questions: [
                     {
                         question: "What does Jefferson mean by calling the presidency 'a splendid misery'?",
@@ -68,6 +70,7 @@ StudyEngine.registerActivity({
                 year: 1798,
                 type: "primary",
                 format: "law",
+                image: "alien_sedition.jpg",
                 excerpt: "\"If any person shall write, print, utter, or publish... any false, scandalous and malicious writing or writings against the government of the United States... shall be punished by a fine not exceeding two thousand dollars, and by imprisonment not exceeding two years.\"",
                 context: "Passed by Congress under President John Adams during tensions with France, these laws restricted speech critical of the government.",
                 questions: [
@@ -89,6 +92,7 @@ StudyEngine.registerActivity({
                 year: 1790,
                 type: "primary",
                 format: "government report",
+                image: "hamilton_report.jpg",
                 excerpt: "\"The debt of the United States... was the price of liberty. The faith of America has been repeatedly pledged for it... Among ourselves, the most enlightened friends of good government are those whose expectations are the highest.\"",
                 context: "Hamilton presented this report to Congress proposing that the federal government assume all state debts from the Revolutionary War.",
                 questions: [
@@ -110,6 +114,7 @@ StudyEngine.registerActivity({
                 year: 1798,
                 type: "primary",
                 format: "political resolution",
+                image: "kentucky.jpeg",
                 excerpt: "\"Resolved, that the several States composing the United States of America, are not united on the principle of unlimited submission to their General Government... whensoever the General Government assumes undelegated powers, its acts are unauthoritative, void, and of no force.\"",
                 context: "Jefferson secretly wrote this resolution for the Kentucky legislature to protest the Alien and Sedition Acts, arguing states could nullify federal laws.",
                 questions: [
@@ -131,6 +136,7 @@ StudyEngine.registerActivity({
                 year: 2020,
                 type: "secondary",
                 format: "textbook",
+                image: "chapter_parties.png",
                 excerpt: "\"The rivalry between Hamilton and Jefferson laid the foundation for America's first political parties. Hamilton's Federalists favored a strong central government and close ties with Britain, while Jefferson's Democratic-Republicans championed states' rights and sympathized with France.\"",
                 context: "Written by historians for students, summarizing and interpreting events that happened over 200 years ago.",
                 questions: [
@@ -152,6 +158,7 @@ StudyEngine.registerActivity({
                 year: 2015,
                 type: "secondary",
                 format: "documentary",
+                image: "the_duel.jpg",
                 excerpt: "\"The bitter rivalry between Alexander Hamilton and Aaron Burr culminated in one of the most famous duels in American history. On July 11, 1804, the two men met on the dueling grounds at Weehawken, New Jersey...\"",
                 context: "A modern documentary using dramatic reenactments, expert interviews, and historical evidence to tell the story.",
                 questions: [
@@ -173,6 +180,7 @@ StudyEngine.registerActivity({
                 year: 1798,
                 type: "primary",
                 format: "political cartoon",
+                image: "Lyon-griswold-brawl.jpg",
                 excerpt: "[A political cartoon showing Congressman Matthew Lyon and Roger Griswold fighting on the floor of Congress with a fireplace poker and cane while other members watch]",
                 context: "This cartoon depicted an actual fight that broke out in Congress in 1798 between a Federalist and a Democratic-Republican, showing how divided the nation's leaders had become.",
                 questions: [
@@ -194,6 +202,7 @@ StudyEngine.registerActivity({
                 year: 1797,
                 type: "primary",
                 format: "letter",
+                image: "adams_ladies_2.jpg__2000x1125_q85_crop_subsampling-2_upscale.jpg",
                 excerpt: "\"I feel not any personal uneasiness at the prospect of being First Lady... My ambition leads me not to be first in Rome. I am content to be second, but I claim my right to think and act for myself.\"",
                 context: "Abigail Adams wrote frequently to her husband, offering political advice and sharing her views on the new nation.",
                 questions: [
@@ -210,17 +219,18 @@ StudyEngine.registerActivity({
                 ]
             },
             {
-                title: "A Historian's Article: 'Was the Whiskey Rebellion Justified?'",
-                creator: "Dr. Sarah Mitchell, University of Virginia",
-                year: 2019,
+                title: "The Whiskey Rebellion by William Hogeland",
+                creator: "William Hogeland",
+                year: 2006,
                 type: "secondary",
-                format: "journal article",
-                excerpt: "\"The farmers of western Pennsylvania had legitimate grievances against Hamilton's excise tax, which disproportionately burdened small producers. However, Washington's decision to march 13,000 troops demonstrated that the new federal government would enforce its laws — a critical precedent for national authority.\"",
-                context: "A modern historian analyzes the Whiskey Rebellion using primary sources, letters, and government records to argue her interpretation.",
+                format: "book",
+                image: "whiskey_hogeland.jpg",
+                excerpt: "\"The farmers of western Pennsylvania had legitimate grievances against Hamilton's excise tax, which disproportionately burdened small producers. Washington's decision to march 13,000 troops demonstrated that the new federal government would enforce its laws — a critical precedent for national authority.\"",
+                context: "Hogeland's book examines the Whiskey Rebellion in depth, using primary sources and government records to tell the story of the farmers' revolt and the federal response.",
                 questions: [
                     {
-                        question: "What makes this article a secondary source?",
-                        options: ["It is written by a professor", "It analyzes and interprets events using evidence gathered long after they occurred", "It is published in a journal", "It mentions the Whiskey Rebellion"],
+                        question: "What makes this book a secondary source?",
+                        options: ["It is written by an author", "It analyzes and interprets events using evidence gathered long after they occurred", "It is published by a publisher", "It mentions the Whiskey Rebellion"],
                         correct: 1
                     },
                     {
@@ -236,6 +246,7 @@ StudyEngine.registerActivity({
                 year: 1795,
                 type: "primary",
                 format: "treaty",
+                image: "greenville.jpg",
                 excerpt: "\"The Indian tribes who have a right to those lands, are quietly to enjoy them, hunting, planting, and dwelling thereon so long as they please, without any molestation from the United States.\"",
                 context: "This treaty was signed after the Battle of Fallen Timbers, forcing Native American nations to give up most of present-day Ohio to the United States.",
                 questions: [
@@ -257,6 +268,7 @@ StudyEngine.registerActivity({
                 year: 1814,
                 type: "primary",
                 format: "poem",
+                image: "The_Star-Spangled_Banner.JPG",
                 excerpt: "\"O say can you see, by the dawn's early light, / What so proudly we hail'd at the twilight's last gleaming, / Whose broad stripes and bright stars through the perilous fight / O'er the ramparts we watch'd were so gallantly streaming?\"",
                 context: "Francis Scott Key wrote this poem after witnessing the British bombardment of Fort McHenry during the War of 1812. It later became the national anthem.",
                 questions: [
