@@ -155,24 +155,57 @@ const StudyEngine = {
 
         items.forEach(a => {
             const card = document.createElement('div');
-            card.className = 'card activity-card category-' + (a.category || 'games');
-            card.addEventListener('click', () => this.activateActivity(a.id));
+            const accessible = MasteryManager.isActivityAccessible(this.config.unit.id, this.config, a.id);
 
-            const cardTitle = document.createElement('h2');
-            const cardIcon = document.createElement('i');
-            cardIcon.className = a.icon;
-            cardTitle.appendChild(cardIcon);
-            cardTitle.appendChild(document.createTextNode(' ' + a.name));
-            card.appendChild(cardTitle);
+            if (!accessible) {
+                card.className = 'card activity-card category-' + (a.category || 'games') + ' locked';
 
-            const desc = document.createElement('p');
-            desc.textContent = a.description;
-            card.appendChild(desc);
+                const cardTitle = document.createElement('h2');
+                const cardIcon = document.createElement('i');
+                cardIcon.className = 'fas fa-lock';
+                cardTitle.appendChild(cardIcon);
+                cardTitle.appendChild(document.createTextNode(' ' + a.name));
+                card.appendChild(cardTitle);
 
-            const btn = document.createElement('button');
-            btn.className = 'card-button';
-            btn.textContent = 'Start';
-            card.appendChild(btn);
+                const desc = document.createElement('p');
+                desc.textContent = MasteryManager.getLockMessage(this.config.unit.id, this.config);
+                card.appendChild(desc);
+
+                const btn = document.createElement('button');
+                btn.className = 'card-button';
+                btn.textContent = 'Locked';
+                btn.disabled = true;
+                card.appendChild(btn);
+            } else {
+                card.className = 'card activity-card category-' + (a.category || 'games');
+                card.addEventListener('click', () => this.activateActivity(a.id));
+
+                const cardTitle = document.createElement('h2');
+                const cardIcon = document.createElement('i');
+                cardIcon.className = a.icon;
+                cardTitle.appendChild(cardIcon);
+                cardTitle.appendChild(document.createTextNode(' ' + a.name));
+                card.appendChild(cardTitle);
+
+                const desc = document.createElement('p');
+                desc.textContent = a.description;
+                card.appendChild(desc);
+
+                if (a.category !== 'study') {
+                    const status = MasteryManager.getUnlockStatus(this.config.unit.id, this.config);
+                    if (!status.allUnlocked) {
+                        const unlockCount = document.createElement('div');
+                        unlockCount.className = 'unlock-count';
+                        unlockCount.textContent = status.unlockedVocab + '/' + status.totalVocab + ' terms available';
+                        card.appendChild(unlockCount);
+                    }
+                }
+
+                const btn = document.createElement('button');
+                btn.className = 'card-button';
+                btn.textContent = 'Start';
+                card.appendChild(btn);
+            }
 
             grid.appendChild(card);
         });
@@ -184,6 +217,11 @@ const StudyEngine = {
     activateActivity(activityId) {
         const activity = this.activities[activityId];
         if (!activity) return;
+
+        if (!MasteryManager.isActivityAccessible(this.config.unit.id, this.config, activityId)) {
+            StudyUtils.showToast(MasteryManager.getLockMessage(this.config.unit.id, this.config), 'info');
+            return;
+        }
 
         // Deactivate current
         if (this.activeActivity && this.activities[this.activeActivity]) {
