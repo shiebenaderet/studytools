@@ -101,7 +101,7 @@ const MasteryManager = {
             unlockedCategories,
             totalVocab,
             unlockedVocab,
-            allUnlocked: categories.length === unlockedCategories.length
+            allUnlocked: categories.length > 0 && categories.length === unlockedCategories.length && this.isCategoryMastered(unitId, config, categories[categories.length - 1])
         };
     },
 
