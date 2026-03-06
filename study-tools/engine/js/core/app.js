@@ -24,6 +24,7 @@ const StudyEngine = {
         if (loadingScreen) loadingScreen.style.display = 'none';
 
         this.applyTheme();
+        if (typeof AchievementManager !== 'undefined') AchievementManager.init(this.config.unit.id);
         this.renderHeader();
         await this.loadActivities();
     },
@@ -296,6 +297,11 @@ const StudyEngine = {
             ProgressManager.renderHomeStats(this.config);
         }
 
+        var badgesContainer = document.getElementById('badges-container');
+        if (badgesContainer) {
+            AchievementManager.renderBadges(badgesContainer);
+        }
+
         const homeCards = document.getElementById('home-cards');
         if (homeCards && homeCards.children.length === 0) {
             homeCards.textContent = '';
@@ -453,3 +459,67 @@ document.addEventListener('keydown', (e) => {
         }
     }
 });
+
+// Easter eggs
+(function() {
+    // Konami Code: ↑↑↓↓←→←→BA
+    var konamiSeq = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+    var konamiIdx = 0;
+
+    // 1776 sequence
+    var yearSeq = ['1','7','7','6'];
+    var yearIdx = 0;
+
+    document.addEventListener('keydown', function(e) {
+        var tag = (e.target.tagName || '').toLowerCase();
+        if (tag === 'input' || tag === 'textarea') return;
+
+        // Konami code
+        if (e.key === konamiSeq[konamiIdx]) {
+            konamiIdx++;
+            if (konamiIdx === konamiSeq.length) {
+                konamiIdx = 0;
+                if (typeof StudyUtils !== 'undefined') StudyUtils.showToast('You found a secret! The Founding Fathers approve.', 'success');
+                if (typeof AchievementManager !== 'undefined') AchievementManager.showConfetti();
+            }
+        } else {
+            konamiIdx = 0;
+        }
+
+        // 1776 easter egg
+        if (e.key === yearSeq[yearIdx]) {
+            yearIdx++;
+            if (yearIdx === yearSeq.length) {
+                yearIdx = 0;
+                var facts = [
+                    'Fun fact: The Declaration of Independence was signed by 56 delegates!',
+                    'Fun fact: John Adams and Thomas Jefferson both died on July 4, 1826 — the 50th anniversary!',
+                    'Fun fact: George Washington never lived in the White House!',
+                    'Fun fact: Benjamin Franklin was 70 years old when he signed the Declaration!',
+                    'Fun fact: The original US flag had 13 stars in a circle!'
+                ];
+                if (typeof StudyUtils !== 'undefined') StudyUtils.showToast(facts[Math.floor(Math.random() * facts.length)], 'info');
+            }
+        } else if (e.key >= '0' && e.key <= '9') {
+            yearIdx = (e.key === '1') ? 1 : 0;
+        }
+    });
+
+    // Header icon tap: 5 rapid clicks
+    var headerClicks = 0;
+    var headerTimer = null;
+    document.addEventListener('click', function(e) {
+        var headerIcon = e.target.closest('#site-title i');
+        if (!headerIcon) return;
+        headerClicks++;
+        if (headerTimer) clearTimeout(headerTimer);
+        headerTimer = setTimeout(function() { headerClicks = 0; }, 2000);
+        if (headerClicks >= 5) {
+            headerClicks = 0;
+            headerIcon.style.transition = 'transform 0.5s';
+            headerIcon.style.transform = 'rotate(360deg)';
+            setTimeout(function() { headerIcon.style.transform = ''; }, 600);
+            if (typeof StudyUtils !== 'undefined') StudyUtils.showToast('You\'re a history detective! Keep exploring!', 'success');
+        }
+    });
+})();

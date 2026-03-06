@@ -468,6 +468,19 @@ StudyEngine.registerActivity({
 
         card.appendChild(meta);
 
+        // Image (if available)
+        if (source.image) {
+            var imgWrap = document.createElement('div');
+            imgWrap.className = 'source-image-wrap';
+            var img = document.createElement('img');
+            img.className = 'source-image';
+            img.src = '../units/' + this._config.unit.id + '/images/sources/' + source.image;
+            img.alt = source.title;
+            img.loading = 'lazy';
+            imgWrap.appendChild(img);
+            card.appendChild(imgWrap);
+        }
+
         // Excerpt
         var excerptBox = document.createElement('div');
         excerptBox.className = 'source-excerpt';

@@ -1,0 +1,231 @@
+StudyEngine.registerActivity({
+    id: 'resources',
+    name: 'Resource Library',
+    icon: 'fas fa-book-open',
+    description: 'Explore terms with links to learn more',
+    category: 'study',
+    requires: ['vocabulary'],
+
+    render: function(container, config) {
+        var vocabulary = config.vocabulary || [];
+
+        // Group terms by category
+        var categoryMap = {};
+        var categoryOrder = [];
+        vocabulary.forEach(function(item) {
+            var cat = item.category || 'Uncategorized';
+            if (!categoryMap[cat]) {
+                categoryMap[cat] = [];
+                categoryOrder.push(cat);
+            }
+            categoryMap[cat].push(item);
+        });
+
+        // Main wrapper
+        var wrapper = document.createElement('div');
+        wrapper.className = 'res-container';
+
+        // Search bar
+        var searchWrap = document.createElement('div');
+        searchWrap.className = 'res-search-wrap';
+
+        var searchIcon = document.createElement('i');
+        searchIcon.className = 'fas fa-search res-search-icon';
+        searchWrap.appendChild(searchIcon);
+
+        var searchInput = document.createElement('input');
+        searchInput.type = 'text';
+        searchInput.className = 'res-search-input';
+        searchInput.placeholder = 'Search terms...';
+        searchInput.setAttribute('aria-label', 'Search terms');
+        searchWrap.appendChild(searchInput);
+
+        wrapper.appendChild(searchWrap);
+
+        // Sections container
+        var sectionsContainer = document.createElement('div');
+        sectionsContainer.className = 'res-sections';
+
+        // Build category sections
+        categoryOrder.forEach(function(cat) {
+            var terms = categoryMap[cat];
+
+            var section = document.createElement('div');
+            section.className = 'res-section';
+            section.setAttribute('data-category', cat);
+
+            // Category header
+            var header = document.createElement('div');
+            header.className = 'res-category-header';
+            header.setAttribute('role', 'button');
+            header.setAttribute('tabindex', '0');
+
+            var headerLeft = document.createElement('div');
+            headerLeft.className = 'res-header-left';
+
+            var chevron = document.createElement('i');
+            chevron.className = 'fas fa-chevron-down res-chevron';
+            headerLeft.appendChild(chevron);
+
+            var headerTitle = document.createElement('span');
+            headerTitle.className = 'res-header-title';
+            headerTitle.textContent = cat;
+            headerLeft.appendChild(headerTitle);
+
+            header.appendChild(headerLeft);
+
+            var countBadge = document.createElement('span');
+            countBadge.className = 'res-count-badge';
+            countBadge.textContent = terms.length + (terms.length === 1 ? ' term' : ' terms');
+            header.appendChild(countBadge);
+
+            section.appendChild(header);
+
+            // Terms list
+            var termsList = document.createElement('div');
+            termsList.className = 'res-terms-list';
+
+            terms.forEach(function(item) {
+                var card = document.createElement('div');
+                card.className = 'res-term-card';
+                card.setAttribute('data-term', item.term.toLowerCase());
+
+                var termInfo = document.createElement('div');
+                termInfo.className = 'res-term-info';
+
+                var termName = document.createElement('div');
+                termName.className = 'res-term-name';
+                termName.textContent = item.term;
+                termInfo.appendChild(termName);
+
+                var termDef = document.createElement('div');
+                termDef.className = 'res-term-def';
+                termDef.textContent = item.definition;
+                termInfo.appendChild(termDef);
+
+                card.appendChild(termInfo);
+
+                // Link buttons
+                var links = document.createElement('div');
+                links.className = 'res-links';
+
+                // Kiddle link
+                var kiddle = document.createElement('a');
+                kiddle.className = 'res-link-btn res-link-kiddle';
+                kiddle.href = 'https://www.kiddle.co/' + encodeURIComponent(item.term + ' history');
+                kiddle.target = '_blank';
+                kiddle.rel = 'noopener noreferrer';
+                var kiddleIcon = document.createElement('i');
+                kiddleIcon.className = 'fas fa-search';
+                kiddle.appendChild(kiddleIcon);
+                kiddle.appendChild(document.createTextNode(' Kiddle'));
+                links.appendChild(kiddle);
+
+                // Wikipedia link
+                var wiki = document.createElement('a');
+                wiki.className = 'res-link-btn res-link-wiki';
+                wiki.href = 'https://en.wikipedia.org/wiki/' + encodeURIComponent(item.term.replace(/ /g, '_'));
+                wiki.target = '_blank';
+                wiki.rel = 'noopener noreferrer';
+                var wikiIcon = document.createElement('i');
+                wikiIcon.className = 'fas fa-globe';
+                wiki.appendChild(wikiIcon);
+                wiki.appendChild(document.createTextNode(' Wikipedia'));
+                links.appendChild(wiki);
+
+                // YouTube link
+                var yt = document.createElement('a');
+                yt.className = 'res-link-btn res-link-youtube';
+                yt.href = 'https://www.youtube.com/results?search_query=' + encodeURIComponent(item.term + ' history for kids');
+                yt.target = '_blank';
+                yt.rel = 'noopener noreferrer';
+                var ytIcon = document.createElement('i');
+                ytIcon.className = 'fab fa-youtube';
+                yt.appendChild(ytIcon);
+                yt.appendChild(document.createTextNode(' YouTube'));
+                links.appendChild(yt);
+
+                card.appendChild(links);
+                termsList.appendChild(card);
+            });
+
+            section.appendChild(termsList);
+
+            // Toggle collapse
+            header.addEventListener('click', function() {
+                var isCollapsed = section.classList.contains('res-collapsed');
+                if (isCollapsed) {
+                    section.classList.remove('res-collapsed');
+                } else {
+                    section.classList.add('res-collapsed');
+                }
+            });
+
+            header.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    header.click();
+                }
+            });
+
+            sectionsContainer.appendChild(section);
+        });
+
+        wrapper.appendChild(sectionsContainer);
+
+        // Search filtering
+        searchInput.addEventListener('input', function() {
+            var query = searchInput.value.toLowerCase().trim();
+            var sections = sectionsContainer.querySelectorAll('.res-section');
+
+            for (var i = 0; i < sections.length; i++) {
+                var sec = sections[i];
+                var cards = sec.querySelectorAll('.res-term-card');
+                var visibleCount = 0;
+
+                for (var j = 0; j < cards.length; j++) {
+                    var cardTerm = cards[j].getAttribute('data-term') || '';
+                    var defEl = cards[j].querySelector('.res-term-def');
+                    var defText = defEl ? defEl.textContent.toLowerCase() : '';
+
+                    if (!query || cardTerm.indexOf(query) !== -1 || defText.indexOf(query) !== -1) {
+                        cards[j].style.display = '';
+                        visibleCount++;
+                    } else {
+                        cards[j].style.display = 'none';
+                    }
+                }
+
+                if (query && visibleCount === 0) {
+                    sec.style.display = 'none';
+                } else {
+                    sec.style.display = '';
+                    // Update count badge to show visible
+                    var badge = sec.querySelector('.res-count-badge');
+                    if (badge) {
+                        if (query) {
+                            badge.textContent = visibleCount + ' of ' + cards.length + (cards.length === 1 ? ' term' : ' terms');
+                        } else {
+                            badge.textContent = cards.length + (cards.length === 1 ? ' term' : ' terms');
+                        }
+                    }
+                    // Auto-expand when searching
+                    if (query) {
+                        sec.classList.remove('res-collapsed');
+                    }
+                }
+            }
+        });
+
+        container.appendChild(wrapper);
+    },
+
+    activate: function() {},
+    deactivate: function() {},
+
+    getProgress: function() {
+        return ProgressManager.getActivityProgress(StudyEngine.config.unit.id, 'resources');
+    },
+
+    loadProgress: function(data) {}
+});
