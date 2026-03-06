@@ -279,6 +279,11 @@ StudyEngine.registerActivity({
         const checkBtn = document.getElementById('fib-check-btn');
         if (checkBtn) checkBtn.disabled = true;
 
+        if (typeof AchievementManager !== 'undefined') {
+            var pct = total > 0 ? Math.round((correct / total) * 100) : 0;
+            AchievementManager.checkAndAward({ activity: 'fill-in-blank', score: pct, event: correct === total ? 'perfect' : 'complete', totalCorrect: correct });
+        }
+
         this._saveProgress();
     },
 

@@ -290,6 +290,10 @@ StudyEngine.registerActivity({
             bestEl.textContent = parts.length > 0 ? 'Best Scores - ' + parts.join(' | ') : '';
         }
 
+        if (typeof AchievementManager !== 'undefined') {
+            AchievementManager.checkAndAward({ activity: 'flip-match', event: 'complete' });
+        }
+
         // Show win message
         const winArea = document.getElementById('flip-match-win');
         if (!winArea) return;

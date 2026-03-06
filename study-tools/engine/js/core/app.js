@@ -259,7 +259,7 @@ const StudyEngine = {
         grid.className = 'tools-grid';
 
         const tools = [
-            { icon: 'fas fa-edit', title: 'Note-Taking Guide', desc: 'Organized notes by topic to help you study effectively.', action: 'StudyTools.openNotes()' },
+            { icon: 'fas fa-edit', title: 'My Study Guide', desc: 'See what you\'ve mastered, what needs review, and add personal notes.', action: 'StudyTools.openNotes()' },
             { icon: 'fas fa-hourglass', title: 'Focused Study Timer', desc: 'Set a timer for focused study sessions.', action: 'StudyTools.openTimer()' },
             { icon: 'fas fa-print', title: 'Print Study Guide', desc: 'Print a formatted study guide.', action: 'StudyTools.openPrint()' },
             { icon: 'fas fa-download', title: 'Export Progress', desc: 'Download your study progress.', action: 'StudyTools.exportProgress()' }
@@ -470,9 +470,15 @@ document.addEventListener('keydown', (e) => {
     var yearSeq = ['1','7','7','6'];
     var yearIdx = 0;
 
+    // "we the people" sequence
+    var preambleSeq = ['w','e','t','h','e','p','e','o','p','l','e'];
+    var preambleIdx = 0;
+
     document.addEventListener('keydown', function(e) {
         var tag = (e.target.tagName || '').toLowerCase();
         if (tag === 'input' || tag === 'textarea') return;
+
+        var key = e.key.toLowerCase();
 
         // Konami code
         if (e.key === konamiSeq[konamiIdx]) {
@@ -480,7 +486,9 @@ document.addEventListener('keydown', (e) => {
             if (konamiIdx === konamiSeq.length) {
                 konamiIdx = 0;
                 if (typeof StudyUtils !== 'undefined') StudyUtils.showToast('You found a secret! The Founding Fathers approve.', 'success');
-                if (typeof AchievementManager !== 'undefined') AchievementManager.showConfetti();
+                if (typeof AchievementManager !== 'undefined') {
+                    AchievementManager.unlock('konami');
+                }
             }
         } else {
             konamiIdx = 0;
@@ -499,9 +507,26 @@ document.addEventListener('keydown', (e) => {
                     'Fun fact: The original US flag had 13 stars in a circle!'
                 ];
                 if (typeof StudyUtils !== 'undefined') StudyUtils.showToast(facts[Math.floor(Math.random() * facts.length)], 'info');
+                if (typeof AchievementManager !== 'undefined') {
+                    AchievementManager.unlock('founding-facts');
+                }
             }
         } else if (e.key >= '0' && e.key <= '9') {
             yearIdx = (e.key === '1') ? 1 : 0;
+        }
+
+        // "wethepeople" easter egg
+        if (key === preambleSeq[preambleIdx]) {
+            preambleIdx++;
+            if (preambleIdx === preambleSeq.length) {
+                preambleIdx = 0;
+                if (typeof StudyUtils !== 'undefined') StudyUtils.showToast('"We the People of the United States, in Order to form a more perfect Union..." You know your Constitution!', 'success');
+                if (typeof AchievementManager !== 'undefined') {
+                    AchievementManager.unlock('we-the-people');
+                }
+            }
+        } else {
+            preambleIdx = (key === 'w') ? 1 : 0;
         }
     });
 
@@ -520,6 +545,29 @@ document.addEventListener('keydown', (e) => {
             headerIcon.style.transform = 'rotate(360deg)';
             setTimeout(function() { headerIcon.style.transform = ''; }, 600);
             if (typeof StudyUtils !== 'undefined') StudyUtils.showToast('You\'re a history detective! Keep exploring!', 'success');
+            if (typeof AchievementManager !== 'undefined') {
+                AchievementManager.unlock('book-tap');
+            }
+        }
+    });
+
+    // Hidden eagle in footer: triple-click
+    document.addEventListener('click', function(e) {
+        var footer = e.target.closest('#app-footer');
+        if (!footer) return;
+        if (e.detail === 3) {
+            if (typeof StudyUtils !== 'undefined') StudyUtils.showToast('You spotted the hidden eagle! E Pluribus Unum!', 'success');
+            if (typeof AchievementManager !== 'undefined') {
+                AchievementManager.unlock('eagle-eye');
+            }
+        }
+    });
+
+    // Midnight Scholar: check on any interaction at midnight
+    document.addEventListener('click', function() {
+        var hour = new Date().getHours();
+        if (hour === 0 && typeof AchievementManager !== 'undefined') {
+            AchievementManager.unlock('midnight-scholar');
         }
     });
 })();

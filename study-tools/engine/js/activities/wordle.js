@@ -362,6 +362,13 @@ StudyEngine.registerActivity({
 
         this._saveProgress();
 
+        if (typeof AchievementManager !== 'undefined') {
+            if (won) {
+                AchievementManager.checkAndAward({ activity: 'wordle', event: 'win', totalWins: this._stats.wins });
+            }
+            AchievementManager.checkAndAward({ activity: 'wordle', event: won ? 'win' : 'complete' });
+        }
+
         // Hide input area
         const inputArea = document.getElementById('wordle-input-area');
         if (inputArea) inputArea.style.display = 'none';

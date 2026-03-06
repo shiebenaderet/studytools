@@ -12,6 +12,7 @@ StudyEngine.registerActivity({
     _keyHandler: null,
     _container: null,
     _questions: null,
+    _shuffleMaps: {},
 
     _shuffleArray(arr) {
         for (var i = arr.length - 1; i > 0; i--) {
@@ -23,11 +24,21 @@ StudyEngine.registerActivity({
         return arr;
     },
 
+    _getShuffleMap(index, q) {
+        if (this._shuffleMaps[index]) return this._shuffleMaps[index];
+        var indices = q.options.map(function(_, i) { return i; });
+        this._shuffleArray(indices);
+        this._shuffleMaps[index] = indices;
+        return indices;
+    },
+
     render(container, config) {
         this._container = container;
         this._questions = this._shuffleArray((config.practiceQuestions || []).slice());
         this._currentIndex = 0;
         this._submitted = false;
+        this._shuffleMaps = {};
+        this._answers = {};
 
         const wrapper = document.createElement('div');
         wrapper.className = 'practice-container';
@@ -77,18 +88,21 @@ StudyEngine.registerActivity({
 
         var answered = this._answers.hasOwnProperty(index);
         var selectedIdx = this._answers[index];
+        var shuffleMap = this._getShuffleMap(index, q);
+        var shuffledCorrect = shuffleMap.indexOf(q.correct);
 
-        for (var i = 0; i < q.options.length; i++) {
+        for (var i = 0; i < shuffleMap.length; i++) {
+            var origIdx = shuffleMap[i];
             var optBtn = document.createElement('button');
             optBtn.className = 'option';
-            optBtn.textContent = q.options[i];
+            optBtn.textContent = q.options[origIdx];
 
             if (answered) {
                 optBtn.disabled = true;
-                if (i === q.correct) {
+                if (i === shuffledCorrect) {
                     optBtn.classList.add('correct');
                 }
-                if (i === selectedIdx && selectedIdx !== q.correct) {
+                if (i === selectedIdx && selectedIdx !== shuffledCorrect) {
                     optBtn.classList.add('incorrect');
                 }
             } else {
@@ -162,9 +176,33 @@ StudyEngine.registerActivity({
         }
     },
 
+    _isAnswerCorrect(questionIdx) {
+        if (!this._answers.hasOwnProperty(questionIdx)) return false;
+        var shuffleMap = this._shuffleMaps[questionIdx];
+        if (!shuffleMap) return false;
+        var selectedDisplayIdx = this._answers[questionIdx];
+        var selectedOrigIdx = shuffleMap[selectedDisplayIdx];
+        return selectedOrigIdx === this._questions[questionIdx].correct;
+    },
+
     finishTest() {
         this._submitted = true;
         this._saveProgress();
+
+        // Calculate score for achievements
+        var questions = this._questions;
+        var correct = 0;
+        for (var i = 0; i < questions.length; i++) {
+            if (this._isAnswerCorrect(i)) {
+                correct++;
+            }
+        }
+        var pct = questions.length > 0 ? Math.round((correct / questions.length) * 100) : 0;
+
+        if (typeof AchievementManager !== 'undefined') {
+            AchievementManager.checkAndAward({ activity: 'test', score: pct, event: pct === 100 ? 'perfect' : 'complete', totalCorrect: correct });
+        }
+
         this.displayQuestion();
     },
 
@@ -172,7 +210,7 @@ StudyEngine.registerActivity({
         var questions = this._questions;
         var correct = 0;
         for (var i = 0; i < questions.length; i++) {
-            if (this._answers[i] === questions[i].correct) {
+            if (this._isAnswerCorrect(i)) {
                 correct++;
             }
         }
@@ -197,7 +235,9 @@ StudyEngine.registerActivity({
         // Review section - show each question with result
         for (var i = 0; i < questions.length; i++) {
             var q = questions[i];
-            var isCorrect = this._answers[i] === q.correct;
+            var isCorrect = this._isAnswerCorrect(i);
+            var shuffleMap = this._shuffleMaps[i] || [];
+            var selectedOrigIdx = shuffleMap[this._answers[i]];
 
             var reviewItem = document.createElement('div');
             reviewItem.className = 'question-review';
@@ -216,7 +256,7 @@ StudyEngine.registerActivity({
             resultEl.className = isCorrect ? 'option correct' : 'option incorrect';
             resultEl.textContent = isCorrect
                 ? 'Correct: ' + q.options[q.correct]
-                : 'Your answer: ' + q.options[this._answers[i]] + ' | Correct: ' + q.options[q.correct];
+                : 'Your answer: ' + (q.options[selectedOrigIdx] || '(none)') + ' | Correct: ' + q.options[q.correct];
             reviewItem.appendChild(resultEl);
 
             if (q.explanation) {

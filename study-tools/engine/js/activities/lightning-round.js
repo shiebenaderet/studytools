@@ -405,6 +405,11 @@ StudyEngine.registerActivity({
         }
         this._updateLeaderboard();
         this._saveBestScore();
+
+        if (typeof AchievementManager !== 'undefined') {
+            AchievementManager.checkAndAward({ activity: 'lightning', score: this._score, event: 'complete' });
+        }
+
         this._showResults();
     },
 

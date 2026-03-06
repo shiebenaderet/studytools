@@ -678,6 +678,10 @@ StudyEngine.registerActivity({
             if (statsEl) {
                 statsEl.textContent = 'Puzzles completed: ' + this._stats.completed;
             }
+
+            if (typeof AchievementManager !== 'undefined') {
+                AchievementManager.checkAndAward({ activity: 'crossword', event: 'complete' });
+            }
         }
     },
 

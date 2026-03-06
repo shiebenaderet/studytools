@@ -450,6 +450,10 @@ StudyEngine.registerActivity({
         this._gameActive = false;
         this._stopGame();
 
+        if (typeof AchievementManager !== 'undefined') {
+            AchievementManager.checkAndAward({ activity: 'term-catcher', event: 'complete', score: this._score });
+        }
+
         // Update high score
         var isNewHigh = false;
         if (this._score > this._highScore) {

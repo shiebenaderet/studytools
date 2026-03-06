@@ -492,10 +492,10 @@
         {
             "question": "The Election of 1800 was called the 'Revolution of 1800' because:",
             "options": [
-                "There was a violent uprising",
-                "Thomas Jefferson refused to take office",
-                "It eliminated the Electoral College",
-                "It was the first peaceful transfer of power between political parties"
+                "There was a violent uprising that overthrew the government",
+                "Thomas Jefferson refused to take office for several months",
+                "It eliminated the Electoral College from the Constitution",
+                "It was the first peaceful transfer of power between parties"
             ],
             "correct": 3,
             "explanation": "The Election of 1800 was revolutionary because power transferred peacefully from the Federalist Party (Adams) to the Democratic-Republican Party (Jefferson). This proved American democracy could survive a change in leadership.",
@@ -528,10 +528,10 @@
         {
             "question": "Jefferson faced a dilemma with the Louisiana Purchase because:",
             "options": [
-                "He didn't want more land",
-                "The Constitution didn't specifically give the president power to buy territory",
-                "France refused to sell it",
-                "Congress wanted to go to war with France instead"
+                "He did not want to add more land to the country",
+                "The Constitution didn't give the president power to buy territory",
+                "France refused to sell it at a price he could afford",
+                "Congress wanted to go to war with France over the land"
             ],
             "correct": 1,
             "explanation": "Jefferson believed in strict construction — the government should only do what the Constitution specifically allows. But the Constitution never mentions buying land. He decided the deal was too good to pass up, using loose construction to justify it.",
@@ -576,10 +576,10 @@
         {
             "question": "The Embargo Act of 1807 backfired because it:",
             "options": [
-                "Caused Britain and France to declare war",
-                "Made the National Bank fail",
-                "Led to the Louisiana Purchase",
-                "Hurt American merchants and farmers more than it hurt foreign nations"
+                "Caused Britain and France to declare war on the United States",
+                "Made the National Bank fail and collapse completely",
+                "Led directly to the signing of the Louisiana Purchase",
+                "Hurt American merchants and farmers more than foreign nations"
             ],
             "correct": 3,
             "explanation": "Jefferson's Embargo Act banned ALL US trade with foreign nations to pressure Britain and France. But it devastated American businesses and farmers who depended on exports, making it extremely unpopular at home.",
@@ -588,10 +588,10 @@
         {
             "question": "War Hawks were members of Congress who:",
             "options": [
-                "Opposed the War of 1812",
-                "Pushed for war with Britain to defend American honor and expand territory",
-                "Wanted to make peace with Native Americans",
-                "Supported the Embargo Act"
+                "Opposed the War of 1812 and pushed for peaceful solutions",
+                "Pushed for war with Britain to defend honor and expand territory",
+                "Wanted to make lasting peace treaties with Native Americans",
+                "Supported the Embargo Act and wanted to expand trade further"
             ],
             "correct": 1,
             "explanation": "War Hawks like Henry Clay and John C. Calhoun pushed for war with Britain in 1812. They wanted to defend American honor against impressment and expand into British Canada and Native American lands.",
@@ -636,10 +636,10 @@
         {
             "question": "After the War of 1812, the Federalist Party collapsed because:",
             "options": [
-                "They had supported the war too strongly",
-                "They lost all their funding",
+                "They had supported the war too strongly and lost credibility",
+                "They lost all their funding from wealthy northern merchants",
                 "They had opposed the war and were seen as unpatriotic",
-                "Their leaders moved to Britain"
+                "Their leaders moved to Britain and abandoned the party"
             ],
             "correct": 2,
             "explanation": "The Federalist Party had opposed the War of 1812, and after the surge of nationalism following the war, they were seen as unpatriotic. The party collapsed, leaving only the Democratic-Republicans.",
@@ -672,10 +672,10 @@
         {
             "question": "McCulloch v. Maryland (1819) was important because it:",
             "options": [
-                "Established freedom of speech",
-                "Gave the president the power to declare war",
-                "Ruled that states could not tax federal institutions, strengthening federal power",
-                "Created the Electoral College"
+                "Established freedom of speech as a protected right for all citizens",
+                "Gave the president the power to declare war without Congress",
+                "Ruled that states could not tax federal institutions like the bank",
+                "Created the Electoral College system for choosing the president"
             ],
             "correct": 2,
             "explanation": "When Maryland tried to tax the Second National Bank, the Supreme Court ruled states cannot tax federal institutions. This reinforced federal supremacy over state law and used the 'Necessary and Proper' clause to justify the bank.",
@@ -708,10 +708,10 @@
         {
             "question": "How does the debate between Hamilton and Jefferson connect to McCulloch v. Maryland?",
             "options": [
-                "They have no connection",
-                "Both involved whether the federal government had the power to create a national bank",
-                "Both were about the War of 1812",
-                "Both involved territorial expansion"
+                "They have no real connection to each other at all",
+                "Both involved whether the federal government could create a national bank",
+                "Both were about the causes and effects of the War of 1812",
+                "Both involved territorial expansion and westward settlement"
             ],
             "correct": 1,
             "explanation": "Hamilton and Jefferson disagreed about whether the National Bank was constitutional (loose vs. strict construction). McCulloch v. Maryland (1819) revisited this same question and ruled the bank WAS constitutional, siding with Hamilton's view.",
@@ -720,10 +720,10 @@
         {
             "question": "The essential question 'How did the first leaders shape the country we live in today?' is best answered by:",
             "options": [
-                "Their decisions about government power, political parties, expansion, and foreign policy created patterns we still follow",
-                "The first leaders had no lasting impact",
-                "Only Washington's decisions mattered",
-                "Everything they did was later reversed"
+                "Their decisions about government power, parties, and expansion created lasting patterns",
+                "The first leaders had no lasting impact on the country we know today",
+                "Only Washington's decisions mattered because he was the first president",
+                "Everything they did was later reversed by the next generation of leaders"
             ],
             "correct": 0,
             "explanation": "The first leaders' decisions — creating the Cabinet, establishing judicial review, forming political parties, expanding territory, and setting foreign policy principles like the Monroe Doctrine — created lasting patterns that still shape American government and politics today.",

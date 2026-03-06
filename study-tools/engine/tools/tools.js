@@ -7,7 +7,7 @@ const StudyTools = {
         if (!config || !config.vocabulary) return;
         const unitId = config.unit.id;
 
-        // Collect unique categories in order of first appearance
+        // Collect category and mastery data
         const categories = [];
         config.vocabulary.forEach(v => {
             if (v.category && !categories.includes(v.category)) {
@@ -15,92 +15,276 @@ const StudyTools = {
             }
         });
 
-        // Load saved notes
-        const saved = ProgressManager.load(unitId, 'notes') || {};
+        const flashcardProgress = ProgressManager.getActivityProgress(unitId, 'flashcards') || {};
+        const masteredTerms = flashcardProgress.mastered || [];
 
-        // Build modal HTML (categories come from teacher config, safe)
-        let html = '<div class="modal-header">' +
-            '<h2>Note-Taking Guide</h2>' +
-            '<button class="close-btn" onclick="StudyEngine.closeModal()">&times;</button>' +
-            '</div>' +
-            '<div class="notes-container" style="max-height:60vh;overflow-y:auto;padding:10px;">';
-
-        categories.forEach((cat, i) => {
-            html += '<h4 style="margin-top:' + (i === 0 ? '0' : '18px') + ';margin-bottom:6px;">' +
-                StudyUtils.escapeHtml(cat) + '</h4>' +
-                '<textarea id="notes-cat-' + i + '" rows="4" ' +
-                'style="width:100%;box-sizing:border-box;padding:8px;border:1px solid #ccc;border-radius:6px;font-size:14px;resize:vertical;" ' +
-                'placeholder="Your notes for ' + StudyUtils.escapeHtml(cat) + '..."></textarea>';
-        });
-
-        html += '</div>' +
-            '<div style="display:flex;gap:10px;margin-top:14px;">' +
-            '<button class="nav-button" id="notes-save-btn" style="flex:1;">Save Notes</button>' +
-            '<button class="nav-button" id="notes-print-btn" style="flex:1;background:var(--secondary,#1F90ED);">Print Notes</button>' +
-            '</div>';
-
-        StudyEngine.showModal(html);
-
-        // Populate saved notes using textContent-safe path (value is safe for textarea)
-        categories.forEach((cat, i) => {
-            const ta = document.getElementById('notes-cat-' + i);
-            if (ta && saved[cat]) {
-                ta.value = saved[cat];
+        // Sort terms into mastered vs needs-review
+        const mastered = [];
+        const needsReview = [];
+        config.vocabulary.forEach(v => {
+            if (masteredTerms.includes(v.term)) {
+                mastered.push(v);
+            } else {
+                needsReview.push(v);
             }
         });
 
-        // Wire up save button
-        document.getElementById('notes-save-btn').addEventListener('click', () => {
+        // Load saved personal notes
+        const savedNotes = ProgressManager.load(unitId, 'notes') || {};
+
+        // Build the container
+        const container = document.getElementById('activity-container');
+        container.classList.add('active');
+        document.getElementById('home-section').classList.remove('active');
+        document.getElementById('sub-nav').classList.remove('active');
+        container.textContent = '';
+
+        // Back button
+        const backBtn = document.createElement('button');
+        backBtn.className = 'nav-button';
+        backBtn.style.marginBottom = '16px';
+        const backIcon = document.createElement('i');
+        backIcon.className = 'fas fa-arrow-left';
+        backBtn.appendChild(backIcon);
+        backBtn.appendChild(document.createTextNode(' Back to Tools'));
+        backBtn.addEventListener('click', () => {
+            StudyEngine.showTools();
+            document.querySelectorAll('.nav-btn').forEach(b => {
+                b.classList.remove('active');
+                if (b.dataset.group === 'tools') b.classList.add('active');
+            });
+        });
+        container.appendChild(backBtn);
+
+        const wrapper = document.createElement('div');
+        wrapper.className = 'study-guide-container';
+
+        // Header
+        const header = document.createElement('div');
+        header.className = 'study-guide-header';
+        const h2 = document.createElement('h2');
+        const hIcon = document.createElement('i');
+        hIcon.className = 'fas fa-edit';
+        h2.appendChild(hIcon);
+        h2.appendChild(document.createTextNode(' My Study Guide'));
+        h2.style.color = 'var(--primary)';
+        header.appendChild(h2);
+
+        const progress = document.createElement('p');
+        progress.style.color = '#666';
+        progress.style.marginTop = '4px';
+        progress.textContent = mastered.length + ' of ' + config.vocabulary.length + ' terms mastered';
+        header.appendChild(progress);
+        wrapper.appendChild(header);
+
+        // Needs Review section
+        if (needsReview.length > 0) {
+            const reviewSection = document.createElement('div');
+            reviewSection.className = 'study-guide-section review';
+
+            const rTitle = document.createElement('h3');
+            const rIcon = document.createElement('i');
+            rIcon.className = 'fas fa-exclamation-circle';
+            rTitle.appendChild(rIcon);
+            rTitle.appendChild(document.createTextNode(' Needs Review (' + needsReview.length + ')'));
+            rTitle.style.color = '#b45309';
+            reviewSection.appendChild(rTitle);
+
+            const rDesc = document.createElement('p');
+            rDesc.textContent = 'These terms haven\'t been mastered yet. Use Flashcards to study them!';
+            rDesc.style.color = '#666';
+            rDesc.style.fontSize = '0.9em';
+            rDesc.style.marginBottom = '12px';
+            reviewSection.appendChild(rDesc);
+
+            // Group by category
+            categories.forEach(cat => {
+                const catTerms = needsReview.filter(v => v.category === cat);
+                if (catTerms.length === 0) return;
+
+                const catLabel = document.createElement('div');
+                catLabel.className = 'study-guide-cat';
+                catLabel.textContent = cat;
+                reviewSection.appendChild(catLabel);
+
+                catTerms.forEach(v => {
+                    const termRow = document.createElement('div');
+                    termRow.className = 'study-guide-term';
+
+                    const termName = document.createElement('strong');
+                    termName.textContent = v.term;
+                    termRow.appendChild(termName);
+
+                    const termDef = document.createElement('span');
+                    termDef.textContent = ' — ' + v.definition;
+                    termDef.style.color = '#555';
+                    termRow.appendChild(termDef);
+
+                    reviewSection.appendChild(termRow);
+                });
+            });
+
+            wrapper.appendChild(reviewSection);
+        }
+
+        // Mastered section
+        if (mastered.length > 0) {
+            const masterSection = document.createElement('div');
+            masterSection.className = 'study-guide-section mastered';
+
+            const mTitle = document.createElement('h3');
+            const mIcon = document.createElement('i');
+            mIcon.className = 'fas fa-check-circle';
+            mTitle.appendChild(mIcon);
+            mTitle.appendChild(document.createTextNode(' Mastered (' + mastered.length + ')'));
+            mTitle.style.color = '#166534';
+            masterSection.appendChild(mTitle);
+
+            const toggleBtn = document.createElement('button');
+            toggleBtn.className = 'study-guide-toggle';
+            toggleBtn.textContent = 'Show mastered terms';
+            const masteredList = document.createElement('div');
+            masteredList.style.display = 'none';
+
+            mastered.forEach(v => {
+                const termRow = document.createElement('div');
+                termRow.className = 'study-guide-term mastered';
+                termRow.textContent = v.term;
+                masteredList.appendChild(termRow);
+            });
+
+            toggleBtn.addEventListener('click', () => {
+                const showing = masteredList.style.display !== 'none';
+                masteredList.style.display = showing ? 'none' : 'block';
+                toggleBtn.textContent = showing ? 'Show mastered terms' : 'Hide mastered terms';
+            });
+
+            masterSection.appendChild(toggleBtn);
+            masterSection.appendChild(masteredList);
+            wrapper.appendChild(masterSection);
+        }
+
+        // Personal notes section (still available)
+        const notesSection = document.createElement('div');
+        notesSection.className = 'study-guide-section notes';
+
+        const nTitle = document.createElement('h3');
+        const nIcon = document.createElement('i');
+        nIcon.className = 'fas fa-sticky-note';
+        nTitle.appendChild(nIcon);
+        nTitle.appendChild(document.createTextNode(' My Notes'));
+        nTitle.style.color = 'var(--primary)';
+        notesSection.appendChild(nTitle);
+
+        categories.forEach((cat, i) => {
+            const catLabel = document.createElement('div');
+            catLabel.className = 'study-guide-cat';
+            catLabel.textContent = cat;
+            notesSection.appendChild(catLabel);
+
+            const ta = document.createElement('textarea');
+            ta.id = 'notes-cat-' + i;
+            ta.rows = 3;
+            ta.className = 'study-guide-textarea';
+            ta.placeholder = 'Your notes for ' + cat + '...';
+            if (savedNotes[cat]) ta.value = savedNotes[cat];
+            notesSection.appendChild(ta);
+        });
+
+        const btnRow = document.createElement('div');
+        btnRow.style.display = 'flex';
+        btnRow.style.gap = '10px';
+        btnRow.style.marginTop = '12px';
+
+        const saveBtn = document.createElement('button');
+        saveBtn.className = 'nav-button';
+        saveBtn.style.flex = '1';
+        saveBtn.textContent = 'Save Notes';
+        saveBtn.addEventListener('click', () => {
             const notes = {};
             categories.forEach((cat, i) => {
-                const ta = document.getElementById('notes-cat-' + i);
-                if (ta) notes[cat] = ta.value;
+                const t = document.getElementById('notes-cat-' + i);
+                if (t) notes[cat] = t.value;
             });
             ProgressManager.save(unitId, 'notes', notes);
-            const btn = document.getElementById('notes-save-btn');
-            btn.textContent = 'Saved!';
-            setTimeout(() => { btn.textContent = 'Save Notes'; }, 1500);
+            saveBtn.textContent = 'Saved!';
+            setTimeout(() => { saveBtn.textContent = 'Save Notes'; }, 1500);
         });
+        btnRow.appendChild(saveBtn);
 
-        // Wire up print button
-        document.getElementById('notes-print-btn').addEventListener('click', () => {
+        const printBtn = document.createElement('button');
+        printBtn.className = 'nav-button';
+        printBtn.style.flex = '1';
+        printBtn.style.background = 'var(--secondary, #1F90ED)';
+        printBtn.textContent = 'Print Guide';
+        printBtn.addEventListener('click', () => {
             const notes = {};
             categories.forEach((cat, i) => {
-                const ta = document.getElementById('notes-cat-' + i);
-                if (ta) notes[cat] = ta.value;
+                const t = document.getElementById('notes-cat-' + i);
+                if (t) notes[cat] = t.value;
             });
-            this._printNotes(config.unit.title, categories, notes);
+            this._printStudyGuide(config, needsReview, mastered, categories, notes);
         });
+        btnRow.appendChild(printBtn);
+
+        notesSection.appendChild(btnRow);
+        wrapper.appendChild(notesSection);
+        container.appendChild(wrapper);
     },
 
-    _printNotes(title, categories, notes) {
+    _printStudyGuide(config, needsReview, mastered, categories, notes) {
         const win = window.open('', '_blank');
         if (!win) return;
 
         const doc = win.document;
         doc.open();
         doc.write('<!DOCTYPE html><html><head><meta charset="UTF-8">' +
-            '<title>Study Notes</title>' +
+            '<title>Study Guide</title>' +
             '<style>body{font-family:Georgia,serif;max-width:700px;margin:40px auto;padding:0 20px;color:#222;}' +
             'h1{border-bottom:2px solid #333;padding-bottom:8px;}' +
-            'h3{margin-top:24px;margin-bottom:4px;color:#444;}' +
+            'h2{margin-top:24px;color:#444;}h3{margin-top:16px;color:#555;}' +
+            '.term{margin-bottom:4px;}.term strong{color:#333;}' +
             'pre{white-space:pre-wrap;font-family:inherit;line-height:1.6;margin:0;padding:8px;background:#f9f9f9;border-radius:4px;}' +
             '@media print{pre{background:none;}}</style></head><body>');
         doc.close();
 
         const h1 = doc.createElement('h1');
-        h1.textContent = title + ' - Study Notes';
+        h1.textContent = config.unit.title + ' - Study Guide';
         doc.body.appendChild(h1);
 
-        categories.forEach(cat => {
-            const h3 = doc.createElement('h3');
-            h3.textContent = cat;
-            doc.body.appendChild(h3);
+        if (needsReview.length > 0) {
+            const h2 = doc.createElement('h2');
+            h2.textContent = 'Terms to Review (' + needsReview.length + ')';
+            doc.body.appendChild(h2);
 
-            const pre = doc.createElement('pre');
-            pre.textContent = (notes[cat] || '').trim() || '(no notes)';
-            doc.body.appendChild(pre);
-        });
+            needsReview.forEach(v => {
+                const p = doc.createElement('div');
+                p.className = 'term';
+                const b = doc.createElement('strong');
+                b.textContent = v.term + ': ';
+                p.appendChild(b);
+                p.appendChild(doc.createTextNode(v.definition));
+                doc.body.appendChild(p);
+            });
+        }
+
+        // Notes
+        const hasNotes = categories.some(cat => notes[cat] && notes[cat].trim());
+        if (hasNotes) {
+            const h2 = doc.createElement('h2');
+            h2.textContent = 'My Notes';
+            doc.body.appendChild(h2);
+
+            categories.forEach(cat => {
+                if (!notes[cat] || !notes[cat].trim()) return;
+                const h3 = doc.createElement('h3');
+                h3.textContent = cat;
+                doc.body.appendChild(h3);
+                const pre = doc.createElement('pre');
+                pre.textContent = notes[cat].trim();
+                doc.body.appendChild(pre);
+            });
+        }
 
         win.print();
     },
@@ -148,37 +332,40 @@ const StudyTools = {
         this._timerStartedAt = Date.now();
         this._timerElapsed = 0;
 
-        const tips = [
-            'Focus on one topic at a time.',
-            'Try to explain concepts in your own words.',
-            'Take a short break after this session.',
-            'Write down questions you have as you study.',
-            'Review your notes from class alongside this tool.'
-        ];
-        const tip = tips[Math.floor(Math.random() * tips.length)];
+        // Remove any existing timer bar
+        var existing = document.getElementById('focus-timer-bar');
+        if (existing) existing.parentNode.removeChild(existing);
 
-        const html = '<div class="modal-header">' +
-            '<h2>Focused Study Session</h2>' +
-            '</div>' +
-            '<div style="text-align:center;padding:20px;">' +
-            '<div id="timer-display" style="font-size:64px;font-weight:bold;font-family:monospace;margin:20px 0;">' +
-            StudyUtils.formatTime(totalSeconds) + '</div>' +
-            '<p style="color:#888;font-style:italic;margin-bottom:24px;">' +
-            StudyUtils.escapeHtml(tip) + '</p>' +
-            '<div style="display:flex;gap:10px;justify-content:center;">' +
-            '<button class="nav-button" id="timer-pause-btn" style="flex:1;">Pause</button>' +
-            '<button class="nav-button" id="timer-exit-btn" style="flex:1;background:#dc2626;">Exit</button>' +
-            '</div></div>';
+        // Create persistent floating timer bar
+        var bar = document.createElement('div');
+        bar.id = 'focus-timer-bar';
+        bar.className = 'focus-timer-bar';
 
-        StudyEngine.showModal(html);
+        var display = document.createElement('span');
+        display.id = 'timer-display';
+        display.className = 'focus-timer-display';
+        display.textContent = StudyUtils.formatTime(totalSeconds);
+        bar.appendChild(display);
 
-        document.getElementById('timer-pause-btn').addEventListener('click', () => {
-            this._togglePause();
-        });
+        var pauseBtn = document.createElement('button');
+        pauseBtn.id = 'timer-pause-btn';
+        pauseBtn.className = 'focus-timer-btn';
+        var pauseIcon = document.createElement('i');
+        pauseIcon.className = 'fas fa-pause';
+        pauseIcon.id = 'timer-pause-icon';
+        pauseBtn.appendChild(pauseIcon);
+        pauseBtn.addEventListener('click', () => this._togglePause());
+        bar.appendChild(pauseBtn);
 
-        document.getElementById('timer-exit-btn').addEventListener('click', () => {
-            this._stopTimer(true);
-        });
+        var exitBtn = document.createElement('button');
+        exitBtn.className = 'focus-timer-btn exit';
+        var exitIcon = document.createElement('i');
+        exitIcon.className = 'fas fa-times';
+        exitBtn.appendChild(exitIcon);
+        exitBtn.addEventListener('click', () => this._stopTimer(true));
+        bar.appendChild(exitBtn);
+
+        document.body.appendChild(bar);
 
         this._timerInterval = setInterval(() => this._tick(), 1000);
     },
@@ -195,14 +382,25 @@ const StudyTools = {
 
         if (this._timerRemaining <= 0) {
             this._stopTimer(false);
-            StudyUtils.showToast('Study session complete!', 'success');
+            StudyUtils.showToast('Study session complete! Great work!', 'success');
+            if (typeof AchievementManager !== 'undefined') {
+                AchievementManager.showConfetti();
+            }
         }
     },
 
     _togglePause() {
         this._timerPaused = !this._timerPaused;
-        const btn = document.getElementById('timer-pause-btn');
-        if (btn) btn.textContent = this._timerPaused ? 'Resume' : 'Pause';
+        var icon = document.getElementById('timer-pause-icon');
+        if (icon) icon.className = this._timerPaused ? 'fas fa-play' : 'fas fa-pause';
+        var bar = document.getElementById('focus-timer-bar');
+        if (bar) {
+            if (this._timerPaused) {
+                bar.classList.add('paused');
+            } else {
+                bar.classList.remove('paused');
+            }
+        }
     },
 
     _stopTimer(early) {
@@ -214,7 +412,8 @@ const StudyTools = {
             ProgressManager.addStudyTime(config.unit.id, this._timerElapsed);
         }
 
-        StudyEngine.closeModal();
+        var bar = document.getElementById('focus-timer-bar');
+        if (bar) bar.parentNode.removeChild(bar);
     },
 
     // ── Print ────────────────────────────────────────────────────────────

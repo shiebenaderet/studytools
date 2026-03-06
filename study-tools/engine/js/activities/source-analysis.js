@@ -37,7 +37,7 @@ StudyEngine.registerActivity({
                     },
                     {
                         question: "Why is this considered a primary source?",
-                        options: ["It was written by a historian", "It was created by someone who lived during the event", "It contains facts about history", "It is very old"],
+                        options: ["It was written by a historian who studied the topic later", "It was created by someone who lived during the event", "It contains facts about history that anyone could find", "It is very old and stored in a government archive"],
                         correct: 1
                     }
                 ]
@@ -59,7 +59,7 @@ StudyEngine.registerActivity({
                     },
                     {
                         question: "What makes a personal letter a valuable primary source?",
-                        options: ["Letters are always accurate", "They reveal private thoughts of people from that time", "Letters are written by professional writers", "They are easy to read"],
+                        options: ["Letters are always accurate accounts of what happened", "They reveal private thoughts of people from that time", "Letters are written by trained professional writers", "They are printed and widely available to the public"],
                         correct: 1
                     }
                 ]
@@ -72,7 +72,7 @@ StudyEngine.registerActivity({
                 format: "law",
                 image: "alien_sedition.jpg",
                 excerpt: "\"If any person shall write, print, utter, or publish... any false, scandalous and malicious writing or writings against the government of the United States... shall be punished by a fine not exceeding two thousand dollars, and by imprisonment not exceeding two years.\"",
-                context: "Passed by Congress under President John Adams during tensions with France, these laws restricted speech critical of the government.",
+                context: "Passed by Congress under President John Adams during tensions with France, the Sedition Act made it a crime to criticize the government — directly challenging the First Amendment's protections of free speech and press. The Alien Acts also gave the president power to deport immigrants deemed 'dangerous.'",
                 questions: [
                     {
                         question: "Which right protected by the First Amendment did the Sedition Act threaten?",
@@ -81,7 +81,7 @@ StudyEngine.registerActivity({
                     },
                     {
                         question: "Why would a historian want to read the actual text of this law rather than just a summary?",
-                        options: ["Summaries are always wrong", "The original text shows exactly what was banned and the specific punishments", "Old documents are more interesting", "Historians only use primary sources"],
+                        options: ["Summaries are always wrong about important details", "The original text shows exactly what was banned and punished", "Old documents are more interesting to read and study", "Historians are only allowed to use primary sources"],
                         correct: 1
                     }
                 ]
@@ -94,16 +94,16 @@ StudyEngine.registerActivity({
                 format: "government report",
                 image: "hamilton_report.jpg",
                 excerpt: "\"The debt of the United States... was the price of liberty. The faith of America has been repeatedly pledged for it... Among ourselves, the most enlightened friends of good government are those whose expectations are the highest.\"",
-                context: "Hamilton presented this report to Congress proposing that the federal government assume all state debts from the Revolutionary War.",
+                context: "Hamilton presented this report to Congress proposing that the federal government assume all state debts from the Revolutionary War. His plan was strongly opposed by Thomas Jefferson and James Madison, who feared it gave too much power to the federal government and benefited wealthy northern bankers.",
                 questions: [
                     {
                         question: "How does Hamilton justify taking on the national debt?",
-                        options: ["He says debt doesn't matter", "He calls it 'the price of liberty' — a cost of winning independence", "He blames the states for spending too much", "He says Britain should pay it"],
+                        options: ["He says that debt does not matter for a new nation", "He calls it 'the price of liberty' worth paying", "He blames the states for spending far too much money", "He says Britain should pay all of America's debts"],
                         correct: 1
                     },
                     {
                         question: "Who opposed Hamilton's financial plan?",
-                        options: ["George Washington", "John Adams", "Thomas Jefferson and James Madison", "Benjamin Franklin"],
+                        options: ["George Washington and John Jay", "John Adams and Abigail Adams", "Thomas Jefferson and James Madison", "Benjamin Franklin and Samuel Adams"],
                         correct: 2
                     }
                 ]
@@ -116,7 +116,7 @@ StudyEngine.registerActivity({
                 format: "political resolution",
                 image: "kentucky.jpeg",
                 excerpt: "\"Resolved, that the several States composing the United States of America, are not united on the principle of unlimited submission to their General Government... whensoever the General Government assumes undelegated powers, its acts are unauthoritative, void, and of no force.\"",
-                context: "Jefferson secretly wrote this resolution for the Kentucky legislature to protest the Alien and Sedition Acts, arguing states could nullify federal laws.",
+                context: "As Vice President, Jefferson secretly wrote this resolution for the Kentucky legislature to protest the Alien and Sedition Acts, arguing states could nullify federal laws they believed were unconstitutional.",
                 questions: [
                     {
                         question: "What principle is Jefferson arguing for in this resolution?",
@@ -142,7 +142,7 @@ StudyEngine.registerActivity({
                 questions: [
                     {
                         question: "Why is a modern textbook considered a secondary source?",
-                        options: ["It is printed on paper", "It was written long after the events by someone who wasn't there", "It contains incorrect information", "It is used in schools"],
+                        options: ["It is printed on paper and sold in bookstores", "It was written long after the events by someone who wasn't there", "It contains incorrect information about major events", "It is used in schools and assigned by teachers"],
                         correct: 1
                     },
                     {
@@ -164,7 +164,7 @@ StudyEngine.registerActivity({
                 questions: [
                     {
                         question: "What makes this documentary a secondary source rather than a primary source?",
-                        options: ["It uses video instead of text", "It was created long after the events by people who researched them", "It mentions real historical figures", "It is entertaining"],
+                        options: ["It uses video recordings instead of written text", "It was created long after the events by people who researched them", "It mentions real historical figures and actual places", "It is entertaining and designed for a wide audience"],
                         correct: 1
                     },
                     {
@@ -186,12 +186,12 @@ StudyEngine.registerActivity({
                 questions: [
                     {
                         question: "What does this cartoon reveal about politics in the Early Republic?",
-                        options: ["Congress was always peaceful", "Political disagreements were so intense they sometimes turned violent", "Everyone agreed on major issues", "Congressmen enjoyed exercise"],
+                        options: ["Congress was always peaceful and orderly during debates", "Political disagreements were so intense they sometimes turned violent", "Everyone agreed on major issues facing the new nation", "Congressmen often settled arguments with friendly competitions"],
                         correct: 1
                     },
                     {
                         question: "Even though we don't know the artist, why is this still a primary source?",
-                        options: ["Because it is a drawing", "Because it was created during the time period it depicts", "Because it is funny", "Because it is in a museum"],
+                        options: ["Because it is a drawing rather than a written document", "Because it was created during the time period it depicts", "Because it is funny and meant to entertain readers", "Because it is preserved in a museum or archive"],
                         correct: 1
                     }
                 ]
@@ -208,12 +208,12 @@ StudyEngine.registerActivity({
                 questions: [
                     {
                         question: "What does this letter reveal about Abigail Adams?",
-                        options: ["She was uninterested in politics", "She was independent-minded and had her own political opinions", "She wanted to be president herself", "She didn't support her husband"],
+                        options: ["She was uninterested in politics and national affairs", "She was independent-minded and had her own political opinions", "She wanted to run for president herself someday", "She did not support her husband's political career"],
                         correct: 1
                     },
                     {
                         question: "Why are personal letters especially valuable to historians?",
-                        options: ["They are written in fancy handwriting", "They show private thoughts that people might not express publicly", "They are always truthful", "They are short and easy to read"],
+                        options: ["They are written in fancy handwriting that looks impressive", "They show private thoughts that people might not express publicly", "They are always truthful and completely free of any bias", "They are short and easy to read compared to other sources"],
                         correct: 1
                     }
                 ]
@@ -230,12 +230,12 @@ StudyEngine.registerActivity({
                 questions: [
                     {
                         question: "What makes this book a secondary source?",
-                        options: ["It is written by an author", "It analyzes and interprets events using evidence gathered long after they occurred", "It is published by a publisher", "It mentions the Whiskey Rebellion"],
+                        options: ["It is written by a professional author with credentials", "It analyzes and interprets events using evidence gathered long after", "It is published by a major publishing company for readers", "It mentions the Whiskey Rebellion and other real events"],
                         correct: 1
                     },
                     {
                         question: "The historian presents multiple perspectives. Why is this important?",
-                        options: ["It makes the article longer", "It helps readers understand the complexity of historical events", "Historians are required to by law", "It proves one side was right"],
+                        options: ["It makes the article longer and more detailed for readers", "It helps readers understand the complexity of historical events", "Historians are required to do this by professional rules", "It proves that one side was completely right all along"],
                         correct: 1
                     }
                 ]
@@ -257,7 +257,7 @@ StudyEngine.registerActivity({
                     },
                     {
                         question: "Why is it important to read the actual words of a treaty rather than just a summary?",
-                        options: ["Treaties use complicated language that is fun to read", "You can see how the language may have been used to disguise unfair terms", "Summaries are always biased", "Treaties are always fair"],
+                        options: ["Treaties use complicated language that is interesting to study", "You can see how language may have been used to disguise unfair terms", "Summaries are always biased and leave out important details", "Treaties are always fair to both sides that signed them"],
                         correct: 1
                     }
                 ]
@@ -279,7 +279,7 @@ StudyEngine.registerActivity({
                     },
                     {
                         question: "A poem can be a primary source because:",
-                        options: ["All poems are primary sources", "It was created by someone who witnessed the event firsthand", "Poems are always historically accurate", "It rhymes"],
+                        options: ["All poems are automatically considered primary sources", "It was created by someone who witnessed the event firsthand", "Poems are always historically accurate accounts of events", "It rhymes and uses creative language about history"],
                         correct: 1
                     }
                 ]
@@ -296,14 +296,6 @@ StudyEngine.registerActivity({
         this._total = 0;
         this._results = [];
 
-        // Shuffle sources
-        for (var i = this._sources.length - 1; i > 0; i--) {
-            var j = Math.floor(Math.random() * (i + 1));
-            var tmp = this._sources[i];
-            this._sources[i] = this._sources[j];
-            this._sources[j] = tmp;
-        }
-
         // Load saved stats
         var saved = ProgressManager.getActivityProgress(config.unit.id, 'source-analysis');
         if (saved) {
@@ -312,12 +304,140 @@ StudyEngine.registerActivity({
             this._stats = { completed: 0, bestScore: 0 };
         }
 
+        // Check for in-progress session
+        var session = this._loadSession();
+
+        if (session && session.currentIndex > 0 && session.currentIndex < this._sources.length) {
+            // Restore source order and progress
+            var allSources = this._getSourceData();
+            this._sources = session.sourceOrder.map(function(title) {
+                return allSources.find(function(s) { return s.title === title; });
+            }).filter(Boolean);
+            this._currentIndex = session.currentIndex;
+            this._score = session.score;
+            this._total = session.total;
+            this._results = session.results || [];
+        } else {
+            // Shuffle sources for new session
+            for (var i = this._sources.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var tmp = this._sources[i];
+                this._sources[i] = this._sources[j];
+                this._sources[j] = tmp;
+            }
+        }
+
         var wrapper = document.createElement('div');
         wrapper.className = 'source-analysis-container';
         wrapper.id = 'source-wrapper';
         container.appendChild(wrapper);
 
-        this._showIntro();
+        if (session && session.currentIndex > 0 && session.currentIndex < this._sources.length) {
+            this._showIntroResume();
+        } else {
+            this._showIntro();
+        }
+    },
+
+    _saveSession() {
+        var sessionData = {
+            sourceOrder: this._sources.map(function(s) { return s.title; }),
+            currentIndex: this._currentIndex,
+            score: this._score,
+            total: this._total,
+            results: this._results
+        };
+        try {
+            localStorage.setItem('source-session-' + this._config.unit.id, JSON.stringify(sessionData));
+        } catch(e) {}
+    },
+
+    _loadSession() {
+        try {
+            var data = localStorage.getItem('source-session-' + this._config.unit.id);
+            return data ? JSON.parse(data) : null;
+        } catch(e) { return null; }
+    },
+
+    _clearSession() {
+        try {
+            localStorage.removeItem('source-session-' + this._config.unit.id);
+        } catch(e) {}
+    },
+
+    _showIntroResume() {
+        var wrapper = document.getElementById('source-wrapper');
+        if (!wrapper) return;
+        while (wrapper.firstChild) wrapper.removeChild(wrapper.firstChild);
+
+        var intro = document.createElement('div');
+        intro.className = 'source-intro';
+
+        var icon = document.createElement('i');
+        icon.className = 'fas fa-scroll';
+        icon.style.fontSize = '3em';
+        icon.style.color = 'var(--primary)';
+        icon.style.marginBottom = '15px';
+        intro.appendChild(icon);
+
+        var title = document.createElement('h2');
+        title.textContent = 'Source Analysis';
+        title.style.color = 'var(--primary)';
+        title.style.marginBottom = '10px';
+        intro.appendChild(title);
+
+        var resumeMsg = document.createElement('p');
+        resumeMsg.style.color = '#555';
+        resumeMsg.style.marginBottom = '20px';
+        resumeMsg.style.lineHeight = '1.6';
+        resumeMsg.textContent = 'You have an in-progress session (' + this._currentIndex + ' of ' + this._sources.length + ' sources completed). Would you like to continue or start over?';
+        intro.appendChild(resumeMsg);
+
+        var self = this;
+
+        var resumeBtn = document.createElement('button');
+        resumeBtn.className = 'nav-button';
+        resumeBtn.style.marginTop = '10px';
+        resumeBtn.style.background = 'var(--primary)';
+        resumeBtn.style.color = 'white';
+        resumeBtn.style.fontSize = '1.1em';
+        resumeBtn.style.padding = '12px 30px';
+        resumeBtn.style.marginRight = '10px';
+        var rIcon = document.createElement('i');
+        rIcon.className = 'fas fa-play';
+        resumeBtn.appendChild(rIcon);
+        resumeBtn.appendChild(document.createTextNode(' Continue'));
+        resumeBtn.addEventListener('click', function() { self._showSource(); });
+        intro.appendChild(resumeBtn);
+
+        var restartBtn = document.createElement('button');
+        restartBtn.className = 'nav-button';
+        restartBtn.style.marginTop = '10px';
+        restartBtn.style.background = '#94a3b8';
+        restartBtn.style.color = 'white';
+        restartBtn.style.fontSize = '1.1em';
+        restartBtn.style.padding = '12px 30px';
+        var sIcon = document.createElement('i');
+        sIcon.className = 'fas fa-redo';
+        restartBtn.appendChild(sIcon);
+        restartBtn.appendChild(document.createTextNode(' Start Over'));
+        restartBtn.addEventListener('click', function() {
+            self._clearSession();
+            self._currentIndex = 0;
+            self._score = 0;
+            self._total = 0;
+            self._results = [];
+            for (var i = self._sources.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var tmp = self._sources[i];
+                self._sources[i] = self._sources[j];
+                self._sources[j] = tmp;
+            }
+            self._showSource();
+        });
+        intro.appendChild(restartBtn);
+
+        wrapper.appendChild(intro);
     },
 
     _showIntro() {
@@ -714,12 +834,22 @@ StudyEngine.registerActivity({
         var optionsDiv = document.createElement('div');
         optionsDiv.className = 'source-question-options';
 
-        q.options.forEach(function(opt, idx) {
+        // Shuffle options while tracking correct answer
+        var indices = q.options.map(function(_, i) { return i; });
+        for (var si = indices.length - 1; si > 0; si--) {
+            var sj = Math.floor(Math.random() * (si + 1));
+            var stmp = indices[si];
+            indices[si] = indices[sj];
+            indices[sj] = stmp;
+        }
+        var shuffledCorrect = indices.indexOf(q.correct);
+
+        indices.forEach(function(origIdx, displayIdx) {
             var optBtn = document.createElement('button');
             optBtn.className = 'source-question-option';
-            optBtn.textContent = opt;
+            optBtn.textContent = q.options[origIdx];
             optBtn.addEventListener('click', function() {
-                self._answerQuestion(idx, q.correct, optionsDiv);
+                self._answerQuestion(displayIdx, shuffledCorrect, optionsDiv);
             });
             optionsDiv.appendChild(optBtn);
         });
@@ -783,6 +913,7 @@ StudyEngine.registerActivity({
             ));
             nextBtn.addEventListener('click', function() {
                 self._currentIndex++;
+                self._saveSession();
                 self._showSource();
             });
         }
@@ -805,17 +936,24 @@ StudyEngine.registerActivity({
         ));
         nextBtn.addEventListener('click', function() {
             self._currentIndex++;
+            self._saveSession();
             self._showSource();
         });
         container.appendChild(nextBtn);
     },
 
     _showFinalResults() {
+        this._clearSession();
+
         var wrapper = document.getElementById('source-wrapper');
         if (!wrapper) return;
         while (wrapper.firstChild) wrapper.removeChild(wrapper.firstChild);
 
         var pct = this._total > 0 ? Math.round((this._score / this._total) * 100) : 0;
+
+        if (typeof AchievementManager !== 'undefined') {
+            AchievementManager.checkAndAward({ activity: 'source-analysis', score: pct, event: 'complete' });
+        }
 
         // Save progress
         this._stats.completed++;

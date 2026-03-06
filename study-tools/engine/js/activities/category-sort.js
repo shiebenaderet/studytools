@@ -359,6 +359,11 @@ StudyEngine.registerActivity({
         const checkBtn = document.getElementById('category-sort-check-btn');
         if (checkBtn) checkBtn.disabled = true;
 
+        if (typeof AchievementManager !== 'undefined') {
+            var pct = totalItems > 0 ? Math.round((correctCount / totalItems) * 100) : 0;
+            AchievementManager.checkAndAward({ activity: 'category-sort', score: pct, event: correctCount === totalItems ? 'perfect' : 'complete', totalCorrect: correctCount });
+        }
+
         this._saveProgress();
     },
 

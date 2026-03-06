@@ -14,7 +14,14 @@ var AchievementManager = {
         { id: 'dedicated', name: 'Dedicated', description: 'Study 3 days in a row.', icon: 'fas fa-calendar-check', unlocked: false, unlockedAt: null },
         { id: 'completionist', name: 'Completionist', description: 'Try every activity at least once.', icon: 'fas fa-trophy', unlocked: false, unlockedAt: null },
         { id: 'half-century', name: 'Half Century', description: 'Answer 50 questions correctly total.', icon: 'fas fa-medal', unlocked: false, unlockedAt: null },
-        { id: 'century', name: 'Century Club', description: 'Answer 100 questions correctly total.', icon: 'fas fa-award', unlocked: false, unlockedAt: null }
+        { id: 'century', name: 'Century Club', description: 'Answer 100 questions correctly total.', icon: 'fas fa-award', unlocked: false, unlockedAt: null },
+        { id: 'email-mr-b', name: 'Reaching Out', description: 'You studied enough to email Mr. B!', icon: 'fas fa-envelope', unlocked: false, unlockedAt: null },
+        { id: 'konami', name: 'Cheat Code', description: 'Found the Konami Code!', icon: 'fas fa-gamepad', unlocked: false, unlockedAt: null, secret: true },
+        { id: 'founding-facts', name: 'History Buff', description: 'Discovered the 1776 secret.', icon: 'fas fa-flag-usa', unlocked: false, unlockedAt: null, secret: true },
+        { id: 'book-tap', name: 'Curious Mind', description: 'Found the hidden header secret.', icon: 'fas fa-eye', unlocked: false, unlockedAt: null, secret: true },
+        { id: 'we-the-people', name: 'We The People', description: 'Typed the famous preamble opening.', icon: 'fas fa-scroll', unlocked: false, unlockedAt: null, secret: true },
+        { id: 'eagle-eye', name: 'Eagle Eye', description: 'Found the hidden eagle.', icon: 'fas fa-dove', unlocked: false, unlockedAt: null, secret: true },
+        { id: 'midnight-scholar', name: 'Midnight Scholar', description: 'Studying at midnight! True dedication.', icon: 'fas fa-hat-wizard', unlocked: false, unlockedAt: null, secret: true }
     ],
 
     unitId: null,
@@ -167,6 +174,16 @@ var AchievementManager = {
         if (context.totalCorrect >= 100) {
             this.unlock('century');
         }
+
+        // Email Mr. B - after 5 activity completions
+        if (context.event === 'complete' || context.event === 'win' || context.event === 'finish' || context.event === 'perfect') {
+            var countKey = 'completion-count-' + this.unitId;
+            var count = parseInt(localStorage.getItem(countKey) || '0', 10) + 1;
+            localStorage.setItem(countKey, String(count));
+            if (count >= 5 && !this.check('email-mr-b')) {
+                this.unlock('email-mr-b');
+            }
+        }
     },
 
     showConfetti: function() {
@@ -206,9 +223,19 @@ var AchievementManager = {
         container.appendChild(heading);
 
         var unlockedCount = this.getUnlocked().length;
-        var totalCount = this.achievements.length;
+        var visibleCount = 0;
+        var secretUnlocked = 0;
+        for (var j = 0; j < this.achievements.length; j++) {
+            if (!this.achievements[j].secret) visibleCount++;
+            if (this.achievements[j].secret && this.achievements[j].unlocked) secretUnlocked++;
+        }
         var summary = document.createElement('p');
-        summary.textContent = unlockedCount + ' / ' + totalCount + ' unlocked';
+        summary.textContent = unlockedCount + ' / ' + visibleCount + ' unlocked';
+        if (secretUnlocked > 0) {
+            summary.textContent += ' + ' + secretUnlocked + ' secret';
+        } else if (unlockedCount > 0) {
+            summary.textContent += ' (+ hidden secrets to discover!)';
+        }
         summary.style.marginBottom = '16px';
         summary.style.color = '#666';
         container.appendChild(summary);
@@ -219,8 +246,12 @@ var AchievementManager = {
         var self = this;
         for (var i = 0; i < this.achievements.length; i++) {
             (function(ach) {
+                // Hide locked secret badges entirely
+                if (ach.secret && !ach.unlocked) return;
+
                 var badge = document.createElement('div');
                 badge.className = 'ach-badge ' + (ach.unlocked ? 'unlocked' : 'locked');
+                if (ach.secret && ach.unlocked) badge.classList.add('secret');
 
                 var iconWrap = document.createElement('div');
                 iconWrap.className = 'ach-icon';

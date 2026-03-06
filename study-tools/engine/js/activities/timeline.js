@@ -327,6 +327,10 @@ StudyEngine.registerActivity({
             this._perfectCount++;
             resultArea.className = 'tl-result tl-result-success';
 
+            if (typeof AchievementManager !== 'undefined') {
+                AchievementManager.checkAndAward({ activity: 'timeline', event: 'perfect' });
+            }
+
             var successMsg = document.createElement('div');
             successMsg.textContent = 'Perfect! All ' + events.length + ' events in the correct order!';
             successMsg.style.fontWeight = '600';

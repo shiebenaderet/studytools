@@ -306,6 +306,10 @@ StudyEngine.registerActivity({
 
         // Save progress
         this._saveProgress();
+
+        if (typeof AchievementManager !== 'undefined') {
+            AchievementManager.checkAndAward({ activity: 'hangman', event: won ? 'win' : 'complete' });
+        }
     },
 
     _saveProgress() {

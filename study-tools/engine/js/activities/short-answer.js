@@ -199,6 +199,10 @@ StudyEngine.registerActivity({
             answer: text
         });
         StudyUtils.showToast('Response saved!', 'success');
+
+        if (typeof AchievementManager !== 'undefined') {
+            AchievementManager.checkAndAward({ activity: 'short-answer', event: 'complete' });
+        }
     },
 
     activate() {},

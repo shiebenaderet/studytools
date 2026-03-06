@@ -609,6 +609,10 @@ StudyEngine.registerActivity({
             this._saveBestTime(parseFloat(timeTaken));
         }
 
+        if (typeof AchievementManager !== 'undefined') {
+            AchievementManager.checkAndAward({ activity: 'typing-race', event: placement === 1 ? 'win' : 'complete', score: accuracy, totalCorrect: this._correctCount });
+        }
+
         // Race Again button
         var self = this;
         var againBtn = document.createElement('button');

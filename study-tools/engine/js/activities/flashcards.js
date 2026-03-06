@@ -241,6 +241,12 @@ StudyEngine.registerActivity({
             this._currentIndex++;
             this._isFlipped = false;
             this.display();
+        } else {
+            // Reached the last card — viewedAll
+            if (typeof AchievementManager !== 'undefined') {
+                AchievementManager.checkAndAward({ activity: 'flashcards', event: 'viewedAll' });
+                AchievementManager.checkAndAward({ activity: 'flashcards', event: 'complete' });
+            }
         }
     },
 
