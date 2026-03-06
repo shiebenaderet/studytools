@@ -239,7 +239,7 @@ StudyEngine.registerActivity({
         slots.forEach(slot => {
             slot.addEventListener('dragover', (e) => {
                 e.preventDefault();
-                slot.style.borderColor = 'var(--primary, #0d9488)';
+                slot.style.borderColor = 'var(--primary, #1669C5)';
             });
             slot.addEventListener('dragleave', (e) => {
                 slot.style.borderColor = '';

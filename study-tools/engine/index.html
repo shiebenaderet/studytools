@@ -5,10 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Study Tool</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <div class="container">
+        <div id="loading-screen" style="text-align: center; padding: 60px 20px;">
+            <i class="fas fa-spinner fa-spin" style="font-size: 3em; color: var(--primary, #1669C5);"></i>
+            <p style="margin-top: 16px; color: #666; font-size: 1.1em;">Loading study tool...</p>
+        </div>
         <header id="site-header">
             <h1 id="site-title"><i class="fas fa-book-open"></i> <span id="title-text">Loading...</span></h1>
             <div class="subtitle" id="site-subtitle"></div>
@@ -29,6 +35,8 @@
 
         <div id="modal-overlay" class="modal"></div>
 
+        <footer class="app-footer" id="app-footer"></footer>
+
         <div id="login-prompt" class="login-prompt hidden">
             <button class="save-progress-btn" onclick="StudyEngine.showLoginModal()">
                 <i class="fas fa-save"></i> Save Progress
@@ -36,11 +44,33 @@
         </div>
     </div>
 
+    <button class="dyslexic-toggle" id="dyslexic-toggle" title="Toggle dyslexic-friendly font">
+        <i class="fas fa-font"></i> <span id="dyslexic-label">Aa</span>
+    </button>
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/core/supabase-config.js"></script>
     <script src="js/core/utils.js"></script>
     <script src="js/core/progress.js"></script>
     <script src="tools/tools.js"></script>
     <script src="js/core/app.js"></script>
+    <script>
+    (function() {
+        var toggle = document.getElementById('dyslexic-toggle');
+        var label = document.getElementById('dyslexic-label');
+        // Restore saved preference
+        if (localStorage.getItem('dyslexic-font') === 'on') {
+            document.body.classList.add('dyslexic-font');
+            toggle.classList.add('active');
+            label.textContent = 'Aa ✓';
+        }
+        toggle.addEventListener('click', function() {
+            var isOn = document.body.classList.toggle('dyslexic-font');
+            toggle.classList.toggle('active', isOn);
+            label.textContent = isOn ? 'Aa ✓' : 'Aa';
+            localStorage.setItem('dyslexic-font', isOn ? 'on' : 'off');
+        });
+    })();
+    </script>
 </body>
 </html>

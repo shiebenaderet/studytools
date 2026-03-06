@@ -198,7 +198,7 @@ StudyEngine.registerActivity({
         ProgressManager.saveActivityProgress(this.unitId, 'short-answer-' + index, {
             answer: text
         });
-        alert('Your response has been saved!');
+        StudyUtils.showToast('Response saved!', 'success');
     },
 
     activate() {},

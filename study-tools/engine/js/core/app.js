@@ -19,6 +19,10 @@ const StudyEngine = {
             return;
         }
 
+        // Hide loading screen
+        const loadingScreen = document.getElementById('loading-screen');
+        if (loadingScreen) loadingScreen.style.display = 'none';
+
         this.applyTheme();
         this.renderHeader();
         await this.loadActivities();
@@ -291,9 +295,72 @@ const StudyEngine = {
         if (this.config) {
             ProgressManager.renderHomeStats(this.config);
         }
+
+        const homeCards = document.getElementById('home-cards');
+        if (homeCards && homeCards.children.length === 0) {
+            homeCards.textContent = '';
+
+            const welcome = document.createElement('div');
+            welcome.className = 'card';
+            welcome.style.marginBottom = '20px';
+            welcome.style.textAlign = 'center';
+            welcome.style.padding = '24px';
+
+            const welcomeTitle = document.createElement('h2');
+            welcomeTitle.textContent = 'Welcome! Here\'s how to get started:';
+            welcomeTitle.style.color = 'var(--primary)';
+            welcome.appendChild(welcomeTitle);
+
+            const steps = [
+                { icon: 'fas fa-book', text: 'Start with Flashcards to learn the terms', group: 'study' },
+                { icon: 'fas fa-clipboard-check', text: 'Test yourself with Practice activities', group: 'practice' },
+                { icon: 'fas fa-gamepad', text: 'Play Games to reinforce what you learned', group: 'games' }
+            ];
+
+            const stepsDiv = document.createElement('div');
+            stepsDiv.style.display = 'flex';
+            stepsDiv.style.flexWrap = 'wrap';
+            stepsDiv.style.gap = '16px';
+            stepsDiv.style.justifyContent = 'center';
+            stepsDiv.style.marginTop = '16px';
+
+            steps.forEach((step) => {
+                const stepCard = document.createElement('div');
+                stepCard.className = 'card activity-card';
+                stepCard.style.cursor = 'pointer';
+                stepCard.style.flex = '1';
+                stepCard.style.minWidth = '200px';
+                stepCard.style.maxWidth = '280px';
+
+                const num = document.createElement('div');
+                num.style.fontSize = '2em';
+                num.style.color = 'var(--primary)';
+                const icon = document.createElement('i');
+                icon.className = step.icon;
+                num.appendChild(icon);
+                stepCard.appendChild(num);
+
+                const text = document.createElement('p');
+                text.textContent = step.text;
+                text.style.marginTop = '8px';
+                stepCard.appendChild(text);
+
+                stepCard.addEventListener('click', () => {
+                    const navBtn = document.querySelector('.nav-btn[data-group="' + step.group + '"]');
+                    if (navBtn) navBtn.click();
+                });
+
+                stepsDiv.appendChild(stepCard);
+            });
+
+            welcome.appendChild(stepsDiv);
+            homeCards.appendChild(welcome);
+        }
     },
 
     showUnitError(message) {
+        const loadingScreen = document.getElementById('loading-screen');
+        if (loadingScreen) loadingScreen.style.display = 'none';
         const titleEl = document.getElementById('title-text');
         titleEl.textContent = 'Error';
         const headerIcon = document.querySelector('#site-title i');
@@ -324,7 +391,20 @@ const StudyEngine = {
 };
 
 // Boot on DOM ready
-document.addEventListener('DOMContentLoaded', () => StudyEngine.init());
+document.addEventListener('DOMContentLoaded', () => {
+    StudyEngine.init();
+
+    // Load version info
+    fetch('version.json')
+        .then(r => r.ok ? r.json() : null)
+        .then(v => {
+            if (v) {
+                const footer = document.getElementById('app-footer');
+                if (footer) footer.textContent = 'v' + v.version;
+            }
+        })
+        .catch(() => {});
+});
 
 // Close modals on overlay click
 document.addEventListener('click', (e) => {

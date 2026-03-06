@@ -1,7 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Lexend:wght@300;400;500;600;700&display=swap');
+
 :root {
-    --primary: #0d9488;
-    --secondary: #065f46;
+    --primary: #1669C5;
+    --secondary: #1F90ED;
     --accent: #f59e0b;
+    --font-heading: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-body: 'Lexend', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body.dyslexic-font {
+    --font-heading: 'OpenDyslexic', 'Roboto', sans-serif !important;
+    --font-body: 'OpenDyslexic', 'Lexend', sans-serif !important;
+}
+
+body.dyslexic-font * {
+    font-family: var(--font-body) !important;
+}
+
+body.dyslexic-font h1, body.dyslexic-font h2, body.dyslexic-font h3,
+body.dyslexic-font h4, body.dyslexic-font h5, body.dyslexic-font h6 {
+    font-family: var(--font-heading) !important;
+}
+
+@font-face {
+    font-family: 'OpenDyslexic';
+    src: url('https://cdn.jsdelivr.net/npm/open-dyslexic@1.0.3/woff/OpenDyslexic-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'OpenDyslexic';
+    src: url('https://cdn.jsdelivr.net/npm/open-dyslexic@1.0.3/woff/OpenDyslexic-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
 }
 
 * {
@@ -11,11 +45,15 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: var(--font-body);
     background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
     min-height: 100vh;
     padding: 20px;
     color: #333;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
 }
 
 .container {
@@ -25,7 +63,7 @@ body {
 
 /* HEADER */
 header {
-    background: linear-gradient(135deg, var(--primary), #059669);
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
     color: white;
     padding: 30px;
     border-radius: 15px;
@@ -275,12 +313,12 @@ header .essential-question {
 
 .badge:hover {
     border-color: var(--primary);
-    background: #f0fdf4;
+    background: #eff6ff;
 }
 
 .badge.unlocked {
     border-color: var(--primary);
-    background: #ecfdf5;
+    background: #dbeafe;
 }
 
 .badge-icon {
@@ -345,7 +383,7 @@ header .essential-question {
     color: white;
     width: 100%;
     max-width: 700px;
-    height: 400px;
+    min-height: 300px;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
@@ -378,6 +416,7 @@ header .essential-question {
     font-size: 1.5em;
     line-height: 1.6;
     font-weight: 500;
+    overflow-y: auto;
 }
 
 .flashcard-nav {
@@ -422,7 +461,7 @@ header .essential-question {
 }
 
 .timeline-instructions {
-    background: #f0fdf4;
+    background: #eff6ff;
     border-left: 4px solid var(--primary);
     padding: 15px;
     border-radius: 8px;
@@ -449,11 +488,11 @@ header .essential-question {
 
 .timeline-item:hover {
     border-color: var(--primary);
-    background: #f0fdf4;
+    background: #eff6ff;
 }
 
 .timeline-item.placed {
-    background: #ecfdf5;
+    background: #dbeafe;
     border-color: var(--primary);
 }
 
@@ -482,7 +521,7 @@ header .essential-question {
 }
 
 .timeline-ordered-container {
-    background: #f0fdf4;
+    background: #eff6ff;
     padding: 25px;
     border-radius: 10px;
     border: 2px dashed var(--primary);
@@ -562,11 +601,11 @@ header .essential-question {
 
 .option:hover {
     border-color: var(--primary);
-    background: #f0fdf4;
+    background: #eff6ff;
 }
 
 .option.selected {
-    background: #ecfdf5;
+    background: #dbeafe;
     border-color: var(--primary);
 }
 
@@ -581,7 +620,7 @@ header .essential-question {
 }
 
 .explanation {
-    background: #f0fdf4;
+    background: #eff6ff;
     border-left: 4px solid var(--primary);
     padding: 15px;
     border-radius: 8px;
@@ -618,7 +657,7 @@ header .essential-question {
 }
 
 .short-answer-instructions {
-    background: #f0fdf4;
+    background: #eff6ff;
     border-left: 4px solid var(--primary);
     padding: 15px;
     border-radius: 8px;
@@ -660,7 +699,7 @@ header .essential-question {
 }
 
 .exemplar {
-    background: #f0fdf4;
+    background: #eff6ff;
     border-left: 4px solid var(--primary);
     padding: 15px;
     border-radius: 8px;
@@ -884,7 +923,7 @@ header .essential-question {
 }
 
 .focused-instructions {
-    background: #f0fdf4;
+    background: #eff6ff;
     border-left: 4px solid var(--primary);
     padding: 15px;
     border-radius: 8px;
@@ -944,7 +983,7 @@ header .essential-question {
 }
 
 .focused-study-tip {
-    background: #f0fdf4;
+    background: #eff6ff;
     border-left: 4px solid var(--primary);
     padding: 15px;
     border-radius: 8px;
@@ -1071,7 +1110,7 @@ header .essential-question {
     }
 
     .flashcard {
-        height: 300px;
+        min-height: 250px;
         padding: 25px;
     }
 
@@ -1223,11 +1262,10 @@ header .essential-question {
 .catcher-lives { font-size: 1.3em; }
 .catcher-combo { font-weight: 600; color: var(--accent); }
 .catcher-definition { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 15px 20px; text-align: center; font-weight: 500; font-size: 1.05em; line-height: 1.4; }
-.catcher-game-area { position: relative; height: 400px; background: linear-gradient(180deg, #f0fdf4 0%, #ecfdf5 100%); border: 2px solid #e5e7eb; border-top: none; overflow: hidden; border-radius: 0 0 12px 12px; }
+.catcher-game-area { position: relative; height: 400px; background: linear-gradient(180deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #e5e7eb; border-top: none; overflow: hidden; border-radius: 0 0 12px 12px; }
 .falling-term { position: absolute; padding: 10px 20px; border-radius: 25px; font-weight: 600; cursor: pointer; transition: background 0.15s, transform 0.15s; white-space: nowrap; font-size: 0.95em; user-select: none; z-index: 2; }
 .falling-term:hover { transform: scale(1.1); }
-.falling-term.term-correct { background: var(--primary); color: white; }
-.falling-term.term-wrong { background: #f3f4f6; color: #333; border: 2px solid #d1d5db; }
+.falling-term { background: #f3f4f6; color: #333; border: 2px solid #d1d5db; }
 .falling-term.flash-green { background: #22c55e !important; color: white !important; }
 .falling-term.flash-red { background: #ef4444 !important; color: white !important; }
 .catcher-start-screen { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(255,255,255,0.95); z-index: 10; }
@@ -1244,10 +1282,10 @@ header .essential-question {
 .lightning-score-item { font-weight: 600; font-size: 1.2em; }
 .lightning-score-item .label { color: #666; font-size: 0.8em; display: block; }
 .lightning-definition { background: white; padding: 25px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); min-height: 100px; display: flex; align-items: center; justify-content: center; }
-.lightning-definition-text { font-size: 1.15em; line-height: 1.5; color: #333; }
+.lightning-definition-text { font-size: 1.15em; line-height: 1.5; color: #1e293b; }
 .lightning-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
-.lightning-option { padding: 15px; border: 2px solid #e5e7eb; border-radius: 10px; background: white; cursor: pointer; font-weight: 600; font-size: 1em; transition: all 0.2s; }
-.lightning-option:hover { border-color: var(--primary); background: #f0fdf4; }
+.lightning-option { padding: 15px; border: 2px solid #94a3b8; border-radius: 10px; background: white; color: #1e293b; cursor: pointer; font-weight: 600; font-size: 1em; transition: all 0.2s; }
+.lightning-option:hover { border-color: var(--primary); background: #eff6ff; }
 .lightning-option.correct-flash { background: #dcfce7; border-color: #22c55e; color: #166534; }
 .lightning-option.wrong-flash { background: #fee2e2; border-color: #ef4444; color: #991b1b; }
 .lightning-countdown { font-size: 5em; font-weight: bold; color: var(--primary); animation: pulse 0.5s ease-in-out; }
@@ -1278,7 +1316,7 @@ header .essential-question {
 .crossword-clues { flex: 1; max-height: 500px; overflow-y: auto; }
 .crossword-clues h3 { color: var(--primary); margin: 15px 0 10px; }
 .crossword-clue { padding: 8px 12px; cursor: pointer; border-radius: 6px; transition: background 0.2s; font-size: 0.9em; line-height: 1.4; }
-.crossword-clue:hover { background: #f0fdf4; }
+.crossword-clue:hover { background: #eff6ff; }
 .crossword-clue.active { background: #dbeafe; }
 .crossword-clue-number { font-weight: bold; color: var(--primary); margin-right: 5px; }
 .crossword-controls { display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap; }
@@ -1287,6 +1325,30 @@ header .essential-question {
     .crossword-cell { width: 30px; height: 30px; }
     .crossword-cell input { font-size: 0.9em; }
 }
+
+/* TOAST NOTIFICATIONS */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    padding: 12px 24px;
+    border-radius: 8px;
+    color: white;
+    font-weight: 500;
+    z-index: 10000;
+    opacity: 0;
+    transition: transform 0.3s, opacity 0.3s;
+    max-width: 90%;
+    text-align: center;
+}
+.toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+.toast-success { background: #22c55e; }
+.toast-error { background: #ef4444; }
+.toast-info { background: #3b82f6; }
 
 /* ACCESSIBILITY */
 *:focus-visible {
@@ -1304,4 +1366,45 @@ header .essential-question {
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border-width: 0;
+}
+
+/* APP FOOTER */
+.app-footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.8em;
+}
+
+/* DYSLEXIC FONT TOGGLE */
+.dyslexic-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: white;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    padding: 10px 14px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 0.85em;
+    font-weight: 600;
+    font-family: var(--font-body);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.dyslexic-toggle:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.dyslexic-toggle.active {
+    background: var(--primary);
+    color: white;
 }

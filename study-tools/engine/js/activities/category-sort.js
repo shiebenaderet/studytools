@@ -132,7 +132,7 @@ StudyEngine.registerActivity({
             bucketLabel.style.fontWeight = 'bold';
             bucketLabel.style.marginBottom = '8px';
             bucketLabel.style.textAlign = 'center';
-            bucketLabel.style.color = 'var(--primary, #0d9488)';
+            bucketLabel.style.color = 'var(--primary, #1669C5)';
             bucketLabel.textContent = cat;
             bucket.appendChild(bucketLabel);
 
@@ -253,7 +253,7 @@ StudyEngine.registerActivity({
         dropZones.forEach(zone => {
             zone.addEventListener('dragover', (e) => {
                 e.preventDefault();
-                zone.parentElement.style.borderColor = 'var(--primary, #0d9488)';
+                zone.parentElement.style.borderColor = 'var(--primary, #1669C5)';
             });
             zone.addEventListener('dragleave', () => {
                 zone.parentElement.style.borderColor = '';

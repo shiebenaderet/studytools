@@ -280,11 +280,6 @@ StudyEngine.registerActivity({
             var termText = termsToSpawn[p];
             var el = document.createElement('div');
             el.className = 'falling-term';
-            if (termText === this._currentAnswer) {
-                el.classList.add('term-correct');
-            } else {
-                el.classList.add('term-wrong');
-            }
             el.textContent = termText;
 
             // Calculate X with some randomness but ensure within bounds

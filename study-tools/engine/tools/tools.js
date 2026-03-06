@@ -36,7 +36,7 @@ const StudyTools = {
         html += '</div>' +
             '<div style="display:flex;gap:10px;margin-top:14px;">' +
             '<button class="nav-button" id="notes-save-btn" style="flex:1;">Save Notes</button>' +
-            '<button class="nav-button" id="notes-print-btn" style="flex:1;background:var(--secondary,#065f46);">Print Notes</button>' +
+            '<button class="nav-button" id="notes-print-btn" style="flex:1;background:var(--secondary,#1F90ED);">Print Notes</button>' +
             '</div>';
 
         StudyEngine.showModal(html);
@@ -195,7 +195,7 @@ const StudyTools = {
 
         if (this._timerRemaining <= 0) {
             this._stopTimer(false);
-            alert('Study session complete!');
+            StudyUtils.showToast('Study session complete!', 'success');
         }
     },
 

@@ -254,7 +254,8 @@ StudyEngine.registerActivity({
     _saveProgress() {
         ProgressManager.saveActivityProgress(StudyEngine.config.unit.id, 'practice-test', {
             answered: this._answers,
-            submitted: this._submitted
+            submitted: this._submitted,
+            currentIndex: this._currentIndex
         });
     },
 
@@ -286,6 +287,9 @@ StudyEngine.registerActivity({
         }
         if (data && data.submitted) {
             this._submitted = data.submitted;
+        }
+        if (data && data.currentIndex !== undefined) {
+            this._currentIndex = data.currentIndex;
         }
     }
 });

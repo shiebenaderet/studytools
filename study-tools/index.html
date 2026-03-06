@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Study Tools</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #0d9488;
-            --secondary: #065f46;
+            --primary: #1669C5;
+            --secondary: #1F90ED;
         }
 
         * {
@@ -18,7 +21,7 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Lexend', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             min-height: 100vh;
             padding: 20px;
@@ -35,7 +38,7 @@
         }
 
         header {
-            background: linear-gradient(135deg, var(--primary), #059669);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             padding: 40px 30px;
             border-radius: 15px;
@@ -235,7 +238,7 @@
                 }
 
                 units.forEach(unit => {
-                    const themeColor = (unit.theme && unit.theme.primary) || '#0d9488';
+                    const themeColor = (unit.theme && unit.theme.primary) || '#1669C5';
 
                     const card = document.createElement('div');
                     card.className = 'unit-card';

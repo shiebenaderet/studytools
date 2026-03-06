@@ -297,7 +297,7 @@ const ProgressManager = {
                     .ilike('code', code)
                     .limit(1);
                 if (classError || !classRows || classRows.length === 0) {
-                    alert('Invalid class code');
+                    StudyUtils.showToast('Invalid class code', 'error');
                     return;
                 }
                 const classId = classRows[0].id;

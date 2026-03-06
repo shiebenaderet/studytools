@@ -45,5 +45,21 @@ const StudyUtils = {
 
     normalizeTerm(term) {
         return term.toLowerCase().trim().replace(/[^a-z0-9\s]/g, '');
+    },
+
+    showToast(message, type) {
+        // type: 'success', 'error', 'info'
+        const toast = document.createElement('div');
+        toast.className = 'toast toast-' + (type || 'info');
+        toast.textContent = message;
+        document.body.appendChild(toast);
+
+        // Trigger animation
+        requestAnimationFrame(() => toast.classList.add('show'));
+
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => toast.remove(), 300);
+        }, 3000);
     }
 };

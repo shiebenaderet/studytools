@@ -25,8 +25,8 @@ StudyEngine.registerActivity({
         this._filteredVocab = config.vocabulary
             .filter(v => {
                 const cleaned = v.term.replace(/[^a-zA-Z]/g, '');
-                // Only single-word terms (no spaces) that are 4-8 letters
-                return !/\s/.test(v.term.trim()) && cleaned.length >= 4 && cleaned.length <= 8;
+                // Only single-word terms (no spaces) that are 4-12 letters
+                return !/\s/.test(v.term.trim()) && cleaned.length >= 4 && cleaned.length <= 12;
             })
             .map(v => {
                 const word = v.term.replace(/[^a-zA-Z]/g, '').toUpperCase();
