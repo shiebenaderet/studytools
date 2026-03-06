@@ -28,7 +28,7 @@ StudyEngine.registerActivity({
         wrapper.id = 'crossword-wrapper';
         container.appendChild(wrapper);
 
-        this._generatePuzzle(config.vocabulary);
+        this._generatePuzzle(MasteryManager.getUnlockedVocabulary(config.unit.id, config));
         this._renderUI();
     },
 
@@ -703,7 +703,7 @@ StudyEngine.registerActivity({
 
     _newPuzzle() {
         if (!this._config) return;
-        this._generatePuzzle(this._config.vocabulary);
+        this._generatePuzzle(MasteryManager.getUnlockedVocabulary(this._config.unit.id, this._config));
         this._renderUI();
     },
 

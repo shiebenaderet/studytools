@@ -21,7 +21,7 @@ StudyEngine.registerActivity({
         this._placements = {};
         this._checked = false;
 
-        const sentences = config.fillInBlankSentences;
+        const sentences = MasteryManager.getUnlockedFillInBlanks(config.unit.id, config);
         if (!sentences || sentences.length === 0) return;
         this._sentences = sentences;
 

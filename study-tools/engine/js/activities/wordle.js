@@ -22,7 +22,7 @@ StudyEngine.registerActivity({
 
     render(container, config) {
         this._container = container;
-        this._filteredVocab = config.vocabulary
+        this._filteredVocab = MasteryManager.getUnlockedVocabulary(config.unit.id, config)
             .filter(v => {
                 const cleaned = v.term.replace(/[^a-zA-Z]/g, '');
                 // Only single-word terms (no spaces) that are 4-12 letters

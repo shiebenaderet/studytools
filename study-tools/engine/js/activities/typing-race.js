@@ -127,7 +127,7 @@ StudyEngine.registerActivity({
 
     _startRace() {
         // Pick 10 random terms
-        var vocab = this._config.vocabulary.slice();
+        var vocab = MasteryManager.getUnlockedVocabulary(this._config.unit.id, this._config).slice();
         var count = Math.min(10, vocab.length);
         this._terms = [];
         for (var i = 0; i < count; i++) {

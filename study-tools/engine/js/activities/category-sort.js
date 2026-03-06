@@ -34,7 +34,7 @@ StudyEngine.registerActivity({
             }));
         } else {
             // Auto-generate from vocabulary grouped by category field
-            const vocab = config.vocabulary;
+            const vocab = MasteryManager.getUnlockedVocabulary(config.unit.id, config);
             if (!vocab || vocab.length === 0) return;
 
             const categoryMap = {};

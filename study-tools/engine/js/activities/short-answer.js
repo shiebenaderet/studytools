@@ -7,7 +7,7 @@ StudyEngine.registerActivity({
     requires: ['shortAnswerQuestions'],
 
     render(container, config) {
-        this.questions = config.shortAnswerQuestions || [];
+        this.questions = MasteryManager.getUnlockedQuestions(config.unit.id, config, 'shortAnswerQuestions') || [];
         this.unitId = config.unit.id;
 
         const wrapper = document.createElement('div');

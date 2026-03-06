@@ -34,7 +34,7 @@ StudyEngine.registerActivity({
 
     render(container, config) {
         this._container = container;
-        this._questions = this._shuffleArray((config.practiceQuestions || []).slice());
+        this._questions = this._shuffleArray((MasteryManager.getUnlockedQuestions(config.unit.id, config, 'practiceQuestions') || []).slice());
         this._currentIndex = 0;
         this._submitted = false;
         this._shuffleMaps = {};
