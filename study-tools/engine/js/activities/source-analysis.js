@@ -32,12 +32,12 @@ StudyEngine.registerActivity({
                 questions: [
                     {
                         question: "What is Washington warning Americans about in this excerpt?",
-                        options: ["The dangers of political parties", "The need for a stronger military", "The importance of foreign alliances", "The threat of British invasion"],
+                        options: ["The dangers of political parties dividing the nation", "The need for building a much stronger military force", "The importance of forming alliances with foreign nations", "The growing threat of another British invasion attempt"],
                         correct: 0
                     },
                     {
                         question: "Why is this considered a primary source?",
-                        options: ["It was written by a historian who studied the topic later", "It was created by someone who lived during the event", "It contains facts about history that anyone could find", "It is very old and stored in a government archive"],
+                        options: ["It was written by a historian who studied the topic much later", "It was created by someone who actually lived during the event", "It contains facts about history that anyone could easily find", "It is very old and is stored in an official government archive"],
                         correct: 1
                     }
                 ]
@@ -54,12 +54,12 @@ StudyEngine.registerActivity({
                 questions: [
                     {
                         question: "What does Jefferson mean by calling the presidency 'a splendid misery'?",
-                        options: ["The president gets paid too little", "The job is prestigious but burdensome", "The White House is uncomfortable", "Presidents are not respected"],
+                        options: ["The president gets paid far too little for the work", "The job is prestigious but comes with heavy burdens", "The White House is uncomfortable and poorly maintained", "Presidents are not respected by the general public"],
                         correct: 1
                     },
                     {
                         question: "What makes a personal letter a valuable primary source?",
-                        options: ["Letters are always accurate accounts of what happened", "They reveal private thoughts of people from that time", "Letters are written by trained professional writers", "They are printed and widely available to the public"],
+                        options: ["Letters are always completely accurate accounts of events", "They reveal private thoughts of people from that time period", "Letters are written by trained and professional writers only", "They are printed and widely available to the general public"],
                         correct: 1
                     }
                 ]
@@ -76,12 +76,12 @@ StudyEngine.registerActivity({
                 questions: [
                     {
                         question: "Which right protected by the First Amendment did the Sedition Act threaten?",
-                        options: ["Freedom of religion", "Right to bear arms", "Freedom of speech and press", "Right to a fair trial"],
+                        options: ["Freedom of religion and worship", "The right to bear arms and weapons", "Freedom of speech and the press", "The right to a fair and speedy trial"],
                         correct: 2
                     },
                     {
                         question: "Why would a historian want to read the actual text of this law rather than just a summary?",
-                        options: ["Summaries are always wrong about important details", "The original text shows exactly what was banned and punished", "Old documents are more interesting to read and study", "Historians are only allowed to use primary sources"],
+                        options: ["Summaries are always wrong about the most important details", "The original text shows exactly what was banned and punished", "Old documents are much more interesting to read and study", "Historians are only allowed to use primary sources for research"],
                         correct: 1
                     }
                 ]
@@ -98,12 +98,12 @@ StudyEngine.registerActivity({
                 questions: [
                     {
                         question: "How does Hamilton justify taking on the national debt?",
-                        options: ["He says that debt does not matter for a new nation", "He calls it 'the price of liberty' worth paying", "He blames the states for spending far too much money", "He says Britain should pay all of America's debts"],
+                        options: ["He says that debt does not matter for a new nation at all", "He calls it 'the price of liberty' that is worth paying", "He blames the states for spending far too much of their money", "He says Britain should be forced to pay all of America's debts"],
                         correct: 1
                     },
                     {
                         question: "Who opposed Hamilton's financial plan?",
-                        options: ["George Washington and John Jay", "John Adams and Abigail Adams", "Thomas Jefferson and James Madison", "Benjamin Franklin and Samuel Adams"],
+                        options: ["George Washington and John Jay opposed it strongly", "John Adams and Abigail Adams argued against the plan", "Thomas Jefferson and James Madison led the opposition", "Benjamin Franklin and Samuel Adams rejected his ideas"],
                         correct: 2
                     }
                 ]
@@ -120,12 +120,12 @@ StudyEngine.registerActivity({
                 questions: [
                     {
                         question: "What principle is Jefferson arguing for in this resolution?",
-                        options: ["The federal government has unlimited power", "States have the right to reject federal laws they consider unconstitutional", "All laws must be obeyed without question", "Only the president can decide what is constitutional"],
+                        options: ["The federal government has unlimited power over the states", "States have the right to reject unconstitutional federal laws", "All laws passed by Congress must be obeyed without question", "Only the president can decide which laws are constitutional"],
                         correct: 1
                     },
                     {
                         question: "Why did Jefferson write this anonymously?",
-                        options: ["He was not a good writer", "As Vice President, openly opposing federal law would be controversial", "He didn't care about the issue", "It was required by law"],
+                        options: ["He was not a skilled enough writer to claim credit", "As Vice President, openly opposing federal law would be controversial", "He did not actually care very much about the issue", "It was required by law that all resolutions be anonymous"],
                         correct: 1
                     }
                 ]
@@ -142,12 +142,12 @@ StudyEngine.registerActivity({
                 questions: [
                     {
                         question: "Why is a modern textbook considered a secondary source?",
-                        options: ["It is printed on paper and sold in bookstores", "It was written long after the events by someone who wasn't there", "It contains incorrect information about major events", "It is used in schools and assigned by teachers"],
+                        options: ["It is printed on paper and sold widely in bookstores", "It was written long after the events by someone who wasn't there", "It contains incorrect information about some major historical events", "It is used in schools and regularly assigned by teachers"],
                         correct: 1
                     },
                     {
                         question: "What is one advantage of using a secondary source like a textbook?",
-                        options: ["It gives you the exact words of historical figures", "It organizes and explains events using evidence from many primary sources", "It is always completely unbiased", "It replaces the need for primary sources"],
+                        options: ["It gives you the exact words spoken by historical figures", "It organizes and explains events using evidence from many primary sources", "It is always completely unbiased and perfectly neutral", "It replaces the need for primary sources in research"],
                         correct: 1
                     }
                 ]
@@ -164,12 +164,12 @@ StudyEngine.registerActivity({
                 questions: [
                     {
                         question: "What makes this documentary a secondary source rather than a primary source?",
-                        options: ["It uses video recordings instead of written text", "It was created long after the events by people who researched them", "It mentions real historical figures and actual places", "It is entertaining and designed for a wide audience"],
+                        options: ["It uses video recordings instead of traditional written text", "It was created long after the events by people who researched them", "It mentions real historical figures and actual places from history", "It is entertaining and specifically designed for a very wide audience"],
                         correct: 1
                     },
                     {
                         question: "How might a documentary be useful even though it's a secondary source?",
-                        options: ["Documentaries are always 100% accurate", "They can make complex historical events easier to understand", "They replace the need to study", "They are more important than primary sources"],
+                        options: ["Documentaries are always completely accurate and trustworthy", "They can make complex historical events easier to understand", "They replace the need to study from books or textbooks", "They are considered more important than primary sources"],
                         correct: 1
                     }
                 ]
@@ -186,12 +186,12 @@ StudyEngine.registerActivity({
                 questions: [
                     {
                         question: "What does this cartoon reveal about politics in the Early Republic?",
-                        options: ["Congress was always peaceful and orderly during debates", "Political disagreements were so intense they sometimes turned violent", "Everyone agreed on major issues facing the new nation", "Congressmen often settled arguments with friendly competitions"],
+                        options: ["Congress was always peaceful and orderly during official debates", "Political disagreements were so intense they sometimes turned violent", "Everyone agreed on the major issues that the new nation faced", "Congressmen often settled their arguments with friendly competitions"],
                         correct: 1
                     },
                     {
                         question: "Even though we don't know the artist, why is this still a primary source?",
-                        options: ["Because it is a drawing rather than a written document", "Because it was created during the time period it depicts", "Because it is funny and meant to entertain readers", "Because it is preserved in a museum or archive"],
+                        options: ["Because it is a drawing rather than a written document of events", "Because it was created during the time period that it depicts", "Because it is funny and was meant to entertain its readers", "Because it is preserved in a museum or a government archive"],
                         correct: 1
                     }
                 ]
@@ -208,12 +208,12 @@ StudyEngine.registerActivity({
                 questions: [
                     {
                         question: "What does this letter reveal about Abigail Adams?",
-                        options: ["She was uninterested in politics and national affairs", "She was independent-minded and had her own political opinions", "She wanted to run for president herself someday", "She did not support her husband's political career"],
+                        options: ["She was uninterested in politics and national affairs entirely", "She was independent-minded and had her own political opinions", "She wanted to run for president herself someday in the future", "She did not support her husband's political career at all"],
                         correct: 1
                     },
                     {
                         question: "Why are personal letters especially valuable to historians?",
-                        options: ["They are written in fancy handwriting that looks impressive", "They show private thoughts that people might not express publicly", "They are always truthful and completely free of any bias", "They are short and easy to read compared to other sources"],
+                        options: ["They are written in fancy handwriting that looks very impressive", "They show private thoughts that people might not express publicly", "They are always truthful and are completely free of any bias", "They are short and much easier to read compared to other sources"],
                         correct: 1
                     }
                 ]
@@ -230,12 +230,12 @@ StudyEngine.registerActivity({
                 questions: [
                     {
                         question: "What makes this book a secondary source?",
-                        options: ["It is written by a professional author with credentials", "It analyzes and interprets events using evidence gathered long after", "It is published by a major publishing company for readers", "It mentions the Whiskey Rebellion and other real events"],
+                        options: ["It is written by a professional author with scholarly credentials", "It analyzes and interprets events using evidence gathered long after", "It is published by a major company and written for general readers", "It mentions the Whiskey Rebellion and many other real historical events"],
                         correct: 1
                     },
                     {
                         question: "The historian presents multiple perspectives. Why is this important?",
-                        options: ["It makes the article longer and more detailed for readers", "It helps readers understand the complexity of historical events", "Historians are required to do this by professional rules", "It proves that one side was completely right all along"],
+                        options: ["It makes the article longer and more detailed for all readers", "It helps readers understand the complexity of historical events", "Historians are required to do this by their professional rules", "It proves that one side was completely right about everything"],
                         correct: 1
                     }
                 ]
@@ -252,12 +252,12 @@ StudyEngine.registerActivity({
                 questions: [
                     {
                         question: "What contradiction do you notice between the treaty's language and its actual effect?",
-                        options: ["There is no contradiction", "The treaty promises peace while actually taking Native American land", "The treaty gave land back to Native Americans", "The treaty was never signed"],
+                        options: ["There is no contradiction between the words and the outcome", "The treaty promises peace while actually taking Native American land", "The treaty gave large amounts of land back to Native Americans", "The treaty was never actually signed by either side involved"],
                         correct: 1
                     },
                     {
                         question: "Why is it important to read the actual words of a treaty rather than just a summary?",
-                        options: ["Treaties use complicated language that is interesting to study", "You can see how language may have been used to disguise unfair terms", "Summaries are always biased and leave out important details", "Treaties are always fair to both sides that signed them"],
+                        options: ["Treaties use complicated language that is very interesting to study", "You can see how language may have been used to disguise unfair terms", "Summaries are always biased and they leave out many important details", "Treaties are always written to be perfectly fair to both sides"],
                         correct: 1
                     }
                 ]
@@ -274,12 +274,12 @@ StudyEngine.registerActivity({
                 questions: [
                     {
                         question: "What event inspired Francis Scott Key to write this poem?",
-                        options: ["The signing of the Constitution", "The British bombardment of Fort McHenry", "Washington's inauguration", "The Boston Tea Party"],
+                        options: ["The signing of the Constitution in Philadelphia", "The British bombardment of Fort McHenry in Baltimore", "Washington's inauguration as the first president", "The Boston Tea Party protest against British taxes"],
                         correct: 1
                     },
                     {
                         question: "A poem can be a primary source because:",
-                        options: ["All poems are automatically considered primary sources", "It was created by someone who witnessed the event firsthand", "Poems are always historically accurate accounts of events", "It rhymes and uses creative language about history"],
+                        options: ["All poems are automatically considered to be primary sources", "It was created by someone who witnessed the event firsthand", "Poems are always historically accurate accounts of real events", "It rhymes and uses creative language when describing history"],
                         correct: 1
                     }
                 ]
@@ -509,7 +509,7 @@ StudyEngine.registerActivity({
 
         if (this._stats.completed > 0) {
             var statsEl = document.createElement('p');
-            statsEl.style.color = '#999';
+            statsEl.style.color = '#6b7280';
             statsEl.style.fontSize = '0.9em';
             statsEl.style.marginTop = '10px';
             statsEl.textContent = 'Sessions completed: ' + this._stats.completed + ' | Best score: ' + this._stats.bestScore + '%';
@@ -974,7 +974,7 @@ StudyEngine.registerActivity({
         results.appendChild(scoreEl);
 
         var detail = document.createElement('p');
-        detail.style.color = '#666';
+        detail.style.color = '#4b5563';
         detail.style.marginBottom = '20px';
         detail.textContent = this._score + ' correct out of ' + this._total + ' total questions';
         results.appendChild(detail);

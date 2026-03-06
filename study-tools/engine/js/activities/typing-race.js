@@ -41,7 +41,7 @@ StudyEngine.registerActivity({
 
         var desc = document.createElement('p');
         desc.textContent = 'See a definition, type the term as fast as you can!';
-        desc.style.color = '#666';
+        desc.style.color = '#4b5563';
         desc.style.marginBottom = '25px';
         startScreen.appendChild(desc);
 
@@ -86,7 +86,7 @@ StudyEngine.registerActivity({
         // Best time display
         var bestTimeEl = document.createElement('p');
         bestTimeEl.id = 'race-best-time';
-        bestTimeEl.style.color = '#999';
+        bestTimeEl.style.color = '#6b7280';
         bestTimeEl.style.fontSize = '0.9em';
         bestTimeEl.style.marginBottom = '20px';
         startScreen.appendChild(bestTimeEl);
@@ -537,7 +537,7 @@ StudyEngine.registerActivity({
         var placeText = document.createElement('p');
         placeText.textContent = placement === 1 ? 'You won the race!' : 'You finished ' + (placementLabels[placement - 1] || placement + 'th') + ' place';
         placeText.style.marginBottom = '15px';
-        placeText.style.color = '#666';
+        placeText.style.color = '#4b5563';
         results.appendChild(placeText);
 
         // Stats
@@ -569,7 +569,7 @@ StudyEngine.registerActivity({
 
             var labelEl = document.createElement('div');
             labelEl.style.fontSize = '0.85em';
-            labelEl.style.color = '#999';
+            labelEl.style.color = '#6b7280';
             labelEl.textContent = stats[i].label;
             statEl.appendChild(labelEl);
 

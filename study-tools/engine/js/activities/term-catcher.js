@@ -88,7 +88,7 @@ StudyEngine.registerActivity({
 
         var desc = document.createElement('p');
         desc.textContent = 'Catch the falling term that matches the definition!';
-        desc.style.color = '#666';
+        desc.style.color = '#4b5563';
         desc.style.marginBottom = '20px';
         startScreen.appendChild(desc);
 
@@ -479,7 +479,7 @@ StudyEngine.registerActivity({
 
         var label = document.createElement('p');
         label.textContent = 'Points';
-        label.style.color = '#666';
+        label.style.color = '#4b5563';
         label.style.marginBottom = '15px';
         overlay.appendChild(label);
 
@@ -494,14 +494,14 @@ StudyEngine.registerActivity({
         } else {
             var highEl = document.createElement('p');
             highEl.textContent = 'High Score: ' + this._highScore;
-            highEl.style.color = '#666';
+            highEl.style.color = '#4b5563';
             highEl.style.marginBottom = '10px';
             overlay.appendChild(highEl);
         }
 
         var statsEl = document.createElement('p');
         statsEl.textContent = 'Correct answers: ' + this._correctCount;
-        statsEl.style.color = '#666';
+        statsEl.style.color = '#4b5563';
         statsEl.style.marginBottom = '20px';
         overlay.appendChild(statsEl);
 

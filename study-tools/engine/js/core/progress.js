@@ -266,7 +266,7 @@ const ProgressManager = {
                 <h2>Save Your Progress</h2>
                 <button class="close-btn" onclick="StudyEngine.closeModal()">&times;</button>
             </div>
-            <p style="color: #666; margin-bottom: 20px;">Enter your name and class code to save progress across devices.</p>
+            <p style="color: #4b5563; margin-bottom: 20px;">Enter your name and class code to save progress across devices.</p>
             <div style="display: flex; flex-direction: column; gap: 15px;">
                 <input type="text" id="student-name" placeholder="Your Name" class="login-input">
                 <input type="text" id="class-code" placeholder="Class Code (from your teacher)" class="login-input">

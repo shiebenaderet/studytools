@@ -50,7 +50,7 @@ StudyEngine.registerActivity({
 
         var desc = document.createElement('p');
         desc.textContent = 'See a definition, pick the correct term. Answer as many as you can in 60 seconds!';
-        desc.style.color = '#666';
+        desc.style.color = '#4b5563';
         desc.style.marginBottom = '25px';
         wrapper.appendChild(desc);
 
@@ -61,7 +61,7 @@ StudyEngine.registerActivity({
         );
         if (saved && saved.bestScore !== undefined) {
             var bestEl = document.createElement('p');
-            bestEl.style.color = '#999';
+            bestEl.style.color = '#6b7280';
             bestEl.style.fontSize = '0.9em';
             bestEl.style.marginBottom = '20px';
             bestEl.textContent = 'Best score: ' + saved.bestScore;
@@ -106,7 +106,7 @@ StudyEngine.registerActivity({
                 row.appendChild(tdScore);
                 var tdDate = document.createElement('td');
                 tdDate.textContent = lb[i].date;
-                tdDate.style.color = '#999';
+                tdDate.style.color = '#6b7280';
                 row.appendChild(tdDate);
                 tbody.appendChild(row);
             }
@@ -433,7 +433,7 @@ StudyEngine.registerActivity({
 
         var pct = this._answered > 0 ? Math.round((this._score / this._answered) * 100) : 0;
         var statsText = document.createElement('p');
-        statsText.style.color = '#666';
+        statsText.style.color = '#4b5563';
         statsText.style.marginBottom = '15px';
         statsText.textContent = this._score + ' correct out of ' + this._answered + ' answered (' + pct + '%)';
         results.appendChild(statsText);
@@ -459,7 +459,7 @@ StudyEngine.registerActivity({
                 item.appendChild(termSpan);
 
                 var defSpan = document.createElement('span');
-                defSpan.style.color = '#999';
+                defSpan.style.color = '#6b7280';
                 defSpan.style.fontSize = '0.9em';
                 defSpan.textContent = this._missed[i].definition;
                 item.appendChild(defSpan);
@@ -521,7 +521,7 @@ StudyEngine.registerActivity({
 
                 var tdDate = document.createElement('td');
                 tdDate.textContent = lb[j].date;
-                tdDate.style.color = '#999';
+                tdDate.style.color = '#6b7280';
                 row.appendChild(tdDate);
 
                 tbody.appendChild(row);

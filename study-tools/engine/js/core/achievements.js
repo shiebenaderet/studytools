@@ -237,7 +237,7 @@ var AchievementManager = {
             summary.textContent += ' (+ hidden secrets to discover!)';
         }
         summary.style.marginBottom = '16px';
-        summary.style.color = '#666';
+        summary.style.color = '#4b5563';
         container.appendChild(summary);
 
         var grid = document.createElement('div');

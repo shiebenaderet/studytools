@@ -71,7 +71,7 @@ const StudyTools = {
         header.appendChild(h2);
 
         const progress = document.createElement('p');
-        progress.style.color = '#666';
+        progress.style.color = '#4b5563';
         progress.style.marginTop = '4px';
         progress.textContent = mastered.length + ' of ' + config.vocabulary.length + ' terms mastered';
         header.appendChild(progress);
@@ -92,7 +92,7 @@ const StudyTools = {
 
             const rDesc = document.createElement('p');
             rDesc.textContent = 'These terms haven\'t been mastered yet. Use Flashcards to study them!';
-            rDesc.style.color = '#666';
+            rDesc.style.color = '#4b5563';
             rDesc.style.fontSize = '0.9em';
             rDesc.style.marginBottom = '12px';
             reviewSection.appendChild(rDesc);
@@ -304,7 +304,7 @@ const StudyTools = {
             '<input type="number" id="timer-sec" value="00" min="0" max="59" ' +
             'style="width:70px;text-align:center;font-size:24px;padding:8px;border:1px solid #ccc;border-radius:6px;">' +
             '</div>' +
-            '<p style="color:#666;margin-bottom:16px;">Set minutes and seconds, then start your focused session.</p>' +
+            '<p style="color:#4b5563;margin-bottom:16px;">Set minutes and seconds, then start your focused session.</p>' +
             '<button class="nav-button" id="timer-start-btn" style="width:100%;font-size:18px;">Start Studying</button>' +
             '</div>';
 
@@ -427,7 +427,7 @@ const StudyTools = {
             '<button class="close-btn" onclick="StudyEngine.closeModal()">&times;</button>' +
             '</div>' +
             '<div style="padding:10px;">' +
-            '<p style="color:#666;margin-bottom:16px;">Choose what to include in your study guide:</p>' +
+            '<p style="color:#4b5563;margin-bottom:16px;">Choose what to include in your study guide:</p>' +
             '<label style="display:block;margin-bottom:10px;cursor:pointer;">' +
             '<input type="checkbox" id="print-vocab" checked> Vocabulary terms</label>' +
             '<label style="display:block;margin-bottom:10px;cursor:pointer;margin-left:24px;">' +
@@ -607,7 +607,7 @@ const StudyTools = {
         doc.body.appendChild(h1);
 
         const date = doc.createElement('p');
-        date.style.color = '#888';
+        date.style.color = '#6b7280';
         date.textContent = 'Generated: ' + new Date().toLocaleDateString();
         doc.body.appendChild(date);
 
