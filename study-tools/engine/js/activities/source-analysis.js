@@ -509,7 +509,7 @@ StudyEngine.registerActivity({
 
         if (this._stats.completed > 0) {
             var statsEl = document.createElement('p');
-            statsEl.style.color = '#6b7280';
+            statsEl.style.color = '#4b5563';
             statsEl.style.fontSize = '0.9em';
             statsEl.style.marginTop = '10px';
             statsEl.textContent = 'Sessions completed: ' + this._stats.completed + ' | Best score: ' + this._stats.bestScore + '%';

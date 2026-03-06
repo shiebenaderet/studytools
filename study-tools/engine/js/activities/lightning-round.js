@@ -61,7 +61,7 @@ StudyEngine.registerActivity({
         );
         if (saved && saved.bestScore !== undefined) {
             var bestEl = document.createElement('p');
-            bestEl.style.color = '#6b7280';
+            bestEl.style.color = '#4b5563';
             bestEl.style.fontSize = '0.9em';
             bestEl.style.marginBottom = '20px';
             bestEl.textContent = 'Best score: ' + saved.bestScore;
@@ -106,7 +106,7 @@ StudyEngine.registerActivity({
                 row.appendChild(tdScore);
                 var tdDate = document.createElement('td');
                 tdDate.textContent = lb[i].date;
-                tdDate.style.color = '#6b7280';
+                tdDate.style.color = '#4b5563';
                 row.appendChild(tdDate);
                 tbody.appendChild(row);
             }
@@ -459,7 +459,7 @@ StudyEngine.registerActivity({
                 item.appendChild(termSpan);
 
                 var defSpan = document.createElement('span');
-                defSpan.style.color = '#6b7280';
+                defSpan.style.color = '#4b5563';
                 defSpan.style.fontSize = '0.9em';
                 defSpan.textContent = this._missed[i].definition;
                 item.appendChild(defSpan);
@@ -521,7 +521,7 @@ StudyEngine.registerActivity({
 
                 var tdDate = document.createElement('td');
                 tdDate.textContent = lb[j].date;
-                tdDate.style.color = '#6b7280';
+                tdDate.style.color = '#4b5563';
                 row.appendChild(tdDate);
 
                 tbody.appendChild(row);

@@ -152,7 +152,7 @@ StudyEngine.registerActivity({
         // --- Tip text ---
         const tip = document.createElement('p');
         tip.style.textAlign = 'center';
-        tip.style.color = '#6b7280';
+        tip.style.color = '#4b5563';
         tip.style.fontSize = '0.85rem';
         tip.style.marginTop = '12px';
         tip.textContent = 'Keyboard shortcuts: Arrow keys or A/D to navigate, Space to flip, M to master';

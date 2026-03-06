@@ -607,7 +607,7 @@ const StudyTools = {
         doc.body.appendChild(h1);
 
         const date = doc.createElement('p');
-        date.style.color = '#6b7280';
+        date.style.color = '#4b5563';
         date.textContent = 'Generated: ' + new Date().toLocaleDateString();
         doc.body.appendChild(date);
 

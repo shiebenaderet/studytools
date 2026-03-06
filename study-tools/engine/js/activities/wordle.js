@@ -88,7 +88,7 @@ StudyEngine.registerActivity({
 
         const lengthHint = document.createElement('div');
         lengthHint.style.marginTop = '10px';
-        lengthHint.style.color = '#6b7280';
+        lengthHint.style.color = '#4b5563';
         lengthHint.style.fontSize = '0.9em';
         lengthHint.textContent = 'Word length: ' + this._targetWord.length + ' letters';
         clueBox.appendChild(lengthHint);
@@ -212,7 +212,7 @@ StudyEngine.registerActivity({
         // Stats display
         const statsBar = document.createElement('div');
         statsBar.style.marginTop = '15px';
-        statsBar.style.color = '#6b7280';
+        statsBar.style.color = '#4b5563';
         statsBar.style.fontSize = '0.85em';
         statsBar.id = 'wordle-stats';
         statsBar.textContent = 'Wins: ' + this._stats.wins + ' | Losses: ' + this._stats.losses + ' | Streak: ' + this._stats.streak;

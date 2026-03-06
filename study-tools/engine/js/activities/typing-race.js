@@ -86,7 +86,7 @@ StudyEngine.registerActivity({
         // Best time display
         var bestTimeEl = document.createElement('p');
         bestTimeEl.id = 'race-best-time';
-        bestTimeEl.style.color = '#6b7280';
+        bestTimeEl.style.color = '#4b5563';
         bestTimeEl.style.fontSize = '0.9em';
         bestTimeEl.style.marginBottom = '20px';
         startScreen.appendChild(bestTimeEl);
@@ -531,7 +531,7 @@ StudyEngine.registerActivity({
         var placementEl = document.createElement('div');
         placementEl.className = 'race-placement';
         placementEl.textContent = placementLabels[placement - 1] || placement + 'th';
-        placementEl.style.color = placementColors[placement - 1] || '#666';
+        placementEl.style.color = placementColors[placement - 1] || '#4b5563';
         results.appendChild(placementEl);
 
         var placeText = document.createElement('p');
@@ -569,7 +569,7 @@ StudyEngine.registerActivity({
 
             var labelEl = document.createElement('div');
             labelEl.style.fontSize = '0.85em';
-            labelEl.style.color = '#6b7280';
+            labelEl.style.color = '#4b5563';
             labelEl.textContent = stats[i].label;
             statEl.appendChild(labelEl);
 
