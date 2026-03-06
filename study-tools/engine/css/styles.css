@@ -1162,9 +1162,10 @@ header .essential-question {
 
 /* ACTIVITY PICKER */
 .activity-picker h2 {
-    color: var(--primary);
+    color: white;
     text-align: center;
     margin-bottom: 20px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .activity-card-grid {

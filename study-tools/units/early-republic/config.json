@@ -39,7 +39,8 @@
             "term": "Cabinet",
             "definition": "A group of advisors appointed by the President to lead executive departments",
             "example": "Washington's Cabinet included Thomas Jefferson (State), Alexander Hamilton (Treasury), and Henry Knox (War)",
-            "category": "Washington's First Decisions"
+            "category": "Washington's First Decisions",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Cabinet_of_the_United_States"
         },
         {
             "term": "Precedent",
@@ -51,19 +52,22 @@
             "term": "Federalist",
             "definition": "Someone who supported a strong federal government; led by Hamilton",
             "example": "Federalists like Hamilton wanted a strong central government and a national bank",
-            "category": "Washington's First Decisions"
+            "category": "Washington's First Decisions",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Federalist_Party"
         },
         {
             "term": "Anti-Federalist",
             "definition": "Someone who opposed a strong federal government; favored states' rights",
             "example": "Anti-Federalists feared a powerful central government would threaten individual liberties",
-            "category": "Washington's First Decisions"
+            "category": "Washington's First Decisions",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Anti-Federalism"
         },
         {
             "term": "National Bank",
             "definition": "Hamilton's proposed central bank to manage the nation's finances",
             "example": "Hamilton argued the National Bank was necessary to print currency and manage debt",
-            "category": "Washington's First Decisions"
+            "category": "Washington's First Decisions",
+            "wikiUrl": "https://en.wikipedia.org/wiki/First_Bank_of_the_United_States"
         },
         {
             "term": "Tariff",
@@ -75,19 +79,22 @@
             "term": "Dept. of Treasury",
             "definition": "Executive department handling finances; first led by Alexander Hamilton",
             "example": "Hamilton used the Dept. of Treasury to create plans for paying off the national debt",
-            "category": "Washington's First Decisions"
+            "category": "Washington's First Decisions",
+            "wikiUrl": "https://en.wikipedia.org/wiki/United_States_Department_of_the_Treasury"
         },
         {
             "term": "Dept. of State",
             "definition": "Executive department handling foreign affairs; first led by Thomas Jefferson",
             "example": "Jefferson led the Dept. of State, managing America's relationships with other countries",
-            "category": "Washington's First Decisions"
+            "category": "Washington's First Decisions",
+            "wikiUrl": "https://en.wikipedia.org/wiki/United_States_Department_of_State"
         },
         {
             "term": "Dept. of War",
             "definition": "Executive department handling military affairs; first led by Henry Knox",
             "example": "Henry Knox led the Dept. of War, overseeing the nation's small military",
-            "category": "Washington's First Decisions"
+            "category": "Washington's First Decisions",
+            "wikiUrl": "https://en.wikipedia.org/wiki/United_States_Department_of_War"
         },
         {
             "term": "Whiskey Rebellion",
@@ -117,13 +124,15 @@
             "term": "Democratic-Republican",
             "definition": "Political party led by Jefferson; favored limited federal power and farmers' interests",
             "example": "Democratic-Republicans believed the government should have limited power and support agriculture",
-            "category": "Political Parties Are Born"
+            "category": "Political Parties Are Born",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Democratic-Republican_Party"
         },
         {
             "term": "Strict Construction",
             "definition": "Belief that the government should only do what the Constitution specifically allows",
             "example": "Jefferson used strict construction to argue against the National Bank — the Constitution doesn't mention it",
-            "category": "Political Parties Are Born"
+            "category": "Political Parties Are Born",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Strict_constructionism"
         },
         {
             "term": "Loose Construction",
@@ -159,7 +168,8 @@
             "term": "Judicial Review",
             "definition": "The power of the Supreme Court to declare laws unconstitutional; established by Marbury v. Madison",
             "example": "Judicial review gave the Supreme Court real power to check Congress and the President",
-            "category": "Exploring & Growing"
+            "category": "Exploring & Growing",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Judicial_review_in_the_United_States"
         },
         {
             "term": "Marbury v. Madison",
@@ -195,7 +205,8 @@
             "term": "Corps of Discovery",
             "definition": "The expedition led by Lewis and Clark to explore the Louisiana Territory",
             "example": "The Corps of Discovery traveled from 1804 to 1806, mapping the territory and documenting plants, animals, and peoples",
-            "category": "Exploring & Growing"
+            "category": "Exploring & Growing",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Lewis_and_Clark_Expedition"
         },
         {
             "term": "Expedition",
@@ -213,7 +224,8 @@
             "term": "Barbary Pirates",
             "definition": "North African pirates who attacked American ships and demanded tribute payments",
             "example": "Jefferson refused to keep paying tribute to the Barbary Pirates and sent the navy to fight them instead",
-            "category": "Exploring & Growing"
+            "category": "Exploring & Growing",
+            "wikiUrl": "https://en.wikipedia.org/wiki/First_Barbary_War"
         },
         {
             "term": "Tribute",
@@ -243,7 +255,8 @@
             "term": "War Hawks",
             "definition": "Members of Congress who pushed for war with Britain in 1812; led by Henry Clay",
             "example": "War Hawks like Henry Clay wanted to defend American honor and expand into British Canada",
-            "category": "War & National Pride"
+            "category": "War & National Pride",
+            "wikiUrl": "https://en.wikipedia.org/wiki/War_hawk"
         },
         {
             "term": "Tecumseh",
@@ -297,7 +310,8 @@
             "term": "American System",
             "definition": "Henry Clay's plan for economic growth: protective tariffs, a national bank, and internal improvements",
             "example": "The American System aimed to connect the North, South, and West into one strong national economy",
-            "category": "War & National Pride"
+            "category": "War & National Pride",
+            "wikiUrl": "https://en.wikipedia.org/wiki/American_System_(economic_plan)"
         },
         {
             "term": "McCulloch v. Maryland",

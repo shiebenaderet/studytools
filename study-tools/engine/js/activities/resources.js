@@ -112,7 +112,7 @@ StudyEngine.registerActivity({
                 // Kiddle link
                 var kiddle = document.createElement('a');
                 kiddle.className = 'res-link-btn res-link-kiddle';
-                kiddle.href = 'https://www.kiddle.co/' + encodeURIComponent(item.term + ' history');
+                kiddle.href = 'https://www.kiddle.co/s.php?q=' + encodeURIComponent(item.term + ' history');
                 kiddle.target = '_blank';
                 kiddle.rel = 'noopener noreferrer';
                 var kiddleIcon = document.createElement('i');
@@ -124,7 +124,7 @@ StudyEngine.registerActivity({
                 // Wikipedia link
                 var wiki = document.createElement('a');
                 wiki.className = 'res-link-btn res-link-wiki';
-                wiki.href = 'https://en.wikipedia.org/wiki/' + encodeURIComponent(item.term.replace(/ /g, '_'));
+                wiki.href = item.wikiUrl || ('https://en.wikipedia.org/wiki/' + encodeURIComponent(item.term.replace(/ /g, '_')));
                 wiki.target = '_blank';
                 wiki.rel = 'noopener noreferrer';
                 var wikiIcon = document.createElement('i');
