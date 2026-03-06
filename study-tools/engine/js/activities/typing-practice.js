@@ -127,7 +127,7 @@ StudyEngine.registerActivity({
         this._startTime = null;
 
         // Collect vocab terms for this category (lowercase for matching)
-        var vocab = config.vocabulary || [];
+        var vocab = MasteryManager.getUnlockedVocabulary(config.unit.id, config);
         this._vocabTerms = [];
         for (var v = 0; v < vocab.length; v++) {
             if (vocab[v].category === category) {
