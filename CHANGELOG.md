@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.2.0] - 2026-03-06
+
+### Added
+- **Fill-in-the-Blank redesign** — Questions now appear one at a time with progress bar, dot navigation, and prev/next buttons instead of all-at-once scrolling
+  - **Type It mode** — Students can choose to type answers instead of using the word bank
+  - **Word Bank mode** — Tap a word, then tap the blank (with clear instructions)
+  - Mode selector screen at start with clear descriptions
+  - Results screen shows all answers with correct/incorrect highlighting
+- **Vocab Tower Defense design doc** — Design document for upcoming 3D tower defense game at `docs/plans/`
+
+### Changed
+- Fill-in-the-Blank moved from all-at-once layout to single-question stepper for less scrolling
+
 ## [3.1.0] - 2026-03-06
 
 ### Added
