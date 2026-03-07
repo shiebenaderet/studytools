@@ -410,10 +410,19 @@ const CommandPalette = {
         });
     },
 
+    // Allowed email domains for teacher access
+    allowedDomains: ['edmonds.wednet.edu'],
+
     async sendMagicLink(email) {
         if (!ProgressManager.supabase) {
             this.showPasswordFallback(email);
             return;
+        }
+
+        // Validate email domain
+        var domain = email.split('@')[1];
+        if (!domain || this.allowedDomains.indexOf(domain.toLowerCase()) === -1) {
+            throw new Error('Access restricted to approved school email addresses.');
         }
 
         const { error } = await ProgressManager.supabase.auth.signInWithOtp({
