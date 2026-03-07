@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy &amp; Data - Study Tools</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .privacy-page {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 40px 20px 60px;
+        }
+        .privacy-page h1 {
+            color: var(--text-primary);
+            font-size: 1.8em;
+            margin-bottom: 8px;
+        }
+        .privacy-page .privacy-subtitle {
+            color: var(--text-secondary);
+            font-size: 1em;
+            margin-bottom: 32px;
+        }
+        .privacy-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        .privacy-section h2 {
+            color: var(--text-primary);
+            font-size: 1.1em;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .privacy-section h2 i {
+            color: var(--primary);
+        }
+        .privacy-section p,
+        .privacy-section li {
+            color: var(--text-secondary);
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+        .privacy-section ul {
+            margin: 8px 0;
+            padding-left: 20px;
+        }
+        .privacy-section li {
+            margin-bottom: 4px;
+        }
+        .privacy-highlight {
+            background: rgba(34, 197, 94, 0.08);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-top: 12px;
+            color: var(--text-primary);
+            font-size: 0.9em;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        .privacy-highlight i {
+            color: #22c55e;
+            margin-top: 2px;
+        }
+        .privacy-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9em;
+            margin-bottom: 24px;
+            transition: color 0.2s;
+        }
+        .privacy-back:hover {
+            color: var(--primary);
+        }
+        .privacy-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+        }
+        .privacy-table th,
+        .privacy-table td {
+            text-align: left;
+            padding: 10px 12px;
+            font-size: 0.9em;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .privacy-table th {
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75em;
+            letter-spacing: 0.5px;
+        }
+        .privacy-table td {
+            color: var(--text-primary);
+        }
+        .privacy-table td:last-child {
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="privacy-page">
+            <a href="index.html" class="privacy-back"><i class="fas fa-arrow-left"></i> Back to Study Tools</a>
+
+            <h1><i class="fas fa-shield-alt" style="color:var(--primary)"></i> Privacy &amp; Your Data</h1>
+            <p class="privacy-subtitle">This study tool is designed with student privacy as a priority. Here's exactly what happens with your data.</p>
+
+            <div class="privacy-section">
+                <h2><i class="fas fa-laptop"></i> How Your Data is Stored</h2>
+                <p>By default, all your study progress is saved directly in your browser using <strong>localStorage</strong>. This means:</p>
+                <ul>
+                    <li>Your data stays on your device</li>
+                    <li>Nothing is sent to any server unless cloud sync is enabled</li>
+                    <li>Clearing your browser data will reset your progress</li>
+                    <li>Your data is specific to the browser and device you're using</li>
+                </ul>
+                <div class="privacy-highlight">
+                    <i class="fas fa-check-circle"></i>
+                    <span>If you use the site without entering your name (guest mode), no data leaves your device at all.</span>
+                </div>
+            </div>
+
+            <div class="privacy-section">
+                <h2><i class="fas fa-cloud"></i> Cloud Sync (Optional)</h2>
+                <p>If your teacher has enabled cloud sync (via Supabase), and you enter your name and period, the following data is synced:</p>
+
+                <table class="privacy-table">
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Why It's Collected</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Your first name</td>
+                            <td>To identify you on the leaderboard and for your teacher</td>
+                        </tr>
+                        <tr>
+                            <td>Your class period</td>
+                            <td>To group students by class for the leaderboard and dashboard</td>
+                        </tr>
+                        <tr>
+                            <td>Activity progress</td>
+                            <td>Flashcard mastery, test scores, and activity completion</td>
+                        </tr>
+                        <tr>
+                            <td>Study time</td>
+                            <td>Session length and total time for progress tracking</td>
+                        </tr>
+                        <tr>
+                            <td>Leaderboard scores</td>
+                            <td>Composite score for class rankings (requires teacher approval to appear)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="privacy-section">
+                <h2><i class="fas fa-ban"></i> What We Do NOT Collect</h2>
+                <ul>
+                    <li>No email addresses</li>
+                    <li>No passwords (there are no accounts)</li>
+                    <li>No location data</li>
+                    <li>No device identifiers or fingerprinting</li>
+                    <li>No cookies for tracking or advertising</li>
+                    <li>No third-party analytics (no Google Analytics, no tracking pixels)</li>
+                    <li>No data is sold or shared with anyone outside your classroom</li>
+                </ul>
+            </div>
+
+            <div class="privacy-section">
+                <h2><i class="fas fa-user-shield"></i> Who Can See Your Data</h2>
+                <ul>
+                    <li><strong>You</strong> can see your own progress on the site</li>
+                    <li><strong>Your teacher</strong> can see student names, study time, and progress via a private dashboard</li>
+                    <li><strong>Your classmates</strong> can see first names and scores on the leaderboard (only after teacher approval)</li>
+                    <li><strong>No one else</strong> has access to the data</li>
+                </ul>
+            </div>
+
+            <div class="privacy-section">
+                <h2><i class="fas fa-trash-alt"></i> Deleting Your Data</h2>
+                <p>You can reset your local progress at any time by clearing your browser's site data. If cloud sync is enabled, ask your teacher to remove your entry from the system.</p>
+            </div>
+
+            <div class="privacy-section">
+                <h2><i class="fas fa-code"></i> Open Source</h2>
+                <p>This project is open source. Anyone can review exactly how data is handled by reading the code on GitHub. There is nothing hidden.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+        }
+        if (localStorage.getItem('dyslexic-font') === 'on') {
+            document.body.classList.add('dyslexic-font');
+        }
+    })();
+    </script>
+</body>
+</html>

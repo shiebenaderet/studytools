@@ -278,6 +278,7 @@ const ProgressManager = {
 
     getFirstName() {
         if (!this.studentInfo || !this.studentInfo.name) return null;
+        if (this.studentInfo.isGuest) return null;
         return this.studentInfo.name.trim().split(/\s+/)[0];
     },
 
@@ -363,6 +364,26 @@ const ProgressManager = {
         goBtn.textContent = 'Let\u2019s Go! \u2192';
         goBtn.disabled = true;
         card.appendChild(goBtn);
+
+        // Guest mode link
+        var guestLink = document.createElement('button');
+        guestLink.type = 'button';
+        guestLink.className = 'welcome-guest-link';
+        guestLink.textContent = 'Just browsing? Continue as guest';
+        card.appendChild(guestLink);
+
+        guestLink.addEventListener('click', function() {
+            self.studentInfo = { name: 'Guest', classCode: 'guest', isGuest: true };
+            localStorage.setItem(self.prefix + 'studentInfo', JSON.stringify(self.studentInfo));
+            overlay.classList.add('fade-out');
+            setTimeout(function() {
+                if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+                if (StudyEngine.config) {
+                    StudyEngine.renderHeader();
+                    StudyEngine.renderHomeStats();
+                }
+            }, 400);
+        });
 
         function updateGoBtn() {
             var hasName = nameInput.value.trim().length > 0;

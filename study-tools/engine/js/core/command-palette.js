@@ -746,7 +746,7 @@ const CommandPalette = {
                 // Aggregate progress data
                 const progMap = {};
                 (progressData || []).forEach(p => {
-                    if (!progMap[p.student_id]) progMap[p.student_id] = { vocab: 0, score: null };
+                    if (!progMap[p.student_id]) progMap[p.student_id] = { vocab: 0, score: null, mapScore: null };
                     if (p.activity === 'activity_flashcards' && p.data && p.data.mastered) {
                         progMap[p.student_id].vocab += (Array.isArray(p.data.mastered) ? p.data.mastered.length : 0);
                     }
@@ -755,14 +755,27 @@ const CommandPalette = {
                             progMap[p.student_id].score = p.data.bestScore;
                         }
                     }
+                    if (p.activity === 'activity_map-quiz' && p.data && typeof p.data.bestScore === 'number') {
+                        if (progMap[p.student_id].mapScore === null || p.data.bestScore > progMap[p.student_id].mapScore) {
+                            progMap[p.student_id].mapScore = p.data.bestScore;
+                        }
+                    }
                 });
 
                 const table = document.createElement('table');
                 table.style.cssText = 'width:100%;border-collapse:collapse;';
 
+                // Load classes for edit dropdown
+                var classesResult = await ProgressManager.supabase
+                    .from('classes')
+                    .select('id, code, name')
+                    .order('name');
+                var classMap = {};
+                (classesResult.data || []).forEach(function(c) { classMap[c.id] = c; });
+
                 const thead = document.createElement('thead');
                 const hr = document.createElement('tr');
-                ['Name', 'Last Active', 'Study Time', 'Vocab', 'Best Score'].forEach(h => {
+                ['Name', 'Class', 'Last Active', 'Study Time', 'Vocab', 'Test', 'Map', 'Actions'].forEach(h => {
                     const th = document.createElement('th');
                     th.style.cssText = 'text-align:left;padding:12px;border-bottom:2px solid var(--border-card);color:var(--text-secondary);font-size:0.85em;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;';
                     th.textContent = h;
@@ -781,19 +794,23 @@ const CommandPalette = {
                     return lb - la;
                 });
 
+                var self = this;
                 sorted.forEach(student => {
                     const sess = sessionMap[student.id] || { total: 0, last: null };
                     const prog = progMap[student.id] || { vocab: 0, score: null };
+                    const cls = student.class_id ? classMap[student.class_id] : null;
 
                     const tr = document.createElement('tr');
                     tr.style.cssText = 'border-bottom:1px solid var(--border-subtle);';
 
                     const cells = [
                         student.name,
+                        cls ? (cls.name || cls.code) : '-',
                         sess.last ? sess.last.toLocaleDateString() : 'Never',
                         sess.total >= 3600 ? (sess.total / 3600).toFixed(1) + ' hrs' : Math.round(sess.total / 60) + ' min',
                         String(prog.vocab),
-                        prog.score !== null ? prog.score + '%' : '-'
+                        prog.score !== null ? prog.score + '%' : '-',
+                        prog.mapScore !== null ? prog.mapScore + '%' : '-'
                     ];
 
                     cells.forEach(text => {
@@ -803,6 +820,38 @@ const CommandPalette = {
                         tr.appendChild(td);
                     });
 
+                    // Actions column
+                    const actionTd = document.createElement('td');
+                    actionTd.style.cssText = 'padding:12px;white-space:nowrap;';
+
+                    const editBtn = document.createElement('button');
+                    editBtn.style.cssText = 'padding:4px 10px;border:none;border-radius:6px;background:var(--primary);color:white;cursor:pointer;font-size:0.8em;font-weight:600;margin-right:6px;';
+                    editBtn.textContent = 'Edit';
+                    editBtn.addEventListener('click', function() {
+                        self._showEditStudentModal(student, classMap);
+                    });
+                    actionTd.appendChild(editBtn);
+
+                    const deleteBtn = document.createElement('button');
+                    deleteBtn.style.cssText = 'padding:4px 10px;border:none;border-radius:6px;background:var(--danger);color:white;cursor:pointer;font-size:0.8em;font-weight:600;';
+                    deleteBtn.textContent = 'Delete';
+                    deleteBtn.addEventListener('click', async function() {
+                        if (!confirm('Delete student "' + student.name + '"? This will remove their leaderboard entries and progress. This cannot be undone.')) return;
+                        try {
+                            await ProgressManager.supabase.from('leaderboard').delete().eq('student_id', student.id);
+                            await ProgressManager.supabase.from('progress').delete().eq('student_id', student.id);
+                            await ProgressManager.supabase.from('sessions').delete().eq('student_id', student.id);
+                            await ProgressManager.supabase.from('students').delete().eq('id', student.id);
+                            StudyUtils.showToast('Student deleted', 'info');
+                            self.loadDashboardData();
+                        } catch (err) {
+                            console.error('Delete student error:', err);
+                            StudyUtils.showToast('Failed to delete student', 'error');
+                        }
+                    });
+                    actionTd.appendChild(deleteBtn);
+
+                    tr.appendChild(actionTd);
                     tbody.appendChild(tr);
                 });
 
@@ -824,6 +873,104 @@ const CommandPalette = {
                 statsRow.appendChild(errEl);
             }
         }
+    },
+
+    _showEditStudentModal(student, classMap) {
+        var self = this;
+        var overlay = document.createElement('div');
+        overlay.className = 'welcome-overlay';
+
+        var card = document.createElement('div');
+        card.className = 'welcome-card';
+
+        var title = document.createElement('h1');
+        title.textContent = 'Edit Student';
+        title.style.fontSize = '1.3em';
+        card.appendChild(title);
+
+        var nameLabel = document.createElement('label');
+        nameLabel.setAttribute('for', 'edit-student-name');
+        nameLabel.textContent = 'Student Name';
+        card.appendChild(nameLabel);
+
+        var nameInput = document.createElement('input');
+        nameInput.type = 'text';
+        nameInput.id = 'edit-student-name';
+        nameInput.className = 'welcome-name-input';
+        nameInput.value = student.name;
+        card.appendChild(nameInput);
+
+        var classLabel = document.createElement('label');
+        classLabel.setAttribute('for', 'edit-student-class');
+        classLabel.textContent = 'Class';
+        card.appendChild(classLabel);
+
+        var classSelect = document.createElement('select');
+        classSelect.id = 'edit-student-class';
+        classSelect.className = 'welcome-name-input';
+        classSelect.style.cursor = 'pointer';
+
+        Object.values(classMap).forEach(function(cls) {
+            var opt = document.createElement('option');
+            opt.value = cls.id;
+            opt.textContent = cls.code + ' - ' + cls.name;
+            if (student.class_id === cls.id) opt.selected = true;
+            classSelect.appendChild(opt);
+        });
+        card.appendChild(classSelect);
+
+        var btnRow = document.createElement('div');
+        btnRow.style.cssText = 'display:flex;gap:10px;margin-top:16px;';
+
+        var cancelBtn = document.createElement('button');
+        cancelBtn.type = 'button';
+        cancelBtn.className = 'welcome-go-btn';
+        cancelBtn.style.cssText = 'flex:1;background:var(--bg-elevated);color:var(--text-primary);border:1px solid var(--border-card);';
+        cancelBtn.textContent = 'Cancel';
+        cancelBtn.addEventListener('click', function() {
+            overlay.classList.add('fade-out');
+            setTimeout(function() { if (overlay.parentNode) overlay.parentNode.removeChild(overlay); }, 400);
+        });
+        btnRow.appendChild(cancelBtn);
+
+        var saveBtn = document.createElement('button');
+        saveBtn.type = 'button';
+        saveBtn.className = 'welcome-go-btn';
+        saveBtn.style.flex = '1';
+        saveBtn.textContent = 'Save Changes';
+        saveBtn.addEventListener('click', async function() {
+            var newName = nameInput.value.trim();
+            var newClassId = classSelect.value;
+            if (!newName) return;
+            saveBtn.disabled = true;
+            saveBtn.textContent = 'Saving...';
+            try {
+                await ProgressManager.supabase
+                    .from('students')
+                    .update({ name: newName, class_id: newClassId })
+                    .eq('id', student.id);
+                StudyUtils.showToast('Student updated', 'success');
+                overlay.classList.add('fade-out');
+                setTimeout(function() { if (overlay.parentNode) overlay.parentNode.removeChild(overlay); }, 400);
+                self.loadDashboardData();
+            } catch (err) {
+                console.error('Edit student error:', err);
+                StudyUtils.showToast('Failed to update student', 'error');
+                saveBtn.disabled = false;
+                saveBtn.textContent = 'Save Changes';
+            }
+        });
+        btnRow.appendChild(saveBtn);
+
+        card.appendChild(btnRow);
+
+        nameInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') saveBtn.click();
+        });
+
+        overlay.appendChild(card);
+        document.body.appendChild(overlay);
+        setTimeout(function() { nameInput.focus(); nameInput.select(); }, 400);
     },
 
     async loadAnalytics() {

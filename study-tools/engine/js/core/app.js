@@ -698,6 +698,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                     versionEl.textContent = 'v' + v.version;
 
+                    // Add privacy link
+                    if (!footer.querySelector('.footer-privacy')) {
+                        var privacyLink = document.createElement('a');
+                        privacyLink.className = 'footer-privacy';
+                        privacyLink.href = 'privacy.html';
+                        var privacyIcon = document.createElement('i');
+                        privacyIcon.className = 'fas fa-shield-alt';
+                        privacyLink.appendChild(privacyIcon);
+                        privacyLink.appendChild(document.createTextNode(' Privacy'));
+                        footer.appendChild(privacyLink);
+                    }
+
                     // Add edit profile link if student is signed in
                     if (ProgressManager.studentInfo && !footer.querySelector('.footer-edit-profile')) {
                         var editLink = document.createElement('button');
