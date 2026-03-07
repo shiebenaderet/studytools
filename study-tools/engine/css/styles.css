@@ -602,6 +602,13 @@ body.activity-active header {
 .historical-quote-source {
     font-weight: 400;
     color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+a.historical-quote-source:hover {
+    color: var(--primary);
+    text-decoration: underline;
 }
 
 .historical-fun-fact {

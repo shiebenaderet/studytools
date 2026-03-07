@@ -1006,91 +1006,85 @@
                 "text": "The name of American, which belongs to you in your national capacity, must always exalt the just pride of patriotism.",
                 "author": "George Washington",
                 "source": "Farewell Address, 1796",
-                "portrait": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Gilbert_Stuart_Williamstown_Portrait_of_George_Washington.jpg/440px-Gilbert_Stuart_Williamstown_Portrait_of_George_Washington.jpg"
+                "sourceUrl": "https://founders.archives.gov/documents/Washington/05-20-02-0440-0002",
+                "portrait": "images/portraits/washington.jpg"
             },
             {
                 "text": "We are all republicans: we are all federalists.",
                 "author": "Thomas Jefferson",
                 "source": "First Inaugural Address, 1801",
-                "portrait": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Thomas_Jefferson_by_Rembrandt_Peale%2C_1800.jpg/440px-Thomas_Jefferson_by_Rembrandt_Peale%2C_1800.jpg"
+                "sourceUrl": "https://avalon.law.yale.edu/19th_century/jefinau1.asp",
+                "portrait": "images/portraits/jefferson.jpg"
             },
             {
                 "text": "A national debt, if it is not excessive, will be to us a national blessing.",
                 "author": "Alexander Hamilton",
                 "source": "Letter to Robert Morris, 1781",
-                "portrait": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Alexander_Hamilton_portrait_by_John_Trumbull_1806.jpg/440px-Alexander_Hamilton_portrait_by_John_Trumbull_1806.jpg"
+                "sourceUrl": "https://founders.archives.gov/documents/Hamilton/01-02-02-1167",
+                "portrait": "images/portraits/hamilton.jpg"
             },
             {
                 "text": "Liberty, once lost, is lost forever.",
                 "author": "John Adams",
-                "source": "Letter to Abigail Adams, 1775",
-                "portrait": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/John_Adams_A18-17a-F_Adams_crop.jpg/440px-John_Adams_A18-17a-F_Adams_crop.jpg"
+                "source": "Letter to Abigail Adams, July 7, 1775",
+                "sourceUrl": "https://founders.archives.gov/documents/Adams/04-01-02-0163",
+                "portrait": "images/portraits/adams.jpg"
             },
             {
-                "text": "The accumulation of all powers in the same hands may justly be pronounced the very definition of tyranny.",
+                "text": "The accumulation of all powers, legislative, executive, and judiciary, in the same hands... may justly be pronounced the very definition of tyranny.",
                 "author": "James Madison",
                 "source": "Federalist No. 47, 1788",
-                "portrait": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/James_Madison.jpg/440px-James_Madison.jpg"
+                "sourceUrl": "https://avalon.law.yale.edu/18th_century/fed47.asp",
+                "portrait": "images/portraits/madison.jpg"
             },
             {
-                "text": "A wise and frugal government shall leave men free to regulate their own pursuits of industry and improvement.",
+                "text": "A wise and frugal government... shall leave them otherwise free to regulate their own pursuits of industry and improvement.",
                 "author": "Thomas Jefferson",
                 "source": "First Inaugural Address, 1801",
-                "portrait": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Thomas_Jefferson_by_Rembrandt_Peale%2C_1800.jpg/440px-Thomas_Jefferson_by_Rembrandt_Peale%2C_1800.jpg"
+                "sourceUrl": "https://avalon.law.yale.edu/19th_century/jefinau1.asp",
+                "portrait": "images/portraits/jefferson.jpg"
             },
             {
-                "text": "If free speech is taken away, then dumb and silent we may be led, like sheep to the slaughter.",
-                "author": "George Washington",
-                "source": "Address to Officers of the Army, 1783",
-                "portrait": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Gilbert_Stuart_Williamstown_Portrait_of_George_Washington.jpg/440px-Gilbert_Stuart_Williamstown_Portrait_of_George_Washington.jpg"
-            },
-            {
-                "text": "The minority possess their equal rights, which equal laws must protect, and to violate would be oppression.",
+                "text": "The minority possess their equal rights, which equal law must protect, and to violate would be oppression.",
                 "author": "Thomas Jefferson",
                 "source": "First Inaugural Address, 1801",
-                "portrait": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Thomas_Jefferson_by_Rembrandt_Peale%2C_1800.jpg/440px-Thomas_Jefferson_by_Rembrandt_Peale%2C_1800.jpg"
+                "sourceUrl": "https://avalon.law.yale.edu/19th_century/jefinau1.asp",
+                "portrait": "images/portraits/jefferson.jpg"
             },
             {
-                "text": "There is not a man living who wishes more sincerely than I do to see a plan adopted for the abolition of slavery.",
+                "text": "There is not a man living who wishes more sincerely than I do, to see a plan adopted for the abolition of it.",
                 "author": "George Washington",
-                "source": "Letter to Robert Morris, 1786",
-                "portrait": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Gilbert_Stuart_Williamstown_Portrait_of_George_Washington.jpg/440px-Gilbert_Stuart_Williamstown_Portrait_of_George_Washington.jpg"
+                "source": "Letter to Robert Morris, April 12, 1786",
+                "sourceUrl": "https://founders.archives.gov/documents/Washington/04-04-02-0019",
+                "portrait": "images/portraits/washington.jpg"
             },
             {
-                "text": "Those who stand for nothing fall for anything.",
-                "author": "Alexander Hamilton",
-                "source": "Attributed",
-                "portrait": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Alexander_Hamilton_portrait_by_John_Trumbull_1806.jpg/440px-Alexander_Hamilton_portrait_by_John_Trumbull_1806.jpg"
+                "text": "The power of making war often prevents it, and in our case would give efficacy to our desire of peace.",
+                "author": "Thomas Jefferson",
+                "source": "Letter to George Washington, 1788",
+                "sourceUrl": "https://founders.archives.gov/documents/Jefferson/01-14-02-0089",
+                "portrait": "images/portraits/jefferson.jpg"
             },
             {
-                "text": "Power is of an encroaching nature and ought to be effectually restrained from passing limits assigned to it.",
-                "author": "James Madison",
-                "source": "Federalist No. 48, 1788",
-                "portrait": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/James_Madison.jpg/440px-James_Madison.jpg"
-            },
-            {
-                "text": "Government is instituted for the common good, not for profit, honor, or private interest of any one man.",
-                "author": "John Adams",
-                "source": "Thoughts on Government, 1776",
-                "portrait": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/John_Adams_A18-17a-F_Adams_crop.jpg/440px-John_Adams_A18-17a-F_Adams_crop.jpg"
-            },
-            {
-                "text": "The nation which indulges toward another an habitual hatred or an habitual fondness is in some degree a slave.",
+                "text": "The nation which indulges towards another an habitual hatred, or an habitual fondness, is in some degree a slave.",
                 "author": "George Washington",
                 "source": "Farewell Address, 1796",
-                "portrait": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Gilbert_Stuart_Williamstown_Portrait_of_George_Washington.jpg/440px-Gilbert_Stuart_Williamstown_Portrait_of_George_Washington.jpg"
+                "sourceUrl": "https://founders.archives.gov/documents/Washington/05-20-02-0440-0002",
+                "portrait": "images/portraits/washington.jpg"
             },
             {
                 "text": "Without liberty, law loses its nature and its name, and becomes oppression.",
                 "author": "James Wilson",
-                "source": "Of the Study of the Law, 1790",
-                "portrait": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/James_Wilson.jpg/440px-James_Wilson.jpg"
+                "source": "Of the Study of the Law in the United States, 1790",
+                "sourceUrl": "https://oll.libertyfund.org/titles/wilson-collected-works-of-james-wilson-vol-1",
+                "portrait": "images/portraits/wilson.jpg"
             },
             {
-                "text": "O say can you see, by the dawn's early light, what so proudly we hailed at the twilight's last gleaming?",
+                "text": "O say can you see, by the dawn's early light, what so proudly we hail'd at the twilight's last gleaming?",
                 "author": "Francis Scott Key",
-                "source": "The Star-Spangled Banner, 1814",
-                "portrait": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Francis_Scott_Key_by_Joseph_Wood_c1825.jpg/440px-Francis_Scott_Key_by_Joseph_Wood_c1825.jpg"
+                "source": "Defence of Fort M'Henry, 1814",
+                "sourceUrl": "https://www.loc.gov/item/ihas.100000006/",
+                "portrait": "images/portraits/key.jpg"
             }
         ],
         "funFacts": [

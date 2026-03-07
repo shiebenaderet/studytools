@@ -499,7 +499,13 @@ const StudyEngine = {
                 const imgWrap = document.createElement('div');
                 imgWrap.className = 'historical-quote-portrait';
                 const img = document.createElement('img');
-                img.src = quote.portrait;
+                // Resolve portrait path relative to unit directory
+                const unitId = this.config.unit.id;
+                if (quote.portrait.startsWith('http')) {
+                    img.src = quote.portrait;
+                } else {
+                    img.src = '../units/' + unitId + '/' + quote.portrait;
+                }
                 img.alt = quote.author || '';
                 img.loading = 'lazy';
                 imgWrap.appendChild(img);
@@ -518,10 +524,20 @@ const StudyEngine = {
             attribution.className = 'historical-quote-author';
             attribution.textContent = '\u2014 ' + quote.author;
             if (quote.source) {
-                const src = document.createElement('span');
-                src.className = 'historical-quote-source';
-                src.textContent = ', ' + quote.source;
-                attribution.appendChild(src);
+                if (quote.sourceUrl) {
+                    const srcLink = document.createElement('a');
+                    srcLink.className = 'historical-quote-source';
+                    srcLink.href = quote.sourceUrl;
+                    srcLink.target = '_blank';
+                    srcLink.rel = 'noopener noreferrer';
+                    srcLink.textContent = ', ' + quote.source;
+                    attribution.appendChild(srcLink);
+                } else {
+                    const src = document.createElement('span');
+                    src.className = 'historical-quote-source';
+                    src.textContent = ', ' + quote.source;
+                    attribution.appendChild(src);
+                }
             }
             textWrap.appendChild(attribution);
 
