@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2026-03-06
+
+### Added
+- **Command palette** — Searchable command launcher (`/`, `Cmd+K`, or visible search button) for quick navigation to any activity, tool, or shortcut
+- **Hidden teacher dashboard** — Type "teacher" in the command palette to access; magic link email auth restricted to approved school domains (@edmonds.wednet.edu), with password fallback
+- **Collapsible header** — Header and nav collapse into a compact activity topbar when students enter an activity, maximizing screen space for content
+- **Historical flavor on home page** — Random historical quote with portrait and fun fact displayed on the home screen, pulled from unit config
+- **Responsive progress bar** — Slim 10px bar with percentage label displayed below instead of cramped text inside the fill
+
+### Changed
+- Container max-width widened to 1280px for better desktop utilization
+- Stats grid uses fixed 4-column layout (2-col on mobile) instead of auto-fit
+- Stat values use primary text color instead of accent for better readability
+- Keyboard shortcuts modal now built with safe DOM methods (no innerHTML)
+
+### Fixed
+- Wordle no longer repeats the same term consecutively — tracks recent words and cycles through half the pool before repeating
+- Magic link auth redirect no longer lands on welcome screen — detects auth hash before showing name/period input
+- URL cleaned properly after magic link redirect (no trailing `#`)
+
 ## [2.0.0] - 2026-03-06
 
 ### Added

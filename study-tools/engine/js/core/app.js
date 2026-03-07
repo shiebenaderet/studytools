@@ -136,6 +136,16 @@ const StudyEngine = {
     },
 
     showSubNav(groupId, items) {
+        // Restore full header when browsing categories
+        document.body.classList.remove('activity-active');
+        var topbar = document.getElementById('activity-topbar');
+        if (topbar) topbar.textContent = '';
+
+        if (this.activeActivity && this.activities[this.activeActivity]) {
+            this.activities[this.activeActivity].deactivate?.();
+            this.activeActivity = null;
+        }
+
         const subNav = document.getElementById('sub-nav');
         subNav.textContent = '';
         subNav.classList.add('active');
@@ -249,30 +259,9 @@ const StudyEngine = {
         document.getElementById('home-section').classList.remove('active');
         document.getElementById('sub-nav').classList.remove('active');
 
-        // Add back button
-        const backBtn = document.createElement('button');
-        backBtn.className = 'nav-button';
-        backBtn.style.marginBottom = '16px';
-        const backIcon = document.createElement('i');
-        backIcon.className = 'fas fa-arrow-left';
-        backBtn.appendChild(backIcon);
-        backBtn.appendChild(document.createTextNode(' Back to Activities'));
-        backBtn.addEventListener('click', () => {
-            // Find which group this activity belongs to
-            const groups = { study: [], practice: [], games: [] };
-            Object.values(this.activities).forEach(a => {
-                const cat = a.category || 'games';
-                if (groups[cat]) groups[cat].push(a);
-            });
-            const groupId = activity.category || 'games';
-            this.showSubNav(groupId, groups[groupId]);
-            // Update nav active state
-            document.querySelectorAll('.nav-btn').forEach(b => {
-                b.classList.remove('active');
-                if (b.dataset.group === groupId) b.classList.add('active');
-            });
-        });
-        container.appendChild(backBtn);
+        // Collapse header, show compact topbar
+        document.body.classList.add('activity-active');
+        this._renderActivityTopbar(activity);
 
         // Render and activate
         activity.render(container, this.config);
@@ -287,10 +276,72 @@ const StudyEngine = {
         ProgressManager.updateStreak(this.config.unit.id);
     },
 
+    _goBackToGroup(activity) {
+        const groups = { study: [], practice: [], games: [] };
+        Object.values(this.activities).forEach(a => {
+            const cat = a.category || 'games';
+            if (groups[cat]) groups[cat].push(a);
+        });
+        const groupId = activity.category || 'games';
+        this.showSubNav(groupId, groups[groupId]);
+        document.querySelectorAll('.nav-btn').forEach(b => {
+            b.classList.remove('active');
+            if (b.dataset.group === groupId) b.classList.add('active');
+        });
+    },
+
+    _renderActivityTopbar(activity) {
+        const topbar = document.getElementById('activity-topbar');
+        if (!topbar) return;
+        topbar.textContent = '';
+
+        // Back button
+        const backBtn = document.createElement('button');
+        backBtn.className = 'activity-topbar-back';
+        const backIcon = document.createElement('i');
+        backIcon.className = 'fas fa-arrow-left';
+        backBtn.appendChild(backIcon);
+        backBtn.appendChild(document.createTextNode(' Back'));
+        backBtn.addEventListener('click', () => this._goBackToGroup(activity));
+        topbar.appendChild(backBtn);
+
+        // Activity name
+        const title = document.createElement('span');
+        title.className = 'activity-topbar-title';
+        const actIcon = document.createElement('i');
+        actIcon.className = activity.icon;
+        actIcon.style.marginRight = '6px';
+        actIcon.style.color = 'var(--primary)';
+        title.appendChild(actIcon);
+        title.appendChild(document.createTextNode(activity.name));
+        topbar.appendChild(title);
+
+        // Quick nav buttons
+        const nav = document.createElement('div');
+        nav.className = 'activity-topbar-nav';
+        const groupLabels = { study: 'Study', practice: 'Practice', games: 'Games' };
+        Object.keys(groupLabels).forEach(groupId => {
+            const btn = document.createElement('button');
+            btn.textContent = groupLabels[groupId];
+            if (activity.category === groupId) btn.style.color = 'var(--primary)';
+            btn.addEventListener('click', () => {
+                const navBtn = document.querySelector('.nav-btn[data-group="' + groupId + '"]');
+                if (navBtn) navBtn.click();
+            });
+            nav.appendChild(btn);
+        });
+        topbar.appendChild(nav);
+    },
+
     showHome() {
         document.getElementById('sub-nav').classList.remove('active');
         document.getElementById('activity-container').classList.remove('active');
         document.getElementById('home-section').classList.add('active');
+
+        // Restore full header
+        document.body.classList.remove('activity-active');
+        var topbar = document.getElementById('activity-topbar');
+        if (topbar) topbar.textContent = '';
 
         if (this.activeActivity && this.activities[this.activeActivity]) {
             this.activities[this.activeActivity].deactivate?.();
@@ -301,6 +352,13 @@ const StudyEngine = {
     },
 
     showTools() {
+        document.body.classList.remove('activity-active');
+        var topbar = document.getElementById('activity-topbar');
+        if (topbar) topbar.textContent = '';
+        if (this.activeActivity && this.activities[this.activeActivity]) {
+            this.activities[this.activeActivity].deactivate?.();
+            this.activeActivity = null;
+        }
         document.getElementById('sub-nav').classList.remove('active');
         document.getElementById('home-section').classList.remove('active');
         const container = document.getElementById('activity-container');
@@ -416,6 +474,75 @@ const StudyEngine = {
 
             welcome.appendChild(stepsDiv);
             homeCards.appendChild(welcome);
+
+            // Historical flavor: random quote card
+            this._renderHistoricalQuote(homeCards);
+        }
+    },
+
+    _renderHistoricalQuote(container) {
+        if (!this.config || !this.config.historicalFlavor) return;
+        const flavor = this.config.historicalFlavor;
+
+        // Pick a random quote
+        if (flavor.quotes && flavor.quotes.length > 0) {
+            const quote = flavor.quotes[Math.floor(Math.random() * flavor.quotes.length)];
+
+            const card = document.createElement('div');
+            card.className = 'card historical-quote-card';
+
+            const inner = document.createElement('div');
+            inner.className = 'historical-quote-inner';
+
+            // Portrait
+            if (quote.portrait) {
+                const imgWrap = document.createElement('div');
+                imgWrap.className = 'historical-quote-portrait';
+                const img = document.createElement('img');
+                img.src = quote.portrait;
+                img.alt = quote.author || '';
+                img.loading = 'lazy';
+                imgWrap.appendChild(img);
+                inner.appendChild(imgWrap);
+            }
+
+            // Text content
+            const textWrap = document.createElement('div');
+            textWrap.className = 'historical-quote-text';
+
+            const quoteText = document.createElement('blockquote');
+            quoteText.textContent = '\u201C' + quote.text + '\u201D';
+            textWrap.appendChild(quoteText);
+
+            const attribution = document.createElement('div');
+            attribution.className = 'historical-quote-author';
+            attribution.textContent = '\u2014 ' + quote.author;
+            if (quote.source) {
+                const src = document.createElement('span');
+                src.className = 'historical-quote-source';
+                src.textContent = ', ' + quote.source;
+                attribution.appendChild(src);
+            }
+            textWrap.appendChild(attribution);
+
+            inner.appendChild(textWrap);
+            card.appendChild(inner);
+
+            // Fun fact below
+            if (flavor.funFacts && flavor.funFacts.length > 0) {
+                const fact = flavor.funFacts[Math.floor(Math.random() * flavor.funFacts.length)];
+                const factEl = document.createElement('div');
+                factEl.className = 'historical-fun-fact';
+                const bulb = document.createElement('i');
+                bulb.className = 'fas fa-lightbulb';
+                bulb.style.marginRight = '8px';
+                bulb.style.color = 'var(--accent)';
+                factEl.appendChild(bulb);
+                factEl.appendChild(document.createTextNode(fact));
+                card.appendChild(factEl);
+            }
+
+            container.appendChild(card);
         }
     },
 

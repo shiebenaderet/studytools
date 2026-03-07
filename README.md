@@ -4,7 +4,7 @@ A modular, config-driven study tool platform for 8th Grade US History. Built for
 
 **Live site:** [shiebenaderet.github.io/studytools](https://shiebenaderet.github.io/studytools/)
 
-**Version:** 2.0.0
+**Version:** 2.1.0
 
 ## Features
 
@@ -38,10 +38,13 @@ A modular, config-driven study tool platform for 8th Grade US History. Built for
 
 ### Platform Features
 - **Dark theme UI** — Polished dark slate design with Outfit font, inspired by Kahoot/Blooket/Gimkit aesthetics
+- **Command palette** — Press `/` or `Cmd+K` to search and jump to any activity, tool, or shortcut; visible search button for Chromebook users
+- **Collapsible header** — Full header on home screen, compact topbar during activities to maximize content space
 - **Student welcome screen** — Name and period input with personalized greetings throughout
 - **Config-driven units** — Add new units by creating a `config.json` with vocabulary, questions, timeline events, and more
 - **Progress tracking** — localStorage for instant saves, optional Supabase sync for cross-device persistence
-- **Teacher dashboard** — View student progress across classes
+- **Hidden teacher dashboard** — Access via command palette with magic link email auth, class filtering, student progress table
+- **Historical flavor** — Era-appropriate quotes with portraits and fun facts from the period on the home screen
 - **Accessibility** — Keyboard shortcuts, focus indicators, OpenDyslexic font toggle
 - **Touch support** — Tap-to-select on mobile for all drag-and-drop activities
 - **Study tools** — Note-taking guide, focused study timer, printable study guide, progress export

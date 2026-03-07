@@ -108,6 +108,7 @@ header {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
 }
 
 header h1 {
@@ -119,6 +120,7 @@ header h1 {
     justify-content: center;
     gap: 10px;
     letter-spacing: -0.02em;
+    transition: font-size 0.3s ease;
 }
 
 header i {
@@ -131,12 +133,14 @@ header .subtitle {
     color: var(--text-secondary);
     margin-bottom: 4px;
     font-weight: 400;
+    transition: all 0.3s ease;
 }
 
 header .essential-question {
     font-size: 0.8em;
     font-style: italic;
     color: var(--text-muted);
+    transition: all 0.3s ease;
 }
 
 .student-greeting {
@@ -144,6 +148,100 @@ header .essential-question {
     font-size: 0.9em;
     font-weight: 600;
     margin-top: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Collapsed header when activity is active */
+body.activity-active header {
+    padding: 8px 20px;
+}
+
+body.activity-active header h1 {
+    font-size: 1em;
+    margin-bottom: 0;
+}
+
+body.activity-active header .subtitle,
+body.activity-active header .essential-question,
+body.activity-active header .student-greeting {
+    display: none;
+}
+
+body.activity-active .nav-tabs {
+    display: none;
+}
+
+/* Compact activity bar shown when activity is active */
+.activity-topbar {
+    display: none;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 20px;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border-subtle);
+    position: sticky;
+    top: 0;
+    z-index: 99;
+}
+
+body.activity-active .activity-topbar {
+    display: flex;
+}
+
+body.activity-active header {
+    position: relative;
+}
+
+.activity-topbar-back {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 0.9em;
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    transition: all 0.2s;
+    font-family: var(--font-body);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.activity-topbar-back:hover {
+    background: var(--bg-surface);
+    color: var(--text-primary);
+}
+
+.activity-topbar-title {
+    font-weight: 700;
+    color: var(--text-primary);
+    font-size: 0.95em;
+    flex: 1;
+}
+
+.activity-topbar-nav {
+    display: flex;
+    gap: 4px;
+}
+
+.activity-topbar-nav button {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 0.8em;
+    font-family: var(--font-body);
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.activity-topbar-nav button:hover {
+    background: var(--bg-surface);
+    color: var(--text-primary);
 }
 
 /* NAV TABS */
@@ -158,6 +256,7 @@ header .essential-question {
     top: 0;
     z-index: 99;
     flex-wrap: wrap;
+    transition: all 0.3s ease;
 }
 
 .nav-btn {
@@ -449,6 +548,76 @@ header .essential-question {
 .badge-description {
     font-size: 0.75em;
     color: var(--text-muted);
+}
+
+/* HISTORICAL QUOTE CARD */
+.historical-quote-card {
+    margin-top: 20px;
+    padding: 0;
+    overflow: hidden;
+}
+
+.historical-quote-inner {
+    display: flex;
+    gap: 20px;
+    padding: 24px;
+    align-items: center;
+}
+
+.historical-quote-portrait {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--primary);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.historical-quote-portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.historical-quote-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.historical-quote-text blockquote {
+    color: var(--text-primary);
+    font-size: 1em;
+    font-style: italic;
+    line-height: 1.6;
+    margin: 0 0 8px 0;
+}
+
+.historical-quote-author {
+    color: var(--text-secondary);
+    font-size: 0.85em;
+    font-weight: 600;
+}
+
+.historical-quote-source {
+    font-weight: 400;
+    color: var(--text-muted);
+}
+
+.historical-fun-fact {
+    padding: 14px 24px;
+    border-top: 1px solid var(--border-subtle);
+    font-size: 0.85em;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    background: rgba(251, 191, 36, 0.04);
+}
+
+@media (max-width: 480px) {
+    .historical-quote-inner {
+        flex-direction: column;
+        text-align: center;
+    }
 }
 
 /* FLASHCARD SECTION — Anki-style SRS with 3D flip */
