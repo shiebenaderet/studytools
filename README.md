@@ -4,7 +4,7 @@ A modular, config-driven study tool platform for 8th Grade US History. Built for
 
 **Live site:** [shiebenaderet.github.io/studytools](https://shiebenaderet.github.io/studytools/)
 
-**Version:** 4.0.0
+**Version:** 4.1.0
 
 ## Features
 
@@ -47,7 +47,7 @@ A modular, config-driven study tool platform for 8th Grade US History. Built for
 - **Historical flavor** — Era-appropriate quotes with portraits and fun facts from the period on the home screen
 - **Accessibility** — Keyboard shortcuts, focus indicators, OpenDyslexic font toggle
 - **Touch support** — Tap-to-select on mobile for all drag-and-drop activities
-- **Study tools** — Note-taking guide, focused study timer, printable study guide, progress export
+- **Study tools** — Note-taking guide, focused study timer, printable study guide, progress export, study music player
 
 ## Architecture
 

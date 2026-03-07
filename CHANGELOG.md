@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.1.0] - 2026-03-06
+
+### Added
+- **Study Music player** — Collapsible floating music player for studying:
+  - Loads tracks from `audio/tracks.json` manifest
+  - Play/pause, skip forward/back, clickable progress bar
+  - Volume slider with mute icon states
+  - Track title and artist display
+  - Auto-advances to next track on end
+  - Collapse to title bar or close entirely
+  - Persists across activity navigation
+  - Accessible from Tools menu
+  - Self-hosted MP3s (no ads, no external services)
+- **`audio/` directory** — Folder for self-hosted study music MP3 files
+
 ## [4.0.0] - 2026-03-06
 
 ### Added

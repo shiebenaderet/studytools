@@ -1,0 +1,121 @@
+{
+    "artists": {
+        "Francis Johnson": {
+            "bio": "Francis Johnson (1792-1844) was the first Black American to publish sheet music. Based in Philadelphia, he led one of the most popular dance bands in the country and was the first American musician to tour Europe. He composed over 200 works including marches, cotillions, and waltzes.",
+            "years": "1792-1844",
+            "portrait": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Francis_Johnson_%28musician%29.jpg/220px-Francis_Johnson_%28musician%29.jpg"
+        },
+        "Francis Hopkinson": {
+            "bio": "Francis Hopkinson (1737-1791) was a signer of the Declaration of Independence and the first American-born composer. He designed the first American flag, served as a federal judge, and wrote 'My Days Have Been So Wondrous Free,' considered the first secular song by an American.",
+            "years": "1737-1791",
+            "portrait": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Francis_Hopkinson.jpg/220px-Francis_Hopkinson.jpg"
+        },
+        "Johann Frederich Peter": {
+            "bio": "Johann Friedrich Peter (1746-1813) was a Moravian composer who wrote the first chamber music composed in America. Born in the Netherlands, he came to Pennsylvania and North Carolina, composing sacred anthems and string quintets that blended European classical style with American spirit.",
+            "years": "1746-1813",
+            "portrait": null
+        },
+        "John Christopher Moller": {
+            "bio": "John Christopher Moller (c.1755-1803) was a German-born composer and organist who settled in Philadelphia and New York. He co-founded one of America's first music publishing firms and organized some of the earliest public concerts in the new nation.",
+            "years": "c.1755-1803",
+            "portrait": null
+        },
+        "Joseph Gehot": {
+            "bio": "Joseph Gehot (c.1756-c.1820) was a Belgian-born violinist and composer who immigrated to America around 1792. He performed in New York and Philadelphia and composed chamber music in the European classical style for American audiences.",
+            "years": "c.1756-c.1820",
+            "portrait": null
+        },
+        "Isaac Hazzard": {
+            "bio": "Isaac Hazzard was a Black American musician and composer in early 19th-century Philadelphia. He played in Francis Johnson's celebrated band and composed dance music including quadrilles, waltzes, and quicksteps.",
+            "years": "early 1800s",
+            "portrait": null
+        },
+        "A. J. R. Conner": {
+            "bio": "A. J. R. Conner was an American composer and musician active in the 1840s-1850s, known for dance music including polkas, waltzes, and cotillions popular in Philadelphia ballrooms.",
+            "years": "1840s-1850s",
+            "portrait": null
+        },
+        "James Hemmenway": {
+            "bio": "James Hemmenway was a Black American musician in early 19th-century Philadelphia who played in Francis Johnson's band. He composed marches and dance music, including pieces honoring the Marquis de Lafayette's 1824 American tour.",
+            "years": "early 1800s",
+            "portrait": null
+        },
+        "Edward Roland": {
+            "bio": "Edward Roland was an American composer active in the mid-1800s, known for dance music performed in Philadelphia's social halls.",
+            "years": "mid 1800s",
+            "portrait": null
+        },
+        "U.S. Army Band": {
+            "bio": "The United States Army Band ('Pershing's Own') is the premier musical organization of the U.S. Army, performing at state functions and public concerts since 1922. Their recordings of patriotic music are in the public domain.",
+            "years": "est. 1922",
+            "portrait": null
+        },
+        "William Billings": {
+            "bio": "William Billings (1746-1800) was America's first major choral composer. A Boston tanner by trade, he wrote 'Chester,' which became the unofficial anthem of the American Revolution, sung by Continental Army soldiers.",
+            "years": "1746-1800",
+            "portrait": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/WilliamBillings.jpg/220px-WilliamBillings.jpg"
+        },
+        "Traditional": {
+            "bio": "Traditional American songs passed down through oral tradition, reflecting the political and cultural life of the Early Republic.",
+            "years": "",
+            "portrait": null
+        },
+        "Pyotr Tchaikovsky": {
+            "bio": "Pyotr Ilyich Tchaikovsky (1840-1893) was a Russian composer. His '1812 Overture' commemorates Russia's defense against Napoleon in 1812, the same year the United States fought the War of 1812 against Britain.",
+            "years": "1840-1893",
+            "portrait": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Tchaikovsky_by_Reutlinger_%28cropped%29.jpg/220px-Tchaikovsky_by_Reutlinger_%28cropped%29.jpg"
+        }
+    },
+    "tracks": [
+        { "title": "The Star-Spangled Banner", "artist": "U.S. Army Band", "file": "the-star-spangled-banner-u.s.-army-band-sign-off-concept-2020.mp3" },
+        { "title": "Hail Columbia", "artist": "Traditional", "file": "hail-columbia.mp3" },
+        { "title": "Chester (Revolutionary War Anthem)", "artist": "William Billings", "file": "chester,-an-american-revolutionary-war-anthem.mp3" },
+        { "title": "1812 Overture", "artist": "Pyotr Tchaikovsky", "file": "1812-overture-tchaikovsky-u.s.-army-band.mp3" },
+        { "title": "Hunters of Kentucky", "artist": "Traditional", "file": "hunters-of-kentucky-jackson-1828.mp3" },
+        { "title": "Eight Songs for the Harpsichord", "artist": "Francis Hopkinson", "file": "francis-hopkinson-17371791-eight-songs-for-the-harpsichord.mp3" },
+        { "title": "Phoenix Polka", "artist": "A. J. R. Conner", "file": "1-phoenix-polka,-anonymous.mp3" },
+        { "title": "Victoria Gallop", "artist": "Francis Johnson", "file": "2-victoria-gallop-by-francis-johnson.mp3" },
+        { "title": "Evergreen Polka", "artist": "A. J. R. Conner", "file": "3-evergreen-polka-by-a.-j.-r.-conner.mp3" },
+        { "title": "Croton Waltz", "artist": "Isaac Hazzard", "file": "4-croton-waltz-by-isaac-hazzard.mp3" },
+        { "title": "Princeton Gallopade", "artist": "Francis Johnson", "file": "5-princeton-gallopade-by-francis-johnson.mp3" },
+        { "title": "Valse a Cinq Temps", "artist": "A. J. R. Conner", "file": "6-valse-a-cinq-temps-by-a.-j.-r.-conner.mp3" },
+        { "title": "Col. Riter's Parade March & Quickstep", "artist": "Francis Johnson", "file": "7-col.-george-w-riters-parade-march-and-quickstep-by-francis-johnson.mp3" },
+        { "title": "Lafayette's Trumpet March & Quickstep", "artist": "James Hemmenway", "file": "8-general-lafayettes-trumpet-march-and-quickstep-by-james-hemmenway.mp3" },
+        { "title": "New Cotillions: The General", "artist": "Francis Johnson", "file": "9-new-cotillions-the-general,-francis-johnson.mp3" },
+        { "title": "New Cotillions: Monmouth", "artist": "Francis Johnson", "file": "10-new-cotillions-monmouth,-francis-johnson.mp3" },
+        { "title": "New Cotillions: German Town", "artist": "Francis Johnson", "file": "11-new-cotillions-german-town,-francis-johnson.mp3" },
+        { "title": "New Cotillions: Brandy Wine", "artist": "Francis Johnson", "file": "12-new-cotillions-brandy-wine,-francis-johnson.mp3" },
+        { "title": "New Cotillions: Yorktown", "artist": "Francis Johnson", "file": "13-new-cotillions-yorktown,-francis-johnson.mp3" },
+        { "title": "New Cotillions: The Cadmus", "artist": "Francis Johnson", "file": "14-new-cotillions-the-cadmus-by-francis-johnson.mp3" },
+        { "title": "La Fayette's Welcome Country Dance", "artist": "Francis Johnson", "file": "15-new-cotillions-la-fayetts-welcome-country-dance-by-francis-johnson.-diane-monroe,-violin.mp3" },
+        { "title": "Honour to the Brave: Lafayette's Grand March", "artist": "Francis Johnson", "file": "16-honour-to-the-brave-general-lafayettes-grand-march-by-francis-johnson.mp3" },
+        { "title": "Lucy Neale Quadrille", "artist": "Isaac Hazzard", "file": "17-lucy-neale-quadrille-by-isaac-hazzard.mp3" },
+        { "title": "The Monongahela Waltz", "artist": "Francis Johnson", "file": "18-the-monongahela-waltz-by-francis-johnson.mp3" },
+        { "title": "Recollections of Buffalo", "artist": "Francis Johnson", "file": "19-recollections-of-buffalo-by-francis-johnson.mp3" },
+        { "title": "Miss Lucy Long", "artist": "Francis Johnson", "file": "20-miss-lucy-long-by-francis-johnson.mp3" },
+        { "title": "Five Step Waltz", "artist": "Edward Roland", "file": "21-five-step-waltz-by-edward-roland.mp3" },
+        { "title": "Bingham's Cotillion", "artist": "Francis Johnson", "file": "22-binghamns-cotillion,-francis-johnson-diane-monroe,-violin.mp3" },
+        { "title": "Philadelphia Firemen's Cotillion", "artist": "Francis Johnson", "file": "23-philadelphia-firemens-cotillion,-francis-johnson.mp3" },
+        { "title": "The Mallet (Stop Waltz)", "artist": "A. J. R. Conner", "file": "24-the-mallet-or-stop-waltz-by-a.-j.-r.-conner.mp3" },
+        { "title": "Davis' Quickstep", "artist": "Isaac Hazzard", "file": "25-davis-quickstep-by-isaac-hazzard.mp3" },
+        { "title": "Butchers & Drovers Grand March", "artist": "Francis Johnson", "file": "26-butchers-and-drovers-grand-march-by-francis-johnson.mp3" },
+        { "title": "Philadelphia Hop Waltz", "artist": "James Hemmenway", "file": "27-philadelphia-hop-waltz,-james-hemmenway.mp3" },
+        { "title": "The New Bird Waltz", "artist": "Francis Johnson", "file": "28-the-new-bird-waltz-by-francis-johnson.mp3" },
+        { "title": "Boone Infantry Brass Band Quickstep", "artist": "Francis Johnson", "file": "29-boone-infantry-brass-band-quickstep-by-francis-johnson.mp3" },
+        { "title": "St. Louis Fire Co. Parade March", "artist": "Francis Johnson", "file": "30-st.-louis-fire-companys-anniversary-parade-march-by-francis-johnson.mp3" },
+        { "title": "Dirge", "artist": "Francis Johnson", "file": "31-dirge-by-francis-johnson.mp3" },
+        { "title": "Philadelphia Gray's Quickstep", "artist": "Francis Johnson", "file": "32-philadelphia-grays-quickstep-by-francis-johnson.mp3" },
+        { "title": "Quintet No. 1 in D - I", "artist": "Johann Frederich Peter", "file": "johann-frederich-peter-quintet-no.-1-in-d.mp3" },
+        { "title": "Quintet No. 1 in D - II", "artist": "Johann Frederich Peter", "file": "johann-frederich-peter-quintet-no.-1-in-d-2.mp3" },
+        { "title": "Quintet No. 1 in D - III", "artist": "Johann Frederich Peter", "file": "johann-frederich-peter-quintet-no.-1-in-d-3.mp3" },
+        { "title": "Quintet No. 6 in Eb - I", "artist": "Johann Frederich Peter", "file": "johann-frederich-peter-quintet-no.-6-in-eb-1.mp3" },
+        { "title": "Quintet No. 6 in Eb - II", "artist": "Johann Frederich Peter", "file": "johann-frederich-peter-quintet-no.-6-in-eb-2.mp3" },
+        { "title": "Quintet No. 6 in Eb - III", "artist": "Johann Frederich Peter", "file": "johann-frederich-peter-quintet-no.-6-in-eb-3.mp3" },
+        { "title": "Quartet in Eb - I", "artist": "John Christopher Moller", "file": "john-christopher-moller-quartet-in-eb-1.mp3" },
+        { "title": "Quartet in Eb - II", "artist": "John Christopher Moller", "file": "john-christopher-moller-quartet-in-eb-2.mp3" },
+        { "title": "Quartet in Eb - III", "artist": "John Christopher Moller", "file": "john-christopher-moller-quartet-in-eb-3.mp3" },
+        { "title": "Quartet in D, Op. 7 No. 6 - I", "artist": "Joseph Gehot", "file": "joseph-gehot-quartet-in-d,-op.-7,-no.-6-1.mp3" },
+        { "title": "Quartet in D, Op. 7 No. 6 - II", "artist": "Joseph Gehot", "file": "joseph-gehot-quartet-in-d,-op.-7,-no.-6-2.mp3" },
+        { "title": "Quartet in D, Op. 7 No. 6 - III", "artist": "Joseph Gehot", "file": "joseph-gehot-quartet-in-d,-op.-7,-no.-6-3.mp3" }
+    ]
+}

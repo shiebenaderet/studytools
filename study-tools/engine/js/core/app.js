@@ -403,7 +403,8 @@ const StudyEngine = {
             { icon: 'fas fa-edit', title: 'My Study Guide', desc: 'See what you\'ve mastered, what needs review, and add personal notes.', action: 'StudyTools.openNotes()' },
             { icon: 'fas fa-hourglass', title: 'Focused Study Timer', desc: 'Set a timer for focused study sessions.', action: 'StudyTools.openTimer()' },
             { icon: 'fas fa-print', title: 'Print Study Guide', desc: 'Print a formatted study guide.', action: 'StudyTools.openPrint()' },
-            { icon: 'fas fa-download', title: 'Export Progress', desc: 'Download your study progress.', action: 'StudyTools.exportProgress()' }
+            { icon: 'fas fa-download', title: 'Export Progress', desc: 'Download your study progress.', action: 'StudyTools.exportProgress()' },
+            { icon: 'fas fa-music', title: 'Study Music', desc: 'Listen to music while you study.', action: 'StudyTools.openMusic()' }
         ];
 
         tools.forEach(tool => {
