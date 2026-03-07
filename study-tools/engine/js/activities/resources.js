@@ -103,6 +103,29 @@ StudyEngine.registerActivity({
                 termDef.textContent = item.definition;
                 termInfo.appendChild(termDef);
 
+                if (item.simpleExplanation) {
+                    var explainBtn = document.createElement('button');
+                    explainBtn.className = 'fc-explain-btn';
+                    var bulbIcon = document.createElement('i');
+                    bulbIcon.className = 'fas fa-lightbulb';
+                    explainBtn.appendChild(bulbIcon);
+                    explainBtn.appendChild(document.createTextNode(' Explain it to me'));
+                    var explainBox = document.createElement('div');
+                    explainBox.className = 'fc-explain-box';
+                    explainBox.textContent = item.simpleExplanation;
+                    explainBox.style.display = 'none';
+                    explainBtn.addEventListener('click', (function(btn, box) {
+                        return function(e) {
+                            e.stopPropagation();
+                            var showing = box.style.display !== 'none';
+                            box.style.display = showing ? 'none' : 'block';
+                            btn.classList.toggle('active', !showing);
+                        };
+                    })(explainBtn, explainBox));
+                    termInfo.appendChild(explainBtn);
+                    termInfo.appendChild(explainBox);
+                }
+
                 card.appendChild(termInfo);
 
                 // Link buttons

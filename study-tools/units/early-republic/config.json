@@ -33,6 +33,7 @@
         {
             "term": "Inauguration",
             "definition": "The formal ceremony where a president takes the oath of office",
+            "simpleExplanation": "It's like a big swearing-in party where the new president promises to do a good job. Think of it like the first day at a new school, but for running the whole country.",
             "example": "George Washington's inauguration in 1789 set the first precedent for how presidents take office",
             "category": "Washington's First Decisions",
             "typingSnippet": "An inauguration is the formal ceremony where a president takes the oath of office and officially begins their term. Washington's inauguration in 1789 was the very first, setting the standard for every president since. It showed the world that power could be transferred peacefully."
@@ -40,6 +41,7 @@
         {
             "term": "Cabinet",
             "definition": "A group of advisors appointed by the President to lead executive departments",
+            "simpleExplanation": "Imagine the president picks a team of experts to help make big decisions — one for money, one for talking to other countries, one for the military. That's the Cabinet.",
             "example": "Washington's Cabinet included Thomas Jefferson (State), Alexander Hamilton (Treasury), and Henry Knox (War)",
             "category": "Washington's First Decisions",
             "wikiUrl": "https://en.wikipedia.org/wiki/Cabinet_of_the_United_States",
@@ -48,6 +50,7 @@
         {
             "term": "Precedent",
             "definition": "An action or decision that becomes an example for the future",
+            "simpleExplanation": "When you're the first to do something and everyone copies you after that. Like if you're the first kid to hold the door open, and then everyone starts doing it — you set a precedent.",
             "example": "Washington set the precedent of serving only two terms as president",
             "category": "Washington's First Decisions",
             "typingSnippet": "A precedent is an action that sets an example for others to follow. Washington created many precedents, like stepping down after two terms, that future presidents would respect for over a century. His choices shaped how the presidency works to this day."
@@ -55,6 +58,7 @@
         {
             "term": "Federalist",
             "definition": "Someone who supported a strong federal government; led by Hamilton",
+            "simpleExplanation": "Team Hamilton! They wanted the national government to be really powerful — like having a strong principal who makes the rules for the whole school, not just each classroom.",
             "example": "Federalists like Hamilton wanted a strong central government and a national bank",
             "category": "Washington's First Decisions",
             "wikiUrl": "https://en.wikipedia.org/wiki/Federalist_Party",
@@ -63,6 +67,7 @@
         {
             "term": "Anti-Federalist",
             "definition": "Someone who opposed a strong federal government; favored states' rights",
+            "simpleExplanation": "The opposite team — they thought each state should mostly run itself. Like wanting each classroom teacher to make their own rules instead of the principal deciding everything.",
             "example": "Anti-Federalists feared a powerful central government would threaten individual liberties",
             "category": "Washington's First Decisions",
             "wikiUrl": "https://en.wikipedia.org/wiki/Anti-Federalism",
@@ -71,6 +76,7 @@
         {
             "term": "National Bank",
             "definition": "Hamilton's proposed central bank to manage the nation's finances",
+            "simpleExplanation": "Hamilton wanted one big bank for the whole country to hold everyone's money and pay the bills. Think of it like a school treasurer who manages all the fundraiser money for every club.",
             "example": "Hamilton argued the National Bank was necessary to print currency and manage debt",
             "category": "Washington's First Decisions",
             "wikiUrl": "https://en.wikipedia.org/wiki/First_Bank_of_the_United_States",
@@ -79,6 +85,7 @@
         {
             "term": "Tariff",
             "definition": "A tax on imported goods, used to raise government revenue",
+            "simpleExplanation": "When you buy something from another country, the government adds an extra charge on it. This makes foreign stuff more expensive so people buy American-made stuff instead.",
             "example": "Hamilton proposed tariffs on imports to protect American manufacturing",
             "category": "Washington's First Decisions",
             "typingSnippet": "A tariff is a tax placed on goods imported from other countries. Hamilton pushed for tariffs to raise money for the government and to help American factories compete with cheaper foreign products. Tariffs became one of the most debated topics in early American politics."
@@ -86,6 +93,7 @@
         {
             "term": "Dept. of Treasury",
             "definition": "Executive department handling finances; first led by Alexander Hamilton",
+            "simpleExplanation": "The government's money manager. Hamilton was in charge of figuring out how to pay bills, collect taxes, and make sure the country didn't go broke.",
             "example": "Hamilton used the Dept. of Treasury to create plans for paying off the national debt",
             "category": "Washington's First Decisions",
             "wikiUrl": "https://en.wikipedia.org/wiki/United_States_Department_of_the_Treasury",
@@ -94,6 +102,7 @@
         {
             "term": "Dept. of State",
             "definition": "Executive department handling foreign affairs; first led by Thomas Jefferson",
+            "simpleExplanation": "The person in charge of being friends (or not) with other countries. Jefferson's job was basically to talk to the rest of the world on America's behalf.",
             "example": "Jefferson led the Dept. of State, managing America's relationships with other countries",
             "category": "Washington's First Decisions",
             "wikiUrl": "https://en.wikipedia.org/wiki/United_States_Department_of_State",
@@ -102,6 +111,7 @@
         {
             "term": "Dept. of War",
             "definition": "Executive department handling military affairs; first led by Henry Knox",
+            "simpleExplanation": "The person in charge of the army and keeping the country safe. Henry Knox ran the military — today we call it the Department of Defense.",
             "example": "Henry Knox led the Dept. of War, overseeing the nation's small military",
             "category": "Washington's First Decisions",
             "wikiUrl": "https://en.wikipedia.org/wiki/United_States_Department_of_War",
@@ -110,6 +120,7 @@
         {
             "term": "Whiskey Rebellion",
             "definition": "A 1794 uprising by farmers protesting the federal tax on whiskey",
+            "simpleExplanation": "Farmers were mad about a tax on whiskey (which they made from their extra grain) and started a revolt. Washington sent the army to stop them — proving the government was serious about enforcing its rules.",
             "example": "Washington sent the army to crush the Whiskey Rebellion, proving the federal government could enforce its laws",
             "category": "Washington's First Decisions",
             "typingSnippet": "The Whiskey Rebellion broke out in 1794 when farmers in western Pennsylvania refused to pay a federal tax on whiskey. President Washington personally led troops to put down the revolt. This proved that the new federal government had the power to enforce its laws."
@@ -117,6 +128,7 @@
         {
             "term": "Jay's Treaty",
             "definition": "A 1794 agreement with Britain that removed British forts but limited US trade",
+            "simpleExplanation": "America made a deal with Britain: 'Leave our forts alone.' But Britain still got to mess with American ships. Most people thought it was a terrible deal, but it kept the peace.",
             "example": "Jay's Treaty was unpopular because it didn't fully stop Britain from seizing American ships",
             "category": "Washington's First Decisions",
             "typingSnippet": "Jay's Treaty was a 1794 agreement with Britain that got the British to leave forts on American soil. However, it did little to stop Britain from seizing American ships and sailors. Many Americans were furious, and the treaty deepened the divide between Federalists and Democratic-Republicans."
@@ -124,6 +136,7 @@
         {
             "term": "XYZ Affair",
             "definition": "An incident where French agents demanded bribes before negotiating with US diplomats",
+            "simpleExplanation": "American diplomats went to France to talk, but French officials said 'Pay us money first before we'll even have a conversation.' Americans were furious — it was basically a shakedown.",
             "example": "The XYZ Affair outraged Americans and led to an undeclared Quasi-War with France under President Adams",
             "category": "Washington's First Decisions",
             "typingSnippet": "The XYZ Affair happened when French officials demanded bribes before they would even talk to American diplomats. Americans were outraged, and the incident nearly led to a full war with France. It showed how fragile the young nation's relationships with European powers really were."
@@ -131,6 +144,7 @@
         {
             "term": "Political Party",
             "definition": "An organized group that seeks to influence government policy by winning elections",
+            "simpleExplanation": "A team of people who agree on how the country should be run. Think of it like rival friend groups who each think they know the best way to do things.",
             "example": "America's first political parties — Federalists and Democratic-Republicans — formed from disagreements between Hamilton and Jefferson",
             "category": "Political Parties Are Born",
             "typingSnippet": "A political party is an organized group of people who share similar ideas about how government should work. The first two parties in America grew out of disagreements between Hamilton and Jefferson. Even though the Founders warned against parties, they became a lasting part of American democracy."
@@ -138,6 +152,7 @@
         {
             "term": "Democratic-Republican",
             "definition": "Political party led by Jefferson; favored limited federal power and farmers' interests",
+            "simpleExplanation": "Team Jefferson! They thought the government should stay small and leave people alone. They were all about farmers and regular people, not big banks and businesses.",
             "example": "Democratic-Republicans believed the government should have limited power and support agriculture",
             "category": "Political Parties Are Born",
             "wikiUrl": "https://en.wikipedia.org/wiki/Democratic-Republican_Party",
@@ -146,6 +161,7 @@
         {
             "term": "Strict Construction",
             "definition": "Belief that the government should only do what the Constitution specifically allows",
+            "simpleExplanation": "If the Constitution doesn't say you can do it, you can't do it. It's like following the rules of a game exactly — no making up new rules as you go.",
             "example": "Jefferson used strict construction to argue against the National Bank — the Constitution doesn't mention it",
             "category": "Political Parties Are Born",
             "wikiUrl": "https://en.wikipedia.org/wiki/Strict_constructionism",
@@ -154,6 +170,7 @@
         {
             "term": "Loose Construction",
             "definition": "Belief that the government has implied powers beyond what the Constitution explicitly states",
+            "simpleExplanation": "The Constitution doesn't have to say everything word-for-word. If something makes sense and helps the country, the government can probably do it. It's like reading between the lines.",
             "example": "Hamilton used loose construction to justify the National Bank under the 'Necessary and Proper' clause",
             "category": "Political Parties Are Born",
             "typingSnippet": "Loose construction means the Constitution gives the government implied powers beyond what is written directly. Hamilton pointed to the Necessary and Proper Clause to argue that Congress could create a national bank. This flexible reading of the Constitution expanded federal power significantly."
@@ -161,6 +178,7 @@
         {
             "term": "Standing Army",
             "definition": "A permanent military force maintained in peacetime",
+            "simpleExplanation": "An army that's always there, even when there's no war. Some people thought this was smart for protection. Others worried it could be used to bully citizens.",
             "example": "Federalists favored a large standing army, while Democratic-Republicans feared it could threaten liberty",
             "category": "Political Parties Are Born",
             "typingSnippet": "A standing army is a permanent military force that remains active even during peacetime. Federalists wanted one for national defense, but Democratic-Republicans worried it could be used to take away people's freedoms. This debate over military power was one of the biggest disagreements between the two parties."
@@ -168,6 +186,7 @@
         {
             "term": "Primary Source",
             "definition": "A firsthand account or original document from the time period being studied",
+            "simpleExplanation": "Something made by someone who was actually there. A diary entry, a photo, a speech — it's the real deal, not someone else talking about it later.",
             "example": "A letter written by Thomas Jefferson in 1803 about the Louisiana Purchase is a primary source",
             "category": "Political Parties Are Born",
             "typingSnippet": "A primary source is a firsthand account or original document from the time being studied. Letters, diaries, photographs, and speeches are all examples. Historians rely on primary sources to understand what people actually thought and experienced during historical events."
@@ -175,6 +194,7 @@
         {
             "term": "SIFT Method",
             "definition": "A strategy for evaluating sources: Stop, Investigate the source, Find better coverage, Trace claims",
+            "simpleExplanation": "Before you believe something you read, check it! Stop and think, look up who wrote it, see if other sources say the same thing, and trace it back to where it started.",
             "example": "Use the SIFT Method to check if a website about the Early Republic is reliable before citing it",
             "category": "Political Parties Are Born",
             "typingSnippet": "The SIFT Method is a four-step process for evaluating sources: Stop, Investigate the source, Find better coverage, and Trace claims back to the original. It helps you figure out whether information is trustworthy before you use it. This skill is especially important when researching online."
@@ -182,6 +202,7 @@
         {
             "term": "Secondary Source",
             "definition": "An account created after an event by someone who did not directly witness it",
+            "simpleExplanation": "Something written about an event by someone who wasn't there. Your history textbook is a secondary source — the author is describing what happened, but they didn't live through it.",
             "example": "A textbook chapter about Washington's presidency is a secondary source",
             "category": "Political Parties Are Born",
             "typingSnippet": "A secondary source is an account written after an event by someone who was not there to witness it. Textbooks, documentaries, and encyclopedia articles are common examples. Secondary sources help us interpret and understand primary sources by putting them in context."
@@ -189,6 +210,7 @@
         {
             "term": "Judicial Review",
             "definition": "The power of the Supreme Court to declare laws unconstitutional; established by Marbury v. Madison",
+            "simpleExplanation": "The Supreme Court can look at any law and say 'Nope, that breaks the rules of the Constitution.' It's like having a referee who can throw a flag on Congress.",
             "example": "Judicial review gave the Supreme Court real power to check Congress and the President",
             "category": "Exploring & Growing",
             "wikiUrl": "https://en.wikipedia.org/wiki/Judicial_review_in_the_United_States",
@@ -197,6 +219,7 @@
         {
             "term": "Marbury v. Madison",
             "definition": "The 1803 Supreme Court case that established the principle of judicial review",
+            "simpleExplanation": "This court case is where the Supreme Court first said 'We can strike down laws that break the Constitution.' It gave the courts real power for the first time.",
             "example": "Chief Justice John Marshall's ruling in Marbury v. Madison created one of the most important checks and balances",
             "category": "Exploring & Growing",
             "typingSnippet": "Marbury v. Madison was an 1803 Supreme Court case decided by Chief Justice John Marshall. Marshall ruled that a law passed by Congress was unconstitutional, creating the power of judicial review. This case is one of the most important in American history because it strengthened the Supreme Court forever."
@@ -204,6 +227,7 @@
         {
             "term": "Unconstitutional",
             "definition": "Something that violates or goes against the Constitution",
+            "simpleExplanation": "It means 'against the rules.' If a law breaks the Constitution, it's unconstitutional and has to be thrown out.",
             "example": "In Marbury v. Madison, the Supreme Court declared a law unconstitutional for the first time",
             "category": "Exploring & Growing",
             "typingSnippet": "When something is unconstitutional, it means it violates or goes against what the Constitution allows. The Supreme Court has the power to strike down any law it finds unconstitutional. This concept is a key part of how checks and balances protect Americans' rights."
@@ -211,6 +235,7 @@
         {
             "term": "Haitian Revolution",
             "definition": "A successful slave revolt in Haiti (1791-1804) that influenced Napoleon's decision to sell Louisiana",
+            "simpleExplanation": "Enslaved people in Haiti fought back and won their freedom — the only successful slave revolt to create a whole new country. It also scared Napoleon into selling Louisiana to the US.",
             "example": "The Haitian Revolution terrified Southern slaveholders but inspired people fighting for freedom worldwide",
             "category": "Exploring & Growing",
             "typingSnippet": "The Haitian Revolution was a successful revolt by enslaved people in Haiti that lasted from 1791 to 1804. It was the only slave revolt in history to create an independent nation. The revolution also caused Napoleon to give up on his American empire, which led directly to the Louisiana Purchase."
@@ -218,6 +243,7 @@
         {
             "term": "Louisiana Purchase",
             "definition": "The 1803 purchase of French territory that doubled the size of the United States",
+            "simpleExplanation": "Jefferson bought a HUGE chunk of land from France for $15 million — it doubled the size of the whole country. Imagine buying half a continent for about 4 cents an acre!",
             "example": "Jefferson bought the Louisiana Territory from Napoleon for $15 million, even though the Constitution didn't specifically allow it",
             "category": "Exploring & Growing",
             "typingSnippet": "The Louisiana Purchase in 1803 doubled the size of the United States overnight. Jefferson bought the massive territory from France for just fifteen million dollars, which was an incredible deal. The purchase created a dilemma for Jefferson because the Constitution said nothing about buying new land."
@@ -225,6 +251,7 @@
         {
             "term": "Napoleon",
             "definition": "French emperor who sold the Louisiana Territory to the US to fund his European wars",
+            "simpleExplanation": "A powerful French leader who needed cash for his wars in Europe. He sold the Louisiana Territory to America because he couldn't hold onto it after losing Haiti.",
             "example": "Napoleon gave up his American empire after the Haitian Revolution made holding the territory too costly",
             "category": "Exploring & Growing",
             "typingSnippet": "Napoleon was the emperor of France who sold the Louisiana Territory to the United States. He needed money to fund his wars in Europe and had lost control of Haiti after the slave revolt there. His decision to sell changed the future of America by giving the young nation room to grow westward."
@@ -232,6 +259,7 @@
         {
             "term": "Corps of Discovery",
             "definition": "The expedition led by Lewis and Clark to explore the Louisiana Territory",
+            "simpleExplanation": "Lewis and Clark's adventure team! They hiked across the whole western half of America, drawing maps, finding new animals, and meeting Native American nations nobody in the government knew about.",
             "example": "The Corps of Discovery traveled from 1804 to 1806, mapping the territory and documenting plants, animals, and peoples",
             "category": "Exploring & Growing",
             "wikiUrl": "https://en.wikipedia.org/wiki/Lewis_and_Clark_Expedition",
@@ -240,6 +268,7 @@
         {
             "term": "Expedition",
             "definition": "A journey undertaken for a specific purpose, especially exploration",
+            "simpleExplanation": "A trip with a mission. Not a vacation — you're going somewhere specific to explore, discover, or accomplish something important.",
             "example": "Jefferson sent Lewis and Clark on an expedition to find a water route to the Pacific Ocean",
             "category": "Exploring & Growing",
             "typingSnippet": "An expedition is a journey organized for a specific purpose, like exploration or scientific research. Jefferson sent Lewis and Clark on an expedition to explore the Louisiana Territory and find a route to the Pacific Ocean. Their trip took over two years and covered thousands of miles of unknown land."
@@ -247,6 +276,7 @@
         {
             "term": "Sacagawea",
             "definition": "A Shoshone woman who served as interpreter and guide for the Lewis and Clark expedition",
+            "simpleExplanation": "A Shoshone woman who translated languages and showed Lewis and Clark the way through unfamiliar territory. Without her, the expedition probably would have failed.",
             "example": "Sacagawea helped the Corps of Discovery communicate with Native nations and navigate the western territory",
             "category": "Exploring & Growing",
             "typingSnippet": "Sacagawea was a Shoshone woman who served as an interpreter and guide for Lewis and Clark's expedition. She helped the team communicate with Native American nations and navigate unfamiliar territory. Her presence also signaled to Native peoples that the expedition came in peace."
@@ -254,6 +284,7 @@
         {
             "term": "Barbary Pirates",
             "definition": "North African pirates who attacked American ships and demanded tribute payments",
+            "simpleExplanation": "Pirates from North Africa who attacked American ships and said 'Pay us or we'll keep attacking.' Jefferson said 'No way' and sent the navy to fight them instead.",
             "example": "Jefferson refused to keep paying tribute to the Barbary Pirates and sent the navy to fight them instead",
             "category": "Exploring & Growing",
             "wikiUrl": "https://en.wikipedia.org/wiki/First_Barbary_War",
@@ -262,6 +293,7 @@
         {
             "term": "Tribute",
             "definition": "Payment made to a foreign power to prevent attacks or gain protection",
+            "simpleExplanation": "Basically protection money. 'Pay us and we won't attack you.' It's like a bully saying 'Give me your lunch money and I'll leave you alone.'",
             "example": "Before Jefferson, the US paid tribute to North African states to protect American merchant ships",
             "category": "Exploring & Growing",
             "typingSnippet": "Tribute is a payment made to a foreign power in exchange for protection or to avoid being attacked. The United States paid tribute to the Barbary States of North Africa to keep American ships safe. Jefferson eventually decided that fighting was better than continuing to pay."
@@ -269,6 +301,7 @@
         {
             "term": "Impressment",
             "definition": "The British practice of forcing American sailors to serve in the Royal Navy",
+            "simpleExplanation": "Britain would stop American ships and kidnap the sailors, forcing them to work on British warships. Imagine someone grabbing you off the street and making you work for them — that's impressment.",
             "example": "Impressment of American sailors was one of the key causes of the War of 1812",
             "category": "Exploring & Growing",
             "typingSnippet": "Impressment was the British practice of capturing American sailors and forcing them to serve in the Royal Navy. Britain claimed it was only taking back deserters, but many of those seized were actually American citizens. This insult to American sovereignty became one of the main causes of the War of 1812."
@@ -276,6 +309,7 @@
         {
             "term": "Embargo Act",
             "definition": "An 1807 law that banned all US trade with foreign nations to pressure Britain and France",
+            "simpleExplanation": "Jefferson said 'Fine, we won't trade with ANYONE!' to punish Britain and France. But it backfired badly — American farmers and businesses suffered the most.",
             "example": "The Embargo Act backfired — it hurt American merchants and farmers more than it hurt Britain or France",
             "category": "Exploring & Growing",
             "typingSnippet": "The Embargo Act of 1807 banned all American trade with foreign nations to punish Britain and France. Instead of hurting those countries, it devastated American farmers and merchants who depended on trade. The act was so unpopular that it was repealed, and it remains a famous example of a policy backfiring."
@@ -283,6 +317,7 @@
         {
             "term": "Dilemma",
             "definition": "A situation requiring a choice between two difficult or undesirable options",
+            "simpleExplanation": "When you're stuck between two bad choices. Like if your two best friends both want you to hang out on the same day — no matter what you pick, someone's upset.",
             "example": "Jefferson faced a dilemma: buying Louisiana required loose construction, which he had always opposed",
             "category": "Exploring & Growing",
             "typingSnippet": "A dilemma is a situation where you must choose between two difficult options. Jefferson faced a famous dilemma when offered the Louisiana Territory: he believed in strict construction, but the Constitution said nothing about buying land. He went ahead with the purchase anyway, showing that even strong beliefs can bend when the stakes are high."
@@ -290,6 +325,7 @@
         {
             "term": "War Hawks",
             "definition": "Members of Congress who pushed for war with Britain in 1812; led by Henry Clay",
+            "simpleExplanation": "Young politicians who were fired up and wanted to fight Britain. They were tired of being pushed around and thought a war would prove America was strong.",
             "example": "War Hawks like Henry Clay wanted to defend American honor and expand into British Canada",
             "category": "War & National Pride",
             "wikiUrl": "https://en.wikipedia.org/wiki/War_hawk",
@@ -298,6 +334,7 @@
         {
             "term": "Tecumseh",
             "definition": "Shawnee leader who built a confederation of Native nations to resist American expansion",
+            "simpleExplanation": "A Shawnee chief who tried to get all the Native American nations to team up and say 'Stop taking our land!' He was one of the strongest leaders fighting against American expansion.",
             "example": "Tecumseh tried to unite Native American nations to stop settlers from taking their land",
             "category": "War & National Pride",
             "typingSnippet": "Tecumseh was a Shawnee leader who worked to unite Native American nations into a confederation to resist American expansion. He argued that no single tribe could sell land that belonged to all Native peoples. His alliance with Britain during the War of 1812 made him one of America's most formidable opponents."
@@ -305,6 +342,7 @@
         {
             "term": "Henry Clay",
             "definition": "Kentucky congressman and War Hawk who later proposed the American System",
+            "simpleExplanation": "A Kentucky politician who wanted war with Britain AND had a big plan to make America's economy stronger afterwards. He was one of the most important voices in Congress for years.",
             "example": "Henry Clay pushed for the War of 1812 and later created the American System to strengthen the economy",
             "category": "War & National Pride",
             "typingSnippet": "Henry Clay was a Kentucky congressman who became one of the most influential politicians of his era. As a War Hawk, he pushed for the War of 1812 to defend American honor. After the war, he proposed the American System, a plan to strengthen the nation's economy through tariffs, a national bank, and better roads."
@@ -312,6 +350,7 @@
         {
             "term": "Fort McHenry",
             "definition": "Baltimore fort whose defense during a British bombardment inspired 'The Star-Spangled Banner'",
+            "simpleExplanation": "Britain bombed this fort ALL night long, but when the sun came up, the American flag was still flying. A guy watching named Francis Scott Key was so moved he wrote our national anthem about it.",
             "example": "Francis Scott Key watched the bombardment of Fort McHenry and wrote the national anthem after seeing the flag still flying",
             "category": "War & National Pride",
             "typingSnippet": "Fort McHenry was the Baltimore fort that withstood a massive British bombardment during the War of 1812. The battle lasted through the night, and when morning came, the American flag was still flying over the fort. This moment inspired Francis Scott Key to write the poem that became our national anthem."
@@ -319,6 +358,7 @@
         {
             "term": "Treaty of Ghent",
             "definition": "The 1814 peace treaty that ended the War of 1812; returned things to prewar conditions",
+            "simpleExplanation": "The peace deal that ended the War of 1812. Nobody won or lost territory — it was basically a tie. But Americans felt like winners because they survived fighting the world's strongest military.",
             "example": "The Treaty of Ghent was basically a draw — no territory changed hands",
             "category": "War & National Pride",
             "typingSnippet": "The Treaty of Ghent was signed in 1814 to end the War of 1812 between the United States and Britain. Neither side gained or lost any territory, so the war ended in a draw. Despite this, many Americans felt like winners because they had stood up to the most powerful military in the world."
@@ -326,6 +366,7 @@
         {
             "term": "Star-Spangled Banner",
             "definition": "The national anthem, written by Francis Scott Key after witnessing the battle at Fort McHenry",
+            "simpleExplanation": "Our national anthem! It started as a poem about watching the flag survive a brutal battle. The 'star-spangled banner' is the flag itself — covered in stars and still waving after the fight.",
             "example": "The Star-Spangled Banner became a symbol of American resilience and national pride",
             "category": "War & National Pride",
             "typingSnippet": "The Star-Spangled Banner is the national anthem of the United States, written by Francis Scott Key during the War of 1812. Key wrote the words after watching the British bombard Fort McHenry all night and seeing the American flag still waving at dawn. The song captures the pride and determination Americans felt during that era."
@@ -333,6 +374,7 @@
         {
             "term": "Nationalism",
             "definition": "A strong sense of pride and loyalty to one's country",
+            "simpleExplanation": "That 'USA! USA!' feeling. After surviving the War of 1812, everyone was pumped up and proud to be American.",
             "example": "After the War of 1812, a surge of nationalism made Americans feel united and proud",
             "category": "War & National Pride",
             "typingSnippet": "Nationalism is a strong feeling of pride and loyalty toward one's country. After the War of 1812, a wave of nationalism swept across the United States as Americans celebrated surviving a second war with Britain. This pride helped unite the country and fueled a period of growth and confidence."
@@ -340,6 +382,7 @@
         {
             "term": "Era of Good Feelings",
             "definition": "A period of national unity and one-party rule following the War of 1812 (roughly 1817-1825)",
+            "simpleExplanation": "A time when everyone basically got along (at least on the surface). There was only one political party left, so there was less arguing. But problems were brewing underneath.",
             "example": "The Era of Good Feelings saw the Federalist Party collapse, leaving only the Democratic-Republicans",
             "category": "War & National Pride",
             "typingSnippet": "The Era of Good Feelings was a period of national unity from about 1817 to 1825 when the Federalist Party disappeared. With only one political party left, there was less conflict in government and Americans felt a shared sense of purpose. However, beneath the surface, tensions over slavery and states' rights were already building."
@@ -347,6 +390,7 @@
         {
             "term": "Monroe Doctrine",
             "definition": "An 1823 policy warning European nations against further colonization in the Americas",
+            "simpleExplanation": "President Monroe basically told Europe: 'This side of the world is ours — stay out!' America couldn't really enforce it yet, but it was a bold statement.",
             "example": "The Monroe Doctrine told Europe to stay out of the Western Hemisphere, even though the US couldn't enforce it yet",
             "category": "War & National Pride",
             "typingSnippet": "The Monroe Doctrine was an 1823 policy declaring that European nations must stop colonizing or interfering in the Americas. President Monroe warned that the U.S. would view any such action as a threat. Even though America was not yet powerful enough to enforce it, this bold statement shaped foreign policy for generations."
@@ -354,6 +398,7 @@
         {
             "term": "American System",
             "definition": "Henry Clay's plan for economic growth: protective tariffs, a national bank, and internal improvements",
+            "simpleExplanation": "Henry Clay's three-part plan: tax foreign goods, create a national bank, and build roads and canals. The idea was to connect all parts of the country into one strong economy.",
             "example": "The American System aimed to connect the North, South, and West into one strong national economy",
             "category": "War & National Pride",
             "wikiUrl": "https://en.wikipedia.org/wiki/American_System_(economic_plan)",
@@ -362,6 +407,7 @@
         {
             "term": "McCulloch v. Maryland",
             "definition": "An 1819 Supreme Court case that upheld the national bank and strengthened federal power",
+            "simpleExplanation": "Maryland tried to tax the national bank to shut it down. The Supreme Court said 'Nope — states can't mess with federal stuff.' This made the national government even more powerful.",
             "example": "McCulloch v. Maryland ruled that states could not tax federal institutions, reinforcing federal supremacy",
             "category": "War & National Pride",
             "typingSnippet": "McCulloch v. Maryland was an 1819 Supreme Court case that ruled states could not tax the national bank. Chief Justice Marshall declared that federal law is supreme over state law. This decision strengthened the power of the federal government and confirmed that Congress had implied powers under the Constitution."

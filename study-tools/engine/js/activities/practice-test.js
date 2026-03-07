@@ -122,6 +122,11 @@ StudyEngine.registerActivity({
             wrapper.appendChild(explEl);
         }
 
+        // "Explain it to me" button (shown after wrong answer)
+        if (answered && selectedIdx !== shuffledCorrect) {
+            this._renderExplainButton(wrapper, q);
+        }
+
         // Navigation
         var navEl = document.createElement('div');
         navEl.className = 'flashcard-nav';
@@ -208,6 +213,64 @@ StudyEngine.registerActivity({
         this.displayQuestion();
     },
 
+    _renderExplainButton(parent, q) {
+        var config = StudyEngine.config;
+        if (!config || !config.vocabulary) return;
+        // Find vocab terms related to this question's topic
+        var relatedTerms = [];
+        if (q.topic) {
+            for (var i = 0; i < config.vocabulary.length; i++) {
+                var v = config.vocabulary[i];
+                if (v.category === q.topic && v.simpleExplanation) {
+                    relatedTerms.push(v);
+                }
+            }
+        }
+        // Also check if correct answer text matches a term
+        if (relatedTerms.length === 0) {
+            var correctText = q.options[q.correct].toLowerCase();
+            for (var i = 0; i < config.vocabulary.length; i++) {
+                var v = config.vocabulary[i];
+                if (v.simpleExplanation && correctText.indexOf(v.term.toLowerCase()) !== -1) {
+                    relatedTerms.push(v);
+                }
+            }
+        }
+        if (relatedTerms.length === 0) return;
+
+        var explainBtn = document.createElement('button');
+        explainBtn.className = 'fc-explain-btn';
+        var bulbIcon = document.createElement('i');
+        bulbIcon.className = 'fas fa-lightbulb';
+        explainBtn.appendChild(bulbIcon);
+        explainBtn.appendChild(document.createTextNode(' Explain it to me'));
+
+        var explainBox = document.createElement('div');
+        explainBox.className = 'fc-explain-box';
+        explainBox.style.display = 'none';
+
+        // Show explanations for related terms
+        for (var i = 0; i < relatedTerms.length && i < 3; i++) {
+            var termDiv = document.createElement('div');
+            if (i > 0) termDiv.style.marginTop = '8px';
+            var termBold = document.createElement('strong');
+            termBold.textContent = relatedTerms[i].term + ': ';
+            termDiv.appendChild(termBold);
+            termDiv.appendChild(document.createTextNode(relatedTerms[i].simpleExplanation));
+            explainBox.appendChild(termDiv);
+        }
+
+        explainBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var showing = explainBox.style.display !== 'none';
+            explainBox.style.display = showing ? 'none' : 'block';
+            explainBtn.classList.toggle('active', !showing);
+        });
+
+        parent.appendChild(explainBtn);
+        parent.appendChild(explainBox);
+    },
+
     _trackWeakTerms() {
         var config = StudyEngine.config;
         var unitId = config.unit.id;
@@ -291,6 +354,10 @@ StudyEngine.registerActivity({
                 explEl.className = 'explanation';
                 explEl.textContent = q.explanation;
                 reviewItem.appendChild(explEl);
+            }
+
+            if (!isCorrect) {
+                this._renderExplainButton(reviewItem, q);
             }
 
             wrapper.appendChild(reviewItem);

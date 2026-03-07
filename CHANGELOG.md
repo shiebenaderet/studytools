@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.3.0] - 2026-03-06
+
+### Added
+- **"Explain It To Me" feature** — Kid-friendly simple explanations for every vocabulary term, accessible via lightbulb button:
+  - **Flashcards** — Button on the back face reveals a plain-language explanation below the definition
+  - **Practice Test** — Appears after wrong answers to help students understand what they missed
+  - **Resource Library** — Available on every term card for quick clarification
+  - All 37 vocabulary terms have hand-written `simpleExplanation` fields with relatable analogies and plain language
+
 ## [3.2.0] - 2026-03-06
 
 ### Added

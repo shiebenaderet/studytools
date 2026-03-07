@@ -314,6 +314,26 @@ StudyEngine.registerActivity({
             exText.textContent = card.example;
             backContent.appendChild(exText);
         }
+        if (card.simpleExplanation) {
+            const explainBtn = document.createElement('button');
+            explainBtn.className = 'fc-explain-btn';
+            var bulbIcon = document.createElement('i');
+            bulbIcon.className = 'fas fa-lightbulb';
+            explainBtn.appendChild(bulbIcon);
+            explainBtn.appendChild(document.createTextNode(' Explain it to me'));
+            var explainBox = document.createElement('div');
+            explainBox.className = 'fc-explain-box';
+            explainBox.textContent = card.simpleExplanation;
+            explainBox.style.display = 'none';
+            explainBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                var showing = explainBox.style.display !== 'none';
+                explainBox.style.display = showing ? 'none' : 'block';
+                explainBtn.classList.toggle('active', !showing);
+            });
+            backContent.appendChild(explainBtn);
+            backContent.appendChild(explainBox);
+        }
 
         // Category badge
         const existingBadge = scene.querySelector('.fc-cat-badge');
