@@ -34,6 +34,8 @@ StudyEngine.registerActivity({
     _towers: [],
     _enemies: [],
     _projectiles: [],
+    _particles: [],
+    _rangeIndicator: null,
     _selectedTowerType: null,
     _placementMode: false,
     _gridCells: [],
@@ -178,6 +180,7 @@ StudyEngine.registerActivity({
         this._towers = [];
         this._enemies = [];
         this._projectiles = [];
+        this._particles = [];
         this._selectedTowerType = null;
         this._placementMode = false;
         this._hoveredCell = null;
@@ -534,11 +537,25 @@ StudyEngine.registerActivity({
             }
         }
 
+        // Remove old range indicator
+        if (this._rangeIndicator) {
+            this._scene.remove(this._rangeIndicator);
+            this._rangeIndicator = null;
+        }
+
         if (cell && !cell.tower) {
             var def = this._towerDefs[this._selectedTowerType];
             cell.mesh.material.color.setHex(def.color);
             cell.mesh.material.opacity = 0.6;
             this._hoveredCell = cell;
+
+            // Show range indicator ring
+            var ringGeo = new THREE.RingGeometry(def.range - 0.05, def.range + 0.05, 32);
+            var ringMat = new THREE.MeshBasicMaterial({ color: def.color, transparent: true, opacity: 0.25, side: THREE.DoubleSide });
+            this._rangeIndicator = new THREE.Mesh(ringGeo, ringMat);
+            this._rangeIndicator.rotation.x = -Math.PI / 2;
+            this._rangeIndicator.position.set(cell.x, 0.05, cell.z);
+            this._scene.add(this._rangeIndicator);
         }
     },
 
@@ -628,6 +645,12 @@ StudyEngine.registerActivity({
         cell.mesh.material.color.setHex(def.color);
         cell.mesh.material.opacity = 0.5;
         this._towers.push(tower);
+
+        // Remove range indicator
+        if (this._rangeIndicator) {
+            this._scene.remove(this._rangeIndicator);
+            this._rangeIndicator = null;
+        }
 
         // Exit placement mode
         this._selectedTowerType = null;
@@ -741,6 +764,9 @@ StudyEngine.registerActivity({
         // Update projectiles
         this._updateProjectiles(dt);
 
+        // Update particles
+        this._updateParticles(dt);
+
         // Check wave complete
         if (this._waveActive && this._enemiesToSpawn <= 0 && this._enemies.length === 0) {
             this._waveComplete();
@@ -823,6 +849,9 @@ StudyEngine.registerActivity({
 
             if (bestEnemy) {
                 tower.cooldown = tower.def.fireRate;
+                // Rotate tower to face target
+                var angle = Math.atan2(bestEnemy.mesh.position.x - tower.x, bestEnemy.mesh.position.z - tower.z);
+                tower.mesh.rotation.y = angle;
                 self._fireProjectile(tower, bestEnemy);
             }
         });
@@ -913,8 +942,30 @@ StudyEngine.registerActivity({
         if (enemy.hp <= 0) {
             enemy.alive = false;
             this._score += 10;
+            // Spawn explosion particles
+            this._spawnExplosion(enemy.mesh.position.x, enemy.mesh.position.z, enemy.mesh.material.color.getHex());
             this._removeEnemy(index);
             this._updateHUD();
+        }
+    },
+
+    _spawnExplosion(x, z, color) {
+        for (var i = 0; i < 8; i++) {
+            var geo = new THREE.SphereGeometry(0.06, 4, 4);
+            var mat = new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity: 1 });
+            var mesh = new THREE.Mesh(geo, mat);
+            mesh.position.set(x, 0.3, z);
+            this._scene.add(mesh);
+
+            var angle = (Math.PI * 2 / 8) * i;
+            var speed = 1.5 + Math.random() * 2;
+            this._particles.push({
+                mesh: mesh,
+                vx: Math.cos(angle) * speed,
+                vy: 2 + Math.random() * 3,
+                vz: Math.sin(angle) * speed,
+                life: 0.6 + Math.random() * 0.3
+            });
         }
     },
 
@@ -923,6 +974,24 @@ StudyEngine.registerActivity({
         if (enemy) {
             this._scene.remove(enemy.mesh);
             this._enemies.splice(index, 1);
+        }
+    },
+
+    _updateParticles(dt) {
+        for (var i = this._particles.length - 1; i >= 0; i--) {
+            var p = this._particles[i];
+            p.life -= dt;
+            if (p.life <= 0) {
+                this._scene.remove(p.mesh);
+                this._particles.splice(i, 1);
+                continue;
+            }
+            p.mesh.position.x += p.vx * dt;
+            p.mesh.position.y += p.vy * dt;
+            p.mesh.position.z += p.vz * dt;
+            p.vy -= 9.8 * dt; // gravity
+            p.mesh.material.opacity = Math.max(0, p.life / 0.8);
+            p.mesh.scale.setScalar(Math.max(0.1, p.life));
         }
     },
 
@@ -1273,7 +1342,9 @@ StudyEngine.registerActivity({
         this._towers = [];
         this._enemies = [];
         this._projectiles = [];
+        this._particles = [];
         this._gridCells = [];
+        this._rangeIndicator = null;
         this._running = false;
     },
 
