@@ -839,6 +839,7 @@ const StudyTools = {
 
         this._musicAudio = new Audio('audio/' + track.file);
         this._musicAudio.volume = this._musicVolume;
+        this._musicAudio.preload = 'auto';
 
         this._musicAudio.addEventListener('timeupdate', () => {
             const bar = document.getElementById('music-progress-bar');
@@ -855,8 +856,13 @@ const StudyTools = {
             this._musicSkip(1);
         });
 
+        this._musicAudio.addEventListener('error', () => {
+            if (titleEl) titleEl.textContent = track.title + ' (failed to load)';
+            StudyUtils.showToast('Could not load: ' + track.title, 'error');
+        });
+
         if (wasPlaying) {
-            this._musicAudio.play();
+            this._musicAudio.play().catch(() => {});
         }
     },
 
@@ -864,8 +870,11 @@ const StudyTools = {
         if (!this._musicAudio) return;
         const icon = document.getElementById('music-play-icon');
         if (this._musicAudio.paused) {
-            this._musicAudio.play();
-            if (icon) icon.className = 'fas fa-pause';
+            this._musicAudio.play().then(() => {
+                if (icon) icon.className = 'fas fa-pause';
+            }).catch(() => {
+                StudyUtils.showToast('Could not play track. Try again.', 'error');
+            });
         } else {
             this._musicAudio.pause();
             if (icon) icon.className = 'fas fa-play';
@@ -876,9 +885,10 @@ const StudyTools = {
         const wasPlaying = this._musicAudio && !this._musicAudio.paused;
         this._musicLoadTrack(this._musicIndex + dir);
         if (wasPlaying) {
-            this._musicAudio.play();
-            const icon = document.getElementById('music-play-icon');
-            if (icon) icon.className = 'fas fa-pause';
+            this._musicAudio.play().then(() => {
+                const icon = document.getElementById('music-play-icon');
+                if (icon) icon.className = 'fas fa-pause';
+            }).catch(() => {});
         }
     },
 
