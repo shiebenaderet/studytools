@@ -210,7 +210,7 @@ header .essential-question {
 
 .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 24px rgba(22, 105, 197, 0.2), 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .card h2 {
@@ -296,6 +296,8 @@ header .essential-question {
     color: white;
     font-size: 0.8em;
     font-weight: bold;
+    min-width: 36px;
+    white-space: nowrap;
 }
 
 .badges-container {
@@ -382,10 +384,13 @@ header .essential-question {
 .flashcard-stats {
     display: flex;
     gap: 20px;
-    background: white;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     padding: 15px 25px;
     border-radius: 10px;
     font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .flashcard {
@@ -449,7 +454,7 @@ header .essential-question {
 
 .nav-button:hover {
     transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(13, 148, 136, 0.4);
+    box-shadow: 0 4px 12px rgba(22, 105, 197, 0.4);
 }
 
 .nav-button:disabled {
@@ -458,8 +463,9 @@ header .essential-question {
 }
 
 .flashcard-counter {
-    color: #4b5563;
+    color: rgba(255, 255, 255, 0.95);
     font-weight: 600;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 /* TIMELINE SECTION */
@@ -745,7 +751,7 @@ header .essential-question {
     padding: 15px;
     border: 2px solid #e5e7eb;
     border-radius: 8px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: var(--font-body);
     font-size: 1em;
     resize: vertical;
     margin: 15px 0;
@@ -754,7 +760,7 @@ header .essential-question {
 .answer-textarea:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
+    box-shadow: 0 0 0 3px rgba(22, 105, 197, 0.2);
 }
 
 /* TOOLS SECTION */
@@ -776,7 +782,7 @@ header .essential-question {
 
 .tool-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 24px rgba(22, 105, 197, 0.2), 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .tool-card h2 {
@@ -808,7 +814,7 @@ header .essential-question {
 
 .tool-button:hover {
     transform: scale(1.02);
-    box-shadow: 0 4px 12px rgba(13, 148, 136, 0.4);
+    box-shadow: 0 4px 12px rgba(22, 105, 197, 0.4);
 }
 
 /* MODALS */
@@ -1057,7 +1063,7 @@ header .essential-question {
 
 .timer-btn:hover {
     transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(13, 148, 136, 0.4);
+    box-shadow: 0 4px 12px rgba(22, 105, 197, 0.4);
 }
 
 .timer-btn.pause {
@@ -1247,7 +1253,7 @@ header .essential-question {
 .login-input:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
+    box-shadow: 0 0 0 3px rgba(22, 105, 197, 0.2);
 }
 
 /* UTILITY CLASSES */
@@ -1311,7 +1317,7 @@ header .essential-question {
 .wordle-cell.filled { border-color: #9ca3af; }
 .wordle-input-area { margin-bottom: 20px; }
 .wordle-input { padding: 12px 20px; font-size: 1.2em; border: 2px solid var(--primary); border-radius: 8px; text-transform: uppercase; text-align: center; width: 200px; font-weight: bold; letter-spacing: 4px; }
-.wordle-input:focus { outline: none; box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.2); }
+.wordle-input:focus { outline: none; box-shadow: 0 0 0 3px rgba(22, 105, 197, 0.2); }
 .wordle-keyboard { display: flex; flex-direction: column; gap: 5px; align-items: center; }
 .wordle-keyboard-row { display: flex; gap: 4px; }
 .wordle-key { padding: 10px 14px; border: none; border-radius: 6px; font-size: 0.9em; font-weight: 600; cursor: pointer; background: #e5e7eb; transition: all 0.2s; min-width: 35px; }
@@ -1391,7 +1397,7 @@ header .essential-question {
 .race-definition-text { font-size: 1.1em; color: #333; line-height: 1.5; }
 .race-input-area { text-align: center; margin-bottom: 20px; }
 .race-input { padding: 12px 20px; font-size: 1.2em; border: 2px solid var(--primary); border-radius: 8px; text-align: center; width: 300px; }
-.race-input:focus { outline: none; box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.2); }
+.race-input:focus { outline: none; box-shadow: 0 0 0 3px rgba(22, 105, 197, 0.2); }
 .race-progress-text { text-align: center; color: #4b5563; font-weight: 600; margin-bottom: 15px; }
 .race-results { background: white; padding: 25px; border-radius: 12px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 .race-results h2 { color: var(--primary); margin-bottom: 15px; }
@@ -1412,8 +1418,8 @@ header .essential-question {
 .fib-sentences { display: flex; flex-direction: column; gap: 15px; }
 .fib-sentence-card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); line-height: 1.8; font-size: 1.05em; }
 .blank-slot { display: inline-block; min-width: 120px; padding: 4px 12px; border-bottom: 3px solid var(--primary); text-align: center; cursor: pointer; transition: all 0.2s; margin: 0 4px; font-weight: 600; color: var(--primary); border-radius: 4px; }
-.blank-slot:hover { background: rgba(13, 148, 136, 0.1); }
-.blank-slot.filled { background: rgba(13, 148, 136, 0.1); border-bottom-color: var(--primary); }
+.blank-slot:hover { background: rgba(22, 105, 197, 0.1); }
+.blank-slot.filled { background: rgba(22, 105, 197, 0.1); border-bottom-color: var(--primary); }
 .blank-slot.correct { background: #dcfce7; border-bottom-color: #22c55e; color: #166534; }
 .blank-slot.incorrect { background: #fee2e2; border-bottom-color: #ef4444; color: #991b1b; }
 .fib-correct-answer { font-size: 0.8em; color: #22c55e; font-weight: 600; margin-left: 8px; }
@@ -1605,7 +1611,7 @@ header .essential-question {
     left: 16px;
     top: 50%;
     transform: translateY(-50%);
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.7);
     font-size: 0.95em;
     pointer-events: none;
 }
@@ -1624,7 +1630,7 @@ header .essential-question {
 }
 
 .res-search-input::placeholder {
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.55);
 }
 
 .res-search-input:focus {
@@ -1668,7 +1674,7 @@ header .essential-question {
 
 .res-chevron {
     font-size: 0.8em;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.7);
     transition: transform 0.25s;
 }
 
@@ -1685,7 +1691,7 @@ header .essential-question {
 
 .res-count-badge {
     font-size: 0.8em;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.75);
     background: rgba(255, 255, 255, 0.08);
     padding: 3px 10px;
     border-radius: 20px;
@@ -1724,7 +1730,7 @@ header .essential-question {
 
 .res-term-def {
     font-size: 0.9em;
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.85);
     line-height: 1.45;
 }
 
@@ -1911,7 +1917,7 @@ header .essential-question {
     text-align: center;
     padding: 20px;
     margin-top: 30px;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.8);
     font-size: 0.8em;
 }
 
@@ -1981,7 +1987,9 @@ header .essential-question {
     text-align: center;
     margin-bottom: 16px;
     font-size: 0.9rem;
-    color: #666;
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 600;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .mastery-progress-bar .progress-bar {
@@ -2024,9 +2032,9 @@ header .essential-question {
 }
 
 .typing-pill {
-    background: rgba(255,255,255,0.15);
-    color: rgba(255,255,255,0.85);
-    border: 1.5px solid rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.18);
+    color: #fff;
+    border: 1.5px solid rgba(255,255,255,0.3);
     border-radius: 20px;
     padding: 8px 20px;
     font-size: 0.9rem;
@@ -2192,7 +2200,7 @@ header .essential-question {
 
 /* Source citation */
 .typing-citation {
-    color: rgba(255,255,255,0.5);
+    color: rgba(255,255,255,0.75);
     font-size: 0.78rem;
     text-align: center;
     font-style: italic;
@@ -2272,4 +2280,131 @@ header .essential-question {
         padding: 6px 14px;
         font-size: 0.82rem;
     }
+}
+
+/* Welcome Screen */
+.welcome-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    z-index: 10001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.welcome-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 480px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    animation: slideIn 0.4s ease;
+}
+
+.welcome-card h1 {
+    color: var(--primary);
+    font-size: 1.8em;
+    margin-bottom: 8px;
+}
+
+.welcome-card .welcome-subtitle {
+    color: #4b5563;
+    margin-bottom: 28px;
+    font-size: 1em;
+}
+
+.welcome-card label {
+    display: block;
+    text-align: left;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 8px;
+    font-size: 0.95em;
+}
+
+.welcome-name-input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid #e5e7eb;
+    border-radius: 10px;
+    font-size: 1.05em;
+    font-family: var(--font-body);
+    margin-bottom: 24px;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+.welcome-name-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(22, 105, 197, 0.15);
+}
+
+.welcome-period-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+}
+
+.welcome-period-btn {
+    padding: 10px 22px;
+    border: 2px solid #e5e7eb;
+    border-radius: 25px;
+    background: white;
+    font-size: 0.95em;
+    font-weight: 600;
+    font-family: var(--font-body);
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #374151;
+}
+
+.welcome-period-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.welcome-period-btn.selected {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+}
+
+.welcome-go-btn {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    border: none;
+    padding: 14px 36px;
+    border-radius: 10px;
+    font-size: 1.1em;
+    font-weight: 700;
+    font-family: var(--font-body);
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+}
+
+.welcome-go-btn:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(22, 105, 197, 0.4);
+}
+
+.welcome-go-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.welcome-overlay.fade-out {
+    animation: fadeOut 0.4s ease forwards;
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
 }

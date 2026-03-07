@@ -93,7 +93,8 @@ const ProgressManager = {
         statsContainer.textContent = '';
 
         const heading = document.createElement('h2');
-        heading.textContent = 'Your Progress';
+        const firstName = this.getFirstName();
+        heading.textContent = firstName ? firstName + '\u2019s Progress' : 'Your Progress';
         statsContainer.appendChild(heading);
 
         const grid = document.createElement('div');
@@ -256,6 +257,190 @@ const ProgressManager = {
         } catch (err) {
             console.error('Session end error:', err);
         }
+    },
+
+    // --- Helper ---
+
+    getFirstName() {
+        if (!this.studentInfo || !this.studentInfo.name) return null;
+        return this.studentInfo.name.trim().split(/\s+/)[0];
+    },
+
+    // --- Welcome Screen ---
+
+    showWelcomeScreen() {
+        var self = this;
+        var selectedCode = null;
+
+        // Overlay
+        var overlay = document.createElement('div');
+        overlay.className = 'welcome-overlay';
+
+        // Card
+        var card = document.createElement('div');
+        card.className = 'welcome-card';
+
+        // Title
+        var title = document.createElement('h1');
+        title.textContent = 'Welcome! \uD83D\uDC4B';
+        card.appendChild(title);
+
+        // Subtitle
+        var subtitle = document.createElement('p');
+        subtitle.className = 'welcome-subtitle';
+        subtitle.textContent = 'Let\u2019s get you set up so your progress is saved.';
+        card.appendChild(subtitle);
+
+        // Name label
+        var nameLabel = document.createElement('label');
+        nameLabel.setAttribute('for', 'welcome-name');
+        nameLabel.textContent = 'What\u2019s your name?';
+        card.appendChild(nameLabel);
+
+        // Name input
+        var nameInput = document.createElement('input');
+        nameInput.type = 'text';
+        nameInput.id = 'welcome-name';
+        nameInput.className = 'welcome-name-input';
+        nameInput.placeholder = 'First name';
+        nameInput.autocomplete = 'given-name';
+        card.appendChild(nameInput);
+
+        // Period label
+        var periodLabel = document.createElement('label');
+        periodLabel.textContent = 'Which period are you in?';
+        card.appendChild(periodLabel);
+
+        // Period buttons
+        var periodContainer = document.createElement('div');
+        periodContainer.className = 'welcome-period-buttons';
+
+        var periods = [
+            { label: 'Period 1', code: 'period1' },
+            { label: 'Period 2', code: 'period2' },
+            { label: 'Period 4', code: 'period4' },
+            { label: 'Period 5', code: 'period5' }
+        ];
+
+        var periodButtons = [];
+
+        periods.forEach(function(p) {
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'welcome-period-btn';
+            btn.textContent = p.label;
+            btn.addEventListener('click', function() {
+                selectedCode = p.code;
+                periodButtons.forEach(function(b) { b.classList.remove('selected'); });
+                btn.classList.add('selected');
+                updateGoBtn();
+            });
+            periodButtons.push(btn);
+            periodContainer.appendChild(btn);
+        });
+
+        card.appendChild(periodContainer);
+
+        // Go button
+        var goBtn = document.createElement('button');
+        goBtn.type = 'button';
+        goBtn.className = 'welcome-go-btn';
+        goBtn.textContent = 'Let\u2019s Go! \u2192';
+        goBtn.disabled = true;
+        card.appendChild(goBtn);
+
+        function updateGoBtn() {
+            var hasName = nameInput.value.trim().length > 0;
+            goBtn.disabled = !(hasName && selectedCode);
+        }
+
+        nameInput.addEventListener('input', updateGoBtn);
+
+        goBtn.addEventListener('click', function() {
+            var name = nameInput.value.trim();
+            if (!name || !selectedCode) return;
+            goBtn.disabled = true;
+            goBtn.textContent = 'Setting up...';
+
+            // Store info and run login logic
+            self.studentInfo = { name: name, classCode: selectedCode };
+            localStorage.setItem(self.prefix + 'studentInfo', JSON.stringify(self.studentInfo));
+
+            // Supabase registration (mirrors login() logic)
+            var afterLogin = function() {
+                // Fade out
+                overlay.classList.add('fade-out');
+                setTimeout(function() {
+                    if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+                    // Re-render header and stats with name
+                    if (StudyEngine.config) {
+                        StudyEngine.renderHeader();
+                        StudyEngine.renderHomeStats();
+                    }
+                }, 400);
+            };
+
+            if (self.supabase) {
+                (async function() {
+                    try {
+                        var classResult = await self.supabase
+                            .from('classes')
+                            .select('id')
+                            .ilike('code', selectedCode)
+                            .limit(1);
+                        if (classResult.error || !classResult.data || classResult.data.length === 0) {
+                            // Class not found — still proceed with local save
+                            afterLogin();
+                            return;
+                        }
+                        var classId = classResult.data[0].id;
+
+                        var studentResult = await self.supabase
+                            .from('students')
+                            .select('id')
+                            .eq('name', name)
+                            .eq('class_id', classId)
+                            .limit(1);
+                        if (studentResult.error) throw studentResult.error;
+
+                        if (studentResult.data && studentResult.data.length > 0) {
+                            self.studentId = studentResult.data[0].id;
+                        } else {
+                            var insertResult = await self.supabase
+                                .from('students')
+                                .insert({ name: name, class_id: classId })
+                                .select('id')
+                                .single();
+                            if (insertResult.error) throw insertResult.error;
+                            self.studentId = insertResult.data.id;
+                        }
+
+                        localStorage.setItem(self.prefix + 'studentId', self.studentId);
+                        self.startSyncLoop();
+                        self.startSession();
+                        self.syncToSupabase();
+                    } catch (err) {
+                        console.error('Welcome screen Supabase error:', err);
+                    }
+                    afterLogin();
+                })();
+            } else {
+                afterLogin();
+            }
+        });
+
+        // Allow Enter key to submit
+        nameInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !goBtn.disabled) {
+                goBtn.click();
+            }
+        });
+
+        overlay.appendChild(card);
+        document.body.appendChild(overlay);
+
+        // Focus name input after animation
+        setTimeout(function() { nameInput.focus(); }, 400);
     },
 
     // --- Login ---

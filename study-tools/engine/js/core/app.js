@@ -42,6 +42,22 @@ const StudyEngine = {
         document.getElementById('site-subtitle').textContent = this.config.unit.subtitle;
         const questionEl = document.getElementById('site-question');
         questionEl.textContent = '"' + this.config.unit.essentialQuestion + '"';
+
+        // Personalized greeting
+        const existingGreeting = document.getElementById('student-greeting');
+        if (existingGreeting) existingGreeting.remove();
+        const firstName = ProgressManager.getFirstName();
+        if (firstName) {
+            const greeting = document.createElement('div');
+            greeting.id = 'student-greeting';
+            greeting.style.color = 'rgba(255,255,255,0.9)';
+            greeting.style.fontSize = '1em';
+            greeting.style.marginTop = '4px';
+            greeting.textContent = 'Hey, ' + firstName + '! \uD83D\uDC4B';
+            const header = document.getElementById('site-header');
+            const subtitle = document.getElementById('site-subtitle');
+            header.insertBefore(greeting, subtitle);
+        }
     },
 
     async loadActivities() {
@@ -147,7 +163,7 @@ const StudyEngine = {
         picker.className = 'activity-picker';
 
         const heading = document.createElement('h2');
-        heading.textContent = 'Choose an activity:';
+        heading.textContent = 'What do you want to work on?';
         picker.appendChild(heading);
 
         const grid = document.createElement('div');
@@ -351,7 +367,10 @@ const StudyEngine = {
             welcome.style.padding = '24px';
 
             const welcomeTitle = document.createElement('h2');
-            welcomeTitle.textContent = 'Welcome! Here\'s how to get started:';
+            const homeFirstName = ProgressManager.getFirstName();
+            welcomeTitle.textContent = homeFirstName
+                ? 'Ready to study, ' + homeFirstName + '? Here\u2019s your game plan:'
+                : 'Ready to study? Here\u2019s your game plan:';
             welcomeTitle.style.color = 'var(--primary)';
             welcome.appendChild(welcomeTitle);
 
@@ -436,7 +455,12 @@ const StudyEngine = {
 
 // Boot on DOM ready
 document.addEventListener('DOMContentLoaded', () => {
-    StudyEngine.init();
+    StudyEngine.init().then(() => {
+        // Show welcome screen on first visit (after app has loaded)
+        if (!ProgressManager.studentInfo) {
+            ProgressManager.showWelcomeScreen();
+        }
+    });
 
     // Load version info
     fetch('version.json')

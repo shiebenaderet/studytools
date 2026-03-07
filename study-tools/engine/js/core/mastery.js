@@ -122,10 +122,13 @@ const MasteryManager = {
         const unitId = config.unit ? config.unit.id : null;
         if (!unitId) return;
         const next = this.getNextLockedCategory(unitId, config);
+        const firstName = ProgressManager.getFirstName();
         if (next) {
-            StudyUtils.showToast(`Nice! "${masteredCategory}" mastered! Now try "${next}" flashcards to unlock more.`, 'success');
+            const prefix = firstName ? `Nice work, ${firstName}!` : 'Nice!';
+            StudyUtils.showToast(`${prefix} "${masteredCategory}" mastered! Now try "${next}" flashcards to unlock more.`, 'success');
         } else {
-            StudyUtils.showToast(`Amazing! All categories mastered! Every activity is now fully unlocked!`, 'success');
+            const prefix = firstName ? `Amazing, ${firstName}!` : 'Amazing!';
+            StudyUtils.showToast(`${prefix} All categories mastered! Every activity is now fully unlocked!`, 'success');
         }
     },
 
@@ -150,7 +153,7 @@ const MasteryManager = {
         // Find the first category that isn't mastered
         for (const cat of categories) {
             if (!this.isCategoryMastered(unitId, config, cat)) {
-                return `Master "${cat}" flashcards to unlock`;
+                return `Learn the "${cat}" terms first \u2014 then this unlocks!`;
             }
         }
         return '';
