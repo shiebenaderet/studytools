@@ -1,49 +1,60 @@
-# Teacher Guide: Make Your Own Study Tool
+<div align="center">
 
-This guide walks you through forking this project and customizing it for your own classes — no coding experience required. You'll use an AI coding assistant (like Claude) to do the heavy lifting.
+# 🍎 Teacher Guide
 
-**What you'll end up with:** A free, hosted study tool website for your students with flashcards, quizzes, games, a leaderboard, and more — all customized to your content.
+### Make Your Own Study Tool — No Coding Required
 
-**What you need:**
-- A GitHub account (free)
-- Your vocabulary, questions, and content ready to go
-- About 30-60 minutes for initial setup
+Fork this project, swap in your content, and give your students a free study tool with flashcards, quizzes, games, and more.
 
----
+**What you need:** A GitHub account (free) and your content ready to go.
 
-## Table of Contents
-
-1. [Fork the Repository](#1-fork-the-repository)
-2. [Enable GitHub Pages](#2-enable-github-pages)
-3. [Understand the Structure](#3-understand-the-structure)
-4. [Edit Your Unit Config](#4-edit-your-unit-config)
-5. [Using AI to Help You](#5-using-ai-to-help-you)
-6. [Config Reference](#6-config-reference)
-7. [Set Up Student Syncing (Optional)](#7-set-up-student-syncing-optional)
-8. [Tips and Common Questions](#8-tips-and-common-questions)
+</div>
 
 ---
 
-## 1. Fork the Repository
+## 📋 Table of Contents
+
+| Step | What You'll Do |
+|------|---------------|
+| [1. Fork the Repository](#-1-fork-the-repository) | Get your own copy of the project |
+| [2. Enable GitHub Pages](#-2-enable-github-pages) | Make your site live on the internet |
+| [3. Understand the Structure](#-3-understand-the-structure) | Learn what goes where |
+| [4. Edit Your Unit Config](#-4-edit-your-unit-config) | Add your vocabulary, questions, and content |
+| [5. Using AI to Help You](#-5-using-ai-to-help-you) | Let AI build your config.json for you |
+| [6. Config Reference](#-6-config-reference) | Full list of activities and fields |
+| [7. Set Up Student Syncing](#-7-set-up-student-syncing-optional) | Optional: leaderboards and cross-device progress |
+| [8. Tips & FAQ](#-8-tips--faq) | Common questions and troubleshooting |
+
+---
+
+## 🍴 1. Fork the Repository
 
 1. Go to the repository page on GitHub
 2. Click the **Fork** button in the top right
 3. Keep the default settings and click **Create fork**
 4. You now have your own copy of the project
 
-## 2. Enable GitHub Pages
+---
 
-This makes your study tool live on the internet for free.
+## 🌐 2. Enable GitHub Pages
+
+This makes your study tool live on the internet — for free.
 
 1. In your forked repo, go to **Settings** > **Pages**
 2. Under "Source," select **Deploy from a branch**
 3. Set the branch to **main** and folder to **/ (root)**
 4. Click **Save**
-5. After a minute or two, your site will be live at `https://YOUR-USERNAME.github.io/studytools/`
+5. After a minute or two, your site will be live at:
 
-## 3. Understand the Structure
+```
+https://YOUR-USERNAME.github.io/studytools/study-tools/?unit=early-republic
+```
 
-You only need to touch **one file** to customize the content:
+---
+
+## 🗂️ 3. Understand the Structure
+
+> **You only need to edit ONE file** to customize the content.
 
 ```
 study-tools/units/YOUR-UNIT/config.json
@@ -51,18 +62,18 @@ study-tools/units/YOUR-UNIT/config.json
 
 That's it. This single file contains all your vocabulary, questions, timeline events, typing passages, and theme settings. The engine reads this file and builds everything automatically.
 
-The existing unit at `study-tools/units/early-republic/` is a complete example you can reference.
-
-### Quick overview of folders
-
-| Folder | What it does | Do you need to edit it? |
-|--------|-------------|------------------------|
-| `study-tools/engine/` | The app itself (HTML, CSS, JS) | No — this just works |
-| `study-tools/units/` | Your content goes here | **Yes — this is where you work** |
+| Folder | What it does | Do you edit it? |
+|--------|-------------|:-:|
+| `study-tools/engine/` | The app itself | No |
+| `study-tools/units/` | **Your content** | **Yes** |
 | `study-tools/dashboard/` | Teacher dashboard | No |
 | `docs/` | Documentation | No |
 
-## 4. Edit Your Unit Config
+The existing unit at `study-tools/units/early-republic/` is a complete example you can reference.
+
+---
+
+## ✏️ 4. Edit Your Unit Config
 
 ### Option A: Modify the existing unit
 
@@ -88,9 +99,9 @@ The simplest path — edit `study-tools/units/early-republic/config.json` direct
 
 4. Your unit will be live at: `https://YOUR-USERNAME.github.io/studytools/study-tools/?unit=your-unit-id`
 
-### What goes in config.json
+### Minimum config.json to get started
 
-Here's the minimum you need to get started:
+This is enough for flashcards, a practice test, fill-in-the-blank, Wordle, and Hangman to all work:
 
 ```json
 {
@@ -133,97 +144,132 @@ Here's the minimum you need to get started:
 }
 ```
 
-That's enough for flashcards, a practice test, fill-in-the-blank, Wordle, and Hangman to all work.
+---
 
-## 5. Using AI to Help You
+## 🤖 5. Using AI to Help You
 
-This is the fastest way to build your content. You can use any AI coding assistant — Claude, ChatGPT, Copilot, etc. Here's how:
+This is the fastest way to build your content. Use any AI assistant — Claude, ChatGPT, Copilot, etc.
 
-### Getting started with AI
+### How to start
 
 1. Open your `config.json` file
-2. Share it with your AI assistant (paste it in, or use a tool like Claude Code)
+2. Share it with your AI assistant (paste it in, or use Claude Code)
 3. Tell it what you want
 
-### Example prompts you can copy and paste
+### Copy-paste prompts
 
-**To create vocabulary from scratch:**
+<details>
+<summary><strong>Create vocabulary from scratch</strong></summary>
+
 > Here are my vocabulary terms for a unit on [your topic]. Create a vocabulary array in the same JSON format as the early-republic config.json. Each term needs: term, definition, simpleExplanation (written for 8th graders), example, and category. Here are my terms: [paste your term list]
 
-**To generate practice questions:**
+</details>
+
+<details>
+<summary><strong>Generate practice questions</strong></summary>
+
 > Using the vocabulary I just gave you, create 20 multiple choice practice questions in the same JSON format. Each question needs 4 options, a correct answer index, an explanation, and a topic that matches one of the vocabulary categories.
 
-**To add typing passages:**
+</details>
+
+<details>
+<summary><strong>Add typing passages</strong></summary>
+
 > Write a 200-300 word typing passage for each category in my vocabulary. Each passage should be written at an 8th grade reading level and cover the key ideas from that category's terms.
 
-**To generate fill-in-the-blank sentences:**
+</details>
+
+<details>
+<summary><strong>Generate fill-in-the-blank sentences</strong></summary>
+
 > Create fill-in-the-blank sentences for each vocabulary term. The sentence should use the term naturally and help students understand the definition.
 
-**To add timeline events:**
+</details>
+
+<details>
+<summary><strong>Add timeline events</strong></summary>
+
 > Create a timeline array with 10-15 key events for this unit. Each event needs a year, event name, and one-sentence description.
 
-**To create short answer questions:**
+</details>
+
+<details>
+<summary><strong>Create short answer questions</strong></summary>
+
 > Write 5 short answer questions that ask students to connect ideas across categories. Each needs a sampleAnswer, rubric with 4 bullet points, keyTerms array, and exemplar response.
+
+</details>
 
 ### Tips for working with AI
 
 - **Always share the existing config.json** so it matches the exact format
-- **Review everything for accuracy** — AI can make mistakes with dates, names, and facts
-- **Ask it to fact-check itself** — "Now review what you just wrote and flag anything that might be historically/scientifically inaccurate"
-- **Iterate** — "Make the simple explanations more conversational" or "These questions are too easy, make them harder"
+- **Review everything for accuracy** — AI can make factual mistakes
+- **Ask it to fact-check itself** — "Review what you wrote and flag anything that might be inaccurate"
+- **Iterate** — "Make the explanations more conversational" or "These questions are too easy"
 - **Be specific about reading level** — "Write for 8th graders" or "Write for 5th graders"
 
-## 6. Config Reference
+---
+
+## 📖 6. Config Reference
 
 ### Available activities
 
 Add any of these to your `activities` array:
 
-| Activity ID | Type | What it does | Required content |
-|------------|------|-------------|-----------------|
-| `flashcards` | Study | Spaced repetition flashcards | `vocabulary` |
-| `resources` | Study | Searchable vocabulary reference | `vocabulary` |
-| `typing-practice` | Study | Typing passages and per-term snippets | `vocabulary` (with `typingSnippet`), `typingPassages` |
-| `source-analysis` | Study | Primary source analysis with SIFT method | Sources in `source-analysis.js` |
-| `practice-test` | Practice | Multiple choice quiz | `practiceQuestions` |
-| `fill-in-blank` | Practice | Complete sentences with terms | `fillInBlankSentences` |
-| `short-answer` | Practice | Open-ended response with rubric | `shortAnswerQuestions` |
-| `timeline` | Practice | Order events chronologically | `timelineEvents` |
-| `wordle` | Game | Guess the term in 6 tries | `vocabulary` |
-| `hangman` | Game | Classic word guessing | `vocabulary` |
-| `flip-match` | Game | Memory matching (terms to definitions) | `vocabulary` |
-| `term-catcher` | Game | Catch the falling correct term | `vocabulary` |
-| `lightning-round` | Game | 60-second speed quiz | `practiceQuestions` |
-| `crossword` | Game | Auto-generated crossword | `vocabulary` |
-| `quiz-race` | Game | Timed quiz race | `practiceQuestions` |
-| `tower-defense` | Game | 3D tower defense (desktop only) | `vocabulary` |
-| `map-quiz` | Game | Click-on-the-map geography quiz | Custom (see source) |
+#### 📖 Study Activities
+| Activity ID | What it does | Required content |
+|------------|-------------|-----------------|
+| `flashcards` | Spaced repetition flashcards | `vocabulary` |
+| `resources` | Searchable vocabulary reference | `vocabulary` |
+| `typing-practice` | Typing passages + per-term snippets | `vocabulary` (with `typingSnippet`), `typingPassages` |
+| `source-analysis` | Primary source analysis (SIFT method) | Sources in `source-analysis.js` |
+
+#### 📝 Practice Activities
+| Activity ID | What it does | Required content |
+|------------|-------------|-----------------|
+| `practice-test` | Multiple choice quiz | `practiceQuestions` |
+| `fill-in-blank` | Complete sentences with terms | `fillInBlankSentences` |
+| `short-answer` | Open-ended response with rubric | `shortAnswerQuestions` |
+| `timeline` | Order events chronologically | `timelineEvents` |
+
+#### 🎮 Games
+| Activity ID | What it does | Required content |
+|------------|-------------|-----------------|
+| `wordle` | Guess the term in 6 tries | `vocabulary` |
+| `hangman` | Classic word guessing | `vocabulary` |
+| `flip-match` | Memory matching (terms to definitions) | `vocabulary` |
+| `term-catcher` | Catch the falling correct term | `vocabulary` |
+| `lightning-round` | 60-second speed quiz | `practiceQuestions` |
+| `crossword` | Auto-generated crossword | `vocabulary` |
+| `quiz-race` | Timed quiz race | `practiceQuestions` |
+| `tower-defense` | 3D tower defense (desktop only) | `vocabulary` |
+| `map-quiz` | Click-on-the-map geography quiz | Custom (see source) |
 
 ### Vocabulary fields
 
 | Field | Required | Description |
-|-------|----------|-------------|
+|-------|:--------:|-------------|
 | `term` | Yes | The vocabulary word |
 | `definition` | Yes | Short definition |
-| `simpleExplanation` | No | Longer, student-friendly explanation |
-| `example` | No | A sentence using the term in context |
-| `category` | No | Groups terms for mastery gating (order matters — first category unlocks first) |
-| `typingSnippet` | No | 2-3 sentence passage for typing practice per term |
-| `wikiUrl` | No | Link to Wikipedia article for the Resources page |
+| `simpleExplanation` | | Longer, student-friendly explanation |
+| `example` | | A sentence using the term in context |
+| `category` | | Groups terms for mastery gating (order matters — first category unlocks first) |
+| `typingSnippet` | | 2-3 sentence passage for typing practice per term |
+| `wikiUrl` | | Link to Wikipedia article for the Resources page |
 
 ### Practice question fields
 
 | Field | Required | Description |
-|-------|----------|-------------|
+|-------|:--------:|-------------|
 | `question` | Yes | The question text |
 | `options` | Yes | Array of 4 answer choices |
 | `correct` | Yes | Index of correct answer (0-3) |
-| `explanation` | No | Why the answer is correct |
-| `topic` | No | Category name — links to vocabulary categories for weakness tracking |
+| `explanation` | | Why the answer is correct |
+| `topic` | | Category name — links to vocabulary categories for weakness tracking |
 
 ### Theme colors
 
-Pick colors that match your subject. The theme object accepts:
+Pick colors that match your subject:
 
 ```json
 "theme": {
@@ -233,78 +279,115 @@ Pick colors that match your subject. The theme object accepts:
 }
 ```
 
-- `primary` — Main brand color (headers, buttons)
-- `secondary` — Lighter variation
-- `accent` — Highlight color (achievements, alerts)
+| Color | What it controls |
+|-------|-----------------|
+| `primary` | Headers, buttons, main brand color |
+| `secondary` | Lighter variation for accents |
+| `accent` | Highlights, achievements, alerts |
 
 ### Welcome screen periods
 
-The welcome screen currently has hardcoded period buttons (Period 1, 2, 4, 5). To change these for your school, edit the `showWelcomeScreen` function in `study-tools/engine/js/core/progress.js`. Search for `var periods = [` and modify the labels and codes.
+The welcome screen has hardcoded period buttons (Period 1, 2, 4, 5). To change these for your school, edit `study-tools/engine/js/core/progress.js` — search for `var periods = [` and modify the labels and codes.
 
-## 7. Set Up Student Syncing (Optional)
+---
 
-Without Supabase, the study tool works perfectly — progress saves to each student's browser (localStorage). But if you want:
+## ☁️ 7. Set Up Student Syncing (Optional)
+
+Without Supabase, the study tool works perfectly — progress saves to each student's browser. But if you want:
+
 - Progress that syncs across devices
-- A leaderboard
+- A leaderboard with class competition
 - A teacher dashboard to see student progress
+- The ability to edit/delete student profiles
 
-You'll need a free Supabase account.
+You'll need a free [Supabase](https://supabase.com) account.
 
-### Steps
+### Setup steps
 
 1. Create a free account at [supabase.com](https://supabase.com)
 2. Create a new project
-3. Run the schema from `study-tools/database/schema.sql` in the Supabase SQL editor
-4. Copy your project URL and anon key
-5. Edit `study-tools/engine/js/core/supabase-config.js` with your credentials:
+3. Go to the **SQL Editor** and run the schema from `study-tools/database/schema.sql`
+4. Copy your project URL and anon key from **Settings** > **API**
+5. Edit `study-tools/engine/js/core/supabase-config.js`:
 
 ```js
 var SUPABASE_URL = 'https://YOUR-PROJECT.supabase.co';
 var SUPABASE_ANON_KEY = 'your-anon-key-here';
 ```
 
-6. Create classes in Supabase for your periods (the `classes` table needs a `code` matching your welcome screen period codes)
+6. Create classes in Supabase for your periods (the `classes` table needs a `code` matching your period codes)
 
 ### Is it worth it?
 
-- **Just trying it out?** Skip Supabase. Everything works without it.
-- **Using it for a real class?** Set it up — the leaderboard and progress tracking are motivating for students.
+| Situation | Recommendation |
+|-----------|---------------|
+| Just trying it out | Skip Supabase — everything works without it |
+| Using it for a real class | Set it up — the leaderboard motivates students |
 
-## 8. Tips and Common Questions
+---
 
-### "How do I test changes before my students see them?"
+## ❓ 8. Tips & FAQ
+
+<details>
+<summary><strong>How do I test changes before my students see them?</strong></summary>
 
 Edit files on a branch other than `main`. GitHub Pages only deploys from `main`, so your changes won't be live until you merge.
 
-### "Can I use this for subjects other than history?"
+</details>
 
-Absolutely. The platform is subject-agnostic. The vocabulary, questions, and content are all in your config.json — replace them with any subject matter.
+<details>
+<summary><strong>Can I use this for subjects other than history?</strong></summary>
 
-### "How do I change the welcome screen message?"
+Absolutely. The platform is subject-agnostic. Replace the vocabulary, questions, and content in your config.json with any subject matter.
+
+</details>
+
+<details>
+<summary><strong>How do I change the welcome screen message?</strong></summary>
 
 Edit the `showWelcomeScreen` function in `study-tools/engine/js/core/progress.js`.
 
-### "How do I add images for source analysis?"
+</details>
+
+<details>
+<summary><strong>How do I add images for source analysis?</strong></summary>
 
 1. Put images in `study-tools/units/your-unit/images/sources/`
 2. Reference them by filename in your source analysis data
 
-### "My students see an old version"
+</details>
 
-GitHub Pages caches aggressively. Tell students to hard-refresh: `Ctrl+Shift+R` (Windows/Chromebook) or `Cmd+Shift+R` (Mac).
+<details>
+<summary><strong>My students see an old version</strong></summary>
 
-### "Can multiple units exist at the same time?"
+GitHub Pages caches aggressively. Tell students to hard-refresh:
+- **Windows/Chromebook:** `Ctrl+Shift+R`
+- **Mac:** `Cmd+Shift+R`
 
-Yes. Each unit has its own URL: `?unit=unit-id`. You can link students directly to their unit.
+</details>
 
-### "I broke something"
+<details>
+<summary><strong>Can multiple units exist at the same time?</strong></summary>
 
-Since it's Git, you can always revert. If you're using the GitHub web editor, go to your commit history and revert the commit that broke things. Or ask your AI assistant: "I made a change that broke the site, here's what I changed, help me fix it."
+Yes! Each unit has its own URL: `?unit=unit-id`. Link students directly to their unit.
+
+</details>
+
+<details>
+<summary><strong>I broke something</strong></summary>
+
+Since it's Git, you can always revert. Go to your commit history on GitHub and revert the commit that broke things. Or ask your AI assistant: "I made a change that broke the site, here's what I changed, help me fix it."
+
+</details>
 
 ---
 
-## Need Help?
+<div align="center">
 
-- Look at the `early-republic` unit as a working example of every feature
-- Open an issue on the GitHub repository
-- Use an AI coding assistant — paste your config.json and describe what's wrong
+### Need Help?
+
+Look at the `early-republic` unit as a working example of every feature.
+
+Open an issue on GitHub or ask an AI assistant — paste your config.json and describe what's wrong.
+
+</div>
