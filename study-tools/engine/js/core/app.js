@@ -413,73 +413,83 @@ const StudyEngine = {
             ProgressManager.renderHomeStats(this.config);
         }
 
-        var badgesContainer = document.getElementById('badges-container');
-        if (badgesContainer) {
-            AchievementManager.renderBadges(badgesContainer);
+        // Render achievements inside the stats container
+        var statsContainer = document.getElementById('stats-container');
+        if (statsContainer && typeof AchievementManager !== 'undefined') {
+            var existingAch = statsContainer.querySelector('.ach-section');
+            if (existingAch) existingAch.remove();
+            var achSection = document.createElement('div');
+            achSection.className = 'ach-section';
+            AchievementManager.renderBadges(achSection);
+            statsContainer.appendChild(achSection);
         }
 
         const homeCards = document.getElementById('home-cards');
         if (homeCards && homeCards.children.length === 0) {
             homeCards.textContent = '';
 
-            const welcome = document.createElement('div');
-            welcome.className = 'card';
-            welcome.style.marginBottom = '12px';
-            welcome.style.textAlign = 'center';
-            welcome.style.padding = '14px 18px';
+            // Step-by-step flow
+            const flow = document.createElement('div');
+            flow.className = 'home-flow';
 
-            const welcomeTitle = document.createElement('h2');
             const homeFirstName = ProgressManager.getFirstName();
-            welcomeTitle.textContent = homeFirstName
-                ? 'Ready to study, ' + homeFirstName + '? Here\u2019s your game plan:'
-                : 'Ready to study? Here\u2019s your game plan:';
-            welcomeTitle.style.color = 'var(--primary)';
-            welcome.appendChild(welcomeTitle);
+            const flowTitle = document.createElement('h2');
+            flowTitle.className = 'home-flow-title';
+            flowTitle.textContent = homeFirstName
+                ? 'Hey ' + homeFirstName + '! Here\u2019s how to study:'
+                : 'Here\u2019s how to study:';
+            flow.appendChild(flowTitle);
 
             const steps = [
-                { icon: 'fas fa-book', text: 'Start with Flashcards to learn the terms', group: 'study' },
-                { icon: 'fas fa-clipboard-check', text: 'Test yourself with Practice activities', group: 'practice' },
-                { icon: 'fas fa-gamepad', text: 'Play Games to reinforce what you learned', group: 'games' }
+                { num: '1', icon: 'fas fa-book', title: 'Learn', desc: 'Read through Flashcards to learn key terms and definitions.', group: 'study', cta: 'Open Study' },
+                { num: '2', icon: 'fas fa-clipboard-check', title: 'Practice', desc: 'Take the Practice Test and Fill-in-the-Blank to check yourself.', group: 'practice', cta: 'Open Practice' },
+                { num: '3', icon: 'fas fa-gamepad', title: 'Play', desc: 'Play Wordle, Crossword, and more to lock it in.', group: 'games', cta: 'Open Games' }
             ];
 
             const stepsDiv = document.createElement('div');
-            stepsDiv.style.display = 'flex';
-            stepsDiv.style.flexWrap = 'wrap';
-            stepsDiv.style.gap = '16px';
-            stepsDiv.style.justifyContent = 'center';
-            stepsDiv.style.marginTop = '16px';
+            stepsDiv.className = 'home-steps';
 
             steps.forEach((step) => {
-                const stepCard = document.createElement('div');
-                stepCard.className = 'card activity-card';
-                stepCard.style.cursor = 'pointer';
-                stepCard.style.flex = '1';
-                stepCard.style.minWidth = '200px';
-                stepCard.style.maxWidth = '280px';
+                const stepEl = document.createElement('div');
+                stepEl.className = 'home-step';
 
-                const num = document.createElement('div');
-                num.style.fontSize = '2em';
-                num.style.color = 'var(--primary)';
-                const icon = document.createElement('i');
+                const numBadge = document.createElement('div');
+                numBadge.className = 'home-step-num';
+                numBadge.textContent = step.num;
+                stepEl.appendChild(numBadge);
+
+                const content = document.createElement('div');
+                content.className = 'home-step-content';
+
+                const titleRow = document.createElement('div');
+                titleRow.className = 'home-step-title';
+                var icon = document.createElement('i');
                 icon.className = step.icon;
-                num.appendChild(icon);
-                stepCard.appendChild(num);
+                titleRow.appendChild(icon);
+                titleRow.appendChild(document.createTextNode(' ' + step.title));
+                content.appendChild(titleRow);
 
-                const text = document.createElement('p');
-                text.textContent = step.text;
-                text.style.marginTop = '8px';
-                stepCard.appendChild(text);
+                const desc = document.createElement('div');
+                desc.className = 'home-step-desc';
+                desc.textContent = step.desc;
+                content.appendChild(desc);
 
-                stepCard.addEventListener('click', () => {
+                stepEl.appendChild(content);
+
+                const ctaBtn = document.createElement('button');
+                ctaBtn.className = 'home-step-cta';
+                ctaBtn.textContent = step.cta;
+                ctaBtn.addEventListener('click', () => {
                     const navBtn = document.querySelector('.nav-btn[data-group="' + step.group + '"]');
                     if (navBtn) navBtn.click();
                 });
+                stepEl.appendChild(ctaBtn);
 
-                stepsDiv.appendChild(stepCard);
+                stepsDiv.appendChild(stepEl);
             });
 
-            welcome.appendChild(stepsDiv);
-            homeCards.appendChild(welcome);
+            flow.appendChild(stepsDiv);
+            homeCards.appendChild(flow);
 
             // Historical flavor: random quote card
             this._renderHistoricalQuote(homeCards);

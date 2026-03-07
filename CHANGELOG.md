@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.5.0] - 2026-03-06
+
+### Changed
+- **Achievements merged into progress** — Badge grid now renders inside the stats/progress container instead of a separate section, saving vertical space
+- **Numbered study flow** — Home page welcome replaced with clear 1-2-3 step cards (Learn → Practice → Play) with descriptions and CTA buttons
+- **Quote card more prominent** — Larger portrait (72px), primary-colored border, gradient background tint, bolder author text
+- **Removed separate badges-container** from HTML layout
+
 ## [2.4.0] - 2026-03-06
 
 ### Changed
