@@ -22,7 +22,8 @@ var AchievementManager = {
         { id: 'we-the-people', name: 'We The People', description: 'Typed the famous preamble opening.', icon: 'fas fa-scroll', unlocked: false, unlockedAt: null, secret: true },
         { id: 'eagle-eye', name: 'Eagle Eye', description: 'Found the hidden eagle.', icon: 'fas fa-dove', unlocked: false, unlockedAt: null, secret: true },
         { id: 'midnight-scholar', name: 'Midnight Scholar', description: 'Studying at midnight! True dedication.', icon: 'fas fa-hat-wizard', unlocked: false, unlockedAt: null, secret: true },
-        { id: 'top-student', name: 'Top Student', description: 'Reached #1 on the leaderboard!', icon: 'fas fa-crown', unlocked: false, unlockedAt: null }
+        { id: 'top-student', name: 'Top Student', description: 'Reached #1 on the leaderboard!', icon: 'fas fa-crown', unlocked: false, unlockedAt: null },
+        { id: 'cartographer', name: 'Cartographer', description: 'Got 100% on the Map Quiz with no mistakes.', icon: 'fas fa-map-marked-alt', unlocked: false, unlockedAt: null }
     ],
 
     unitId: null,
@@ -143,6 +144,11 @@ var AchievementManager = {
         // Source Sleuth - 90%+ on Source Analysis
         if (context.activity === 'source-analysis' && context.score >= 90) {
             this.unlock('source-sleuth');
+        }
+
+        // Cartographer - perfect map quiz
+        if (context.activity === 'map-quiz' && context.event === 'cartographer') {
+            this.unlock('cartographer');
         }
 
         // Night Owl - study after 8 PM
