@@ -3086,9 +3086,10 @@ body.timer-active header {
 
 .footer-fun-fact {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
     gap: 8px;
-    text-align: left;
+    text-align: center;
     font-size: 0.9em;
     color: var(--text-secondary);
     line-height: 1.4;
@@ -4101,6 +4102,10 @@ body.timer-active header {
 .td-upgrade-toast { position: absolute; top: 50px; left: 50%; transform: translateX(-50%); background: var(--bg-card); border: 1px solid #eab308; color: #eab308; padding: 8px 20px; border-radius: 20px; font-weight: 600; font-size: 0.9em; z-index: 15; animation: fadeIn 0.2s ease, fadeOut 0.3s ease 1.7s forwards; pointer-events: none; white-space: nowrap; }
 
 /* ── MUSIC PLAYER ──────────────────────────────────────────────────── */
+body.music-active .container {
+    padding-bottom: 60px;
+}
+
 .music-player {
     position: fixed;
     bottom: 16px;

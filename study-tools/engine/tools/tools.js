@@ -583,6 +583,7 @@ const StudyTools = {
         if (this._musicPlayer) {
             const isHidden = this._musicPlayer.style.display === 'none';
             this._musicPlayer.style.display = isHidden ? 'flex' : 'none';
+            document.body.classList.toggle('music-active', isHidden);
             return;
         }
 
@@ -633,6 +634,7 @@ const StudyTools = {
                 this._musicAudio = null;
             }
             player.style.display = 'none';
+            document.body.classList.remove('music-active');
         });
         player.appendChild(closeBtn);
 
@@ -764,6 +766,7 @@ const StudyTools = {
 
         player.appendChild(body);
         document.body.appendChild(player);
+        document.body.classList.add('music-active');
         this._musicPlayer = player;
 
         // Load first track
