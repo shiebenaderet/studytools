@@ -4143,15 +4143,16 @@ body.timer-active header {
 .mq-region-path { cursor: pointer; transition: opacity 0.15s, fill 0.3s; stroke-linejoin: round; }
 .mq-region-path:hover { opacity: 0.75; stroke: #ffffff; stroke-width: 2; }
 .mq-region-path.mq-correct { cursor: default; opacity: 0.85; }
-.mq-region-path.mq-correct:hover { opacity: 0.85; stroke: #0d1b2a; stroke-width: 1.5; }
+.mq-region-path.mq-correct:hover { opacity: 0.85; stroke: #ffffff; stroke-width: 2; }
 .mq-region-path.mq-wrong { fill: #ef4444 !important; animation: mq-flash 0.5s ease; }
-.mq-region-path.mq-hint { fill: #fbbf24 !important; animation: mq-pulse 0.75s ease 2; }
+.mq-region-path.mq-hint { fill: #fbbf24 !important; stroke: #fbbf24 !important; stroke-width: 4 !important; animation: mq-pulse 0.6s ease 4; }
 
 @keyframes mq-flash { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-@keyframes mq-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+@keyframes mq-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
 .mq-feedback { text-align: center; padding: 10px 16px; background: var(--bg-elevated); border-radius: 0 0 12px 12px; border: 1px solid var(--border-card); border-top: none; min-height: 20px; font-weight: 600; font-size: 0.95em; transition: color 0.2s; }
 .mq-feedback-correct { color: #22c55e; }
+.mq-feedback-hint { color: #fbbf24; }
 .mq-feedback-wrong { color: #ef4444; }
 
 .mq-results { max-width: 500px; margin: 0 auto; text-align: center; padding: 40px 20px; }

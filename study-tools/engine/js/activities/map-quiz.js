@@ -19,6 +19,7 @@ StudyEngine.registerActivity({
     _bestTime: null,
     _attempts: 0,
     _hintUsed: false,
+    _regionMistakes: 0,
 
     // All 24 regions with accurate SVG path data from Seterra-style 1803 U.S. map
     // Coordinate system: viewBox 0 0 900 700
@@ -264,9 +265,9 @@ StudyEngine.registerActivity({
 
             var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
             path.setAttribute('d', region.path);
-            path.setAttribute('fill', region.color);
-            path.setAttribute('stroke', '#0d1b2a');
-            path.setAttribute('stroke-width', '1.5');
+            path.setAttribute('fill', '#5a7a9a');
+            path.setAttribute('stroke', '#ffffff');
+            path.setAttribute('stroke-width', '2');
             path.setAttribute('class', 'mq-region-path');
             path.setAttribute('data-id', region.id);
 
@@ -324,6 +325,7 @@ StudyEngine.registerActivity({
 
         this._currentRegion = this._queue.shift();
         this._hintUsed = false;
+        this._regionMistakes = 0;
 
         var prompt = document.getElementById('mq-prompt');
         if (prompt) {
@@ -408,6 +410,7 @@ StudyEngine.registerActivity({
 
         } else {
             this._mistakes++;
+            this._regionMistakes++;
 
             // Flash wrong
             if (clickedPath && !clickedPath.classList.contains('mq-correct')) {
@@ -422,15 +425,18 @@ StudyEngine.registerActivity({
                 feedback.textContent = 'Try again!';
             }
 
-            // After 2 mistakes on the same region, show a hint pulse
-            if (this._mistakes > 1 && !this._hintUsed) {
+            // After 3 wrong clicks on this region, pulse the correct answer
+            if (this._regionMistakes >= 3 && !this._hintUsed) {
                 this._hintUsed = true;
                 if (correctPath) {
                     correctPath.classList.add('mq-hint');
-                    var self2 = this;
                     setTimeout(function() {
                         correctPath.classList.remove('mq-hint');
-                    }, 1500);
+                    }, 2500);
+                }
+                if (feedback) {
+                    feedback.className = 'mq-feedback mq-feedback-hint';
+                    feedback.textContent = 'Look for the highlighted region!';
                 }
             }
         }
@@ -540,262 +546,18 @@ StudyEngine.registerActivity({
         this._loadLeaderboard(lbWrap);
     },
 
-    async _loadLeaderboard(container) {
-        if (!ProgressManager.supabase) {
+    _loadLeaderboard(container) {
+        if (typeof LeaderboardManager === 'undefined') {
             container.textContent = '';
             var msg = document.createElement('p');
             msg.className = 'mq-lb-empty';
-            msg.textContent = 'Sign in to see the leaderboard.';
+            msg.textContent = 'Leaderboard unavailable.';
             container.appendChild(msg);
             return;
         }
 
-        container.textContent = '';
-        var loading = document.createElement('p');
-        loading.className = 'mq-lb-empty';
-        var spinner = document.createElement('i');
-        spinner.className = 'fas fa-spinner fa-spin';
-        loading.appendChild(spinner);
-        loading.appendChild(document.createTextNode(' Loading leaderboard...'));
-        container.appendChild(loading);
-
-        try {
-            var unitId = this._config.unit.id;
-
-            // Get all map-quiz progress entries
-            var result = await ProgressManager.supabase
-                .from('progress')
-                .select('student_id, data')
-                .eq('unit_id', unitId)
-                .eq('activity', 'map-quiz');
-            if (result.error) throw result.error;
-            var entries = result.data || [];
-
-            // Filter to entries with a bestScore, sort by score desc then time asc
-            var ranked = entries
-                .filter(function(e) { return e.data && typeof e.data.bestScore === 'number' && e.data.bestScore > 0; })
-                .map(function(e) {
-                    return {
-                        student_id: e.student_id,
-                        score: e.data.bestScore,
-                        time: e.data.bestTime || null,
-                        attempts: e.data.attempts || 0
-                    };
-                })
-                .sort(function(a, b) {
-                    if (b.score !== a.score) return b.score - a.score;
-                    if (a.time === null) return 1;
-                    if (b.time === null) return -1;
-                    return a.time - b.time;
-                });
-
-            if (ranked.length === 0) {
-                container.textContent = '';
-                var empty = document.createElement('p');
-                empty.className = 'mq-lb-empty';
-                empty.textContent = 'No scores yet. Be the first!';
-                container.appendChild(empty);
-                return;
-            }
-
-            // Get student names and class_ids
-            var studentIds = ranked.map(function(e) { return e.student_id; });
-            var sResult = await ProgressManager.supabase
-                .from('students')
-                .select('id, name, class_id')
-                .in('id', studentIds);
-            var studentMap = {};
-            if (sResult.data) {
-                sResult.data.forEach(function(s) { studentMap[s.id] = s; });
-            }
-
-            // Get class names
-            var classResult = await ProgressManager.supabase
-                .from('classes')
-                .select('id, name, code');
-            var classMap = {};
-            if (classResult.data) {
-                classResult.data.forEach(function(c) { classMap[c.id] = c; });
-            }
-
-            container.textContent = '';
-            var self = this;
-
-            // ── Tab bar ──
-            var tabBar = document.createElement('div');
-            tabBar.className = 'mq-lb-tabs';
-
-            var studentTab = document.createElement('button');
-            studentTab.className = 'mq-lb-tab active';
-            studentTab.textContent = 'Top Students';
-            var classTab = document.createElement('button');
-            classTab.className = 'mq-lb-tab';
-            classTab.textContent = 'Class Battle';
-
-            var contentArea = document.createElement('div');
-
-            studentTab.addEventListener('click', function() {
-                studentTab.classList.add('active');
-                classTab.classList.remove('active');
-                self._renderStudentLB(contentArea, ranked, studentMap);
-            });
-            classTab.addEventListener('click', function() {
-                classTab.classList.add('active');
-                studentTab.classList.remove('active');
-                self._renderClassLB(contentArea, ranked, studentMap, classMap);
-            });
-
-            tabBar.appendChild(studentTab);
-            tabBar.appendChild(classTab);
-            container.appendChild(tabBar);
-            container.appendChild(contentArea);
-
-            // Default: student rankings
-            this._renderStudentLB(contentArea, ranked, studentMap);
-
-        } catch (err) {
-            console.error('Map quiz leaderboard error:', err);
-            container.textContent = '';
-            var errEl = document.createElement('p');
-            errEl.className = 'mq-lb-empty';
-            errEl.style.color = 'var(--danger)';
-            errEl.textContent = 'Could not load leaderboard.';
-            container.appendChild(errEl);
-        }
-    },
-
-    _renderStudentLB(container, ranked, studentMap) {
-        container.textContent = '';
-        var self = this;
-
-        var heading = document.createElement('h3');
-        heading.className = 'mq-lb-heading';
-        var headingIcon = document.createElement('i');
-        headingIcon.className = 'fas fa-trophy';
-        heading.appendChild(headingIcon);
-        heading.appendChild(document.createTextNode(' Top Students'));
-        container.appendChild(heading);
-
-        var list = document.createElement('div');
-        list.className = 'mq-lb-list';
-
-        ranked.slice(0, 20).forEach(function(entry, i) {
-            var student = studentMap[entry.student_id] || {};
-            var row = document.createElement('div');
-            row.className = 'mq-lb-row';
-            if (ProgressManager.studentId === entry.student_id) row.classList.add('mq-lb-me');
-
-            var rank = document.createElement('div');
-            rank.className = 'mq-lb-rank';
-            var medals = ['gold', 'silver', 'bronze'];
-            if (i < 3) rank.classList.add('mq-lb-' + medals[i]);
-            rank.textContent = '#' + (i + 1);
-            row.appendChild(rank);
-
-            var name = document.createElement('div');
-            name.className = 'mq-lb-name';
-            name.textContent = student.name || 'Unknown';
-            if (ProgressManager.studentId === entry.student_id) {
-                var tag = document.createElement('span');
-                tag.className = 'mq-lb-you';
-                tag.textContent = 'YOU';
-                name.appendChild(tag);
-            }
-            row.appendChild(name);
-
-            var score = document.createElement('div');
-            score.className = 'mq-lb-score';
-            score.textContent = entry.score + '%';
-            row.appendChild(score);
-
-            var time = document.createElement('div');
-            time.className = 'mq-lb-time';
-            time.textContent = entry.time !== null ? self._formatTime(entry.time) : '--';
-            row.appendChild(time);
-
-            list.appendChild(row);
-        });
-
-        container.appendChild(list);
-    },
-
-    _renderClassLB(container, ranked, studentMap, classMap) {
-        container.textContent = '';
-        var self = this;
-
-        // Aggregate by class
-        var classScores = {};
-        ranked.forEach(function(entry) {
-            var student = studentMap[entry.student_id];
-            if (!student || !student.class_id) return;
-            var cid = student.class_id;
-            if (!classScores[cid]) classScores[cid] = { total: 0, count: 0, bestTime: null };
-            classScores[cid].total += entry.score;
-            classScores[cid].count++;
-            if (entry.score === 100 && entry.time !== null) {
-                if (classScores[cid].bestTime === null || entry.time < classScores[cid].bestTime) {
-                    classScores[cid].bestTime = entry.time;
-                }
-            }
-        });
-
-        var sorted = Object.keys(classScores).map(function(cid) {
-            var c = classScores[cid];
-            return { classId: cid, avg: Math.round(c.total / c.count), count: c.count, bestTime: c.bestTime };
-        }).sort(function(a, b) { return b.avg - a.avg; });
-
-        var heading = document.createElement('h3');
-        heading.className = 'mq-lb-heading';
-        var headingIcon = document.createElement('i');
-        headingIcon.className = 'fas fa-users';
-        heading.appendChild(headingIcon);
-        heading.appendChild(document.createTextNode(' Class Battle'));
-        container.appendChild(heading);
-
-        if (sorted.length === 0) {
-            var empty = document.createElement('p');
-            empty.className = 'mq-lb-empty';
-            empty.textContent = 'No class scores yet.';
-            container.appendChild(empty);
-            return;
-        }
-
-        var maxAvg = sorted[0].avg || 1;
-        var barWrap = document.createElement('div');
-        barWrap.className = 'mq-lb-bars';
-
-        sorted.forEach(function(item, i) {
-            var cls = classMap[item.classId] || {};
-            var barItem = document.createElement('div');
-            barItem.className = 'mq-lb-bar-item';
-
-            var label = document.createElement('div');
-            label.className = 'mq-lb-bar-label';
-            var trophies = ['1st', '2nd', '3rd'];
-            label.textContent = (i < 3 ? trophies[i] + ' ' : '') + (cls.name || cls.code || 'Unknown');
-            barItem.appendChild(label);
-
-            var track = document.createElement('div');
-            track.className = 'mq-lb-bar-track';
-
-            var fill = document.createElement('div');
-            fill.className = 'mq-lb-bar-fill';
-            var pct = maxAvg > 0 ? Math.round((item.avg / maxAvg) * 100) : 0;
-            fill.style.width = '0%';
-            fill.textContent = item.avg + '% avg';
-            setTimeout(function(f, p) { return function() { f.style.width = Math.max(p, 15) + '%'; }; }(fill, pct), 100 + i * 150);
-            track.appendChild(fill);
-            barItem.appendChild(track);
-
-            var count = document.createElement('div');
-            count.className = 'mq-lb-bar-count';
-            count.textContent = item.count + ' students';
-            barItem.appendChild(count);
-
-            barWrap.appendChild(barItem);
-        });
-
-        container.appendChild(barWrap);
+        LeaderboardManager.submitScore();
+        LeaderboardManager.renderPage(container);
     },
 
     _getPathCenter(pathData) {
