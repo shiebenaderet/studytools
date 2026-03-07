@@ -5,6 +5,35 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2026-03-06
+
+### Added
+- **Dark theme redesign** — Complete visual overhaul with Outfit font, dark slate backgrounds, and cohesive CSS variable system (`--bg-deep`, `--bg-card`, `--bg-surface`, `--text-primary`, etc.)
+- **Anki-style flashcards** — Spaced repetition with 3D flip animation, confidence rating (Again/Hard/Good/Easy), progress dots, and session completion stats
+- **Cross-activity weakness tracking** — Wrong answers in Practice Test, Lightning Round, and Typing Practice feed into a shared `weakness_tracker`, surfaced as review suggestions in Flashcards
+- **Per-term typing snippets** — Each vocabulary term has a 2-3 sentence mini-passage; weak terms highlighted in amber and prioritized for practice
+- **Source Analysis activity** — SIFT method primary source analysis with classification, contextual questions, and scoring
+- **Mastery gating** — Activities unlock progressively as students demonstrate mastery
+- **Student welcome screen** — Name and period input overlay with personalized greetings throughout the app
+- **Historical flavor content** — 15 era-appropriate quotes with Wikimedia Commons portraits and 15 fun facts from the 1785-1815 period in config
+- **Resource Library** — Searchable, collapsible vocabulary reference with Kiddle, Wikipedia, and YouTube links per term
+- **Achievement system** — Unlockable badges with confetti animations for milestones (perfect scores, streaks, speed records)
+
+### Changed
+- Font family from Roboto/Lexend to Outfit (variable weight 300-900)
+- All activity UI components converted from white/light backgrounds to dark theme
+- Category card colors updated for dark theme contrast (study=blue, practice=purple, games=green)
+- Feedback colors use semi-transparent RGBA instead of solid light backgrounds (e.g., `rgba(34,197,94,0.15)` instead of `#dcfce7`)
+- Practice test answer positions randomized per question with persistent shuffle maps
+- Activity card grid alignment and button styling unified
+
+### Fixed
+- Source analysis "Questions:" field showing blank after score screen (empty array was truthy)
+- Flashcard content overflow on long definitions
+- Timeline, crossword, and all game activities now render correctly on dark backgrounds
+- Modal, toast, and input styling consistent with dark theme
+- Hangman gallows visible on dark backgrounds (was `#333` on dark)
+
 ## [1.0.0] - 2026-03-05
 
 ### Added
