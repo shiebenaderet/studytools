@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Study - Study Tools</title>
+    <link rel="stylesheet" href="vendor/font-awesome.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .study-page {
+            max-width: 740px;
+            margin: 0 auto;
+            padding: 40px 20px 60px;
+        }
+        .study-page h1 {
+            color: var(--text-primary);
+            font-size: 1.8em;
+            margin-bottom: 8px;
+        }
+        .study-page .study-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.05em;
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+        .study-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9em;
+            margin-bottom: 24px;
+            transition: color 0.2s;
+        }
+        .study-back:hover {
+            color: var(--primary);
+        }
+
+        /* Hero callout */
+        .study-hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 16px;
+            padding: 28px 28px 24px;
+            margin-bottom: 28px;
+            color: #fff;
+        }
+        .study-hero h2 {
+            color: #fff;
+            font-size: 1.25em;
+            margin-bottom: 8px;
+        }
+        .study-hero p {
+            color: rgba(255,255,255,0.9);
+            font-size: 0.95em;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Strategy cards */
+        .strategy-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 14px;
+            padding: 0;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .strategy-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 20px 24px 16px;
+        }
+        .strategy-number {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1em;
+            color: #fff;
+            flex-shrink: 0;
+        }
+        .strategy-header h2 {
+            color: var(--text-primary);
+            font-size: 1.15em;
+            margin: 0;
+        }
+        .strategy-header .strategy-tagline {
+            color: var(--text-secondary);
+            font-size: 0.85em;
+            margin-top: 2px;
+        }
+        .strategy-body {
+            padding: 0 24px 20px;
+        }
+        .strategy-body p,
+        .strategy-body li {
+            color: var(--text-secondary);
+            font-size: 0.93em;
+            line-height: 1.65;
+        }
+        .strategy-body ul {
+            margin: 8px 0 12px;
+            padding-left: 20px;
+        }
+        .strategy-body li {
+            margin-bottom: 4px;
+        }
+        .strategy-body strong {
+            color: var(--text-primary);
+        }
+        .strategy-quote {
+            border-left: 3px solid var(--primary);
+            padding: 10px 16px;
+            margin: 12px 0;
+            background: var(--bg-elevated);
+            border-radius: 0 8px 8px 0;
+        }
+        .strategy-quote p {
+            font-style: italic;
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            margin: 0;
+        }
+        .strategy-quote .quote-source {
+            font-style: normal;
+            font-size: 0.82em;
+            color: var(--text-muted);
+            margin-top: 6px;
+            display: block;
+        }
+
+        /* Activity mapping */
+        .strategy-activities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 12px;
+        }
+        .strategy-activity-tag {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: 6px;
+            padding: 4px 10px;
+            font-size: 0.78em;
+            color: var(--text-secondary);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .strategy-activity-tag i {
+            font-size: 0.85em;
+            color: var(--primary);
+        }
+
+        /* Myths section */
+        .myth-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 14px;
+            padding: 20px 24px;
+            margin-bottom: 16px;
+        }
+        .myth-card h3 {
+            color: var(--text-primary);
+            font-size: 1em;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .myth-card p {
+            color: var(--text-secondary);
+            font-size: 0.93em;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Credit footer */
+        .study-credit {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 14px;
+            padding: 20px 24px;
+            margin-top: 32px;
+            text-align: center;
+        }
+        .study-credit p {
+            color: var(--text-secondary);
+            font-size: 0.85em;
+            line-height: 1.6;
+            margin: 0;
+        }
+        .study-credit a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .study-credit a:hover {
+            text-decoration: underline;
+        }
+
+        /* Section dividers */
+        .study-section-title {
+            color: var(--text-primary);
+            font-size: 1.3em;
+            margin: 36px 0 16px;
+        }
+        .study-section-intro {
+            color: var(--text-secondary);
+            font-size: 0.95em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        /* Color palette for strategy numbers */
+        .strat-1 { background: #3b82f6; }
+        .strat-2 { background: #22c55e; }
+        .strat-3 { background: #f59e0b; }
+        .strat-4 { background: #a855f7; }
+        .strat-5 { background: #ef4444; }
+        .strat-6 { background: #06b6d4; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="study-page">
+            <a id="back-link" href="index.html" class="study-back"><i class="fas fa-arrow-left"></i> Back to Study Tools</a>
+
+            <h1><i class="fas fa-brain" style="color:var(--primary)"></i> How to Study</h1>
+            <p class="study-subtitle">Most students don't know the best ways to study. That's not your fault — nobody teaches you! This page covers six strategies backed by decades of research in cognitive science. They actually work.</p>
+
+            <div class="study-hero">
+                <h2>The big idea</h2>
+                <p>Studying doesn't mean reading your notes over and over. Real studying means <strong>doing things with the information</strong> — testing yourself, explaining ideas, connecting concepts, and spreading your work across multiple days. The strategies below show you how.</p>
+            </div>
+
+            <!-- ========== THE SIX STRATEGIES ========== -->
+
+            <h2 class="study-section-title">The Six Strategies</h2>
+            <p class="study-section-intro">These come from research by cognitive scientists. They apply to every subject — history, science, math, languages, anything. Each strategy is something you can start doing right now.</p>
+
+            <!-- 1. SPACED PRACTICE -->
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-number strat-1">1</div>
+                    <div>
+                        <h2>Spaced Practice</h2>
+                        <div class="strategy-tagline">Spread it out instead of cramming</div>
+                    </div>
+                </div>
+                <div class="strategy-body">
+                    <p>Instead of studying everything the night before a test, spread your studying across multiple days. Five hours over two weeks beats five hours the night before — every time.</p>
+
+                    <div class="strategy-quote">
+                        <p>"Five hours spread out over two weeks is better than the same five hours right before the exam."</p>
+                        <span class="quote-source">— The Learning Scientists</span>
+                    </div>
+
+                    <p><strong>Why cramming fails:</strong></p>
+                    <ul>
+                        <li>You forget crammed information fast — sometimes within days</li>
+                        <li>Cramming actually takes <em>more</em> total time for the same result</li>
+                        <li>Sleep deprivation makes everything worse</li>
+                    </ul>
+
+                    <p><strong>What to do instead:</strong></p>
+                    <ul>
+                        <li>Study a little bit each day, starting early</li>
+                        <li>Go back and review older material — don't just focus on the newest stuff</li>
+                        <li>Even 15 minutes a day is better than 3 hours the night before</li>
+                    </ul>
+
+                    <p><strong>How this tool helps:</strong></p>
+                    <div class="strategy-activities">
+                        <span class="strategy-activity-tag"><i class="fas fa-layer-group"></i> Flashcards use spaced repetition — cards you struggle with come back more often</span>
+                    </div>
+                    <div class="strategy-activities">
+                        <span class="strategy-activity-tag"><i class="fas fa-lock"></i> Mastery gating unlocks content progressively so you return across multiple sessions</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. RETRIEVAL PRACTICE -->
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-number strat-2">2</div>
+                    <div>
+                        <h2>Retrieval Practice</h2>
+                        <div class="strategy-tagline">Test yourself — don't just re-read</div>
+                    </div>
+                </div>
+                <div class="strategy-body">
+                    <p>The single most powerful study technique: pull information out of your brain instead of just putting more in. Every time you successfully remember something, that memory gets stronger.</p>
+
+                    <div class="strategy-quote">
+                        <p>"Practicing retrieval makes the information more retrievable later; compared to simply studying by looking over your notes, if you practice retrieval you're more likely to remember the information later, and also more likely to be able to use and apply the information in new situations."</p>
+                        <span class="quote-source">— The Learning Scientists</span>
+                    </div>
+
+                    <p><strong>How to do it:</strong></p>
+                    <ul>
+                        <li>Close your notes and try to write down everything you remember about a topic</li>
+                        <li>Use flashcards — but actually try to answer before flipping</li>
+                        <li>Take practice tests without looking at your materials</li>
+                        <li>After you try to remember, <em>then</em> check your notes to see what you missed</li>
+                    </ul>
+
+                    <p><strong>Important:</strong> Struggling to remember is actually a <em>good</em> sign. That effort is what makes the memory stronger. If it feels too easy, you're not learning as much.</p>
+
+                    <p><strong>How this tool helps:</strong></p>
+                    <div class="strategy-activities">
+                        <span class="strategy-activity-tag"><i class="fas fa-clipboard-check"></i> Practice Test</span>
+                        <span class="strategy-activity-tag"><i class="fas fa-pen-fancy"></i> Fill-in-the-Blank</span>
+                        <span class="strategy-activity-tag"><i class="fas fa-edit"></i> Short Answer</span>
+                        <span class="strategy-activity-tag"><i class="fas fa-bolt"></i> Lightning Round</span>
+                        <span class="strategy-activity-tag"><i class="fas fa-layer-group"></i> Flashcards</span>
+                        <span class="strategy-activity-tag"><i class="fas fa-puzzle-piece"></i> Crossword</span>
+                        <span class="strategy-activity-tag"><i class="fas fa-gamepad"></i> All Games</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. ELABORATION -->
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-number strat-3">3</div>
+                    <div>
+                        <h2>Elaboration</h2>
+                        <div class="strategy-tagline">Explain it like you're teaching someone</div>
+                    </div>
+                </div>
+                <div class="strategy-body">
+                    <p>Don't just memorize a definition — ask yourself <em>how</em> and <em>why</em> it works. Connect new information to things you already know. The more connections you make, the easier it is to remember.</p>
+
+                    <div class="strategy-quote">
+                        <p>"Explaining and describing ideas with many details... integrate the new material you are learning with the things you already know."</p>
+                        <span class="quote-source">— The Learning Scientists</span>
+                    </div>
+
+                    <p><strong>Try these questions while studying:</strong></p>
+                    <ul>
+                        <li><em>Why</em> does this work this way?</li>
+                        <li><em>How</em> is this similar to something I already know?</li>
+                        <li><em>What</em> would happen if this were different?</li>
+                        <li>Can I explain this to a friend without looking at my notes?</li>
+                    </ul>
+
+                    <p><strong>How this tool helps:</strong></p>
+                    <div class="strategy-activities">
+                        <span class="strategy-activity-tag"><i class="fas fa-layer-group"></i> Flashcards show simple explanations and real-world examples</span>
+                    </div>
+                    <div class="strategy-activities">
+                        <span class="strategy-activity-tag"><i class="fas fa-edit"></i> Short Answer asks you to connect ideas across topics</span>
+                    </div>
+                    <div class="strategy-activities">
+                        <span class="strategy-activity-tag"><i class="fas fa-scroll"></i> Source Analysis asks you to explain <em>why</em> sources matter</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. INTERLEAVING -->
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-number strat-4">4</div>
+                    <div>
+                        <h2>Interleaving</h2>
+                        <div class="strategy-tagline">Mix it up — don't study one thing forever</div>
+                    </div>
+                </div>
+                <div class="strategy-body">
+                    <p>Instead of studying Topic A for an hour, then Topic B for an hour, switch between them. This feels harder (and it is!) but it forces your brain to practice choosing the right approach, not just following a pattern.</p>
+
+                    <div class="strategy-quote">
+                        <p>"Switching between ideas while you study... helps you see the links, similarities, and differences between ideas."</p>
+                        <span class="quote-source">— The Learning Scientists</span>
+                    </div>
+
+                    <p><strong>How to do it:</strong></p>
+                    <ul>
+                        <li>Don't spend the whole session on one category — rotate between topics</li>
+                        <li>When doing practice problems, mix different types instead of doing 20 of the same kind</li>
+                        <li>Go back to earlier material while learning new material</li>
+                    </ul>
+
+                    <p><strong>Warning:</strong> Don't switch <em>too</em> fast. Spend enough time on each topic to actually think about it before moving on. This isn't multitasking — it's intentional mixing.</p>
+
+                    <p><strong>How this tool helps:</strong></p>
+                    <div class="strategy-activities">
+                        <span class="strategy-activity-tag"><i class="fas fa-bolt"></i> Lightning Round mixes questions from all topics randomly</span>
+                    </div>
+                    <div class="strategy-activities">
+                        <span class="strategy-activity-tag"><i class="fas fa-clipboard-check"></i> Practice Test shuffles questions across categories</span>
+                    </div>
+                    <div class="strategy-activities">
+                        <span class="strategy-activity-tag"><i class="fas fa-flag-checkered"></i> Quiz Race combines speed with mixed topics</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. CONCRETE EXAMPLES -->
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-number strat-5">5</div>
+                    <div>
+                        <h2>Concrete Examples</h2>
+                        <div class="strategy-tagline">Make abstract ideas real</div>
+                    </div>
+                </div>
+                <div class="strategy-body">
+                    <p>Abstract ideas are hard to remember. Specific examples make them stick. When you learn a concept, immediately think: "What's a real example of this?"</p>
+
+                    <div class="strategy-quote">
+                        <p>"Abstract ideas can be vague and hard to grasp... people remember concrete information better than abstract material."</p>
+                        <span class="quote-source">— The Learning Scientists</span>
+                    </div>
+
+                    <p><strong>How to use this:</strong></p>
+                    <ul>
+                        <li>For each vocabulary term, think of a real situation where it applies</li>
+                        <li>Look at the examples your teacher provides and make sure you understand <em>why</em> they're examples of that concept</li>
+                        <li>Try to come up with your <em>own</em> examples from your life — then check with your teacher that they're accurate</li>
+                        <li>The more specific and vivid the example, the better you'll remember it</li>
+                    </ul>
+
+                    <p><strong>How this tool helps:</strong></p>
+                    <div class="strategy-activities">
+                        <span class="strategy-activity-tag"><i class="fas fa-layer-group"></i> Every flashcard includes a real-world example</span>
+                    </div>
+                    <div class="strategy-activities">
+                        <span class="strategy-activity-tag"><i class="fas fa-book-open"></i> Simple explanations connect terms to things you already know</span>
+                    </div>
+                    <div class="strategy-activities">
+                        <span class="strategy-activity-tag"><i class="fas fa-pen-fancy"></i> Fill-in-the-Blank puts terms in realistic sentences</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. DUAL CODING -->
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-number strat-6">6</div>
+                    <div>
+                        <h2>Dual Coding</h2>
+                        <div class="strategy-tagline">Combine words and pictures</div>
+                    </div>
+                </div>
+                <div class="strategy-body">
+                    <p>When you pair words with visuals — diagrams, timelines, sketches, maps — you create two pathways to the same memory. If you can't remember through one pathway, the other one can help.</p>
+
+                    <div class="strategy-quote">
+                        <p>"Combining verbal materials with visual materials... when information appears in both word and picture formats, learners gain access to two distinct retrieval pathways during recall."</p>
+                        <span class="quote-source">— The Learning Scientists</span>
+                    </div>
+
+                    <p><strong>How to do it:</strong></p>
+                    <ul>
+                        <li>While studying, draw a quick sketch or diagram to represent key ideas</li>
+                        <li>Don't just look at diagrams in your textbook — try to redraw them from memory</li>
+                        <li>Create a timeline, flowchart, or mind map connecting your vocabulary terms</li>
+                        <li>This works for <em>everyone</em> — it's not just for "visual learners" (that's a myth!)</li>
+                    </ul>
+
+                    <p><strong>How this tool helps:</strong></p>
+                    <div class="strategy-activities">
+                        <span class="strategy-activity-tag"><i class="fas fa-map-marked-alt"></i> Map Quiz combines geography visuals with vocabulary</span>
+                    </div>
+                    <div class="strategy-activities">
+                        <span class="strategy-activity-tag"><i class="fas fa-scroll"></i> Source Analysis pairs images with historical text</span>
+                    </div>
+                    <div class="strategy-activities">
+                        <span class="strategy-activity-tag"><i class="fas fa-clock"></i> Timeline builds a visual picture of chronological order</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== MYTHS ========== -->
+
+            <h2 class="study-section-title">Common Study Myths</h2>
+            <p class="study-section-intro">Some popular study advice actually doesn't work. Here's what the research says.</p>
+
+            <div class="myth-card">
+                <h3><i class="fas fa-times-circle" style="color:#ef4444"></i> "I'm a visual/auditory learner"</h3>
+                <p>The idea that people learn better when taught in their preferred "style" (visual, auditory, kinesthetic) has been studied extensively — and <strong>it doesn't hold up</strong>. Everyone benefits from combining words and pictures (dual coding). Everyone benefits from retrieval practice. Don't limit yourself to one approach.</p>
+            </div>
+
+            <div class="myth-card">
+                <h3><i class="fas fa-times-circle" style="color:#ef4444"></i> "Re-reading my notes helps me learn"</h3>
+                <p>Re-reading feels productive because the material looks familiar, but familiarity isn't the same as learning. You can recognize something without being able to recall it on a test. <strong>Testing yourself is far more effective</strong> than re-reading — even if it feels harder.</p>
+            </div>
+
+            <div class="myth-card">
+                <h3><i class="fas fa-times-circle" style="color:#ef4444"></i> "Highlighting is studying"</h3>
+                <p>Highlighting doesn't involve any thinking — you're just coloring. It can help you find information later, but <strong>it doesn't help you learn it</strong>. Instead of highlighting, close your book and try to write down what you remember. That's studying.</p>
+            </div>
+
+            <div class="myth-card">
+                <h3><i class="fas fa-times-circle" style="color:#ef4444"></i> "If I study long enough, I'll be ready"</h3>
+                <p><strong>How</strong> you study matters more than how <em>long</em> you study. One hour of retrieval practice and elaboration beats three hours of passively re-reading notes. Work smarter, not just longer.</p>
+            </div>
+
+            <!-- ========== CREDIT ========== -->
+
+            <div class="study-credit">
+                <p>The six strategies on this page are based on research by cognitive scientists and were organized by <strong><a href="https://www.learningscientists.org/" target="_blank" rel="noopener">The Learning Scientists</a></strong> (Yana Weinstein, Megan Smith, &amp; Oliver Caviglioli). Their downloadable posters, blog posts, and resources are free at <a href="https://www.learningscientists.org/downloadable-materials" target="_blank" rel="noopener">learningscientists.org</a>. All quotes used with credit under their <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">Creative Commons BY-NC license</a>.</p>
+            </div>
+
+            <p style="color:var(--text-muted);font-size:0.8em;text-align:center;margin-top:16px;">Last updated: March 2026</p>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+        }
+        if (localStorage.getItem('dyslexic-font') === 'on') {
+            document.body.classList.add('dyslexic-font');
+        }
+        var backLink = document.getElementById('back-link');
+        var params = new URLSearchParams(window.location.search);
+        var unit = params.get('unit');
+        if (!unit && document.referrer) {
+            try {
+                var refUrl = new URL(document.referrer);
+                unit = new URLSearchParams(refUrl.search).get('unit');
+            } catch (e) {}
+        }
+        if (unit) {
+            backLink.href = 'index.html?unit=' + encodeURIComponent(unit);
+        }
+    })();
+    </script>
+</body>
+</html>

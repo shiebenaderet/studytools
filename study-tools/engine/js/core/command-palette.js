@@ -56,7 +56,8 @@ const CommandPalette = {
         cmds.push({ id: 'tool-print', label: 'Print Study Guide', icon: 'fas fa-print', category: 'Tools', action: () => { StudyTools.openPrint(); } });
         cmds.push({ id: 'tool-export', label: 'Export Progress', icon: 'fas fa-download', category: 'Tools', action: () => { StudyTools.exportProgress(); } });
 
-        // Shortcuts help
+        // Help & info
+        cmds.push({ id: 'how-to-study', label: 'How to Study', icon: 'fas fa-brain', category: 'Help', action: () => { var u = new URLSearchParams(window.location.search).get('unit'); window.location.href = 'how-to-study.html' + (u ? '?unit=' + encodeURIComponent(u) : ''); } });
         cmds.push({ id: 'shortcuts', label: 'Keyboard Shortcuts', icon: 'fas fa-keyboard', category: 'Help', action: () => { this.showShortcuts(); } });
 
         // Dyslexic font toggle

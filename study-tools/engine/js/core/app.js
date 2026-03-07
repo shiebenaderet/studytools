@@ -698,12 +698,25 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                     versionEl.textContent = 'v' + v.version;
 
-                    // Add privacy link
-                    if (!footer.querySelector('.footer-privacy')) {
+                    // Add footer links (How to Study, Privacy)
+                    var unitParam = new URLSearchParams(window.location.search).get('unit');
+                    var unitSuffix = unitParam ? '?unit=' + encodeURIComponent(unitParam) : '';
+
+                    if (!footer.querySelector('.footer-how-to-study')) {
+                        var studyLink = document.createElement('a');
+                        studyLink.className = 'footer-privacy footer-how-to-study';
+                        studyLink.href = 'how-to-study.html' + unitSuffix;
+                        var studyIcon = document.createElement('i');
+                        studyIcon.className = 'fas fa-brain';
+                        studyLink.appendChild(studyIcon);
+                        studyLink.appendChild(document.createTextNode(' How to Study'));
+                        footer.appendChild(studyLink);
+                    }
+
+                    if (!footer.querySelector('.footer-privacy-link')) {
                         var privacyLink = document.createElement('a');
-                        privacyLink.className = 'footer-privacy';
-                        var unitParam = new URLSearchParams(window.location.search).get('unit');
-                        privacyLink.href = 'privacy.html' + (unitParam ? '?unit=' + encodeURIComponent(unitParam) : '');
+                        privacyLink.className = 'footer-privacy footer-privacy-link';
+                        privacyLink.href = 'privacy.html' + unitSuffix;
                         var privacyIcon = document.createElement('i');
                         privacyIcon.className = 'fas fa-shield-alt';
                         privacyLink.appendChild(privacyIcon);
