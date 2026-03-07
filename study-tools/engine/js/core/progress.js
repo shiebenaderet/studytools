@@ -554,6 +554,169 @@ const ProgressManager = {
                 this.syncFromSupabase();
             }
         }
+    },
+
+    showEditProfile() {
+        var self = this;
+        var currentName = (this.studentInfo && this.studentInfo.name) || '';
+        var currentCode = (this.studentInfo && this.studentInfo.classCode) || '';
+        var selectedCode = currentCode;
+
+        var overlay = document.createElement('div');
+        overlay.className = 'welcome-overlay';
+
+        var card = document.createElement('div');
+        card.className = 'welcome-card';
+
+        var title = document.createElement('h1');
+        title.textContent = 'Edit Profile';
+        card.appendChild(title);
+
+        var subtitle = document.createElement('p');
+        subtitle.className = 'welcome-subtitle';
+        subtitle.textContent = 'Fix your name or switch your period.';
+        card.appendChild(subtitle);
+
+        // Name
+        var nameLabel = document.createElement('label');
+        nameLabel.setAttribute('for', 'edit-profile-name');
+        nameLabel.textContent = 'Your name';
+        card.appendChild(nameLabel);
+
+        var nameInput = document.createElement('input');
+        nameInput.type = 'text';
+        nameInput.id = 'edit-profile-name';
+        nameInput.className = 'welcome-name-input';
+        nameInput.placeholder = 'First name';
+        nameInput.value = currentName;
+        card.appendChild(nameInput);
+
+        // Period
+        var periodLabel = document.createElement('label');
+        periodLabel.textContent = 'Your period';
+        card.appendChild(periodLabel);
+
+        var periodContainer = document.createElement('div');
+        periodContainer.className = 'welcome-period-buttons';
+
+        var periods = [
+            { label: 'Period 1', code: 'period1' },
+            { label: 'Period 2', code: 'period2' },
+            { label: 'Period 4', code: 'period4' },
+            { label: 'Period 5', code: 'period5' }
+        ];
+
+        var periodButtons = [];
+        periods.forEach(function(p) {
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'welcome-period-btn';
+            if (p.code === currentCode) btn.classList.add('selected');
+            btn.textContent = p.label;
+            btn.addEventListener('click', function() {
+                selectedCode = p.code;
+                periodButtons.forEach(function(b) { b.classList.remove('selected'); });
+                btn.classList.add('selected');
+            });
+            periodButtons.push(btn);
+            periodContainer.appendChild(btn);
+        });
+        card.appendChild(periodContainer);
+
+        // Button row
+        var btnRow = document.createElement('div');
+        btnRow.style.cssText = 'display:flex;gap:10px;margin-top:16px;';
+
+        var cancelBtn = document.createElement('button');
+        cancelBtn.type = 'button';
+        cancelBtn.className = 'welcome-go-btn';
+        cancelBtn.style.cssText = 'flex:1;background:var(--bg-elevated);color:var(--text-primary);border:1px solid var(--border-card);';
+        cancelBtn.textContent = 'Cancel';
+        cancelBtn.addEventListener('click', function() {
+            overlay.classList.add('fade-out');
+            setTimeout(function() {
+                if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+            }, 400);
+        });
+        btnRow.appendChild(cancelBtn);
+
+        var saveBtn = document.createElement('button');
+        saveBtn.type = 'button';
+        saveBtn.className = 'welcome-go-btn';
+        saveBtn.style.flex = '1';
+        saveBtn.textContent = 'Save Changes';
+        saveBtn.addEventListener('click', function() {
+            var newName = nameInput.value.trim();
+            if (!newName || !selectedCode) return;
+
+            saveBtn.disabled = true;
+            saveBtn.textContent = 'Saving...';
+
+            var oldName = currentName;
+            var oldCode = currentCode;
+
+            self.studentInfo = { name: newName, classCode: selectedCode };
+            localStorage.setItem(self.prefix + 'studentInfo', JSON.stringify(self.studentInfo));
+
+            // Update Supabase if name or class changed
+            var updateSupabase = function() {
+                overlay.classList.add('fade-out');
+                setTimeout(function() {
+                    if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+                    if (StudyEngine.config) {
+                        StudyEngine.renderHeader();
+                        StudyEngine.renderHomeStats();
+                    }
+                    StudyUtils.showToast('Profile updated!', 'success');
+                }, 400);
+            };
+
+            if (self.supabase && self.studentId && (newName !== oldName || selectedCode !== oldCode)) {
+                (async function() {
+                    try {
+                        // Update name in students table
+                        if (newName !== oldName) {
+                            await self.supabase
+                                .from('students')
+                                .update({ name: newName })
+                                .eq('id', self.studentId);
+                        }
+
+                        // If period changed, look up new class and update
+                        if (selectedCode !== oldCode) {
+                            var classResult = await self.supabase
+                                .from('classes')
+                                .select('id')
+                                .ilike('code', selectedCode)
+                                .limit(1);
+                            if (classResult.data && classResult.data.length > 0) {
+                                await self.supabase
+                                    .from('students')
+                                    .update({ class_id: classResult.data[0].id })
+                                    .eq('id', self.studentId);
+                            }
+                        }
+                    } catch (err) {
+                        console.error('Profile update error:', err);
+                    }
+                    updateSupabase();
+                })();
+            } else {
+                updateSupabase();
+            }
+        });
+        btnRow.appendChild(saveBtn);
+
+        card.appendChild(btnRow);
+
+        // Allow Enter to save
+        nameInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') saveBtn.click();
+        });
+
+        overlay.appendChild(card);
+        document.body.appendChild(overlay);
+        setTimeout(function() { nameInput.focus(); nameInput.select(); }, 400);
     }
 };
 

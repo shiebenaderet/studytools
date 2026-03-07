@@ -683,7 +683,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Load version info (append, don't overwrite — fun fact may already be in footer)
+    // Load version info and edit profile link
     fetch('version.json')
         .then(r => r.ok ? r.json() : null)
         .then(v => {
@@ -697,6 +697,20 @@ document.addEventListener('DOMContentLoaded', () => {
                         footer.appendChild(versionEl);
                     }
                     versionEl.textContent = 'v' + v.version;
+
+                    // Add edit profile link if student is signed in
+                    if (ProgressManager.studentInfo && !footer.querySelector('.footer-edit-profile')) {
+                        var editLink = document.createElement('button');
+                        editLink.className = 'footer-edit-profile';
+                        editLink.addEventListener('click', function() {
+                            ProgressManager.showEditProfile();
+                        });
+                        var userIcon = document.createElement('i');
+                        userIcon.className = 'fas fa-user-edit';
+                        editLink.appendChild(userIcon);
+                        editLink.appendChild(document.createTextNode(' Edit Profile'));
+                        footer.appendChild(editLink);
+                    }
                 }
             }
         })
