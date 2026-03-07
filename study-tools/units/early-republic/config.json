@@ -21,13 +21,13 @@
         "wordle",
         "hangman",
         "flip-match",
-        "typing-race",
         "fill-in-blank",
         "term-catcher",
         "lightning-round",
         "crossword",
         "source-analysis",
-        "quiz-race"
+        "quiz-race",
+        "tower-defense"
     ],
     "vocabulary": [
         {

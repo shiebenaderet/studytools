@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.0.0] - 2026-03-06
+
+### Added
+- **3D Tower Defense game** — New vocabulary-powered tower defense game built with Three.js:
+  - Answer timed vocabulary questions (10 seconds each) to earn coins
+  - Build 4 tower types: Quill (fast), Cannon (area damage), Frost (slows), Eagle (long range)
+  - 10 waves of enemies with increasing difficulty (more enemies, more HP, faster)
+  - S-curve path with grid-based tower placement
+  - Low-poly procedural geometry optimized for Chromebooks (no imported 3D models)
+  - Streak bonus for consecutive correct answers
+  - Wrong answers tracked in weakness tracker
+  - Start screen with tower previews and best score
+  - Victory/Game Over screen with stats
+- **Three.js CDN** — Loaded on-demand only when Tower Defense is opened (no impact on other activities)
+
+### Changed
+- Removed Typing Race from default activities (replaced by Tower Defense)
+
 ## [3.3.0] - 2026-03-06
 
 ### Added

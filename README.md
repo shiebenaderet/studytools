@@ -4,7 +4,7 @@ A modular, config-driven study tool platform for 8th Grade US History. Built for
 
 **Live site:** [shiebenaderet.github.io/studytools](https://shiebenaderet.github.io/studytools/)
 
-**Version:** 3.3.0
+**Version:** 4.0.0
 
 ## Features
 
@@ -22,10 +22,10 @@ A modular, config-driven study tool platform for 8th Grade US History. Built for
 - **Category Sort** — Sort terms into categories with drag-and-drop or tap-to-select
 
 ### Games
+- **Tower Defense** — 3D tower defense game: answer vocab questions to earn coins, build towers, and defend against 10 waves of enemies (Three.js, Chromebook-optimized)
 - **Wordle** — Guess the vocabulary term in 6 tries with definition clues
 - **Hangman** — Classic word guessing with definitions
 - **Flip Match** — Memory matching game pairing terms to definitions
-- **Typing Race** — Type the correct term as fast as you can, with progressive hints
 - **Term Catcher** — Catch the falling correct term matching a definition
 - **Lightning Round** — 60-second speed quiz with leaderboard
 - **Crossword** — Auto-generated crossword puzzle from vocabulary
