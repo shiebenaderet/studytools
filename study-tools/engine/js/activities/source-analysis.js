@@ -26,6 +26,7 @@ StudyEngine.registerActivity({
                 year: 1796,
                 type: "primary",
                 format: "speech",
+                topic: "Washington's First Decisions",
                 image: "iiif-public_gdcmassbookdig_washingtonsfarew02wash_washingtonsfarew02wash_0020-full-pct_50.0-0-default.jpg",
                 excerpt: "\"I have already intimated to you the danger of parties in the State... Let me now take a more comprehensive view, and warn you in the most solemn manner against the baneful effects of the spirit of party generally.\"",
                 context: "Published in newspapers across the country as Washington prepared to leave office after two terms.",
@@ -48,6 +49,7 @@ StudyEngine.registerActivity({
                 year: 1797,
                 type: "primary",
                 format: "letter",
+                topic: "Political Parties Are Born",
                 image: "jefferson_to_gerry(alternative letter).jpg",
                 excerpt: "\"The second office of this government is honorable and easy, the first is but a splendid misery.\"",
                 context: "Jefferson wrote this private letter to Elbridge Gerry, a fellow Democratic-Republican, reflecting on the presidency after the 1796 election.",
@@ -70,6 +72,7 @@ StudyEngine.registerActivity({
                 year: 1798,
                 type: "primary",
                 format: "law",
+                topic: "Political Parties Are Born",
                 image: "alien_sedition.jpg",
                 excerpt: "\"If any person shall write, print, utter, or publish... any false, scandalous and malicious writing or writings against the government of the United States... shall be punished by a fine not exceeding two thousand dollars, and by imprisonment not exceeding two years.\"",
                 context: "Passed by Congress under President John Adams during tensions with France, the Sedition Act made it a crime to criticize the government — directly challenging the First Amendment's protections of free speech and press. The Alien Acts also gave the president power to deport immigrants deemed 'dangerous.'",
@@ -92,6 +95,7 @@ StudyEngine.registerActivity({
                 year: 1790,
                 type: "primary",
                 format: "government report",
+                topic: "Washington's First Decisions",
                 image: "hamilton_report.jpg",
                 excerpt: "\"The debt of the United States... was the price of liberty. The faith of America has been repeatedly pledged for it... Among ourselves, the most enlightened friends of good government are those whose expectations are the highest.\"",
                 context: "Hamilton presented this report to Congress proposing that the federal government assume all state debts from the Revolutionary War. His plan was strongly opposed by Thomas Jefferson and James Madison, who feared it gave too much power to the federal government and benefited wealthy northern bankers.",
@@ -114,6 +118,7 @@ StudyEngine.registerActivity({
                 year: 1798,
                 type: "primary",
                 format: "political resolution",
+                topic: "Political Parties Are Born",
                 image: "kentucky.jpeg",
                 excerpt: "\"Resolved, that the several States composing the United States of America, are not united on the principle of unlimited submission to their General Government... whensoever the General Government assumes undelegated powers, its acts are unauthoritative, void, and of no force.\"",
                 context: "As Vice President, Jefferson secretly wrote this resolution for the Kentucky legislature to protest the Alien and Sedition Acts, arguing states could nullify federal laws they believed were unconstitutional.",
@@ -136,6 +141,7 @@ StudyEngine.registerActivity({
                 year: 2020,
                 type: "secondary",
                 format: "textbook",
+                topic: "Political Parties Are Born",
                 image: "chapter_parties.png",
                 excerpt: "\"The rivalry between Hamilton and Jefferson laid the foundation for America's first political parties. Hamilton's Federalists favored a strong central government and close ties with Britain, while Jefferson's Democratic-Republicans championed states' rights and sympathized with France.\"",
                 context: "Written by historians for students, summarizing and interpreting events that happened over 200 years ago.",
@@ -158,6 +164,7 @@ StudyEngine.registerActivity({
                 year: 2015,
                 type: "secondary",
                 format: "documentary",
+                topic: "Exploring & Growing",
                 image: "the_duel.jpg",
                 excerpt: "\"The bitter rivalry between Alexander Hamilton and Aaron Burr culminated in one of the most famous duels in American history. On July 11, 1804, the two men met on the dueling grounds at Weehawken, New Jersey...\"",
                 context: "A modern documentary using dramatic reenactments, expert interviews, and historical evidence to tell the story.",
@@ -180,6 +187,7 @@ StudyEngine.registerActivity({
                 year: 1798,
                 type: "primary",
                 format: "political cartoon",
+                topic: "Political Parties Are Born",
                 image: "Lyon-griswold-brawl.jpg",
                 excerpt: "[A political cartoon showing Congressman Matthew Lyon and Roger Griswold fighting on the floor of Congress with a fireplace poker and cane while other members watch]",
                 context: "This cartoon depicted an actual fight that broke out in Congress in 1798 between a Federalist and a Democratic-Republican, showing how divided the nation's leaders had become.",
@@ -202,6 +210,7 @@ StudyEngine.registerActivity({
                 year: 1797,
                 type: "primary",
                 format: "letter",
+                topic: "Washington's First Decisions",
                 image: "adams_ladies_2.jpg__2000x1125_q85_crop_subsampling-2_upscale.jpg",
                 excerpt: "\"I feel not any personal uneasiness at the prospect of being First Lady... My ambition leads me not to be first in Rome. I am content to be second, but I claim my right to think and act for myself.\"",
                 context: "Abigail Adams wrote frequently to her husband, offering political advice and sharing her views on the new nation.",
@@ -224,6 +233,7 @@ StudyEngine.registerActivity({
                 year: 2006,
                 type: "secondary",
                 format: "book",
+                topic: "Washington's First Decisions",
                 image: "whiskey_hogeland.jpg",
                 excerpt: "\"The farmers of western Pennsylvania had legitimate grievances against Hamilton's excise tax, which disproportionately burdened small producers. Washington's decision to march 13,000 troops demonstrated that the new federal government would enforce its laws — a critical precedent for national authority.\"",
                 context: "Hogeland's book examines the Whiskey Rebellion in depth, using primary sources and government records to tell the story of the farmers' revolt and the federal response.",
@@ -246,6 +256,7 @@ StudyEngine.registerActivity({
                 year: 1795,
                 type: "primary",
                 format: "treaty",
+                topic: "Exploring & Growing",
                 image: "greenville.jpg",
                 excerpt: "\"The Indian tribes who have a right to those lands, are quietly to enjoy them, hunting, planting, and dwelling thereon so long as they please, without any molestation from the United States.\"",
                 context: "This treaty was signed after the Battle of Fallen Timbers, forcing Native American nations to give up most of present-day Ohio to the United States.",
@@ -268,6 +279,7 @@ StudyEngine.registerActivity({
                 year: 1814,
                 type: "primary",
                 format: "poem",
+                topic: "Exploring & Growing",
                 image: "The_Star-Spangled_Banner.JPG",
                 excerpt: "\"O say can you see, by the dawn's early light, / What so proudly we hail'd at the twilight's last gleaming, / Whose broad stripes and bright stars through the perilous fight / O'er the ramparts we watch'd were so gallantly streaming?\"",
                 context: "Francis Scott Key wrote this poem after witnessing the British bombardment of Fort McHenry during the War of 1812. It later became the national anthem.",
@@ -290,7 +302,12 @@ StudyEngine.registerActivity({
     render(container, config) {
         this._container = container;
         this._config = config;
-        this._sources = this._getSourceData();
+        var allSources = this._getSourceData();
+        // Filter sources by unlocked categories
+        var unlocked = MasteryManager.getUnlockedCategories(config.unit.id, config);
+        this._sources = allSources.filter(function(s) {
+            return !s.topic || unlocked.includes(s.topic);
+        });
         this._currentIndex = 0;
         this._score = 0;
         this._total = 0;
@@ -308,11 +325,14 @@ StudyEngine.registerActivity({
         var session = this._loadSession();
 
         if (session && session.currentIndex > 0 && session.currentIndex < this._sources.length) {
-            // Restore source order and progress
-            var allSources = this._getSourceData();
+            // Restore source order and progress (filtered to unlocked)
+            var restoreSources = this._getSourceData();
+            var unlockedCats = MasteryManager.getUnlockedCategories(config.unit.id, config);
             this._sources = session.sourceOrder.map(function(title) {
-                return allSources.find(function(s) { return s.title === title; });
-            }).filter(Boolean);
+                return restoreSources.find(function(s) { return s.title === title; });
+            }).filter(function(s) {
+                return s && (!s.topic || unlockedCats.includes(s.topic));
+            });
             this._currentIndex = session.currentIndex;
             this._score = session.score;
             this._total = session.total;
