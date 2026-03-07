@@ -1121,17 +1121,18 @@ a.historical-quote-source:hover {
     font-weight: 400;
 }
 .fc-card-image {
-    max-width: 140px;
-    max-height: 120px;
-    border-radius: 8px;
+    max-width: 220px;
+    max-height: 200px;
+    border-radius: 10px;
     object-fit: cover;
-    margin-bottom: 12px;
-    border: 1px solid rgba(255,255,255,0.1);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    margin: 0 auto 16px;
+    display: block;
+    border: 2px solid rgba(255,255,255,0.15);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
 }
 body.light-mode .fc-card-image {
-    border-color: rgba(0,0,0,0.1);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border-color: rgba(0,0,0,0.12);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 .fc-example {
     margin-top: 14px;
@@ -1182,6 +1183,39 @@ body.light-mode .fc-explain-box {
     background: rgba(250,204,21,0.1);
     border-left-color: #a16207;
     color: #334155;
+}
+.fc-my-example-btn {
+    border-color: rgba(59,130,246,0.3) !important;
+    background: rgba(59,130,246,0.06) !important;
+    color: #3b82f6 !important;
+}
+.fc-my-example-btn.active {
+    background: rgba(59,130,246,0.15) !important;
+}
+.fc-my-example-box {
+    margin-top: 10px;
+    animation: fadeIn 0.2s ease;
+}
+.fc-my-example-input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(59,130,246,0.3);
+    background: rgba(59,130,246,0.06);
+    color: #334155;
+    font-family: var(--font-body);
+    font-size: 0.88em;
+    line-height: 1.5;
+    resize: vertical;
+    box-sizing: border-box;
+}
+.fc-my-example-input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59,130,246,0.15);
+}
+.fc-my-example-input::placeholder {
+    color: #94a3b8;
 }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
 .fc-flip-hint {
@@ -4675,4 +4709,272 @@ body.music-active .container {
         max-width: 280px;
         bottom: 8px;
     }
+}
+
+/* ===================== Sketch & Match ===================== */
+.sm-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.sm-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+.sm-mode-btn {
+    background: var(--card-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85em;
+    font-family: var(--font-body);
+    transition: background 0.2s, transform 0.15s;
+}
+.sm-mode-btn:hover {
+    background: var(--primary);
+    color: #fff;
+}
+.sm-mode-flash {
+    animation: smFlash 0.4s ease;
+}
+@keyframes smFlash {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+}
+.sm-score {
+    font-size: 1.3em;
+    font-weight: 700;
+    font-family: var(--font-heading);
+    color: var(--text-primary);
+}
+.sm-mode-label {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.95em;
+    margin-bottom: 20px;
+    font-family: var(--font-body);
+}
+.sm-prompt {
+    text-align: center;
+    margin-bottom: 24px;
+}
+.sm-prompt-image {
+    max-width: 260px;
+    max-height: 220px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 3px solid var(--primary);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    margin: 0 auto;
+    display: block;
+}
+body.light-mode .sm-prompt-image {
+    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+.sm-prompt-fallback {
+    padding: 40px;
+    color: var(--text-muted);
+    font-style: italic;
+}
+.sm-prompt-term {
+    font-size: 1.6em;
+    font-weight: 700;
+    font-family: var(--font-heading);
+    color: var(--text-primary);
+    margin-bottom: 6px;
+}
+.sm-prompt-def {
+    font-size: 1em;
+    color: var(--text-secondary);
+    font-family: var(--font-body);
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+/* Text choices (image-to-term mode) */
+.sm-choices-text {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.sm-choice-btn {
+    background: var(--card-bg);
+    color: var(--text-primary);
+    border: 2px solid var(--border-color);
+    padding: 14px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1em;
+    font-family: var(--font-body);
+    font-weight: 500;
+    transition: border-color 0.2s, background 0.2s, transform 0.1s;
+    text-align: center;
+}
+.sm-choice-btn:hover:not(:disabled) {
+    border-color: var(--primary);
+    background: rgba(var(--primary-rgb, 22,105,197), 0.08);
+    transform: translateY(-2px);
+}
+.sm-choice-btn:disabled {
+    cursor: default;
+    opacity: 0.85;
+}
+.sm-choice-btn.sm-correct {
+    border-color: #22c55e;
+    background: rgba(34,197,94,0.12);
+    color: #16a34a;
+}
+body.light-mode .sm-choice-btn.sm-correct {
+    background: rgba(34,197,94,0.1);
+}
+.sm-choice-btn.sm-wrong {
+    border-color: #ef4444;
+    background: rgba(239,68,68,0.12);
+    color: #dc2626;
+}
+body.light-mode .sm-choice-btn.sm-wrong {
+    background: rgba(239,68,68,0.08);
+}
+
+/* Image choices (term-to-image mode) */
+.sm-choices-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+.sm-choice-img-btn {
+    background: var(--card-bg);
+    border: 3px solid var(--border-color);
+    border-radius: 12px;
+    cursor: pointer;
+    padding: 6px;
+    transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+    overflow: hidden;
+}
+.sm-choice-img-btn:hover:not(:disabled) {
+    border-color: var(--primary);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+}
+.sm-choice-img-btn:disabled {
+    cursor: default;
+}
+.sm-choice-img-btn img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+}
+.sm-choice-img-btn.sm-correct {
+    border-color: #22c55e;
+    box-shadow: 0 0 12px rgba(34,197,94,0.3);
+}
+.sm-choice-img-btn.sm-wrong {
+    border-color: #ef4444;
+    box-shadow: 0 0 12px rgba(239,68,68,0.3);
+}
+
+/* Feedback */
+.sm-feedback {
+    text-align: center;
+    font-size: 1.1em;
+    font-weight: 600;
+    font-family: var(--font-heading);
+    min-height: 32px;
+    margin-bottom: 8px;
+    transition: opacity 0.2s;
+}
+.sm-feedback-correct {
+    color: #22c55e;
+}
+.sm-feedback-wrong {
+    color: #ef4444;
+}
+.sm-feedback-wrong strong {
+    color: var(--text-primary);
+}
+
+/* Streak */
+.sm-streak {
+    text-align: center;
+    font-size: 0.95em;
+    color: #f59e0b;
+    font-weight: 600;
+    font-family: var(--font-heading);
+    margin-bottom: 12px;
+}
+.sm-streak i {
+    color: #f97316;
+}
+
+/* Results screen */
+.sm-results {
+    text-align: center;
+    padding: 40px 20px;
+}
+.sm-results h2 {
+    font-family: var(--font-heading);
+    font-size: 1.8em;
+    color: var(--text-primary);
+    margin: 0 0 12px;
+}
+.sm-result-score {
+    font-size: 1.2em;
+    color: var(--text-secondary);
+    font-family: var(--font-body);
+    margin-bottom: 8px;
+}
+.sm-result-streak {
+    color: #f59e0b;
+    font-weight: 600;
+    font-family: var(--font-heading);
+    margin-bottom: 16px;
+}
+.sm-result-streak i {
+    color: #f97316;
+}
+.sm-result-btn {
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1em;
+    font-family: var(--font-body);
+    font-weight: 600;
+    transition: background 0.2s, transform 0.1s;
+}
+.sm-result-btn:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+}
+.sm-result-btn-alt {
+    background: var(--card-bg);
+    color: var(--text-primary);
+    border: 2px solid var(--border-color);
+}
+.sm-result-btn-alt:hover {
+    border-color: var(--primary);
+    filter: none;
+}
+
+/* Mobile adjustments */
+@media (max-width: 480px) {
+    .sm-wrapper { padding: 12px; }
+    .sm-prompt-image { max-width: 200px; max-height: 180px; }
+    .sm-prompt-term { font-size: 1.3em; }
+    .sm-choices-text { grid-template-columns: 1fr; }
+    .sm-choices-images { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .sm-choice-img-btn img { height: 90px; }
+    .sm-choice-btn { padding: 12px; font-size: 0.9em; }
+    .sm-results h2 { font-size: 1.4em; }
 }

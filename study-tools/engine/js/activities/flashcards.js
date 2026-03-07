@@ -426,6 +426,47 @@ StudyEngine.registerActivity({
             backContent.appendChild(explainBox);
         }
 
+        // "Your Example" section
+        const unitId = StudyEngine.config.unit.id;
+        const myExamplesKey = 'fc-my-examples-' + unitId;
+        const myExamples = JSON.parse(localStorage.getItem(myExamplesKey) || '{}');
+        const myExBtn = document.createElement('button');
+        myExBtn.className = 'fc-explain-btn fc-my-example-btn';
+        const pencilIcon = document.createElement('i');
+        pencilIcon.className = 'fas fa-pencil-alt';
+        myExBtn.appendChild(pencilIcon);
+        myExBtn.appendChild(document.createTextNode(myExamples[card.term] ? ' Your example' : ' Add your own example'));
+        const myExBox = document.createElement('div');
+        myExBox.className = 'fc-my-example-box';
+        myExBox.style.display = 'none';
+        const myExInput = document.createElement('textarea');
+        myExInput.className = 'fc-my-example-input';
+        myExInput.placeholder = 'Think of your own real-life example of "' + card.term + '"...';
+        myExInput.rows = 2;
+        myExInput.value = myExamples[card.term] || '';
+        myExInput.addEventListener('click', function(e) { e.stopPropagation(); });
+        myExInput.addEventListener('input', function() {
+            var val = myExInput.value.trim();
+            if (val) {
+                myExamples[card.term] = val;
+            } else {
+                delete myExamples[card.term];
+            }
+            localStorage.setItem(myExamplesKey, JSON.stringify(myExamples));
+        });
+        myExBox.appendChild(myExInput);
+        const selfRef = this;
+        myExBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var showing = myExBox.style.display !== 'none';
+            myExBox.style.display = showing ? 'none' : 'block';
+            myExBtn.classList.toggle('active', !showing);
+            if (!showing) myExInput.focus();
+            setTimeout(() => selfRef._syncSceneHeight(), 10);
+        });
+        backContent.appendChild(myExBtn);
+        backContent.appendChild(myExBox);
+
         // Category badge
         const existingBadge = scene.querySelector('.fc-cat-badge');
         if (existingBadge) existingBadge.remove();
