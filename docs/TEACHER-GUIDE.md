@@ -17,13 +17,15 @@ Fork this project, swap in your content, and give your students a free study too
 | Step | What You'll Do |
 |------|---------------|
 | [1. Fork the Repository](#-1-fork-the-repository) | Get your own copy of the project |
-| [2. Enable GitHub Pages](#-2-enable-github-pages) | Make your site live on the internet |
-| [3. Understand the Structure](#-3-understand-the-structure) | Learn what goes where |
-| [4. Edit Your Unit Config](#-4-edit-your-unit-config) | Add your vocabulary, questions, and content |
-| [5. Using AI to Help You](#-5-using-ai-to-help-you) | Let AI build your config.json for you |
-| [6. Config Reference](#-6-config-reference) | Full list of activities and fields |
-| [7. Set Up Student Syncing](#-7-set-up-student-syncing-optional) | Optional: leaderboards and cross-device progress |
-| [8. Tips & FAQ](#-8-tips--faq) | Common questions and troubleshooting |
+| [2. Run the Setup Script](#-2-run-the-setup-script) | Remove the example content and start fresh |
+| [3. Enable GitHub Pages](#-3-enable-github-pages) | Make your site live on the internet |
+| [4. Understand the Structure](#-4-understand-the-structure) | Learn what goes where |
+| [5. Edit Your Unit Config](#-5-edit-your-unit-config) | Add your vocabulary, questions, and content |
+| [6. Using AI to Help You](#-6-using-ai-to-help-you) | Let AI build your config.json for you |
+| [7. Considerations for Teachers](#-7-considerations-for-teachers) | Quality checklist for AI-generated content |
+| [8. Config Reference](#-8-config-reference) | Full list of activities and fields |
+| [9. Set Up Student Syncing](#-9-set-up-student-syncing-optional) | Optional: leaderboards and cross-device progress |
+| [10. Tips & FAQ](#-10-tips--faq) | Common questions and troubleshooting |
 
 ---
 
@@ -36,7 +38,46 @@ Fork this project, swap in your content, and give your students a free study too
 
 ---
 
-## 🌐 2. Enable GitHub Pages
+## 🧹 2. Run the Setup Script
+
+After forking, you need to remove the example content so you start with a clean slate. The setup script does this automatically.
+
+### Option A: Run it from your computer (recommended)
+
+If you have a Mac or Linux computer, open Terminal and run:
+
+```bash
+git clone https://github.com/YOUR-USERNAME/studytools.git
+cd studytools
+./setup.sh
+git add -A && git commit -m "Remove example content, start fresh"
+git push
+```
+
+Replace `YOUR-USERNAME` with your GitHub username.
+
+### Option B: Do it manually on GitHub.com
+
+If you don't have Terminal access, you can do this entirely through GitHub's web interface:
+
+1. **Delete the example unit folder:** Navigate to `study-tools/units/early-republic/`, click the `...` menu on any file, and select "Delete directory"
+2. **Edit `study-tools/units/units.json`** — replace the contents with:
+```json
+{
+    "units": []
+}
+```
+3. **Edit `study-tools/engine/js/core/supabase-config.js`** — replace the contents with:
+```js
+const SUPABASE_URL = 'https://YOUR-PROJECT.supabase.co';
+const SUPABASE_ANON_KEY = 'your-anon-key-here';
+```
+
+That's it — the engine, styles, and app structure all stay intact. You just removed the example content.
+
+---
+
+## 🌐 3. Enable GitHub Pages
 
 This makes your study tool live on the internet — for free.
 
@@ -47,12 +88,12 @@ This makes your study tool live on the internet — for free.
 5. After a minute or two, your site will be live at:
 
 ```
-https://YOUR-USERNAME.github.io/studytools/study-tools/?unit=early-republic
+https://YOUR-USERNAME.github.io/studytools/study-tools/?unit=your-unit-id
 ```
 
 ---
 
-## 🗂️ 3. Understand the Structure
+## 🗂️ 4. Understand the Structure
 
 > **You only need to edit ONE file** to customize the content.
 
@@ -69,21 +110,16 @@ That's it. This single file contains all your vocabulary, questions, timeline ev
 | `study-tools/dashboard/` | Teacher dashboard | No |
 | `docs/` | Documentation | No |
 
-The existing unit at `study-tools/units/early-republic/` is a complete example you can reference.
-
 ---
 
-## ✏️ 4. Edit Your Unit Config
+## ✏️ 5. Edit Your Unit Config
 
-### Option A: Modify the existing unit
-
-The simplest path — edit `study-tools/units/early-republic/config.json` directly and replace the content with your own.
-
-### Option B: Create a new unit
+### Create your first unit
 
 1. Create a new folder: `study-tools/units/your-unit-id/`
-2. Copy `config.json` from the early-republic folder into your new folder
-3. Edit `study-tools/units/units.json` to add your unit:
+   - Use lowercase letters and dashes (e.g., `civil-war`, `biology-ch5`, `spanish-1`)
+2. Create a `config.json` file inside it (use the template below)
+3. Edit `study-tools/units/units.json` to register your unit:
 
 ```json
 {
@@ -146,7 +182,7 @@ This is enough for flashcards, a practice test, fill-in-the-blank, Wordle, and H
 
 ---
 
-## 🤖 5. Using AI to Help You
+## 🤖 6. Using AI to Help You
 
 This is the fastest way to build your content. Use any AI assistant — Claude, ChatGPT, Copilot, etc.
 
@@ -161,21 +197,21 @@ This is the fastest way to build your content. Use any AI assistant — Claude, 
 <details>
 <summary><strong>Create vocabulary from scratch</strong></summary>
 
-> Here are my vocabulary terms for a unit on [your topic]. Create a vocabulary array in the same JSON format as the early-republic config.json. Each term needs: term, definition, simpleExplanation (written for 8th graders), example, and category. Here are my terms: [paste your term list]
+> Here are my vocabulary terms for a unit on [your topic]. Create a vocabulary array in the same JSON format as this config.json. Each term needs: term, definition, simpleExplanation (written for [grade level] students), example, and category. Here are my terms: [paste your term list]
 
 </details>
 
 <details>
 <summary><strong>Generate practice questions</strong></summary>
 
-> Using the vocabulary I just gave you, create 20 multiple choice practice questions in the same JSON format. Each question needs 4 options, a correct answer index, an explanation, and a topic that matches one of the vocabulary categories.
+> Using the vocabulary I just gave you, create 20 multiple choice practice questions in the same JSON format. Each question needs 4 options, a correct answer index, an explanation, and a topic that matches one of the vocabulary categories. Make sure the answer choices are all similar in length and style so students can't guess by picking the longest or most detailed answer.
 
 </details>
 
 <details>
 <summary><strong>Add typing passages</strong></summary>
 
-> Write a 200-300 word typing passage for each category in my vocabulary. Each passage should be written at an 8th grade reading level and cover the key ideas from that category's terms.
+> Write a 200-300 word typing passage for each category in my vocabulary. Each passage should be written at a [grade level] reading level and cover the key ideas from that category's terms.
 
 </details>
 
@@ -210,7 +246,66 @@ This is the fastest way to build your content. Use any AI assistant — Claude, 
 
 ---
 
-## 📖 6. Config Reference
+## 🔍 7. Considerations for Teachers
+
+When using AI to generate your content, here's a checklist of things to review before giving it to students. These are common issues that AI tends to get wrong or overlook.
+
+### Multiple choice questions
+
+- [ ] **Answer positions are randomized** — The app shuffles answer order automatically, but double-check that the `correct` index (0-3) points to the right answer in your original `options` array
+- [ ] **All answer choices are similar length** — If the correct answer is always the longest or most detailed option, students will learn to guess by length instead of studying. Ask the AI: *"Make all answer options similar in length and detail"*
+- [ ] **Wrong answers are plausible** — Options like "Pizza" or "SpongeBob" are obviously wrong and don't help students learn. Wrong answers should be things a student who didn't study might actually pick
+- [ ] **No "All of the above" or "None of the above"** — These don't work well with randomized answer positions
+- [ ] **Explanations teach, not just confirm** — The explanation should say *why* the answer is correct, not just "The correct answer is B"
+- [ ] **Questions vary in difficulty** — Mix straightforward recall questions with questions that require applying or connecting ideas
+- [ ] **No trick questions** — Questions should test knowledge, not reading comprehension of tricky wording
+
+### Vocabulary
+
+- [ ] **Definitions are accurate** — AI sometimes subtly changes definitions or oversimplifies to the point of being wrong. Cross-check key terms against your textbook
+- [ ] **Simple explanations are actually simple** — Read them as if you're a student encountering this word for the first time. If the "simple" explanation uses other vocabulary words, it's not simple enough
+- [ ] **Examples are relatable** — The best examples connect to things students already know or experience in their daily lives
+- [ ] **Categories are meaningful** — Categories group related terms together. Don't let AI create too many categories (3-6 is ideal) or put unrelated terms in the same category
+- [ ] **Terms work for Wordle/Hangman** — Very long terms (3+ words) or terms with special characters don't work well in word games. If you have terms like "Checks and Balances," they'll still work in flashcards and quizzes but may be skipped by word games
+
+### Fill-in-the-blank
+
+- [ ] **Sentences don't give away the answer** — The sentence should help students understand the term, not make the answer obvious from context alone
+- [ ] **Only one term fits each blank** — If multiple vocabulary terms could reasonably fill the blank, the question is too vague
+
+### Timeline events
+
+- [ ] **Dates are correct** — AI commonly gets historical dates wrong by a few years. Verify each one
+- [ ] **Events are in the right order** — The timeline activity asks students to sort events chronologically, so the dates matter
+
+### Short answer questions
+
+- [ ] **The rubric matches the question** — Make sure the rubric bullet points actually address what the question asks
+- [ ] **Key terms are relevant** — The `keyTerms` array should contain terms a good answer would naturally include
+- [ ] **The exemplar response would score full marks** — Read the exemplar against your own rubric to make sure it hits every point
+
+### General quality checks
+
+- [ ] **Read level is appropriate** — Ask AI to write for your specific grade level, then read it yourself. Would your struggling readers understand it?
+- [ ] **Content is culturally sensitive** — Review examples and explanations for assumptions or stereotypes
+- [ ] **No AI hallucinations** — AI sometimes invents plausible-sounding facts, quotes, or dates. If you're not sure about something, look it up
+- [ ] **Consistent tone** — All explanations and examples should feel like they're written by the same person. Ask AI: *"Make the tone consistent — warm, encouraging, and conversational throughout"*
+
+### Quick prompts for quality fixes
+
+| Problem | Prompt to use |
+|---------|--------------|
+| Answer choices are different lengths | *"Rewrite all answer options to be similar in length (8-15 words each)"* |
+| Wrong answers are too obvious | *"Make the wrong answers more plausible — things a student might actually pick"* |
+| Definitions are too complex | *"Rewrite the definitions at a [grade] grade reading level"* |
+| Explanations are too short | *"Expand each explanation to 2-3 sentences explaining WHY this is correct"* |
+| Need to verify accuracy | *"Review everything you wrote and flag any facts, dates, or claims you're less than 95% confident about"* |
+| Tone is inconsistent | *"Rewrite all simpleExplanations in a warm, conversational tone as if talking directly to a student"* |
+| Too many easy questions | *"Add 5 harder questions that require students to apply or connect multiple concepts"* |
+
+---
+
+## 📖 8. Config Reference
 
 ### Available activities
 
@@ -291,7 +386,7 @@ The welcome screen has hardcoded period buttons (Period 1, 2, 4, 5). To change t
 
 ---
 
-## ☁️ 7. Set Up Student Syncing (Optional)
+## ☁️ 9. Set Up Student Syncing (Optional)
 
 Without Supabase, the study tool works perfectly — progress saves to each student's browser. But if you want:
 
@@ -311,8 +406,8 @@ You'll need a free [Supabase](https://supabase.com) account.
 5. Edit `study-tools/engine/js/core/supabase-config.js`:
 
 ```js
-var SUPABASE_URL = 'https://YOUR-PROJECT.supabase.co';
-var SUPABASE_ANON_KEY = 'your-anon-key-here';
+const SUPABASE_URL = 'https://YOUR-PROJECT.supabase.co';
+const SUPABASE_ANON_KEY = 'your-anon-key-here';
 ```
 
 6. Create classes in Supabase for your periods (the `classes` table needs a `code` matching your period codes)
@@ -326,7 +421,7 @@ var SUPABASE_ANON_KEY = 'your-anon-key-here';
 
 ---
 
-## ❓ 8. Tips & FAQ
+## ❓ 10. Tips & FAQ
 
 <details>
 <summary><strong>How do I test changes before my students see them?</strong></summary>
@@ -385,8 +480,6 @@ Since it's Git, you can always revert. Go to your commit history on GitHub and r
 <div align="center">
 
 ### Need Help?
-
-Look at the `early-republic` unit as a working example of every feature.
 
 Open an issue on GitHub or ask an AI assistant — paste your config.json and describe what's wrong.
 

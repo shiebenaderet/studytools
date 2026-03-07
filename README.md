@@ -8,7 +8,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 
 [![Live Site](https://img.shields.io/badge/Live_Site-study.mrbsocialstudies.org-1669C5?style=for-the-badge&logo=google-chrome&logoColor=white)](https://study.mrbsocialstudies.org)
 [![License](https://img.shields.io/badge/License-Educational_Use-22c55e?style=for-the-badge)](#license)
-[![Version](https://img.shields.io/badge/Version-4.9.0-f59e0b?style=for-the-badge)](#)
+[![Version](https://img.shields.io/badge/Version-4.9.2-f59e0b?style=for-the-badge)](#)
 
 ---
 
@@ -121,6 +121,11 @@ study-tools/
 ## 🚀 Quick Start
 
 ### For teachers (no coding)
+
+1. **Fork** this repo
+2. Run `./setup.sh` to remove the example content and start fresh
+3. Add your own vocabulary and questions to a `config.json` file
+4. Enable GitHub Pages — your site is live
 
 See the **[Teacher Guide](docs/TEACHER-GUIDE.md)** for the full walkthrough.
 
