@@ -1310,6 +1310,8 @@ a.historical-quote-source:hover {
     transition: all 0.2s ease;
     color: var(--text-primary);
     box-shadow: var(--shadow-button);
+    font-size: 1.05em;
+    line-height: 1.5;
 }
 
 .option:hover {
