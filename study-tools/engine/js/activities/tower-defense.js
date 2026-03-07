@@ -1,8 +1,8 @@
 StudyEngine.registerActivity({
     id: 'tower-defense',
-    name: 'Tower Defense',
+    name: 'Defend the Republic',
     icon: 'fas fa-chess-rook',
-    description: 'Answer vocab questions to build towers and defend your base!',
+    description: 'Build defenses and answer vocab questions to protect the young nation!',
     category: 'games',
     requires: ['vocabulary'],
 
@@ -64,12 +64,24 @@ StudyEngine.registerActivity({
     // Three.js loaded flag
     _threeLoaded: false,
 
-    // Tower definitions
+    // Tower definitions — themed around the Early Republic era
     _towerDefs: {
-        quill:  { name: 'Quill',  cost: 50,  color: 0x3b82f6, range: 3.5, damage: 2, fireRate: 0.4, aoe: false, slow: 0, icon: 'fa-feather-pointed' },
-        cannon: { name: 'Cannon', cost: 100, color: 0xef4444, range: 2.5, damage: 5, fireRate: 1.2, aoe: true,  slow: 0, icon: 'fa-bomb' },
-        frost:  { name: 'Frost',  cost: 75,  color: 0x06b6d4, range: 3.0, damage: 1, fireRate: 0.8, aoe: false, slow: 0.5, icon: 'fa-snowflake' },
-        eagle:  { name: 'Eagle',  cost: 125, color: 0xeab308, range: 5.0, damage: 3, fireRate: 0.9, aoe: false, slow: 0, icon: 'fa-dove' }
+        musket:   { name: 'Musket Post',     cost: 50,  color: 0x3b82f6, range: 3.5, damage: 2, fireRate: 0.4, aoe: false, slow: 0, icon: 'fa-crosshairs',
+                    upgrades: ['Rifled Musket', 'Sharpshooter Tower'], desc: 'Minutemen fire quickly at single targets' },
+        cannon:   { name: 'Cannon Battery',  cost: 100, color: 0xef4444, range: 2.5, damage: 5, fireRate: 1.2, aoe: true,  slow: 0, icon: 'fa-bomb',
+                    upgrades: ['Heavy Cannon', 'Fort McHenry Guns'], desc: 'Area damage — blasts groups of enemies' },
+        diplomat: { name: 'Diplomat\'s Hall', cost: 75,  color: 0x06b6d4, range: 3.0, damage: 1, fireRate: 0.8, aoe: false, slow: 0.5, icon: 'fa-scroll',
+                    upgrades: ['Treaty Office', 'State Dept. HQ'], desc: 'Slows enemies with the power of negotiation' },
+        eagle:    { name: 'Eagle\'s Nest',   cost: 125, color: 0xeab308, range: 5.0, damage: 3, fireRate: 0.9, aoe: false, slow: 0, icon: 'fa-dove',
+                    upgrades: ['War Hawk Roost', 'Liberty Spire'], desc: 'Long range — spots enemies from far away' }
+    },
+
+    // Upgrade multipliers per level (level 1 = base, 2 = first upgrade, 3 = second)
+    _upgradeCosts: [0, 75, 150],
+    _upgradeMultipliers: {
+        damage:   [1, 1.6, 2.5],
+        range:    [1, 1.15, 1.3],
+        fireRate: [1, 0.85, 0.7]
     },
 
     render(container, config) {
@@ -117,12 +129,12 @@ StudyEngine.registerActivity({
 
         var title = document.createElement('h2');
         title.className = 'td-title';
-        title.textContent = 'Vocab Tower Defense';
+        title.textContent = 'Defend the Republic';
         wrapper.appendChild(title);
 
         var desc = document.createElement('p');
         desc.className = 'td-desc';
-        desc.textContent = 'Answer vocabulary questions to earn coins. Build towers to defend your base against 10 waves of enemies!';
+        desc.textContent = 'Answer vocabulary questions to earn coins. Build defenses to protect the young nation against 10 waves of invaders!';
         wrapper.appendChild(desc);
 
         // Tower preview
@@ -149,6 +161,13 @@ StudyEngine.registerActivity({
             cost.className = 'td-preview-cost';
             cost.textContent = def.cost + ' coins';
             card.appendChild(cost);
+
+            if (def.desc) {
+                var descEl = document.createElement('div');
+                descEl.className = 'td-preview-desc';
+                descEl.textContent = def.desc;
+                card.appendChild(descEl);
+            }
 
             towerPreview.appendChild(card);
         });
@@ -292,6 +311,12 @@ StudyEngine.registerActivity({
 
             shop.appendChild(btn);
         });
+
+        // Upgrade hint
+        var upgradeHint = document.createElement('span');
+        upgradeHint.className = 'td-upgrade-hint';
+        upgradeHint.textContent = 'Click a tower to upgrade';
+        shop.appendChild(upgradeHint);
 
         // Wave button
         var waveBtn = document.createElement('button');
@@ -560,9 +585,17 @@ StudyEngine.registerActivity({
     },
 
     _handleCanvasClick(e) {
-        if (!this._placementMode || !this._selectedTowerType) return;
         var cell = this._getCellAtMouse(e);
-        if (cell && !cell.tower) {
+        if (!cell) return;
+
+        // If clicking a tower, try to upgrade
+        if (cell.tower) {
+            this._upgradeTower(cell.tower);
+            return;
+        }
+
+        // If in placement mode, place tower
+        if (this._placementMode && this._selectedTowerType) {
             this._placeTower(cell, this._selectedTowerType);
         }
     },
@@ -638,7 +671,10 @@ StudyEngine.registerActivity({
             mesh: group,
             x: cell.x,
             z: cell.z,
-            cooldown: 0
+            cooldown: 0,
+            effectiveDamage: def.damage,
+            effectiveRange: def.range,
+            effectiveFireRate: def.fireRate
         };
 
         cell.tower = tower;
@@ -658,6 +694,61 @@ StudyEngine.registerActivity({
         this._updateHUD();
         this._updateShopUI();
         this._clearGridHighlight();
+    },
+
+    _upgradeTower(tower) {
+        if (tower.level >= 3) {
+            this._showUpgradeToast('Max level reached!');
+            return;
+        }
+
+        var upgradeCost = this._upgradeCosts[tower.level];
+        if (this._coins < upgradeCost) {
+            this._showUpgradeToast('Need ' + upgradeCost + ' coins to upgrade');
+            return;
+        }
+
+        this._coins -= upgradeCost;
+        tower.level++;
+
+        // Apply upgrade multipliers
+        var mult = this._upgradeMultipliers;
+        var baseDef = this._towerDefs[tower.type];
+        tower.effectiveDamage = baseDef.damage * mult.damage[tower.level - 1];
+        tower.effectiveRange = baseDef.range * mult.range[tower.level - 1];
+        tower.effectiveFireRate = baseDef.fireRate * mult.fireRate[tower.level - 1];
+
+        // Visual upgrade — make tower taller and add a glow ring
+        var scale = 1 + (tower.level - 1) * 0.2;
+        tower.mesh.scale.set(scale, scale, scale);
+
+        // Add star on top for each upgrade level
+        var starGeo = new THREE.OctahedronGeometry(0.12, 0);
+        var starMat = new THREE.MeshBasicMaterial({ color: 0xfbbf24 });
+        var star = new THREE.Mesh(starGeo, starMat);
+        star.position.y = 1.15 * scale + 0.2;
+        tower.mesh.add(star);
+
+        var upgradeName = baseDef.upgrades ? baseDef.upgrades[tower.level - 2] : ('Level ' + tower.level);
+        this._showUpgradeToast('Upgraded to ' + upgradeName + '!');
+        this._updateHUD();
+        this._updateShopUI();
+    },
+
+    _showUpgradeToast(msg) {
+        // Remove existing toast
+        var existing = document.getElementById('td-upgrade-toast');
+        if (existing) existing.remove();
+
+        var toast = document.createElement('div');
+        toast.id = 'td-upgrade-toast';
+        toast.className = 'td-upgrade-toast';
+        toast.textContent = msg;
+
+        var wrapper = document.getElementById('td-game-wrapper');
+        if (wrapper) wrapper.appendChild(toast);
+
+        setTimeout(function() { toast.remove(); }, 2000);
     },
 
     _startNextWave() {
@@ -833,7 +924,7 @@ StudyEngine.registerActivity({
 
             // Find nearest enemy in range
             var bestEnemy = null;
-            var bestDist = tower.def.range;
+            var bestDist = tower.effectiveRange || tower.def.range;
 
             for (var i = 0; i < self._enemies.length; i++) {
                 var enemy = self._enemies[i];
@@ -848,7 +939,7 @@ StudyEngine.registerActivity({
             }
 
             if (bestEnemy) {
-                tower.cooldown = tower.def.fireRate;
+                tower.cooldown = tower.effectiveFireRate || tower.def.fireRate;
                 // Rotate tower to face target
                 var angle = Math.atan2(bestEnemy.mesh.position.x - tower.x, bestEnemy.mesh.position.z - tower.z);
                 tower.mesh.rotation.y = angle;
@@ -901,6 +992,7 @@ StudyEngine.registerActivity({
                 // Hit!
                 proj.alive = false;
                 var def = proj.tower.def;
+                var effectiveDmg = proj.tower.effectiveDamage || def.damage;
 
                 if (def.aoe) {
                     // Area damage
@@ -911,13 +1003,13 @@ StudyEngine.registerActivity({
                         var edz = e.mesh.position.z - tz;
                         var eDist = Math.sqrt(edx * edx + edz * edz);
                         if (eDist < 1.5) {
-                            self._damageEnemy(j, def.damage);
+                            self._damageEnemy(j, effectiveDmg);
                         }
                     }
                 } else {
                     var targetIdx = self._enemies.indexOf(proj.target);
                     if (targetIdx >= 0) {
-                        self._damageEnemy(targetIdx, def.damage);
+                        self._damageEnemy(targetIdx, effectiveDmg);
                     }
                 }
 
