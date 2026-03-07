@@ -50,10 +50,8 @@ const StudyEngine = {
         if (firstName) {
             const greeting = document.createElement('div');
             greeting.id = 'student-greeting';
-            greeting.style.color = 'rgba(255,255,255,0.9)';
-            greeting.style.fontSize = '1em';
-            greeting.style.marginTop = '4px';
-            greeting.textContent = 'Hey, ' + firstName + '! \uD83D\uDC4B';
+            greeting.className = 'student-greeting';
+            greeting.textContent = 'Hey, ' + firstName + '!';
             const header = document.getElementById('site-header');
             const subtitle = document.getElementById('site-subtitle');
             header.insertBefore(greeting, subtitle);

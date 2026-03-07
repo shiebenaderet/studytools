@@ -107,6 +107,14 @@ header .essential-question {
     opacity: 0.85;
 }
 
+.student-greeting {
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 1em;
+    font-weight: 500;
+    margin-top: 4px;
+    letter-spacing: 0.01em;
+}
+
 /* NAV TABS */
 .nav-tabs {
     display: flex;
@@ -2291,30 +2299,44 @@ header .essential-question {
     display: flex;
     align-items: center;
     justify-content: center;
-    animation: fadeIn 0.3s ease;
+    animation: fadeIn 0.5s ease;
 }
 
 .welcome-card {
-    background: white;
+    background: #fefcf8;
     border-radius: 20px;
-    padding: 40px;
+    padding: 44px 40px 36px;
     max-width: 480px;
     width: 90%;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255,255,255,0.1);
     text-align: center;
-    animation: slideIn 0.4s ease;
+    animation: welcomeCardIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes welcomeCardIn {
+    from {
+        opacity: 0;
+        transform: translateY(24px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 .welcome-card h1 {
+    font-family: var(--font-heading);
     color: var(--primary);
-    font-size: 1.8em;
-    margin-bottom: 8px;
+    font-size: 1.9em;
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
 }
 
 .welcome-card .welcome-subtitle {
-    color: #4b5563;
-    margin-bottom: 28px;
-    font-size: 1em;
+    color: #6b7280;
+    margin-bottom: 30px;
+    font-size: 0.95em;
+    line-height: 1.5;
 }
 
 .welcome-card label {
@@ -2354,7 +2376,7 @@ header .essential-question {
 
 .welcome-period-btn {
     padding: 10px 22px;
-    border: 2px solid #e5e7eb;
+    border: 2px solid #d1d5db;
     border-radius: 25px;
     background: white;
     font-size: 0.95em;
@@ -2368,12 +2390,19 @@ header .essential-question {
 .welcome-period-btn:hover {
     border-color: var(--primary);
     color: var(--primary);
+    background: #f0f7ff;
+}
+
+.welcome-period-btn:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
 }
 
 .welcome-period-btn.selected {
     background: var(--primary);
     border-color: var(--primary);
     color: white;
+    box-shadow: 0 2px 8px rgba(22, 105, 197, 0.3);
 }
 
 .welcome-go-btn {
@@ -2393,6 +2422,11 @@ header .essential-question {
 .welcome-go-btn:hover:not(:disabled) {
     transform: translateY(-1px);
     box-shadow: 0 4px 15px rgba(22, 105, 197, 0.4);
+}
+
+.welcome-go-btn:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 2px;
 }
 
 .welcome-go-btn:disabled {
