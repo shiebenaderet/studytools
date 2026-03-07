@@ -4037,6 +4037,11 @@ body.timer-active header {
 }
 
 /* TOWER DEFENSE */
+.td-mobile-block { text-align: center; padding: 60px 20px; color: var(--text-secondary); }
+.td-mobile-block i.fa-chess-rook { font-size: 3em; color: var(--primary); margin-bottom: 16px; display: block; }
+.td-mobile-block h3 { color: var(--text-primary); font-size: 1.4em; margin-bottom: 12px; }
+.td-mobile-block p { font-size: 1em; line-height: 1.6; margin-bottom: 8px; }
+
 .td-loading { text-align: center; padding: 60px 20px; color: var(--text-secondary); font-size: 1.2em; }
 
 /* Start screen */

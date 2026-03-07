@@ -89,6 +89,28 @@ StudyEngine.registerActivity({
         this._config = config;
         container.textContent = '';
 
+        // Block on small screens — game needs mouse/keyboard and a larger canvas
+        if (window.innerWidth < 768) {
+            var msg = document.createElement('div');
+            msg.className = 'td-mobile-block';
+            var icon = document.createElement('i');
+            icon.className = 'fas fa-chess-rook';
+            var heading = document.createElement('h3');
+            heading.textContent = 'Defend the Republic';
+            var p1 = document.createElement('p');
+            p1.textContent = 'This game works best on a larger screen with a mouse or trackpad.';
+            var p2 = document.createElement('p');
+            var strong = document.createElement('strong');
+            strong.textContent = 'Play on your Chromebook!';
+            p2.appendChild(strong);
+            msg.appendChild(icon);
+            msg.appendChild(heading);
+            msg.appendChild(p1);
+            msg.appendChild(p2);
+            container.appendChild(msg);
+            return;
+        }
+
         // Load saved progress
         var saved = ProgressManager.getActivityProgress(config.unit.id, 'tower-defense');
         this._bestWave = saved?.bestWave || 0;
