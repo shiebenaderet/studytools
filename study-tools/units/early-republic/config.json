@@ -1120,6 +1120,34 @@
                 "source": "Statement upon his arrest, 1802",
                 "sourceUrl": "https://www.blackpast.org/global-african-history/louverture-toussaint-1743-1803/",
                 "portrait": "images/portraits/louverture.jpg"
+            },
+            {
+                "text": "I am of the African race. I have ever felt it my duty to promote the interest of my brethren.",
+                "author": "Benjamin Banneker",
+                "source": "Letter to Thomas Jefferson, August 19, 1791",
+                "sourceUrl": "https://founders.archives.gov/documents/Jefferson/01-22-02-0049",
+                "portrait": "images/portraits/banneker.jpg"
+            },
+            {
+                "text": "Where today are the Pequot? Where are the Narragansett, the Mohican? They have vanished before the avarice and the oppression of the White Man.",
+                "author": "Tecumseh",
+                "source": "Speech to the Osages, 1811",
+                "sourceUrl": "https://www.pbs.org/wgbh/aia/part4/4h1569.html",
+                "portrait": "images/portraits/tecumseh.jpg"
+            },
+            {
+                "text": "The Constitution of the United States was not made merely for the generation that then existed, but for posterity.",
+                "author": "John Marshall",
+                "source": "Cohens v. Virginia, 1821",
+                "sourceUrl": "https://supreme.justia.com/cases/federal/us/19/264/",
+                "portrait": "images/portraits/marshall.jpg"
+            },
+            {
+                "text": "The bank is trying to kill me, but I will kill it.",
+                "author": "Andrew Jackson",
+                "source": "Regarding the Second Bank of the United States, 1832",
+                "sourceUrl": "https://millercenter.org/president/jackson/domestic-affairs",
+                "portrait": "images/portraits/jackson.jpg"
             }
         ],
         "funFacts": [
@@ -1139,7 +1167,11 @@
             "The Whiskey Rebellion was the first time the US government used military force against its own citizens.",
             "Jefferson wrote to a friend that the Louisiana Purchase was 'the most important event since the birth of Christ.'",
             "The Haitian Revolution (1791-1804) was the only successful large-scale slave revolt in history — and it helped make the Louisiana Purchase possible when Napoleon gave up on the Americas.",
-            "Toussaint Louverture taught himself to read at age 20 and went from being enslaved to governing all of Saint-Domingue, earning the nickname 'The Black Napoleon.'"
+            "Toussaint Louverture taught himself to read at age 20 and went from being enslaved to governing all of Saint-Domingue, earning the nickname 'The Black Napoleon.'",
+            "Benjamin Banneker, a free Black man, wrote a letter to Thomas Jefferson challenging him to live up to the ideals of equality in the Declaration of Independence.",
+            "Tecumseh tried to unite Native American nations from the Great Lakes to the Gulf of Mexico into one confederation to resist American expansion.",
+            "Chief Justice John Marshall served on the Supreme Court for 34 years — the longest tenure ever — and established the principle of judicial review.",
+            "Andrew Jackson was the first president who wasn't from Virginia or Massachusetts, and he was the only president to have been a prisoner of war (captured at age 13 during the Revolution)."
         ]
     }
 }

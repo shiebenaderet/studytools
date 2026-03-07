@@ -50,6 +50,10 @@
         <i class="fas fa-search"></i>
     </button>
 
+    <button class="theme-toggle" id="theme-toggle" title="Toggle light/dark mode">
+        <i class="fas fa-sun" id="theme-icon"></i>
+    </button>
+
     <button class="dyslexic-toggle" id="dyslexic-toggle" title="Toggle dyslexic-friendly font">
         <i class="fas fa-font"></i> <span id="dyslexic-label">Aa</span>
     </button>
@@ -65,9 +69,22 @@
     <script src="js/core/app.js"></script>
     <script>
     (function() {
+        // Theme toggle (light/dark)
+        var themeBtn = document.getElementById('theme-toggle');
+        var themeIcon = document.getElementById('theme-icon');
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+            themeIcon.className = 'fas fa-moon';
+        }
+        themeBtn.addEventListener('click', function() {
+            var isLight = document.body.classList.toggle('light-mode');
+            themeIcon.className = isLight ? 'fas fa-moon' : 'fas fa-sun';
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        });
+
+        // Dyslexic font toggle
         var toggle = document.getElementById('dyslexic-toggle');
         var label = document.getElementById('dyslexic-label');
-        // Restore saved preference
         if (localStorage.getItem('dyslexic-font') === 'on') {
             document.body.classList.add('dyslexic-font');
             toggle.classList.add('active');

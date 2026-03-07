@@ -418,9 +418,9 @@ const StudyEngine = {
 
             const welcome = document.createElement('div');
             welcome.className = 'card';
-            welcome.style.marginBottom = '20px';
+            welcome.style.marginBottom = '12px';
             welcome.style.textAlign = 'center';
-            welcome.style.padding = '24px';
+            welcome.style.padding = '14px 18px';
 
             const welcomeTitle = document.createElement('h2');
             const homeFirstName = ProgressManager.getFirstName();

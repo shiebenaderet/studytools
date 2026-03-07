@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.0] - 2026-03-06
+
+### Added
+- **Light/dark mode toggle** — Sun/moon button (fixed bottom-right) with localStorage persistence; full light theme with adjusted shadows, borders, and contrast
+- **`--font-mono` CSS variable** — Monospace font variable for consistent typing-related UI
+
+- **New quotes** — Benjamin Banneker (letter to Jefferson), Tecumseh (speech to Osages), John Marshall (Cohens v. Virginia), Andrew Jackson (Bank War), with portraits and verified sources
+- **5 new fun facts** — Banneker, Tecumseh, Marshall, Jackson
+
+### Changed
+- **Typing Practice colors** — Replaced all hardcoded Monkeytype colors (#323437, #e2b714, #646669, #ca4754, #d1d0c5) with site CSS variables for full theme consistency
+- **Typing Practice fonts** — Replaced all hardcoded `'Roboto Mono'` references (10+ instances) with `var(--font-mono)` CSS variable
+- **Reduced vertical spacing** — Tighter stats, cards, header, sections, quote card, and footer padding to minimize scrolling on home page
+- Fixed-position button stack reordered: search (top), theme toggle (middle), dyslexic font (bottom)
+
 ## [2.2.0] - 2026-03-06
 
 ### Added

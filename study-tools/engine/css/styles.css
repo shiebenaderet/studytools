@@ -27,6 +27,77 @@
     --shadow-button: 0 2px 6px rgba(0,0,0,0.3);
     --font-heading: 'Outfit', system-ui, -apple-system, sans-serif;
     --font-body: 'Outfit', system-ui, -apple-system, sans-serif;
+    --font-mono: 'Outfit', system-ui, monospace;
+}
+
+/* Light mode */
+body.light-mode {
+    --primary: #2563eb;
+    --primary-bold: #1d4ed8;
+    --secondary: #3b82f6;
+    --accent: #d97706;
+    --bg-deep: #f1f5f9;
+    --bg-card: #ffffff;
+    --bg-elevated: #ffffff;
+    --bg-surface: #e2e8f0;
+    --border-subtle: rgba(0,0,0,0.06);
+    --border-card: rgba(0,0,0,0.1);
+    --border-hover: rgba(0,0,0,0.18);
+    --text-primary: #1e293b;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+    --success: #16a34a;
+    --danger: #dc2626;
+    --warning: #d97706;
+    --shadow-card: 0 1px 3px rgba(0,0,0,0.08), 0 0 0 1px var(--border-card);
+    --shadow-elevated: 0 4px 12px rgba(0,0,0,0.1), 0 0 0 1px var(--border-card);
+    --shadow-button: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Light mode overrides for hardcoded rgba/alpha elements */
+body.light-mode header {
+    background: var(--bg-elevated);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+body.light-mode .nav-tabs {
+    background: var(--bg-card);
+}
+
+body.light-mode .nav-btn.active {
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+}
+
+body.light-mode .fc-front {
+    background: linear-gradient(145deg, var(--primary-bold) 0%, var(--primary) 50%, var(--secondary) 100%);
+    color: white;
+}
+
+body.light-mode .fc-front .fc-label,
+body.light-mode .fc-front .fc-flip-hint {
+    color: rgba(255,255,255,0.7);
+}
+
+body.light-mode .fc-back {
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-card);
+}
+
+body.light-mode .activity-topbar {
+    background: var(--bg-card);
+}
+
+body.light-mode .welcome-overlay {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+}
+
+body.light-mode .typing-dark-box:not(.focused) .typing-focus-hint {
+    background: var(--bg-card);
+}
+
+body.light-mode .typing-word.vocab-term.current {
+    text-shadow: none;
 }
 
 body.dyslexic-font {
@@ -98,7 +169,7 @@ h1, h2, h3, h4, h5, h6 {
 header {
     background: var(--bg-elevated);
     color: var(--text-primary);
-    padding: 24px 30px;
+    padding: 14px 30px;
     margin-bottom: 0;
     border-bottom: 1px solid var(--border-card);
     text-align: center;
@@ -320,7 +391,7 @@ body.activity-active header {
 .section {
     display: none;
     animation: fadeIn 0.25s ease;
-    padding: 24px 20px;
+    padding: 16px 20px;
 }
 
 .section.active {
@@ -336,13 +407,13 @@ body.activity-active header {
 .home-content {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 16px;
-    margin-bottom: 24px;
+    gap: 12px;
+    margin-bottom: 16px;
 }
 
 .card {
     background: var(--bg-elevated);
-    padding: 24px;
+    padding: 18px;
     border-radius: var(--radius-md);
     border: 1px solid var(--border-card);
     transition: all 0.2s ease;
@@ -409,29 +480,29 @@ body.activity-active header {
 
 .stats-container {
     background: var(--bg-elevated);
-    padding: 28px;
+    padding: 16px 20px;
     border-radius: var(--radius-md);
     border: 1px solid var(--border-card);
-    margin-bottom: 24px;
+    margin-bottom: 16px;
     box-shadow: var(--shadow-card);
 }
 
 .stats-container h2 {
     color: var(--text-primary);
-    font-size: 1.15em;
+    font-size: 1em;
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
 }
 
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
+    gap: 10px;
 }
 
 .stat-box {
     background: var(--bg-surface);
-    padding: 20px;
+    padding: 12px 14px;
     border-radius: var(--radius-sm);
     border: 1px solid var(--border-subtle);
     border-left: 3px solid var(--primary);
@@ -440,15 +511,15 @@ body.activity-active header {
 
 .stat-label {
     color: var(--text-muted);
-    font-size: 0.75em;
-    margin-bottom: 6px;
+    font-size: 0.7em;
+    margin-bottom: 4px;
     text-transform: uppercase;
     letter-spacing: 0.06em;
     font-weight: 700;
 }
 
 .stat-value {
-    font-size: 1.6em;
+    font-size: 1.3em;
     font-weight: 800;
     color: var(--text-primary);
 }
@@ -494,7 +565,7 @@ body.activity-active header {
 
 .badges-container {
     background: var(--bg-elevated);
-    padding: 24px;
+    padding: 16px;
     border-radius: var(--radius-md);
     border: 1px solid var(--border-card);
     box-shadow: var(--shadow-card);
@@ -552,26 +623,26 @@ body.activity-active header {
 
 /* HISTORICAL QUOTE CARD */
 .historical-quote-card {
-    margin-top: 20px;
+    margin-top: 12px;
     padding: 0;
     overflow: hidden;
 }
 
 .historical-quote-inner {
     display: flex;
-    gap: 20px;
-    padding: 24px;
+    gap: 16px;
+    padding: 16px 18px;
     align-items: center;
 }
 
 .historical-quote-portrait {
     flex-shrink: 0;
-    width: 80px;
-    height: 80px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
     overflow: hidden;
-    border: 3px solid var(--primary);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    border: 2px solid var(--primary);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
 .historical-quote-portrait img {
@@ -612,11 +683,11 @@ a.historical-quote-source:hover {
 }
 
 .historical-fun-fact {
-    padding: 14px 24px;
+    padding: 10px 18px;
     border-top: 1px solid var(--border-subtle);
-    font-size: 0.85em;
+    font-size: 0.8em;
     color: var(--text-secondary);
-    line-height: 1.5;
+    line-height: 1.4;
     background: rgba(251, 191, 36, 0.04);
 }
 
@@ -2662,8 +2733,8 @@ a.historical-quote-source:hover {
 /* APP FOOTER */
 .app-footer {
     text-align: center;
-    padding: 20px;
-    margin-top: 30px;
+    padding: 12px;
+    margin-top: 16px;
     color: rgba(255, 255, 255, 0.8);
     font-size: 0.8em;
 }
@@ -2671,7 +2742,7 @@ a.historical-quote-source:hover {
 /* DYSLEXIC FONT TOGGLE */
 .cmd-palette-btn {
     position: fixed;
-    bottom: 120px;
+    bottom: 170px;
     right: 20px;
     background: var(--bg-elevated);
     border: 2px solid var(--border-card);
@@ -2696,9 +2767,36 @@ a.historical-quote-source:hover {
     transform: scale(1.08);
 }
 
-.dyslexic-toggle {
+.theme-toggle {
     position: fixed;
     bottom: 70px;
+    right: 20px;
+    background: var(--bg-elevated);
+    border: 2px solid var(--border-card);
+    color: var(--text-secondary);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1em;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-toggle:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+    transform: scale(1.08);
+}
+
+.dyslexic-toggle {
+    position: fixed;
+    bottom: 20px;
     right: 20px;
     background: var(--bg-elevated);
     border: 2px solid var(--primary);
@@ -2782,21 +2880,21 @@ a.historical-quote-source:hover {
 }
 
 .typing-title {
-    color: rgba(255,255,255,0.9);
+    color: var(--text-primary);
     text-align: center;
     margin-bottom: 6px;
     font-size: 1.2rem;
-    font-family: 'Roboto Mono', 'Courier New', monospace;
+    font-family: var(--font-mono);
     font-weight: 400;
     letter-spacing: 0.02em;
 }
 
 .typing-description {
-    color: rgba(255,255,255,0.45);
+    color: var(--text-muted);
     text-align: center;
     margin-bottom: 20px;
     font-size: 0.82rem;
-    font-family: 'Roboto Mono', 'Courier New', monospace;
+    font-family: var(--font-mono);
 }
 
 /* Passage selector tabs — monkeytype style */
@@ -2810,51 +2908,52 @@ a.historical-quote-source:hover {
 
 .typing-pill {
     background: transparent;
-    color: rgba(255,255,255,0.5);
+    color: var(--text-muted);
     border: none;
     border-bottom: 2px solid transparent;
     border-radius: 0;
     padding: 8px 14px;
     font-size: 0.82rem;
-    font-family: 'Roboto Mono', 'Courier New', monospace;
+    font-family: var(--font-mono);
     cursor: pointer;
     transition: color 0.15s, border-color 0.15s;
     letter-spacing: 0.01em;
 }
 
 .typing-pill:hover {
-    color: rgba(255,255,255,0.8);
-    border-bottom-color: rgba(255,255,255,0.25);
+    color: var(--text-primary);
+    border-bottom-color: var(--border-hover);
 }
 
 .typing-pill.active {
-    color: #e2b714;
-    border-bottom-color: #e2b714;
+    color: var(--primary);
+    border-bottom-color: var(--primary);
 }
 
 .typing-pill.completed {
-    color: rgba(255,255,255,0.45);
+    color: var(--text-muted);
 }
 
 .typing-pill.completed.active {
-    color: #e2b714;
+    color: var(--primary);
 }
 
 .typing-pill-check {
-    color: #a6e3a1;
+    color: var(--success);
     font-weight: 700;
     font-size: 0.9em;
 }
 
 /* Dark typing box */
 .typing-dark-box {
-    background: #323437;
+    background: var(--bg-card);
     border-radius: 16px;
     padding: 28px 32px;
     position: relative;
     cursor: text;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    box-shadow: var(--shadow-elevated);
     margin-bottom: 12px;
+    border: 1px solid var(--border-card);
 }
 
 /* Stats bar */
@@ -2863,7 +2962,7 @@ a.historical-quote-source:hover {
     justify-content: flex-start;
     gap: 20px;
     margin-bottom: 16px;
-    font-family: 'Roboto Mono', 'Courier New', monospace;
+    font-family: var(--font-mono);
 }
 
 .typing-stat {
@@ -2873,19 +2972,19 @@ a.historical-quote-source:hover {
 }
 
 .typing-stat-value {
-    font-weight: 400;
-    color: #e2b714;
+    font-weight: 600;
+    color: var(--primary);
     font-size: 1.6rem;
 }
 
 .typing-stat-label {
-    color: #646669;
+    color: var(--text-muted);
     font-size: 0.7rem;
 }
 
 /* Passage display — constrained to ~3 lines */
 .typing-passage-display {
-    font-family: 'Roboto Mono', 'Courier New', monospace;
+    font-family: var(--font-mono);
     font-size: 1.5rem;
     line-height: 2.2;
     max-height: calc(1.5rem * 2.2 * 3);
@@ -2897,21 +2996,21 @@ a.historical-quote-source:hover {
 /* Words */
 .typing-word {
     display: inline;
-    color: #646669;
+    color: var(--text-muted);
     transition: color 0.15s;
     border-radius: 3px;
 }
 
 .typing-word.current {
-    color: #d1d0c5;
+    color: var(--text-primary);
 }
 
 .typing-word.current.typing-active {
-    color: #d1d0c5;
+    color: var(--text-primary);
 }
 
 .typing-word.current.typing-error {
-    color: #ca4754;
+    color: var(--danger);
 }
 
 /* Character-level cursor */
@@ -2933,17 +3032,17 @@ a.historical-quote-source:hover {
 }
 
 .typing-char.typed-correct {
-    color: #d1d0c5;
+    color: var(--text-primary);
 }
 
 .typing-char.typed-incorrect {
-    color: #ca4754;
+    color: var(--danger);
     text-decoration: underline;
-    text-decoration-color: #ca4754;
+    text-decoration-color: var(--danger);
 }
 
 .typing-char.typed-extra {
-    color: #ca4754;
+    color: var(--danger);
     opacity: 0.7;
 }
 
@@ -2953,33 +3052,33 @@ a.historical-quote-source:hover {
 }
 
 .typing-word.correct {
-    color: #d1d0c5;
+    color: var(--text-secondary);
 }
 
 .typing-word.incorrect {
-    color: #ca4754;
+    color: var(--danger);
     text-decoration: line-through;
     text-decoration-thickness: 2px;
 }
 
-/* Vocab terms — golden highlight */
+/* Vocab terms — accent highlight */
 .typing-word.vocab-term {
-    color: #e2b714;
+    color: var(--accent);
     font-weight: 700;
 }
 
 .typing-word.vocab-term.current {
-    color: #e2b714;
-    text-shadow: 0 0 8px rgba(226, 183, 20, 0.3);
+    color: var(--accent);
+    text-shadow: 0 0 8px rgba(251, 191, 36, 0.3);
 }
 
 .typing-word.vocab-term.correct {
-    color: #d1d0c5;
+    color: var(--text-secondary);
     font-weight: 700;
 }
 
 .typing-word.vocab-term.incorrect {
-    color: #ca4754;
+    color: var(--danger);
     font-weight: 700;
     text-decoration: line-through;
     text-decoration-thickness: 2px;
@@ -3006,10 +3105,11 @@ a.historical-quote-source:hover {
     display: none;
     align-items: center;
     justify-content: center;
-    font-family: 'Roboto Mono', 'Courier New', monospace;
+    font-family: var(--font-mono);
     font-size: 1rem;
-    color: #646669;
-    background: rgba(50, 52, 55, 0.85);
+    color: var(--text-muted);
+    background: var(--bg-card);
+    opacity: 0.92;
     border-radius: 16px;
     z-index: 2;
     cursor: text;
@@ -3021,7 +3121,7 @@ a.historical-quote-source:hover {
 
 /* Source citation */
 .typing-citation {
-    color: rgba(255,255,255,0.75);
+    color: var(--text-secondary);
     font-size: 0.78rem;
     text-align: center;
     font-style: italic;
@@ -3034,16 +3134,16 @@ a.historical-quote-source:hover {
     width: 100%;
     margin-top: 8px;
     padding-top: 16px;
-    border-top: 1px solid rgba(255,255,255,0.1);
+    border-top: 1px solid var(--border-subtle);
 }
 .typing-snippet-title {
-    color: rgba(255,255,255,0.9);
+    color: var(--text-primary);
     font-size: 1em;
     margin: 0 0 4px 0;
     font-weight: 600;
 }
 .typing-snippet-desc {
-    color: rgba(255,255,255,0.5);
+    color: var(--text-muted);
     font-size: 0.8em;
     margin: 0 0 10px 0;
 }
@@ -3055,18 +3155,18 @@ a.historical-quote-source:hover {
     padding: 5px 12px;
 }
 .typing-term-pill.weak-term {
-    border-color: #f59e0b;
-    color: #fbbf24;
+    border-color: var(--warning);
+    color: var(--accent);
 }
 .typing-term-pill.weak-term:hover {
     background: rgba(245, 158, 11, 0.15);
 }
 .typing-term-header {
-    color: rgba(255,255,255,0.85);
+    color: var(--text-secondary);
     font-size: 0.9em;
     margin-bottom: 10px;
     padding: 10px 14px;
-    background: rgba(255,255,255,0.05);
+    background: var(--bg-surface);
     border-radius: 8px;
     border-left: 3px solid var(--accent);
     line-height: 1.5;
@@ -3082,10 +3182,10 @@ a.historical-quote-source:hover {
 }
 
 .typing-complete-title {
-    color: #646669;
+    color: var(--text-muted);
     font-size: 0.85rem;
     margin-bottom: 28px;
-    font-family: 'Roboto Mono', 'Courier New', monospace;
+    font-family: var(--font-mono);
     font-weight: 400;
     letter-spacing: 0.02em;
 }
@@ -3103,36 +3203,36 @@ a.historical-quote-source:hover {
 
 .typing-complete-stat-value {
     font-size: 3rem;
-    font-weight: 400;
-    color: #e2b714;
-    font-family: 'Roboto Mono', 'Courier New', monospace;
+    font-weight: 600;
+    color: var(--primary);
+    font-family: var(--font-mono);
 }
 
 .typing-complete-stat-label {
     font-size: 0.7rem;
-    color: #646669;
-    font-family: 'Roboto Mono', 'Courier New', monospace;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
     margin-top: 6px;
     letter-spacing: 0.03em;
 }
 
 .typing-retry-btn {
     background: transparent;
-    color: #646669;
+    color: var(--text-muted);
     border: none;
     border-radius: 0;
     padding: 8px 0;
     font-size: 0.85rem;
     font-weight: 400;
-    font-family: 'Roboto Mono', 'Courier New', monospace;
+    font-family: var(--font-mono);
     cursor: pointer;
     transition: color 0.15s;
     border-bottom: 1px solid transparent;
 }
 
 .typing-retry-btn:hover {
-    color: #e2b714;
-    border-bottom-color: #e2b714;
+    color: var(--primary);
+    border-bottom-color: var(--primary);
 }
 
 /* Responsive */
