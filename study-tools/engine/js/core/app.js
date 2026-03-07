@@ -6,7 +6,12 @@ const StudyEngine = {
     async init() {
         const unitId = new URLSearchParams(window.location.search).get('unit');
         if (!unitId) {
-            this.showUnitError('No unit specified. Add ?unit=unit-name to the URL.');
+            // No unit — hide loading, show minimal UI (command palette still works for teacher access)
+            const loadingScreen = document.getElementById('loading-screen');
+            if (loadingScreen) loadingScreen.style.display = 'none';
+            document.getElementById('title-text').textContent = 'Study Tools';
+            document.getElementById('site-subtitle').textContent = 'Use the search button or press / to open the command palette.';
+            document.getElementById('site-question').textContent = '';
             return;
         }
 
