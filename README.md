@@ -4,7 +4,7 @@ A modular, config-driven study tool platform for 8th Grade US History. Built for
 
 **Live site:** [shiebenaderet.github.io/studytools](https://shiebenaderet.github.io/studytools/)
 
-**Version:** 2.1.0
+**Version:** 2.2.0
 
 ## Features
 

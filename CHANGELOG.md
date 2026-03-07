@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.2.0] - 2026-03-06
+
+### Added
+- **Women's quotes** — Abigail Adams (2 quotes), Mercy Otis Warren, and Dolley Madison with verified sources and local portraits
+- **Toussaint Louverture quote** — "tree of black liberty" quote with portrait, representing Black voices in the Early Republic era
+- **Haitian Revolution fun facts** — Two new fun facts connecting the Haitian Revolution to the Louisiana Purchase
+
+### Changed
+- Washington abolition quote now includes editorial bracket `[slavery]` for 8th-grade clarity
+- Replaced misattributed Dolley Madison quote with her verified letter about saving Washington's portrait during the War of 1812
+
 ## [2.1.0] - 2026-03-06
 
 ### Added

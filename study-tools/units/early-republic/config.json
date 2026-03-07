@@ -1052,7 +1052,7 @@
                 "portrait": "images/portraits/jefferson.jpg"
             },
             {
-                "text": "There is not a man living who wishes more sincerely than I do, to see a plan adopted for the abolition of it.",
+                "text": "There is not a man living who wishes more sincerely than I do, to see a plan adopted for the abolition of [slavery].",
                 "author": "George Washington",
                 "source": "Letter to Robert Morris, April 12, 1786",
                 "sourceUrl": "https://founders.archives.gov/documents/Washington/04-04-02-0019",
@@ -1085,6 +1085,41 @@
                 "source": "Defence of Fort M'Henry, 1814",
                 "sourceUrl": "https://www.loc.gov/item/ihas.100000006/",
                 "portrait": "images/portraits/key.jpg"
+            },
+            {
+                "text": "Remember the Ladies, and be more generous and favourable to them than your ancestors.",
+                "author": "Abigail Adams",
+                "source": "Letter to John Adams, March 31, 1776",
+                "sourceUrl": "https://founders.archives.gov/documents/Adams/04-01-02-0241",
+                "portrait": "images/portraits/abigail-adams.jpg"
+            },
+            {
+                "text": "If perticuliar care and attention is not paid to the Laidies we are determined to foment a Rebelion.",
+                "author": "Abigail Adams",
+                "source": "Letter to John Adams, March 31, 1776",
+                "sourceUrl": "https://founders.archives.gov/documents/Adams/04-01-02-0241",
+                "portrait": "images/portraits/abigail-adams.jpg"
+            },
+            {
+                "text": "The origin of all power is in the people, and they have an incontestible right to check the creatures of their own creation.",
+                "author": "Mercy Otis Warren",
+                "source": "Observations on the New Constitution, 1788",
+                "sourceUrl": "https://teachingamericanhistory.org/document/observations-on-the-new-constitution/",
+                "portrait": "images/portraits/warren.jpg"
+            },
+            {
+                "text": "Our kind friend Mr. Carroll has come to hasten my departure, and is in a very bad humor... because I insist on waiting until the large picture of Gen. Washington is secured.",
+                "author": "Dolley Madison",
+                "source": "Letter to her sister Lucy, August 23, 1814",
+                "sourceUrl": "https://founders.archives.gov/documents/Madison/03-08-02-0091",
+                "portrait": "images/portraits/dolley-madison.jpg"
+            },
+            {
+                "text": "In overthrowing me, you have done no more than cut down the trunk of the tree of black liberty in Saint-Domingue. It will spring back from the roots, for they are numerous and deep.",
+                "author": "Toussaint Louverture",
+                "source": "Statement upon his arrest, 1802",
+                "sourceUrl": "https://www.blackpast.org/global-african-history/louverture-toussaint-1743-1803/",
+                "portrait": "images/portraits/louverture.jpg"
             }
         ],
         "funFacts": [
@@ -1102,7 +1137,9 @@
             "The original Star-Spangled Banner flag was 30 by 42 feet — about the size of a small house.",
             "James Madison, the 'Father of the Constitution,' was only 5 feet 4 inches tall — the shortest president ever.",
             "The Whiskey Rebellion was the first time the US government used military force against its own citizens.",
-            "Jefferson wrote to a friend that the Louisiana Purchase was 'the most important event since the birth of Christ.'"
+            "Jefferson wrote to a friend that the Louisiana Purchase was 'the most important event since the birth of Christ.'",
+            "The Haitian Revolution (1791-1804) was the only successful large-scale slave revolt in history — and it helped make the Louisiana Purchase possible when Napoleon gave up on the Americas.",
+            "Toussaint Louverture taught himself to read at age 20 and went from being enslaved to governing all of Saint-Domingue, earning the nickname 'The Black Napoleon.'"
         ]
     }
 }
