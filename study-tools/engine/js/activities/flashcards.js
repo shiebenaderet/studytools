@@ -10,6 +10,7 @@ StudyEngine.registerActivity({
     _currentIndex: 0,
     _isFlipped: false,
     _displayedVocab: [],
+    _allUnlockedVocab: [],
     _mastered: [],
     _keyHandler: null,
     _queue: [],        // SRS queue of term names
@@ -19,7 +20,8 @@ StudyEngine.registerActivity({
     _weakTerms: [],
 
     render(container, config) {
-        this._displayedVocab = [...MasteryManager.getUnlockedVocabulary(config.unit.id, config)];
+        this._allUnlockedVocab = [...MasteryManager.getUnlockedVocabulary(config.unit.id, config)];
+        this._displayedVocab = [...this._allUnlockedVocab];
         const saved = ProgressManager.getActivityProgress(config.unit.id, 'flashcards');
         this._mastered = saved?.mastered || [];
         this._ratings = saved?.ratings || {};
@@ -414,7 +416,7 @@ StudyEngine.registerActivity({
 
         const total = this._queue.length;
         if (total > 30) {
-            progress.textContent = this._mastered.length + ' of ' + this._displayedVocab.length + ' mastered';
+            progress.textContent = this._mastered.length + ' of ' + this._allUnlockedVocab.length + ' mastered';
             progress.className = 'fc-progress fc-progress-text';
             return;
         }
@@ -467,7 +469,7 @@ StudyEngine.registerActivity({
         stats.className = 'fc-complete-stats';
 
         const masteredCount = this._mastered.length;
-        const totalCount = this._displayedVocab.length;
+        const totalCount = this._allUnlockedVocab.length;
 
         const mainStat = document.createElement('div');
         const mainVal = document.createElement('span');
