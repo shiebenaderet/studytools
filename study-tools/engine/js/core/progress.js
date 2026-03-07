@@ -136,10 +136,10 @@ const ProgressManager = {
 
         statsContainer.appendChild(grid);
 
-        // Login prompt visibility
+        // Login prompt visibility — show when not synced to Supabase
         const loginPrompt = document.getElementById('login-prompt');
         if (loginPrompt) {
-            if (!this.studentInfo) {
+            if (!this.studentId) {
                 loginPrompt.classList.remove('hidden');
             } else {
                 loginPrompt.classList.add('hidden');
