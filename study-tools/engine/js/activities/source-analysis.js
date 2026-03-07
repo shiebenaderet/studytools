@@ -26,7 +26,7 @@ StudyEngine.registerActivity({
                 year: 1796,
                 type: "primary",
                 format: "speech",
-                topic: "Washington's First Decisions",
+                topic: "The First Presidencies",
                 image: "iiif-public_gdcmassbookdig_washingtonsfarew02wash_washingtonsfarew02wash_0020-full-pct_50.0-0-default.jpg",
                 excerpt: "\"I have already intimated to you the danger of parties in the State... Let me now take a more comprehensive view, and warn you in the most solemn manner against the baneful effects of the spirit of party generally.\"",
                 context: "Published in newspapers across the country as Washington prepared to leave office after two terms.",
@@ -95,7 +95,7 @@ StudyEngine.registerActivity({
                 year: 1790,
                 type: "primary",
                 format: "government report",
-                topic: "Washington's First Decisions",
+                topic: "The First Presidencies",
                 image: "hamilton_report.jpg",
                 excerpt: "\"The debt of the United States... was the price of liberty. The faith of America has been repeatedly pledged for it... Among ourselves, the most enlightened friends of good government are those whose expectations are the highest.\"",
                 context: "Hamilton presented this report to Congress proposing that the federal government assume all state debts from the Revolutionary War. His plan was strongly opposed by Thomas Jefferson and James Madison, who feared it gave too much power to the federal government and benefited wealthy northern bankers.",
@@ -189,7 +189,7 @@ StudyEngine.registerActivity({
                 format: "political cartoon",
                 topic: "Political Parties Are Born",
                 image: "Lyon-griswold-brawl.jpg",
-                excerpt: "[A political cartoon showing Congressman Matthew Lyon and Roger Griswold fighting on the floor of Congress with a fireplace poker and cane while other members watch]",
+                excerpt: "[A political cartoon showing Congressman Matthew Lyon and Roger Griswold fighting on the floor of Congress with a fire tongs and cane while other members watch]",
                 context: "This cartoon depicted an actual fight that broke out in Congress in 1798 between a Federalist and a Democratic-Republican, showing how divided the nation's leaders had become.",
                 questions: [
                     {
@@ -205,24 +205,24 @@ StudyEngine.registerActivity({
                 ]
             },
             {
-                title: "Abigail Adams's Letter to John Adams",
+                title: "Abigail Adams's Letter to Her Sister",
                 creator: "Abigail Adams",
-                year: 1797,
+                year: 1800,
                 type: "primary",
                 format: "letter",
-                topic: "Washington's First Decisions",
+                topic: "The First Presidencies",
                 image: "adams_ladies_2.jpg__2000x1125_q85_crop_subsampling-2_upscale.jpg",
-                excerpt: "\"I feel not any personal uneasiness at the prospect of being First Lady... My ambition leads me not to be first in Rome. I am content to be second, but I claim my right to think and act for myself.\"",
-                context: "Abigail Adams wrote frequently to her husband, offering political advice and sharing her views on the new nation.",
+                excerpt: "\"I arrived in this city on Sunday... The house is made habitable, but there is not a single apartment finished... I had much rather live in the house at Philadelphia. Not one room or chamber is finished of the whole. It is habitable by fires in every part, thirteen of which we are obliged to keep daily, or sleep in wet and damp places.\"",
+                context: "Abigail Adams wrote to her sister about moving into the unfinished White House in November 1800, giving a firsthand account of early life in the new capital.",
                 questions: [
                     {
-                        question: "What does this letter reveal about Abigail Adams?",
-                        options: ["She was uninterested in politics and national affairs entirely", "She was independent-minded and had her own political opinions", "She wanted to run for president herself someday in the future", "She did not support her husband's political career at all"],
+                        question: "What does this letter reveal about the new capital?",
+                        options: ["The White House was a luxurious and comfortable building from the start", "The new capital and White House were still unfinished and uncomfortable", "Abigail Adams loved Washington, D.C. more than Philadelphia", "The government had plenty of money to furnish the president's home"],
                         correct: 1
                     },
                     {
                         question: "Why are personal letters especially valuable to historians?",
-                        options: ["They are written in fancy handwriting that looks very impressive", "They show private thoughts that people might not express publicly", "They are always truthful and are completely free of any bias", "They are short and much easier to read compared to other sources"],
+                        options: ["They are written in fancy handwriting that looks very impressive", "They show private thoughts and everyday details not found in official records", "They are always truthful and are completely free of any bias", "They are short and much easier to read compared to other sources"],
                         correct: 1
                     }
                 ]
@@ -233,7 +233,7 @@ StudyEngine.registerActivity({
                 year: 2006,
                 type: "secondary",
                 format: "book",
-                topic: "Washington's First Decisions",
+                topic: "The First Presidencies",
                 image: "whiskey_hogeland.jpg",
                 excerpt: "\"The farmers of western Pennsylvania had legitimate grievances against Hamilton's excise tax, which disproportionately burdened small producers. Washington's decision to march 13,000 troops demonstrated that the new federal government would enforce its laws — a critical precedent for national authority.\"",
                 context: "Hogeland's book examines the Whiskey Rebellion in depth, using primary sources and government records to tell the story of the farmers' revolt and the federal response.",

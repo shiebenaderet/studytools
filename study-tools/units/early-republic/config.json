@@ -36,7 +36,7 @@
             "definition": "The formal ceremony where a president takes the oath of office",
             "simpleExplanation": "It's like a big swearing-in party where the new president promises to do a good job. Think of it like the first day at a new school, but for running the whole country.",
             "example": "George Washington's inauguration in 1789 set the first precedent for how presidents take office",
-            "category": "Washington's First Decisions",
+            "category": "The First Presidencies",
             "typingSnippet": "An inauguration is the formal ceremony where a president takes the oath of office and officially begins their term. Washington's inauguration in 1789 was the very first, setting the standard for every president since. It established the tradition of taking the oath of office that every president has followed since."
         },
         {
@@ -44,7 +44,7 @@
             "definition": "A group of advisors appointed by the President to lead executive departments",
             "simpleExplanation": "Imagine the president picks a team of experts to help make big decisions — one for money, one for talking to other countries, one for the military. That's the Cabinet.",
             "example": "Washington's Cabinet included Thomas Jefferson (State), Alexander Hamilton (Treasury), and Henry Knox (War)",
-            "category": "Washington's First Decisions",
+            "category": "The First Presidencies",
             "wikiUrl": "https://en.wikipedia.org/wiki/Cabinet_of_the_United_States",
             "typingSnippet": "The Cabinet is a group of advisors chosen by the president to lead the executive departments. Washington created the first Cabinet with Jefferson, Hamilton, and Knox. This system of expert advisors helping the president make decisions continues today."
         },
@@ -53,7 +53,7 @@
             "definition": "An action or decision that becomes an example for the future",
             "simpleExplanation": "When you're the first to do something and everyone copies you after that. Like if you're the first kid to hold the door open, and then everyone starts doing it — you set a precedent.",
             "example": "Washington set the precedent of serving only two terms as president",
-            "category": "Washington's First Decisions",
+            "category": "The First Presidencies",
             "typingSnippet": "A precedent is an action that sets an example for others to follow. Washington created many precedents, like stepping down after two terms, that future presidents would respect for over a century. His choices shaped how the presidency works to this day."
         },
         {
@@ -61,7 +61,7 @@
             "definition": "Someone who supported a strong federal government; led by Hamilton",
             "simpleExplanation": "Team Hamilton! They wanted the national government to be really powerful — like having a strong principal who makes the rules for the whole school, not just each classroom.",
             "example": "Federalists like Hamilton wanted a strong central government and a national bank",
-            "category": "Washington's First Decisions",
+            "category": "The First Presidencies",
             "wikiUrl": "https://en.wikipedia.org/wiki/Federalist_Party",
             "typingSnippet": "Federalists were led by Alexander Hamilton and believed in a strong central government. They supported a national bank, protective tariffs, and a powerful military. Their vision helped build the financial foundation of the United States."
         },
@@ -70,7 +70,7 @@
             "definition": "Someone who opposed a strong federal government; favored states' rights",
             "simpleExplanation": "The opposite team — they thought each state should mostly run itself. Like wanting each classroom teacher to make their own rules instead of the principal deciding everything.",
             "example": "Anti-Federalists feared a powerful central government would threaten individual liberties",
-            "category": "Washington's First Decisions",
+            "category": "The First Presidencies",
             "wikiUrl": "https://en.wikipedia.org/wiki/Anti-Federalism",
             "typingSnippet": "Anti-Federalists opposed giving too much power to the central government. They believed states should hold more authority and feared that a strong federal government could become like the monarchy they had just fought to escape. Their pressure led to the Bill of Rights."
         },
@@ -79,7 +79,7 @@
             "definition": "Hamilton's proposed central bank to manage the nation's finances",
             "simpleExplanation": "Hamilton wanted one big bank for the whole country to hold everyone's money and pay the bills. Think of it like a school treasurer who manages all the fundraiser money for every club.",
             "example": "Hamilton argued the National Bank was necessary to print currency and manage debt",
-            "category": "Washington's First Decisions",
+            "category": "The First Presidencies",
             "wikiUrl": "https://en.wikipedia.org/wiki/First_Bank_of_the_United_States",
             "typingSnippet": "Hamilton proposed a National Bank to manage the country's money and pay off war debts. Jefferson argued the Constitution did not allow it, sparking a major debate over government power. Washington sided with Hamilton, and the bank was created in 1791."
         },
@@ -88,7 +88,7 @@
             "definition": "A tax on imported goods, used to raise government revenue",
             "simpleExplanation": "When you buy something from another country, the government adds an extra charge on it. This makes foreign stuff more expensive so people buy American-made stuff instead.",
             "example": "Hamilton proposed tariffs on imports to protect American manufacturing",
-            "category": "Washington's First Decisions",
+            "category": "The First Presidencies",
             "typingSnippet": "A tariff is a tax placed on goods imported from other countries. Hamilton pushed for tariffs to raise money for the government and to help American factories compete with cheaper foreign products. Tariffs became one of the most debated topics in early American politics."
         },
         {
@@ -96,7 +96,7 @@
             "definition": "Executive department handling finances; first led by Alexander Hamilton",
             "simpleExplanation": "The government's money manager. Hamilton was in charge of figuring out how to pay bills, collect taxes, and make sure the country didn't go broke.",
             "example": "Hamilton used the Dept. of Treasury to create plans for paying off the national debt",
-            "category": "Washington's First Decisions",
+            "category": "The First Presidencies",
             "wikiUrl": "https://en.wikipedia.org/wiki/United_States_Department_of_the_Treasury",
             "typingSnippet": "The Department of Treasury was created to handle the nation's money, and Alexander Hamilton was its first leader. He developed a plan to pay off war debts and build the country's credit. His financial decisions helped the young nation gain trust from other countries."
         },
@@ -105,7 +105,7 @@
             "definition": "Executive department handling foreign affairs; first led by Thomas Jefferson",
             "simpleExplanation": "The person in charge of being friends (or not) with other countries. Jefferson's job was basically to talk to the rest of the world on America's behalf.",
             "example": "Jefferson led the Dept. of State, managing America's relationships with other countries",
-            "category": "Washington's First Decisions",
+            "category": "The First Presidencies",
             "wikiUrl": "https://en.wikipedia.org/wiki/United_States_Department_of_State",
             "typingSnippet": "The Department of State handles the nation's foreign affairs, and Thomas Jefferson was its first leader. He managed relationships with countries like Britain and France during a very tense time. This department still oversees American diplomacy around the world today."
         },
@@ -114,7 +114,7 @@
             "definition": "Executive department handling military affairs; first led by Henry Knox",
             "simpleExplanation": "The person in charge of the army and keeping the country safe. Henry Knox ran the military — today we call it the Department of Defense.",
             "example": "Henry Knox led the Dept. of War, overseeing the nation's small military",
-            "category": "Washington's First Decisions",
+            "category": "The First Presidencies",
             "wikiUrl": "https://en.wikipedia.org/wiki/United_States_Department_of_War",
             "typingSnippet": "The Department of War was responsible for the nation's military, and Henry Knox was chosen as its first leader. Knox had served as a general in the Revolutionary War, so he knew the military well. This department later became what we now call the Department of Defense."
         },
@@ -123,7 +123,7 @@
             "definition": "A 1794 uprising by farmers protesting the federal tax on whiskey",
             "simpleExplanation": "Farmers were mad about a tax on whiskey (which they made from their extra grain) and started a revolt. Washington sent the army to stop them — proving the government was serious about enforcing its rules.",
             "example": "Washington sent the army to crush the Whiskey Rebellion, proving the federal government could enforce its laws",
-            "category": "Washington's First Decisions",
+            "category": "The First Presidencies",
             "typingSnippet": "The Whiskey Rebellion broke out in 1794 when farmers in western Pennsylvania refused to pay a federal tax on whiskey. President Washington personally led troops to put down the revolt. This proved that the new federal government had the power to enforce its laws."
         },
         {
@@ -131,7 +131,7 @@
             "definition": "A 1794 agreement with Britain that removed British forts but limited US trade",
             "simpleExplanation": "America made a deal with Britain: 'Leave our forts alone.' But Britain still got to mess with American ships. Most people thought it was a terrible deal, but it kept the peace.",
             "example": "Jay's Treaty was unpopular because it didn't fully stop Britain from seizing American ships",
-            "category": "Washington's First Decisions",
+            "category": "The First Presidencies",
             "typingSnippet": "Jay's Treaty was a 1794 agreement with Britain that got the British to leave forts on American soil. However, it did little to stop Britain from seizing American ships and sailors. Many Americans were furious, and the treaty deepened the divide between Federalists and Democratic-Republicans."
         },
         {
@@ -139,7 +139,7 @@
             "definition": "An incident where French agents demanded bribes before negotiating with US diplomats",
             "simpleExplanation": "American diplomats went to France to talk, but French officials said 'Pay us money first before we'll even have a conversation.' Americans were furious — it was basically a shakedown.",
             "example": "The XYZ Affair outraged Americans and led to an undeclared Quasi-War with France under President Adams",
-            "category": "Washington's First Decisions",
+            "category": "The First Presidencies",
             "typingSnippet": "The XYZ Affair happened when French officials demanded bribes before they would even talk to American diplomats. Americans were outraged, and the incident nearly led to a full war with France. It showed how fragile the young nation's relationships with European powers really were."
         },
         {
@@ -251,11 +251,11 @@
         },
         {
             "term": "Napoleon",
-            "definition": "French emperor who sold the Louisiana Territory to the US to fund his European wars",
+            "definition": "French leader who sold the Louisiana Territory to the US to fund his European wars",
             "simpleExplanation": "A powerful French leader who needed cash for his wars in Europe. He sold the Louisiana Territory to America because he couldn't hold onto it after losing Haiti.",
             "example": "Napoleon gave up his American empire after the Haitian Revolution made holding the territory too costly",
             "category": "Exploring & Growing",
-            "typingSnippet": "Napoleon was the emperor of France who sold the Louisiana Territory to the United States. He needed money to fund his wars in Europe and had lost control of Haiti after the slave revolt there. His decision to sell changed the future of America by giving the young nation room to grow westward."
+            "typingSnippet": "Napoleon was the leader of France who sold the Louisiana Territory to the United States. He needed money to fund his wars in Europe and had lost control of Haiti after the slave revolt there. His decision to sell changed the future of America by giving the young nation room to grow westward."
         },
         {
             "term": "Corps of Discovery",
@@ -487,7 +487,7 @@
             ],
             "correct": 0,
             "explanation": "Washington created the first Cabinet with three departments: State (led by Jefferson), Treasury (led by Hamilton), and War (led by Knox). These advisors helped the president make major decisions for the new nation.",
-            "topic": "Washington's First Decisions"
+            "topic": "The First Presidencies"
         },
         {
             "question": "A 'precedent' is best defined as:",
@@ -499,7 +499,7 @@
             ],
             "correct": 1,
             "explanation": "A precedent is an action or decision that sets an example for future leaders. Washington set many precedents, like creating a Cabinet and serving only two terms, that future presidents followed.",
-            "topic": "Washington's First Decisions"
+            "topic": "The First Presidencies"
         },
         {
             "question": "Alexander Hamilton proposed a National Bank to:",
@@ -511,7 +511,7 @@
             ],
             "correct": 0,
             "explanation": "Hamilton argued a National Bank was needed to print national currency, manage government debt, and expand capital in the growing economy. He used the 'Necessary and Proper' clause to justify it.",
-            "topic": "Washington's First Decisions"
+            "topic": "The First Presidencies"
         },
         {
             "question": "The Whiskey Rebellion was significant because it showed that:",
@@ -523,7 +523,7 @@
             ],
             "correct": 2,
             "explanation": "When frontier farmers in Pennsylvania revolted against the whiskey tax in 1794, Washington sent the army to crush the rebellion. This proved the new federal government had the power and will to enforce national laws.",
-            "topic": "Washington's First Decisions"
+            "topic": "The First Presidencies"
         },
         {
             "question": "Jay's Treaty was unpopular among Americans because:",
@@ -535,7 +535,7 @@
             ],
             "correct": 1,
             "explanation": "Jay's Treaty (1794) got Britain to remove forts from American soil, but it didn't stop impressment or fully protect American trade. Only 2 of its main objectives were achieved, making it very unpopular.",
-            "topic": "Washington's First Decisions"
+            "topic": "The First Presidencies"
         },
         {
             "question": "The XYZ Affair involved:",
@@ -547,7 +547,7 @@
             ],
             "correct": 3,
             "explanation": "In the XYZ Affair, French agents (called X, Y, and Z) demanded bribes before they would negotiate with American diplomats. This outraged Americans and led to an undeclared 'Quasi-War' with France.",
-            "topic": "Washington's First Decisions"
+            "topic": "The First Presidencies"
         },
         {
             "question": "Hamilton (Federalist) and Jefferson (Democratic-Republican) disagreed most about:",
@@ -948,32 +948,32 @@
         {
             "sentence": "George Washington's ___ in 1789 set the example for how every future president would take the oath of office.",
             "answer": "Inauguration",
-            "category": "Washington's First Decisions"
+            "category": "The First Presidencies"
         },
         {
             "sentence": "Washington appointed advisors to lead executive departments, forming the first presidential ___.",
             "answer": "Cabinet",
-            "category": "Washington's First Decisions"
+            "category": "The First Presidencies"
         },
         {
             "sentence": "By serving only two terms, Washington set a ___ that future presidents followed for over 150 years.",
             "answer": "Precedent",
-            "category": "Washington's First Decisions"
+            "category": "The First Presidencies"
         },
         {
             "sentence": "Hamilton proposed a ___ to print currency, manage government debt, and strengthen the economy.",
             "answer": "National Bank",
-            "category": "Washington's First Decisions"
+            "category": "The First Presidencies"
         },
         {
             "sentence": "Hamilton wanted to place a ___ on imported goods to protect American manufacturing and raise revenue.",
             "answer": "Tariff",
-            "category": "Washington's First Decisions"
+            "category": "The First Presidencies"
         },
         {
             "sentence": "Washington sent the army to crush the ___, proving the federal government could enforce its laws.",
             "answer": "Whiskey Rebellion",
-            "category": "Washington's First Decisions"
+            "category": "The First Presidencies"
         },
         {
             "sentence": "Jefferson believed in ___, arguing that the government should only do what the Constitution specifically allows.",
@@ -1023,7 +1023,7 @@
     ],
     "typingPassages": [
         {
-            "category": "Washington's First Decisions",
+            "category": "The First Presidencies",
             "title": "Building a New Government",
             "source": "Content adapted from The American Yawp (americanyawp.com) and Wikipedia for educational use.",
             "passage": "When George Washington took office in 1789, his inauguration marked the beginning of a brand new experiment in government. No one had ever been president before, so every decision Washington made set a precedent for future leaders. One of his first moves was to create a Cabinet of trusted advisors. He chose Thomas Jefferson to lead the Department of State, Alexander Hamilton to run the Department of Treasury, and Henry Knox to head the Department of War. Hamilton quickly became one of the most influential voices in Washington's government. He proposed creating a National Bank to manage the country's finances and print a national currency. He also pushed for tariffs on imported goods to protect American manufacturing and raise revenue for the government. Not everyone agreed with Hamilton's vision. Anti-Federalists worried that a strong central government would take power away from the states and threaten individual liberty. When farmers in western Pennsylvania refused to pay a new tax on whiskey, Washington faced his first major test. The Whiskey Rebellion showed that the federal government was willing to use military force to enforce its laws. Meanwhile, foreign crises tested the young nation. Jay's Treaty with Britain and the XYZ Affair with France forced Washington to navigate dangerous waters between two powerful European nations. Every choice he made shaped how future presidents would lead."
@@ -1073,7 +1073,7 @@
             {
                 "text": "Liberty, once lost, is lost forever.",
                 "author": "John Adams",
-                "source": "Letter to Abigail Adams, July 7, 1775",
+                "source": "Letter to Abigail Adams, July 17, 1775",
                 "sourceUrl": "https://founders.archives.gov/documents/Adams/04-01-02-0163",
                 "portrait": "images/portraits/adams.jpg"
             },
