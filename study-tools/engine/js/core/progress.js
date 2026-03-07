@@ -736,9 +736,90 @@ const ProgressManager = {
             if (e.key === 'Enter') saveBtn.click();
         });
 
+        // Reset progress section
+        var resetSection = document.createElement('div');
+        resetSection.style.cssText = 'margin-top:20px;padding-top:16px;border-top:1px solid var(--border-subtle);text-align:center;';
+
+        var resetBtn = document.createElement('button');
+        resetBtn.type = 'button';
+        resetBtn.className = 'welcome-go-btn';
+        resetBtn.style.cssText = 'background:transparent;color:var(--text-muted);border:1px solid var(--border-card);font-size:0.85em;padding:8px 16px;';
+        var resetIcon = document.createElement('i');
+        resetIcon.className = 'fas fa-redo';
+        resetIcon.style.marginRight = '6px';
+        resetBtn.appendChild(resetIcon);
+        resetBtn.appendChild(document.createTextNode('Reset My Progress'));
+        resetBtn.addEventListener('click', function() {
+            if (resetBtn.dataset.confirmed) {
+                self._resetProgress();
+                overlay.classList.add('fade-out');
+                setTimeout(function() {
+                    if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+                    StudyUtils.showToast('Progress has been reset. Start fresh!', 'success');
+                    if (StudyEngine.config) {
+                        StudyEngine.renderHomeStats();
+                    }
+                }, 400);
+                return;
+            }
+            resetBtn.dataset.confirmed = '1';
+            resetBtn.style.cssText = 'background:#ef4444;color:#fff;border:1px solid #ef4444;font-size:0.85em;padding:8px 16px;';
+            resetBtn.textContent = '';
+            var warnIcon = document.createElement('i');
+            warnIcon.className = 'fas fa-exclamation-triangle';
+            warnIcon.style.marginRight = '6px';
+            resetBtn.appendChild(warnIcon);
+            resetBtn.appendChild(document.createTextNode('Are you sure? Click again to confirm'));
+            setTimeout(function() {
+                if (resetBtn.dataset.confirmed) {
+                    delete resetBtn.dataset.confirmed;
+                    resetBtn.style.cssText = 'background:transparent;color:var(--text-muted);border:1px solid var(--border-card);font-size:0.85em;padding:8px 16px;';
+                    resetBtn.textContent = '';
+                    var redoIcon = document.createElement('i');
+                    redoIcon.className = 'fas fa-redo';
+                    redoIcon.style.marginRight = '6px';
+                    resetBtn.appendChild(redoIcon);
+                    resetBtn.appendChild(document.createTextNode('Reset My Progress'));
+                }
+            }, 5000);
+        });
+        resetSection.appendChild(resetBtn);
+        card.appendChild(resetSection);
+
         overlay.appendChild(card);
         document.body.appendChild(overlay);
         setTimeout(function() { nameInput.focus(); nameInput.select(); }, 400);
+    },
+
+    _resetProgress() {
+        var unitId = StudyEngine.config ? StudyEngine.config.unit.id : null;
+        if (!unitId) return;
+
+        var prefix = this.prefix + unitId + '_';
+        var keysToRemove = [];
+        for (var i = 0; i < localStorage.length; i++) {
+            var key = localStorage.key(i);
+            if (key && key.startsWith(prefix)) {
+                keysToRemove.push(key);
+            }
+        }
+        keysToRemove.forEach(function(k) { localStorage.removeItem(k); });
+
+        localStorage.removeItem('fc-tutorial-seen');
+
+        if (this.supabase && this.studentId) {
+            (async () => {
+                try {
+                    await this.supabase
+                        .from('progress')
+                        .delete()
+                        .eq('student_id', this.studentId)
+                        .eq('unit_id', unitId);
+                } catch (err) {
+                    console.error('Failed to clear cloud progress:', err);
+                }
+            })();
+        }
     }
 };
 
