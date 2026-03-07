@@ -2,9 +2,11 @@
 
 A modular, config-driven study tool platform for 8th Grade US History. Built for GitHub Pages with optional Supabase sync for persistent student progress.
 
-**Live site:** [shiebenaderet.github.io/studytools](https://shiebenaderet.github.io/studytools/)
+**Live site:** [study.mrbsocialstudies.org](https://study.mrbsocialstudies.org)
 
-**Version:** 4.1.0
+**Version:** 4.5.1
+
+**For teachers:** Want to fork this for your own classes? See the [Teacher Guide](docs/TEACHER-GUIDE.md) — step-by-step instructions for setup, customization, and using AI to build your content.
 
 ## Features
 
@@ -19,7 +21,7 @@ A modular, config-driven study tool platform for 8th Grade US History. Built for
 - **Practice Test** — Multiple choice with randomized questions and shuffled answer positions
 - **Fill-in-the-Blank** — Complete sentences with key terms from a word bank
 - **Timeline** — Place events in chronological order (challenge mode hides years)
-- **Category Sort** — Sort terms into categories with drag-and-drop or tap-to-select
+
 
 ### Games
 - **Tower Defense** — 3D tower defense game: answer vocab questions to earn coins, build towers, and defend against 10 waves of enemies (Three.js, Chromebook-optimized)
@@ -29,6 +31,8 @@ A modular, config-driven study tool platform for 8th Grade US History. Built for
 - **Term Catcher** — Catch the falling correct term matching a definition
 - **Lightning Round** — 60-second speed quiz with leaderboard
 - **Crossword** — Auto-generated crossword puzzle from vocabulary
+- **Quiz Race** — Timed quiz race with leaderboard
+- **Map Quiz** — Click-on-the-map geography quiz with hint system
 
 ### Smart Learning Features
 - **Cross-activity weakness tracking** — Wrong answers in Practice Test, Lightning Round, and Typing Practice feed into a shared tracker, surfacing weak terms for review in Flashcards and Typing Practice
