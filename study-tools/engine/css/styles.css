@@ -1120,6 +1120,19 @@ a.historical-quote-source:hover {
     font-family: var(--font-body);
     font-weight: 400;
 }
+.fc-card-image {
+    max-width: 140px;
+    max-height: 120px;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-bottom: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+body.light-mode .fc-card-image {
+    border-color: rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
 .fc-example {
     margin-top: 14px;
     font-style: italic;
@@ -1162,12 +1175,13 @@ body.light-mode .fc-explain-btn:hover, body.light-mode .fc-explain-btn.active {
     border-left: 3px solid #facc15;
     font-size: 0.88em;
     line-height: 1.6;
-    color: var(--text-primary);
+    color: #334155;
     animation: fadeIn 0.2s ease;
 }
 body.light-mode .fc-explain-box {
     background: rgba(250,204,21,0.1);
     border-left-color: #a16207;
+    color: #334155;
 }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
 .fc-flip-hint {
@@ -2893,6 +2907,14 @@ body.timer-active header {
     gap: 14px;
     padding: 14px 18px;
     border-top: 1px solid var(--border-subtle);
+}
+.res-term-thumb {
+    width: 56px;
+    height: 56px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid var(--border-subtle);
 }
 
 .res-term-info {

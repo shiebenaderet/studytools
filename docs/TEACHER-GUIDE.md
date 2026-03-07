@@ -236,6 +236,15 @@ This is the fastest way to build your content. Use any AI assistant — Claude, 
 
 </details>
 
+<details>
+<summary><strong>Add images to vocabulary (dual coding)</strong></summary>
+
+> For each vocabulary term, find a relevant public domain image from Wikimedia Commons. Download each image and save it to `study-tools/units/my-unit/images/vocab/` with a simple filename (e.g., `hamilton.jpg`). Then add an `imageUrl` field to each term like: `"imageUrl": "../units/my-unit/images/vocab/hamilton.jpg"`. Skip abstract concepts that don't have a natural visual.
+
+Images show up on flashcards and in the Resource Library — this helps students learn through **dual coding** (pairing words with pictures).
+
+</details>
+
 ### Tips for working with AI
 
 - **Always share the existing config.json** so it matches the exact format
@@ -350,6 +359,7 @@ Add any of these to your `activities` array:
 | `example` | | A sentence using the term in context |
 | `category` | | Groups terms for mastery gating (order matters — first category unlocks first) |
 | `typingSnippet` | | 2-3 sentence passage for typing practice per term |
+| `imageUrl` | | Image shown on flashcards and resources (use local path, see below) |
 | `wikiUrl` | | Link to Wikipedia article for the Resources page |
 
 ### Practice question fields

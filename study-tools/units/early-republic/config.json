@@ -36,7 +36,8 @@
             "simpleExplanation": "It's like a big swearing-in party where the new president promises to do a good job. Think of it like the first day at a new school, but for running the whole country.",
             "example": "George Washington's inauguration in 1789 set the first precedent for how presidents take office",
             "category": "The First Presidencies",
-            "typingSnippet": "An inauguration is the formal ceremony where a president takes the oath of office and officially begins their term. Washington's inauguration in 1789 was the very first, setting the standard for every president since. It established the tradition of taking the oath of office that every president has followed since."
+            "typingSnippet": "An inauguration is the formal ceremony where a president takes the oath of office and officially begins their term. Washington's inauguration in 1789 was the very first, setting the standard for every president since. It established the tradition of taking the oath of office that every president has followed since.",
+            "imageUrl": "../units/early-republic/images/vocab/inauguration.jpg"
         },
         {
             "term": "Cabinet",
@@ -45,7 +46,8 @@
             "example": "Washington's Cabinet included Thomas Jefferson (State), Alexander Hamilton (Treasury), and Henry Knox (War)",
             "category": "The First Presidencies",
             "wikiUrl": "https://en.wikipedia.org/wiki/Cabinet_of_the_United_States",
-            "typingSnippet": "The Cabinet is a group of advisors chosen by the president to lead the executive departments. Washington created the first Cabinet with Jefferson, Hamilton, and Knox. This system of expert advisors helping the president make decisions continues today."
+            "typingSnippet": "The Cabinet is a group of advisors chosen by the president to lead the executive departments. Washington created the first Cabinet with Jefferson, Hamilton, and Knox. This system of expert advisors helping the president make decisions continues today.",
+            "imageUrl": "../units/early-republic/images/vocab/cabinet.jpg"
         },
         {
             "term": "Precedent",
@@ -53,7 +55,8 @@
             "simpleExplanation": "When you're the first to do something and everyone copies you after that. Like if you're the first kid to hold the door open, and then everyone starts doing it — you set a precedent.",
             "example": "Washington set the precedent of serving only two terms as president",
             "category": "The First Presidencies",
-            "typingSnippet": "A precedent is an action that sets an example for others to follow. Washington created many precedents, like stepping down after two terms, that future presidents would respect for over a century. His choices shaped how the presidency works to this day."
+            "typingSnippet": "A precedent is an action that sets an example for others to follow. Washington created many precedents, like stepping down after two terms, that future presidents would respect for over a century. His choices shaped how the presidency works to this day.",
+            "imageUrl": "../units/early-republic/images/vocab/washington.jpg"
         },
         {
             "term": "Federalist",
@@ -62,7 +65,8 @@
             "example": "Federalists like Hamilton wanted a strong central government and a national bank",
             "category": "The First Presidencies",
             "wikiUrl": "https://en.wikipedia.org/wiki/Federalist_Party",
-            "typingSnippet": "Federalists were led by Alexander Hamilton and believed in a strong central government. They supported a national bank, protective tariffs, and a powerful military. Their vision helped build the financial foundation of the United States."
+            "typingSnippet": "Federalists were led by Alexander Hamilton and believed in a strong central government. They supported a national bank, protective tariffs, and a powerful military. Their vision helped build the financial foundation of the United States.",
+            "imageUrl": "../units/early-republic/images/vocab/hamilton.jpg"
         },
         {
             "term": "Anti-Federalist",
@@ -71,7 +75,8 @@
             "example": "Anti-Federalists feared a powerful central government would threaten individual liberties",
             "category": "The First Presidencies",
             "wikiUrl": "https://en.wikipedia.org/wiki/Anti-Federalism",
-            "typingSnippet": "Anti-Federalists opposed giving too much power to the central government. They believed states should hold more authority and feared that a strong federal government could become like the monarchy they had just fought to escape. Their pressure led to the Bill of Rights."
+            "typingSnippet": "Anti-Federalists opposed giving too much power to the central government. They believed states should hold more authority and feared that a strong federal government could become like the monarchy they had just fought to escape. Their pressure led to the Bill of Rights.",
+            "imageUrl": "../units/early-republic/images/vocab/patrick-henry.jpg"
         },
         {
             "term": "National Bank",
@@ -80,7 +85,8 @@
             "example": "Hamilton argued the National Bank was necessary to print currency and manage debt",
             "category": "The First Presidencies",
             "wikiUrl": "https://en.wikipedia.org/wiki/First_Bank_of_the_United_States",
-            "typingSnippet": "Hamilton proposed a National Bank to manage the country's money and pay off war debts. Jefferson argued the Constitution did not allow it, sparking a major debate over government power. Washington sided with Hamilton, and the bank was created in 1791."
+            "typingSnippet": "Hamilton proposed a National Bank to manage the country's money and pay off war debts. Jefferson argued the Constitution did not allow it, sparking a major debate over government power. Washington sided with Hamilton, and the bank was created in 1791.",
+            "imageUrl": "../units/early-republic/images/vocab/first-bank.jpg"
         },
         {
             "term": "Tariff",
@@ -88,7 +94,8 @@
             "simpleExplanation": "When you buy something from another country, the government adds an extra charge on it. This makes foreign stuff more expensive so people buy American-made stuff instead.",
             "example": "Hamilton proposed tariffs on imports to protect American manufacturing",
             "category": "The First Presidencies",
-            "typingSnippet": "A tariff is a tax placed on goods imported from other countries. Hamilton pushed for tariffs to raise money for the government and to help American factories compete with cheaper foreign products. Tariffs became one of the most debated topics in early American politics."
+            "typingSnippet": "A tariff is a tax placed on goods imported from other countries. Hamilton pushed for tariffs to raise money for the government and to help American factories compete with cheaper foreign products. Tariffs became one of the most debated topics in early American politics.",
+            "imageUrl": "../units/early-republic/images/vocab/federal-hall.jpg"
         },
         {
             "term": "Dept. of Treasury",
@@ -97,7 +104,8 @@
             "example": "Hamilton used the Dept. of Treasury to create plans for paying off the national debt",
             "category": "The First Presidencies",
             "wikiUrl": "https://en.wikipedia.org/wiki/United_States_Department_of_the_Treasury",
-            "typingSnippet": "The Department of Treasury was created to handle the nation's money, and Alexander Hamilton was its first leader. He developed a plan to pay off war debts and build the country's credit. His financial decisions helped the young nation gain trust from other countries."
+            "typingSnippet": "The Department of Treasury was created to handle the nation's money, and Alexander Hamilton was its first leader. He developed a plan to pay off war debts and build the country's credit. His financial decisions helped the young nation gain trust from other countries.",
+            "imageUrl": "../units/early-republic/images/vocab/hamilton.jpg"
         },
         {
             "term": "Dept. of State",
@@ -106,7 +114,8 @@
             "example": "Jefferson led the Dept. of State, managing America's relationships with other countries",
             "category": "The First Presidencies",
             "wikiUrl": "https://en.wikipedia.org/wiki/United_States_Department_of_State",
-            "typingSnippet": "The Department of State handles the nation's foreign affairs, and Thomas Jefferson was its first leader. He managed relationships with countries like Britain and France during a very tense time. This department still oversees American diplomacy around the world today."
+            "typingSnippet": "The Department of State handles the nation's foreign affairs, and Thomas Jefferson was its first leader. He managed relationships with countries like Britain and France during a very tense time. This department still oversees American diplomacy around the world today.",
+            "imageUrl": "../units/early-republic/images/vocab/jefferson.jpg"
         },
         {
             "term": "Dept. of War",
@@ -115,7 +124,8 @@
             "example": "Henry Knox led the Dept. of War, overseeing the nation's small military",
             "category": "The First Presidencies",
             "wikiUrl": "https://en.wikipedia.org/wiki/United_States_Department_of_War",
-            "typingSnippet": "The Department of War was responsible for the nation's military, and Henry Knox was chosen as its first leader. Knox had served as a general in the Revolutionary War, so he knew the military well. This department later became what we now call the Department of Defense."
+            "typingSnippet": "The Department of War was responsible for the nation's military, and Henry Knox was chosen as its first leader. Knox had served as a general in the Revolutionary War, so he knew the military well. This department later became what we now call the Department of Defense.",
+            "imageUrl": "../units/early-republic/images/vocab/henry-knox.jpg"
         },
         {
             "term": "Whiskey Rebellion",
@@ -123,7 +133,8 @@
             "simpleExplanation": "Farmers were mad about a tax on whiskey (which they made from their extra grain) and started a revolt. Washington sent the army to stop them — proving the government was serious about enforcing its rules.",
             "example": "Washington sent the army to crush the Whiskey Rebellion, proving the federal government could enforce its laws",
             "category": "The First Presidencies",
-            "typingSnippet": "The Whiskey Rebellion broke out in 1794 when farmers in western Pennsylvania refused to pay a federal tax on whiskey. President Washington personally led troops to put down the revolt. This proved that the new federal government had the power to enforce its laws."
+            "typingSnippet": "The Whiskey Rebellion broke out in 1794 when farmers in western Pennsylvania refused to pay a federal tax on whiskey. President Washington personally led troops to put down the revolt. This proved that the new federal government had the power to enforce its laws.",
+            "imageUrl": "../units/early-republic/images/vocab/whiskey-rebellion.jpg"
         },
         {
             "term": "Jay's Treaty",
@@ -131,7 +142,8 @@
             "simpleExplanation": "America made a deal with Britain: 'Leave our forts alone.' But Britain still got to mess with American ships. Most people thought it was a terrible deal, but it kept the peace.",
             "example": "Jay's Treaty was unpopular because it didn't fully stop Britain from seizing American ships",
             "category": "The First Presidencies",
-            "typingSnippet": "Jay's Treaty was a 1794 agreement with Britain that got the British to leave forts on American soil. However, it did little to stop Britain from seizing American ships and sailors. Many Americans were furious, and the treaty deepened the divide between Federalists and Democratic-Republicans."
+            "typingSnippet": "Jay's Treaty was a 1794 agreement with Britain that got the British to leave forts on American soil. However, it did little to stop Britain from seizing American ships and sailors. Many Americans were furious, and the treaty deepened the divide between Federalists and Democratic-Republicans.",
+            "imageUrl": "../units/early-republic/images/vocab/john-jay.jpg"
         },
         {
             "term": "XYZ Affair",
@@ -139,7 +151,8 @@
             "simpleExplanation": "American diplomats went to France to talk, but French officials said 'Pay us money first before we'll even have a conversation.' Americans were furious — it was basically a shakedown.",
             "example": "The XYZ Affair outraged Americans and led to an undeclared Quasi-War with France under President Adams",
             "category": "The First Presidencies",
-            "typingSnippet": "The XYZ Affair happened when French officials demanded bribes before they would even talk to American diplomats. Americans were outraged, and the incident nearly led to a full war with France. It showed how fragile the young nation's relationships with European powers really were."
+            "typingSnippet": "The XYZ Affair happened when French officials demanded bribes before they would even talk to American diplomats. Americans were outraged, and the incident nearly led to a full war with France. It showed how fragile the young nation's relationships with European powers really were.",
+            "imageUrl": "../units/early-republic/images/vocab/xyz-affair.jpg"
         },
         {
             "term": "Political Party",
@@ -147,7 +160,8 @@
             "simpleExplanation": "A team of people who agree on how the country should be run. Think of it like rival friend groups who each think they know the best way to do things.",
             "example": "America's first political parties — Federalists and Democratic-Republicans — formed from disagreements between Hamilton and Jefferson",
             "category": "Political Parties Are Born",
-            "typingSnippet": "A political party is an organized group of people who share similar ideas about how government should work. The first two parties in America grew out of disagreements between Hamilton and Jefferson. Even though the Founders warned against parties, they became a lasting part of American democracy."
+            "typingSnippet": "A political party is an organized group of people who share similar ideas about how government should work. The first two parties in America grew out of disagreements between Hamilton and Jefferson. Even though the Founders warned against parties, they became a lasting part of American democracy.",
+            "imageUrl": "../units/early-republic/images/vocab/election-day.jpg"
         },
         {
             "term": "Democratic-Republican",
@@ -156,7 +170,8 @@
             "example": "Democratic-Republicans believed the government should have limited power and support agriculture",
             "category": "Political Parties Are Born",
             "wikiUrl": "https://en.wikipedia.org/wiki/Democratic-Republican_Party",
-            "typingSnippet": "The Democratic-Republican Party was led by Thomas Jefferson and James Madison. They believed the federal government should have limited power and that farmers were the backbone of America. This party represented the opposite vision from Hamilton's Federalists."
+            "typingSnippet": "The Democratic-Republican Party was led by Thomas Jefferson and James Madison. They believed the federal government should have limited power and that farmers were the backbone of America. This party represented the opposite vision from Hamilton's Federalists.",
+            "imageUrl": "../units/early-republic/images/vocab/jefferson.jpg"
         },
         {
             "term": "Strict Construction",
@@ -165,7 +180,8 @@
             "example": "Jefferson used strict construction to argue against the National Bank — the Constitution doesn't mention it",
             "category": "Political Parties Are Born",
             "wikiUrl": "https://en.wikipedia.org/wiki/Strict_constructionism",
-            "typingSnippet": "Strict construction means interpreting the Constitution exactly as it is written. Jefferson believed the government could only do what the Constitution specifically allowed. He used this argument to oppose the National Bank, since the Constitution never mentioned creating one."
+            "typingSnippet": "Strict construction means interpreting the Constitution exactly as it is written. Jefferson believed the government could only do what the Constitution specifically allowed. He used this argument to oppose the National Bank, since the Constitution never mentioned creating one.",
+            "imageUrl": "../units/early-republic/images/vocab/constitution.jpg"
         },
         {
             "term": "Loose Construction",
@@ -173,7 +189,8 @@
             "simpleExplanation": "The Constitution doesn't have to say everything word-for-word. If something makes sense and helps the country, the government can probably do it. It's like reading between the lines.",
             "example": "Hamilton used loose construction to justify the National Bank under the 'Necessary and Proper' clause",
             "category": "Political Parties Are Born",
-            "typingSnippet": "Loose construction means the Constitution gives the government implied powers beyond what is written directly. Hamilton pointed to the Necessary and Proper Clause to argue that Congress could create a national bank. This flexible reading of the Constitution expanded federal power significantly."
+            "typingSnippet": "Loose construction means the Constitution gives the government implied powers beyond what is written directly. Hamilton pointed to the Necessary and Proper Clause to argue that Congress could create a national bank. This flexible reading of the Constitution expanded federal power significantly.",
+            "imageUrl": "../units/early-republic/images/vocab/hamilton.jpg"
         },
         {
             "term": "Standing Army",
@@ -181,7 +198,8 @@
             "simpleExplanation": "An army that's always there, even when there's no war. Some people thought this was smart for protection. Others worried it could be used to bully citizens.",
             "example": "Federalists favored a large standing army, while Democratic-Republicans feared it could threaten liberty",
             "category": "Political Parties Are Born",
-            "typingSnippet": "A standing army is a permanent military force that remains active even during peacetime. Federalists wanted one for national defense, but Democratic-Republicans worried it could be used to take away people's freedoms. This debate over military power was one of the biggest disagreements between the two parties."
+            "typingSnippet": "A standing army is a permanent military force that remains active even during peacetime. Federalists wanted one for national defense, but Democratic-Republicans worried it could be used to take away people's freedoms. This debate over military power was one of the biggest disagreements between the two parties.",
+            "imageUrl": "../units/early-republic/images/vocab/crossing-delaware.jpg"
         },
         {
             "term": "Primary Source",
@@ -189,7 +207,8 @@
             "simpleExplanation": "Something made by someone who was actually there. A diary entry, a photo, a speech — it's the real deal, not someone else talking about it later.",
             "example": "A letter written by Thomas Jefferson in 1803 about the Louisiana Purchase is a primary source",
             "category": "Political Parties Are Born",
-            "typingSnippet": "A primary source is a firsthand account or original document from the time being studied. Letters, diaries, photographs, and speeches are all examples. Historians rely on primary sources to understand what people actually thought and experienced during historical events."
+            "typingSnippet": "A primary source is a firsthand account or original document from the time being studied. Letters, diaries, photographs, and speeches are all examples. Historians rely on primary sources to understand what people actually thought and experienced during historical events.",
+            "imageUrl": "../units/early-republic/images/vocab/declaration.jpg"
         },
         {
             "term": "SIFT Method",
@@ -214,7 +233,8 @@
             "example": "Judicial review gave the Supreme Court real power to check Congress and the President",
             "category": "Exploring & Growing",
             "wikiUrl": "https://en.wikipedia.org/wiki/Judicial_review_in_the_United_States",
-            "typingSnippet": "Judicial review is the power of the Supreme Court to decide whether a law goes against the Constitution. This power was established in the landmark case Marbury v. Madison in 1803. It gave the judicial branch a real way to check the power of Congress and the president."
+            "typingSnippet": "Judicial review is the power of the Supreme Court to decide whether a law goes against the Constitution. This power was established in the landmark case Marbury v. Madison in 1803. It gave the judicial branch a real way to check the power of Congress and the president.",
+            "imageUrl": "../units/early-republic/images/vocab/supreme-court.jpg"
         },
         {
             "term": "Marbury v. Madison",
@@ -222,7 +242,8 @@
             "simpleExplanation": "This court case is where the Supreme Court first said 'We can strike down laws that break the Constitution.' It gave the courts real power for the first time.",
             "example": "Chief Justice John Marshall's ruling in Marbury v. Madison created one of the most important checks and balances",
             "category": "Exploring & Growing",
-            "typingSnippet": "Marbury v. Madison was an 1803 Supreme Court case decided by Chief Justice John Marshall. Marshall ruled that a law passed by Congress was unconstitutional, creating the power of judicial review. This case is one of the most important in American history because it strengthened the Supreme Court forever."
+            "typingSnippet": "Marbury v. Madison was an 1803 Supreme Court case decided by Chief Justice John Marshall. Marshall ruled that a law passed by Congress was unconstitutional, creating the power of judicial review. This case is one of the most important in American history because it strengthened the Supreme Court forever.",
+            "imageUrl": "../units/early-republic/images/vocab/john-marshall.jpg"
         },
         {
             "term": "Unconstitutional",
@@ -238,7 +259,8 @@
             "simpleExplanation": "Enslaved people in Haiti fought back and won their freedom — the only successful slave revolt to create a whole new country. It also scared Napoleon into selling Louisiana to the US.",
             "example": "The Haitian Revolution terrified Southern slaveholders but inspired people fighting for freedom worldwide",
             "category": "Exploring & Growing",
-            "typingSnippet": "The Haitian Revolution was a successful revolt by enslaved people in Haiti that lasted from 1791 to 1804. It was the only slave revolt in history to create an independent nation. The revolution also caused Napoleon to give up on his American empire, which led directly to the Louisiana Purchase."
+            "typingSnippet": "The Haitian Revolution was a successful revolt by enslaved people in Haiti that lasted from 1791 to 1804. It was the only slave revolt in history to create an independent nation. The revolution also caused Napoleon to give up on his American empire, which led directly to the Louisiana Purchase.",
+            "imageUrl": "../units/early-republic/images/vocab/toussaint.jpg"
         },
         {
             "term": "Louisiana Purchase",
@@ -246,7 +268,8 @@
             "simpleExplanation": "Jefferson bought a HUGE chunk of land from France for $15 million — it doubled the size of the whole country. Imagine buying half a continent for about 4 cents an acre!",
             "example": "Jefferson bought the Louisiana Territory from Napoleon for $15 million, even though the Constitution didn't specifically allow it",
             "category": "Exploring & Growing",
-            "typingSnippet": "The Louisiana Purchase in 1803 doubled the size of the United States overnight. Jefferson bought the massive territory from France for just fifteen million dollars, which was an incredible deal. The purchase created a dilemma for Jefferson because the Constitution said nothing about buying new land."
+            "typingSnippet": "The Louisiana Purchase in 1803 doubled the size of the United States overnight. Jefferson bought the massive territory from France for just fifteen million dollars, which was an incredible deal. The purchase created a dilemma for Jefferson because the Constitution said nothing about buying new land.",
+            "imageUrl": "../units/early-republic/images/vocab/louisiana-purchase.jpg"
         },
         {
             "term": "Napoleon",
@@ -254,7 +277,8 @@
             "simpleExplanation": "A powerful French leader who needed cash for his wars in Europe. He sold the Louisiana Territory to America because he couldn't hold onto it after losing Haiti.",
             "example": "Napoleon gave up his American empire after the Haitian Revolution made holding the territory too costly",
             "category": "Exploring & Growing",
-            "typingSnippet": "Napoleon was the leader of France who sold the Louisiana Territory to the United States. He needed money to fund his wars in Europe and had lost control of Haiti after the slave revolt there. His decision to sell changed the future of America by giving the young nation room to grow westward."
+            "typingSnippet": "Napoleon was the leader of France who sold the Louisiana Territory to the United States. He needed money to fund his wars in Europe and had lost control of Haiti after the slave revolt there. His decision to sell changed the future of America by giving the young nation room to grow westward.",
+            "imageUrl": "../units/early-republic/images/vocab/napoleon.jpg"
         },
         {
             "term": "Corps of Discovery",
@@ -263,7 +287,8 @@
             "example": "The Corps of Discovery traveled from 1804 to 1806, mapping the territory and documenting plants, animals, and peoples",
             "category": "Exploring & Growing",
             "wikiUrl": "https://en.wikipedia.org/wiki/Lewis_and_Clark_Expedition",
-            "typingSnippet": "The Corps of Discovery was the expedition team led by Meriwether Lewis and William Clark to explore the Louisiana Territory. From 1804 to 1806, they mapped new land, recorded plants and animals, and met many Native American nations. Their journey gave Americans their first real look at the western part of the continent."
+            "typingSnippet": "The Corps of Discovery was the expedition team led by Meriwether Lewis and William Clark to explore the Louisiana Territory. From 1804 to 1806, they mapped new land, recorded plants and animals, and met many Native American nations. Their journey gave Americans their first real look at the western part of the continent.",
+            "imageUrl": "../units/early-republic/images/vocab/lewis-clark.jpg"
         },
         {
             "term": "Expedition",
@@ -271,7 +296,8 @@
             "simpleExplanation": "A trip with a mission. Not a vacation — you're going somewhere specific to explore, discover, or accomplish something important.",
             "example": "Jefferson sent Lewis and Clark on an expedition to find a water route to the Pacific Ocean",
             "category": "Exploring & Growing",
-            "typingSnippet": "An expedition is a journey organized for a specific purpose, like exploration or scientific research. Jefferson sent Lewis and Clark on an expedition to explore the Louisiana Territory and find a route to the Pacific Ocean. Their trip took over two years and covered thousands of miles of unknown land."
+            "typingSnippet": "An expedition is a journey organized for a specific purpose, like exploration or scientific research. Jefferson sent Lewis and Clark on an expedition to explore the Louisiana Territory and find a route to the Pacific Ocean. Their trip took over two years and covered thousands of miles of unknown land.",
+            "imageUrl": "../units/early-republic/images/vocab/lewis-clark.jpg"
         },
         {
             "term": "Sacagawea",
@@ -279,7 +305,8 @@
             "simpleExplanation": "A Shoshone woman who translated languages and showed Lewis and Clark the way through unfamiliar territory. Without her, the expedition probably would have failed.",
             "example": "Sacagawea helped the Corps of Discovery communicate with Native nations and navigate the western territory",
             "category": "Exploring & Growing",
-            "typingSnippet": "Sacagawea was a Shoshone woman who served as an interpreter and guide for Lewis and Clark's expedition. She helped the team communicate with Native American nations and navigate unfamiliar territory. Her presence also signaled to Native peoples that the expedition came in peace."
+            "typingSnippet": "Sacagawea was a Shoshone woman who served as an interpreter and guide for Lewis and Clark's expedition. She helped the team communicate with Native American nations and navigate unfamiliar territory. Her presence also signaled to Native peoples that the expedition came in peace.",
+            "imageUrl": "../units/early-republic/images/vocab/sacagawea.jpg"
         },
         {
             "term": "Barbary Pirates",
@@ -288,7 +315,8 @@
             "example": "Jefferson refused to keep paying tribute to the Barbary Pirates and sent the navy to fight them instead",
             "category": "Exploring & Growing",
             "wikiUrl": "https://en.wikipedia.org/wiki/First_Barbary_War",
-            "typingSnippet": "The Barbary Pirates were raiders from North Africa who attacked American trading ships in the Mediterranean Sea. For years, the U.S. paid them tribute money for protection, but Jefferson refused to keep paying and sent the navy instead. This conflict showed the world that America would fight to defend its interests."
+            "typingSnippet": "The Barbary Pirates were raiders from North Africa who attacked American trading ships in the Mediterranean Sea. For years, the U.S. paid them tribute money for protection, but Jefferson refused to keep paying and sent the navy instead. This conflict showed the world that America would fight to defend its interests.",
+            "imageUrl": "../units/early-republic/images/vocab/barbary-pirates.jpg"
         },
         {
             "term": "Tribute",
@@ -304,7 +332,8 @@
             "simpleExplanation": "Britain would stop American ships and kidnap the sailors, forcing them to work on British warships. Imagine someone grabbing you off the street and making you work for them — that's impressment.",
             "example": "Impressment of American sailors was one of the key causes of the War of 1812",
             "category": "Exploring & Growing",
-            "typingSnippet": "Impressment was the British practice of capturing American sailors and forcing them to serve in the Royal Navy. Britain claimed it was only taking back deserters, but many of those seized were actually American citizens. This insult to American sovereignty became one of the main causes of the War of 1812."
+            "typingSnippet": "Impressment was the British practice of capturing American sailors and forcing them to serve in the Royal Navy. Britain claimed it was only taking back deserters, but many of those seized were actually American citizens. This insult to American sovereignty became one of the main causes of the War of 1812.",
+            "imageUrl": "../units/early-republic/images/vocab/press-gang.jpg"
         },
         {
             "term": "Embargo Act",
@@ -312,7 +341,8 @@
             "simpleExplanation": "Jefferson said 'Fine, we won't trade with ANYONE!' to punish Britain and France. But it backfired badly — American farmers and businesses suffered the most.",
             "example": "The Embargo Act backfired — it hurt American merchants and farmers more than it hurt Britain or France",
             "category": "Exploring & Growing",
-            "typingSnippet": "The Embargo Act of 1807 banned all American trade with foreign nations to punish Britain and France. Instead of hurting those countries, it devastated American farmers and merchants who depended on trade. The act was so unpopular that it was repealed, and it remains a famous example of a policy backfiring."
+            "typingSnippet": "The Embargo Act of 1807 banned all American trade with foreign nations to punish Britain and France. Instead of hurting those countries, it devastated American farmers and merchants who depended on trade. The act was so unpopular that it was repealed, and it remains a famous example of a policy backfiring.",
+            "imageUrl": "../units/early-republic/images/vocab/ograbme.jpg"
         },
         {
             "term": "Dilemma",
@@ -329,7 +359,8 @@
             "example": "War Hawks like Henry Clay wanted to defend American honor and expand into British Canada",
             "category": "War & National Pride",
             "wikiUrl": "https://en.wikipedia.org/wiki/War_hawk",
-            "typingSnippet": "War Hawks were young members of Congress who pushed hard for war with Britain in the early 1800s. Led by Henry Clay, they were angry about impressment and wanted to expand American territory into Canada. Their influence helped convince Congress to declare the War of 1812."
+            "typingSnippet": "War Hawks were young members of Congress who pushed hard for war with Britain in the early 1800s. Led by Henry Clay, they were angry about impressment and wanted to expand American territory into Canada. Their influence helped convince Congress to declare the War of 1812.",
+            "imageUrl": "../units/early-republic/images/vocab/henry-clay.jpg"
         },
         {
             "term": "Tecumseh",
@@ -337,7 +368,8 @@
             "simpleExplanation": "A Shawnee chief who tried to get all the Native American nations to team up and say 'Stop taking our land!' He was one of the strongest leaders fighting against American expansion.",
             "example": "Tecumseh tried to unite Native American nations to stop settlers from taking their land",
             "category": "War & National Pride",
-            "typingSnippet": "Tecumseh was a Shawnee leader who worked to unite Native American nations into a confederation to resist American expansion. He argued that no single tribe could sell land that belonged to all Native peoples. His alliance with Britain during the War of 1812 made him one of America's most formidable opponents."
+            "typingSnippet": "Tecumseh was a Shawnee leader who worked to unite Native American nations into a confederation to resist American expansion. He argued that no single tribe could sell land that belonged to all Native peoples. His alliance with Britain during the War of 1812 made him one of America's most formidable opponents.",
+            "imageUrl": "../units/early-republic/images/vocab/tecumseh.jpg"
         },
         {
             "term": "Henry Clay",
@@ -345,7 +377,8 @@
             "simpleExplanation": "A Kentucky politician who wanted war with Britain AND had a big plan to make America's economy stronger afterwards. He was one of the most important voices in Congress for years.",
             "example": "Henry Clay pushed for the War of 1812 and later created the American System to strengthen the economy",
             "category": "War & National Pride",
-            "typingSnippet": "Henry Clay was a Kentucky congressman who became one of the most influential politicians of his era. As a War Hawk, he pushed for the War of 1812 to defend American honor. After the war, he proposed the American System, a plan to strengthen the nation's economy through tariffs, a national bank, and better roads."
+            "typingSnippet": "Henry Clay was a Kentucky congressman who became one of the most influential politicians of his era. As a War Hawk, he pushed for the War of 1812 to defend American honor. After the war, he proposed the American System, a plan to strengthen the nation's economy through tariffs, a national bank, and better roads.",
+            "imageUrl": "../units/early-republic/images/vocab/henry-clay.jpg"
         },
         {
             "term": "Fort McHenry",
@@ -353,7 +386,8 @@
             "simpleExplanation": "Britain bombed this fort ALL night long, but when the sun came up, the American flag was still flying. A guy watching named Francis Scott Key was so moved he wrote our national anthem about it.",
             "example": "Francis Scott Key watched the bombardment of Fort McHenry and wrote the national anthem after seeing the flag still flying",
             "category": "War & National Pride",
-            "typingSnippet": "Fort McHenry was the Baltimore fort that withstood a massive British bombardment during the War of 1812. The battle lasted through the night, and when morning came, the American flag was still flying over the fort. This moment inspired Francis Scott Key to write the poem that became our national anthem."
+            "typingSnippet": "Fort McHenry was the Baltimore fort that withstood a massive British bombardment during the War of 1812. The battle lasted through the night, and when morning came, the American flag was still flying over the fort. This moment inspired Francis Scott Key to write the poem that became our national anthem.",
+            "imageUrl": "../units/early-republic/images/vocab/fort-mchenry.jpg"
         },
         {
             "term": "Treaty of Ghent",
@@ -361,7 +395,8 @@
             "simpleExplanation": "The peace deal that ended the War of 1812. Nobody won or lost territory — it was basically a tie. But Americans felt like winners because they survived fighting the world's strongest military.",
             "example": "The Treaty of Ghent was basically a draw — no territory changed hands",
             "category": "War & National Pride",
-            "typingSnippet": "The Treaty of Ghent was signed in 1814 to end the War of 1812 between the United States and Britain. Neither side gained or lost any territory, so the war ended in a draw. Despite this, many Americans felt like winners because they had stood up to the most powerful military in the world."
+            "typingSnippet": "The Treaty of Ghent was signed in 1814 to end the War of 1812 between the United States and Britain. Neither side gained or lost any territory, so the war ended in a draw. Despite this, many Americans felt like winners because they had stood up to the most powerful military in the world.",
+            "imageUrl": "../units/early-republic/images/vocab/treaty-ghent.jpg"
         },
         {
             "term": "Star-Spangled Banner",
@@ -369,7 +404,8 @@
             "simpleExplanation": "Our national anthem! It started as a poem about watching the flag survive a brutal battle. The 'star-spangled banner' is the flag itself — covered in stars and still waving after the fight.",
             "example": "The Star-Spangled Banner became a symbol of American resilience and national pride",
             "category": "War & National Pride",
-            "typingSnippet": "The Star-Spangled Banner is the national anthem of the United States, written by Francis Scott Key during the War of 1812. Key wrote the words after watching the British bombard Fort McHenry all night and seeing the American flag still waving at dawn. The song captures the pride and determination Americans felt during that era."
+            "typingSnippet": "The Star-Spangled Banner is the national anthem of the United States, written by Francis Scott Key during the War of 1812. Key wrote the words after watching the British bombard Fort McHenry all night and seeing the American flag still waving at dawn. The song captures the pride and determination Americans felt during that era.",
+            "imageUrl": "../units/early-republic/images/vocab/star-spangled-banner.jpg"
         },
         {
             "term": "Nationalism",
@@ -385,7 +421,8 @@
             "simpleExplanation": "A time when everyone basically got along (at least on the surface). There was only one political party left, so there was less arguing. But problems were brewing underneath.",
             "example": "The Era of Good Feelings saw the Federalist Party collapse, leaving only the Democratic-Republicans",
             "category": "War & National Pride",
-            "typingSnippet": "The Era of Good Feelings was a period of national unity from about 1817 to 1825 when the Federalist Party disappeared. With only one political party left, there was less conflict in government and Americans felt a shared sense of purpose. However, beneath the surface, tensions over slavery and states' rights were already building."
+            "typingSnippet": "The Era of Good Feelings was a period of national unity from about 1817 to 1825 when the Federalist Party disappeared. With only one political party left, there was less conflict in government and Americans felt a shared sense of purpose. However, beneath the surface, tensions over slavery and states' rights were already building.",
+            "imageUrl": "../units/early-republic/images/vocab/james-monroe.jpg"
         },
         {
             "term": "Monroe Doctrine",
@@ -393,7 +430,8 @@
             "simpleExplanation": "President Monroe basically told Europe: 'This side of the world is ours — stay out!' America couldn't really enforce it yet, but it was a bold statement.",
             "example": "The Monroe Doctrine told Europe to stay out of the Western Hemisphere, even though the US couldn't enforce it yet",
             "category": "War & National Pride",
-            "typingSnippet": "The Monroe Doctrine was an 1823 policy declaring that European nations must stop colonizing or interfering in the Americas. President Monroe warned that the U.S. would view any such action as a threat. Even though America was not yet powerful enough to enforce it, this bold statement shaped foreign policy for generations."
+            "typingSnippet": "The Monroe Doctrine was an 1823 policy declaring that European nations must stop colonizing or interfering in the Americas. President Monroe warned that the U.S. would view any such action as a threat. Even though America was not yet powerful enough to enforce it, this bold statement shaped foreign policy for generations.",
+            "imageUrl": "../units/early-republic/images/vocab/james-monroe.jpg"
         },
         {
             "term": "American System",
@@ -402,7 +440,8 @@
             "example": "The American System aimed to connect the North, South, and West into one strong national economy",
             "category": "War & National Pride",
             "wikiUrl": "https://en.wikipedia.org/wiki/American_System_(economic_plan)",
-            "typingSnippet": "The American System was Henry Clay's plan to strengthen the national economy after the War of 1812. It included protective tariffs, a national bank, and government-funded roads and canals. The goal was to connect the different regions of the country and make America less dependent on foreign goods."
+            "typingSnippet": "The American System was Henry Clay's plan to strengthen the national economy after the War of 1812. It included protective tariffs, a national bank, and government-funded roads and canals. The goal was to connect the different regions of the country and make America less dependent on foreign goods.",
+            "imageUrl": "../units/early-republic/images/vocab/erie-canal.jpg"
         },
         {
             "term": "McCulloch v. Maryland",
@@ -410,7 +449,8 @@
             "simpleExplanation": "Maryland tried to tax the national bank to shut it down. The Supreme Court said 'Nope — states can't mess with federal stuff.' This made the national government even more powerful.",
             "example": "McCulloch v. Maryland ruled that states could not tax federal institutions, reinforcing federal supremacy",
             "category": "War & National Pride",
-            "typingSnippet": "McCulloch v. Maryland was an 1819 Supreme Court case that ruled states could not tax the national bank. Chief Justice Marshall declared that federal law is supreme over state law. This decision strengthened the power of the federal government and confirmed that Congress had implied powers under the Constitution."
+            "typingSnippet": "McCulloch v. Maryland was an 1819 Supreme Court case that ruled states could not tax the national bank. Chief Justice Marshall declared that federal law is supreme over state law. This decision strengthened the power of the federal government and confirmed that Congress had implied powers under the Constitution.",
+            "imageUrl": "../units/early-republic/images/vocab/john-marshall.jpg"
         }
     ],
     "timelineEvents": [
@@ -841,7 +881,14 @@
         {
             "question": "Hamilton vs. Jefferson: Pick ONE of the major disagreements between Hamilton and Jefferson (national bank, strict vs. loose construction, economic vision, or foreign policy). Explain what each side believed and why it mattered for the future of the country.",
             "topic": "Political Parties Are Born",
-            "keyTerms": ["Strict Construction", "Loose Construction", "National Bank", "Tariff", "Political Party", "Democratic-Republican"],
+            "keyTerms": [
+                "Strict Construction",
+                "Loose Construction",
+                "National Bank",
+                "Tariff",
+                "Political Party",
+                "Democratic-Republican"
+            ],
             "rubric": [
                 "Names a SPECIFIC disagreement (not just 'they disagreed')",
                 "Explains Hamilton's position with specific details",
@@ -860,7 +907,13 @@
         {
             "question": "Jefferson's Dilemma: Explain the dilemma Jefferson faced with the Louisiana Purchase. What did he believe about the Constitution? What did he actually do? Why does this matter?",
             "topic": "Exploring & Growing",
-            "keyTerms": ["Dilemma", "Strict Construction", "Loose Construction", "Louisiana Purchase", "Napoleon"],
+            "keyTerms": [
+                "Dilemma",
+                "Strict Construction",
+                "Loose Construction",
+                "Louisiana Purchase",
+                "Napoleon"
+            ],
             "rubric": [
                 "Explains Jefferson's belief in strict construction",
                 "Identifies the specific problem: Constitution doesn't mention buying land",
@@ -879,7 +932,13 @@
         {
             "question": "Escalation to War: Trace the path from peaceful disagreements to the War of 1812. What events led to war? Why did peaceful solutions fail? Use at least 3 specific events in your answer.",
             "topic": "War & National Pride",
-            "keyTerms": ["Impressment", "Embargo Act", "War Hawks", "Henry Clay", "Tecumseh"],
+            "keyTerms": [
+                "Impressment",
+                "Embargo Act",
+                "War Hawks",
+                "Henry Clay",
+                "Tecumseh"
+            ],
             "rubric": [
                 "Names at least 3 specific events that led to war",
                 "Explains HOW each event contributed to growing tensions",
@@ -899,7 +958,15 @@
         {
             "question": "Nationalism After 1812: How did the War of 1812 change how Americans felt about their country? Explain at least 3 specific ways nationalism grew after the war.",
             "topic": "War & National Pride",
-            "keyTerms": ["Nationalism", "Era of Good Feelings", "Star-Spangled Banner", "Fort McHenry", "American System", "Monroe Doctrine", "Henry Clay"],
+            "keyTerms": [
+                "Nationalism",
+                "Era of Good Feelings",
+                "Star-Spangled Banner",
+                "Fort McHenry",
+                "American System",
+                "Monroe Doctrine",
+                "Henry Clay"
+            ],
             "rubric": [
                 "Defines or shows understanding of nationalism",
                 "Names at least 3 specific examples of growing nationalism",
@@ -919,7 +986,14 @@
         {
             "question": "Connections Across the Unit: Pick ONE of the event pairings below and explain how they are connected. How does the earlier event help explain the later one?",
             "topic": "Connections",
-            "keyTerms": ["Precedent", "Strict Construction", "Loose Construction", "Nationalism", "Impressment", "McCulloch v. Maryland"],
+            "keyTerms": [
+                "Precedent",
+                "Strict Construction",
+                "Loose Construction",
+                "Nationalism",
+                "Impressment",
+                "McCulloch v. Maryland"
+            ],
             "connectionPairings": [
                 "National Bank debate (1790s) → McCulloch v. Maryland (1819): How did Hamilton's argument about loose construction win out decades later?",
                 "Whiskey Rebellion (1794) → War of 1812: How did the government's willingness to use force set a precedent?",

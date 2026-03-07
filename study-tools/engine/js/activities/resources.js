@@ -90,6 +90,16 @@ StudyEngine.registerActivity({
                 card.className = 'res-term-card';
                 card.setAttribute('data-term', item.term.toLowerCase());
 
+                if (item.imageUrl) {
+                    var thumb = document.createElement('img');
+                    thumb.className = 'res-term-thumb';
+                    thumb.src = item.imageUrl;
+                    thumb.alt = item.term;
+                    thumb.loading = 'lazy';
+                    thumb.addEventListener('error', function() { this.style.display = 'none'; });
+                    card.appendChild(thumb);
+                }
+
                 var termInfo = document.createElement('div');
                 termInfo.className = 'res-term-info';
 

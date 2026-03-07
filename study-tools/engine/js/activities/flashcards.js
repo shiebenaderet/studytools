@@ -305,6 +305,15 @@ StudyEngine.registerActivity({
 
         // Back
         backContent.textContent = '';
+        if (card.imageUrl) {
+            const img = document.createElement('img');
+            img.className = 'fc-card-image';
+            img.src = card.imageUrl;
+            img.alt = card.term;
+            img.loading = 'lazy';
+            img.addEventListener('error', function() { this.style.display = 'none'; });
+            backContent.appendChild(img);
+        }
         const defText = document.createElement('div');
         defText.textContent = card.definition;
         backContent.appendChild(defText);
