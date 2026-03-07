@@ -617,13 +617,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Load version info
+    // Load version info (append, don't overwrite — fun fact may already be in footer)
     fetch('version.json')
         .then(r => r.ok ? r.json() : null)
         .then(v => {
             if (v) {
                 const footer = document.getElementById('app-footer');
-                if (footer) footer.textContent = 'v' + v.version;
+                if (footer) {
+                    var versionEl = footer.querySelector('.footer-version');
+                    if (!versionEl) {
+                        versionEl = document.createElement('span');
+                        versionEl.className = 'footer-version';
+                        footer.appendChild(versionEl);
+                    }
+                    versionEl.textContent = 'v' + v.version;
+                }
             }
         })
         .catch(() => {});
