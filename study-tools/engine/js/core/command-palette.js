@@ -793,18 +793,50 @@ const CommandPalette = {
         }
     },
 
-    // Check for magic link redirect on page load
+    // Returns true if this is a magic link redirect (hash contains access_token)
+    isMagicLinkRedirect() {
+        return window.location.hash.includes('access_token');
+    },
+
+    // Check for magic link redirect on page load.
+    // Called from app.js AFTER engine init, before welcome screen.
     async checkAuthRedirect() {
-        if (!ProgressManager.supabase) return;
+        if (!ProgressManager.supabase) return false;
+        if (!this.isMagicLinkRedirect()) return false;
+
         try {
-            const { data: { session } } = await ProgressManager.supabase.auth.getSession();
-            if (session && window.location.hash.includes('access_token')) {
-                history.replaceState(null, '', window.location.pathname + window.location.search);
+            // Wait for Supabase to process the hash fragment
+            const { data, error } = await ProgressManager.supabase.auth.getSession();
+            if (error) throw error;
+
+            if (data.session) {
+                // Clean up URL — remove hash entirely
+                var cleanUrl = window.location.pathname + window.location.search;
+                history.replaceState(null, '', cleanUrl);
+
                 this.teacherMode = true;
-                setTimeout(() => this.openTeacherDashboard(), 500);
+                // Small delay to let the app finish rendering
+                setTimeout(() => this.openTeacherDashboard(), 300);
+                return true;
             }
+
+            // If no session yet, listen for auth state change (Supabase processes hash async)
+            return new Promise((resolve) => {
+                var timeout = setTimeout(() => { resolve(false); }, 5000);
+                ProgressManager.supabase.auth.onAuthStateChange((event, session) => {
+                    if (session && (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED')) {
+                        clearTimeout(timeout);
+                        var cleanUrl = window.location.pathname + window.location.search;
+                        history.replaceState(null, '', cleanUrl);
+                        this.teacherMode = true;
+                        setTimeout(() => this.openTeacherDashboard(), 300);
+                        resolve(true);
+                    }
+                });
+            });
         } catch (err) {
             console.error('Auth redirect check error:', err);
+            return false;
         }
     }
 };
@@ -830,9 +862,4 @@ document.addEventListener('keydown', (e) => {
 document.addEventListener('DOMContentLoaded', () => {
     const btn = document.getElementById('cmd-palette-btn');
     if (btn) btn.addEventListener('click', () => CommandPalette.open());
-});
-
-// Check for magic link auth redirect on load
-document.addEventListener('DOMContentLoaded', () => {
-    CommandPalette.checkAuthRedirect();
 });

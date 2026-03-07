@@ -121,9 +121,20 @@ const ProgressManager = {
                 const fill = document.createElement('div');
                 fill.className = 'progress-fill';
                 fill.style.width = pct + '%';
-                fill.textContent = pct + '%';
                 bar.appendChild(fill);
                 box.appendChild(bar);
+
+                const progLabel = document.createElement('div');
+                progLabel.className = 'progress-label';
+                const progText = document.createElement('span');
+                progText.className = 'progress-label-text';
+                progText.textContent = value;
+                progLabel.appendChild(progText);
+                const progPct = document.createElement('span');
+                progPct.className = 'progress-label-pct';
+                progPct.textContent = pct + '%';
+                progLabel.appendChild(progPct);
+                box.appendChild(progLabel);
             }
 
             return box;

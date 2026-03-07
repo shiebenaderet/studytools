@@ -453,7 +453,13 @@ const StudyEngine = {
 
 // Boot on DOM ready
 document.addEventListener('DOMContentLoaded', () => {
-    StudyEngine.init().then(() => {
+    StudyEngine.init().then(async () => {
+        // Check for magic link redirect first — skip welcome screen if teacher is logging in
+        if (typeof CommandPalette !== 'undefined' && CommandPalette.isMagicLinkRedirect()) {
+            await CommandPalette.checkAuthRedirect();
+            return;
+        }
+
         // Show welcome screen on first visit (after app has loaded)
         if (!ProgressManager.studentInfo) {
             ProgressManager.showWelcomeScreen();
