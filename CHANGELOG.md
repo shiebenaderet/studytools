@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.4.0] - 2026-03-06
+
+### Changed
+- **Condensed home page** — Smaller progress tracker (reduced padding, font sizes, hidden progress labels), compact achievement badges (56px inline flex instead of 90px grid), tighter quote card spacing
+- **Fun fact moved to footer** — Historical fun facts now display in the site footer on every page instead of below the quote card on the home page only
+- **Focus timer no longer overlaps header** — Timer bar pushes page content down via `body.timer-active` class instead of covering the sticky header; reduced timer bar height from 44px to 36px
+- **Compact achievements** — Heading and summary merged into a single inline row; badges reduced to 56px with smaller icons/text
+- **Light mode polish** — Replaced remaining hardcoded `rgba(255,255,255,...)` in wordle, timeline, source analysis, and achievement styles with theme-aware CSS variables; loading screen uses CSS variables
+
 ## [2.3.0] - 2026-03-06
 
 ### Added

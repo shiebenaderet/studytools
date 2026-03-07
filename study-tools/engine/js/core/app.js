@@ -26,6 +26,7 @@ const StudyEngine = {
         this.applyTheme();
         if (typeof AchievementManager !== 'undefined') AchievementManager.init(this.config.unit.id);
         this.renderHeader();
+        this.renderFooterFact();
         await this.loadActivities();
     },
 
@@ -544,22 +545,24 @@ const StudyEngine = {
             inner.appendChild(textWrap);
             card.appendChild(inner);
 
-            // Fun fact below
-            if (flavor.funFacts && flavor.funFacts.length > 0) {
-                const fact = flavor.funFacts[Math.floor(Math.random() * flavor.funFacts.length)];
-                const factEl = document.createElement('div');
-                factEl.className = 'historical-fun-fact';
-                const bulb = document.createElement('i');
-                bulb.className = 'fas fa-lightbulb';
-                bulb.style.marginRight = '8px';
-                bulb.style.color = 'var(--accent)';
-                factEl.appendChild(bulb);
-                factEl.appendChild(document.createTextNode(fact));
-                card.appendChild(factEl);
-            }
-
             container.appendChild(card);
         }
+    },
+
+    renderFooterFact() {
+        if (!this.config || !this.config.historicalFlavor) return;
+        var facts = this.config.historicalFlavor.funFacts;
+        if (!facts || facts.length === 0) return;
+        var footer = document.getElementById('app-footer');
+        if (!footer || footer.querySelector('.footer-fun-fact')) return;
+        var fact = facts[Math.floor(Math.random() * facts.length)];
+        var factEl = document.createElement('div');
+        factEl.className = 'footer-fun-fact';
+        var bulb = document.createElement('i');
+        bulb.className = 'fas fa-lightbulb';
+        factEl.appendChild(bulb);
+        factEl.appendChild(document.createTextNode(fact));
+        footer.insertBefore(factEl, footer.firstChild);
     },
 
     showUnitError(message) {

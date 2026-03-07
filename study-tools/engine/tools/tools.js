@@ -366,6 +366,7 @@ const StudyTools = {
         bar.appendChild(exitBtn);
 
         document.body.appendChild(bar);
+        document.body.classList.add('timer-active');
 
         this._timerInterval = setInterval(() => this._tick(), 1000);
     },
@@ -414,6 +415,7 @@ const StudyTools = {
 
         var bar = document.getElementById('focus-timer-bar');
         if (bar) bar.parentNode.removeChild(bar);
+        document.body.classList.remove('timer-active');
     },
 
     // ── Print ────────────────────────────────────────────────────────────

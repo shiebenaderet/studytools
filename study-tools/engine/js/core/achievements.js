@@ -216,12 +216,6 @@ var AchievementManager = {
     renderBadges: function(container) {
         container.textContent = '';
 
-        var heading = document.createElement('h3');
-        heading.textContent = 'Achievements';
-        heading.style.marginBottom = '12px';
-        heading.style.color = 'var(--primary)';
-        container.appendChild(heading);
-
         var unlockedCount = this.getUnlocked().length;
         var visibleCount = 0;
         var secretUnlocked = 0;
@@ -229,16 +223,29 @@ var AchievementManager = {
             if (!this.achievements[j].secret) visibleCount++;
             if (this.achievements[j].secret && this.achievements[j].unlocked) secretUnlocked++;
         }
-        var summary = document.createElement('p');
-        summary.textContent = unlockedCount + ' / ' + visibleCount + ' unlocked';
-        if (secretUnlocked > 0) {
-            summary.textContent += ' + ' + secretUnlocked + ' secret';
-        } else if (unlockedCount > 0) {
-            summary.textContent += ' (+ hidden secrets to discover!)';
-        }
-        summary.style.marginBottom = '16px';
-        summary.style.color = '#4b5563';
-        container.appendChild(summary);
+
+        var heading = document.createElement('div');
+        heading.style.display = 'flex';
+        heading.style.alignItems = 'center';
+        heading.style.justifyContent = 'space-between';
+        heading.style.marginBottom = '6px';
+
+        var title = document.createElement('span');
+        title.style.color = 'var(--primary)';
+        title.style.fontWeight = '700';
+        title.style.fontSize = '0.85em';
+        title.textContent = 'Achievements';
+        heading.appendChild(title);
+
+        var summary = document.createElement('span');
+        summary.style.color = 'var(--text-muted)';
+        summary.style.fontSize = '0.75em';
+        var summaryText = unlockedCount + '/' + visibleCount;
+        if (secretUnlocked > 0) summaryText += ' + ' + secretUnlocked + ' secret';
+        summary.textContent = summaryText;
+        heading.appendChild(summary);
+
+        container.appendChild(heading);
 
         var grid = document.createElement('div');
         grid.className = 'ach-grid';

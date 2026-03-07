@@ -614,29 +614,29 @@ body.activity-active header {
 
 .stats-container {
     background: var(--bg-elevated);
-    padding: 16px 20px;
+    padding: 10px 16px;
     border-radius: var(--radius-md);
     border: 1px solid var(--border-card);
-    margin-bottom: 16px;
+    margin-bottom: 10px;
     box-shadow: var(--shadow-card);
 }
 
 .stats-container h2 {
     color: var(--text-primary);
-    font-size: 1em;
+    font-size: 0.85em;
     font-weight: 700;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
 }
 
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
+    gap: 8px;
 }
 
 .stat-box {
     background: var(--bg-surface);
-    padding: 12px 14px;
+    padding: 8px 10px;
     border-radius: var(--radius-sm);
     border: 1px solid var(--border-subtle);
     border-left: 3px solid var(--primary);
@@ -645,25 +645,25 @@ body.activity-active header {
 
 .stat-label {
     color: var(--text-muted);
-    font-size: 0.7em;
-    margin-bottom: 4px;
+    font-size: 0.65em;
+    margin-bottom: 2px;
     text-transform: uppercase;
     letter-spacing: 0.06em;
     font-weight: 700;
 }
 
 .stat-value {
-    font-size: 1.3em;
+    font-size: 1em;
     font-weight: 800;
     color: var(--text-primary);
 }
 
 .progress-bar {
     background: var(--bg-card);
-    height: 10px;
-    border-radius: 5px;
+    height: 6px;
+    border-radius: 3px;
     overflow: hidden;
-    margin-top: 10px;
+    margin-top: 6px;
     border: 1px solid var(--border-subtle);
     position: relative;
 }
@@ -672,17 +672,14 @@ body.activity-active header {
     background: linear-gradient(90deg, var(--primary-bold) 0%, var(--primary) 60%, var(--success) 100%);
     height: 100%;
     transition: width 0.4s ease;
-    border-radius: 5px;
+    border-radius: 3px;
     box-shadow: 0 0 8px rgba(79, 143, 247, 0.25);
     font-size: 0;
     color: transparent;
 }
 
 .progress-label {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 6px;
+    display: none;
 }
 
 .progress-label-text {
@@ -699,10 +696,11 @@ body.activity-active header {
 
 .badges-container {
     background: var(--bg-elevated);
-    padding: 16px;
+    padding: 10px 16px;
     border-radius: var(--radius-md);
     border: 1px solid var(--border-card);
     box-shadow: var(--shadow-card);
+    margin-top: 10px;
 }
 
 .badges-grid {
@@ -757,15 +755,15 @@ body.activity-active header {
 
 /* HISTORICAL QUOTE CARD */
 .historical-quote-card {
-    margin-top: 12px;
+    margin-top: 8px;
     padding: 0;
     overflow: hidden;
 }
 
 .historical-quote-inner {
     display: flex;
-    gap: 16px;
-    padding: 16px 18px;
+    gap: 12px;
+    padding: 12px 16px;
     align-items: center;
 }
 
@@ -816,14 +814,7 @@ a.historical-quote-source:hover {
     text-decoration: underline;
 }
 
-.historical-fun-fact {
-    padding: 10px 18px;
-    border-top: 1px solid var(--border-subtle);
-    font-size: 0.8em;
-    color: var(--text-secondary);
-    line-height: 1.4;
-    background: rgba(251, 191, 36, 0.04);
-}
+/* Fun fact now rendered in footer via .footer-fun-fact */
 
 @media (max-width: 480px) {
     .historical-quote-inner {
@@ -1873,17 +1864,25 @@ a.historical-quote-source:hover {
     top: 0;
     left: 0;
     right: 0;
-    height: 44px;
+    height: 36px;
     background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
     color: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 16px;
+    gap: 12px;
     z-index: 10000;
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     font-family: var(--font-body);
     animation: slideDown 0.3s ease;
+}
+
+body.timer-active .container {
+    padding-top: 36px;
+}
+
+body.timer-active header {
+    top: 36px;
 }
 
 .focus-timer-bar.paused {
@@ -1896,9 +1895,9 @@ a.historical-quote-source:hover {
 }
 
 .focus-timer-display {
-    font-size: 1.4em;
+    font-size: 1.1em;
     font-weight: 700;
-    font-family: 'Courier New', monospace;
+    font-family: var(--font-mono);
     letter-spacing: 2px;
 }
 
@@ -1906,11 +1905,11 @@ a.historical-quote-source:hover {
     background: rgba(255,255,255,0.2);
     border: none;
     color: white;
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
     cursor: pointer;
-    font-size: 0.9em;
+    font-size: 0.8em;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2763,16 +2762,15 @@ a.historical-quote-source:hover {
 
 /* ACHIEVEMENTS */
 .ach-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-    gap: 12px;
-    padding: 8px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 4px 0;
 }
 
 @media (max-width: 600px) {
     .ach-grid {
-        grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
-        gap: 8px;
+        gap: 6px;
     }
 }
 
@@ -2781,14 +2779,13 @@ a.historical-quote-source:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 80px;
-    height: 80px;
-    margin: 0 auto;
-    border-radius: 12px;
+    width: 56px;
+    height: 56px;
+    border-radius: 10px;
     background: var(--bg-elevated);
     border: 1px solid var(--border-card);
     transition: transform 0.2s, box-shadow 0.2s;
-    padding: 8px 4px;
+    padding: 4px 2px;
     box-shadow: var(--shadow-card);
 }
 
@@ -2808,8 +2805,8 @@ a.historical-quote-source:hover {
 }
 
 .ach-badge .ach-icon {
-    font-size: 1.6em;
-    margin-bottom: 4px;
+    font-size: 1.2em;
+    margin-bottom: 2px;
     color: var(--primary);
 }
 
@@ -2818,9 +2815,9 @@ a.historical-quote-source:hover {
 }
 
 .ach-badge .ach-name {
-    font-size: 0.6em;
+    font-size: 0.5em;
     text-align: center;
-    line-height: 1.2;
+    line-height: 1.1;
     color: var(--text-primary);
     max-width: 100%;
     overflow: hidden;
@@ -2871,10 +2868,31 @@ a.historical-quote-source:hover {
 /* APP FOOTER */
 .app-footer {
     text-align: center;
-    padding: 12px;
-    margin-top: 16px;
+    padding: 10px 16px;
+    margin-top: 12px;
     color: var(--text-muted);
     font-size: 0.8em;
+}
+
+.footer-fun-fact {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    text-align: left;
+    font-size: 0.9em;
+    color: var(--text-secondary);
+    line-height: 1.4;
+    margin-bottom: 6px;
+    padding: 8px 12px;
+    background: rgba(251, 191, 36, 0.04);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-subtle);
+}
+
+.footer-fun-fact i {
+    color: var(--accent);
+    margin-top: 2px;
+    flex-shrink: 0;
 }
 
 /* DYSLEXIC FONT TOGGLE */
