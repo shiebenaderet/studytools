@@ -515,71 +515,107 @@ const StudyEngine = {
         }
     },
 
+    _quoteIndex: -1,
+
     _renderHistoricalQuote(container) {
         if (!this.config || !this.config.historicalFlavor) return;
         const flavor = this.config.historicalFlavor;
+        if (!flavor.quotes || flavor.quotes.length === 0) return;
 
-        // Pick a random quote
-        if (flavor.quotes && flavor.quotes.length > 0) {
-            const quote = flavor.quotes[Math.floor(Math.random() * flavor.quotes.length)];
+        // Pick initial random quote
+        if (this._quoteIndex < 0) {
+            this._quoteIndex = Math.floor(Math.random() * flavor.quotes.length);
+        }
 
-            const card = document.createElement('div');
-            card.className = 'card historical-quote-card';
+        const card = document.createElement('div');
+        card.className = 'card historical-quote-card';
+        card.style.cursor = 'pointer';
+        card.title = 'Click for next quote';
 
-            const inner = document.createElement('div');
-            inner.className = 'historical-quote-inner';
+        this._fillQuoteCard(card, flavor.quotes[this._quoteIndex]);
 
-            // Portrait
-            if (quote.portrait) {
-                const imgWrap = document.createElement('div');
-                imgWrap.className = 'historical-quote-portrait';
-                const img = document.createElement('img');
-                // Resolve portrait path relative to unit directory
-                const unitId = this.config.unit.id;
-                if (quote.portrait.startsWith('http')) {
-                    img.src = quote.portrait;
-                } else {
-                    img.src = '../units/' + unitId + '/' + quote.portrait;
-                }
-                img.alt = quote.author || '';
-                img.loading = 'lazy';
-                imgWrap.appendChild(img);
-                inner.appendChild(imgWrap);
+        // Click to cycle
+        var self = this;
+        card.addEventListener('click', function(e) {
+            // Don't cycle if they clicked a source link
+            if (e.target.tagName === 'A') return;
+            self._quoteIndex = (self._quoteIndex + 1) % flavor.quotes.length;
+            card.style.opacity = '0';
+            card.style.transform = 'translateX(20px)';
+            setTimeout(function() {
+                self._fillQuoteCard(card, flavor.quotes[self._quoteIndex]);
+                card.style.opacity = '1';
+                card.style.transform = 'translateX(0)';
+            }, 200);
+        });
+
+        // Hint
+        var hint = document.createElement('div');
+        hint.className = 'quote-cycle-hint';
+        hint.textContent = 'Tap for more quotes';
+        card.appendChild(hint);
+
+        container.appendChild(card);
+    },
+
+    _fillQuoteCard(card, quote) {
+        // Clear existing content but keep event listeners
+        var existing = card.querySelector('.historical-quote-inner');
+        if (existing) existing.remove();
+        var existingHint = card.querySelector('.quote-cycle-hint');
+
+        const inner = document.createElement('div');
+        inner.className = 'historical-quote-inner';
+
+        if (quote.portrait) {
+            const imgWrap = document.createElement('div');
+            imgWrap.className = 'historical-quote-portrait';
+            const img = document.createElement('img');
+            const unitId = this.config.unit.id;
+            if (quote.portrait.startsWith('http')) {
+                img.src = quote.portrait;
+            } else {
+                img.src = '../units/' + unitId + '/' + quote.portrait;
             }
+            img.alt = quote.author || '';
+            img.loading = 'lazy';
+            imgWrap.appendChild(img);
+            inner.appendChild(imgWrap);
+        }
 
-            // Text content
-            const textWrap = document.createElement('div');
-            textWrap.className = 'historical-quote-text';
+        const textWrap = document.createElement('div');
+        textWrap.className = 'historical-quote-text';
 
-            const quoteText = document.createElement('blockquote');
-            quoteText.textContent = '\u201C' + quote.text + '\u201D';
-            textWrap.appendChild(quoteText);
+        const quoteText = document.createElement('blockquote');
+        quoteText.textContent = '\u201C' + quote.text + '\u201D';
+        textWrap.appendChild(quoteText);
 
-            const attribution = document.createElement('div');
-            attribution.className = 'historical-quote-author';
-            attribution.textContent = '\u2014 ' + quote.author;
-            if (quote.source) {
-                if (quote.sourceUrl) {
-                    const srcLink = document.createElement('a');
-                    srcLink.className = 'historical-quote-source';
-                    srcLink.href = quote.sourceUrl;
-                    srcLink.target = '_blank';
-                    srcLink.rel = 'noopener noreferrer';
-                    srcLink.textContent = ', ' + quote.source;
-                    attribution.appendChild(srcLink);
-                } else {
-                    const src = document.createElement('span');
-                    src.className = 'historical-quote-source';
-                    src.textContent = ', ' + quote.source;
-                    attribution.appendChild(src);
-                }
+        const attribution = document.createElement('div');
+        attribution.className = 'historical-quote-author';
+        attribution.textContent = '\u2014 ' + quote.author;
+        if (quote.source) {
+            if (quote.sourceUrl) {
+                const srcLink = document.createElement('a');
+                srcLink.className = 'historical-quote-source';
+                srcLink.href = quote.sourceUrl;
+                srcLink.target = '_blank';
+                srcLink.rel = 'noopener noreferrer';
+                srcLink.textContent = ', ' + quote.source;
+                attribution.appendChild(srcLink);
+            } else {
+                const src = document.createElement('span');
+                src.className = 'historical-quote-source';
+                src.textContent = ', ' + quote.source;
+                attribution.appendChild(src);
             }
-            textWrap.appendChild(attribution);
+        }
+        textWrap.appendChild(attribution);
+        inner.appendChild(textWrap);
 
-            inner.appendChild(textWrap);
+        if (existingHint) {
+            card.insertBefore(inner, existingHint);
+        } else {
             card.appendChild(inner);
-
-            container.appendChild(card);
         }
     },
 

@@ -18,7 +18,6 @@
         "practice-test",
         "short-answer",
         "timeline",
-        "category-sort",
         "wordle",
         "hangman",
         "flip-match",
@@ -27,7 +26,8 @@
         "term-catcher",
         "lightning-round",
         "crossword",
-        "source-analysis"
+        "source-analysis",
+        "quiz-race"
     ],
     "vocabulary": [
         {

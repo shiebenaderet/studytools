@@ -916,6 +916,18 @@ a.historical-quote-source:hover {
     text-decoration: underline;
 }
 
+.historical-quote-card {
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.quote-cycle-hint {
+    text-align: center;
+    font-size: 0.7em;
+    color: var(--text-muted);
+    padding: 4px 0 8px;
+    opacity: 0.6;
+}
+
 @media (max-width: 480px) {
     .historical-quote-inner {
         flex-direction: column;

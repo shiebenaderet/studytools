@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.1.0] - 2026-03-06
+
+### Added
+- **1v1 Quiz Race** — New 2-player same-screen game: Player 1 uses keys 1-4, Player 2 uses keys 7-0. Race to answer multiple-choice questions with 6-second timer, correct = +1, wrong = -1. Key hints shown on each option.
+- **Teacher Analytics Dashboard** — Three analytics cards in teacher view:
+  - **Popular Activities** — Bar chart showing usage counts per activity with "underused" warnings
+  - **Tricky Terms** — Top 10 most-missed vocabulary terms aggregated from weakness tracker and flashcard ratings
+  - **Review Recommendations** — AI-generated suggestions based on mastery rates, activity usage gaps, and common struggles
+- **Click-to-cycle quotes** — Click the quote card on the home page to slide to the next quote with smooth transition animation and "Tap for more quotes" hint
+
+### Changed
+- Removed Category Sort from default unit activities (replaced by Quiz Race)
+
 ## [3.0.0] - 2026-03-06
 
 ### Added

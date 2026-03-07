@@ -596,14 +596,24 @@ const CommandPalette = {
         tableSection.style.marginTop = '24px';
         container.appendChild(tableSection);
 
+        // Analytics section
+        var analyticsSection = document.createElement('div');
+        analyticsSection.id = 'teacher-analytics';
+        analyticsSection.style.marginTop = '24px';
+        container.appendChild(analyticsSection);
+
         // Leaderboard management section
         var leaderboardSection = document.createElement('div');
         leaderboardSection.id = 'teacher-leaderboard';
         container.appendChild(leaderboardSection);
 
         await this.loadClasses(classSelect);
-        classSelect.addEventListener('change', () => this.loadDashboardData(container));
+        classSelect.addEventListener('change', () => {
+            this.loadDashboardData(container);
+            this.loadAnalytics();
+        });
         await this.loadDashboardData(container);
+        await this.loadAnalytics();
 
         // Load leaderboard management
         if (typeof LeaderboardManager !== 'undefined') {
@@ -814,6 +824,303 @@ const CommandPalette = {
                 statsRow.appendChild(errEl);
             }
         }
+    },
+
+    async loadAnalytics() {
+        var section = document.getElementById('teacher-analytics');
+        if (!section) return;
+        section.textContent = '';
+
+        var heading = document.createElement('h3');
+        heading.style.cssText = 'color:var(--text-primary);margin-bottom:16px;';
+        var icon = document.createElement('i');
+        icon.className = 'fas fa-chart-bar';
+        icon.style.color = 'var(--primary)';
+        heading.appendChild(icon);
+        heading.appendChild(document.createTextNode(' Insights & Analytics'));
+        section.appendChild(heading);
+
+        var classId = document.getElementById('teacher-filter-class')?.value || null;
+
+        try {
+            // Get students
+            var studentQuery = ProgressManager.supabase.from('students').select('id, name, class_id');
+            if (classId) studentQuery = studentQuery.eq('class_id', classId);
+            var sResult = await studentQuery;
+            var students = sResult.data || [];
+            var studentIds = students.map(function(s) { return s.id; });
+
+            if (studentIds.length === 0) {
+                var empty = document.createElement('p');
+                empty.style.cssText = 'color:var(--text-muted);text-align:center;padding:20px;';
+                empty.textContent = 'No student data to analyze.';
+                section.appendChild(empty);
+                return;
+            }
+
+            // Get sessions (for activity popularity)
+            var sessQuery = ProgressManager.supabase
+                .from('sessions')
+                .select('student_id, activities_used, duration_seconds')
+                .in('student_id', studentIds);
+            var sessResult = await sessQuery;
+            var sessions = sessResult.data || [];
+
+            // Get progress data (for question/term analysis)
+            var progQuery = ProgressManager.supabase
+                .from('progress')
+                .select('student_id, activity, data')
+                .in('student_id', studentIds);
+            var progResult = await progQuery;
+            var progressData = progResult.data || [];
+
+            // Layout: 3-column grid
+            var grid = document.createElement('div');
+            grid.style.cssText = 'display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;';
+
+            // === 1. ACTIVITY POPULARITY ===
+            var activityCounts = {};
+            var allActivities = StudyEngine.config ? StudyEngine.config.activities || [] : [];
+            allActivities.forEach(function(a) { activityCounts[a] = 0; });
+
+            sessions.forEach(function(s) {
+                if (s.activities_used) {
+                    s.activities_used.forEach(function(a) {
+                        // Strip "activity_" prefix if present
+                        var key = a.replace(/^activity_/, '');
+                        activityCounts[key] = (activityCounts[key] || 0) + 1;
+                    });
+                }
+            });
+
+            var activityNames = {
+                'flashcards': 'Flashcards', 'practice-test': 'Practice Test', 'short-answer': 'Short Answer',
+                'fill-in-blank': 'Fill-in-the-Blank', 'timeline': 'Timeline', 'category-sort': 'Category Sort',
+                'wordle': 'Wordle', 'hangman': 'Hangman', 'flip-match': 'Flip Match',
+                'typing-race': 'Typing Race', 'typing-practice': 'Typing Practice',
+                'term-catcher': 'Term Catcher', 'lightning-round': 'Lightning Round',
+                'crossword': 'Crossword', 'source-analysis': 'Source Analysis', 'resources': 'Resource Library'
+            };
+
+            var popCard = this._createAnalyticsCard('Popular Activities', 'fas fa-fire', 'var(--danger)');
+            var sortedActivities = Object.entries(activityCounts).sort(function(a, b) { return b[1] - a[1]; });
+            var maxCount = sortedActivities.length > 0 ? sortedActivities[0][1] : 1;
+
+            sortedActivities.forEach(function(item) {
+                var name = activityNames[item[0]] || item[0];
+                var count = item[1];
+                var bar = document.createElement('div');
+                bar.style.cssText = 'display:flex;align-items:center;gap:8px;margin-bottom:6px;';
+
+                var label = document.createElement('span');
+                label.style.cssText = 'font-size:0.8em;color:var(--text-primary);width:110px;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;';
+                label.textContent = name;
+                bar.appendChild(label);
+
+                var track = document.createElement('div');
+                track.style.cssText = 'flex:1;height:16px;background:var(--bg-surface);border-radius:8px;overflow:hidden;';
+                var fill = document.createElement('div');
+                var pct = maxCount > 0 ? (count / maxCount) * 100 : 0;
+                fill.style.cssText = 'height:100%;border-radius:8px;background:linear-gradient(90deg,var(--primary),var(--secondary));transition:width 0.4s;width:' + Math.max(pct, 2) + '%;';
+                track.appendChild(fill);
+                bar.appendChild(track);
+
+                var countEl = document.createElement('span');
+                countEl.style.cssText = 'font-size:0.75em;color:var(--text-muted);width:30px;text-align:right;';
+                countEl.textContent = String(count);
+                bar.appendChild(countEl);
+
+                popCard.querySelector('.analytics-body').appendChild(bar);
+            });
+
+            // Underused warning
+            var underused = sortedActivities.filter(function(a) { return a[1] === 0; });
+            if (underused.length > 0) {
+                var warning = document.createElement('div');
+                warning.style.cssText = 'margin-top:10px;padding:8px 10px;background:rgba(251,191,36,0.1);border-radius:8px;border-left:3px solid var(--accent);';
+                var warnIcon = document.createElement('i');
+                warnIcon.className = 'fas fa-exclamation-triangle';
+                warnIcon.style.cssText = 'color:var(--accent);margin-right:6px;font-size:0.8em;';
+                warning.appendChild(warnIcon);
+                var warnText = document.createElement('span');
+                warnText.style.cssText = 'font-size:0.8em;color:var(--text-secondary);';
+                warnText.textContent = 'Not used yet: ' + underused.map(function(a) { return activityNames[a[0]] || a[0]; }).join(', ');
+                warning.appendChild(warnText);
+                popCard.querySelector('.analytics-body').appendChild(warning);
+            }
+
+            grid.appendChild(popCard);
+
+            // === 2. CONFUSING TERMS (from weakness tracker + flashcard ratings) ===
+            var termDifficulty = {};
+            var totalVocab = StudyEngine.config && StudyEngine.config.vocabulary ? StudyEngine.config.vocabulary.length : 0;
+
+            progressData.forEach(function(p) {
+                // Weakness tracker
+                if (p.activity === 'weakness_tracker' && p.data && p.data.terms) {
+                    Object.entries(p.data.terms).forEach(function(entry) {
+                        if (!termDifficulty[entry[0]]) termDifficulty[entry[0]] = { missed: 0, mastered: 0 };
+                        termDifficulty[entry[0]].missed += entry[1];
+                    });
+                }
+                // Flashcard ratings
+                if (p.activity === 'activity_flashcards' && p.data) {
+                    if (p.data.ratings) {
+                        Object.entries(p.data.ratings).forEach(function(entry) {
+                            if (!termDifficulty[entry[0]]) termDifficulty[entry[0]] = { missed: 0, mastered: 0 };
+                            if (entry[1] === 'again' || entry[1] === 'hard') termDifficulty[entry[0]].missed++;
+                            if (entry[1] === 'easy' || entry[1] === 'good') termDifficulty[entry[0]].mastered++;
+                        });
+                    }
+                    if (p.data.mastered && Array.isArray(p.data.mastered)) {
+                        p.data.mastered.forEach(function(term) {
+                            if (!termDifficulty[term]) termDifficulty[term] = { missed: 0, mastered: 0 };
+                            termDifficulty[term].mastered++;
+                        });
+                    }
+                }
+            });
+
+            var confusingCard = this._createAnalyticsCard('Tricky Terms', 'fas fa-question-circle', 'var(--accent)');
+            var sortedTerms = Object.entries(termDifficulty)
+                .map(function(e) { return { term: e[0], missed: e[1].missed, mastered: e[1].mastered, ratio: e[1].missed / Math.max(e[1].missed + e[1].mastered, 1) }; })
+                .sort(function(a, b) { return b.missed - a.missed; })
+                .slice(0, 10);
+
+            if (sortedTerms.length === 0) {
+                var noData = document.createElement('p');
+                noData.style.cssText = 'color:var(--text-muted);font-size:0.85em;text-align:center;padding:16px;';
+                noData.textContent = 'No term difficulty data yet.';
+                confusingCard.querySelector('.analytics-body').appendChild(noData);
+            } else {
+                sortedTerms.forEach(function(item) {
+                    var row = document.createElement('div');
+                    row.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--border-subtle);';
+
+                    var term = document.createElement('span');
+                    term.style.cssText = 'font-size:0.85em;color:var(--text-primary);font-weight:600;';
+                    term.textContent = item.term;
+                    row.appendChild(term);
+
+                    var badges = document.createElement('div');
+                    badges.style.cssText = 'display:flex;gap:6px;';
+                    var missedBadge = document.createElement('span');
+                    missedBadge.style.cssText = 'font-size:0.7em;padding:2px 6px;border-radius:8px;background:rgba(239,68,68,0.15);color:var(--danger);font-weight:600;';
+                    missedBadge.textContent = item.missed + ' missed';
+                    badges.appendChild(missedBadge);
+                    if (item.mastered > 0) {
+                        var masteredBadge = document.createElement('span');
+                        masteredBadge.style.cssText = 'font-size:0.7em;padding:2px 6px;border-radius:8px;background:rgba(34,197,94,0.15);color:var(--success);font-weight:600;';
+                        masteredBadge.textContent = item.mastered + ' got it';
+                        badges.appendChild(masteredBadge);
+                    }
+                    row.appendChild(badges);
+
+                    confusingCard.querySelector('.analytics-body').appendChild(row);
+                });
+            }
+
+            grid.appendChild(confusingCard);
+
+            // === 3. REVIEW RECOMMENDATIONS ===
+            var recCard = this._createAnalyticsCard('Review Recommendations', 'fas fa-clipboard-list', 'var(--success)');
+            var recBody = recCard.querySelector('.analytics-body');
+
+            // Mastery overview
+            var masteredCounts = {};
+            progressData.forEach(function(p) {
+                if (p.activity === 'activity_flashcards' && p.data && p.data.mastered) {
+                    masteredCounts[p.student_id] = Array.isArray(p.data.mastered) ? p.data.mastered.length : 0;
+                }
+            });
+            var avgMastered = 0;
+            var masteredValues = Object.values(masteredCounts);
+            if (masteredValues.length > 0) {
+                avgMastered = Math.round(masteredValues.reduce(function(a, b) { return a + b; }, 0) / masteredValues.length);
+            }
+
+            var recs = [];
+
+            if (totalVocab > 0 && avgMastered < totalVocab * 0.5) {
+                recs.push({ icon: 'fas fa-book', text: 'Most students haven\u2019t mastered half the vocab yet. Assign Flashcards review.', priority: 'high' });
+            }
+
+            if (sortedTerms.length > 3) {
+                var topConfusing = sortedTerms.slice(0, 3).map(function(t) { return t.term; }).join(', ');
+                recs.push({ icon: 'fas fa-exclamation-circle', text: 'Focus review on: ' + topConfusing, priority: 'high' });
+            }
+
+            var practiceTestUsers = progressData.filter(function(p) { return p.activity === 'activity_practice-test'; }).length;
+            if (practiceTestUsers < students.length * 0.5) {
+                recs.push({ icon: 'fas fa-clipboard-check', text: 'Less than half your students have taken the Practice Test.', priority: 'medium' });
+            }
+
+            if (underused.length > 0) {
+                recs.push({ icon: 'fas fa-gamepad', text: 'Try assigning: ' + underused.slice(0, 3).map(function(a) { return activityNames[a[0]] || a[0]; }).join(', '), priority: 'low' });
+            }
+
+            var sourceUsers = progressData.filter(function(p) { return p.activity === 'activity_source-analysis'; }).length;
+            if (sourceUsers < students.length * 0.3) {
+                recs.push({ icon: 'fas fa-search', text: 'Source Analysis is underused \u2014 great for critical thinking skills.', priority: 'medium' });
+            }
+
+            if (recs.length === 0) {
+                recs.push({ icon: 'fas fa-check-circle', text: 'Students are well-engaged across activities!', priority: 'low' });
+            }
+
+            recs.forEach(function(rec) {
+                var row = document.createElement('div');
+                var bgColor = rec.priority === 'high' ? 'rgba(239,68,68,0.08)' : rec.priority === 'medium' ? 'rgba(251,191,36,0.08)' : 'rgba(34,197,94,0.08)';
+                var borderColor = rec.priority === 'high' ? 'var(--danger)' : rec.priority === 'medium' ? 'var(--accent)' : 'var(--success)';
+                row.style.cssText = 'display:flex;align-items:flex-start;gap:8px;padding:8px 10px;margin-bottom:6px;border-radius:8px;border-left:3px solid ' + borderColor + ';background:' + bgColor + ';';
+
+                var recIcon = document.createElement('i');
+                recIcon.className = rec.icon;
+                recIcon.style.cssText = 'color:' + borderColor + ';margin-top:2px;flex-shrink:0;';
+                row.appendChild(recIcon);
+
+                var recText = document.createElement('span');
+                recText.style.cssText = 'font-size:0.85em;color:var(--text-primary);line-height:1.4;';
+                recText.textContent = rec.text;
+                row.appendChild(recText);
+
+                recBody.appendChild(row);
+            });
+
+            grid.appendChild(recCard);
+            section.appendChild(grid);
+
+        } catch (err) {
+            console.error('Analytics error:', err);
+            var errEl = document.createElement('p');
+            errEl.style.cssText = 'color:var(--danger);text-align:center;padding:20px;';
+            errEl.textContent = 'Failed to load analytics.';
+            section.appendChild(errEl);
+        }
+    },
+
+    _createAnalyticsCard(title, iconClass, iconColor) {
+        var card = document.createElement('div');
+        card.style.cssText = 'background:var(--bg-elevated);border:1px solid var(--border-card);border-radius:var(--radius-md);box-shadow:var(--shadow-card);overflow:hidden;';
+
+        var header = document.createElement('div');
+        header.style.cssText = 'padding:12px 14px;border-bottom:1px solid var(--border-subtle);display:flex;align-items:center;gap:8px;';
+        var icon = document.createElement('i');
+        icon.className = iconClass;
+        icon.style.color = iconColor;
+        header.appendChild(icon);
+        var titleEl = document.createElement('span');
+        titleEl.style.cssText = 'font-weight:700;font-size:0.9em;color:var(--text-primary);';
+        titleEl.textContent = title;
+        header.appendChild(titleEl);
+        card.appendChild(header);
+
+        var body = document.createElement('div');
+        body.className = 'analytics-body';
+        body.style.cssText = 'padding:12px 14px;';
+        card.appendChild(body);
+
+        return card;
     },
 
     // Returns true if this is a magic link redirect (hash contains access_token)
