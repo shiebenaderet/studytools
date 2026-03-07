@@ -99,7 +99,6 @@ Here's the minimum you need to get started:
         "title": "My Study Tool",
         "subtitle": "Study for your upcoming test!",
         "essentialQuestion": "What is the big question students should think about?",
-        "teacherEmail": "you@school.edu",
         "theme": {
             "primary": "#1669C5",
             "secondary": "#1F90ED",

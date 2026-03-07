@@ -702,7 +702,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (!footer.querySelector('.footer-privacy')) {
                         var privacyLink = document.createElement('a');
                         privacyLink.className = 'footer-privacy';
-                        privacyLink.href = 'privacy.html';
+                        var unitParam = new URLSearchParams(window.location.search).get('unit');
+                        privacyLink.href = 'privacy.html' + (unitParam ? '?unit=' + encodeURIComponent(unitParam) : '');
                         var privacyIcon = document.createElement('i');
                         privacyIcon.className = 'fas fa-shield-alt';
                         privacyLink.appendChild(privacyIcon);

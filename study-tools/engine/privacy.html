@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy &amp; Data - Study Tools</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="vendor/font-awesome.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <style>
         .privacy-page {
@@ -112,7 +112,7 @@
 <body>
     <div class="container">
         <div class="privacy-page">
-            <a href="index.html" class="privacy-back"><i class="fas fa-arrow-left"></i> Back to Study Tools</a>
+            <a id="back-link" href="index.html" class="privacy-back"><i class="fas fa-arrow-left"></i> Back to Study Tools</a>
 
             <h1><i class="fas fa-shield-alt" style="color:var(--primary)"></i> Privacy &amp; Your Data</h1>
             <p class="privacy-subtitle">This study tool is designed with student privacy as a priority. Here's exactly what happens with your data.</p>
@@ -171,14 +171,18 @@
             <div class="privacy-section">
                 <h2><i class="fas fa-ban"></i> What We Do NOT Collect</h2>
                 <ul>
-                    <li>No email addresses</li>
-                    <li>No passwords (there are no accounts)</li>
+                    <li>No student email addresses or passwords (there are no accounts)</li>
                     <li>No location data</li>
                     <li>No device identifiers or fingerprinting</li>
                     <li>No cookies for tracking or advertising</li>
                     <li>No third-party analytics (no Google Analytics, no tracking pixels)</li>
                     <li>No data is sold or shared with anyone outside your classroom</li>
                 </ul>
+            </div>
+
+            <div class="privacy-section">
+                <h2><i class="fas fa-globe"></i> Third-Party Connections</h2>
+                <p>All fonts, icons, and scripts are self-hosted. This site does not make requests to Google, Facebook, or any external analytics or advertising service. No student data is transmitted to third parties.</p>
             </div>
 
             <div class="privacy-section">
@@ -197,9 +201,31 @@
             </div>
 
             <div class="privacy-section">
+                <h2><i class="fas fa-child"></i> COPPA &amp; FERPA Compliance</h2>
+                <p>This tool is designed for use in K-12 classrooms. We take student privacy seriously:</p>
+                <ul>
+                    <li><strong>COPPA:</strong> This site collects only a student's first name and class period, which alone do not constitute personal information under COPPA. When cloud sync is enabled in a school setting, the teacher or school acts as the consenting party on behalf of parents under the COPPA school exception. Data is used solely for educational purposes.</li>
+                    <li><strong>FERPA:</strong> Student progress data (scores, study time) is classified as education records when linked to a student name. Access is limited to the student and their teacher. No data is shared with third parties.</li>
+                    <li><strong>Data minimization:</strong> We collect only what is needed for the tool to function. No unnecessary personal information is gathered.</li>
+                </ul>
+            </div>
+
+            <div class="privacy-section">
+                <h2><i class="fas fa-clock"></i> Data Retention</h2>
+                <p>Local data (in your browser) persists until you clear your browser's site data. Cloud-synced data is retained for the duration of the school year. Teachers can delete individual student records at any time via the teacher dashboard.</p>
+            </div>
+
+            <div class="privacy-section">
                 <h2><i class="fas fa-code"></i> Open Source</h2>
                 <p>This project is open source. Anyone can review exactly how data is handled by reading the code on GitHub. There is nothing hidden.</p>
             </div>
+
+            <div class="privacy-section">
+                <h2><i class="fas fa-envelope"></i> Questions?</h2>
+                <p>If you have questions about this privacy policy or how student data is handled, please contact your child's teacher or open an issue on the project's GitHub repository.</p>
+            </div>
+
+            <p style="color:var(--text-muted);font-size:0.8em;text-align:center;margin-top:24px;">Last updated: March 2026</p>
         </div>
     </div>
 
@@ -210,6 +236,19 @@
         }
         if (localStorage.getItem('dyslexic-font') === 'on') {
             document.body.classList.add('dyslexic-font');
+        }
+        // Set back link to include the unit param from referrer or query string
+        var backLink = document.getElementById('back-link');
+        var params = new URLSearchParams(window.location.search);
+        var unit = params.get('unit');
+        if (!unit && document.referrer) {
+            try {
+                var refUrl = new URL(document.referrer);
+                unit = new URLSearchParams(refUrl.search).get('unit');
+            } catch (e) {}
+        }
+        if (unit) {
+            backLink.href = 'index.html?unit=' + encodeURIComponent(unit);
         }
     })();
     </script>

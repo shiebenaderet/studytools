@@ -318,8 +318,9 @@ const ProgressManager = {
         nameInput.type = 'text';
         nameInput.id = 'welcome-name';
         nameInput.className = 'welcome-name-input';
-        nameInput.placeholder = 'First name';
+        nameInput.placeholder = 'First name only';
         nameInput.autocomplete = 'given-name';
+        nameInput.maxLength = 20;
         card.appendChild(nameInput);
 
         // Period label
@@ -393,7 +394,7 @@ const ProgressManager = {
         nameInput.addEventListener('input', updateGoBtn);
 
         goBtn.addEventListener('click', function() {
-            var name = nameInput.value.trim();
+            var name = nameInput.value.trim().split(/\s+/)[0]; // First name only
             if (!name || !selectedCode) return;
             goBtn.disabled = true;
             goBtn.textContent = 'Setting up...';
