@@ -28,7 +28,74 @@ StudyEngine.registerActivity({
         this._currentIndex = 0;
         this._isFlipped = false;
         this._mode = 'study';
+        this._container = container;
+        this._config = config;
 
+        // Show tutorial on first use
+        const tutorialSeen = localStorage.getItem('fc-tutorial-seen');
+        if (!tutorialSeen) {
+            this._showTutorial(container, config);
+            return;
+        }
+
+        this._renderCards(container, config);
+    },
+
+    _showTutorial(container, config) {
+        const tutorial = document.createElement('div');
+        tutorial.className = 'fc-tutorial';
+
+        const icon = document.createElement('div');
+        icon.className = 'fc-tutorial-icon';
+        icon.innerHTML = '<i class="fas fa-graduation-cap"></i>';
+        tutorial.appendChild(icon);
+
+        const title = document.createElement('h2');
+        title.textContent = 'How to Use Flashcards';
+        tutorial.appendChild(title);
+
+        const steps = [
+            { icon: 'fas fa-mouse-pointer', text: 'Click the card (or press Space) to flip it and reveal the definition' },
+            { icon: 'fas fa-brain', text: 'Before flipping, try to recall the definition from memory — this is what makes flashcards work' },
+            { icon: 'fas fa-star', text: 'After flipping, rate how well you knew it: Again, Hard, Good, or Easy' },
+            { icon: 'fas fa-redo', text: 'Cards you rate "Again" or "Hard" will come back sooner so you practice them more' },
+            { icon: 'fas fa-check-circle', text: 'Rate "Good" or "Easy" to mark a term as mastered and unlock new categories' }
+        ];
+
+        const list = document.createElement('div');
+        list.className = 'fc-tutorial-steps';
+        steps.forEach(s => {
+            const step = document.createElement('div');
+            step.className = 'fc-tutorial-step';
+            const stepIcon = document.createElement('i');
+            stepIcon.className = s.icon;
+            step.appendChild(stepIcon);
+            const stepText = document.createElement('span');
+            stepText.textContent = s.text;
+            step.appendChild(stepText);
+            list.appendChild(step);
+        });
+        tutorial.appendChild(list);
+
+        const tip = document.createElement('div');
+        tip.className = 'fc-tutorial-tip';
+        tip.innerHTML = '<i class="fas fa-lightbulb"></i> <strong>Pro tip:</strong> Don\'t just read — actively try to remember before flipping. Struggling to recall is what makes the memory stick!';
+        tutorial.appendChild(tip);
+
+        const startBtn = document.createElement('button');
+        startBtn.className = 'fc-tutorial-start';
+        startBtn.textContent = 'Got it — start studying!';
+        startBtn.addEventListener('click', () => {
+            localStorage.setItem('fc-tutorial-seen', '1');
+            container.textContent = '';
+            this._renderCards(container, config);
+        });
+        tutorial.appendChild(startBtn);
+
+        container.appendChild(tutorial);
+    },
+
+    _renderCards(container, config) {
         const categories = MasteryManager.getUnlockedCategories(config.unit.id, config);
 
         const wrapper = document.createElement('div');
@@ -108,6 +175,19 @@ StudyEngine.registerActivity({
         shuffleBtn.appendChild(document.createTextNode(' Shuffle'));
         shuffleBtn.addEventListener('click', () => this._shuffleCards());
         controls.appendChild(shuffleBtn);
+
+        const helpBtn = document.createElement('button');
+        helpBtn.className = 'fc-ctrl-btn fc-help-btn';
+        helpBtn.title = 'How to use flashcards';
+        const helpIcon = document.createElement('i');
+        helpIcon.className = 'fas fa-question-circle';
+        helpBtn.appendChild(helpIcon);
+        helpBtn.addEventListener('click', () => {
+            this._container.textContent = '';
+            localStorage.removeItem('fc-tutorial-seen');
+            this._showTutorial(this._container, this._config);
+        });
+        controls.appendChild(helpBtn);
 
         wrapper.appendChild(controls);
 
@@ -334,11 +414,13 @@ StudyEngine.registerActivity({
             explainBox.className = 'fc-explain-box';
             explainBox.textContent = card.simpleExplanation;
             explainBox.style.display = 'none';
+            const self = this;
             explainBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
                 var showing = explainBox.style.display !== 'none';
                 explainBox.style.display = showing ? 'none' : 'block';
                 explainBtn.classList.toggle('active', !showing);
+                setTimeout(() => self._syncSceneHeight(), 10);
             });
             backContent.appendChild(explainBtn);
             backContent.appendChild(explainBox);
@@ -362,6 +444,9 @@ StudyEngine.registerActivity({
 
         // Nav buttons
         prevBtn.disabled = this._roundIndex === 0;
+
+        // Sync scene height to content
+        this._syncSceneHeight();
     },
 
     _flip() {
@@ -378,6 +463,18 @@ StudyEngine.registerActivity({
             cardEl.classList.remove('fc-flipped');
             confidence.classList.remove('fc-visible');
         }
+        this._syncSceneHeight();
+    },
+
+    _syncSceneHeight() {
+        const scene = document.getElementById('fc-scene');
+        const front = document.getElementById('fc-front');
+        const back = document.getElementById('fc-back');
+        if (!scene || !front || !back) return;
+        const face = this._isFlipped ? back : front;
+        const h = Math.max(340, face.scrollHeight);
+        scene.style.minHeight = h + 'px';
+        document.getElementById('fc-card').style.minHeight = h + 'px';
     },
 
     _rate(rating) {

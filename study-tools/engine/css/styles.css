@@ -1411,6 +1411,85 @@ body.light-mode .fc-explain-box {
     .fc-rate-shortcut { display: none; }
 }
 
+/* Flashcard Tutorial */
+.fc-tutorial {
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 40px 28px;
+    text-align: center;
+}
+.fc-tutorial-icon {
+    font-size: 2.5em;
+    color: var(--primary);
+    margin-bottom: 12px;
+}
+.fc-tutorial h2 {
+    color: var(--text-primary);
+    font-size: 1.4em;
+    margin-bottom: 24px;
+}
+.fc-tutorial-steps {
+    text-align: left;
+    margin: 0 auto 20px;
+    max-width: 440px;
+}
+.fc-tutorial-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-subtle);
+}
+.fc-tutorial-step:last-child {
+    border-bottom: none;
+}
+.fc-tutorial-step i {
+    color: var(--primary);
+    margin-top: 3px;
+    width: 18px;
+    text-align: center;
+    flex-shrink: 0;
+}
+.fc-tutorial-step span {
+    color: var(--text-secondary);
+    font-size: 0.93em;
+    line-height: 1.5;
+}
+.fc-tutorial-tip {
+    background: rgba(250,204,21,0.1);
+    border: 1px solid rgba(250,204,21,0.25);
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin: 16px auto 24px;
+    max-width: 440px;
+    text-align: left;
+    font-size: 0.88em;
+    line-height: 1.5;
+    color: var(--text-secondary);
+}
+.fc-tutorial-tip i {
+    color: #facc15;
+    margin-right: 4px;
+}
+.fc-tutorial-start {
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 28px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+.fc-tutorial-start:hover {
+    opacity: 0.9;
+}
+.fc-help-btn {
+    min-width: auto !important;
+    padding: 6px 10px !important;
+}
+
 /* TIMELINE SECTION */
 /* TIMELINE - Compact redesign */
 .tl-wrapper { background: var(--bg-elevated); padding: 24px; border-radius: 12px; border: 1px solid var(--border-card); box-shadow: var(--shadow-card); }
