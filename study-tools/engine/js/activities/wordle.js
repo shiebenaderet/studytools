@@ -16,6 +16,7 @@ StudyEngine.registerActivity({
     _won: false,
     _keyboardState: {},
     _filteredVocab: [],
+    _recentWords: [],
     _stats: { wins: 0, losses: 0, streak: 0 },
     _keyHandler: null,
     _container: null,
@@ -57,11 +58,22 @@ StudyEngine.registerActivity({
         this._won = false;
         this._keyboardState = {};
 
-        // Pick random word
+        // Pick random word, avoiding recent repeats
         if (this._filteredVocab.length === 0) return;
-        const pick = this._filteredVocab[Math.floor(Math.random() * this._filteredVocab.length)];
+        var available = this._filteredVocab.filter(v => this._recentWords.indexOf(v.word) === -1);
+        if (available.length === 0) {
+            this._recentWords = [];
+            available = this._filteredVocab;
+        }
+        const pick = available[Math.floor(Math.random() * available.length)];
         this._targetWord = pick.word;
         this._targetVocab = pick.vocab;
+        this._recentWords.push(pick.word);
+        // Keep history to half the pool size so words cycle back eventually
+        var maxHistory = Math.max(1, Math.floor(this._filteredVocab.length / 2));
+        if (this._recentWords.length > maxHistory) {
+            this._recentWords = this._recentWords.slice(-maxHistory);
+        }
 
         this._renderUI();
     },
