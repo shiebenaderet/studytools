@@ -4499,6 +4499,72 @@ body.music-active .container {
     line-height: 1.4;
 }
 
+.music-mode-btn {
+    font-size: 0.85em;
+    position: relative;
+}
+.music-mode-btn.active {
+    color: var(--primary);
+}
+.music-loop-one {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    font-size: 0.6em;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1;
+}
+
+.music-playlist {
+    max-height: 180px;
+    overflow-y: auto;
+    border-top: 1px solid var(--border-subtle);
+    padding-top: 6px;
+    margin-top: 4px;
+}
+.music-playlist-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background 0.15s;
+}
+.music-playlist-item:hover {
+    background: var(--bg-surface);
+}
+.music-playlist-item.active {
+    background: rgba(79, 143, 247, 0.12);
+}
+.music-playlist-num {
+    color: var(--text-muted);
+    font-size: 0.75em;
+    min-width: 18px;
+}
+.music-playlist-info {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    flex: 1;
+}
+.music-playlist-title {
+    font-size: 0.82em;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.music-playlist-item.active .music-playlist-title {
+    color: var(--primary);
+    font-weight: 600;
+}
+.music-playlist-artist {
+    font-size: 0.7em;
+    color: var(--text-muted);
+}
+
 /* Mobile: full width */
 @media (max-width: 480px) {
     .music-player {

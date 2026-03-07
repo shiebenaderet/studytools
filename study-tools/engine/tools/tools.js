@@ -577,6 +577,8 @@ const StudyTools = {
     _musicArtists: {},
     _musicIndex: 0,
     _musicVolume: 0.5,
+    _musicShuffle: false,
+    _musicLoop: false, // false = no loop, 'all' = loop playlist, 'one' = loop track
 
     openMusic() {
         // If player already exists, just toggle visibility
@@ -716,6 +718,18 @@ const StudyTools = {
         const controls = document.createElement('div');
         controls.className = 'music-controls';
 
+        const shuffleBtn = document.createElement('button');
+        shuffleBtn.className = 'music-ctrl-btn music-mode-btn';
+        shuffleBtn.id = 'music-shuffle-btn';
+        const shuffleIcon = document.createElement('i');
+        shuffleIcon.className = 'fas fa-random';
+        shuffleBtn.appendChild(shuffleIcon);
+        shuffleBtn.setAttribute('aria-label', 'Toggle shuffle');
+        shuffleBtn.addEventListener('click', () => {
+            this._musicShuffle = !this._musicShuffle;
+            shuffleBtn.classList.toggle('active', this._musicShuffle);
+        });
+
         const prevBtn = document.createElement('button');
         prevBtn.className = 'music-ctrl-btn';
         const prevIcon = document.createElement('i');
@@ -742,12 +756,47 @@ const StudyTools = {
         nextBtn.setAttribute('aria-label', 'Next track');
         nextBtn.addEventListener('click', () => this._musicSkip(1));
 
+        const loopBtn = document.createElement('button');
+        loopBtn.className = 'music-ctrl-btn music-mode-btn';
+        loopBtn.id = 'music-loop-btn';
+        const loopIcon = document.createElement('i');
+        loopIcon.className = 'fas fa-redo';
+        loopIcon.id = 'music-loop-icon';
+        loopBtn.appendChild(loopIcon);
+        loopBtn.setAttribute('aria-label', 'Toggle loop mode');
+        loopBtn.addEventListener('click', () => {
+            if (!this._musicLoop) {
+                this._musicLoop = 'all';
+                loopBtn.classList.add('active');
+            } else if (this._musicLoop === 'all') {
+                this._musicLoop = 'one';
+                loopBtn.classList.add('active');
+                var oneLabel = document.getElementById('music-loop-one');
+                if (!oneLabel) {
+                    oneLabel = document.createElement('span');
+                    oneLabel.id = 'music-loop-one';
+                    oneLabel.className = 'music-loop-one';
+                    oneLabel.textContent = '1';
+                    loopBtn.appendChild(oneLabel);
+                } else {
+                    oneLabel.style.display = '';
+                }
+            } else {
+                this._musicLoop = false;
+                loopBtn.classList.remove('active');
+                var oneLbl = document.getElementById('music-loop-one');
+                if (oneLbl) oneLbl.style.display = 'none';
+            }
+        });
+
+        controls.appendChild(shuffleBtn);
         controls.appendChild(prevBtn);
         controls.appendChild(playBtn);
         controls.appendChild(nextBtn);
+        controls.appendChild(loopBtn);
         body.appendChild(controls);
 
-        // Volume
+        // Volume + playlist toggle row
         const volRow = document.createElement('div');
         volRow.className = 'music-vol-row';
         const volIcon = document.createElement('i');
@@ -767,7 +816,31 @@ const StudyTools = {
             if (vi) vi.className = this._musicVolume === 0 ? 'fas fa-volume-mute' : this._musicVolume < 0.5 ? 'fas fa-volume-down' : 'fas fa-volume-up';
         });
         volRow.appendChild(volSlider);
+
+        const playlistToggle = document.createElement('button');
+        playlistToggle.className = 'music-ctrl-btn music-mode-btn';
+        playlistToggle.setAttribute('aria-label', 'Toggle playlist');
+        const listIcon = document.createElement('i');
+        listIcon.className = 'fas fa-list';
+        playlistToggle.appendChild(listIcon);
+        playlistToggle.addEventListener('click', () => {
+            const pl = document.getElementById('music-playlist');
+            if (pl) {
+                const visible = pl.style.display !== 'none';
+                pl.style.display = visible ? 'none' : 'block';
+                playlistToggle.classList.toggle('active', !visible);
+            }
+        });
+        volRow.appendChild(playlistToggle);
         body.appendChild(volRow);
+
+        // Playlist panel
+        const playlist = document.createElement('div');
+        playlist.className = 'music-playlist';
+        playlist.id = 'music-playlist';
+        playlist.style.display = 'none';
+        this._renderPlaylist(playlist);
+        body.appendChild(playlist);
 
         player.appendChild(body);
         document.body.appendChild(player);
@@ -875,7 +948,7 @@ const StudyTools = {
         });
 
         this._musicAudio.addEventListener('ended', () => {
-            this._musicSkip(1);
+            this._musicOnEnded();
         });
 
         this._musicAudio.addEventListener('error', () => {
@@ -905,14 +978,116 @@ const StudyTools = {
         }
     },
 
+    _musicOnEnded() {
+        if (this._musicLoop === 'one') {
+            // Replay same track
+            if (this._musicAudio) {
+                this._musicAudio.currentTime = 0;
+                this._musicAudio.play().catch(() => {});
+            }
+            return;
+        }
+
+        var nextIndex;
+        if (this._musicShuffle) {
+            nextIndex = Math.floor(Math.random() * this._musicTracks.length);
+            if (this._musicTracks.length > 1) {
+                while (nextIndex === this._musicIndex) {
+                    nextIndex = Math.floor(Math.random() * this._musicTracks.length);
+                }
+            }
+        } else {
+            nextIndex = this._musicIndex + 1;
+        }
+
+        // If we've reached the end and loop is off, stop
+        if (!this._musicShuffle && nextIndex >= this._musicTracks.length) {
+            if (this._musicLoop === 'all') {
+                nextIndex = 0;
+            } else {
+                // No loop — stop at end
+                var icon = document.getElementById('music-play-icon');
+                if (icon) icon.className = 'fas fa-play';
+                return;
+            }
+        }
+
+        this._musicLoadTrack(nextIndex);
+        this._musicAudio.play().catch(() => {});
+        this._updatePlaylistHighlight();
+    },
+
     _musicSkip(dir) {
-        const wasPlaying = this._musicAudio && !this._musicAudio.paused;
-        this._musicLoadTrack(this._musicIndex + dir);
+        var wasPlaying = this._musicAudio && !this._musicAudio.paused;
+        var nextIndex;
+
+        if (this._musicShuffle && dir === 1) {
+            nextIndex = Math.floor(Math.random() * this._musicTracks.length);
+            if (this._musicTracks.length > 1) {
+                while (nextIndex === this._musicIndex) {
+                    nextIndex = Math.floor(Math.random() * this._musicTracks.length);
+                }
+            }
+        } else {
+            nextIndex = this._musicIndex + dir;
+        }
+
+        this._musicLoadTrack(nextIndex);
         if (wasPlaying) {
-            const icon = document.getElementById('music-play-icon');
+            var icon = document.getElementById('music-play-icon');
             if (icon) icon.className = 'fas fa-spinner fa-spin';
             this._musicAudio.play().catch(() => {});
         }
+        this._updatePlaylistHighlight();
+    },
+
+    _renderPlaylist(container) {
+        container.textContent = '';
+        var self = this;
+        this._musicTracks.forEach(function(track, i) {
+            var item = document.createElement('div');
+            item.className = 'music-playlist-item' + (i === self._musicIndex ? ' active' : '');
+            item.dataset.index = i;
+
+            var num = document.createElement('span');
+            num.className = 'music-playlist-num';
+            num.textContent = (i + 1) + '.';
+            item.appendChild(num);
+
+            var info = document.createElement('span');
+            info.className = 'music-playlist-info';
+            var titleSpan = document.createElement('span');
+            titleSpan.className = 'music-playlist-title';
+            titleSpan.textContent = track.title;
+            info.appendChild(titleSpan);
+            if (track.artist) {
+                var artistSpan = document.createElement('span');
+                artistSpan.className = 'music-playlist-artist';
+                artistSpan.textContent = track.artist;
+                info.appendChild(artistSpan);
+            }
+            item.appendChild(info);
+
+            item.addEventListener('click', function() {
+                self._musicLoadTrack(i);
+                self._musicAudio.play().catch(function() {});
+                var icon = document.getElementById('music-play-icon');
+                if (icon) icon.className = 'fas fa-spinner fa-spin';
+                self._updatePlaylistHighlight();
+            });
+
+            container.appendChild(item);
+        });
+    },
+
+    _updatePlaylistHighlight() {
+        var pl = document.getElementById('music-playlist');
+        if (!pl) return;
+        var items = pl.querySelectorAll('.music-playlist-item');
+        var self = this;
+        items.forEach(function(item) {
+            item.classList.toggle('active', parseInt(item.dataset.index, 10) === self._musicIndex);
+        });
     },
 
     _formatMusicTime(seconds) {
