@@ -73,10 +73,13 @@
                 <i class="fas fa-users"></i> Students
             </button>
             <button class="tab-btn" data-tab="units" onclick="Dashboard.switchTab('units')">
-                <i class="fas fa-book"></i> Units
+                <i class="fas fa-chart-bar"></i> Activity Usage
             </button>
             <button class="tab-btn" data-tab="classes" onclick="Dashboard.switchTab('classes')">
                 <i class="fas fa-key"></i> Class Codes
+            </button>
+            <button class="tab-btn" data-tab="scores" onclick="Dashboard.switchTab('scores')">
+                <i class="fas fa-trophy"></i> Scores
             </button>
         </nav>
 
@@ -95,6 +98,21 @@
 
         <div id="tab-classes" class="tab-content">
             <div id="classes-container"></div>
+        </div>
+
+        <div id="tab-scores" class="tab-content">
+            <div id="scores-container"></div>
+        </div>
+
+        <!-- Student Edit Modal -->
+        <div id="student-edit-modal" class="modal-overlay hidden">
+            <div class="modal-card">
+                <div class="modal-card-header">
+                    <h3>Edit Student</h3>
+                    <button class="btn-close-modal" onclick="Dashboard.closeStudentModal()"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="modal-card-body" id="student-edit-body"></div>
+            </div>
         </div>
     </div>
 

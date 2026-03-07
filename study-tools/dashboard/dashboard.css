@@ -607,3 +607,207 @@ body {
     color: var(--white);
     border-color: var(--danger);
 }
+
+/* ---- Scores Tab ---- */
+.scores-actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.scores-summary {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-bottom: 12px;
+}
+
+.score-pending {
+    background: #fffbeb;
+}
+
+.score-value {
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.score-actions-cell {
+    display: flex;
+    gap: 6px;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.status-approved {
+    background: rgba(34, 197, 94, 0.12);
+    color: #16a34a;
+}
+
+.status-pending {
+    background: rgba(245, 158, 11, 0.12);
+    color: #d97706;
+}
+
+.btn-approve {
+    background: var(--success);
+    color: var(--white);
+    border: none;
+    padding: 6px 10px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.btn-approve:hover {
+    filter: brightness(1.1);
+}
+
+.btn-remove {
+    background: transparent;
+    color: var(--text-light);
+    border: 1px solid var(--border);
+    padding: 6px 10px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.btn-remove:hover {
+    border-color: var(--danger);
+    color: var(--danger);
+}
+
+.btn-remove.btn-remove-confirm {
+    background: var(--danger);
+    color: var(--white);
+    border-color: var(--danger);
+}
+
+/* ---- Student Edit Button ---- */
+.btn-edit-student {
+    background: transparent;
+    color: var(--text-light);
+    border: 1px solid var(--border);
+    padding: 5px 10px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.2s;
+}
+
+.btn-edit-student:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+/* ---- Student Edit Modal ---- */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.modal-overlay.hidden {
+    display: none;
+}
+
+.modal-card {
+    background: var(--white);
+    border-radius: 12px;
+    width: 100%;
+    max-width: 440px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.modal-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border);
+}
+
+.modal-card-header h3 {
+    font-size: 1.1rem;
+    color: var(--text);
+}
+
+.btn-close-modal {
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: var(--radius);
+}
+
+.btn-close-modal:hover {
+    background: var(--bg);
+    color: var(--text);
+}
+
+.modal-card-body {
+    padding: 24px;
+}
+
+.modal-card-body .form-group {
+    margin-bottom: 16px;
+}
+
+.modal-danger-section {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+}
+
+/* ---- Unit Stats ---- */
+.unit-stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.unit-stat-mini {
+    text-align: center;
+    padding: 10px 8px;
+    background: var(--bg);
+    border-radius: var(--radius);
+}
+
+.unit-stat-val {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.unit-stat-lbl {
+    font-size: 0.7rem;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    margin-top: 2px;
+}
+
+@media (max-width: 480px) {
+    .unit-stats-row {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .tab-nav {
+        flex-wrap: wrap;
+    }
+}

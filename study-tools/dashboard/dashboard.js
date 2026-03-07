@@ -156,6 +156,9 @@ const Dashboard = {
             case 'classes':
                 this.loadClassCodes();
                 break;
+            case 'scores':
+                this.loadScores();
+                break;
         }
     },
 
@@ -410,7 +413,10 @@ const Dashboard = {
                 const sess = sessionMap[s.id] || { totalSeconds: 0, lastActive: null };
                 const prog = progressMap[s.id] || { vocabMastered: 0, bestTestScore: null };
                 return {
+                    id: s.id,
                     name: s.name,
+                    classId: s.class_id,
+                    className: s.classes ? s.classes.name : null,
                     classCode: s.classes ? s.classes.code : '-',
                     lastActive: sess.lastActive,
                     studyMinutes: Math.round(sess.totalSeconds / 60),
@@ -436,7 +442,7 @@ const Dashboard = {
 
             const thead = document.createElement('thead');
             const headerRow = document.createElement('tr');
-            ['Name', 'Class', 'Last Active', 'Study Time', 'Vocab Mastered', 'Best Test Score'].forEach(text => {
+            ['Name', 'Class', 'Last Active', 'Study Time', 'Vocab Mastered', 'Best Test Score', ''].forEach(text => {
                 const th = document.createElement('th');
                 th.textContent = text;
                 headerRow.appendChild(th);
@@ -479,6 +485,16 @@ const Dashboard = {
                     ? student.bestTestScore + '%'
                     : '-';
                 tr.appendChild(tdScore);
+
+                const tdEdit = document.createElement('td');
+                const editBtn = document.createElement('button');
+                editBtn.className = 'btn btn-edit-student';
+                editBtn.appendChild(Dashboard._icon('fas fa-pen'));
+                editBtn.addEventListener('click', function() {
+                    Dashboard.openStudentModal(student);
+                });
+                tdEdit.appendChild(editBtn);
+                tr.appendChild(tdEdit);
 
                 tbody.appendChild(tr);
             });
@@ -710,17 +726,15 @@ const Dashboard = {
     },
 
     async loadUnits(filters) {
-        const container = document.getElementById('units-chart-container');
+        var container = document.getElementById('units-chart-container');
         container.textContent = '';
         container.appendChild(this._loading());
 
         try {
-            // Fetch progress records grouped by unit and activity
-            let query = this.supabase
+            // Fetch all progress records
+            var { data: progressData, error: progErr } = await this.supabase
                 .from('progress')
-                .select('unit_id, activity, student_id');
-
-            const { data: progressData, error: progErr } = await query;
+                .select('student_id, unit_id, activity, data');
             if (progErr) throw progErr;
 
             if (!progressData || progressData.length === 0) {
@@ -731,44 +745,52 @@ const Dashboard = {
                 return;
             }
 
-            // If filtering by class, get student IDs for that class
-            let validStudentIds = null;
+            // If filtering by class, get valid student IDs
+            var validStudentIds = null;
             if (filters.classId) {
-                const { data: classStudents, error: csErr } = await this.supabase
+                var { data: classStudents, error: csErr } = await this.supabase
                     .from('students')
                     .select('id')
                     .eq('class_id', filters.classId);
                 if (csErr) throw csErr;
-                validStudentIds = new Set((classStudents || []).map(s => s.id));
+                validStudentIds = new Set((classStudents || []).map(function(s) { return s.id; }));
             }
 
-            // Group by unit_id -> activity -> count
-            const units = {};
-            progressData.forEach(p => {
+            // Group by unit
+            var units = {};
+            progressData.forEach(function(p) {
                 if (validStudentIds && !validStudentIds.has(p.student_id)) return;
-
                 if (!units[p.unit_id]) {
-                    units[p.unit_id] = {};
+                    units[p.unit_id] = {
+                        students: new Set(),
+                        activities: {},
+                        vocabMastered: 0,
+                        testScores: [],
+                        flashcardStudents: 0
+                    };
                 }
-                if (!units[p.unit_id][p.activity]) {
-                    units[p.unit_id][p.activity] = 0;
+                var unit = units[p.unit_id];
+                unit.students.add(p.student_id);
+
+                // Count activity usage
+                if (!unit.activities[p.activity]) unit.activities[p.activity] = new Set();
+                unit.activities[p.activity].add(p.student_id);
+
+                // Vocab mastery
+                if (p.activity === 'flashcards' && p.data && p.data.mastered) {
+                    unit.vocabMastered += (Array.isArray(p.data.mastered) ? p.data.mastered.length : 0);
+                    unit.flashcardStudents++;
                 }
-                units[p.unit_id][p.activity]++;
+
+                // Test scores
+                if (p.activity === 'practice-test' && p.data && typeof p.data.bestScore === 'number') {
+                    unit.testScores.push(p.data.bestScore);
+                }
             });
 
-            // Find max count across all for scaling bars
-            let maxCount = 0;
-            Object.values(units).forEach(activities => {
-                Object.values(activities).forEach(count => {
-                    if (count > maxCount) maxCount = count;
-                });
-            });
-            if (maxCount === 0) maxCount = 1;
-
-            // Render
             container.textContent = '';
 
-            const unitIds = Object.keys(units).sort();
+            var unitIds = Object.keys(units).sort();
             if (unitIds.length === 0) {
                 container.appendChild(
                     this._emptyState('fas fa-chart-bar', 'No activity data matches the current filters.')
@@ -776,37 +798,74 @@ const Dashboard = {
                 return;
             }
 
-            unitIds.forEach(unitId => {
-                const section = document.createElement('div');
+            unitIds.forEach(function(unitId) {
+                var unit = units[unitId];
+                var section = document.createElement('div');
                 section.className = 'unit-section';
 
-                const heading = document.createElement('h3');
-                heading.textContent = unitId.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+                var heading = document.createElement('h3');
+                heading.textContent = unitId.replace(/-/g, ' ').replace(/\b\w/g, function(c) { return c.toUpperCase(); });
                 section.appendChild(heading);
 
-                const activities = units[unitId];
-                const sorted = Object.entries(activities).sort((a, b) => b[1] - a[1]);
+                // Summary stats
+                var statsRow = document.createElement('div');
+                statsRow.className = 'unit-stats-row';
 
-                sorted.forEach(([activity, count]) => {
-                    const row = document.createElement('div');
+                var studentCount = unit.students.size;
+                var avgVocab = unit.flashcardStudents > 0 ? Math.round(unit.vocabMastered / unit.flashcardStudents) : 0;
+                var avgTest = unit.testScores.length > 0 ? Math.round(unit.testScores.reduce(function(a, b) { return a + b; }, 0) / unit.testScores.length) : null;
+                var activityCount = Object.keys(unit.activities).length;
+
+                var summaryItems = [
+                    { icon: 'fas fa-users', value: studentCount, label: 'Students' },
+                    { icon: 'fas fa-book', value: avgVocab, label: 'Avg Vocab Mastered' },
+                    { icon: 'fas fa-pen', value: avgTest !== null ? avgTest + '%' : '-', label: 'Avg Test Score' },
+                    { icon: 'fas fa-puzzle-piece', value: activityCount, label: 'Activities Used' }
+                ];
+
+                summaryItems.forEach(function(item) {
+                    var stat = document.createElement('div');
+                    stat.className = 'unit-stat-mini';
+                    var val = document.createElement('div');
+                    val.className = 'unit-stat-val';
+                    val.textContent = item.value;
+                    stat.appendChild(val);
+                    var lbl = document.createElement('div');
+                    lbl.className = 'unit-stat-lbl';
+                    lbl.textContent = item.label;
+                    stat.appendChild(lbl);
+                    statsRow.appendChild(stat);
+                });
+
+                section.appendChild(statsRow);
+
+                // Activity engagement bars
+                var sorted = Object.entries(unit.activities)
+                    .map(function(pair) { return [pair[0], pair[1].size]; })
+                    .sort(function(a, b) { return b[1] - a[1]; });
+                var maxStudents = sorted.length > 0 ? sorted[0][1] : 1;
+
+                sorted.forEach(function(pair) {
+                    var activity = pair[0], count = pair[1];
+                    var row = document.createElement('div');
                     row.className = 'activity-bar-row';
 
-                    const label = document.createElement('div');
+                    var label = document.createElement('div');
                     label.className = 'activity-bar-label';
                     label.textContent = activity.replace(/-/g, ' ');
 
-                    const track = document.createElement('div');
+                    var track = document.createElement('div');
                     track.className = 'activity-bar-track';
 
-                    const fill = document.createElement('div');
+                    var fill = document.createElement('div');
                     fill.className = 'activity-bar-fill';
-                    fill.style.width = Math.round((count / maxCount) * 100) + '%';
+                    fill.style.width = Math.round((count / maxStudents) * 100) + '%';
 
                     track.appendChild(fill);
 
-                    const countEl = document.createElement('div');
+                    var countEl = document.createElement('div');
                     countEl.className = 'activity-bar-count';
-                    countEl.textContent = count;
+                    countEl.textContent = count + ' student' + (count !== 1 ? 's' : '');
 
                     row.appendChild(label);
                     row.appendChild(track);
@@ -821,8 +880,339 @@ const Dashboard = {
             console.error('Failed to load units:', err);
             container.textContent = '';
             container.appendChild(
-                this._emptyState('fas fa-exclamation-triangle', 'Failed to load unit data. Please try again.')
+                Dashboard._emptyState('fas fa-exclamation-triangle', 'Failed to load unit data. Please try again.')
             );
+        }
+    },
+
+    // ---- Scores / Leaderboard Approval ----
+
+    async loadScores() {
+        var container = document.getElementById('scores-container');
+        container.textContent = '';
+        container.appendChild(this._loading());
+
+        try {
+            // Get all leaderboard entries
+            var { data: entries, error: lbErr } = await this.supabase
+                .from('leaderboard')
+                .select('id, student_id, unit_id, score, vocab_mastered, best_test_score, study_time_seconds, approved, updated_at')
+                .order('updated_at', { ascending: false });
+
+            if (lbErr) throw lbErr;
+
+            container.textContent = '';
+
+            // Action bar
+            var actions = document.createElement('div');
+            actions.className = 'scores-actions';
+
+            var approveAllBtn = document.createElement('button');
+            approveAllBtn.className = 'btn btn-primary';
+            approveAllBtn.appendChild(this._icon('fas fa-check-double'));
+            var approveText = document.createElement('span');
+            approveText.textContent = ' Approve All Pending';
+            approveAllBtn.appendChild(approveText);
+            approveAllBtn.addEventListener('click', async function() {
+                await Dashboard.supabase
+                    .from('leaderboard')
+                    .update({ approved: true })
+                    .eq('approved', false);
+                Dashboard.loadScores();
+            });
+            actions.appendChild(approveAllBtn);
+
+            container.appendChild(actions);
+
+            if (!entries || entries.length === 0) {
+                container.appendChild(
+                    this._emptyState('fas fa-trophy', 'No leaderboard entries yet. Students will appear here as they study.')
+                );
+                return;
+            }
+
+            // Get student names
+            var studentIds = entries.map(function(e) { return e.student_id; });
+            var { data: studentData } = await this.supabase
+                .from('students')
+                .select('id, name, class_id, classes(code, name)')
+                .in('id', studentIds);
+            var studentMap = {};
+            (studentData || []).forEach(function(s) { studentMap[s.id] = s; });
+
+            var pendingCount = entries.filter(function(e) { return !e.approved; }).length;
+
+            var summary = document.createElement('div');
+            summary.className = 'scores-summary';
+            summary.textContent = pendingCount + ' pending approval, ' + (entries.length - pendingCount) + ' approved';
+            container.appendChild(summary);
+
+            // Build table
+            var wrapper = document.createElement('div');
+            wrapper.className = 'data-table-wrapper';
+
+            var table = document.createElement('table');
+            table.className = 'data-table';
+
+            var thead = document.createElement('thead');
+            var headerRow = document.createElement('tr');
+            ['Status', 'Name', 'Class', 'Score', 'Vocab', 'Test', 'Study Time', 'Actions'].forEach(function(text) {
+                var th = document.createElement('th');
+                th.textContent = text;
+                headerRow.appendChild(th);
+            });
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+
+            var tbody = document.createElement('tbody');
+            var self = this;
+            entries.forEach(function(entry) {
+                var student = studentMap[entry.student_id] || {};
+                var tr = document.createElement('tr');
+                if (!entry.approved) tr.classList.add('score-pending');
+
+                // Status
+                var tdStatus = document.createElement('td');
+                var badge = document.createElement('span');
+                badge.className = entry.approved ? 'status-badge status-approved' : 'status-badge status-pending';
+                badge.textContent = entry.approved ? 'Approved' : 'Pending';
+                tdStatus.appendChild(badge);
+                tr.appendChild(tdStatus);
+
+                // Name
+                var tdName = document.createElement('td');
+                tdName.textContent = student.name || 'Unknown';
+                tr.appendChild(tdName);
+
+                // Class
+                var tdClass = document.createElement('td');
+                tdClass.textContent = student.classes ? (student.classes.name || student.classes.code) : '-';
+                tr.appendChild(tdClass);
+
+                // Score
+                var tdScore = document.createElement('td');
+                tdScore.className = 'score-value';
+                tdScore.textContent = entry.score;
+                tr.appendChild(tdScore);
+
+                // Vocab
+                var tdVocab = document.createElement('td');
+                tdVocab.textContent = entry.vocab_mastered;
+                tr.appendChild(tdVocab);
+
+                // Test
+                var tdTest = document.createElement('td');
+                tdTest.textContent = entry.best_test_score !== null ? entry.best_test_score + '%' : '-';
+                tr.appendChild(tdTest);
+
+                // Study time
+                var tdTime = document.createElement('td');
+                var mins = Math.round((entry.study_time_seconds || 0) / 60);
+                tdTime.textContent = mins >= 60 ? (mins / 60).toFixed(1) + ' hrs' : mins + ' min';
+                tr.appendChild(tdTime);
+
+                // Actions
+                var tdActions = document.createElement('td');
+                tdActions.className = 'score-actions-cell';
+
+                if (!entry.approved) {
+                    var approveBtn = document.createElement('button');
+                    approveBtn.className = 'btn btn-approve';
+                    approveBtn.appendChild(self._icon('fas fa-check'));
+                    approveBtn.title = 'Approve';
+                    approveBtn.addEventListener('click', async function() {
+                        await Dashboard.supabase
+                            .from('leaderboard')
+                            .update({ approved: true })
+                            .eq('id', entry.id);
+                        Dashboard.loadScores();
+                    });
+                    tdActions.appendChild(approveBtn);
+                }
+
+                var removeBtn = document.createElement('button');
+                removeBtn.className = 'btn btn-remove';
+                removeBtn.appendChild(self._icon('fas fa-trash'));
+                removeBtn.title = 'Remove';
+                var removeConfirm = false;
+                removeBtn.addEventListener('click', async function() {
+                    if (!removeConfirm) {
+                        removeConfirm = true;
+                        removeBtn.classList.add('btn-remove-confirm');
+                        removeBtn.textContent = '';
+                        removeBtn.appendChild(self._icon('fas fa-exclamation-triangle'));
+                        setTimeout(function() {
+                            removeConfirm = false;
+                            removeBtn.classList.remove('btn-remove-confirm');
+                            removeBtn.textContent = '';
+                            removeBtn.appendChild(self._icon('fas fa-trash'));
+                        }, 3000);
+                    } else {
+                        await Dashboard.supabase
+                            .from('leaderboard')
+                            .delete()
+                            .eq('id', entry.id);
+                        Dashboard.loadScores();
+                    }
+                });
+                tdActions.appendChild(removeBtn);
+
+                tr.appendChild(tdActions);
+                tbody.appendChild(tr);
+            });
+
+            table.appendChild(tbody);
+            wrapper.appendChild(table);
+            container.appendChild(wrapper);
+
+        } catch (err) {
+            console.error('Failed to load scores:', err);
+            container.textContent = '';
+            container.appendChild(
+                this._emptyState('fas fa-exclamation-triangle', 'Failed to load scores.')
+            );
+        }
+    },
+
+    // ---- Student Editing ----
+
+    _allClasses: null,
+
+    async openStudentModal(student) {
+        var modal = document.getElementById('student-edit-modal');
+        var body = document.getElementById('student-edit-body');
+        body.textContent = '';
+
+        // Load classes if not cached
+        if (!this._allClasses) {
+            var { data } = await this.supabase
+                .from('classes')
+                .select('id, code, name')
+                .order('name');
+            this._allClasses = data || [];
+        }
+
+        // Name field
+        var nameGroup = document.createElement('div');
+        nameGroup.className = 'form-group';
+        var nameLabel = document.createElement('label');
+        nameLabel.textContent = 'Student Name';
+        nameGroup.appendChild(nameLabel);
+        var nameInput = document.createElement('input');
+        nameInput.type = 'text';
+        nameInput.value = student.name;
+        nameInput.id = 'edit-student-name';
+        nameGroup.appendChild(nameInput);
+        body.appendChild(nameGroup);
+
+        // Class field
+        var classGroup = document.createElement('div');
+        classGroup.className = 'form-group';
+        var classLabel = document.createElement('label');
+        classLabel.textContent = 'Class';
+        classGroup.appendChild(classLabel);
+        var classSelect = document.createElement('select');
+        classSelect.id = 'edit-student-class';
+        var noClassOpt = document.createElement('option');
+        noClassOpt.value = '';
+        noClassOpt.textContent = 'No class';
+        classSelect.appendChild(noClassOpt);
+        this._allClasses.forEach(function(cls) {
+            var opt = document.createElement('option');
+            opt.value = cls.id;
+            opt.textContent = cls.code + ' - ' + cls.name;
+            if (student.classId === cls.id) opt.selected = true;
+            classSelect.appendChild(opt);
+        });
+        classGroup.appendChild(classSelect);
+        body.appendChild(classGroup);
+
+        // Save button
+        var saveBtn = document.createElement('button');
+        saveBtn.className = 'btn btn-primary btn-block';
+        saveBtn.appendChild(this._icon('fas fa-save'));
+        var saveText = document.createElement('span');
+        saveText.textContent = ' Save Changes';
+        saveBtn.appendChild(saveText);
+        saveBtn.addEventListener('click', function() {
+            Dashboard.saveStudent(student.id);
+        });
+        body.appendChild(saveBtn);
+
+        // Delete student button
+        var deleteSection = document.createElement('div');
+        deleteSection.className = 'modal-danger-section';
+        var deleteBtn = document.createElement('button');
+        deleteBtn.className = 'btn btn-danger-small';
+        deleteBtn.appendChild(this._icon('fas fa-user-times'));
+        var delText = document.createElement('span');
+        delText.textContent = ' Delete Student';
+        deleteBtn.appendChild(delText);
+        var delConfirm = false;
+        deleteBtn.addEventListener('click', async function() {
+            if (!delConfirm) {
+                delConfirm = true;
+                deleteBtn.classList.add('btn-danger-confirm');
+                deleteBtn.textContent = '';
+                deleteBtn.appendChild(Dashboard._icon('fas fa-exclamation-triangle'));
+                var confirmText = document.createElement('span');
+                confirmText.textContent = ' This deletes all their data. Click again to confirm.';
+                deleteBtn.appendChild(confirmText);
+                setTimeout(function() {
+                    delConfirm = false;
+                    deleteBtn.classList.remove('btn-danger-confirm');
+                    deleteBtn.textContent = '';
+                    deleteBtn.appendChild(Dashboard._icon('fas fa-user-times'));
+                    var resetText = document.createElement('span');
+                    resetText.textContent = ' Delete Student';
+                    deleteBtn.appendChild(resetText);
+                }, 5000);
+            } else {
+                await Dashboard.deleteStudent(student.id);
+            }
+        });
+        deleteSection.appendChild(deleteBtn);
+        body.appendChild(deleteSection);
+
+        modal.classList.remove('hidden');
+    },
+
+    closeStudentModal() {
+        document.getElementById('student-edit-modal').classList.add('hidden');
+    },
+
+    async saveStudent(studentId) {
+        var name = document.getElementById('edit-student-name').value.trim();
+        var classId = document.getElementById('edit-student-class').value || null;
+
+        if (!name) return;
+
+        try {
+            await this.supabase
+                .from('students')
+                .update({ name: name, class_id: classId })
+                .eq('id', studentId);
+
+            this.closeStudentModal();
+            this._allClasses = null; // bust cache
+            this.switchTab('students');
+        } catch (err) {
+            console.error('Failed to save student:', err);
+        }
+    },
+
+    async deleteStudent(studentId) {
+        try {
+            // Delete related data first
+            await this.supabase.from('progress').delete().eq('student_id', studentId);
+            await this.supabase.from('sessions').delete().eq('student_id', studentId);
+            await this.supabase.from('leaderboard').delete().eq('student_id', studentId);
+            await this.supabase.from('students').delete().eq('id', studentId);
+
+            this.closeStudentModal();
+            this.switchTab('students');
+        } catch (err) {
+            console.error('Failed to delete student:', err);
         }
     }
 };
