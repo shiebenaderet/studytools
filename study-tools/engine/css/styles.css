@@ -2016,59 +2016,68 @@ header .essential-question {
 }
 
 .typing-title {
-    color: #fff;
+    color: rgba(255,255,255,0.9);
     text-align: center;
     margin-bottom: 6px;
-    font-size: 1.6rem;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    font-size: 1.2rem;
+    font-family: 'Roboto Mono', 'Courier New', monospace;
+    font-weight: 400;
+    letter-spacing: 0.02em;
 }
 
 .typing-description {
-    color: rgba(255,255,255,0.8);
+    color: rgba(255,255,255,0.45);
     text-align: center;
     margin-bottom: 20px;
-    font-size: 0.95rem;
+    font-size: 0.82rem;
+    font-family: 'Roboto Mono', 'Courier New', monospace;
 }
 
-/* Pill category buttons */
+/* Passage selector tabs — monkeytype style */
 .typing-pill-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 10px;
+    gap: 6px;
     margin-bottom: 24px;
 }
 
 .typing-pill {
-    background: rgba(255,255,255,0.18);
-    color: #fff;
-    border: 1.5px solid rgba(255,255,255,0.3);
-    border-radius: 20px;
-    padding: 8px 20px;
-    font-size: 0.9rem;
-    font-family: var(--font-body);
+    background: transparent;
+    color: rgba(255,255,255,0.5);
+    border: none;
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
+    padding: 8px 14px;
+    font-size: 0.82rem;
+    font-family: 'Roboto Mono', 'Courier New', monospace;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: color 0.15s, border-color 0.15s;
+    letter-spacing: 0.01em;
 }
 
 .typing-pill:hover {
-    background: rgba(255,255,255,0.25);
-    color: #fff;
+    color: rgba(255,255,255,0.8);
+    border-bottom-color: rgba(255,255,255,0.25);
 }
 
 .typing-pill.active {
-    background: rgba(255,255,255,0.3);
-    color: #fff;
-    border-color: rgba(255,255,255,0.6);
+    color: #e2b714;
+    border-bottom-color: #e2b714;
 }
 
 .typing-pill.completed {
-    border-color: rgba(255,255,255,0.4);
+    color: rgba(255,255,255,0.45);
+}
+
+.typing-pill.completed.active {
+    color: #e2b714;
 }
 
 .typing-pill-check {
     color: #a6e3a1;
     font-weight: 700;
+    font-size: 0.9em;
 }
 
 /* Dark typing box */
@@ -2086,26 +2095,26 @@ header .essential-question {
 .typing-stats {
     display: flex;
     justify-content: flex-start;
-    gap: 24px;
+    gap: 20px;
     margin-bottom: 16px;
-    font-size: 0.85rem;
     font-family: 'Roboto Mono', 'Courier New', monospace;
 }
 
 .typing-stat {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     gap: 4px;
 }
 
 .typing-stat-value {
-    font-weight: 700;
+    font-weight: 400;
     color: #e2b714;
-    font-size: 1.1rem;
+    font-size: 1.6rem;
 }
 
 .typing-stat-label {
     color: #646669;
+    font-size: 0.7rem;
 }
 
 /* Passage display — constrained to ~3 lines */
@@ -2137,6 +2146,43 @@ header .essential-question {
 
 .typing-word.current.typing-error {
     color: #ca4754;
+}
+
+/* Character-level cursor */
+.typing-char {
+    position: relative;
+}
+
+.typing-char.cursor::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.1em;
+    width: 2.5px;
+    height: 1.2em;
+    background: #e2b714;
+    animation: typing-blink 1s step-end infinite;
+    border-radius: 1px;
+}
+
+.typing-char.typed-correct {
+    color: #d1d0c5;
+}
+
+.typing-char.typed-incorrect {
+    color: #ca4754;
+    text-decoration: underline;
+    text-decoration-color: #ca4754;
+}
+
+.typing-char.typed-extra {
+    color: #ca4754;
+    opacity: 0.7;
+}
+
+@keyframes typing-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
 }
 
 .typing-word.correct {
@@ -2223,17 +2269,19 @@ header .essential-question {
 }
 
 .typing-complete-title {
-    color: #e2b714;
-    font-size: 1.6rem;
-    margin-bottom: 24px;
+    color: #646669;
+    font-size: 0.85rem;
+    margin-bottom: 28px;
     font-family: 'Roboto Mono', 'Courier New', monospace;
+    font-weight: 400;
+    letter-spacing: 0.02em;
 }
 
 .typing-complete-stats {
     display: flex;
     justify-content: center;
-    gap: 48px;
-    margin-bottom: 28px;
+    gap: 56px;
+    margin-bottom: 32px;
 }
 
 .typing-complete-stat {
@@ -2241,35 +2289,37 @@ header .essential-question {
 }
 
 .typing-complete-stat-value {
-    font-size: 2.4rem;
-    font-weight: 700;
-    color: #d1d0c5;
+    font-size: 3rem;
+    font-weight: 400;
+    color: #e2b714;
     font-family: 'Roboto Mono', 'Courier New', monospace;
 }
 
 .typing-complete-stat-label {
-    font-size: 0.85rem;
+    font-size: 0.7rem;
     color: #646669;
     font-family: 'Roboto Mono', 'Courier New', monospace;
-    margin-top: 4px;
+    margin-top: 6px;
+    letter-spacing: 0.03em;
 }
 
 .typing-retry-btn {
-    background: #e2b714;
-    color: #323437;
+    background: transparent;
+    color: #646669;
     border: none;
-    border-radius: 8px;
-    padding: 12px 28px;
-    font-size: 1rem;
-    font-weight: 700;
-    font-family: var(--font-body);
+    border-radius: 0;
+    padding: 8px 0;
+    font-size: 0.85rem;
+    font-weight: 400;
+    font-family: 'Roboto Mono', 'Courier New', monospace;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: color 0.15s;
+    border-bottom: 1px solid transparent;
 }
 
 .typing-retry-btn:hover {
-    background: #d4a90f;
-    transform: translateY(-1px);
+    color: #e2b714;
+    border-bottom-color: #e2b714;
 }
 
 /* Responsive */

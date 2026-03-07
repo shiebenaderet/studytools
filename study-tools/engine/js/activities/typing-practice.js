@@ -208,6 +208,8 @@ StudyEngine.registerActivity({
 
             if (w === 0) {
                 span.classList.add('current');
+                // Render initial word with cursor at start
+                this._renderWordChars(span, this._words[w], '');
             }
 
             display.appendChild(span);
@@ -275,6 +277,58 @@ StudyEngine.registerActivity({
         }, 50);
     },
 
+    _renderWordChars(span, expected, typed) {
+        // Clear existing content
+        while (span.firstChild) span.removeChild(span.firstChild);
+
+        var maxLen = Math.max(expected.length, typed.length);
+        for (var i = 0; i < maxLen; i++) {
+            var charSpan = document.createElement('span');
+            charSpan.className = 'typing-char';
+
+            if (i < expected.length) {
+                charSpan.textContent = expected[i];
+                if (i < typed.length) {
+                    if (typed[i] === expected[i]) {
+                        charSpan.classList.add('typed-correct');
+                    } else {
+                        charSpan.classList.add('typed-incorrect');
+                    }
+                }
+            } else {
+                // Extra typed characters beyond expected length
+                charSpan.textContent = typed[i];
+                charSpan.classList.add('typed-extra');
+            }
+
+            // Place cursor at current typing position
+            if (i === typed.length) {
+                charSpan.classList.add('cursor');
+            }
+
+            span.appendChild(charSpan);
+        }
+
+        // If typed is empty, cursor goes on first char
+        if (typed.length === 0 && expected.length > 0) {
+            var firstChar = span.querySelector('.typing-char');
+            if (firstChar) firstChar.classList.add('cursor');
+        }
+
+        // If typed length equals expected length, add a trailing cursor
+        if (typed.length >= expected.length && typed.length > 0) {
+            var trail = document.createElement('span');
+            trail.className = 'typing-char cursor';
+            trail.textContent = '\u200B'; // zero-width space
+            span.appendChild(trail);
+        }
+    },
+
+    _resetWordText(span, expected) {
+        while (span.firstChild) span.removeChild(span.firstChild);
+        span.textContent = expected;
+    },
+
     _updateLiveTyping(input) {
         if (!this._active) return;
         var display = document.getElementById('typing-passage-display');
@@ -287,7 +341,10 @@ StudyEngine.registerActivity({
         var typed = input.value;
         var expected = this._words[this._currentWordIndex];
 
-        // Check character-by-character if the typed text matches the beginning of expected
+        // Render character-by-character with cursor
+        this._renderWordChars(currentSpan, expected, typed);
+
+        // Update word-level error class for color
         if (typed.length > 0) {
             var matchSoFar = true;
             for (var c = 0; c < typed.length; c++) {
@@ -356,13 +413,20 @@ StudyEngine.registerActivity({
                 }
             }
 
+            // Reset completed word to plain text
+            if (currentSpan) {
+                this._resetWordText(currentSpan, expected);
+            }
+
             this._currentWordIndex++;
 
-            // Highlight next word
+            // Highlight next word and show cursor
             if (this._currentWordIndex < this._words.length) {
                 var nextSpan = wordSpans[this._currentWordIndex];
                 if (nextSpan) {
                     nextSpan.classList.add('current');
+                    // Render with cursor at position 0
+                    this._renderWordChars(nextSpan, this._words[this._currentWordIndex], '');
                     // Scroll to keep current word visible within display
                     this._scrollToWord(display, nextSpan);
                 }
