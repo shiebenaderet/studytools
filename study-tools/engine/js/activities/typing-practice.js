@@ -16,6 +16,7 @@ StudyEngine.registerActivity({
     _active: false,
     _selectedCategory: null,
     _vocabTerms: [],
+    _availablePassages: [],
 
     render(container, config) {
         this._container = container;
@@ -42,66 +43,71 @@ StudyEngine.registerActivity({
 
         // Title
         var title = document.createElement('h2');
+        title.className = 'typing-title';
         title.textContent = 'Typing Practice';
-        title.style.color = 'var(--primary)';
-        title.style.marginBottom = '8px';
-        title.style.textAlign = 'center';
         wrapper.appendChild(title);
 
         var desc = document.createElement('p');
+        desc.className = 'typing-description';
         desc.textContent = 'Select a passage to practice typing. Vocabulary terms are highlighted in bold.';
-        desc.style.color = '#666';
-        desc.style.marginBottom = '20px';
-        desc.style.textAlign = 'center';
         wrapper.appendChild(desc);
 
-        // Category selector
-        var selectWrapper = document.createElement('div');
-        selectWrapper.className = 'typing-category-select';
-
-        var select = document.createElement('select');
-        select.className = 'filter-select';
-        select.id = 'typing-category-select';
-
-        var defaultOpt = document.createElement('option');
-        defaultOpt.value = '';
-        defaultOpt.textContent = '-- Choose a passage --';
-        select.appendChild(defaultOpt);
-
         // Filter passages to only unlocked categories
-        var availablePassages = [];
+        this._availablePassages = [];
         for (var i = 0; i < passages.length; i++) {
             if (categories.indexOf(passages[i].category) !== -1) {
-                availablePassages.push(passages[i]);
+                this._availablePassages.push(passages[i]);
             }
         }
 
-        for (var j = 0; j < availablePassages.length; j++) {
-            var p = availablePassages[j];
-            var opt = document.createElement('option');
-            opt.value = p.category;
-            var label = p.title || p.category;
+        // Category pill buttons
+        var pillContainer = document.createElement('div');
+        pillContainer.className = 'typing-pill-container';
+        pillContainer.id = 'typing-pill-container';
+
+        for (var j = 0; j < this._availablePassages.length; j++) {
+            var p = this._availablePassages[j];
+            var pill = document.createElement('button');
+            pill.className = 'typing-pill';
+            pill.dataset.category = p.category;
+
+            var pillText = document.createTextNode(p.title || p.category);
+            pill.appendChild(pillText);
+
             if (completed[p.category]) {
-                label += ' \u2713';
+                pill.classList.add('completed');
+                var check = document.createElement('span');
+                check.className = 'typing-pill-check';
+                check.textContent = ' \u2713';
+                pill.appendChild(check);
             }
-            opt.textContent = label;
-            select.appendChild(opt);
+
+            pill.addEventListener('click', (function(cat) {
+                return function() {
+                    self._selectPill(cat);
+                    self._startPassage(cat);
+                };
+            })(p.category));
+
+            pillContainer.appendChild(pill);
         }
 
-        select.addEventListener('change', function() {
-            var cat = select.value;
-            if (cat) {
-                self._startPassage(cat);
-            }
-        });
-
-        selectWrapper.appendChild(select);
-        wrapper.appendChild(selectWrapper);
+        wrapper.appendChild(pillContainer);
 
         // Passage area placeholder
         var passageArea = document.createElement('div');
         passageArea.id = 'typing-passage-area';
         wrapper.appendChild(passageArea);
+    },
+
+    _selectPill(category) {
+        var pills = document.querySelectorAll('.typing-pill');
+        for (var i = 0; i < pills.length; i++) {
+            pills[i].classList.remove('active');
+            if (pills[i].dataset.category === category) {
+                pills[i].classList.add('active');
+            }
+        }
     },
 
     _startPassage(category) {
@@ -143,15 +149,19 @@ StudyEngine.registerActivity({
         if (!passageArea) return;
         while (passageArea.firstChild) passageArea.removeChild(passageArea.firstChild);
 
+        // Dark typing box
+        var darkBox = document.createElement('div');
+        darkBox.className = 'typing-dark-box';
+        darkBox.id = 'typing-dark-box';
+
         // Stats bar
         var statsBar = document.createElement('div');
         statsBar.className = 'typing-stats';
         statsBar.id = 'typing-stats';
 
         var statItems = [
-            { id: 'typing-stat-wpm', label: 'WPM', value: '0' },
-            { id: 'typing-stat-accuracy', label: 'Accuracy', value: '100%' },
-            { id: 'typing-stat-progress', label: 'Progress', value: '0/' + this._words.length }
+            { id: 'typing-stat-wpm', label: 'wpm', value: '0' },
+            { id: 'typing-stat-accuracy', label: 'acc', value: '100%' }
         ];
 
         for (var s = 0; s < statItems.length; s++) {
@@ -165,26 +175,33 @@ StudyEngine.registerActivity({
             stat.appendChild(valEl);
 
             var labelEl = document.createElement('span');
+            labelEl.className = 'typing-stat-label';
             labelEl.textContent = ' ' + statItems[s].label;
             stat.appendChild(labelEl);
 
             statsBar.appendChild(stat);
         }
 
-        passageArea.appendChild(statsBar);
+        darkBox.appendChild(statsBar);
 
-        // Passage display
+        // Click-to-focus hint (shown when not focused)
+        var focusHint = document.createElement('div');
+        focusHint.className = 'typing-focus-hint';
+        focusHint.id = 'typing-focus-hint';
+        focusHint.textContent = 'Click here or start typing to focus';
+
+        // Passage display (constrained to ~3 lines)
         var display = document.createElement('div');
         display.className = 'typing-passage-display';
         display.id = 'typing-passage-display';
 
         for (var w = 0; w < this._words.length; w++) {
             var span = document.createElement('span');
-            span.className = 'word';
+            span.className = 'typing-word';
             span.textContent = this._words[w];
             span.dataset.index = w;
 
-            // Check if this word (stripped of punctuation) is a vocab term
+            // Check if this word is a vocab term
             if (this._isVocabTerm(this._words[w])) {
                 span.classList.add('vocab-term');
             }
@@ -195,22 +212,20 @@ StudyEngine.registerActivity({
 
             display.appendChild(span);
 
-            // Add space text node between words
+            // Add space between words
             if (w < this._words.length - 1) {
                 display.appendChild(document.createTextNode(' '));
             }
         }
 
-        passageArea.appendChild(display);
+        darkBox.appendChild(display);
+        darkBox.appendChild(focusHint);
 
-        // Input area
-        var inputArea = document.createElement('div');
-        inputArea.className = 'typing-input-area';
-
+        // Hidden input
         var input = document.createElement('input');
         input.type = 'text';
         input.id = 'typing-input';
-        input.placeholder = 'Start typing...';
+        input.className = 'typing-hidden-input';
         input.autocomplete = 'off';
         input.autocapitalize = 'off';
         input.spellcheck = false;
@@ -222,13 +237,75 @@ StudyEngine.registerActivity({
             }
         });
 
-        inputArea.appendChild(input);
-        passageArea.appendChild(inputArea);
+        input.addEventListener('input', function() {
+            self._updateLiveTyping(input);
+        });
+
+        input.addEventListener('focus', function() {
+            darkBox.classList.add('focused');
+            focusHint.style.display = 'none';
+        });
+
+        input.addEventListener('blur', function() {
+            darkBox.classList.remove('focused');
+            if (self._active) {
+                focusHint.style.display = '';
+            }
+        });
+
+        darkBox.appendChild(input);
+
+        // Click on dark box focuses input
+        darkBox.addEventListener('click', function() {
+            input.focus();
+        });
+
+        passageArea.appendChild(darkBox);
+
+        // Source citation
+        var source = passage.source || 'Content adapted from The American Yawp (americanyawp.com) and Wikipedia for educational use.';
+        var citation = document.createElement('p');
+        citation.className = 'typing-citation';
+        citation.textContent = source + ' Vocabulary terms appear in bold.';
+        passageArea.appendChild(citation);
 
         // Focus the input
         setTimeout(function() {
             input.focus();
         }, 50);
+    },
+
+    _updateLiveTyping(input) {
+        if (!this._active) return;
+        var display = document.getElementById('typing-passage-display');
+        if (!display) return;
+
+        var wordSpans = display.querySelectorAll('.typing-word');
+        var currentSpan = wordSpans[this._currentWordIndex];
+        if (!currentSpan) return;
+
+        var typed = input.value;
+        var expected = this._words[this._currentWordIndex];
+
+        // Check character-by-character if the typed text matches the beginning of expected
+        if (typed.length > 0) {
+            var matchSoFar = true;
+            for (var c = 0; c < typed.length; c++) {
+                if (c >= expected.length || typed[c] !== expected[c]) {
+                    matchSoFar = false;
+                    break;
+                }
+            }
+            if (matchSoFar) {
+                currentSpan.classList.remove('typing-error');
+                currentSpan.classList.add('typing-active');
+            } else {
+                currentSpan.classList.remove('typing-active');
+                currentSpan.classList.add('typing-error');
+            }
+        } else {
+            currentSpan.classList.remove('typing-active', 'typing-error');
+        }
     },
 
     _stripPunctuation(word) {
@@ -238,7 +315,6 @@ StudyEngine.registerActivity({
     _isVocabTerm(word) {
         var stripped = this._stripPunctuation(word).toLowerCase();
         for (var i = 0; i < this._vocabTerms.length; i++) {
-            // Check single-word vocab terms
             if (stripped === this._vocabTerms[i].toLowerCase()) {
                 return true;
             }
@@ -267,10 +343,10 @@ StudyEngine.registerActivity({
         // Update word styling
         var display = document.getElementById('typing-passage-display');
         if (display) {
-            var wordSpans = display.querySelectorAll('.word');
+            var wordSpans = display.querySelectorAll('.typing-word');
             var currentSpan = wordSpans[this._currentWordIndex];
             if (currentSpan) {
-                currentSpan.classList.remove('current');
+                currentSpan.classList.remove('current', 'typing-active', 'typing-error');
                 if (isCorrect) {
                     currentSpan.classList.add('correct');
                     this._correctCount++;
@@ -287,8 +363,8 @@ StudyEngine.registerActivity({
                 var nextSpan = wordSpans[this._currentWordIndex];
                 if (nextSpan) {
                     nextSpan.classList.add('current');
-                    // Auto-scroll to keep current word visible
-                    nextSpan.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    // Scroll to keep current word visible within display
+                    this._scrollToWord(display, nextSpan);
                 }
             }
         }
@@ -301,6 +377,25 @@ StudyEngine.registerActivity({
         // Check completion
         if (this._currentWordIndex >= this._words.length) {
             this._completePassage();
+        }
+    },
+
+    _scrollToWord(display, wordSpan) {
+        // Get position of word relative to display container
+        var wordTop = wordSpan.offsetTop;
+        var wordHeight = wordSpan.offsetHeight;
+        var displayHeight = display.clientHeight;
+        var scrollTop = display.scrollTop;
+
+        // If the word is below the visible area, scroll down
+        // Keep one line of context above
+        var lineHeight = wordHeight;
+        if (wordTop + wordHeight > scrollTop + displayHeight) {
+            display.scrollTop = wordTop - lineHeight;
+        }
+        // If the word is above the visible area, scroll up
+        if (wordTop < scrollTop) {
+            display.scrollTop = wordTop - lineHeight;
         }
     },
 
@@ -322,10 +417,6 @@ StudyEngine.registerActivity({
         var accuracy = totalTyped > 0 ? Math.round((this._correctCount / totalTyped) * 100) : 100;
         var accEl = document.getElementById('typing-stat-accuracy');
         if (accEl) accEl.textContent = accuracy + '%';
-
-        // Progress
-        var progEl = document.getElementById('typing-stat-progress');
-        if (progEl) progEl.textContent = this._currentWordIndex + '/' + this._words.length;
     },
 
     _completePassage() {
@@ -348,45 +439,43 @@ StudyEngine.registerActivity({
             completed: completed
         });
 
-        // Update the select dropdown to show checkmark
-        var select = document.getElementById('typing-category-select');
-        if (select) {
-            for (var i = 0; i < select.options.length; i++) {
-                if (select.options[i].value === this._selectedCategory) {
-                    var text = select.options[i].textContent;
-                    if (text.indexOf('\u2713') === -1) {
-                        select.options[i].textContent = text + ' \u2713';
-                    }
-                    break;
-                }
+        // Update pill button to show checkmark
+        var pills = document.querySelectorAll('.typing-pill');
+        for (var i = 0; i < pills.length; i++) {
+            if (pills[i].dataset.category === this._selectedCategory && !pills[i].classList.contains('completed')) {
+                pills[i].classList.add('completed');
+                var check = document.createElement('span');
+                check.className = 'typing-pill-check';
+                check.textContent = ' \u2713';
+                pills[i].appendChild(check);
             }
         }
 
-        // Show completion UI
-        var passageArea = document.getElementById('typing-passage-area');
-        if (!passageArea) return;
+        // Show completion UI inside the dark box
+        var darkBox = document.getElementById('typing-dark-box');
+        if (!darkBox) return;
 
-        // Hide input
+        // Hide display, input, focus hint, stats
+        var display = document.getElementById('typing-passage-display');
+        if (display) display.style.display = 'none';
         var input = document.getElementById('typing-input');
         if (input) input.style.display = 'none';
+        var focusHint = document.getElementById('typing-focus-hint');
+        if (focusHint) focusHint.style.display = 'none';
+        var stats = document.getElementById('typing-stats');
+        if (stats) stats.style.display = 'none';
 
         // Completion message
         var completeDiv = document.createElement('div');
-        completeDiv.style.textAlign = 'center';
-        completeDiv.style.marginTop = '20px';
-        completeDiv.style.padding = '20px';
+        completeDiv.className = 'typing-complete';
 
         var completeTitle = document.createElement('h3');
+        completeTitle.className = 'typing-complete-title';
         completeTitle.textContent = 'Passage Complete!';
-        completeTitle.style.color = 'var(--primary)';
-        completeTitle.style.marginBottom = '15px';
         completeDiv.appendChild(completeTitle);
 
         var statsRow = document.createElement('div');
-        statsRow.style.display = 'flex';
-        statsRow.style.justifyContent = 'center';
-        statsRow.style.gap = '30px';
-        statsRow.style.marginBottom = '20px';
+        statsRow.className = 'typing-complete-stats';
 
         var finalStats = [
             { label: 'WPM', value: String(wpm) },
@@ -395,18 +484,15 @@ StudyEngine.registerActivity({
 
         for (var s = 0; s < finalStats.length; s++) {
             var statDiv = document.createElement('div');
-            statDiv.style.textAlign = 'center';
+            statDiv.className = 'typing-complete-stat';
 
             var valEl = document.createElement('div');
-            valEl.style.fontSize = '1.8em';
-            valEl.style.fontWeight = 'bold';
-            valEl.style.color = 'var(--primary)';
+            valEl.className = 'typing-complete-stat-value';
             valEl.textContent = finalStats[s].value;
             statDiv.appendChild(valEl);
 
             var labelEl = document.createElement('div');
-            labelEl.style.fontSize = '0.9em';
-            labelEl.style.color = '#999';
+            labelEl.className = 'typing-complete-stat-label';
             labelEl.textContent = finalStats[s].label;
             statDiv.appendChild(labelEl);
 
@@ -418,11 +504,7 @@ StudyEngine.registerActivity({
         // Try Again button
         var self = this;
         var tryAgainBtn = document.createElement('button');
-        tryAgainBtn.className = 'nav-button';
-        tryAgainBtn.style.background = 'var(--primary)';
-        tryAgainBtn.style.color = 'white';
-        tryAgainBtn.style.fontSize = '1.1em';
-        tryAgainBtn.style.padding = '10px 25px';
+        tryAgainBtn.className = 'typing-retry-btn';
 
         var icon = document.createElement('i');
         icon.className = 'fas fa-redo';
@@ -434,7 +516,7 @@ StudyEngine.registerActivity({
         });
 
         completeDiv.appendChild(tryAgainBtn);
-        passageArea.appendChild(completeDiv);
+        darkBox.appendChild(completeDiv);
 
         // Show toast
         StudyUtils.showToast('Passage completed! ' + wpm + ' WPM, ' + accuracy + '% accuracy', 'success');
