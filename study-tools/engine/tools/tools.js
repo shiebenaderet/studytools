@@ -849,6 +849,20 @@ const StudyTools = {
         this._musicAudio.volume = this._musicVolume;
         this._musicAudio.preload = 'auto';
 
+        this._musicAudio.addEventListener('canplay', () => {
+            // Track is ready for playback
+        });
+
+        this._musicAudio.addEventListener('waiting', () => {
+            const icon = document.getElementById('music-play-icon');
+            if (icon) icon.className = 'fas fa-spinner fa-spin';
+        });
+
+        this._musicAudio.addEventListener('playing', () => {
+            const icon = document.getElementById('music-play-icon');
+            if (icon) icon.className = 'fas fa-pause';
+        });
+
         this._musicAudio.addEventListener('timeupdate', () => {
             const bar = document.getElementById('music-progress-bar');
             const cur = document.getElementById('music-time-current');
@@ -878,9 +892,11 @@ const StudyTools = {
         if (!this._musicAudio) return;
         const icon = document.getElementById('music-play-icon');
         if (this._musicAudio.paused) {
+            if (icon) icon.className = 'fas fa-spinner fa-spin';
             this._musicAudio.play().then(() => {
                 if (icon) icon.className = 'fas fa-pause';
             }).catch(() => {
+                if (icon) icon.className = 'fas fa-play';
                 StudyUtils.showToast('Could not play track. Try again.', 'error');
             });
         } else {
@@ -893,10 +909,9 @@ const StudyTools = {
         const wasPlaying = this._musicAudio && !this._musicAudio.paused;
         this._musicLoadTrack(this._musicIndex + dir);
         if (wasPlaying) {
-            this._musicAudio.play().then(() => {
-                const icon = document.getElementById('music-play-icon');
-                if (icon) icon.className = 'fas fa-pause';
-            }).catch(() => {});
+            const icon = document.getElementById('music-play-icon');
+            if (icon) icon.className = 'fas fa-spinner fa-spin';
+            this._musicAudio.play().catch(() => {});
         }
     },
 

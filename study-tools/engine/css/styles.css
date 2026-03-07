@@ -3445,6 +3445,17 @@ body.timer-active header {
     color: white;
 }
 
+@media (max-width: 480px) {
+    .cmd-palette-btn,
+    .theme-toggle,
+    .dyslexic-toggle {
+        width: 36px;
+        height: 36px;
+        font-size: 0.8em;
+        right: 8px;
+    }
+}
+
 /* --- Mastery Gating --- */
 
 .activity-card.locked {
@@ -4053,6 +4064,11 @@ body.timer-active header {
 /* Canvas */
 .td-canvas-wrap { width: 100%; height: 450px; background: #1a2332; border-left: 1px solid var(--border-card); border-right: 1px solid var(--border-card); cursor: crosshair; }
 @media (max-width: 768px) { .td-canvas-wrap { height: 350px; } }
+@media (max-width: 480px) {
+    .td-canvas-wrap { height: 300px; }
+    .td-shop { flex-wrap: wrap; }
+    .td-shop-btn { font-size: 0.75em; padding: 6px 8px; }
+}
 
 /* Shop */
 .td-shop { display: flex; align-items: center; gap: 8px; padding: 10px 16px; background: var(--bg-elevated); border-radius: 0 0 12px 12px; border: 1px solid var(--border-card); border-top: none; flex-wrap: wrap; }
@@ -4332,7 +4348,8 @@ body.music-active .container {
     .music-player {
         left: 8px;
         right: 8px;
-        width: auto;
+        width: calc(100% - 16px);
+        max-width: 280px;
         bottom: 8px;
     }
 }
