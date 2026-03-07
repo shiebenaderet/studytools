@@ -199,11 +199,38 @@ StudyEngine.registerActivity({
         }
         var pct = questions.length > 0 ? Math.round((correct / questions.length) * 100) : 0;
 
+        this._trackWeakTerms();
+
         if (typeof AchievementManager !== 'undefined') {
             AchievementManager.checkAndAward({ activity: 'test', score: pct, event: pct === 100 ? 'perfect' : 'complete', totalCorrect: correct });
         }
 
         this.displayQuestion();
+    },
+
+    _trackWeakTerms() {
+        var config = StudyEngine.config;
+        var unitId = config.unit.id;
+        var data = ProgressManager.load(unitId, 'weakness_tracker') || { terms: {} };
+        var vocab = config.vocabulary || [];
+        var questions = this._questions;
+        var tracked = false;
+
+        for (var i = 0; i < questions.length; i++) {
+            if (!this._isAnswerCorrect(i) && questions[i].topic) {
+                // Find vocab terms that match this topic
+                for (var j = 0; j < vocab.length; j++) {
+                    if (vocab[j].category === questions[i].topic) {
+                        data.terms[vocab[j].term] = (data.terms[vocab[j].term] || 0) + 1;
+                        tracked = true;
+                    }
+                }
+            }
+        }
+
+        if (tracked) {
+            ProgressManager.save(unitId, 'weakness_tracker', data);
+        }
     },
 
     _renderScore(wrapper) {

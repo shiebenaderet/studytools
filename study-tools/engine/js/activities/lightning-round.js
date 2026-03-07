@@ -405,12 +405,24 @@ StudyEngine.registerActivity({
         }
         this._updateLeaderboard();
         this._saveBestScore();
+        this._trackWeakTerms();
 
         if (typeof AchievementManager !== 'undefined') {
             AchievementManager.checkAndAward({ activity: 'lightning', score: this._score, event: 'complete' });
         }
 
         this._showResults();
+    },
+
+    _trackWeakTerms() {
+        if (this._missed.length === 0) return;
+        var unitId = this._config.unit.id;
+        var data = ProgressManager.load(unitId, 'weakness_tracker') || { terms: {} };
+        for (var i = 0; i < this._missed.length; i++) {
+            var term = this._missed[i].term;
+            data.terms[term] = (data.terms[term] || 0) + 1;
+        }
+        ProgressManager.save(unitId, 'weakness_tracker', data);
     },
 
     _showResults() {

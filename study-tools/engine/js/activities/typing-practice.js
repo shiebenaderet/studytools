@@ -94,10 +94,232 @@ StudyEngine.registerActivity({
 
         wrapper.appendChild(pillContainer);
 
+        // --- Term snippet section (per-term mini passages) ---
+        var vocab = MasteryManager.getUnlockedVocabulary(config.unit.id, config);
+        var termsWithSnippets = [];
+        for (var t = 0; t < vocab.length; t++) {
+            if (vocab[t].typingSnippet) {
+                termsWithSnippets.push(vocab[t]);
+            }
+        }
+
+        if (termsWithSnippets.length > 0) {
+            var snippetSection = document.createElement('div');
+            snippetSection.className = 'typing-snippet-section';
+
+            var snippetTitle = document.createElement('h3');
+            snippetTitle.className = 'typing-snippet-title';
+            snippetTitle.textContent = 'Term Practice';
+            snippetSection.appendChild(snippetTitle);
+
+            var snippetDesc = document.createElement('p');
+            snippetDesc.className = 'typing-snippet-desc';
+            snippetDesc.textContent = 'Short passages to reinforce individual terms.';
+            snippetSection.appendChild(snippetDesc);
+
+            // Check for weak terms to highlight
+            var weakData = ProgressManager.load(config.unit.id, 'weakness_tracker');
+            var weakTerms = weakData ? weakData.terms || {} : {};
+
+            var snippetPills = document.createElement('div');
+            snippetPills.className = 'typing-pill-container typing-snippet-pills';
+
+            // Show weak terms first, then others
+            var sortedTerms = termsWithSnippets.slice().sort(function(a, b) {
+                var aWeak = weakTerms[a.term] || 0;
+                var bWeak = weakTerms[b.term] || 0;
+                return bWeak - aWeak;
+            });
+
+            var snippetCompleted = saved.snippetsCompleted || {};
+
+            for (var st = 0; st < sortedTerms.length; st++) {
+                var termItem = sortedTerms[st];
+                var termPill = document.createElement('button');
+                termPill.className = 'typing-pill typing-term-pill';
+                termPill.dataset.term = termItem.term;
+
+                if (weakTerms[termItem.term]) {
+                    termPill.classList.add('weak-term');
+                }
+
+                termPill.textContent = termItem.term;
+
+                if (snippetCompleted[termItem.term]) {
+                    termPill.classList.add('completed');
+                    var termCheck = document.createElement('span');
+                    termCheck.className = 'typing-pill-check';
+                    termCheck.textContent = ' \u2713';
+                    termPill.appendChild(termCheck);
+                }
+
+                termPill.addEventListener('click', (function(term) {
+                    return function() {
+                        self._startTermSnippet(term);
+                    };
+                })(termItem));
+
+                snippetPills.appendChild(termPill);
+            }
+
+            snippetSection.appendChild(snippetPills);
+            wrapper.appendChild(snippetSection);
+        }
+
         // Passage area placeholder
         var passageArea = document.createElement('div');
         passageArea.id = 'typing-passage-area';
         wrapper.appendChild(passageArea);
+    },
+
+    _startTermSnippet(vocabItem) {
+        var self = this;
+        var config = this._config;
+
+        this._selectedCategory = '__term__' + vocabItem.term;
+        this._active = true;
+        this._currentWordIndex = 0;
+        this._correctCount = 0;
+        this._incorrectCount = 0;
+        this._startTime = null;
+
+        // Use the vocab term itself for highlighting
+        this._vocabTerms = [vocabItem.term.toLowerCase()];
+
+        // Split snippet into words
+        this._words = vocabItem.typingSnippet.split(/\s+/).filter(function(w) { return w.length > 0; });
+
+        // Deselect any active pills
+        var pills = document.querySelectorAll('.typing-pill');
+        for (var i = 0; i < pills.length; i++) {
+            pills[i].classList.remove('active');
+            if (pills[i].dataset.term === vocabItem.term) {
+                pills[i].classList.add('active');
+            }
+        }
+
+        // Clear passage area
+        var passageArea = document.getElementById('typing-passage-area');
+        if (!passageArea) return;
+        while (passageArea.firstChild) passageArea.removeChild(passageArea.firstChild);
+
+        // Term header
+        var termHeader = document.createElement('div');
+        termHeader.className = 'typing-term-header';
+        var termName = document.createElement('strong');
+        termName.textContent = vocabItem.term;
+        termHeader.appendChild(termName);
+        var termDef = document.createElement('span');
+        termDef.textContent = ' \u2014 ' + vocabItem.definition;
+        termHeader.appendChild(termDef);
+        passageArea.appendChild(termHeader);
+
+        // Dark typing box (reuse existing passage rendering logic)
+        var darkBox = document.createElement('div');
+        darkBox.className = 'typing-dark-box';
+        darkBox.id = 'typing-dark-box';
+
+        // Stats bar
+        var statsBar = document.createElement('div');
+        statsBar.className = 'typing-stats';
+        statsBar.id = 'typing-stats';
+
+        var statItems = [
+            { id: 'typing-stat-wpm', label: 'wpm', value: '0' },
+            { id: 'typing-stat-accuracy', label: 'acc', value: '100%' }
+        ];
+
+        for (var s = 0; s < statItems.length; s++) {
+            var stat = document.createElement('div');
+            stat.className = 'typing-stat';
+            var valEl = document.createElement('span');
+            valEl.className = 'typing-stat-value';
+            valEl.id = statItems[s].id;
+            valEl.textContent = statItems[s].value;
+            stat.appendChild(valEl);
+            var labelEl = document.createElement('span');
+            labelEl.className = 'typing-stat-label';
+            labelEl.textContent = ' ' + statItems[s].label;
+            stat.appendChild(labelEl);
+            statsBar.appendChild(stat);
+        }
+
+        darkBox.appendChild(statsBar);
+
+        var focusHint = document.createElement('div');
+        focusHint.className = 'typing-focus-hint';
+        focusHint.id = 'typing-focus-hint';
+        focusHint.textContent = 'Click here or start typing to focus';
+
+        var display = document.createElement('div');
+        display.className = 'typing-passage-display';
+        display.id = 'typing-passage-display';
+
+        for (var w = 0; w < this._words.length; w++) {
+            var span = document.createElement('span');
+            span.className = 'typing-word';
+            span.textContent = this._words[w];
+            span.dataset.index = w;
+
+            if (this._isVocabTerm(this._words[w])) {
+                span.classList.add('vocab-term');
+            }
+
+            if (w === 0) {
+                span.classList.add('current');
+                this._renderWordChars(span, this._words[w], '');
+            }
+
+            display.appendChild(span);
+            if (w < this._words.length - 1) {
+                display.appendChild(document.createTextNode(' '));
+            }
+        }
+
+        darkBox.appendChild(display);
+        darkBox.appendChild(focusHint);
+
+        var input = document.createElement('input');
+        input.type = 'text';
+        input.id = 'typing-input';
+        input.className = 'typing-hidden-input';
+        input.autocomplete = 'off';
+        input.autocapitalize = 'off';
+        input.spellcheck = false;
+
+        input.addEventListener('keydown', function(e) {
+            if (e.key === ' ' || e.key === 'Enter') {
+                e.preventDefault();
+                self._submitWord(input);
+            }
+        });
+
+        input.addEventListener('input', function() {
+            self._updateLiveTyping(input);
+        });
+
+        input.addEventListener('focus', function() {
+            darkBox.classList.add('focused');
+            focusHint.style.display = 'none';
+        });
+
+        input.addEventListener('blur', function() {
+            darkBox.classList.remove('focused');
+            if (self._active) {
+                focusHint.style.display = '';
+            }
+        });
+
+        darkBox.appendChild(input);
+        darkBox.addEventListener('click', function() {
+            input.focus();
+        });
+
+        passageArea.appendChild(darkBox);
+
+        setTimeout(function() {
+            input.focus();
+        }, 50);
     },
 
     _selectPill(category) {
@@ -493,25 +715,57 @@ StudyEngine.registerActivity({
 
         // Save progress
         var saved = ProgressManager.getActivityProgress(this._config.unit.id, 'typing-practice') || {};
-        var completed = saved.completed || {};
-        completed[this._selectedCategory] = {
-            wpm: wpm,
-            accuracy: accuracy,
-            completedAt: new Date().toISOString()
-        };
-        ProgressManager.saveActivityProgress(this._config.unit.id, 'typing-practice', {
-            completed: completed
-        });
+        var isTermSnippet = this._selectedCategory && this._selectedCategory.indexOf('__term__') === 0;
 
-        // Update pill button to show checkmark
-        var pills = document.querySelectorAll('.typing-pill');
-        for (var i = 0; i < pills.length; i++) {
-            if (pills[i].dataset.category === this._selectedCategory && !pills[i].classList.contains('completed')) {
-                pills[i].classList.add('completed');
-                var check = document.createElement('span');
-                check.className = 'typing-pill-check';
-                check.textContent = ' \u2713';
-                pills[i].appendChild(check);
+        if (isTermSnippet) {
+            var termName = this._selectedCategory.replace('__term__', '');
+            var snippetsCompleted = saved.snippetsCompleted || {};
+            snippetsCompleted[termName] = {
+                wpm: wpm,
+                accuracy: accuracy,
+                completedAt: new Date().toISOString()
+            };
+            saved.snippetsCompleted = snippetsCompleted;
+            ProgressManager.saveActivityProgress(this._config.unit.id, 'typing-practice', saved);
+
+            // Update term pill
+            var termPills = document.querySelectorAll('.typing-term-pill');
+            for (var tp = 0; tp < termPills.length; tp++) {
+                if (termPills[tp].dataset.term === termName && !termPills[tp].classList.contains('completed')) {
+                    termPills[tp].classList.add('completed');
+                    var termCheck = document.createElement('span');
+                    termCheck.className = 'typing-pill-check';
+                    termCheck.textContent = ' \u2713';
+                    termPills[tp].appendChild(termCheck);
+                }
+            }
+
+            // Clear weakness for this term since they practiced it
+            var weakData = ProgressManager.load(this._config.unit.id, 'weakness_tracker');
+            if (weakData && weakData.terms && weakData.terms[termName]) {
+                delete weakData.terms[termName];
+                ProgressManager.save(this._config.unit.id, 'weakness_tracker', weakData);
+            }
+        } else {
+            var completed = saved.completed || {};
+            completed[this._selectedCategory] = {
+                wpm: wpm,
+                accuracy: accuracy,
+                completedAt: new Date().toISOString()
+            };
+            saved.completed = completed;
+            ProgressManager.saveActivityProgress(this._config.unit.id, 'typing-practice', saved);
+
+            // Update pill button to show checkmark
+            var pills = document.querySelectorAll('.typing-pill');
+            for (var i = 0; i < pills.length; i++) {
+                if (pills[i].dataset.category === this._selectedCategory && !pills[i].classList.contains('completed')) {
+                    pills[i].classList.add('completed');
+                    var check = document.createElement('span');
+                    check.className = 'typing-pill-check';
+                    check.textContent = ' \u2713';
+                    pills[i].appendChild(check);
+                }
             }
         }
 

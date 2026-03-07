@@ -1037,7 +1037,7 @@ StudyEngine.registerActivity({
             nameSpan.textContent = ' ' + r.title;
             row.appendChild(nameSpan);
 
-            if (r.questionResults) {
+            if (r.questionResults && typeof r.questionResults === 'string') {
                 var qSpan = document.createElement('span');
                 qSpan.className = 'source-breakdown-questions';
                 qSpan.textContent = 'Questions: ' + r.questionResults;
