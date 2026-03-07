@@ -242,10 +242,6 @@ body.light-mode .focus-timer-btn { color: white; }
 /* Footer */
 body.light-mode .app-footer { color: var(--text-muted); }
 
-/* Theme toggle icon */
-body.light-mode .theme-toggle {
-    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-}
 
 /* Achievement badges */
 body.light-mode .ach-badge:hover { border-color: var(--border-hover); }
@@ -3545,99 +3541,185 @@ body.timer-active header {
 }
 
 /* DYSLEXIC FONT TOGGLE */
-.cmd-palette-btn {
-    position: fixed;
-    bottom: 170px;
-    right: 20px;
-    background: var(--bg-elevated);
-    border: 2px solid var(--border-card);
-    color: var(--text-secondary);
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 0.95em;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    z-index: 1000;
-    transition: all 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.cmd-palette-btn:hover {
-    background: var(--primary);
-    border-color: var(--primary);
-    color: white;
-    transform: scale(1.08);
-}
-
-.theme-toggle {
-    position: fixed;
-    bottom: 70px;
-    right: 20px;
-    background: var(--bg-elevated);
-    border: 2px solid var(--border-card);
-    color: var(--text-secondary);
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 1em;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    z-index: 1000;
-    transition: all 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.theme-toggle:hover {
-    background: var(--primary);
-    border-color: var(--primary);
-    color: white;
-    transform: scale(1.08);
-}
-
-.dyslexic-toggle {
+/* ===================== Settings FAB & Panel ===================== */
+.settings-fab {
     position: fixed;
     bottom: 20px;
     right: 20px;
     background: var(--bg-elevated);
-    border: 2px solid var(--primary);
-    color: var(--primary);
-    padding: 10px 14px;
-    border-radius: 50px;
+    border: 2px solid var(--border-card);
+    color: var(--text-secondary);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
     cursor: pointer;
-    font-size: 0.85em;
-    font-weight: 600;
-    font-family: var(--font-body);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(79, 143, 247, 0.2);
-    z-index: 1000;
-    transition: all 0.2s;
+    font-size: 1.1em;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+    z-index: 1100;
+    transition: all 0.25s;
     display: flex;
     align-items: center;
-    gap: 6px;
+    justify-content: center;
 }
-
-.dyslexic-toggle:hover {
+.settings-fab:hover {
     background: var(--primary);
+    border-color: var(--primary);
     color: white;
+    transform: scale(1.08);
+}
+body.light-mode .settings-fab {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 }
 
-.dyslexic-toggle.active {
+.settings-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1099;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s;
+}
+.settings-backdrop.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.settings-panel {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 320px;
+    max-width: 100vw;
+    background: var(--bg-card);
+    border-top-left-radius: 16px;
+    border-top-right-radius: 0;
+    box-shadow: -4px -4px 24px rgba(0, 0, 0, 0.3);
+    z-index: 1101;
+    transform: translateY(100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+.settings-panel.open {
+    transform: translateY(0);
+}
+body.light-mode .settings-panel {
+    box-shadow: -4px -4px 24px rgba(0, 0, 0, 0.1);
+}
+
+.settings-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px 12px;
+    border-bottom: 1px solid var(--border-subtle);
+}
+.settings-panel-title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.1em;
+    color: var(--text-primary);
+}
+.settings-panel-close {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.1em;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: color 0.15s, background 0.15s;
+}
+.settings-panel-close:hover {
+    color: var(--text-primary);
+    background: var(--bg-surface);
+}
+
+.settings-panel-body {
+    padding: 8px 0 16px;
+}
+
+.settings-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    padding: 14px 20px;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 0.95em;
+    cursor: pointer;
+    transition: background 0.15s;
+    text-align: left;
+}
+.settings-row:hover {
+    background: var(--bg-surface);
+}
+.settings-row-icon {
+    width: 28px;
+    text-align: center;
+    font-size: 1.05em;
+    color: var(--text-secondary);
+    flex-shrink: 0;
+}
+.settings-row-label {
+    flex: 1;
+    font-weight: 500;
+}
+.settings-row-toggle {
+    width: 40px;
+    height: 22px;
+    border-radius: 11px;
+    background: var(--border-card);
+    position: relative;
+    transition: background 0.2s;
+    flex-shrink: 0;
+}
+.settings-row-toggle::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: white;
+    transition: transform 0.2s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+.settings-row-toggle.on {
     background: var(--primary);
-    color: white;
+}
+.settings-row-toggle.on::after {
+    transform: translateX(18px);
+}
+.settings-row-shortcut {
+    flex-shrink: 0;
+}
+.settings-row-shortcut kbd {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-card);
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 0.8em;
+    font-family: var(--font-body);
+    color: var(--text-muted);
 }
 
+/* Mobile: full-width panel */
 @media (max-width: 480px) {
-    .cmd-palette-btn,
-    .theme-toggle,
-    .dyslexic-toggle {
-        width: 36px;
-        height: 36px;
-        font-size: 0.8em;
-        right: 8px;
+    .settings-fab {
+        width: 44px;
+        height: 44px;
+        font-size: 1em;
+        right: 12px;
+        bottom: 12px;
+    }
+    .settings-panel {
+        width: 100vw;
+        border-top-right-radius: 16px;
     }
 }
 

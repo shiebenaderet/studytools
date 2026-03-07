@@ -34,7 +34,10 @@
     <!-- Dashboard -->
     <div id="dashboard" class="dashboard hidden">
         <header class="dashboard-header">
-            <h1><i class="fas fa-chalkboard-teacher"></i> Teacher Dashboard</h1>
+            <div class="dashboard-header-left">
+                <h1><i class="fas fa-chalkboard-teacher"></i> Teacher Dashboard</h1>
+                <span class="dashboard-version" id="dashboard-version"></span>
+            </div>
             <button class="btn btn-logout" onclick="Dashboard.logout()">
                 <i class="fas fa-sign-out-alt"></i> Logout
             </button>
@@ -72,6 +75,9 @@
             <button class="tab-btn" data-tab="units" onclick="Dashboard.switchTab('units')">
                 <i class="fas fa-book"></i> Units
             </button>
+            <button class="tab-btn" data-tab="classes" onclick="Dashboard.switchTab('classes')">
+                <i class="fas fa-key"></i> Class Codes
+            </button>
         </nav>
 
         <!-- Tab Content -->
@@ -85,6 +91,10 @@
 
         <div id="tab-units" class="tab-content">
             <div id="units-chart-container"></div>
+        </div>
+
+        <div id="tab-classes" class="tab-content">
+            <div id="classes-container"></div>
         </div>
     </div>
 

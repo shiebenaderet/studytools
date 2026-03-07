@@ -62,8 +62,22 @@ const Dashboard = {
     showDashboard() {
         document.getElementById('login-screen').classList.add('hidden');
         document.getElementById('dashboard').classList.remove('hidden');
+        this.loadVersion();
         this.loadClasses();
         this.switchTab('overview');
+    },
+
+    async loadVersion() {
+        try {
+            var resp = await fetch('../engine/version.json');
+            var data = await resp.json();
+            var el = document.getElementById('dashboard-version');
+            if (el && data.version) {
+                el.textContent = 'v' + data.version;
+            }
+        } catch (err) {
+            // Version file not critical
+        }
     },
 
     // ---- Authentication ----
@@ -138,6 +152,9 @@ const Dashboard = {
                 break;
             case 'units':
                 this.loadUnits(filters);
+                break;
+            case 'classes':
+                this.loadClassCodes();
                 break;
         }
     },
@@ -476,6 +493,219 @@ const Dashboard = {
             container.appendChild(
                 this._emptyState('fas fa-exclamation-triangle', 'Failed to load student data. Please try again.')
             );
+        }
+    },
+
+    async loadClassCodes() {
+        var container = document.getElementById('classes-container');
+        container.textContent = '';
+        container.appendChild(this._loading());
+
+        try {
+            var { data: classes, error } = await this.supabase
+                .from('classes')
+                .select('id, code, name, created_at')
+                .order('created_at', { ascending: false });
+
+            if (error) throw error;
+
+            container.textContent = '';
+
+            // Create new class form
+            var createSection = document.createElement('div');
+            createSection.className = 'class-create-section';
+
+            var createTitle = document.createElement('h3');
+            createTitle.textContent = 'Create New Class Code';
+            createSection.appendChild(createTitle);
+
+            var createForm = document.createElement('div');
+            createForm.className = 'class-create-form';
+
+            var nameInput = document.createElement('input');
+            nameInput.type = 'text';
+            nameInput.placeholder = 'Class name (e.g. Period 3)';
+            nameInput.className = 'class-input';
+            nameInput.id = 'new-class-name';
+            createForm.appendChild(nameInput);
+
+            var codeInput = document.createElement('input');
+            codeInput.type = 'text';
+            codeInput.placeholder = 'Code (e.g. MRB-P3)';
+            codeInput.className = 'class-input';
+            codeInput.id = 'new-class-code';
+            codeInput.maxLength = 20;
+            createForm.appendChild(codeInput);
+
+            var createBtn = document.createElement('button');
+            createBtn.className = 'btn btn-primary';
+            createBtn.appendChild(this._icon('fas fa-plus'));
+            var btnText = document.createElement('span');
+            btnText.textContent = ' Create';
+            createBtn.appendChild(btnText);
+            createBtn.addEventListener('click', function() { Dashboard.createClassCode(); });
+            createForm.appendChild(createBtn);
+
+            createSection.appendChild(createForm);
+
+            var createError = document.createElement('div');
+            createError.className = 'class-create-error hidden';
+            createError.id = 'class-create-error';
+            createSection.appendChild(createError);
+
+            container.appendChild(createSection);
+
+            // Existing classes list
+            if (!classes || classes.length === 0) {
+                container.appendChild(
+                    this._emptyState('fas fa-key', 'No class codes yet. Create one above.')
+                );
+                return;
+            }
+
+            var self = this;
+            classes.forEach(function(cls) {
+                var card = document.createElement('div');
+                card.className = 'class-code-card';
+
+                var cardHeader = document.createElement('div');
+                cardHeader.className = 'class-code-header';
+
+                var codeEl = document.createElement('span');
+                codeEl.className = 'class-code-value';
+                codeEl.textContent = cls.code;
+                cardHeader.appendChild(codeEl);
+
+                var copyBtn = document.createElement('button');
+                copyBtn.className = 'btn btn-copy';
+                copyBtn.title = 'Copy code';
+                copyBtn.appendChild(self._icon('fas fa-copy'));
+                copyBtn.addEventListener('click', function() {
+                    navigator.clipboard.writeText(cls.code).then(function() {
+                        copyBtn.textContent = '';
+                        copyBtn.appendChild(self._icon('fas fa-check'));
+                        setTimeout(function() {
+                            copyBtn.textContent = '';
+                            copyBtn.appendChild(self._icon('fas fa-copy'));
+                        }, 1500);
+                    });
+                });
+                cardHeader.appendChild(copyBtn);
+
+                card.appendChild(cardHeader);
+
+                var nameEl = document.createElement('div');
+                nameEl.className = 'class-code-name';
+                nameEl.textContent = cls.name || 'Unnamed class';
+                card.appendChild(nameEl);
+
+                var dateEl = document.createElement('div');
+                dateEl.className = 'class-code-date';
+                dateEl.textContent = 'Created ' + new Date(cls.created_at).toLocaleDateString();
+                card.appendChild(dateEl);
+
+                // Delete button
+                var deleteBtn = document.createElement('button');
+                deleteBtn.className = 'btn btn-danger-small';
+                deleteBtn.appendChild(self._icon('fas fa-trash'));
+                var delText = document.createElement('span');
+                delText.textContent = ' Delete';
+                deleteBtn.appendChild(delText);
+                var confirmState = false;
+                deleteBtn.addEventListener('click', function() {
+                    if (!confirmState) {
+                        confirmState = true;
+                        deleteBtn.textContent = '';
+                        deleteBtn.appendChild(self._icon('fas fa-exclamation-triangle'));
+                        var confirmText = document.createElement('span');
+                        confirmText.textContent = ' Confirm delete?';
+                        deleteBtn.appendChild(confirmText);
+                        deleteBtn.classList.add('btn-danger-confirm');
+                        setTimeout(function() {
+                            confirmState = false;
+                            deleteBtn.textContent = '';
+                            deleteBtn.classList.remove('btn-danger-confirm');
+                            deleteBtn.appendChild(self._icon('fas fa-trash'));
+                            var resetText = document.createElement('span');
+                            resetText.textContent = ' Delete';
+                            deleteBtn.appendChild(resetText);
+                        }, 4000);
+                    } else {
+                        Dashboard.deleteClassCode(cls.id);
+                    }
+                });
+                card.appendChild(deleteBtn);
+
+                container.appendChild(card);
+            });
+
+        } catch (err) {
+            console.error('Failed to load class codes:', err);
+            container.textContent = '';
+            container.appendChild(
+                this._emptyState('fas fa-exclamation-triangle', 'Failed to load class codes.')
+            );
+        }
+    },
+
+    async createClassCode() {
+        var nameInput = document.getElementById('new-class-name');
+        var codeInput = document.getElementById('new-class-code');
+        var errorEl = document.getElementById('class-create-error');
+
+        var name = (nameInput.value || '').trim();
+        var code = (codeInput.value || '').trim().toUpperCase();
+
+        errorEl.classList.add('hidden');
+
+        if (!name || !code) {
+            errorEl.textContent = 'Both class name and code are required.';
+            errorEl.classList.remove('hidden');
+            return;
+        }
+
+        if (code.length < 3) {
+            errorEl.textContent = 'Code must be at least 3 characters.';
+            errorEl.classList.remove('hidden');
+            return;
+        }
+
+        try {
+            var { error } = await this.supabase
+                .from('classes')
+                .insert({ name: name, code: code });
+
+            if (error) {
+                if (error.message && error.message.includes('duplicate')) {
+                    errorEl.textContent = 'That code already exists. Try a different one.';
+                } else {
+                    errorEl.textContent = error.message || 'Failed to create class code.';
+                }
+                errorEl.classList.remove('hidden');
+                return;
+            }
+
+            nameInput.value = '';
+            codeInput.value = '';
+            this.loadClassCodes();
+            this.loadClasses(); // refresh filter dropdown
+        } catch (err) {
+            errorEl.textContent = 'An unexpected error occurred.';
+            errorEl.classList.remove('hidden');
+        }
+    },
+
+    async deleteClassCode(classId) {
+        try {
+            await this.supabase
+                .from('classes')
+                .delete()
+                .eq('id', classId);
+
+            this.loadClassCodes();
+            this.loadClasses();
+        } catch (err) {
+            console.error('Failed to delete class:', err);
         }
     },
 

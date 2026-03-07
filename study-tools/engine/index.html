@@ -43,17 +43,38 @@
         </div>
     </div>
 
-    <button class="cmd-palette-btn" id="cmd-palette-btn" title="Command palette (/ or Cmd+K)" aria-label="Search and commands">
-        <i class="fas fa-search"></i>
+    <!-- Settings gear button -->
+    <button class="settings-fab" id="settings-fab" title="Settings" aria-label="Open settings">
+        <i class="fas fa-cog" id="settings-fab-icon"></i>
     </button>
 
-    <button class="theme-toggle" id="theme-toggle" title="Toggle light/dark mode" aria-label="Toggle light and dark mode">
-        <i class="fas fa-sun" id="theme-icon"></i>
-    </button>
-
-    <button class="dyslexic-toggle" id="dyslexic-toggle" title="Toggle dyslexic-friendly font">
-        <i class="fas fa-font"></i> <span id="dyslexic-label">Aa</span>
-    </button>
+    <!-- Settings panel -->
+    <div class="settings-panel" id="settings-panel">
+        <div class="settings-panel-header">
+            <span class="settings-panel-title">Settings</span>
+            <button class="settings-panel-close" id="settings-panel-close" aria-label="Close settings">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="settings-panel-body">
+            <button class="settings-row" id="settings-theme" aria-label="Toggle light and dark mode">
+                <span class="settings-row-icon"><i class="fas fa-sun" id="theme-icon"></i></span>
+                <span class="settings-row-label" id="theme-label">Dark Mode</span>
+                <span class="settings-row-toggle" id="theme-toggle-indicator"></span>
+            </button>
+            <button class="settings-row" id="settings-dyslexic" aria-label="Toggle dyslexic-friendly font">
+                <span class="settings-row-icon"><i class="fas fa-font"></i></span>
+                <span class="settings-row-label">Dyslexic-Friendly Font</span>
+                <span class="settings-row-toggle" id="dyslexic-toggle-indicator"></span>
+            </button>
+            <button class="settings-row" id="settings-search" aria-label="Open search">
+                <span class="settings-row-icon"><i class="fas fa-search"></i></span>
+                <span class="settings-row-label">Search & Commands</span>
+                <span class="settings-row-shortcut"><kbd>/</kbd></span>
+            </button>
+        </div>
+    </div>
+    <div class="settings-backdrop" id="settings-backdrop"></div>
 
     <script src="vendor/supabase-js.min.js"></script>
     <script src="js/core/supabase-config.js"></script>
@@ -72,32 +93,75 @@
     </script>
     <script>
     (function() {
-        // Theme toggle (light/dark)
-        var themeBtn = document.getElementById('theme-toggle');
+        var panel = document.getElementById('settings-panel');
+        var fab = document.getElementById('settings-fab');
+        var fabIcon = document.getElementById('settings-fab-icon');
+        var backdrop = document.getElementById('settings-backdrop');
+        var closeBtn = document.getElementById('settings-panel-close');
         var themeIcon = document.getElementById('theme-icon');
+        var themeLabel = document.getElementById('theme-label');
+        var themeIndicator = document.getElementById('theme-toggle-indicator');
+        var dyslexicIndicator = document.getElementById('dyslexic-toggle-indicator');
+
+        function isOpen() { return panel.classList.contains('open'); }
+
+        function openPanel() {
+            panel.classList.add('open');
+            backdrop.classList.add('open');
+            fabIcon.className = 'fas fa-times';
+        }
+        function closePanel() {
+            panel.classList.remove('open');
+            backdrop.classList.remove('open');
+            fabIcon.className = 'fas fa-cog';
+        }
+
+        fab.addEventListener('click', function() { isOpen() ? closePanel() : openPanel(); });
+        backdrop.addEventListener('click', closePanel);
+        closeBtn.addEventListener('click', closePanel);
+
+        // --- Theme ---
+        function updateThemeUI() {
+            var isLight = document.body.classList.contains('light-mode');
+            themeIcon.className = isLight ? 'fas fa-moon' : 'fas fa-sun';
+            themeLabel.textContent = isLight ? 'Light Mode' : 'Dark Mode';
+            themeIndicator.classList.toggle('on', !isLight);
+        }
         if (localStorage.getItem('theme') === 'light') {
             document.body.classList.add('light-mode');
-            themeIcon.className = 'fas fa-moon';
         }
-        themeBtn.addEventListener('click', function() {
-            var isLight = document.body.classList.toggle('light-mode');
-            themeIcon.className = isLight ? 'fas fa-moon' : 'fas fa-sun';
+        updateThemeUI();
+
+        document.getElementById('settings-theme').addEventListener('click', function() {
+            document.body.classList.toggle('light-mode');
+            var isLight = document.body.classList.contains('light-mode');
             localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            updateThemeUI();
         });
 
-        // Dyslexic font toggle
-        var toggle = document.getElementById('dyslexic-toggle');
-        var label = document.getElementById('dyslexic-label');
+        // --- Dyslexic font ---
+        function updateDyslexicUI() {
+            var isOn = document.body.classList.contains('dyslexic-font');
+            dyslexicIndicator.classList.toggle('on', isOn);
+        }
         if (localStorage.getItem('dyslexic-font') === 'on') {
             document.body.classList.add('dyslexic-font');
-            toggle.classList.add('active');
-            label.textContent = 'Aa ✓';
         }
-        toggle.addEventListener('click', function() {
-            var isOn = document.body.classList.toggle('dyslexic-font');
-            toggle.classList.toggle('active', isOn);
-            label.textContent = isOn ? 'Aa ✓' : 'Aa';
+        updateDyslexicUI();
+
+        document.getElementById('settings-dyslexic').addEventListener('click', function() {
+            document.body.classList.toggle('dyslexic-font');
+            var isOn = document.body.classList.contains('dyslexic-font');
             localStorage.setItem('dyslexic-font', isOn ? 'on' : 'off');
+            updateDyslexicUI();
+        });
+
+        // --- Search shortcut ---
+        document.getElementById('settings-search').addEventListener('click', function() {
+            closePanel();
+            setTimeout(function() {
+                if (typeof CommandPalette !== 'undefined') CommandPalette.open();
+            }, 200);
         });
     })();
     </script>
