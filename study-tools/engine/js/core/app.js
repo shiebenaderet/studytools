@@ -113,6 +113,10 @@ const StudyEngine = {
             nav.appendChild(btn);
         });
 
+        // Leaderboard button
+        const lbBtn = this.createNavButton('Leaderboard', 'leaderboard', () => this.showLeaderboard());
+        nav.appendChild(lbBtn);
+
         // Tools button
         const toolsBtn = this.createNavButton('Tools', 'tools', () => this.showTools());
         nav.appendChild(toolsBtn);
@@ -124,7 +128,7 @@ const StudyEngine = {
         btn.dataset.group = id;
 
         // Add icon if available
-        const icons = { home: 'fas fa-home', study: 'fas fa-book', practice: 'fas fa-clipboard-check', games: 'fas fa-gamepad', tools: 'fas fa-tools' };
+        const icons = { home: 'fas fa-home', study: 'fas fa-book', practice: 'fas fa-clipboard-check', games: 'fas fa-gamepad', leaderboard: 'fas fa-trophy', tools: 'fas fa-tools' };
         if (icons[id]) {
             const icon = document.createElement('i');
             icon.className = icons[id];
@@ -357,6 +361,27 @@ const StudyEngine = {
         this.renderHomeStats();
     },
 
+    showLeaderboard() {
+        document.body.classList.remove('activity-active');
+        var topbar = document.getElementById('activity-topbar');
+        if (topbar) topbar.textContent = '';
+        if (this.activeActivity && this.activities[this.activeActivity]) {
+            this.activities[this.activeActivity].deactivate?.();
+            this.activeActivity = null;
+        }
+        document.getElementById('sub-nav').classList.remove('active');
+        document.getElementById('home-section').classList.remove('active');
+        const container = document.getElementById('activity-container');
+        container.classList.add('active');
+        container.textContent = '';
+
+        if (typeof LeaderboardManager !== 'undefined') {
+            // Submit latest score before showing
+            LeaderboardManager.submitScore();
+            LeaderboardManager.renderPage(container);
+        }
+    },
+
     showTools() {
         document.body.classList.remove('activity-active');
         var topbar = document.getElementById('activity-topbar');
@@ -413,15 +438,9 @@ const StudyEngine = {
             ProgressManager.renderHomeStats(this.config);
         }
 
-        // Render achievements inside the stats container
-        var statsContainer = document.getElementById('stats-container');
-        if (statsContainer && typeof AchievementManager !== 'undefined') {
-            var existingAch = statsContainer.querySelector('.ach-section');
-            if (existingAch) existingAch.remove();
-            var achSection = document.createElement('div');
-            achSection.className = 'ach-section';
-            AchievementManager.renderBadges(achSection);
-            statsContainer.appendChild(achSection);
+        // Auto-submit leaderboard score
+        if (typeof LeaderboardManager !== 'undefined') {
+            LeaderboardManager.submitScore();
         }
 
         const homeCards = document.getElementById('home-cards');

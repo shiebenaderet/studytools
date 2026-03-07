@@ -32,6 +32,10 @@ const ProgressManager = {
             ...data,
             updatedAt: Date.now()
         });
+        // Auto-submit to leaderboard on every save
+        if (typeof LeaderboardManager !== 'undefined') {
+            LeaderboardManager.submitScore();
+        }
     },
 
     // --- Streaks ---

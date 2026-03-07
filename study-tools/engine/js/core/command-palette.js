@@ -596,9 +596,19 @@ const CommandPalette = {
         tableSection.style.marginTop = '24px';
         container.appendChild(tableSection);
 
+        // Leaderboard management section
+        var leaderboardSection = document.createElement('div');
+        leaderboardSection.id = 'teacher-leaderboard';
+        container.appendChild(leaderboardSection);
+
         await this.loadClasses(classSelect);
         classSelect.addEventListener('change', () => this.loadDashboardData(container));
         await this.loadDashboardData(container);
+
+        // Load leaderboard management
+        if (typeof LeaderboardManager !== 'undefined') {
+            await LeaderboardManager.renderTeacherSection(leaderboardSection);
+        }
     },
 
     async loadClasses(select) {

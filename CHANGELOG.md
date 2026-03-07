@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0] - 2026-03-06
+
+### Added
+- **Leaderboard system** — New "Leaderboard" nav tab with three sub-tabs:
+  - **Top Students** — Individual rankings with podium visualization for top 3 (gold/silver/bronze), score breakdown (vocab × 10 + test score + study minutes)
+  - **Class Battle** — Class-vs-class rankings with animated horizontal bar chart, ranked by average student score
+  - **Achievements** — Moved from home page to leaderboard tab to reduce clutter
+- **Teacher leaderboard management** — In teacher dashboard:
+  - Approve individual students or "Approve All" for the leaderboard
+  - Remove individual entries
+  - Reset entire leaderboard with confirmation
+  - Status badges (Pending/Approved) with class and score details
+- **Auto-score submission** — Scores automatically submitted to Supabase on every activity save and when visiting the leaderboard
+- **"Top Student" achievement** — New badge for reaching #1 on the leaderboard
+- **`leaderboard` database table** — `student_id, unit_id, score, vocab_mastered, best_test_score, study_time_seconds, approved` with RLS policies
+
+### Changed
+- Achievements removed from home page stats container (now in Leaderboard tab)
+- Nav bar now includes Leaderboard between Games and Tools
+
 ## [2.5.0] - 2026-03-06
 
 ### Changed

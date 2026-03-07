@@ -2997,6 +2997,259 @@ body.timer-active header {
     flex-shrink: 0;
 }
 
+/* LEADERBOARD */
+.lb-tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 16px;
+    background: var(--bg-surface);
+    padding: 4px;
+    border-radius: var(--radius-sm);
+}
+
+.lb-tab {
+    flex: 1;
+    padding: 10px 14px;
+    border: none;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.85em;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: var(--font-body);
+}
+
+.lb-tab:hover {
+    color: var(--text-primary);
+    background: var(--bg-elevated);
+}
+
+.lb-tab.active {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+}
+
+.lb-tab i {
+    margin-right: 4px;
+}
+
+.lb-content {
+    min-height: 200px;
+}
+
+/* Podium — top 3 visual */
+.lb-podium {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    padding: 16px 0;
+}
+
+.lb-podium-place {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: var(--radius-md);
+    padding: 16px 12px 12px;
+    border: 2px solid var(--border-card);
+    background: var(--bg-elevated);
+    transition: transform 0.2s;
+    width: 120px;
+}
+
+.lb-podium-place:hover {
+    transform: translateY(-4px);
+}
+
+.lb-place-1 {
+    border-color: #f59e0b;
+    background: linear-gradient(180deg, rgba(245,158,11,0.12) 0%, var(--bg-elevated) 100%);
+    padding-bottom: 20px;
+    min-height: 160px;
+    order: 2;
+}
+
+.lb-place-2 {
+    border-color: #9ca3af;
+    background: linear-gradient(180deg, rgba(156,163,175,0.1) 0%, var(--bg-elevated) 100%);
+    min-height: 130px;
+    order: 1;
+}
+
+.lb-place-3 {
+    border-color: #d97706;
+    background: linear-gradient(180deg, rgba(217,119,6,0.08) 0%, var(--bg-elevated) 100%);
+    min-height: 110px;
+    order: 3;
+}
+
+.lb-medal {
+    font-size: 2em;
+    margin-bottom: 8px;
+}
+
+.lb-podium-name {
+    font-weight: 700;
+    font-size: 0.9em;
+    color: var(--text-primary);
+    text-align: center;
+    word-break: break-word;
+    margin-bottom: 4px;
+}
+
+.lb-podium-score {
+    font-size: 0.8em;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+/* Ranking list */
+.lb-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.lb-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-card);
+    border-radius: var(--radius-sm);
+    transition: border-color 0.2s;
+}
+
+.lb-row:hover {
+    border-color: var(--primary);
+}
+
+.lb-row-me {
+    border-color: var(--accent);
+    background: linear-gradient(90deg, rgba(245,158,11,0.08) 0%, var(--bg-elevated) 30%);
+}
+
+.lb-rank {
+    flex-shrink: 0;
+    width: 36px;
+    font-weight: 800;
+    font-size: 0.9em;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+.lb-name {
+    flex: 1;
+    font-weight: 600;
+    font-size: 0.95em;
+    color: var(--text-primary);
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.lb-you-tag {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 1px 6px;
+    border-radius: 6px;
+    background: var(--accent);
+    color: white;
+    font-size: 0.65em;
+    font-weight: 700;
+    vertical-align: middle;
+}
+
+.lb-stats {
+    display: flex;
+    gap: 12px;
+    font-size: 0.78em;
+    color: var(--text-muted);
+}
+
+.lb-score {
+    flex-shrink: 0;
+    font-weight: 800;
+    font-size: 0.95em;
+    color: var(--primary);
+    min-width: 60px;
+    text-align: right;
+}
+
+.lb-class-row {
+    border-left: 3px solid var(--primary);
+}
+
+/* Class battle bar chart */
+.lb-class-bar-wrap {
+    margin-bottom: 20px;
+}
+
+.lb-class-bar-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.lb-class-bar-label {
+    flex-shrink: 0;
+    width: 100px;
+    font-weight: 600;
+    font-size: 0.85em;
+    color: var(--text-primary);
+    text-align: right;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.lb-class-bar-track {
+    flex: 1;
+    height: 28px;
+    background: var(--bg-surface);
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid var(--border-subtle);
+}
+
+.lb-class-bar-fill {
+    height: 100%;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 10px;
+    font-size: 0.75em;
+    font-weight: 700;
+    color: white;
+    min-width: 40px;
+    transition: width 0.6s ease;
+}
+
+.lb-class-bar-fill.bar-1 { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+.lb-class-bar-fill.bar-2 { background: linear-gradient(90deg, var(--primary-bold), var(--primary)); }
+.lb-class-bar-fill.bar-3 { background: linear-gradient(90deg, #10b981, #34d399); }
+.lb-class-bar-fill.bar-4 { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
+.lb-class-bar-fill.bar-5 { background: linear-gradient(90deg, #ef4444, #f87171); }
+.lb-class-bar-fill.bar-6 { background: linear-gradient(90deg, #ec4899, #f472b6); }
+
+@media (max-width: 600px) {
+    .lb-podium-place { width: 90px; padding: 12px 8px 8px; }
+    .lb-medal { font-size: 1.5em; }
+    .lb-podium-name { font-size: 0.8em; }
+    .lb-stats { display: none; }
+    .lb-class-bar-label { width: 70px; font-size: 0.75em; }
+}
+
 /* DYSLEXIC FONT TOGGLE */
 .cmd-palette-btn {
     position: fixed;

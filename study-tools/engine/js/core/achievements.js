@@ -21,7 +21,8 @@ var AchievementManager = {
         { id: 'book-tap', name: 'Curious Mind', description: 'Found the hidden header secret.', icon: 'fas fa-eye', unlocked: false, unlockedAt: null, secret: true },
         { id: 'we-the-people', name: 'We The People', description: 'Typed the famous preamble opening.', icon: 'fas fa-scroll', unlocked: false, unlockedAt: null, secret: true },
         { id: 'eagle-eye', name: 'Eagle Eye', description: 'Found the hidden eagle.', icon: 'fas fa-dove', unlocked: false, unlockedAt: null, secret: true },
-        { id: 'midnight-scholar', name: 'Midnight Scholar', description: 'Studying at midnight! True dedication.', icon: 'fas fa-hat-wizard', unlocked: false, unlockedAt: null, secret: true }
+        { id: 'midnight-scholar', name: 'Midnight Scholar', description: 'Studying at midnight! True dedication.', icon: 'fas fa-hat-wizard', unlocked: false, unlockedAt: null, secret: true },
+        { id: 'top-student', name: 'Top Student', description: 'Reached #1 on the leaderboard!', icon: 'fas fa-crown', unlocked: false, unlockedAt: null }
     ],
 
     unitId: null,

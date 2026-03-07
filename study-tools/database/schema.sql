@@ -34,6 +34,23 @@ CREATE TABLE sessions (
     activities_used text[] DEFAULT '{}'
 );
 
+CREATE TABLE leaderboard (
+    id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+    student_id uuid REFERENCES students(id) ON DELETE CASCADE,
+    unit_id text NOT NULL,
+    score integer NOT NULL DEFAULT 0,
+    vocab_mastered integer NOT NULL DEFAULT 0,
+    best_test_score integer,
+    study_time_seconds integer NOT NULL DEFAULT 0,
+    approved boolean NOT NULL DEFAULT false,
+    created_at timestamp DEFAULT now(),
+    updated_at timestamp DEFAULT now(),
+    UNIQUE(student_id, unit_id)
+);
+
+CREATE INDEX idx_leaderboard_unit_approved ON leaderboard(unit_id, approved);
+CREATE INDEX idx_leaderboard_score ON leaderboard(score DESC);
+
 -- Row Level Security
 ALTER TABLE classes ENABLE ROW LEVEL SECURITY;
 ALTER TABLE students ENABLE ROW LEVEL SECURITY;
@@ -45,3 +62,6 @@ CREATE POLICY "Anyone can register" ON students FOR INSERT WITH CHECK (true);
 CREATE POLICY "Students read own data" ON students FOR SELECT USING (true);
 CREATE POLICY "Students manage own progress" ON progress FOR ALL USING (true);
 CREATE POLICY "Students manage own sessions" ON sessions FOR ALL USING (true);
+
+ALTER TABLE leaderboard ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Leaderboard open access" ON leaderboard FOR ALL USING (true);
