@@ -613,6 +613,7 @@ const StudyTools = {
         collapseIcon.className = 'fas fa-chevron-down';
         collapseIcon.id = 'music-collapse-icon';
         collapseBtn.appendChild(collapseIcon);
+        collapseBtn.setAttribute('aria-label', 'Collapse music player');
         collapseBtn.addEventListener('click', () => {
             const body = document.getElementById('music-body');
             const icon = document.getElementById('music-collapse-icon');
@@ -628,6 +629,7 @@ const StudyTools = {
         const closeIcon = document.createElement('i');
         closeIcon.className = 'fas fa-times';
         closeBtn.appendChild(closeIcon);
+        closeBtn.setAttribute('aria-label', 'Close music player');
         closeBtn.addEventListener('click', () => {
             if (this._musicAudio) {
                 this._musicAudio.pause();
@@ -719,6 +721,7 @@ const StudyTools = {
         const prevIcon = document.createElement('i');
         prevIcon.className = 'fas fa-backward';
         prevBtn.appendChild(prevIcon);
+        prevBtn.setAttribute('aria-label', 'Previous track');
         prevBtn.addEventListener('click', () => this._musicSkip(-1));
 
         const playBtn = document.createElement('button');
@@ -728,6 +731,7 @@ const StudyTools = {
         playIcon.className = 'fas fa-play';
         playIcon.id = 'music-play-icon';
         playBtn.appendChild(playIcon);
+        playBtn.setAttribute('aria-label', 'Play or pause');
         playBtn.addEventListener('click', () => this._musicTogglePlay());
 
         const nextBtn = document.createElement('button');
@@ -735,6 +739,7 @@ const StudyTools = {
         const nextIcon = document.createElement('i');
         nextIcon.className = 'fas fa-forward';
         nextBtn.appendChild(nextIcon);
+        nextBtn.setAttribute('aria-label', 'Next track');
         nextBtn.addEventListener('click', () => this._musicSkip(1));
 
         controls.appendChild(prevBtn);
