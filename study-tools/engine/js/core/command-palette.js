@@ -526,7 +526,11 @@ const CommandPalette = {
         backBtn.appendChild(document.createTextNode(' Back to Student View'));
         backBtn.addEventListener('click', () => {
             this.teacherMode = false;
-            StudyEngine.showHome();
+            if (StudyEngine.config) {
+                StudyEngine.showHome();
+            } else {
+                window.location.href = '../';
+            }
         });
         container.appendChild(backBtn);
 
