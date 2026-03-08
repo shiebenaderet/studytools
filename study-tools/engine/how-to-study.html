@@ -488,6 +488,23 @@
             try { unit = new URLSearchParams(new URL(document.referrer).search).get('unit'); } catch (e) {}
         }
         if (unit) backLink.href = 'index.html?unit=' + encodeURIComponent(unit);
+
+        // If we came from the main app (has referrer from same origin), use history.back() to preserve their state
+        var cameFromApp = false;
+        if (document.referrer) {
+            try {
+                var ref = new URL(document.referrer);
+                if (ref.origin === window.location.origin && ref.pathname.indexOf('index.html') !== -1) {
+                    cameFromApp = true;
+                }
+            } catch (e) {}
+        }
+        if (cameFromApp) {
+            backLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                history.back();
+            });
+        }
     })();
 
     function toggleStrategy(headerEl) {

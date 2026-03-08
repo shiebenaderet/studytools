@@ -405,6 +405,11 @@ const ProgressManager = {
 
             // Supabase registration (mirrors login() logic)
             var afterLogin = function() {
+                // Redirect first-time students to How to Study page
+                if (!localStorage.getItem('how-to-study-seen') && typeof StudyEngine !== 'undefined' && StudyEngine.config) {
+                    StudyEngine.redirectToHowToStudy();
+                    return;
+                }
                 // Fade out
                 overlay.classList.add('fade-out');
                 setTimeout(function() {

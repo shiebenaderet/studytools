@@ -665,6 +665,46 @@ const StudyEngine = {
 
     showLoginModal() {
         ProgressManager.showLoginModal();
+    },
+
+    // Redirect new students to How to Study page after first sign-in
+    redirectToHowToStudy() {
+        var unitParam = this.config ? this.config.unit.id : '';
+        var suffix = unitParam ? '?unit=' + encodeURIComponent(unitParam) : '';
+        localStorage.setItem('how-to-study-seen', '1');
+        window.location.href = 'how-to-study.html' + suffix;
+    },
+
+    // Show a rare nudge toast pointing to How to Study (once per session, only if badge not earned)
+    _scheduleHowToStudyNudge() {
+        if (!this.config) return;
+        var unitId = this.config.unit.id;
+
+        // Don't nudge if they already earned the badge
+        var achKey = 'achievements-' + unitId;
+        try {
+            var achData = JSON.parse(localStorage.getItem(achKey) || '{}');
+            if (achData['study-smart']) return;
+        } catch (e) { return; }
+
+        // Don't nudge if already seen How to Study page
+        if (localStorage.getItem('how-to-study-seen')) return;
+
+        // Show nudge after 90 seconds of using the app
+        var self = this;
+        setTimeout(function() {
+            // Re-check badge in case they earned it in the meantime
+            try {
+                var fresh = JSON.parse(localStorage.getItem(achKey) || '{}');
+                if (fresh['study-smart']) return;
+            } catch (e) { return; }
+
+            if (typeof StudyUtils !== 'undefined' && StudyUtils.showToast) {
+                StudyUtils.showToast('Tip: Check out "How to Study" to earn a badge and learn study strategies that actually work!', 'info', 8000);
+            }
+            // Mark as nudged so we don't keep showing it
+            localStorage.setItem('how-to-study-seen', '1');
+        }, 90000);
     }
 };
 
@@ -680,6 +720,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // Show welcome screen on first visit (after app has loaded)
         if (!ProgressManager.studentInfo) {
             ProgressManager.showWelcomeScreen();
+        } else {
+            // Schedule a rare nudge to How to Study page (if badge not yet earned)
+            StudyEngine._scheduleHowToStudyNudge();
         }
     });
 
