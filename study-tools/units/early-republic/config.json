@@ -458,61 +458,61 @@
         {
             "id": 1,
             "title": "Washington's Inauguration",
-            "year": "1789",
+            "year": "April 1789",
             "description": "George Washington takes the oath of office as the first U.S. President"
         },
         {
             "id": 2,
             "title": "Bill of Rights Ratified",
-            "year": "1791",
+            "year": "December 1791",
             "description": "First ten amendments to the Constitution are officially adopted"
         },
         {
             "id": 3,
             "title": "Whiskey Rebellion",
-            "year": "1794",
+            "year": "July 1794",
             "description": "Farmers revolt against federal whiskey tax; Washington sends the army"
         },
         {
             "id": 4,
             "title": "Jay's Treaty",
-            "year": "1794",
+            "year": "November 1794",
             "description": "Agreement with Britain to remove forts, but limited American trade"
         },
         {
             "id": 5,
             "title": "XYZ Affair",
-            "year": "1797",
+            "year": "October 1797",
             "description": "French agents demand bribes from American diplomats, outraging the nation"
         },
         {
             "id": 6,
             "title": "Election of 1800",
-            "year": "1800",
+            "year": "December 1800",
             "description": "First peaceful transfer of power between political parties; Jefferson wins"
         },
         {
             "id": 7,
             "title": "Marbury v. Madison",
-            "year": "1803",
+            "year": "February 1803",
             "description": "Supreme Court establishes the power of judicial review"
         },
         {
             "id": 8,
             "title": "Louisiana Purchase",
-            "year": "1803",
+            "year": "April 1803",
             "description": "U.S. buys the Louisiana Territory from France, doubling the nation's size"
         },
         {
             "id": 9,
             "title": "War of 1812 Begins",
-            "year": "1812",
+            "year": "June 1812",
             "description": "U.S. declares war on Britain over impressment and frontier conflicts"
         },
         {
             "id": 10,
             "title": "Monroe Doctrine",
-            "year": "1823",
+            "year": "December 1823",
             "description": "President Monroe warns Europe against further colonization in the Americas"
         }
     ],

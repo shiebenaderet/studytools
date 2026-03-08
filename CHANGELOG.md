@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [6.0.0] - 2026-03-07
 
+### Changed
+- **Timeline events now include months** — All 10 events updated with historically verified months (e.g., "1794" → "July 1794" and "November 1794") so students can distinguish events that share the same year
+
 ### Fixed
 - **Timeline: remove placed events** — Tap a placed event then tap the events area to return it to the pool
 - **Timeline: shuffle button** — New shuffle button to re-randomize the event pool order
