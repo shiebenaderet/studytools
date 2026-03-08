@@ -817,6 +817,30 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Load version info and edit profile link
+    // Auto-update: bust cache on version change
+    fetch('version.json?_=' + Date.now())
+        .then(r => r.ok ? r.json() : null)
+        .then(v => {
+            if (!v) return;
+            var storedVersion = localStorage.getItem('st_app_version');
+            if (storedVersion && storedVersion !== v.version) {
+                localStorage.setItem('st_app_version', v.version);
+                // Clear service worker caches and reload
+                if ('caches' in window) {
+                    caches.keys().then(function(keys) {
+                        return Promise.all(keys.map(function(k) { return caches.delete(k); }));
+                    }).then(function() {
+                        window.location.reload();
+                    });
+                } else {
+                    window.location.reload();
+                }
+                return;
+            }
+            localStorage.setItem('st_app_version', v.version);
+        })
+        .catch(function() {});
+
     fetch('version.json')
         .then(r => r.ok ? r.json() : null)
         .then(v => {
