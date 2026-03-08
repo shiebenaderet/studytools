@@ -46,7 +46,7 @@
             },
             "sourceNote": "Adapted from American Yawp MS Ch. 6 and TCI Ch. 11, Section 1",
             "image": {
-              "src": "../../units/early-republic/images/vocab/inauguration.jpg",
+              "src": "../units/early-republic/images/vocab/inauguration.jpg",
               "caption": "Washington's inauguration at Federal Hall, New York City, April 30, 1789.",
               "float": "right"
             }
@@ -80,7 +80,7 @@
             },
             "sourceNote": "Adapted from TCI Ch. 11, Sections 1-2 and American Yawp MS Ch. 6",
             "image": {
-              "src": "../../units/early-republic/images/vocab/cabinet.jpg",
+              "src": "../units/early-republic/images/vocab/cabinet.jpg",
               "caption": "Washington meets with his Cabinet — the group of advisors he created to help run the executive branch."
             }
           },
@@ -111,7 +111,7 @@
             },
             "sourceNote": "Adapted from TCI Ch. 11, Sections 3-4 and American Yawp MS Ch. 6",
             "image": {
-              "src": "../../units/early-republic/images/vocab/first-bank.jpg",
+              "src": "../units/early-republic/images/vocab/first-bank.jpg",
               "caption": "The First Bank of the United States in Philadelphia — Hamilton's plan to manage the nation's money.",
               "float": "right"
             }
@@ -136,7 +136,7 @@
             },
             "sourceNote": "Adapted from TCI Ch. 11, Sections 3-4 and American Yawp MS Ch. 6",
             "image": {
-              "src": "../../units/early-republic/images/portraits/hamilton.jpg",
+              "src": "../units/early-republic/images/portraits/hamilton.jpg",
               "caption": "Alexander Hamilton (left) and Thomas Jefferson had fundamentally different visions for America's future.",
               "float": "left"
             }
@@ -160,7 +160,7 @@
             },
             "sourceNote": "Adapted from TCI Ch. 11, Section 2 and American Yawp MS Ch. 6",
             "image": {
-              "src": "../../units/early-republic/images/textbook/whiskey-rebellion.jpg",
+              "src": "../units/early-republic/images/textbook/whiskey-rebellion.jpg",
               "caption": "Washington reviews troops before marching to suppress the Whiskey Rebellion, 1794.",
               "credit": "Painting by Frederick Kemmelmeyer"
             }
@@ -191,7 +191,7 @@
             },
             "sourceNote": "Adapted from TCI Ch. 11 and American Yawp MS Ch. 6",
             "image": {
-              "src": "../../units/early-republic/images/vocab/john-jay.jpg",
+              "src": "../units/early-republic/images/vocab/john-jay.jpg",
               "caption": "John Jay, the first Chief Justice, negotiated a controversial treaty with Britain in 1794.",
               "float": "right"
             }
@@ -215,7 +215,7 @@
             },
             "sourceNote": "Adapted from TCI Ch. 11, Section 5 and American Yawp MS Ch. 6",
             "image": {
-              "src": "../../units/early-republic/images/vocab/xyz-affair.jpg",
+              "src": "../units/early-republic/images/vocab/xyz-affair.jpg",
               "caption": "A political cartoon depicting the XYZ Affair — French agents demanding bribes from American diplomats.",
               "float": "left"
             }
@@ -244,7 +244,7 @@
             },
             "sourceNote": "Summary of Segment 1 content",
             "image": {
-              "src": "../../units/early-republic/images/portraits/washington.jpg",
+              "src": "../units/early-republic/images/portraits/washington.jpg",
               "caption": "George Washington set the precedents that shaped the American presidency for centuries."
             }
           }
@@ -277,7 +277,7 @@
             },
             "sourceNote": "Adapted from TCI Ch. 11, Sections 3-5 and American Yawp MS Ch. 6",
             "image": {
-              "src": "../../units/early-republic/images/sources/chapter_parties.png",
+              "src": "../units/early-republic/images/sources/chapter_parties.png",
               "caption": "The birth of America's first political parties grew out of deep disagreements about the nation's future."
             }
           },
@@ -309,7 +309,7 @@
             },
             "sourceNote": "Adapted from TCI Ch. 11, Sections 3-4 and American Yawp MS Ch. 6",
             "image": {
-              "src": "../../units/early-republic/images/vocab/constitution.jpg",
+              "src": "../units/early-republic/images/vocab/constitution.jpg",
               "caption": "The Constitution — Federalists and Democratic-Republicans read it very differently.",
               "float": "right"
             }
@@ -334,7 +334,7 @@
             },
             "sourceNote": "Adapted from American Yawp MS Ch. 6 and class primary source activity",
             "image": {
-              "src": "../../units/early-republic/images/vocab/declaration.jpg",
+              "src": "../units/early-republic/images/vocab/declaration.jpg",
               "caption": "The Declaration of Independence — a primary source that shaped American identity and ideals.",
               "float": "left"
             }
@@ -363,7 +363,7 @@
             },
             "sourceNote": "Adapted from TCI Ch. 11, Sections 6-7 and American Yawp MS Ch. 6",
             "image": {
-              "src": "../../units/early-republic/images/textbook/jefferson-inauguration.jpg",
+              "src": "../units/early-republic/images/textbook/jefferson-inauguration.jpg",
               "caption": "Thomas Jefferson's inauguration, 1801 — the first peaceful transfer of power between political rivals.",
               "credit": "Wikimedia Commons"
             }
@@ -392,7 +392,7 @@
             },
             "sourceNote": "Summary of Segment 2 content",
             "image": {
-              "src": "../../units/early-republic/images/vocab/election-day.jpg",
+              "src": "../units/early-republic/images/vocab/election-day.jpg",
               "caption": "Early American elections looked nothing like today — but they set the foundation for democratic traditions."
             }
           }
@@ -433,7 +433,7 @@
             },
             "sourceNote": "Adapted from American Yawp MS Ch. 7 and TCI Ch. 11",
             "image": {
-              "src": "../../units/early-republic/images/vocab/john-marshall.jpg",
+              "src": "../units/early-republic/images/vocab/john-marshall.jpg",
               "caption": "Chief Justice John Marshall established judicial review in Marbury v. Madison (1803).",
               "float": "right"
             }
@@ -458,7 +458,7 @@
             },
             "sourceNote": "Adapted from American Yawp MS Ch. 7 and TCI Ch. 12",
             "image": {
-              "src": "../../units/early-republic/images/textbook/battle-vertieres.jpg",
+              "src": "../units/early-republic/images/textbook/battle-vertieres.jpg",
               "caption": "The Battle of Vertières, 1803 — the final battle of the Haitian Revolution that changed the course of American history.",
               "credit": "Wikimedia Commons"
             }
@@ -482,7 +482,7 @@
             },
             "sourceNote": "Adapted from American Yawp MS Ch. 7 and TCI Ch. 12",
             "image": {
-              "src": "../../units/early-republic/images/textbook/louisiana-purchase-map.png",
+              "src": "../units/early-republic/images/textbook/louisiana-purchase-map.png",
               "caption": "The Louisiana Purchase doubled the size of the United States overnight for just $15 million."
             }
           },
@@ -507,7 +507,7 @@
             },
             "sourceNote": "Adapted from American Yawp MS Ch. 7 and TCI Ch. 12",
             "image": {
-              "src": "../../units/early-republic/images/vocab/lewis-clark.jpg",
+              "src": "../units/early-republic/images/vocab/lewis-clark.jpg",
               "caption": "Lewis and Clark's Corps of Discovery explored the vast Louisiana Territory with the help of Sacagawea.",
               "float": "right"
             }
@@ -541,7 +541,7 @@
             },
             "sourceNote": "Adapted from TCI Ch. 12 and American Yawp MS Ch. 7",
             "image": {
-              "src": "../../units/early-republic/images/vocab/barbary-pirates.jpg",
+              "src": "../units/early-republic/images/vocab/barbary-pirates.jpg",
               "caption": "American ships battle the Barbary Pirates off the coast of North Africa.",
               "float": "left"
             }
@@ -570,7 +570,7 @@
             },
             "sourceNote": "Summary of Segment 3 content",
             "image": {
-              "src": "../../units/early-republic/images/vocab/sacagawea.jpg",
+              "src": "../units/early-republic/images/vocab/sacagawea.jpg",
               "caption": "Sacagawea — the Lemhi Shoshone woman who guided Lewis and Clark across the West."
             }
           }
@@ -611,7 +611,7 @@
             },
             "sourceNote": "Adapted from TCI Ch. 12 and American Yawp MS Ch. 7",
             "image": {
-              "src": "../../units/early-republic/images/portraits/tecumseh.jpg",
+              "src": "../units/early-republic/images/portraits/tecumseh.jpg",
               "caption": "Tecumseh, the Shawnee leader who built a confederation of Native nations to resist American expansion.",
               "float": "right"
             }
@@ -637,7 +637,7 @@
             },
             "sourceNote": "Adapted from TCI Ch. 12 and American Yawp MS Ch. 7",
             "image": {
-              "src": "../../units/early-republic/images/textbook/fort-mchenry-bombardment.jpeg",
+              "src": "../units/early-republic/images/textbook/fort-mchenry-bombardment.jpeg",
               "caption": "The bombardment of Fort McHenry, September 1814 — the battle that inspired 'The Star-Spangled Banner.'",
               "credit": "Wikimedia Commons"
             }
@@ -669,7 +669,7 @@
             },
             "sourceNote": "Adapted from TCI Ch. 12 and American Yawp MS Ch. 7",
             "image": {
-              "src": "../../units/early-republic/images/vocab/erie-canal.jpg",
+              "src": "../units/early-republic/images/vocab/erie-canal.jpg",
               "caption": "The Erie Canal connected the Great Lakes to the Atlantic Ocean, fueling national pride and economic growth.",
               "float": "right"
             }
@@ -702,7 +702,7 @@
             },
             "sourceNote": "Adapted from TCI Ch. 12 and American Yawp MS Ch. 7",
             "image": {
-              "src": "../../units/early-republic/images/vocab/james-monroe.jpg",
+              "src": "../units/early-republic/images/vocab/james-monroe.jpg",
               "caption": "President James Monroe declared that the Western Hemisphere was closed to European colonization.",
               "float": "left"
             }
@@ -731,7 +731,7 @@
             },
             "sourceNote": "Summary of Segment 4 content",
             "image": {
-              "src": "../../units/early-republic/images/vocab/star-spangled-banner.jpg",
+              "src": "../units/early-republic/images/vocab/star-spangled-banner.jpg",
               "caption": "The Star-Spangled Banner — the flag that flew over Fort McHenry and became a symbol of American resilience."
             }
           }
