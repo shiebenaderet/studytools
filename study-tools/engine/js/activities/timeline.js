@@ -3,7 +3,7 @@ StudyEngine.registerActivity({
     name: 'Timeline',
     icon: 'fas fa-history',
     description: 'Put key events in chronological order',
-    category: 'practice',
+    category: 'study',
     requires: ['timelineEvents'],
 
     _attempts: 0,
