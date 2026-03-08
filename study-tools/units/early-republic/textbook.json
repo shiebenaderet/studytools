@@ -44,7 +44,12 @@
               "prompt": "Why do you think Washington was so nervous about being the first president? Can you think of a time when you were the first person to do something and everyone was watching?",
               "hint": "Think about what it feels like when everyone copies what you do..."
             },
-            "sourceNote": "Adapted from American Yawp MS Ch. 6 and TCI Ch. 11, Section 1"
+            "sourceNote": "Adapted from American Yawp MS Ch. 6 and TCI Ch. 11, Section 1",
+            "image": {
+              "src": "../../units/early-republic/images/vocab/inauguration.jpg",
+              "caption": "Washington's inauguration at Federal Hall, New York City, April 30, 1789.",
+              "float": "right"
+            }
           },
           {
             "id": "s1-02-building-cabinet",
@@ -73,7 +78,11 @@
               "correct": 1,
               "explanation": "The Cabinet isn't mentioned in the Constitution. Washington created the practice of meeting regularly with his department heads, and every president since has followed this precedent."
             },
-            "sourceNote": "Adapted from TCI Ch. 11, Sections 1-2 and American Yawp MS Ch. 6"
+            "sourceNote": "Adapted from TCI Ch. 11, Sections 1-2 and American Yawp MS Ch. 6",
+            "image": {
+              "src": "../../units/early-republic/images/vocab/cabinet.jpg",
+              "caption": "Washington meets with his Cabinet — the group of advisors he created to help run the executive branch."
+            }
           },
           {
             "id": "s1-03-hamiltons-plan",
@@ -100,7 +109,12 @@
               "correct": 0,
               "explanation": "Hamilton wanted to pay off all war debts (including states' debts), establish the Bank of the United States, and use tariffs to raise revenue and protect American businesses."
             },
-            "sourceNote": "Adapted from TCI Ch. 11, Sections 3-4 and American Yawp MS Ch. 6"
+            "sourceNote": "Adapted from TCI Ch. 11, Sections 3-4 and American Yawp MS Ch. 6",
+            "image": {
+              "src": "../../units/early-republic/images/vocab/first-bank.jpg",
+              "caption": "The First Bank of the United States in Philadelphia — Hamilton's plan to manage the nation's money.",
+              "float": "right"
+            }
           },
           {
             "id": "s1-04-hamilton-v-jefferson",
@@ -120,7 +134,12 @@
               "prompt": "Hamilton thought ordinary people were too selfish to govern themselves wisely. Jefferson thought farmers had natural good sense. Who do you think was closer to right — and why?",
               "hint": "Think about people you know. Are most people mainly looking out for themselves, or do they try to do the right thing?"
             },
-            "sourceNote": "Adapted from TCI Ch. 11, Sections 3-4 and American Yawp MS Ch. 6"
+            "sourceNote": "Adapted from TCI Ch. 11, Sections 3-4 and American Yawp MS Ch. 6",
+            "image": {
+              "src": "../../units/early-republic/images/portraits/hamilton.jpg",
+              "caption": "Alexander Hamilton (left) and Thomas Jefferson had fundamentally different visions for America's future.",
+              "float": "left"
+            }
           },
           {
             "id": "s1-05-whiskey-rebellion",
@@ -139,7 +158,12 @@
               "prompt": "The Whiskey Rebels said they were doing the same thing the American revolutionaries had done — resisting unfair taxes. Washington said they were breaking the law. Who was right?",
               "hint": "What's the difference between the colonists resisting British taxes and citizens resisting taxes from their own elected government?"
             },
-            "sourceNote": "Adapted from TCI Ch. 11, Section 2 and American Yawp MS Ch. 6"
+            "sourceNote": "Adapted from TCI Ch. 11, Section 2 and American Yawp MS Ch. 6",
+            "image": {
+              "src": "../../units/early-republic/images/textbook/whiskey-rebellion.jpg",
+              "caption": "Washington reviews troops before marching to suppress the Whiskey Rebellion, 1794.",
+              "credit": "Painting by Frederick Kemmelmeyer"
+            }
           },
           {
             "id": "s1-06-foreign-policy",
@@ -165,7 +189,12 @@
               "correct": 1,
               "explanation": "Jay's Treaty got some concessions from Britain, but it failed to address the biggest issue — British ships were still kidnapping American sailors (impressment). Many Americans felt the treaty gave away too much."
             },
-            "sourceNote": "Adapted from TCI Ch. 11 and American Yawp MS Ch. 6"
+            "sourceNote": "Adapted from TCI Ch. 11 and American Yawp MS Ch. 6",
+            "image": {
+              "src": "../../units/early-republic/images/vocab/john-jay.jpg",
+              "caption": "John Jay, the first Chief Justice, negotiated a controversial treaty with Britain in 1794.",
+              "float": "right"
+            }
           },
           {
             "id": "s1-07-adams",
@@ -184,7 +213,12 @@
               "prompt": "Adams chose peace with France even though it probably cost him the next election. Was that brave leadership or bad politics? Can it be both?",
               "hint": "Think about whether doing the right thing and doing the popular thing are always the same..."
             },
-            "sourceNote": "Adapted from TCI Ch. 11, Section 5 and American Yawp MS Ch. 6"
+            "sourceNote": "Adapted from TCI Ch. 11, Section 5 and American Yawp MS Ch. 6",
+            "image": {
+              "src": "../../units/early-republic/images/vocab/xyz-affair.jpg",
+              "caption": "A political cartoon depicting the XYZ Affair — French agents demanding bribes from American diplomats.",
+              "float": "left"
+            }
           },
           {
             "id": "s1-08-summary",
@@ -208,7 +242,11 @@
               "correct": 2,
               "explanation": "Judicial review was established by Chief Justice John Marshall in Marbury v. Madison (1803), during Jefferson's presidency — not by Washington. Washington's precedents included the Cabinet, the two-term tradition, and the simple title 'Mr. President.'"
             },
-            "sourceNote": "Summary of Segment 1 content"
+            "sourceNote": "Summary of Segment 1 content",
+            "image": {
+              "src": "../../units/early-republic/images/portraits/washington.jpg",
+              "caption": "George Washington set the precedents that shaped the American presidency for centuries."
+            }
           }
         ]
       },
@@ -237,7 +275,11 @@
               "prompt": "Washington warned that political parties would tear the country apart. Do you think he was right? What are the good and bad sides of having political parties?",
               "hint": "Think about what would happen if there were no parties at all — would that be better or worse?"
             },
-            "sourceNote": "Adapted from TCI Ch. 11, Sections 3-5 and American Yawp MS Ch. 6"
+            "sourceNote": "Adapted from TCI Ch. 11, Sections 3-5 and American Yawp MS Ch. 6",
+            "image": {
+              "src": "../../units/early-republic/images/sources/chapter_parties.png",
+              "caption": "The birth of America's first political parties grew out of deep disagreements about the nation's future."
+            }
           },
           {
             "id": "s2-02-comparison",
@@ -265,7 +307,12 @@
               "correct": 1,
               "explanation": "Strict construction means the government can ONLY do what the Constitution specifically says. A strict constructionist would argue that if a power isn't listed, the government doesn't have it. A loose constructionist would counter that the 'necessary and proper' clause allows Congress to adapt."
             },
-            "sourceNote": "Adapted from TCI Ch. 11, Sections 3-4 and American Yawp MS Ch. 6"
+            "sourceNote": "Adapted from TCI Ch. 11, Sections 3-4 and American Yawp MS Ch. 6",
+            "image": {
+              "src": "../../units/early-republic/images/vocab/constitution.jpg",
+              "caption": "The Constitution — Federalists and Democratic-Republicans read it very differently.",
+              "float": "right"
+            }
           },
           {
             "id": "s2-03-what-is-american",
@@ -285,7 +332,12 @@
               "prompt": "If someone asked you 'What makes a person American?' right now, what would you say? How is your answer different from what Crèvecoeur would have said in 1782?",
               "hint": "Think about whether it's about where you're born, what you believe, or something else entirely..."
             },
-            "sourceNote": "Adapted from American Yawp MS Ch. 6 and class primary source activity"
+            "sourceNote": "Adapted from American Yawp MS Ch. 6 and class primary source activity",
+            "image": {
+              "src": "../../units/early-republic/images/vocab/declaration.jpg",
+              "caption": "The Declaration of Independence — a primary source that shaped American identity and ideals.",
+              "float": "left"
+            }
           },
           {
             "id": "s2-04-election-1800",
@@ -309,7 +361,12 @@
               "correct": 1,
               "explanation": "The 1801 transfer was remarkable because one political party voluntarily gave up power to its opponent — peacefully, without soldiers or coups. In a world where revolutions usually ended in violence and dictatorship, this was a genuinely revolutionary act."
             },
-            "sourceNote": "Adapted from TCI Ch. 11, Sections 6-7 and American Yawp MS Ch. 6"
+            "sourceNote": "Adapted from TCI Ch. 11, Sections 6-7 and American Yawp MS Ch. 6",
+            "image": {
+              "src": "../../units/early-republic/images/textbook/jefferson-inauguration.jpg",
+              "caption": "Thomas Jefferson's inauguration, 1801 — the first peaceful transfer of power between political rivals.",
+              "credit": "Wikimedia Commons"
+            }
           },
           {
             "id": "s2-05-summary",
@@ -333,7 +390,11 @@
               "correct": 1,
               "explanation": "Democratic-Republicans (Jefferson's party) supported strict construction of the Constitution, an economy based on farming, and closer ties with France. Federalists supported the opposite: loose construction, commerce/industry, and ties with Britain."
             },
-            "sourceNote": "Summary of Segment 2 content"
+            "sourceNote": "Summary of Segment 2 content",
+            "image": {
+              "src": "../../units/early-republic/images/vocab/election-day.jpg",
+              "caption": "Early American elections looked nothing like today — but they set the foundation for democratic traditions."
+            }
           }
         ]
       },
@@ -370,7 +431,12 @@
               "correct": 2,
               "explanation": "Judicial review is the Supreme Court's power to examine laws and decide whether they follow the Constitution. If a law is unconstitutional, the Court can strike it down. This power was established in Marbury v. Madison (1803)."
             },
-            "sourceNote": "Adapted from American Yawp MS Ch. 7 and TCI Ch. 11"
+            "sourceNote": "Adapted from American Yawp MS Ch. 7 and TCI Ch. 11",
+            "image": {
+              "src": "../../units/early-republic/images/vocab/john-marshall.jpg",
+              "caption": "Chief Justice John Marshall established judicial review in Marbury v. Madison (1803).",
+              "float": "right"
+            }
           },
           {
             "id": "s3-02-haiti-napoleon",
@@ -390,7 +456,12 @@
               "prompt": "Why do you think the Haitian Revolution isn't as well known as the American or French Revolutions? What does that tell us about which stories get told — and which don't?",
               "hint": "Think about who writes history books and whose stories they tend to focus on..."
             },
-            "sourceNote": "Adapted from American Yawp MS Ch. 7 and TCI Ch. 12"
+            "sourceNote": "Adapted from American Yawp MS Ch. 7 and TCI Ch. 12",
+            "image": {
+              "src": "../../units/early-republic/images/textbook/battle-vertieres.jpg",
+              "caption": "The Battle of Vertières, 1803 — the final battle of the Haitian Revolution that changed the course of American history.",
+              "credit": "Wikimedia Commons"
+            }
           },
           {
             "id": "s3-03-louisiana-purchase",
@@ -409,7 +480,11 @@
               "prompt": "Jefferson believed the government should ONLY do what the Constitution specifically allows. But when he had the chance to buy Louisiana, he went ahead even though the Constitution doesn't mention buying land. Was he a hypocrite, or was it the right call?",
               "hint": "Think about whether there are times when doing the right thing means breaking your own rules..."
             },
-            "sourceNote": "Adapted from American Yawp MS Ch. 7 and TCI Ch. 12"
+            "sourceNote": "Adapted from American Yawp MS Ch. 7 and TCI Ch. 12",
+            "image": {
+              "src": "../../units/early-republic/images/textbook/louisiana-purchase-map.png",
+              "caption": "The Louisiana Purchase doubled the size of the United States overnight for just $15 million."
+            }
           },
           {
             "id": "s3-04-lewis-and-clark",
@@ -430,7 +505,12 @@
               "prompt": "Lewis and Clark depended on Native American help to survive their journey. But their expedition eventually led to the loss of Native lands. How should we think about that complicated relationship?",
               "hint": "Think about whether something can be helpful to one group and harmful to another at the same time..."
             },
-            "sourceNote": "Adapted from American Yawp MS Ch. 7 and TCI Ch. 12"
+            "sourceNote": "Adapted from American Yawp MS Ch. 7 and TCI Ch. 12",
+            "image": {
+              "src": "../../units/early-republic/images/vocab/lewis-clark.jpg",
+              "caption": "Lewis and Clark's Corps of Discovery explored the vast Louisiana Territory with the help of Sacagawea.",
+              "float": "right"
+            }
           },
           {
             "id": "s3-05-trouble-abroad",
@@ -459,7 +539,12 @@
               "correct": 1,
               "explanation": "The Embargo Act stopped ALL foreign trade, hoping to pressure Britain and France. But it devastated American merchants and farmers without significantly affecting European powers, who could find goods elsewhere. It's widely considered the biggest failure of Jefferson's presidency."
             },
-            "sourceNote": "Adapted from TCI Ch. 12 and American Yawp MS Ch. 7"
+            "sourceNote": "Adapted from TCI Ch. 12 and American Yawp MS Ch. 7",
+            "image": {
+              "src": "../../units/early-republic/images/vocab/barbary-pirates.jpg",
+              "caption": "American ships battle the Barbary Pirates off the coast of North Africa.",
+              "float": "left"
+            }
           },
           {
             "id": "s3-06-summary",
@@ -483,7 +568,11 @@
               "correct": 2,
               "explanation": "When enslaved Haitians defeated Napoleon's army, he abandoned his plans for a North American empire. Needing money for his European wars, Napoleon sold the entire Louisiana Territory to the U.S. — a deal that wouldn't have happened without Haiti's revolution."
             },
-            "sourceNote": "Summary of Segment 3 content"
+            "sourceNote": "Summary of Segment 3 content",
+            "image": {
+              "src": "../../units/early-republic/images/vocab/sacagawea.jpg",
+              "caption": "Sacagawea — the Lemhi Shoshone woman who guided Lewis and Clark across the West."
+            }
           }
         ]
       },
@@ -520,7 +609,12 @@
               "correct": 3,
               "explanation": "France did not invade American territory. The three main causes of the War of 1812 were British impressment, British support for Native American resistance, and the War Hawks' push for military action to defend American honor."
             },
-            "sourceNote": "Adapted from TCI Ch. 12 and American Yawp MS Ch. 7"
+            "sourceNote": "Adapted from TCI Ch. 12 and American Yawp MS Ch. 7",
+            "image": {
+              "src": "../../units/early-republic/images/portraits/tecumseh.jpg",
+              "caption": "Tecumseh, the Shawnee leader who built a confederation of Native nations to resist American expansion.",
+              "float": "right"
+            }
           },
           {
             "id": "s4-02-war-of-1812",
@@ -541,7 +635,12 @@
               "prompt": "The Treaty of Ghent basically returned everything to the way it was before the war. No land was gained or lost. So was the War of 1812 worth fighting? What did America actually gain?",
               "hint": "Think beyond territory — what about national pride, national identity, and what happened to Native American resistance..."
             },
-            "sourceNote": "Adapted from TCI Ch. 12 and American Yawp MS Ch. 7"
+            "sourceNote": "Adapted from TCI Ch. 12 and American Yawp MS Ch. 7",
+            "image": {
+              "src": "../../units/early-republic/images/textbook/fort-mchenry-bombardment.jpeg",
+              "caption": "The bombardment of Fort McHenry, September 1814 — the battle that inspired 'The Star-Spangled Banner.'",
+              "credit": "Wikimedia Commons"
+            }
           },
           {
             "id": "s4-03-nationalism",
@@ -568,7 +667,12 @@
               "correct": 1,
               "explanation": "The Federalist Party opposed the War of 1812 and even discussed secession at the Hartford Convention. When the war ended with a wave of nationalism, the Federalists looked unpatriotic and lost all credibility. The party essentially died out."
             },
-            "sourceNote": "Adapted from TCI Ch. 12 and American Yawp MS Ch. 7"
+            "sourceNote": "Adapted from TCI Ch. 12 and American Yawp MS Ch. 7",
+            "image": {
+              "src": "../../units/early-republic/images/vocab/erie-canal.jpg",
+              "caption": "The Erie Canal connected the Great Lakes to the Atlantic Ocean, fueling national pride and economic growth.",
+              "float": "right"
+            }
           },
           {
             "id": "s4-04-monroe-doctrine",
@@ -596,7 +700,12 @@
               "correct": 0,
               "explanation": "Clay's American System had three parts: (1) a national bank for stable currency, (2) protective tariffs to help American manufacturers compete with foreign imports, and (3) internal improvements like roads and canals to connect the country."
             },
-            "sourceNote": "Adapted from TCI Ch. 12 and American Yawp MS Ch. 7"
+            "sourceNote": "Adapted from TCI Ch. 12 and American Yawp MS Ch. 7",
+            "image": {
+              "src": "../../units/early-republic/images/vocab/james-monroe.jpg",
+              "caption": "President James Monroe declared that the Western Hemisphere was closed to European colonization.",
+              "float": "left"
+            }
           },
           {
             "id": "s4-05-summary",
@@ -620,7 +729,11 @@
               "correct": 1,
               "explanation": "The Treaty of Ghent restored everything to pre-war conditions — no territory changed hands. But the war's true impact was psychological and political: it boosted nationalism, destroyed the Federalist Party, ended Native resistance in the East, and produced lasting symbols of American identity like the Star-Spangled Banner."
             },
-            "sourceNote": "Summary of Segment 4 content"
+            "sourceNote": "Summary of Segment 4 content",
+            "image": {
+              "src": "../../units/early-republic/images/vocab/star-spangled-banner.jpg",
+              "caption": "The Star-Spangled Banner — the flag that flew over Fort McHenry and became a symbol of American resilience."
+            }
           }
         ]
       }

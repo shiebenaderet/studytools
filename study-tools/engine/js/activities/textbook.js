@@ -288,6 +288,32 @@ StudyEngine.registerActivity({
         heading.textContent = section.heading;
         readingArea.appendChild(heading);
 
+        // Section image (figure with caption)
+        if (section.image) {
+            var figure = document.createElement('figure');
+            figure.className = 'tb-figure';
+            if (section.image.float) figure.classList.add('tb-figure-' + section.image.float);
+            var img = document.createElement('img');
+            img.className = 'tb-figure-img';
+            img.src = section.image.src;
+            img.alt = section.image.caption || section.heading;
+            img.loading = 'lazy';
+            figure.appendChild(img);
+            if (section.image.caption) {
+                var figcaption = document.createElement('figcaption');
+                figcaption.className = 'tb-figure-caption';
+                figcaption.textContent = section.image.caption;
+                if (section.image.credit) {
+                    var credit = document.createElement('span');
+                    credit.className = 'tb-figure-credit';
+                    credit.textContent = ' ' + section.image.credit;
+                    figcaption.appendChild(credit);
+                }
+                figure.appendChild(figcaption);
+            }
+            readingArea.appendChild(figure);
+        }
+
         // Source note
         if (section.sourceNote) {
             var sourceNote = document.createElement('div');
