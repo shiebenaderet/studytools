@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.6.0] - 2026-03-07
+
+### Changed
+- **Short Answer redesign** — Replaced dropdown selector with card-based question grid:
+  - Each question shown as a clickable card with topic, preview text, and number badge
+  - Green checkmark on cards with saved responses
+  - Full question view with back button, prev/next navigation
+  - Styled save button and responsive layout
+- **Map Quiz: British North America** — Added non-interactive British territory above the US border for geographic context, with dashed border and label
+- **Map Quiz: Great Lakes** — Added simplified Great Lakes (Superior, Michigan, Huron, Erie, Ontario) as water features
+
 ## [5.5.0] - 2026-03-07
 
 ### Fixed

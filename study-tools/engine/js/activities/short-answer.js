@@ -6,104 +6,137 @@ StudyEngine.registerActivity({
     category: 'practice',
     requires: ['shortAnswerQuestions'],
 
+    _activeIndex: -1,
+
     render(container, config) {
         this.questions = MasteryManager.getUnlockedQuestions(config.unit.id, config, 'shortAnswerQuestions') || [];
         this.unitId = config.unit.id;
+        this._activeIndex = -1;
 
-        const wrapper = document.createElement('div');
+        var wrapper = document.createElement('div');
         wrapper.className = 'short-answer-container';
+        wrapper.id = 'sa-wrapper';
 
-        // Title
-        const title = document.createElement('h2');
-        const icon = document.createElement('i');
-        icon.className = 'fas fa-pen-fancy';
-        title.appendChild(icon);
-        title.appendChild(document.createTextNode(' Short Answer Practice'));
-        wrapper.appendChild(title);
+        // Question cards grid
+        var grid = document.createElement('div');
+        grid.className = 'sa-card-grid';
+        grid.id = 'sa-card-grid';
 
-        // Instructions
-        const instructions = document.createElement('div');
-        instructions.className = 'short-answer-instructions';
-        instructions.textContent = 'Select a question below, review the rubric to understand what to include, then write your response. Use the sentence starters and exemplar for guidance.';
-        wrapper.appendChild(instructions);
+        var self = this;
+        this.questions.forEach(function(q, i) {
+            var saved = ProgressManager.getActivityProgress(self.unitId, 'short-answer-' + i);
+            var completed = saved && saved.answer && saved.answer.trim().length > 0;
 
-        // Question selector
-        const selectLabel = document.createElement('label');
-        selectLabel.className = 'sa-select-label';
-        selectLabel.setAttribute('for', 'sa-question-select');
-        selectLabel.textContent = 'Choose a question:';
-        wrapper.appendChild(selectLabel);
+            var card = document.createElement('button');
+            card.className = 'sa-question-card';
+            card.dataset.index = i;
+            if (completed) card.classList.add('sa-completed');
 
-        const select = document.createElement('select');
-        select.className = 'filter-select';
-        select.id = 'sa-question-select';
+            var topRow = document.createElement('div');
+            topRow.className = 'sa-card-top';
 
-        const defaultOption = document.createElement('option');
-        defaultOption.value = '';
-        defaultOption.textContent = '-- Choose a question --';
-        select.appendChild(defaultOption);
+            var num = document.createElement('span');
+            num.className = 'sa-card-num';
+            num.textContent = (i + 1);
+            topRow.appendChild(num);
 
-        this.questions.forEach((q, i) => {
-            const option = document.createElement('option');
-            option.value = i;
-            option.textContent = q.topic + ': ' + q.question.substring(0, 80) + (q.question.length > 80 ? '...' : '');
-            select.appendChild(option);
-        });
-
-        select.addEventListener('change', () => {
-            const val = select.value;
-            if (val !== '') {
-                this.loadQuestion(parseInt(val, 10));
-            } else {
-                const content = document.getElementById('sa-content-area');
-                if (content) content.textContent = '';
+            if (completed) {
+                var check = document.createElement('i');
+                check.className = 'fas fa-check-circle sa-card-check';
+                topRow.appendChild(check);
             }
+
+            card.appendChild(topRow);
+
+            var topic = document.createElement('div');
+            topic.className = 'sa-card-topic';
+            topic.textContent = q.topic || 'Question ' + (i + 1);
+            card.appendChild(topic);
+
+            var preview = document.createElement('div');
+            preview.className = 'sa-card-preview';
+            preview.textContent = q.question.length > 90 ? q.question.substring(0, 90) + '...' : q.question;
+            card.appendChild(preview);
+
+            card.addEventListener('click', function() {
+                self.openQuestion(i);
+            });
+
+            grid.appendChild(card);
         });
 
-        wrapper.appendChild(select);
+        wrapper.appendChild(grid);
 
-        // Content area (populated when question is selected)
-        const contentArea = document.createElement('div');
+        // Content area (shows when question is selected)
+        var contentArea = document.createElement('div');
         contentArea.id = 'sa-content-area';
+        contentArea.className = 'sa-content-area';
         wrapper.appendChild(contentArea);
 
         container.appendChild(wrapper);
     },
 
-    loadQuestion(index) {
-        const q = this.questions[index];
+    openQuestion(index) {
+        var q = this.questions[index];
         if (!q) return;
+        this._activeIndex = index;
 
-        const contentArea = document.getElementById('sa-content-area');
+        var contentArea = document.getElementById('sa-content-area');
         if (!contentArea) return;
         contentArea.textContent = '';
 
+        // Back button
+        var self = this;
+        var backBtn = document.createElement('button');
+        backBtn.className = 'sa-back-btn';
+        var backIcon = document.createElement('i');
+        backIcon.className = 'fas fa-arrow-left';
+        backBtn.appendChild(backIcon);
+        backBtn.appendChild(document.createTextNode(' All Questions'));
+        backBtn.addEventListener('click', function() {
+            self._activeIndex = -1;
+            contentArea.textContent = '';
+            contentArea.classList.remove('sa-active');
+            document.getElementById('sa-card-grid').style.display = '';
+        });
+        contentArea.appendChild(backBtn);
+
+        // Question header
+        var qHeader = document.createElement('div');
+        qHeader.className = 'sa-q-header';
+        var qNum = document.createElement('span');
+        qNum.className = 'sa-q-num';
+        qNum.textContent = 'Question ' + (index + 1) + ' of ' + this.questions.length;
+        qHeader.appendChild(qNum);
+        var qTopic = document.createElement('span');
+        qTopic.className = 'sa-q-topic-badge';
+        qTopic.textContent = q.topic || '';
+        qHeader.appendChild(qTopic);
+        contentArea.appendChild(qHeader);
+
         // Question text
-        const questionDiv = document.createElement('div');
-        questionDiv.className = 'question-text';
-        const questionLabel = document.createElement('strong');
-        questionLabel.textContent = 'Question: ';
-        questionDiv.appendChild(questionLabel);
-        questionDiv.appendChild(document.createTextNode(q.question));
+        var questionDiv = document.createElement('div');
+        questionDiv.className = 'sa-question-text';
+        questionDiv.textContent = q.question;
         contentArea.appendChild(questionDiv);
 
         // Key Terms
         if (q.keyTerms && q.keyTerms.length > 0) {
-            const termsDiv = document.createElement('div');
+            var termsDiv = document.createElement('div');
             termsDiv.className = 'key-terms-box';
 
-            const termsTitle = document.createElement('div');
+            var termsTitle = document.createElement('div');
             termsTitle.className = 'key-terms-title';
-            const termsIcon = document.createElement('i');
+            var termsIcon = document.createElement('i');
             termsIcon.className = 'fas fa-key';
             termsTitle.appendChild(termsIcon);
             termsTitle.appendChild(document.createTextNode(' Key Terms to Use:'));
             termsDiv.appendChild(termsTitle);
 
-            const termsList = document.createElement('div');
+            var termsList = document.createElement('div');
             termsList.className = 'key-terms-list';
-            q.keyTerms.forEach(term => {
-                const chip = document.createElement('span');
+            q.keyTerms.forEach(function(term) {
+                var chip = document.createElement('span');
                 chip.className = 'key-term-chip';
                 chip.textContent = term;
                 termsList.appendChild(chip);
@@ -114,43 +147,42 @@ StudyEngine.registerActivity({
 
         // Connection Pairings
         if (q.connectionPairings && q.connectionPairings.length > 0) {
-            const pairDiv = document.createElement('div');
+            var pairDiv = document.createElement('div');
             pairDiv.className = 'connection-pairings';
 
-            const pairTitle = document.createElement('div');
+            var pairTitle = document.createElement('div');
             pairTitle.className = 'connection-pairings-title';
-            const pairIcon = document.createElement('i');
+            var pairIcon = document.createElement('i');
             pairIcon.className = 'fas fa-link';
             pairTitle.appendChild(pairIcon);
             pairTitle.appendChild(document.createTextNode(' Choose One Pairing:'));
             pairDiv.appendChild(pairTitle);
 
-            q.connectionPairings.forEach(pairing => {
-                const item = document.createElement('div');
+            q.connectionPairings.forEach(function(pairing) {
+                var item = document.createElement('div');
                 item.className = 'connection-pairing-item';
                 item.textContent = pairing;
                 pairDiv.appendChild(item);
             });
-            pairDiv.appendChild(document.createElement('br'));
             contentArea.appendChild(pairDiv);
         }
 
         // Rubric
-        const rubricDiv = document.createElement('div');
+        var rubricDiv = document.createElement('div');
         rubricDiv.className = 'rubric';
 
-        const rubricTitle = document.createElement('div');
+        var rubricTitle = document.createElement('div');
         rubricTitle.className = 'rubric-title';
-        const rubricIcon = document.createElement('i');
+        var rubricIcon = document.createElement('i');
         rubricIcon.className = 'fas fa-clipboard-check';
         rubricTitle.appendChild(rubricIcon);
         rubricTitle.appendChild(document.createTextNode(' What to Include:'));
         rubricDiv.appendChild(rubricTitle);
 
-        const rubricItems = document.createElement('ul');
+        var rubricItems = document.createElement('ul');
         rubricItems.className = 'rubric-items';
-        q.rubric.forEach(item => {
-            const li = document.createElement('li');
+        q.rubric.forEach(function(item) {
+            var li = document.createElement('li');
             li.className = 'rubric-item';
             li.textContent = item;
             rubricItems.appendChild(li);
@@ -160,27 +192,27 @@ StudyEngine.registerActivity({
 
         // Sentence starters
         if (q.sentenceStarters && q.sentenceStarters.length > 0) {
-            const startersDiv = document.createElement('div');
+            var startersDiv = document.createElement('div');
             startersDiv.className = 'sentence-starters';
 
-            const startersTitle = document.createElement('div');
+            var startersTitle = document.createElement('div');
             startersTitle.className = 'sentence-starters-title';
-            const startersIcon = document.createElement('i');
+            var startersIcon = document.createElement('i');
             startersIcon.className = 'fas fa-lightbulb';
             startersTitle.appendChild(startersIcon);
             startersTitle.appendChild(document.createTextNode(' Sentence Starters:'));
             startersDiv.appendChild(startersTitle);
 
-            const starterList = document.createElement('div');
+            var starterList = document.createElement('div');
             starterList.className = 'starter-list';
-            q.sentenceStarters.forEach(starter => {
-                const span = document.createElement('span');
+            q.sentenceStarters.forEach(function(starter) {
+                var span = document.createElement('span');
                 span.className = 'starter';
                 span.textContent = starter;
-                span.addEventListener('click', () => {
-                    const textarea = document.getElementById('sa-answer-text');
+                span.addEventListener('click', function() {
+                    var textarea = document.getElementById('sa-answer-text');
                     if (textarea) {
-                        const current = textarea.value;
+                        var current = textarea.value;
                         if (current.length > 0 && !current.endsWith(' ') && !current.endsWith('\n')) {
                             textarea.value += ' ';
                         }
@@ -195,64 +227,118 @@ StudyEngine.registerActivity({
         }
 
         // Textarea
-        const textarea = document.createElement('textarea');
+        var textarea = document.createElement('textarea');
         textarea.className = 'answer-textarea';
         textarea.id = 'sa-answer-text';
         textarea.placeholder = 'Write your response here...';
         textarea.rows = 8;
         contentArea.appendChild(textarea);
 
-        // Save button
-        const saveBtn = document.createElement('button');
-        saveBtn.className = 'nav-button';
-        saveBtn.textContent = 'Save Response';
-        saveBtn.addEventListener('click', () => this.saveAnswer(index));
-        contentArea.appendChild(saveBtn);
+        // Button row
+        var btnRow = document.createElement('div');
+        btnRow.className = 'sa-btn-row';
+
+        var saveBtn = document.createElement('button');
+        saveBtn.className = 'sa-save-btn';
+        var saveIcon = document.createElement('i');
+        saveIcon.className = 'fas fa-save';
+        saveBtn.appendChild(saveIcon);
+        saveBtn.appendChild(document.createTextNode(' Save Response'));
+        saveBtn.addEventListener('click', function() { self.saveAnswer(index); });
+        btnRow.appendChild(saveBtn);
+
+        // Nav buttons
+        if (this.questions.length > 1) {
+            var navDiv = document.createElement('div');
+            navDiv.className = 'sa-nav-btns';
+
+            if (index > 0) {
+                var prevBtn = document.createElement('button');
+                prevBtn.className = 'sa-nav-btn';
+                var prevIcon = document.createElement('i');
+                prevIcon.className = 'fas fa-chevron-left';
+                prevBtn.appendChild(prevIcon);
+                prevBtn.appendChild(document.createTextNode(' Prev'));
+                prevBtn.addEventListener('click', function() { self.openQuestion(index - 1); });
+                navDiv.appendChild(prevBtn);
+            }
+
+            if (index < this.questions.length - 1) {
+                var nextBtn = document.createElement('button');
+                nextBtn.className = 'sa-nav-btn';
+                nextBtn.appendChild(document.createTextNode('Next '));
+                var nextIcon = document.createElement('i');
+                nextIcon.className = 'fas fa-chevron-right';
+                nextBtn.appendChild(nextIcon);
+                nextBtn.addEventListener('click', function() { self.openQuestion(index + 1); });
+                navDiv.appendChild(nextBtn);
+            }
+
+            btnRow.appendChild(navDiv);
+        }
+
+        contentArea.appendChild(btnRow);
 
         // Exemplar (collapsible)
         if (q.exemplar) {
-            const exemplarDiv = document.createElement('div');
+            var exemplarDiv = document.createElement('div');
             exemplarDiv.className = 'exemplar';
 
-            const exemplarTitle = document.createElement('div');
+            var exemplarTitle = document.createElement('div');
             exemplarTitle.className = 'exemplar-title';
-            const exemplarIcon = document.createElement('i');
+            var exemplarIcon = document.createElement('i');
             exemplarIcon.className = 'fas fa-star';
             exemplarTitle.appendChild(exemplarIcon);
             exemplarTitle.appendChild(document.createTextNode(' Example Strong Response (click to reveal):'));
             exemplarDiv.appendChild(exemplarTitle);
 
-            const exemplarText = document.createElement('div');
+            var exemplarText = document.createElement('div');
             exemplarText.className = 'exemplar-text';
             exemplarText.textContent = q.exemplar;
             exemplarText.style.display = 'none';
             exemplarDiv.appendChild(exemplarText);
 
             exemplarTitle.style.cursor = 'pointer';
-            exemplarTitle.addEventListener('click', () => {
-                if (exemplarText.style.display === 'none') {
-                    exemplarText.style.display = 'block';
-                } else {
-                    exemplarText.style.display = 'none';
-                }
+            exemplarTitle.addEventListener('click', function() {
+                exemplarText.style.display = exemplarText.style.display === 'none' ? 'block' : 'none';
             });
 
             contentArea.appendChild(exemplarDiv);
         }
 
         // Load saved answer
-        const saved = ProgressManager.getActivityProgress(this.unitId, 'short-answer-' + index);
+        var saved = ProgressManager.getActivityProgress(this.unitId, 'short-answer-' + index);
         if (saved && saved.answer) {
             textarea.value = saved.answer;
         }
+
+        // Hide card grid, show content
+        document.getElementById('sa-card-grid').style.display = 'none';
+        contentArea.classList.add('sa-active');
+
+        // Scroll to top of content
+        contentArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
     },
 
     saveAnswer(index) {
-        const text = document.getElementById('sa-answer-text')?.value || '';
+        var text = document.getElementById('sa-answer-text');
+        var answer = text ? text.value : '';
         ProgressManager.saveActivityProgress(this.unitId, 'short-answer-' + index, {
-            answer: text
+            answer: answer
         });
         StudyUtils.showToast('Response saved!', 'success');
+
+        // Update the card's checkmark in the grid
+        var card = document.querySelector('.sa-question-card[data-index="' + index + '"]');
+        if (card && answer.trim().length > 0 && !card.classList.contains('sa-completed')) {
+            card.classList.add('sa-completed');
+            var topRow = card.querySelector('.sa-card-top');
+            if (topRow && !topRow.querySelector('.sa-card-check')) {
+                var check = document.createElement('i');
+                check.className = 'fas fa-check-circle sa-card-check';
+                topRow.appendChild(check);
+            }
+        }
 
         if (typeof AchievementManager !== 'undefined') {
             AchievementManager.checkAndAward({ activity: 'short-answer', event: 'complete' });
