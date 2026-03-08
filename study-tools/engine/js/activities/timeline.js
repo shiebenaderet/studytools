@@ -62,13 +62,29 @@ StudyEngine.registerActivity({
             self.render(self._container, self._config);
         });
         controls.appendChild(toggleBtn);
+
+        var shuffleBtn = document.createElement('button');
+        shuffleBtn.className = 'tl-toggle-btn';
+        var shuffleIcon = document.createElement('i');
+        shuffleIcon.className = 'fas fa-random';
+        shuffleBtn.appendChild(shuffleIcon);
+        shuffleBtn.appendChild(document.createTextNode(' Shuffle'));
+        shuffleBtn.addEventListener('click', function() {
+            var pool = document.getElementById('tl-pool');
+            if (!pool) return;
+            var cards = Array.from(pool.querySelectorAll('.tl-card'));
+            self._shuffle(cards);
+            cards.forEach(function(c) { pool.appendChild(c); });
+        });
+        controls.appendChild(shuffleBtn);
+
         header.appendChild(controls);
         wrapper.appendChild(header);
 
         // Instructions
         var instEl = document.createElement('p');
         instEl.className = 'tl-instructions';
-        instEl.textContent = 'Tap an event, then tap a slot to place it. Tap a placed event to move it. Arrange all events from earliest to latest.';
+        instEl.textContent = 'Tap an event, then tap a slot to place it. Tap a placed event, then tap the events area to remove it. Arrange all events from earliest to latest.';
         wrapper.appendChild(instEl);
 
         // Stats
@@ -98,6 +114,21 @@ StudyEngine.registerActivity({
         for (var i = 0; i < shuffled.length; i++) {
             pool.appendChild(this._createCard(shuffled[i]));
         }
+
+        // Clicking the pool area returns a selected placed card back to pool
+        pool.addEventListener('click', function(e) {
+            if (e.target.closest('.tl-card')) return; // handled by card click
+            if (self._selectedCard && self._selectedSlot) {
+                pool.appendChild(self._selectedCard);
+                self._selectedSlot.querySelector('.tl-slot-drop').style.display = '';
+                self._clearSelections();
+                // Clear check result styling
+                var slots = document.querySelectorAll('.tl-slot');
+                slots.forEach(function(s) { s.classList.remove('tl-slot-correct', 'tl-slot-wrong'); });
+                var resultArea = document.getElementById('tl-result');
+                if (resultArea) { resultArea.style.display = 'none'; while (resultArea.firstChild) resultArea.removeChild(resultArea.firstChild); }
+            }
+        });
 
         poolSection.appendChild(pool);
         layout.appendChild(poolSection);

@@ -5,6 +5,38 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.0.0] - 2026-03-07
+
+### Fixed
+- **Timeline: remove placed events** — Tap a placed event then tap the events area to return it to the pool
+- **Timeline: shuffle button** — New shuffle button to re-randomize the event pool order
+
+## [5.9.0] - 2026-03-07
+
+### Changed
+- **Practice Test redesign** — Now pulls 10 random questions per session instead of all at once:
+  - Tracks which questions have been answered correctly across sessions
+  - Prioritizes unmastered questions, fills remaining slots with review questions
+  - Mastery progress bar shows overall completion (e.g., "23/37 questions mastered")
+  - Students keep taking tests until every question answered correctly at least once
+  - "All Questions Mastered" celebration screen when complete
+  - Wrong answers feed back to flashcards — marks related vocab terms as "Again" for re-study
+
+## [5.8.0] - 2026-03-07
+
+### Fixed
+- **Source Analysis dark mode contrast** — Description text and "sessions completed" stats were nearly invisible in dark mode (hardcoded `#555` and `#4b5563`); now uses theme variables
+
+## [5.7.0] - 2026-03-07
+
+### Changed
+- **Short Answer card redesign** — Replaced small text cards with visual, color-coded cards:
+  - Each topic gets a distinct accent color for visual differentiation
+  - Topic images from vocabulary database shown on cards
+  - Question summaries instead of truncated text
+  - Key terms preview chips on each card
+  - Larger card size with better contrast and readability
+
 ## [5.6.0] - 2026-03-07
 
 ### Changed

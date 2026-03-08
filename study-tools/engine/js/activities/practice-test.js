@@ -11,8 +11,13 @@ StudyEngine.registerActivity({
     _submitted: false,
     _keyHandler: null,
     _container: null,
+    _config: null,
     _questions: null,
+    _sessionQuestions: null,
     _shuffleMaps: {},
+    _masteryData: null,
+
+    QUESTIONS_PER_SESSION: 10,
 
     _shuffleArray(arr) {
         for (var i = arr.length - 1; i > 0; i--) {
@@ -32,19 +37,246 @@ StudyEngine.registerActivity({
         return indices;
     },
 
+    /**
+     * Load persistent mastery data: which question indices have been answered correctly at least once.
+     * Stored as { mastered: [questionIndex, ...], wrong: [questionIndex, ...], sessions: number }
+     * Question indices refer to the FULL question pool (config.practiceQuestions).
+     */
+    _loadMasteryData() {
+        var unitId = this._config.unit.id;
+        var data = ProgressManager.getActivityProgress(unitId, 'practice-test-mastery');
+        if (!data) {
+            data = { mastered: [], wrong: [], sessions: 0 };
+        }
+        this._masteryData = data;
+    },
+
+    _saveMasteryData() {
+        var unitId = this._config.unit.id;
+        ProgressManager.saveActivityProgress(unitId, 'practice-test-mastery', this._masteryData);
+    },
+
+    /**
+     * Build a question identifier from its text (first 80 chars) for stable tracking
+     * across sessions even if question order changes in config.
+     */
+    _questionId(q) {
+        return (q.question || '').substring(0, 80);
+    },
+
+    /**
+     * Select questions for this session. Prioritize unmastered questions,
+     * then fill with random mastered ones if needed.
+     */
+    _selectSessionQuestions() {
+        var allQuestions = MasteryManager.getUnlockedQuestions(this._config.unit.id, this._config, 'practiceQuestions') || [];
+        var masteredIds = this._masteryData.mastered || [];
+        var self = this;
+
+        var unmastered = [];
+        var mastered = [];
+        for (var i = 0; i < allQuestions.length; i++) {
+            var qId = this._questionId(allQuestions[i]);
+            if (masteredIds.indexOf(qId) !== -1) {
+                mastered.push(allQuestions[i]);
+            } else {
+                unmastered.push(allQuestions[i]);
+            }
+        }
+
+        this._shuffleArray(unmastered);
+        this._shuffleArray(mastered);
+
+        var selected = [];
+        var count = Math.min(this.QUESTIONS_PER_SESSION, allQuestions.length);
+
+        // Prioritize unmastered
+        for (var i = 0; i < unmastered.length && selected.length < count; i++) {
+            selected.push(unmastered[i]);
+        }
+        // Fill remaining with mastered (review)
+        for (var i = 0; i < mastered.length && selected.length < count; i++) {
+            selected.push(mastered[i]);
+        }
+
+        this._shuffleArray(selected);
+        return selected;
+    },
+
     render(container, config) {
         this._container = container;
-        this._questions = this._shuffleArray((MasteryManager.getUnlockedQuestions(config.unit.id, config, 'practiceQuestions') || []).slice());
+        this._config = config;
         this._currentIndex = 0;
         this._submitted = false;
         this._shuffleMaps = {};
         this._answers = {};
 
-        const wrapper = document.createElement('div');
+        this._loadMasteryData();
+
+        var allQuestions = MasteryManager.getUnlockedQuestions(config.unit.id, config, 'practiceQuestions') || [];
+        this._questions = allQuestions;
+
+        // Check if all mastered
+        var masteredIds = this._masteryData.mastered || [];
+        var allMastered = allQuestions.length > 0 && allQuestions.every(function(q) {
+            return masteredIds.indexOf((q.question || '').substring(0, 80)) !== -1;
+        });
+
+        var wrapper = document.createElement('div');
         wrapper.className = 'practice-container';
         container.appendChild(wrapper);
 
+        if (allMastered) {
+            this._renderAllMastered(wrapper);
+        } else {
+            this._sessionQuestions = this._selectSessionQuestions();
+            this._renderStartScreen(wrapper);
+        }
+    },
+
+    _renderStartScreen(wrapper) {
+        wrapper.textContent = '';
+
+        var allQuestions = this._questions;
+        var masteredCount = 0;
+        var masteredIds = this._masteryData.mastered || [];
+        for (var i = 0; i < allQuestions.length; i++) {
+            if (masteredIds.indexOf(this._questionId(allQuestions[i])) !== -1) {
+                masteredCount++;
+            }
+        }
+        var totalCount = allQuestions.length;
+        var sessionCount = this._sessionQuestions.length;
+
+        // Mastery progress header
+        var progressDiv = document.createElement('div');
+        progressDiv.className = 'pt-mastery-header';
+
+        var progressTitle = document.createElement('div');
+        progressTitle.className = 'pt-mastery-title';
+        progressTitle.textContent = 'Practice Test Progress';
+        progressDiv.appendChild(progressTitle);
+
+        var progressBarWrap = document.createElement('div');
+        progressBarWrap.className = 'pt-mastery-bar-wrap';
+        var progressBar = document.createElement('div');
+        progressBar.className = 'pt-mastery-bar';
+        var pct = totalCount > 0 ? Math.round((masteredCount / totalCount) * 100) : 0;
+        progressBar.style.width = pct + '%';
+        progressBarWrap.appendChild(progressBar);
+        progressDiv.appendChild(progressBarWrap);
+
+        var progressLabel = document.createElement('div');
+        progressLabel.className = 'pt-mastery-label';
+        progressLabel.textContent = masteredCount + ' / ' + totalCount + ' questions mastered (' + pct + '%)';
+        progressDiv.appendChild(progressLabel);
+
+        if (this._masteryData.sessions > 0) {
+            var sessionsLabel = document.createElement('div');
+            sessionsLabel.className = 'pt-sessions-label';
+            sessionsLabel.textContent = this._masteryData.sessions + ' test' + (this._masteryData.sessions === 1 ? '' : 's') + ' completed so far';
+            progressDiv.appendChild(sessionsLabel);
+        }
+
+        wrapper.appendChild(progressDiv);
+
+        // Session info
+        var sessionInfo = document.createElement('div');
+        sessionInfo.className = 'pt-session-info';
+
+        var unmasteredInSession = 0;
+        var self = this;
+        for (var i = 0; i < this._sessionQuestions.length; i++) {
+            if (masteredIds.indexOf(this._questionId(this._sessionQuestions[i])) === -1) {
+                unmasteredInSession++;
+            }
+        }
+
+        var infoText = document.createElement('div');
+        infoText.className = 'pt-info-text';
+        infoText.textContent = 'This test has ' + sessionCount + ' questions';
+        if (unmasteredInSession > 0 && unmasteredInSession < sessionCount) {
+            infoText.textContent += ' (' + unmasteredInSession + ' new, ' + (sessionCount - unmasteredInSession) + ' review)';
+        }
+        sessionInfo.appendChild(infoText);
+
+        var startBtn = document.createElement('button');
+        startBtn.className = 'sa-save-btn';
+        var startIcon = document.createElement('i');
+        startIcon.className = 'fas fa-play';
+        startBtn.appendChild(startIcon);
+        startBtn.appendChild(document.createTextNode(' Start Test'));
+        startBtn.addEventListener('click', this._startSession.bind(this));
+        sessionInfo.appendChild(startBtn);
+
+        wrapper.appendChild(sessionInfo);
+    },
+
+    _startSession() {
+        this._currentIndex = 0;
+        this._answers = {};
+        this._submitted = false;
+        this._shuffleMaps = {};
         this.displayQuestion();
+    },
+
+    _renderAllMastered(wrapper) {
+        wrapper.textContent = '';
+
+        var div = document.createElement('div');
+        div.className = 'pt-all-mastered';
+
+        var icon = document.createElement('i');
+        icon.className = 'fas fa-trophy';
+        icon.style.fontSize = '3rem';
+        icon.style.color = 'var(--accent)';
+        div.appendChild(icon);
+
+        var title = document.createElement('div');
+        title.className = 'pt-mastery-title';
+        title.style.marginTop = '12px';
+        title.textContent = 'All Questions Mastered!';
+        div.appendChild(title);
+
+        var sub = document.createElement('div');
+        sub.className = 'pt-mastery-label';
+        sub.textContent = 'You\'ve answered every question correctly at least once across ' + this._masteryData.sessions + ' test' + (this._masteryData.sessions === 1 ? '' : 's') + '.';
+        div.appendChild(sub);
+
+        var btnRow = document.createElement('div');
+        btnRow.className = 'sa-btn-row';
+        btnRow.style.marginTop = '20px';
+
+        var reviewBtn = document.createElement('button');
+        reviewBtn.className = 'sa-save-btn';
+        var reviewIcon = document.createElement('i');
+        reviewIcon.className = 'fas fa-redo';
+        reviewBtn.appendChild(reviewIcon);
+        reviewBtn.appendChild(document.createTextNode(' Take Another Test'));
+        var self = this;
+        reviewBtn.addEventListener('click', function() {
+            self._sessionQuestions = self._selectSessionQuestions();
+            self._renderStartScreen(wrapper);
+        });
+        btnRow.appendChild(reviewBtn);
+
+        var resetBtn = document.createElement('button');
+        resetBtn.className = 'sa-nav-btn';
+        var resetIcon = document.createElement('i');
+        resetIcon.className = 'fas fa-trash-alt';
+        resetBtn.appendChild(resetIcon);
+        resetBtn.appendChild(document.createTextNode(' Reset Progress'));
+        resetBtn.addEventListener('click', function() {
+            self._masteryData = { mastered: [], wrong: [], sessions: 0 };
+            self._saveMasteryData();
+            self._sessionQuestions = self._selectSessionQuestions();
+            self._renderStartScreen(wrapper);
+            StudyUtils.showToast('Practice test progress reset.', 'info');
+        });
+        btnRow.appendChild(resetBtn);
+
+        div.appendChild(btnRow);
+        wrapper.appendChild(div);
     },
 
     displayQuestion() {
@@ -57,7 +289,7 @@ StudyEngine.registerActivity({
             return;
         }
 
-        var questions = this._questions;
+        var questions = this._sessionQuestions;
         var index = this._currentIndex;
         var q = questions[index];
         if (!q) return;
@@ -163,12 +395,11 @@ StudyEngine.registerActivity({
         if (this._answers.hasOwnProperty(this._currentIndex)) return;
 
         this._answers[this._currentIndex] = index;
-        this._saveProgress();
         this.displayQuestion();
     },
 
     nextQuestion() {
-        if (this._currentIndex < this._questions.length - 1) {
+        if (this._currentIndex < this._sessionQuestions.length - 1) {
             this._currentIndex++;
             this.displayQuestion();
         }
@@ -187,24 +418,48 @@ StudyEngine.registerActivity({
         if (!shuffleMap) return false;
         var selectedDisplayIdx = this._answers[questionIdx];
         var selectedOrigIdx = shuffleMap[selectedDisplayIdx];
-        return selectedOrigIdx === this._questions[questionIdx].correct;
+        return selectedOrigIdx === this._sessionQuestions[questionIdx].correct;
     },
 
     finishTest() {
         this._submitted = true;
-        this._saveProgress();
 
-        // Calculate score for achievements
-        var questions = this._questions;
+        var questions = this._sessionQuestions;
         var correct = 0;
+        var wrongQuestions = [];
+
         for (var i = 0; i < questions.length; i++) {
+            var qId = this._questionId(questions[i]);
             if (this._isAnswerCorrect(i)) {
                 correct++;
+                // Mark as mastered if not already
+                if (this._masteryData.mastered.indexOf(qId) === -1) {
+                    this._masteryData.mastered.push(qId);
+                }
+                // Remove from wrong list if previously wrong
+                var wrongIdx = this._masteryData.wrong.indexOf(qId);
+                if (wrongIdx !== -1) {
+                    this._masteryData.wrong.splice(wrongIdx, 1);
+                }
+            } else {
+                wrongQuestions.push(questions[i]);
+                // Add to wrong list if not already there
+                if (this._masteryData.wrong.indexOf(qId) === -1) {
+                    this._masteryData.wrong.push(qId);
+                }
             }
         }
-        var pct = questions.length > 0 ? Math.round((correct / questions.length) * 100) : 0;
 
+        this._masteryData.sessions = (this._masteryData.sessions || 0) + 1;
+        this._saveMasteryData();
+
+        // Track weak terms in weakness tracker
         this._trackWeakTerms();
+
+        // Feed wrong answers back to flashcard ratings
+        this._markWrongTermsInFlashcards(wrongQuestions);
+
+        var pct = questions.length > 0 ? Math.round((correct / questions.length) * 100) : 0;
 
         if (typeof AchievementManager !== 'undefined') {
             AchievementManager.checkAndAward({ activity: 'test', score: pct, event: pct === 100 ? 'perfect' : 'complete', totalCorrect: correct });
@@ -213,10 +468,68 @@ StudyEngine.registerActivity({
         this.displayQuestion();
     },
 
-    _renderExplainButton(parent, q) {
-        var config = StudyEngine.config;
+    /**
+     * When a student gets a practice test question wrong, mark the related
+     * vocabulary terms as 'again' in flashcard ratings and remove them from
+     * the mastered list. This pushes those cards back into active study.
+     */
+    _markWrongTermsInFlashcards(wrongQuestions) {
+        var config = this._config;
         if (!config || !config.vocabulary) return;
-        // Find vocab terms related to this question's topic
+        var unitId = config.unit.id;
+        var fcProgress = ProgressManager.getActivityProgress(unitId, 'flashcards') || {};
+        var mastered = fcProgress.mastered ? fcProgress.mastered.slice() : [];
+        var ratings = fcProgress.ratings ? Object.assign({}, fcProgress.ratings) : {};
+        var changed = false;
+
+        for (var i = 0; i < wrongQuestions.length; i++) {
+            var q = wrongQuestions[i];
+            if (!q.topic) continue;
+
+            // Find vocab terms matching this question's topic
+            for (var j = 0; j < config.vocabulary.length; j++) {
+                var v = config.vocabulary[j];
+                if (v.category === q.topic) {
+                    // Mark as 'again' so it resurfaces in flashcards
+                    ratings[v.term] = 'again';
+                    // Remove from mastered list
+                    var mIdx = mastered.indexOf(v.term);
+                    if (mIdx !== -1) {
+                        mastered.splice(mIdx, 1);
+                        changed = true;
+                    }
+                    changed = true;
+                }
+            }
+
+            // Also check if the correct answer text matches a specific term
+            if (!q.topic) {
+                var correctText = q.options[q.correct].toLowerCase();
+                for (var j = 0; j < config.vocabulary.length; j++) {
+                    var v = config.vocabulary[j];
+                    if (v.term.toLowerCase() === correctText || correctText.indexOf(v.term.toLowerCase()) !== -1) {
+                        ratings[v.term] = 'again';
+                        var mIdx = mastered.indexOf(v.term);
+                        if (mIdx !== -1) {
+                            mastered.splice(mIdx, 1);
+                        }
+                        changed = true;
+                    }
+                }
+            }
+        }
+
+        if (changed) {
+            ProgressManager.saveActivityProgress(unitId, 'flashcards', {
+                mastered: mastered,
+                ratings: ratings
+            });
+        }
+    },
+
+    _renderExplainButton(parent, q) {
+        var config = this._config;
+        if (!config || !config.vocabulary) return;
         var relatedTerms = [];
         if (q.topic) {
             for (var i = 0; i < config.vocabulary.length; i++) {
@@ -226,7 +539,6 @@ StudyEngine.registerActivity({
                 }
             }
         }
-        // Also check if correct answer text matches a term
         if (relatedTerms.length === 0) {
             var correctText = q.options[q.correct].toLowerCase();
             for (var i = 0; i < config.vocabulary.length; i++) {
@@ -249,7 +561,6 @@ StudyEngine.registerActivity({
         explainBox.className = 'fc-explain-box';
         explainBox.style.display = 'none';
 
-        // Show explanations for related terms
         for (var i = 0; i < relatedTerms.length && i < 3; i++) {
             var termDiv = document.createElement('div');
             if (i > 0) termDiv.style.marginTop = '8px';
@@ -272,16 +583,15 @@ StudyEngine.registerActivity({
     },
 
     _trackWeakTerms() {
-        var config = StudyEngine.config;
+        var config = this._config;
         var unitId = config.unit.id;
         var data = ProgressManager.load(unitId, 'weakness_tracker') || { terms: {} };
         var vocab = config.vocabulary || [];
-        var questions = this._questions;
+        var questions = this._sessionQuestions;
         var tracked = false;
 
         for (var i = 0; i < questions.length; i++) {
             if (!this._isAnswerCorrect(i) && questions[i].topic) {
-                // Find vocab terms that match this topic
                 for (var j = 0; j < vocab.length; j++) {
                     if (vocab[j].category === questions[i].topic) {
                         data.terms[vocab[j].term] = (data.terms[vocab[j].term] || 0) + 1;
@@ -297,7 +607,7 @@ StudyEngine.registerActivity({
     },
 
     _renderScore(wrapper) {
-        var questions = this._questions;
+        var questions = this._sessionQuestions;
         var correct = 0;
         for (var i = 0; i < questions.length; i++) {
             if (this._isAnswerCorrect(i)) {
@@ -307,6 +617,18 @@ StudyEngine.registerActivity({
 
         var pct = Math.round((correct / questions.length) * 100);
 
+        // Overall mastery progress
+        var allQuestions = this._questions;
+        var masteredIds = this._masteryData.mastered || [];
+        var totalMastered = 0;
+        for (var i = 0; i < allQuestions.length; i++) {
+            if (masteredIds.indexOf(this._questionId(allQuestions[i])) !== -1) {
+                totalMastered++;
+            }
+        }
+        var totalPct = allQuestions.length > 0 ? Math.round((totalMastered / allQuestions.length) * 100) : 0;
+
+        // Score
         var scoreDiv = document.createElement('div');
         scoreDiv.className = 'test-score';
 
@@ -322,7 +644,44 @@ StudyEngine.registerActivity({
 
         wrapper.appendChild(scoreDiv);
 
-        // Review section - show each question with result
+        // Overall mastery bar
+        var masteryDiv = document.createElement('div');
+        masteryDiv.className = 'pt-mastery-header';
+        masteryDiv.style.marginTop = '16px';
+
+        var masteryBarWrap = document.createElement('div');
+        masteryBarWrap.className = 'pt-mastery-bar-wrap';
+        var masteryBar = document.createElement('div');
+        masteryBar.className = 'pt-mastery-bar';
+        masteryBar.style.width = totalPct + '%';
+        masteryBarWrap.appendChild(masteryBar);
+        masteryDiv.appendChild(masteryBarWrap);
+
+        var masteryLabel = document.createElement('div');
+        masteryLabel.className = 'pt-mastery-label';
+        masteryLabel.textContent = 'Overall: ' + totalMastered + ' / ' + allQuestions.length + ' questions mastered (' + totalPct + '%)';
+        masteryDiv.appendChild(masteryLabel);
+
+        wrapper.appendChild(masteryDiv);
+
+        // Feedback message
+        if (pct === 100) {
+            var msg = document.createElement('div');
+            msg.className = 'pt-feedback-msg pt-feedback-perfect';
+            msg.textContent = 'Perfect score! Keep it up!';
+            wrapper.appendChild(msg);
+        } else if (correct < questions.length) {
+            var wrongCount = questions.length - correct;
+            var msg = document.createElement('div');
+            msg.className = 'pt-feedback-msg pt-feedback-study';
+            var msgIcon = document.createElement('i');
+            msgIcon.className = 'fas fa-book-open';
+            msg.appendChild(msgIcon);
+            msg.appendChild(document.createTextNode(' ' + wrongCount + ' missed question' + (wrongCount === 1 ? '' : 's') + ' sent back to your flashcards for review.'));
+            wrapper.appendChild(msg);
+        }
+
+        // Review section
         for (var i = 0; i < questions.length; i++) {
             var q = questions[i];
             var isCorrect = this._isAnswerCorrect(i);
@@ -363,40 +722,53 @@ StudyEngine.registerActivity({
             wrapper.appendChild(reviewItem);
         }
 
-        // Reset button
+        // Action buttons
         var navEl = document.createElement('div');
         navEl.className = 'flashcard-nav';
 
-        var resetBtn = document.createElement('button');
-        resetBtn.className = 'nav-button';
-        resetBtn.textContent = 'Retake Test';
-        resetBtn.addEventListener('click', this.resetTest.bind(this));
-        navEl.appendChild(resetBtn);
+        var nextTestBtn = document.createElement('button');
+        nextTestBtn.className = 'nav-button';
+        var nextIcon = document.createElement('i');
+        nextIcon.className = 'fas fa-redo';
+        nextTestBtn.appendChild(nextIcon);
+        nextTestBtn.appendChild(document.createTextNode(' Next Test'));
+        var self = this;
+        nextTestBtn.addEventListener('click', function() {
+            self._sessionQuestions = self._selectSessionQuestions();
+            self._currentIndex = 0;
+            self._answers = {};
+            self._submitted = false;
+            self._shuffleMaps = {};
+
+            var allMastered = self._questions.length > 0 && self._questions.every(function(q) {
+                return self._masteryData.mastered.indexOf(self._questionId(q)) !== -1;
+            });
+
+            if (allMastered) {
+                self._renderAllMastered(self._container.querySelector('.practice-container'));
+            } else {
+                self._renderStartScreen(self._container.querySelector('.practice-container'));
+            }
+        });
+        navEl.appendChild(nextTestBtn);
 
         wrapper.appendChild(navEl);
     },
 
     resetTest() {
+        this._sessionQuestions = this._selectSessionQuestions();
         this._answers = {};
         this._submitted = false;
         this._currentIndex = 0;
-        this._shuffleArray(this._questions);
-        this._saveProgress();
+        this._shuffleMaps = {};
         this.displayQuestion();
-    },
-
-    _saveProgress() {
-        ProgressManager.saveActivityProgress(StudyEngine.config.unit.id, 'practice-test', {
-            answered: this._answers,
-            submitted: this._submitted,
-            currentIndex: this._currentIndex
-        });
     },
 
     activate() {
         var self = this;
         this._keyHandler = function(e) {
             if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') return;
+            if (self._submitted || !self._sessionQuestions) return;
             if (e.key >= '1' && e.key <= '4') self.selectAnswer(parseInt(e.key) - 1);
             if (e.key === 'ArrowRight') self.nextQuestion();
             if (e.key === 'ArrowLeft') self.previousQuestion();
@@ -412,18 +784,8 @@ StudyEngine.registerActivity({
     },
 
     getProgress() {
-        return ProgressManager.getActivityProgress(StudyEngine.config.unit.id, 'practice-test');
+        return ProgressManager.getActivityProgress(this._config ? this._config.unit.id : '', 'practice-test');
     },
 
-    loadProgress(data) {
-        if (data && data.answered) {
-            this._answers = data.answered;
-        }
-        if (data && data.submitted) {
-            this._submitted = data.submitted;
-        }
-        if (data && data.currentIndex !== undefined) {
-            this._currentIndex = data.currentIndex;
-        }
-    }
+    loadProgress(data) {}
 });

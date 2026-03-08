@@ -8,10 +8,65 @@ StudyEngine.registerActivity({
 
     _activeIndex: -1,
 
+    // Category accent colors for visual differentiation
+    _categoryColors: [
+        { bg: 'rgba(79, 143, 247, 0.15)', border: 'rgba(79, 143, 247, 0.4)', accent: '#4f8ff7' },
+        { bg: 'rgba(168, 85, 247, 0.15)', border: 'rgba(168, 85, 247, 0.4)', accent: '#a855f7' },
+        { bg: 'rgba(52, 211, 153, 0.15)', border: 'rgba(52, 211, 153, 0.4)', accent: '#34d399' },
+        { bg: 'rgba(251, 146, 60, 0.15)', border: 'rgba(251, 146, 60, 0.4)', accent: '#fb923c' },
+        { bg: 'rgba(244, 114, 182, 0.15)', border: 'rgba(244, 114, 182, 0.4)', accent: '#f472b6' },
+        { bg: 'rgba(56, 189, 248, 0.15)', border: 'rgba(56, 189, 248, 0.4)', accent: '#38bdf8' }
+    ],
+
+    _getColorForTopic(topic, allTopics) {
+        var idx = allTopics.indexOf(topic);
+        if (idx === -1) idx = 0;
+        return this._categoryColors[idx % this._categoryColors.length];
+    },
+
+    _getImageForTopic(topic, config) {
+        if (!config.vocabulary) return null;
+        for (var i = 0; i < config.vocabulary.length; i++) {
+            if (config.vocabulary[i].category === topic && config.vocabulary[i].imageUrl) {
+                return config.vocabulary[i].imageUrl;
+            }
+        }
+        return null;
+    },
+
+    _summarizeQuestion(question) {
+        // Extract the core task from the question, cutting at the first period or colon after initial instruction
+        var text = question;
+        // If it starts with a name/topic followed by colon, grab everything before the detailed instruction
+        var colonIdx = text.indexOf(':');
+        if (colonIdx > 0 && colonIdx < 60) {
+            return text.substring(0, colonIdx);
+        }
+        // Otherwise take first sentence
+        var periodIdx = text.indexOf('.');
+        if (periodIdx > 0 && periodIdx < 120) {
+            return text.substring(0, periodIdx + 1);
+        }
+        // Fallback: truncate at ~100 chars on word boundary
+        if (text.length > 100) {
+            var cut = text.lastIndexOf(' ', 100);
+            return text.substring(0, cut > 50 ? cut : 100) + '...';
+        }
+        return text;
+    },
+
     render(container, config) {
         this.questions = MasteryManager.getUnlockedQuestions(config.unit.id, config, 'shortAnswerQuestions') || [];
         this.unitId = config.unit.id;
+        this._config = config;
         this._activeIndex = -1;
+
+        // Collect unique topics for color mapping
+        var allTopics = [];
+        for (var i = 0; i < this.questions.length; i++) {
+            var t = this.questions[i].topic || '';
+            if (t && allTopics.indexOf(t) === -1) allTopics.push(t);
+        }
 
         var wrapper = document.createElement('div');
         wrapper.className = 'short-answer-container';
@@ -26,19 +81,40 @@ StudyEngine.registerActivity({
         this.questions.forEach(function(q, i) {
             var saved = ProgressManager.getActivityProgress(self.unitId, 'short-answer-' + i);
             var completed = saved && saved.answer && saved.answer.trim().length > 0;
+            var colors = self._getColorForTopic(q.topic || '', allTopics);
+            var imageUrl = self._getImageForTopic(q.topic, config);
 
             var card = document.createElement('button');
             card.className = 'sa-question-card';
             card.dataset.index = i;
             if (completed) card.classList.add('sa-completed');
+            card.style.background = colors.bg;
+            card.style.borderColor = colors.border;
+
+            // Image area
+            if (imageUrl) {
+                var imgWrap = document.createElement('div');
+                imgWrap.className = 'sa-card-img';
+                var img = document.createElement('img');
+                img.src = imageUrl;
+                img.alt = q.topic || '';
+                img.loading = 'lazy';
+                imgWrap.appendChild(img);
+                card.appendChild(imgWrap);
+            }
+
+            // Content area
+            var content = document.createElement('div');
+            content.className = 'sa-card-content';
 
             var topRow = document.createElement('div');
             topRow.className = 'sa-card-top';
 
-            var num = document.createElement('span');
-            num.className = 'sa-card-num';
-            num.textContent = (i + 1);
-            topRow.appendChild(num);
+            var topicBadge = document.createElement('span');
+            topicBadge.className = 'sa-card-topic-badge';
+            topicBadge.textContent = q.topic || 'Question ' + (i + 1);
+            topicBadge.style.background = colors.accent;
+            topRow.appendChild(topicBadge);
 
             if (completed) {
                 var check = document.createElement('i');
@@ -46,17 +122,31 @@ StudyEngine.registerActivity({
                 topRow.appendChild(check);
             }
 
-            card.appendChild(topRow);
+            content.appendChild(topRow);
 
-            var topic = document.createElement('div');
-            topic.className = 'sa-card-topic';
-            topic.textContent = q.topic || 'Question ' + (i + 1);
-            card.appendChild(topic);
+            var summary = document.createElement('div');
+            summary.className = 'sa-card-summary';
+            summary.textContent = self._summarizeQuestion(q.question);
+            content.appendChild(summary);
 
-            var preview = document.createElement('div');
-            preview.className = 'sa-card-preview';
-            preview.textContent = q.question.length > 90 ? q.question.substring(0, 90) + '...' : q.question;
-            card.appendChild(preview);
+            var keyTermsPreview = document.createElement('div');
+            keyTermsPreview.className = 'sa-card-terms';
+            var maxTerms = Math.min((q.keyTerms || []).length, 3);
+            for (var j = 0; j < maxTerms; j++) {
+                var chip = document.createElement('span');
+                chip.className = 'sa-card-term-chip';
+                chip.textContent = q.keyTerms[j];
+                keyTermsPreview.appendChild(chip);
+            }
+            if ((q.keyTerms || []).length > 3) {
+                var more = document.createElement('span');
+                more.className = 'sa-card-term-chip sa-card-term-more';
+                more.textContent = '+' + ((q.keyTerms || []).length - 3);
+                keyTermsPreview.appendChild(more);
+            }
+            content.appendChild(keyTermsPreview);
+
+            card.appendChild(content);
 
             card.addEventListener('click', function() {
                 self.openQuestion(i);

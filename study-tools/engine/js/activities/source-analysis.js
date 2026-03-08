@@ -407,7 +407,7 @@ StudyEngine.registerActivity({
         intro.appendChild(title);
 
         var resumeMsg = document.createElement('p');
-        resumeMsg.style.color = '#555';
+        resumeMsg.style.color = 'var(--text-secondary)';
         resumeMsg.style.marginBottom = '20px';
         resumeMsg.style.lineHeight = '1.6';
         resumeMsg.textContent = 'You have an in-progress session (' + this._currentIndex + ' of ' + this._sources.length + ' sources completed). Would you like to continue or start over?';
@@ -482,7 +482,7 @@ StudyEngine.registerActivity({
         intro.appendChild(title);
 
         var desc = document.createElement('p');
-        desc.style.color = '#555';
+        desc.style.color = 'var(--text-secondary)';
         desc.style.marginBottom = '20px';
         desc.style.lineHeight = '1.6';
         desc.textContent = 'Examine historical sources from the Early Republic. For each source, decide if it is a primary source (created during the time period) or a secondary source (created later by someone studying the events). Then answer comprehension questions to deepen your understanding.';
@@ -529,7 +529,7 @@ StudyEngine.registerActivity({
 
         if (this._stats.completed > 0) {
             var statsEl = document.createElement('p');
-            statsEl.style.color = '#4b5563';
+            statsEl.style.color = 'var(--text-muted)';
             statsEl.style.fontSize = '0.9em';
             statsEl.style.marginTop = '10px';
             statsEl.textContent = 'Sessions completed: ' + this._stats.completed + ' | Best score: ' + this._stats.bestScore + '%';
