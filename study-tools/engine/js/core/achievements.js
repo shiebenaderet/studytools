@@ -23,7 +23,8 @@ var AchievementManager = {
         { id: 'eagle-eye', name: 'Eagle Eye', description: 'Found the hidden eagle.', icon: 'fas fa-dove', unlocked: false, unlockedAt: null, secret: true },
         { id: 'midnight-scholar', name: 'Midnight Scholar', description: 'Studying at midnight! True dedication.', icon: 'fas fa-hat-wizard', unlocked: false, unlockedAt: null, secret: true },
         { id: 'top-student', name: 'Top Student', description: 'Reached #1 on the leaderboard!', icon: 'fas fa-crown', unlocked: false, unlockedAt: null },
-        { id: 'cartographer', name: 'Cartographer', description: 'Got 100% on the Map Quiz with no mistakes.', icon: 'fas fa-map-marked-alt', unlocked: false, unlockedAt: null }
+        { id: 'cartographer', name: 'Cartographer', description: 'Got 100% on the Map Quiz with no mistakes.', icon: 'fas fa-map-marked-alt', unlocked: false, unlockedAt: null },
+        { id: 'study-smart', name: 'Study Smart', description: 'Passed the How to Study comprehension quiz.', icon: 'fas fa-graduation-cap', unlocked: false, unlockedAt: null }
     ],
 
     unitId: null,
