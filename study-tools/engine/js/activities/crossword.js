@@ -37,6 +37,7 @@ StudyEngine.registerActivity({
         this._words = [];
         this._clues = { across: [], down: [] };
         this._activeClue = null;
+        this._puzzleCompleted = false;
 
         for (var i = 0; i < this._gridSize; i++) {
             this._grid.push(new Array(this._gridSize).fill(null));
@@ -671,7 +672,8 @@ StudyEngine.registerActivity({
             }
         }
 
-        if (allCorrect) {
+        if (allCorrect && !this._puzzleCompleted) {
+            this._puzzleCompleted = true;
             this._stats.completed++;
             this._saveProgress();
             var statsEl = document.getElementById('crossword-stats');

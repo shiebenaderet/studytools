@@ -357,15 +357,20 @@ StudyEngine.registerActivity({
         var isPerfect = correctCount === events.length;
 
         if (isPerfect) {
-            this._perfectCount++;
             resultArea.className = 'tl-result tl-result-success';
 
-            if (typeof AchievementManager !== 'undefined') {
-                AchievementManager.checkAndAward({ activity: 'timeline', event: 'perfect' });
+            // Only count as perfect and award achievement if years are hidden (challenge mode)
+            if (!this._showYears) {
+                this._perfectCount++;
+                if (typeof AchievementManager !== 'undefined') {
+                    AchievementManager.checkAndAward({ activity: 'timeline', event: 'perfect' });
+                }
             }
 
             var successMsg = document.createElement('div');
-            successMsg.textContent = 'Perfect! All ' + events.length + ' events in the correct order!';
+            successMsg.textContent = this._showYears
+                ? 'All correct! Try with years hidden for a real challenge.'
+                : 'Perfect! All ' + events.length + ' events in the correct order!';
             successMsg.style.fontWeight = '600';
             successMsg.style.marginBottom = '10px';
             resultArea.appendChild(successMsg);

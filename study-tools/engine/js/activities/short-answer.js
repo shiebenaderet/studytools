@@ -24,16 +24,6 @@ StudyEngine.registerActivity({
         return this._categoryColors[idx % this._categoryColors.length];
     },
 
-    _getImageForTopic(topic, config) {
-        if (!config.vocabulary) return null;
-        for (var i = 0; i < config.vocabulary.length; i++) {
-            if (config.vocabulary[i].category === topic && config.vocabulary[i].imageUrl) {
-                return config.vocabulary[i].imageUrl;
-            }
-        }
-        return null;
-    },
-
     _summarizeQuestion(question) {
         // Extract the core task from the question, cutting at the first period or colon after initial instruction
         var text = question;
@@ -82,7 +72,6 @@ StudyEngine.registerActivity({
             var saved = ProgressManager.getActivityProgress(self.unitId, 'short-answer-' + i);
             var completed = saved && saved.answer && saved.answer.trim().length > 0;
             var colors = self._getColorForTopic(q.topic || '', allTopics);
-            var imageUrl = self._getImageForTopic(q.topic, config);
 
             var card = document.createElement('button');
             card.className = 'sa-question-card';
@@ -91,17 +80,11 @@ StudyEngine.registerActivity({
             card.style.background = colors.bg;
             card.style.borderColor = colors.border;
 
-            // Image area
-            if (imageUrl) {
-                var imgWrap = document.createElement('div');
-                imgWrap.className = 'sa-card-img';
-                var img = document.createElement('img');
-                img.src = imageUrl;
-                img.alt = q.topic || '';
-                img.loading = 'lazy';
-                imgWrap.appendChild(img);
-                card.appendChild(imgWrap);
-            }
+            // Color accent bar at top
+            var accentBar = document.createElement('div');
+            accentBar.className = 'sa-card-accent';
+            accentBar.style.background = colors.accent;
+            card.appendChild(accentBar);
 
             // Content area
             var content = document.createElement('div');

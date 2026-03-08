@@ -218,28 +218,6 @@ StudyEngine.registerActivity({
         bg.setAttribute('rx', '8');
         svg.appendChild(bg);
 
-        // Great Lakes (simplified)
-        var lakePaths = [
-            // Lake Superior
-            'M520,110 Q530,100 545,102 Q560,100 570,108 Q575,115 568,122 Q558,128 545,126 Q530,128 522,120 Q518,116 520,110 Z',
-            // Lake Michigan
-            'M560,130 Q565,125 568,130 Q572,145 570,160 Q567,170 563,168 Q558,165 557,155 Q556,140 560,130 Z',
-            // Lake Huron
-            'M580,110 Q595,105 605,112 Q612,120 608,132 Q600,140 590,138 Q580,135 576,125 Q575,115 580,110 Z',
-            // Lake Erie
-            'M605,165 Q620,158 640,160 Q660,162 670,168 Q665,174 650,175 Q630,176 615,174 Q605,172 605,165 Z',
-            // Lake Ontario
-            'M700,152 Q715,148 730,150 Q740,155 735,160 Q725,165 710,163 Q698,160 700,152 Z'
-        ];
-        lakePaths.forEach(function(d) {
-            var lake = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-            lake.setAttribute('d', d);
-            lake.setAttribute('fill', '#1a3a5c');
-            lake.setAttribute('stroke', 'rgba(255,255,255,0.08)');
-            lake.setAttribute('stroke-width', '1');
-            svg.appendChild(lake);
-        });
-
         // Water label
         var waterLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
         waterLabel.setAttribute('x', '870');

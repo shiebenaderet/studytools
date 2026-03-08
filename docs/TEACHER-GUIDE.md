@@ -327,6 +327,7 @@ Add any of these to your `activities` array:
 | `resources` | Searchable vocabulary reference | `vocabulary` |
 | `typing-practice` | Typing passages + per-term snippets | `vocabulary` (with `typingSnippet`), `typingPassages` |
 | `source-analysis` | Primary source analysis (SIFT method) | Sources in `source-analysis.js` |
+| `how-to-study` | Interactive study strategies with quiz | Built-in (no config needed) |
 
 #### 📝 Practice Activities
 | Activity ID | What it does | Required content |
@@ -347,6 +348,7 @@ Add any of these to your `activities` array:
 | `crossword` | Auto-generated crossword | `vocabulary` |
 | `quiz-race` | Timed quiz race | `practiceQuestions` |
 | `tower-defense` | 3D tower defense (desktop only) | `vocabulary` |
+| `sketch-match` | Draw/identify vocabulary images | `vocabulary` (with `imageUrl`) |
 | `map-quiz` | Click-on-the-map geography quiz | Custom (see source) |
 
 ### Vocabulary fields

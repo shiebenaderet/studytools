@@ -8,7 +8,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 
 [![Live Site](https://img.shields.io/badge/Live_Site-study.mrbsocialstudies.org-1669C5?style=for-the-badge&logo=google-chrome&logoColor=white)](https://study.mrbsocialstudies.org)
 [![License](https://img.shields.io/badge/License-Educational_Use-22c55e?style=for-the-badge)](#license)
-[![Version](https://img.shields.io/badge/Version-5.0.0-f59e0b?style=for-the-badge)](#)
+[![Version](https://img.shields.io/badge/Version-6.2.0-f59e0b?style=for-the-badge)](#)
 
 ---
 
@@ -25,30 +25,32 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 ### 📖 Study
 | Activity | Description |
 |----------|-------------|
-| **Flashcards** | Anki-style spaced repetition with 3D flip animation and confidence rating |
-| **Short Answer** | Open-ended response practice with rubric, exemplar, and key terms |
+| **Flashcards** | Anki-style spaced repetition with 3D flip animation, confidence rating, and "Make Your Own Example" |
+| **Short Answer** | Visual card-based question selector with topic images, color-coded categories, and key term chips |
 | **Source Analysis** | Primary source analysis using the SIFT method with scoring |
 | **Typing Practice** | Monkeytype-inspired typing with full passages and per-term snippets |
 | **Resource Library** | Searchable vocabulary reference with Wikipedia and YouTube links |
+| **How to Study** | Interactive study strategies page with comprehension quiz and Study Smart badge |
 
 ### 📝 Practice
 | Activity | Description |
 |----------|-------------|
-| **Practice Test** | Multiple choice with randomized questions and shuffled answer positions |
-| **Fill-in-the-Blank** | Complete sentences with key terms from a word bank |
-| **Timeline** | Drag events into chronological order (challenge mode hides years) |
+| **Practice Test** | 10-question mastery loop — tracks progress across sessions until every question answered correctly; wrong answers feed back to flashcards |
+| **Fill-in-the-Blank** | One-at-a-time stepper with word bank or type-it mode |
+| **Timeline** | Drag events into chronological order with shuffle, remove, and challenge mode |
 
 ### 🎮 Games
 | Activity | Description |
 |----------|-------------|
 | **Tower Defense** | 3D tower defense — answer vocab to earn coins, build towers, survive 10 waves |
+| **Sketch & Match** | Two modes (term→image, image→term) with streak tracking |
 | **Wordle** | Guess the vocabulary term in 6 tries with definition clues |
 | **Hangman** | Classic word guessing with definitions |
 | **Flip Match** | Memory matching — pair terms to definitions |
 | **Term Catcher** | Catch the falling correct term |
 | **Lightning Round** | 60-second speed quiz with leaderboard |
 | **Crossword** | Auto-generated crossword from vocabulary |
-| **Quiz Race** | Timed quiz race with leaderboard |
+| **Quiz Race** | Timed 1v1 same-screen quiz race with leaderboard |
 | **Map Quiz** | Click-on-the-map geography quiz with 3-strike hint system |
 
 ---
@@ -70,12 +72,14 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 
 **For Students**
 - Dark/light theme with Outfit font
+- Settings gear with theme toggle, dyslexic font, and search
 - Command palette (`/` or `Cmd+K`)
 - OpenDyslexic font toggle
 - Study timer, notes, printable guide
-- Music player with shuffle, loop, playlist
+- Music player with auto-shuffle, loop, playlist
+- Deep linking to activities (`#activity-name`)
 - Progress tracking (local + optional cloud sync)
-- Personalized greetings and progress stats
+- Personalized welcome screen and progress stats
 
 </td>
 <td width="50%">

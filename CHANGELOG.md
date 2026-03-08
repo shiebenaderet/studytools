@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.4.0] - 2026-03-07
+
+### Changed
+- **Short Answer cards redesigned** — Removed images, replaced with color accent bars; significantly larger text (1.5em summary, 1em badges, 0.95em term chips) for readability in both light and dark mode
+- **README updated** — Brought up to date with all features through v6.4 (How to Study, Sketch & Match, settings gear, practice test mastery loop, deep linking, etc.)
+- **Teacher Guide updated** — Added How to Study and Sketch & Match to activity reference tables
+
+### Fixed
+- **Crossword double-counting** — Clicking "Check" after completing a crossword no longer increments the puzzles completed counter repeatedly
+- **Timeline perfect scoring** — Perfect score only counts when years are hidden (challenge mode); with years shown, students get a congratulations message but no perfect credit or achievement
+- **Map Quiz cleanup** — Removed Great Lakes overlays, restored original clean map
+
+### Removed
+- **Map Quiz: Great Lakes blobs** — Removed simplified lake shapes that didn't match the map well
+
 ## [6.2.0] - 2026-03-07
 
 ### Removed
