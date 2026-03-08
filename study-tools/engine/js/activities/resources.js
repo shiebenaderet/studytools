@@ -192,7 +192,7 @@ StudyEngine.registerActivity({
                 // Kids encyclopedia link
                 var kiddle = document.createElement('a');
                 kiddle.className = 'res-link-btn res-link-kiddle';
-                kiddle.href = 'https://wiki.kiddle.co/' + encodeURIComponent(item.term.replace(/ /g, '_'));
+                kiddle.href = 'https://kids.kiddle.co/' + encodeURIComponent(item.term.replace(/ /g, '_'));
                 kiddle.target = '_blank';
                 kiddle.rel = 'noopener noreferrer';
                 var kiddleIcon = document.createElement('i');
