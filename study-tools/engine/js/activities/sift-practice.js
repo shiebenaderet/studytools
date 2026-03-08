@@ -319,9 +319,19 @@ StudyEngine.registerActivity({
             label.className = 'sift-detail-label';
             label.textContent = d.label + ': ';
             row.appendChild(label);
-            var value = document.createElement('span');
-            value.className = 'sift-detail-value';
-            value.textContent = d.value;
+            var value;
+            if (d.label === 'URL') {
+                value = document.createElement('a');
+                value.className = 'sift-detail-value sift-detail-link';
+                value.textContent = d.value;
+                value.href = 'https://' + d.value;
+                value.target = '_blank';
+                value.rel = 'noopener noreferrer';
+            } else {
+                value = document.createElement('span');
+                value.className = 'sift-detail-value';
+                value.textContent = d.value;
+            }
             row.appendChild(value);
             detailsGrid.appendChild(row);
         });

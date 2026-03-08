@@ -5337,6 +5337,8 @@ body.light-mode .sm-choice-btn.sm-wrong {
 .sift-detail-row i { color: var(--text-muted); width: 14px; text-align: center; }
 .sift-detail-label { color: var(--text-muted); }
 .sift-detail-value { color: var(--text-primary); font-weight: 600; }
+a.sift-detail-link { color: var(--primary); text-decoration: underline; cursor: pointer; }
+a.sift-detail-link:hover { opacity: 0.8; }
 .sift-source-desc { color: var(--text-secondary); line-height: 1.5; font-size: 0.95em; }
 
 /* SIFT walkthrough */

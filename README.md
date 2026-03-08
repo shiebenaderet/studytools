@@ -43,7 +43,6 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 | Activity | Description |
 |----------|-------------|
 | **Tower Defense** | 3D tower defense — answer vocab to earn coins, build towers, survive 10 waves |
-| **Sketch & Match** | Two modes (term→image, image→term) with streak tracking |
 | **Wordle** | Guess the vocabulary term in 6 tries with definition clues |
 | **Hangman** | Classic word guessing with definitions |
 | **Flip Match** | Memory matching — pair terms to definitions |

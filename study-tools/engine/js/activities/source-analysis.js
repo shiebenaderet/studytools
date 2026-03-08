@@ -464,6 +464,7 @@ StudyEngine.registerActivity({
         var wrapper = document.getElementById('source-wrapper');
         if (!wrapper) return;
         while (wrapper.firstChild) wrapper.removeChild(wrapper.firstChild);
+        var self = this;
 
         var intro = document.createElement('div');
         intro.className = 'source-intro';
