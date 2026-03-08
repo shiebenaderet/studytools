@@ -5,6 +5,78 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.5.0] - 2026-03-07
+
+### Fixed
+- **"Explain it to me" dark mode contrast** — Text in expand boxes was nearly invisible in dark mode (hardcoded dark color on dark background); now uses theme variable
+- **Map Quiz "Atlantic Ocean" label** — Text was cut off by SVG viewBox; widened viewBox from 900→960, repositioned and rotated label to fit
+- **Map Quiz viewport** — Wider viewBox shows more of the map area including the Atlantic coast
+
+### Changed
+- Map Quiz border-radius and border styling improved
+
+## [5.4.0] - 2026-03-07
+
+### Added
+- **Deep linking to activities** — Share links like `?unit=early-republic#map-quiz` to open specific activities directly
+- URL hash updates when navigating activities, clears when returning home
+
+### Changed
+- **Map Quiz always unlocked** — No longer gated behind mastery; students can access it immediately
+
+## [5.3.0] - 2026-03-07
+
+### Added
+- **"Study Smart" badge** — Achievement earned by passing the How to Study comprehension quiz (5/6 correct)
+- Badge registered in achievements.js so it displays in the achievements panel
+
+## [5.2.0] - 2026-03-07
+
+### Added
+- **How to Study nudges** — New students redirected to How to Study page after first sign-in; returning students get a one-time toast nudge after 90 seconds
+- **Collapsible strategies** — How to Study page strategies now click-to-expand with chevron indicators
+- **Comprehension quiz** — 6-question quiz at the bottom of How to Study page; awards Study Smart badge at 5/6 correct
+- **Expand/Collapse All** toggle button for strategy cards
+- **Smart back navigation** — "Back to Study Tools" uses browser history when coming from the main app, preserving the user's previous state
+
+### Fixed
+- How to Study dark mode contrast for quiz feedback, letter badges, and badge earned text
+- Timeline "Show Years" toggle was broken (old wrapper not removed before re-rendering)
+- Short Answer select dropdown was unstyled browser default; now themed with proper spacing and label
+
+## [5.1.0] - 2026-03-07
+
+### Added
+- **Sketch & Match game** — Two modes (term→image, image→term) with streak tracking and weakness tracker integration
+- **"Make Your Own Example"** on flashcards — Students can write their own examples for terms, saved to localStorage
+- **Settings panel** — Single floating gear button replaces 3 separate floating buttons; slide-up panel with theme toggle, dyslexic font toggle, and search shortcut
+
+### Changed
+- Flashcard images enlarged from 140×120 to 220×200px and centered
+- Three floating buttons (theme, font, search) consolidated into single settings gear
+
+## [5.0.0] - 2026-03-07
+
+### Added
+- **Teacher Dashboard enhancements:**
+  - Version display badge in dashboard header
+  - Class Codes tab — create, view, copy, and delete class codes
+  - Scores tab — approve/reject student leaderboard entries with status badges
+  - Student editing modal — edit name, change class, delete student with cascading cleanup
+  - Activity Usage tab (renamed from Units) — per-unit stats with student counts, avg mastery, avg test scores, activity engagement bars
+
+## [4.2.0] - 2026-03-07
+
+### Added
+- **Map Quiz activity** — Click-to-identify 1802 US map with 24 regions (states + territories + foreign holdings)
+- **Cartographer achievement** — Badge for 100% map quiz with no mistakes
+
+### Fixed
+- Randomized practice test answer positions and question order
+- Crossword uses full terms
+- Timeline hides years by default
+- Added back button to activities
+
 ## [4.1.0] - 2026-03-06
 
 ### Added

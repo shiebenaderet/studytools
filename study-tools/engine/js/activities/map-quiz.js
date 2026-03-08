@@ -204,7 +204,7 @@ StudyEngine.registerActivity({
         svgWrap.className = 'mq-map-wrap';
 
         var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        svg.setAttribute('viewBox', '0 0 900 700');
+        svg.setAttribute('viewBox', '0 0 960 700');
         svg.setAttribute('class', 'mq-map');
         svg.id = 'mq-map';
 
@@ -212,7 +212,7 @@ StudyEngine.registerActivity({
         var bg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
         bg.setAttribute('x', '0');
         bg.setAttribute('y', '0');
-        bg.setAttribute('width', '900');
+        bg.setAttribute('width', '960');
         bg.setAttribute('height', '700');
         bg.setAttribute('fill', '#1a3a5c');
         bg.setAttribute('rx', '8');
@@ -220,11 +220,13 @@ StudyEngine.registerActivity({
 
         // Water label
         var waterLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        waterLabel.setAttribute('x', '830');
-        waterLabel.setAttribute('y', '450');
-        waterLabel.setAttribute('fill', 'rgba(255,255,255,0.15)');
-        waterLabel.setAttribute('font-size', '16');
+        waterLabel.setAttribute('x', '870');
+        waterLabel.setAttribute('y', '340');
+        waterLabel.setAttribute('fill', 'rgba(255,255,255,0.18)');
+        waterLabel.setAttribute('font-size', '18');
         waterLabel.setAttribute('font-style', 'italic');
+        waterLabel.setAttribute('text-anchor', 'middle');
+        waterLabel.setAttribute('transform', 'rotate(75, 870, 340)');
         waterLabel.textContent = 'Atlantic Ocean';
         svg.appendChild(waterLabel);
 
