@@ -277,8 +277,9 @@
             },
             "sourceNote": "Adapted from TCI Ch. 11, Sections 3-5 and American Yawp MS Ch. 6",
             "image": {
-              "src": "../units/early-republic/images/sources/chapter_parties.png",
-              "caption": "The birth of America's first political parties grew out of deep disagreements about the nation's future."
+              "src": "../units/early-republic/images/textbook/cabinet-dispute.jpg",
+              "caption": "Hamilton and Jefferson clash during a Cabinet meeting — their disagreements gave birth to America's first political parties.",
+              "credit": "Painting by Alonzo Chappel"
             }
           },
           {
@@ -309,8 +310,8 @@
             },
             "sourceNote": "Adapted from TCI Ch. 11, Sections 3-4 and American Yawp MS Ch. 6",
             "image": {
-              "src": "../units/early-republic/images/vocab/constitution.jpg",
-              "caption": "The Constitution — Federalists and Democratic-Republicans read it very differently.",
+              "src": "../units/early-republic/images/textbook/join-or-die.jpg",
+              "caption": "\"Join, or Die\" — Benjamin Franklin's famous cartoon urged the colonies to unite. The same debate over unity vs. independence continued between Federalists and Democratic-Republicans.",
               "float": "right"
             }
           },
@@ -334,8 +335,8 @@
             },
             "sourceNote": "Adapted from American Yawp MS Ch. 6 and class primary source activity",
             "image": {
-              "src": "../units/early-republic/images/vocab/declaration.jpg",
-              "caption": "The Declaration of Independence — a primary source that shaped American identity and ideals.",
+              "src": "../units/early-republic/images/portraits/adams.jpg",
+              "caption": "John Adams — Federalist president who signed the controversial Alien and Sedition Acts, testing the limits of free speech in the young republic.",
               "float": "left"
             }
           },
@@ -392,8 +393,8 @@
             },
             "sourceNote": "Summary of Segment 2 content",
             "image": {
-              "src": "../units/early-republic/images/vocab/election-day.jpg",
-              "caption": "Early American elections looked nothing like today — but they set the foundation for democratic traditions."
+              "src": "../units/early-republic/images/portraits/jefferson.jpg",
+              "caption": "Thomas Jefferson — his election in 1800 proved that power could transfer peacefully between rival parties."
             }
           }
         ]
