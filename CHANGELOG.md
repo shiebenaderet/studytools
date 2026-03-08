@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [7.0.3] - 2026-03-07
+
+### Fixed
+- **Source Analysis** — "Begin Analysis" button was broken (missing variable declaration caused silent error)
+- **SIFT Practice** — Source URLs are now clickable links that open in a new tab
+- **Activity card ordering** — Cards on Practice and Games tabs no longer shuffle randomly; order matches config
+
+### Removed
+- **Sketch & Match** — Disabled until unique images are available per term (shared images made matching impossible)
+
 ## [7.0.0] - 2026-03-07
 
 ### Added
