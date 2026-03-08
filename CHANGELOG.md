@@ -5,10 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [6.1.0] - 2026-03-07
+## [6.2.0] - 2026-03-07
+
+### Removed
+- **Map Quiz: British North America blob** — Removed the poorly-shaped British territory overlay; Great Lakes remain for geographic context
 
 ### Changed
 - **Music player auto-shuffle** — Playlist is shuffled on load and starts with shuffle enabled; each time the player opens, songs play in a different random order
+
+## [6.1.0] - 2026-03-07
 
 ## [6.0.0] - 2026-03-07
 

@@ -218,25 +218,6 @@ StudyEngine.registerActivity({
         bg.setAttribute('rx', '8');
         svg.appendChild(bg);
 
-        // British North America (non-interactive background)
-        var britishPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-        britishPath.setAttribute('d', 'M0,0 L960,0 L960,160 L850,130 L845,145 L830,135 L810,140 L800,155 L795,157 L772,169 L765,171 L761,172 L752,174 L750,175 L748,177 L746,178 L738,187 L737,189 L602,165 L600,164 L598,165 L597,167 L593,168 L586,168 L583,169 L579,173 L578,174 L577,174 L576,174 L575,174 L573,174 L571,173 L567,174 L565,174 L563,168 L562,167 L559,166 L557,167 L556,166 L553,164 L552,168 L551,169 L550,168 L547,162 L545,165 L544,164 L540,167 L538,169 L532,170 L532,171 L530,172 L528,174 L526,175 L524,176 L523,176 L522,176 L521,175 L519,174 L518,174 L516,175 L515,175 L516,173 L518,170 L519,169 L517,168 L515,168 L512,170 L506,173 L503,174 L501,173 L499,173 L497,173 L490,169 L488,167 L487,161 L493,155 L494,152 L487,147 L488,143 L491,137 L487,135 L485,134 L483,134 L481,134 L480,134 L480,136 L475,136 L475,134 L469,134 L469,133 L465,133 L462,131 L461,125 L460,120 L458,119 L456,119 L456,118 L455,117 L455,126 L447,117 L440,108 L430,100 L410,87 L385,80 L355,72 L320,68 L278,63 L230,60 L180,57 L120,55 L60,57 L0,60 Z');
-        britishPath.setAttribute('fill', '#2a5040');
-        britishPath.setAttribute('stroke', 'rgba(255,255,255,0.25)');
-        britishPath.setAttribute('stroke-width', '1.5');
-        britishPath.setAttribute('stroke-dasharray', '6,4');
-        svg.appendChild(britishPath);
-
-        var britishLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        britishLabel.setAttribute('x', '400');
-        britishLabel.setAttribute('y', '45');
-        britishLabel.setAttribute('fill', 'rgba(255,255,255,0.25)');
-        britishLabel.setAttribute('font-size', '14');
-        britishLabel.setAttribute('font-style', 'italic');
-        britishLabel.setAttribute('text-anchor', 'middle');
-        britishLabel.textContent = 'British North America';
-        svg.appendChild(britishLabel);
-
         // Great Lakes (simplified)
         var lakePaths = [
             // Lake Superior
