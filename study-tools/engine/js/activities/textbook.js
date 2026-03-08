@@ -124,48 +124,11 @@ StudyEngine.registerActivity({
         wrapper.className = 'tb-wrapper';
         wrapper.id = 'tb-wrapper';
 
-        // Header row with title and level picker
-        var header = document.createElement('div');
-        header.className = 'tb-header';
-        var headerLeft = document.createElement('div');
-        headerLeft.className = 'tb-header-title';
-        var headerIcon = document.createElement('i');
-        headerIcon.className = 'fas fa-book-open';
-        headerLeft.appendChild(headerIcon);
-        var headerTitle = document.createElement('span');
-        headerTitle.textContent = ' Textbook';
-        headerLeft.appendChild(headerTitle);
-        header.appendChild(headerLeft);
+        // Top bar: segment nav + level picker in one row
+        var topBar = document.createElement('div');
+        topBar.className = 'tb-top-bar';
 
-        // Reading level picker
-        var levelPicker = document.createElement('div');
-        levelPicker.className = 'tb-level-picker';
-        this._LEVELS.forEach(function(level) {
-            var btn = document.createElement('button');
-            btn.className = 'tb-level-btn' + (level.id === self._readingLevel ? ' active' : '');
-            btn.title = level.label;
-            var lvlIcon = document.createElement('i');
-            lvlIcon.className = level.icon;
-            btn.appendChild(lvlIcon);
-            btn.appendChild(document.createTextNode(' ' + level.label));
-            btn.addEventListener('click', function() {
-                self._readingLevel = level.id;
-                self._progress.readingLevel = level.id;
-                self._saveProgress();
-                // Re-render just the section content, not the whole page
-                self._renderSection(wrapper);
-                // Update picker active state
-                levelPicker.querySelectorAll('.tb-level-btn').forEach(function(b) {
-                    b.classList.remove('active');
-                });
-                btn.classList.add('active');
-            });
-            levelPicker.appendChild(btn);
-        });
-        header.appendChild(levelPicker);
-        wrapper.appendChild(header);
-
-        // Segment nav
+        // Segment nav (left side)
         var segNav = document.createElement('div');
         segNav.className = 'tb-seg-nav';
         segNav.id = 'tb-seg-nav';
@@ -194,35 +157,42 @@ StudyEngine.registerActivity({
             });
             segNav.appendChild(btn);
         });
-        wrapper.appendChild(segNav);
+        topBar.appendChild(segNav);
 
-        // Current segment info
+        // Reading level picker (right side)
+        var levelPicker = document.createElement('div');
+        levelPicker.className = 'tb-level-picker';
+        this._LEVELS.forEach(function(level) {
+            var btn = document.createElement('button');
+            btn.className = 'tb-level-btn' + (level.id === self._readingLevel ? ' active' : '');
+            btn.title = level.label;
+            var lvlIcon = document.createElement('i');
+            lvlIcon.className = level.icon;
+            btn.appendChild(lvlIcon);
+            btn.appendChild(document.createTextNode(' ' + level.label));
+            btn.addEventListener('click', function() {
+                self._readingLevel = level.id;
+                self._progress.readingLevel = level.id;
+                self._saveProgress();
+                self._renderSection(wrapper);
+                levelPicker.querySelectorAll('.tb-level-btn').forEach(function(b) {
+                    b.classList.remove('active');
+                });
+                btn.classList.add('active');
+            });
+            levelPicker.appendChild(btn);
+        });
+        topBar.appendChild(levelPicker);
+        wrapper.appendChild(topBar);
+
+        // Compact section pills (TOC)
         var seg = segments[this._currentSegment];
-        var segHeader = document.createElement('div');
-        segHeader.className = 'tb-seg-header';
-        var segTitle = document.createElement('h2');
-        segTitle.className = 'tb-seg-title';
-        segTitle.textContent = 'Segment ' + seg.number + ': ' + seg.title;
-        segHeader.appendChild(segTitle);
-        if (seg.subtitle) {
-            var segSub = document.createElement('div');
-            segSub.className = 'tb-seg-subtitle';
-            segSub.textContent = seg.subtitle;
-            segHeader.appendChild(segSub);
-        }
-        wrapper.appendChild(segHeader);
-
-        // Section nav (table of contents)
         var tocEl = document.createElement('div');
         tocEl.className = 'tb-toc';
-        var tocTitle = document.createElement('div');
-        tocTitle.className = 'tb-toc-title';
-        tocTitle.textContent = 'Sections';
-        tocEl.appendChild(tocTitle);
 
         seg.sections.forEach(function(section, si) {
             var tocItem = document.createElement('button');
-            tocItem.className = 'tb-toc-item' + (si === self._currentSection ? ' active' : '');
+            tocItem.className = 'tb-toc-pill' + (si === self._currentSection ? ' active' : '');
             var isRead = self._isSectionRead(seg.id, section.id);
             if (isRead) tocItem.classList.add('read');
 
@@ -232,13 +202,13 @@ StudyEngine.registerActivity({
             tocItem.appendChild(num);
 
             var tocText = document.createElement('span');
+            tocText.className = 'tb-toc-label';
             tocText.textContent = section.heading;
             tocItem.appendChild(tocText);
 
             if (isRead) {
                 var readIcon = document.createElement('i');
                 readIcon.className = 'fas fa-check';
-                readIcon.style.cssText = 'margin-left:auto;color:var(--success);font-size:0.8em;';
                 tocItem.appendChild(readIcon);
             }
 
@@ -246,6 +216,9 @@ StudyEngine.registerActivity({
                 self._currentSection = si;
                 self._renderSection(wrapper);
                 self._scrollToReading();
+                // Update active pill
+                tocEl.querySelectorAll('.tb-toc-pill').forEach(function(p) { p.classList.remove('active'); });
+                tocItem.classList.add('active');
             });
             tocEl.appendChild(tocItem);
         });

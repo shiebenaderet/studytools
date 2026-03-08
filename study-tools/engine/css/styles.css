@@ -5484,42 +5484,21 @@ a.sift-detail-link:hover { opacity: 0.8; }
 /* ===== Textbook Mode ===== */
 .tb-wrapper { max-width: 900px; margin: 0 auto; padding: 0 16px 40px; }
 
-.tb-header {
+/* Top bar: segments + level picker */
+.tb-top-bar {
     display: flex; align-items: center; justify-content: space-between;
-    font-size: 1.6em; font-weight: 700;
-    color: var(--primary); margin-bottom: 20px; padding-top: 10px;
+    gap: 12px; margin-bottom: 12px; padding-top: 8px; flex-wrap: wrap;
 }
-.tb-header-title { display: flex; align-items: center; }
-.tb-header-title i { margin-right: 6px; }
-
-/* Reading level picker */
-.tb-level-picker {
-    display: flex; gap: 4px; font-size: 0.5em;
-}
-.tb-level-btn {
-    padding: 6px 12px; border-radius: 8px; border: 1.5px solid var(--border-color);
-    background: var(--bg-card); color: var(--text-secondary); cursor: pointer;
-    font-family: inherit; font-size: 1em; font-weight: 500;
-    transition: all 0.2s ease; display: flex; align-items: center; gap: 5px;
-}
-.tb-level-btn:hover {
-    border-color: var(--primary); color: var(--primary);
-}
-.tb-level-btn.active {
-    background: var(--primary); color: #fff; border-color: var(--primary);
-}
-.tb-level-btn i { font-size: 0.9em; }
 
 /* Segment nav */
 .tb-seg-nav {
-    display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;
-    margin-bottom: 24px; padding: 0 8px;
+    display: flex; gap: 6px; flex-wrap: wrap;
 }
 .tb-seg-btn {
     background: var(--bg-card); border: 1px solid var(--border-card);
-    color: var(--text-secondary); padding: 8px 16px; border-radius: var(--radius-md);
-    font-size: 0.85em; cursor: pointer; transition: all 0.2s;
-    display: flex; align-items: center; gap: 4px;
+    color: var(--text-secondary); padding: 6px 14px; border-radius: var(--radius-md);
+    font-size: 0.82em; cursor: pointer; transition: all 0.2s;
+    display: flex; align-items: center; gap: 4px; font-family: inherit;
 }
 .tb-seg-btn:hover { border-color: var(--primary); color: var(--text-primary); }
 .tb-seg-btn.active {
@@ -5527,40 +5506,50 @@ a.sift-detail-link:hover { opacity: 0.8; }
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
-/* Segment header */
-.tb-seg-header { text-align: center; margin-bottom: 20px; }
-.tb-seg-title {
-    font-size: 1.4em; font-weight: 700; color: var(--text-primary); margin-bottom: 4px;
+/* Reading level picker */
+.tb-level-picker {
+    display: flex; gap: 4px;
 }
-.tb-seg-subtitle { color: var(--text-muted); font-size: 0.95em; }
+.tb-level-btn {
+    padding: 5px 10px; border-radius: 8px; border: 1.5px solid var(--border-color);
+    background: var(--bg-card); color: var(--text-secondary); cursor: pointer;
+    font-family: inherit; font-size: 0.8em; font-weight: 500;
+    transition: all 0.2s ease; display: flex; align-items: center; gap: 4px;
+}
+.tb-level-btn:hover {
+    border-color: var(--primary); color: var(--primary);
+}
+.tb-level-btn.active {
+    background: var(--primary); color: #fff; border-color: var(--primary);
+}
+.tb-level-btn i { font-size: 0.85em; }
 
-/* Table of contents */
+/* Section pills (compact TOC) */
 .tb-toc {
+    display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px;
+    padding: 0 2px;
+}
+.tb-toc-pill {
+    display: flex; align-items: center; gap: 5px;
     background: var(--bg-card); border: 1px solid var(--border-card);
-    border-radius: var(--radius-md); padding: 16px; margin-bottom: 24px;
-    box-shadow: var(--shadow-card);
+    color: var(--text-secondary); padding: 5px 12px; border-radius: 20px;
+    font-size: 0.8em; cursor: pointer; transition: all 0.2s;
+    font-family: inherit; white-space: nowrap;
 }
-.tb-toc-title {
-    font-weight: 700; font-size: 0.85em; text-transform: uppercase;
-    letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 10px;
+.tb-toc-pill:hover { border-color: var(--primary); color: var(--text-primary); }
+.tb-toc-pill.active {
+    background: rgba(79, 143, 247, 0.12); color: var(--primary);
+    border-color: var(--primary); font-weight: 600;
 }
-.tb-toc-item {
-    display: flex; align-items: center; gap: 10px; width: 100%;
-    background: none; border: none; color: var(--text-secondary);
-    padding: 8px 10px; border-radius: var(--radius-sm); cursor: pointer;
-    text-align: left; font-size: 0.92em; transition: all 0.15s;
-}
-.tb-toc-item:hover { background: var(--bg-surface); color: var(--text-primary); }
-.tb-toc-item.active {
-    background: rgba(79, 143, 247, 0.12); color: var(--primary); font-weight: 600;
-}
-.tb-toc-item.read { color: var(--text-muted); }
+.tb-toc-pill.read { color: var(--text-muted); }
+.tb-toc-pill.read .fas.fa-check { color: var(--success); font-size: 0.75em; }
 .tb-toc-num {
     display: inline-flex; align-items: center; justify-content: center;
-    width: 24px; height: 24px; border-radius: 50%; font-size: 0.8em; font-weight: 700;
+    width: 20px; height: 20px; border-radius: 50%; font-size: 0.75em; font-weight: 700;
     background: var(--bg-surface); color: var(--text-muted); flex-shrink: 0;
 }
-.tb-toc-item.active .tb-toc-num { background: var(--primary); color: #fff; }
+.tb-toc-pill.active .tb-toc-num { background: var(--primary); color: #fff; }
+.tb-toc-label { max-width: 140px; overflow: hidden; text-overflow: ellipsis; }
 
 /* Reading area */
 .tb-reading {
@@ -5752,13 +5741,16 @@ a.sift-detail-link:hover { opacity: 0.8; }
 /* Mobile responsive */
 @media (max-width: 600px) {
     .tb-reading { padding: 20px 16px; }
-    .tb-seg-nav { gap: 6px; }
-    .tb-seg-btn { padding: 6px 10px; font-size: 0.78em; }
+    .tb-top-bar { flex-direction: column; align-items: stretch; gap: 8px; }
+    .tb-seg-nav { justify-content: center; }
+    .tb-seg-btn { padding: 5px 10px; font-size: 0.75em; }
     .tb-seg-btn i { display: none; }
+    .tb-level-picker { justify-content: center; }
+    .tb-level-btn { padding: 4px 8px; font-size: 0.75em; }
+    .tb-toc { gap: 4px; }
+    .tb-toc-pill { padding: 4px 8px; font-size: 0.72em; }
+    .tb-toc-label { max-width: 100px; }
     .tb-section-heading { font-size: 1.15em; }
     .tb-content { font-size: 0.95em; }
     .tb-vocab-popup { max-width: calc(100vw - 32px); }
-    .tb-header { flex-direction: column; gap: 10px; }
-    .tb-level-picker { justify-content: center; }
-    .tb-level-btn { padding: 5px 10px; font-size: 0.9em; }
 }
