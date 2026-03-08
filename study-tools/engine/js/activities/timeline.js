@@ -57,6 +57,8 @@ StudyEngine.registerActivity({
         var self = this;
         toggleBtn.addEventListener('click', function() {
             self._showYears = !self._showYears;
+            var oldWrapper = document.getElementById('tl-wrapper');
+            if (oldWrapper) oldWrapper.remove();
             self.render(self._container, self._config);
         });
         controls.appendChild(toggleBtn);

@@ -1674,8 +1674,44 @@ body.light-mode .fc-explain-box {
     border-left: 4px solid var(--primary);
     padding: 15px;
     border-radius: 8px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     color: var(--text-secondary);
+}
+
+.sa-select-label {
+    display: block;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.95em;
+    margin-bottom: 8px;
+}
+
+.short-answer-container .filter-select {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1px solid var(--border-card);
+    background: var(--bg-surface);
+    color: var(--text-primary);
+    font-size: 0.95em;
+    font-family: var(--font-body);
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23a0aec0' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+    margin-bottom: 24px;
+    transition: border-color 0.2s;
+}
+.short-answer-container .filter-select:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+.short-answer-container .filter-select option {
+    background: var(--bg-card);
+    color: var(--text-primary);
 }
 
 .rubric {

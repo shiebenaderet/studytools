@@ -28,6 +28,12 @@ StudyEngine.registerActivity({
         wrapper.appendChild(instructions);
 
         // Question selector
+        const selectLabel = document.createElement('label');
+        selectLabel.className = 'sa-select-label';
+        selectLabel.setAttribute('for', 'sa-question-select');
+        selectLabel.textContent = 'Choose a question:';
+        wrapper.appendChild(selectLabel);
+
         const select = document.createElement('select');
         select.className = 'filter-select';
         select.id = 'sa-question-select';
