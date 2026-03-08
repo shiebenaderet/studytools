@@ -137,7 +137,7 @@ const MasteryManager = {
      * Games/Practice require at least 1 category mastered.
      */
     isActivityAccessible(unitId, config, activityId) {
-        const alwaysAccessible = ['flashcards', 'typing-practice', 'map-quiz'];
+        const alwaysAccessible = ['flashcards', 'typing-practice', 'map-quiz', 'textbook'];
         if (alwaysAccessible.includes(activityId)) return true;
         const categories = this.getCategories(config);
         if (categories.length === 0) return true;

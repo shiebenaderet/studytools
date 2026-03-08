@@ -1,4 +1,4 @@
-const CACHE_NAME = 'studytools-v17';
+const CACHE_NAME = 'studytools-v18';
 const APP_SHELL = [
     './',
     'index.html',

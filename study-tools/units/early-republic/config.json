@@ -12,6 +12,7 @@
     },
     "activities": [
         "flashcards",
+        "textbook",
         "resources",
         "typing-practice",
         "practice-test",
