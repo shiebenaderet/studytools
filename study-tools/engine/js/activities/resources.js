@@ -213,17 +213,6 @@ StudyEngine.registerActivity({
                 wiki.appendChild(document.createTextNode(' Wikipedia'));
                 links.appendChild(wiki);
 
-                // YouTube link
-                var yt = document.createElement('a');
-                yt.className = 'res-link-btn res-link-youtube';
-                yt.href = 'https://www.youtube.com/results?search_query=' + encodeURIComponent(item.term + ' history for kids');
-                yt.target = '_blank';
-                yt.rel = 'noopener noreferrer';
-                var ytIcon = document.createElement('i');
-                ytIcon.className = 'fab fa-youtube';
-                yt.appendChild(ytIcon);
-                yt.appendChild(document.createTextNode(' YouTube'));
-                links.appendChild(yt);
 
                 card.appendChild(links);
                 termsList.appendChild(card);
