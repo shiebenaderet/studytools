@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.5.0] - 2026-03-07
+
+### Added
+- **Auto study time tracking** — Time spent in activities now automatically counts toward study time; pauses after 60 seconds of inactivity or when tab is hidden; resumes on interaction
+- **Fill-in-the-Blank feeds flashcards** — Wrong answers mark corresponding vocab terms as "Again" in flashcards and add them to the weakness tracker; feedback message shown on results screen
+- **Resource Library mastery indicators** — Each term shows a colored badge (Mastered/Learning/Study) based on flashcard ratings; category headers show mastery counts (e.g., "3/7 mastered")
+
+### Changed
+- **Resource Library: Kids Wiki link** — Replaced Kiddle search results link with direct link to Kiddle encyclopedia article pages
+- **Home page name deduplication** — Student name now only appears once (header greeting); removed from "Here's how to study" title and progress heading
+
 ## [6.4.0] - 2026-03-07
 
 ### Changed

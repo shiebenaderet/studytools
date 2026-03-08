@@ -9,6 +9,11 @@ StudyEngine.registerActivity({
     render: function(container, config) {
         var vocabulary = config.vocabulary || [];
 
+        // Load flashcard mastery data
+        var fcProgress = ProgressManager.getActivityProgress(config.unit.id, 'flashcards') || {};
+        var masteredTerms = fcProgress.mastered || [];
+        var ratings = fcProgress.ratings || {};
+
         // Group terms by category
         var categoryMap = {};
         var categoryOrder = [];
@@ -74,9 +79,14 @@ StudyEngine.registerActivity({
 
             header.appendChild(headerLeft);
 
+            var masteredCount = 0;
+            terms.forEach(function(t) {
+                if (masteredTerms.indexOf(t.term) !== -1 || ratings[t.term] === 'easy') masteredCount++;
+            });
+
             var countBadge = document.createElement('span');
             countBadge.className = 'res-count-badge';
-            countBadge.textContent = terms.length + (terms.length === 1 ? ' term' : ' terms');
+            countBadge.textContent = masteredCount + '/' + terms.length + ' mastered';
             header.appendChild(countBadge);
 
             section.appendChild(header);
@@ -103,10 +113,47 @@ StudyEngine.registerActivity({
                 var termInfo = document.createElement('div');
                 termInfo.className = 'res-term-info';
 
-                var termName = document.createElement('div');
+                var termNameRow = document.createElement('div');
+                termNameRow.className = 'res-term-name-row';
+
+                var termName = document.createElement('span');
                 termName.className = 'res-term-name';
                 termName.textContent = item.term;
-                termInfo.appendChild(termName);
+                termNameRow.appendChild(termName);
+
+                // Mastery indicator
+                var rating = ratings[item.term];
+                var isMastered = masteredTerms.indexOf(item.term) !== -1;
+                if (isMastered || rating === 'easy') {
+                    var badge = document.createElement('span');
+                    badge.className = 'res-mastery-badge res-mastery-mastered';
+                    badge.title = 'Mastered';
+                    var badgeIcon = document.createElement('i');
+                    badgeIcon.className = 'fas fa-check-circle';
+                    badge.appendChild(badgeIcon);
+                    badge.appendChild(document.createTextNode(' Mastered'));
+                    termNameRow.appendChild(badge);
+                } else if (rating === 'again' || rating === 'hard') {
+                    var badge = document.createElement('span');
+                    badge.className = 'res-mastery-badge res-mastery-study';
+                    badge.title = 'Needs review';
+                    var badgeIcon = document.createElement('i');
+                    badgeIcon.className = 'fas fa-redo';
+                    badge.appendChild(badgeIcon);
+                    badge.appendChild(document.createTextNode(' Study'));
+                    termNameRow.appendChild(badge);
+                } else if (rating === 'good') {
+                    var badge = document.createElement('span');
+                    badge.className = 'res-mastery-badge res-mastery-learning';
+                    badge.title = 'Learning';
+                    var badgeIcon = document.createElement('i');
+                    badgeIcon.className = 'fas fa-book-open';
+                    badge.appendChild(badgeIcon);
+                    badge.appendChild(document.createTextNode(' Learning'));
+                    termNameRow.appendChild(badge);
+                }
+
+                termInfo.appendChild(termNameRow);
 
                 var termDef = document.createElement('div');
                 termDef.className = 'res-term-def';
@@ -142,16 +189,16 @@ StudyEngine.registerActivity({
                 var links = document.createElement('div');
                 links.className = 'res-links';
 
-                // Kiddle link
+                // Kids encyclopedia link
                 var kiddle = document.createElement('a');
                 kiddle.className = 'res-link-btn res-link-kiddle';
-                kiddle.href = 'https://www.kiddle.co/s.php?q=' + encodeURIComponent(item.term + ' history');
+                kiddle.href = 'https://wiki.kiddle.co/' + encodeURIComponent(item.term.replace(/ /g, '_'));
                 kiddle.target = '_blank';
                 kiddle.rel = 'noopener noreferrer';
                 var kiddleIcon = document.createElement('i');
-                kiddleIcon.className = 'fas fa-search';
+                kiddleIcon.className = 'fas fa-child';
                 kiddle.appendChild(kiddleIcon);
-                kiddle.appendChild(document.createTextNode(' Kiddle'));
+                kiddle.appendChild(document.createTextNode(' Kids Wiki'));
                 links.appendChild(kiddle);
 
                 // Wikipedia link

@@ -8,7 +8,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 
 [![Live Site](https://img.shields.io/badge/Live_Site-study.mrbsocialstudies.org-1669C5?style=for-the-badge&logo=google-chrome&logoColor=white)](https://study.mrbsocialstudies.org)
 [![License](https://img.shields.io/badge/License-Educational_Use-22c55e?style=for-the-badge)](#license)
-[![Version](https://img.shields.io/badge/Version-6.2.0-f59e0b?style=for-the-badge)](#)
+[![Version](https://img.shields.io/badge/Version-6.5.0-f59e0b?style=for-the-badge)](#)
 
 ---
 
@@ -29,7 +29,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 | **Short Answer** | Visual card-based question selector with topic images, color-coded categories, and key term chips |
 | **Source Analysis** | Primary source analysis using the SIFT method with scoring |
 | **Typing Practice** | Monkeytype-inspired typing with full passages and per-term snippets |
-| **Resource Library** | Searchable vocabulary reference with Wikipedia and YouTube links |
+| **Resource Library** | Searchable vocabulary reference with mastery indicators, Wikipedia, Kids Wiki, and YouTube links |
 | **How to Study** | Interactive study strategies page with comprehension quiz and Study Smart badge |
 
 ### 📝 Practice
@@ -57,7 +57,8 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 
 ## 🧠 Smart Learning
 
-- **Cross-activity weakness tracking** — wrong answers feed a shared tracker that surfaces weak terms across Flashcards, Practice Test, Lightning Round, and Typing Practice
+- **Cross-activity weakness tracking** — wrong answers feed a shared tracker that surfaces weak terms across Flashcards, Practice Test, Fill-in-the-Blank, Lightning Round, and Typing Practice
+- **Auto study time tracking** — time in activities counts automatically; pauses on inactivity or hidden tab
 - **Mastery gating** — activities unlock progressively as students demonstrate mastery
 - **Achievement system** — unlockable badges with confetti for milestones
 - **Guest mode** — parents and visitors can browse without entering a name

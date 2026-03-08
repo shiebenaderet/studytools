@@ -434,6 +434,11 @@ StudyEngine.registerActivity({
             perfect.className = 'fib-perfect';
             perfect.textContent = 'Perfect score!';
             scoreDiv.appendChild(perfect);
+        } else {
+            var feedbackMsg = document.createElement('div');
+            feedbackMsg.className = 'fib-feedback-msg';
+            feedbackMsg.textContent = 'Missed terms have been sent back to your flashcards for review.';
+            scoreDiv.appendChild(feedbackMsg);
         }
 
         wrapper.appendChild(scoreDiv);
@@ -459,11 +464,71 @@ StudyEngine.registerActivity({
         this._attempts++;
         if (correct > this._bestScore) this._bestScore = correct;
 
+        // Track wrong answers in weakness tracker and flashcards
+        this._trackWrongAnswers();
+
         if (typeof AchievementManager !== 'undefined') {
             AchievementManager.checkAndAward({ activity: 'fill-in-blank', score: pct, event: correct === total ? 'perfect' : 'complete', totalCorrect: correct });
         }
 
         this._saveProgress();
+    },
+
+    _trackWrongAnswers() {
+        var config = this._config;
+        if (!config || !config.vocabulary) return;
+        var unitId = config.unit.id;
+        var vocab = config.vocabulary;
+        var self = this;
+
+        // Collect wrong answer terms
+        var wrongTerms = [];
+        this._sentences.forEach(function(item, index) {
+            var placed = self._answers[index] || '';
+            if (placed.toLowerCase() !== item.answer.toLowerCase()) {
+                wrongTerms.push(item.answer);
+            }
+        });
+
+        if (wrongTerms.length === 0) return;
+
+        // Update weakness tracker
+        var weakData = ProgressManager.load(unitId, 'weakness_tracker') || { terms: {} };
+        for (var i = 0; i < wrongTerms.length; i++) {
+            // Find matching vocab term (case-insensitive)
+            for (var j = 0; j < vocab.length; j++) {
+                if (vocab[j].term.toLowerCase() === wrongTerms[i].toLowerCase()) {
+                    weakData.terms[vocab[j].term] = (weakData.terms[vocab[j].term] || 0) + 1;
+                }
+            }
+        }
+        ProgressManager.save(unitId, 'weakness_tracker', weakData);
+
+        // Mark wrong terms in flashcards as 'again'
+        var fcProgress = ProgressManager.getActivityProgress(unitId, 'flashcards') || {};
+        var mastered = fcProgress.mastered ? fcProgress.mastered.slice() : [];
+        var ratings = fcProgress.ratings ? Object.assign({}, fcProgress.ratings) : {};
+        var changed = false;
+
+        for (var i = 0; i < wrongTerms.length; i++) {
+            for (var j = 0; j < vocab.length; j++) {
+                if (vocab[j].term.toLowerCase() === wrongTerms[i].toLowerCase()) {
+                    ratings[vocab[j].term] = 'again';
+                    var mIdx = mastered.indexOf(vocab[j].term);
+                    if (mIdx !== -1) {
+                        mastered.splice(mIdx, 1);
+                    }
+                    changed = true;
+                }
+            }
+        }
+
+        if (changed) {
+            ProgressManager.saveActivityProgress(unitId, 'flashcards', {
+                mastered: mastered,
+                ratings: ratings
+            });
+        }
     },
 
     _saveProgress() {

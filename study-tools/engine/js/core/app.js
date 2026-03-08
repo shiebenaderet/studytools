@@ -1,3 +1,77 @@
+// Tracks active study time based on user interaction
+const ActivityTimer = {
+    _active: false,
+    _elapsed: 0,
+    _lastTick: 0,
+    _lastInteraction: 0,
+    _interval: null,
+    _unitId: null,
+    IDLE_TIMEOUT: 60000, // pause after 60s of no interaction
+
+    start(unitId) {
+        this.stop(); // save any previous session
+        this._unitId = unitId;
+        this._elapsed = 0;
+        this._active = true;
+        this._lastTick = Date.now();
+        this._lastInteraction = Date.now();
+        this._interval = setInterval(() => this._tick(), 1000);
+        this._addListeners();
+    },
+
+    stop() {
+        if (this._interval) {
+            this._tick(); // capture final partial second
+            clearInterval(this._interval);
+            this._interval = null;
+        }
+        this._removeListeners();
+        if (this._unitId && this._elapsed > 0) {
+            ProgressManager.addStudyTime(this._unitId, this._elapsed);
+        }
+        this._active = false;
+        this._elapsed = 0;
+        this._unitId = null;
+    },
+
+    _tick() {
+        var now = Date.now();
+        var idle = now - this._lastInteraction > this.IDLE_TIMEOUT;
+        var hidden = document.hidden;
+        if (!idle && !hidden && this._active) {
+            this._elapsed += now - this._lastTick;
+        }
+        this._lastTick = now;
+    },
+
+    _onInteraction() {
+        ActivityTimer._lastInteraction = Date.now();
+    },
+
+    _onVisibility() {
+        if (!document.hidden) {
+            ActivityTimer._lastTick = Date.now();
+            ActivityTimer._lastInteraction = Date.now();
+        }
+    },
+
+    _addListeners() {
+        document.addEventListener('click', this._onInteraction);
+        document.addEventListener('keydown', this._onInteraction);
+        document.addEventListener('scroll', this._onInteraction, true);
+        document.addEventListener('touchstart', this._onInteraction);
+        document.addEventListener('visibilitychange', this._onVisibility);
+    },
+
+    _removeListeners() {
+        document.removeEventListener('click', this._onInteraction);
+        document.removeEventListener('keydown', this._onInteraction);
+        document.removeEventListener('scroll', this._onInteraction, true);
+        document.removeEventListener('touchstart', this._onInteraction);
+        document.removeEventListener('visibilitychange', this._onVisibility);
+    }
+};
+
 const StudyEngine = {
     config: null,
     activities: {},
@@ -292,6 +366,9 @@ const StudyEngine = {
 
         activity.activate?.();
 
+        // Track active study time
+        ActivityTimer.start(this.config.unit.id);
+
         // Update streak
         ProgressManager.updateStreak(this.config.unit.id);
     },
@@ -354,6 +431,7 @@ const StudyEngine = {
     },
 
     showHome() {
+        ActivityTimer.stop();
         document.getElementById('sub-nav').classList.remove('active');
         document.getElementById('activity-container').classList.remove('active');
         document.getElementById('home-section').classList.add('active');
@@ -375,6 +453,7 @@ const StudyEngine = {
     },
 
     showLeaderboard() {
+        ActivityTimer.stop();
         document.body.classList.remove('activity-active');
         var topbar = document.getElementById('activity-topbar');
         if (topbar) topbar.textContent = '';
@@ -396,6 +475,7 @@ const StudyEngine = {
     },
 
     showTools() {
+        ActivityTimer.stop();
         document.body.classList.remove('activity-active');
         var topbar = document.getElementById('activity-topbar');
         if (topbar) topbar.textContent = '';
@@ -465,12 +545,9 @@ const StudyEngine = {
             const flow = document.createElement('div');
             flow.className = 'home-flow';
 
-            const homeFirstName = ProgressManager.getFirstName();
             const flowTitle = document.createElement('h2');
             flowTitle.className = 'home-flow-title';
-            flowTitle.textContent = homeFirstName
-                ? 'Hey ' + homeFirstName + '! Here\u2019s how to study:'
-                : 'Here\u2019s how to study:';
+            flowTitle.textContent = 'Here\u2019s how to study:';
             flow.appendChild(flowTitle);
 
             const steps = [
@@ -798,6 +875,9 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(() => {});
 });
+
+// Save study time when tab closes
+window.addEventListener('beforeunload', () => ActivityTimer.stop());
 
 // Close modals on overlay click
 document.addEventListener('click', (e) => {

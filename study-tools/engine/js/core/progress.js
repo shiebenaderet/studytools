@@ -97,8 +97,7 @@ const ProgressManager = {
         statsContainer.textContent = '';
 
         const heading = document.createElement('h2');
-        const firstName = this.getFirstName();
-        heading.textContent = firstName ? firstName + '\u2019s Progress' : 'Your Progress';
+        heading.textContent = 'Your Progress';
         statsContainer.appendChild(heading);
 
         const grid = document.createElement('div');
