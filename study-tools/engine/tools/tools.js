@@ -595,7 +595,15 @@ const StudyTools = {
             .then(data => {
                 this._musicTracks = data.tracks || data;
                 this._musicArtists = data.artists || {};
+                // Shuffle playlist on load
+                for (var i = this._musicTracks.length - 1; i > 0; i--) {
+                    var j = Math.floor(Math.random() * (i + 1));
+                    var tmp = this._musicTracks[i];
+                    this._musicTracks[i] = this._musicTracks[j];
+                    this._musicTracks[j] = tmp;
+                }
                 this._musicIndex = 0;
+                this._musicShuffle = true;
                 this._buildMusicPlayer();
             })
             .catch(() => {
@@ -719,7 +727,7 @@ const StudyTools = {
         controls.className = 'music-controls';
 
         const shuffleBtn = document.createElement('button');
-        shuffleBtn.className = 'music-ctrl-btn music-mode-btn';
+        shuffleBtn.className = 'music-ctrl-btn music-mode-btn' + (this._musicShuffle ? ' active' : '');
         shuffleBtn.id = 'music-shuffle-btn';
         const shuffleIcon = document.createElement('i');
         shuffleIcon.className = 'fas fa-random';
