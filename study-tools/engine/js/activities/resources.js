@@ -189,16 +189,16 @@ StudyEngine.registerActivity({
                 var links = document.createElement('div');
                 links.className = 'res-links';
 
-                // Kids encyclopedia link
+                // Simple English Wikipedia link
                 var kiddle = document.createElement('a');
                 kiddle.className = 'res-link-btn res-link-kiddle';
-                kiddle.href = 'https://kids.kiddle.co/' + encodeURIComponent(item.term.replace(/ /g, '_'));
+                kiddle.href = 'https://simple.wikipedia.org/wiki/' + encodeURIComponent(item.term.replace(/ /g, '_'));
                 kiddle.target = '_blank';
                 kiddle.rel = 'noopener noreferrer';
                 var kiddleIcon = document.createElement('i');
-                kiddleIcon.className = 'fas fa-child';
+                kiddleIcon.className = 'fas fa-book';
                 kiddle.appendChild(kiddleIcon);
-                kiddle.appendChild(document.createTextNode(' Kids Wiki'));
+                kiddle.appendChild(document.createTextNode(' Simple Wiki'));
                 links.appendChild(kiddle);
 
                 // Wikipedia link
