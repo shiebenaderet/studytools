@@ -81,7 +81,14 @@ const StudyEngine = {
 
         await Promise.all(loadPromises);
         this.buildNav();
-        this.showHome();
+
+        // Check for deep link: #activity-id in URL hash
+        var hash = window.location.hash.replace('#', '');
+        if (hash && this.activities[hash]) {
+            this.activateActivity(hash);
+        } else {
+            this.showHome();
+        }
     },
 
     registerActivity(activity) {
@@ -263,6 +270,9 @@ const StudyEngine = {
         }
 
         this.activeActivity = activityId;
+        // Update URL hash for deep linking (replace state to avoid polluting history)
+        history.replaceState(null, '', '#' + activityId);
+
         const container = document.getElementById('activity-container');
         container.textContent = '';
         container.classList.add('active');
@@ -347,6 +357,9 @@ const StudyEngine = {
         document.getElementById('sub-nav').classList.remove('active');
         document.getElementById('activity-container').classList.remove('active');
         document.getElementById('home-section').classList.add('active');
+
+        // Clear URL hash
+        if (window.location.hash) history.replaceState(null, '', window.location.pathname + window.location.search);
 
         // Restore full header
         document.body.classList.remove('activity-active');
