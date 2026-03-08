@@ -2871,7 +2871,7 @@ body.timer-active header {
 
 /* Sentence card (one at a time) */
 .fib-sentence-card { background: var(--bg-elevated); padding: 20px; border-radius: 12px; border: 1px solid var(--border-card); line-height: 1.8; font-size: 1.1em; color: var(--text-primary); box-shadow: var(--shadow-card); }
-.fib-sentence-card.fib-single { padding: 28px 24px; font-size: 1.15em; min-height: 80px; display: flex; flex-wrap: wrap; align-items: center; }
+.fib-sentence-card.fib-single { padding: 28px 24px; font-size: 1.15em; min-height: 80px; }
 
 /* Blank slots */
 .blank-slot { display: inline-block; min-width: 120px; padding: 4px 12px; border-bottom: 3px solid var(--primary); text-align: center; cursor: pointer; transition: all 0.2s; margin: 0 4px; font-weight: 600; color: var(--primary); border-radius: 4px; }
