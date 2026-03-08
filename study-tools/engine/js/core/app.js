@@ -385,7 +385,15 @@ const StudyEngine = {
 
     _goBackToGroup(activity) {
         const groups = { study: [], practice: [], games: [] };
-        Object.values(this.activities).forEach(a => {
+        const configOrder = (this.config && this.config.activities) || [];
+        var sortedActivities = Object.values(this.activities).sort(function(a, b) {
+            var ai = configOrder.indexOf(a.id);
+            var bi = configOrder.indexOf(b.id);
+            if (ai === -1) ai = 999;
+            if (bi === -1) bi = 999;
+            return ai - bi;
+        });
+        sortedActivities.forEach(a => {
             const cat = a.category || 'games';
             if (groups[cat]) groups[cat].push(a);
         });
