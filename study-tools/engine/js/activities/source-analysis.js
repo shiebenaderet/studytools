@@ -488,45 +488,6 @@ StudyEngine.registerActivity({
         desc.textContent = 'Examine historical sources from the Early Republic. For each source, decide if it is a primary source (created during the time period) or a secondary source (created later by someone studying the events). Then answer comprehension questions to deepen your understanding.';
         intro.appendChild(desc);
 
-        // SIFT method card
-        var sift = document.createElement('div');
-        sift.className = 'source-sift-card';
-
-        var siftTitle = document.createElement('h3');
-        siftTitle.textContent = 'Use the SIFT Method';
-        siftTitle.style.color = 'var(--primary)';
-        siftTitle.style.marginBottom = '10px';
-        sift.appendChild(siftTitle);
-
-        var steps = [
-            { letter: 'S', word: 'Stop', desc: 'Pause before reacting. What are you looking at?' },
-            { letter: 'I', word: 'Investigate', desc: 'Who created this source? What is their perspective?' },
-            { letter: 'F', word: 'Find', desc: 'Can you find other sources that confirm this information?' },
-            { letter: 'T', word: 'Trace', desc: 'Where did this source originally come from?' }
-        ];
-
-        var self = this;
-        steps.forEach(function(step) {
-            var row = document.createElement('div');
-            row.className = 'source-sift-step';
-
-            var letter = document.createElement('span');
-            letter.className = 'source-sift-letter';
-            letter.textContent = step.letter;
-            row.appendChild(letter);
-
-            var content = document.createElement('div');
-            var bold = document.createElement('strong');
-            bold.textContent = step.word + ': ';
-            content.appendChild(bold);
-            content.appendChild(document.createTextNode(step.desc));
-            row.appendChild(content);
-
-            sift.appendChild(row);
-        });
-
-        intro.appendChild(sift);
-
         if (this._stats.completed > 0) {
             var statsEl = document.createElement('p');
             statsEl.style.color = 'var(--text-muted)';

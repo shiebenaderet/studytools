@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [7.0.0] - 2026-03-07
+
+### Added
+- **SIFT Practice activity** — Evaluate 6 real sources about the Early Republic using the SIFT method (Stop, Investigate, Find, Trace):
+  - 3 reliable sources: Founders Online (National Archives), Mount Vernon Digital Encyclopedia, Monticello Spurious Quotations
+  - 3 unreliable sources: PragerU AI-generated founding father videos, QuoteFancy unsourced quotes, Pinterest quote boards
+  - Guided SIFT walkthrough with note-taking for each step
+  - Reliable/Unreliable verdict buttons with scoring
+  - Results page with detailed explanations, SIFT breakdowns, and student notes review
+  - Source screenshots, metadata (author, URL, date, publication)
+
+### Changed
+- **Source Analysis** — Removed SIFT method card from intro (moved to dedicated SIFT Practice activity); now focuses on primary vs. secondary source identification
+
 ## [6.6.0] - 2026-03-07
 
 ### Added
