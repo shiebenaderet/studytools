@@ -185,50 +185,79 @@ StudyEngine.registerActivity({
         topBar.appendChild(levelPicker);
         wrapper.appendChild(topBar);
 
-        // Compact section pills (TOC)
+        // Body: sidebar tabs + reading area
         var seg = segments[this._currentSegment];
-        var tocEl = document.createElement('div');
-        tocEl.className = 'tb-toc';
+        var body = document.createElement('div');
+        body.className = 'tb-body';
+
+        // Sidebar with section tabs
+        var sidebar = document.createElement('div');
+        sidebar.className = 'tb-sidebar';
+        sidebar.id = 'tb-sidebar';
+
+        // Toggle button to collapse/expand
+        var toggle = document.createElement('button');
+        toggle.className = 'tb-sidebar-toggle';
+        toggle.title = 'Toggle sections';
+        var toggleIcon = document.createElement('i');
+        toggleIcon.className = 'fas fa-bars';
+        toggle.appendChild(toggleIcon);
+        toggle.addEventListener('click', function() {
+            sidebar.classList.toggle('collapsed');
+            toggleIcon.className = sidebar.classList.contains('collapsed') ? 'fas fa-bars' : 'fas fa-bars';
+        });
+        sidebar.appendChild(toggle);
+
+        // Section tab list
+        var tabList = document.createElement('div');
+        tabList.className = 'tb-tab-list';
 
         seg.sections.forEach(function(section, si) {
-            var tocItem = document.createElement('button');
-            tocItem.className = 'tb-toc-pill' + (si === self._currentSection ? ' active' : '');
+            var tab = document.createElement('button');
+            tab.className = 'tb-tab' + (si === self._currentSection ? ' active' : '');
             var isRead = self._isSectionRead(seg.id, section.id);
-            if (isRead) tocItem.classList.add('read');
+            if (isRead) tab.classList.add('read');
 
             var num = document.createElement('span');
-            num.className = 'tb-toc-num';
+            num.className = 'tb-tab-num';
             num.textContent = (si + 1);
-            tocItem.appendChild(num);
+            tab.appendChild(num);
 
-            var tocText = document.createElement('span');
-            tocText.className = 'tb-toc-label';
-            tocText.textContent = section.heading;
-            tocItem.appendChild(tocText);
+            var tabText = document.createElement('span');
+            tabText.className = 'tb-tab-label';
+            tabText.textContent = section.heading;
+            tab.appendChild(tabText);
 
             if (isRead) {
                 var readIcon = document.createElement('i');
                 readIcon.className = 'fas fa-check';
-                tocItem.appendChild(readIcon);
+                readIcon.style.cssText = 'margin-left:auto;color:var(--success);font-size:0.7em;flex-shrink:0;';
+                tab.appendChild(readIcon);
             }
 
-            tocItem.addEventListener('click', function() {
+            tab.addEventListener('click', function() {
                 self._currentSection = si;
                 self._renderSection(wrapper);
                 self._scrollToReading();
-                // Update active pill
-                tocEl.querySelectorAll('.tb-toc-pill').forEach(function(p) { p.classList.remove('active'); });
-                tocItem.classList.add('active');
+                tabList.querySelectorAll('.tb-tab').forEach(function(t) { t.classList.remove('active'); });
+                tab.classList.add('active');
+                // Auto-collapse sidebar on mobile
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.add('collapsed');
+                }
             });
-            tocEl.appendChild(tocItem);
+            tabList.appendChild(tab);
         });
-        wrapper.appendChild(tocEl);
+        sidebar.appendChild(tabList);
+        body.appendChild(sidebar);
 
         // Reading area
         var readingArea = document.createElement('div');
         readingArea.className = 'tb-reading';
         readingArea.id = 'tb-reading';
-        wrapper.appendChild(readingArea);
+        body.appendChild(readingArea);
+
+        wrapper.appendChild(body);
 
         // Progress bar
         var progressWrap = document.createElement('div');
