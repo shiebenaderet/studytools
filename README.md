@@ -25,7 +25,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 ### 📖 Study
 | Activity | Description |
 |----------|-------------|
-| **Textbook** | Interactive reading with vocab highlighting, primary source quotes, Key Idea callouts, Quick Checks, and reading progress tracking |
+| **Textbook** | Interactive reading with 3 reading levels (Easier/On Grade/Challenge), collapsible sidebar navigation, vocab highlighting, primary source quotes, Key Idea callouts, Quick Checks, and reading progress tracking |
 | **Flashcards** | Anki-style spaced repetition with 3D flip animation, confidence rating, and "Make Your Own Example" |
 | **Short Answer** | Visual card-based question selector with topic images, color-coded categories, and key term chips |
 | **Source Analysis** | Primary source analysis using the SIFT method with scoring |

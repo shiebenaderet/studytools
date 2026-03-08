@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [7.1.0] - 2026-03-08
+
+### Added
+- **Textbook activity** — Interactive reading experience with full Early Republic content (4 segments, 24 sections):
+  - 3 non-stigmatizing reading levels: Easier, On Grade, Challenge
+  - Collapsible sidebar navigation with section tabs
+  - Vocab term highlighting with popup definitions
+  - Primary source quotes, Key Idea callouts, Stop & Think prompts, Quick Check quizzes
+  - Per-section "Mark as Read" with progress tracking
+  - Remembers last position and reading level across sessions
+  - Always accessible (no mastery gating)
+
+### Changed
+- Textbook layout — compact top bar (segment nav + level picker in one row), vertical sidebar tabs replace horizontal pills
+
 ## [7.0.3] - 2026-03-07
 
 ### Fixed
