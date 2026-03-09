@@ -305,10 +305,31 @@ StudyEngine.registerActivity({
         var section = seg.sections[this._currentSection];
         if (!section) return;
 
-        // Section heading
+        // Section heading with copy-link button
         var heading = document.createElement('h3');
         heading.className = 'tb-section-heading';
-        heading.textContent = section.heading;
+        var headingText = document.createElement('span');
+        headingText.textContent = section.heading;
+        heading.appendChild(headingText);
+
+        var linkBtn = document.createElement('button');
+        linkBtn.className = 'tb-link-btn';
+        linkBtn.title = 'Copy link to this section';
+        var linkIcon = document.createElement('i');
+        linkIcon.className = 'fas fa-link';
+        linkBtn.appendChild(linkIcon);
+        linkBtn.addEventListener('click', function() {
+            var url = window.location.origin + window.location.pathname + window.location.search + '#textbook/' + seg.id + '/' + section.id;
+            navigator.clipboard.writeText(url).then(function() {
+                linkIcon.className = 'fas fa-check';
+                linkBtn.classList.add('copied');
+                setTimeout(function() {
+                    linkIcon.className = 'fas fa-link';
+                    linkBtn.classList.remove('copied');
+                }, 2000);
+            });
+        });
+        heading.appendChild(linkBtn);
         readingArea.appendChild(heading);
 
         // Section image (figure with caption)

@@ -5582,7 +5582,16 @@ a.sift-detail-link:hover { opacity: 0.8; }
     font-size: 1.3em; font-weight: 700; color: var(--text-primary);
     margin-bottom: 6px; padding-left: 14px;
     border-left: 4px solid var(--primary);
+    display: flex; align-items: center; gap: 10px;
 }
+.tb-link-btn {
+    background: none; border: none; color: var(--text-muted); cursor: pointer;
+    font-size: 0.6em; padding: 4px 6px; border-radius: var(--radius-sm);
+    opacity: 0; transition: all 0.2s; flex-shrink: 0;
+}
+.tb-section-heading:hover .tb-link-btn { opacity: 1; }
+.tb-link-btn:hover { color: var(--primary); background: rgba(79, 143, 247, 0.1); }
+.tb-link-btn.copied { color: var(--success); opacity: 1; }
 
 .tb-source-note {
     font-size: 0.78em; color: var(--text-muted); margin-bottom: 18px;
