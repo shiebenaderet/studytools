@@ -227,7 +227,7 @@ StudyEngine.registerActivity({
         toggle.appendChild(toggleIcon);
         toggle.addEventListener('click', function() {
             sidebar.classList.toggle('collapsed');
-            toggleIcon.className = sidebar.classList.contains('collapsed') ? 'fas fa-bars' : 'fas fa-bars';
+            toggleIcon.className = sidebar.classList.contains('collapsed') ? 'fas fa-chevron-right' : 'fas fa-chevron-left';
         });
         sidebar.appendChild(toggle);
 
@@ -671,12 +671,16 @@ StudyEngine.registerActivity({
             });
         });
 
-        // Close popup on click outside
-        document.addEventListener('click', function handler(e) {
+        // Close popup on click outside (remove previous listener to prevent leaks)
+        if (this._docClickHandler) {
+            document.removeEventListener('click', this._docClickHandler);
+        }
+        this._docClickHandler = function(e) {
             if (self._popupEl && !self._popupEl.contains(e.target) && !e.target.classList.contains('tb-vocab')) {
                 self._removePopup();
             }
-        });
+        };
+        document.addEventListener('click', this._docClickHandler);
     },
 
     _showVocabPopup(anchor, entry) {
@@ -779,7 +783,7 @@ StudyEngine.registerActivity({
     _updateTocState() {
         var seg = this._content.segments[this._currentSegment];
         var self = this;
-        var tocItems = document.querySelectorAll('.tb-toc-item');
+        var tocItems = document.querySelectorAll('.tb-tab');
         tocItems.forEach(function(item, i) {
             item.classList.toggle('active', i === self._currentSection);
             var isRead = self._isSectionRead(seg.id, seg.sections[i].id);
@@ -816,6 +820,10 @@ StudyEngine.registerActivity({
 
     deactivate() {
         this._removePopup();
+        if (this._docClickHandler) {
+            document.removeEventListener('click', this._docClickHandler);
+            this._docClickHandler = null;
+        }
     },
 
     getProgress() {
