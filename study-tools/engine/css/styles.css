@@ -2616,7 +2616,7 @@ body.timer-active header {
 /* LOGIN PROMPT */
 .login-prompt {
     position: fixed;
-    bottom: 20px;
+    bottom: 76px;
     right: 20px;
     z-index: 100;
 }
