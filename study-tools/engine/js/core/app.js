@@ -156,10 +156,12 @@ const StudyEngine = {
         await Promise.all(loadPromises);
         this.buildNav();
 
-        // Check for deep link: #activity-id in URL hash
+        // Check for deep link: #activity-id or #activity-id/param/param in URL hash
         var hash = window.location.hash.replace('#', '');
-        if (hash && this.activities[hash]) {
-            this.activateActivity(hash);
+        var hashParts = hash.split('/');
+        var activityId = hashParts[0];
+        if (activityId && this.activities[activityId]) {
+            this.activateActivity(activityId, hashParts.slice(1));
         } else {
             this.showHome();
         }
@@ -339,7 +341,7 @@ const StudyEngine = {
         container.appendChild(picker);
     },
 
-    activateActivity(activityId) {
+    activateActivity(activityId, deepLinkParams) {
         const activity = this.activities[activityId];
         if (!activity) return;
 
@@ -366,6 +368,9 @@ const StudyEngine = {
         // Collapse header, show compact topbar
         document.body.classList.add('activity-active');
         this._renderActivityTopbar(activity);
+
+        // Store deep link params for the activity to pick up
+        activity._deepLinkParams = deepLinkParams || [];
 
         // Render and activate
         activity.render(container, this.config);

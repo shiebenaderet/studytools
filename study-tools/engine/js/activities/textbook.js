@@ -65,12 +65,35 @@ StudyEngine.registerActivity({
             .then(function(data) {
                 // Support both { segments: [...] } and { textbookContent: { segments: [...] } }
                 self._content = data.textbookContent || data;
-                // Restore last position
-                if (self._progress.lastSegment !== undefined) {
+                // Deep link: #textbook/segment-id/section-id
+                var params = self._deepLinkParams || [];
+                var deepLinked = false;
+                if (params.length >= 1 && self._content.segments) {
+                    var segId = params[0];
+                    var secId = params[1];
+                    for (var si = 0; si < self._content.segments.length; si++) {
+                        if (self._content.segments[si].id === segId) {
+                            self._currentSegment = si;
+                            if (secId) {
+                                for (var sci = 0; sci < self._content.segments[si].sections.length; sci++) {
+                                    if (self._content.segments[si].sections[sci].id === secId) {
+                                        self._currentSection = sci;
+                                        break;
+                                    }
+                                }
+                            }
+                            deepLinked = true;
+                            break;
+                        }
+                    }
+                }
+                // Fall back to saved position if no deep link
+                if (!deepLinked && self._progress.lastSegment !== undefined) {
                     self._currentSegment = self._progress.lastSegment;
                     self._currentSection = self._progress.lastSection || 0;
                 }
                 self._renderTextbook();
+                self._updateHash();
             })
             .catch(function() {
                 var msg = document.createElement('div');
@@ -754,7 +777,17 @@ StudyEngine.registerActivity({
         if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     },
 
+    _updateHash() {
+        if (!this._content || !this._content.segments) return;
+        var seg = this._content.segments[this._currentSegment];
+        var sec = seg.sections[this._currentSection];
+        if (seg && sec) {
+            history.replaceState(null, '', '#textbook/' + seg.id + '/' + sec.id);
+        }
+    },
+
     _saveProgress() {
+        this._updateHash();
         ProgressManager.saveActivityProgress(this._config.unit.id, 'textbook', this._progress);
     },
 
