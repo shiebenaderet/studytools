@@ -68,6 +68,7 @@ var LeaderboardManager = {
         tabBar.className = 'lb-tabs';
         var tabs = [
             { id: 'students', label: 'Top Students', icon: 'fas fa-user' },
+            { id: 'map', label: 'Map Speed Run', icon: 'fas fa-map-marked-alt' },
             { id: 'classes', label: 'Class Battle', icon: 'fas fa-users' },
             { id: 'achievements', label: 'Achievements', icon: 'fas fa-medal' }
         ];
@@ -87,6 +88,7 @@ var LeaderboardManager = {
                 tabBar.querySelectorAll('.lb-tab').forEach(function(b) { b.classList.remove('active'); });
                 btn.classList.add('active');
                 if (tab.id === 'students') self.renderStudentRankings(contentArea);
+                else if (tab.id === 'map') self.renderMapSpeedRun(contentArea);
                 else if (tab.id === 'classes') self.renderClassRankings(contentArea);
                 else if (tab.id === 'achievements') self.renderAchievements(contentArea);
             });
@@ -125,7 +127,7 @@ var LeaderboardManager = {
 
             var query = ProgressManager.supabase
                 .from('leaderboard')
-                .select('student_id, score, vocab_mastered, best_test_score, study_time_seconds, updated_at')
+                .select('student_id, score, vocab_mastered, best_test_score, study_time_seconds, map_best_time, map_bonus, updated_at')
                 .eq('approved', true)
                 .order('score', { ascending: false })
                 .limit(50);
@@ -149,6 +151,11 @@ var LeaderboardManager = {
             }
 
             container.textContent = '';
+
+            var explainer = document.createElement('p');
+            explainer.className = 'lb-explainer';
+            explainer.textContent = 'Vocab (\u00d710) + Test Score + Study Min + Map Bonus = Total';
+            container.appendChild(explainer);
 
             if (entries.length === 0) {
                 var empty = document.createElement('div');
@@ -234,6 +241,10 @@ var LeaderboardManager = {
                     testStat.textContent = entry.best_test_score + '%';
                     stats.appendChild(testStat);
                 }
+                var mapStat = document.createElement('span');
+                mapStat.title = 'Map bonus';
+                mapStat.textContent = entry.map_bonus ? '+' + entry.map_bonus + ' map' : '';
+                if (mapStat.textContent) stats.appendChild(mapStat);
                 row.appendChild(stats);
 
                 var scoreEl = document.createElement('div');
@@ -252,6 +263,162 @@ var LeaderboardManager = {
             var errEl = document.createElement('p');
             errEl.style.cssText = 'text-align:center;color:var(--danger);padding:20px;';
             errEl.textContent = 'Failed to load leaderboard.';
+            container.appendChild(errEl);
+        }
+    },
+
+    async renderMapSpeedRun(container) {
+        container.textContent = '';
+        var loading = document.createElement('div');
+        loading.style.cssText = 'text-align:center;padding:30px;color:var(--text-muted);';
+        var spinner = document.createElement('i');
+        spinner.className = 'fas fa-spinner fa-spin';
+        loading.appendChild(spinner);
+        loading.appendChild(document.createTextNode(' Loading map times...'));
+        container.appendChild(loading);
+
+        if (!ProgressManager.supabase) {
+            container.textContent = '';
+            var msg = document.createElement('p');
+            msg.style.cssText = 'text-align:center;color:var(--text-muted);padding:30px;';
+            msg.textContent = 'Speed run board requires an internet connection.';
+            container.appendChild(msg);
+            return;
+        }
+
+        try {
+            var config = StudyEngine.config;
+            var unitId = config ? config.unit.id : null;
+
+            var query = ProgressManager.supabase
+                .from('leaderboard')
+                .select('student_id, map_best_time, map_bonus')
+                .eq('approved', true)
+                .not('map_best_time', 'is', null)
+                .order('map_best_time', { ascending: true })
+                .limit(50);
+            if (unitId) query = query.eq('unit_id', unitId);
+
+            var result = await query;
+            if (result.error) throw result.error;
+            var entries = result.data || [];
+
+            var studentIds = entries.map(function(e) { return e.student_id; });
+            var studentNames = {};
+            if (studentIds.length > 0) {
+                var sResult = await ProgressManager.supabase
+                    .from('students')
+                    .select('id, name')
+                    .in('id', studentIds);
+                if (sResult.data) {
+                    sResult.data.forEach(function(s) { studentNames[s.id] = s; });
+                }
+            }
+
+            container.textContent = '';
+
+            var desc = document.createElement('p');
+            desc.className = 'lb-explainer';
+            desc.textContent = 'Get 100% on the Map Quiz to post your time. Faster = more bonus points!';
+            container.appendChild(desc);
+
+            if (entries.length === 0) {
+                var empty = document.createElement('div');
+                empty.style.cssText = 'text-align:center;padding:40px;color:var(--text-muted);';
+                var emptyIcon = document.createElement('i');
+                emptyIcon.className = 'fas fa-map-marked-alt';
+                emptyIcon.style.cssText = 'font-size:2em;display:block;margin-bottom:12px;opacity:0.3;';
+                empty.appendChild(emptyIcon);
+                var emptyText = document.createElement('p');
+                emptyText.textContent = 'No perfect map runs yet. Get 100% to post your time!';
+                empty.appendChild(emptyText);
+                container.appendChild(empty);
+                return;
+            }
+
+            if (entries.length >= 3) {
+                var podium = document.createElement('div');
+                podium.className = 'lb-podium';
+                var podiumOrder = [1, 0, 2];
+                podiumOrder.forEach(function(idx) {
+                    var entry = entries[idx];
+                    var student = studentNames[entry.student_id] || {};
+                    var place = document.createElement('div');
+                    place.className = 'lb-podium-place lb-place-' + (idx + 1);
+
+                    var medal = document.createElement('div');
+                    medal.className = 'lb-medal';
+                    var medals = ['\uD83E\uDD47', '\uD83E\uDD48', '\uD83E\uDD49'];
+                    medal.textContent = medals[idx];
+                    place.appendChild(medal);
+
+                    var name = document.createElement('div');
+                    name.className = 'lb-podium-name';
+                    name.textContent = student.name || 'Unknown';
+                    place.appendChild(name);
+
+                    var time = document.createElement('div');
+                    time.className = 'lb-podium-score';
+                    var m = Math.floor(entry.map_best_time / 60);
+                    var s = entry.map_best_time % 60;
+                    time.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+                    place.appendChild(time);
+
+                    podium.appendChild(place);
+                });
+                container.appendChild(podium);
+            }
+
+            var list = document.createElement('div');
+            list.className = 'lb-list';
+
+            entries.forEach(function(entry, i) {
+                var student = studentNames[entry.student_id] || {};
+                var row = document.createElement('div');
+                row.className = 'lb-row';
+                if (ProgressManager.studentId === entry.student_id) row.classList.add('lb-row-me');
+
+                var rank = document.createElement('div');
+                rank.className = 'lb-rank';
+                rank.textContent = '#' + (i + 1);
+                row.appendChild(rank);
+
+                var nameEl = document.createElement('div');
+                nameEl.className = 'lb-name';
+                nameEl.textContent = student.name || 'Unknown';
+                if (ProgressManager.studentId === entry.student_id) {
+                    var youTag = document.createElement('span');
+                    youTag.className = 'lb-you-tag';
+                    youTag.textContent = 'YOU';
+                    nameEl.appendChild(youTag);
+                }
+                row.appendChild(nameEl);
+
+                var stats = document.createElement('div');
+                stats.className = 'lb-stats';
+                var timeStat = document.createElement('span');
+                var m = Math.floor(entry.map_best_time / 60);
+                var s = entry.map_best_time % 60;
+                timeStat.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+                stats.appendChild(timeStat);
+                row.appendChild(stats);
+
+                var scoreEl = document.createElement('div');
+                scoreEl.className = 'lb-score';
+                scoreEl.textContent = '+' + (entry.map_bonus || 0) + ' pts';
+                row.appendChild(scoreEl);
+
+                list.appendChild(row);
+            });
+
+            container.appendChild(list);
+
+        } catch (err) {
+            console.error('Map speed run error:', err);
+            container.textContent = '';
+            var errEl = document.createElement('p');
+            errEl.style.cssText = 'text-align:center;color:var(--danger);padding:20px;';
+            errEl.textContent = 'Failed to load map speed runs.';
             container.appendChild(errEl);
         }
     },

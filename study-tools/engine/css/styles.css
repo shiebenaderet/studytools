@@ -3592,6 +3592,14 @@ body.timer-active header {
     min-height: 200px;
 }
 
+.lb-explainer {
+    text-align: center;
+    font-size: 0.8em;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
 /* Podium — top 3 visual */
 .lb-podium {
     display: flex;
