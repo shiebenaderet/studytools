@@ -64,6 +64,7 @@ const Dashboard = {
         document.getElementById('dashboard').classList.remove('hidden');
         this.loadVersion();
         this.loadClasses();
+        this.loadUnitFilter();
         this.switchTab('overview');
     },
 
@@ -120,6 +121,7 @@ const Dashboard = {
     getFilters() {
         return {
             classId: document.getElementById('filter-class').value || null,
+            unitId: document.getElementById('filter-unit').value || null,
             dateStart: document.getElementById('filter-date-start').value || null,
             dateEnd: document.getElementById('filter-date-end').value || null
         };
@@ -193,6 +195,35 @@ const Dashboard = {
             }
         } catch (err) {
             console.error('Failed to load classes:', err);
+        }
+    },
+
+    async loadUnitFilter() {
+        var select = document.getElementById('filter-unit');
+        while (select.options.length > 0) select.remove(0);
+        var defaultOpt = document.createElement('option');
+        defaultOpt.value = '';
+        defaultOpt.textContent = 'All Units';
+        select.appendChild(defaultOpt);
+
+        try {
+            var { data, error } = await this.supabase
+                .from('leaderboard')
+                .select('unit_id');
+            if (error) throw error;
+            var unitIds = [];
+            (data || []).forEach(function(row) {
+                if (unitIds.indexOf(row.unit_id) === -1) unitIds.push(row.unit_id);
+            });
+            unitIds.sort();
+            unitIds.forEach(function(uid) {
+                var opt = document.createElement('option');
+                opt.value = uid;
+                opt.textContent = uid.replace(/-/g, ' ').replace(/\b\w/g, function(c) { return c.toUpperCase(); });
+                select.appendChild(opt);
+            });
+        } catch (err) {
+            console.error('Failed to load unit filter:', err);
         }
     },
 
@@ -930,38 +961,56 @@ const Dashboard = {
         container.appendChild(this._loading());
 
         try {
-            // Get all leaderboard entries
-            var { data: entries, error: lbErr } = await this.supabase
+            // If filtering by class, get student IDs first so we can filter server-side
+            var classStudentIds = null;
+            if (filters && filters.classId) {
+                var { data: classStudents, error: csErr } = await this.supabase
+                    .from('students')
+                    .select('id')
+                    .eq('class_id', filters.classId);
+                if (csErr) throw csErr;
+                classStudentIds = (classStudents || []).map(function(s) { return s.id; });
+                if (classStudentIds.length === 0) {
+                    container.textContent = '';
+                    container.appendChild(
+                        this._emptyState('fas fa-filter', 'No scores for this class yet.')
+                    );
+                    return;
+                }
+            }
+
+            // Build leaderboard query with server-side filters
+            var lbQuery = this.supabase
                 .from('leaderboard')
                 .select('id, student_id, unit_id, score, vocab_mastered, best_test_score, study_time_seconds, map_best_time, map_bonus, approved, updated_at')
                 .order('updated_at', { ascending: false });
 
-            if (lbErr) throw lbErr;
+            if (filters && filters.unitId) {
+                lbQuery = lbQuery.eq('unit_id', filters.unitId);
+            }
+            if (classStudentIds) {
+                lbQuery = lbQuery.in('student_id', classStudentIds);
+            }
+
+            // Run leaderboard + all students queries in parallel
+            var [lbResult, studentResult] = await Promise.all([
+                lbQuery,
+                this.supabase.from('students').select('id, name, class_id, classes(code, name)')
+            ]);
+
+            if (lbResult.error) throw lbResult.error;
+            var entries = lbResult.data || [];
+
+            var studentMap = {};
+            (studentResult.data || []).forEach(function(s) { studentMap[s.id] = s; });
 
             container.textContent = '';
 
-            if (!entries || entries.length === 0) {
+            if (entries.length === 0) {
                 container.appendChild(
                     this._emptyState('fas fa-trophy', 'No leaderboard entries yet. Students will appear here as they study.')
                 );
                 return;
-            }
-
-            // Get student names
-            var studentIds = entries.map(function(e) { return e.student_id; });
-            var { data: studentData } = await this.supabase
-                .from('students')
-                .select('id, name, class_id, classes(code, name)')
-                .in('id', studentIds);
-            var studentMap = {};
-            (studentData || []).forEach(function(s) { studentMap[s.id] = s; });
-
-            // Filter by class if selected
-            if (filters && filters.classId) {
-                entries = entries.filter(function(e) {
-                    var student = studentMap[e.student_id];
-                    return student && student.class_id === filters.classId;
-                });
             }
 
             // Action bar
@@ -987,13 +1036,6 @@ const Dashboard = {
             actions.appendChild(approveAllBtn);
 
             container.appendChild(actions);
-
-            if (entries.length === 0) {
-                container.appendChild(
-                    this._emptyState('fas fa-filter', 'No scores for this class yet.')
-                );
-                return;
-            }
 
             var pendingCount = entries.filter(function(e) { return !e.approved; }).length;
 
