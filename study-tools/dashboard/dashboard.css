@@ -341,6 +341,14 @@ body {
     white-space: nowrap;
 }
 
+.data-table th.sort-asc::after,
+.data-table th.sort-desc::after {
+    margin-left: 4px;
+    font-size: 0.7em;
+}
+.data-table th.sort-asc::after { content: ' \u25B2'; }
+.data-table th.sort-desc::after { content: ' \u25BC'; }
+
 .data-table td {
     padding: 12px 16px;
     border-bottom: 1px solid var(--border);

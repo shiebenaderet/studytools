@@ -1053,9 +1053,60 @@ const Dashboard = {
 
             var thead = document.createElement('thead');
             var headerRow = document.createElement('tr');
-            ['Status', 'Name', 'Class', 'Score', 'Vocab', 'Test', 'Study Time', 'Map Time', 'Actions'].forEach(function(text) {
+            var sortableColumns = [
+                { label: 'Status', key: 'approved' },
+                { label: 'Name', key: 'name' },
+                { label: 'Class', key: 'class' },
+                { label: 'Score', key: 'score' },
+                { label: 'Vocab', key: 'vocab_mastered' },
+                { label: 'Test', key: 'best_test_score' },
+                { label: 'Study Time', key: 'study_time_seconds' },
+                { label: 'Map Time', key: 'map_best_time' },
+                { label: 'Actions', key: null }
+            ];
+            var currentSort = { key: null, asc: true };
+
+            function sortEntries(key) {
+                if (currentSort.key === key) {
+                    currentSort.asc = !currentSort.asc;
+                } else {
+                    currentSort.key = key;
+                    currentSort.asc = key === 'name' || key === 'class' || key === 'approved';
+                }
+                entries.sort(function(a, b) {
+                    var va, vb;
+                    if (key === 'name') {
+                        va = (studentMap[a.student_id] || {}).name || '';
+                        vb = (studentMap[b.student_id] || {}).name || '';
+                    } else if (key === 'class') {
+                        var ca = (studentMap[a.student_id] || {}).classes;
+                        var cb = (studentMap[b.student_id] || {}).classes;
+                        va = ca ? (ca.name || ca.code || '') : '';
+                        vb = cb ? (cb.name || cb.code || '') : '';
+                    } else {
+                        va = a[key]; vb = b[key];
+                    }
+                    if (va == null) va = key === 'approved' ? false : -Infinity;
+                    if (vb == null) vb = key === 'approved' ? false : -Infinity;
+                    if (typeof va === 'string') return currentSort.asc ? va.localeCompare(vb) : vb.localeCompare(va);
+                    return currentSort.asc ? va - vb : vb - va;
+                });
+                renderRows();
+                // Update header indicators
+                headerRow.querySelectorAll('th').forEach(function(th) {
+                    th.classList.remove('sort-asc', 'sort-desc');
+                });
+                var idx = sortableColumns.findIndex(function(c) { return c.key === key; });
+                if (idx >= 0) headerRow.children[idx].classList.add(currentSort.asc ? 'sort-asc' : 'sort-desc');
+            }
+
+            sortableColumns.forEach(function(col) {
                 var th = document.createElement('th');
-                th.textContent = text;
+                th.textContent = col.label;
+                if (col.key) {
+                    th.style.cursor = 'pointer';
+                    th.addEventListener('click', function() { sortEntries(col.key); });
+                }
                 headerRow.appendChild(th);
             });
             thead.appendChild(headerRow);
@@ -1063,7 +1114,13 @@ const Dashboard = {
 
             var tbody = document.createElement('tbody');
             var self = this;
-            entries.forEach(function(entry) {
+
+            function renderRows() {
+                tbody.textContent = '';
+                entries.forEach(renderRow);
+            }
+
+            function renderRow(entry) {
                 var student = studentMap[entry.student_id] || {};
                 var tr = document.createElement('tr');
                 if (!entry.approved) tr.classList.add('score-pending');
@@ -1133,7 +1190,7 @@ const Dashboard = {
                             .from('leaderboard')
                             .update({ approved: true })
                             .eq('id', entry.id);
-                        Dashboard.loadScores();
+                        Dashboard.loadScores(Dashboard.getFilters());
                     });
                     tdActions.appendChild(approveBtn);
                 }
@@ -1160,15 +1217,16 @@ const Dashboard = {
                             .from('leaderboard')
                             .delete()
                             .eq('id', entry.id);
-                        Dashboard.loadScores();
+                        Dashboard.loadScores(Dashboard.getFilters());
                     }
                 });
                 tdActions.appendChild(removeBtn);
 
                 tr.appendChild(tdActions);
                 tbody.appendChild(tr);
-            });
+            }
 
+            renderRows();
             table.appendChild(tbody);
             wrapper.appendChild(table);
             container.appendChild(wrapper);
