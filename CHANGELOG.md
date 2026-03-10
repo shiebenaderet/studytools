@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [7.4.0] - 2026-03-10
+
+### Added
+- **Map quiz bonus points** — Perfect map runs (100%) earn bonus points: `max(0, 180 - seconds)`, rewarding speed
+- **Map Speed Run leaderboard tab** — Fastest perfect map times ranked separately with podium
+- **Score formula explanation** — "Vocab (×10) + Test Score + Study Min + Map Bonus = Total" shown above rankings
+- **Map bonus column** — Map time and bonus visible in Top Students stats and teacher dashboard
+
+### Changed
+- Leaderboard composite score now includes map bonus in calculation
+
 ## [7.3.0] - 2026-03-09
 
 ### Fixed
