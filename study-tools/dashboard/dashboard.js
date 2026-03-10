@@ -174,6 +174,12 @@ const Dashboard = {
             case 'scores':
                 this.loadScores(filters);
                 break;
+            case 'vocab':
+                this.loadVocabInsights(filters);
+                break;
+            case 'leaderboard':
+                this.loadLeaderboardPreview(filters);
+                break;
         }
     },
 
@@ -1249,6 +1255,326 @@ const Dashboard = {
             container.textContent = '';
             container.appendChild(
                 this._emptyState('fas fa-exclamation-triangle', 'Failed to load scores.')
+            );
+        }
+    },
+
+    // ---- Vocab Insights ----
+
+    async loadVocabInsights(filters) {
+        var container = document.getElementById('vocab-container');
+        container.textContent = '';
+        container.appendChild(this._loading());
+
+        try {
+            // Get all flashcard progress rows
+            var query = this.supabase
+                .from('progress')
+                .select('student_id, unit_id, data')
+                .eq('activity', 'flashcards');
+
+            if (filters && filters.unitId) {
+                query = query.eq('unit_id', filters.unitId);
+            }
+
+            // If class filter, get student IDs first
+            var classStudentSet = null;
+            if (filters && filters.classId) {
+                var { data: classStudents } = await this.supabase
+                    .from('students')
+                    .select('id')
+                    .eq('class_id', filters.classId);
+                classStudentSet = new Set((classStudents || []).map(function(s) { return s.id; }));
+            }
+
+            var { data: progressRows, error } = await query;
+            if (error) throw error;
+
+            container.textContent = '';
+
+            if (!progressRows || progressRows.length === 0) {
+                container.appendChild(
+                    this._emptyState('fas fa-brain', 'No flashcard data yet. Students will appear here once they start studying.')
+                );
+                return;
+            }
+
+            // Aggregate ratings per unit per term
+            var units = {};
+            progressRows.forEach(function(row) {
+                if (classStudentSet && !classStudentSet.has(row.student_id)) return;
+                var data = row.data || {};
+                var ratings = data.ratings || {};
+                if (!units[row.unit_id]) units[row.unit_id] = {};
+                var unit = units[row.unit_id];
+                Object.keys(ratings).forEach(function(term) {
+                    if (!unit[term]) unit[term] = { hard: 0, medium: 0, easy: 0, total: 0 };
+                    var r = ratings[term];
+                    if (r === 'hard') unit[term].hard++;
+                    else if (r === 'medium') unit[term].medium++;
+                    else if (r === 'easy') unit[term].easy++;
+                    unit[term].total++;
+                });
+            });
+
+            var unitIds = Object.keys(units).sort();
+
+            if (unitIds.length === 0) {
+                container.appendChild(
+                    this._emptyState('fas fa-brain', 'No rating data yet. Students need to rate flashcards.')
+                );
+                return;
+            }
+
+            var desc = document.createElement('p');
+            desc.style.cssText = 'color:var(--text-muted);margin-bottom:16px;font-size:0.9em;';
+            desc.textContent = 'Terms students find difficult based on flashcard ratings. Higher difficulty % means more students rated a term as "hard."';
+            container.appendChild(desc);
+
+            var self = this;
+            unitIds.forEach(function(unitId) {
+                var terms = units[unitId];
+                var termList = Object.keys(terms).map(function(term) {
+                    var t = terms[term];
+                    var diffPct = t.total > 0 ? Math.round((t.hard / t.total) * 100) : 0;
+                    return { term: term, hard: t.hard, medium: t.medium, easy: t.easy, total: t.total, diffPct: diffPct };
+                });
+                // Sort by difficulty descending
+                termList.sort(function(a, b) { return b.diffPct - a.diffPct || b.hard - a.hard; });
+
+                var section = document.createElement('div');
+                section.style.cssText = 'margin-bottom:24px;';
+
+                var heading = document.createElement('h3');
+                heading.style.cssText = 'margin-bottom:12px;color:var(--primary-dark);';
+                heading.textContent = unitId.replace(/-/g, ' ').replace(/\b\w/g, function(c) { return c.toUpperCase(); });
+                section.appendChild(heading);
+
+                // Summary stats
+                var hardTerms = termList.filter(function(t) { return t.diffPct >= 40; });
+                if (hardTerms.length > 0) {
+                    var alert = document.createElement('div');
+                    alert.style.cssText = 'background:var(--danger-light, #fef2f2);border:1px solid var(--danger, #ef4444);border-radius:8px;padding:12px 16px;margin-bottom:12px;color:var(--danger, #ef4444);font-size:0.9em;';
+                    var alertIcon = document.createElement('i');
+                    alertIcon.className = 'fas fa-exclamation-circle';
+                    alert.appendChild(alertIcon);
+                    var alertText = document.createElement('strong');
+                    alertText.textContent = ' ' + hardTerms.length + ' term' + (hardTerms.length > 1 ? 's' : '');
+                    alert.appendChild(alertText);
+                    alert.appendChild(document.createTextNode(' rated hard by 40%+ of students'));
+                    section.appendChild(alert);
+                }
+
+                var wrapper = document.createElement('div');
+                wrapper.className = 'data-table-wrapper';
+                var table = document.createElement('table');
+                table.className = 'data-table';
+
+                var thead = document.createElement('thead');
+                var hr = document.createElement('tr');
+                ['Term', 'Hard', 'Medium', 'Easy', 'Responses', 'Difficulty'].forEach(function(text) {
+                    var th = document.createElement('th');
+                    th.textContent = text;
+                    hr.appendChild(th);
+                });
+                thead.appendChild(hr);
+                table.appendChild(thead);
+
+                var tbody = document.createElement('tbody');
+                termList.forEach(function(t) {
+                    var tr = document.createElement('tr');
+                    if (t.diffPct >= 40) tr.style.background = 'var(--danger-light, #fef2f2)';
+
+                    var tdTerm = document.createElement('td');
+                    tdTerm.style.fontWeight = '600';
+                    tdTerm.textContent = t.term;
+                    tr.appendChild(tdTerm);
+
+                    var tdHard = document.createElement('td');
+                    tdHard.textContent = t.hard;
+                    tdHard.style.color = t.hard > 0 ? 'var(--danger, #ef4444)' : '';
+                    tr.appendChild(tdHard);
+
+                    var tdMed = document.createElement('td');
+                    tdMed.textContent = t.medium;
+                    tr.appendChild(tdMed);
+
+                    var tdEasy = document.createElement('td');
+                    tdEasy.textContent = t.easy;
+                    tr.appendChild(tdEasy);
+
+                    var tdTotal = document.createElement('td');
+                    tdTotal.textContent = t.total;
+                    tr.appendChild(tdTotal);
+
+                    var tdDiff = document.createElement('td');
+                    var bar = document.createElement('div');
+                    bar.style.cssText = 'display:flex;align-items:center;gap:8px;';
+                    var barBg = document.createElement('div');
+                    barBg.style.cssText = 'flex:1;height:8px;background:var(--border);border-radius:4px;overflow:hidden;';
+                    var barFill = document.createElement('div');
+                    var color = t.diffPct >= 40 ? 'var(--danger, #ef4444)' : t.diffPct >= 20 ? 'var(--warning, #f59e0b)' : 'var(--success, #22c55e)';
+                    barFill.style.cssText = 'height:100%;border-radius:4px;background:' + color + ';width:' + t.diffPct + '%;';
+                    barBg.appendChild(barFill);
+                    bar.appendChild(barBg);
+                    var pct = document.createElement('span');
+                    pct.style.cssText = 'font-size:0.85em;min-width:36px;text-align:right;';
+                    pct.textContent = t.diffPct + '%';
+                    bar.appendChild(pct);
+                    tdDiff.appendChild(bar);
+                    tr.appendChild(tdDiff);
+
+                    tbody.appendChild(tr);
+                });
+
+                table.appendChild(tbody);
+                wrapper.appendChild(table);
+                section.appendChild(wrapper);
+                container.appendChild(section);
+            });
+
+        } catch (err) {
+            console.error('Failed to load vocab insights:', err);
+            container.textContent = '';
+            container.appendChild(
+                this._emptyState('fas fa-exclamation-triangle', 'Failed to load vocab insights.')
+            );
+        }
+    },
+
+    // ---- Leaderboard Preview ----
+
+    async loadLeaderboardPreview(filters) {
+        var container = document.getElementById('leaderboard-container');
+        container.textContent = '';
+        container.appendChild(this._loading());
+
+        try {
+            var lbQuery = this.supabase
+                .from('leaderboard')
+                .select('student_id, unit_id, score, vocab_mastered, best_test_score, study_time_seconds, map_best_time, map_bonus, approved')
+                .eq('approved', true)
+                .order('score', { ascending: false })
+                .limit(50);
+
+            if (filters && filters.unitId) {
+                lbQuery = lbQuery.eq('unit_id', filters.unitId);
+            }
+
+            var classStudentIds = null;
+            if (filters && filters.classId) {
+                var { data: classStudents } = await this.supabase
+                    .from('students')
+                    .select('id')
+                    .eq('class_id', filters.classId);
+                classStudentIds = (classStudents || []).map(function(s) { return s.id; });
+            }
+
+            var [lbResult, studentResult] = await Promise.all([
+                lbQuery,
+                this.supabase.from('students').select('id, name, class_id, classes(code, name)')
+            ]);
+
+            if (lbResult.error) throw lbResult.error;
+            var entries = lbResult.data || [];
+
+            var studentMap = {};
+            (studentResult.data || []).forEach(function(s) { studentMap[s.id] = s; });
+
+            // Filter by class client-side
+            if (classStudentIds) {
+                var idSet = new Set(classStudentIds);
+                entries = entries.filter(function(e) { return idSet.has(e.student_id); });
+            }
+
+            container.textContent = '';
+
+            if (entries.length === 0) {
+                container.appendChild(
+                    this._emptyState('fas fa-medal', 'No approved leaderboard entries yet.')
+                );
+                return;
+            }
+
+            var desc = document.createElement('p');
+            desc.style.cssText = 'color:var(--text-muted);margin-bottom:4px;font-size:0.85em;';
+            desc.textContent = 'Vocab (\u00d710) + Test Score + Study Min + Map Bonus = Total';
+            container.appendChild(desc);
+
+            var wrapper = document.createElement('div');
+            wrapper.className = 'data-table-wrapper';
+            var table = document.createElement('table');
+            table.className = 'data-table';
+
+            var thead = document.createElement('thead');
+            var headerRow = document.createElement('tr');
+            ['#', 'Name', 'Class', 'Score', 'Vocab', 'Test', 'Study Time', 'Map Time'].forEach(function(text) {
+                var th = document.createElement('th');
+                th.textContent = text;
+                headerRow.appendChild(th);
+            });
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+
+            var tbody = document.createElement('tbody');
+            entries.forEach(function(entry, i) {
+                var student = studentMap[entry.student_id] || {};
+                var tr = document.createElement('tr');
+
+                var tdRank = document.createElement('td');
+                tdRank.style.fontWeight = '700';
+                if (i < 3) tdRank.style.color = ['#FFD700', '#C0C0C0', '#CD7F32'][i];
+                tdRank.textContent = i + 1;
+                tr.appendChild(tdRank);
+
+                var tdName = document.createElement('td');
+                tdName.textContent = student.name || 'Unknown';
+                tr.appendChild(tdName);
+
+                var tdClass = document.createElement('td');
+                tdClass.textContent = student.classes ? (student.classes.name || student.classes.code) : '-';
+                tr.appendChild(tdClass);
+
+                var tdScore = document.createElement('td');
+                tdScore.className = 'score-value';
+                tdScore.textContent = entry.score;
+                tr.appendChild(tdScore);
+
+                var tdVocab = document.createElement('td');
+                tdVocab.textContent = entry.vocab_mastered;
+                tr.appendChild(tdVocab);
+
+                var tdTest = document.createElement('td');
+                tdTest.textContent = entry.best_test_score !== null ? entry.best_test_score + '%' : '-';
+                tr.appendChild(tdTest);
+
+                var tdTime = document.createElement('td');
+                var mins = Math.round((entry.study_time_seconds || 0) / 60);
+                tdTime.textContent = mins >= 60 ? (mins / 60).toFixed(1) + ' hrs' : mins + ' min';
+                tr.appendChild(tdTime);
+
+                var tdMap = document.createElement('td');
+                if (entry.map_best_time) {
+                    var mm = Math.floor(entry.map_best_time / 60);
+                    var ss = entry.map_best_time % 60;
+                    tdMap.textContent = mm + ':' + (ss < 10 ? '0' : '') + ss + ' (+' + (entry.map_bonus || 0) + ')';
+                } else {
+                    tdMap.textContent = '-';
+                }
+                tr.appendChild(tdMap);
+
+                tbody.appendChild(tr);
+            });
+
+            table.appendChild(tbody);
+            wrapper.appendChild(table);
+            container.appendChild(wrapper);
+
+        } catch (err) {
+            console.error('Failed to load leaderboard preview:', err);
+            container.textContent = '';
+            container.appendChild(
+                this._emptyState('fas fa-exclamation-triangle', 'Failed to load leaderboard.')
             );
         }
     },
