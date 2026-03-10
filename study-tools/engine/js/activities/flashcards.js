@@ -146,9 +146,23 @@ StudyEngine.registerActivity({
             wrapper.appendChild(nudge);
         }
 
-        // --- Controls row ---
+        // --- Controls row (collapsed behind Options toggle) ---
         const controls = document.createElement('div');
         controls.className = 'fc-controls';
+
+        const optionsToggle = document.createElement('button');
+        optionsToggle.className = 'fc-ctrl-btn fc-options-toggle';
+        optionsToggle.id = 'fc-options-toggle';
+        const optionsIcon = document.createElement('i');
+        optionsIcon.className = 'fas fa-sliders-h';
+        optionsToggle.appendChild(optionsIcon);
+        optionsToggle.appendChild(document.createTextNode(' Options'));
+        controls.appendChild(optionsToggle);
+
+        const optionsPanel = document.createElement('div');
+        optionsPanel.className = 'fc-options-panel';
+        optionsPanel.id = 'fc-options-panel';
+        optionsPanel.style.display = 'none';
 
         const filterSelect = document.createElement('select');
         filterSelect.className = 'fc-filter';
@@ -164,7 +178,7 @@ StudyEngine.registerActivity({
             filterSelect.appendChild(opt);
         });
         filterSelect.addEventListener('change', () => this._filterByCategory(filterSelect.value));
-        controls.appendChild(filterSelect);
+        optionsPanel.appendChild(filterSelect);
 
         const shuffleBtn = document.createElement('button');
         shuffleBtn.className = 'fc-ctrl-btn';
@@ -174,7 +188,7 @@ StudyEngine.registerActivity({
         shuffleBtn.appendChild(shuffleIcon);
         shuffleBtn.appendChild(document.createTextNode(' Shuffle'));
         shuffleBtn.addEventListener('click', () => this._shuffleCards());
-        controls.appendChild(shuffleBtn);
+        optionsPanel.appendChild(shuffleBtn);
 
         const helpBtn = document.createElement('button');
         helpBtn.className = 'fc-ctrl-btn fc-help-btn';
@@ -182,12 +196,22 @@ StudyEngine.registerActivity({
         const helpIcon = document.createElement('i');
         helpIcon.className = 'fas fa-question-circle';
         helpBtn.appendChild(helpIcon);
+        helpBtn.appendChild(document.createTextNode(' Help'));
         helpBtn.addEventListener('click', () => {
             this._container.textContent = '';
             localStorage.removeItem('fc-tutorial-seen');
             this._showTutorial(this._container, this._config);
         });
-        controls.appendChild(helpBtn);
+        optionsPanel.appendChild(helpBtn);
+
+        controls.appendChild(optionsPanel);
+
+        optionsToggle.addEventListener('click', () => {
+            var panel = document.getElementById('fc-options-panel');
+            var showing = panel.style.display !== 'none';
+            panel.style.display = showing ? 'none' : 'flex';
+            optionsToggle.classList.toggle('active', !showing);
+        });
 
         wrapper.appendChild(controls);
 
@@ -486,6 +510,13 @@ StudyEngine.registerActivity({
         // Nav buttons
         prevBtn.disabled = this._roundIndex === 0;
 
+        // Disable next until card is rated (enforces engagement)
+        var nextBtn = document.getElementById('fc-next-btn');
+        if (nextBtn) {
+            var currentTerm = this._getCurrentTerm();
+            nextBtn.disabled = !currentTerm || !this._ratings[currentTerm.term];
+        }
+
         // Sync scene height to content
         this._syncSceneHeight();
     },
@@ -554,6 +585,9 @@ StudyEngine.registerActivity({
     },
 
     _next() {
+        // Only allow next if current card has been rated
+        var currentTerm = this._getCurrentTerm();
+        if (currentTerm && !this._ratings[currentTerm.term]) return;
         if (this._roundIndex < this._queue.length - 1) {
             this._roundIndex++;
             this._display();
