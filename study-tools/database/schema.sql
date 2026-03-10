@@ -42,6 +42,8 @@ CREATE TABLE leaderboard (
     vocab_mastered integer NOT NULL DEFAULT 0,
     best_test_score integer,
     study_time_seconds integer NOT NULL DEFAULT 0,
+    map_best_time integer,
+    map_bonus integer NOT NULL DEFAULT 0,
     approved boolean NOT NULL DEFAULT false,
     created_at timestamp DEFAULT now(),
     updated_at timestamp DEFAULT now(),
