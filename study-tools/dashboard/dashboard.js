@@ -43,8 +43,11 @@ const Dashboard = {
 
         try {
             const { data: { session } } = await this.supabase.auth.getSession();
-            if (session) {
+            if (session && this._allowedTeachers.indexOf(session.user.email.toLowerCase()) !== -1) {
                 this.showDashboard();
+            } else if (session) {
+                await this.supabase.auth.signOut();
+                this.showLogin();
             } else {
                 this.showLogin();
             }
@@ -83,6 +86,8 @@ const Dashboard = {
 
     // ---- Authentication ----
 
+    _allowedTeachers: ['benaderets885@edmonds.wednet.edu'],
+
     async login(email, password) {
         const errorEl = document.getElementById('login-error');
         errorEl.classList.add('hidden');
@@ -95,6 +100,14 @@ const Dashboard = {
 
             if (error) {
                 errorEl.textContent = error.message;
+                errorEl.classList.remove('hidden');
+                return;
+            }
+
+            // Restrict dashboard access to allowed teachers
+            if (this._allowedTeachers.indexOf(email.toLowerCase()) === -1) {
+                await this.supabase.auth.signOut();
+                errorEl.textContent = 'Access denied. Contact the site administrator.';
                 errorEl.classList.remove('hidden');
                 return;
             }
