@@ -65,9 +65,9 @@ const Dashboard = {
     showDashboard() {
         document.getElementById('login-screen').classList.add('hidden');
         document.getElementById('dashboard').classList.remove('hidden');
+        // Run all init tasks in parallel
         this.loadVersion();
-        this.loadClasses();
-        this.loadUnitFilter();
+        Promise.all([this.loadClasses(), this.loadUnitFilter()]);
         this.switchTab('overview');
     },
 
@@ -226,13 +226,19 @@ const Dashboard = {
         select.appendChild(defaultOpt);
 
         try {
+            // Only fetch unit_id column with minimal data
             var { data, error } = await this.supabase
-                .from('leaderboard')
-                .select('unit_id');
+                .from('progress')
+                .select('unit_id')
+                .limit(1000);
             if (error) throw error;
+            var seen = {};
             var unitIds = [];
             (data || []).forEach(function(row) {
-                if (unitIds.indexOf(row.unit_id) === -1) unitIds.push(row.unit_id);
+                if (!seen[row.unit_id]) {
+                    seen[row.unit_id] = true;
+                    unitIds.push(row.unit_id);
+                }
             });
             unitIds.sort();
             unitIds.forEach(function(uid) {
@@ -247,149 +253,118 @@ const Dashboard = {
     },
 
     async loadOverview(filters) {
-        const container = document.getElementById('overview-stats');
+        var container = document.getElementById('overview-stats');
+        var lbContainer = document.getElementById('overview-leaderboard');
         container.textContent = '';
         container.appendChild(this._loading());
+        if (lbContainer) lbContainer.textContent = '';
 
         try {
-            // Total students
-            let studentQuery = this.supabase.from('students').select('id', { count: 'exact', head: true });
-            if (filters.classId) {
-                studentQuery = studentQuery.eq('class_id', filters.classId);
-            }
-            const { count: totalStudents, error: studentErr } = await studentQuery;
-            if (studentErr) throw studentErr;
+            // Build all queries upfront
+            var studentQuery = this.supabase.from('students').select('id', { count: 'exact', head: true });
+            if (filters.classId) studentQuery = studentQuery.eq('class_id', filters.classId);
 
-            // Active this week (students with sessions in last 7 days)
-            const weekAgo = new Date();
+            var weekAgo = new Date();
             weekAgo.setDate(weekAgo.getDate() - 7);
-            const weekAgoISO = weekAgo.toISOString();
-
-            let activeQuery = this.supabase
-                .from('sessions')
-                .select('student_id');
-
+            var activeQuery = this.supabase.from('sessions').select('student_id');
             if (filters.dateStart) {
                 activeQuery = activeQuery.gte('started_at', filters.dateStart);
             } else {
-                activeQuery = activeQuery.gte('started_at', weekAgoISO);
+                activeQuery = activeQuery.gte('started_at', weekAgo.toISOString());
             }
-            if (filters.dateEnd) {
-                activeQuery = activeQuery.lte('started_at', filters.dateEnd + 'T23:59:59');
+            if (filters.dateEnd) activeQuery = activeQuery.lte('started_at', filters.dateEnd + 'T23:59:59');
+
+            var hoursQuery = this.supabase.from('sessions').select('duration_seconds, student_id');
+            if (filters.dateStart) hoursQuery = hoursQuery.gte('started_at', filters.dateStart);
+            if (filters.dateEnd) hoursQuery = hoursQuery.lte('started_at', filters.dateEnd + 'T23:59:59');
+
+            var progressQuery = this.supabase.from('progress').select('student_id, data').eq('activity', 'studyTime');
+
+            var lbQuery = this.supabase.from('leaderboard')
+                .select('student_id, score, vocab_mastered, best_test_score, study_time_seconds, map_best_time, map_bonus')
+                .eq('approved', true)
+                .order('score', { ascending: false })
+                .limit(10);
+            if (filters.unitId) lbQuery = lbQuery.eq('unit_id', filters.unitId);
+
+            // Run ALL queries in parallel
+            var [studentRes, activeRes, hoursRes, progressRes, lbRes, classStudentRes, allStudentRes] = await Promise.all([
+                studentQuery,
+                activeQuery,
+                hoursQuery,
+                progressQuery,
+                lbQuery,
+                filters.classId
+                    ? this.supabase.from('students').select('id').eq('class_id', filters.classId)
+                    : Promise.resolve({ data: null }),
+                this.supabase.from('students').select('id, name')
+            ]);
+
+            if (studentRes.error) throw studentRes.error;
+            if (activeRes.error) throw activeRes.error;
+            if (hoursRes.error) throw hoursRes.error;
+
+            var classIdSet = null;
+            if (filters.classId && classStudentRes.data) {
+                classIdSet = new Set(classStudentRes.data.map(function(s) { return s.id; }));
             }
 
-            const { data: activeSessions, error: activeErr } = await activeQuery;
-            if (activeErr) throw activeErr;
+            var studentNameMap = {};
+            (allStudentRes.data || []).forEach(function(s) { studentNameMap[s.id] = s.name; });
 
-            // Unique active student IDs
-            const activeStudentIds = new Set();
-            if (activeSessions) {
-                activeSessions.forEach(s => activeStudentIds.add(s.student_id));
+            // Active this week
+            var activeStudentIds = new Set();
+            (activeRes.data || []).forEach(function(s) { activeStudentIds.add(s.student_id); });
+            var activeCount = activeStudentIds.size;
+            if (classIdSet) {
+                activeCount = 0;
+                activeStudentIds.forEach(function(id) { if (classIdSet.has(id)) activeCount++; });
             }
 
-            // If filtering by class, intersect with class students
-            let activeCount = activeStudentIds.size;
-            if (filters.classId && activeSessions) {
-                const { data: classStudents, error: csErr } = await this.supabase
-                    .from('students')
-                    .select('id')
-                    .eq('class_id', filters.classId);
-                if (csErr) throw csErr;
-                const classStudentIds = new Set((classStudents || []).map(s => s.id));
-                activeCount = [...activeStudentIds].filter(id => classStudentIds.has(id)).length;
-            }
-
-            // Total study hours
-            let hoursQuery = this.supabase.from('sessions').select('duration_seconds, student_id');
-            if (filters.dateStart) {
-                hoursQuery = hoursQuery.gte('started_at', filters.dateStart);
-            }
-            if (filters.dateEnd) {
-                hoursQuery = hoursQuery.lte('started_at', filters.dateEnd + 'T23:59:59');
-            }
-
-            const { data: hoursSessions, error: hoursErr } = await hoursQuery;
-            if (hoursErr) throw hoursErr;
-
-            let sessionSeconds = 0;
-            if (hoursSessions) {
-                if (filters.classId) {
-                    const { data: classStudents } = await this.supabase
-                        .from('students')
-                        .select('id')
-                        .eq('class_id', filters.classId);
-                    const classIds = new Set((classStudents || []).map(s => s.id));
-                    hoursSessions.forEach(s => {
-                        if (classIds.has(s.student_id)) {
-                            sessionSeconds += (s.duration_seconds || 0);
-                        }
-                    });
-                } else {
-                    hoursSessions.forEach(s => {
-                        sessionSeconds += (s.duration_seconds || 0);
-                    });
+            // Study hours from sessions
+            var sessionSeconds = 0;
+            (hoursRes.data || []).forEach(function(s) {
+                if (!classIdSet || classIdSet.has(s.student_id)) {
+                    sessionSeconds += (s.duration_seconds || 0);
                 }
-            }
+            });
 
-            // Also check progress table studyTime (more reliable source)
-            let progressQuery = this.supabase.from('progress')
-                .select('student_id, data')
-                .eq('activity', 'studyTime');
-            const { data: studyTimeRows } = await progressQuery;
-            let progressSeconds = 0;
-            if (studyTimeRows) {
-                if (filters.classId) {
-                    const { data: classStudents2 } = await this.supabase
-                        .from('students')
-                        .select('id')
-                        .eq('class_id', filters.classId);
-                    const classIds2 = new Set((classStudents2 || []).map(s => s.id));
-                    studyTimeRows.forEach(r => {
-                        if (classIds2.has(r.student_id) && typeof r.data === 'number') {
-                            progressSeconds += Math.round(r.data / 1000);
-                        }
-                    });
-                } else {
-                    studyTimeRows.forEach(r => {
-                        if (typeof r.data === 'number') {
-                            progressSeconds += Math.round(r.data / 1000);
-                        }
-                    });
+            // Study hours from progress table (more reliable)
+            var progressSeconds = 0;
+            (progressRes.data || []).forEach(function(r) {
+                if ((!classIdSet || classIdSet.has(r.student_id)) && typeof r.data === 'number') {
+                    progressSeconds += Math.round(r.data / 1000);
                 }
-            }
+            });
 
-            // Use whichever source has more data
-            const totalSeconds = Math.max(sessionSeconds, progressSeconds);
-            const totalHours = (totalSeconds / 3600).toFixed(1);
-
-            // Average session length
-            const sessionCount = hoursSessions ? hoursSessions.length : 0;
-            const avgMinutes = sessionCount > 0
-                ? Math.round(totalSeconds / sessionCount / 60)
-                : 0;
+            var totalSeconds = Math.max(sessionSeconds, progressSeconds);
+            var totalHours = (totalSeconds / 3600).toFixed(1);
+            var sessionCount = hoursRes.data ? hoursRes.data.length : 0;
+            var avgMinutes = sessionCount > 0 ? Math.round(totalSeconds / sessionCount / 60) : 0;
 
             // Render stat cards
             container.textContent = '';
-            const stats = [
-                { icon: 'fas fa-users', value: totalStudents || 0, label: 'Total Students' },
+            var stats = [
+                { icon: 'fas fa-users', value: studentRes.count || 0, label: 'Total Students' },
                 { icon: 'fas fa-bolt', value: activeCount, label: 'Active This Week' },
                 { icon: 'fas fa-clock', value: totalHours, label: 'Total Study Hours' },
                 { icon: 'fas fa-stopwatch', value: avgMinutes + ' min', label: 'Avg Session Length' }
             ];
 
-            stats.forEach(stat => {
-                const card = document.createElement('div');
+            var self = this;
+            stats.forEach(function(stat) {
+                var card = document.createElement('div');
                 card.className = 'stat-card';
 
-                const iconDiv = document.createElement('div');
+                var iconDiv = document.createElement('div');
                 iconDiv.className = 'stat-icon';
-                iconDiv.appendChild(this._icon(stat.icon));
+                iconDiv.appendChild(self._icon(stat.icon));
 
-                const valueDiv = document.createElement('div');
+                var valueDiv = document.createElement('div');
                 valueDiv.className = 'stat-value';
                 valueDiv.textContent = stat.value;
 
-                const labelDiv = document.createElement('div');
+                var labelDiv = document.createElement('div');
                 labelDiv.className = 'stat-label';
                 labelDiv.textContent = stat.label;
 
@@ -398,6 +373,90 @@ const Dashboard = {
                 card.appendChild(labelDiv);
                 container.appendChild(card);
             });
+
+            // Render inline leaderboard
+            if (lbContainer) {
+                var lbEntries = lbRes.data || [];
+                if (classIdSet) {
+                    lbEntries = lbEntries.filter(function(e) { return classIdSet.has(e.student_id); });
+                }
+
+                if (lbEntries.length > 0) {
+                    var heading = document.createElement('h3');
+                    heading.style.cssText = 'margin:24px 0 12px;color:var(--primary-dark);';
+                    heading.textContent = 'Top Students';
+                    lbContainer.appendChild(heading);
+
+                    var formula = document.createElement('p');
+                    formula.style.cssText = 'color:var(--text-muted);font-size:0.85em;margin-bottom:8px;';
+                    formula.textContent = 'Vocab (\u00d710) + Test Score + Study Min + Map Bonus = Total';
+                    lbContainer.appendChild(formula);
+
+                    var wrapper = document.createElement('div');
+                    wrapper.className = 'data-table-wrapper';
+                    var table = document.createElement('table');
+                    table.className = 'data-table';
+
+                    var thead = document.createElement('thead');
+                    var hr = document.createElement('tr');
+                    ['#', 'Name', 'Score', 'Vocab', 'Test', 'Study', 'Map'].forEach(function(text) {
+                        var th = document.createElement('th');
+                        th.textContent = text;
+                        hr.appendChild(th);
+                    });
+                    thead.appendChild(hr);
+                    table.appendChild(thead);
+
+                    var tbody = document.createElement('tbody');
+                    lbEntries.forEach(function(entry, i) {
+                        var tr = document.createElement('tr');
+
+                        var tdRank = document.createElement('td');
+                        tdRank.style.fontWeight = '700';
+                        if (i < 3) tdRank.style.color = ['#FFD700', '#C0C0C0', '#CD7F32'][i];
+                        tdRank.textContent = i + 1;
+                        tr.appendChild(tdRank);
+
+                        var tdName = document.createElement('td');
+                        tdName.textContent = studentNameMap[entry.student_id] || 'Unknown';
+                        tr.appendChild(tdName);
+
+                        var tdScore = document.createElement('td');
+                        tdScore.className = 'score-value';
+                        tdScore.textContent = entry.score;
+                        tr.appendChild(tdScore);
+
+                        var tdVocab = document.createElement('td');
+                        tdVocab.textContent = entry.vocab_mastered;
+                        tr.appendChild(tdVocab);
+
+                        var tdTest = document.createElement('td');
+                        tdTest.textContent = entry.best_test_score != null ? entry.best_test_score + '%' : '-';
+                        tr.appendChild(tdTest);
+
+                        var tdTime = document.createElement('td');
+                        var mins = Math.round((entry.study_time_seconds || 0) / 60);
+                        tdTime.textContent = mins + ' min';
+                        tr.appendChild(tdTime);
+
+                        var tdMap = document.createElement('td');
+                        if (entry.map_best_time) {
+                            var mm = Math.floor(entry.map_best_time / 60);
+                            var ss = entry.map_best_time % 60;
+                            tdMap.textContent = mm + ':' + (ss < 10 ? '0' : '') + ss;
+                        } else {
+                            tdMap.textContent = '-';
+                        }
+                        tr.appendChild(tdMap);
+
+                        tbody.appendChild(tr);
+                    });
+
+                    table.appendChild(tbody);
+                    wrapper.appendChild(table);
+                    lbContainer.appendChild(wrapper);
+                }
+            }
 
         } catch (err) {
             console.error('Failed to load overview:', err);
