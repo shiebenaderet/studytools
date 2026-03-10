@@ -464,6 +464,9 @@ StudyEngine.registerActivity({
         if (pct === 100) {
             AchievementManager.checkAndAward({ activity: 'map-quiz', event: 'perfect', score: 100 });
             AchievementManager.checkAndAward({ activity: 'map-quiz', event: 'cartographer' });
+            if (typeof LeaderboardManager !== 'undefined') {
+                LeaderboardManager.submitScore();
+            }
         }
         AchievementManager.checkAndAward({ activity: 'map-quiz', event: 'complete' });
 

@@ -914,7 +914,10 @@ window.addEventListener('beforeunload', () => {
             var vocabMastered = vocabProgress.mastered ? vocabProgress.mastered.length : 0;
             var practiceProgress = ProgressManager.getActivityProgress(uid, 'practice-test') || {};
             var bestTestScore = typeof practiceProgress.bestScore === 'number' ? practiceProgress.bestScore : null;
-            var score = LeaderboardManager.calculateScore(vocabMastered, bestTestScore, studyTimeSeconds);
+            var mapProgress = ProgressManager.getActivityProgress(uid, 'map-quiz') || {};
+            var mapBestTime = (mapProgress.bestScore === 100 && mapProgress.bestTime) ? mapProgress.bestTime : null;
+            var mapBonus = mapBestTime ? Math.max(0, 180 - mapBestTime) : 0;
+            var score = LeaderboardManager.calculateScore(vocabMastered, bestTestScore, studyTimeSeconds, mapBonus);
             fetch(SUPABASE_URL + '/rest/v1/leaderboard', {
                 method: 'POST',
                 headers: Object.assign({}, headers, { 'Prefer': 'resolution=merge-duplicates' }),
@@ -925,6 +928,8 @@ window.addEventListener('beforeunload', () => {
                     vocab_mastered: vocabMastered,
                     best_test_score: bestTestScore,
                     study_time_seconds: studyTimeSeconds,
+                    map_best_time: mapBestTime,
+                    map_bonus: mapBonus,
                     updated_at: new Date().toISOString()
                 }),
                 keepalive: true

@@ -1,12 +1,13 @@
 // Leaderboard — student rankings with teacher approval
 var LeaderboardManager = {
 
-    // Calculate composite score: vocab mastered * 10 + best test score + study minutes
-    calculateScore(vocabMastered, bestTestScore, studyTimeSeconds) {
+    // Calculate composite score: vocab mastered * 10 + best test score + study minutes + map bonus
+    calculateScore(vocabMastered, bestTestScore, studyTimeSeconds, mapBonus) {
         var vocabPts = (vocabMastered || 0) * 10;
         var testPts = bestTestScore || 0;
         var timePts = Math.floor((studyTimeSeconds || 0) / 60); // 1 pt per minute
-        return vocabPts + testPts + timePts;
+        var mapPts = mapBonus || 0;
+        return vocabPts + testPts + timePts + mapPts;
     },
 
     // Submit or update student's leaderboard entry
@@ -26,7 +27,11 @@ var LeaderboardManager = {
         var studyTime = ProgressManager.load(unitId, 'studyTime') || 0;
         var studyTimeSeconds = Math.floor(studyTime / 1000);
 
-        var score = this.calculateScore(vocabMastered, bestTestScore, studyTimeSeconds);
+        var mapProgress = ProgressManager.getActivityProgress(unitId, 'map-quiz') || {};
+        var mapBestTime = (mapProgress.bestScore === 100 && mapProgress.bestTime) ? mapProgress.bestTime : null;
+        var mapBonus = mapBestTime ? Math.max(0, 180 - mapBestTime) : 0;
+
+        var score = this.calculateScore(vocabMastered, bestTestScore, studyTimeSeconds, mapBonus);
 
         try {
             await ProgressManager.supabase.from('leaderboard').upsert({
@@ -36,6 +41,8 @@ var LeaderboardManager = {
                 vocab_mastered: vocabMastered,
                 best_test_score: bestTestScore,
                 study_time_seconds: studyTimeSeconds,
+                map_best_time: mapBestTime,
+                map_bonus: mapBonus,
                 updated_at: new Date().toISOString()
             }, { onConflict: 'student_id,unit_id' });
         } catch (err) {
