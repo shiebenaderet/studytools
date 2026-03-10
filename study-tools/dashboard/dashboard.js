@@ -157,7 +157,7 @@ const Dashboard = {
                 this.loadClassCodes();
                 break;
             case 'scores':
-                this.loadScores();
+                this.loadScores(filters);
                 break;
         }
     },
@@ -924,7 +924,7 @@ const Dashboard = {
 
     // ---- Scores / Leaderboard Approval ----
 
-    async loadScores() {
+    async loadScores(filters) {
         var container = document.getElementById('scores-container');
         container.textContent = '';
         container.appendChild(this._loading());
@@ -939,27 +939,6 @@ const Dashboard = {
             if (lbErr) throw lbErr;
 
             container.textContent = '';
-
-            // Action bar
-            var actions = document.createElement('div');
-            actions.className = 'scores-actions';
-
-            var approveAllBtn = document.createElement('button');
-            approveAllBtn.className = 'btn btn-primary';
-            approveAllBtn.appendChild(this._icon('fas fa-check-double'));
-            var approveText = document.createElement('span');
-            approveText.textContent = ' Approve All Pending';
-            approveAllBtn.appendChild(approveText);
-            approveAllBtn.addEventListener('click', async function() {
-                await Dashboard.supabase
-                    .from('leaderboard')
-                    .update({ approved: true })
-                    .eq('approved', false);
-                Dashboard.loadScores();
-            });
-            actions.appendChild(approveAllBtn);
-
-            container.appendChild(actions);
 
             if (!entries || entries.length === 0) {
                 container.appendChild(
@@ -976,6 +955,45 @@ const Dashboard = {
                 .in('id', studentIds);
             var studentMap = {};
             (studentData || []).forEach(function(s) { studentMap[s.id] = s; });
+
+            // Filter by class if selected
+            if (filters && filters.classId) {
+                entries = entries.filter(function(e) {
+                    var student = studentMap[e.student_id];
+                    return student && student.class_id === filters.classId;
+                });
+            }
+
+            // Action bar
+            var actions = document.createElement('div');
+            actions.className = 'scores-actions';
+
+            var approveAllBtn = document.createElement('button');
+            approveAllBtn.className = 'btn btn-primary';
+            approveAllBtn.appendChild(this._icon('fas fa-check-double'));
+            var approveText = document.createElement('span');
+            approveText.textContent = ' Approve All Pending';
+            approveAllBtn.appendChild(approveText);
+            approveAllBtn.addEventListener('click', async function() {
+                var pendingIds = entries.filter(function(e) { return !e.approved; }).map(function(e) { return e.id; });
+                if (pendingIds.length > 0) {
+                    await Dashboard.supabase
+                        .from('leaderboard')
+                        .update({ approved: true })
+                        .in('id', pendingIds);
+                }
+                Dashboard.loadScores(Dashboard.getFilters());
+            });
+            actions.appendChild(approveAllBtn);
+
+            container.appendChild(actions);
+
+            if (entries.length === 0) {
+                container.appendChild(
+                    this._emptyState('fas fa-filter', 'No scores for this class yet.')
+                );
+                return;
+            }
 
             var pendingCount = entries.filter(function(e) { return !e.approved; }).length;
 
