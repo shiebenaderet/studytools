@@ -6,6 +6,7 @@ const ProgressManager = {
     studentId: null,
     syncTimer: null,
     sessionId: null,
+    _sessionStartedAt: null,
 
     // --- localStorage tier ---
 
@@ -222,7 +223,13 @@ const ProgressManager = {
 
     startSyncLoop() {
         if (this.syncTimer) clearInterval(this.syncTimer);
-        this.syncTimer = setInterval(() => this.syncToSupabase(), 30000);
+        this.syncTimer = setInterval(() => {
+            this.syncToSupabase();
+            // Also sync study time to leaderboard periodically
+            if (typeof LeaderboardManager !== 'undefined') {
+                LeaderboardManager.submitScore();
+            }
+        }, 30000);
     },
 
     async startSession() {
@@ -241,6 +248,7 @@ const ProgressManager = {
                 .single();
             if (!error && data) {
                 this.sessionId = data.id;
+                this._sessionStartedAt = Date.now();
             }
         } catch (err) {
             console.error('Session start error:', err);
@@ -578,6 +586,7 @@ const ProgressManager = {
             if (this.supabase) {
                 this.startSyncLoop();
                 this.syncFromSupabase();
+                this.startSession();
             }
         }
     },
@@ -833,41 +842,95 @@ ProgressManager.loadStudentInfo();
 
 // Save session and sync on page unload
 window.addEventListener('beforeunload', () => {
-    if (ProgressManager.supabase && ProgressManager.sessionId) {
+    // Flush ActivityTimer elapsed time to localStorage before syncing
+    if (typeof ActivityTimer !== 'undefined') {
+        try { ActivityTimer.stop(); } catch (e) { /* best-effort */ }
+    }
+
+    if (!ProgressManager.supabase || !ProgressManager.studentId) return;
+
+    var headers = {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY
+    };
+
+    // End session with keepalive fetch (async endSession won't complete during unload)
+    if (ProgressManager.sessionId) {
         try {
-            ProgressManager.endSession();
+            var sessionStart = ProgressManager._sessionStartedAt;
+            var durationSeconds = sessionStart ? Math.round((Date.now() - sessionStart) / 1000) : 0;
+            var activitiesUsed = Object.keys(ProgressManager.dirty).map(function(k) { return k.split(':')[1]; });
+            var uniqueActivities = activitiesUsed.filter(function(v, i, a) { return a.indexOf(v) === i; });
+            fetch(SUPABASE_URL + '/rest/v1/sessions?id=eq.' + ProgressManager.sessionId, {
+                method: 'PATCH',
+                headers: headers,
+                body: JSON.stringify({
+                    duration_seconds: durationSeconds,
+                    activities_used: uniqueActivities
+                }),
+                keepalive: true
+            });
         } catch (e) {
             // best-effort
         }
     }
-    if (ProgressManager.supabase && ProgressManager.studentId) {
-        try {
-            const dirtyKeys = Object.keys(ProgressManager.dirty);
-            for (const compositeKey of dirtyKeys) {
-                const [unitId, key] = compositeKey.split(':');
-                const data = ProgressManager.load(unitId, key);
-                if (data === null) continue;
-                const body = JSON.stringify({
+
+    // Sync dirty progress
+    try {
+        var dirtyKeys = Object.keys(ProgressManager.dirty);
+        for (var i = 0; i < dirtyKeys.length; i++) {
+            var compositeKey = dirtyKeys[i];
+            var parts = compositeKey.split(':');
+            var unitId = parts[0];
+            var key = parts[1];
+            var data = ProgressManager.load(unitId, key);
+            if (data === null) continue;
+            fetch(SUPABASE_URL + '/rest/v1/progress', {
+                method: 'POST',
+                headers: Object.assign({}, headers, { 'Prefer': 'resolution=merge-duplicates' }),
+                body: JSON.stringify({
                     student_id: ProgressManager.studentId,
                     unit_id: unitId,
                     activity: key,
                     data: data,
                     updated_at: new Date().toISOString()
-                });
-                fetch(`${SUPABASE_URL}/rest/v1/progress`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'apikey': SUPABASE_ANON_KEY,
-                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-                        'Prefer': 'resolution=merge-duplicates'
-                    },
-                    body: body,
-                    keepalive: true
-                });
-            }
-        } catch (e) {
-            // best-effort
+                }),
+                keepalive: true
+            });
         }
+    } catch (e) {
+        // best-effort
+    }
+
+    // Update leaderboard study_time_seconds with keepalive fetch
+    try {
+        var config = typeof StudyEngine !== 'undefined' && StudyEngine.config;
+        if (config) {
+            var uid = config.unit.id;
+            var studyTime = ProgressManager.load(uid, 'studyTime') || 0;
+            var studyTimeSeconds = Math.floor(studyTime / 1000);
+            var vocabProgress = ProgressManager.getActivityProgress(uid, 'flashcards') || {};
+            var vocabMastered = vocabProgress.mastered ? vocabProgress.mastered.length : 0;
+            var practiceProgress = ProgressManager.getActivityProgress(uid, 'practice-test') || {};
+            var bestTestScore = typeof practiceProgress.bestScore === 'number' ? practiceProgress.bestScore : null;
+            var score = LeaderboardManager.calculateScore(vocabMastered, bestTestScore, studyTimeSeconds);
+            fetch(SUPABASE_URL + '/rest/v1/leaderboard', {
+                method: 'POST',
+                headers: Object.assign({}, headers, { 'Prefer': 'resolution=merge-duplicates' }),
+                body: JSON.stringify({
+                    student_id: ProgressManager.studentId,
+                    unit_id: uid,
+                    score: score,
+                    vocab_mastered: vocabMastered,
+                    best_test_score: bestTestScore,
+                    study_time_seconds: studyTimeSeconds,
+                    updated_at: new Date().toISOString()
+                }),
+                keepalive: true
+            });
+        }
+    } catch (e) {
+        // best-effort
     }
 });

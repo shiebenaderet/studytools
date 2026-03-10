@@ -261,7 +261,7 @@ const Dashboard = {
             const { data: hoursSessions, error: hoursErr } = await hoursQuery;
             if (hoursErr) throw hoursErr;
 
-            let totalSeconds = 0;
+            let sessionSeconds = 0;
             if (hoursSessions) {
                 if (filters.classId) {
                     const { data: classStudents } = await this.supabase
@@ -271,15 +271,45 @@ const Dashboard = {
                     const classIds = new Set((classStudents || []).map(s => s.id));
                     hoursSessions.forEach(s => {
                         if (classIds.has(s.student_id)) {
-                            totalSeconds += (s.duration_seconds || 0);
+                            sessionSeconds += (s.duration_seconds || 0);
                         }
                     });
                 } else {
                     hoursSessions.forEach(s => {
-                        totalSeconds += (s.duration_seconds || 0);
+                        sessionSeconds += (s.duration_seconds || 0);
                     });
                 }
             }
+
+            // Also check progress table studyTime (more reliable source)
+            let progressQuery = this.supabase.from('progress')
+                .select('student_id, data')
+                .eq('activity', 'studyTime');
+            const { data: studyTimeRows } = await progressQuery;
+            let progressSeconds = 0;
+            if (studyTimeRows) {
+                if (filters.classId) {
+                    const { data: classStudents2 } = await this.supabase
+                        .from('students')
+                        .select('id')
+                        .eq('class_id', filters.classId);
+                    const classIds2 = new Set((classStudents2 || []).map(s => s.id));
+                    studyTimeRows.forEach(r => {
+                        if (classIds2.has(r.student_id) && typeof r.data === 'number') {
+                            progressSeconds += Math.round(r.data / 1000);
+                        }
+                    });
+                } else {
+                    studyTimeRows.forEach(r => {
+                        if (typeof r.data === 'number') {
+                            progressSeconds += Math.round(r.data / 1000);
+                        }
+                    });
+                }
+            }
+
+            // Use whichever source has more data
+            const totalSeconds = Math.max(sessionSeconds, progressSeconds);
             const totalHours = (totalSeconds / 3600).toFixed(1);
 
             // Average session length
@@ -395,7 +425,7 @@ const Dashboard = {
             const progressMap = {};
             (progressData || []).forEach(p => {
                 if (!progressMap[p.student_id]) {
-                    progressMap[p.student_id] = { vocabMastered: 0, bestTestScore: null };
+                    progressMap[p.student_id] = { vocabMastered: 0, bestTestScore: null, studyTimeMs: 0 };
                 }
                 if (p.activity === 'flashcards' && p.data && p.data.mastered) {
                     progressMap[p.student_id].vocabMastered += (Array.isArray(p.data.mastered) ? p.data.mastered.length : 0);
@@ -406,12 +436,19 @@ const Dashboard = {
                         progressMap[p.student_id].bestTestScore = p.data.bestScore;
                     }
                 }
+                if (p.activity === 'studyTime' && typeof p.data === 'number') {
+                    progressMap[p.student_id].studyTimeMs = p.data;
+                }
             });
 
             // Build enriched student list and sort by last active
             const enriched = students.map(s => {
                 const sess = sessionMap[s.id] || { totalSeconds: 0, lastActive: null };
-                const prog = progressMap[s.id] || { vocabMastered: 0, bestTestScore: null };
+                const prog = progressMap[s.id] || { vocabMastered: 0, bestTestScore: null, studyTimeMs: 0 };
+                // Use progress table studyTime (ms) if available, fall back to sessions
+                const studyMinutes = prog.studyTimeMs > 0
+                    ? Math.round(prog.studyTimeMs / 60000)
+                    : Math.round(sess.totalSeconds / 60);
                 return {
                     id: s.id,
                     name: s.name,
@@ -419,7 +456,7 @@ const Dashboard = {
                     className: s.classes ? s.classes.name : null,
                     classCode: s.classes ? s.classes.code : '-',
                     lastActive: sess.lastActive,
-                    studyMinutes: Math.round(sess.totalSeconds / 60),
+                    studyMinutes: studyMinutes,
                     vocabMastered: prog.vocabMastered,
                     bestTestScore: prog.bestTestScore
                 };
