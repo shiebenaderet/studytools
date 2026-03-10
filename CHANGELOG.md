@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [7.3.0] - 2026-03-09
+
+### Fixed
+- **Study time tracking** — All students showed 0 minutes in teacher dashboard due to three bugs:
+  - Returning students never got a session row created (startSession not called on page load)
+  - Session end used async/await during page unload which browsers ignore; replaced with keepalive fetch
+  - Leaderboard study_time_seconds not updated on page close; now synced via keepalive fetch and periodic sync loop
+- **Dashboard study time source** — Now reads from progress table studyTime (more reliable) with sessions fallback
+
+### Added
+- **"Continue Studying" home button** — Prominent CTA on the home page that routes directly to flashcards (or practice test if all vocab mastered), with progress hint
+- **Enforced flashcard rating** — Next button and arrow keys disabled until student flips and rates the card; prevents skipping without engaging
+- **Collapsed flashcard controls** — Category filter, shuffle, and help buttons hidden behind an "Options" toggle to reduce visual clutter
+
+## [7.2.0] - 2026-03-08
+
+### Fixed
+- **Textbook tab highlighting** — Active section tab now correctly highlights when navigating
+- **Textbook listener leak** — Removed stale event listeners on section switch
+- **Textbook toggle icon** — Sidebar collapse icon now updates correctly
+
 ## [7.1.0] - 2026-03-08
 
 ### Added
