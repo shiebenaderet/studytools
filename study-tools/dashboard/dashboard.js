@@ -933,7 +933,7 @@ const Dashboard = {
             // Get all leaderboard entries
             var { data: entries, error: lbErr } = await this.supabase
                 .from('leaderboard')
-                .select('id, student_id, unit_id, score, vocab_mastered, best_test_score, study_time_seconds, approved, updated_at')
+                .select('id, student_id, unit_id, score, vocab_mastered, best_test_score, study_time_seconds, map_best_time, map_bonus, approved, updated_at')
                 .order('updated_at', { ascending: false });
 
             if (lbErr) throw lbErr;
@@ -993,7 +993,7 @@ const Dashboard = {
 
             var thead = document.createElement('thead');
             var headerRow = document.createElement('tr');
-            ['Status', 'Name', 'Class', 'Score', 'Vocab', 'Test', 'Study Time', 'Actions'].forEach(function(text) {
+            ['Status', 'Name', 'Class', 'Score', 'Vocab', 'Test', 'Study Time', 'Map Time', 'Actions'].forEach(function(text) {
                 var th = document.createElement('th');
                 th.textContent = text;
                 headerRow.appendChild(th);
@@ -1047,6 +1047,17 @@ const Dashboard = {
                 var mins = Math.round((entry.study_time_seconds || 0) / 60);
                 tdTime.textContent = mins >= 60 ? (mins / 60).toFixed(1) + ' hrs' : mins + ' min';
                 tr.appendChild(tdTime);
+
+                // Map time
+                var tdMap = document.createElement('td');
+                if (entry.map_best_time) {
+                    var mm = Math.floor(entry.map_best_time / 60);
+                    var ss = entry.map_best_time % 60;
+                    tdMap.textContent = mm + ':' + (ss < 10 ? '0' : '') + ss + ' (+' + (entry.map_bonus || 0) + ')';
+                } else {
+                    tdMap.textContent = '-';
+                }
+                tr.appendChild(tdMap);
 
                 // Actions
                 var tdActions = document.createElement('td');
