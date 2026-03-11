@@ -915,7 +915,7 @@ window.addEventListener('beforeunload', () => {
             var practiceProgress = ProgressManager.getActivityProgress(uid, 'practice-test') || {};
             var bestTestScore = typeof practiceProgress.bestScore === 'number' ? practiceProgress.bestScore : null;
             var mapProgress = ProgressManager.getActivityProgress(uid, 'map-quiz') || {};
-            var mapBestTime = (mapProgress.bestScore >= 100 && mapProgress.bestTime) ? mapProgress.bestTime : null;
+            var mapBestTime = (mapProgress.bestScore >= 100 && mapProgress.bestTime) ? Math.max(30, mapProgress.bestTime) : null;
             var mapBonus = mapBestTime ? Math.max(0, 180 - mapBestTime) : 0;
             var score = LeaderboardManager.calculateScore(vocabMastered, bestTestScore, studyTimeSeconds, mapBonus);
             fetch(SUPABASE_URL + '/rest/v1/leaderboard', {
