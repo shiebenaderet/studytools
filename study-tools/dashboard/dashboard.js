@@ -1756,49 +1756,25 @@ const Dashboard = {
 
     async deleteStudent(studentId) {
         try {
-            // Ensure we have a valid auth session
-            var { data: sessionData } = await this.supabase.auth.getSession();
-            if (!sessionData.session) {
-                alert('Your session has expired. Please log out and log back in.');
-                return;
-            }
-
-            // Delete related data in parallel first (these tables have FK to students)
+            // Delete related data in parallel first (FK references to students)
             var [r1, r2, r3] = await Promise.all([
-                this.supabase.from('progress').delete().eq('student_id', studentId).select('id'),
-                this.supabase.from('sessions').delete().eq('student_id', studentId).select('id'),
-                this.supabase.from('leaderboard').delete().eq('student_id', studentId).select('id')
+                this.supabase.from('progress').delete().eq('student_id', studentId),
+                this.supabase.from('sessions').delete().eq('student_id', studentId),
+                this.supabase.from('leaderboard').delete().eq('student_id', studentId)
             ]);
-
-            console.log('Delete results — progress:', r1, 'sessions:', r2, 'leaderboard:', r3);
-
-            if (r1.error) throw new Error('Progress: ' + r1.error.message);
-            if (r2.error) throw new Error('Sessions: ' + r2.error.message);
-            if (r3.error) throw new Error('Leaderboard: ' + r3.error.message);
+            if (r1.error) throw r1.error;
+            if (r2.error) throw r2.error;
+            if (r3.error) throw r3.error;
 
             // Now delete the student row
-            var r4 = await this.supabase.from('students').delete().eq('id', studentId).select('id');
-            console.log('Delete student result:', r4);
-
-            if (r4.error) throw new Error('Student: ' + r4.error.message);
-
-            if (!r4.data || r4.data.length === 0) {
-                // RLS silently blocked — try refreshing the session and retrying
-                await this.supabase.auth.refreshSession();
-                var retry = await this.supabase.from('students').delete().eq('id', studentId).select('id');
-                console.log('Retry delete student result:', retry);
-                if (retry.error) throw new Error('Retry: ' + retry.error.message);
-                if (!retry.data || retry.data.length === 0) {
-                    alert('Could not delete student. The session may need to be refreshed — try logging out and back in.');
-                    return;
-                }
-            }
+            var r4 = await this.supabase.from('students').delete().eq('id', studentId);
+            if (r4.error) throw r4.error;
 
             this.closeStudentModal();
             this.switchTab('students');
         } catch (err) {
             console.error('Failed to delete student:', err);
-            alert('Failed to delete student: ' + err.message);
+            alert('Failed to delete student: ' + (err.message || 'Unknown error'));
         }
     }
 };
