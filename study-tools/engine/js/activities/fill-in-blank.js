@@ -462,7 +462,7 @@ StudyEngine.registerActivity({
 
         // Save progress
         this._attempts++;
-        if (correct > this._bestScore) this._bestScore = correct;
+        if (pct > this._bestScore) this._bestScore = pct;
 
         // Track wrong answers in weakness tracker and flashcards
         this._trackWrongAnswers();

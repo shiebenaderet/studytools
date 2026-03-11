@@ -39,7 +39,7 @@ const ActivityTimer = {
         var idle = now - this._lastInteraction > this.IDLE_TIMEOUT;
         var hidden = document.hidden;
         if (!idle && !hidden && this._active) {
-            this._elapsed += now - this._lastTick;
+            this._elapsed += Math.max(0, now - this._lastTick);
         }
         this._lastTick = now;
     },

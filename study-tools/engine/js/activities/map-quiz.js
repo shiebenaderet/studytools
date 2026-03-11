@@ -89,7 +89,7 @@ StudyEngine.registerActivity({
         container.textContent = '';
 
         var saved = ProgressManager.getActivityProgress(config.unit.id, 'map-quiz');
-        this._bestScore = saved?.bestScore || 0;
+        this._bestScore = Math.min(100, saved?.bestScore || 0);
         this._bestTime = saved?.bestTime || null;
         this._attempts = saved?.attempts || 0;
 
@@ -454,7 +454,7 @@ StudyEngine.registerActivity({
         // Save progress
         var saveData = {
             bestScore: Math.max(this._bestScore, pct),
-            bestTime: this._bestTime === null ? elapsed : (pct >= this._bestScore ? Math.min(this._bestTime, elapsed) : this._bestTime),
+            bestTime: pct >= 100 ? (this._bestTime === null ? elapsed : Math.min(this._bestTime, elapsed)) : this._bestTime,
             attempts: this._attempts,
             lastPlayed: new Date().toISOString()
         };

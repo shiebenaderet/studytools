@@ -461,6 +461,16 @@ StudyEngine.registerActivity({
 
         var pct = questions.length > 0 ? Math.round((correct / questions.length) * 100) : 0;
 
+        // Save best test score for leaderboard
+        var unitId = this._config.unit.id;
+        var existing = ProgressManager.getActivityProgress(unitId, 'practice-test') || {};
+        var prevBest = typeof existing.bestScore === 'number' ? existing.bestScore : 0;
+        ProgressManager.saveActivityProgress(unitId, 'practice-test', {
+            bestScore: Math.max(prevBest, pct),
+            lastScore: pct,
+            sessions: this._masteryData.sessions
+        });
+
         if (typeof AchievementManager !== 'undefined') {
             AchievementManager.checkAndAward({ activity: 'test', score: pct, event: pct === 100 ? 'perfect' : 'complete', totalCorrect: correct });
         }
@@ -484,26 +494,22 @@ StudyEngine.registerActivity({
 
         for (var i = 0; i < wrongQuestions.length; i++) {
             var q = wrongQuestions[i];
-            if (!q.topic) continue;
 
-            // Find vocab terms matching this question's topic
-            for (var j = 0; j < config.vocabulary.length; j++) {
-                var v = config.vocabulary[j];
-                if (v.category === q.topic) {
-                    // Mark as 'again' so it resurfaces in flashcards
-                    ratings[v.term] = 'again';
-                    // Remove from mastered list
-                    var mIdx = mastered.indexOf(v.term);
-                    if (mIdx !== -1) {
-                        mastered.splice(mIdx, 1);
+            if (q.topic) {
+                // Find vocab terms matching this question's topic
+                for (var j = 0; j < config.vocabulary.length; j++) {
+                    var v = config.vocabulary[j];
+                    if (v.category === q.topic) {
+                        ratings[v.term] = 'again';
+                        var mIdx = mastered.indexOf(v.term);
+                        if (mIdx !== -1) {
+                            mastered.splice(mIdx, 1);
+                        }
                         changed = true;
                     }
-                    changed = true;
                 }
-            }
-
-            // Also check if the correct answer text matches a specific term
-            if (!q.topic) {
+            } else {
+                // No topic — match correct answer text to vocab terms
                 var correctText = q.options[q.correct].toLowerCase();
                 for (var j = 0; j < config.vocabulary.length; j++) {
                     var v = config.vocabulary[j];
