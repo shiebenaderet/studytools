@@ -446,7 +446,9 @@ StudyEngine.registerActivity({
 
     _endGame() {
         if (this._timerId) clearInterval(this._timerId);
-        var elapsed = Math.floor((Date.now() - this._startTime) / 1000);
+        var rawElapsed = Math.floor((Date.now() - this._startTime) / 1000);
+        // Minimum 30 seconds — faster times are not humanly possible for 24 regions
+        var elapsed = Math.max(30, rawElapsed);
         var pct = Math.min(100, Math.round((this._score / this._total) * 100));
 
         this._attempts++;
@@ -464,6 +466,9 @@ StudyEngine.registerActivity({
         if (pct === 100) {
             AchievementManager.checkAndAward({ activity: 'map-quiz', event: 'perfect', score: 100 });
             AchievementManager.checkAndAward({ activity: 'map-quiz', event: 'cartographer' });
+            if (elapsed <= 60) {
+                AchievementManager.checkAndAward({ activity: 'map-quiz', event: 'map-master' });
+            }
             if (typeof LeaderboardManager !== 'undefined') {
                 LeaderboardManager.submitScore();
             }

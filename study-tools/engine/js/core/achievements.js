@@ -24,6 +24,7 @@ var AchievementManager = {
         { id: 'midnight-scholar', name: 'Midnight Scholar', description: 'Studying at midnight! True dedication.', icon: 'fas fa-hat-wizard', unlocked: false, unlockedAt: null, secret: true },
         { id: 'top-student', name: 'Top Student', description: 'Reached #1 on the leaderboard!', icon: 'fas fa-crown', unlocked: false, unlockedAt: null },
         { id: 'cartographer', name: 'Cartographer', description: 'Got 100% on the Map Quiz with no mistakes.', icon: 'fas fa-map-marked-alt', unlocked: false, unlockedAt: null },
+        { id: 'map-master', name: 'Map Master', description: 'Completed the Map Quiz in under 60 seconds!', icon: 'fas fa-globe-americas', unlocked: false, unlockedAt: null },
         { id: 'study-smart', name: 'Study Smart', description: 'Passed the How to Study comprehension quiz.', icon: 'fas fa-graduation-cap', unlocked: false, unlockedAt: null }
     ],
 
@@ -150,6 +151,11 @@ var AchievementManager = {
         // Cartographer - perfect map quiz
         if (context.activity === 'map-quiz' && context.event === 'cartographer') {
             this.unlock('cartographer');
+        }
+
+        // Map Master - perfect map quiz under 60 seconds
+        if (context.activity === 'map-quiz' && context.event === 'map-master') {
+            this.unlock('map-master');
         }
 
         // Night Owl - study after 8 PM
