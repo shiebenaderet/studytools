@@ -453,9 +453,6 @@ StudyEngine.registerActivity({
         this._masteryData.sessions = (this._masteryData.sessions || 0) + 1;
         this._saveMasteryData();
 
-        // Track weak terms in weakness tracker
-        this._trackWeakTerms();
-
         // Feed wrong answers back to flashcard ratings
         this._markWrongTermsInFlashcards(wrongQuestions);
 
@@ -487,49 +484,30 @@ StudyEngine.registerActivity({
         var config = this._config;
         if (!config || !config.vocabulary) return;
         var unitId = config.unit.id;
-        var fcProgress = ProgressManager.getActivityProgress(unitId, 'flashcards') || {};
-        var mastered = fcProgress.mastered ? fcProgress.mastered.slice() : [];
-        var ratings = fcProgress.ratings ? Object.assign({}, fcProgress.ratings) : {};
-        var changed = false;
+        var missedTerms = [];
 
         for (var i = 0; i < wrongQuestions.length; i++) {
             var q = wrongQuestions[i];
 
             if (q.topic) {
-                // Find vocab terms matching this question's topic
                 for (var j = 0; j < config.vocabulary.length; j++) {
-                    var v = config.vocabulary[j];
-                    if (v.category === q.topic) {
-                        ratings[v.term] = 'again';
-                        var mIdx = mastered.indexOf(v.term);
-                        if (mIdx !== -1) {
-                            mastered.splice(mIdx, 1);
-                        }
-                        changed = true;
+                    if (config.vocabulary[j].category === q.topic) {
+                        missedTerms.push(config.vocabulary[j].term);
                     }
                 }
             } else {
-                // No topic — match correct answer text to vocab terms
                 var correctText = q.options[q.correct].toLowerCase();
                 for (var j = 0; j < config.vocabulary.length; j++) {
                     var v = config.vocabulary[j];
                     if (v.term.toLowerCase() === correctText || correctText.indexOf(v.term.toLowerCase()) !== -1) {
-                        ratings[v.term] = 'again';
-                        var mIdx = mastered.indexOf(v.term);
-                        if (mIdx !== -1) {
-                            mastered.splice(mIdx, 1);
-                        }
-                        changed = true;
+                        missedTerms.push(v.term);
                     }
                 }
             }
         }
 
-        if (changed) {
-            ProgressManager.saveActivityProgress(unitId, 'flashcards', {
-                mastered: mastered,
-                ratings: ratings
-            });
+        if (typeof NudgeManager !== 'undefined') {
+            NudgeManager.trackMissedTerms(unitId, config, missedTerms);
         }
     },
 
@@ -586,30 +564,6 @@ StudyEngine.registerActivity({
 
         parent.appendChild(explainBtn);
         parent.appendChild(explainBox);
-    },
-
-    _trackWeakTerms() {
-        var config = this._config;
-        var unitId = config.unit.id;
-        var data = ProgressManager.load(unitId, 'weakness_tracker') || { terms: {} };
-        var vocab = config.vocabulary || [];
-        var questions = this._sessionQuestions;
-        var tracked = false;
-
-        for (var i = 0; i < questions.length; i++) {
-            if (!this._isAnswerCorrect(i) && questions[i].topic) {
-                for (var j = 0; j < vocab.length; j++) {
-                    if (vocab[j].category === questions[i].topic) {
-                        data.terms[vocab[j].term] = (data.terms[vocab[j].term] || 0) + 1;
-                        tracked = true;
-                    }
-                }
-            }
-        }
-
-        if (tracked) {
-            ProgressManager.save(unitId, 'weakness_tracker', data);
-        }
     },
 
     _renderScore(wrapper) {

@@ -416,13 +416,14 @@ StudyEngine.registerActivity({
 
     _trackWeakTerms() {
         if (this._missed.length === 0) return;
-        var unitId = this._config.unit.id;
-        var data = ProgressManager.load(unitId, 'weakness_tracker') || { terms: {} };
-        for (var i = 0; i < this._missed.length; i++) {
-            var term = this._missed[i].term;
-            data.terms[term] = (data.terms[term] || 0) + 1;
+        var config = this._config;
+        if (!config) return;
+        var unitId = config.unit.id;
+        var missedTerms = this._missed.map(function(m) { return m.term; });
+
+        if (typeof NudgeManager !== 'undefined') {
+            NudgeManager.trackMissedTerms(unitId, config, missedTerms);
         }
-        ProgressManager.save(unitId, 'weakness_tracker', data);
     },
 
     _showResults() {
