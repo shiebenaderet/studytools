@@ -53,12 +53,27 @@ CREATE TABLE leaderboard (
 CREATE INDEX idx_leaderboard_unit_approved ON leaderboard(unit_id, approved);
 CREATE INDEX idx_leaderboard_score ON leaderboard(score DESC);
 
+CREATE TABLE leaderboard_snapshots (
+    id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+    snapshot_date date NOT NULL,
+    student_id uuid REFERENCES students(id) ON DELETE CASCADE,
+    unit_id text NOT NULL,
+    score integer NOT NULL DEFAULT 0,
+    class_id uuid REFERENCES classes(id),
+    created_at timestamp DEFAULT now(),
+    UNIQUE(snapshot_date, student_id, unit_id)
+);
+
+CREATE INDEX idx_snapshots_date ON leaderboard_snapshots(snapshot_date);
+CREATE INDEX idx_snapshots_unit_date ON leaderboard_snapshots(unit_id, snapshot_date);
+
 -- Row Level Security
 ALTER TABLE classes ENABLE ROW LEVEL SECURITY;
 ALTER TABLE students ENABLE ROW LEVEL SECURITY;
 ALTER TABLE progress ENABLE ROW LEVEL SECURITY;
 ALTER TABLE sessions ENABLE ROW LEVEL SECURITY;
 ALTER TABLE leaderboard ENABLE ROW LEVEL SECURITY;
+ALTER TABLE leaderboard_snapshots ENABLE ROW LEVEL SECURITY;
 
 -- Classes: anyone can read (needed for period selection), only authenticated teachers can modify
 CREATE POLICY "Anyone can read classes" ON classes FOR SELECT USING (true);
@@ -91,3 +106,7 @@ CREATE POLICY "Students upsert own score" ON leaderboard FOR INSERT WITH CHECK (
 CREATE POLICY "Anyone reads approved scores" ON leaderboard FOR SELECT USING (true);
 CREATE POLICY "Students update own score" ON leaderboard FOR UPDATE USING (true);
 CREATE POLICY "Teachers manage leaderboard" ON leaderboard FOR ALL USING (auth.role() = 'authenticated');
+
+-- Leaderboard Snapshots: read-only for students, teachers manage
+CREATE POLICY "Anyone can read snapshots" ON leaderboard_snapshots FOR SELECT USING (true);
+CREATE POLICY "Teachers manage snapshots" ON leaderboard_snapshots FOR ALL USING (auth.role() = 'authenticated');

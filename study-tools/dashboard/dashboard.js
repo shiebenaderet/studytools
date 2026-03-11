@@ -719,6 +719,12 @@ const Dashboard = {
                 }
             }
 
+            // Render leaderboard replay
+            var replayContainer = document.getElementById('overview-replay');
+            if (replayContainer) {
+                this._renderReplay(replayContainer, filters, studentNameMap, studentClassMap, classesRes.data || []);
+            }
+
             // Render inline leaderboard
             if (lbContainer) {
                 var lbEntries = lbRes.data || [];
@@ -802,6 +808,271 @@ const Dashboard = {
                 this._emptyState('fas fa-exclamation-triangle', 'Failed to load overview data. Please try again.')
             );
         }
+    },
+
+    async _renderReplay(container, filters, studentNameMap, studentClassMap, classes) {
+        container.textContent = '';
+        var self = this;
+
+        // Check if snapshots table has data
+        var datesRes = await this.supabase
+            .from('leaderboard_snapshots')
+            .select('snapshot_date')
+            .order('snapshot_date', { ascending: false })
+            .limit(100);
+
+        if (datesRes.error || !datesRes.data || datesRes.data.length === 0) return;
+
+        // Get unique dates
+        var dateSet = {};
+        datesRes.data.forEach(function(r) { dateSet[r.snapshot_date] = true; });
+        var availableDates = Object.keys(dateSet).sort();
+        if (availableDates.length === 0) return;
+
+        var currentIdx = availableDates.length - 1;
+
+        // Build class name map
+        var classNameMap = {};
+        classes.forEach(function(c) { classNameMap[c.id] = c.name || c.code; });
+
+        // Header with controls
+        var header = document.createElement('div');
+        header.className = 'replay-header';
+
+        var heading = document.createElement('h3');
+        heading.appendChild(self._icon('fas fa-history'));
+        heading.appendChild(document.createTextNode(' Leaderboard Replay'));
+        header.appendChild(heading);
+
+        var controls = document.createElement('div');
+        controls.className = 'replay-controls';
+
+        var prevBtn = document.createElement('button');
+        prevBtn.appendChild(self._icon('fas fa-chevron-left'));
+        prevBtn.title = 'Previous day';
+        controls.appendChild(prevBtn);
+
+        var dateLabel = document.createElement('span');
+        dateLabel.className = 'replay-date-label';
+        controls.appendChild(dateLabel);
+
+        var nextBtn = document.createElement('button');
+        nextBtn.appendChild(self._icon('fas fa-chevron-right'));
+        nextBtn.title = 'Next day';
+        controls.appendChild(nextBtn);
+
+        header.appendChild(controls);
+        container.appendChild(header);
+
+        var panelsWrap = document.createElement('div');
+        panelsWrap.className = 'replay-panels';
+        container.appendChild(panelsWrap);
+
+        async function loadDay(idx) {
+            currentIdx = idx;
+            var date = availableDates[idx];
+            var prevDate = idx > 0 ? availableDates[idx - 1] : null;
+
+            // Format date for display
+            var d = new Date(date + 'T12:00:00');
+            var today = new Date().toISOString().slice(0, 10);
+            var yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+            var label = date === today ? 'Today' : date === yesterday ? 'Yesterday' : d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            dateLabel.textContent = label;
+
+            prevBtn.disabled = idx === 0;
+            nextBtn.disabled = idx === availableDates.length - 1;
+
+            // Fetch current day + previous day snapshots in parallel
+            var queries = [
+                self.supabase.from('leaderboard_snapshots')
+                    .select('student_id, score, class_id')
+                    .eq('snapshot_date', date)
+            ];
+            if (filters.unitId) queries[0] = queries[0].eq('unit_id', filters.unitId);
+
+            if (prevDate) {
+                var prevQuery = self.supabase.from('leaderboard_snapshots')
+                    .select('student_id, score, class_id')
+                    .eq('snapshot_date', prevDate);
+                if (filters.unitId) prevQuery = prevQuery.eq('unit_id', filters.unitId);
+                queries.push(prevQuery);
+            }
+
+            var results = await Promise.all(queries);
+            var currentData = results[0].data || [];
+            var prevData = prevDate && results[1] ? (results[1].data || []) : [];
+
+            // Filter by class if needed
+            if (filters.classId) {
+                currentData = currentData.filter(function(r) { return r.class_id === filters.classId; });
+                prevData = prevData.filter(function(r) { return r.class_id === filters.classId; });
+            }
+
+            // Build previous day score maps
+            var prevStudentScores = {};
+            prevData.forEach(function(r) { prevStudentScores[r.student_id] = r.score; });
+
+            var prevClassTotals = {};
+            prevData.forEach(function(r) {
+                if (!r.class_id) return;
+                if (!prevClassTotals[r.class_id]) prevClassTotals[r.class_id] = 0;
+                prevClassTotals[r.class_id] += r.score;
+            });
+
+            // Current day: student rankings
+            var studentRanks = currentData.slice().sort(function(a, b) { return b.score - a.score; });
+
+            // Current day: class rankings
+            var classTotals = {};
+            currentData.forEach(function(r) {
+                if (!r.class_id) return;
+                if (!classTotals[r.class_id]) classTotals[r.class_id] = { total: 0, count: 0 };
+                classTotals[r.class_id].total += r.score;
+                classTotals[r.class_id].count++;
+            });
+            var classRanks = Object.keys(classTotals).map(function(cid) {
+                return { classId: cid, total: classTotals[cid].total, count: classTotals[cid].count };
+            }).sort(function(a, b) { return b.total - a.total; });
+
+            // Build previous class rank order for position change
+            var prevClassRanks = Object.keys(prevClassTotals).map(function(cid) {
+                return { classId: cid, total: prevClassTotals[cid] };
+            }).sort(function(a, b) { return b.total - a.total; });
+            var prevClassPositions = {};
+            prevClassRanks.forEach(function(c, i) { prevClassPositions[c.classId] = i + 1; });
+
+            // Build previous student rank order
+            var prevStudentRanks = prevData.slice().sort(function(a, b) { return b.score - a.score; });
+            var prevStudentPositions = {};
+            prevStudentRanks.forEach(function(r, i) { prevStudentPositions[r.student_id] = i + 1; });
+
+            // Render panels
+            panelsWrap.textContent = '';
+
+            // Class panel
+            var classPanel = document.createElement('div');
+            classPanel.className = 'replay-panel';
+            var classTitle = document.createElement('h4');
+            classTitle.appendChild(self._icon('fas fa-flag'));
+            classTitle.appendChild(document.createTextNode(' Class Standings'));
+            classPanel.appendChild(classTitle);
+
+            if (classRanks.length === 0) {
+                var empty = document.createElement('div');
+                empty.className = 'replay-empty';
+                empty.textContent = 'No data for this day';
+                classPanel.appendChild(empty);
+            } else {
+                classRanks.forEach(function(cls, i) {
+                    var row = document.createElement('div');
+                    row.className = 'replay-row';
+
+                    var rank = document.createElement('span');
+                    rank.className = 'replay-rank';
+                    rank.textContent = '#' + (i + 1);
+
+                    var name = document.createElement('span');
+                    name.className = 'replay-name';
+                    name.textContent = classNameMap[cls.classId] || 'Unknown';
+
+                    var score = document.createElement('span');
+                    score.className = 'replay-score';
+                    score.textContent = cls.total.toLocaleString();
+
+                    var change = document.createElement('span');
+                    change.className = 'replay-change';
+                    var prevPos = prevClassPositions[cls.classId];
+                    if (prevPos && prevDate) {
+                        var diff = prevPos - (i + 1);
+                        if (diff > 0) {
+                            change.className += ' up';
+                            change.textContent = '\u25B2' + diff;
+                        } else if (diff < 0) {
+                            change.className += ' down';
+                            change.textContent = '\u25BC' + Math.abs(diff);
+                        } else {
+                            change.className += ' flat';
+                            change.textContent = '\u2014';
+                        }
+                    }
+
+                    row.appendChild(rank);
+                    row.appendChild(name);
+                    row.appendChild(score);
+                    row.appendChild(change);
+                    classPanel.appendChild(row);
+                });
+            }
+            panelsWrap.appendChild(classPanel);
+
+            // Student panel
+            var studentPanel = document.createElement('div');
+            studentPanel.className = 'replay-panel';
+            var studentTitle = document.createElement('h4');
+            studentTitle.appendChild(self._icon('fas fa-trophy'));
+            studentTitle.appendChild(document.createTextNode(' Top Students'));
+            studentPanel.appendChild(studentTitle);
+
+            var topStudents = studentRanks.slice(0, 10);
+            if (topStudents.length === 0) {
+                var empty = document.createElement('div');
+                empty.className = 'replay-empty';
+                empty.textContent = 'No data for this day';
+                studentPanel.appendChild(empty);
+            } else {
+                topStudents.forEach(function(entry, i) {
+                    var row = document.createElement('div');
+                    row.className = 'replay-row';
+
+                    var rank = document.createElement('span');
+                    rank.className = 'replay-rank';
+                    rank.textContent = '#' + (i + 1);
+
+                    var name = document.createElement('span');
+                    name.className = 'replay-name';
+                    name.textContent = studentNameMap[entry.student_id] || 'Unknown';
+
+                    var score = document.createElement('span');
+                    score.className = 'replay-score';
+                    score.textContent = entry.score;
+
+                    var change = document.createElement('span');
+                    change.className = 'replay-change';
+                    var prevPos = prevStudentPositions[entry.student_id];
+                    if (prevPos && prevDate) {
+                        var diff = prevPos - (i + 1);
+                        if (diff > 0) {
+                            change.className += ' up';
+                            change.textContent = '\u25B2' + diff;
+                        } else if (diff < 0) {
+                            change.className += ' down';
+                            change.textContent = '\u25BC' + Math.abs(diff);
+                        } else {
+                            change.className += ' flat';
+                            change.textContent = '\u2014';
+                        }
+                    }
+
+                    row.appendChild(rank);
+                    row.appendChild(name);
+                    row.appendChild(score);
+                    row.appendChild(change);
+                    studentPanel.appendChild(row);
+                });
+            }
+            panelsWrap.appendChild(studentPanel);
+        }
+
+        prevBtn.addEventListener('click', function() {
+            if (currentIdx > 0) loadDay(currentIdx - 1);
+        });
+        nextBtn.addEventListener('click', function() {
+            if (currentIdx < availableDates.length - 1) loadDay(currentIdx + 1);
+        });
+
+        // Load most recent day
+        loadDay(currentIdx);
     },
 
     async loadStudents(filters) {
