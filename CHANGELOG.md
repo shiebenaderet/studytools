@@ -5,22 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [7.6.0] - 2026-03-11
+## [7.6.3] - 2026-03-11
 
 ### Added
 - **Unit filter** — Dropdown to filter scores, leaderboard, and vocab insights by unit
 - **Sortable columns** — Click any column header to sort ascending/descending on all dashboard tables (overview, students, scores, leaderboard)
 - **Vocab Insights tab** — Shows which terms students find hardest based on flashcard ratings, with difficulty bars and alerts for terms rated hard by 40%+ of students
-- **Leaderboard tab** — Read-only preview of approved student rankings with score formula
+- **Leaderboard tab** — Read-only preview of all student rankings (pending entries shown dimmed)
 - **Overview leaderboard** — Top 10 students shown inline below overview stat cards
 - **Teacher account restriction** — Dashboard login restricted to authorized email only
 
 ### Fixed
+- **Student delete** — Missing RLS DELETE/UPDATE policies on students table prevented deletion; added policies to Supabase
+- **Dashboard leaderboard sync** — Overview and Leaderboard tabs now show all entries (including pending) instead of only approved
 - **Class filter on Scores tab** — Was ignored; now filters server-side
 - **Approve All respects filters** — Only approves visible (filtered) entries, not all
 - **Vocab Insights rating mismatch** — Flashcards use "again/hard/good/easy" not "hard/medium/easy"; ratings now mapped correctly
 - **Sort arrow icons** — Were showing raw `u25B2` text instead of ▲/▼ symbols
-- **Student delete feedback** — Now shows error alerts on failure instead of silently doing nothing
 
 ### Changed
 - **Dashboard loading speed** — All queries parallelized with Promise.all; eliminated duplicate class lookups and sequential awaits
