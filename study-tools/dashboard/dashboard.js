@@ -1756,16 +1756,29 @@ const Dashboard = {
 
     async deleteStudent(studentId) {
         try {
-            // Delete related data first
-            await this.supabase.from('progress').delete().eq('student_id', studentId);
-            await this.supabase.from('sessions').delete().eq('student_id', studentId);
-            await this.supabase.from('leaderboard').delete().eq('student_id', studentId);
-            await this.supabase.from('students').delete().eq('id', studentId);
+            // Delete related data in parallel first
+            var [r1, r2, r3] = await Promise.all([
+                this.supabase.from('progress').delete().eq('student_id', studentId),
+                this.supabase.from('sessions').delete().eq('student_id', studentId),
+                this.supabase.from('leaderboard').delete().eq('student_id', studentId)
+            ]);
+            if (r1.error) throw r1.error;
+            if (r2.error) throw r2.error;
+            if (r3.error) throw r3.error;
+
+            // Now delete the student row
+            var r4 = await this.supabase.from('students').delete().eq('id', studentId).select();
+            if (r4.error) throw r4.error;
+
+            if (!r4.data || r4.data.length === 0) {
+                alert('Delete may have failed — please check if the student was removed. You may need to log out and log back in.');
+            }
 
             this.closeStudentModal();
             this.switchTab('students');
         } catch (err) {
             console.error('Failed to delete student:', err);
+            alert('Failed to delete student: ' + (err.message || 'Unknown error'));
         }
     }
 };
