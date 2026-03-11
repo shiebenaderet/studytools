@@ -447,7 +447,7 @@ StudyEngine.registerActivity({
     _endGame() {
         if (this._timerId) clearInterval(this._timerId);
         var elapsed = Math.floor((Date.now() - this._startTime) / 1000);
-        var pct = Math.round((this._score / this._total) * 100);
+        var pct = Math.min(100, Math.round((this._score / this._total) * 100));
 
         this._attempts++;
 

@@ -28,7 +28,7 @@ var LeaderboardManager = {
         var studyTimeSeconds = Math.floor(studyTime / 1000);
 
         var mapProgress = ProgressManager.getActivityProgress(unitId, 'map-quiz') || {};
-        var mapBestTime = (mapProgress.bestScore === 100 && mapProgress.bestTime) ? mapProgress.bestTime : null;
+        var mapBestTime = (mapProgress.bestScore >= 100 && mapProgress.bestTime) ? mapProgress.bestTime : null;
         var mapBonus = mapBestTime ? Math.max(0, 180 - mapBestTime) : 0;
 
         var score = this.calculateScore(vocabMastered, bestTestScore, studyTimeSeconds, mapBonus);

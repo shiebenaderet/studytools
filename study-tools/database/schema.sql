@@ -89,7 +89,5 @@ CREATE POLICY "Teachers delete sessions" ON sessions FOR DELETE USING (auth.role
 -- Only authenticated teachers can approve, update approval status, or delete entries
 CREATE POLICY "Students upsert own score" ON leaderboard FOR INSERT WITH CHECK (true);
 CREATE POLICY "Anyone reads approved scores" ON leaderboard FOR SELECT USING (true);
-CREATE POLICY "Students update own score" ON leaderboard FOR UPDATE
-    USING (true)
-    WITH CHECK (approved = false);  -- Students cannot self-approve
+CREATE POLICY "Students update own score" ON leaderboard FOR UPDATE USING (true);
 CREATE POLICY "Teachers manage leaderboard" ON leaderboard FOR ALL USING (auth.role() = 'authenticated');
