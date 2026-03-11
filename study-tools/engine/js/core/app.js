@@ -467,6 +467,11 @@ const StudyEngine = {
         var topbar = document.getElementById('activity-topbar');
         if (topbar) topbar.textContent = '';
 
+        // Smart nudge toast when leaving an activity
+        if (this.activeActivity && typeof NudgeManager !== 'undefined' && this.config) {
+            NudgeManager.onActivityComplete(this.activeActivity, this.config);
+        }
+
         if (this.activeActivity && this.activities[this.activeActivity]) {
             this.activities[this.activeActivity].deactivate?.();
             this.activeActivity = null;
@@ -564,52 +569,10 @@ const StudyEngine = {
         if (homeCards && homeCards.children.length === 0) {
             homeCards.textContent = '';
 
-            // "Continue Studying" CTA — single clear action
-            const continueCard = document.createElement('div');
-            continueCard.className = 'home-continue';
-            const continueBtn = document.createElement('button');
-            continueBtn.className = 'home-continue-btn';
-            // Determine best next action based on progress
-            var unitId = this.config.unit.id;
-            var fcProgress = ProgressManager.getActivityProgress(unitId, 'flashcards') || {};
-            var masteredCount = fcProgress.mastered ? fcProgress.mastered.length : 0;
-            var totalVocab = this.config.vocabulary ? this.config.vocabulary.length : 0;
-            var continueIcon = document.createElement('i');
-            if (masteredCount < totalVocab) {
-                continueIcon.className = 'fas fa-graduation-cap';
-                continueBtn.appendChild(continueIcon);
-                continueBtn.appendChild(document.createTextNode(' Start Flashcards'));
-                continueBtn.addEventListener('click', () => {
-                    var navBtn = document.querySelector('.nav-btn[data-group="study"]');
-                    if (navBtn) navBtn.click();
-                    setTimeout(() => {
-                        var fcBtn = document.querySelector('[data-activity="flashcards"]');
-                        if (fcBtn) fcBtn.click();
-                    }, 100);
-                });
-            } else {
-                continueIcon.className = 'fas fa-clipboard-check';
-                continueBtn.appendChild(continueIcon);
-                continueBtn.appendChild(document.createTextNode(' Start Practice Test'));
-                continueBtn.addEventListener('click', () => {
-                    var navBtn = document.querySelector('.nav-btn[data-group="practice"]');
-                    if (navBtn) navBtn.click();
-                    setTimeout(() => {
-                        var ptBtn = document.querySelector('[data-activity="practice-test"]');
-                        if (ptBtn) ptBtn.click();
-                    }, 100);
-                });
+            // Smart "What to Do Next" suggestions
+            if (typeof NudgeManager !== 'undefined') {
+                NudgeManager.renderSuggestions(homeCards, this.config);
             }
-            continueCard.appendChild(continueBtn);
-            var progressHint = document.createElement('div');
-            progressHint.className = 'home-continue-hint';
-            if (masteredCount < totalVocab) {
-                progressHint.textContent = masteredCount + '/' + totalVocab + ' terms mastered — keep going!';
-            } else {
-                progressHint.textContent = 'All vocab mastered! Time to practice.';
-            }
-            continueCard.appendChild(progressHint);
-            homeCards.appendChild(continueCard);
 
             // Step-by-step flow
             const flow = document.createElement('div');
