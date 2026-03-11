@@ -314,9 +314,15 @@ const Dashboard = {
     async loadOverview(filters) {
         var container = document.getElementById('overview-stats');
         var lbContainer = document.getElementById('overview-leaderboard');
+        var trendContainer = document.getElementById('overview-trend');
+        var feedContainer = document.getElementById('overview-feed');
+        var classLbContainer = document.getElementById('overview-class-lb');
         container.textContent = '';
         container.appendChild(this._loading());
         if (lbContainer) lbContainer.textContent = '';
+        if (trendContainer) trendContainer.textContent = '';
+        if (feedContainer) feedContainer.textContent = '';
+        if (classLbContainer) classLbContainer.textContent = '';
 
         try {
             // Build all queries upfront
@@ -345,8 +351,23 @@ const Dashboard = {
                 .limit(10);
             if (filters.unitId) lbQuery = lbQuery.eq('unit_id', filters.unitId);
 
+            // Trend query: sessions from the last 7 days
+            var trendStart = new Date();
+            trendStart.setDate(trendStart.getDate() - 6);
+            trendStart.setHours(0, 0, 0, 0);
+            var trendQuery = this.supabase.from('sessions')
+                .select('student_id, started_at, duration_seconds, activities_used')
+                .gte('started_at', trendStart.toISOString())
+                .order('started_at', { ascending: false });
+
+            // Class leaderboard: all leaderboard + all students with class info + all classes
+            var allLbQuery = this.supabase.from('leaderboard')
+                .select('student_id, score, approved')
+                .eq('approved', true);
+            if (filters.unitId) allLbQuery = allLbQuery.eq('unit_id', filters.unitId);
+
             // Run ALL queries in parallel
-            var [studentRes, activeRes, hoursRes, progressRes, lbRes, classStudentRes, allStudentRes] = await Promise.all([
+            var [studentRes, activeRes, hoursRes, progressRes, lbRes, classStudentRes, allStudentRes, trendRes, allLbRes, classesRes, allStudentsWithClassRes] = await Promise.all([
                 studentQuery,
                 activeQuery,
                 hoursQuery,
@@ -355,7 +376,11 @@ const Dashboard = {
                 filters.classId
                     ? this.supabase.from('students').select('id').eq('class_id', filters.classId)
                     : Promise.resolve({ data: null }),
-                this.supabase.from('students').select('id, name')
+                this.supabase.from('students').select('id, name'),
+                trendQuery,
+                allLbQuery,
+                this.supabase.from('classes').select('id, code, name').order('name'),
+                this.supabase.from('students').select('id, name, class_id')
             ]);
 
             if (studentRes.error) throw studentRes.error;
@@ -369,6 +394,12 @@ const Dashboard = {
 
             var studentNameMap = {};
             (allStudentRes.data || []).forEach(function(s) { studentNameMap[s.id] = s.name; });
+
+            // Build student->class map
+            var studentClassMap = {};
+            (allStudentsWithClassRes.data || []).forEach(function(s) {
+                studentClassMap[s.id] = s.class_id;
+            });
 
             // Active this week
             var activeStudentIds = new Set();
@@ -431,6 +462,262 @@ const Dashboard = {
                 card.appendChild(labelDiv);
                 container.appendChild(card);
             });
+
+            // ---- Render Daily Trend Chart ----
+            if (trendContainer && trendRes.data) {
+                var trendSessions = trendRes.data;
+                if (classIdSet) {
+                    trendSessions = trendSessions.filter(function(s) { return classIdSet.has(s.student_id); });
+                }
+
+                // Group by day
+                var dayCounts = {};
+                var dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                for (var d = 0; d < 7; d++) {
+                    var day = new Date();
+                    day.setDate(day.getDate() - (6 - d));
+                    var key = day.toISOString().slice(0, 10);
+                    dayCounts[key] = { count: 0, label: dayNames[day.getDay()], isToday: d === 6 };
+                }
+                trendSessions.forEach(function(s) {
+                    var dayKey = s.started_at.slice(0, 10);
+                    if (dayCounts[dayKey]) dayCounts[dayKey].count++;
+                });
+
+                var maxCount = 0;
+                var dayKeys = Object.keys(dayCounts);
+                dayKeys.forEach(function(k) { if (dayCounts[k].count > maxCount) maxCount = dayCounts[k].count; });
+
+                var heading = document.createElement('h3');
+                heading.appendChild(self._icon('fas fa-chart-bar'));
+                heading.appendChild(document.createTextNode(' Daily Activity'));
+                trendContainer.appendChild(heading);
+
+                dayKeys.forEach(function(k) {
+                    var row = document.createElement('div');
+                    row.className = 'trend-row';
+
+                    var label = document.createElement('span');
+                    label.className = 'trend-label';
+                    label.textContent = dayCounts[k].label;
+
+                    var track = document.createElement('div');
+                    track.className = 'trend-bar-track';
+
+                    var fill = document.createElement('div');
+                    fill.className = 'trend-bar-fill' + (dayCounts[k].isToday ? ' trend-today' : '');
+                    var pct = maxCount > 0 ? (dayCounts[k].count / maxCount * 100) : 0;
+                    fill.style.width = pct + '%';
+
+                    var count = document.createElement('span');
+                    count.className = 'trend-count';
+                    count.textContent = dayCounts[k].count;
+
+                    track.appendChild(fill);
+                    row.appendChild(label);
+                    row.appendChild(track);
+                    row.appendChild(count);
+                    trendContainer.appendChild(row);
+                });
+            }
+
+            // ---- Render Recently Active Feed ----
+            if (feedContainer && trendRes.data) {
+                var now = new Date();
+                var dayAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+                var recentSessions = trendRes.data.filter(function(s) {
+                    var match = new Date(s.started_at) >= dayAgo;
+                    if (classIdSet) match = match && classIdSet.has(s.student_id);
+                    return match;
+                }).slice(0, 8);
+
+                var heading = document.createElement('h3');
+                heading.appendChild(self._icon('fas fa-stream'));
+                heading.appendChild(document.createTextNode(' Recently Active'));
+                feedContainer.appendChild(heading);
+
+                if (recentSessions.length === 0) {
+                    var empty = document.createElement('p');
+                    empty.style.cssText = 'color:var(--text-light);font-size:0.875rem;text-align:center;padding:20px 0;';
+                    empty.textContent = 'No activity in the last 24 hours';
+                    feedContainer.appendChild(empty);
+                } else {
+                    // Activity name prettifier
+                    var activityNames = {
+                        flashcards: 'Flashcards', 'practice-test': 'Practice Test',
+                        'fill-in-blank': 'Fill in the Blank', 'typing-practice': 'Typing Practice',
+                        textbook: 'Textbook', 'source-analysis': 'Source Analysis',
+                        'lightning-round': 'Lightning Round', wordle: 'Wordle',
+                        hangman: 'Hangman', 'flip-match': 'Flip Match',
+                        'term-catcher': 'Term Catcher', 'tower-defense': 'Tower Defense',
+                        crossword: 'Crossword', 'quiz-race': 'Quiz Race',
+                        'map-quiz': 'Map Quiz', timeline: 'Timeline',
+                        'resource-library': 'Resource Library', 'how-to-study': 'How to Study'
+                    };
+
+                    recentSessions.forEach(function(s) {
+                        var item = document.createElement('div');
+                        item.className = 'feed-item';
+
+                        var name = studentNameMap[s.student_id] || 'Unknown';
+                        var avatar = document.createElement('div');
+                        avatar.className = 'feed-avatar';
+                        avatar.textContent = name.charAt(0).toUpperCase();
+
+                        var details = document.createElement('div');
+                        details.className = 'feed-details';
+
+                        var nameEl = document.createElement('div');
+                        nameEl.className = 'feed-name';
+                        nameEl.textContent = name;
+
+                        var actEl = document.createElement('div');
+                        actEl.className = 'feed-activity';
+                        var activities = s.activities_used || [];
+                        var prettyActivities = activities.map(function(a) { return activityNames[a] || a; });
+                        actEl.textContent = prettyActivities.length > 0 ? prettyActivities.join(', ') : 'Studying';
+
+                        details.appendChild(nameEl);
+                        details.appendChild(actEl);
+
+                        var meta = document.createElement('div');
+                        meta.className = 'feed-meta';
+
+                        var durEl = document.createElement('div');
+                        durEl.className = 'feed-duration';
+                        var durMin = Math.round((s.duration_seconds || 0) / 60);
+                        durEl.textContent = durMin > 0 ? durMin + ' min' : '<1 min';
+
+                        var timeEl = document.createElement('div');
+                        timeEl.className = 'feed-time';
+                        var diffMs = now - new Date(s.started_at);
+                        var diffMin = Math.round(diffMs / 60000);
+                        if (diffMin < 60) {
+                            timeEl.textContent = diffMin + 'm ago';
+                        } else {
+                            var diffHr = Math.round(diffMin / 60);
+                            timeEl.textContent = diffHr + 'h ago';
+                        }
+
+                        meta.appendChild(durEl);
+                        meta.appendChild(timeEl);
+
+                        item.appendChild(avatar);
+                        item.appendChild(details);
+                        item.appendChild(meta);
+                        feedContainer.appendChild(item);
+                    });
+                }
+            }
+
+            // ---- Render Class Leaderboard ----
+            if (classLbContainer && classesRes.data && classesRes.data.length > 0 && allLbRes.data) {
+                // Build class name map
+                var classMap = {};
+                classesRes.data.forEach(function(c) { classMap[c.id] = c; });
+
+                // Aggregate scores per class
+                var classScores = {};
+                allLbRes.data.forEach(function(entry) {
+                    var cid = studentClassMap[entry.student_id];
+                    if (!cid) return;
+                    if (!classScores[cid]) classScores[cid] = { total: 0, count: 0 };
+                    classScores[cid].total += (entry.score || 0);
+                    classScores[cid].count++;
+                });
+
+                // Calculate daily study minutes per class from trend sessions
+                var classDailyMinutes = {};
+                var todayStr = new Date().toISOString().slice(0, 10);
+                (trendRes.data || []).forEach(function(s) {
+                    if (s.started_at.slice(0, 10) !== todayStr) return;
+                    var cid = studentClassMap[s.student_id];
+                    if (!cid) return;
+                    if (!classDailyMinutes[cid]) classDailyMinutes[cid] = 0;
+                    classDailyMinutes[cid] += Math.round((s.duration_seconds || 0) / 60);
+                });
+
+                // Build sorted class list
+                var classList = classesRes.data.map(function(c) {
+                    var scores = classScores[c.id] || { total: 0, count: 0 };
+                    return {
+                        id: c.id,
+                        name: c.name || c.code,
+                        code: c.code,
+                        totalScore: scores.total,
+                        studentCount: scores.count,
+                        avgScore: scores.count > 0 ? Math.round(scores.total / scores.count) : 0,
+                        dailyMinutes: classDailyMinutes[c.id] || 0
+                    };
+                }).filter(function(c) { return c.studentCount > 0; });
+
+                classList.sort(function(a, b) { return b.totalScore - a.totalScore; });
+
+                if (classList.length > 0) {
+                    var heading = document.createElement('h3');
+                    heading.appendChild(self._icon('fas fa-flag'));
+                    heading.appendChild(document.createTextNode(' Class Standings'));
+                    classLbContainer.appendChild(heading);
+
+                    var grid = document.createElement('div');
+                    grid.className = 'class-lb-grid';
+
+                    classList.forEach(function(cls, idx) {
+                        var card = document.createElement('div');
+                        card.className = 'class-lb-card';
+                        if (idx < 3) card.classList.add('rank-' + (idx + 1));
+
+                        var rank = document.createElement('div');
+                        rank.className = 'class-lb-rank';
+                        rank.textContent = '#' + (idx + 1);
+
+                        var info = document.createElement('div');
+                        info.className = 'class-lb-info';
+
+                        var nameEl = document.createElement('div');
+                        nameEl.className = 'class-lb-name';
+                        nameEl.textContent = cls.name;
+
+                        var statsEl = document.createElement('div');
+                        statsEl.className = 'class-lb-stats';
+                        statsEl.textContent = cls.studentCount + ' students \u00B7 avg ' + cls.avgScore + ' pts';
+
+                        info.appendChild(nameEl);
+                        info.appendChild(statsEl);
+
+                        var scoreDiv = document.createElement('div');
+                        scoreDiv.className = 'class-lb-score';
+
+                        var totalEl = document.createElement('div');
+                        totalEl.className = 'class-lb-total';
+                        totalEl.textContent = cls.totalScore.toLocaleString();
+
+                        var dailyEl = document.createElement('div');
+                        dailyEl.className = 'class-lb-daily';
+                        if (cls.dailyMinutes > 0) {
+                            var span = document.createElement('span');
+                            span.className = 'up';
+                            span.textContent = '\u25B2 ' + cls.dailyMinutes + ' min today';
+                            dailyEl.appendChild(span);
+                        } else {
+                            var span = document.createElement('span');
+                            span.className = 'flat';
+                            span.textContent = '\u2014 no activity today';
+                            dailyEl.appendChild(span);
+                        }
+
+                        scoreDiv.appendChild(totalEl);
+                        scoreDiv.appendChild(dailyEl);
+
+                        card.appendChild(rank);
+                        card.appendChild(info);
+                        card.appendChild(scoreDiv);
+                        grid.appendChild(card);
+                    });
+
+                    classLbContainer.appendChild(grid);
+                }
+            }
 
             // Render inline leaderboard
             if (lbContainer) {

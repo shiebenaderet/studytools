@@ -400,7 +400,7 @@ StudyEngine.registerActivity({
             if (won) {
                 msg.textContent = 'Congratulations! You guessed it in ' + this._guesses.length + ' ' + (this._guesses.length === 1 ? 'try' : 'tries') + '!';
             } else {
-                msg.textContent = 'The word was: ' + this._targetWord;
+                msg.textContent = 'The word was: ' + (this._targetVocab.term || this._targetWord);
             }
             msgArea.appendChild(msg);
 

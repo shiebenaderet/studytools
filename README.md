@@ -8,7 +8,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 
 [![Live Site](https://img.shields.io/badge/Live_Site-study.mrbsocialstudies.org-1669C5?style=for-the-badge&logo=google-chrome&logoColor=white)](https://study.mrbsocialstudies.org)
 [![License](https://img.shields.io/badge/License-Educational_Use-22c55e?style=for-the-badge)](#license)
-[![Version](https://img.shields.io/badge/Version-7.8.2-f59e0b?style=for-the-badge)](#)
+[![Version](https://img.shields.io/badge/Version-7.9.0-f59e0b?style=for-the-badge)](#)
 
 ---
 
@@ -177,6 +177,19 @@ No build step. No dependencies to install. Just HTML, CSS, and JavaScript.
 - COPPA school exception documented
 - Teacher approval required for leaderboard visibility
 - [Full privacy policy](study-tools/engine/privacy.html)
+
+---
+
+## 🙌 Student Contributors
+
+Students who reported bugs or suggested improvements:
+
+| Student | Contribution |
+|---------|-------------|
+| **Ahmad** | Found the leaderboard scoring bug where map quiz scores above 100% weren't being counted |
+| **Fabian** | Reported Wordle display issue with abbreviated terms |
+
+> Want to be listed here? Report a bug or suggest an improvement to your teacher!
 
 ---
 

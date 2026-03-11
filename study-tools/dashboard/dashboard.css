@@ -819,3 +819,227 @@ body {
         flex-wrap: wrap;
     }
 }
+
+/* ---- Overview Panels (Trend + Feed side by side) ---- */
+.overview-panels {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.overview-panel {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    box-shadow: var(--shadow);
+}
+
+.overview-panel h3 {
+    font-size: 1rem;
+    color: var(--primary-dark);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+@media (max-width: 768px) {
+    .overview-panels {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ---- Daily Trend Chart ---- */
+.trend-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.trend-label {
+    min-width: 36px;
+    font-size: 0.8rem;
+    color: var(--text-light);
+    text-align: right;
+    font-weight: 500;
+}
+
+.trend-bar-track {
+    flex: 1;
+    height: 20px;
+    background: var(--bg);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.trend-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+    border-radius: 4px;
+    transition: width 0.4s ease;
+    min-width: 0;
+}
+
+.trend-bar-fill.trend-today {
+    background: linear-gradient(90deg, var(--accent), #d97706);
+}
+
+.trend-count {
+    min-width: 28px;
+    font-size: 0.8rem;
+    color: var(--text-light);
+    text-align: right;
+}
+
+/* ---- Recently Active Feed ---- */
+.feed-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.feed-item:last-child {
+    border-bottom: none;
+}
+
+.feed-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--primary-light);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+}
+
+.feed-details {
+    flex: 1;
+    min-width: 0;
+}
+
+.feed-name {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.feed-activity {
+    font-size: 0.75rem;
+    color: var(--text-light);
+}
+
+.feed-meta {
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.feed-duration {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.feed-time {
+    font-size: 0.7rem;
+    color: var(--text-light);
+}
+
+/* ---- Class Leaderboard ---- */
+#overview-class-lb {
+    margin-top: 16px;
+}
+
+#overview-class-lb h3 {
+    margin: 0 0 12px;
+    color: var(--primary-dark);
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.class-lb-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 12px;
+}
+
+.class-lb-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    position: relative;
+    border-left: 4px solid var(--primary);
+}
+
+.class-lb-card.rank-1 { border-left-color: #FFD700; }
+.class-lb-card.rank-2 { border-left-color: #C0C0C0; }
+.class-lb-card.rank-3 { border-left-color: #CD7F32; }
+
+.class-lb-rank {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-light);
+    min-width: 28px;
+    text-align: center;
+}
+
+.class-lb-card.rank-1 .class-lb-rank { color: #FFD700; }
+.class-lb-card.rank-2 .class-lb-rank { color: #C0C0C0; }
+.class-lb-card.rank-3 .class-lb-rank { color: #CD7F32; }
+
+.class-lb-info {
+    flex: 1;
+}
+
+.class-lb-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text);
+}
+
+.class-lb-stats {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    margin-top: 2px;
+}
+
+.class-lb-score {
+    text-align: right;
+}
+
+.class-lb-total {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.class-lb-daily {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    margin-top: 2px;
+}
+
+.class-lb-daily .up {
+    color: var(--success);
+    font-weight: 600;
+}
+
+.class-lb-daily .flat {
+    color: var(--text-light);
+}
