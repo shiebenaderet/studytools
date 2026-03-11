@@ -340,8 +340,7 @@ const Dashboard = {
             var progressQuery = this.supabase.from('progress').select('student_id, data').eq('activity', 'studyTime');
 
             var lbQuery = this.supabase.from('leaderboard')
-                .select('student_id, score, vocab_mastered, best_test_score, study_time_seconds, map_best_time, map_bonus')
-                .eq('approved', true)
+                .select('student_id, score, vocab_mastered, best_test_score, study_time_seconds, map_best_time, map_bonus, approved')
                 .order('score', { ascending: false })
                 .limit(10);
             if (filters.unitId) lbQuery = lbQuery.eq('unit_id', filters.unitId);
@@ -464,6 +463,7 @@ const Dashboard = {
                     lbContainer.appendChild(self._sortableTable(lbCols, lbEntries, function(entry) {
                         var tr = document.createElement('tr');
                         var idx = lbEntries.indexOf(entry);
+                        if (!entry.approved) tr.style.opacity = '0.5';
 
                         var tdRank = document.createElement('td');
                         tdRank.style.fontWeight = '700';
@@ -472,7 +472,7 @@ const Dashboard = {
                         tr.appendChild(tdRank);
 
                         var tdName = document.createElement('td');
-                        tdName.textContent = studentNameMap[entry.student_id] || 'Unknown';
+                        tdName.textContent = (studentNameMap[entry.student_id] || 'Unknown') + (entry.approved ? '' : ' (pending)');
                         tr.appendChild(tdName);
 
                         var tdScore = document.createElement('td');
@@ -1518,7 +1518,6 @@ const Dashboard = {
             var lbQuery = this.supabase
                 .from('leaderboard')
                 .select('student_id, unit_id, score, vocab_mastered, best_test_score, study_time_seconds, map_best_time, map_bonus, approved')
-                .eq('approved', true)
                 .order('score', { ascending: false })
                 .limit(50);
 
@@ -1573,6 +1572,7 @@ const Dashboard = {
             container.appendChild(this._sortableTable(columns, entries, function(entry) {
                 var student = studentMap[entry.student_id] || {};
                 var tr = document.createElement('tr');
+                if (!entry.approved) tr.style.opacity = '0.5';
 
                 var tdRank = document.createElement('td');
                 tdRank.style.fontWeight = '700';
@@ -1582,7 +1582,7 @@ const Dashboard = {
                 tr.appendChild(tdRank);
 
                 var tdName = document.createElement('td');
-                tdName.textContent = student.name || 'Unknown';
+                tdName.textContent = (student.name || 'Unknown') + (entry.approved ? '' : ' (pending)');
                 tr.appendChild(tdName);
 
                 var tdClass = document.createElement('td');
