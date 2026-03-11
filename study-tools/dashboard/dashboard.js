@@ -31,6 +31,65 @@ const Dashboard = {
         return div;
     },
 
+    // ---- Helper: build a sortable table ----
+    // columns: [{ label, key, getValue(row) }]  — key=null means non-sortable
+    // rows: array of data objects
+    // renderRow(row): returns a <tr> element
+    _sortableTable(columns, rows, renderRow) {
+        var wrapper = document.createElement('div');
+        wrapper.className = 'data-table-wrapper';
+        var table = document.createElement('table');
+        table.className = 'data-table';
+        var thead = document.createElement('thead');
+        var headerRow = document.createElement('tr');
+        var tbody = document.createElement('tbody');
+        var currentSort = { key: null, asc: true };
+
+        function render() {
+            tbody.textContent = '';
+            rows.forEach(function(row) { tbody.appendChild(renderRow(row)); });
+        }
+
+        function doSort(col) {
+            if (currentSort.key === col.key) {
+                currentSort.asc = !currentSort.asc;
+            } else {
+                currentSort.key = col.key;
+                currentSort.asc = col.defaultAsc !== undefined ? col.defaultAsc : false;
+            }
+            rows.sort(function(a, b) {
+                var va = col.getValue(a), vb = col.getValue(b);
+                if (va == null) va = typeof vb === 'string' ? '' : -Infinity;
+                if (vb == null) vb = typeof va === 'string' ? '' : -Infinity;
+                var cmp = typeof va === 'string' ? va.localeCompare(vb) : va - vb;
+                return currentSort.asc ? cmp : -cmp;
+            });
+            headerRow.querySelectorAll('th').forEach(function(th) {
+                th.classList.remove('sort-asc', 'sort-desc');
+            });
+            var idx = columns.indexOf(col);
+            if (idx >= 0) headerRow.children[idx].classList.add(currentSort.asc ? 'sort-asc' : 'sort-desc');
+            render();
+        }
+
+        columns.forEach(function(col) {
+            var th = document.createElement('th');
+            th.textContent = col.label;
+            if (col.key) {
+                th.style.cursor = 'pointer';
+                th.addEventListener('click', function() { doSort(col); });
+            }
+            headerRow.appendChild(th);
+        });
+
+        thead.appendChild(headerRow);
+        table.appendChild(thead);
+        render();
+        table.appendChild(tbody);
+        wrapper.appendChild(table);
+        return wrapper;
+    },
+
     // ---- Initialization ----
 
     async init() {
@@ -392,29 +451,24 @@ const Dashboard = {
                     formula.textContent = 'Vocab (\u00d710) + Test Score + Study Min + Map Bonus = Total';
                     lbContainer.appendChild(formula);
 
-                    var wrapper = document.createElement('div');
-                    wrapper.className = 'data-table-wrapper';
-                    var table = document.createElement('table');
-                    table.className = 'data-table';
+                    var lbCols = [
+                        { label: '#', key: null, getValue: function() { return 0; } },
+                        { label: 'Name', key: 'name', defaultAsc: true, getValue: function(r) { return studentNameMap[r.student_id] || ''; } },
+                        { label: 'Score', key: 'score', getValue: function(r) { return r.score || 0; } },
+                        { label: 'Vocab', key: 'vocab', getValue: function(r) { return r.vocab_mastered || 0; } },
+                        { label: 'Test', key: 'test', getValue: function(r) { return r.best_test_score != null ? r.best_test_score : -1; } },
+                        { label: 'Study', key: 'study', getValue: function(r) { return r.study_time_seconds || 0; } },
+                        { label: 'Map', key: 'map', getValue: function(r) { return r.map_best_time || Infinity; } }
+                    ];
 
-                    var thead = document.createElement('thead');
-                    var hr = document.createElement('tr');
-                    ['#', 'Name', 'Score', 'Vocab', 'Test', 'Study', 'Map'].forEach(function(text) {
-                        var th = document.createElement('th');
-                        th.textContent = text;
-                        hr.appendChild(th);
-                    });
-                    thead.appendChild(hr);
-                    table.appendChild(thead);
-
-                    var tbody = document.createElement('tbody');
-                    lbEntries.forEach(function(entry, i) {
+                    lbContainer.appendChild(self._sortableTable(lbCols, lbEntries, function(entry) {
                         var tr = document.createElement('tr');
+                        var idx = lbEntries.indexOf(entry);
 
                         var tdRank = document.createElement('td');
                         tdRank.style.fontWeight = '700';
-                        if (i < 3) tdRank.style.color = ['#FFD700', '#C0C0C0', '#CD7F32'][i];
-                        tdRank.textContent = i + 1;
+                        if (idx < 3) tdRank.style.color = ['#FFD700', '#C0C0C0', '#CD7F32'][idx];
+                        tdRank.textContent = idx + 1;
                         tr.appendChild(tdRank);
 
                         var tdName = document.createElement('td');
@@ -449,12 +503,8 @@ const Dashboard = {
                         }
                         tr.appendChild(tdMap);
 
-                        tbody.appendChild(tr);
-                    });
-
-                    table.appendChild(tbody);
-                    wrapper.appendChild(table);
-                    lbContainer.appendChild(wrapper);
+                        return tr;
+                    }));
                 }
             }
 
@@ -468,100 +518,73 @@ const Dashboard = {
     },
 
     async loadStudents(filters) {
-        const container = document.getElementById('students-table-container');
+        var container = document.getElementById('students-table-container');
         container.textContent = '';
         container.appendChild(this._loading());
 
         try {
-            // Fetch students with class info
-            let studentQuery = this.supabase
+            var studentQuery = this.supabase
                 .from('students')
                 .select('id, name, class_id, classes(code, name)');
+            if (filters.classId) studentQuery = studentQuery.eq('class_id', filters.classId);
 
-            if (filters.classId) {
-                studentQuery = studentQuery.eq('class_id', filters.classId);
-            }
-
-            const { data: students, error: studentErr } = await studentQuery;
+            var { data: students, error: studentErr } = await studentQuery;
             if (studentErr) throw studentErr;
 
             if (!students || students.length === 0) {
                 container.textContent = '';
-                container.appendChild(
-                    this._emptyState('fas fa-user-slash', 'No students found.')
-                );
+                container.appendChild(this._emptyState('fas fa-user-slash', 'No students found.'));
                 return;
             }
 
-            // Fetch sessions for these students
-            const studentIds = students.map(s => s.id);
+            var studentIds = students.map(function(s) { return s.id; });
 
-            let sessionsQuery = this.supabase
+            // Run sessions + progress queries in parallel
+            var sessionsQuery = this.supabase
                 .from('sessions')
                 .select('student_id, started_at, duration_seconds')
                 .in('student_id', studentIds);
+            if (filters.dateStart) sessionsQuery = sessionsQuery.gte('started_at', filters.dateStart);
+            if (filters.dateEnd) sessionsQuery = sessionsQuery.lte('started_at', filters.dateEnd + 'T23:59:59');
 
-            if (filters.dateStart) {
-                sessionsQuery = sessionsQuery.gte('started_at', filters.dateStart);
-            }
-            if (filters.dateEnd) {
-                sessionsQuery = sessionsQuery.lte('started_at', filters.dateEnd + 'T23:59:59');
-            }
+            var [sessRes, progRes] = await Promise.all([
+                sessionsQuery,
+                this.supabase.from('progress').select('student_id, activity, data').in('student_id', studentIds)
+            ]);
+            if (sessRes.error) throw sessRes.error;
+            if (progRes.error) throw progRes.error;
 
-            const { data: sessions, error: sessErr } = await sessionsQuery;
-            if (sessErr) throw sessErr;
-
-            // Fetch progress for vocab mastered and test scores
-            const { data: progressData, error: progErr } = await this.supabase
-                .from('progress')
-                .select('student_id, activity, data')
-                .in('student_id', studentIds);
-            if (progErr) throw progErr;
-
-            // Aggregate per student
-            const sessionMap = {};
-            (sessions || []).forEach(s => {
-                if (!sessionMap[s.student_id]) {
-                    sessionMap[s.student_id] = { totalSeconds: 0, lastActive: null };
-                }
+            var sessionMap = {};
+            (sessRes.data || []).forEach(function(s) {
+                if (!sessionMap[s.student_id]) sessionMap[s.student_id] = { totalSeconds: 0, lastActive: null };
                 sessionMap[s.student_id].totalSeconds += (s.duration_seconds || 0);
-                const started = new Date(s.started_at);
+                var started = new Date(s.started_at);
                 if (!sessionMap[s.student_id].lastActive || started > sessionMap[s.student_id].lastActive) {
                     sessionMap[s.student_id].lastActive = started;
                 }
             });
 
-            const progressMap = {};
-            (progressData || []).forEach(p => {
-                if (!progressMap[p.student_id]) {
-                    progressMap[p.student_id] = { vocabMastered: 0, bestTestScore: null, studyTimeMs: 0 };
-                }
+            var progressMap = {};
+            (progRes.data || []).forEach(function(p) {
+                if (!progressMap[p.student_id]) progressMap[p.student_id] = { vocabMastered: 0, bestTestScore: null, studyTimeMs: 0 };
                 if (p.activity === 'flashcards' && p.data && p.data.mastered) {
                     progressMap[p.student_id].vocabMastered += (Array.isArray(p.data.mastered) ? p.data.mastered.length : 0);
                 }
                 if (p.activity === 'practice-test' && p.data && typeof p.data.bestScore === 'number') {
-                    const current = progressMap[p.student_id].bestTestScore;
-                    if (current === null || p.data.bestScore > current) {
-                        progressMap[p.student_id].bestTestScore = p.data.bestScore;
-                    }
+                    var current = progressMap[p.student_id].bestTestScore;
+                    if (current === null || p.data.bestScore > current) progressMap[p.student_id].bestTestScore = p.data.bestScore;
                 }
                 if (p.activity === 'studyTime' && typeof p.data === 'number') {
                     progressMap[p.student_id].studyTimeMs = p.data;
                 }
             });
 
-            // Build enriched student list and sort by last active
-            const enriched = students.map(s => {
-                const sess = sessionMap[s.id] || { totalSeconds: 0, lastActive: null };
-                const prog = progressMap[s.id] || { vocabMastered: 0, bestTestScore: null, studyTimeMs: 0 };
-                // Use progress table studyTime (ms) if available, fall back to sessions
-                const studyMinutes = prog.studyTimeMs > 0
-                    ? Math.round(prog.studyTimeMs / 60000)
-                    : Math.round(sess.totalSeconds / 60);
+            var enriched = students.map(function(s) {
+                var sess = sessionMap[s.id] || { totalSeconds: 0, lastActive: null };
+                var prog = progressMap[s.id] || { vocabMastered: 0, bestTestScore: null, studyTimeMs: 0 };
+                var studyMinutes = prog.studyTimeMs > 0 ? Math.round(prog.studyTimeMs / 60000) : Math.round(sess.totalSeconds / 60);
                 return {
-                    id: s.id,
-                    name: s.name,
-                    classId: s.class_id,
+                    id: s.id, name: s.name, classId: s.class_id,
                     className: s.classes ? s.classes.name : null,
                     classCode: s.classes ? s.classes.code : '-',
                     lastActive: sess.lastActive,
@@ -571,90 +594,69 @@ const Dashboard = {
                 };
             });
 
-            enriched.sort((a, b) => {
+            enriched.sort(function(a, b) {
                 if (!a.lastActive && !b.lastActive) return 0;
                 if (!a.lastActive) return 1;
                 if (!b.lastActive) return -1;
                 return b.lastActive - a.lastActive;
             });
 
-            // Build table
             container.textContent = '';
-            const wrapper = document.createElement('div');
-            wrapper.className = 'data-table-wrapper';
 
-            const table = document.createElement('table');
-            table.className = 'data-table';
+            var columns = [
+                { label: 'Name', key: 'name', defaultAsc: true, getValue: function(r) { return r.name || ''; } },
+                { label: 'Class', key: 'class', defaultAsc: true, getValue: function(r) { return r.classCode || ''; } },
+                { label: 'Last Active', key: 'lastActive', getValue: function(r) { return r.lastActive ? r.lastActive.getTime() : -Infinity; } },
+                { label: 'Study Time', key: 'studyMinutes', getValue: function(r) { return r.studyMinutes; } },
+                { label: 'Vocab Mastered', key: 'vocabMastered', getValue: function(r) { return r.vocabMastered; } },
+                { label: 'Best Test', key: 'bestTestScore', getValue: function(r) { return r.bestTestScore != null ? r.bestTestScore : -1; } },
+                { label: '', key: null, getValue: function() { return 0; } }
+            ];
 
-            const thead = document.createElement('thead');
-            const headerRow = document.createElement('tr');
-            ['Name', 'Class', 'Last Active', 'Study Time', 'Vocab Mastered', 'Best Test Score', ''].forEach(text => {
-                const th = document.createElement('th');
-                th.textContent = text;
-                headerRow.appendChild(th);
-            });
-            thead.appendChild(headerRow);
-            table.appendChild(thead);
+            var tableWrapper = this._sortableTable(columns, enriched, function(student) {
+                var tr = document.createElement('tr');
 
-            const tbody = document.createElement('tbody');
-            enriched.forEach(student => {
-                const tr = document.createElement('tr');
-
-                const tdName = document.createElement('td');
+                var tdName = document.createElement('td');
                 tdName.textContent = student.name;
                 tr.appendChild(tdName);
 
-                const tdClass = document.createElement('td');
+                var tdClass = document.createElement('td');
                 tdClass.textContent = student.classCode;
                 tr.appendChild(tdClass);
 
-                const tdActive = document.createElement('td');
-                tdActive.textContent = student.lastActive
-                    ? student.lastActive.toLocaleDateString()
-                    : 'Never';
+                var tdActive = document.createElement('td');
+                tdActive.textContent = student.lastActive ? student.lastActive.toLocaleDateString() : 'Never';
                 tr.appendChild(tdActive);
 
-                const tdTime = document.createElement('td');
-                if (student.studyMinutes >= 60) {
-                    tdTime.textContent = (student.studyMinutes / 60).toFixed(1) + ' hrs';
-                } else {
-                    tdTime.textContent = student.studyMinutes + ' min';
-                }
+                var tdTime = document.createElement('td');
+                tdTime.textContent = student.studyMinutes >= 60 ? (student.studyMinutes / 60).toFixed(1) + ' hrs' : student.studyMinutes + ' min';
                 tr.appendChild(tdTime);
 
-                const tdVocab = document.createElement('td');
+                var tdVocab = document.createElement('td');
                 tdVocab.textContent = student.vocabMastered;
                 tr.appendChild(tdVocab);
 
-                const tdScore = document.createElement('td');
-                tdScore.textContent = student.bestTestScore !== null
-                    ? student.bestTestScore + '%'
-                    : '-';
+                var tdScore = document.createElement('td');
+                tdScore.textContent = student.bestTestScore !== null ? student.bestTestScore + '%' : '-';
                 tr.appendChild(tdScore);
 
-                const tdEdit = document.createElement('td');
-                const editBtn = document.createElement('button');
+                var tdEdit = document.createElement('td');
+                var editBtn = document.createElement('button');
                 editBtn.className = 'btn btn-edit-student';
                 editBtn.appendChild(Dashboard._icon('fas fa-pen'));
-                editBtn.addEventListener('click', function() {
-                    Dashboard.openStudentModal(student);
-                });
+                editBtn.addEventListener('click', function() { Dashboard.openStudentModal(student); });
                 tdEdit.appendChild(editBtn);
                 tr.appendChild(tdEdit);
 
-                tbody.appendChild(tr);
+                return tr;
             });
 
-            table.appendChild(tbody);
-            wrapper.appendChild(table);
-            container.appendChild(wrapper);
+            container.appendChild(tableWrapper);
 
         } catch (err) {
             console.error('Failed to load students:', err);
             container.textContent = '';
-            container.appendChild(
-                this._emptyState('fas fa-exclamation-triangle', 'Failed to load student data. Please try again.')
-            );
+            container.appendChild(this._emptyState('fas fa-exclamation-triangle', 'Failed to load student data. Please try again.'));
         }
     },
 
@@ -1336,17 +1338,20 @@ const Dashboard = {
                 query = query.eq('unit_id', filters.unitId);
             }
 
-            // If class filter, get student IDs first
-            var classStudentSet = null;
+            // Run progress + class filter queries in parallel
+            var queries = [query];
             if (filters && filters.classId) {
-                var { data: classStudents } = await this.supabase
-                    .from('students')
-                    .select('id')
-                    .eq('class_id', filters.classId);
-                classStudentSet = new Set((classStudents || []).map(function(s) { return s.id; }));
+                queries.push(this.supabase.from('students').select('id').eq('class_id', filters.classId));
+            }
+            var vocabResults = await Promise.all(queries);
+
+            var classStudentSet = null;
+            if (vocabResults[1] && vocabResults[1].data) {
+                classStudentSet = new Set(vocabResults[1].data.map(function(s) { return s.id; }));
             }
 
-            var { data: progressRows, error } = await query;
+            var progressRows = vocabResults[0].data;
+            var error = vocabResults[0].error;
             if (error) throw error;
 
             container.textContent = '';
@@ -1369,8 +1374,9 @@ const Dashboard = {
                 Object.keys(ratings).forEach(function(term) {
                     if (!unit[term]) unit[term] = { hard: 0, medium: 0, easy: 0, total: 0 };
                     var r = ratings[term];
-                    if (r === 'hard') unit[term].hard++;
-                    else if (r === 'medium') unit[term].medium++;
+                    // Flashcards rates: 'again', 'hard', 'good', 'easy'
+                    if (r === 'again' || r === 'hard') unit[term].hard++;
+                    else if (r === 'good') unit[term].medium++;
                     else if (r === 'easy') unit[term].easy++;
                     unit[term].total++;
                 });
@@ -1516,23 +1522,19 @@ const Dashboard = {
                 .order('score', { ascending: false })
                 .limit(50);
 
-            if (filters && filters.unitId) {
-                lbQuery = lbQuery.eq('unit_id', filters.unitId);
-            }
+            if (filters && filters.unitId) lbQuery = lbQuery.eq('unit_id', filters.unitId);
 
-            var classStudentIds = null;
-            if (filters && filters.classId) {
-                var { data: classStudents } = await this.supabase
-                    .from('students')
-                    .select('id')
-                    .eq('class_id', filters.classId);
-                classStudentIds = (classStudents || []).map(function(s) { return s.id; });
-            }
-
-            var [lbResult, studentResult] = await Promise.all([
+            // Run class filter + leaderboard + students all in parallel
+            var queries = [
                 lbQuery,
                 this.supabase.from('students').select('id, name, class_id, classes(code, name)')
-            ]);
+            ];
+            if (filters && filters.classId) {
+                queries.push(this.supabase.from('students').select('id').eq('class_id', filters.classId));
+            }
+            var results = await Promise.all(queries);
+            var lbResult = results[0], studentResult = results[1];
+            var classStudentIds = results[2] ? (results[2].data || []).map(function(s) { return s.id; }) : null;
 
             if (lbResult.error) throw lbResult.error;
             var entries = lbResult.data || [];
@@ -1540,7 +1542,6 @@ const Dashboard = {
             var studentMap = {};
             (studentResult.data || []).forEach(function(s) { studentMap[s.id] = s; });
 
-            // Filter by class client-side
             if (classStudentIds) {
                 var idSet = new Set(classStudentIds);
                 entries = entries.filter(function(e) { return idSet.has(e.student_id); });
@@ -1549,9 +1550,7 @@ const Dashboard = {
             container.textContent = '';
 
             if (entries.length === 0) {
-                container.appendChild(
-                    this._emptyState('fas fa-medal', 'No approved leaderboard entries yet.')
-                );
+                container.appendChild(this._emptyState('fas fa-medal', 'No approved leaderboard entries yet.'));
                 return;
             }
 
@@ -1560,30 +1559,26 @@ const Dashboard = {
             desc.textContent = 'Vocab (\u00d710) + Test Score + Study Min + Map Bonus = Total';
             container.appendChild(desc);
 
-            var wrapper = document.createElement('div');
-            wrapper.className = 'data-table-wrapper';
-            var table = document.createElement('table');
-            table.className = 'data-table';
+            var columns = [
+                { label: '#', key: null, getValue: function() { return 0; } },
+                { label: 'Name', key: 'name', defaultAsc: true, getValue: function(r) { return (studentMap[r.student_id] || {}).name || ''; } },
+                { label: 'Class', key: 'class', defaultAsc: true, getValue: function(r) { var s = studentMap[r.student_id]; return s && s.classes ? (s.classes.name || s.classes.code) : ''; } },
+                { label: 'Score', key: 'score', getValue: function(r) { return r.score || 0; } },
+                { label: 'Vocab', key: 'vocab', getValue: function(r) { return r.vocab_mastered || 0; } },
+                { label: 'Test', key: 'test', getValue: function(r) { return r.best_test_score != null ? r.best_test_score : -1; } },
+                { label: 'Study Time', key: 'study', getValue: function(r) { return r.study_time_seconds || 0; } },
+                { label: 'Map Time', key: 'map', getValue: function(r) { return r.map_best_time || Infinity; } }
+            ];
 
-            var thead = document.createElement('thead');
-            var headerRow = document.createElement('tr');
-            ['#', 'Name', 'Class', 'Score', 'Vocab', 'Test', 'Study Time', 'Map Time'].forEach(function(text) {
-                var th = document.createElement('th');
-                th.textContent = text;
-                headerRow.appendChild(th);
-            });
-            thead.appendChild(headerRow);
-            table.appendChild(thead);
-
-            var tbody = document.createElement('tbody');
-            entries.forEach(function(entry, i) {
+            container.appendChild(this._sortableTable(columns, entries, function(entry) {
                 var student = studentMap[entry.student_id] || {};
                 var tr = document.createElement('tr');
 
                 var tdRank = document.createElement('td');
                 tdRank.style.fontWeight = '700';
-                if (i < 3) tdRank.style.color = ['#FFD700', '#C0C0C0', '#CD7F32'][i];
-                tdRank.textContent = i + 1;
+                var idx = entries.indexOf(entry);
+                if (idx < 3) tdRank.style.color = ['#FFD700', '#C0C0C0', '#CD7F32'][idx];
+                tdRank.textContent = idx + 1;
                 tr.appendChild(tdRank);
 
                 var tdName = document.createElement('td');
@@ -1604,7 +1599,7 @@ const Dashboard = {
                 tr.appendChild(tdVocab);
 
                 var tdTest = document.createElement('td');
-                tdTest.textContent = entry.best_test_score !== null ? entry.best_test_score + '%' : '-';
+                tdTest.textContent = entry.best_test_score != null ? entry.best_test_score + '%' : '-';
                 tr.appendChild(tdTest);
 
                 var tdTime = document.createElement('td');
@@ -1622,19 +1617,13 @@ const Dashboard = {
                 }
                 tr.appendChild(tdMap);
 
-                tbody.appendChild(tr);
-            });
-
-            table.appendChild(tbody);
-            wrapper.appendChild(table);
-            container.appendChild(wrapper);
+                return tr;
+            }));
 
         } catch (err) {
             console.error('Failed to load leaderboard preview:', err);
             container.textContent = '';
-            container.appendChild(
-                this._emptyState('fas fa-exclamation-triangle', 'Failed to load leaderboard.')
-            );
+            container.appendChild(this._emptyState('fas fa-exclamation-triangle', 'Failed to load leaderboard.'));
         }
     },
 
