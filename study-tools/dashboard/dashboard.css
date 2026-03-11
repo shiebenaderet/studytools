@@ -346,8 +346,8 @@ body {
     margin-left: 4px;
     font-size: 0.7em;
 }
-.data-table th.sort-asc::after { content: ' \u25B2'; }
-.data-table th.sort-desc::after { content: ' \u25BC'; }
+.data-table th.sort-asc::after { content: ' \25B2'; }
+.data-table th.sort-desc::after { content: ' \25BC'; }
 
 .data-table td {
     padding: 12px 16px;
