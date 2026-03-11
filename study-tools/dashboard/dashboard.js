@@ -1332,7 +1332,7 @@ const Dashboard = {
             var query = this.supabase
                 .from('progress')
                 .select('student_id, unit_id, data')
-                .eq('activity', 'flashcards');
+                .eq('activity', 'activity_flashcards');
 
             if (filters && filters.unitId) {
                 query = query.eq('unit_id', filters.unitId);
