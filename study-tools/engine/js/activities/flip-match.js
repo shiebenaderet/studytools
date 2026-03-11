@@ -248,6 +248,14 @@ StudyEngine.registerActivity({
             this._matchedPairs++;
             this._checkWin();
         } else {
+            if (typeof NudgeManager !== 'undefined' && this._config) {
+                var missed = [];
+                if (first.data.type === 'term') missed.push(first.data.text);
+                if (second.data.type === 'term') missed.push(second.data.text);
+                if (missed.length > 0) {
+                    NudgeManager.trackMissedTerms(this._config.unit.id, this._config, missed);
+                }
+            }
             // Flip back after delay
             this._locked = true;
             setTimeout(() => {

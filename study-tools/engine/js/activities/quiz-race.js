@@ -311,6 +311,17 @@ StudyEngine.registerActivity({
                 feedback.textContent = playerName + ' scores! \uD83C\uDF89';
             }
         } else {
+            var q = this._questions[this._currentQ];
+            if (q && q.topic && typeof NudgeManager !== 'undefined' && this._config) {
+                var vocab = this._config.vocabulary || [];
+                var missed = [];
+                for (var j = 0; j < vocab.length; j++) {
+                    if (vocab[j].category === q.topic) {
+                        missed.push(vocab[j].term);
+                    }
+                }
+                NudgeManager.trackMissedTerms(this._config.unit.id, this._config, missed);
+            }
             this._scores[player] = Math.max(0, this._scores[player] - 1);
             if (feedback) {
                 feedback.style.color = 'var(--danger)';

@@ -264,6 +264,10 @@ StudyEngine.registerActivity({
     _endGame(won) {
         this._gameOver = true;
 
+        if (!won && typeof NudgeManager !== 'undefined' && this._config) {
+            NudgeManager.trackMissedTerms(this._config.unit.id, this._config, [this._targetWord]);
+        }
+
         // Disable all remaining buttons
         var buttons = document.querySelectorAll('.hangman-letter-btn');
         for (var i = 0; i < buttons.length; i++) {

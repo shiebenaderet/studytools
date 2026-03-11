@@ -1288,18 +1288,15 @@ StudyEngine.registerActivity({
             this._streak = 0;
             this._showQuestionFeedback(false, 'Correct: ' + q.options[q.correct]);
 
-            // Track weakness
-            if (q.topic) {
-                var config = this._config;
-                var unitId = config.unit.id;
-                var data = ProgressManager.load(unitId, 'weakness_tracker') || { terms: {} };
-                var vocab = config.vocabulary || [];
+            if (q.topic && typeof NudgeManager !== 'undefined' && this._config) {
+                var vocab = this._config.vocabulary || [];
+                var missed = [];
                 for (var j = 0; j < vocab.length; j++) {
                     if (vocab[j].category === q.topic) {
-                        data.terms[vocab[j].term] = (data.terms[vocab[j].term] || 0) + 1;
+                        missed.push(vocab[j].term);
                     }
                 }
-                ProgressManager.save(unitId, 'weakness_tracker', data);
+                NudgeManager.trackMissedTerms(this._config.unit.id, this._config, missed);
             }
         }
 

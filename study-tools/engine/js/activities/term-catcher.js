@@ -371,6 +371,9 @@ StudyEngine.registerActivity({
             }, 300);
         } else {
             // Wrong!
+            if (typeof NudgeManager !== 'undefined' && this._config) {
+                NudgeManager.trackMissedTerms(this._config.unit.id, this._config, [this._currentAnswer]);
+            }
             el.classList.add('flash-red');
             this._combo = 0;
             this._lives--;

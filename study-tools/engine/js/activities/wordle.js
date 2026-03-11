@@ -364,6 +364,10 @@ StudyEngine.registerActivity({
         this._gameOver = true;
         this._won = won;
 
+        if (!won && typeof NudgeManager !== 'undefined' && StudyEngine.config) {
+            NudgeManager.trackMissedTerms(StudyEngine.config.unit.id, StudyEngine.config, [this._targetWord]);
+        }
+
         if (won) {
             this._stats.wins++;
             this._stats.streak++;

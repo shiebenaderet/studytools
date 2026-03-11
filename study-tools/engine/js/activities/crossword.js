@@ -672,6 +672,27 @@ StudyEngine.registerActivity({
             }
         }
 
+        var missedTerms = [];
+        for (var i = 0; i < this._words.length; i++) {
+            var w = this._words[i];
+            var wordCorrect = true;
+            for (var j = 0; j < w.word.length; j++) {
+                var r = w.direction === 'across' ? w.row : w.row + j;
+                var c = w.direction === 'across' ? w.col + j : w.col;
+                var input = this._getInputElement(r, c);
+                if (!input || input.value.toUpperCase() !== w.word[j]) {
+                    wordCorrect = false;
+                    break;
+                }
+            }
+            if (!wordCorrect && w.vocab) {
+                missedTerms.push(w.vocab.term);
+            }
+        }
+        if (missedTerms.length > 0 && typeof NudgeManager !== 'undefined' && this._config) {
+            NudgeManager.trackMissedTerms(this._config.unit.id, this._config, missedTerms);
+        }
+
         if (allCorrect && !this._puzzleCompleted) {
             this._puzzleCompleted = true;
             this._stats.completed++;
@@ -690,6 +711,17 @@ StudyEngine.registerActivity({
     _revealWord() {
         if (!this._activeClue) return;
         var clue = this._activeClue;
+
+        var revealWordIdx = -1;
+        for (var ri = 0; ri < this._words.length; ri++) {
+            if (this._words[ri].number === clue.number && this._words[ri].direction === clue.direction) {
+                revealWordIdx = ri;
+                break;
+            }
+        }
+        if (revealWordIdx >= 0 && this._words[revealWordIdx].vocab && typeof NudgeManager !== 'undefined' && this._config) {
+            NudgeManager.trackMissedTerms(this._config.unit.id, this._config, [this._words[revealWordIdx].vocab.term]);
+        }
 
         for (var i = 0; i < clue.length; i++) {
             var r = clue.direction === 'across' ? clue.row : clue.row + i;
