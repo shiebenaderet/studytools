@@ -17,6 +17,25 @@ StudyEngine.registerActivity({
     _getSources() {
         return [
             {
+                id: 'founders-museum-franklin',
+                title: 'Benjamin Franklin — Founders Museum',
+                subtitle: 'AI-generated video where a digital Benjamin Franklin "comes to life" to address viewers',
+                author: 'White House Task Force 250 / PragerU',
+                publication: 'YouTube (The White House)',
+                url: 'youtube.com/watch?v=bBN3Dioq1js',
+                date: '2025',
+                image: '../units/early-republic/images/sources/founders-museum-franklin.png',
+                description: 'An AI-generated video from the White House "Founders Museum" exhibit in which a digital Benjamin Franklin speaks directly to viewers. Franklin says he "captured lightning from the skies with the kite," quotes the famous "We must all hang together" line, and urges viewers to "guard" their inheritance. The video is presented without any disclaimer distinguishing historical record from invented dialogue.',
+                reliable: false,
+                explanation: 'This video uses AI to put words in a real historical figure\'s mouth. Franklin never recorded these exact sentences — the script was written in 2025 and performed by an AI voice. The "hang together" quote is disputed by historians (it first appeared in print decades after 1776). The claim that Franklin "captured lightning from the skies with the kite" presents a historically disputed event as fact. Most critically, there is no disclaimer telling viewers which words are documented quotes and which are invented. NPR, 404 Media, and UC Berkeley researchers flagged the Founders Museum videos for blurring the line between history and AI-generated fiction.',
+                siftGuide: {
+                    stop: 'An AI-generated historical figure "speaking" directly to you should raise immediate red flags. These are not Franklin\'s real words — someone wrote a script in 2025.',
+                    investigate: 'The Founders Museum was created by PragerU (a conservative advocacy nonprofit) in partnership with the White House Task Force 250. PragerU is not a university and has a political mission. The White House is not a neutral educational institution.',
+                    find: 'NPR reported that the videos blur history and AI-generated fiction. UC Berkeley\'s Hany Farid investigated the exhibit. 404 Media documented fabricated quotes across the video series, including an AI John Adams saying "facts do not care about your feelings" (a Ben Shapiro phrase from 2014).',
+                    trace: 'Search Franklin\'s actual writings on Founders Online (founders.archives.gov). The exact sentences in this video do not appear in any historical record. The "hang together" quote has no contemporaneous documentation — it first appeared in Jared Sparks\' 1840 biography, 50+ years after the event.'
+                }
+            },
+            {
                 id: 'founders-online',
                 title: 'Founders Online',
                 subtitle: 'Correspondence and Other Writings of Seven Major Shapers of the United States',
@@ -71,25 +90,6 @@ StudyEngine.registerActivity({
                     investigate: 'Monticello is the preeminent Jefferson research institution, with direct access to his papers and estate.',
                     find: 'This spurious quotes page is frequently cited by fact-checkers, journalists, and historians as the go-to resource for verifying Jefferson quotes.',
                     trace: 'Each entry explains the research process — where they looked, what they found (or didn\'t find), and sometimes where the fake quote actually originated.'
-                }
-            },
-            {
-                id: 'prageru-adams',
-                title: 'John Adams: American Founder and Second President',
-                subtitle: 'AI-generated video where a digital John Adams "comes to life" to tell his story',
-                author: 'PragerU / White House Task Force 250',
-                publication: 'PragerU (prageru.com)',
-                url: 'prageru.com/videos/john-adams-american-founder-and-second-president',
-                date: '2025',
-                image: '../units/early-republic/images/sources/prageru-adams.png',
-                description: 'An AI-generated video in which a digital John Adams speaks to viewers about his life and beliefs. In the video, Adams says "Facts do not care about your feelings" and other quotes presented as his real words.',
-                reliable: false,
-                explanation: '"Facts don\'t care about your feelings" is a phrase popularized by modern commentator Ben Shapiro around 2014 — John Adams never said it. The videos put fabricated words into the mouths of real historical figures using AI. Searching Adams\' actual papers on Founders Online returns zero results for this phrase. NPR and multiple historians flagged these inaccuracies.',
-                siftGuide: {
-                    stop: 'AI-generated historical figures "speaking" should immediately raise red flags. How do we know these are his real words?',
-                    investigate: 'PragerU is a conservative advocacy nonprofit founded to promote specific political values — not a neutral educational institution. Despite the name, it is not a university.',
-                    find: 'NPR reported on the fabricated quotes. The American Historical Association raised concerns. No scholarly source confirms Adams said "facts don\'t care about your feelings."',
-                    trace: 'Search "facts do not care about your feelings" + "John Adams" in Founders Online — zero results. The phrase traces to Ben Shapiro circa 2014, over 200 years after Adams\' presidency.'
                 }
             },
             {
