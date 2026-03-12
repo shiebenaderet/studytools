@@ -4,7 +4,7 @@ StudyEngine.registerActivity({
     icon: 'fas fa-shield-alt',
     description: 'Use the SIFT method to evaluate real sources — can you spot the fakes?',
     category: 'practice',
-    requires: ['vocabulary'],
+    requires: [],
 
     _container: null,
     _config: null,
