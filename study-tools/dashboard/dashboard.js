@@ -591,8 +591,10 @@ const Dashboard = {
                         var timeEl = document.createElement('div');
                         timeEl.className = 'feed-time';
                         var diffMs = now - new Date(s.started_at);
-                        var diffMin = Math.round(diffMs / 60000);
-                        if (diffMin < 60) {
+                        var diffMin = Math.max(0, Math.round(diffMs / 60000));
+                        if (diffMin < 2) {
+                            timeEl.textContent = 'Just now';
+                        } else if (diffMin < 60) {
                             timeEl.textContent = diffMin + 'm ago';
                         } else {
                             var diffHr = Math.round(diffMin / 60);
