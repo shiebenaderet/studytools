@@ -1196,3 +1196,57 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+/* Rankings Visualization */
+.rankings-line-chart {
+    position: relative;
+    margin-bottom: 24px;
+}
+
+.rankings-line-chart canvas {
+    display: block;
+    width: 100%;
+}
+
+.rankings-tooltip {
+    position: absolute;
+    background: var(--card-bg, #fff);
+    border: 1px solid var(--border, #e0e0e0);
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    pointer-events: none;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    white-space: nowrap;
+}
+
+.rankings-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+.rankings-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.85rem;
+    color: var(--text, #333);
+}
+
+.rankings-legend-swatch {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    display: inline-block;
+}
+
+.rankings-note {
+    text-align: center;
+    color: var(--text-muted, #999);
+    font-size: 0.85rem;
+    margin-top: 8px;
+}
