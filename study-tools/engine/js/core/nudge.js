@@ -4,6 +4,7 @@ var NudgeManager = {
     _sessionNudgeCount: 0,
     _lastActivityId: null,
     MAX_NUDGES_PER_SESSION: 3,
+    STALE_ACTIVITY_DAYS: 3,
 
     STUDY_FLOW: ['textbook', 'flashcards', 'fill-in-blank', 'typing-practice', 'practice-test'],
 
@@ -256,6 +257,8 @@ var NudgeManager = {
 
     onActivityComplete(activityId, config) {
         if (!config || !config.unit) return;
+        var unitId = config.unit.id;
+        ProgressManager.save(unitId, 'lastUsed_' + activityId, Date.now());
 
         this._sessionActivityCounts[activityId] = (this._sessionActivityCounts[activityId] || 0) + 1;
         var consecutiveCount = this._sessionActivityCounts[activityId];
@@ -263,8 +266,6 @@ var NudgeManager = {
         this._lastActivityId = activityId;
 
         if (this._sessionNudgeCount >= this.MAX_NUDGES_PER_SESSION) return;
-
-        var unitId = config.unit.id;
         var firstName = ProgressManager.getFirstName();
         var prefix = firstName ? firstName + ', ' : '';
 
