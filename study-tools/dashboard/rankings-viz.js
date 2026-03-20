@@ -255,5 +255,272 @@ var RankingsViz = {
         }
     },
 
-    _renderBarRace(container, data) {},
+    _renderBarRace(container, data) {
+        var classIds = Object.keys(data.classes);
+        var dates = data.dates;
+        if (dates.length === 0 || classIds.length === 0) return;
+
+        var self = this;
+
+        var heading = document.createElement('h4');
+        heading.style.cssText = 'color:var(--text);margin-bottom:12px;';
+        heading.appendChild(self._icon('fas fa-play-circle'));
+        heading.appendChild(document.createTextNode(' Class Race'));
+        container.appendChild(heading);
+
+        var dateDisplay = document.createElement('div');
+        dateDisplay.className = 'race-date-display';
+        container.appendChild(dateDisplay);
+
+        var canvas = document.createElement('canvas');
+        var dpr = window.devicePixelRatio || 1;
+        var width = container.clientWidth || 600;
+        var barHeight = 36;
+        var barGap = 8;
+        var height = classIds.length * (barHeight + barGap) + 20;
+        canvas.width = width * dpr;
+        canvas.height = height * dpr;
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+        var ctx = canvas.getContext('2d');
+        ctx.scale(dpr, dpr);
+        container.appendChild(canvas);
+
+        var controls = document.createElement('div');
+        controls.className = 'race-controls';
+
+        var playBtn = document.createElement('button');
+        playBtn.className = 'btn race-play-btn';
+        playBtn.appendChild(self._icon('fas fa-play'));
+        controls.appendChild(playBtn);
+
+        function setPlayIcon(iconClass) {
+            playBtn.textContent = '';
+            playBtn.appendChild(self._icon(iconClass));
+        }
+
+        var speedWrap = document.createElement('div');
+        speedWrap.className = 'race-speed-wrap';
+        var speedLabel = document.createElement('label');
+        speedLabel.textContent = 'Speed ';
+        var speedSlider = document.createElement('input');
+        speedSlider.type = 'range';
+        speedSlider.min = '0.5';
+        speedSlider.max = '3';
+        speedSlider.step = '0.5';
+        speedSlider.value = '1';
+        speedSlider.className = 'race-speed-slider';
+        var speedReadout = document.createElement('span');
+        speedReadout.className = 'race-speed-readout';
+        speedReadout.textContent = '1x';
+        speedSlider.addEventListener('input', function() {
+            speedReadout.textContent = speedSlider.value + 'x';
+        });
+        speedWrap.appendChild(speedLabel);
+        speedWrap.appendChild(speedSlider);
+        speedWrap.appendChild(speedReadout);
+        controls.appendChild(speedWrap);
+
+        var progress = document.createElement('span');
+        progress.className = 'race-progress';
+        controls.appendChild(progress);
+
+        container.appendChild(controls);
+
+        if (dates.length <= 1) {
+            playBtn.disabled = true;
+            progress.textContent = 'Day 1 of 1';
+        }
+
+        var currentDay = 0;
+        var playing = false;
+        var animFrame = null;
+        var transitioning = false;
+
+        var daySnapshots = [];
+        for (var d = 0; d < dates.length; d++) {
+            var snap = [];
+            for (var c = 0; c < classIds.length; c++) {
+                var cls = data.classes[classIds[c]];
+                var avg = cls.averages[d];
+                if (avg !== null) {
+                    snap.push({ classId: classIds[c], name: cls.name, color: cls.color, avg: avg });
+                }
+            }
+            snap.sort(function(a, b) { return b.avg - a.avg; });
+            daySnapshots.push(snap);
+        }
+
+        var maxAvg = 1;
+        for (var d = 0; d < daySnapshots.length; d++) {
+            for (var i = 0; i < daySnapshots[d].length; i++) {
+                if (daySnapshots[d][i].avg > maxAvg) maxAvg = daySnapshots[d][i].avg;
+            }
+        }
+
+        var positions = {};
+        var labelWidth = 100;
+        var barAreaW = width - labelWidth - 60;
+
+        function initPositions(dayIdx) {
+            var snap = daySnapshots[dayIdx] || [];
+            positions = {};
+            for (var i = 0; i < snap.length; i++) {
+                positions[snap[i].classId] = {
+                    y: i * (barHeight + barGap),
+                    barW: (snap[i].avg / maxAvg) * barAreaW,
+                    avg: snap[i].avg,
+                    name: snap[i].name,
+                    color: snap[i].color
+                };
+            }
+        }
+
+        function formatDate(dateStr) {
+            var d = new Date(dateStr + 'T12:00:00');
+            var today = new Date().toISOString().slice(0, 10);
+            var yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+            if (dateStr === today) return 'Today';
+            if (dateStr === yesterday) return 'Yesterday';
+            return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        }
+
+        function drawFrame() {
+            ctx.clearRect(0, 0, width, height);
+            var classIdsDrawn = Object.keys(positions);
+            for (var i = 0; i < classIdsDrawn.length; i++) {
+                var p = positions[classIdsDrawn[i]];
+
+                ctx.fillStyle = p.color;
+                ctx.beginPath();
+                var radius = 4;
+                var bx = labelWidth;
+                var by = p.y + 2;
+                var bw = Math.max(p.barW, 2);
+                var bh = barHeight - 4;
+                ctx.moveTo(bx + radius, by);
+                ctx.lineTo(bx + bw - radius, by);
+                ctx.quadraticCurveTo(bx + bw, by, bx + bw, by + radius);
+                ctx.lineTo(bx + bw, by + bh - radius);
+                ctx.quadraticCurveTo(bx + bw, by + bh, bx + bw - radius, by + bh);
+                ctx.lineTo(bx + radius, by + bh);
+                ctx.quadraticCurveTo(bx, by + bh, bx, by + bh - radius);
+                ctx.lineTo(bx, by + radius);
+                ctx.quadraticCurveTo(bx, by, bx + radius, by);
+                ctx.fill();
+
+                ctx.fillStyle = '#333';
+                ctx.font = '13px system-ui, sans-serif';
+                ctx.textAlign = 'right';
+                ctx.fillText(p.name, labelWidth - 8, p.y + barHeight / 2 + 5);
+
+                ctx.fillStyle = '#666';
+                ctx.textAlign = 'left';
+                ctx.fillText(Math.round(p.avg), labelWidth + bw + 8, p.y + barHeight / 2 + 5);
+            }
+        }
+
+        function updateProgress() {
+            progress.textContent = 'Day ' + (currentDay + 1) + ' of ' + dates.length;
+            dateDisplay.textContent = formatDate(dates[currentDay]);
+        }
+
+        function easeInOut(t) {
+            return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+        }
+
+        function transitionToDay(targetDay, callback) {
+            var fromPos = {};
+            for (var k in positions) fromPos[k] = { y: positions[k].y, barW: positions[k].barW, avg: positions[k].avg };
+
+            var toSnap = daySnapshots[targetDay] || [];
+            var targetPos = {};
+            for (var i = 0; i < toSnap.length; i++) {
+                targetPos[toSnap[i].classId] = {
+                    y: i * (barHeight + barGap),
+                    barW: (toSnap[i].avg / maxAvg) * barAreaW,
+                    avg: toSnap[i].avg,
+                    name: toSnap[i].name,
+                    color: toSnap[i].color
+                };
+            }
+
+            for (var cid in targetPos) {
+                if (!fromPos[cid]) {
+                    fromPos[cid] = { y: targetPos[cid].y, barW: 0, avg: 0 };
+                    positions[cid] = {
+                        y: targetPos[cid].y, barW: 0, avg: 0,
+                        name: targetPos[cid].name, color: targetPos[cid].color
+                    };
+                }
+            }
+
+            var duration = 2000 / parseFloat(speedSlider.value);
+            var start = performance.now();
+            transitioning = true;
+
+            function step(now) {
+                var elapsed = now - start;
+                var t = Math.min(elapsed / duration, 1);
+                var et = easeInOut(t);
+
+                for (var cid in targetPos) {
+                    var from = fromPos[cid] || { y: 0, barW: 0, avg: 0 };
+                    positions[cid].y = from.y + (targetPos[cid].y - from.y) * et;
+                    positions[cid].barW = from.barW + (targetPos[cid].barW - from.barW) * et;
+                    positions[cid].avg = from.avg + (targetPos[cid].avg - from.avg) * et;
+                }
+
+                drawFrame();
+
+                if (t < 1) {
+                    animFrame = requestAnimationFrame(step);
+                } else {
+                    currentDay = targetDay;
+                    transitioning = false;
+                    updateProgress();
+                    if (callback) callback();
+                }
+            }
+            animFrame = requestAnimationFrame(step);
+        }
+
+        function playNext() {
+            if (!playing) return;
+            if (currentDay >= dates.length - 1) {
+                playing = false;
+                setPlayIcon('fas fa-play');
+                return;
+            }
+            transitionToDay(currentDay + 1, playNext);
+        }
+
+        playBtn.addEventListener('click', function() {
+            if (playing) {
+                playing = false;
+                if (animFrame) cancelAnimationFrame(animFrame);
+                transitioning = false;
+                setPlayIcon('fas fa-play');
+            } else {
+                if (currentDay >= dates.length - 1) {
+                    currentDay = 0;
+                    initPositions(0);
+                    updateProgress();
+                    drawFrame();
+                }
+                playing = true;
+                setPlayIcon('fas fa-pause');
+                playNext();
+            }
+        });
+
+        container._raceCleanup = function() {
+            playing = false;
+            if (animFrame) cancelAnimationFrame(animFrame);
+        };
+
+        initPositions(0);
+        updateProgress();
+        drawFrame();
+    },
 };
