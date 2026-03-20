@@ -31,6 +31,34 @@ const Dashboard = {
         return div;
     },
 
+    // ---- Helper: score warning badges ----
+    _scoreWarningBadges(entry) {
+        var badges = [];
+        // Inline tier calculation (mirrors LeaderboardManager.calculateTimePts)
+        var mins = Math.floor((entry.study_time_seconds || 0) / 60);
+        var timePts;
+        if (mins <= 30) timePts = mins;
+        else if (mins <= 60) timePts = 30 + Math.floor((mins - 30) * 0.5);
+        else if (mins <= 100) timePts = 45 + Math.floor((mins - 60) * 0.25);
+        else timePts = 55;
+
+        // Study time heavy: time pts > 60% of score
+        if (entry.score > 0 && timePts / entry.score > 0.6) {
+            badges.push({ icon: 'fas fa-clock', color: '#e67e22', title: 'Most of this student\u2019s score comes from study time, not mastery.' });
+        }
+        // Missing milestones
+        var noVocab = (entry.vocab_mastered || 0) === 0;
+        var noTest = entry.best_test_score == null;
+        if (noVocab && noTest) {
+            badges.push({ icon: 'fas fa-exclamation-circle', color: '#e74c3c', title: 'This student hasn\u2019t mastered any vocabulary or taken a practice test.' });
+        } else if (noVocab) {
+            badges.push({ icon: 'fas fa-exclamation-circle', color: '#e74c3c', title: 'This student hasn\u2019t mastered any vocabulary.' });
+        } else if (noTest) {
+            badges.push({ icon: 'fas fa-exclamation-circle', color: '#e74c3c', title: 'This student hasn\u2019t taken a practice test.' });
+        }
+        return badges;
+    },
+
     // ---- Helper: build a sortable table ----
     // columns: [{ label, key, getValue(row) }]  — key=null means non-sortable
     // rows: array of data objects
@@ -773,6 +801,14 @@ const Dashboard = {
                         var tdScore = document.createElement('td');
                         tdScore.className = 'score-value';
                         tdScore.textContent = entry.score;
+                        var warnings = self._scoreWarningBadges(entry);
+                        for (var w = 0; w < warnings.length; w++) {
+                            var badge = document.createElement('i');
+                            badge.className = warnings[w].icon;
+                            badge.title = warnings[w].title;
+                            badge.style.cssText = 'color:' + warnings[w].color + ';margin-left:6px;font-size:0.85em;cursor:help;';
+                            tdScore.appendChild(badge);
+                        }
                         tr.appendChild(tdScore);
 
                         var tdVocab = document.createElement('td');
@@ -1787,6 +1823,14 @@ const Dashboard = {
                 var tdScore = document.createElement('td');
                 tdScore.className = 'score-value';
                 tdScore.textContent = entry.score;
+                var warnings = self._scoreWarningBadges(entry);
+                for (var w = 0; w < warnings.length; w++) {
+                    var badge = document.createElement('i');
+                    badge.className = warnings[w].icon;
+                    badge.title = warnings[w].title;
+                    badge.style.cssText = 'color:' + warnings[w].color + ';margin-left:6px;font-size:0.85em;cursor:help;';
+                    tdScore.appendChild(badge);
+                }
                 tr.appendChild(tdScore);
 
                 // Vocab
@@ -2152,6 +2196,14 @@ const Dashboard = {
                 var tdScore = document.createElement('td');
                 tdScore.className = 'score-value';
                 tdScore.textContent = entry.score;
+                var warnings = self._scoreWarningBadges(entry);
+                for (var w = 0; w < warnings.length; w++) {
+                    var badge = document.createElement('i');
+                    badge.className = warnings[w].icon;
+                    badge.title = warnings[w].title;
+                    badge.style.cssText = 'color:' + warnings[w].color + ';margin-left:6px;font-size:0.85em;cursor:help;';
+                    tdScore.appendChild(badge);
+                }
                 tr.appendChild(tdScore);
 
                 var tdVocab = document.createElement('td');
