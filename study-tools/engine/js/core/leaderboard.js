@@ -163,7 +163,7 @@ var LeaderboardManager = {
 
             var explainer = document.createElement('p');
             explainer.className = 'lb-explainer';
-            explainer.textContent = 'Vocab (\u00d710) + Test Score + Study Min + Map Bonus = Total';
+            explainer.textContent = 'Vocab (\u00d710) + Test Score + Study Time (diminishing) + Map Bonus = Total';
             container.appendChild(explainer);
 
             if (entries.length === 0) {

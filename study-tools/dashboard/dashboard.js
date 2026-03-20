@@ -742,7 +742,7 @@ const Dashboard = {
 
                     var formula = document.createElement('p');
                     formula.style.cssText = 'color:var(--text-muted);font-size:0.85em;margin-bottom:8px;';
-                    formula.textContent = 'Vocab (\u00d710) + Test Score + Study Min + Map Bonus = Total';
+                    formula.textContent = 'Vocab (\u00d710) + Test Score + Study Time (diminishing) + Map Bonus = Total';
                     lbContainer.appendChild(formula);
 
                     var lbCols = [
@@ -2115,7 +2115,7 @@ const Dashboard = {
 
             var desc = document.createElement('p');
             desc.style.cssText = 'color:var(--text-muted);margin-bottom:4px;font-size:0.85em;';
-            desc.textContent = 'Vocab (\u00d710) + Test Score + Study Min + Map Bonus = Total';
+            desc.textContent = 'Vocab (\u00d710) + Test Score + Study Time (diminishing) + Map Bonus = Total';
             container.appendChild(desc);
 
             var columns = [
