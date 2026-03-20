@@ -1,11 +1,20 @@
 // Leaderboard — student rankings with teacher approval
 var LeaderboardManager = {
 
-    // Calculate composite score: vocab mastered * 10 + best test score + study minutes + map bonus
+    // Diminishing study-time points: 1pt/min for 0-30, 0.5pt/min for 31-60, 0.25pt/min for 61-100, 0 after 100
+    calculateTimePts(studyTimeSeconds) {
+        var mins = Math.floor((studyTimeSeconds || 0) / 60);
+        if (mins <= 30) return mins;
+        if (mins <= 60) return 30 + Math.floor((mins - 30) * 0.5);
+        if (mins <= 100) return 45 + Math.floor((mins - 60) * 0.25);
+        return 55; // hard cap
+    },
+
+    // Calculate composite score: vocab mastered * 10 + best test score + study time (diminishing) + map bonus
     calculateScore(vocabMastered, bestTestScore, studyTimeSeconds, mapBonus) {
         var vocabPts = (vocabMastered || 0) * 10;
         var testPts = bestTestScore || 0;
-        var timePts = Math.floor((studyTimeSeconds || 0) / 60); // 1 pt per minute
+        var timePts = this.calculateTimePts(studyTimeSeconds);
         var mapPts = mapBonus || 0;
         return vocabPts + testPts + timePts + mapPts;
     },
