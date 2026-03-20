@@ -345,12 +345,17 @@ const Dashboard = {
         var trendContainer = document.getElementById('overview-trend');
         var feedContainer = document.getElementById('overview-feed');
         var classLbContainer = document.getElementById('overview-class-lb');
+        var vizContainer = document.getElementById('overview-rankings-viz');
         container.textContent = '';
         container.appendChild(this._loading());
         if (lbContainer) lbContainer.textContent = '';
         if (trendContainer) trendContainer.textContent = '';
         if (feedContainer) feedContainer.textContent = '';
         if (classLbContainer) classLbContainer.textContent = '';
+        if (vizContainer) {
+            if (vizContainer._raceCleanup) vizContainer._raceCleanup();
+            vizContainer.textContent = '';
+        }
 
         try {
             // Build all queries upfront
@@ -747,6 +752,28 @@ const Dashboard = {
 
                     classLbContainer.appendChild(grid);
                 }
+            }
+
+            // Render class rankings visualization
+            if (vizContainer && typeof RankingsViz !== 'undefined') {
+                if (vizContainer._raceCleanup) vizContainer._raceCleanup();
+
+                var vizQuery = this.supabase.from('leaderboard_snapshots')
+                    .select('student_id, score, class_id, snapshot_date')
+                    .order('snapshot_date', { ascending: true })
+                    .limit(5000);
+                if (filters.unitId) vizQuery = vizQuery.eq('unit_id', filters.unitId);
+                var vizRes = await vizQuery;
+                var vizData = vizRes.data || [];
+
+                if (filters.classId) {
+                    vizData = vizData.filter(function(r) { return r.class_id === filters.classId; });
+                }
+
+                var vizClassMap = {};
+                (classesRes.data || []).forEach(function(c) { vizClassMap[c.id] = c.name || c.code; });
+
+                RankingsViz.render(vizContainer, vizData, vizClassMap);
             }
 
             // Render leaderboard replay
