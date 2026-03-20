@@ -111,6 +111,22 @@ var NudgeManager = {
         }
 
         if (suggestions.length < 2) {
+            var stale = this._getStaleActivity(unitId, config);
+            if (stale && !suggestions.some(function(s) { return s.activityId === stale.id; })) {
+                var info = this.ACTIVITY_INFO[stale.id];
+                if (info) {
+                    suggestions.push({
+                        activityId: stale.id,
+                        icon: info.icon,
+                        name: info.name,
+                        group: info.group,
+                        reason: 'You haven\'t tried ' + info.name + ' in ' + stale.days + ' day' + (stale.days !== 1 ? 's' : '') + ' \u2014 give it another go!'
+                    });
+                }
+            }
+        }
+
+        if (suggestions.length < 2) {
             var untried = this._getUntriedActivity(unitId, triedActivities, config);
             if (untried && !suggestions.some(function(s) { return s.activityId === untried; })) {
                 var info = this.ACTIVITY_INFO[untried];
@@ -326,6 +342,17 @@ var NudgeManager = {
             if (info) {
                 this._sessionNudgeCount++;
                 StudyUtils.showToast(prefix + 'nice work! Ready to try ' + info.name + '?', 'info', 6000);
+                return;
+            }
+        }
+
+        // Recency nudge: suggest an activity not used in 3+ days
+        var stale = this._getStaleActivity(unitId, config);
+        if (stale && stale.id !== activityId) {
+            var info = this.ACTIVITY_INFO[stale.id];
+            if (info) {
+                this._sessionNudgeCount++;
+                StudyUtils.showToast(prefix + 'nice work! It\'s been ' + stale.days + ' days since you tried ' + info.name + ' \u2014 worth a revisit!', 'info', 6000);
                 return;
             }
         }
