@@ -6,19 +6,31 @@ const ActivityTimer = {
     _lastInteraction: 0,
     _interval: null,
     _unitId: null,
+    _activityId: null,
     _shownThresholds: {},  // track which study-time toasts have fired this session
+    _shownCapWarning: false,
+    _shownCapReached: false,
     IDLE_TIMEOUT: 60000, // pause after 60s of no interaction
+    DAILY_ACTIVITY_CAP_MS: 15 * 60 * 1000, // 15 min per activity per day
 
-    start(unitId) {
+    start(unitId, activityId) {
         this.stop(); // save any previous session
         this._unitId = unitId;
+        this._activityId = activityId || null;
         this._elapsed = 0;
         this._shownThresholds = {};
+        this._shownCapWarning = false;
+        this._shownCapReached = false;
         this._active = true;
         this._lastTick = Date.now();
         this._lastInteraction = Date.now();
         this._interval = setInterval(() => this._tick(), 1000);
         this._addListeners();
+
+        // Show banner if activity already capped today
+        if (this._activityId && this._isActivityCappedToday(unitId, this._activityId)) {
+            this._showCapBanner();
+        }
     },
 
     stop() {
@@ -28,12 +40,49 @@ const ActivityTimer = {
             this._interval = null;
         }
         this._removeListeners();
+        this._removeCapBanner();
         if (this._unitId && this._elapsed > 0) {
-            ProgressManager.addStudyTime(this._unitId, this._elapsed);
+            this._addCappedStudyTime(this._unitId, this._activityId, this._elapsed);
         }
         this._active = false;
         this._elapsed = 0;
         this._unitId = null;
+        this._activityId = null;
+    },
+
+    // Add study time respecting per-activity daily cap
+    _addCappedStudyTime(unitId, activityId, ms) {
+        if (!activityId) {
+            ProgressManager.addStudyTime(unitId, ms);
+            return;
+        }
+        var today = new Date().toDateString();
+        var key = 'dailyActivityTime_' + activityId;
+        var data = ProgressManager.load(unitId, key) || { date: null, ms: 0 };
+        if (data.date !== today) {
+            data = { date: today, ms: 0 };
+        }
+        var remaining = Math.max(0, this.DAILY_ACTIVITY_CAP_MS - data.ms);
+        var credited = Math.min(ms, remaining);
+        if (credited > 0) {
+            ProgressManager.addStudyTime(unitId, credited);
+        }
+        data.ms += ms; // track total time even past cap (for display)
+        ProgressManager.save(unitId, key, data);
+    },
+
+    _isActivityCappedToday(unitId, activityId) {
+        var today = new Date().toDateString();
+        var key = 'dailyActivityTime_' + activityId;
+        var data = ProgressManager.load(unitId, key) || { date: null, ms: 0 };
+        return data.date === today && data.ms >= this.DAILY_ACTIVITY_CAP_MS;
+    },
+
+    _getActivityTodayMs(unitId, activityId) {
+        var today = new Date().toDateString();
+        var key = 'dailyActivityTime_' + activityId;
+        var data = ProgressManager.load(unitId, key) || { date: null, ms: 0 };
+        return data.date === today ? data.ms : 0;
     },
 
     _tick() {
@@ -44,7 +93,101 @@ const ActivityTimer = {
             this._elapsed += Math.max(0, now - this._lastTick);
         }
         this._lastTick = now;
+        this._checkActivityCap();
         this._checkStudyTimeThresholds();
+    },
+
+    _checkActivityCap() {
+        if (!this._activityId || !this._unitId) return;
+        var todayMs = this._getActivityTodayMs(this._unitId, this._activityId) + this._elapsed;
+        var capMs = this.DAILY_ACTIVITY_CAP_MS;
+        var firstName = typeof ProgressManager !== 'undefined' ? ProgressManager.getFirstName() : '';
+        var prefix = firstName ? firstName + ', ' : '';
+
+        // At 80% (12 min), warn approaching cap
+        if (todayMs >= capMs * 0.8 && todayMs < capMs && !this._shownCapWarning) {
+            this._shownCapWarning = true;
+            var actName = this._getActivityName(this._activityId);
+            if (typeof StudyUtils !== 'undefined') {
+                StudyUtils.showToast(prefix + 'you\'ve been on ' + actName + ' for a while today \u2014 only a few more minutes of study time points left. Try mixing in another activity!', 'info', 8000);
+            }
+        }
+
+        // At 100% (15 min), notify cap reached and show banner
+        if (todayMs >= capMs && !this._shownCapReached) {
+            this._shownCapReached = true;
+            var actName = this._getActivityName(this._activityId);
+            if (typeof StudyUtils !== 'undefined') {
+                StudyUtils.showToast(prefix + 'you\'ve maxed out study time points for ' + actName + ' today! Try a different activity to keep earning points.', 'info', 8000);
+            }
+            this._showCapBanner();
+        }
+    },
+
+    _getActivityName(activityId) {
+        if (typeof NudgeManager !== 'undefined' && NudgeManager.ACTIVITY_INFO[activityId]) {
+            return NudgeManager.ACTIVITY_INFO[activityId].name;
+        }
+        return activityId;
+    },
+
+    _showCapBanner() {
+        this._removeCapBanner();
+        var container = document.getElementById('activity-container');
+        if (!container) return;
+
+        var actName = this._getActivityName(this._activityId);
+
+        // Get a suggestion for a different activity
+        var suggestion = '';
+        if (typeof NudgeManager !== 'undefined' && typeof StudyEngine !== 'undefined' && StudyEngine.config) {
+            var suggestions = NudgeManager.getSuggestions(StudyEngine.config);
+            for (var i = 0; i < suggestions.length; i++) {
+                if (suggestions[i].activityId !== this._activityId) {
+                    suggestion = suggestions[i].name;
+                    break;
+                }
+            }
+        }
+
+        var banner = document.createElement('div');
+        banner.id = 'activity-cap-banner';
+        banner.style.cssText = 'background:#fef3cd;border:1px solid #ffc107;border-radius:8px;padding:10px 16px;margin-bottom:12px;display:flex;align-items:center;gap:10px;font-size:0.9rem;color:#856404;';
+
+        var icon = document.createElement('i');
+        icon.className = 'fas fa-clock';
+        icon.style.fontSize = '1.1rem';
+        banner.appendChild(icon);
+
+        var text = document.createElement('span');
+        text.textContent = 'You\'ve already earned today\'s study time points for ' + actName + '. You can still practice, but try ' + (suggestion || 'a different activity') + ' to keep earning points!';
+        banner.appendChild(text);
+
+        if (suggestion) {
+            var tryBtn = document.createElement('button');
+            tryBtn.style.cssText = 'margin-left:auto;background:#ffc107;border:none;border-radius:4px;padding:6px 12px;cursor:pointer;font-size:0.85rem;font-weight:600;color:#856404;white-space:nowrap;';
+            tryBtn.textContent = 'Try ' + suggestion;
+            tryBtn.addEventListener('click', function() {
+                // Find and click the suggestion
+                if (typeof NudgeManager !== 'undefined' && typeof StudyEngine !== 'undefined' && StudyEngine.config) {
+                    var sugs = NudgeManager.getSuggestions(StudyEngine.config);
+                    for (var i = 0; i < sugs.length; i++) {
+                        if (sugs[i].name === suggestion) {
+                            StudyEngine.activateActivity(sugs[i].activityId);
+                            return;
+                        }
+                    }
+                }
+            });
+            banner.appendChild(tryBtn);
+        }
+
+        container.insertBefore(banner, container.firstChild);
+    },
+
+    _removeCapBanner() {
+        var existing = document.getElementById('activity-cap-banner');
+        if (existing) existing.remove();
     },
 
     _checkStudyTimeThresholds() {
@@ -407,8 +550,8 @@ const StudyEngine = {
 
         activity.activate?.();
 
-        // Track active study time
-        ActivityTimer.start(this.config.unit.id);
+        // Track active study time (pass activity ID for per-activity daily cap)
+        ActivityTimer.start(this.config.unit.id, activityId);
 
         // Update streak
         ProgressManager.updateStreak(this.config.unit.id);

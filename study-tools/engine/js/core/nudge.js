@@ -74,6 +74,27 @@ var NudgeManager = {
         var unitId = config.unit.id;
         var suggestions = [];
 
+        // Highest priority: if last activity was capped for the day, suggest an uncapped alternative
+        if (typeof ActivityTimer !== 'undefined' && typeof StudyEngine !== 'undefined') {
+            var lastAct = StudyEngine.activeActivity;
+            if (lastAct && ActivityTimer._isActivityCappedToday(unitId, lastAct)) {
+                var alt = this._pickUncappedActivity(unitId, lastAct, config);
+                if (alt) {
+                    var info = this.ACTIVITY_INFO[alt];
+                    if (info) {
+                        var cappedName = this.ACTIVITY_INFO[lastAct] ? this.ACTIVITY_INFO[lastAct].name : lastAct;
+                        suggestions.push({
+                            activityId: alt,
+                            icon: info.icon,
+                            name: info.name,
+                            group: info.group,
+                            reason: 'You\'ve maxed out ' + cappedName + ' for today \u2014 try this instead!'
+                        });
+                    }
+                }
+            }
+        }
+
         var weakCount = this._getWeakTermCount(unitId);
         var triedActivities = this._getTriedActivities(unitId);
         var fcProgress = ProgressManager.getActivityProgress(unitId, 'flashcards') || {};
@@ -225,6 +246,19 @@ var NudgeManager = {
             }
         }
         return stalest ? { id: stalest, days: Math.floor(stalestAge / (24 * 60 * 60 * 1000)) } : null;
+    },
+
+    _pickUncappedActivity(unitId, excludeId, config) {
+        var activities = Object.keys(this.ACTIVITY_INFO);
+        for (var i = 0; i < activities.length; i++) {
+            var id = activities[i];
+            if (id === excludeId) continue;
+            if (typeof MasteryManager !== 'undefined' && !MasteryManager.isActivityAccessible(unitId, config, id)) continue;
+            if (typeof StudyEngine !== 'undefined' && StudyEngine.activities && !StudyEngine.activities[id]) continue;
+            if (typeof ActivityTimer !== 'undefined' && ActivityTimer._isActivityCappedToday(unitId, id)) continue;
+            return id;
+        }
+        return null;
     },
 
     renderSuggestions(container, config) {
