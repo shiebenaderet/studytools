@@ -1250,3 +1250,77 @@ body {
     font-size: 0.85rem;
     margin-top: 8px;
 }
+
+/* Bar Chart Race */
+.rankings-bar-race {
+    margin-top: 24px;
+}
+
+.race-date-display {
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text, #333);
+    margin-bottom: 12px;
+}
+
+.race-controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+}
+
+.race-play-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--primary, #4e79a7);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.race-play-btn:hover {
+    opacity: 0.9;
+}
+
+.race-play-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.race-speed-wrap {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: var(--text-muted, #888);
+}
+
+.race-speed-slider {
+    width: 80px;
+    cursor: pointer;
+}
+
+.race-speed-readout {
+    font-weight: 600;
+    min-width: 2em;
+    color: var(--text, #333);
+}
+
+.race-progress {
+    font-size: 0.85rem;
+    color: var(--text-muted, #888);
+}
+
+.rankings-bar-race canvas {
+    display: block;
+    width: 100%;
+}
