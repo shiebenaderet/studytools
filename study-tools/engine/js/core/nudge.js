@@ -188,6 +188,29 @@ var NudgeManager = {
         return null;
     },
 
+    _getStaleActivity(unitId, config) {
+        var now = Date.now();
+        var threshold = this.STALE_ACTIVITY_DAYS * 24 * 60 * 60 * 1000;
+        var activities = Object.keys(this.ACTIVITY_INFO);
+        var stalest = null;
+        var stalestAge = 0;
+
+        for (var i = 0; i < activities.length; i++) {
+            var id = activities[i];
+            var lastUsed = ProgressManager.load(unitId, 'lastUsed_' + id);
+            if (!lastUsed) continue; // never used — handled by _getUntriedActivity
+            var age = now - lastUsed;
+            if (age < threshold) continue;
+            if (typeof MasteryManager !== 'undefined' && !MasteryManager.isActivityAccessible(unitId, config, id)) continue;
+            if (typeof StudyEngine !== 'undefined' && StudyEngine.activities && !StudyEngine.activities[id]) continue;
+            if (age > stalestAge) {
+                stalest = id;
+                stalestAge = age;
+            }
+        }
+        return stalest ? { id: stalest, days: Math.floor(stalestAge / (24 * 60 * 60 * 1000)) } : null;
+    },
+
     renderSuggestions(container, config) {
         var existing = document.getElementById('nudge-suggestions');
         if (existing) existing.remove();
