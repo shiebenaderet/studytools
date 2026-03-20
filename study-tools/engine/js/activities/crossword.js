@@ -221,6 +221,7 @@ StudyEngine.registerActivity({
                 direction: w.direction,
                 definition: w.vocab.definition,
                 word: w.word,
+                originalTerm: w.vocab.term,
                 row: w.row,
                 col: w.col,
                 length: w.word.length
@@ -433,7 +434,8 @@ StudyEngine.registerActivity({
                     div.appendChild(textNode);
 
                     var defSpan = document.createElement('span');
-                    defSpan.textContent = clue.definition + ' (' + clue.length + ')';
+                    var hasPunctuation = clue.originalTerm && /[^a-zA-Z\s]/.test(clue.originalTerm);
+                    defSpan.textContent = clue.definition + ' (' + clue.length + (hasPunctuation ? ', letters only' : '') + ')';
                     div.appendChild(defSpan);
 
                     div.addEventListener('click', function() {
@@ -467,7 +469,8 @@ StudyEngine.registerActivity({
                     div.appendChild(textNode);
 
                     var defSpan = document.createElement('span');
-                    defSpan.textContent = clue.definition + ' (' + clue.length + ')';
+                    var hasPunctuation = clue.originalTerm && /[^a-zA-Z\s]/.test(clue.originalTerm);
+                    defSpan.textContent = clue.definition + ' (' + clue.length + (hasPunctuation ? ', letters only' : '') + ')';
                     div.appendChild(defSpan);
 
                     div.addEventListener('click', function() {

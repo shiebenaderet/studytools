@@ -102,7 +102,8 @@ StudyEngine.registerActivity({
         lengthHint.style.marginTop = '10px';
         lengthHint.style.color = '#4b5563';
         lengthHint.style.fontSize = '0.9em';
-        lengthHint.textContent = 'Word length: ' + this._targetWord.length + ' letters';
+        var hasPunctuation = /[^a-zA-Z\s]/.test(this._targetVocab.term);
+        lengthHint.textContent = 'Word length: ' + this._targetWord.length + ' letters' + (hasPunctuation ? ' (letters only, no punctuation)' : '');
         clueBox.appendChild(lengthHint);
 
         wrapper.appendChild(clueBox);
