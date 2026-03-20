@@ -6,12 +6,14 @@ const ActivityTimer = {
     _lastInteraction: 0,
     _interval: null,
     _unitId: null,
+    _shownThresholds: {},  // track which study-time toasts have fired this session
     IDLE_TIMEOUT: 60000, // pause after 60s of no interaction
 
     start(unitId) {
         this.stop(); // save any previous session
         this._unitId = unitId;
         this._elapsed = 0;
+        this._shownThresholds = {};
         this._active = true;
         this._lastTick = Date.now();
         this._lastInteraction = Date.now();
@@ -42,6 +44,30 @@ const ActivityTimer = {
             this._elapsed += Math.max(0, now - this._lastTick);
         }
         this._lastTick = now;
+        this._checkStudyTimeThresholds();
+    },
+
+    _checkStudyTimeThresholds() {
+        var elapsedMin = Math.floor(this._elapsed / 60000);
+        var firstName = typeof ProgressManager !== 'undefined' ? ProgressManager.getFirstName() : '';
+        var prefix = firstName ? firstName + ', ' : '';
+
+        if (elapsedMin >= 100 && !this._shownThresholds[100]) {
+            this._shownThresholds[100] = true;
+            if (typeof StudyUtils !== 'undefined') {
+                StudyUtils.showToast(prefix + 'you\'ve hit the study time point cap! Focus on vocab and practice tests to keep climbing the leaderboard!', 'info', 8000);
+            }
+        } else if (elapsedMin >= 60 && !this._shownThresholds[60]) {
+            this._shownThresholds[60] = true;
+            if (typeof StudyUtils !== 'undefined') {
+                StudyUtils.showToast(prefix + '60 minutes of studying \u2014 impressive! Your study time points are slowing down. Try mastering vocab or taking a practice test to keep your score growing!', 'info', 8000);
+            }
+        } else if (elapsedMin >= 30 && !this._shownThresholds[30]) {
+            this._shownThresholds[30] = true;
+            if (typeof StudyUtils !== 'undefined') {
+                StudyUtils.showToast(prefix + 'you\'ve been studying for 30 minutes \u2014 nice! Points are building up a bit slower now. Great time for a break!', 'info', 6000);
+            }
+        }
     },
 
     _onInteraction() {
@@ -480,7 +506,7 @@ const StudyEngine = {
         this.renderHomeStats();
     },
 
-    showLeaderboard() {
+    async showLeaderboard() {
         ActivityTimer.stop();
         document.body.classList.remove('activity-active');
         var topbar = document.getElementById('activity-topbar');
@@ -496,9 +522,9 @@ const StudyEngine = {
         container.textContent = '';
 
         if (typeof LeaderboardManager !== 'undefined') {
-            // Submit latest score before showing
-            LeaderboardManager.submitScore();
-            LeaderboardManager.renderPage(container);
+            // Submit latest score before showing — await so rankings reflect current data
+            await LeaderboardManager.submitScore();
+            await LeaderboardManager.renderPage(container);
         }
     },
 
