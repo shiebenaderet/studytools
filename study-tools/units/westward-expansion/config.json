@@ -11,7 +11,24 @@
         }
     },
     "activities": [
-        "flashcards"
+        "flashcards",
+        "textbook",
+        "resources",
+        "typing-practice",
+        "practice-test",
+        "short-answer",
+        "timeline",
+        "wordle",
+        "hangman",
+        "flip-match",
+        "fill-in-blank",
+        "term-catcher",
+        "lightning-round",
+        "crossword",
+        "source-analysis",
+        "quiz-race",
+        "tower-defense",
+        "map-quiz"
     ],
     "vocabulary": [
         {
