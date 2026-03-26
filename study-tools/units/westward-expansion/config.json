@@ -1220,7 +1220,201 @@
         }
     ],
     "historicalFlavor": {
-        "quotes": [],
-        "funFacts": []
+        "quotes": [
+            {
+                "text": "The individual who refuses to defend his rights when called by his Government, deserves to be a slave, and one who would not rally to the defence of his country when threatened by a foreign enemy, merits the severest punishment.",
+                "author": "Andrew Jackson",
+                "source": "Letter to the Tennessee militia, 1812",
+                "sourceUrl": "https://founders.archives.gov/",
+                "portrait": "images/portraits/jackson.jpg"
+            },
+            {
+                "text": "One man with courage makes a majority.",
+                "author": "Andrew Jackson",
+                "source": "Attributed, widely cited in Jackson biographies",
+                "sourceUrl": "https://www.loc.gov/",
+                "portrait": "images/portraits/jackson.jpg"
+            },
+            {
+                "text": "No president who performs his duties faithfully and conscientiously can have any leisure.",
+                "author": "James K. Polk",
+                "source": "Diary of James K. Polk, 1845",
+                "sourceUrl": "https://www.loc.gov/item/07023209/",
+                "portrait": "images/portraits/polk.jpg"
+            },
+            {
+                "text": "Texas has achieved her independence, and she has a right to dispose of herself as she pleases.",
+                "author": "Sam Houston",
+                "source": "Speech on Texas annexation, 1836",
+                "sourceUrl": "https://www.loc.gov/",
+                "portrait": "images/portraits/houston.jpg"
+            },
+            {
+                "text": "Be always sure you are right, then go ahead.",
+                "author": "Davy Crockett",
+                "source": "A Narrative of the Life of David Crockett, 1834",
+                "sourceUrl": "https://www.loc.gov/item/17021067/",
+                "portrait": "images/portraits/crockett.jpg"
+            },
+            {
+                "text": "I would rather be right than be President.",
+                "author": "Henry Clay",
+                "source": "Remark to Senator Preston, 1839",
+                "sourceUrl": "https://www.loc.gov/",
+                "portrait": "images/portraits/clay.jpg"
+            },
+            {
+                "text": "I am not going to write a book. I am going to take the wrongs of a people and put them into a story.",
+                "author": "Harriet Beecher Stowe",
+                "source": "Letter regarding Uncle Tom's Cabin, 1851",
+                "sourceUrl": "https://www.loc.gov/",
+                "portrait": "images/portraits/stowe.jpg"
+            },
+            {
+                "text": "We hold these truths to be self-evident: that all men and women are created equal.",
+                "author": "Elizabeth Cady Stanton",
+                "source": "Declaration of Sentiments, Seneca Falls Convention, 1848",
+                "sourceUrl": "https://avalon.law.yale.edu/19th_century/seneca.asp",
+                "portrait": "images/portraits/stanton.jpg"
+            },
+            {
+                "text": "And ain't I a woman? I have ploughed and planted, and gathered into barns, and no man could head me!",
+                "author": "Sojourner Truth",
+                "source": "Speech at the Women's Convention in Akron, Ohio, 1851",
+                "sourceUrl": "https://www.loc.gov/",
+                "portrait": "images/portraits/truth.jpg"
+            },
+            {
+                "text": "What, to the American slave, is your Fourth of July? I answer: a day that reveals to him, more than all other days in the year, the gross injustice and cruelty to which he is the constant victim.",
+                "author": "Frederick Douglass",
+                "source": "What to the Slave Is the Fourth of July?, 1852",
+                "sourceUrl": "https://www.loc.gov/resource/mfd.21001/",
+                "portrait": "images/portraits/douglass.jpg"
+            },
+            {
+                "text": "If there is no struggle, there is no progress.",
+                "author": "Frederick Douglass",
+                "source": "West India Emancipation speech, 1857",
+                "sourceUrl": "https://www.loc.gov/",
+                "portrait": "images/portraits/douglass.jpg"
+            },
+            {
+                "text": "The power of the General Government over internal improvement is not to be found in the Constitution.",
+                "author": "John C. Calhoun",
+                "source": "Speech on internal improvements, 1817",
+                "sourceUrl": "https://www.loc.gov/",
+                "portrait": "images/portraits/calhoun.jpg"
+            },
+            {
+                "text": "The Constitution of the United States was made not merely for the generation that then existed, but for posterity.",
+                "author": "John Marshall",
+                "source": "Cohens v. Virginia, 1821",
+                "sourceUrl": "https://www.loc.gov/",
+                "portrait": "images/portraits/marshall.jpg"
+            },
+            {
+                "text": "I am determined to sustain myself as long as possible and die like a soldier who never forgets what is due to his own honor and that of his country. Victory or Death.",
+                "author": "William Barret Travis",
+                "source": "Letter from the Alamo, February 24, 1836",
+                "sourceUrl": "https://www.archives.gov/",
+                "portrait": "images/portraits/travis.jpg"
+            },
+            {
+                "text": "The history of mankind is a history of repeated injuries and usurpations on the part of man toward woman, having in direct object the establishment of an absolute tyranny over her.",
+                "author": "Elizabeth Cady Stanton",
+                "source": "Declaration of Sentiments, Seneca Falls Convention, 1848",
+                "sourceUrl": "https://avalon.law.yale.edu/19th_century/seneca.asp",
+                "portrait": "images/portraits/stanton.jpg"
+            },
+            {
+                "text": "Power concedes nothing without a demand. It never did and it never will.",
+                "author": "Frederick Douglass",
+                "source": "West India Emancipation speech, 1857",
+                "sourceUrl": "https://www.loc.gov/",
+                "portrait": "images/portraits/douglass.jpg"
+            }
+        ],
+        "funFacts": [
+            {
+                "text": "The Oregon Trail was about 2,000 miles long, and it took most wagon trains four to six months to travel the entire route.",
+                "source": "National Park Service",
+                "sourceUrl": "https://www.nps.gov/oreg/index.htm"
+            },
+            {
+                "text": "During the California Gold Rush, a single egg could cost the equivalent of $25 in today's money because food was so scarce near the mining camps.",
+                "source": "Smithsonian National Museum of American History",
+                "sourceUrl": "https://americanhistory.si.edu/"
+            },
+            {
+                "text": "Davy Crockett really did use the motto 'Be always sure you are right, then go ahead' in his autobiography, published in 1834.",
+                "source": "Smithsonian National Museum of American History",
+                "sourceUrl": "https://americanhistory.si.edu/"
+            },
+            {
+                "text": "The Alamo was originally a Spanish mission called Mission San Antonio de Valero, built in the 1700s for converting Native Americans to Christianity.",
+                "source": "National Park Service",
+                "sourceUrl": "https://www.nps.gov/saan/index.htm"
+            },
+            {
+                "text": "Eli Whitney's cotton gin could clean 50 pounds of cotton per day, replacing the work of many laborers. This made cotton hugely profitable and tragically increased the demand for enslaved labor.",
+                "source": "Smithsonian National Museum of American History",
+                "sourceUrl": "https://americanhistory.si.edu/"
+            },
+            {
+                "text": "The phrase 'Manifest Destiny' was first coined by newspaper editor John O'Sullivan in 1845 to justify American expansion westward.",
+                "source": "Library of Congress",
+                "sourceUrl": "https://www.loc.gov/"
+            },
+            {
+                "text": "The Seneca Falls Convention of 1848 was the first women's rights convention in the United States. About 300 people attended, including 40 men.",
+                "source": "National Park Service",
+                "sourceUrl": "https://www.nps.gov/wori/index.htm"
+            },
+            {
+                "text": "Sam Houston served as president of the Republic of Texas, then later as a U.S. senator and governor of Texas after it became a state.",
+                "source": "Texas State Library and Archives Commission",
+                "sourceUrl": "https://www.tsl.texas.gov/"
+            },
+            {
+                "text": "The Cherokee Nation's forced removal, known as the Trail of Tears, resulted in the death of approximately 4,000 Cherokee people during the 800-mile journey.",
+                "source": "National Park Service",
+                "sourceUrl": "https://www.nps.gov/trte/index.htm"
+            },
+            {
+                "text": "James K. Polk is one of the few presidents who accomplished all of his major campaign promises. He pledged to serve only one term and kept that promise.",
+                "source": "Library of Congress",
+                "sourceUrl": "https://www.loc.gov/"
+            },
+            {
+                "text": "Before the invention of the cotton gin in 1793, separating cotton seeds from cotton fiber by hand took about 10 hours to produce one pound of clean cotton.",
+                "source": "Smithsonian National Museum of American History",
+                "sourceUrl": "https://americanhistory.si.edu/"
+            },
+            {
+                "text": "The word 'Texas' comes from the Caddo word 'tejas,' meaning 'friends' or 'allies.'",
+                "source": "Texas State Historical Association",
+                "sourceUrl": "https://www.tshaonline.org/"
+            },
+            {
+                "text": "Frederick Douglass taught himself to read as a child by trading bread to white children in exchange for reading lessons.",
+                "source": "National Park Service",
+                "sourceUrl": "https://www.nps.gov/frdo/index.htm"
+            },
+            {
+                "text": "The Battle of the Alamo lasted 13 days. The final assault by Mexican forces on March 6, 1836, was over in less than 90 minutes.",
+                "source": "Texas State Historical Association",
+                "sourceUrl": "https://www.tshaonline.org/"
+            },
+            {
+                "text": "During the Gold Rush, San Francisco's population exploded from about 1,000 in 1848 to over 25,000 by 1850.",
+                "source": "Library of Congress",
+                "sourceUrl": "https://www.loc.gov/"
+            },
+            {
+                "text": "Sojourner Truth was born into slavery in New York and didn't gain her freedom until 1826. She went on to become one of the most powerful voices for abolition and women's rights.",
+                "source": "National Park Service",
+                "sourceUrl": "https://www.nps.gov/sotu/index.htm"
+            }
+        ]
     }
 }

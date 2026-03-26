@@ -1020,7 +1020,8 @@ const StudyEngine = {
         var bulb = document.createElement('i');
         bulb.className = 'fas fa-lightbulb';
         factEl.appendChild(bulb);
-        factEl.appendChild(document.createTextNode(fact));
+        var factText = typeof fact === 'string' ? fact : fact.text;
+        factEl.appendChild(document.createTextNode(factText));
         footer.insertBefore(factEl, footer.firstChild);
     },
 
