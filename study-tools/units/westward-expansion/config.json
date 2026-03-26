@@ -1014,7 +1014,88 @@
             ]
         }
     ],
-    "fillInBlankSentences": [],
+    "fillInBlankSentences": [
+        {
+            "sentence": "The _____ was the practice of giving government jobs to loyal political supporters after winning an election.",
+            "answer": "spoils system",
+            "category": "Jackson's America"
+        },
+        {
+            "sentence": "South Carolina believed in _____, the idea that a state could refuse to follow a federal law it considered unconstitutional.",
+            "answer": "nullification",
+            "category": "Jackson's America"
+        },
+        {
+            "sentence": "The _____ of 1830 authorized the federal government to force Native American tribes to relocate west of the Mississippi River.",
+            "answer": "Indian Removal Act",
+            "category": "Jackson's America"
+        },
+        {
+            "sentence": "The forced march of the Cherokee people from their homeland to Oklahoma, in which thousands died, is known as the _____.",
+            "answer": "Trail of Tears",
+            "category": "Jackson's America"
+        },
+        {
+            "sentence": "_____ was the belief that Americans were destined by God to expand across the entire continent to the Pacific Ocean.",
+            "answer": "manifest destiny",
+            "category": "Westward Trails"
+        },
+        {
+            "sentence": "The _____ stretched 2,000 miles from Missouri to the Pacific Northwest and was used by thousands of pioneer families in covered wagons.",
+            "answer": "Oregon Trail",
+            "category": "Westward Trails"
+        },
+        {
+            "sentence": "_____ led the Texas army to victory at the Battle of San Jacinto and became the first president of the Republic of Texas.",
+            "answer": "Sam Houston",
+            "category": "Westward Trails"
+        },
+        {
+            "sentence": "In 1845, the United States decided to _____ Texas, officially making the former independent republic the 28th state.",
+            "answer": "annex",
+            "category": "Westward Trails"
+        },
+        {
+            "sentence": "The _____ ended the Mexican-American War in 1848 and forced Mexico to give up nearly half of its territory to the United States.",
+            "answer": "Treaty of Guadalupe Hidalgo",
+            "category": "War & Compromise"
+        },
+        {
+            "sentence": "The _____ was a proposed law that would have banned slavery in any territory gained from Mexico, but it failed to pass the Senate.",
+            "answer": "Wilmot Proviso",
+            "category": "War & Compromise"
+        },
+        {
+            "sentence": "The _____ admitted California as a free state and included a stronger law requiring Northerners to return escaped enslaved people.",
+            "answer": "Compromise of 1850",
+            "category": "War & Compromise"
+        },
+        {
+            "sentence": "The territory that Mexico surrendered to the United States after the war, including California and Nevada, is called the _____.",
+            "answer": "Mexican Cession",
+            "category": "War & Compromise"
+        },
+        {
+            "sentence": "The _____ transformed the Northern economy with factories and machines, while the South remained focused on farming.",
+            "answer": "Industrial Revolution",
+            "category": "Two Americas"
+        },
+        {
+            "sentence": "Eli Whitney's _____ could separate cotton seeds from fiber fifty times faster than by hand, making slavery more profitable in the South.",
+            "answer": "cotton gin",
+            "category": "Two Americas"
+        },
+        {
+            "sentence": "The _____ of 1848 was a historic gathering in New York where women demanded voting rights and legal equality.",
+            "answer": "Seneca Falls Convention",
+            "category": "Two Americas"
+        },
+        {
+            "sentence": "_____ was a formerly enslaved woman who became a powerful speaker for abolition and women's rights, famous for her 'Ain't I a Woman?' speech.",
+            "answer": "Sojourner Truth",
+            "category": "Two Americas"
+        }
+    ],
     "typingPassages": [],
     "historicalFlavor": {
         "quotes": [],
