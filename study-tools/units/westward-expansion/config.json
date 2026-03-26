@@ -894,7 +894,126 @@
             "topic": "Westward Trails"
         }
     ],
-    "shortAnswerQuestions": [],
+    "shortAnswerQuestions": [
+        {
+            "question": "Was Andrew Jackson strengthening or abusing presidential power? Use at least two specific examples from the unit to support your answer.",
+            "topic": "Jackson's America",
+            "keyTerms": [
+                "spoils system",
+                "nullification",
+                "Indian Removal Act",
+                "Worcester v. Georgia",
+                "Bank of the U.S.",
+                "Force Bill"
+            ],
+            "rubric": [
+                "Takes a clear position on whether Jackson strengthened or abused presidential power",
+                "Supports the argument with at least two specific examples from the unit, such as the spoils system, the Indian Removal Act, the nullification crisis, or the Bank War",
+                "Explains WHY each example shows strength or abuse of power, not just what happened",
+                "Uses key vocabulary correctly and writes 4-6 sentences that build a logical argument"
+            ],
+            "exemplar": "Andrew Jackson abused presidential power because he put his own beliefs above the law. For example, when the Supreme Court ruled in Worcester v. Georgia that Georgia could not force the Cherokee off their land, Jackson ignored the ruling and pushed the Indian Removal Act forward anyway. This led to the Trail of Tears, which killed thousands of Native Americans. Jackson also destroyed the Bank of the U.S. by pulling out all federal money, even though Congress wanted to keep it open. He used the spoils system to fill government jobs with his loyal supporters instead of qualified people. These actions show that Jackson used his power to get what he wanted, even when it meant ignoring the courts and hurting innocent people.",
+            "sentenceStarters": [
+                "Andrew Jackson strengthened/abused presidential power because...",
+                "One example that shows this is when Jackson...",
+                "This matters because it shows that a president can..."
+            ]
+        },
+        {
+            "question": "What perspectives are missing from the Manifest Destiny narrative? Use at least two specific examples to explain whose voices were left out.",
+            "topic": "Westward Trails",
+            "keyTerms": [
+                "manifest destiny",
+                "Trail of Tears",
+                "Tejanos",
+                "Native Americans",
+                "Oregon Trail"
+            ],
+            "rubric": [
+                "Identifies at least two specific groups whose perspectives are missing from the Manifest Destiny story, such as Native Americans, Tejanos, or Mexican citizens",
+                "Explains what happened to each group using specific details from the unit",
+                "Makes a clear connection between how the Manifest Destiny narrative celebrated expansion while ignoring the suffering it caused",
+                "Writes 4-6 thoughtful sentences that show understanding of multiple points of view"
+            ],
+            "exemplar": "The Manifest Destiny narrative left out the voices of the people who already lived on the land Americans claimed. Native Americans like the Cherokee were forced off their homeland on the Trail of Tears, but the Manifest Destiny story treated westward expansion as heroic progress instead of a tragedy. Tejanos, who were Mexican citizens living in Texas, also lost their land and rights when American settlers took over and declared Texas independent. The Oregon Trail story often focuses on brave pioneer families, but it rarely mentions the Native American nations whose hunting grounds and villages were destroyed by the settlers passing through. These missing perspectives show that Manifest Destiny was not just about American growth; it came at a terrible cost to the people who were already there.",
+            "sentenceStarters": [
+                "The Manifest Destiny narrative left out the voices of...",
+                "For example, Native Americans experienced expansion very differently because...",
+                "This shows that the story of westward expansion looks very different when you consider..."
+            ]
+        },
+        {
+            "question": "Was the Mexican-American War justified? Use at least two specific examples to support your position.",
+            "topic": "War & Compromise",
+            "keyTerms": [
+                "Mexican-American War",
+                "Rio Grande",
+                "Nueces River",
+                "Treaty of Guadalupe Hidalgo",
+                "Mexican Cession",
+                "manifest destiny"
+            ],
+            "rubric": [
+                "Takes a clear position on whether the Mexican-American War was justified or not",
+                "Uses at least two specific examples, such as the border dispute between the Rio Grande and Nueces River, the Treaty of Guadalupe Hidalgo, or the Mexican Cession",
+                "Explains the reasoning behind the position, not just listing facts",
+                "Writes 4-6 well-organized sentences that show understanding of both sides of the debate"
+            ],
+            "exemplar": "The Mexican-American War was not justified because the United States provoked the conflict to gain more territory. President Polk sent troops to the Rio Grande even though Mexico said the border was at the Nueces River, which was further north. When Mexican soldiers fought back, Polk told Congress that Mexico had attacked Americans on American soil, but the land was actually disputed. The real goal was manifest destiny: Polk wanted California and the Southwest. The Treaty of Guadalupe Hidalgo forced Mexico to give up the Mexican Cession, nearly half of its entire country. This war shows that the United States used military force to take land it wanted, which is hard to call justified.",
+            "sentenceStarters": [
+                "The Mexican-American War was/was not justified because...",
+                "One key example is the dispute over the border between...",
+                "This evidence shows that the war was really about..."
+            ]
+        },
+        {
+            "question": "How did technology deepen the divide between North and South? Use at least two specific examples from the unit.",
+            "topic": "Two Americas",
+            "keyTerms": [
+                "cotton gin",
+                "Industrial Revolution",
+                "interchangeable parts",
+                "Erie Canal",
+                "plantation",
+                "agrarian"
+            ],
+            "rubric": [
+                "Identifies at least two specific technologies or innovations and explains how each one affected the North or South differently",
+                "Shows how technology pushed the two regions in opposite directions, with the North becoming more industrial and the South becoming more dependent on slavery",
+                "Makes a clear argument about why this growing divide mattered for the country's future",
+                "Writes 4-6 sentences with specific details and key vocabulary from the unit"
+            ],
+            "exemplar": "Technology made the North and South grow in completely opposite directions, which deepened the divide between them. In the North, the Industrial Revolution brought factories, and inventions like interchangeable parts made manufacturing faster and cheaper. The Erie Canal connected northern cities and helped goods move quickly, which boosted trade and attracted immigrants looking for factory jobs. In the South, the cotton gin made it much faster to clean cotton, but instead of reducing the need for slavery, it actually increased it because planters wanted to grow more cotton to make more money. The South stayed agrarian and became even more dependent on enslaved labor while the North built cities and industries. These different paths made it harder and harder for the two regions to agree on laws, especially about slavery.",
+            "sentenceStarters": [
+                "Technology deepened the divide between North and South because...",
+                "In the North, inventions like... changed the economy by...",
+                "Meanwhile in the South, the cotton gin caused..."
+            ]
+        },
+        {
+            "question": "Can one person be both a hero and a villain? Choose one historical figure from this unit and use specific examples to support your answer.",
+            "topic": "Connections",
+            "keyTerms": [
+                "Andrew Jackson",
+                "James K. Polk",
+                "Eli Whitney",
+                "manifest destiny",
+                "Indian Removal Act"
+            ],
+            "rubric": [
+                "Chooses one historical figure from the unit and clearly states whether that person can be seen as both a hero and a villain",
+                "Provides at least one specific example of something heroic or positive the person did and one specific example of something harmful",
+                "Explains why looking at historical figures from multiple perspectives is important for understanding history",
+                "Writes 4-6 thoughtful sentences that show the complexity of judging people from the past"
+            ],
+            "exemplar": "Andrew Jackson can definitely be seen as both a hero and a villain depending on your perspective. Many Americans at the time saw him as a hero because he was a war hero from the Battle of New Orleans and he fought for the common man by expanding voting rights to all white men, not just the wealthy. However, Jackson was also responsible for the Indian Removal Act, which forced tens of thousands of Native Americans off their land and led to the Trail of Tears, where thousands of Cherokee people died. He even ignored the Supreme Court ruling in Worcester v. Georgia that said the removal was illegal. This shows that one person can do things that help some people while causing terrible harm to others. Looking at both sides helps us understand that history is complicated and that we should think carefully before calling anyone simply a hero or a villain.",
+            "sentenceStarters": [
+                "I chose... because this person can be seen as both a hero and a villain.",
+                "On one hand, this person... which many people saw as heroic because...",
+                "On the other hand, this same person... which caused great harm to..."
+            ]
+        }
+    ],
     "fillInBlankSentences": [],
     "typingPassages": [],
     "historicalFlavor": {
