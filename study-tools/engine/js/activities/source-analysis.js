@@ -947,7 +947,8 @@ StudyEngine.registerActivity({
         desc.style.color = 'var(--text-secondary)';
         desc.style.marginBottom = '20px';
         desc.style.lineHeight = '1.6';
-        desc.textContent = 'Examine historical sources from the Early Republic. For each source, decide if it is a primary source (created during the time period) or a secondary source (created later by someone studying the events). Then answer comprehension questions to deepen your understanding.';
+        var unitTitle = this._config.unit.title || 'this unit';
+        desc.textContent = 'Examine historical sources from ' + unitTitle.replace(' Study Tool', '') + '. For each source, decide if it is a primary source (created during the time period) or a secondary source (created later by someone studying the events). Then answer comprehension questions to deepen your understanding.';
         intro.appendChild(desc);
 
         if (this._stats.completed > 0) {

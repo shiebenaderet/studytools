@@ -2,7 +2,7 @@ StudyEngine.registerActivity({
     id: 'textbook',
     name: 'Textbook',
     icon: 'fas fa-book-open',
-    description: 'Read about the Early Republic in an interactive textbook',
+    description: 'Read about key events and people in an interactive textbook',
     category: 'study',
     requires: [],
 

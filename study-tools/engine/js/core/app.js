@@ -380,6 +380,14 @@ const StudyEngine = {
         document.documentElement.style.setProperty('--secondary', theme.secondary);
         document.documentElement.style.setProperty('--accent', theme.accent);
         document.title = `${this.config.unit.title} - Study Tool`;
+
+        // Unit-specific background colors for visual distinction
+        if (theme.bgDeep) {
+            document.documentElement.style.setProperty('--bg-deep', theme.bgDeep);
+            document.documentElement.style.setProperty('--bg-card', theme.bgCard || theme.bgDeep);
+            document.documentElement.style.setProperty('--bg-elevated', theme.bgElevated || theme.bgCard || theme.bgDeep);
+            document.documentElement.style.setProperty('--bg-surface', theme.bgSurface || theme.bgElevated || theme.bgDeep);
+        }
     },
 
     renderHeader() {

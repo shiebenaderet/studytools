@@ -64,7 +64,7 @@ StudyEngine.registerActivity({
     // Three.js loaded flag
     _threeLoaded: false,
 
-    // Tower definitions — themed around the Early Republic era
+    // Tower definitions — themed around American history
     _towerDefs: {
         musket:   { name: 'Musket Post',     cost: 50,  color: 0x3b82f6, range: 3.5, damage: 2, fireRate: 0.4, aoe: false, slow: 0, icon: 'fa-crosshairs',
                     upgrades: ['Rifled Musket', 'Sharpshooter Tower'], desc: 'Minutemen fire quickly at single targets' },

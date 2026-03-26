@@ -7,7 +7,11 @@
         "theme": {
             "primary": "#B5651D",
             "secondary": "#D4883A",
-            "accent": "#C0392B"
+            "accent": "#C0392B",
+            "bgDeep": "#1a120b",
+            "bgCard": "#261a10",
+            "bgElevated": "#2e2015",
+            "bgSurface": "#3d2c1c"
         }
     },
     "activities": [
