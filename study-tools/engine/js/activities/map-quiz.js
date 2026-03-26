@@ -165,19 +165,24 @@ StudyEngine.registerActivity({
         var container = this._container;
         container.textContent = '';
 
+        var isWE = this._config.unit.id === 'westward-expansion';
+
+        // Westward-expansion gets a mode selector instead of simple start
+        if (isWE) {
+            this._showModeSelector();
+            return;
+        }
+
         var wrapper = document.createElement('div');
         wrapper.className = 'mq-start-screen';
 
         var title = document.createElement('h2');
         title.className = 'mq-title';
-        var isWE = this._config.unit.id === 'westward-expansion';
-        title.textContent = isWE ? 'Map Quiz: Territorial Expansion' : 'Map Quiz: The United States, 1802';
+        title.textContent = 'Map Quiz: The United States, 1802';
 
         var desc = document.createElement('p');
         desc.className = 'mq-desc';
-        desc.textContent = isWE
-            ? 'Click the correct territory on the map. Identify how the United States expanded from coast to coast.'
-            : 'Click the correct state or territory on the map. Identify all 24 regions of the early United States before the Louisiana Purchase.';
+        desc.textContent = 'Click the correct state or territory on the map. Identify all 24 regions of the early United States before the Louisiana Purchase.';
 
         wrapper.appendChild(title);
         wrapper.appendChild(desc);
@@ -209,6 +214,422 @@ StudyEngine.registerActivity({
         container.appendChild(wrapper);
 
         this._loadLeaderboard(lbWrap);
+    },
+
+    _showModeSelector() {
+        var container = this._container;
+        container.textContent = '';
+        var self = this;
+
+        // Determine unlocked categories for mastery gating
+        var unlockedCategories = null;
+        if (typeof MasteryManager !== 'undefined') {
+            unlockedCategories = MasteryManager.getUnlockedCategories(this._config);
+        }
+
+        var wrapper = document.createElement('div');
+        wrapper.className = 'mq-start-screen mq-mode-selector';
+
+        var title = document.createElement('h2');
+        title.className = 'mq-title';
+        title.textContent = 'Map Quiz: Territorial Expansion';
+        wrapper.appendChild(title);
+
+        var desc = document.createElement('p');
+        desc.className = 'mq-desc';
+        desc.textContent = 'Choose a map challenge:';
+        wrapper.appendChild(desc);
+
+        var grid = document.createElement('div');
+        grid.className = 'mq-mode-grid';
+
+        // First card: SVG territorial quiz (always available)
+        var svgCard = document.createElement('button');
+        svgCard.className = 'mq-mode-card';
+        var svgIcon = document.createElement('i');
+        svgIcon.className = 'fas fa-globe-americas mq-mode-icon';
+        svgCard.appendChild(svgIcon);
+        var svgTitle = document.createElement('span');
+        svgTitle.className = 'mq-mode-title';
+        svgTitle.textContent = 'Territorial Expansion';
+        svgCard.appendChild(svgTitle);
+        var svgDesc = document.createElement('span');
+        svgDesc.className = 'mq-mode-desc';
+        svgDesc.textContent = 'Identify territories on the interactive map';
+        svgCard.appendChild(svgDesc);
+        svgCard.addEventListener('click', function() {
+            self._startGame();
+        });
+        grid.appendChild(svgCard);
+
+        // Image-based quiz cards
+        var imageQuizzes = this._getImageQuizzes();
+        var quizIcons = [
+            'fas fa-route',
+            'fas fa-hiking',
+            'fas fa-flag-usa',
+            'fas fa-balance-scale'
+        ];
+
+        imageQuizzes.forEach(function(quiz, idx) {
+            var isLocked = false;
+            if (unlockedCategories !== null) {
+                isLocked = unlockedCategories.indexOf(quiz.category) === -1;
+            }
+
+            var card = document.createElement('button');
+            card.className = 'mq-mode-card' + (isLocked ? ' mq-mode-locked' : '');
+            if (isLocked) {
+                card.disabled = true;
+            }
+
+            var icon = document.createElement('i');
+            icon.className = (isLocked ? 'fas fa-lock' : quizIcons[idx]) + ' mq-mode-icon';
+            card.appendChild(icon);
+
+            var cardTitle = document.createElement('span');
+            cardTitle.className = 'mq-mode-title';
+            cardTitle.textContent = quiz.title;
+            card.appendChild(cardTitle);
+
+            var cardDesc = document.createElement('span');
+            cardDesc.className = 'mq-mode-desc';
+            cardDesc.textContent = quiz.category;
+            card.appendChild(cardDesc);
+
+            if (!isLocked) {
+                card.addEventListener('click', function() {
+                    self._startImageQuiz(quiz);
+                });
+            }
+
+            grid.appendChild(card);
+        });
+
+        wrapper.appendChild(grid);
+
+        // Leaderboard
+        var lbWrap = document.createElement('div');
+        lbWrap.className = 'mq-leaderboard-wrap';
+        wrapper.appendChild(lbWrap);
+
+        container.appendChild(wrapper);
+
+        this._loadLeaderboard(lbWrap);
+    },
+
+    _getImageQuizzes() {
+        return [
+            {
+                id: 'trail-of-tears',
+                title: 'Trail of Tears Routes',
+                category: "Jackson's America",
+                image: '../units/westward-expansion/images/sources/map_trail_of_tears_removal_routes.jpg',
+                hotspots: [
+                    { id: 'cherokee-homeland', name: 'Cherokee Homeland', x: 68, y: 42, width: 10, height: 8 },
+                    { id: 'creek-homeland', name: 'Creek Homeland', x: 64, y: 50, width: 8, height: 8 },
+                    { id: 'chickasaw-homeland', name: 'Chickasaw Homeland', x: 56, y: 48, width: 8, height: 8 },
+                    { id: 'choctaw-homeland', name: 'Choctaw Homeland', x: 54, y: 56, width: 8, height: 8 },
+                    { id: 'seminole-homeland', name: 'Seminole Homeland', x: 72, y: 64, width: 8, height: 8 },
+                    { id: 'indian-territory', name: 'Indian Territory (Oklahoma)', x: 42, y: 42, width: 10, height: 12 }
+                ]
+            },
+            {
+                id: 'oregon-trail',
+                title: 'Oregon Trail',
+                category: "Westward Trails",
+                image: '../units/westward-expansion/images/sources/map_oregon_trail.webp',
+                hotspots: [
+                    { id: 'independence-mo', name: 'Independence, Missouri (Start)', x: 52, y: 45, width: 8, height: 6 },
+                    { id: 'south-pass', name: 'South Pass', x: 30, y: 35, width: 8, height: 6 },
+                    { id: 'fort-laramie', name: 'Fort Laramie', x: 38, y: 34, width: 8, height: 6 },
+                    { id: 'oregon-city', name: 'Oregon City (End)', x: 10, y: 25, width: 8, height: 6 },
+                    { id: 'soda-springs', name: 'Soda Springs', x: 22, y: 30, width: 8, height: 6 }
+                ]
+            },
+            {
+                id: 'mexican-cession-map',
+                title: 'Mexican Cession',
+                category: "War & Compromise",
+                image: '../units/westward-expansion/images/sources/map_mexican_cession_before_1846.png',
+                hotspots: [
+                    { id: 'texas-republic', name: 'Republic of Texas', x: 45, y: 55, width: 12, height: 15 },
+                    { id: 'mexican-territory', name: 'Mexican Territory', x: 18, y: 45, width: 18, height: 18 },
+                    { id: 'oregon-country', name: 'Oregon Country', x: 12, y: 18, width: 16, height: 14 },
+                    { id: 'unorganized-territory', name: 'Unorganized Territory', x: 35, y: 25, width: 14, height: 16 },
+                    { id: 'disputed-area', name: 'Disputed Area (Rio Grande/Nueces)', x: 42, y: 68, width: 10, height: 8 }
+                ]
+            },
+            {
+                id: 'free-slave-states',
+                title: 'Free & Slave States',
+                category: "Two Americas",
+                image: '../units/westward-expansion/images/sources/map_free_slave_states_1854.jpg',
+                hotspots: [
+                    { id: 'free-states-north', name: 'Free States (North)', x: 55, y: 22, width: 20, height: 15 },
+                    { id: 'slave-states-south', name: 'Slave States (South)', x: 55, y: 45, width: 20, height: 15 },
+                    { id: 'california-free', name: 'California (Free State)', x: 8, y: 35, width: 8, height: 15 },
+                    { id: 'kansas-nebraska', name: 'Kansas-Nebraska Territory', x: 35, y: 25, width: 12, height: 12 },
+                    { id: 'utah-territory', name: 'Utah Territory', x: 18, y: 30, width: 10, height: 10 }
+                ]
+            }
+        ];
+    },
+
+    _startImageQuiz(quizData) {
+        this._imageQuiz = {
+            data: quizData,
+            queue: [],
+            current: null,
+            score: 0,
+            total: quizData.hotspots.length,
+            mistakes: 0,
+            startTime: Date.now()
+        };
+
+        // Shuffle hotspots into queue
+        var queue = quizData.hotspots.slice();
+        for (var i = queue.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = queue[i];
+            queue[i] = queue[j];
+            queue[j] = temp;
+        }
+        this._imageQuiz.queue = queue;
+
+        this._buildImageQuizUI(quizData);
+        this._nextImageHotspot();
+    },
+
+    _buildImageQuizUI(quizData) {
+        var container = this._container;
+        container.textContent = '';
+        var self = this;
+
+        var wrapper = document.createElement('div');
+        wrapper.className = 'mq-game-wrapper';
+
+        // Top bar: prompt + score
+        var topBar = document.createElement('div');
+        topBar.className = 'mq-topbar';
+
+        var prompt = document.createElement('div');
+        prompt.className = 'mq-prompt';
+        prompt.id = 'mq-img-prompt';
+        prompt.textContent = 'Loading...';
+        topBar.appendChild(prompt);
+
+        var scoreArea = document.createElement('div');
+        scoreArea.className = 'mq-score-area';
+
+        var scoreEl = document.createElement('span');
+        scoreEl.className = 'mq-score';
+        scoreEl.id = 'mq-img-score';
+        scoreEl.textContent = '0/' + quizData.hotspots.length;
+        scoreArea.appendChild(scoreEl);
+
+        var timerEl = document.createElement('span');
+        timerEl.className = 'mq-timer';
+        timerEl.id = 'mq-img-timer';
+        timerEl.textContent = '0:00';
+        scoreArea.appendChild(timerEl);
+
+        topBar.appendChild(scoreArea);
+        wrapper.appendChild(topBar);
+
+        // Image map container
+        var mapWrap = document.createElement('div');
+        mapWrap.className = 'mq-image-map-wrap';
+
+        var img = document.createElement('img');
+        img.className = 'mq-image-map';
+        img.src = quizData.image;
+        img.alt = quizData.title;
+        img.draggable = false;
+        mapWrap.appendChild(img);
+
+        // Overlay hotspots
+        quizData.hotspots.forEach(function(hotspot) {
+            var div = document.createElement('div');
+            div.className = 'mq-hotspot';
+            div.setAttribute('data-id', hotspot.id);
+            div.style.left = hotspot.x + '%';
+            div.style.top = hotspot.y + '%';
+            div.style.width = hotspot.width + '%';
+            div.style.height = hotspot.height + '%';
+            div.addEventListener('click', function() {
+                self._handleImageClick(hotspot.id);
+            });
+            mapWrap.appendChild(div);
+        });
+
+        wrapper.appendChild(mapWrap);
+
+        // Feedback area
+        var feedback = document.createElement('div');
+        feedback.className = 'mq-feedback';
+        feedback.id = 'mq-img-feedback';
+        wrapper.appendChild(feedback);
+
+        container.appendChild(wrapper);
+
+        // Start timer
+        this._imageTimerId = setInterval(function() {
+            var elapsed = Math.floor((Date.now() - self._imageQuiz.startTime) / 1000);
+            var el = document.getElementById('mq-img-timer');
+            if (el) el.textContent = self._formatTime(elapsed);
+        }, 1000);
+    },
+
+    _nextImageHotspot() {
+        var quiz = this._imageQuiz;
+        if (quiz.queue.length === 0) {
+            this._endImageQuiz();
+            return;
+        }
+
+        quiz.current = quiz.queue.shift();
+
+        var prompt = document.getElementById('mq-img-prompt');
+        if (prompt) {
+            prompt.textContent = 'Click on: ';
+            var strong = document.createElement('strong');
+            strong.textContent = quiz.current.name;
+            prompt.appendChild(strong);
+        }
+
+        var feedback = document.getElementById('mq-img-feedback');
+        if (feedback) feedback.textContent = '';
+    },
+
+    _handleImageClick(clickedId) {
+        var quiz = this._imageQuiz;
+        if (!quiz || !quiz.current) return;
+
+        var correctId = quiz.current.id;
+        var isCorrect = clickedId === correctId;
+
+        var clickedEl = document.querySelector('.mq-hotspot[data-id="' + clickedId + '"]');
+        var correctEl = document.querySelector('.mq-hotspot[data-id="' + correctId + '"]');
+        var feedback = document.getElementById('mq-img-feedback');
+
+        if (isCorrect) {
+            quiz.score++;
+
+            // Mark correct permanently
+            if (correctEl) {
+                correctEl.classList.add('mq-hotspot-correct');
+                // Add label
+                var label = document.createElement('span');
+                label.className = 'mq-hotspot-label';
+                label.textContent = quiz.current.name;
+                correctEl.appendChild(label);
+            }
+
+            if (feedback) {
+                feedback.className = 'mq-feedback mq-feedback-correct';
+                feedback.textContent = 'Correct!';
+            }
+
+            var scoreEl = document.getElementById('mq-img-score');
+            if (scoreEl) scoreEl.textContent = quiz.score + '/' + quiz.total;
+
+            var self = this;
+            setTimeout(function() {
+                self._nextImageHotspot();
+            }, 600);
+
+        } else {
+            quiz.mistakes++;
+
+            // Flash wrong
+            if (clickedEl && !clickedEl.classList.contains('mq-hotspot-correct')) {
+                clickedEl.classList.add('mq-hotspot-wrong');
+                setTimeout(function() {
+                    clickedEl.classList.remove('mq-hotspot-wrong');
+                }, 500);
+            }
+
+            if (feedback) {
+                feedback.className = 'mq-feedback mq-feedback-wrong';
+                feedback.textContent = 'Try again!';
+            }
+        }
+    },
+
+    _endImageQuiz() {
+        if (this._imageTimerId) clearInterval(this._imageTimerId);
+        var quiz = this._imageQuiz;
+        var elapsed = Math.floor((Date.now() - quiz.startTime) / 1000);
+        var pct = Math.min(100, Math.round((quiz.score / quiz.total) * 100));
+
+        // Show results
+        var container = this._container;
+        container.textContent = '';
+        var self = this;
+
+        var wrapper = document.createElement('div');
+        wrapper.className = 'mq-results';
+
+        var icon = document.createElement('i');
+        icon.className = pct === 100 ? 'fas fa-trophy mq-results-icon gold' : 'fas fa-map-marked-alt mq-results-icon';
+        wrapper.appendChild(icon);
+
+        var title = document.createElement('h2');
+        title.className = 'mq-results-title';
+        title.textContent = pct === 100 ? 'Perfect Score!' : 'Quiz Complete!';
+        wrapper.appendChild(title);
+
+        var subtitle = document.createElement('p');
+        subtitle.className = 'mq-desc';
+        subtitle.textContent = quiz.data.title;
+        wrapper.appendChild(subtitle);
+
+        var stats = document.createElement('div');
+        stats.className = 'mq-results-stats';
+
+        var statItems = [
+            ['Score', pct + '%'],
+            ['Time', self._formatTime(elapsed)],
+            ['Mistakes', String(quiz.mistakes)]
+        ];
+
+        statItems.forEach(function(item) {
+            var stat = document.createElement('div');
+            stat.className = 'mq-stat';
+            var label = document.createElement('span');
+            label.className = 'mq-stat-label';
+            label.textContent = item[0];
+            var value = document.createElement('span');
+            value.className = 'mq-stat-value';
+            value.textContent = item[1];
+            stat.appendChild(label);
+            stat.appendChild(value);
+            stats.appendChild(stat);
+        });
+        wrapper.appendChild(stats);
+
+        var btnRow = document.createElement('div');
+        btnRow.className = 'mq-btn-row';
+
+        var retryBtn = document.createElement('button');
+        retryBtn.className = 'nav-button mq-start-btn';
+        retryBtn.textContent = 'Play Again';
+        retryBtn.addEventListener('click', function() {
+            self._startImageQuiz(quiz.data);
+        });
+        btnRow.appendChild(retryBtn);
+
+        var backBtn = document.createElement('button');
+        backBtn.className = 'nav-button';
+        backBtn.textContent = 'All Map Quizzes';
+        backBtn.addEventListener('click', function() {
+            self._showModeSelector();
+        });
+        btnRow.appendChild(backBtn);
+
+        wrapper.appendChild(btnRow);
+        container.appendChild(wrapper);
     },
 
     _startGame() {
@@ -652,8 +1073,10 @@ StudyEngine.registerActivity({
 
     cleanup() {
         if (this._timerId) clearInterval(this._timerId);
+        if (this._imageTimerId) clearInterval(this._imageTimerId);
         this._currentRegion = null;
         this._queue = [];
+        this._imageQuiz = null;
     },
 
     getProgress() {

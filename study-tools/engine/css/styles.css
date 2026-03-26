@@ -4725,6 +4725,34 @@ body.light-mode .settings-panel {
     .mq-prompt { font-size: 1em; }
 }
 
+/* Map Quiz Mode Selector */
+.mq-mode-selector { max-width: 700px; }
+.mq-mode-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; margin-bottom: 24px; }
+.mq-mode-card { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 20px 12px; background: var(--bg-card); border: 2px solid var(--border-card); border-radius: 14px; cursor: pointer; transition: all 0.2s; text-align: center; }
+.mq-mode-card:hover { border-color: var(--primary); background: var(--bg-elevated); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+.mq-mode-card.mq-mode-locked { opacity: 0.45; cursor: not-allowed; filter: grayscale(0.5); }
+.mq-mode-card.mq-mode-locked:hover { border-color: var(--border-card); background: var(--bg-card); transform: none; box-shadow: none; }
+.mq-mode-icon { font-size: 1.8em; color: var(--primary); }
+.mq-mode-locked .mq-mode-icon { color: var(--text-muted); }
+.mq-mode-title { font-weight: 700; font-size: 1em; color: var(--text-primary); }
+.mq-mode-desc { font-size: 0.82em; color: var(--text-muted); line-height: 1.4; }
+
+/* Image-based Map Quiz */
+.mq-image-map-wrap { position: relative; border: 1px solid var(--border-card); overflow: hidden; background: #1a3a5c; }
+.mq-image-map { width: 100%; height: auto; display: block; user-select: none; -webkit-user-drag: none; }
+.mq-hotspot { position: absolute; cursor: pointer; border: 2px dashed transparent; border-radius: 4px; transition: border-color 0.2s, background-color 0.3s; box-sizing: border-box; }
+.mq-hotspot:hover { border-color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.08); }
+.mq-hotspot-correct { background: rgba(34,197,94,0.35) !important; border: 2px solid rgba(34,197,94,0.7) !important; cursor: default; pointer-events: none; }
+.mq-hotspot-wrong { background: rgba(239,68,68,0.4) !important; border: 2px solid rgba(239,68,68,0.7) !important; animation: mq-flash 0.5s ease; }
+.mq-hotspot-label { position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 10px; font-weight: 700; color: #fff; background: rgba(0,0,0,0.7); padding: 2px 6px; border-radius: 4px; pointer-events: none; }
+
+@media (max-width: 600px) {
+    .mq-mode-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .mq-mode-card { padding: 14px 8px; }
+    .mq-mode-icon { font-size: 1.4em; }
+    .mq-hotspot-label { font-size: 8px; bottom: -14px; }
+}
+
 /* Map Quiz Leaderboard */
 .mq-leaderboard-wrap { margin-top: 32px; max-width: 600px; margin-left: auto; margin-right: auto; }
 .mq-lb-tabs { display: flex; gap: 0; margin-bottom: 0; border-bottom: 2px solid var(--border-card); }
