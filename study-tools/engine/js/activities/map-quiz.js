@@ -35,7 +35,33 @@ StudyEngine.registerActivity({
     },
 
     _getWestwardExpansionRegions() {
-        return []; // placeholder for Task 5.2
+        // Continental US in viewBox 0 0 900 700
+        // x: west(~50) to east(~870), y: north(~55) to south(~620)
+        // Key boundaries: Mississippi River ~x540, Rockies ~x280, Pacific ~x55
+        // Canadian border ~y55, Gulf coast ~y540, Mexico border ~y580
+        return [
+            // 1. Original 13 States — eastern seaboard west to Mississippi/Great Lakes
+            { id: 'original-states', name: 'Original 13 States & Territories', color: '#8B7355',
+              path: 'M540,58 L548,80 L555,110 L560,145 L562,180 L558,215 L555,250 L558,285 L562,320 L568,355 L575,385 L582,410 L590,435 L600,460 L612,480 L625,500 L640,515 L655,525 L672,530 L690,532 L710,530 L730,522 L748,510 L762,498 L775,480 L785,460 L795,435 L802,410 L810,385 L820,360 L830,335 L838,310 L845,285 L850,260 L852,235 L850,210 L845,190 L838,172 L828,158 L815,148 L800,140 L785,138 L775,125 L762,108 L748,92 L735,80 L718,70 L698,62 L675,58 L650,55 L625,54 L600,55 L575,56 Z' },
+            // 2. Louisiana Purchase — Mississippi River to Rocky Mountains
+            { id: 'louisiana-purchase', name: 'Louisiana Purchase (1803)', color: '#B5651D',
+              path: 'M280,58 L295,57 L315,56 L340,55 L365,55 L390,55 L415,55 L440,56 L465,56 L490,57 L515,57 L540,58 L548,80 L555,110 L560,145 L562,180 L558,215 L555,250 L558,285 L562,320 L568,355 L575,385 L582,410 L590,435 L600,460 L612,480 L625,500 L640,515 L640,530 L625,535 L608,538 L590,540 L570,540 L548,538 L530,532 L518,522 L505,510 L492,495 L478,478 L462,458 L445,438 L430,418 L415,398 L400,378 L388,360 L378,342 L368,322 L358,300 L348,278 L338,255 L328,232 L318,208 L308,185 L298,160 L290,135 L284,110 L280,85 Z' },
+            // 3. Florida — peninsula and panhandle
+            { id: 'florida', name: 'Florida / Adams-Onis Treaty (1819)', color: '#D4883A',
+              path: 'M640,515 L655,525 L672,530 L690,532 L710,530 L725,538 L735,552 L740,570 L738,590 L732,608 L722,625 L710,638 L696,645 L682,642 L672,630 L665,612 L660,590 L655,568 L648,550 L640,535 L640,530 Z' },
+            // 4. Texas Annexation — from Gulf coast to Oklahoma panhandle
+            { id: 'texas', name: 'Texas Annexation (1845)', color: '#C0392B',
+              path: 'M400,378 L415,398 L430,418 L445,438 L462,458 L478,478 L492,495 L505,510 L518,522 L530,532 L548,538 L558,548 L548,565 L535,585 L518,600 L498,612 L478,620 L458,624 L440,622 L425,615 L412,605 L400,590 L390,572 L382,552 L378,530 L375,510 L372,490 L368,470 L365,450 L362,430 L360,410 L362,395 L370,385 L380,378 L390,375 Z' },
+            // 5. Oregon Territory — Pacific Northwest (OR, WA, ID, parts of MT/WY)
+            { id: 'oregon', name: 'Oregon Territory (1846)', color: '#2A6B4A',
+              path: 'M58,58 L85,56 L115,55 L145,55 L175,56 L205,57 L235,57 L260,58 L280,58 L280,85 L284,110 L290,135 L298,160 L280,172 L260,180 L238,185 L215,188 L190,188 L168,185 L148,178 L128,168 L110,156 L92,142 L78,128 L68,112 L60,95 L56,78 Z' },
+            // 6. Mexican Cession — CA, NV, UT, AZ, parts of NM/CO/WY
+            { id: 'mexican-cession', name: 'Mexican Cession (1848)', color: '#D4883A',
+              path: 'M56,78 L60,95 L68,112 L78,128 L92,142 L110,156 L128,168 L148,178 L168,185 L190,188 L215,188 L238,185 L260,180 L280,172 L298,160 L308,185 L318,208 L328,232 L338,255 L348,278 L358,300 L368,322 L378,342 L388,360 L400,378 L390,375 L380,378 L370,385 L362,395 L360,410 L362,430 L365,450 L368,470 L372,490 L375,510 L378,530 L372,535 L358,538 L340,535 L322,528 L305,518 L288,505 L272,488 L258,470 L242,448 L228,425 L215,400 L200,372 L185,345 L170,318 L155,292 L140,268 L125,245 L110,225 L95,208 L80,192 L68,178 L58,165 L54,145 L52,120 L54,98 Z' },
+            // 7. Gadsden Purchase — thin strip along southern AZ/NM border
+            { id: 'gadsden', name: 'Gadsden Purchase (1853)', color: '#8B4513',
+              path: 'M272,488 L288,505 L305,518 L322,528 L340,535 L358,538 L372,535 L378,530 L382,552 L378,568 L365,575 L348,578 L330,575 L312,568 L295,558 L280,545 L268,528 L260,510 L258,495 Z' }
+        ];
     },
 
     // All 24 regions with accurate SVG path data from Seterra-style 1803 U.S. map
@@ -119,7 +145,7 @@ StudyEngine.registerActivity({
     },
 
     _getWestwardExpansionDrawOrder() {
-        return []; // placeholder for Task 5.2
+        return ['louisiana-purchase', 'original-states', 'mexican-cession', 'oregon', 'texas', 'florida', 'gadsden'];
     },
 
     render(container, config) {
