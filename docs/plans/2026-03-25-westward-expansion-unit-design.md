@@ -8,7 +8,7 @@
 
 Build a complete second unit for the study tools platform covering Unit 8: Westward Expansion & Reform. The unit mirrors the early-republic unit's structure and activities but with new content, a distinct color scheme, and password gating to prevent student access until launch.
 
-All content should draw from the provided source materials: `unit8_vocab_master.json`, `westward-expansion-review.tsv`, classroom handouts (HTML/DOCX/PDF in `Handouts/`), History Alive chapters 14 and 15, and americanyawp.com. Avoid `--` dashes throughout all content.
+All content should draw from the provided source materials: `unit8_vocab_master.json`, `westward-expansion-review.tsv`, classroom handouts (HTML/DOCX/PDF in `Handouts/`), History Alive chapters 14 and 15, and americanyawpms.com. Avoid `--` dashes throughout all content.
 
 ## Unit Identity
 
@@ -88,7 +88,7 @@ Approximately 4 per category, sourced from key definitions and concepts.
 
 ### Typing Passages (4)
 
-One per category, approximately 200 to 300 words at 8th grade reading level. Content drawn from textbook chapters.
+One per category, approximately 200 to 300 words at 8th grade reading level. Content tied to the vocabulary terms for that category so students reinforce term knowledge while practicing typing. Each passage should weave in as many category terms as natural, using them in context rather than just listing definitions.
 
 ### Timeline Events (16)
 
@@ -112,6 +112,13 @@ From `keyEvents` array in `unit8_vocab_master.json`. Note: source data uses `eve
 16. Formation of Two Americas (1830s-1850s)
 
 Each includes `id` (numeric), `year`, `title`, `description`.
+
+**Timeline enhancements:** The current timeline activity uses year-only sorting. For this unit, several events overlap in time (e.g., Trail of Tears 1838-1839 overlaps with Texas independence 1835-1836; Seneca Falls and Treaty of Guadalupe Hidalgo both in 1848). To make the activity more engaging and challenging:
+
+- Add `month` field where historically specific (e.g., "February 1836" for the Alamo, "July 1848" for Seneca Falls, "February 1848" for Treaty of Guadalupe Hidalgo) to enable finer-grained ordering
+- Support date ranges with `startYear` and `endYear` for multi-year events (Nullification Crisis, Mexican-American War, Industrial Revolution, etc.)
+- Update the timeline engine to handle overlapping events and month-level precision in the drag-to-order challenge
+- This is engine-level work in `timeline.js` and should be included in Stage 2 or as a sub-task of Stage 6 (Polish)
 
 ### Historical Flavor
 
@@ -137,26 +144,58 @@ All quotes and fun facts are nested under `config.historicalFlavor` (i.e., `conf
 
 Separate file: `study-tools/units/westward-expansion/textbook.json`
 
-### 4 Chapters (one per category)
+### 4 Chapters (one per category), broken into sections
 
-1. **Jackson's America** covering Jacksonian Democracy, spoils system, nullification crisis, Bank War, Indian Removal, Trail of Tears
-2. **Westward Trails** covering Manifest Destiny, Texas independence, Oregon Trail, the Alamo, key figures (Polk, Houston, Austin, Santa Anna)
-3. **War & Compromise** covering Mexican-American War, Treaty of Guadalupe Hidalgo, Mexican Cession, Wilmot Proviso, Compromise of 1850, Fugitive Slave Act, Uncle Tom's Cabin
-4. **Two Americas** covering Industrial Revolution vs. cotton economy, North vs. South, reform movements, Seneca Falls, Declaration of Sentiments
+Each chapter is a segment containing multiple sections, mirroring the early-republic textbook structure. Each section includes:
+- `id`, `heading`
+- `vocabTerms` array (terms bolded inline in the text)
+- `content` object with `simplified`, `standard`, and `advanced` reading levels
+- `keyIdea` summary sentence
+- `checkIn` with `type` ("stop-and-think"), `prompt`, and `hint`
+- `sourceNote` citing source material
+- `image` (optional) with `src`, `caption`, `float`
+
+**Chapter 1: Jackson's America** (5-6 sections)
+- The Rise of the Common Man (Jacksonian Democracy, spoils system, mudslinging)
+- King Andrew and the Bank War (Bank of the U.S., kitchen cabinet, political cartoons)
+- The Nullification Crisis (tariff, nullification, secede, Force Bill)
+- Indian Removal (Indian Removal Act, Five Civilized Tribes, Worcester v. Georgia)
+- The Trail of Tears (Sequoyah, Cherokee resistance, forced march)
+
+**Chapter 2: Westward Trails** (5-6 sections)
+- Manifest Destiny and the Dream of Expansion (manifest destiny, annex, territory, diplomacy)
+- Texas Breaks Free (Stephen F. Austin, Tejanos, Texas War for Independence)
+- Remember the Alamo (the Alamo, Sam Houston, Santa Anna, Davy Crockett)
+- The Oregon Trail (Oregon Trail, South Pass, pioneer life)
+- Polk and the Push to the Pacific (James K. Polk, "54-40 or fight!", Oregon Treaty)
+
+**Chapter 3: War & Compromise** (5-6 sections)
+- The Road to War (Rio Grande, Nueces River, disputed territory)
+- The Mexican-American War (Mexican-American War, Bear Flag Republic)
+- The Treaty and Its Consequences (Treaty of Guadalupe Hidalgo, Mexican Cession, Gadsden Purchase)
+- The Slavery Question Explodes (Wilmot Proviso, free state / slave state)
+- The Compromise of 1850 (Compromise of 1850, Fugitive Slave Act, Uncle Tom's Cabin)
+
+**Chapter 4: Two Americas** (5-6 sections)
+- The Industrial North (Industrial Revolution, interchangeable parts, Erie Canal, industrialist)
+- King Cotton and the South (cotton gin, plantation, agrarian, Tredegar Iron Works)
+- Push and Pull: Why People Moved (push factor / pull factor, deforestation)
+- The Fight for Women's Rights (Seneca Falls Convention, Declaration of Sentiments, Elizabeth Cady Stanton, Sojourner Truth)
+- Two Nations Under One Flag (North vs. South divergence, seeds of Civil War)
 
 ### 3 Reading Levels per Chapter
 
-- **Simplified** shorter sentences, core concepts only, approximately 6th grade reading level
-- **On-level** standard 8th grade, the default
-- **Advanced** more nuance, primary source excerpts woven in, connections to broader themes
+- **Simplified** (`simplified`) shorter sentences, core concepts only, approximately 3rd-5th grade reading level
+- **On-level** (`standard`) standard 8th grade, the default
+- **Advanced** (`advanced`) more nuance, primary source excerpts woven in, connections to broader themes
 
 ### Content Sources
 
 - History Alive chapters 14 and 15 (structure and topical coverage)
-- americanyawp.com (additional context and perspectives)
+- americanyawpms.com (additional context and perspectives)
 - Classroom handouts (framing and analysis angles)
 
-Each chapter includes section headers, key vocabulary bolded inline, and image references.
+Each section includes vocabulary terms bolded inline, key idea summaries, stop-and-think check-ins, and image references where available.
 
 ## Source Analysis
 
