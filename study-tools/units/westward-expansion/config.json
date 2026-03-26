@@ -74,7 +74,8 @@
             "example": "During the Trail of Tears, about 4,000 Cherokee people died from exposure, disease, and starvation on the brutal march to Oklahoma.",
             "category": "Jackson's America",
             "typingSnippet": "The Trail of Tears was the forced removal of the Cherokee people from their homeland to Oklahoma in 1838. Thousands of Cherokee men, women, and children died along the way. It remains one of the most tragic events in American history.",
-            "wikiUrl": "https://en.wikipedia.org/wiki/Trail_of_Tears"
+            "wikiUrl": "https://en.wikipedia.org/wiki/Trail_of_Tears",
+            "imageUrl": "../units/westward-expansion/images/vocab/trail_of_tears.jpg"
         },
         {
             "term": "civil servant",
@@ -110,7 +111,8 @@
             "example": "South Carolina used the idea of nullification to declare the federal tariff void within its borders, sparking a major constitutional crisis.",
             "category": "Jackson's America",
             "typingSnippet": "Nullification was the idea that a state could refuse to follow a federal law it considered unconstitutional. South Carolina tried to nullify the tariff of 1828. President Jackson firmly rejected this idea and threatened to use military force to enforce the law.",
-            "wikiUrl": "https://en.wikipedia.org/wiki/Nullification_(U.S._Constitution)"
+            "wikiUrl": "https://en.wikipedia.org/wiki/Nullification_(U.S._Constitution)",
+            "imageUrl": "../units/westward-expansion/images/vocab/nullification.jpg"
         },
         {
             "term": "Force Bill",
@@ -128,7 +130,8 @@
             "example": "The Indian Removal Act of 1830 led to the forced relocation of thousands of Cherokee, Creek, and other Native Americans from the Southeast.",
             "category": "Jackson's America",
             "typingSnippet": "The Indian Removal Act of 1830 allowed the federal government to force Native American tribes off their land. Tribes in the Southeast were relocated to territories west of the Mississippi River. This law led directly to the devastating Trail of Tears.",
-            "wikiUrl": "https://en.wikipedia.org/wiki/Indian_Removal_Act"
+            "wikiUrl": "https://en.wikipedia.org/wiki/Indian_Removal_Act",
+            "imageUrl": "../units/westward-expansion/images/vocab/indian_removal.png"
         },
         {
             "term": "Worcester v. Georgia",
@@ -155,7 +158,8 @@
             "example": "Jackson vetoed the recharter of the Bank of the U.S. in 1832, calling it a tool of the wealthy elite that hurt ordinary Americans.",
             "category": "Jackson's America",
             "typingSnippet": "The Bank of the United States was a powerful national bank that managed the country's money. President Jackson believed it gave too much power to the wealthy and vetoed its recharter. He then withdrew federal funds, effectively destroying the bank.",
-            "wikiUrl": "https://en.wikipedia.org/wiki/Second_Bank_of_the_United_States"
+            "wikiUrl": "https://en.wikipedia.org/wiki/Second_Bank_of_the_United_States",
+            "imageUrl": "../units/westward-expansion/images/vocab/bank_war.jpg"
         },
         {
             "term": "Sequoyah",
@@ -173,7 +177,8 @@
             "example": "Manifest destiny drove thousands of settlers westward in the 1840s, believing it was their God-given right to expand American territory to the Pacific.",
             "category": "Westward Trails",
             "typingSnippet": "Manifest destiny was the widespread belief that Americans were destined by God to spread across the entire continent. This idea fueled westward expansion and justified taking land from Native Americans and Mexico. It shaped American policy for decades.",
-            "wikiUrl": "https://en.wikipedia.org/wiki/Manifest_destiny"
+            "wikiUrl": "https://en.wikipedia.org/wiki/Manifest_destiny",
+            "imageUrl": "../units/westward-expansion/images/vocab/manifest_destiny.jpg"
         },
         {
             "term": "annex",
@@ -218,7 +223,8 @@
             "example": "Over 400,000 pioneers traveled the Oregon Trail in covered wagons, facing harsh weather, disease, and dangerous river crossings along the way.",
             "category": "Westward Trails",
             "typingSnippet": "The Oregon Trail stretched 2,000 miles from Missouri to the Pacific Northwest. Thousands of pioneer families loaded covered wagons and risked everything to reach Oregon and California. The journey took about five months and was filled with danger.",
-            "wikiUrl": "https://en.wikipedia.org/wiki/Oregon_Trail"
+            "wikiUrl": "https://en.wikipedia.org/wiki/Oregon_Trail",
+            "imageUrl": "../units/westward-expansion/images/vocab/oregon_trail.jpg"
         },
         {
             "term": "South Pass",
@@ -236,7 +242,8 @@
             "example": "The fall of the Alamo in 1836 rallied Texians with the battle cry 'Remember the Alamo!' as they fought for independence from Mexico.",
             "category": "Westward Trails",
             "typingSnippet": "The Alamo was a mission in San Antonio where fewer than 200 Texian defenders fought against thousands of Mexican soldiers in 1836. Every defender died, but the battle became a powerful symbol of sacrifice. 'Remember the Alamo!' became the rallying cry of the Texas Revolution.",
-            "wikiUrl": "https://en.wikipedia.org/wiki/Battle_of_the_Alamo"
+            "wikiUrl": "https://en.wikipedia.org/wiki/Battle_of_the_Alamo",
+            "imageUrl": "../units/westward-expansion/images/vocab/alamo.jpg"
         },
         {
             "term": "Sam Houston",
@@ -290,7 +297,8 @@
             "example": "The slogan '54-40 or fight!' fired up American voters during the 1844 election, but Polk eventually compromised with Britain at the 49th parallel.",
             "category": "Westward Trails",
             "typingSnippet": "The slogan '54-40 or fight!' demanded that the U.S. claim the entire Oregon Territory up to the 54 degrees 40 minutes line. It was a popular rallying cry during the 1844 election. In the end, diplomacy won out and the boundary was set at the 49th parallel.",
-            "wikiUrl": "https://en.wikipedia.org/wiki/Fifty-four_Forty_or_Fight"
+            "wikiUrl": "https://en.wikipedia.org/wiki/Fifty-four_Forty_or_Fight",
+            "imageUrl": "../units/westward-expansion/images/vocab/oregon_treaty.png"
         },
         {
             "term": "Mexican-American War",
@@ -299,7 +307,8 @@
             "example": "The Mexican-American War began in 1846 after a border dispute and ended with the U.S. gaining a massive amount of territory from Mexico.",
             "category": "War & Compromise",
             "typingSnippet": "The Mexican-American War lasted from 1846 to 1848 and resulted in a massive U.S. victory. The war began over a border dispute between Texas and Mexico. When it ended, the United States gained over one million square miles of new territory.",
-            "wikiUrl": "https://en.wikipedia.org/wiki/Mexican%E2%80%93American_War"
+            "wikiUrl": "https://en.wikipedia.org/wiki/Mexican%E2%80%93American_War",
+            "imageUrl": "../units/westward-expansion/images/vocab/mexican_american_war.jpg"
         },
         {
             "term": "Mexican Cession",
@@ -371,7 +380,8 @@
             "example": "The Compromise of 1850 admitted California as a free state while allowing popular sovereignty in other new territories, delaying the crisis over slavery.",
             "category": "War & Compromise",
             "typingSnippet": "The Compromise of 1850 was a set of laws designed to settle the slavery debate in new western territories. California entered as a free state, and the Fugitive Slave Act was strengthened. It kept the peace temporarily, but the underlying tensions remained.",
-            "wikiUrl": "https://en.wikipedia.org/wiki/Compromise_of_1850"
+            "wikiUrl": "https://en.wikipedia.org/wiki/Compromise_of_1850",
+            "imageUrl": "../units/westward-expansion/images/vocab/compromise_1850.jpg"
         },
         {
             "term": "Fugitive Slave Act",
@@ -416,7 +426,8 @@
             "example": "After the cotton gin was invented, cotton production in the South exploded, and the number of enslaved people grew from 700,000 to over 3 million by 1850.",
             "category": "Two Americas",
             "typingSnippet": "The cotton gin was a machine invented by Eli Whitney in 1793 that cleaned cotton fifty times faster than doing it by hand. It made cotton incredibly profitable for Southern plantations. Tragically, it also caused a massive increase in the demand for enslaved labor.",
-            "wikiUrl": "https://en.wikipedia.org/wiki/Cotton_gin"
+            "wikiUrl": "https://en.wikipedia.org/wiki/Cotton_gin",
+            "imageUrl": "../units/westward-expansion/images/vocab/cotton_gin.jpg"
         },
         {
             "term": "plantation",
@@ -425,7 +436,8 @@
             "example": "Large cotton plantations in Mississippi and Alabama relied on the labor of hundreds of enslaved people to produce the crops that fueled the Southern economy.",
             "category": "Two Americas",
             "typingSnippet": "A plantation was a large Southern farm that grew cash crops like cotton, tobacco, and rice. These estates depended on the forced labor of enslaved people to stay profitable. Plantation owners became wealthy while enslaved workers endured terrible conditions.",
-            "wikiUrl": "https://en.wikipedia.org/wiki/Plantation"
+            "wikiUrl": "https://en.wikipedia.org/wiki/Plantation",
+            "imageUrl": "../units/westward-expansion/images/vocab/plantation.jpg"
         },
         {
             "term": "agrarian",
@@ -452,7 +464,8 @@
             "example": "About 300 people attended the Seneca Falls Convention in 1848, where they debated and signed the Declaration of Sentiments demanding equal rights for women.",
             "category": "Two Americas",
             "typingSnippet": "The Seneca Falls Convention of 1848 was a groundbreaking gathering for women's rights in New York. Elizabeth Cady Stanton and others presented the Declaration of Sentiments, demanding equality for women. This convention launched the organized women's rights movement in America.",
-            "wikiUrl": "https://en.wikipedia.org/wiki/Seneca_Falls_Convention"
+            "wikiUrl": "https://en.wikipedia.org/wiki/Seneca_Falls_Convention",
+            "imageUrl": "../units/westward-expansion/images/vocab/seneca_falls.jpg"
         },
         {
             "term": "Declaration of Sentiments",
@@ -461,7 +474,8 @@
             "example": "The Declaration of Sentiments boldly stated that 'all men and women are created equal,' demanding the right to vote and own property.",
             "category": "Two Americas",
             "typingSnippet": "The Declaration of Sentiments was written for the Seneca Falls Convention in 1848. It was modeled after the Declaration of Independence but added women to the famous phrase 'all men are created equal.' It demanded voting rights and legal equality for women.",
-            "wikiUrl": "https://en.wikipedia.org/wiki/Declaration_of_Sentiments"
+            "wikiUrl": "https://en.wikipedia.org/wiki/Declaration_of_Sentiments",
+            "imageUrl": "../units/westward-expansion/images/vocab/declaration_of_sentiments.jpg"
         },
         {
             "term": "Elizabeth Cady Stanton",
@@ -515,7 +529,8 @@
             "example": "The Erie Canal reduced shipping costs by about 90 percent, making New York City the biggest commercial hub in the United States.",
             "category": "Two Americas",
             "typingSnippet": "The Erie Canal was a 363-mile waterway completed in 1825 that connected the Hudson River to Lake Erie. It slashed shipping costs and turned New York City into a booming trade center. The canal fueled Northern economic growth and encouraged westward migration.",
-            "wikiUrl": "https://en.wikipedia.org/wiki/Erie_Canal"
+            "wikiUrl": "https://en.wikipedia.org/wiki/Erie_Canal",
+            "imageUrl": "../units/westward-expansion/images/vocab/erie_canal.jpg"
         },
         {
             "term": "Eli Whitney",
