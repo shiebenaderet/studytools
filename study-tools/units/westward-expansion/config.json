@@ -1,0 +1,26 @@
+{
+    "unit": {
+        "id": "westward-expansion",
+        "title": "Westward Expansion & Reform Study Tool",
+        "subtitle": "Get ready to ace your test! Learn vocabulary, practice questions, and track your progress.",
+        "essentialQuestion": "Can one person be both a hero and a villain?",
+        "theme": {
+            "primary": "#B5651D",
+            "secondary": "#D4883A",
+            "accent": "#C0392B"
+        }
+    },
+    "activities": [
+        "flashcards"
+    ],
+    "vocabulary": [],
+    "timelineEvents": [],
+    "practiceQuestions": [],
+    "shortAnswerQuestions": [],
+    "fillInBlankSentences": [],
+    "typingPassages": [],
+    "historicalFlavor": {
+        "quotes": [],
+        "funFacts": []
+    }
+}
