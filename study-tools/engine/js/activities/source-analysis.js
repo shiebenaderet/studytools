@@ -19,6 +19,14 @@ StudyEngine.registerActivity({
     _results: [],
 
     _getSourceData() {
+        var unitId = this._config.unit.id;
+        if (unitId === 'westward-expansion') {
+            return this._getWestwardExpansionSources();
+        }
+        return this._getEarlyRepublicSources();
+    },
+
+    _getEarlyRepublicSources() {
         return [
             {
                 title: "Washington's Farewell Address",
@@ -292,6 +300,459 @@ StudyEngine.registerActivity({
                     {
                         question: "A poem can be a primary source because:",
                         options: ["All poems are automatically considered to be primary sources", "It was created by someone who witnessed the event firsthand", "Poems are always historically accurate accounts of real events", "It rhymes and uses creative language when describing history"],
+                        correct: 1
+                    }
+                ]
+            }
+        ];
+    },
+
+    _getWestwardExpansionSources() {
+        return [
+            {
+                title: "King Andrew the First",
+                creator: "Unknown artist",
+                year: 1833,
+                type: "primary",
+                format: "cartoon",
+                topic: "Jackson's America",
+                image: "../units/westward-expansion/images/sources/cartoon_king_andrew.jpg",
+                excerpt: "",
+                context: "This political cartoon appeared in 1833 during the height of the Bank War. It shows President Andrew Jackson dressed in royal robes, holding a veto in one hand and trampling on the Constitution, the U.S. Bank, and internal improvements. Critics called him 'King Andrew' because they believed he abused presidential power.",
+                questions: [
+                    {
+                        question: "What symbols in this cartoon suggest Jackson is acting like a king?",
+                        options: ["He is shown giving a speech to a large crowd of supporters", "He wears royal robes and a crown while holding a veto", "He is sitting at a desk signing important new legislation", "He is shaking hands with foreign leaders at a ceremony"],
+                        correct: 1
+                    },
+                    {
+                        question: "What is the cartoonist's main argument about Jackson?",
+                        options: ["Jackson is a strong and effective leader who helps the people", "Jackson is abusing his presidential power like a monarch", "Jackson is too weak to stand up to Congress on major issues", "Jackson is focused on improving life for ordinary Americans"],
+                        correct: 1
+                    },
+                    {
+                        question: "What perspective might be missing from this cartoon?",
+                        options: ["The view of Jackson's supporters who saw him as a champion of the common people", "The opinion of the British government about American politics", "The perspective of people who did not care about politics at all", "The viewpoint of future historians studying the time period"],
+                        correct: 0
+                    }
+                ]
+            },
+            {
+                title: "The House that Jack Built",
+                creator: "Unknown artist",
+                year: 1833,
+                type: "primary",
+                format: "cartoon",
+                topic: "Jackson's America",
+                image: "../units/westward-expansion/images/sources/cartoon_house_jack_built.webp",
+                excerpt: "",
+                context: "This cartoon uses the nursery rhyme 'The House that Jack Built' to mock Andrew Jackson's destruction of the Second Bank of the United States. It portrays the chaos Jackson's opponents believed his Bank War was causing to the American economy.",
+                questions: [
+                    {
+                        question: "What is this cartoon depicting about Jackson's presidency?",
+                        options: ["Jackson building new government offices across the country", "The damage Jackson's opponents believed his Bank War caused", "Jackson's plan to construct a new national capitol building", "The improvements Jackson made to the American banking system"],
+                        correct: 1
+                    },
+                    {
+                        question: "Why did the cartoonist use a nursery rhyme format?",
+                        options: ["The artist could not think of a more creative approach", "It made the political criticism memorable and easy to understand", "Nursery rhymes were the only legal way to criticize the president", "The cartoon was designed specifically for young children to read"],
+                        correct: 1
+                    },
+                    {
+                        question: "What does this cartoon reveal about political media in the 1830s?",
+                        options: ["Newspapers did not cover political events during this era", "Cartoons were used to shape public opinion on major issues", "Only the government was allowed to publish political images", "People in the 1830s could not understand visual media at all"],
+                        correct: 1
+                    }
+                ]
+            },
+            {
+                title: "Symptoms of a Locked Jaw",
+                creator: "Unknown artist",
+                year: 1834,
+                type: "primary",
+                format: "cartoon",
+                topic: "Jackson's America",
+                image: "../units/westward-expansion/images/sources/cartoon_locked_jaw.jpg",
+                excerpt: "",
+                context: "This political cartoon from 1834 mocks Andrew Jackson's stubbornness and refusal to compromise with Congress. The title 'Locked Jaw' is a play on words, suggesting Jackson's jaw is locked shut and he will not listen to anyone who disagrees with him.",
+                questions: [
+                    {
+                        question: "What characteristic of Jackson is this cartoon criticizing?",
+                        options: ["His lack of military experience in battle", "His stubbornness and refusal to compromise", "His inability to speak clearly in public settings", "His close friendship with members of Congress"],
+                        correct: 1
+                    },
+                    {
+                        question: "How does the title 'Locked Jaw' work as political commentary?",
+                        options: ["It refers to a medical condition Jackson actually suffered from", "It is a metaphor for Jackson refusing to listen or change his mind", "It describes a law Jackson passed about freedom of speech", "It refers to Jackson's habit of talking too much in meetings"],
+                        correct: 1
+                    },
+                    {
+                        question: "What does this cartoon tell us about the relationship between Jackson and Congress?",
+                        options: ["Jackson and Congress worked together smoothly on all issues", "There was significant tension between Jackson and his opponents in Congress", "Congress fully supported everything Jackson wanted to accomplish", "Jackson rarely interacted with Congress during his presidency"],
+                        correct: 1
+                    }
+                ]
+            },
+            {
+                title: "The Great Father",
+                creator: "Unknown artist",
+                year: 1835,
+                type: "primary",
+                format: "cartoon",
+                topic: "Jackson's America",
+                image: "../units/westward-expansion/images/sources/cartoon_great_father.jpg",
+                excerpt: "",
+                context: "This cartoon shows Andrew Jackson as 'The Great Father' to Native Americans, a title used in treaty negotiations. It appeared during the era of Indian Removal, when Jackson pushed to relocate Native American nations from their ancestral lands east of the Mississippi River to territories in the West.",
+                questions: [
+                    {
+                        question: "What is the significance of calling Jackson 'The Great Father' in this cartoon?",
+                        options: ["It shows genuine respect for Jackson's kindness toward Native Americans", "It uses the treaty language ironically to highlight the power imbalance", "It refers to Jackson's large family and many children at home", "It compares Jackson favorably to George Washington's leadership"],
+                        correct: 1
+                    },
+                    {
+                        question: "What policy is this cartoon connected to?",
+                        options: ["The creation of new states in the western territories", "Jackson's Indian Removal policy and forced relocation of Native peoples", "The expansion of voting rights to all white men in America", "Jackson's plan to build roads and canals across the country"],
+                        correct: 1
+                    },
+                    {
+                        question: "Whose perspective is likely missing from this cartoon?",
+                        options: ["The perspective of Jackson's political allies in Congress", "The perspective of the Native American nations being removed", "The perspective of European visitors observing American politics", "The perspective of newspaper editors who supported Jackson"],
+                        correct: 1
+                    }
+                ]
+            },
+            {
+                title: "The Spoils System",
+                creator: "Unknown artist",
+                year: 1832,
+                type: "primary",
+                format: "cartoon",
+                topic: "Jackson's America",
+                image: "../units/westward-expansion/images/sources/cartoon_spoils_system.jpeg",
+                excerpt: "",
+                context: "This cartoon criticizes Jackson's practice of rewarding loyal supporters with government jobs, known as the 'spoils system.' Jackson defended the practice by arguing it prevented a permanent ruling class and gave ordinary citizens a chance to serve in government.",
+                questions: [
+                    {
+                        question: "What practice is being criticized in this cartoon?",
+                        options: ["Jackson's decision to veto important legislation from Congress", "Jackson giving government jobs to his political supporters", "Jackson's policy of removing Native Americans from their lands", "Jackson's efforts to destroy the national banking system"],
+                        correct: 1
+                    },
+                    {
+                        question: "How did Jackson defend the spoils system?",
+                        options: ["He said it was required by the Constitution's original text", "He argued it gave ordinary citizens a chance to serve in government", "He claimed Congress had already approved the practice years earlier", "He said George Washington had done the exact same thing before"],
+                        correct: 1
+                    },
+                    {
+                        question: "What is the cartoonist's point of view on Jackson's practice?",
+                        options: ["The cartoonist fully supports Jackson and thinks he is right", "The cartoonist is critical and sees the practice as corrupt", "The cartoonist is neutral and presents both sides equally", "The cartoonist does not understand what Jackson is doing"],
+                        correct: 1
+                    }
+                ]
+            },
+            {
+                title: "The Bank War",
+                creator: "Unknown artist",
+                year: 1833,
+                type: "primary",
+                format: "cartoon",
+                topic: "Jackson's America",
+                image: "../units/westward-expansion/images/sources/cartoon_bank_war.jpg",
+                excerpt: "",
+                context: "This cartoon depicts Jackson's battle against the Second Bank of the United States, led by bank president Nicholas Biddle. Jackson believed the Bank was a corrupt institution that favored the wealthy. He vetoed the recharter bill and withdrew federal deposits, effectively destroying the Bank.",
+                questions: [
+                    {
+                        question: "What conflict is shown in this cartoon?",
+                        options: ["A military battle between the United States and Britain", "Jackson's fight to destroy the Second Bank of the United States", "A debate in Congress about tariffs and trade policy", "Jackson's disagreement with the Supreme Court over a ruling"],
+                        correct: 1
+                    },
+                    {
+                        question: "Why did Jackson oppose the Bank of the United States?",
+                        options: ["He thought it did not have enough money to function properly", "He believed it was corrupt and favored the wealthy over common people", "He wanted to create his own private bank to replace it", "He did not understand how banking and finance actually worked"],
+                        correct: 1
+                    },
+                    {
+                        question: "How might a supporter of the Bank view this cartoon differently than a Jackson supporter?",
+                        options: ["Both sides would see the cartoon in exactly the same way", "A Bank supporter might see Jackson as reckless, while a Jackson supporter might see him as heroic", "Neither side would care about political cartoons during this era", "Only Bank supporters read newspapers and saw political cartoons"],
+                        correct: 1
+                    }
+                ]
+            },
+            {
+                title: "American Progress",
+                creator: "John Gast",
+                year: 1872,
+                type: "primary",
+                format: "painting",
+                topic: "Westward Trails",
+                image: "../units/westward-expansion/images/sources/painting_american_progress.jpg",
+                excerpt: "",
+                context: "John Gast painted 'American Progress' in 1872 as an allegory of Manifest Destiny. A giant female figure representing 'Progress' moves westward carrying a schoolbook and stringing telegraph wire. Settlers, stagecoaches, and railroads follow her, while Native Americans and bison flee into darkness ahead of her.",
+                questions: [
+                    {
+                        question: "What does the large female figure in the center of the painting represent?",
+                        options: ["A real woman who led settlers across the Great Plains", "An allegory for American progress and Manifest Destiny", "The Statue of Liberty being transported to New York Harbor", "A goddess from ancient Greek and Roman mythology"],
+                        correct: 1
+                    },
+                    {
+                        question: "What is significant about the contrast between light and darkness in this painting?",
+                        options: ["It shows that the West had more sunshine than the East", "Light follows the settlers while Native Americans flee into darkness, suggesting a biased view of expansion", "The artist ran out of bright paint and had to use darker colors", "It represents the difference between summer and winter seasons"],
+                        correct: 1
+                    },
+                    {
+                        question: "What perspective does this painting promote, and what does it leave out?",
+                        options: ["It promotes the Native American perspective on westward expansion", "It promotes Manifest Destiny while ignoring the cost to Native peoples and the environment", "It shows all sides of westward expansion equally and fairly", "It criticizes American expansion and supports Native American rights"],
+                        correct: 1
+                    }
+                ]
+            },
+            {
+                title: "Map of the Oregon Trail",
+                creator: "Historical cartographer",
+                year: 1846,
+                type: "primary",
+                format: "map",
+                topic: "Westward Trails",
+                image: "../units/westward-expansion/images/sources/map_oregon_trail.webp",
+                excerpt: "",
+                context: "This map shows the route of the Oregon Trail, which stretched roughly 2,000 miles from Independence, Missouri, to the Oregon Territory. Between the 1840s and 1860s, an estimated 400,000 settlers traveled this trail seeking farmland, gold, and new opportunities in the West.",
+                questions: [
+                    {
+                        question: "What type of source is this, and what can it tell us?",
+                        options: ["It is a painting that shows what the trail looked like up close", "It is a map that shows the route settlers took to reach the West", "It is a letter describing one family's journey on the trail", "It is a government document listing the rules for traveling west"],
+                        correct: 1
+                    },
+                    {
+                        question: "What geographic challenges can you identify from this map?",
+                        options: ["The trail only passed through flat, easy terrain with no obstacles", "Settlers had to cross rivers, mountains, and vast plains to reach Oregon", "The trail followed a straight, direct path with no turns or detours", "There were no natural barriers between Missouri and Oregon"],
+                        correct: 1
+                    },
+                    {
+                        question: "What information is missing from this map that a historian might want to know?",
+                        options: ["The names of the states the trail passed through", "The locations of Native American nations whose lands the trail crossed", "The direction of north on the map", "The name of the country the trail was located in"],
+                        correct: 1
+                    }
+                ]
+            },
+            {
+                title: "Travis's Letter from the Alamo",
+                creator: "William Barret Travis",
+                year: 1836,
+                type: "primary",
+                format: "letter",
+                topic: "Westward Trails",
+                image: "",
+                excerpt: "\"To the People of Texas & All Americans in the World: I am besieged, by a thousand or more of the Mexicans under Santa Anna. I have sustained a continual Bombardment & cannonade for 24 hours & have not lost a man. The enemy has demanded a surrender at discretion, otherwise, the garrison are to be put to the sword, if the fort is taken. I have answered the demand with a cannon shot, & our flag still waves proudly from the walls. I shall never surrender or retreat. Then, I call on you in the name of Liberty, of patriotism & everything dear to the American character, to come to our aid, with all dispatch.\"",
+                context: "Colonel William Barret Travis wrote this letter on February 24, 1836, during the siege of the Alamo in San Antonio, Texas. He was commanding a small force of Texan volunteers against the much larger Mexican army led by General Santa Anna. Travis and nearly all of the Alamo's defenders were killed on March 6, 1836.",
+                questions: [
+                    {
+                        question: "What is Travis asking for in this letter?",
+                        options: ["Permission to surrender the fort to Santa Anna's forces", "Reinforcements and aid from anyone who will come to help", "Supplies of food and water for his troops inside the fort", "A peace treaty to end the fighting at the Alamo"],
+                        correct: 1
+                    },
+                    {
+                        question: "What words and phrases does Travis use to persuade people to help?",
+                        options: ["He uses calm, quiet language and asks politely for a small favor", "He appeals to liberty, patriotism, and 'everything dear to the American character'", "He threatens punishment for anyone who does not come immediately", "He offers money and land to anyone willing to join the fight"],
+                        correct: 1
+                    },
+                    {
+                        question: "Why is this letter considered such an important primary source?",
+                        options: ["It was written by a famous author who witnessed the battle from far away", "It was written during the actual siege by the commander, capturing the urgency of the moment", "It was published in a textbook many years after the event took place", "It gives a detailed account of who won the battle at the Alamo"],
+                        correct: 1
+                    }
+                ]
+            },
+            {
+                title: "Mexican Territory Before 1846",
+                creator: "Historical cartographer",
+                year: 1846,
+                type: "primary",
+                format: "map",
+                topic: "War & Compromise",
+                image: "../units/westward-expansion/images/sources/map_mexican_cession_before_1846.png",
+                excerpt: "",
+                context: "This map shows the territorial boundaries of Mexico before the Mexican-American War. Mexico controlled vast lands including present-day California, Nevada, Utah, Arizona, New Mexico, and parts of Colorado and Wyoming. The disputed border between Texas and Mexico along the Rio Grande was a key trigger of the war.",
+                questions: [
+                    {
+                        question: "What does this map show about Mexico's territory before 1846?",
+                        options: ["Mexico was a small country with very little land at this time", "Mexico controlled vast lands in what is now the southwestern United States", "Mexico and the United States had identical borders to today", "Mexico had already sold all its northern territory to the United States"],
+                        correct: 1
+                    },
+                    {
+                        question: "What border dispute helped trigger the Mexican-American War?",
+                        options: ["A disagreement over the border between Canada and the United States", "The disputed boundary between Texas and Mexico along the Rio Grande", "A conflict over who owned the Oregon Territory in the Northwest", "A disagreement about the border between Louisiana and Florida"],
+                        correct: 1
+                    },
+                    {
+                        question: "Why is it important to look at maps from before a war?",
+                        options: ["Maps from before a war are always more accurate than later maps", "They help us understand what territory was at stake and why the conflict started", "Pre-war maps are more colorful and interesting to study", "Historians only use maps that were created before major conflicts"],
+                        correct: 1
+                    }
+                ]
+            },
+            {
+                title: "Mexican Cession After 1848",
+                creator: "Historical cartographer",
+                year: 1848,
+                type: "primary",
+                format: "map",
+                topic: "War & Compromise",
+                image: "../units/westward-expansion/images/sources/map_mexican_cession_after_1848.jpeg",
+                excerpt: "",
+                context: "This map shows the territory Mexico ceded to the United States after the Treaty of Guadalupe Hidalgo in 1848. The Mexican Cession included present-day California, Nevada, Utah, and parts of Arizona, New Mexico, Colorado, and Wyoming. Mexico lost roughly half of its total territory, and the United States paid $15 million.",
+                questions: [
+                    {
+                        question: "How much territory did Mexico lose as a result of the Treaty of Guadalupe Hidalgo?",
+                        options: ["A small strip of land along the Texas border", "Roughly half of Mexico's total territory, including present-day California and the Southwest", "Only the area that is now the state of Texas", "Mexico did not lose any territory after the war ended"],
+                        correct: 1
+                    },
+                    {
+                        question: "What can you learn by comparing this map to the 'before' map of 1846?",
+                        options: ["Nothing, because the maps look exactly the same as before", "The enormous scale of territory the United States gained from Mexico", "That Mexico actually gained territory after the war was over", "That the border between the two countries did not change at all"],
+                        correct: 1
+                    },
+                    {
+                        question: "What question about fairness does this territorial change raise?",
+                        options: ["Whether it was fair that the U.S. paid $15 million, which many considered too much", "Whether it was just for the U.S. to take so much land through military conquest", "Whether Mexico should have fought harder to keep all of its territory", "Whether the land was valuable enough to be worth fighting a war over"],
+                        correct: 1
+                    }
+                ]
+            },
+            {
+                title: "Compromise of 1850 Map",
+                creator: "Historical cartographer",
+                year: 1850,
+                type: "primary",
+                format: "map",
+                topic: "War & Compromise",
+                image: "../units/westward-expansion/images/sources/map_compromise_of_1850.jpg",
+                excerpt: "",
+                context: "This map shows how the Compromise of 1850 organized the new western territories. California entered as a free state, while the Utah and New Mexico territories would decide the slavery question through popular sovereignty. The compromise also included a stronger Fugitive Slave Law, which angered abolitionists in the North.",
+                questions: [
+                    {
+                        question: "How did the Compromise of 1850 handle the question of slavery in the new territories?",
+                        options: ["It banned slavery in all new territories permanently", "California entered as a free state, while other territories would decide through popular sovereignty", "It allowed slavery in every new territory without any restrictions", "It ignored the slavery question completely and focused on other issues"],
+                        correct: 1
+                    },
+                    {
+                        question: "Why was the new Fugitive Slave Law controversial?",
+                        options: ["It freed all enslaved people living in the southern states", "It required northerners to help return escaped enslaved people, which angered abolitionists", "It only applied to people living in the western territories", "It was supported by everyone in both the North and the South"],
+                        correct: 1
+                    },
+                    {
+                        question: "What does this map reveal about the growing tension between North and South?",
+                        options: ["The North and South agreed on everything related to westward expansion", "Every new territory forced a difficult debate about whether to allow slavery", "Slavery was no longer an important political issue by 1850", "The map shows that slavery had already been abolished everywhere"],
+                        correct: 1
+                    }
+                ]
+            },
+            {
+                title: "Free and Slave States 1854",
+                creator: "Historical cartographer",
+                year: 1854,
+                type: "primary",
+                format: "map",
+                topic: "War & Compromise",
+                image: "../units/westward-expansion/images/sources/map_free_slave_states_1854.jpg",
+                excerpt: "",
+                context: "This map shows the division between free states, slave states, and territories open to popular sovereignty after the Kansas-Nebraska Act of 1854. The act overturned the Missouri Compromise line and allowed settlers in Kansas and Nebraska to vote on whether to allow slavery, leading to violent conflict known as 'Bleeding Kansas.'",
+                questions: [
+                    {
+                        question: "What pattern do you notice about the geographic distribution of free and slave states?",
+                        options: ["Free and slave states were mixed together with no geographic pattern", "Free states were generally in the North and slave states in the South", "All states west of the Mississippi were slave states at this time", "There were more slave states than free states on this map"],
+                        correct: 1
+                    },
+                    {
+                        question: "What was the impact of the Kansas-Nebraska Act on the slavery debate?",
+                        options: ["It permanently resolved the debate over slavery in all territories", "It reopened the slavery question in areas previously closed to it, increasing tensions", "It had no effect on the debate because nobody cared about Kansas", "It abolished slavery in both Kansas and Nebraska immediately"],
+                        correct: 1
+                    },
+                    {
+                        question: "How can comparing maps from different years help historians understand change over time?",
+                        options: ["Maps from different years always show the same exact information", "They reveal how political boundaries and policies shifted as the nation expanded", "Historians prefer to use only the most recent maps for their research", "Older maps are unreliable and should not be used for historical study"],
+                        correct: 1
+                    }
+                ]
+            },
+            {
+                title: "Declaration of Sentiments",
+                creator: "Elizabeth Cady Stanton and the Seneca Falls Convention",
+                year: 1848,
+                type: "primary",
+                format: "declaration",
+                topic: "Two Americas",
+                image: "",
+                excerpt: "\"We hold these truths to be self-evident: that all men and women are created equal; that they are endowed by their Creator with certain inalienable rights; that among these are life, liberty, and the pursuit of happiness. The history of mankind is a history of repeated injuries and usurpations on the part of man toward woman, having in direct object the establishment of an absolute tyranny over her.\"",
+                context: "Elizabeth Cady Stanton wrote the Declaration of Sentiments for the Seneca Falls Convention in 1848, the first women's rights convention in the United States. The document deliberately echoed the Declaration of Independence to argue that women deserved the same rights as men, including the right to vote.",
+                questions: [
+                    {
+                        question: "How does the Declaration of Sentiments echo the Declaration of Independence?",
+                        options: ["It uses completely different language and ideas from the original", "It mirrors the same structure and phrases but adds 'and women' to demand equal rights", "It criticizes the Declaration of Independence as a flawed document", "It was written by the same people who wrote the Declaration of Independence"],
+                        correct: 1
+                    },
+                    {
+                        question: "Why did Stanton choose to model her declaration after the Declaration of Independence?",
+                        options: ["She could not think of any other way to write a political document", "By using familiar language, she highlighted the contradiction of denying women the rights promised to all", "She wanted to replace the Declaration of Independence with a new version", "It was required by law to use that specific format for all declarations"],
+                        correct: 1
+                    },
+                    {
+                        question: "What does this source reveal about the status of women in 1848 America?",
+                        options: ["Women had full equal rights in all areas of American society", "Women were denied basic rights including voting, and reformers were organizing to demand change", "Women were not interested in participating in politics or government", "The government had already passed laws giving women the right to vote"],
+                        correct: 1
+                    }
+                ]
+            },
+            {
+                title: "Indian Removal: The Trail of Tears",
+                creator: "Unknown artist",
+                year: 1838,
+                type: "primary",
+                format: "cartoon",
+                topic: "Two Americas",
+                image: "../units/westward-expansion/images/sources/cartoon_indian_removal.jpg",
+                excerpt: "",
+                context: "This image depicts the forced removal of Native American nations from their homelands in the southeastern United States to Indian Territory (present-day Oklahoma). The Cherokee, Chickasaw, Choctaw, Creek, and Seminole nations were forcibly relocated, and thousands died from disease, starvation, and exposure during the journey known as the Trail of Tears.",
+                questions: [
+                    {
+                        question: "What event does this image depict?",
+                        options: ["Native Americans voluntarily moving to better farmland out West", "The forced removal of Native American nations from their homelands", "A celebration of Native American culture and traditions", "Native Americans trading goods with European settlers"],
+                        correct: 1
+                    },
+                    {
+                        question: "What were the human costs of Indian Removal?",
+                        options: ["There were no negative effects because everyone was treated fairly", "Thousands of Native Americans died from disease, starvation, and exposure", "Only a few families were affected by the removal policy", "Native Americans were given better land and thrived in the new territory"],
+                        correct: 1
+                    },
+                    {
+                        question: "Why is it important to include Native American perspectives when studying this event?",
+                        options: ["Native American perspectives are not relevant to American history", "Their experiences reveal the devastating human impact that official government records often minimize", "They would only confirm what government documents already tell us", "Native Americans did not have any opinions about the removal policy"],
+                        correct: 1
+                    }
+                ]
+            },
+            {
+                title: "The Tariff Debate",
+                creator: "Unknown artist",
+                year: 1832,
+                type: "primary",
+                format: "cartoon",
+                topic: "Two Americas",
+                image: "../units/westward-expansion/images/sources/cartoon_tariff_debate.webp",
+                excerpt: "",
+                context: "This cartoon addresses the fierce debate over protective tariffs in the 1830s. Northern manufacturers favored high tariffs to protect their industries from foreign competition, while southern planters opposed them because tariffs raised the cost of imported goods they depended on. South Carolina even threatened to nullify the tariff, leading to the Nullification Crisis of 1832.",
+                questions: [
+                    {
+                        question: "Why did the North and South disagree about tariffs?",
+                        options: ["Both regions wanted higher tariffs to protect their industries", "The North wanted tariffs to protect factories, while the South opposed them because they raised prices on imports", "The South supported tariffs and the North opposed them strongly", "Neither region cared about tariffs or trade policy at this time"],
+                        correct: 1
+                    },
+                    {
+                        question: "What was the Nullification Crisis?",
+                        options: ["A crisis caused by the president refusing to sign any new laws", "South Carolina's threat to declare the federal tariff void within its borders", "A disagreement between the North and South about building railroads", "A crisis caused by the Bank of the United States running out of money"],
+                        correct: 1
+                    },
+                    {
+                        question: "How does this cartoon help us understand the growing division between North and South?",
+                        options: ["It shows that the North and South agreed on all economic policies", "It illustrates how economic differences created political conflict that threatened national unity", "It proves that cartoons were not an important part of political culture", "It demonstrates that tariffs were a minor issue that nobody really cared about"],
                         correct: 1
                     }
                 ]
