@@ -178,22 +178,18 @@ StudyEngine.registerActivity({
 
         var isWE = this._config.unit.id === 'westward-expansion';
 
-        // Westward-expansion gets a mode selector instead of simple start
-        if (isWE) {
-            this._showModeSelector();
-            return;
-        }
-
         var wrapper = document.createElement('div');
         wrapper.className = 'mq-start-screen';
 
         var title = document.createElement('h2');
         title.className = 'mq-title';
-        title.textContent = 'Map Quiz: The United States, 1802';
+        title.textContent = isWE ? 'Map Quiz: Territorial Expansion' : 'Map Quiz: The United States, 1802';
 
         var desc = document.createElement('p');
         desc.className = 'mq-desc';
-        desc.textContent = 'Click the correct state or territory on the map. Identify all 24 regions of the early United States before the Louisiana Purchase.';
+        desc.textContent = isWE
+            ? 'Click the correct territory on the map. Identify how the United States expanded from coast to coast through treaties, purchases, and annexations.'
+            : 'Click the correct state or territory on the map. Identify all 24 regions of the early United States before the Louisiana Purchase.';
 
         wrapper.appendChild(title);
         wrapper.appendChild(desc);
@@ -760,16 +756,21 @@ StudyEngine.registerActivity({
 
             var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
             path.setAttribute('d', region.path);
-            path.setAttribute('fill', '#5a7a9a');
+            // Use unit-specific coloring: westward-expansion uses each region's color, early-republic uses uniform color
+            var isWE = self._config.unit.id === 'westward-expansion';
+            path.setAttribute('fill', isWE ? region.color : '#5a7a9a');
+            path.setAttribute('fill-opacity', isWE ? '0.7' : '1');
             path.setAttribute('stroke', '#ffffff');
-            path.setAttribute('stroke-width', '2');
+            path.setAttribute('stroke-width', isWE ? '2.5' : '2');
             path.setAttribute('class', 'mq-region-path');
             path.setAttribute('data-id', region.id);
 
             group.appendChild(path);
 
             // Add label for larger regions
-            var largeRegions = ['louisiana', 'new-spain', 'unorganized', 'northwest', 'indiana', 'mississippi', 'east-florida'];
+            var largeRegions = isWE
+                ? ['original-states', 'louisiana-purchase', 'mexican-cession', 'oregon', 'texas']
+                : ['louisiana', 'new-spain', 'unorganized', 'northwest', 'indiana', 'mississippi', 'east-florida'];
             if (largeRegions.indexOf(region.id) !== -1) {
                 var center = self._getPathCenter(region.path);
                 var label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
@@ -777,7 +778,8 @@ StudyEngine.registerActivity({
                 label.setAttribute('y', center.y);
                 label.setAttribute('text-anchor', 'middle');
                 label.setAttribute('fill', 'rgba(0,0,0,0.4)');
-                label.setAttribute('font-size', region.id === 'louisiana' || region.id === 'new-spain' ? '11' : '8');
+                var bigRegions = ['louisiana', 'new-spain', 'louisiana-purchase', 'original-states', 'mexican-cession'];
+                label.setAttribute('font-size', bigRegions.indexOf(region.id) !== -1 ? '11' : '8');
                 label.setAttribute('font-weight', '600');
                 label.setAttribute('pointer-events', 'none');
                 label.setAttribute('class', 'mq-region-label');
