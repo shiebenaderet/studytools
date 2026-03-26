@@ -13,7 +13,512 @@
     "activities": [
         "flashcards"
     ],
-    "vocabulary": [],
+    "vocabulary": [
+        {
+            "term": "Jacksonian Democracy",
+            "definition": "A political movement of the 1820s-1830s that expanded democracy and political participation for common white men while excluding women, enslaved people, and Native Americans.",
+            "simpleExplanation": "Andrew Jackson said 'I'm going to include the everyday guy in government!' But his idea of 'everyday guy' really only meant white men. It's like opening a club that says it welcomes everyone, but actually only lets in certain people.",
+            "example": "During the Election of 1828, Jacksonian Democracy brought thousands of common white men into politics for the first time, as many states dropped property requirements for voting.",
+            "category": "Jackson's America",
+            "typingSnippet": "Jacksonian Democracy was a political movement that expanded voting rights and government participation for common white men. However, women, enslaved people, and Native Americans were still left out. It changed American politics but only for some.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Jacksonian_democracy"
+        },
+        {
+            "term": "spoils system",
+            "definition": "A practice where a newly elected president rewards loyal supporters with government jobs, replacing previous office holders.",
+            "simpleExplanation": "When a new president gets elected, they give all the government jobs to their friends and supporters, replacing the people who worked there before. It's like a rewards program for your campaign workers.",
+            "example": "After winning the presidency, Andrew Jackson replaced many experienced government workers with his loyal supporters through the spoils system.",
+            "category": "Jackson's America",
+            "typingSnippet": "The spoils system was Andrew Jackson's practice of giving government jobs to his loyal supporters. He believed that everyday citizens could handle government work just as well as experienced officials. Critics said it led to corruption and incompetence.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Spoils_system"
+        },
+        {
+            "term": "tariff",
+            "definition": "A tax on imported goods designed to protect domestic industries and raise government revenue.",
+            "simpleExplanation": "The government charges money on stuff you buy from other countries. This makes foreign stuff more expensive so people buy American-made products instead, protecting American workers.",
+            "example": "The 1828 tariff made imported goods so expensive that Southerners called it the 'Tariff of Abominations' because it hurt their economy.",
+            "category": "Jackson's America",
+            "typingSnippet": "A tariff is a tax placed on goods imported from other countries. Northern factory owners loved tariffs because they made foreign products more expensive, helping American businesses. Southerners hated them because they raised the cost of everyday goods.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Tariff"
+        },
+        {
+            "term": "secede",
+            "definition": "To formally withdraw from membership in a political union or organization.",
+            "simpleExplanation": "To leave. When a state is so mad at the federal government that it says 'We're out!' and tries to leave the country, that's secession. It's like quitting the club in protest.",
+            "example": "During the Nullification Crisis, South Carolina threatened to secede from the United States over the tariff issue.",
+            "category": "Jackson's America",
+            "typingSnippet": "To secede means to formally leave a political union. During the 1830s, South Carolina threatened to secede from the United States because it opposed the federal tariff. This crisis foreshadowed the bigger secession movement before the Civil War.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Secession"
+        },
+        {
+            "term": "Trail of Tears",
+            "definition": "The forced march of the Cherokee people from their homeland in the Southeast to Oklahoma in 1838-1839, in which thousands died from disease and hardship.",
+            "simpleExplanation": "The Cherokee people were forced to walk thousands of miles from their homes to Oklahoma. Many died along the way from cold, hunger, and disease. It's one of the darkest chapters in American history.",
+            "example": "During the Trail of Tears, about 4,000 Cherokee people died from exposure, disease, and starvation on the brutal march to Oklahoma.",
+            "category": "Jackson's America",
+            "typingSnippet": "The Trail of Tears was the forced removal of the Cherokee people from their homeland to Oklahoma in 1838. Thousands of Cherokee men, women, and children died along the way. It remains one of the most tragic events in American history.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Trail_of_Tears"
+        },
+        {
+            "term": "civil servant",
+            "definition": "A government employee who works in administrative or professional positions.",
+            "simpleExplanation": "A person whose job is to work for the government doing paperwork, managing money, or other important tasks. They're supposed to serve the public by keeping government running smoothly.",
+            "example": "Before Jackson's spoils system, many civil servants kept their jobs regardless of which party won the presidency.",
+            "category": "Jackson's America",
+            "typingSnippet": "A civil servant is a government worker who handles everyday tasks like managing records and public services. Under Jackson, many experienced civil servants lost their jobs to political supporters. This raised questions about whether loyalty or skill mattered more.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Civil_service"
+        },
+        {
+            "term": "mudslinging",
+            "definition": "The practice of making harsh, unfounded attacks on a political opponent's character or background.",
+            "simpleExplanation": "When politicians say really mean things about each other that might not even be true, just to make the other person look bad. It's like spreading rumors to win a popularity contest.",
+            "example": "The Election of 1828 was full of mudslinging, with opponents calling Jackson a murderer and attacking his wife's reputation.",
+            "category": "Jackson's America",
+            "typingSnippet": "Mudslinging is when politicians attack each other's character with harsh, sometimes untrue accusations. The 1828 election between Jackson and Adams was one of the nastiest in history. Both sides spread vicious rumors to try to win voters.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Mudslinging"
+        },
+        {
+            "term": "kitchen cabinet",
+            "definition": "An informal group of trusted advisors to a president, often not official cabinet members.",
+            "simpleExplanation": "Instead of using the official cabinet, Jackson had a secret group of trusted friends he'd talk to in private. They were like his personal brain trust, meeting informally to give him advice.",
+            "example": "Jackson's kitchen cabinet included newspaper editors and old friends who had more influence than his actual cabinet members.",
+            "category": "Jackson's America",
+            "typingSnippet": "Jackson's kitchen cabinet was an informal group of close friends and advisors he trusted more than his official cabinet. They met privately and had major influence on his decisions. Critics worried that unelected people had too much power over the president.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Kitchen_Cabinet"
+        },
+        {
+            "term": "nullification",
+            "definition": "The belief that individual states could refuse to obey federal laws they believed were unconstitutional.",
+            "simpleExplanation": "A state saying 'We don't like that law, so we're not going to follow it.' South Carolina said they could just ignore the tariff because they thought it was unfair. It's like saying 'School rules don't apply to me' and actually getting away with it.",
+            "example": "South Carolina used the idea of nullification to declare the federal tariff void within its borders, sparking a major constitutional crisis.",
+            "category": "Jackson's America",
+            "typingSnippet": "Nullification was the idea that a state could refuse to follow a federal law it considered unconstitutional. South Carolina tried to nullify the tariff of 1828. President Jackson firmly rejected this idea and threatened to use military force to enforce the law.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Nullification_(U.S._Constitution)"
+        },
+        {
+            "term": "Force Bill",
+            "definition": "Legislation passed in 1833 that authorized the president to use military force to enforce federal law and prevent state secession.",
+            "simpleExplanation": "Jackson said 'If South Carolina doesn't obey federal law, I'll send in the military.' This law gave him the power to use force against states that refused to follow federal rules.",
+            "example": "The Force Bill showed that Jackson was willing to use the military to keep the Union together, even against a state that wanted to nullify federal law.",
+            "category": "Jackson's America",
+            "typingSnippet": "The Force Bill of 1833 gave President Jackson the power to use the military to enforce federal law in South Carolina. It was a strong message that no state could ignore the federal government. A compromise tariff was also passed to calm tensions.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Force_Bill"
+        },
+        {
+            "term": "Indian Removal Act",
+            "definition": "A law passed in 1830 that authorized the federal government to relocate Native American tribes from their ancestral lands to territories west of the Mississippi River.",
+            "simpleExplanation": "Jackson said 'We want your land, so move west.' This law made it official government policy to force Native Americans off their homelands and move them far away.",
+            "example": "The Indian Removal Act of 1830 led to the forced relocation of thousands of Cherokee, Creek, and other Native Americans from the Southeast.",
+            "category": "Jackson's America",
+            "typingSnippet": "The Indian Removal Act of 1830 allowed the federal government to force Native American tribes off their land. Tribes in the Southeast were relocated to territories west of the Mississippi River. This law led directly to the devastating Trail of Tears.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Indian_Removal_Act"
+        },
+        {
+            "term": "Worcester v. Georgia",
+            "definition": "An 1832 Supreme Court case in which Chief Justice John Marshall ruled that Georgia could not impose its laws on the Cherokee Nation.",
+            "simpleExplanation": "The Supreme Court said 'Hey Georgia, you can't just make laws for the Cherokee. The Cherokee Nation is its own government.' But Jackson ignored this court decision, which was shocking.",
+            "example": "In Worcester v. Georgia, the Supreme Court upheld Cherokee sovereignty, but President Jackson reportedly refused to enforce the ruling.",
+            "category": "Jackson's America",
+            "typingSnippet": "Worcester v. Georgia was a landmark 1832 Supreme Court case that protected Cherokee sovereignty. Chief Justice Marshall ruled that Georgia had no authority over the Cherokee Nation. However, President Jackson refused to enforce the decision, and removal continued.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Worcester_v._Georgia"
+        },
+        {
+            "term": "Five Civilized Tribes",
+            "definition": "The Cherokee, Chickasaw, Choctaw, Creek, and Seminole nations, called 'civilized' because they adopted European American practices like farming and written government.",
+            "simpleExplanation": "These five Native American nations tried to be like European Americans: they farmed, had written laws, and wanted to live peacefully. The word 'civilized' means they were seen as 'more like us.' But even though they tried to fit in, they were still forced out.",
+            "example": "Despite being called the Five Civilized Tribes because they adopted many European American customs, all five nations were still forced to relocate during Indian Removal.",
+            "category": "Jackson's America",
+            "typingSnippet": "The Five Civilized Tribes were the Cherokee, Chickasaw, Choctaw, Creek, and Seminole nations. They adopted European American practices like written laws and farming. Despite their efforts to coexist, they were all forcibly removed from their homelands.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Five_Civilized_Tribes"
+        },
+        {
+            "term": "Bank of the U.S.",
+            "definition": "The Second Bank of the United States, a national financial institution chartered by Congress that President Jackson opposed and ultimately destroyed through his veto and withdrawal of federal funds.",
+            "simpleExplanation": "A national bank that handled money for the whole country. Jackson hated it because he thought it gave too much power to wealthy people and big business. He basically declared war on the bank and won.",
+            "example": "Jackson vetoed the recharter of the Bank of the U.S. in 1832, calling it a tool of the wealthy elite that hurt ordinary Americans.",
+            "category": "Jackson's America",
+            "typingSnippet": "The Bank of the United States was a powerful national bank that managed the country's money. President Jackson believed it gave too much power to the wealthy and vetoed its recharter. He then withdrew federal funds, effectively destroying the bank.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Second_Bank_of_the_United_States"
+        },
+        {
+            "term": "Sequoyah",
+            "definition": "A Cherokee leader and silversmith who created a written syllabary (alphabet) for the Cherokee language between 1809-1821.",
+            "simpleExplanation": "Sequoyah was a Cherokee genius who invented an alphabet for the Cherokee language so Cherokee people could read and write in their own language. It was like creating an instant literacy tool for his whole nation.",
+            "example": "Thanks to Sequoyah's syllabary, the Cherokee Nation was able to publish its own newspaper and write its own constitution in the Cherokee language.",
+            "category": "Jackson's America",
+            "typingSnippet": "Sequoyah was a brilliant Cherokee leader who created a written alphabet for the Cherokee language. His syllabary allowed the Cherokee people to read, write, and publish a newspaper in their own language. It was a remarkable achievement in cultural preservation.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Sequoyah"
+        },
+        {
+            "term": "manifest destiny",
+            "definition": "The belief that American expansion across North America to the Pacific Ocean was inevitable and justified by God or progress.",
+            "simpleExplanation": "Americans believed God wanted them to spread across the continent all the way to the Pacific Ocean. It's like feeling like you're destined to take over a video game map, but with real land and real people living there.",
+            "example": "Manifest destiny drove thousands of settlers westward in the 1840s, believing it was their God-given right to expand American territory to the Pacific.",
+            "category": "Westward Trails",
+            "typingSnippet": "Manifest destiny was the widespread belief that Americans were destined by God to spread across the entire continent. This idea fueled westward expansion and justified taking land from Native Americans and Mexico. It shaped American policy for decades.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Manifest_destiny"
+        },
+        {
+            "term": "annex",
+            "definition": "To incorporate a territory into a country or state by political or military means.",
+            "simpleExplanation": "To take over a piece of land and make it officially part of your country. The U.S. annexed Texas, meaning Texas became an official part of America.",
+            "example": "The United States officially annexed Texas in 1845, making the former independent republic the 28th state.",
+            "category": "Westward Trails",
+            "typingSnippet": "To annex means to officially add new territory to a country. The United States annexed Texas in 1845 after it had been an independent republic for nearly ten years. This annexation angered Mexico and helped start the Mexican-American War.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Annexation"
+        },
+        {
+            "term": "territory",
+            "definition": "A region of land under U.S. control but not yet admitted as a state, with its own government and laws.",
+            "simpleExplanation": "A piece of America that hasn't become a state yet. It has its own rules and government, but it's controlled by the federal government. Think of it as America's 'waiting room,' where it'll eventually become a state if it grows big enough.",
+            "example": "Oregon was a U.S. territory for years before it had enough settlers and organization to apply for statehood.",
+            "category": "Westward Trails",
+            "typingSnippet": "A territory is a region controlled by the United States that has not yet become a state. Territories had their own local governments but answered to the federal government. As more settlers moved west, territories like Oregon and California eventually became states.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Territories_of_the_United_States"
+        },
+        {
+            "term": "Texas War for Independence",
+            "definition": "A conflict (1835-1836) in which American colonists and Texians fought against Mexican rule, resulting in an independent Texas Republic.",
+            "simpleExplanation": "American settlers living in Texas got tired of Mexican rule and rebelled. They won and created their own country called the Texas Republic. It was like a breakaway revolution.",
+            "example": "The Texas War for Independence ended with Sam Houston's victory at the Battle of San Jacinto, creating the Republic of Texas in 1836.",
+            "category": "Westward Trails",
+            "typingSnippet": "The Texas War for Independence was a revolt by American settlers against Mexican rule in 1835 and 1836. After the devastating loss at the Alamo, Sam Houston led the Texians to victory at San Jacinto. Texas became an independent republic before joining the United States.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Texas_Revolution"
+        },
+        {
+            "term": "diplomacy",
+            "definition": "The practice of conducting negotiations between nations to settle disputes or reach agreements.",
+            "simpleExplanation": "Countries talking to each other instead of fighting. Diplomacy is about making deals and solving problems through conversation rather than war.",
+            "example": "Through diplomacy, the United States and Britain peacefully settled their dispute over the Oregon Territory in 1846.",
+            "category": "Westward Trails",
+            "typingSnippet": "Diplomacy is the practice of nations negotiating with each other to resolve disputes peacefully. The Oregon Treaty of 1846 is a great example. Instead of going to war with Britain, the U.S. used diplomacy to divide the Oregon Territory at the 49th parallel.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Diplomacy"
+        },
+        {
+            "term": "Oregon Trail",
+            "definition": "A 2,000-mile overland route used by thousands of pioneers from 1841-1869 to travel from the Missouri River to Oregon and California.",
+            "simpleExplanation": "The main highway for settlers heading west. Thousands of families packed everything they owned into covered wagons and traveled 2,000 miles on this route. Many died along the way, but they wanted new land in the West.",
+            "example": "Over 400,000 pioneers traveled the Oregon Trail in covered wagons, facing harsh weather, disease, and dangerous river crossings along the way.",
+            "category": "Westward Trails",
+            "typingSnippet": "The Oregon Trail stretched 2,000 miles from Missouri to the Pacific Northwest. Thousands of pioneer families loaded covered wagons and risked everything to reach Oregon and California. The journey took about five months and was filled with danger.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Oregon_Trail"
+        },
+        {
+            "term": "South Pass",
+            "definition": "A low mountain pass in the Rocky Mountains through which the Oregon Trail passed, discovered to be passable for wagon trains.",
+            "simpleExplanation": "A gap in the Rocky Mountains that wagons could actually get through! Before South Pass was discovered, people thought the mountains blocked all wagon travel west. Finding this pass opened up the whole western frontier.",
+            "example": "South Pass allowed wagon trains to cross the Rocky Mountains safely, making westward migration along the Oregon Trail possible.",
+            "category": "Westward Trails",
+            "typingSnippet": "South Pass was a gentle gap in the Rocky Mountains wide enough for wagon trains to cross. Its discovery was a game-changer for westward migration. Without South Pass, the Oregon Trail and the great westward movement might never have happened.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/South_Pass_(Wyoming)"
+        },
+        {
+            "term": "the Alamo",
+            "definition": "A mission in San Antonio, Texas, where fewer than 200 Texian defenders died fighting a Mexican army of thousands in 1836.",
+            "simpleExplanation": "A famous battle where Texas settlers fought back against Mexico. The Texians were outnumbered like crazy, but they fought to the death. It became a symbol of fighting for independence.",
+            "example": "The fall of the Alamo in 1836 rallied Texians with the battle cry 'Remember the Alamo!' as they fought for independence from Mexico.",
+            "category": "Westward Trails",
+            "typingSnippet": "The Alamo was a mission in San Antonio where fewer than 200 Texian defenders fought against thousands of Mexican soldiers in 1836. Every defender died, but the battle became a powerful symbol of sacrifice. 'Remember the Alamo!' became the rallying cry of the Texas Revolution.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Battle_of_the_Alamo"
+        },
+        {
+            "term": "Sam Houston",
+            "definition": "Leader of the Texas Revolution who became president of the Republic of Texas and led a crucial military victory at the Battle of San Jacinto.",
+            "simpleExplanation": "Sam Houston was like Texas's superhero. He lost a big battle at the Alamo but came back to win decisively at San Jacinto and established Texas as an independent nation.",
+            "example": "Sam Houston defeated Santa Anna at the Battle of San Jacinto in just 18 minutes, securing Texas independence and becoming the republic's first president.",
+            "category": "Westward Trails",
+            "typingSnippet": "Sam Houston led the Texas army to a stunning victory at the Battle of San Jacinto in 1836. He captured Santa Anna and secured Texas independence. Houston then served as president of the Republic of Texas and later as a U.S. senator.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Sam_Houston"
+        },
+        {
+            "term": "Santa Anna",
+            "definition": "Mexican general and president who led the assault on the Alamo and opposed Texas independence and American expansion.",
+            "simpleExplanation": "The Mexican leader who said 'I'm going to crush Texas and stop American expansion!' He won at the Alamo but lost the overall war. He's seen as a villain in American history, but a complex figure in Mexican history.",
+            "example": "Santa Anna led thousands of Mexican soldiers to victory at the Alamo, but was captured after his defeat at San Jacinto.",
+            "category": "Westward Trails",
+            "typingSnippet": "Santa Anna was a Mexican general and president who led the attack on the Alamo in 1836. Though he won that battle, he was later defeated and captured at San Jacinto. His loss led to Texas becoming an independent republic.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Antonio_L%C3%B3pez_de_Santa_Anna"
+        },
+        {
+            "term": "Stephen F. Austin",
+            "definition": "American colonizer known as the 'Father of Texas' who led the settlement of American families in Mexican Texas before supporting independence.",
+            "simpleExplanation": "Stephen Austin got permission from Mexico to settle American families in Texas. He was supposed to be the bridge between Mexico and the American settlers, but eventually, his people rebelled and he supported independence too.",
+            "example": "Stephen F. Austin brought 300 American families to settle in Mexican Texas, earning him the title 'Father of Texas.'",
+            "category": "Westward Trails",
+            "typingSnippet": "Stephen F. Austin is known as the 'Father of Texas' because he led the first major American settlement in Mexican Texas. He originally worked peacefully with the Mexican government. Eventually, tensions grew and Austin supported Texas independence.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Stephen_F._Austin"
+        },
+        {
+            "term": "Tejanos",
+            "definition": "Spanish-speaking people living in Texas, including both Mexican citizens and descendants of earlier Spanish settlers.",
+            "simpleExplanation": "The Spanish-speaking people who lived in Texas before American settlers arrived. They had their own culture and had lived there for a long time. When the American settlers came, there was cultural conflict.",
+            "example": "Tejanos like Juan Seguin fought alongside American settlers for Texas independence, but many Tejanos later faced discrimination in the new republic.",
+            "category": "Westward Trails",
+            "typingSnippet": "Tejanos were the Spanish-speaking people who lived in Texas long before American settlers arrived. Some Tejanos fought for Texas independence alongside American colonists. Despite their contributions, many Tejanos faced discrimination and lost their land after Texas became independent.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Tejano"
+        },
+        {
+            "term": "James K. Polk",
+            "definition": "The 11th President of the United States (1845-1849) who led the country during the Mexican-American War and accomplished the goal of Manifest Destiny.",
+            "simpleExplanation": "Polk was totally committed to Manifest Destiny. He wanted to expand American territory as much as possible. He started the Mexican-American War and successfully achieved the expansion he wanted.",
+            "example": "President James K. Polk expanded U.S. territory by over one million square miles through the Oregon Treaty and the Mexican-American War.",
+            "category": "Westward Trails",
+            "typingSnippet": "James K. Polk was the 11th president and one of the most ambitious expansionists in American history. He settled the Oregon boundary with Britain and led the nation into the Mexican-American War. By the end of his term, the U.S. stretched from coast to coast.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/James_K._Polk"
+        },
+        {
+            "term": "54-40 or fight!",
+            "definition": "A political slogan representing American demands for the Oregon Territory boundary to extend to 54 degrees 40 minutes north latitude.",
+            "simpleExplanation": "Americans said 'We want Oregon all the way north to 54-40!' This was the rallying cry for expansion. But actually, America ended up compromising and didn't get that far north.",
+            "example": "The slogan '54-40 or fight!' fired up American voters during the 1844 election, but Polk eventually compromised with Britain at the 49th parallel.",
+            "category": "Westward Trails",
+            "typingSnippet": "The slogan '54-40 or fight!' demanded that the U.S. claim the entire Oregon Territory up to the 54 degrees 40 minutes line. It was a popular rallying cry during the 1844 election. In the end, diplomacy won out and the boundary was set at the 49th parallel.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Fifty-four_Forty_or_Fight"
+        },
+        {
+            "term": "Mexican-American War",
+            "definition": "A conflict (1846-1848) between the United States and Mexico resulting in U.S. victory and the acquisition of over one million square miles of Mexican territory.",
+            "simpleExplanation": "America fought Mexico and won big time. America got California, Nevada, Utah, Arizona, and other huge chunks of land. It was all part of Manifest Destiny: America taking over western territory.",
+            "example": "The Mexican-American War began in 1846 after a border dispute and ended with the U.S. gaining a massive amount of territory from Mexico.",
+            "category": "War & Compromise",
+            "typingSnippet": "The Mexican-American War lasted from 1846 to 1848 and resulted in a massive U.S. victory. The war began over a border dispute between Texas and Mexico. When it ended, the United States gained over one million square miles of new territory.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Mexican%E2%80%93American_War"
+        },
+        {
+            "term": "Mexican Cession",
+            "definition": "The territory ceded (given) by Mexico to the United States at the end of the Mexican-American War, including present-day California, Nevada, Utah, and parts of Arizona and New Mexico.",
+            "simpleExplanation": "The huge chunk of land that Mexico had to give up after losing the war. This included California and Nevada, some of America's most valuable land.",
+            "example": "The Mexican Cession added present-day California, Nevada, Utah, and parts of several other states to the United States.",
+            "category": "War & Compromise",
+            "typingSnippet": "The Mexican Cession was the vast territory Mexico surrendered to the United States after the Mexican-American War. It included present-day California, Nevada, Utah, and parts of Arizona and New Mexico. This land grab fulfilled the dream of Manifest Destiny.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Mexican_Cession"
+        },
+        {
+            "term": "Treaty of Guadalupe Hidalgo",
+            "definition": "The 1848 treaty that ended the Mexican-American War, in which Mexico surrendered half its territory to the United States.",
+            "simpleExplanation": "The peace deal that ended the war. Mexico basically had to give up about half of its entire country to the United States. It was a devastating loss for Mexico.",
+            "example": "The Treaty of Guadalupe Hidalgo forced Mexico to give up nearly half its territory and set the Rio Grande as the official border between the two countries.",
+            "category": "War & Compromise",
+            "typingSnippet": "The Treaty of Guadalupe Hidalgo ended the Mexican-American War in 1848. Under this treaty, Mexico gave up about half of its entire territory to the United States. The U.S. paid Mexico $15 million, but the loss was devastating for Mexico.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Treaty_of_Guadalupe_Hidalgo"
+        },
+        {
+            "term": "Rio Grande",
+            "definition": "A river forming the boundary between Texas and Mexico, the site of disputed territory that helped spark the Mexican-American War.",
+            "simpleExplanation": "A river that separates Texas and Mexico. America and Mexico disagreed about where the border should be. Texas claimed it was way south, but Mexico said it was further north. This disagreement led to war.",
+            "example": "President Polk sent troops to the Rio Grande in 1846, and when Mexican forces fired on them, he used it as justification to declare war.",
+            "category": "War & Compromise",
+            "typingSnippet": "The Rio Grande is a river that forms the border between Texas and Mexico. The United States claimed the Rio Grande was the southern boundary of Texas, but Mexico disagreed. This border dispute became one of the main causes of the Mexican-American War.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Rio_Grande"
+        },
+        {
+            "term": "Nueces River",
+            "definition": "A river in Texas; Mexico claimed this was the boundary of Texas, while the United States claimed the Rio Grande was the boundary.",
+            "simpleExplanation": "Another river in Texas. This was the disagreement that started the Mexican-American War. Mexico said 'The border is here at the Nueces River,' but America said 'No, it's way down at the Rio Grande.'",
+            "example": "The disputed land between the Nueces River and the Rio Grande became the flashpoint that triggered the Mexican-American War in 1846.",
+            "category": "War & Compromise",
+            "typingSnippet": "The Nueces River was at the center of a border dispute that sparked the Mexican-American War. Mexico insisted the Texas border ended at the Nueces, while the U.S. claimed the border was further south at the Rio Grande. This disagreement led to armed conflict.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Nueces_River"
+        },
+        {
+            "term": "Bear Flag Republic",
+            "definition": "A short-lived independent California republic (1846) that existed briefly before being absorbed into the United States during the Mexican-American War.",
+            "simpleExplanation": "For about a month, California declared itself independent with its own flag featuring a bear. But America took over before California could really become its own country.",
+            "example": "American settlers in California raised a homemade flag with a grizzly bear and declared the Bear Flag Republic in June 1846, weeks before the U.S. military arrived.",
+            "category": "War & Compromise",
+            "typingSnippet": "The Bear Flag Republic was a brief attempt by American settlers to create an independent California in 1846. They raised a flag with a grizzly bear and declared independence from Mexico. The republic lasted only about a month before the U.S. military took control.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/California_Republic"
+        },
+        {
+            "term": "Gadsden Purchase",
+            "definition": "An 1853 agreement in which the United States purchased a strip of land from Mexico for $10 million to complete the southern boundary of the continental U.S.",
+            "simpleExplanation": "America wanted to complete its southern border, so it paid Mexico $10 million for a strip of land in Arizona and New Mexico. This was the final piece that made the continental U.S. complete.",
+            "example": "The Gadsden Purchase of 1853 added a strip of land in present-day southern Arizona and New Mexico, completing the map of the continental United States.",
+            "category": "War & Compromise",
+            "typingSnippet": "The Gadsden Purchase was an 1853 deal in which the United States bought a strip of land from Mexico for $10 million. This land, in present-day Arizona and New Mexico, completed the southern border of the continental United States. It was the last major land acquisition.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Gadsden_Purchase"
+        },
+        {
+            "term": "Wilmot Proviso",
+            "definition": "A proposed amendment (1846) that would have banned slavery in any territory acquired from Mexico, which failed to pass Congress.",
+            "simpleExplanation": "A congressman said 'If we're going to take Mexican land, at least we won't allow slavery there.' But the proposal failed, and slavery was allowed in the new territories, which made tensions worse.",
+            "example": "The Wilmot Proviso failed to pass the Senate, but it showed how deeply divided the nation was over whether slavery should expand into new western territories.",
+            "category": "War & Compromise",
+            "typingSnippet": "The Wilmot Proviso was a proposal to ban slavery in all territory gained from Mexico. It passed the House but failed in the Senate. Even though it never became law, it exposed the deep divide between North and South over the future of slavery.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Wilmot_Proviso"
+        },
+        {
+            "term": "Compromise of 1850",
+            "definition": "A series of laws designed to settle disputes over slavery in western territories and the admission of new states, temporarily reducing sectional tensions.",
+            "simpleExplanation": "Congress tried to keep both sides happy by making a big deal. California would be free, but slavery was allowed in some other territories. It held the country together for a few more years, but the problems weren't really solved.",
+            "example": "The Compromise of 1850 admitted California as a free state while allowing popular sovereignty in other new territories, delaying the crisis over slavery.",
+            "category": "War & Compromise",
+            "typingSnippet": "The Compromise of 1850 was a set of laws designed to settle the slavery debate in new western territories. California entered as a free state, and the Fugitive Slave Act was strengthened. It kept the peace temporarily, but the underlying tensions remained.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Compromise_of_1850"
+        },
+        {
+            "term": "Fugitive Slave Act",
+            "definition": "A controversial law passed as part of the Compromise of 1850 that required Northern citizens to assist in capturing and returning escaped enslaved people to the South.",
+            "simpleExplanation": "This law said northern people had to help catch enslaved people who escaped to the North and send them back. Many northerners thought it was totally unfair and refused to follow it.",
+            "example": "The Fugitive Slave Act of 1850 outraged many Northerners who were forced to help return escaped enslaved people, turning more people against slavery.",
+            "category": "War & Compromise",
+            "typingSnippet": "The Fugitive Slave Act required Northern citizens to help capture and return escaped enslaved people to the South. Anyone who refused could be fined or jailed. This law angered many Northerners and actually increased support for the abolition of slavery.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Fugitive_Slave_Act_of_1850"
+        },
+        {
+            "term": "Uncle Tom's Cabin",
+            "definition": "An influential 1852 novel by Harriet Beecher Stowe depicting the horrors of slavery that strengthened Northern opposition to slavery.",
+            "simpleExplanation": "A book that showed people how terrible slavery really was. Reading it made northerners furious about slavery and helped turn them against it. A book changed the whole nation's opinion!",
+            "example": "Uncle Tom's Cabin sold 300,000 copies in its first year and became a powerful tool in turning Northern public opinion against slavery.",
+            "category": "War & Compromise",
+            "typingSnippet": "Uncle Tom's Cabin was a novel by Harriet Beecher Stowe that showed the brutal reality of slavery. Published in 1852, it sold hundreds of thousands of copies and turned many Northerners against slavery. Some say this book helped start the Civil War.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Uncle_Tom%27s_Cabin"
+        },
+        {
+            "term": "free state / slave state",
+            "definition": "States where slavery was prohibited (free states) or permitted and legal (slave states); the balance between these determined representation and power in Congress.",
+            "simpleExplanation": "Free states didn't allow slavery. Slave states did. The balance between how many of each was super important because each state got representatives in Congress. If there were more free states, the North had more power.",
+            "example": "Every time a new state joined the Union, Congress fought over whether it would be a free state or a slave state to maintain the balance of power.",
+            "category": "War & Compromise",
+            "typingSnippet": "Free states were states where slavery was banned, while slave states allowed it. The balance between the two was critical because it determined which side had more power in Congress. Every new state admitted to the Union sparked fierce debate over this balance.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Slave_states_and_free_states"
+        },
+        {
+            "term": "Industrial Revolution",
+            "definition": "A period of rapid technological and economic development in the North (roughly 1750s-1840s) based on factory production and mechanized manufacturing.",
+            "simpleExplanation": "The North developed factories and machines while the South stayed agricultural. Factories needed lots of workers, but farms needed lots of enslaved people. This difference pushed the two regions further apart.",
+            "example": "The Industrial Revolution transformed Northern cities like Lowell, Massachusetts, where textile mills employed thousands of workers making cloth from Southern cotton.",
+            "category": "Two Americas",
+            "typingSnippet": "The Industrial Revolution transformed the Northern economy with factories, machines, and new technology. Cities grew rapidly as workers flocked to manufacturing jobs. Meanwhile, the South remained focused on farming, creating two very different American economies.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Industrial_Revolution"
+        },
+        {
+            "term": "cotton gin",
+            "definition": "A machine invented by Eli Whitney in 1793 that could separate cotton seeds from fiber 50 times faster than by hand, making slavery more profitable.",
+            "simpleExplanation": "Eli Whitney invented a machine that cleaned cotton super fast. Before this, cotton processing was slow and not profitable. After the cotton gin, cotton became super valuable, so southern plantations bought more enslaved people to grow more cotton.",
+            "example": "After the cotton gin was invented, cotton production in the South exploded, and the number of enslaved people grew from 700,000 to over 3 million by 1850.",
+            "category": "Two Americas",
+            "typingSnippet": "The cotton gin was a machine invented by Eli Whitney in 1793 that cleaned cotton fifty times faster than doing it by hand. It made cotton incredibly profitable for Southern plantations. Tragically, it also caused a massive increase in the demand for enslaved labor.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Cotton_gin"
+        },
+        {
+            "term": "plantation",
+            "definition": "A large agricultural estate in the South focused on growing cash crops like cotton, tobacco, and rice, typically worked by enslaved labor.",
+            "simpleExplanation": "A huge farm in the South, like hundreds of acres of cotton fields. Plantations made tons of money but depended on enslaving thousands of people to work the fields.",
+            "example": "Large cotton plantations in Mississippi and Alabama relied on the labor of hundreds of enslaved people to produce the crops that fueled the Southern economy.",
+            "category": "Two Americas",
+            "typingSnippet": "A plantation was a large Southern farm that grew cash crops like cotton, tobacco, and rice. These estates depended on the forced labor of enslaved people to stay profitable. Plantation owners became wealthy while enslaved workers endured terrible conditions.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Plantation"
+        },
+        {
+            "term": "agrarian",
+            "definition": "Related to farming and rural agriculture; an agrarian society is based on farming and land ownership.",
+            "simpleExplanation": "All about farming. An agrarian society is one where farming is the main economy. The South was agrarian: it was all about plantations and farming.",
+            "example": "The South's agrarian economy depended almost entirely on growing and selling cash crops like cotton, unlike the North's factory-based economy.",
+            "category": "Two Americas",
+            "typingSnippet": "Agrarian means related to farming and agriculture. The Southern economy was deeply agrarian, centered on growing cash crops on large plantations. This farming lifestyle stood in sharp contrast to the industrialized, factory-driven economy of the North.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Agrarianism"
+        },
+        {
+            "term": "push factor / pull factor",
+            "definition": "Push factors drive people to leave a place (poverty, violence, lack of opportunity); pull factors attract them to a new place (jobs, freedom, opportunity).",
+            "simpleExplanation": "Push factors are reasons to leave home, like 'This place is terrible.' Pull factors are reasons to go somewhere, like 'The West has free land!' Westward expansion happened because both push and pull factors affected people.",
+            "example": "Poverty in crowded Eastern cities was a push factor, while the promise of free land in the West was a pull factor that drove thousands of families to migrate.",
+            "category": "Two Americas",
+            "typingSnippet": "Push factors are reasons people leave a place, like poverty or war. Pull factors are reasons people move to a new place, like jobs or free land. During westward expansion, both push and pull factors drove families to pack up and head west.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Push%E2%80%93pull_factor"
+        },
+        {
+            "term": "Seneca Falls Convention",
+            "definition": "A historic women's rights gathering held in Seneca Falls, New York in 1848, where the Declaration of Sentiments was adopted.",
+            "simpleExplanation": "A big meeting where women said 'We deserve rights just like men!' Elizabeth Cady Stanton and others demanded voting rights and legal equality. It was the birth of the organized women's movement.",
+            "example": "About 300 people attended the Seneca Falls Convention in 1848, where they debated and signed the Declaration of Sentiments demanding equal rights for women.",
+            "category": "Two Americas",
+            "typingSnippet": "The Seneca Falls Convention of 1848 was a groundbreaking gathering for women's rights in New York. Elizabeth Cady Stanton and others presented the Declaration of Sentiments, demanding equality for women. This convention launched the organized women's rights movement in America.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Seneca_Falls_Convention"
+        },
+        {
+            "term": "Declaration of Sentiments",
+            "definition": "A document adopted at the Seneca Falls Convention modeled after the Declaration of Independence, demanding women's rights including voting.",
+            "simpleExplanation": "Women took the Declaration of Independence and rewrote it to say 'All men AND women are created equal.' It demanded voting rights and all sorts of equality for women.",
+            "example": "The Declaration of Sentiments boldly stated that 'all men and women are created equal,' demanding the right to vote and own property.",
+            "category": "Two Americas",
+            "typingSnippet": "The Declaration of Sentiments was written for the Seneca Falls Convention in 1848. It was modeled after the Declaration of Independence but added women to the famous phrase 'all men are created equal.' It demanded voting rights and legal equality for women.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Declaration_of_Sentiments"
+        },
+        {
+            "term": "Elizabeth Cady Stanton",
+            "definition": "A leading women's rights activist who organized the Seneca Falls Convention and wrote the Declaration of Sentiments.",
+            "simpleExplanation": "A super important woman who fought for women's rights. She organized the Seneca Falls Convention and said women deserved voting rights and equality. She's basically the founder of the organized women's movement.",
+            "example": "Elizabeth Cady Stanton spent her life fighting for women's suffrage, though she did not live to see the 19th Amendment passed in 1920.",
+            "category": "Two Americas",
+            "typingSnippet": "Elizabeth Cady Stanton was a pioneering women's rights leader who organized the Seneca Falls Convention in 1848. She wrote the Declaration of Sentiments and spent decades fighting for women's right to vote. Her work laid the foundation for the suffrage movement.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Elizabeth_Cady_Stanton"
+        },
+        {
+            "term": "Sojourner Truth",
+            "definition": "A formerly enslaved woman who became a powerful speaker for abolition and women's rights, famous for her 'Ain't I a Woman?' speech.",
+            "simpleExplanation": "A formerly enslaved woman who gave powerful speeches about abolition and women's rights. Her most famous speech, 'Ain't I a Woman?', pointed out that women of color faced even more discrimination than white women.",
+            "example": "Sojourner Truth's 'Ain't I a Woman?' speech at a women's rights convention powerfully argued that Black women deserved the same rights as everyone else.",
+            "category": "Two Americas",
+            "typingSnippet": "Sojourner Truth was a formerly enslaved woman who became a powerful voice for abolition and women's rights. Her famous speech 'Ain't I a Woman?' highlighted the double discrimination faced by Black women. She inspired countless people to fight for equality.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Sojourner_Truth"
+        },
+        {
+            "term": "industrialist",
+            "definition": "A wealthy business owner who owns or operates factories and manufacturing plants, particularly during the Industrial Revolution.",
+            "simpleExplanation": "A rich person who owns factories and makes money from manufacturing. Industrialists got incredibly wealthy during the Industrial Revolution and became the powerful elite of the North.",
+            "example": "Northern industrialists built large factories that employed thousands of workers, creating wealth and economic power that rivaled Southern plantation owners.",
+            "category": "Two Americas",
+            "typingSnippet": "An industrialist is a wealthy factory owner who profits from manufacturing. During the Industrial Revolution, Northern industrialists built empires of factories and railroads. They became some of the richest and most powerful people in the country.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Industrialist"
+        },
+        {
+            "term": "deforestation",
+            "definition": "The large-scale removal of forests, often for timber or farmland, which significantly damaged the environment during westward expansion.",
+            "simpleExplanation": "Cutting down huge numbers of trees to clear land for farms or to sell the wood. During westward expansion, millions of trees were chopped down, destroying forests that had been there for thousands of years.",
+            "example": "As settlers moved west, massive deforestation cleared ancient forests to make room for farms and to provide lumber for building new towns.",
+            "category": "Two Americas",
+            "typingSnippet": "Deforestation is the large-scale cutting down of forests for farming or timber. During westward expansion, millions of acres of ancient forests were destroyed. This environmental damage changed landscapes forever and harmed ecosystems across the continent.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Deforestation"
+        },
+        {
+            "term": "interchangeable parts",
+            "definition": "Standardized, identical components that can be used in place of one another, enabling mass production and assembly-line manufacturing.",
+            "simpleExplanation": "Making parts that are all exactly the same so they fit together perfectly. This meant factories could make things faster because they didn't have to custom-fit every piece.",
+            "example": "Eli Whitney demonstrated interchangeable parts by assembling muskets from a pile of identical components, showing the military how mass production could work.",
+            "category": "Two Americas",
+            "typingSnippet": "Interchangeable parts are identical components that can replace one another in any product. Eli Whitney pioneered this idea for manufacturing muskets. This concept revolutionized factory production and made it possible to build and repair goods much faster.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Interchangeable_parts"
+        },
+        {
+            "term": "Erie Canal",
+            "definition": "A 363-mile waterway completed in 1825 connecting the Hudson River to Lake Erie, dramatically reducing shipping costs and fueling Northern economic growth.",
+            "simpleExplanation": "A man-made canal connecting New York City to the Great Lakes. This canal made it super cheap to ship goods, which made the North even richer. It was basically the 'information superhighway' of the 1800s.",
+            "example": "The Erie Canal reduced shipping costs by about 90 percent, making New York City the biggest commercial hub in the United States.",
+            "category": "Two Americas",
+            "typingSnippet": "The Erie Canal was a 363-mile waterway completed in 1825 that connected the Hudson River to Lake Erie. It slashed shipping costs and turned New York City into a booming trade center. The canal fueled Northern economic growth and encouraged westward migration.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Erie_Canal"
+        },
+        {
+            "term": "Eli Whitney",
+            "definition": "An inventor who created the cotton gin (1793) and pioneered the use of interchangeable parts in manufacturing.",
+            "simpleExplanation": "Eli Whitney was a genius inventor who created the cotton gin and came up with the idea of interchangeable parts. His cotton gin accidentally made slavery more profitable, but his interchangeable parts idea revolutionized manufacturing.",
+            "example": "Eli Whitney's two major inventions had opposite effects: the cotton gin strengthened slavery in the South, while interchangeable parts boosted factories in the North.",
+            "category": "Two Americas",
+            "typingSnippet": "Eli Whitney was an American inventor whose creations shaped both the North and the South. His cotton gin made cotton hugely profitable but increased the demand for enslaved labor. His idea of interchangeable parts transformed Northern manufacturing forever.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Eli_Whitney"
+        },
+        {
+            "term": "Tredegar Iron Works",
+            "definition": "A major iron foundry in Richmond, Virginia that became one of the South's most important industrial facilities.",
+            "simpleExplanation": "One of the few factories in the South. It made iron and metal products. The Tredegar Iron Works showed that the South could industrialize, but most southern money went into plantations instead.",
+            "example": "The Tredegar Iron Works in Richmond was one of the only large factories in the South, proving the region could industrialize even though most investment went to agriculture.",
+            "category": "Two Americas",
+            "typingSnippet": "The Tredegar Iron Works was a major iron foundry located in Richmond, Virginia. It was one of the few large factories in the entire South. While it showed that Southern industry was possible, most Southern wealth remained tied to agriculture and enslaved labor.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Tredegar_Iron_Works"
+        }
+    ],
     "timelineEvents": [],
     "practiceQuestions": [],
     "shortAnswerQuestions": [],
