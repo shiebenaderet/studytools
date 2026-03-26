@@ -151,6 +151,29 @@ body {
     margin-bottom: 12px;
 }
 
+.forgot-password {
+    margin-top: 12px;
+    font-size: 0.85rem;
+}
+
+.forgot-password a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.forgot-password a:hover {
+    text-decoration: underline;
+}
+
+.login-success {
+    background: #f0fdf4;
+    color: #166534;
+    padding: 10px;
+    border-radius: var(--radius);
+    font-size: 0.875rem;
+    margin-bottom: 12px;
+}
+
 /* ---- Dashboard Layout ---- */
 .dashboard {
     max-width: 1200px;

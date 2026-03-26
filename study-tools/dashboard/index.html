@@ -24,9 +24,11 @@
                     <input type="password" id="password" name="password" required placeholder="Password">
                 </div>
                 <div id="login-error" class="login-error hidden"></div>
+                <div id="login-success" class="login-success hidden"></div>
                 <button type="submit" class="btn btn-primary btn-block">
                     <i class="fas fa-sign-in-alt"></i> Sign In
                 </button>
+                <p class="forgot-password"><a href="#" onclick="event.preventDefault(); Dashboard.resetPassword();">Forgot password?</a></p>
             </form>
         </div>
     </div>

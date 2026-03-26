@@ -206,6 +206,38 @@ const Dashboard = {
         }
     },
 
+    async resetPassword() {
+        const emailInput = document.getElementById('email');
+        const email = emailInput.value.trim();
+        const errorEl = document.getElementById('login-error');
+        const successEl = document.getElementById('login-success');
+        errorEl.classList.add('hidden');
+        successEl.classList.add('hidden');
+
+        if (!email) {
+            errorEl.textContent = 'Enter your email address first, then click "Forgot password?"';
+            errorEl.classList.remove('hidden');
+            emailInput.focus();
+            return;
+        }
+
+        try {
+            const { error } = await this.supabase.auth.resetPasswordForEmail(email, {
+                redirectTo: window.location.origin + window.location.pathname
+            });
+            if (error) {
+                errorEl.textContent = error.message;
+                errorEl.classList.remove('hidden');
+                return;
+            }
+            successEl.textContent = 'Password reset email sent! Check your inbox.';
+            successEl.classList.remove('hidden');
+        } catch (err) {
+            errorEl.textContent = 'Could not send reset email. Please try again.';
+            errorEl.classList.remove('hidden');
+        }
+    },
+
     async logout() {
         try {
             await this.supabase.auth.signOut();
