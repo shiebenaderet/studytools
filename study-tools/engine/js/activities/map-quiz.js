@@ -224,7 +224,7 @@ StudyEngine.registerActivity({
         // Determine unlocked categories for mastery gating
         var unlockedCategories = null;
         if (typeof MasteryManager !== 'undefined') {
-            unlockedCategories = MasteryManager.getUnlockedCategories(this._config);
+            unlockedCategories = MasteryManager.getUnlockedCategories(this._config.unit.id, this._config);
         }
 
         var wrapper = document.createElement('div');
