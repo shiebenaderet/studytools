@@ -109,7 +109,7 @@ const ActivityTimer = {
             this._shownCapWarning = true;
             var actName = this._getActivityName(this._activityId);
             if (typeof StudyUtils !== 'undefined') {
-                StudyUtils.showToast(prefix + 'you\'ve been on ' + actName + ' for a while today \u2014 only a few more minutes of study time points left. Try mixing in another activity!', 'info', 8000);
+                StudyUtils.showToast(prefix + 'heads up! You have about 3 minutes of point-earning time left on ' + actName + ' today. You can still practice after that, but switch to a different activity to keep earning points!', 'info', 10000);
             }
         }
 
@@ -118,7 +118,7 @@ const ActivityTimer = {
             this._shownCapReached = true;
             var actName = this._getActivityName(this._activityId);
             if (typeof StudyUtils !== 'undefined') {
-                StudyUtils.showToast(prefix + 'you\'ve maxed out study time points for ' + actName + ' today! Try a different activity to keep earning points.', 'info', 8000);
+                StudyUtils.showToast(prefix + 'you\'ve earned all the points you can on ' + actName + ' for today! You can still practice here, but switch to a different activity to keep earning points.', 'warning', 12000);
             }
             this._showCapBanner();
         }
@@ -160,7 +160,7 @@ const ActivityTimer = {
         banner.appendChild(icon);
 
         var text = document.createElement('span');
-        text.textContent = 'You\'ve already earned today\'s study time points for ' + actName + '. You can still practice, but try ' + (suggestion || 'a different activity') + ' to keep earning points!';
+        text.textContent = 'No more points available on ' + actName + ' today (15 min daily limit per activity). You can still practice here, but switch to ' + (suggestion || 'a different activity') + ' to keep earning points!';
         banner.appendChild(text);
 
         if (suggestion) {
