@@ -520,7 +520,380 @@
         }
     ],
     "timelineEvents": [],
-    "practiceQuestions": [],
+    "practiceQuestions": [
+        {
+            "question": "The primary goal of the spoils system under Andrew Jackson was to:",
+            "options": [
+                "Create a merit-based government where the most qualified people got jobs",
+                "Reward loyal supporters with government positions regardless of experience",
+                "Reduce the size of the federal government",
+                "Strengthen the power of state governments over the federal government"
+            ],
+            "correct": 1,
+            "explanation": "The spoils system rewarded Jackson's political supporters with government jobs, replacing experienced officials with loyal allies.",
+            "topic": "Jackson's America"
+        },
+        {
+            "question": "The Nullification Crisis of 1832 was primarily caused by:",
+            "options": [
+                "Native Americans refusing to leave the Southeast",
+                "Mexico's refusal to recognize Texas independence",
+                "South Carolina's opposition to the protective tariff on imports",
+                "The conflict between Jackson and the Bank of the United States"
+            ],
+            "correct": 2,
+            "explanation": "South Carolina argued it could nullify (ignore) federal tariff laws it considered unfair, leading to a tense standoff with President Jackson.",
+            "topic": "Jackson's America"
+        },
+        {
+            "question": "Chief Justice John Marshall's ruling in Worcester v. Georgia established that:",
+            "options": [
+                "Native American tribes had no legal rights whatsoever",
+                "States could impose laws on Native American nations within their borders",
+                "Native American nations had sovereignty and states could not impose their laws on tribes",
+                "The federal government must relocate all Native Americans westward"
+            ],
+            "correct": 2,
+            "explanation": "The Supreme Court ruled that the Cherokee Nation was sovereign and Georgia had no authority over Cherokee lands, though Jackson ignored the decision.",
+            "topic": "Jackson's America"
+        },
+        {
+            "question": "The Indian Removal Act of 1830 authorized the federal government to:",
+            "options": [
+                "Protect Native American lands from white settlers",
+                "Relocate Native American tribes from the Southeast to territories west of the Mississippi River",
+                "Grant citizenship rights to Native Americans",
+                "Establish trading posts for peaceful commerce with Native nations"
+            ],
+            "correct": 1,
+            "explanation": "The Indian Removal Act gave Jackson legal authority to negotiate removal treaties and forcibly relocate southeastern tribes to lands west of the Mississippi.",
+            "topic": "Jackson's America"
+        },
+        {
+            "question": "The Five Civilized Tribes were called 'civilized' because they:",
+            "options": [
+                "Were more advanced militarily than other Native American nations",
+                "Had adopted European American practices like farming, written laws, and formal government",
+                "Had agreed to peaceful relocation without resistance",
+                "Had signed trade agreements with European nations"
+            ],
+            "correct": 1,
+            "explanation": "These tribes adopted European American customs including farming, written constitutions, and formal governments, yet were still forcibly removed from their lands.",
+            "topic": "Jackson's America"
+        },
+        {
+            "question": "Sequoyah's major contribution to Cherokee culture was:",
+            "options": [
+                "Leading the Cherokee Nation during the Trail of Tears",
+                "Creating a written syllabary for the Cherokee language",
+                "Signing the Indian Removal Act into law",
+                "Negotiating peace treaties with the United States"
+            ],
+            "correct": 1,
+            "explanation": "Sequoyah invented a writing system (syllabary) for the Cherokee language, allowing his people to read and write in their own language for the first time.",
+            "topic": "Jackson's America"
+        },
+        {
+            "question": "Manifest Destiny was the belief that:",
+            "options": [
+                "American expansion westward was inevitable, justified, and divinely ordained",
+                "The United States should respect Native American sovereignty",
+                "The federal government should remain small and weak",
+                "Slavery should expand into all western territories"
+            ],
+            "correct": 0,
+            "explanation": "Manifest Destiny held that Americans were destined by God to spread across the continent, which was used to justify westward expansion.",
+            "topic": "Westward Trails"
+        },
+        {
+            "question": "The Oregon Trail was significant because it:",
+            "options": [
+                "Was the battleground where Americans defeated the British",
+                "Provided a 2,000-mile route that allowed over 400,000 pioneers to migrate westward",
+                "Led directly to the Mexican-American War",
+                "Was where Native Americans defeated American settlers"
+            ],
+            "correct": 1,
+            "explanation": "The Oregon Trail stretched roughly 2,000 miles and served as the primary overland route for hundreds of thousands of settlers heading west.",
+            "topic": "Westward Trails"
+        },
+        {
+            "question": "The Texas War for Independence (1835-1836) resulted in:",
+            "options": [
+                "Texas remaining under Mexican control",
+                "American military defeat and withdrawal",
+                "The establishment of the independent Texas Republic under Sam Houston's leadership",
+                "British military intervention to prevent American expansion"
+            ],
+            "correct": 2,
+            "explanation": "After defeating Mexican forces at the Battle of San Jacinto, Texas became an independent republic with Sam Houston as its first president.",
+            "topic": "Westward Trails"
+        },
+        {
+            "question": "The Battle of the Alamo is remembered for:",
+            "options": [
+                "An American military victory over Mexico",
+                "Fewer than 200 Texian defenders dying against a much larger Mexican army",
+                "Proving that Mexican forces were weak and unprepared",
+                "Preventing further American settlement in Texas"
+            ],
+            "correct": 1,
+            "explanation": "The Alamo became a symbol of courage and sacrifice after a small group of Texian defenders fought to the death against Santa Anna's much larger army.",
+            "topic": "Westward Trails"
+        },
+        {
+            "question": "The slogan '54-40 or fight!' represented American demands for:",
+            "options": [
+                "All of Mexican territory up to the 54th parallel",
+                "The entire Oregon Territory up to the 54 degrees 40 minutes latitude line",
+                "Compensation payments of 54-40 dollars from Mexico",
+                "Control of 54 states and 40 territories"
+            ],
+            "correct": 1,
+            "explanation": "This slogan expressed the desire to claim all of Oregon Country up to the 54 degrees 40 minutes line, though the U.S. ultimately compromised at the 49th parallel.",
+            "topic": "Westward Trails"
+        },
+        {
+            "question": "The Mexican-American War (1846-1848) resulted in:",
+            "options": [
+                "Mexico gaining territory from the United States",
+                "Britain declaring war on the United States",
+                "The United States acquiring over one million square miles of Mexican territory",
+                "No territorial changes between the nations"
+            ],
+            "correct": 2,
+            "explanation": "The U.S. victory led to the Mexican Cession, adding over one million square miles including present-day California, Nevada, Utah, and Arizona.",
+            "topic": "War & Compromise"
+        },
+        {
+            "question": "The Gadsden Purchase of 1853 was significant because it:",
+            "options": [
+                "Returned territory to Mexico after the Mexican-American War",
+                "Completed the southern boundary of the continental United States",
+                "Led to British involvement in the American Southwest",
+                "Prevented the expansion of slavery into new territories"
+            ],
+            "correct": 1,
+            "explanation": "The Gadsden Purchase added a strip of land in present-day Arizona and New Mexico, finalizing the southern border of the continental United States.",
+            "topic": "War & Compromise"
+        },
+        {
+            "question": "The Wilmot Proviso attempted to:",
+            "options": [
+                "Expand slavery into western territories",
+                "Ban slavery in any territories acquired from Mexico",
+                "Protect slavery in existing Southern states",
+                "Require Mexico to end slavery before the war"
+            ],
+            "correct": 1,
+            "explanation": "The Wilmot Proviso proposed banning slavery in all territory gained from the Mexican-American War, but it failed to pass in the Senate.",
+            "topic": "War & Compromise"
+        },
+        {
+            "question": "The Compromise of 1850 included all of the following EXCEPT:",
+            "options": [
+                "California's admission as a free state",
+                "The Fugitive Slave Act",
+                "Popular sovereignty in some territories",
+                "The immediate abolition of slavery in all southern states"
+            ],
+            "correct": 3,
+            "explanation": "The Compromise of 1850 tried to balance free and slave state interests but never called for abolishing slavery in the South. It admitted California as free, enacted the Fugitive Slave Act, and allowed popular sovereignty in other territories.",
+            "topic": "War & Compromise"
+        },
+        {
+            "question": "The Fugitive Slave Act outraged many northerners because it:",
+            "options": [
+                "Freed all enslaved people in the South",
+                "Prohibited the slave trade but allowed slavery to continue",
+                "Required them to help capture and return escaped enslaved people to the South",
+                "Granted citizenship rights to formerly enslaved people"
+            ],
+            "correct": 2,
+            "explanation": "The Fugitive Slave Act forced northerners to assist in capturing and returning escaped enslaved people, making many feel personally complicit in slavery.",
+            "topic": "War & Compromise"
+        },
+        {
+            "question": "Uncle Tom's Cabin influenced American public opinion by:",
+            "options": [
+                "Defending the institution of slavery as moral and just",
+                "Depicting slavery's brutal realities and strengthening Northern opposition to it",
+                "Arguing that slavery should only exist in the South",
+                "Proposing a gradual end to slavery over 100 years"
+            ],
+            "correct": 1,
+            "explanation": "Harriet Beecher Stowe's novel vividly portrayed the horrors of slavery, turning many northerners against it and deepening the national divide.",
+            "topic": "War & Compromise"
+        },
+        {
+            "question": "The primary difference between free states and slave states involved:",
+            "options": [
+                "The size of the state's territory",
+                "The amount of federal representation each received",
+                "Whether slavery was legal within the state's borders",
+                "The trade policies each state could implement"
+            ],
+            "correct": 2,
+            "explanation": "The key distinction was whether a state's laws permitted slavery. The balance between free and slave states shaped congressional power and national politics.",
+            "topic": "War & Compromise"
+        },
+        {
+            "question": "The cotton gin, invented by Eli Whitney, had the unintended consequence of:",
+            "options": [
+                "Ending slavery throughout the South",
+                "Making cotton production less profitable",
+                "Increasing slavery's profitability and demand for enslaved workers",
+                "Shifting the South's economy away from agriculture"
+            ],
+            "correct": 2,
+            "explanation": "While the cotton gin made processing cotton faster, it also made cotton farming far more profitable, which dramatically increased the demand for enslaved labor.",
+            "topic": "Two Americas"
+        },
+        {
+            "question": "The Industrial Revolution transformed the North by creating:",
+            "options": [
+                "A primarily agricultural economy based on slave labor",
+                "Factory-based manufacturing and urbanization",
+                "Greater dependence on foreign trade and imports",
+                "A weaker economy dependent on southern agricultural exports"
+            ],
+            "correct": 1,
+            "explanation": "The Industrial Revolution shifted the North toward factory-based manufacturing, drawing workers into growing cities and creating an economy very different from the agricultural South.",
+            "topic": "Two Americas"
+        },
+        {
+            "question": "The Erie Canal (completed 1825) was significant because it:",
+            "options": [
+                "Connected Europe directly to the American Midwest",
+                "Reduced shipping costs by 90 percent and fueled Northern economic growth",
+                "Provided a direct route from the South to the Pacific Ocean",
+                "Established direct trade with Asian nations"
+            ],
+            "correct": 1,
+            "explanation": "The Erie Canal drastically cut shipping costs between the East Coast and the Great Lakes region, boosting trade and economic growth throughout the North.",
+            "topic": "Two Americas"
+        },
+        {
+            "question": "Eli Whitney's invention of interchangeable parts revolutionized manufacturing by:",
+            "options": [
+                "Making all goods identical and identical in quality",
+                "Allowing standardized components to fit together, enabling mass production",
+                "Eliminating the need for skilled workers entirely",
+                "Making factories unnecessary and returning to handcrafted goods"
+            ],
+            "correct": 1,
+            "explanation": "Interchangeable parts meant that standardized components could be assembled quickly by less-skilled workers, making mass production possible for the first time.",
+            "topic": "Two Americas"
+        },
+        {
+            "question": "The Seneca Falls Convention of 1848 launched the:",
+            "options": [
+                "Abolitionist movement",
+                "Industrial Revolution",
+                "Organized women's rights movement in America",
+                "Political party system"
+            ],
+            "correct": 2,
+            "explanation": "The Seneca Falls Convention was the first major gathering dedicated to women's rights, marking the formal beginning of the organized women's suffrage movement.",
+            "topic": "Two Americas"
+        },
+        {
+            "question": "The Declaration of Sentiments was important because it:",
+            "options": [
+                "Declared America's independence from Britain",
+                "Demanded women's rights including voting, modeled after the Declaration of Independence",
+                "Established the Constitution of the United States",
+                "Called for the immediate abolition of slavery"
+            ],
+            "correct": 1,
+            "explanation": "The Declaration of Sentiments deliberately echoed the Declaration of Independence to argue that women deserved the same rights as men, including the right to vote.",
+            "topic": "Two Americas"
+        },
+        {
+            "question": "Elizabeth Cady Stanton was a pioneering leader who:",
+            "options": [
+                "Opposed voting rights for women",
+                "Organized the Seneca Falls Convention and wrote the Declaration of Sentiments",
+                "Served as the first female president",
+                "Created the cotton gin"
+            ],
+            "correct": 1,
+            "explanation": "Elizabeth Cady Stanton was a driving force behind the women's rights movement, organizing the historic Seneca Falls Convention and authoring the Declaration of Sentiments.",
+            "topic": "Two Americas"
+        },
+        {
+            "question": "Sojourner Truth's 'Ain't I a Woman?' speech was significant because it:",
+            "options": [
+                "Defended slavery as a necessary system",
+                "Called for the exclusion of women from voting",
+                "Highlighted that Black women faced even greater discrimination than white women",
+                "Argued against westward expansion"
+            ],
+            "correct": 2,
+            "explanation": "Sojourner Truth powerfully argued that Black women experienced a double burden of racial and gender discrimination, broadening the conversation about equality.",
+            "topic": "Two Americas"
+        },
+        {
+            "question": "How did Manifest Destiny justify American expansion?",
+            "options": [
+                "By claiming that Native Americans had given permission",
+                "By arguing that expansion was inevitable and divinely ordained progress",
+                "By proving that American military was stronger than all other nations",
+                "By showing that expansion would end slavery"
+            ],
+            "correct": 1,
+            "explanation": "Manifest Destiny framed westward expansion as God's will and inevitable progress, giving Americans a sense of moral justification for taking land from others.",
+            "topic": "Connections"
+        },
+        {
+            "question": "The essential question 'Can one person be both a hero and a villain?' is best illustrated by:",
+            "options": [
+                "Andrew Jackson, who expanded democracy for white men while supporting Indian Removal",
+                "Abraham Lincoln, who preserved the Union but could not end slavery immediately",
+                "Eli Whitney, who invented the cotton gin to reduce labor but made slavery more profitable",
+                "All of the above: multiple figures in this era showed heroic and villainous characteristics"
+            ],
+            "correct": 3,
+            "explanation": "Many historical figures in this era had both positive and negative impacts. Jackson expanded democracy but forced Native removal; Whitney's inventions had unintended consequences for slavery.",
+            "topic": "Connections"
+        },
+        {
+            "question": "Which event best demonstrates how the desire for westward expansion led directly to conflict over slavery?",
+            "options": [
+                "The construction of the Erie Canal",
+                "The passage of the Wilmot Proviso after the Mexican-American War",
+                "The Seneca Falls Convention of 1848",
+                "The invention of the cotton gin"
+            ],
+            "correct": 1,
+            "explanation": "The Wilmot Proviso was proposed specifically because the Mexican-American War added vast new territories, forcing the nation to confront whether slavery would expand westward.",
+            "topic": "Connections"
+        },
+        {
+            "question": "Jackson's decision to destroy the Bank of the United States reflected his belief that:",
+            "options": [
+                "The country no longer needed a national currency",
+                "Wealthy elites had too much control over the economy and government",
+                "State banks were less trustworthy than a national bank",
+                "The Supreme Court had ordered the bank to close"
+            ],
+            "correct": 1,
+            "explanation": "Jackson viewed the Bank of the United States as a tool of the wealthy elite that gave too much economic power to a small group, so he vetoed its recharter.",
+            "topic": "Jackson's America"
+        },
+        {
+            "question": "President James K. Polk's presidency is most associated with:",
+            "options": [
+                "Ending the practice of slavery in new territories",
+                "Aggressively pursuing territorial expansion through Manifest Destiny",
+                "Strengthening relations with Mexico through diplomacy",
+                "Reducing the size of the United States military"
+            ],
+            "correct": 1,
+            "explanation": "Polk was a strong believer in Manifest Destiny who expanded U.S. territory significantly, including through the Mexican-American War and the Oregon Treaty.",
+            "topic": "Westward Trails"
+        }
+    ],
     "shortAnswerQuestions": [],
     "fillInBlankSentences": [],
     "typingPassages": [],
