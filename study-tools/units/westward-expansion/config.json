@@ -519,7 +519,104 @@
             "wikiUrl": "https://en.wikipedia.org/wiki/Tredegar_Iron_Works"
         }
     ],
-    "timelineEvents": [],
+    "timelineEvents": [
+        {
+            "id": 1,
+            "title": "Cotton Gin Invented",
+            "year": "1793",
+            "description": "Eli Whitney's cotton gin cleaned cotton 50 times faster than by hand, making cotton hugely profitable and increasing demand for enslaved labor in the South."
+        },
+        {
+            "id": 2,
+            "title": "Erie Canal Completed",
+            "year": "1825",
+            "description": "This 363-mile waterway connected the Hudson River to Lake Erie, dramatically reducing shipping costs and fueling Northern economic growth and western migration."
+        },
+        {
+            "id": 3,
+            "title": "Nullification Crisis",
+            "year": "1828-1833",
+            "description": "A conflict between the federal government and South Carolina over tariffs. South Carolina threatened to leave the Union, but a compromise tariff and the Force Bill resolved the crisis."
+        },
+        {
+            "id": 4,
+            "title": "Indian Removal Act",
+            "year": "May 1830",
+            "description": "A federal law that authorized the government to relocate Native American tribes from the Southeast to Oklahoma Territory. It led directly to the Trail of Tears."
+        },
+        {
+            "id": 5,
+            "title": "Worcester v. Georgia",
+            "year": "March 1832",
+            "description": "A Supreme Court ruling that Georgia could not impose its laws on the Cherokee Nation. It established tribal sovereignty, but President Jackson refused to enforce it."
+        },
+        {
+            "id": 6,
+            "title": "Texas War for Independence",
+            "year": "1835-1836",
+            "description": "American colonists rebelled against Mexican rule. The Battle of the Alamo and the Battle of San Jacinto led to the creation of the independent Texas Republic."
+        },
+        {
+            "id": 7,
+            "title": "Battle of the Alamo",
+            "year": "March 1836",
+            "description": "A famous battle where fewer than 200 Texian defenders died fighting Mexican forces. It became a powerful symbol of Texas resistance and sacrifice."
+        },
+        {
+            "id": 8,
+            "title": "Trail of Tears",
+            "year": "1838-1839",
+            "description": "The forced march of the Cherokee and other tribes to Oklahoma. Thousands died from disease, starvation, and cold during one of the most tragic events in American history."
+        },
+        {
+            "id": 9,
+            "title": "Oregon Treaty",
+            "year": "June 1846",
+            "description": "A diplomatic agreement between the U.S. and Britain that established the Oregon boundary at the 49th parallel, peacefully resolving the '54-40 or fight!' dispute."
+        },
+        {
+            "id": 10,
+            "title": "Mexican-American War",
+            "year": "1846-1848",
+            "description": "A U.S. military victory over Mexico that resulted in the acquisition of 525,000 square miles, including present-day California, Nevada, Utah, and parts of Arizona and New Mexico."
+        },
+        {
+            "id": 11,
+            "title": "Treaty of Guadalupe Hidalgo",
+            "year": "February 1848",
+            "description": "The treaty that ended the Mexican-American War. Mexico surrendered half its territory to the United States, and Mexican residents could become U.S. citizens or relocate."
+        },
+        {
+            "id": 12,
+            "title": "Seneca Falls Convention",
+            "year": "July 1848",
+            "description": "A historic women's rights convention in New York where the Declaration of Sentiments was adopted, demanding voting rights and legal equality for women."
+        },
+        {
+            "id": 13,
+            "title": "Compromise of 1850",
+            "year": "1850",
+            "description": "A series of laws that tried to balance slavery in the new territories. It admitted California as a free state and included the controversial Fugitive Slave Act."
+        },
+        {
+            "id": 14,
+            "title": "Publication of Uncle Tom's Cabin",
+            "year": "1852",
+            "description": "Harriet Beecher Stowe's novel depicted the horrors of slavery and sold 300,000 copies in its first year, strengthening Northern opposition to slavery."
+        },
+        {
+            "id": 15,
+            "title": "Industrial Revolution in the North",
+            "year": "1750s-1840s",
+            "description": "The development of factories, railroads, canals, and manufacturing in Northern states created an urban economy based on free labor and industrial production."
+        },
+        {
+            "id": 16,
+            "title": "Formation of Two Americas",
+            "year": "1830s-1850s",
+            "description": "The North developed as an industrial, urbanized, free-labor economy while the South remained agricultural, rural, and dependent on slavery, setting the stage for the Civil War."
+        }
+    ],
     "practiceQuestions": [
         {
             "question": "The primary goal of the spoils system under Andrew Jackson was to:",
