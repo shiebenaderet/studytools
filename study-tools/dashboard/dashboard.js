@@ -299,6 +299,9 @@ const Dashboard = {
             case 'leaderboard':
                 this.loadLeaderboardPreview(filters);
                 break;
+            case 'wiki':
+                this.loadWikiEntries(filters);
+                break;
         }
     },
 
@@ -2447,6 +2450,160 @@ const Dashboard = {
             console.error('Failed to delete student:', err);
             alert('Failed to delete student: ' + (err.message || 'Unknown error'));
         }
+    },
+
+    // ---- Wiki Entries Tab ----
+
+    async loadWikiEntries(filters) {
+        var container = document.getElementById('wiki-container');
+        container.textContent = '';
+        container.appendChild(this._loading());
+
+        try {
+            // Query all wiki entry progress records
+            var query = this.supabase
+                .from('progress')
+                .select('student_id, unit_id, data, updated_at')
+                .eq('activity', 'learn-mode-wiki-entries');
+
+            if (filters && filters.classId) {
+                var studentIds = await this.supabase.from('students').select('id').eq('class_id', filters.classId);
+                if (studentIds.data && studentIds.data.length > 0) {
+                    query = query.in('student_id', studentIds.data.map(s => s.id));
+                }
+            }
+
+            var { data: progressRows, error } = await query;
+            if (error) throw error;
+
+            // Get student names
+            var allStudentIds = (progressRows || []).map(r => r.student_id).filter(Boolean);
+            var uniqueStudentIds = allStudentIds.filter((id, idx) => allStudentIds.indexOf(id) === idx);
+            var studentNames = {};
+            if (uniqueStudentIds.length > 0) {
+                var { data: students } = await this.supabase
+                    .from('students')
+                    .select('id, first_name, last_name')
+                    .in('id', uniqueStudentIds);
+                if (students) {
+                    students.forEach(s => {
+                        studentNames[s.id] = (s.first_name || '') + ' ' + (s.last_name || '').charAt(0) + '.';
+                    });
+                }
+            }
+
+            // Flatten all entries from all students
+            var allEntries = [];
+            (progressRows || []).forEach(row => {
+                var entries = row.data;
+                if (!Array.isArray(entries)) return;
+                entries.forEach(entry => {
+                    allEntries.push({
+                        studentId: row.student_id,
+                        studentName: studentNames[row.student_id] || entry.author || 'Unknown',
+                        unitId: row.unit_id,
+                        term: entry.term || 'Unknown term',
+                        text: entry.text || '',
+                        date: entry.date || new Date(entry.timestamp || 0).toLocaleDateString(),
+                        timestamp: entry.timestamp || 0,
+                        starred: entry.starred || false
+                    });
+                });
+            });
+
+            // Sort by most recent first
+            allEntries.sort((a, b) => b.timestamp - a.timestamp);
+
+            container.textContent = '';
+
+            // Header
+            var header = document.createElement('div');
+            header.style.cssText = 'display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;';
+
+            var title = document.createElement('h2');
+            title.textContent = 'Wiki Entries (' + allEntries.length + ')';
+            title.style.cssText = 'margin:0;font-size:1.3rem;color:var(--text);';
+            header.appendChild(title);
+
+            // Group by term selector
+            var groupSelect = document.createElement('select');
+            groupSelect.style.cssText = 'padding:8px 12px;border-radius:var(--radius);border:1px solid var(--border);font-family:inherit;font-size:0.9rem;';
+            var allOption = document.createElement('option');
+            allOption.value = '';
+            allOption.textContent = 'All terms';
+            groupSelect.appendChild(allOption);
+
+            var termSet = {};
+            allEntries.forEach(e => { termSet[e.term] = (termSet[e.term] || 0) + 1; });
+            Object.keys(termSet).sort().forEach(term => {
+                var opt = document.createElement('option');
+                opt.value = term;
+                opt.textContent = term + ' (' + termSet[term] + ')';
+                groupSelect.appendChild(opt);
+            });
+
+            groupSelect.addEventListener('change', () => {
+                this._renderWikiEntries(container, allEntries, groupSelect.value, header);
+            });
+            header.appendChild(groupSelect);
+
+            container.appendChild(header);
+            this._renderWikiEntries(container, allEntries, '', header);
+
+        } catch (err) {
+            container.textContent = '';
+            container.appendChild(this._emptyState('fas fa-exclamation-circle', 'Could not load wiki entries: ' + (err.message || 'Unknown error')));
+        }
+    },
+
+    _renderWikiEntries(container, allEntries, filterTerm, header) {
+        // Remove old entries list if present
+        var oldList = container.querySelector('.wiki-entries-list');
+        if (oldList) oldList.remove();
+
+        var filtered = filterTerm ? allEntries.filter(e => e.term === filterTerm) : allEntries;
+
+        if (filtered.length === 0) {
+            var empty = this._emptyState('fas fa-pen-fancy', 'No wiki entries yet. Students can write entries after completing Learn Mode sessions.');
+            empty.className = 'wiki-entries-list';
+            container.appendChild(empty);
+            return;
+        }
+
+        var list = document.createElement('div');
+        list.className = 'wiki-entries-list';
+        list.style.cssText = 'display:flex;flex-direction:column;gap:12px;';
+
+        filtered.forEach(entry => {
+            var card = document.createElement('div');
+            card.style.cssText = 'background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;';
+
+            // Top row: term + student + date
+            var topRow = document.createElement('div');
+            topRow.style.cssText = 'display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;';
+
+            var termBadge = document.createElement('span');
+            termBadge.textContent = entry.term;
+            termBadge.style.cssText = 'background:var(--primary);color:white;padding:3px 10px;border-radius:12px;font-size:0.8rem;font-weight:600;';
+            topRow.appendChild(termBadge);
+
+            var meta = document.createElement('span');
+            meta.textContent = entry.studentName + ' \u00B7 ' + entry.date;
+            meta.style.cssText = 'color:var(--text-light);font-size:0.85rem;';
+            topRow.appendChild(meta);
+
+            card.appendChild(topRow);
+
+            // Entry text
+            var textEl = document.createElement('p');
+            textEl.textContent = entry.text;
+            textEl.style.cssText = 'margin:0;line-height:1.6;color:var(--text);font-size:0.95rem;';
+            card.appendChild(textEl);
+
+            list.appendChild(card);
+        });
+
+        container.appendChild(list);
     }
 };
 
