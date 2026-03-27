@@ -8,7 +8,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 
 [![Live Site](https://img.shields.io/badge/Live_Site-study.mrbsocialstudies.org-1669C5?style=for-the-badge&logo=google-chrome&logoColor=white)](https://study.mrbsocialstudies.org)
 [![License](https://img.shields.io/badge/License-Educational_Use-22c55e?style=for-the-badge)](#license)
-[![Version](https://img.shields.io/badge/Version-7.9.0-f59e0b?style=for-the-badge)](#)
+[![Version](https://img.shields.io/badge/Version-8.3.0-f59e0b?style=for-the-badge)](#)
 
 ---
 
@@ -25,6 +25,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 ### 📖 Study
 | Activity | Description |
 |----------|-------------|
+| **Learn Mode** | Guided study sessions inspired by Seneca Learning. Short interactive slides with adaptive depth (3 tiers), pre/post assessments, reflection prompts, Wiki Writer bonus challenge, 1.5x points multiplier |
 | **Textbook** | Interactive reading with 3 reading levels (Easier/On Grade/Challenge), collapsible sidebar navigation, vocab highlighting, primary source quotes, Key Idea callouts, Quick Checks, and reading progress tracking |
 | **Flashcards** | Anki-style spaced repetition with 3D flip animation, confidence rating, and "Make Your Own Example" |
 | **Short Answer** | Visual card-based question selector with topic images, color-coded categories, and key term chips |

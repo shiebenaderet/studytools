@@ -5,6 +5,48 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.3.0] - 2026-03-27
+
+### Added
+- **Learn Mode** — Guided study activity inspired by Seneca Learning. Presents content as short, interactive slides with adaptive depth (3-tier system), pre/post assessments with growth tracking, structured reflection prompts, and an always-available Wonder button for capturing student thinking
+- **Wiki Writer** — Bonus challenge after Learn Mode sessions where students write Simple Wikipedia-style entries for terms they studied (+10 min bonus points, 1 per day). Best entries can become real Wikipedia contributions
+- **Unit-specific reflection prompts** — Each unit has tailored reflection questions tied to its essential question and themes, loaded from config.json
+- **1.5x points multiplier** for Learn Mode (rewards deeper study over games)
+- **30-minute daily cap** for Learn Mode (vs 15 min for other activities)
+- **Dashboard: Wiki Entries tab** — View student wiki submissions filterable by term
+- **Dashboard: Forgot Password** — Password reset flow with email link and update form
+- **Dashboard: Unit filter** — Now loads all configured units from units.json
+
+### Added (Westward Expansion Unit)
+- **New unit: Westward Expansion & Reform** — Complete second study unit behind password gate
+- 56 vocabulary terms across 4 categories (Jackson's America, Westward Trails, War & Compromise, Two Americas)
+- 31 practice questions, 5 short answer, 16 fill-in-blank, 4 typing passages
+- 16 timeline events with month precision
+- 16 sourced historical quotes, 16 sourced fun facts (all URLs verified)
+- 4 textbook chapters with 20 sections at 3 reading levels each
+- 16 source analysis sources (cartoons, maps, painting, primary documents)
+- SVG territorial expansion map quiz with 8 accurate regions (Seterra-sourced paths)
+- 16 portrait images, 15 vocab images from Wikimedia Commons
+- Sunset Trail color theme (warm brown dark mode background)
+- 18 activities enabled (all except SIFT)
+
+### Changed
+- **Activity cap messages** — Now show dynamic remaining time and are clearer about the per-activity daily limit
+- **Terms mastered indicator** — Only shows on flashcards card, not every activity
+- **Textbook description** — Generic instead of "Early Republic" specific
+- **Dark mode backgrounds** — Unit-specific via theme config (bgDeep/bgCard/bgElevated/bgSurface)
+- **Source analysis** — Refactored for multi-unit support (unit-specific source data)
+- **Map quiz** — Refactored for multi-unit support (unit-specific regions, descriptions, draw order)
+- **Fun facts** — Engine now supports object format with text/source/sourceUrl (backward compatible with plain strings)
+- **Resources** — Added simpleWikiUrl override for terms without Simple Wikipedia pages
+
+### Fixed
+- Map quiz crash from missing unitId argument in MasteryManager call
+- Broken quote source URLs replaced with verified Wikiquote/TSHA links
+- Broken Avalon Law Yale URL for Declaration of Sentiments
+- Bear Flag Republic wiki links pointing to nonexistent pages
+- 19 Simple Wikipedia links for terms without pages
+
 ## [7.6.3] - 2026-03-11
 
 ### Added

@@ -323,6 +323,7 @@ Add any of these to your `activities` array:
 #### 📖 Study Activities
 | Activity ID | What it does | Required content |
 |------------|-------------|-----------------|
+| `learn-mode` | Guided study sessions with adaptive depth, pre/post assessments, reflection prompts, and Wiki Writer bonus. 1.5x points, 30-min cap. | `vocabulary`, `practiceQuestions`, `fillInBlankSentences`, textbook.json (optional, for Key Idea cards) |
 | `flashcards` | Spaced repetition flashcards | `vocabulary` |
 | `resources` | Searchable vocabulary reference | `vocabulary` |
 | `typing-practice` | Typing passages + per-term snippets | `vocabulary` (with `typingSnippet`), `typingPassages` |
@@ -363,6 +364,27 @@ Add any of these to your `activities` array:
 | `typingSnippet` | | 2-3 sentence passage for typing practice per term |
 | `imageUrl` | | Image shown on flashcards and resources (use local path, see below) |
 | `wikiUrl` | | Link to Wikipedia article for the Resources page |
+| `simpleWikiUrl` | | Override for Simple Wikipedia link (use when auto-generated link leads to nonexistent page) |
+
+### Learn Mode config fields
+
+These optional fields customize Learn Mode behavior per unit:
+
+| Field | Description |
+|-------|-------------|
+| `reflectionPrompts` | Array of reflection prompt strings. Use `{term}` as placeholder for the current term. If not set, generic prompts are used. |
+
+### Theme fields
+
+| Field | Description |
+|-------|-------------|
+| `theme.primary` | Primary color (buttons, headers) |
+| `theme.secondary` | Secondary color |
+| `theme.accent` | Accent color (highlights, badges) |
+| `theme.bgDeep` | Dark mode background color (optional, for visual distinction between units) |
+| `theme.bgCard` | Dark mode card background (optional) |
+| `theme.bgElevated` | Dark mode elevated surface (optional) |
+| `theme.bgSurface` | Dark mode surface color (optional) |
 
 ### Practice question fields
 
