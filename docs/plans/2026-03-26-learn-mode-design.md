@@ -315,6 +315,30 @@ ActivityTimer.start() takes a single activityId. The 1.5x multiplier must be app
 ### 5. Reflection Storage Growth
 Student reflection text stored in localStorage could grow large over time (especially with many students on shared devices). Strategy: keep only the last 50 reflections in localStorage; if Supabase sync is enabled, push older reflections to cloud and trim local storage.
 
+### 8. Requires Field Is Informational Only
+The engine's `requires` property on activities is never checked at runtime. Learn Mode must add its own defensive checks: if `config.vocabulary`, `config.practiceQuestions`, or `config.fillInBlankSentences` are missing or empty, show a friendly "Not enough content for Learn Mode" message instead of crashing.
+
+### 9. Cap/Multiplier Interaction Must Be Precise
+The 30-min cap applies to REAL wall-clock time (tracked via `data.ms`). The 1.5x multiplier applies ONLY to the credited amount passed to `ProgressManager.addStudyTime()`. So: cap check uses raw ms, but the `credited` value is `Math.min(ms, remaining) * 1.5`. The cap warning messages (80% at 24 min, 100% at 30 min) and banner text must be updated to show "30 min" instead of hardcoded "15 min" when the current activity is learn-mode.
+
+### 10. Fill-in-Blank Distractors
+Distractors for fill-in-blank cards come from other vocab term names in the same category. To avoid giving away the answer by length, select distractors that are similar in word count to the correct answer (e.g., if the answer is "Indian Removal Act" (3 words), pick other multi-word terms like "Worcester v. Georgia" as distractors, not single words like "tariff").
+
+### 11. Tier 2 Content Template
+Tier 2 auto-derivation format: show the formal `definition` as the main text, then below it show "For example: [example field]". Do NOT prepend "Think of it like..." to the example sentence. The reframing is structural (definition + example shown together in a clearer layout) rather than textual transformation.
+
+### 12. Session Persistence State
+A saved session stores: session mode, category selection, current slide index, pre-assessment results, questions used (to avoid repeats in post), per-term tier overrides for this session, and reflection responses. Sessions expire after 7 days (stale sessions are discarded on resume attempt). Stored under ProgressManager key `learn-mode-current-session`.
+
+### 13. Textbook Fetch Failure
+If textbook.json fails to load, Learn Mode degrades gracefully: Key Idea cards and Tier 3 Deep Dive content are skipped. The session continues with Term Cards and question cards only. No error shown to the student.
+
+### 14. Smart Review Algorithm
+Smart Review priority: (1) terms the student got wrong in their most recent Learn Mode session, (2) terms never seen in Learn Mode, (3) terms at Tier 1 (not yet advanced to Tier 2/3), (4) terms from flashcard "weak" list if available. If no prior data exists, fall back to prompting category selection or Full Unit.
+
+### 15. Completion Bonus
+Completing a session (reaching post-assessment) awards a flat bonus of 5 minutes of credited study time, added on top of the timer-based points. This bonus is NOT subject to the daily cap. It's a one-time reward per completed session per day (max 1 bonus per day to prevent farming).
+
 ### 6. Limited Question Pool for Single-Category Sessions
 If a student only has 1 category unlocked and chooses that category, the pre/post assessment draws from ~11 questions (7 MC + 4 FIB). This is enough for the adaptive assessment (typically needs 5-8), but pre and post combined need ~10-16 unique questions. May need to allow some question reuse between pre and post in small pools, or supplement with generated term-recall questions.
 
