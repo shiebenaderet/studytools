@@ -192,7 +192,7 @@ StudyEngine.registerActivity({
                 // Simple English Wikipedia link
                 var kiddle = document.createElement('a');
                 kiddle.className = 'res-link-btn res-link-kiddle';
-                kiddle.href = 'https://simple.wikipedia.org/wiki/' + encodeURIComponent(item.term.replace(/ /g, '_'));
+                kiddle.href = item.simpleWikiUrl || ('https://simple.wikipedia.org/wiki/' + encodeURIComponent(item.term.replace(/ /g, '_')));
                 kiddle.target = '_blank';
                 kiddle.rel = 'noopener noreferrer';
                 var kiddleIcon = document.createElement('i');
