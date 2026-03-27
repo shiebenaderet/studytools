@@ -15,6 +15,7 @@
         }
     },
     "activities": [
+        "learn-mode",
         "flashcards",
         "textbook",
         "resources",
