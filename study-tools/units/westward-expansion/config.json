@@ -43,7 +43,8 @@
             "example": "During the Election of 1828, Jacksonian Democracy brought thousands of common white men into politics for the first time, as many states dropped property requirements for voting.",
             "category": "Jackson's America",
             "typingSnippet": "Jacksonian Democracy was a political movement that expanded voting rights and government participation for common white men. However, women, enslaved people, and Native Americans were still left out. It changed American politics but only for some.",
-            "wikiUrl": "https://en.wikipedia.org/wiki/Jacksonian_democracy"
+            "wikiUrl": "https://en.wikipedia.org/wiki/Jacksonian_democracy",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Andrew_Jackson"
         },
         {
             "term": "spoils system",
@@ -52,7 +53,8 @@
             "example": "After winning the presidency, Andrew Jackson replaced many experienced government workers with his loyal supporters through the spoils system.",
             "category": "Jackson's America",
             "typingSnippet": "The spoils system was Andrew Jackson's practice of giving government jobs to his loyal supporters. He believed that everyday citizens could handle government work just as well as experienced officials. Critics said it led to corruption and incompetence.",
-            "wikiUrl": "https://en.wikipedia.org/wiki/Spoils_system"
+            "wikiUrl": "https://en.wikipedia.org/wiki/Spoils_system",
+            "simpleWikiUrl": "https://en.wikipedia.org/wiki/Spoils_system"
         },
         {
             "term": "tariff",
@@ -98,7 +100,8 @@
             "example": "The Election of 1828 was full of mudslinging, with opponents calling Jackson a murderer and attacking his wife's reputation.",
             "category": "Jackson's America",
             "typingSnippet": "Mudslinging is when politicians attack each other's character with harsh, sometimes untrue accusations. The 1828 election between Jackson and Adams was one of the nastiest in history. Both sides spread vicious rumors to try to win voters.",
-            "wikiUrl": "https://en.wikipedia.org/wiki/Mudslinging"
+            "wikiUrl": "https://en.wikipedia.org/wiki/Mudslinging",
+            "simpleWikiUrl": "https://en.wikipedia.org/wiki/Negative_campaigning"
         },
         {
             "term": "kitchen cabinet",
@@ -107,7 +110,8 @@
             "example": "Jackson's kitchen cabinet included newspaper editors and old friends who had more influence than his actual cabinet members.",
             "category": "Jackson's America",
             "typingSnippet": "Jackson's kitchen cabinet was an informal group of close friends and advisors he trusted more than his official cabinet. They met privately and had major influence on his decisions. Critics worried that unelected people had too much power over the president.",
-            "wikiUrl": "https://en.wikipedia.org/wiki/Kitchen_Cabinet"
+            "wikiUrl": "https://en.wikipedia.org/wiki/Kitchen_Cabinet",
+            "simpleWikiUrl": "https://en.wikipedia.org/wiki/Kitchen_Cabinet"
         },
         {
             "term": "nullification",
@@ -126,7 +130,8 @@
             "example": "The Force Bill showed that Jackson was willing to use the military to keep the Union together, even against a state that wanted to nullify federal law.",
             "category": "Jackson's America",
             "typingSnippet": "The Force Bill of 1833 gave President Jackson the power to use the military to enforce federal law in South Carolina. It was a strong message that no state could ignore the federal government. A compromise tariff was also passed to calm tensions.",
-            "wikiUrl": "https://en.wikipedia.org/wiki/Force_Bill"
+            "wikiUrl": "https://en.wikipedia.org/wiki/Force_Bill",
+            "simpleWikiUrl": "https://en.wikipedia.org/wiki/Force_Bill"
         },
         {
             "term": "Indian Removal Act",
@@ -145,7 +150,8 @@
             "example": "In Worcester v. Georgia, the Supreme Court upheld Cherokee sovereignty, but President Jackson reportedly refused to enforce the ruling.",
             "category": "Jackson's America",
             "typingSnippet": "Worcester v. Georgia was a landmark 1832 Supreme Court case that protected Cherokee sovereignty. Chief Justice Marshall ruled that Georgia had no authority over the Cherokee Nation. However, President Jackson refused to enforce the decision, and removal continued.",
-            "wikiUrl": "https://en.wikipedia.org/wiki/Worcester_v._Georgia"
+            "wikiUrl": "https://en.wikipedia.org/wiki/Worcester_v._Georgia",
+            "simpleWikiUrl": "https://en.wikipedia.org/wiki/Worcester_v._Georgia"
         },
         {
             "term": "Five Civilized Tribes",
@@ -164,7 +170,8 @@
             "category": "Jackson's America",
             "typingSnippet": "The Bank of the United States was a powerful national bank that managed the country's money. President Jackson believed it gave too much power to the wealthy and vetoed its recharter. He then withdrew federal funds, effectively destroying the bank.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Second_Bank_of_the_United_States",
-            "imageUrl": "../units/westward-expansion/images/vocab/bank_war.jpg"
+            "imageUrl": "../units/westward-expansion/images/vocab/bank_war.jpg",
+            "simpleWikiUrl": "https://en.wikipedia.org/wiki/Second_Bank_of_the_United_States"
         },
         {
             "term": "Sequoyah",
@@ -210,7 +217,8 @@
             "example": "The Texas War for Independence ended with Sam Houston's victory at the Battle of San Jacinto, creating the Republic of Texas in 1836.",
             "category": "Westward Trails",
             "typingSnippet": "The Texas War for Independence was a revolt by American settlers against Mexican rule in 1835 and 1836. After the devastating loss at the Alamo, Sam Houston led the Texians to victory at San Jacinto. Texas became an independent republic before joining the United States.",
-            "wikiUrl": "https://en.wikipedia.org/wiki/Texas_Revolution"
+            "wikiUrl": "https://en.wikipedia.org/wiki/Texas_Revolution",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Texas_Revolution"
         },
         {
             "term": "diplomacy",
@@ -238,7 +246,8 @@
             "example": "South Pass allowed wagon trains to cross the Rocky Mountains safely, making westward migration along the Oregon Trail possible.",
             "category": "Westward Trails",
             "typingSnippet": "South Pass was a gentle gap in the Rocky Mountains wide enough for wagon trains to cross. Its discovery was a game-changer for westward migration. Without South Pass, the Oregon Trail and the great westward movement might never have happened.",
-            "wikiUrl": "https://en.wikipedia.org/wiki/South_Pass_(Wyoming)"
+            "wikiUrl": "https://en.wikipedia.org/wiki/South_Pass_(Wyoming)",
+            "simpleWikiUrl": "https://en.wikipedia.org/wiki/South_Pass_(Wyoming)"
         },
         {
             "term": "the Alamo",
@@ -266,7 +275,8 @@
             "example": "Santa Anna led thousands of Mexican soldiers to victory at the Alamo, but was captured after his defeat at San Jacinto.",
             "category": "Westward Trails",
             "typingSnippet": "Santa Anna was a Mexican general and president who led the attack on the Alamo in 1836. Though he won that battle, he was later defeated and captured at San Jacinto. His loss led to Texas becoming an independent republic.",
-            "wikiUrl": "https://en.wikipedia.org/wiki/Antonio_L%C3%B3pez_de_Santa_Anna"
+            "wikiUrl": "https://en.wikipedia.org/wiki/Antonio_L%C3%B3pez_de_Santa_Anna",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Antonio_L%C3%B3pez_de_Santa_Anna"
         },
         {
             "term": "Stephen F. Austin",
@@ -303,7 +313,8 @@
             "category": "Westward Trails",
             "typingSnippet": "The slogan '54-40 or fight!' demanded that the U.S. claim the entire Oregon Territory up to the 54 degrees 40 minutes line. It was a popular rallying cry during the 1844 election. In the end, diplomacy won out and the boundary was set at the 49th parallel.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Fifty-four_Forty_or_Fight",
-            "imageUrl": "../units/westward-expansion/images/vocab/oregon_treaty.png"
+            "imageUrl": "../units/westward-expansion/images/vocab/oregon_treaty.png",
+            "simpleWikiUrl": "https://en.wikipedia.org/wiki/Fifty-four_Forty_or_Fight"
         },
         {
             "term": "Mexican-American War",
@@ -349,7 +360,8 @@
             "example": "The disputed land between the Nueces River and the Rio Grande became the flashpoint that triggered the Mexican-American War in 1846.",
             "category": "War & Compromise",
             "typingSnippet": "The Nueces River was at the center of a border dispute that sparked the Mexican-American War. Mexico insisted the Texas border ended at the Nueces, while the U.S. claimed the border was further south at the Rio Grande. This disagreement led to armed conflict.",
-            "wikiUrl": "https://en.wikipedia.org/wiki/Nueces_River"
+            "wikiUrl": "https://en.wikipedia.org/wiki/Nueces_River",
+            "simpleWikiUrl": "https://en.wikipedia.org/wiki/Nueces_River"
         },
         {
             "term": "Bear Flag Republic",
@@ -396,7 +408,8 @@
             "example": "The Fugitive Slave Act of 1850 outraged many Northerners who were forced to help return escaped enslaved people, turning more people against slavery.",
             "category": "War & Compromise",
             "typingSnippet": "The Fugitive Slave Act required Northern citizens to help capture and return escaped enslaved people to the South. Anyone who refused could be fined or jailed. This law angered many Northerners and actually increased support for the abolition of slavery.",
-            "wikiUrl": "https://en.wikipedia.org/wiki/Fugitive_Slave_Act_of_1850"
+            "wikiUrl": "https://en.wikipedia.org/wiki/Fugitive_Slave_Act_of_1850",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Fugitive_Slave_Act_of_1850"
         },
         {
             "term": "Uncle Tom's Cabin",
@@ -414,7 +427,8 @@
             "example": "Every time a new state joined the Union, Congress fought over whether it would be a free state or a slave state to maintain the balance of power.",
             "category": "War & Compromise",
             "typingSnippet": "Free states were states where slavery was banned, while slave states allowed it. The balance between the two was critical because it determined which side had more power in Congress. Every new state admitted to the Union sparked fierce debate over this balance.",
-            "wikiUrl": "https://en.wikipedia.org/wiki/Slave_states_and_free_states"
+            "wikiUrl": "https://en.wikipedia.org/wiki/Slave_states_and_free_states",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Slave_states_and_free_states"
         },
         {
             "term": "Industrial Revolution",
@@ -452,7 +466,8 @@
             "example": "The South's agrarian economy depended almost entirely on growing and selling cash crops like cotton, unlike the North's factory-based economy.",
             "category": "Two Americas",
             "typingSnippet": "Agrarian means related to farming and agriculture. The Southern economy was deeply agrarian, centered on growing cash crops on large plantations. This farming lifestyle stood in sharp contrast to the industrialized, factory-driven economy of the North.",
-            "wikiUrl": "https://en.wikipedia.org/wiki/Agrarianism"
+            "wikiUrl": "https://en.wikipedia.org/wiki/Agrarianism",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Agriculture"
         },
         {
             "term": "push factor / pull factor",
@@ -461,7 +476,8 @@
             "example": "Poverty in crowded Eastern cities was a push factor, while the promise of free land in the West was a pull factor that drove thousands of families to migrate.",
             "category": "Two Americas",
             "typingSnippet": "Push factors are reasons people leave a place, like poverty or war. Pull factors are reasons people move to a new place, like jobs or free land. During westward expansion, both push and pull factors drove families to pack up and head west.",
-            "wikiUrl": "https://en.wikipedia.org/wiki/Push%E2%80%93pull_factor"
+            "wikiUrl": "https://en.wikipedia.org/wiki/Push%E2%80%93pull_factor",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Immigration"
         },
         {
             "term": "Seneca Falls Convention",
@@ -481,7 +497,8 @@
             "category": "Two Americas",
             "typingSnippet": "The Declaration of Sentiments was written for the Seneca Falls Convention in 1848. It was modeled after the Declaration of Independence but added women to the famous phrase 'all men are created equal.' It demanded voting rights and legal equality for women.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Declaration_of_Sentiments",
-            "imageUrl": "../units/westward-expansion/images/vocab/declaration_of_sentiments.jpg"
+            "imageUrl": "../units/westward-expansion/images/vocab/declaration_of_sentiments.jpg",
+            "simpleWikiUrl": "https://en.wikipedia.org/wiki/Declaration_of_Sentiments"
         },
         {
             "term": "Elizabeth Cady Stanton",
@@ -508,7 +525,8 @@
             "example": "Northern industrialists built large factories that employed thousands of workers, creating wealth and economic power that rivaled Southern plantation owners.",
             "category": "Two Americas",
             "typingSnippet": "An industrialist is a wealthy factory owner who profits from manufacturing. During the Industrial Revolution, Northern industrialists built empires of factories and railroads. They became some of the richest and most powerful people in the country.",
-            "wikiUrl": "https://en.wikipedia.org/wiki/Industrialist"
+            "wikiUrl": "https://en.wikipedia.org/wiki/Industrialist",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Industrial_Revolution"
         },
         {
             "term": "deforestation",
@@ -554,7 +572,8 @@
             "example": "The Tredegar Iron Works in Richmond was one of the only large factories in the South, proving the region could industrialize even though most investment went to agriculture.",
             "category": "Two Americas",
             "typingSnippet": "The Tredegar Iron Works was a major iron foundry located in Richmond, Virginia. It was one of the few large factories in the entire South. While it showed that Southern industry was possible, most Southern wealth remained tied to agriculture and enslaved labor.",
-            "wikiUrl": "https://en.wikipedia.org/wiki/Tredegar_Iron_Works"
+            "wikiUrl": "https://en.wikipedia.org/wiki/Tredegar_Iron_Works",
+            "simpleWikiUrl": "https://en.wikipedia.org/wiki/Tredegar_Iron_Works"
         }
     ],
     "timelineEvents": [
