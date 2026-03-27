@@ -1736,6 +1736,124 @@ StudyEngine.registerActivity({
         // Completion bonus
         this._checkCompletionBonus(wrap);
 
+        // Wiki Writer bonus challenge
+        var wikiBonus = this._el('div');
+        wikiBonus.style.cssText = 'background:var(--bg-elevated);border:1px solid var(--border-card);border-radius:var(--radius-md);padding:20px;margin-top:20px;text-align:left;';
+
+        var wikiIcon = this._icon('fas fa-pen-fancy');
+        wikiIcon.style.cssText = 'color:var(--accent);font-size:1.3rem;margin-bottom:8px;display:block;text-align:center;';
+        wikiBonus.appendChild(wikiIcon);
+
+        var wikiTitle = this._el('div', null, 'Bonus Challenge: Write a Wiki Entry');
+        wikiTitle.style.cssText = 'color:var(--text-primary);font-weight:700;font-size:1.05rem;margin-bottom:6px;text-align:center;';
+        wikiBonus.appendChild(wikiTitle);
+
+        var wikiDesc = this._el('div', null, 'Write a Simple Wikipedia-style explanation of a term you just studied. The best entries could become real Wikipedia articles! Earn +10 min bonus points.');
+        wikiDesc.style.cssText = 'color:var(--text-secondary);font-size:0.9rem;line-height:1.5;margin-bottom:14px;text-align:center;';
+        wikiBonus.appendChild(wikiDesc);
+
+        // Check if already submitted today
+        var wikiToday = 'learn-mode-wiki-' + new Date().toDateString();
+        var alreadySubmitted = ProgressManager.load(this._config.unit.id, wikiToday);
+
+        if (alreadySubmitted) {
+            var alreadyMsg = this._el('div', null, 'You already submitted a Wiki entry today. Come back tomorrow for another!');
+            alreadyMsg.style.cssText = 'color:var(--text-secondary);font-size:0.9rem;text-align:center;font-style:italic;';
+            wikiBonus.appendChild(alreadyMsg);
+        } else {
+            // Term picker
+            var termLabel = this._el('div', null, 'Choose a term to write about:');
+            termLabel.style.cssText = 'color:var(--text-secondary);font-size:0.85rem;margin-bottom:8px;';
+            wikiBonus.appendChild(termLabel);
+
+            var termSelect = document.createElement('select');
+            termSelect.style.cssText = 'width:100%;padding:10px 12px;border-radius:var(--radius-md);background:var(--bg-deep);color:var(--text-primary);border:1px solid rgba(255,255,255,0.15);font-size:0.95rem;font-family:inherit;margin-bottom:12px;';
+
+            // Use terms from the session
+            var sessionTerms = [];
+            var slides = this._slides || [];
+            for (var s = 0; s < slides.length; s++) {
+                if (slides[s].type === 'term' && slides[s].data && slides[s].data.term) {
+                    var termName = slides[s].data.term;
+                    if (sessionTerms.indexOf(termName) === -1) sessionTerms.push(termName);
+                }
+            }
+            for (var st = 0; st < sessionTerms.length; st++) {
+                var opt = document.createElement('option');
+                opt.value = sessionTerms[st];
+                opt.textContent = sessionTerms[st];
+                termSelect.appendChild(opt);
+            }
+            wikiBonus.appendChild(termSelect);
+
+            // Writing template
+            var templateHint = this._el('div', null, 'Write 3-5 sentences explaining this term for someone who has never heard of it. Use simple, clear English.');
+            templateHint.style.cssText = 'color:var(--text-secondary);font-size:0.85rem;margin-bottom:8px;font-style:italic;';
+            wikiBonus.appendChild(templateHint);
+
+            var wikiTextarea = document.createElement('textarea');
+            wikiTextarea.placeholder = 'Write your Simple Wikipedia entry here...';
+            wikiTextarea.style.cssText = 'width:100%;min-height:120px;padding:12px;border-radius:var(--radius-md);background:var(--bg-deep);color:var(--text-primary);border:1px solid rgba(255,255,255,0.1);font-size:0.95rem;resize:vertical;font-family:inherit;box-sizing:border-box;line-height:1.6;';
+            wikiBonus.appendChild(wikiTextarea);
+
+            var wikiSubmitRow = this._el('div');
+            wikiSubmitRow.style.cssText = 'display:flex;justify-content:center;margin-top:12px;';
+
+            var wikiSubmitBtn = this._el('button', null, 'Submit Wiki Entry (+10 min points)');
+            wikiSubmitBtn.style.cssText = 'padding:10px 24px;border-radius:var(--radius-md);background:var(--accent);color:#fff;border:none;font-size:0.95rem;cursor:pointer;font-weight:600;';
+            wikiSubmitBtn.addEventListener('click', function() {
+                var text = wikiTextarea.value;
+                var term = termSelect.value;
+                if (!text || text.trim().length < 20) {
+                    if (typeof StudyUtils !== 'undefined') {
+                        StudyUtils.showToast('Please write at least a few sentences!', 'info', 3000);
+                    }
+                    return;
+                }
+
+                // Save the wiki entry
+                var unitId = self._config.unit.id;
+                var entries = ProgressManager.load(unitId, 'learn-mode-wiki-entries') || [];
+                var studentName = typeof ProgressManager !== 'undefined' ? ProgressManager.getFirstName() : '';
+                entries.push({
+                    term: term,
+                    text: text.trim(),
+                    author: studentName || 'Anonymous',
+                    timestamp: Date.now(),
+                    date: new Date().toLocaleDateString()
+                });
+                // Keep last 100 entries
+                if (entries.length > 100) entries = entries.slice(entries.length - 100);
+                ProgressManager.save(unitId, 'learn-mode-wiki-entries', entries);
+
+                // Award bonus points (10 min = 600000ms)
+                ProgressManager.addStudyTime(unitId, 600000);
+
+                // Mark as submitted today
+                ProgressManager.save(unitId, wikiToday, true);
+
+                // Replace the form with a thank you
+                wikiBonus.textContent = '';
+                var thankIcon = self._icon('fas fa-star');
+                thankIcon.style.cssText = 'color:var(--accent);font-size:2rem;display:block;text-align:center;margin-bottom:8px;';
+                wikiBonus.appendChild(thankIcon);
+                var thankMsg = self._el('div', null, 'Wiki entry submitted! +10 min bonus points awarded.');
+                thankMsg.style.cssText = 'color:#2ecc71;font-weight:600;font-size:1rem;text-align:center;margin-bottom:6px;';
+                wikiBonus.appendChild(thankMsg);
+                var thankDetail = self._el('div', null, 'Your entry for "' + term + '" has been saved. Mr. B will review the best entries!');
+                thankDetail.style.cssText = 'color:var(--text-secondary);font-size:0.9rem;text-align:center;';
+                wikiBonus.appendChild(thankDetail);
+
+                if (typeof StudyUtils !== 'undefined') {
+                    StudyUtils.showToast('Wiki entry saved! +10 min bonus points!', 'success', 4000);
+                }
+            });
+            wikiSubmitRow.appendChild(wikiSubmitBtn);
+            wikiBonus.appendChild(wikiSubmitRow);
+        }
+
+        wrap.appendChild(wikiBonus);
+
         // Action buttons
         var btnRow = this._el('div');
         btnRow.style.cssText = 'display:flex;gap:12px;justify-content:center;margin-top:20px;';
