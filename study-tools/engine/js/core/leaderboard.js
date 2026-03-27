@@ -4,10 +4,11 @@ var LeaderboardManager = {
     // Diminishing study-time points: 1pt/min for 0-30, 0.5pt/min for 31-60, 0.25pt/min for 61-100, 0 after 100
     calculateTimePts(studyTimeSeconds) {
         var mins = Math.floor((studyTimeSeconds || 0) / 60);
-        if (mins <= 30) return mins;
-        if (mins <= 60) return 30 + Math.floor((mins - 30) * 0.5);
-        if (mins <= 100) return 45 + Math.floor((mins - 60) * 0.25);
-        return 55; // hard cap
+        // Diminishing returns but NO hard cap — students always earn something
+        if (mins <= 30) return mins;                                          // 1 pt/min (30 pts by 30 min)
+        if (mins <= 60) return 30 + Math.floor((mins - 30) * 0.5);          // 0.5 pt/min (45 pts by 60 min)
+        if (mins <= 120) return 45 + Math.floor((mins - 60) * 0.25);        // 0.25 pt/min (60 pts by 120 min)
+        return 60 + Math.floor((mins - 120) * 0.1);                         // 0.1 pt/min forever after
     },
 
     // Calculate composite score: vocab mastered * 10 + best test score + study time (diminishing) + map bonus
