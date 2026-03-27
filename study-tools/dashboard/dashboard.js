@@ -128,11 +128,24 @@ const Dashboard = {
             return;
         }
 
+        // Listen for auth state changes (catches password recovery redirect)
+        this.supabase.auth.onAuthStateChange(function(event, session) {
+            if (event === 'PASSWORD_RECOVERY') {
+                Dashboard._showPasswordUpdateForm();
+            }
+        });
+
         try {
             const { data: { session } } = await this.supabase.auth.getSession();
             if (session && this._allowedTeachers.indexOf(session.user.email.toLowerCase()) !== -1) {
                 this.showDashboard();
             } else if (session) {
+                // Could be a recovery session - check URL hash
+                var hash = window.location.hash;
+                if (hash && hash.indexOf('type=recovery') !== -1) {
+                    this._showPasswordUpdateForm();
+                    return;
+                }
                 await this.supabase.auth.signOut();
                 this.showLogin();
             } else {
@@ -142,6 +155,114 @@ const Dashboard = {
             console.error('Session check failed:', err);
             this.showLogin();
         }
+    },
+
+    _showPasswordUpdateForm() {
+        var loginScreen = document.getElementById('login-screen');
+        loginScreen.classList.remove('hidden');
+        document.getElementById('dashboard').classList.add('hidden');
+
+        var card = loginScreen.querySelector('.login-card');
+        card.textContent = '';
+
+        var title = document.createElement('h1');
+        var icon = document.createElement('i');
+        icon.className = 'fas fa-key';
+        title.appendChild(icon);
+        title.appendChild(document.createTextNode(' Set New Password'));
+        title.style.cssText = 'color:var(--primary);margin-bottom:6px;font-size:1.5rem;';
+        card.appendChild(title);
+
+        var subtitle = document.createElement('p');
+        subtitle.textContent = 'Enter your new password below.';
+        subtitle.style.cssText = 'color:var(--text-light);margin-bottom:28px;font-size:0.95rem;';
+        card.appendChild(subtitle);
+
+        var group1 = document.createElement('div');
+        group1.className = 'form-group';
+        var label1 = document.createElement('label');
+        label1.textContent = 'New Password';
+        label1.setAttribute('for', 'new-password');
+        group1.appendChild(label1);
+        var input1 = document.createElement('input');
+        input1.type = 'password';
+        input1.id = 'new-password';
+        input1.placeholder = 'Enter new password';
+        input1.required = true;
+        input1.minLength = 6;
+        group1.appendChild(input1);
+        card.appendChild(group1);
+
+        var group2 = document.createElement('div');
+        group2.className = 'form-group';
+        var label2 = document.createElement('label');
+        label2.textContent = 'Confirm Password';
+        label2.setAttribute('for', 'confirm-password');
+        group2.appendChild(label2);
+        var input2 = document.createElement('input');
+        input2.type = 'password';
+        input2.id = 'confirm-password';
+        input2.placeholder = 'Confirm new password';
+        input2.required = true;
+        group2.appendChild(input2);
+        card.appendChild(group2);
+
+        var errorEl = document.createElement('div');
+        errorEl.id = 'pw-update-error';
+        errorEl.className = 'login-error hidden';
+        card.appendChild(errorEl);
+
+        var successEl = document.createElement('div');
+        successEl.id = 'pw-update-success';
+        successEl.className = 'login-success hidden';
+        card.appendChild(successEl);
+
+        var btn = document.createElement('button');
+        btn.className = 'btn btn-primary btn-block';
+        btn.type = 'button';
+        var btnIcon = document.createElement('i');
+        btnIcon.className = 'fas fa-save';
+        btn.appendChild(btnIcon);
+        btn.appendChild(document.createTextNode(' Update Password'));
+        btn.addEventListener('click', async function() {
+            var pw = input1.value;
+            var confirm = input2.value;
+            errorEl.classList.add('hidden');
+            successEl.classList.add('hidden');
+
+            if (!pw || pw.length < 6) {
+                errorEl.textContent = 'Password must be at least 6 characters.';
+                errorEl.classList.remove('hidden');
+                return;
+            }
+            if (pw !== confirm) {
+                errorEl.textContent = 'Passwords do not match.';
+                errorEl.classList.remove('hidden');
+                return;
+            }
+
+            try {
+                var { error } = await Dashboard.supabase.auth.updateUser({ password: pw });
+                if (error) {
+                    errorEl.textContent = error.message;
+                    errorEl.classList.remove('hidden');
+                    return;
+                }
+                successEl.textContent = 'Password updated! Redirecting to dashboard...';
+                successEl.classList.remove('hidden');
+                // Clear the hash and reload after a moment
+                setTimeout(function() {
+                    window.location.hash = '';
+                    window.location.reload();
+                }, 2000);
+            } catch (err) {
+                errorEl.textContent = 'Could not update password. Please try again.';
+                errorEl.classList.remove('hidden');
+            }
+        });
+        card.appendChild(btn);
+
+        input1.focus();
     },
 
     showLogin() {
@@ -222,8 +343,9 @@ const Dashboard = {
         }
 
         try {
+            var dashboardUrl = window.location.origin + '/study-tools/dashboard/';
             const { error } = await this.supabase.auth.resetPasswordForEmail(email, {
-                redirectTo: window.location.origin + window.location.pathname
+                redirectTo: dashboardUrl
             });
             if (error) {
                 errorEl.textContent = error.message;
