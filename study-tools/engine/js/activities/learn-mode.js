@@ -21,12 +21,14 @@ StudyEngine.registerActivity({
     _sessionStartTime: null,
 
     REFLECTION_PROMPTS: [
-        'What connection can you make between {term} and your life?',
-        'How would you explain {term} to a friend in your own words?',
-        'Why do you think {term} matters in history?',
-        'What surprised you most about {term}?',
-        'How does {term} connect to something else you have learned?',
-        'If you could ask one question about {term}, what would it be?'
+        'Think about {term}. Can you connect it to anything happening in the world today?',
+        'How would you explain {term} to a 5th grader? Try to keep it simple.',
+        'You just learned about {term}. What is one thing you want to remember about it?',
+        'If you were alive during the time of {term}, how might your life be different?',
+        'What do you think was the most important effect of {term}? Why?',
+        'What questions do you still have about {term}? Write them down for class discussion.',
+        'How does {term} relate to something else we have studied this year?',
+        'Do you think {term} was fair or unfair? Explain your thinking.'
     ],
 
     // ─── Utility helpers ────────────────────────────────────────
