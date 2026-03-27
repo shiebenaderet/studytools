@@ -11,7 +11,9 @@ const ActivityTimer = {
     _shownCapWarning: false,
     _shownCapReached: false,
     IDLE_TIMEOUT: 60000, // pause after 60s of no interaction
-    DAILY_ACTIVITY_CAP_MS: 15 * 60 * 1000, // 15 min per activity per day
+    DAILY_ACTIVITY_CAP_MS: 15 * 60 * 1000, // 15 min per activity per day (default)
+    LEARN_MODE_CAP_MS: 30 * 60 * 1000, // 30 min for learn-mode
+    LEARN_MODE_MULTIPLIER: 1.5, // 1.5x points for learn-mode
 
     start(unitId, activityId) {
         this.stop(); // save any previous session
@@ -50,6 +52,11 @@ const ActivityTimer = {
         this._activityId = null;
     },
 
+    _getActivityCapMs(activityId) {
+        if (activityId === 'learn-mode') return this.LEARN_MODE_CAP_MS;
+        return this.DAILY_ACTIVITY_CAP_MS;
+    },
+
     // Add study time respecting per-activity daily cap
     _addCappedStudyTime(unitId, activityId, ms) {
         if (!activityId) {
@@ -62,10 +69,13 @@ const ActivityTimer = {
         if (data.date !== today) {
             data = { date: today, ms: 0 };
         }
-        var remaining = Math.max(0, this.DAILY_ACTIVITY_CAP_MS - data.ms);
+        var capMs = this._getActivityCapMs(activityId);
+        var remaining = Math.max(0, capMs - data.ms);
         var credited = Math.min(ms, remaining);
+        // Apply points multiplier for learn-mode (cap is on real time, multiplier on credited points)
         if (credited > 0) {
-            ProgressManager.addStudyTime(unitId, credited);
+            var multiplied = activityId === 'learn-mode' ? Math.round(credited * this.LEARN_MODE_MULTIPLIER) : credited;
+            ProgressManager.addStudyTime(unitId, multiplied);
         }
         data.ms += ms; // track total time even past cap (for display)
         ProgressManager.save(unitId, key, data);
@@ -75,7 +85,7 @@ const ActivityTimer = {
         var today = new Date().toDateString();
         var key = 'dailyActivityTime_' + activityId;
         var data = ProgressManager.load(unitId, key) || { date: null, ms: 0 };
-        return data.date === today && data.ms >= this.DAILY_ACTIVITY_CAP_MS;
+        return data.date === today && data.ms >= this._getActivityCapMs(activityId);
     },
 
     _getActivityTodayMs(unitId, activityId) {
@@ -100,7 +110,7 @@ const ActivityTimer = {
     _checkActivityCap() {
         if (!this._activityId || !this._unitId) return;
         var todayMs = this._getActivityTodayMs(this._unitId, this._activityId) + this._elapsed;
-        var capMs = this.DAILY_ACTIVITY_CAP_MS;
+        var capMs = this._getActivityCapMs(this._activityId);
         var firstName = typeof ProgressManager !== 'undefined' ? ProgressManager.getFirstName() : '';
         var prefix = firstName ? firstName + ', ' : '';
 
@@ -109,7 +119,8 @@ const ActivityTimer = {
             this._shownCapWarning = true;
             var actName = this._getActivityName(this._activityId);
             if (typeof StudyUtils !== 'undefined') {
-                StudyUtils.showToast(prefix + 'heads up! You have about 3 minutes of point-earning time left on ' + actName + ' today. You can still practice after that, but switch to a different activity to keep earning points!', 'info', 10000);
+                var remainMin = Math.max(1, Math.round((capMs - todayMs) / 60000));
+                StudyUtils.showToast(prefix + 'heads up! You have about ' + remainMin + ' minutes of point-earning time left on ' + actName + ' today. You can still practice after that, but switch to a different activity to keep earning points!', 'info', 10000);
             }
         }
 
@@ -160,7 +171,8 @@ const ActivityTimer = {
         banner.appendChild(icon);
 
         var text = document.createElement('span');
-        text.textContent = 'No more points available on ' + actName + ' today (15 min daily limit per activity). You can still practice here, but switch to ' + (suggestion || 'a different activity') + ' to keep earning points!';
+        var capMin = Math.round(this._getActivityCapMs(this._activityId) / 60000);
+        text.textContent = 'No more points available on ' + actName + ' today (' + capMin + ' min daily limit). You can still practice here, but switch to ' + (suggestion || 'a different activity') + ' to keep earning points!';
         banner.appendChild(text);
 
         if (suggestion) {
