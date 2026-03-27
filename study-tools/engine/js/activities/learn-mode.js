@@ -167,7 +167,7 @@ StudyEngine.registerActivity({
     _serializeSlides: function(slides) {
         if (!slides) return [];
         return slides.map(function(s) {
-            return { type: s.type, data: s.data, tier: s.tier };
+            return { type: s.type, data: s.data, tier: s.tier, keyIdea: s.keyIdea || null };
         });
     },
 
@@ -888,10 +888,9 @@ StudyEngine.registerActivity({
         var slidesSinceReflection = 0;
 
         // Group terms (2-3 at a time)
-        var groupSize = 2;
+        var groupSize = 3;
         for (var g = 0; g < prioritized.length; g += groupSize) {
-            var group = prioritized.slice(g, g + groupSize + 1);
-            if (group.length > 3) group = group.slice(0, 3);
+            var group = prioritized.slice(g, g + groupSize);
 
             // Term cards for this group
             for (var t = 0; t < group.length; t++) {
@@ -1772,7 +1771,7 @@ StudyEngine.registerActivity({
 
             // Use terms from the session
             var sessionTerms = [];
-            var slides = this._slides || [];
+            var slides = this._slideSequence || [];
             for (var s = 0; s < slides.length; s++) {
                 if (slides[s].type === 'term' && slides[s].data && slides[s].data.term) {
                     var termName = slides[s].data.term;
@@ -1900,7 +1899,7 @@ StudyEngine.registerActivity({
 
     _checkCompletionBonus: function(wrap) {
         var unitId = this._config.unit.id;
-        var today = new Date().toISOString().slice(0, 10);
+        var today = new Date().toDateString();
         var bonusKey = 'learn-mode-bonus-' + today;
         var alreadyAwarded = ProgressManager.load(unitId, bonusKey);
 
@@ -1925,7 +1924,9 @@ StudyEngine.registerActivity({
 
             wrap.appendChild(bonusMsg);
 
-            StudyUtils.showToast('Bonus: +5 min study time!', 'success', 3000);
+            if (typeof StudyUtils !== 'undefined') {
+                StudyUtils.showToast('Bonus: +5 min study time!', 'success', 3000);
+            }
         }
     },
 

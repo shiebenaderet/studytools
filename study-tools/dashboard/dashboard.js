@@ -2606,9 +2606,14 @@ const Dashboard = {
 
             if (filters && filters.classId) {
                 var studentIds = await this.supabase.from('students').select('id').eq('class_id', filters.classId);
+                if (studentIds.error) throw studentIds.error;
                 if (studentIds.data && studentIds.data.length > 0) {
                     query = query.in('student_id', studentIds.data.map(s => s.id));
                 }
+            }
+
+            if (filters && filters.unitId) {
+                query = query.eq('unit_id', filters.unitId);
             }
 
             var { data: progressRows, error } = await query;
@@ -2621,11 +2626,11 @@ const Dashboard = {
             if (uniqueStudentIds.length > 0) {
                 var { data: students } = await this.supabase
                     .from('students')
-                    .select('id, first_name, last_name')
+                    .select('id, name')
                     .in('id', uniqueStudentIds);
                 if (students) {
                     students.forEach(s => {
-                        studentNames[s.id] = (s.first_name || '') + ' ' + (s.last_name || '').charAt(0) + '.';
+                        studentNames[s.id] = s.name || 'Unknown';
                     });
                 }
             }
