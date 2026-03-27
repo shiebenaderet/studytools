@@ -297,3 +297,26 @@ All three tiers derive from existing vocabulary fields:
 - Session history in My Study Guide
 - Dashboard integration for teacher (reflections view)
 - CSS polish, responsive layout, dark/light mode
+
+## Known Issues & Edge Cases
+
+### 1. Connections Questions Require Full Mastery
+The "Connections" topic (3 questions) requires ALL categories to be mastered. Learn Mode pre-assessment must skip Connections if not all categories are unlocked.
+
+### 2. Smart Review Cold Start
+Smart Review needs prior mastery/session data to know what's weak. First-time users have none. Fallback: if no prior data, prompt the student to pick a category or start Full Unit instead of Smart Review.
+
+### 3. Points Stacking
+The 30-min Learn Mode cap is separate from 15-min caps on other activities. A student could earn up to 45 min of Learn Mode points PLUS 15 min from each other activity in a single day. This is intentional (Learn Mode should be the most rewarding), but be aware students could accumulate significant points.
+
+### 4. Multiplier Implementation
+ActivityTimer.start() takes a single activityId. The 1.5x multiplier must be applied in `_addCappedStudyTime()` (when crediting points), NOT in the timer tick (which measures real elapsed time). The cap should still be based on real time (30 min), but credited points = real time * 1.5.
+
+### 5. Reflection Storage Growth
+Student reflection text stored in localStorage could grow large over time (especially with many students on shared devices). Strategy: keep only the last 50 reflections in localStorage; if Supabase sync is enabled, push older reflections to cloud and trim local storage.
+
+### 6. Limited Question Pool for Single-Category Sessions
+If a student only has 1 category unlocked and chooses that category, the pre/post assessment draws from ~11 questions (7 MC + 4 FIB). This is enough for the adaptive assessment (typically needs 5-8), but pre and post combined need ~10-16 unique questions. May need to allow some question reuse between pre and post in small pools, or supplement with generated term-recall questions.
+
+### 7. Textbook.json Fetch
+Key Idea cards require fetching textbook.json, which is a separate file from config.json. The activity must handle this async fetch gracefully: if textbook.json fails to load, Key Idea cards should be skipped (degrade gracefully) rather than crashing the session.
