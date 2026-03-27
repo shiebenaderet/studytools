@@ -470,21 +470,37 @@ const Dashboard = {
         select.appendChild(defaultOpt);
 
         try {
-            // Only fetch unit_id column with minimal data
+            var seen = {};
+            var unitIds = [];
+
+            // First: get units from units.json so all configured units show up
+            try {
+                var unitsResp = await fetch('../units/units.json');
+                var unitsData = await unitsResp.json();
+                (unitsData.units || []).forEach(function(u) {
+                    if (!seen[u.id]) {
+                        seen[u.id] = true;
+                        unitIds.push(u.id);
+                    }
+                });
+            } catch (e) {
+                // Fallback: ignore if units.json fails
+            }
+
+            // Also: add any unit IDs from progress data that might not be in units.json
             var { data, error } = await this.supabase
                 .from('progress')
                 .select('unit_id')
                 .limit(1000);
-            if (error) throw error;
-            var seen = {};
-            var unitIds = [];
-            (data || []).forEach(function(row) {
-                if (!seen[row.unit_id]) {
-                    seen[row.unit_id] = true;
-                    unitIds.push(row.unit_id);
-                }
-            });
-            unitIds.sort();
+            if (!error && data) {
+                data.forEach(function(row) {
+                    if (!seen[row.unit_id]) {
+                        seen[row.unit_id] = true;
+                        unitIds.push(row.unit_id);
+                    }
+                });
+            }
+
             unitIds.forEach(function(uid) {
                 var opt = document.createElement('option');
                 opt.value = uid;
