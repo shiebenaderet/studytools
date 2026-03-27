@@ -589,9 +589,8 @@ const StudyEngine = {
                 desc.textContent = a.description;
                 card.appendChild(desc);
 
-                // Show term count only for activities that filter by unlocked vocabulary
-                var usesVocab = a.requires && (a.requires.indexOf('vocabulary') !== -1 || a.requires.indexOf('practiceQuestions') !== -1 || a.requires.indexOf('fillInBlankSentences') !== -1 || a.requires.indexOf('shortAnswerQuestions') !== -1);
-                if (usesVocab) {
+                // Show term count only on flashcards card
+                if (a.id === 'flashcards') {
                     const status = MasteryManager.getUnlockStatus(this.config.unit.id, this.config);
                     if (!status.allUnlocked) {
                         const unlockCount = document.createElement('div');
