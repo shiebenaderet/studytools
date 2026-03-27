@@ -1296,5 +1296,19 @@
             "Chief Justice John Marshall served on the Supreme Court for 34 years — the longest tenure ever — and established the principle of judicial review.",
             "Andrew Jackson was the first president who wasn't from Virginia or Massachusetts, and he was the only president to have been a prisoner of war (captured at age 13 during the Revolution)."
         ]
-    }
+    },
+    "reflectionPrompts": [
+        "Think about {term}. Can you connect it to anything happening in the world today?",
+        "How would you explain {term} to a 5th grader? Try to keep it simple.",
+        "If you were alive during the time of {term}, how might your life be different?",
+        "Do you think {term} was fair or unfair? Explain your thinking.",
+        "Washington, Adams, Jefferson, and Madison all had to make tough choices. How does {term} show one of those tough choices?",
+        "How does {term} connect to our essential question: How did the first leaders shape the country we live in today?",
+        "Hamilton and Jefferson disagreed about almost everything. What would each think about {term}?",
+        "How did {term} test whether the new American government would survive?",
+        "If the founders could see America today, what would they think about how {term} turned out?",
+        "What would be different about the United States if {term} had never happened?",
+        "Whose voice or perspective is missing from the story of {term}?",
+        "If you could interview someone who lived through {term}, what would you ask them?"
+    ]
 }

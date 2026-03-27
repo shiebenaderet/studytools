@@ -928,7 +928,8 @@ StudyEngine.registerActivity({
             // Reflection every 5-7 slides
             if (slidesSinceReflection >= 5) {
                 var recentTerm = group[group.length - 1] ? group[group.length - 1].term : 'this topic';
-                var promptTemplate = this.REFLECTION_PROMPTS[Math.floor(Math.random() * this.REFLECTION_PROMPTS.length)];
+                var prompts = (this._config && this._config.reflectionPrompts && this._config.reflectionPrompts.length > 0) ? this._config.reflectionPrompts : this.REFLECTION_PROMPTS;
+                var promptTemplate = prompts[Math.floor(Math.random() * prompts.length)];
                 slides.push({
                     type: 'reflection',
                     data: { prompt: promptTemplate.replace('{term}', recentTerm), term: recentTerm }

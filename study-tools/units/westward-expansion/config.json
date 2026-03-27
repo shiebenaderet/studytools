@@ -1473,5 +1473,19 @@
                 "sourceUrl": "https://www.nps.gov/sotu/index.htm"
             }
         ]
-    }
+    },
+    "reflectionPrompts": [
+        "Think about {term}. Can you connect it to anything happening in the world today?",
+        "How would you explain {term} to a 5th grader? Try to keep it simple.",
+        "If you were alive during the time of {term}, how might your life be different?",
+        "Do you think {term} was fair or unfair? Explain your thinking.",
+        "Jackson is sometimes called a hero and sometimes a villain. How does {term} support one of those views?",
+        "Manifest Destiny said Americans were meant to expand west. How does {term} show the costs of that belief?",
+        "Whose voice or perspective is missing from the story of {term}?",
+        "How did {term} help cause the growing divide between North and South?",
+        "If you could interview someone who lived through {term}, what would you ask them?",
+        "How does {term} connect to our essential question: Can one person be both a hero and a villain?",
+        "What would a Native American, a settler, and a politician each think about {term}?",
+        "How did {term} change the map of the United States?"
+    ]
 }
