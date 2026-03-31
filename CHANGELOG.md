@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.4.1] - 2026-03-30
+
+### Added
+- **Per-unit music playlists** -- Music player now loads unit-specific tracks. Westward Expansion unit has 23 period-appropriate tracks (Stephen Foster, Civil War songs, spirituals, frontier folk)
+
+### Fixed
+- "New best time!" message now displays correctly on first perfect score
+- Union States quiz count corrected from 20 to 19
+- MC distractors drawn from filtered quiz subset (not all 42 regions)
+- Quiz progress saved per subset (union, confederate, etc.) so scores do not overwrite each other
+- Border state badge contrast improved for WCAG AA compliance
+- Null guard on getBBox prevents crash if SVG group not found
+- Minimum quiz time floor scales with region count (not hardcoded 45s for all subsets)
+
+### Removed
+- Cleaned up unused planning documents, teacher handouts, export scripts, and source screenshots from repository
+
 ## [8.4.0] - 2026-03-30
 
 ### Added
