@@ -36,6 +36,8 @@ const MasteryManager = {
     getUnlockedCategories(unitId, config) {
         const categories = this.getCategories(config);
         if (categories.length === 0) return [];
+        // Teacher unlock bypasses mastery gating
+        if (sessionStorage.getItem('teacher-unlock') === 'true') return categories.slice();
         const unlocked = [categories[0]];
         for (let i = 1; i < categories.length; i++) {
             if (this.isCategoryMastered(unitId, config, categories[i - 1])) {

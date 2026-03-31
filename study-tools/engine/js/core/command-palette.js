@@ -127,6 +127,13 @@ const CommandPalette = {
                 return;
             }
 
+            // Teacher unlock: bypass mastery gating for demos
+            if (query === 'teacher-unlock') {
+                this.close();
+                this.promptTeacherUnlock();
+                return;
+            }
+
             if (query === '') {
                 this.filteredCommands = this.commands;
             } else {
@@ -319,6 +326,90 @@ const CommandPalette = {
             ]
         };
         return map[activityId] || [];
+    },
+
+    // --- Teacher Unlock (bypass mastery gating for demos) ---
+
+    promptTeacherUnlock() {
+        // If already unlocked, offer to lock again
+        if (sessionStorage.getItem('teacher-unlock') === 'true') {
+            sessionStorage.removeItem('teacher-unlock');
+            StudyUtils.showToast('Teacher unlock disabled. Mastery gating restored.', 'info');
+            if (typeof StudyEngine !== 'undefined') StudyEngine.showHome();
+            return;
+        }
+
+        var overlay = document.getElementById('modal-overlay');
+        var content = document.createElement('div');
+        content.className = 'modal-content';
+
+        var headerDiv = document.createElement('div');
+        headerDiv.className = 'modal-header';
+        var h2 = document.createElement('h2');
+        var icon = document.createElement('i');
+        icon.className = 'fas fa-lock-open';
+        h2.appendChild(icon);
+        h2.appendChild(document.createTextNode(' Teacher Unlock'));
+        headerDiv.appendChild(h2);
+        var closeBtn = document.createElement('button');
+        closeBtn.className = 'close-btn';
+        closeBtn.textContent = '\u00D7';
+        closeBtn.addEventListener('click', function() { StudyEngine.closeModal(); });
+        headerDiv.appendChild(closeBtn);
+        content.appendChild(headerDiv);
+
+        var desc = document.createElement('p');
+        desc.style.cssText = 'color:var(--text-secondary);margin-bottom:20px;';
+        desc.textContent = 'Enter the teacher password to unlock all activities and content for this session.';
+        content.appendChild(desc);
+
+        var form = document.createElement('div');
+        form.style.cssText = 'display:flex;flex-direction:column;gap:12px;';
+
+        var input = document.createElement('input');
+        input.type = 'password';
+        input.placeholder = 'Password';
+        input.className = 'modal-input';
+        input.style.cssText = 'padding:10px 14px;border:1px solid var(--border-card);border-radius:8px;background:var(--bg-surface);color:var(--text-primary);font-size:1em;';
+        form.appendChild(input);
+
+        var statusEl = document.createElement('p');
+        statusEl.style.cssText = 'color:var(--text-muted);font-size:0.9em;min-height:1.2em;';
+        form.appendChild(statusEl);
+
+        var btn = document.createElement('button');
+        btn.className = 'nav-button';
+        btn.style.cssText = 'width:100%;padding:10px;font-size:1em;';
+        btn.textContent = 'Unlock';
+
+        var self = this;
+        var doUnlock = function() {
+            var pw = input.value.trim();
+            if (!pw) return;
+            if (pw === self.teacherSecret) {
+                sessionStorage.setItem('teacher-unlock', 'true');
+                StudyEngine.closeModal();
+                StudyUtils.showToast('All activities unlocked for this session!', 'success');
+                if (typeof StudyEngine !== 'undefined') StudyEngine.showHome();
+            } else {
+                statusEl.style.color = '#ef4444';
+                statusEl.textContent = 'Incorrect password. Try again.';
+                input.value = '';
+                input.focus();
+            }
+        };
+
+        btn.addEventListener('click', doUnlock);
+        input.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') doUnlock();
+        });
+        form.appendChild(btn);
+        content.appendChild(form);
+
+        overlay.textContent = '';
+        overlay.appendChild(content);
+        overlay.classList.add('active');
+        setTimeout(function() { input.focus(); }, 100);
     },
 
     // --- Teacher Dashboard ---
