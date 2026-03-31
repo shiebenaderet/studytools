@@ -967,12 +967,12 @@ StudyEngine.registerActivity({
         grid.className = 'mq-mode-grid';
 
         var options = [
-            { label: 'All Regions', filter: null, count: 42, icon: 'fas fa-globe-americas' },
-            { label: 'States Only', filter: function(r) { return r.status === 'state'; }, count: 34, icon: 'fas fa-star' },
-            { label: 'Territories Only', filter: function(r) { return r.status === 'territory'; }, count: 8, icon: 'fas fa-map' },
-            { label: 'Union States', filter: function(r) { return r.allegiance === 'union'; }, count: 20, icon: 'fas fa-flag-usa' },
-            { label: 'Confederate States', filter: function(r) { return r.allegiance === 'confederate'; }, count: 11, icon: 'fas fa-flag' },
-            { label: 'Border States', filter: function(r) { return r.allegiance === 'border'; }, count: 4, icon: 'fas fa-balance-scale' }
+            { label: 'All Regions', key: 'all', filter: null, count: 42, icon: 'fas fa-globe-americas' },
+            { label: 'States Only', key: 'states', filter: function(r) { return r.status === 'state'; }, count: 34, icon: 'fas fa-star' },
+            { label: 'Territories Only', key: 'territories', filter: function(r) { return r.status === 'territory'; }, count: 8, icon: 'fas fa-map' },
+            { label: 'Union States', key: 'union', filter: function(r) { return r.allegiance === 'union'; }, count: 19, icon: 'fas fa-flag-usa' },
+            { label: 'Confederate States', key: 'confederate', filter: function(r) { return r.allegiance === 'confederate'; }, count: 11, icon: 'fas fa-flag' },
+            { label: 'Border States', key: 'border', filter: function(r) { return r.allegiance === 'border'; }, count: 4, icon: 'fas fa-balance-scale' }
         ];
 
         options.forEach(function(opt) {
@@ -994,7 +994,7 @@ StudyEngine.registerActivity({
             card.appendChild(cardDesc);
 
             card.addEventListener('click', function() {
-                self._start1861Quiz(opt.filter);
+                self._start1861Quiz(opt.filter, opt.key);
             });
             grid.appendChild(card);
         });
@@ -1013,8 +1013,9 @@ StudyEngine.registerActivity({
         container.appendChild(wrapper);
     },
 
-    _start1861Quiz(filterFn) {
+    _start1861Quiz(filterFn, subsetKey) {
         this._active1861Mode = 'quiz';
+        this._quizSubsetKey = subsetKey || 'all';
         this._resetQuizState();
         var allRegions = this._get1861Regions();
         var regions = filterFn ? allRegions.filter(filterFn) : allRegions;
@@ -1219,16 +1220,18 @@ StudyEngine.registerActivity({
         var elapsed = Math.max(45, rawElapsed); // 42 regions needs at least 45s
         var pct = Math.min(100, Math.round((this._score / this._total) * 100));
 
-        // Load saved progress for 1861 map
-        var saved = ProgressManager.getActivityProgress(this._config.unit.id, 'map-quiz-1861') || {};
+        // Load saved progress for 1861 map (namespaced by quiz subset)
+        var progressKey = 'map-quiz-1861-' + (this._quizSubsetKey || 'all');
+        var saved = ProgressManager.getActivityProgress(this._config.unit.id, progressKey) || {};
         var attempts = (saved.attempts || 0) + 1;
         var bestScore = Math.max(saved.bestScore || 0, pct);
-        var bestTime = saved.bestTime || null;
+        var prevBestTime = saved.bestTime || null;
+        var bestTime = prevBestTime;
         if (pct >= 100) {
-            bestTime = bestTime === null ? elapsed : Math.min(bestTime, elapsed);
+            bestTime = prevBestTime === null ? elapsed : Math.min(prevBestTime, elapsed);
         }
 
-        ProgressManager.saveActivityProgress(this._config.unit.id, 'map-quiz-1861', {
+        ProgressManager.saveActivityProgress(this._config.unit.id, progressKey, {
             bestScore: bestScore,
             bestTime: bestTime,
             attempts: attempts,
@@ -1286,7 +1289,7 @@ StudyEngine.registerActivity({
         });
         wrapper.appendChild(stats);
 
-        if (pct === 100 && (bestTime === null || elapsed < bestTime)) {
+        if (pct === 100 && (prevBestTime === null || elapsed < prevBestTime)) {
             var newBest = document.createElement('p');
             newBest.className = 'mq-new-best';
             newBest.textContent = 'New best time!';
@@ -1671,7 +1674,7 @@ StudyEngine.registerActivity({
         this._hintUsed = false;
         this._regionMistakes = 0;
         var self = this;
-        var regions = this._get1861Regions(); // cached via window global, no reconstruction
+        var regions = this._mapRegions; // use filtered quiz set for distractors
 
         // Update prompt
         var prompt = document.getElementById('mq-prompt');
@@ -2271,6 +2274,8 @@ StudyEngine.registerActivity({
         this._imageQuiz = null;
         this._active1861Mode = null;
         this._answeredIds = [];
+        this._exploredIds = null;
+        this._quizSubsetKey = null;
     },
 
     getProgress() {
