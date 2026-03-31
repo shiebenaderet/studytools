@@ -20,6 +20,8 @@ StudyEngine.registerActivity({
     _attempts: 0,
     _hintUsed: false,
     _regionMistakes: 0,
+    _active1861Mode: null,
+    _answeredIds: [],
 
     // Map regions loaded at runtime based on unit — see _getMapRegions()
     _mapRegions: [
@@ -270,6 +272,25 @@ StudyEngine.registerActivity({
             self._startGame();
         });
         grid.appendChild(svgCard);
+
+        // Second card: 1861 States & Territories
+        var card1861 = document.createElement('button');
+        card1861.className = 'mq-mode-card';
+        var icon1861 = document.createElement('i');
+        icon1861.className = 'fas fa-flag-usa mq-mode-icon';
+        card1861.appendChild(icon1861);
+        var title1861 = document.createElement('span');
+        title1861.className = 'mq-mode-title';
+        title1861.textContent = 'States & Territories, 1861';
+        card1861.appendChild(title1861);
+        var desc1861 = document.createElement('span');
+        desc1861.className = 'mq-mode-desc';
+        desc1861.textContent = 'Explore and identify all 42 states and territories on the eve of the Civil War';
+        card1861.appendChild(desc1861);
+        card1861.addEventListener('click', function() {
+            self._start1861Learn();
+        });
+        grid.appendChild(card1861);
 
         // Image-based quiz cards
         var imageQuizzes = this._getImageQuizzes();
