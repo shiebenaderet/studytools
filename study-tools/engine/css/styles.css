@@ -4696,6 +4696,8 @@ body.light-mode .settings-panel {
 
 .mq-region-path { cursor: pointer; transition: opacity 0.15s, fill 0.3s; stroke-linejoin: round; }
 .mq-region-path:hover { opacity: 0.75; stroke: #ffffff; stroke-width: 2; }
+.mq-region:focus-visible { outline: 2px solid #fff; outline-offset: -2px; border-radius: 2px; }
+.mq-region:focus-visible .mq-region-path { opacity: 0.8; }
 .mq-region-path.mq-correct { cursor: default; opacity: 0.85; }
 .mq-region-path.mq-correct:hover { opacity: 0.85; stroke: #ffffff; stroke-width: 2; }
 .mq-region-path.mq-wrong { fill: #ef4444 !important; animation: mq-flash 0.5s ease; }

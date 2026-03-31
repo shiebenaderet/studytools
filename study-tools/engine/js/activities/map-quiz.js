@@ -785,6 +785,9 @@ StudyEngine.registerActivity({
             var group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
             group.setAttribute('class', 'mq-region');
             group.setAttribute('data-id', region.id);
+            group.setAttribute('tabindex', '0');
+            group.setAttribute('role', 'button');
+            group.setAttribute('aria-label', region.name);
 
             // Render all paths for this region, colored by allegiance
             var fillColor = window.MAP_1861_ALLEGIANCE_COLORS[region.allegiance] || '#5a7a9a';
@@ -803,6 +806,12 @@ StudyEngine.registerActivity({
             group.addEventListener('click', function(e) {
                 e.stopPropagation();
                 onClickRegion(region.id);
+            });
+            group.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    onClickRegion(region.id);
+                }
             });
 
             svg.appendChild(group);
