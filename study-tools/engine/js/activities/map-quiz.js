@@ -307,16 +307,12 @@ StudyEngine.registerActivity({
         ];
 
         imageQuizzes.forEach(function(quiz, idx) {
-            var isLocked = false;
-            if (unlockedCategories !== null) {
-                isLocked = unlockedCategories.indexOf(quiz.category) === -1;
-            }
+            // Image quizzes are WIP — lock them for now
+            var isLocked = true;
 
             var card = document.createElement('button');
-            card.className = 'mq-mode-card' + (isLocked ? ' mq-mode-locked' : '');
-            if (isLocked) {
-                card.disabled = true;
-            }
+            card.className = 'mq-mode-card mq-mode-locked';
+            card.disabled = true;
 
             var icon = document.createElement('i');
             icon.className = (isLocked ? 'fas fa-lock' : quizIcons[idx]) + ' mq-mode-icon';
@@ -816,10 +812,12 @@ StudyEngine.registerActivity({
         bg.addEventListener('click', function() {
             var existing = svgWrap.querySelector('.mq-1861-tooltip');
             if (existing) existing.remove();
-            // Remove highlight from all regions
+            // Restore allegiance colors on all regions
             var paths = svg.querySelectorAll('.mq-region-path');
             for (var i = 0; i < paths.length; i++) {
-                paths[i].setAttribute('fill', '#5a7a9a');
+                var allegiance = paths[i].getAttribute('data-allegiance');
+                var color = window.MAP_1861_ALLEGIANCE_COLORS[allegiance] || '#5a7a9a';
+                paths[i].setAttribute('fill', color);
             }
         });
 
@@ -836,10 +834,12 @@ StudyEngine.registerActivity({
         var existing = svgWrap.querySelector('.mq-1861-tooltip');
         if (existing) existing.remove();
 
-        // Reset all region colors, then highlight selected
+        // Restore allegiance colors, then highlight selected
         var allPaths = svgWrap.querySelectorAll('.mq-region-path');
         for (var i = 0; i < allPaths.length; i++) {
-            allPaths[i].setAttribute('fill', '#5a7a9a');
+            var allegiance = allPaths[i].getAttribute('data-allegiance');
+            var color = window.MAP_1861_ALLEGIANCE_COLORS[allegiance] || '#5a7a9a';
+            allPaths[i].setAttribute('fill', color);
         }
         var selectedPaths = svgWrap.querySelectorAll('.mq-region-path[data-id="' + regionId + '"]');
         for (var i = 0; i < selectedPaths.length; i++) {
