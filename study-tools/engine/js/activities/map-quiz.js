@@ -1235,6 +1235,15 @@ StudyEngine.registerActivity({
             lastPlayed: new Date().toISOString()
         });
 
+        // Achievements
+        if (pct === 100) {
+            AchievementManager.checkAndAward({ activity: 'map-quiz-1861', event: 'perfect', score: 100 });
+            if (elapsed <= 120) {
+                AchievementManager.checkAndAward({ activity: 'map-quiz-1861', event: 'map-master' });
+            }
+        }
+        AchievementManager.checkAndAward({ activity: 'map-quiz-1861', event: 'complete' });
+
         // Show results
         var container = this._container;
         container.textContent = '';
@@ -1476,6 +1485,47 @@ StudyEngine.registerActivity({
             self._show1861QuizChooser();
         });
         wrapper.appendChild(quizBtn);
+
+        // Small context map (non-interactive, highlights on card tap)
+        var mapWrap = document.createElement('div');
+        mapWrap.className = 'mq-map-wrap mq-1861-mobile-learn-map';
+        var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('viewBox', '0 0 900 700');
+        svg.setAttribute('class', 'mq-map');
+        svg.setAttribute('role', 'img');
+        svg.setAttribute('aria-label', 'Map of the United States in 1861');
+
+        var bg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        bg.setAttribute('x', '0');
+        bg.setAttribute('y', '0');
+        bg.setAttribute('width', '900');
+        bg.setAttribute('height', '700');
+        bg.setAttribute('fill', '#1a3a5c');
+        bg.setAttribute('rx', '8');
+        svg.appendChild(bg);
+
+        var drawOrder = this._get1861DrawOrder();
+        drawOrder.forEach(function(regionId) {
+            var r = window.MAP_1861_REGION_MAP[regionId];
+            if (!r) return;
+            var group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+            group.setAttribute('data-id', r.id);
+            var fillColor = window.MAP_1861_ALLEGIANCE_COLORS[r.allegiance] || '#5a7a9a';
+            r.paths.forEach(function(pathData) {
+                var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                path.setAttribute('d', pathData);
+                path.setAttribute('fill', fillColor);
+                path.setAttribute('stroke', '#ffffff');
+                path.setAttribute('stroke-width', '1');
+                path.setAttribute('class', 'mq-region-path');
+                path.setAttribute('data-id', r.id);
+                path.setAttribute('data-allegiance', r.allegiance);
+                group.appendChild(path);
+            });
+            svg.appendChild(group);
+        });
+        mapWrap.appendChild(svg);
+        wrapper.appendChild(mapWrap);
 
         // States section
         var states = regions.filter(function(r) { return r.status === 'state'; });
