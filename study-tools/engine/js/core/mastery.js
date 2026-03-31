@@ -22,11 +22,12 @@ const MasteryManager = {
      */
     isCategoryMastered(unitId, config, categoryName) {
         if (!config.vocabulary) return false;
-        const progress = ProgressManager.getActivityProgress(unitId, 'flashcards') || {};
-        const mastered = progress.mastered || [];
-        const categoryTerms = config.vocabulary.filter(v => v.category === categoryName);
+        var categoryTerms = config.vocabulary.filter(function(v) { return v.category === categoryName; });
         if (categoryTerms.length === 0) return false;
-        return categoryTerms.every(v => mastered.includes(v.term));
+        var self = this;
+        return categoryTerms.every(function(v) {
+            return self.isTermMastered(unitId, config, v.term);
+        });
     },
 
     /**
@@ -132,6 +133,54 @@ const MasteryManager = {
             const prefix = firstName ? `Amazing, ${firstName}!` : 'Amazing!';
             StudyUtils.showToast(`${prefix} All categories mastered! Every activity is now fully unlocked!`, 'success');
         }
+    },
+
+    /**
+     * Records that a student answered a term correctly in an activity.
+     * Tracks mastery evidence from multiple sources.
+     * A term is mastered when: flashcard Good/Easy (instant),
+     * OR correct in 2+ different activities, OR correct 3+ times in same activity.
+     */
+    recordTermCorrect(unitId, term, activityId) {
+        if (!unitId || !term || !activityId) return;
+        var data = ProgressManager.load(unitId, 'term-mastery') || {};
+        if (!data[term]) {
+            data[term] = { sources: [], count: {} };
+        }
+        // Add activity to sources if not already there
+        if (data[term].sources.indexOf(activityId) === -1) {
+            data[term].sources.push(activityId);
+        }
+        // Increment count for this activity
+        data[term].count[activityId] = (data[term].count[activityId] || 0) + 1;
+        ProgressManager.save(unitId, 'term-mastery', data);
+    },
+
+    /**
+     * Returns true if a term is mastered via multi-source evidence.
+     * Checks: flashcard mastered list, OR 2+ activity sources, OR 3+ times in one activity.
+     */
+    isTermMastered(unitId, config, term) {
+        // Check flashcard mastery first (instant, existing behavior)
+        var flashcardProgress = ProgressManager.getActivityProgress(unitId, 'flashcards') || {};
+        var mastered = flashcardProgress.mastered || [];
+        if (mastered.indexOf(term) !== -1) return true;
+
+        // Check multi-source mastery
+        var data = ProgressManager.load(unitId, 'term-mastery') || {};
+        var termData = data[term];
+        if (!termData) return false;
+
+        // 2+ different activity sources
+        if (termData.sources.length >= 2) return true;
+
+        // 3+ times in same activity
+        var counts = termData.count || {};
+        for (var key in counts) {
+            if (counts[key] >= 3) return true;
+        }
+
+        return false;
     },
 
     /**
