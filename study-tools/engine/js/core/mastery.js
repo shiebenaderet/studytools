@@ -139,6 +139,8 @@ const MasteryManager = {
      * Games/Practice require at least 1 category mastered.
      */
     isActivityAccessible(unitId, config, activityId) {
+        // Teacher unlock bypasses all activity gating
+        if (sessionStorage.getItem('teacher-unlock') === 'true') return true;
         const alwaysAccessible = ['flashcards', 'typing-practice', 'map-quiz', 'textbook', 'sift-practice', 'learn-mode'];
         if (alwaysAccessible.includes(activityId)) return true;
         const categories = this.getCategories(config);
