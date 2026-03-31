@@ -8,7 +8,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 
 [![Live Site](https://img.shields.io/badge/Live_Site-study.mrbsocialstudies.org-1669C5?style=for-the-badge&logo=google-chrome&logoColor=white)](https://study.mrbsocialstudies.org)
 [![License](https://img.shields.io/badge/License-Educational_Use-22c55e?style=for-the-badge)](#license)
-[![Version](https://img.shields.io/badge/Version-8.4.1-f59e0b?style=for-the-badge)](#)
+[![Version](https://img.shields.io/badge/Version-8.6.0-f59e0b?style=for-the-badge)](#)
 
 ---
 
@@ -44,15 +44,18 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 ### 🎮 Games
 | Activity | Description |
 |----------|-------------|
-| **Tower Defense** | 3D tower defense — answer vocab to earn coins, build towers, survive 10 waves |
-| **Wordle** | Guess the vocabulary term in 6 tries with definition clues |
-| **Hangman** | Classic word guessing with definitions |
-| **Flip Match** | Memory matching — pair terms to definitions |
-| **Term Catcher** | Catch the falling correct term |
+| **Sort It Out** | Sort terms into category buckets with streak bonuses and speed timer (1.25x analysis tier) |
+| **Who Am I?** | Guess the term from progressive clues — fewer clues = more points (1.25x analysis tier) |
+| **Four Corners** | Find the odd one out — 3 terms share a category, 1 does not belong (1.25x analysis tier) |
+| **Map Quiz** | Click-on-the-map geography quiz with 3-strike hint system. Includes 1861 States & Territories map with Learn/Quiz modes and Union/Confederate/Border/Territory color-coding |
 | **Lightning Round** | 60-second speed quiz with leaderboard |
 | **Crossword** | Auto-generated crossword from vocabulary |
 | **Quiz Race** | Timed 1v1 same-screen quiz race with leaderboard |
-| **Map Quiz** | Click-on-the-map geography quiz with 3-strike hint system. Includes 1861 States & Territories map with Learn/Quiz modes and Union/Confederate/Border/Territory color-coding |
+| **Wordle** | Guess the vocabulary term in 6 tries with definition clues |
+| **Tower Defense** | 3D tower defense — answer vocab to earn coins, build towers, survive 10 waves |
+| **Flip Match** | Memory matching — pair terms to definitions |
+| **Hangman** | Classic word guessing with definitions |
+| **Term Catcher** | Catch the falling correct term |
 
 ---
 

@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.6.0] - 2026-03-31
+
+### Added
+- **Sort It Out** — Category sorting game with streak bonuses and speed timer. Terms appear one at a time, student taps the correct category bucket. 1.25x scoring tier.
+- **Who Am I?** — Progressive clues game. Guess the term with fewer clues for more points (5/4/3/2). Clues progress from a distinguishing hint to full definition. 1.25x scoring tier.
+- **Four Corners** — Odd-one-out game. 4 terms shown, 3 share a category, find the one that does not belong. 8-second timer with time bonus. 1.25x scoring tier.
+- **Learn Mode mini-game breaks** — Every ~6 slides, a quick 3-question mini-game appears (rotating Sort It Out, Who Am I?, Four Corners). Uses recent session terms and feeds multi-source mastery.
+- **Multi-source mastery** — Terms can now be mastered through flashcards (instant), 2+ different activities, or 3+ correct answers in the same activity. Categories unlock faster for engaged students.
+- **Scoring tiers (westward-expansion)** — Analysis games earn 1.25x, recognition games earn 0.75x. Learn Mode stays highest at 1.5x+. Incentivizes deeper activities without punishing easier ones.
+- **Learn Mode streak bonus** — Consecutive daily Learn Mode sessions earn escalating multipliers: Day 1 (1.5x), Day 2 (1.75x), Day 3+ (2.0x). Streak badge shown on home screen.
+- **Smart nudges** — Gentle toast suggestions guide students toward Learn Mode and higher-order games. Max 2 per session, never shaming.
+- **Activity ordering by impact** — Games section now shows highest-impact activities first (Sort It Out, Who Am I?, Four Corners at top; Term Catcher at bottom)
+
 ## [8.4.1] - 2026-03-30
 
 ### Added
