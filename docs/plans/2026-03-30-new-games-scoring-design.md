@@ -243,14 +243,14 @@ Stored in progress as `learn-mode-streak`:
 
 ## 7. Scope Boundaries
 
-### In Scope (westward-expansion unit)
+### In Scope
 
-- 3 new game activities (Who Am I?, Sort It Out, Four Corners)
-- Mini-game breaks in Learn Mode
-- Multi-source mastery (`MasteryManager.recordTermCorrect()`)
-- Scoring tier multipliers
-- Learn Mode streak bonus with notifications
-- Smart nudges (max 2 per session)
+- 3 new game activities (Who Am I?, Sort It Out, Four Corners) — westward-expansion only (add to config)
+- Mini-game breaks in Learn Mode — all units
+- Multi-source mastery (`MasteryManager.recordTermCorrect()`) — all units
+- Scoring tier multipliers — **westward-expansion only** (checked via unit config flag)
+- Learn Mode streak bonus with notifications — all units
+- Smart nudges (max 2 per session) — all units
 - Add 3 new activity IDs to westward-expansion config
 
 ### NOT In Scope
