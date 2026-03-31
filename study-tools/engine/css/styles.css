@@ -5981,6 +5981,8 @@ a.sift-detail-link:hover { opacity: 0.8; }
 
 /* ── 1861 Map: Mobile Learn cards ── */
 .mq-1861-mobile-learn { max-width: 700px; text-align: left; }
+.mq-1861-mobile-learn-map { max-height: 30vh; pointer-events: none; margin-bottom: 16px; border-radius: 8px; overflow: hidden; }
+.mq-1861-mobile-learn-map .mq-region-path { transition: fill 0.3s, stroke 0.3s; }
 .mq-1861-section-heading { color: var(--text-primary); font-size: 1.1em; margin: 24px 0 8px; padding-bottom: 6px; border-bottom: 2px solid var(--border-card); }
 .mq-1861-card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .mq-1861-info-card { background: var(--bg-card); border: 1px solid var(--border-card); border-radius: 10px; padding: 12px; }

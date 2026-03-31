@@ -1566,6 +1566,28 @@ StudyEngine.registerActivity({
                 card.appendChild(allegEl);
             }
 
+            (function(rid) {
+                card.style.cursor = 'pointer';
+                card.addEventListener('click', function() {
+                    // Reset all paths to allegiance colors
+                    var allPaths = mapWrap.querySelectorAll('.mq-region-path');
+                    for (var j = 0; j < allPaths.length; j++) {
+                        var a = allPaths[j].getAttribute('data-allegiance');
+                        allPaths[j].setAttribute('fill', window.MAP_1861_ALLEGIANCE_COLORS[a] || '#5a7a9a');
+                        allPaths[j].setAttribute('stroke', '#ffffff');
+                        allPaths[j].setAttribute('stroke-width', '1');
+                    }
+                    // Highlight selected region
+                    var selected = mapWrap.querySelectorAll('.mq-region-path[data-id="' + rid + '"]');
+                    for (var j = 0; j < selected.length; j++) {
+                        selected[j].setAttribute('fill', '#fbbf24');
+                        selected[j].setAttribute('stroke', '#fbbf24');
+                        selected[j].setAttribute('stroke-width', '3');
+                    }
+                    // Scroll map into view
+                    mapWrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                });
+            })(region.id);
             statesGrid.appendChild(card);
         });
         wrapper.appendChild(statesGrid);
@@ -1600,6 +1622,28 @@ StudyEngine.registerActivity({
             capitalEl.textContent = region.capital ? 'Capital: ' + region.capital : 'No formal capital';
             card.appendChild(capitalEl);
 
+            (function(rid) {
+                card.style.cursor = 'pointer';
+                card.addEventListener('click', function() {
+                    // Reset all paths to allegiance colors
+                    var allPaths = mapWrap.querySelectorAll('.mq-region-path');
+                    for (var j = 0; j < allPaths.length; j++) {
+                        var a = allPaths[j].getAttribute('data-allegiance');
+                        allPaths[j].setAttribute('fill', window.MAP_1861_ALLEGIANCE_COLORS[a] || '#5a7a9a');
+                        allPaths[j].setAttribute('stroke', '#ffffff');
+                        allPaths[j].setAttribute('stroke-width', '1');
+                    }
+                    // Highlight selected region
+                    var selected = mapWrap.querySelectorAll('.mq-region-path[data-id="' + rid + '"]');
+                    for (var j = 0; j < selected.length; j++) {
+                        selected[j].setAttribute('fill', '#fbbf24');
+                        selected[j].setAttribute('stroke', '#fbbf24');
+                        selected[j].setAttribute('stroke-width', '3');
+                    }
+                    // Scroll map into view
+                    mapWrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                });
+            })(region.id);
             terrGrid.appendChild(card);
         });
         wrapper.appendChild(terrGrid);
