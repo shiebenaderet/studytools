@@ -55,8 +55,9 @@ var NudgeManager = {
         // Track how many times this activity was used this session
         this._sessionActivityCounts[activityId] = (this._sessionActivityCounts[activityId] || 0) + 1;
 
-        // Nudge 1: Opening any game without doing Learn Mode today
-        if (!this._learnModeDoneToday && activityId !== 'learn-mode' && activityId !== 'flashcards' && activityId !== 'textbook') {
+        // Nudge 1: Opening a game without doing Learn Mode today (only for games, not study/practice)
+        var actInfo = this.ACTIVITY_INFO[activityId];
+        if (!this._learnModeDoneToday && actInfo && actInfo.group === 'games') {
             var streakData = ProgressManager.load(unitId, 'learn-mode-streak') || { currentStreak: 0 };
             var multiplier = '1.5x';
             if (streakData.currentStreak >= 2) multiplier = '1.75x';

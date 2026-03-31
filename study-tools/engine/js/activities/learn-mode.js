@@ -1555,7 +1555,8 @@ StudyEngine.registerActivity({
             termCard.appendChild(termName);
             var termDef = document.createElement('div');
             termDef.style.cssText = 'color:var(--text-secondary);font-size:0.85em;';
-            termDef.textContent = (term.simpleExplanation || term.definition || '').substring(0, 80) + '...';
+            var defText = term.simpleExplanation || term.definition || '';
+            termDef.textContent = defText.length > 80 ? defText.substring(0, 80) + '...' : defText;
             termCard.appendChild(termDef);
             gameArea.appendChild(termCard);
 
@@ -1765,7 +1766,8 @@ StudyEngine.registerActivity({
                 card.appendChild(name);
                 var def = document.createElement('div');
                 def.style.cssText = 'color:var(--text-muted);font-size:0.75em;line-height:1.3;';
-                def.textContent = (t.definition || '').substring(0, 60) + '...';
+                var defStr = t.definition || '';
+                def.textContent = defStr.length > 60 ? defStr.substring(0, 60) + '...' : defStr;
                 card.appendChild(def);
 
                 card.addEventListener('click', function() {

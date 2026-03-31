@@ -40,7 +40,7 @@ const ActivityTimer = {
                 ? this._getLearnModeMultiplier()
                 : this.LEARN_MODE_MULTIPLIER;
         }
-        if (typeof StudyEngine !== 'undefined' && StudyEngine.config && StudyEngine.config.unit) {
+        if (typeof StudyEngine !== 'undefined' && StudyEngine.config) {
             if (!StudyEngine.config.scoringTiers) return 1.0;
         }
         return this.SCORING_TIERS[activityId] || 1.0;

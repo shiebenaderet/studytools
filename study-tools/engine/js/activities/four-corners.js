@@ -94,6 +94,8 @@ StudyEngine.registerActivity({
         this._correct = 0;
         this._results = [];
         this._frozen = false;
+        this._validCategories = [];
+        this._catMap = {};
 
         // Check we have at least 2 categories with 3+ terms each
         var categories = MasteryManager.getUnlockedCategories(this._config.unit.id, this._config);
