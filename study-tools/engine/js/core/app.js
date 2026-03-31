@@ -741,6 +741,11 @@ const StudyEngine = {
         // Track active study time (pass activity ID for per-activity daily cap)
         ActivityTimer.start(this.config.unit.id, activityId);
 
+        // Smart nudges
+        if (typeof NudgeManager !== 'undefined') {
+            NudgeManager.checkSmartNudge(activityId, this.config);
+        }
+
         // Update streak
         ProgressManager.updateStreak(this.config.unit.id);
     },

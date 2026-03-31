@@ -4,6 +4,12 @@ var NudgeManager = {
     _sessionNudgeCount: 0,
     _lastActivityId: null,
     MAX_NUDGES_PER_SESSION: 3,
+    _smartNudgeCount: 0,
+    MAX_SMART_NUDGES: 2,
+    _learnModeDoneToday: false,
+
+    RECOGNITION_GAMES: ['term-catcher', 'flip-match', 'hangman', 'tower-defense'],
+    ANALYSIS_GAMES: ['sort-it-out', 'who-am-i', 'four-corners', 'map-quiz', 'source-analysis'],
     STALE_ACTIVITY_DAYS: 3,
 
     STUDY_FLOW: ['textbook', 'flashcards', 'fill-in-blank', 'typing-practice', 'practice-test'],
@@ -22,7 +28,85 @@ var NudgeManager = {
         'crossword':        { icon: 'fas fa-border-all',      name: 'Crossword',         group: 'games' },
         'term-catcher':     { icon: 'fas fa-hand-paper',      name: 'Term Catcher',      group: 'games' },
         'tower-defense':    { icon: 'fas fa-chess-rook',      name: 'Tower Defense',     group: 'games' },
-        'quiz-race':        { icon: 'fas fa-flag-checkered',  name: 'Quiz Race',         group: 'games' }
+        'quiz-race':        { icon: 'fas fa-flag-checkered',  name: 'Quiz Race',         group: 'games' },
+        'sort-it-out':      { icon: 'fas fa-layer-group',    name: 'Sort It Out',       group: 'games' },
+        'who-am-i':         { icon: 'fas fa-question-circle',name: 'Who Am I?',         group: 'games' },
+        'four-corners':     { icon: 'fas fa-th-large',       name: 'Four Corners',      group: 'games' },
+        'learn-mode':       { icon: 'fas fa-brain',          name: 'Learn Mode',        group: 'study' },
+        'source-analysis':  { icon: 'fas fa-search',         name: 'Source Analysis',   group: 'study' }
+    },
+
+    checkSmartNudge(activityId, config) {
+        // Don't nudge if teacher-unlock is active or guest
+        if (sessionStorage.getItem('teacher-unlock') === 'true') return;
+        if (!ProgressManager.studentInfo || ProgressManager.studentInfo.isGuest) return;
+        if (this._smartNudgeCount >= this.MAX_SMART_NUDGES) return;
+
+        var unitId = config && config.unit ? config.unit.id : null;
+        if (!unitId) return;
+        var firstName = ProgressManager.getFirstName();
+        var prefix = firstName ? firstName + ', ' : '';
+
+        // Check if student did Learn Mode today
+        var today = new Date().toDateString();
+        var learnStreak = ProgressManager.load(unitId, 'learn-mode-streak') || {};
+        this._learnModeDoneToday = learnStreak.lastSessionDate === today;
+
+        // Track how many times this activity was used this session
+        this._sessionActivityCounts[activityId] = (this._sessionActivityCounts[activityId] || 0) + 1;
+
+        // Nudge 1: Opening any game without doing Learn Mode today
+        if (!this._learnModeDoneToday && activityId !== 'learn-mode' && activityId !== 'flashcards' && activityId !== 'textbook') {
+            var streakData = ProgressManager.load(unitId, 'learn-mode-streak') || { currentStreak: 0 };
+            var multiplier = '1.5x';
+            if (streakData.currentStreak >= 2) multiplier = '1.75x';
+            if (streakData.currentStreak >= 3) multiplier = '2x';
+            var streakNote = streakData.currentStreak >= 1 ? ' (Day ' + (streakData.currentStreak + 1) + ' streak: ' + multiplier + '!)' : '';
+            StudyUtils.showToast(prefix + 'start with Learn Mode for ' + multiplier + ' points!' + streakNote, 'info');
+            this._smartNudgeCount++;
+            return;
+        }
+
+        // Nudge 2: Playing recognition-tier game 2+ times
+        if (this.RECOGNITION_GAMES.indexOf(activityId) !== -1 && this._sessionActivityCounts[activityId] >= 2) {
+            var suggestions = this.ANALYSIS_GAMES.filter(function(g) {
+                return config.activities && config.activities.indexOf(g) !== -1;
+            });
+            if (suggestions.length > 0) {
+                var suggestion = suggestions[Math.floor(Math.random() * suggestions.length)];
+                var info = this.ACTIVITY_INFO[suggestion];
+                var name = info ? info.name : suggestion;
+                StudyUtils.showToast(prefix + 'you\'re doing great! Try ' + name + ' for 1.25x points.', 'info');
+                this._smartNudgeCount++;
+            }
+        }
+    },
+
+    checkPostLearnNudge(config) {
+        if (this._smartNudgeCount >= this.MAX_SMART_NUDGES) return;
+        if (sessionStorage.getItem('teacher-unlock') === 'true') return;
+        var firstName = ProgressManager.getFirstName();
+        var prefix = firstName ? firstName + ', w' : 'W';
+        var suggestions = this.ANALYSIS_GAMES.filter(function(g) {
+            return config.activities && config.activities.indexOf(g) !== -1;
+        });
+        if (suggestions.length > 0) {
+            var suggestion = suggestions[Math.floor(Math.random() * suggestions.length)];
+            var info = this.ACTIVITY_INFO[suggestion];
+            var name = info ? info.name : suggestion;
+            StudyUtils.showToast(prefix + 'ant to test what you just learned? Try ' + name + '!', 'info');
+            this._smartNudgeCount++;
+        }
+    },
+
+    checkPostGameNudge(activityId, config) {
+        if (this._smartNudgeCount >= this.MAX_SMART_NUDGES) return;
+        if (this._learnModeDoneToday) return;
+        if (sessionStorage.getItem('teacher-unlock') === 'true') return;
+        var firstName = ProgressManager.getFirstName();
+        var prefix = firstName ? 'Nice game, ' + firstName + '! ' : 'Nice game! ';
+        StudyUtils.showToast(prefix + 'Learn Mode earns more points and builds your streak.', 'info');
+        this._smartNudgeCount++;
     },
 
     trackMissedTerms(unitId, config, missedTermNames) {
