@@ -170,28 +170,29 @@ StudyEngine.registerActivity({
     _getClueText(clueIndex) {
         var term = this._currentTerm;
         if (clueIndex === 0) {
-            // Category name
-            var cat = term.category || 'this unit';
-            return 'I am a term from the category: ' + cat;
-        } else if (clueIndex === 1) {
-            // First sentence of simpleExplanation
-            var explanation = term.simpleExplanation || term.definition || '';
-            var firstSentence = explanation.split(/[.!?]/)[0];
-            if (firstSentence && firstSentence.length > 0) {
-                return firstSentence.trim() + '.';
+            // Distinguishing hint: use example (catchy, specific) or first sentence of simpleExplanation
+            var hint = term.example || '';
+            if (!hint) {
+                var explanation = term.simpleExplanation || term.definition || '';
+                hint = explanation.split(/[.!?]/)[0].trim() + '.';
             }
-            return explanation;
+            return hint;
+        } else if (clueIndex === 1) {
+            // Full simple explanation
+            return term.simpleExplanation || term.definition || '';
         } else if (clueIndex === 2) {
-            // Example field
-            return term.example || term.definition || 'No example available.';
+            // Category + keyword from definition
+            var cat = term.category || 'this unit';
+            var defWords = (term.definition || '').split(' ').slice(0, 8).join(' ');
+            return 'From "' + cat + '" — ' + defWords + '...';
         } else {
-            // Full definition
+            // Full definition (safety net)
             return term.definition || '';
         }
     },
 
     _getClueLabel(clueIndex) {
-        var labels = ['Clue 1: Category', 'Clue 2: Hint', 'Clue 3: Example', 'Clue 4: Definition'];
+        var labels = ['Clue 1: Quick Hint', 'Clue 2: Explanation', 'Clue 3: Category + Keyword', 'Clue 4: Full Definition'];
         return labels[clueIndex] || '';
     },
 
