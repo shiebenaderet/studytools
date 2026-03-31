@@ -1020,6 +1020,7 @@ StudyEngine.registerActivity({
         var prompt = document.createElement('div');
         prompt.className = 'mq-prompt';
         prompt.id = 'mq-prompt';
+        prompt.setAttribute('aria-live', 'polite');
         prompt.textContent = 'Loading...';
         topBar.appendChild(prompt);
 
@@ -1294,6 +1295,7 @@ StudyEngine.registerActivity({
         var prompt = document.createElement('div');
         prompt.className = 'mq-prompt';
         prompt.id = 'mq-prompt';
+        prompt.setAttribute('aria-live', 'polite');
         prompt.textContent = 'Loading...';
         topBar.appendChild(prompt);
 
@@ -1334,6 +1336,8 @@ StudyEngine.registerActivity({
         svg.setAttribute('viewBox', '0 0 900 700');
         svg.setAttribute('class', 'mq-map');
         svg.id = 'mq-map';
+        svg.setAttribute('role', 'img');
+        svg.setAttribute('aria-label', 'Map of the United States in 1861');
 
         var bg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
         bg.setAttribute('x', '0');
@@ -1546,11 +1550,15 @@ StudyEngine.registerActivity({
         for (var i = 0; i < allPaths.length; i++) {
             if (!allPaths[i].classList.contains('mq-correct')) {
                 allPaths[i].setAttribute('fill', '#5a7a9a');
+                allPaths[i].setAttribute('stroke', '#ffffff');
+                allPaths[i].setAttribute('stroke-width', '1.5');
             }
         }
         var targetPaths = document.querySelectorAll('.mq-region-path[data-id="' + this._currentRegion.id + '"]');
         for (var i = 0; i < targetPaths.length; i++) {
             targetPaths[i].setAttribute('fill', '#fbbf24');
+            targetPaths[i].setAttribute('stroke', '#fbbf24');
+            targetPaths[i].setAttribute('stroke-width', '3.5');
         }
 
         // Build 4 MC options: 1 correct + 3 distractors (exclude already-answered)
