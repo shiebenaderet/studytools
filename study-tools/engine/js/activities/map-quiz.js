@@ -22,6 +22,8 @@ StudyEngine.registerActivity({
     _regionMistakes: 0,
     _active1861Mode: null,
     _answeredIds: [],
+    _exploredIds: null,
+    _quizSubsetKey: null,
 
     // Map regions loaded at runtime based on unit — see _getMapRegions()
     _mapRegions: [
@@ -869,6 +871,7 @@ StudyEngine.registerActivity({
         // Calculate tooltip position using getBBox() on rendered group (handles multi-path regions)
         var svg = svgWrap.querySelector('svg');
         var group = svg.querySelector('g[data-id="' + regionId + '"]');
+        if (!group) return;
         var svgRect = svg.getBoundingClientRect();
         var viewBox = svg.viewBox.baseVal;
 
@@ -1217,7 +1220,8 @@ StudyEngine.registerActivity({
     _end1861Quiz() {
         if (this._timerId) clearInterval(this._timerId);
         var rawElapsed = Math.floor((Date.now() - this._startTime) / 1000);
-        var elapsed = Math.max(45, rawElapsed); // 42 regions needs at least 45s
+        var minTime = Math.min(45, this._total * 1); // ~1s per region, capped at 45s
+        var elapsed = Math.max(minTime, rawElapsed);
         var pct = Math.min(100, Math.round((this._score / this._total) * 100));
 
         // Load saved progress for 1861 map (namespaced by quiz subset)
