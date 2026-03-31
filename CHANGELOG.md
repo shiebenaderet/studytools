@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.4.0] - 2026-03-30
+
+### Added
+- **States & Territories, 1861 Map Quiz** — Interactive SVG map of all 42 states and territories on the eve of the Civil War, available in the westward-expansion unit
+- **Map Learn Mode** — Click any region to see a tooltip with name, allegiance (Union/Confederate/Border/Territory), year of statehood or territorial establishment, and capital as of 1861. Regions color-coded by allegiance (blue=Union, red=Confederate, gold=Border, green=Territory)
+- **Map Quiz Mode** with 6 subset options: All Regions (42), States Only (34), Territories Only (8), Union States (20), Confederate States (11), Border States (4)
+- **Mobile Learn Mode** — Card list grouped by States/Territories with allegiance badges; small context map highlights the region when a card is tapped
+- **Mobile Quiz Mode** — Context map with highlighted target region and 4 multiple-choice buttons; distractors filter out already-answered regions
+- **Quiz UX** — Explore counter in Learn mode ("8 of 42 explored"), mid-quiz encouragement ("Halfway there!", "Almost done!", "Last one!")
+- **Keyboard navigation** — All SVG regions have tabindex, role=button, aria-label, and Enter/Space support
+- **Accessibility** — aria-live on quiz prompts, focus-visible on MC buttons, strikethrough on wrong MC answers, role=img on mobile SVG
+- **Achievement integration** — Perfect score, speed (under 2 min), and completion achievements for 1861 quiz
+- **Leaderboard integration** — Scores submitted on perfect quiz completion
+- **Region data module** — `study-tools/engine/js/data/map-1861-data.js` with allegiance fields, pre-built ID lookup map for O(1) access
+
+### Fixed
+- Missing `var self = this` in dashboard `loadLeaderboardPreview()` causing "Failed to load leaderboard" error
+- Service worker cache not invalidating on new deployments
+
 ## [8.3.0] - 2026-03-27
 
 ### Added

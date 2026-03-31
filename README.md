@@ -8,7 +8,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 
 [![Live Site](https://img.shields.io/badge/Live_Site-study.mrbsocialstudies.org-1669C5?style=for-the-badge&logo=google-chrome&logoColor=white)](https://study.mrbsocialstudies.org)
 [![License](https://img.shields.io/badge/License-Educational_Use-22c55e?style=for-the-badge)](#license)
-[![Version](https://img.shields.io/badge/Version-8.3.0-f59e0b?style=for-the-badge)](#)
+[![Version](https://img.shields.io/badge/Version-8.4.0-f59e0b?style=for-the-badge)](#)
 
 ---
 
@@ -52,7 +52,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 | **Lightning Round** | 60-second speed quiz with leaderboard |
 | **Crossword** | Auto-generated crossword from vocabulary |
 | **Quiz Race** | Timed 1v1 same-screen quiz race with leaderboard |
-| **Map Quiz** | Click-on-the-map geography quiz with 3-strike hint system |
+| **Map Quiz** | Click-on-the-map geography quiz with 3-strike hint system. Includes 1861 States & Territories map with Learn/Quiz modes and Union/Confederate/Border/Territory color-coding |
 
 ---
 
