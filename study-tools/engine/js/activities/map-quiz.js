@@ -173,6 +173,11 @@ StudyEngine.registerActivity({
         this._bestTime = saved?.bestTime || null;
         this._attempts = saved?.attempts || 0;
 
+        // Westward expansion has multiple map modes — show mode selector
+        if (config.unit.id === 'westward-expansion') {
+            this._showModeSelector();
+            return;
+        }
         this._showStartScreen();
     },
 
