@@ -721,7 +721,8 @@ StudyEngine.registerActivity({
         // Instruction text
         var feedback = document.createElement('div');
         feedback.className = 'mq-feedback';
-        feedback.textContent = 'Click any state or territory to learn about it';
+        feedback.id = 'mq-1861-explore-count';
+        feedback.textContent = 'Click any state or territory to learn about it (0 of 42 explored)';
         wrapper.appendChild(feedback);
 
         container.appendChild(wrapper);
@@ -839,6 +840,16 @@ StudyEngine.registerActivity({
         var region = this._get1861RegionById(regionId);
         if (!region) return;
 
+        // Track explored regions
+        if (!this._exploredIds) this._exploredIds = [];
+        if (this._exploredIds.indexOf(regionId) === -1) {
+            this._exploredIds.push(regionId);
+        }
+        var exploreEl = document.getElementById('mq-1861-explore-count');
+        if (exploreEl) {
+            exploreEl.textContent = 'Click any state or territory to learn about it (' + this._exploredIds.length + ' of 42 explored)';
+        }
+
         // Remove existing tooltip
         var existing = svgWrap.querySelector('.mq-1861-tooltip');
         if (existing) existing.remove();
@@ -918,6 +929,21 @@ StudyEngine.registerActivity({
         tooltip.style.top = top + 'px';
     },
 
+    _resetQuizState() {
+        this._score = 0;
+        this._total = 0;
+        this._mistakes = 0;
+        this._hintUsed = false;
+        this._regionMistakes = 0;
+        this._currentRegion = null;
+        this._queue = [];
+        this._answeredIds = [];
+        if (this._timerId) {
+            clearInterval(this._timerId);
+            this._timerId = null;
+        }
+    },
+
     // Show quiz subset chooser before starting the quiz
     _show1861QuizChooser() {
         var container = this._container;
@@ -989,15 +1015,11 @@ StudyEngine.registerActivity({
 
     _start1861Quiz(filterFn) {
         this._active1861Mode = 'quiz';
-        this._answeredIds = []; // Track answered for distractor filtering
+        this._resetQuizState();
         var allRegions = this._get1861Regions();
         var regions = filterFn ? allRegions.filter(filterFn) : allRegions;
         this._mapRegions = regions;
-        this._score = 0;
         this._total = regions.length;
-        this._mistakes = 0;
-        this._hintUsed = false;
-        this._regionMistakes = 0;
         this._startTime = Date.now();
 
         // Shuffle the queue
@@ -1104,7 +1126,22 @@ StudyEngine.registerActivity({
         }
 
         var feedback = document.getElementById('mq-feedback');
-        if (feedback) feedback.textContent = '';
+        if (feedback) {
+            var remaining = this._queue.length + 1;
+            if (remaining === Math.ceil(this._total / 2)) {
+                feedback.className = 'mq-feedback mq-feedback-correct';
+                feedback.textContent = 'Halfway there! Keep going!';
+            } else if (remaining <= 5 && remaining > 1) {
+                feedback.className = 'mq-feedback mq-feedback-correct';
+                feedback.textContent = 'Almost done! ' + remaining + ' left!';
+            } else if (remaining === 1) {
+                feedback.className = 'mq-feedback mq-feedback-correct';
+                feedback.textContent = 'Last one!';
+            } else {
+                feedback.textContent = '';
+                feedback.className = 'mq-feedback';
+            }
+        }
     },
 
     _handle1861Click(clickedId) {
@@ -1552,7 +1589,22 @@ StudyEngine.registerActivity({
         }
 
         var feedback = document.getElementById('mq-feedback');
-        if (feedback) feedback.textContent = '';
+        if (feedback) {
+            var remaining = this._queue.length + 1;
+            if (remaining === Math.ceil(this._total / 2)) {
+                feedback.className = 'mq-feedback mq-feedback-correct';
+                feedback.textContent = 'Halfway there! Keep going!';
+            } else if (remaining <= 5 && remaining > 1) {
+                feedback.className = 'mq-feedback mq-feedback-correct';
+                feedback.textContent = 'Almost done! ' + remaining + ' left!';
+            } else if (remaining === 1) {
+                feedback.className = 'mq-feedback mq-feedback-correct';
+                feedback.textContent = 'Last one!';
+            } else {
+                feedback.textContent = '';
+                feedback.className = 'mq-feedback';
+            }
+        }
 
         // Highlight target region on map
         var allPaths = document.querySelectorAll('.mq-region-path');
