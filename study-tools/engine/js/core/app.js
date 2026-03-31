@@ -15,6 +15,37 @@ const ActivityTimer = {
     LEARN_MODE_CAP_MS: 30 * 60 * 1000, // 30 min for learn-mode
     LEARN_MODE_MULTIPLIER: 1.5, // 1.5x points for learn-mode
 
+    // Scoring tiers: higher-order activities earn more points per minute
+    // Only applied when unit config has scoringTiers: true
+    SCORING_TIERS: {
+        // Deep Study (1.5x) — handled by LEARN_MODE_MULTIPLIER
+        // Analysis (1.25x)
+        'sort-it-out': 1.25,
+        'who-am-i': 1.25,
+        'four-corners': 1.25,
+        'map-quiz': 1.25,
+        'source-analysis': 1.25,
+        'sift-practice': 1.25,
+        // Recall (1.0x) — default, no entry needed
+        // Recognition (0.75x)
+        'term-catcher': 0.75,
+        'flip-match': 0.75,
+        'hangman': 0.75,
+        'tower-defense': 0.75
+    },
+
+    _getScoringMultiplier(activityId) {
+        if (activityId === 'learn-mode') {
+            return typeof this._getLearnModeMultiplier === 'function'
+                ? this._getLearnModeMultiplier()
+                : this.LEARN_MODE_MULTIPLIER;
+        }
+        if (typeof StudyEngine !== 'undefined' && StudyEngine.config && StudyEngine.config.unit) {
+            if (!StudyEngine.config.scoringTiers) return 1.0;
+        }
+        return this.SCORING_TIERS[activityId] || 1.0;
+    },
+
     start(unitId, activityId) {
         this.stop(); // save any previous session
         this._unitId = unitId;
@@ -72,9 +103,10 @@ const ActivityTimer = {
         var capMs = this._getActivityCapMs(activityId);
         var remaining = Math.max(0, capMs - data.ms);
         var credited = Math.min(ms, remaining);
-        // Apply points multiplier for learn-mode (cap is on real time, multiplier on credited points)
+        // Apply scoring tier multiplier (cap is on real time, multiplier on credited points)
         if (credited > 0) {
-            var multiplied = activityId === 'learn-mode' ? Math.round(credited * this.LEARN_MODE_MULTIPLIER) : credited;
+            var multiplier = this._getScoringMultiplier(activityId);
+            var multiplied = multiplier !== 1.0 ? Math.round(credited * multiplier) : credited;
             ProgressManager.addStudyTime(unitId, multiplied);
         }
         data.ms += ms; // track total time even past cap (for display)

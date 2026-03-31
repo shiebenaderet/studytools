@@ -14,6 +14,7 @@
             "bgSurface": "#3d2c1c"
         }
     },
+    "scoringTiers": true,
     "activities": [
         "learn-mode",
         "flashcards",
