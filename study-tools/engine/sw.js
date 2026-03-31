@@ -1,4 +1,4 @@
-const CACHE_NAME = 'studytools-v19';
+const CACHE_NAME = 'studytools-v20';
 const APP_SHELL = [
     './',
     'index.html',
@@ -12,6 +12,7 @@ const APP_SHELL = [
     'js/core/supabase-config.js',
     'js/core/app.js',
     'tools/tools.js',
+    'js/data/map-1861-data.js',
     'audio/tracks.json'
 ];
 
