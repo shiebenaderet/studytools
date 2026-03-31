@@ -1,0 +1,64 @@
+{
+    "artists": {
+        "Stephen Foster": {
+            "bio": "Stephen Foster (1826-1864) was the most popular songwriter in 19th-century America. Known as the 'father of American music,' he wrote over 200 songs including Oh! Susanna, Camptown Races, and My Old Kentucky Home. His melodies captured the spirit of pre-Civil War America and remain beloved today.",
+            "years": "1826-1864",
+            "portrait": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Stephen_Foster.jpg/250px-Stephen_Foster.jpg"
+        },
+        "Traditional": {
+            "bio": "Many of America's most enduring songs were passed down through generations of singers, travelers, and communities. These folk songs, spirituals, and frontier tunes tell the story of westward expansion, the struggle for freedom, and life on the American frontier.",
+            "years": "1800s",
+            "portrait": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Covered_wagon.jpg/250px-Covered_wagon.jpg"
+        },
+        "Julia Ward Howe": {
+            "bio": "Julia Ward Howe (1819-1910) wrote the lyrics to 'Battle Hymn of the Republic' after visiting Union Army camps near Washington, D.C. in 1861. The song became the most popular Union anthem of the Civil War. She was also a prominent abolitionist and women's suffrage activist.",
+            "years": "1819-1910",
+            "portrait": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Julia_Ward_Howe_2.jpg/250px-Julia_Ward_Howe_2.jpg"
+        },
+        "Daniel Decatur Emmett": {
+            "bio": "Daniel Decatur Emmett (1815-1904) was an Ohio-born songwriter and performer who composed 'Dixie' in 1859 as a minstrel show tune. The song was adopted as an unofficial Confederate anthem, much to Emmett's dismay as a Union supporter. He also wrote 'Old Dan Tucker.'",
+            "years": "1815-1904",
+            "portrait": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Daniel_Decatur_Emmett.jpg/250px-Daniel_Decatur_Emmett.jpg"
+        },
+        "Harry McCarthy": {
+            "bio": "Harry McCarthy (1834-1888) was an Irish-born entertainer who wrote 'The Bonnie Blue Flag' in 1861. It became the second most popular song in the Confederacy after Dixie. McCarthy performed it throughout the South during the Civil War.",
+            "years": "1834-1888",
+            "portrait": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Bonnieblue.jpg/250px-Bonnieblue.jpg"
+        },
+        "George F. Root": {
+            "bio": "George Frederick Root (1820-1895) was a Union songwriter whose 'Battle Cry of Freedom' became one of the most popular songs of the Civil War. President Lincoln reportedly said the song was worth more to the Union cause than a whole regiment of soldiers.",
+            "years": "1820-1895",
+            "portrait": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/George_Frederick_Root_-_Brady-Handy.jpg/250px-George_Frederick_Root_-_Brady-Handy.jpg"
+        },
+        "Cool White": {
+            "bio": "Cool White (John Hodges, 1821-1891) was a minstrel performer who popularized 'Buffalo Gals' in 1844. The song became one of the most well-known folk tunes in America, sung on frontier porches and at barn dances across the expanding nation.",
+            "years": "1821-1891",
+            "portrait": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Covered_wagon.jpg/250px-Covered_wagon.jpg"
+        }
+    },
+    "tracks": [
+        { "title": "Oh! Susanna", "artist": "Stephen Foster", "file": "oh-susanna.mp3" },
+        { "title": "Camptown Races", "artist": "Stephen Foster", "file": "camptown-races.mp3" },
+        { "title": "My Old Kentucky Home", "artist": "Stephen Foster", "file": "my-old-kentucky-home.mp3" },
+        { "title": "Old Folks at Home", "artist": "Stephen Foster", "file": "old-folks-at-home.mp3" },
+        { "title": "Jeanie with the Light Brown Hair", "artist": "Stephen Foster", "file": "jeanie-with-the-light-brown-hair.mp3" },
+        { "title": "Beautiful Dreamer", "artist": "Stephen Foster", "file": "beautiful-dreamer.mp3" },
+        { "title": "Battle Hymn of the Republic", "artist": "Julia Ward Howe", "file": "battle-hymn-of-the-republic.mp3" },
+        { "title": "Dixie's Land", "artist": "Daniel Decatur Emmett", "file": "dixies-land.mp3" },
+        { "title": "When Johnny Comes Marching Home", "artist": "Traditional", "file": "when-johnny-comes-marching-home.mp3" },
+        { "title": "The Yellow Rose of Texas", "artist": "Traditional", "file": "yellow-rose-of-texas.mp3" },
+        { "title": "The Bonnie Blue Flag", "artist": "Harry McCarthy", "file": "bonnie-blue-flag.mp3" },
+        { "title": "Battle Cry of Freedom", "artist": "George F. Root", "file": "battle-cry-of-freedom.mp3" },
+        { "title": "Home on the Range", "artist": "Traditional", "file": "home-on-the-range.mp3" },
+        { "title": "Shenandoah", "artist": "Traditional", "file": "shenandoah.mp3" },
+        { "title": "Red River Valley", "artist": "Traditional", "file": "red-river-valley.mp3" },
+        { "title": "Buffalo Gals", "artist": "Cool White", "file": "buffalo-gals.mp3" },
+        { "title": "Amazing Grace", "artist": "Traditional", "file": "amazing-grace.mp3" },
+        { "title": "Swing Low, Sweet Chariot", "artist": "Traditional", "file": "swing-low-sweet-chariot.mp3" },
+        { "title": "Go Down, Moses", "artist": "Traditional", "file": "go-down-moses.mp3" },
+        { "title": "Follow the Drinking Gourd", "artist": "Traditional", "file": "follow-the-drinking-gourd.mp3" },
+        { "title": "Turkey in the Straw", "artist": "Traditional", "file": "turkey-in-the-straw.mp3" },
+        { "title": "Arkansas Traveler", "artist": "Traditional", "file": "arkansas-traveler.mp3" },
+        { "title": "Old Dan Tucker", "artist": "Daniel Decatur Emmett", "file": "old-dan-tucker.mp3" }
+    ]
+}

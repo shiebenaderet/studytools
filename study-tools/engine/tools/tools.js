@@ -589,26 +589,43 @@ const StudyTools = {
             return;
         }
 
-        // Load tracks manifest
-        fetch('audio/tracks.json')
-            .then(r => r.json())
-            .then(data => {
-                this._musicTracks = data.tracks || data;
-                this._musicArtists = data.artists || {};
-                // Shuffle playlist on load
-                for (var i = this._musicTracks.length - 1; i > 0; i--) {
-                    var j = Math.floor(Math.random() * (i + 1));
-                    var tmp = this._musicTracks[i];
-                    this._musicTracks[i] = this._musicTracks[j];
-                    this._musicTracks[j] = tmp;
-                }
-                this._musicIndex = 0;
-                this._musicShuffle = true;
-                this._buildMusicPlayer();
-            })
-            .catch(() => {
-                StudyUtils.showToast('No music tracks found. Add MP3s to audio/ folder.', 'error');
-            });
+        // Try unit-specific playlist first, fall back to global
+        var unitId = (typeof StudyEngine !== 'undefined' && StudyEngine.config && StudyEngine.config.unit)
+            ? StudyEngine.config.unit.id : null;
+        var unitAudioPath = unitId ? '../units/' + unitId + '/audio/' : null;
+        var unitTracksUrl = unitAudioPath ? unitAudioPath + 'tracks.json' : null;
+        var self = this;
+
+        var loadTracks = function(url, basePath) {
+            return fetch(url)
+                .then(function(r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+                .then(function(data) {
+                    self._musicTracks = data.tracks || data;
+                    self._musicArtists = data.artists || {};
+                    self._musicAudioBasePath = basePath;
+                    // Shuffle playlist on load
+                    for (var i = self._musicTracks.length - 1; i > 0; i--) {
+                        var j = Math.floor(Math.random() * (i + 1));
+                        var tmp = self._musicTracks[i];
+                        self._musicTracks[i] = self._musicTracks[j];
+                        self._musicTracks[j] = tmp;
+                    }
+                    self._musicIndex = 0;
+                    self._musicShuffle = true;
+                    self._buildMusicPlayer();
+                });
+        };
+
+        // Try unit playlist, then global fallback
+        var attempt = unitTracksUrl
+            ? loadTracks(unitTracksUrl, unitAudioPath).catch(function() {
+                return loadTracks('audio/tracks.json', 'audio/');
+              })
+            : loadTracks('audio/tracks.json', 'audio/');
+
+        attempt.catch(function() {
+            StudyUtils.showToast('No music tracks found.', 'error');
+        });
     },
 
     _buildMusicPlayer() {
@@ -926,7 +943,7 @@ const StudyTools = {
             this._musicAudio.pause();
         }
 
-        this._musicAudio = new Audio('audio/' + track.file);
+        this._musicAudio = new Audio((this._musicAudioBasePath || 'audio/') + track.file);
         this._musicAudio.volume = this._musicVolume;
         this._musicAudio.preload = 'auto';
 
