@@ -129,6 +129,18 @@ StudyEngine.registerActivity({
         ];
     },
 
+    _get1861Regions() {
+        return window.MAP_1861_REGIONS;
+    },
+
+    _get1861DrawOrder() {
+        return window.MAP_1861_DRAW_ORDER;
+    },
+
+    _get1861RegionById(id) {
+        return window.MAP_1861_REGION_MAP[id] || null;
+    },
+
     _getDrawOrder() {
         var unitId = this._config.unit.id;
         if (unitId === 'westward-expansion') {
