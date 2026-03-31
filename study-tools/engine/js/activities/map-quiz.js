@@ -2101,6 +2101,8 @@ StudyEngine.registerActivity({
         this._currentRegion = null;
         this._queue = [];
         this._imageQuiz = null;
+        this._active1861Mode = null;
+        this._answeredIds = [];
     },
 
     getProgress() {
