@@ -664,6 +664,11 @@ StudyEngine.registerActivity({
 
     _start1861Learn() {
         this._active1861Mode = 'learn';
+        // Mobile: show list view instead of interactive map
+        if (window.innerWidth < 768) {
+            this._start1861MobileLearn();
+            return;
+        }
         var container = this._container;
         container.textContent = '';
         var self = this;
@@ -1388,6 +1393,123 @@ StudyEngine.registerActivity({
         }, 1000);
 
         this._next1861MobileRegion();
+    },
+
+    _start1861MobileLearn() {
+        var container = this._container;
+        container.textContent = '';
+        var self = this;
+        var regions = this._get1861Regions();
+
+        var wrapper = document.createElement('div');
+        wrapper.className = 'mq-start-screen mq-1861-mobile-learn';
+
+        var title = document.createElement('h2');
+        title.className = 'mq-title';
+        title.textContent = 'States & Territories, 1861';
+        wrapper.appendChild(title);
+
+        var desc = document.createElement('p');
+        desc.className = 'mq-desc';
+        desc.textContent = 'Explore all 42 states and territories on the eve of the Civil War.';
+        wrapper.appendChild(desc);
+
+        var quizBtn = document.createElement('button');
+        quizBtn.className = 'nav-button mq-start-btn';
+        quizBtn.textContent = 'Start Quiz';
+        quizBtn.addEventListener('click', function() {
+            self._show1861QuizChooser();
+        });
+        wrapper.appendChild(quizBtn);
+
+        // States section
+        var states = regions.filter(function(r) { return r.status === 'state'; });
+        states.sort(function(a, b) { return a.name.localeCompare(b.name); });
+
+        var statesHeading = document.createElement('h3');
+        statesHeading.className = 'mq-1861-section-heading';
+        statesHeading.textContent = 'States (' + states.length + ')';
+        wrapper.appendChild(statesHeading);
+
+        var statesGrid = document.createElement('div');
+        statesGrid.className = 'mq-1861-card-grid';
+        states.forEach(function(region) {
+            var card = document.createElement('div');
+            card.className = 'mq-1861-info-card';
+
+            var nameEl = document.createElement('div');
+            nameEl.className = 'mq-1861-card-name';
+            nameEl.textContent = region.name;
+            card.appendChild(nameEl);
+
+            var statusEl = document.createElement('div');
+            statusEl.className = 'mq-1861-card-detail';
+            statusEl.textContent = 'State since ' + region.year;
+            card.appendChild(statusEl);
+
+            var capitalEl = document.createElement('div');
+            capitalEl.className = 'mq-1861-card-detail';
+            capitalEl.textContent = 'Capital: ' + (region.capital || 'N/A');
+            card.appendChild(capitalEl);
+
+            var allegianceLabels = { union: 'Union', confederate: 'Confederate', border: 'Border State' };
+            if (allegianceLabels[region.allegiance]) {
+                var allegEl = document.createElement('span');
+                allegEl.className = 'mq-1861-tooltip-badge mq-1861-badge-' + region.allegiance;
+                allegEl.style.marginTop = '6px';
+                allegEl.textContent = allegianceLabels[region.allegiance];
+                card.appendChild(allegEl);
+            }
+
+            statesGrid.appendChild(card);
+        });
+        wrapper.appendChild(statesGrid);
+
+        // Territories section
+        var territories = regions.filter(function(r) { return r.status === 'territory'; });
+        territories.sort(function(a, b) { return a.name.localeCompare(b.name); });
+
+        var terrHeading = document.createElement('h3');
+        terrHeading.className = 'mq-1861-section-heading';
+        terrHeading.textContent = 'Territories (' + territories.length + ')';
+        wrapper.appendChild(terrHeading);
+
+        var terrGrid = document.createElement('div');
+        terrGrid.className = 'mq-1861-card-grid';
+        territories.forEach(function(region) {
+            var card = document.createElement('div');
+            card.className = 'mq-1861-info-card';
+
+            var nameEl = document.createElement('div');
+            nameEl.className = 'mq-1861-card-name';
+            nameEl.textContent = region.name;
+            card.appendChild(nameEl);
+
+            var statusEl = document.createElement('div');
+            statusEl.className = 'mq-1861-card-detail';
+            statusEl.textContent = 'Territory since ' + region.year;
+            card.appendChild(statusEl);
+
+            var capitalEl = document.createElement('div');
+            capitalEl.className = 'mq-1861-card-detail';
+            capitalEl.textContent = region.capital ? 'Capital: ' + region.capital : 'No formal capital';
+            card.appendChild(capitalEl);
+
+            terrGrid.appendChild(card);
+        });
+        wrapper.appendChild(terrGrid);
+
+        // Back button
+        var backBtn = document.createElement('button');
+        backBtn.className = 'nav-button';
+        backBtn.style.marginTop = '20px';
+        backBtn.textContent = 'All Map Quizzes';
+        backBtn.addEventListener('click', function() {
+            self._showModeSelector();
+        });
+        wrapper.appendChild(backBtn);
+
+        container.appendChild(wrapper);
     },
 
     _next1861MobileRegion() {
