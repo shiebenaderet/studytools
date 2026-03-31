@@ -84,6 +84,7 @@ const ProgressManager = {
 
         const studyTime = this.load(unitId, 'studyTime') || 0;
         const streak = this.load(unitId, 'streak') || { current: 0 };
+        var learnStreak = this.load(unitId, 'learn-mode-streak') || { currentStreak: 0 };
         const vocabProgress = this.getActivityProgress(unitId, 'flashcards') || {};
         const masteredCount = vocabProgress.mastered ? vocabProgress.mastered.length : 0;
         const totalVocab = config.vocabulary ? config.vocabulary.length : 0;
@@ -148,6 +149,10 @@ const ProgressManager = {
         grid.appendChild(createStatBox('Vocabulary Mastered', `${masteredCount}/${totalVocab}`, true, vocabPct));
         grid.appendChild(createStatBox('Practice Questions', `${practiceCount}/${totalQuestions}`, true, practicePct));
         grid.appendChild(createStatBox('Current Streak', `${streak.current} days`, false));
+            if (learnStreak.currentStreak > 0) {
+                var multiplier = learnStreak.currentStreak >= 3 ? '2x' : learnStreak.currentStreak >= 2 ? '1.75x' : '1.5x';
+                grid.appendChild(createStatBox('Learn Streak', learnStreak.currentStreak + ' day' + (learnStreak.currentStreak !== 1 ? 's' : '') + ' (' + multiplier + ')', false));
+            }
 
         statsContainer.appendChild(grid);
 
@@ -200,6 +205,59 @@ const ProgressManager = {
         }
     },
 
+    // Merge remote and local activity data, keeping the best of both
+    mergeActivityData(activity, local, remote) {
+        if (!local) return remote;
+        if (!remote) return local;
+
+        // For flashcards: union mastered arrays, merge ratings keeping latest
+        if (activity === 'activity_flashcards') {
+            var localMastered = local.mastered || [];
+            var remoteMastered = remote.mastered || [];
+            var mergedMastered = [...new Set([...localMastered, ...remoteMastered])];
+
+            var mergedRatings = { ...(remote.ratings || {}), ...(local.ratings || {}) };
+
+            return {
+                ...remote,
+                ...local,
+                mastered: mergedMastered,
+                ratings: mergedRatings,
+                updatedAt: Math.max(local.updatedAt || 0, remote.updatedAt || 0)
+            };
+        }
+
+        // For practice-test: keep the higher bestScore
+        if (activity === 'activity_practice-test') {
+            var localBest = typeof local.bestScore === 'number' ? local.bestScore : 0;
+            var remoteBest = typeof remote.bestScore === 'number' ? remote.bestScore : 0;
+            return {
+                ...remote,
+                ...local,
+                bestScore: Math.max(localBest, remoteBest),
+                updatedAt: Math.max(local.updatedAt || 0, remote.updatedAt || 0)
+            };
+        }
+
+        // For map-quiz: keep the better bestScore and bestTime
+        if (activity === 'activity_map-quiz') {
+            return {
+                ...remote,
+                ...local,
+                bestScore: Math.max(local.bestScore || 0, remote.bestScore || 0),
+                bestTime: (local.bestTime && remote.bestTime)
+                    ? Math.min(local.bestTime, remote.bestTime)
+                    : local.bestTime || remote.bestTime,
+                updatedAt: Math.max(local.updatedAt || 0, remote.updatedAt || 0)
+            };
+        }
+
+        // Default: newer wins (original behavior)
+        var remoteTime = remote.updatedAt || 0;
+        var localTime = local.updatedAt || 0;
+        return remoteTime > localTime ? remote : local;
+    },
+
     async syncFromSupabase() {
         if (!this.supabase || !this.studentId) return;
         try {
@@ -210,10 +268,11 @@ const ProgressManager = {
             if (error || !rows) return;
             for (const row of rows) {
                 const localData = this.load(row.unit_id, row.activity);
-                const remoteTime = new Date(row.updated_at).getTime();
-                const localTime = localData && localData.updatedAt ? localData.updatedAt : 0;
-                if (remoteTime > localTime) {
-                    localStorage.setItem(this.getKey(row.unit_id, row.activity), JSON.stringify(row.data));
+                const merged = this.mergeActivityData(row.activity, localData, row.data);
+                if (merged !== localData) {
+                    localStorage.setItem(this.getKey(row.unit_id, row.activity), JSON.stringify(merged));
+                    // Mark dirty so the merged result syncs back to Supabase
+                    this.dirty[`${row.unit_id}:${row.activity}`] = Date.now();
                 }
             }
         } catch (err) {
@@ -584,8 +643,14 @@ const ProgressManager = {
             this.studentId = storedId;
             this.initSupabase();
             if (this.supabase) {
-                this.startSyncLoop();
-                this.syncFromSupabase();
+                // Await remote sync before starting the periodic sync loop
+                // to prevent stale remote data from overwriting local progress
+                this.syncFromSupabase().then(() => {
+                    this.startSyncLoop();
+                    if (typeof LeaderboardManager !== 'undefined') {
+                        LeaderboardManager.submitScore();
+                    }
+                });
                 this.startSession();
             }
         }

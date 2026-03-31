@@ -46,6 +46,47 @@ const ActivityTimer = {
         return this.SCORING_TIERS[activityId] || 1.0;
     },
 
+    _getLearnModeMultiplier() {
+        var unitId = this._unitId;
+        if (!unitId) return this.LEARN_MODE_MULTIPLIER;
+        var streakData = ProgressManager.load(unitId, 'learn-mode-streak') || { currentStreak: 0, lastSessionDate: null, longestStreak: 0 };
+        var streak = streakData.currentStreak || 0;
+        if (streak >= 3) return 2.0;
+        if (streak >= 2) return 1.75;
+        return 1.5; // base
+    },
+
+    recordLearnModeSession(unitId) {
+        var today = new Date().toDateString();
+        var streakData = ProgressManager.load(unitId, 'learn-mode-streak') || { currentStreak: 0, lastSessionDate: null, longestStreak: 0 };
+
+        if (streakData.lastSessionDate === today) {
+            // Already recorded today
+            return streakData;
+        }
+
+        var yesterday = new Date(Date.now() - 86400000).toDateString();
+        if (streakData.lastSessionDate === yesterday) {
+            streakData.currentStreak = (streakData.currentStreak || 0) + 1;
+        } else if (streakData.lastSessionDate !== today) {
+            streakData.currentStreak = 1; // reset streak
+        }
+
+        streakData.lastSessionDate = today;
+        streakData.longestStreak = Math.max(streakData.longestStreak || 0, streakData.currentStreak);
+        ProgressManager.save(unitId, 'learn-mode-streak', streakData);
+
+        // Show streak notification
+        var multiplier = streakData.currentStreak >= 3 ? '2x' : streakData.currentStreak >= 2 ? '1.75x' : '1.5x';
+        var firstName = ProgressManager.getFirstName();
+        var prefix = firstName ? firstName + ', ' : '';
+        if (streakData.currentStreak >= 2) {
+            StudyUtils.showToast(prefix + 'Day ' + streakData.currentStreak + ' streak! ' + multiplier + ' points in Learn Mode today!', 'success');
+        }
+
+        return streakData;
+    },
+
     start(unitId, activityId) {
         this.stop(); // save any previous session
         this._unitId = unitId;
