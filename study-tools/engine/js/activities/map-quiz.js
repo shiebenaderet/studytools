@@ -662,6 +662,243 @@ StudyEngine.registerActivity({
         container.appendChild(wrapper);
     },
 
+    _start1861Learn() {
+        this._active1861Mode = 'learn';
+        var container = this._container;
+        container.textContent = '';
+        var self = this;
+
+        var wrapper = document.createElement('div');
+        wrapper.className = 'mq-game-wrapper';
+
+        // Top bar: title + Start Quiz button
+        var topBar = document.createElement('div');
+        topBar.className = 'mq-topbar';
+
+        var titleEl = document.createElement('div');
+        titleEl.className = 'mq-prompt';
+        titleEl.textContent = 'States & Territories, 1861';
+        topBar.appendChild(titleEl);
+
+        var rightBar = document.createElement('div');
+        rightBar.className = 'mq-score-area';
+
+        var quizBtn = document.createElement('button');
+        quizBtn.className = 'nav-button mq-start-btn';
+        quizBtn.style.cssText = 'font-size: 0.85em; padding: 6px 16px;';
+        quizBtn.textContent = 'Start Quiz';
+        quizBtn.addEventListener('click', function() {
+            self._show1861QuizChooser();
+        });
+        rightBar.appendChild(quizBtn);
+
+        var backBtn = document.createElement('button');
+        backBtn.className = 'nav-button';
+        backBtn.style.cssText = 'font-size: 0.85em; padding: 6px 16px;';
+        backBtn.textContent = 'All Map Quizzes';
+        backBtn.addEventListener('click', function() {
+            self._showModeSelector();
+        });
+        rightBar.appendChild(backBtn);
+
+        topBar.appendChild(rightBar);
+        wrapper.appendChild(topBar);
+
+        // Build SVG map
+        var svgWrap = this._build1861Map(wrapper, function(regionId) {
+            self._show1861Tooltip(regionId, svgWrap);
+        });
+
+        // Tooltip container (positioned absolutely within svgWrap)
+        svgWrap.style.position = 'relative';
+
+        // Instruction text
+        var feedback = document.createElement('div');
+        feedback.className = 'mq-feedback';
+        feedback.textContent = 'Click any state or territory to learn about it';
+        wrapper.appendChild(feedback);
+
+        container.appendChild(wrapper);
+    },
+
+    _build1861Map(wrapper, onClickRegion) {
+        var regions = this._get1861Regions();
+        var drawOrder = this._get1861DrawOrder();
+
+        var svgWrap = document.createElement('div');
+        svgWrap.className = 'mq-map-wrap';
+
+        var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('viewBox', '0 0 900 700');
+        svg.setAttribute('class', 'mq-map');
+        svg.id = 'mq-map';
+
+        // Background
+        var bg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        bg.setAttribute('x', '0');
+        bg.setAttribute('y', '0');
+        bg.setAttribute('width', '900');
+        bg.setAttribute('height', '700');
+        bg.setAttribute('fill', '#1a3a5c');
+        bg.setAttribute('rx', '8');
+        svg.appendChild(bg);
+
+        // Water labels
+        var waterLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        waterLabel.setAttribute('x', '845');
+        waterLabel.setAttribute('y', '340');
+        waterLabel.setAttribute('fill', 'rgba(255,255,255,0.18)');
+        waterLabel.setAttribute('font-size', '16');
+        waterLabel.setAttribute('font-style', 'italic');
+        waterLabel.setAttribute('text-anchor', 'middle');
+        waterLabel.setAttribute('transform', 'rotate(75, 845, 340)');
+        waterLabel.textContent = 'Atlantic Ocean';
+        svg.appendChild(waterLabel);
+
+        var gulfLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        gulfLabel.setAttribute('x', '500');
+        gulfLabel.setAttribute('y', '600');
+        gulfLabel.setAttribute('fill', 'rgba(255,255,255,0.15)');
+        gulfLabel.setAttribute('font-size', '14');
+        gulfLabel.setAttribute('font-style', 'italic');
+        gulfLabel.textContent = 'Gulf of Mexico';
+        svg.appendChild(gulfLabel);
+
+        // Draw regions
+        var self = this;
+        drawOrder.forEach(function(regionId) {
+            var region = null;
+            for (var i = 0; i < regions.length; i++) {
+                if (regions[i].id === regionId) {
+                    region = regions[i];
+                    break;
+                }
+            }
+            if (!region) return;
+
+            var group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+            group.setAttribute('class', 'mq-region');
+            group.setAttribute('data-id', region.id);
+
+            // Render all paths for this region, colored by allegiance
+            var fillColor = window.MAP_1861_ALLEGIANCE_COLORS[region.allegiance] || '#5a7a9a';
+            region.paths.forEach(function(pathData) {
+                var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                path.setAttribute('d', pathData);
+                path.setAttribute('fill', fillColor);
+                path.setAttribute('stroke', '#ffffff');
+                path.setAttribute('stroke-width', '1.5');
+                path.setAttribute('class', 'mq-region-path');
+                path.setAttribute('data-id', region.id);
+                path.setAttribute('data-allegiance', region.allegiance);
+                group.appendChild(path);
+            });
+
+            group.addEventListener('click', function(e) {
+                e.stopPropagation();
+                onClickRegion(region.id);
+            });
+
+            svg.appendChild(group);
+        });
+
+        // Click background to dismiss tooltip
+        bg.addEventListener('click', function() {
+            var existing = svgWrap.querySelector('.mq-1861-tooltip');
+            if (existing) existing.remove();
+            // Remove highlight from all regions
+            var paths = svg.querySelectorAll('.mq-region-path');
+            for (var i = 0; i < paths.length; i++) {
+                paths[i].setAttribute('fill', '#5a7a9a');
+            }
+        });
+
+        svgWrap.appendChild(svg);
+        wrapper.appendChild(svgWrap);
+        return svgWrap;
+    },
+
+    _show1861Tooltip(regionId, svgWrap) {
+        var region = this._get1861RegionById(regionId);
+        if (!region) return;
+
+        // Remove existing tooltip
+        var existing = svgWrap.querySelector('.mq-1861-tooltip');
+        if (existing) existing.remove();
+
+        // Reset all region colors, then highlight selected
+        var allPaths = svgWrap.querySelectorAll('.mq-region-path');
+        for (var i = 0; i < allPaths.length; i++) {
+            allPaths[i].setAttribute('fill', '#5a7a9a');
+        }
+        var selectedPaths = svgWrap.querySelectorAll('.mq-region-path[data-id="' + regionId + '"]');
+        for (var i = 0; i < selectedPaths.length; i++) {
+            selectedPaths[i].setAttribute('fill', '#7fb3e0');
+        }
+
+        // Calculate tooltip position using getBBox() on rendered group (handles multi-path regions)
+        var svg = svgWrap.querySelector('svg');
+        var group = svg.querySelector('g[data-id="' + regionId + '"]');
+        var svgRect = svg.getBoundingClientRect();
+        var viewBox = svg.viewBox.baseVal;
+
+        // Use getBBox for accurate center of rendered group
+        var bbox = group.getBBox();
+        var centerX = bbox.x + bbox.width / 2;
+        var centerY = bbox.y + bbox.height / 2;
+
+        // Convert SVG coords to pixel coords
+        var pixelX = (centerX / viewBox.width) * svgRect.width;
+        var pixelY = (centerY / viewBox.height) * svgRect.height;
+
+        // Build tooltip
+        var tooltip = document.createElement('div');
+        tooltip.className = 'mq-1861-tooltip';
+
+        var nameEl = document.createElement('div');
+        nameEl.className = 'mq-1861-tooltip-name';
+        nameEl.textContent = region.name;
+        tooltip.appendChild(nameEl);
+
+        // Allegiance badge
+        var allegianceLabels = { union: 'Union', confederate: 'Confederate', border: 'Border State', territory: 'Territory' };
+        var badgeEl = document.createElement('span');
+        badgeEl.className = 'mq-1861-tooltip-badge mq-1861-badge-' + region.allegiance;
+        badgeEl.textContent = allegianceLabels[region.allegiance] || '';
+        tooltip.appendChild(badgeEl);
+
+        var statusEl = document.createElement('div');
+        statusEl.className = 'mq-1861-tooltip-status';
+        var statusText = region.status === 'state' ? 'State' : 'Territory';
+        statusEl.textContent = statusText + ' since ' + region.year;
+        tooltip.appendChild(statusEl);
+
+        var capitalEl = document.createElement('div');
+        capitalEl.className = 'mq-1861-tooltip-capital';
+        capitalEl.textContent = region.capital ? 'Capital: ' + region.capital : 'No formal capital';
+        tooltip.appendChild(capitalEl);
+
+        svgWrap.appendChild(tooltip);
+
+        // Position tooltip, keeping within bounds (including bottom edge)
+        var tooltipRect = tooltip.getBoundingClientRect();
+        var wrapRect = svgWrap.getBoundingClientRect();
+        var left = pixelX - tooltipRect.width / 2;
+        var top = pixelY - tooltipRect.height - 12;
+
+        if (left < 8) left = 8;
+        if (left + tooltipRect.width > wrapRect.width - 8) left = wrapRect.width - tooltipRect.width - 8;
+        if (top < 8) {
+            top = pixelY + 20; // Show below if no room above
+        }
+        if (top + tooltipRect.height > wrapRect.height - 8) {
+            top = wrapRect.height - tooltipRect.height - 8; // Bottom edge clamp
+        }
+
+        tooltip.style.left = left + 'px';
+        tooltip.style.top = top + 'px';
+    },
+
     _startGame() {
         this._mapRegions = this._getMapRegions();
         this._score = 0;
