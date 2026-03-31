@@ -1733,6 +1733,15 @@ StudyEngine.registerActivity({
         // Save session
         this._saveSessionRecord();
 
+        // Record Learn Mode streak
+        if (typeof ActivityTimer !== 'undefined') {
+            ActivityTimer.recordLearnModeSession(this._config.unit.id);
+        }
+        // Post-learn nudge
+        if (typeof NudgeManager !== 'undefined') {
+            NudgeManager.checkPostLearnNudge(this._config);
+        }
+
         // Completion bonus
         this._checkCompletionBonus(wrap);
 
