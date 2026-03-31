@@ -899,6 +899,375 @@ StudyEngine.registerActivity({
         tooltip.style.top = top + 'px';
     },
 
+    // Show quiz subset chooser before starting the quiz
+    _show1861QuizChooser() {
+        var container = this._container;
+        container.textContent = '';
+        var self = this;
+
+        var wrapper = document.createElement('div');
+        wrapper.className = 'mq-start-screen';
+
+        var title = document.createElement('h2');
+        title.className = 'mq-title';
+        title.textContent = 'Choose Your Quiz';
+        wrapper.appendChild(title);
+
+        var desc = document.createElement('p');
+        desc.className = 'mq-desc';
+        desc.textContent = 'Select which regions to be quizzed on:';
+        wrapper.appendChild(desc);
+
+        var grid = document.createElement('div');
+        grid.className = 'mq-mode-grid';
+
+        var options = [
+            { label: 'All Regions', filter: null, count: 42, icon: 'fas fa-globe-americas' },
+            { label: 'States Only', filter: function(r) { return r.status === 'state'; }, count: 34, icon: 'fas fa-star' },
+            { label: 'Territories Only', filter: function(r) { return r.status === 'territory'; }, count: 8, icon: 'fas fa-map' },
+            { label: 'Union States', filter: function(r) { return r.allegiance === 'union'; }, count: 20, icon: 'fas fa-flag-usa' },
+            { label: 'Confederate States', filter: function(r) { return r.allegiance === 'confederate'; }, count: 11, icon: 'fas fa-flag' },
+            { label: 'Border States', filter: function(r) { return r.allegiance === 'border'; }, count: 4, icon: 'fas fa-balance-scale' }
+        ];
+
+        options.forEach(function(opt) {
+            var card = document.createElement('button');
+            card.className = 'mq-mode-card';
+
+            var icon = document.createElement('i');
+            icon.className = opt.icon + ' mq-mode-icon';
+            card.appendChild(icon);
+
+            var cardTitle = document.createElement('span');
+            cardTitle.className = 'mq-mode-title';
+            cardTitle.textContent = opt.label;
+            card.appendChild(cardTitle);
+
+            var cardDesc = document.createElement('span');
+            cardDesc.className = 'mq-mode-desc';
+            cardDesc.textContent = opt.count + ' regions';
+            card.appendChild(cardDesc);
+
+            card.addEventListener('click', function() {
+                self._start1861Quiz(opt.filter);
+            });
+            grid.appendChild(card);
+        });
+
+        wrapper.appendChild(grid);
+
+        var backBtn = document.createElement('button');
+        backBtn.className = 'nav-button';
+        backBtn.style.marginTop = '16px';
+        backBtn.textContent = 'Back to Learn';
+        backBtn.addEventListener('click', function() {
+            self._start1861Learn();
+        });
+        wrapper.appendChild(backBtn);
+
+        container.appendChild(wrapper);
+    },
+
+    _start1861Quiz(filterFn) {
+        this._active1861Mode = 'quiz';
+        this._answeredIds = []; // Track answered for distractor filtering
+        var allRegions = this._get1861Regions();
+        var regions = filterFn ? allRegions.filter(filterFn) : allRegions;
+        this._mapRegions = regions;
+        this._score = 0;
+        this._total = regions.length;
+        this._mistakes = 0;
+        this._hintUsed = false;
+        this._regionMistakes = 0;
+        this._startTime = Date.now();
+
+        // Shuffle the queue
+        this._queue = regions.slice();
+        for (var i = this._queue.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = this._queue[i];
+            this._queue[i] = this._queue[j];
+            this._queue[j] = temp;
+        }
+
+        // Check if mobile
+        if (window.innerWidth < 768) {
+            this._start1861MobileQuiz();
+            return;
+        }
+
+        var container = this._container;
+        container.textContent = '';
+        var self = this;
+
+        var wrapper = document.createElement('div');
+        wrapper.className = 'mq-game-wrapper';
+
+        // Top bar
+        var topBar = document.createElement('div');
+        topBar.className = 'mq-topbar';
+
+        var prompt = document.createElement('div');
+        prompt.className = 'mq-prompt';
+        prompt.id = 'mq-prompt';
+        prompt.textContent = 'Loading...';
+        topBar.appendChild(prompt);
+
+        var scoreArea = document.createElement('div');
+        scoreArea.className = 'mq-score-area';
+
+        var scoreEl = document.createElement('span');
+        scoreEl.className = 'mq-score';
+        scoreEl.id = 'mq-score';
+        scoreEl.textContent = '0/' + this._total;
+        scoreArea.appendChild(scoreEl);
+
+        var timerEl = document.createElement('span');
+        timerEl.className = 'mq-timer';
+        timerEl.id = 'mq-timer';
+        timerEl.textContent = '0:00';
+        scoreArea.appendChild(timerEl);
+
+        var backBtn = document.createElement('button');
+        backBtn.className = 'nav-button';
+        backBtn.style.cssText = 'font-size: 0.8em; padding: 4px 12px;';
+        backBtn.textContent = 'Back to Learn';
+        backBtn.addEventListener('click', function() {
+            if (self._timerId) clearInterval(self._timerId);
+            self._start1861Learn();
+        });
+        scoreArea.appendChild(backBtn);
+
+        topBar.appendChild(scoreArea);
+        wrapper.appendChild(topBar);
+
+        // Build map with quiz click handler
+        this._build1861Map(wrapper, function(regionId) {
+            self._handle1861Click(regionId);
+        });
+
+        // Feedback bar
+        var feedback = document.createElement('div');
+        feedback.className = 'mq-feedback';
+        feedback.id = 'mq-feedback';
+        wrapper.appendChild(feedback);
+
+        container.appendChild(wrapper);
+
+        // Start timer
+        this._timerId = setInterval(function() {
+            var elapsed = Math.floor((Date.now() - self._startTime) / 1000);
+            var el = document.getElementById('mq-timer');
+            if (el) el.textContent = self._formatTime(elapsed);
+        }, 1000);
+
+        this._regions = [];
+        this._next1861Region();
+    },
+
+    _next1861Region() {
+        if (this._queue.length === 0) {
+            this._end1861Quiz();
+            return;
+        }
+
+        this._currentRegion = this._queue.shift();
+        this._hintUsed = false;
+        this._regionMistakes = 0;
+
+        var prompt = document.getElementById('mq-prompt');
+        if (prompt) {
+            prompt.textContent = 'Click on: ';
+            var strong = document.createElement('strong');
+            strong.textContent = this._currentRegion.name;
+            prompt.appendChild(strong);
+        }
+
+        var feedback = document.getElementById('mq-feedback');
+        if (feedback) feedback.textContent = '';
+    },
+
+    _handle1861Click(clickedId) {
+        if (!this._currentRegion) return;
+
+        var correctId = this._currentRegion.id;
+        var isCorrect = clickedId === correctId;
+
+        var clickedPaths = document.querySelectorAll('.mq-region-path[data-id="' + clickedId + '"]');
+        var correctPaths = document.querySelectorAll('.mq-region-path[data-id="' + correctId + '"]');
+        var feedback = document.getElementById('mq-feedback');
+
+        if (isCorrect) {
+            this._score++;
+            this._answeredIds.push(correctId);
+
+            // Mark as correct permanently
+            for (var i = 0; i < correctPaths.length; i++) {
+                correctPaths[i].classList.add('mq-correct');
+                correctPaths[i].setAttribute('fill', '#22c55e');
+            }
+
+            if (feedback) {
+                feedback.className = 'mq-feedback mq-feedback-correct';
+                feedback.textContent = 'Correct!';
+            }
+
+            var scoreEl = document.getElementById('mq-score');
+            if (scoreEl) scoreEl.textContent = this._score + '/' + this._total;
+
+            var self = this;
+            setTimeout(function() {
+                self._next1861Region();
+            }, 600);
+
+        } else {
+            this._mistakes++;
+            this._regionMistakes++;
+
+            // Flash wrong
+            for (var i = 0; i < clickedPaths.length; i++) {
+                if (!clickedPaths[i].classList.contains('mq-correct')) {
+                    clickedPaths[i].classList.add('mq-wrong');
+                    (function(p) {
+                        setTimeout(function() { p.classList.remove('mq-wrong'); }, 500);
+                    })(clickedPaths[i]);
+                }
+            }
+
+            if (feedback) {
+                feedback.className = 'mq-feedback mq-feedback-wrong';
+                feedback.textContent = 'Try again!';
+            }
+
+            // After 2 wrong clicks, show hint (per design spec)
+            if (this._regionMistakes >= 2 && !this._hintUsed) {
+                this._hintUsed = true;
+                for (var i = 0; i < correctPaths.length; i++) {
+                    correctPaths[i].classList.add('mq-hint');
+                    (function(p) {
+                        setTimeout(function() { p.classList.remove('mq-hint'); }, 2500);
+                    })(correctPaths[i]);
+                }
+                if (feedback) {
+                    feedback.className = 'mq-feedback mq-feedback-hint';
+                    feedback.textContent = 'Look for the highlighted region!';
+                }
+            }
+        }
+    },
+
+    _end1861Quiz() {
+        if (this._timerId) clearInterval(this._timerId);
+        var rawElapsed = Math.floor((Date.now() - this._startTime) / 1000);
+        var elapsed = Math.max(45, rawElapsed); // 42 regions needs at least 45s
+        var pct = Math.min(100, Math.round((this._score / this._total) * 100));
+
+        // Load saved progress for 1861 map
+        var saved = ProgressManager.getActivityProgress(this._config.unit.id, 'map-quiz-1861') || {};
+        var attempts = (saved.attempts || 0) + 1;
+        var bestScore = Math.max(saved.bestScore || 0, pct);
+        var bestTime = saved.bestTime || null;
+        if (pct >= 100) {
+            bestTime = bestTime === null ? elapsed : Math.min(bestTime, elapsed);
+        }
+
+        ProgressManager.saveActivityProgress(this._config.unit.id, 'map-quiz-1861', {
+            bestScore: bestScore,
+            bestTime: bestTime,
+            attempts: attempts,
+            lastPlayed: new Date().toISOString()
+        });
+
+        // Show results
+        var container = this._container;
+        container.textContent = '';
+        var self = this;
+
+        var wrapper = document.createElement('div');
+        wrapper.className = 'mq-results';
+
+        var icon = document.createElement('i');
+        icon.className = pct === 100 ? 'fas fa-trophy mq-results-icon gold' : 'fas fa-map-marked-alt mq-results-icon';
+        wrapper.appendChild(icon);
+
+        var title = document.createElement('h2');
+        title.className = 'mq-results-title';
+        title.textContent = pct === 100 ? 'Perfect Score!' : 'Quiz Complete!';
+        wrapper.appendChild(title);
+
+        var stats = document.createElement('div');
+        stats.className = 'mq-results-stats';
+
+        var statItems = [
+            ['Score', pct + '%'],
+            ['Time', this._formatTime(elapsed)],
+            ['Mistakes', String(this._mistakes)],
+            ['Attempts', String(attempts)]
+        ];
+
+        statItems.forEach(function(item) {
+            var stat = document.createElement('div');
+            stat.className = 'mq-stat';
+            var label = document.createElement('span');
+            label.className = 'mq-stat-label';
+            label.textContent = item[0];
+            var value = document.createElement('span');
+            value.className = 'mq-stat-value';
+            value.textContent = item[1];
+            stat.appendChild(label);
+            stat.appendChild(value);
+            stats.appendChild(stat);
+        });
+        wrapper.appendChild(stats);
+
+        if (pct === 100 && (bestTime === null || elapsed < bestTime)) {
+            var newBest = document.createElement('p');
+            newBest.className = 'mq-new-best';
+            newBest.textContent = 'New best time!';
+            wrapper.appendChild(newBest);
+        }
+
+        var btnRow = document.createElement('div');
+        btnRow.className = 'mq-btn-row';
+
+        var retryBtn = document.createElement('button');
+        retryBtn.className = 'nav-button mq-start-btn';
+        retryBtn.textContent = 'Play Again';
+        retryBtn.addEventListener('click', function() {
+            self._show1861QuizChooser();
+        });
+        btnRow.appendChild(retryBtn);
+
+        var learnBtn = document.createElement('button');
+        learnBtn.className = 'nav-button';
+        learnBtn.textContent = 'Back to Learn';
+        learnBtn.addEventListener('click', function() {
+            self._start1861Learn();
+        });
+        btnRow.appendChild(learnBtn);
+
+        var homeBtn = document.createElement('button');
+        homeBtn.className = 'nav-button';
+        homeBtn.textContent = 'All Map Quizzes';
+        homeBtn.addEventListener('click', function() {
+            self._showModeSelector();
+        });
+        btnRow.appendChild(homeBtn);
+
+        wrapper.appendChild(btnRow);
+
+        // Leaderboard section
+        if (pct === 100 && typeof LeaderboardManager !== 'undefined') {
+            LeaderboardManager.submitScore();
+        }
+        var lbWrap = document.createElement('div');
+        lbWrap.className = 'mq-leaderboard-wrap';
+        wrapper.appendChild(lbWrap);
+
+        container.appendChild(wrapper);
+        this._loadLeaderboard(lbWrap);
+    },
+
     _startGame() {
         this._mapRegions = this._getMapRegions();
         this._score = 0;
