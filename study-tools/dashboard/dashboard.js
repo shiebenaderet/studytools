@@ -2317,6 +2317,7 @@ const Dashboard = {
         var container = document.getElementById('leaderboard-container');
         container.textContent = '';
         container.appendChild(this._loading());
+        var self = this;
 
         try {
             var lbQuery = this.supabase
