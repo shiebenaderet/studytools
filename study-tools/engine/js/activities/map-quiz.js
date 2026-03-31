@@ -1268,6 +1268,266 @@ StudyEngine.registerActivity({
         this._loadLeaderboard(lbWrap);
     },
 
+    _start1861MobileQuiz() {
+        var container = this._container;
+        container.textContent = '';
+        var self = this;
+        var regions = this._get1861Regions();
+
+        var wrapper = document.createElement('div');
+        wrapper.className = 'mq-game-wrapper mq-1861-mobile';
+
+        // Top bar
+        var topBar = document.createElement('div');
+        topBar.className = 'mq-topbar';
+
+        var prompt = document.createElement('div');
+        prompt.className = 'mq-prompt';
+        prompt.id = 'mq-prompt';
+        prompt.textContent = 'Loading...';
+        topBar.appendChild(prompt);
+
+        var scoreArea = document.createElement('div');
+        scoreArea.className = 'mq-score-area';
+
+        var scoreEl = document.createElement('span');
+        scoreEl.className = 'mq-score';
+        scoreEl.id = 'mq-score';
+        scoreEl.textContent = '0/' + this._total;
+        scoreArea.appendChild(scoreEl);
+
+        var timerEl = document.createElement('span');
+        timerEl.className = 'mq-timer';
+        timerEl.id = 'mq-timer';
+        timerEl.textContent = '0:00';
+        scoreArea.appendChild(timerEl);
+
+        var backBtn = document.createElement('button');
+        backBtn.className = 'nav-button';
+        backBtn.style.cssText = 'font-size: 0.8em; padding: 4px 12px;';
+        backBtn.textContent = 'Back';
+        backBtn.addEventListener('click', function() {
+            if (self._timerId) clearInterval(self._timerId);
+            self._start1861Learn();
+        });
+        scoreArea.appendChild(backBtn);
+
+        topBar.appendChild(scoreArea);
+        wrapper.appendChild(topBar);
+
+        // Map (visual context only, not interactive on mobile)
+        var svgWrap = document.createElement('div');
+        svgWrap.className = 'mq-map-wrap mq-1861-mobile-map';
+        svgWrap.id = 'mq-mobile-map-wrap';
+
+        var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('viewBox', '0 0 900 700');
+        svg.setAttribute('class', 'mq-map');
+        svg.id = 'mq-map';
+
+        var bg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        bg.setAttribute('x', '0');
+        bg.setAttribute('y', '0');
+        bg.setAttribute('width', '900');
+        bg.setAttribute('height', '700');
+        bg.setAttribute('fill', '#1a3a5c');
+        bg.setAttribute('rx', '8');
+        svg.appendChild(bg);
+
+        // Draw all regions
+        var drawOrder = this._get1861DrawOrder();
+        drawOrder.forEach(function(regionId) {
+            var region = null;
+            for (var i = 0; i < regions.length; i++) {
+                if (regions[i].id === regionId) {
+                    region = regions[i];
+                    break;
+                }
+            }
+            if (!region) return;
+
+            var group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+            group.setAttribute('data-id', region.id);
+
+            region.paths.forEach(function(pathData) {
+                var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                path.setAttribute('d', pathData);
+                path.setAttribute('fill', '#5a7a9a');
+                path.setAttribute('stroke', '#ffffff');
+                path.setAttribute('stroke-width', '1.5');
+                path.setAttribute('class', 'mq-region-path');
+                path.setAttribute('data-id', region.id);
+                group.appendChild(path);
+            });
+
+            svg.appendChild(group);
+        });
+
+        svgWrap.appendChild(svg);
+        wrapper.appendChild(svgWrap);
+
+        // Multiple choice buttons container
+        var mcWrap = document.createElement('div');
+        mcWrap.className = 'mq-1861-mc-wrap';
+        mcWrap.id = 'mq-mc-buttons';
+        wrapper.appendChild(mcWrap);
+
+        // Feedback
+        var feedback = document.createElement('div');
+        feedback.className = 'mq-feedback';
+        feedback.id = 'mq-feedback';
+        wrapper.appendChild(feedback);
+
+        container.appendChild(wrapper);
+
+        // Timer
+        this._timerId = setInterval(function() {
+            var elapsed = Math.floor((Date.now() - self._startTime) / 1000);
+            var el = document.getElementById('mq-timer');
+            if (el) el.textContent = self._formatTime(elapsed);
+        }, 1000);
+
+        this._next1861MobileRegion();
+    },
+
+    _next1861MobileRegion() {
+        if (this._queue.length === 0) {
+            this._end1861Quiz();
+            return;
+        }
+
+        this._currentRegion = this._queue.shift();
+        this._hintUsed = false;
+        this._regionMistakes = 0;
+        var self = this;
+        var regions = this._get1861Regions(); // cached via window global, no reconstruction
+
+        // Update prompt
+        var prompt = document.getElementById('mq-prompt');
+        if (prompt) {
+            prompt.textContent = 'Find: ';
+            var strong = document.createElement('strong');
+            strong.textContent = this._currentRegion.name;
+            prompt.appendChild(strong);
+        }
+
+        var feedback = document.getElementById('mq-feedback');
+        if (feedback) feedback.textContent = '';
+
+        // Highlight target region on map
+        var allPaths = document.querySelectorAll('.mq-region-path');
+        for (var i = 0; i < allPaths.length; i++) {
+            if (!allPaths[i].classList.contains('mq-correct')) {
+                allPaths[i].setAttribute('fill', '#5a7a9a');
+            }
+        }
+        var targetPaths = document.querySelectorAll('.mq-region-path[data-id="' + this._currentRegion.id + '"]');
+        for (var i = 0; i < targetPaths.length; i++) {
+            targetPaths[i].setAttribute('fill', '#fbbf24');
+        }
+
+        // Build 4 MC options: 1 correct + 3 distractors (exclude already-answered)
+        var distractors = [];
+        var remaining = regions.filter(function(r) {
+            return r.id !== self._currentRegion.id && self._answeredIds.indexOf(r.id) === -1;
+        });
+        // Fall back to full pool if not enough unanswered distractors
+        if (remaining.length < 3) {
+            remaining = regions.filter(function(r) { return r.id !== self._currentRegion.id; });
+        }
+        // Shuffle remaining
+        for (var i = remaining.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = remaining[i];
+            remaining[i] = remaining[j];
+            remaining[j] = temp;
+        }
+        distractors = remaining.slice(0, 3);
+
+        var options = [this._currentRegion].concat(distractors);
+        // Shuffle options
+        for (var i = options.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = options[i];
+            options[i] = options[j];
+            options[j] = temp;
+        }
+
+        var mcWrap = document.getElementById('mq-mc-buttons');
+        mcWrap.textContent = '';
+
+        options.forEach(function(opt) {
+            var btn = document.createElement('button');
+            btn.className = 'mq-1861-mc-btn';
+            btn.textContent = opt.name;
+            btn.addEventListener('click', function() {
+                self._handle1861MobileClick(opt.id, btn);
+            });
+            mcWrap.appendChild(btn);
+        });
+    },
+
+    _handle1861MobileClick(clickedId, btnEl) {
+        if (!this._currentRegion) return;
+
+        var correctId = this._currentRegion.id;
+        var isCorrect = clickedId === correctId;
+        var feedback = document.getElementById('mq-feedback');
+        var self = this;
+
+        if (isCorrect) {
+            this._score++;
+            this._answeredIds.push(correctId);
+            btnEl.classList.add('mq-1861-mc-correct');
+
+            // Mark region green on map
+            var correctPaths = document.querySelectorAll('.mq-region-path[data-id="' + correctId + '"]');
+            for (var i = 0; i < correctPaths.length; i++) {
+                correctPaths[i].classList.add('mq-correct');
+                correctPaths[i].setAttribute('fill', '#22c55e');
+            }
+
+            if (feedback) {
+                feedback.className = 'mq-feedback mq-feedback-correct';
+                feedback.textContent = 'Correct!';
+            }
+
+            var scoreEl = document.getElementById('mq-score');
+            if (scoreEl) scoreEl.textContent = this._score + '/' + this._total;
+
+            // Disable all buttons
+            var allBtns = document.querySelectorAll('.mq-1861-mc-btn');
+            for (var i = 0; i < allBtns.length; i++) {
+                allBtns[i].disabled = true;
+            }
+
+            setTimeout(function() {
+                self._next1861MobileRegion();
+            }, 800);
+
+        } else {
+            this._mistakes++;
+            this._regionMistakes++;
+            btnEl.classList.add('mq-1861-mc-wrong');
+            btnEl.disabled = true;
+
+            if (feedback) {
+                feedback.className = 'mq-feedback mq-feedback-wrong';
+                feedback.textContent = 'Try again!';
+            }
+
+            // After 2 wrong, highlight correct button
+            if (this._regionMistakes >= 2) {
+                var allBtns = document.querySelectorAll('.mq-1861-mc-btn');
+                for (var i = 0; i < allBtns.length; i++) {
+                    if (allBtns[i].textContent === this._currentRegion.name) {
+                        allBtns[i].classList.add('mq-1861-mc-hint');
+                    }
+                }
+            }
+        }
+    },
+
     _startGame() {
         this._mapRegions = this._getMapRegions();
         this._score = 0;
