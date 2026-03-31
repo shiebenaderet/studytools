@@ -128,7 +128,7 @@ const CommandPalette = {
             }
 
             // Teacher unlock: bypass mastery gating for demos
-            if (query === 'teacher-unlock') {
+            if (query === 'unlock') {
                 this.close();
                 this.promptTeacherUnlock();
                 return;
