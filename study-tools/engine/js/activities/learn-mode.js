@@ -924,6 +924,22 @@ StudyEngine.registerActivity({
                 slidesSinceReflection++;
             }
 
+            // Mini-game break every other group (after ~6 slides)
+            if (g > 0 && g % (groupSize * 2) === 0) {
+                var gameTypes = ['sort-it-out', 'who-am-i', 'four-corners'];
+                var gameType = gameTypes[Math.floor(g / (groupSize * 2)) % gameTypes.length];
+                // Collect recent terms for the mini-game (last 2 groups worth)
+                var recentTerms = prioritized.slice(Math.max(0, g - groupSize * 2), g + groupSize);
+                slides.push({
+                    type: 'mini-game',
+                    data: {
+                        gameType: gameType,
+                        terms: recentTerms.slice(0, 8) // max 8 terms for mini-game
+                    }
+                });
+                slidesSinceReflection = 0; // reset so reflection doesn't pile on
+            }
+
             // Reflection every 5-7 slides
             if (slidesSinceReflection >= 5) {
                 var recentTerm = group[group.length - 1] ? group[group.length - 1].term : 'this topic';
@@ -1080,6 +1096,8 @@ StudyEngine.registerActivity({
             this._renderKeyIdeaCard(slideArea, slide.data);
         } else if (slide.type === 'reflection') {
             this._renderReflectionCard(slideArea, slide.data);
+        } else if (slide.type === 'mini-game') {
+            this._renderMiniGame(slideArea, slide.data);
         }
     },
 
@@ -1439,6 +1457,396 @@ StudyEngine.registerActivity({
 
         card.appendChild(btnRow);
         slideArea.appendChild(card);
+    },
+
+    // ─── Mini-game breaks ────────────────────────────────────────
+
+    _renderMiniGame: function(slideArea, gameData) {
+        var self = this;
+        var unitId = this._config.unit.id;
+        slideArea.textContent = '';
+
+        var wrapper = document.createElement('div');
+        wrapper.style.cssText = 'text-align:center;padding:20px;';
+
+        // Header
+        var header = document.createElement('div');
+        header.style.cssText = 'margin-bottom:20px;';
+        var icon = document.createElement('i');
+        icon.className = 'fas fa-gamepad';
+        icon.style.cssText = 'font-size:2em;color:var(--accent);display:block;margin-bottom:8px;';
+        header.appendChild(icon);
+        var title = document.createElement('h3');
+        title.style.cssText = 'color:var(--text-primary);margin-bottom:4px;';
+        title.textContent = 'Quick Challenge!';
+        header.appendChild(title);
+        var subtitle = document.createElement('p');
+        subtitle.style.cssText = 'color:var(--text-muted);font-size:0.9em;';
+        subtitle.textContent = 'Let\'s see what stuck.';
+        header.appendChild(subtitle);
+        wrapper.appendChild(header);
+
+        var terms = gameData.terms || [];
+        var gameType = gameData.gameType;
+
+        if (gameType === 'sort-it-out' && terms.length >= 4) {
+            this._renderMiniSortItOut(wrapper, terms, unitId);
+        } else if (gameType === 'who-am-i' && terms.length >= 4) {
+            this._renderMiniWhoAmI(wrapper, terms, unitId);
+        } else if (gameType === 'four-corners' && terms.length >= 4) {
+            this._renderMiniFourCorners(wrapper, terms, unitId);
+        } else {
+            // Fallback: not enough terms, skip
+            var msg = document.createElement('p');
+            msg.style.cssText = 'color:var(--text-muted);';
+            msg.textContent = 'Keep going!';
+            wrapper.appendChild(msg);
+            var skipBtn = document.createElement('button');
+            skipBtn.className = 'nav-button';
+            skipBtn.textContent = 'Continue';
+            skipBtn.addEventListener('click', function() { self._advanceSlide(); });
+            wrapper.appendChild(skipBtn);
+        }
+
+        slideArea.appendChild(wrapper);
+    },
+
+    _renderMiniSortItOut: function(wrapper, terms, unitId) {
+        var self = this;
+        var categories = [];
+        var catSet = {};
+        for (var i = 0; i < terms.length; i++) {
+            if (terms[i].category && !catSet[terms[i].category]) {
+                catSet[terms[i].category] = true;
+                categories.push(terms[i].category);
+            }
+        }
+        if (categories.length < 2) {
+            this._miniGameDone(wrapper);
+            return;
+        }
+
+        // Shuffle terms, take 3
+        var shuffled = terms.slice();
+        for (var i = shuffled.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var tmp = shuffled[i]; shuffled[i] = shuffled[j]; shuffled[j] = tmp;
+        }
+        var queue = shuffled.slice(0, 3);
+        var round = 0;
+        var correct = 0;
+
+        var gameArea = document.createElement('div');
+        wrapper.appendChild(gameArea);
+
+        function showRound() {
+            if (round >= queue.length) {
+                self._miniGameComplete(wrapper, correct, queue.length);
+                return;
+            }
+            gameArea.textContent = '';
+            var term = queue[round];
+
+            var termCard = document.createElement('div');
+            termCard.style.cssText = 'background:var(--bg-card);border:1px solid var(--border-card);border-radius:12px;padding:16px;margin-bottom:16px;';
+            var termName = document.createElement('div');
+            termName.style.cssText = 'font-weight:700;font-size:1.1em;color:var(--text-primary);margin-bottom:6px;';
+            termName.textContent = term.term;
+            termCard.appendChild(termName);
+            var termDef = document.createElement('div');
+            termDef.style.cssText = 'color:var(--text-secondary);font-size:0.85em;';
+            termDef.textContent = (term.simpleExplanation || term.definition || '').substring(0, 80) + '...';
+            termCard.appendChild(termDef);
+            gameArea.appendChild(termCard);
+
+            var label = document.createElement('p');
+            label.style.cssText = 'color:var(--text-muted);font-size:0.85em;margin-bottom:8px;';
+            label.textContent = 'Which category?';
+            gameArea.appendChild(label);
+
+            var btnWrap = document.createElement('div');
+            btnWrap.style.cssText = 'display:flex;flex-wrap:wrap;gap:8px;justify-content:center;';
+            categories.forEach(function(cat) {
+                var btn = document.createElement('button');
+                btn.style.cssText = 'padding:10px 18px;border:2px solid var(--border-card);border-radius:10px;background:var(--bg-card);color:var(--text-primary);font-weight:600;cursor:pointer;font-size:0.9em;';
+                btn.textContent = cat;
+                btn.addEventListener('click', function() {
+                    var isCorrect = cat === term.category;
+                    if (isCorrect) {
+                        correct++;
+                        btn.style.background = 'rgba(34,197,94,0.2)';
+                        btn.style.borderColor = '#22c55e';
+                        if (typeof MasteryManager !== 'undefined') {
+                            MasteryManager.recordTermCorrect(unitId, term.term, 'learn-mode');
+                        }
+                    } else {
+                        btn.style.background = 'rgba(239,68,68,0.2)';
+                        btn.style.borderColor = '#ef4444';
+                        // Highlight correct
+                        var allBtns = btnWrap.querySelectorAll('button');
+                        for (var b = 0; b < allBtns.length; b++) {
+                            if (allBtns[b].textContent === term.category) {
+                                allBtns[b].style.background = 'rgba(34,197,94,0.2)';
+                                allBtns[b].style.borderColor = '#22c55e';
+                            }
+                        }
+                    }
+                    // Disable all buttons
+                    var allBtns = btnWrap.querySelectorAll('button');
+                    for (var b = 0; b < allBtns.length; b++) allBtns[b].disabled = true;
+                    round++;
+                    setTimeout(showRound, 800);
+                });
+                btnWrap.appendChild(btn);
+            });
+            gameArea.appendChild(btnWrap);
+        }
+        showRound();
+    },
+
+    _renderMiniWhoAmI: function(wrapper, terms, unitId) {
+        var self = this;
+        var shuffled = terms.slice();
+        for (var i = shuffled.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var tmp = shuffled[i]; shuffled[i] = shuffled[j]; shuffled[j] = tmp;
+        }
+        var queue = shuffled.slice(0, 3);
+        var round = 0;
+        var correct = 0;
+
+        var gameArea = document.createElement('div');
+        wrapper.appendChild(gameArea);
+
+        function showRound() {
+            if (round >= queue.length) {
+                self._miniGameComplete(wrapper, correct, queue.length);
+                return;
+            }
+            gameArea.textContent = '';
+            var term = queue[round];
+
+            // Clue card
+            var clueCard = document.createElement('div');
+            clueCard.style.cssText = 'background:var(--bg-card);border:1px solid var(--border-card);border-radius:12px;padding:16px;margin-bottom:16px;';
+            var clueLabel = document.createElement('div');
+            clueLabel.style.cssText = 'color:var(--accent);font-weight:600;font-size:0.8em;margin-bottom:6px;';
+            clueLabel.textContent = 'Who Am I?';
+            clueCard.appendChild(clueLabel);
+            var clueText = document.createElement('div');
+            clueText.style.cssText = 'color:var(--text-primary);font-size:0.95em;line-height:1.5;';
+            clueText.textContent = term.simpleExplanation || term.definition || '';
+            clueCard.appendChild(clueText);
+            gameArea.appendChild(clueCard);
+
+            // Build 4 options: correct + 3 distractors
+            var distractors = shuffled.filter(function(t) { return t.term !== term.term; });
+            for (var d = distractors.length - 1; d > 0; d--) {
+                var j = Math.floor(Math.random() * (d + 1));
+                var tmp = distractors[d]; distractors[d] = distractors[j]; distractors[j] = tmp;
+            }
+            var options = [term].concat(distractors.slice(0, 3));
+            for (var o = options.length - 1; o > 0; o--) {
+                var j = Math.floor(Math.random() * (o + 1));
+                var tmp = options[o]; options[o] = options[j]; options[j] = tmp;
+            }
+
+            var btnWrap = document.createElement('div');
+            btnWrap.style.cssText = 'display:grid;grid-template-columns:1fr 1fr;gap:8px;';
+            options.forEach(function(opt) {
+                var btn = document.createElement('button');
+                btn.style.cssText = 'padding:12px 8px;border:2px solid var(--border-card);border-radius:10px;background:var(--bg-card);color:var(--text-primary);font-weight:600;cursor:pointer;font-size:0.9em;text-align:center;';
+                btn.textContent = opt.term;
+                btn.addEventListener('click', function() {
+                    var isCorrect = opt.term === term.term;
+                    if (isCorrect) {
+                        correct++;
+                        btn.style.background = 'rgba(34,197,94,0.2)';
+                        btn.style.borderColor = '#22c55e';
+                        if (typeof MasteryManager !== 'undefined') {
+                            MasteryManager.recordTermCorrect(unitId, term.term, 'learn-mode');
+                        }
+                    } else {
+                        btn.style.background = 'rgba(239,68,68,0.2)';
+                        btn.style.borderColor = '#ef4444';
+                        var allBtns = btnWrap.querySelectorAll('button');
+                        for (var b = 0; b < allBtns.length; b++) {
+                            if (allBtns[b].textContent === term.term) {
+                                allBtns[b].style.background = 'rgba(34,197,94,0.2)';
+                                allBtns[b].style.borderColor = '#22c55e';
+                            }
+                        }
+                    }
+                    var allBtns = btnWrap.querySelectorAll('button');
+                    for (var b = 0; b < allBtns.length; b++) allBtns[b].disabled = true;
+                    round++;
+                    setTimeout(showRound, 800);
+                });
+                btnWrap.appendChild(btn);
+            });
+            gameArea.appendChild(btnWrap);
+        }
+        showRound();
+    },
+
+    _renderMiniFourCorners: function(wrapper, terms, unitId) {
+        var self = this;
+        var round = 0;
+        var correct = 0;
+        var maxRounds = 3;
+
+        // Build category groups
+        var catGroups = {};
+        for (var i = 0; i < terms.length; i++) {
+            var cat = terms[i].category;
+            if (!catGroups[cat]) catGroups[cat] = [];
+            catGroups[cat].push(terms[i]);
+        }
+        var catNames = Object.keys(catGroups).filter(function(c) { return catGroups[c].length >= 3; });
+        if (catNames.length < 2) {
+            // Not enough variety, fall back to Who Am I
+            this._renderMiniWhoAmI(wrapper, terms, unitId);
+            return;
+        }
+
+        var gameArea = document.createElement('div');
+        wrapper.appendChild(gameArea);
+
+        function showRound() {
+            if (round >= maxRounds) {
+                self._miniGameComplete(wrapper, correct, maxRounds);
+                return;
+            }
+            gameArea.textContent = '';
+
+            // Pick majority category and odd-one-out category
+            var shuffledCats = catNames.slice();
+            for (var c = shuffledCats.length - 1; c > 0; c--) {
+                var j = Math.floor(Math.random() * (c + 1));
+                var tmp = shuffledCats[c]; shuffledCats[c] = shuffledCats[j]; shuffledCats[j] = tmp;
+            }
+            var majorityCat = shuffledCats[0];
+            var oddCat = shuffledCats[1];
+
+            // Pick 3 from majority, 1 from odd
+            var majTerms = catGroups[majorityCat].slice();
+            for (var m = majTerms.length - 1; m > 0; m--) {
+                var j = Math.floor(Math.random() * (m + 1));
+                var tmp = majTerms[m]; majTerms[m] = majTerms[j]; majTerms[j] = tmp;
+            }
+            var oddTerms = catGroups[oddCat].slice();
+            for (var o = oddTerms.length - 1; o > 0; o--) {
+                var j = Math.floor(Math.random() * (o + 1));
+                var tmp = oddTerms[o]; oddTerms[o] = oddTerms[j]; oddTerms[j] = tmp;
+            }
+
+            var three = majTerms.slice(0, 3);
+            var oddOne = oddTerms[0];
+            var four = three.concat([oddOne]);
+            // Shuffle
+            for (var f = four.length - 1; f > 0; f--) {
+                var j = Math.floor(Math.random() * (f + 1));
+                var tmp = four[f]; four[f] = four[j]; four[j] = tmp;
+            }
+
+            var prompt = document.createElement('p');
+            prompt.style.cssText = 'color:var(--text-muted);font-size:0.85em;margin-bottom:10px;';
+            prompt.textContent = 'Which term does NOT belong?';
+            gameArea.appendChild(prompt);
+
+            var grid = document.createElement('div');
+            grid.style.cssText = 'display:grid;grid-template-columns:1fr 1fr;gap:8px;';
+            four.forEach(function(t) {
+                var card = document.createElement('button');
+                card.style.cssText = 'padding:14px 10px;border:2px solid var(--border-card);border-radius:10px;background:var(--bg-card);cursor:pointer;text-align:left;';
+                var name = document.createElement('div');
+                name.style.cssText = 'font-weight:700;color:var(--text-primary);font-size:0.9em;margin-bottom:4px;';
+                name.textContent = t.term;
+                card.appendChild(name);
+                var def = document.createElement('div');
+                def.style.cssText = 'color:var(--text-muted);font-size:0.75em;line-height:1.3;';
+                def.textContent = (t.definition || '').substring(0, 60) + '...';
+                card.appendChild(def);
+
+                card.addEventListener('click', function() {
+                    var isCorrect = t.term === oddOne.term;
+                    if (isCorrect) {
+                        correct++;
+                        card.style.background = 'rgba(34,197,94,0.2)';
+                        card.style.borderColor = '#22c55e';
+                        for (var i = 0; i < three.length; i++) {
+                            if (typeof MasteryManager !== 'undefined') {
+                                MasteryManager.recordTermCorrect(unitId, three[i].term, 'learn-mode');
+                            }
+                        }
+                    } else {
+                        card.style.background = 'rgba(239,68,68,0.2)';
+                        card.style.borderColor = '#ef4444';
+                        // Highlight the odd one
+                        var allCards = grid.querySelectorAll('button');
+                        for (var b = 0; b < allCards.length; b++) {
+                            if (allCards[b].querySelector('div').textContent === oddOne.term) {
+                                allCards[b].style.background = 'rgba(251,191,36,0.2)';
+                                allCards[b].style.borderColor = '#fbbf24';
+                            }
+                        }
+                    }
+                    // Show explanation
+                    var explain = document.createElement('p');
+                    explain.style.cssText = 'color:var(--text-secondary);font-size:0.8em;margin-top:10px;';
+                    explain.textContent = 'The other three are from "' + majorityCat + '". ' + oddOne.term + ' is from "' + oddCat + '".';
+                    gameArea.appendChild(explain);
+
+                    var allCards = grid.querySelectorAll('button');
+                    for (var b = 0; b < allCards.length; b++) allCards[b].disabled = true;
+                    round++;
+                    setTimeout(showRound, 1200);
+                });
+                grid.appendChild(card);
+            });
+            gameArea.appendChild(grid);
+        }
+        showRound();
+    },
+
+    _miniGameComplete: function(wrapper, correct, total) {
+        var self = this;
+        wrapper.textContent = '';
+
+        var result = document.createElement('div');
+        result.style.cssText = 'text-align:center;padding:20px;';
+
+        var icon = document.createElement('i');
+        icon.className = correct === total ? 'fas fa-star' : 'fas fa-check-circle';
+        icon.style.cssText = 'font-size:2em;color:' + (correct === total ? 'var(--accent)' : 'var(--primary)') + ';display:block;margin-bottom:8px;';
+        result.appendChild(icon);
+
+        var msg = document.createElement('h3');
+        msg.style.cssText = 'color:var(--text-primary);margin-bottom:8px;';
+        msg.textContent = correct === total ? 'Perfect!' : 'Good effort!';
+        result.appendChild(msg);
+
+        var score = document.createElement('p');
+        score.style.cssText = 'color:var(--text-secondary);margin-bottom:16px;';
+        score.textContent = correct + ' of ' + total + ' correct';
+        result.appendChild(score);
+
+        var contBtn = document.createElement('button');
+        contBtn.className = 'nav-button';
+        contBtn.textContent = 'Keep Going!';
+        contBtn.addEventListener('click', function() { self._advanceSlide(); });
+        result.appendChild(contBtn);
+
+        wrapper.appendChild(result);
+    },
+
+    _miniGameDone: function(wrapper) {
+        var self = this;
+        var btn = document.createElement('button');
+        btn.className = 'nav-button';
+        btn.textContent = 'Continue';
+        btn.addEventListener('click', function() { self._advanceSlide(); });
+        wrapper.appendChild(btn);
     },
 
     // ─── Wonder button ───────────────────────────────────────────
