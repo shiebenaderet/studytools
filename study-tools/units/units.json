@@ -1,19 +1,19 @@
 {
     "units": [
         {
-            "id": "early-republic",
-            "title": "Early Republic Study Tool",
-            "subtitle": "Get ready to ace your test! Learn vocabulary, practice questions, and track your progress.",
-            "theme": { "primary": "#1669C5" },
-            "activityCount": 13
-        },
-        {
             "id": "westward-expansion",
             "title": "Westward Expansion & Reform Study Tool",
             "subtitle": "Get ready to ace your test! Learn vocabulary, practice questions, and track your progress.",
             "theme": { "primary": "#B5651D" },
-            "activityCount": 18,
-            "locked": true
+            "activityCount": 18
+        },
+        {
+            "id": "early-republic",
+            "title": "Early Republic Study Tool",
+            "subtitle": "Get ready to ace your test! Learn vocabulary, practice questions, and track your progress.",
+            "theme": { "primary": "#1669C5" },
+            "activityCount": 13,
+            "retired": true
         }
     ]
 }

@@ -463,6 +463,7 @@ StudyEngine.registerActivity({
         var existing = ProgressManager.getActivityProgress(unitId, 'practice-test') || {};
         var prevBest = typeof existing.bestScore === 'number' ? existing.bestScore : 0;
         ProgressManager.saveActivityProgress(unitId, 'practice-test', {
+            ...existing,
             bestScore: Math.max(prevBest, pct),
             lastScore: pct,
             sessions: this._masteryData.sessions

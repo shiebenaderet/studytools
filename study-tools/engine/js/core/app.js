@@ -352,22 +352,6 @@ const StudyEngine = {
             return;
         }
 
-        // Password gate for locked units
-        if (this.config.unit && this.config.unit.id) {
-            const gateUnitId = this.config.unit.id;
-            try {
-                const unitsResp = await fetch('../units/units.json');
-                const unitsData = await unitsResp.json();
-                const unitMeta = unitsData.units.find(u => u.id === gateUnitId);
-                if (unitMeta && unitMeta.locked && !sessionStorage.getItem('unit_access_' + gateUnitId)) {
-                    this._showEnginePasswordGate(gateUnitId);
-                    return;
-                }
-            } catch (e) {
-                // If units.json fails to load, skip gate check
-            }
-        }
-
         // Hide loading screen
         const loadingScreen = document.getElementById('loading-screen');
         if (loadingScreen) loadingScreen.style.display = 'none';
@@ -377,86 +361,6 @@ const StudyEngine = {
         this.renderHeader();
         this.renderFooterFact();
         await this.loadActivities();
-    },
-
-    _showEnginePasswordGate(unitId) {
-        // Hide loading screen
-        var loadingScreen = document.getElementById('loading-screen');
-        if (loadingScreen) loadingScreen.style.display = 'none';
-
-        var container = document.getElementById('app-container') || document.body;
-        container.textContent = '';
-
-        var wrapper = document.createElement('div');
-        wrapper.style.cssText = 'display:flex;align-items:center;justify-content:center;min-height:80vh;';
-
-        var box = document.createElement('div');
-        box.style.cssText = 'background:white;border-radius:12px;padding:32px;max-width:400px;width:90%;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,0.15);';
-
-        // Heading with lock icon
-        var heading = document.createElement('h3');
-        heading.style.marginBottom = '8px';
-        var hIcon = document.createElement('i');
-        hIcon.className = 'fas fa-lock';
-        heading.appendChild(hIcon);
-        heading.appendChild(document.createTextNode(' Password Required'));
-        box.appendChild(heading);
-
-        // Description
-        var desc = document.createElement('p');
-        desc.style.cssText = 'color:#666;margin-bottom:16px;font-size:0.9rem;';
-        desc.textContent = 'This unit is not yet available to students.';
-        box.appendChild(desc);
-
-        // Input
-        var input = document.createElement('input');
-        input.type = 'password';
-        input.placeholder = 'Enter password';
-        input.autocomplete = 'off';
-        input.style.cssText = 'width:100%;padding:10px 14px;border:2px solid #ddd;border-radius:8px;font-size:1rem;margin-bottom:12px;outline:none;';
-        box.appendChild(input);
-
-        // Error
-        var errorDiv = document.createElement('div');
-        errorDiv.style.cssText = 'color:#C0392B;font-size:0.85rem;margin-bottom:8px;display:none;';
-        errorDiv.textContent = 'Incorrect password';
-        box.appendChild(errorDiv);
-
-        // Buttons
-        var btnRow = document.createElement('div');
-        btnRow.style.cssText = 'display:flex;gap:10px;justify-content:center;margin-top:8px;';
-
-        var backLink = document.createElement('a');
-        backLink.href = '../';
-        backLink.textContent = 'Back';
-        backLink.style.cssText = 'padding:10px 24px;background:#eee;color:#333;border-radius:8px;text-decoration:none;display:inline-block;';
-        btnRow.appendChild(backLink);
-
-        var submitBtn = document.createElement('button');
-        submitBtn.textContent = 'Submit';
-        submitBtn.style.cssText = 'padding:10px 24px;border:none;border-radius:8px;font-size:1rem;cursor:pointer;background:#B5651D;color:white;';
-        btnRow.appendChild(submitBtn);
-
-        box.appendChild(btnRow);
-        wrapper.appendChild(box);
-        container.appendChild(wrapper);
-        input.focus();
-
-        function tryPassword() {
-            if (input.value === 'americanprogress') {
-                sessionStorage.setItem('unit_access_' + unitId, 'true');
-                window.location.reload();
-            } else {
-                errorDiv.style.display = 'block';
-                input.value = '';
-                input.focus();
-            }
-        }
-
-        submitBtn.addEventListener('click', tryPassword);
-        input.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') tryPassword();
-        });
     },
 
     applyTheme() {

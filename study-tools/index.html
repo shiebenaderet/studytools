@@ -178,15 +178,21 @@
             color: white;
         }
 
-        .unit-card.locked {
-            position: relative;
+        .unit-card.retired {
+            opacity: 0.55;
+            filter: grayscale(40%);
         }
 
-        .lock-overlay {
+        .unit-card.retired:hover {
+            transform: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .retired-badge {
             position: absolute;
             top: 12px;
             right: 12px;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.55);
             color: white;
             padding: 6px 14px;
             border-radius: 20px;
@@ -198,7 +204,7 @@
             z-index: 1;
         }
 
-        .password-modal-overlay {
+        .retired-modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
@@ -211,52 +217,29 @@
             z-index: 1000;
         }
 
-        .password-modal {
+        .retired-modal {
             background: white;
             border-radius: 12px;
             padding: 30px;
-            max-width: 400px;
+            max-width: 420px;
             width: 90%;
             text-align: center;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
-        .password-modal h3 {
+        .retired-modal h3 {
             font-size: 1.3em;
             margin-bottom: 10px;
             color: #333;
         }
 
-        .password-modal p {
+        .retired-modal p {
             color: #6b7280;
             margin-bottom: 20px;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
-        .password-modal input {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #d1d5db;
-            border-radius: 8px;
-            font-size: 1em;
-            font-family: inherit;
-            margin-bottom: 8px;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-
-        .password-modal input:focus {
-            border-color: #B5651D;
-        }
-
-        .password-modal .error-msg {
-            color: #dc2626;
-            font-size: 0.85em;
-            display: none;
-            margin-bottom: 12px;
-        }
-
-        .password-modal button {
+        .retired-modal button {
             padding: 10px 24px;
             border-radius: 8px;
             border: none;
@@ -265,20 +248,12 @@
             font-weight: 600;
             font-family: inherit;
             transition: transform 0.2s;
-        }
-
-        .password-modal button:hover {
-            transform: scale(1.03);
-        }
-
-        .password-modal .submit-btn {
-            background: #B5651D;
+            background: #6b7280;
             color: white;
         }
 
-        .password-modal .cancel-btn {
-            background: #e5e7eb;
-            color: #333;
+        .retired-modal button:hover {
+            transform: scale(1.03);
         }
 
         @media (max-width: 768px) {
@@ -313,35 +288,23 @@
     </footer>
 
     <script>
-        function showPasswordModal(unit) {
+        function showRetiredModal(unit) {
             var overlay = document.createElement('div');
-            overlay.className = 'password-modal-overlay';
+            overlay.className = 'retired-modal-overlay';
 
             var modal = document.createElement('div');
-            modal.className = 'password-modal';
+            modal.className = 'retired-modal';
 
             var heading = document.createElement('h3');
             var headingIcon = document.createElement('i');
-            headingIcon.className = 'fas fa-lock';
+            headingIcon.className = 'fas fa-archive';
             heading.appendChild(headingIcon);
-            heading.appendChild(document.createTextNode(' Password Required'));
+            heading.appendChild(document.createTextNode(' Previous Unit'));
             modal.appendChild(heading);
 
             var desc = document.createElement('p');
-            desc.textContent = 'This unit is not yet available to students.';
+            desc.textContent = 'This unit is from an earlier part of the year. Your current unit is Westward Expansion & Reform. Head there to study for your upcoming test!';
             modal.appendChild(desc);
-
-            var input = document.createElement('input');
-            input.type = 'password';
-            input.placeholder = 'Enter password';
-            input.autocomplete = 'off';
-            modal.appendChild(input);
-
-            var errorDiv = document.createElement('div');
-            errorDiv.className = 'error-msg';
-            errorDiv.textContent = 'Incorrect password';
-            errorDiv.style.display = 'none';
-            modal.appendChild(errorDiv);
 
             var btnContainer = document.createElement('div');
             btnContainer.style.display = 'flex';
@@ -349,39 +312,15 @@
             btnContainer.style.justifyContent = 'center';
             btnContainer.style.marginTop = '16px';
 
-            var cancelBtn = document.createElement('button');
-            cancelBtn.className = 'cancel-btn';
-            cancelBtn.textContent = 'Cancel';
-            btnContainer.appendChild(cancelBtn);
-
-            var submitBtn = document.createElement('button');
-            submitBtn.className = 'submit-btn';
-            submitBtn.textContent = 'Submit';
-            btnContainer.appendChild(submitBtn);
+            var closeBtn = document.createElement('button');
+            closeBtn.textContent = 'Got It';
+            btnContainer.appendChild(closeBtn);
 
             modal.appendChild(btnContainer);
             overlay.appendChild(modal);
             document.body.appendChild(overlay);
-            input.focus();
 
-            function tryPassword() {
-                if (input.value === 'americanprogress') {
-                    sessionStorage.setItem('unit_access_' + unit.id, 'true');
-                    window.location.href = 'engine/?unit=' + encodeURIComponent(unit.id);
-                } else {
-                    errorDiv.style.display = 'block';
-                    input.value = '';
-                    input.focus();
-                }
-            }
-
-            submitBtn.addEventListener('click', tryPassword);
-            input.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter') {
-                    tryPassword();
-                }
-            });
-            cancelBtn.addEventListener('click', function() {
+            closeBtn.addEventListener('click', function() {
                 overlay.remove();
             });
             overlay.addEventListener('click', function(e) {
@@ -455,30 +394,28 @@
                         body.appendChild(subtitle);
                     }
 
-                    var isLocked = unit.locked && !sessionStorage.getItem('unit_access_' + unit.id);
-
                     const btn = document.createElement('a');
                     btn.className = 'start-btn';
                     btn.style.background = themeColor;
 
-                    if (isLocked) {
-                        card.classList.add('locked');
+                    if (unit.retired) {
+                        card.classList.add('retired');
                         card.style.position = 'relative';
 
-                        var lockBadge = document.createElement('div');
-                        lockBadge.className = 'lock-overlay';
-                        var lockBadgeIcon = document.createElement('i');
-                        lockBadgeIcon.className = 'fas fa-lock';
-                        lockBadge.appendChild(lockBadgeIcon);
-                        var lockBadgeText = document.createTextNode(' Coming Soon');
-                        lockBadge.appendChild(lockBadgeText);
-                        card.appendChild(lockBadge);
+                        var retiredBadge = document.createElement('div');
+                        retiredBadge.className = 'retired-badge';
+                        var retiredIcon = document.createElement('i');
+                        retiredIcon.className = 'fas fa-archive';
+                        retiredBadge.appendChild(retiredIcon);
+                        retiredBadge.appendChild(document.createTextNode(' Previous Unit'));
+                        card.appendChild(retiredBadge);
 
                         btn.href = '#';
-                        btn.textContent = 'Enter Password';
+                        btn.textContent = 'View Unit';
+                        btn.style.background = '#9ca3af';
                         btn.addEventListener('click', function(e) {
                             e.preventDefault();
-                            showPasswordModal(unit);
+                            showRetiredModal(unit);
                         });
                     } else {
                         btn.href = 'engine/?unit=' + encodeURIComponent(unit.id);
