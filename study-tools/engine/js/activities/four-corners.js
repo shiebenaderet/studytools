@@ -99,7 +99,7 @@ StudyEngine.registerActivity({
 
         // Check we have at least 2 categories with 3+ terms each
         var categories = MasteryManager.getUnlockedCategories(this._config.unit.id, this._config);
-        var vocab = MasteryManager.getUnlockedVocabulary(this._config.unit.id, this._config);
+        var vocab = MasteryManager.getMustKnowVocabulary(this._config.unit.id, this._config);
 
         // Group vocab by category
         var catMap = {};

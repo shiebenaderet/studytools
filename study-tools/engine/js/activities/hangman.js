@@ -153,7 +153,7 @@ StudyEngine.registerActivity({
     },
 
     _newGame() {
-        var vocab = MasteryManager.getUnlockedVocabulary(this._config.unit.id, this._config);
+        var vocab = MasteryManager.getMustKnowVocabulary(this._config.unit.id, this._config);
         var item = vocab[Math.floor(Math.random() * vocab.length)];
         this._targetWord = item.term.toUpperCase().replace(/[^A-Z\s]/g, '');
         this._currentDefinition = item.definition;

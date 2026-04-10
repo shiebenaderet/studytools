@@ -127,7 +127,7 @@ StudyEngine.registerActivity({
         const pairCounts = { easy: 6, medium: 8, hard: 12 };
         this._totalPairs = pairCounts[difficulty] || 6;
 
-        const vocab = MasteryManager.getUnlockedVocabulary(this._config.unit.id, this._config);
+        const vocab = MasteryManager.getMustKnowVocabulary(this._config.unit.id, this._config);
         if (!vocab || vocab.length === 0) return;
 
         // Randomly select N terms (or fewer if not enough vocab)

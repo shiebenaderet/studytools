@@ -87,7 +87,7 @@ StudyEngine.registerActivity({
         this._results = [];
 
         // Get unlocked vocab and pick 10 terms
-        var vocab = MasteryManager.getUnlockedVocabulary(this._config.unit.id, this._config);
+        var vocab = MasteryManager.getMustKnowVocabulary(this._config.unit.id, this._config);
         if (vocab.length < 4) {
             this._showNotEnoughTerms();
             return;
@@ -139,7 +139,7 @@ StudyEngine.registerActivity({
         this._currentClue = 0;
 
         // Build distractor options from full unlocked vocab
-        var vocab = MasteryManager.getUnlockedVocabulary(this._config.unit.id, this._config);
+        var vocab = MasteryManager.getMustKnowVocabulary(this._config.unit.id, this._config);
         var distractorPool = [];
         for (var i = 0; i < vocab.length; i++) {
             if (vocab[i].term !== this._currentTerm.term) {

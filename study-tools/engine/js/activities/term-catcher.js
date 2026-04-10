@@ -206,7 +206,7 @@ StudyEngine.registerActivity({
     _spawnTerms() {
         if (!this._gameActive || !this._currentAnswer) return;
 
-        var vocab = MasteryManager.getUnlockedVocabulary(this._config.unit.id, this._config);
+        var vocab = MasteryManager.getMustKnowVocabulary(this._config.unit.id, this._config);
         if (!vocab || vocab.length === 0) return;
 
         // Determine how many terms to spawn (3-4 total on screen at a time)
@@ -310,7 +310,7 @@ StudyEngine.registerActivity({
     },
 
     _newQuestion() {
-        var vocab = MasteryManager.getUnlockedVocabulary(this._config.unit.id, this._config);
+        var vocab = MasteryManager.getMustKnowVocabulary(this._config.unit.id, this._config);
         if (!vocab || vocab.length === 0) return;
 
         // Pick a random term we haven't used recently

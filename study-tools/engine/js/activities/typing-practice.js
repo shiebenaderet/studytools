@@ -95,7 +95,7 @@ StudyEngine.registerActivity({
         wrapper.appendChild(pillContainer);
 
         // --- Term snippet section (per-term mini passages) ---
-        var vocab = MasteryManager.getUnlockedVocabulary(config.unit.id, config);
+        var vocab = MasteryManager.getMustKnowVocabulary(config.unit.id, config);
         var termsWithSnippets = [];
         for (var t = 0; t < vocab.length; t++) {
             if (vocab[t].typingSnippet) {
@@ -355,7 +355,7 @@ StudyEngine.registerActivity({
         this._startTime = null;
 
         // Collect vocab terms for this category (lowercase for matching)
-        var vocab = MasteryManager.getUnlockedVocabulary(config.unit.id, config);
+        var vocab = MasteryManager.getMustKnowVocabulary(config.unit.id, config);
         this._vocabTerms = [];
         for (var v = 0; v < vocab.length; v++) {
             if (vocab[v].category === category) {

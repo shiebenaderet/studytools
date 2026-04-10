@@ -114,7 +114,7 @@ StudyEngine.registerActivity({
         this._categories = categories.slice(0, 4);
 
         // Get unlocked vocab filtered to our categories
-        var vocab = MasteryManager.getUnlockedVocabulary(this._config.unit.id, this._config);
+        var vocab = MasteryManager.getMustKnowVocabulary(this._config.unit.id, this._config);
         var categorySet = {};
         for (var c = 0; c < this._categories.length; c++) {
             categorySet[this._categories[c]] = true;

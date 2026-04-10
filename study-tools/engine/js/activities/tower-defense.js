@@ -1148,7 +1148,7 @@ StudyEngine.registerActivity({
         });
 
         // Generate from vocabulary definitions
-        var vocab = config.vocabulary || [];
+        var vocab = MasteryManager.getMustKnowVocabulary(config.unit.id, config);
         if (vocab.length >= 4) {
             vocab.forEach(function(v) {
                 var options = [v.term];

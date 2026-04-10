@@ -251,7 +251,7 @@ StudyEngine.registerActivity({
     _nextQuestion() {
         if (!this._gameActive) return;
 
-        var vocab = MasteryManager.getUnlockedVocabulary(this._config.unit.id, this._config);
+        var vocab = MasteryManager.getMustKnowVocabulary(this._config.unit.id, this._config);
         if (vocab.length < 4) return;
 
         // Pick a term we haven't used yet
@@ -329,7 +329,7 @@ StudyEngine.registerActivity({
         this._locked = true;
         this._answered++;
 
-        var vocab = MasteryManager.getUnlockedVocabulary(this._config.unit.id, this._config);
+        var vocab = MasteryManager.getMustKnowVocabulary(this._config.unit.id, this._config);
         var selectedVocabIdx = this._options[index];
         var isCorrect = (selectedVocabIdx === vocab.indexOf(this._currentVocab));
 
