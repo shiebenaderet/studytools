@@ -61,7 +61,9 @@ StudyEngine.registerActivity({
         var unitId = config.unit.id;
         var progress = ProgressManager.getActivityProgress(unitId, 'flashcards') || {};
         var mastered = progress.mastered || [];
-        var terms = (config.vocabulary || []).filter(function(v) { return v.category === category; });
+        var terms = (config.vocabulary || []).filter(function(v) {
+            return v.category === category && (!v.tier || v.tier === 'must-know');
+        });
         if (terms.length === 0) return 0;
         var count = 0;
         for (var i = 0; i < terms.length; i++) {
