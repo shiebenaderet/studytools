@@ -18,11 +18,14 @@ const MasteryManager = {
     },
 
     /**
-     * Returns true if ALL vocab terms in that category are in the flashcard mastered list.
+     * Returns true if all must-know terms in that category are mastered.
+     * Falls back to all terms for units without tiers (backwards compat).
      */
     isCategoryMastered(unitId, config, categoryName) {
         if (!config.vocabulary) return false;
-        var categoryTerms = config.vocabulary.filter(function(v) { return v.category === categoryName; });
+        var categoryTerms = config.vocabulary.filter(function(v) {
+            return v.category === categoryName && (!v.tier || v.tier === 'must-know');
+        });
         if (categoryTerms.length === 0) return false;
         var self = this;
         return categoryTerms.every(function(v) {
@@ -48,6 +51,17 @@ const MasteryManager = {
             }
         }
         return unlocked;
+    },
+
+    /**
+     * Returns unlocked vocabulary filtered to must-know tier only.
+     * Falls back to all vocab for units without tiers (backwards compat).
+     */
+    getMustKnowVocabulary(unitId, config) {
+        const unlocked = this.getUnlockedVocabulary(unitId, config);
+        const hasTiers = unlocked.some(v => v.tier);
+        if (!hasTiers) return unlocked;
+        return unlocked.filter(v => !v.tier || v.tier === 'must-know');
     },
 
     /**
@@ -79,11 +93,11 @@ const MasteryManager = {
 
     /**
      * Returns config.fillInBlankSentences filtered by matching answer (case-insensitive)
-     * to unlocked vocabulary terms.
+     * to unlocked must-know vocabulary terms.
      */
     getUnlockedFillInBlanks(unitId, config) {
         if (!config.fillInBlankSentences) return [];
-        const unlockedVocab = this.getUnlockedVocabulary(unitId, config);
+        const unlockedVocab = this.getMustKnowVocabulary(unitId, config);
         const unlockedTermsLower = unlockedVocab.map(v => v.term.toLowerCase());
         return config.fillInBlankSentences.filter(s => {
             const answer = (s.answer || '').toLowerCase();
@@ -92,13 +106,18 @@ const MasteryManager = {
     },
 
     /**
-     * Returns unlock status summary object.
+     * Returns unlock status summary object. Progress counts use must-know terms only.
      */
     getUnlockStatus(unitId, config) {
         const categories = this.getCategories(config);
         const unlockedCategories = this.getUnlockedCategories(unitId, config);
-        const totalVocab = config.vocabulary ? config.vocabulary.length : 0;
-        const unlockedVocab = this.getUnlockedVocabulary(unitId, config).length;
+        const hasTiers = config.vocabulary && config.vocabulary.some(v => v.tier);
+        const coreVocab = hasTiers
+            ? config.vocabulary.filter(v => !v.tier || v.tier === 'must-know')
+            : config.vocabulary || [];
+        const totalVocab = coreVocab.length;
+        const unlockedVocab = this.getUnlockedVocabulary(unitId, config)
+            .filter(v => !hasTiers || !v.tier || v.tier === 'must-know').length;
         return {
             categories,
             unlockedCategories,
