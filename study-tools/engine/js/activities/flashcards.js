@@ -372,8 +372,14 @@ StudyEngine.registerActivity({
     // --- SRS Queue Logic ---
 
     _buildQueue() {
-        const cards = this._displayedVocab.map(v => v.term);
-        this._queue = StudyUtils.shuffle([...cards]);
+        const mustKnow = this._displayedVocab.filter(v => !v.tier || v.tier === 'must-know');
+        const encounter = this._displayedVocab.filter(v => v.tier === 'encounter');
+        const bonus = this._displayedVocab.filter(v => v.tier === 'bonus');
+        this._queue = [
+            ...StudyUtils.shuffle(mustKnow.map(v => v.term)),
+            ...StudyUtils.shuffle(encounter.map(v => v.term)),
+            ...StudyUtils.shuffle(bonus.map(v => v.term))
+        ];
         this._roundIndex = 0;
     },
 
@@ -501,6 +507,16 @@ StudyEngine.registerActivity({
             scene.appendChild(badge);
         }
 
+        // Tier badge for encounter/bonus terms
+        const existingTierBadge = scene.querySelector('.fc-tier-badge');
+        if (existingTierBadge) existingTierBadge.remove();
+        if (card.tier === 'encounter' || card.tier === 'bonus') {
+            const tierBadge = document.createElement('div');
+            tierBadge.className = 'fc-tier-badge';
+            tierBadge.textContent = 'Bonus';
+            scene.appendChild(tierBadge);
+        }
+
         // Counter
         counter.textContent = (this._roundIndex + 1) + ' / ' + this._queue.length;
 
@@ -564,10 +580,13 @@ StudyEngine.registerActivity({
         } else if (rating === 'good' || rating === 'easy') {
             if (!this._mastered.includes(card.term)) {
                 this._mastered.push(card.term);
-                const config = StudyEngine.config;
-                const unitId = config.unit.id;
-                if (MasteryManager.isCategoryMastered(unitId, config, card.category)) {
-                    MasteryManager.showMasteryNudge(config, card.category);
+                // Only check category mastery for must-know terms
+                if (!card.tier || card.tier === 'must-know') {
+                    const config = StudyEngine.config;
+                    const unitId = config.unit.id;
+                    if (MasteryManager.isCategoryMastered(unitId, config, card.category)) {
+                        MasteryManager.showMasteryNudge(config, card.category);
+                    }
                 }
             }
         }
@@ -617,7 +636,17 @@ StudyEngine.registerActivity({
 
         const total = this._queue.length;
         if (total > 30) {
-            progress.textContent = this._mastered.length + ' of ' + this._allUnlockedVocab.length + ' mastered';
+            const hasTiers = this._allUnlockedVocab.some(v => v.tier);
+            const mustKnowTotal = hasTiers
+                ? this._allUnlockedVocab.filter(v => !v.tier || v.tier === 'must-know').length
+                : this._allUnlockedVocab.length;
+            const mustKnowMastered = hasTiers
+                ? this._mastered.filter(t => {
+                    const v = this._allUnlockedVocab.find(vv => vv.term === t);
+                    return v && (!v.tier || v.tier === 'must-know');
+                }).length
+                : this._mastered.length;
+            progress.textContent = mustKnowMastered + ' of ' + mustKnowTotal + ' key terms mastered';
             progress.className = 'fc-progress fc-progress-text';
             return;
         }
