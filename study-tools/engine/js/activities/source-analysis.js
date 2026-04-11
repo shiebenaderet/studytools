@@ -1050,7 +1050,10 @@ StudyEngine.registerActivity({
             imgWrap.className = 'source-image-wrap';
             var img = document.createElement('img');
             img.className = 'source-image';
-            img.src = '../units/' + this._config.unit.id + '/images/sources/' + source.image;
+            // Support both full relative paths and bare filenames
+            img.src = source.image.indexOf('/') !== -1
+                ? source.image
+                : '../units/' + this._config.unit.id + '/images/sources/' + source.image;
             img.alt = source.title;
             img.loading = 'lazy';
             imgWrap.appendChild(img);
