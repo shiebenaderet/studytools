@@ -183,8 +183,14 @@ var NudgeManager = {
         var weakCount = this._getWeakTermCount(unitId);
         var triedActivities = this._getTriedActivities(unitId);
         var fcProgress = ProgressManager.getActivityProgress(unitId, 'flashcards') || {};
-        var masteredCount = fcProgress.mastered ? fcProgress.mastered.length : 0;
-        var totalVocab = config.vocabulary ? config.vocabulary.length : 0;
+        var nudgeHasTiers = config.vocabulary && config.vocabulary.some(function(v) { return v.tier; });
+        var nudgeMasteredList = fcProgress.mastered || [];
+        var masteredCount = nudgeHasTiers
+            ? nudgeMasteredList.filter(function(t) { return config.vocabulary.some(function(v) { return v.term === t && (!v.tier || v.tier === 'must-know'); }); }).length
+            : nudgeMasteredList.length;
+        var totalVocab = nudgeHasTiers
+            ? config.vocabulary.filter(function(v) { return !v.tier || v.tier === 'must-know'; }).length
+            : (config.vocabulary ? config.vocabulary.length : 0);
 
         if (weakCount > 0) {
             var remediation = this._pickRemediationActivity(unitId, triedActivities);
@@ -452,9 +458,15 @@ var NudgeManager = {
             }
         }
 
-        var fcProgress = ProgressManager.getActivityProgress(unitId, 'flashcards') || {};
-        var masteredCount = fcProgress.mastered ? fcProgress.mastered.length : 0;
-        var totalVocab = config.vocabulary ? config.vocabulary.length : 0;
+        var fcProgress2 = ProgressManager.getActivityProgress(unitId, 'flashcards') || {};
+        var ht2 = config.vocabulary && config.vocabulary.some(function(v) { return v.tier; });
+        var ml2 = fcProgress2.mastered || [];
+        var masteredCount = ht2
+            ? ml2.filter(function(t) { return config.vocabulary.some(function(v) { return v.term === t && (!v.tier || v.tier === 'must-know'); }); }).length
+            : ml2.length;
+        var totalVocab = ht2
+            ? config.vocabulary.filter(function(v) { return !v.tier || v.tier === 'must-know'; }).length
+            : (config.vocabulary ? config.vocabulary.length : 0);
         var flowNext = this._findFlowGap(unitId, this._getTriedActivities(unitId), masteredCount, totalVocab);
         if (flowNext && flowNext !== activityId) {
             var info = this.ACTIVITY_INFO[flowNext];

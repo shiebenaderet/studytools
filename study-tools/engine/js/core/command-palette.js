@@ -1192,7 +1192,11 @@ const CommandPalette = {
 
             // === 2. CONFUSING TERMS (from weakness tracker + flashcard ratings) ===
             var termDifficulty = {};
-            var totalVocab = StudyEngine.config && StudyEngine.config.vocabulary ? StudyEngine.config.vocabulary.length : 0;
+            var cpVocab = StudyEngine.config && StudyEngine.config.vocabulary ? StudyEngine.config.vocabulary : [];
+            var cpHasTiers = cpVocab.some(function(v) { return v.tier; });
+            var totalVocab = cpHasTiers
+                ? cpVocab.filter(function(v) { return !v.tier || v.tier === 'must-know'; }).length
+                : cpVocab.length;
 
             progressData.forEach(function(p) {
                 // Weakness tracker

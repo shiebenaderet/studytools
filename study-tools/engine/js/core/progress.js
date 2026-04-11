@@ -86,8 +86,14 @@ const ProgressManager = {
         const streak = this.load(unitId, 'streak') || { current: 0 };
         var learnStreak = this.load(unitId, 'learn-mode-streak') || { currentStreak: 0 };
         const vocabProgress = this.getActivityProgress(unitId, 'flashcards') || {};
-        const masteredCount = vocabProgress.mastered ? vocabProgress.mastered.length : 0;
-        const totalVocab = config.vocabulary ? config.vocabulary.length : 0;
+        const hasTiers = config.vocabulary && config.vocabulary.some(v => v.tier);
+        const masteredList = vocabProgress.mastered || [];
+        const masteredCount = hasTiers
+            ? masteredList.filter(t => config.vocabulary.some(v => v.term === t && (!v.tier || v.tier === 'must-know'))).length
+            : masteredList.length;
+        const totalVocab = hasTiers
+            ? config.vocabulary.filter(v => !v.tier || v.tier === 'must-know').length
+            : (config.vocabulary ? config.vocabulary.length : 0);
         const practiceProgress = this.getActivityProgress(unitId, 'practice-test') || {};
         const practiceCount = practiceProgress.answered ? Object.keys(practiceProgress.answered).length : 0;
         const totalQuestions = config.practiceQuestions ? config.practiceQuestions.length : 0;

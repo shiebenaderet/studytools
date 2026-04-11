@@ -73,7 +73,14 @@ const StudyTools = {
         const progress = document.createElement('p');
         progress.style.color = '#4b5563';
         progress.style.marginTop = '4px';
-        progress.textContent = mastered.length + ' of ' + config.vocabulary.length + ' terms mastered';
+        const hasTiers = config.vocabulary.some(v => v.tier);
+        const mustKnowTotal = hasTiers
+            ? config.vocabulary.filter(v => !v.tier || v.tier === 'must-know').length
+            : config.vocabulary.length;
+        const mustKnowMastered = hasTiers
+            ? mastered.filter(v => !v.tier || v.tier === 'must-know').length
+            : mastered.length;
+        progress.textContent = mustKnowMastered + ' of ' + mustKnowTotal + ' key terms mastered';
         header.appendChild(progress);
         wrapper.appendChild(header);
 
@@ -1133,8 +1140,14 @@ const StudyTools = {
         const studyTime = ProgressManager.load(unitId, 'studyTime') || 0;
         const streak = ProgressManager.load(unitId, 'streak') || { current: 0 };
         const vocabProgress = ProgressManager.getActivityProgress(unitId, 'flashcards') || {};
-        const masteredCount = vocabProgress.mastered ? vocabProgress.mastered.length : 0;
-        const totalVocab = config.vocabulary ? config.vocabulary.length : 0;
+        const hasTiersExport = config.vocabulary && config.vocabulary.some(v => v.tier);
+        const masteredList = vocabProgress.mastered || [];
+        const masteredCount = hasTiersExport
+            ? masteredList.filter(t => config.vocabulary.some(v => v.term === t && (!v.tier || v.tier === 'must-know'))).length
+            : masteredList.length;
+        const totalVocab = hasTiersExport
+            ? config.vocabulary.filter(v => !v.tier || v.tier === 'must-know').length
+            : (config.vocabulary ? config.vocabulary.length : 0);
 
         const practiceProgress = ProgressManager.getActivityProgress(unitId, 'practice-test') || {};
         const practiceAnswered = practiceProgress.answered ? Object.keys(practiceProgress.answered).length : 0;
