@@ -1,6 +1,52 @@
 const Dashboard = {
     supabase: null,
     currentTab: 'overview',
+    _unitConfigCache: {},
+
+    // ---- Helper: count only must-know mastered terms ----
+    async _countMustKnowMastered(unitId, masteredArray) {
+        if (!Array.isArray(masteredArray) || masteredArray.length === 0) return 0;
+        var config = this._unitConfigCache[unitId];
+        if (!config) {
+            try {
+                var resp = await fetch('../units/' + unitId + '/config.json');
+                config = await resp.json();
+                this._unitConfigCache[unitId] = config;
+            } catch (e) {
+                return masteredArray.length;
+            }
+        }
+        var vocab = config.vocabulary || [];
+        var hasTiers = vocab.some(function(v) { return v.tier; });
+        if (!hasTiers) return masteredArray.length;
+        return masteredArray.filter(function(t) {
+            return vocab.some(function(v) { return v.term === t && (!v.tier || v.tier === 'must-know'); });
+        }).length;
+    },
+
+    _countMustKnowMasteredSync(unitId, masteredArray) {
+        if (!Array.isArray(masteredArray) || masteredArray.length === 0) return 0;
+        var config = this._unitConfigCache[unitId];
+        if (!config) return masteredArray.length;
+        var vocab = config.vocabulary || [];
+        var hasTiers = vocab.some(function(v) { return v.tier; });
+        if (!hasTiers) return masteredArray.length;
+        return masteredArray.filter(function(t) {
+            return vocab.some(function(v) { return v.term === t && (!v.tier || v.tier === 'must-know'); });
+        }).length;
+    },
+
+    // ---- Helper: preload unit configs for tier filtering ----
+    async _preloadUnitConfigs(unitIds) {
+        var self = this;
+        await Promise.all(unitIds.map(async function(id) {
+            if (self._unitConfigCache[id]) return;
+            try {
+                var resp = await fetch('../units/' + id + '/config.json');
+                self._unitConfigCache[id] = await resp.json();
+            } catch (e) { /* skip */ }
+        }));
+    },
 
     // ---- Helper: create an icon element ----
     _icon(className) {
@@ -1345,10 +1391,15 @@ const Dashboard = {
 
             var [sessRes, progRes] = await Promise.all([
                 sessionsQuery,
-                this.supabase.from('progress').select('student_id, activity, data').in('student_id', studentIds)
+                this.supabase.from('progress').select('student_id, unit_id, activity, data').in('student_id', studentIds)
             ]);
             if (sessRes.error) throw sessRes.error;
             if (progRes.error) throw progRes.error;
+
+            // Preload unit configs for tier filtering
+            var progUnitIds = {};
+            (progRes.data || []).forEach(function(p) { if (p.unit_id) progUnitIds[p.unit_id] = true; });
+            await this._preloadUnitConfigs(Object.keys(progUnitIds));
 
             var sessionMap = {};
             (sessRes.data || []).forEach(function(s) {
@@ -1360,11 +1411,12 @@ const Dashboard = {
                 }
             });
 
+            var self = this;
             var progressMap = {};
             (progRes.data || []).forEach(function(p) {
                 if (!progressMap[p.student_id]) progressMap[p.student_id] = { vocabMastered: 0, bestTestScore: null, studyTimeMs: 0 };
                 if (p.activity === 'flashcards' && p.data && p.data.mastered) {
-                    progressMap[p.student_id].vocabMastered += (Array.isArray(p.data.mastered) ? p.data.mastered.length : 0);
+                    progressMap[p.student_id].vocabMastered += self._countMustKnowMasteredSync(p.unit_id, p.data.mastered);
                 }
                 if (p.activity === 'practice-test' && p.data && typeof p.data.bestScore === 'number') {
                     var current = progressMap[p.student_id].bestTestScore;
@@ -1700,7 +1752,13 @@ const Dashboard = {
                 validStudentIds = new Set((classStudents || []).map(function(s) { return s.id; }));
             }
 
+            // Preload unit configs for tier filtering
+            var unitIdsForConfig = {};
+            progressData.forEach(function(p) { if (p.unit_id) unitIdsForConfig[p.unit_id] = true; });
+            await this._preloadUnitConfigs(Object.keys(unitIdsForConfig));
+
             // Group by unit
+            var self = this;
             var units = {};
             progressData.forEach(function(p) {
                 if (validStudentIds && !validStudentIds.has(p.student_id)) return;
@@ -1720,9 +1778,9 @@ const Dashboard = {
                 if (!unit.activities[p.activity]) unit.activities[p.activity] = new Set();
                 unit.activities[p.activity].add(p.student_id);
 
-                // Vocab mastery
+                // Vocab mastery — only count must-know terms
                 if (p.activity === 'flashcards' && p.data && p.data.mastered) {
-                    unit.vocabMastered += (Array.isArray(p.data.mastered) ? p.data.mastered.length : 0);
+                    unit.vocabMastered += self._countMustKnowMasteredSync(p.unit_id, p.data.mastered);
                     unit.flashcardStudents++;
                 }
 

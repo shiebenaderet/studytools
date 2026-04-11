@@ -79,14 +79,15 @@ StudyEngine.registerActivity({
 
             header.appendChild(headerLeft);
 
+            var mustKnowTerms = terms.filter(function(t) { return !t.tier || t.tier === 'must-know'; });
             var masteredCount = 0;
-            terms.forEach(function(t) {
+            mustKnowTerms.forEach(function(t) {
                 if (masteredTerms.indexOf(t.term) !== -1 || ratings[t.term] === 'easy') masteredCount++;
             });
 
             var countBadge = document.createElement('span');
             countBadge.className = 'res-count-badge';
-            countBadge.textContent = masteredCount + '/' + terms.length + ' mastered';
+            countBadge.textContent = masteredCount + '/' + mustKnowTerms.length + ' mastered';
             header.appendChild(countBadge);
 
             section.appendChild(header);

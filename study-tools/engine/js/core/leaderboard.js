@@ -27,9 +27,13 @@ var LeaderboardManager = {
         if (!config) return;
         var unitId = config.unit.id;
 
-        // Gather stats
+        // Gather stats — only count must-know terms for scoring
         var vocabProgress = ProgressManager.getActivityProgress(unitId, 'flashcards') || {};
-        var vocabMastered = vocabProgress.mastered ? vocabProgress.mastered.length : 0;
+        var vocabMasteredList = vocabProgress.mastered || [];
+        var lbHasTiers = config.vocabulary && config.vocabulary.some(function(v) { return v.tier; });
+        var vocabMastered = lbHasTiers
+            ? vocabMasteredList.filter(function(t) { return config.vocabulary.some(function(v) { return v.term === t && (!v.tier || v.tier === 'must-know'); }); }).length
+            : vocabMasteredList.length;
 
         var practiceProgress = ProgressManager.getActivityProgress(unitId, 'practice-test') || {};
         var bestTestScore = typeof practiceProgress.bestScore === 'number' ? practiceProgress.bestScore : null;

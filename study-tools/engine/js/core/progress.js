@@ -982,7 +982,11 @@ window.addEventListener('beforeunload', () => {
             var studyTime = ProgressManager.load(uid, 'studyTime') || 0;
             var studyTimeSeconds = Math.floor(studyTime / 1000);
             var vocabProgress = ProgressManager.getActivityProgress(uid, 'flashcards') || {};
-            var vocabMastered = vocabProgress.mastered ? vocabProgress.mastered.length : 0;
+            var tjHasTiers = config.vocabulary && config.vocabulary.some(function(v) { return v.tier; });
+            var tjMasteredList = vocabProgress.mastered || [];
+            var vocabMastered = tjHasTiers
+                ? tjMasteredList.filter(function(t) { return config.vocabulary.some(function(v) { return v.term === t && (!v.tier || v.tier === 'must-know'); }); }).length
+                : tjMasteredList.length;
             var practiceProgress = ProgressManager.getActivityProgress(uid, 'practice-test') || {};
             var bestTestScore = typeof practiceProgress.bestScore === 'number' ? practiceProgress.bestScore : null;
             var mapProgress = ProgressManager.getActivityProgress(uid, 'map-quiz') || {};

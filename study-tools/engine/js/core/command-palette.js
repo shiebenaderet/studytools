@@ -835,12 +835,17 @@ const CommandPalette = {
                     if (!sessionMap[s.student_id].last || d > sessionMap[s.student_id].last) sessionMap[s.student_id].last = d;
                 });
 
-                // Aggregate progress data
+                // Aggregate progress data — filter vocab to must-know terms
+                var cpVocabList = StudyEngine.config && StudyEngine.config.vocabulary ? StudyEngine.config.vocabulary : [];
+                var cpHasTiers2 = cpVocabList.some(function(v) { return v.tier; });
                 const progMap = {};
                 (progressData || []).forEach(p => {
                     if (!progMap[p.student_id]) progMap[p.student_id] = { vocab: 0, score: null, mapScore: null };
                     if (p.activity === 'activity_flashcards' && p.data && p.data.mastered) {
-                        progMap[p.student_id].vocab += (Array.isArray(p.data.mastered) ? p.data.mastered.length : 0);
+                        var mList = Array.isArray(p.data.mastered) ? p.data.mastered : [];
+                        progMap[p.student_id].vocab += cpHasTiers2
+                            ? mList.filter(function(t) { return cpVocabList.some(function(v) { return v.term === t && (!v.tier || v.tier === 'must-know'); }); }).length
+                            : mList.length;
                     }
                     if (p.activity === 'activity_practice-test' && p.data && typeof p.data.bestScore === 'number') {
                         if (progMap[p.student_id].score === null || p.data.bestScore > progMap[p.student_id].score) {
@@ -1269,11 +1274,14 @@ const CommandPalette = {
             var recCard = this._createAnalyticsCard('Review Recommendations', 'fas fa-clipboard-list', 'var(--success)');
             var recBody = recCard.querySelector('.analytics-body');
 
-            // Mastery overview
+            // Mastery overview — only count must-know terms
             var masteredCounts = {};
             progressData.forEach(function(p) {
                 if (p.activity === 'activity_flashcards' && p.data && p.data.mastered) {
-                    masteredCounts[p.student_id] = Array.isArray(p.data.mastered) ? p.data.mastered.length : 0;
+                    var mArr = Array.isArray(p.data.mastered) ? p.data.mastered : [];
+                    masteredCounts[p.student_id] = cpHasTiers
+                        ? mArr.filter(function(t) { return cpVocab.some(function(v) { return v.term === t && (!v.tier || v.tier === 'must-know'); }); }).length
+                        : mArr.length;
                 }
             });
             var avgMastered = 0;
