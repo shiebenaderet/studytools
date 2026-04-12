@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.8.1] - 2026-04-11
+
+### Fixed
+- Textbook reading gate now only applies to flashcards (was blocking source analysis, games, and other activities)
+- Flashcards "complete" screen shows must-know term totals instead of all terms
+- Homepage flashcard card shows read-gated term count (consistent with actual flashcard availability)
+- Weak terms review filters to must-know terms only
+- 5 digital maps in Source Analysis reclassified from primary to secondary sources (Oregon Trail, Mexican Territory, Mexican Cession, Compromise of 1850, Free/Slave States)
+
 ## [8.8.0] - 2026-04-11
 
 ### Added
