@@ -1,5 +1,94 @@
 const MasteryManager = {
 
+    _textbookCache: {},
+
+    /**
+     * Fetches and caches textbook data for a unit. Returns null if no textbook.
+     */
+    async _loadTextbook(unitId) {
+        if (this._textbookCache[unitId] !== undefined) return this._textbookCache[unitId];
+        try {
+            var resp = await fetch('../units/' + unitId + '/textbook.json');
+            if (!resp.ok) { this._textbookCache[unitId] = null; return null; }
+            var data = await resp.json();
+            this._textbookCache[unitId] = data.textbookContent || data;
+            return this._textbookCache[unitId];
+        } catch (e) {
+            this._textbookCache[unitId] = null;
+            return null;
+        }
+    },
+
+    /**
+     * Returns segment info for a textbook chapter matching the given category name.
+     */
+    getChapterSectionIds(textbookContent, categoryName) {
+        if (!textbookContent || !textbookContent.segments) return null;
+        for (var i = 0; i < textbookContent.segments.length; i++) {
+            var seg = textbookContent.segments[i];
+            if (seg.title === categoryName) {
+                return { segmentId: seg.id, sectionIds: seg.sections.map(function(s) { return s.id; }) };
+            }
+        }
+        return null;
+    },
+
+    /**
+     * Returns true if all sections in the category's textbook chapter have been read.
+     * Returns true if the unit has no textbook (backwards compat).
+     */
+    isChapterRead(unitId, textbookContent, categoryName) {
+        if (!textbookContent) return true;
+        var chapter = this.getChapterSectionIds(textbookContent, categoryName);
+        if (!chapter) return true;
+        var tbProgress = ProgressManager.getActivityProgress(unitId, 'textbook') || {};
+        var sectionsRead = tbProgress.sectionsRead || {};
+        return chapter.sectionIds.every(function(secId) {
+            return sectionsRead[chapter.segmentId + '/' + secId] === true;
+        });
+    },
+
+    /**
+     * Returns info about the next chapter that needs reading, or null if all read.
+     */
+    getNextUnreadChapter(unitId, config) {
+        var textbook = this._textbookCache[unitId];
+        if (!textbook) return null;
+        var categories = this.getCategories(config);
+        for (var i = 0; i < categories.length; i++) {
+            if (!this.isChapterRead(unitId, textbook, categories[i])) {
+                var chapter = this.getChapterSectionIds(textbook, categories[i]);
+                return chapter ? { category: categories[i], segmentId: chapter.segmentId, index: i + 1 } : null;
+            }
+            if (!this.isCategoryMastered(unitId, config, categories[i])) break;
+        }
+        return null;
+    },
+
+    /**
+     * Builds a map of term -> { segmentId, sectionId } for deep-linking from flashcards.
+     */
+    buildTermSectionMap(config, textbookContent, readingLevel) {
+        var map = {};
+        if (!textbookContent || !textbookContent.segments || !config.vocabulary) return map;
+        var level = readingLevel || 'standard';
+        config.vocabulary.forEach(function(v) {
+            var termLower = v.term.toLowerCase();
+            for (var si = 0; si < textbookContent.segments.length; si++) {
+                var seg = textbookContent.segments[si];
+                for (var sci = 0; sci < seg.sections.length; sci++) {
+                    var sec = seg.sections[sci];
+                    var content = (sec.content && sec.content[level]) || '';
+                    if (content.toLowerCase().indexOf(termLower) !== -1) {
+                        map[v.term] = { segmentId: seg.id, sectionId: sec.id };
+                        return;
+                    }
+                }
+            }
+        });
+        return map;
+    },
+
     /**
      * Returns ordered list of unique category names from config.vocabulary,
      * preserving first-appearance order.
@@ -34,20 +123,28 @@ const MasteryManager = {
     },
 
     /**
-     * Category 1 is always unlocked. Each subsequent category unlocks when the
-     * previous one is mastered. Returns array of unlocked category names.
+     * Category unlocks when: its textbook chapter is read AND the previous category is mastered.
+     * Category 1 unlocks when its chapter is read (no mastery prerequisite).
+     * Falls back to mastery-only gating if no textbook exists.
      */
     getUnlockedCategories(unitId, config) {
         const categories = this.getCategories(config);
         if (categories.length === 0) return [];
-        // Teacher unlock bypasses mastery gating
         if (sessionStorage.getItem('teacher-unlock') === 'true') return categories.slice();
-        const unlocked = [categories[0]];
-        for (let i = 1; i < categories.length; i++) {
-            if (this.isCategoryMastered(unitId, config, categories[i - 1])) {
-                unlocked.push(categories[i]);
+
+        var textbook = this._textbookCache[unitId] !== undefined ? this._textbookCache[unitId] : null;
+        const unlocked = [];
+        for (let i = 0; i < categories.length; i++) {
+            var chapterRead = this.isChapterRead(unitId, textbook, categories[i]);
+            if (i === 0) {
+                if (chapterRead) unlocked.push(categories[i]);
+                else break;
             } else {
-                break;
+                if (this.isCategoryMastered(unitId, config, categories[i - 1]) && chapterRead) {
+                    unlocked.push(categories[i]);
+                } else {
+                    break;
+                }
             }
         }
         return unlocked;
@@ -146,8 +243,13 @@ const MasteryManager = {
         const next = this.getNextLockedCategory(unitId, config);
         const firstName = ProgressManager.getFirstName();
         if (next) {
+            var nextChapter = this.getNextUnreadChapter(unitId, config);
             const prefix = firstName ? `Nice work, ${firstName}!` : 'Nice!';
-            StudyUtils.showToast(`${prefix} "${masteredCategory}" mastered! Now try "${next}" flashcards to unlock more.`, 'success');
+            if (nextChapter) {
+                StudyUtils.showToast(`${prefix} "${masteredCategory}" mastered! Read the next chapter in the textbook to unlock "${next}" terms.`, 'success');
+            } else {
+                StudyUtils.showToast(`${prefix} "${masteredCategory}" mastered! Now try "${next}" flashcards to unlock more.`, 'success');
+            }
         } else {
             const prefix = firstName ? `Amazing, ${firstName}!` : 'Amazing!';
             StudyUtils.showToast(`${prefix} All categories mastered! Every activity is now fully unlocked!`, 'success');

@@ -352,6 +352,11 @@ const StudyEngine = {
             return;
         }
 
+        // Preload textbook for mastery gating
+        if (typeof MasteryManager !== 'undefined') {
+            await MasteryManager._loadTextbook(this.config.unit.id);
+        }
+
         // Hide loading screen
         const loadingScreen = document.getElementById('loading-screen');
         if (loadingScreen) loadingScreen.style.display = 'none';
