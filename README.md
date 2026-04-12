@@ -8,7 +8,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 
 [![Live Site](https://img.shields.io/badge/Live_Site-study.mrbsocialstudies.org-1669C5?style=for-the-badge&logo=google-chrome&logoColor=white)](https://study.mrbsocialstudies.org)
 [![License](https://img.shields.io/badge/License-Educational_Use-22c55e?style=for-the-badge)](#license)
-[![Version](https://img.shields.io/badge/Version-8.6.0-f59e0b?style=for-the-badge)](#)
+[![Version](https://img.shields.io/badge/Version-8.8.0-f59e0b?style=for-the-badge)](#)
 
 ---
 
@@ -27,7 +27,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 |----------|-------------|
 | **Learn Mode** | Guided study sessions inspired by Seneca Learning. Short interactive slides with adaptive depth (3 tiers), pre/post assessments, reflection prompts, Wiki Writer bonus challenge, 1.5x points multiplier |
 | **Textbook** | Interactive reading with 3 reading levels (Easier/On Grade/Challenge), collapsible sidebar navigation, vocab highlighting, primary source quotes, Key Idea callouts, Quick Checks, and reading progress tracking |
-| **Flashcards** | Anki-style spaced repetition with 3D flip animation, confidence rating, and "Make Your Own Example" |
+| **Flashcards** | Anki-style spaced repetition with 3D flip animation, confidence rating, "Make Your Own Example", vocab tiers (must-know/encounter/bonus), and "Read in textbook" deep-links |
 | **Short Answer** | Visual card-based question selector with topic images, color-coded categories, and key term chips |
 | **Source Analysis** | Primary source analysis using the SIFT method with scoring |
 | **Typing Practice** | Monkeytype-inspired typing with full passages and per-term snippets |
@@ -63,7 +63,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 
 - **Cross-activity weakness tracking** — wrong answers feed a shared tracker that surfaces weak terms across Flashcards, Practice Test, Fill-in-the-Blank, Lightning Round, and Typing Practice
 - **Auto study time tracking** — time in activities counts automatically; pauses on inactivity or hidden tab
-- **Mastery gating** — activities unlock progressively as students demonstrate mastery
+- **Mastery gating** — Read > Study > Practice > Play flow: students read the textbook chapter before flashcards unlock, then master terms to unlock games. Vocabulary tiers (must-know/encounter/bonus) focus study on tested terms
 - **Achievement system** — unlockable badges with confetti for milestones
 - **Guest mode** — parents and visitors can browse without entering a name
 

@@ -5,6 +5,38 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.8.0] - 2026-04-11
+
+### Added
+- **Vocabulary tiers** — Terms are now classified as must-know (25, tested on quiz), encounter (25, seen in context), or bonus (23, enrichment). Games and scoring only use must-know terms. Flashcards show all tiers with "Bonus" badge on encounter/bonus cards.
+- **Textbook-before-flashcards gating** — Students must read the textbook chapter for a category before its flashcards unlock. Creates a Read > Study > Practice > Play flow.
+- **Reading level prompt** — First-time textbook users choose their reading level (Easier/On Grade/Challenge) before content loads.
+- **"Read in textbook" deep-links** — Flashcard back face includes a link that jumps to the textbook section where the term appears in context.
+- **Term unlock progress** — Flashcards show "X/25 key terms unlocked" when not all categories are available, with guidance to read the next chapter.
+- **Locked category visibility** — Flashcard category filter shows locked categories greyed out with "(read chapter first)" label.
+- **Source analysis lightbox** — Click any source image to see it full-screen with dark overlay. Close via X, click outside, or Escape.
+- **3 new must-know terms** — Popular Sovereignty, Suffrage, Abolition added to westward-expansion unit.
+- **14 new encounter terms** — Primary Source, Bias, Perspective, Assimilation, Frontier, Santa Fe Trail, Mormon Trail, Emigrant, Pioneer, Republic of Texas, Tall Tale, Legend, War of Aggression, States' Rights.
+- **Bonus category** — 23 enrichment terms (Bank of the U.S., Sequoyah, Sam Houston, etc.) unlock after mastering all 4 main categories.
+
+### Changed
+- Westward Expansion unit is now the primary unit (password gate removed). Early Republic shown as greyed-out "Previous Unit."
+- Term renames: annex > Annexation, Texas War for Independence > Texas Revolution, the Alamo > Alamo.
+- Fill-in-blank sentences updated for renamed/new terms (16 total, all must-know answers).
+- Simplified reading level updated to include all 25 must-know terms.
+- Mastery nudge toast now suggests reading the next chapter when appropriate.
+
+### Fixed
+- Scoring pipeline (leaderboard, dashboard, progress, nudge, command palette) now filters to must-know terms only. Previously counted all 73 terms, inflating vocab scores.
+- Source analysis images for westward expansion fixed (double-path bug).
+- Magic link redirect now goes to dashboard instead of student engine.
+- Practice test progress preserves existing fields on save (spread fix).
+- Learn mode mastery percentage only counts must-know terms.
+
+## [8.7.0] - 2026-04-09
+
+*Intermediate release, superseded by 8.8.0*
+
 ## [8.6.0] - 2026-03-31
 
 ### Added
