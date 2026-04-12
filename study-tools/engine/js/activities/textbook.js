@@ -49,7 +49,81 @@ StudyEngine.registerActivity({
         this._readingLevel = this._progress.readingLevel || 'standard';
 
         container.textContent = '';
+
+        // Show level prompt for brand-new textbook users
+        var hasExistingProgress = this._progress.sectionsRead && Object.keys(this._progress.sectionsRead).length > 0;
+        if (!this._progress.readingLevel && !hasExistingProgress) {
+            this._showLevelPrompt();
+            return;
+        }
+
         this._loadContent();
+    },
+
+    _showLevelPrompt() {
+        var self = this;
+        var container = this._container;
+        container.textContent = '';
+
+        var prompt = document.createElement('div');
+        prompt.className = 'tb-level-prompt';
+
+        var iconEl = document.createElement('i');
+        iconEl.className = 'fas fa-book-open';
+        iconEl.style.cssText = 'font-size:2.5em;color:var(--primary);margin-bottom:16px;display:block;';
+        prompt.appendChild(iconEl);
+
+        var heading = document.createElement('h2');
+        heading.textContent = 'Choose Your Reading Level';
+        heading.style.cssText = 'color:var(--text-primary);margin-bottom:8px;';
+        prompt.appendChild(heading);
+
+        var subtext = document.createElement('p');
+        subtext.textContent = 'Pick the level that feels right for you. You can change this anytime.';
+        subtext.style.cssText = 'color:var(--text-secondary);margin-bottom:24px;';
+        prompt.appendChild(subtext);
+
+        var cards = document.createElement('div');
+        cards.className = 'tb-level-cards';
+
+        var descriptions = {
+            simplified: 'Shorter sentences, simpler vocabulary',
+            standard: 'Standard 8th grade reading level',
+            advanced: 'More detail, deeper analysis'
+        };
+
+        this._LEVELS.forEach(function(level) {
+            var card = document.createElement('button');
+            card.className = 'tb-level-card';
+
+            var cardIcon = document.createElement('i');
+            cardIcon.className = level.icon;
+            cardIcon.style.cssText = 'font-size:1.8em;color:var(--primary);margin-bottom:10px;display:block;';
+            card.appendChild(cardIcon);
+
+            var cardLabel = document.createElement('div');
+            cardLabel.style.cssText = 'font-size:1.1em;font-weight:700;color:var(--text-primary);margin-bottom:6px;';
+            cardLabel.textContent = level.label;
+            card.appendChild(cardLabel);
+
+            var desc = document.createElement('div');
+            desc.style.cssText = 'font-size:0.85em;color:var(--text-secondary);line-height:1.4;';
+            desc.textContent = descriptions[level.id] || '';
+            card.appendChild(desc);
+
+            card.addEventListener('click', function() {
+                self._readingLevel = level.id;
+                self._progress.readingLevel = level.id;
+                self._saveProgress();
+                container.textContent = '';
+                self._loadContent();
+            });
+
+            cards.appendChild(card);
+        });
+
+        prompt.appendChild(cards);
+        container.appendChild(prompt);
     },
 
     _loadContent() {
