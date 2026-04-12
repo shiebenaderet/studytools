@@ -77,7 +77,7 @@ const Dashboard = {
         return div;
     },
 
-    // ---- Helper: score warning badges ----
+    // ---- Helper: score warning pills ----
     _scoreWarningBadges(entry) {
         var badges = [];
         // Inline tier calculation (mirrors LeaderboardManager.calculateTimePts)
@@ -90,17 +90,17 @@ const Dashboard = {
 
         // Study time heavy: time pts > 60% of score
         if (entry.score > 0 && timePts / entry.score > 0.6) {
-            badges.push({ icon: 'fas fa-clock', color: '#e67e22', title: 'Most of this student\u2019s score comes from study time, not mastery.' });
+            badges.push({ label: 'Time-heavy', bg: '#fef3c7', color: '#92400e' });
         }
         // Missing milestones
         var noVocab = (entry.vocab_mastered || 0) === 0;
         var noTest = entry.best_test_score == null;
         if (noVocab && noTest) {
-            badges.push({ icon: 'fas fa-exclamation-circle', color: '#e74c3c', title: 'This student hasn\u2019t mastered any vocabulary or taken a practice test.' });
+            badges.push({ label: 'No vocab or test', bg: '#fee2e2', color: '#991b1b' });
         } else if (noVocab) {
-            badges.push({ icon: 'fas fa-exclamation-circle', color: '#e74c3c', title: 'This student hasn\u2019t mastered any vocabulary.' });
+            badges.push({ label: 'No vocab', bg: '#fee2e2', color: '#991b1b' });
         } else if (noTest) {
-            badges.push({ icon: 'fas fa-exclamation-circle', color: '#e74c3c', title: 'This student hasn\u2019t taken a practice test.' });
+            badges.push({ label: 'No test', bg: '#fee2e2', color: '#991b1b' });
         }
         return badges;
     },
@@ -592,10 +592,12 @@ const Dashboard = {
             if (filters.dateEnd) activeQuery = activeQuery.lte('started_at', filters.dateEnd + 'T23:59:59');
 
             var hoursQuery = this.supabase.from('sessions').select('duration_seconds, student_id');
+            if (filters.unitId) hoursQuery = hoursQuery.eq('unit_id', filters.unitId);
             if (filters.dateStart) hoursQuery = hoursQuery.gte('started_at', filters.dateStart);
             if (filters.dateEnd) hoursQuery = hoursQuery.lte('started_at', filters.dateEnd + 'T23:59:59');
 
-            var progressQuery = this.supabase.from('progress').select('student_id, data').eq('activity', 'studyTime');
+            var progressQuery = this.supabase.from('progress').select('student_id, data, unit_id').eq('activity', 'studyTime');
+            if (filters.unitId) progressQuery = progressQuery.eq('unit_id', filters.unitId);
 
             var lbQuery = this.supabase.from('leaderboard')
                 .select('student_id, score, vocab_mastered, best_test_score, study_time_seconds, map_best_time, map_bonus, approved')
@@ -1049,11 +1051,10 @@ const Dashboard = {
                         tdScore.textContent = entry.score;
                         var warnings = self._scoreWarningBadges(entry);
                         for (var w = 0; w < warnings.length; w++) {
-                            var badge = document.createElement('i');
-                            badge.className = warnings[w].icon;
-                            badge.title = warnings[w].title;
-                            badge.style.cssText = 'color:' + warnings[w].color + ';margin-left:6px;font-size:0.85em;cursor:help;';
-                            tdScore.appendChild(badge);
+                            var pill = document.createElement('span');
+                            pill.textContent = warnings[w].label;
+                            pill.style.cssText = 'display:inline-block;margin-left:6px;padding:2px 8px;border-radius:10px;font-size:0.7em;font-weight:600;background:' + warnings[w].bg + ';color:' + warnings[w].color + ';vertical-align:middle;';
+                            tdScore.appendChild(pill);
                         }
                         tr.appendChild(tdScore);
 
@@ -2083,11 +2084,10 @@ const Dashboard = {
                 tdScore.textContent = entry.score;
                 var warnings = self._scoreWarningBadges(entry);
                 for (var w = 0; w < warnings.length; w++) {
-                    var badge = document.createElement('i');
-                    badge.className = warnings[w].icon;
-                    badge.title = warnings[w].title;
-                    badge.style.cssText = 'color:' + warnings[w].color + ';margin-left:6px;font-size:0.85em;cursor:help;';
-                    tdScore.appendChild(badge);
+                    var pill = document.createElement('span');
+                    pill.textContent = warnings[w].label;
+                    pill.style.cssText = 'display:inline-block;margin-left:6px;padding:2px 8px;border-radius:10px;font-size:0.7em;font-weight:600;background:' + warnings[w].bg + ';color:' + warnings[w].color + ';vertical-align:middle;';
+                    tdScore.appendChild(pill);
                 }
                 tr.appendChild(tdScore);
 
@@ -2457,11 +2457,10 @@ const Dashboard = {
                 tdScore.textContent = entry.score;
                 var warnings = self._scoreWarningBadges(entry);
                 for (var w = 0; w < warnings.length; w++) {
-                    var badge = document.createElement('i');
-                    badge.className = warnings[w].icon;
-                    badge.title = warnings[w].title;
-                    badge.style.cssText = 'color:' + warnings[w].color + ';margin-left:6px;font-size:0.85em;cursor:help;';
-                    tdScore.appendChild(badge);
+                    var pill = document.createElement('span');
+                    pill.textContent = warnings[w].label;
+                    pill.style.cssText = 'display:inline-block;margin-left:6px;padding:2px 8px;border-radius:10px;font-size:0.7em;font-weight:600;background:' + warnings[w].bg + ';color:' + warnings[w].color + ';vertical-align:middle;';
+                    tdScore.appendChild(pill);
                 }
                 tr.appendChild(tdScore);
 
