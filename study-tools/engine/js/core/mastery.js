@@ -123,11 +123,30 @@ const MasteryManager = {
     },
 
     /**
-     * Category unlocks when: its textbook chapter is read AND the previous category is mastered.
-     * Category 1 unlocks when its chapter is read (no mastery prerequisite).
-     * Falls back to mastery-only gating if no textbook exists.
+     * Category 1 is always unlocked. Each subsequent category unlocks when the
+     * previous one is mastered. Returns array of unlocked category names.
+     * This is mastery-only gating used by most activities.
      */
     getUnlockedCategories(unitId, config) {
+        const categories = this.getCategories(config);
+        if (categories.length === 0) return [];
+        if (sessionStorage.getItem('teacher-unlock') === 'true') return categories.slice();
+        const unlocked = [categories[0]];
+        for (let i = 1; i < categories.length; i++) {
+            if (this.isCategoryMastered(unitId, config, categories[i - 1])) {
+                unlocked.push(categories[i]);
+            } else {
+                break;
+            }
+        }
+        return unlocked;
+    },
+
+    /**
+     * Like getUnlockedCategories but also requires reading the textbook chapter.
+     * Used by flashcards to enforce Read > Study flow.
+     */
+    getReadUnlockedCategories(unitId, config) {
         const categories = this.getCategories(config);
         if (categories.length === 0) return [];
         if (sessionStorage.getItem('teacher-unlock') === 'true') return categories.slice();
@@ -167,6 +186,16 @@ const MasteryManager = {
     getUnlockedVocabulary(unitId, config) {
         if (!config.vocabulary) return [];
         const unlocked = this.getUnlockedCategories(unitId, config);
+        return config.vocabulary.filter(v => unlocked.includes(v.category));
+    },
+
+    /**
+     * Returns vocabulary filtered to categories that are both mastered-unlocked AND chapter-read.
+     * Used by flashcards for Read > Study gating.
+     */
+    getReadUnlockedVocabulary(unitId, config) {
+        if (!config.vocabulary) return [];
+        const unlocked = this.getReadUnlockedCategories(unitId, config);
         return config.vocabulary.filter(v => unlocked.includes(v.category));
     },
 

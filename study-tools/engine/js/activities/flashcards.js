@@ -20,7 +20,7 @@ StudyEngine.registerActivity({
     _weakTerms: [],
 
     render(container, config) {
-        this._allUnlockedVocab = [...MasteryManager.getUnlockedVocabulary(config.unit.id, config)];
+        this._allUnlockedVocab = [...MasteryManager.getReadUnlockedVocabulary(config.unit.id, config)];
         this._displayedVocab = [...this._allUnlockedVocab];
         const saved = ProgressManager.getActivityProgress(config.unit.id, 'flashcards');
         this._mastered = saved?.mastered || [];
@@ -145,7 +145,7 @@ StudyEngine.registerActivity({
     },
 
     _renderCards(container, config) {
-        const categories = MasteryManager.getUnlockedCategories(config.unit.id, config);
+        const categories = MasteryManager.getReadUnlockedCategories(config.unit.id, config);
 
         const wrapper = document.createElement('div');
         wrapper.className = 'fc-wrapper';
@@ -714,7 +714,7 @@ StudyEngine.registerActivity({
 
     _filterByCategory(category) {
         const config = StudyEngine.config;
-        const unlocked = MasteryManager.getUnlockedVocabulary(config.unit.id, config);
+        const unlocked = MasteryManager.getReadUnlockedVocabulary(config.unit.id, config);
         this._displayedVocab = category
             ? unlocked.filter(v => v.category === category)
             : [...unlocked];
@@ -901,7 +901,7 @@ StudyEngine.registerActivity({
         }
 
         // Filter to unlocked vocab that isn't mastered
-        const unlocked = MasteryManager.getUnlockedVocabulary(unitId, config);
+        const unlocked = MasteryManager.getReadUnlockedVocabulary(unitId, config);
         const unlockedTerms = unlocked.map(v => v.term);
         return Object.keys(weakMap)
             .filter(t => unlockedTerms.includes(t) && !this._mastered.includes(t))
@@ -911,7 +911,7 @@ StudyEngine.registerActivity({
     _startWeakReview() {
         this._mode = 'weak';
         const config = StudyEngine.config;
-        const unlocked = MasteryManager.getUnlockedVocabulary(config.unit.id, config);
+        const unlocked = MasteryManager.getReadUnlockedVocabulary(config.unit.id, config);
         this._displayedVocab = unlocked.filter(v => this._weakTerms.includes(v.term));
         if (this._displayedVocab.length === 0) {
             this._displayedVocab = [...unlocked];

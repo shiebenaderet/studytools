@@ -427,9 +427,13 @@ StudyEngine.registerActivity({
                     pctLabel.style.cssText = 'color:var(--text-secondary);font-size:0.8rem;margin-top:2px;';
                     left.appendChild(pctLabel);
                 } else {
-                    var lockLabel = self._el('div', null, 'Locked');
+                    // Determine why it's locked: textbook not read, or previous category not mastered?
+                    var textbook = MasteryManager._textbookCache[config.unit.id];
+                    var chapterNotRead = textbook && !MasteryManager.isChapterRead(config.unit.id, textbook, cat);
+                    var lockText = chapterNotRead ? 'Read chapter first' : 'Master previous category first';
+                    var lockLabel = self._el('div', null, lockText);
                     lockLabel.style.cssText = 'color:var(--text-secondary);font-size:0.8rem;margin-top:2px;';
-                    var lockIcon = self._icon('fas fa-lock');
+                    var lockIcon = self._icon(chapterNotRead ? 'fas fa-book' : 'fas fa-lock');
                     lockIcon.style.cssText = 'margin-right:4px;font-size:0.7rem;';
                     lockLabel.insertBefore(lockIcon, lockLabel.firstChild);
                     left.appendChild(lockLabel);
