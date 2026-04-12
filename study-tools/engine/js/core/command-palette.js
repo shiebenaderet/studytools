@@ -520,7 +520,7 @@ const CommandPalette = {
         const { error } = await ProgressManager.supabase.auth.signInWithOtp({
             email: email,
             options: {
-                emailRedirectTo: window.location.href
+                emailRedirectTo: window.location.origin + '/study-tools/dashboard/'
             }
         });
 
