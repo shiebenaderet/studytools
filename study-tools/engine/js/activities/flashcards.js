@@ -31,6 +31,22 @@ StudyEngine.registerActivity({
         this._container = container;
         this._config = config;
 
+        // Build term -> textbook section map for deep-linking
+        var textbook = MasteryManager._textbookCache[config.unit.id];
+        var tbProgress = ProgressManager.getActivityProgress(config.unit.id, 'textbook') || {};
+        this._termSectionMap = textbook
+            ? MasteryManager.buildTermSectionMap(config, textbook, tbProgress.readingLevel || 'standard')
+            : {};
+
+        // If no vocab available, check if textbook reading is needed
+        if (this._allUnlockedVocab.length === 0) {
+            var nextChapter = MasteryManager.getNextUnreadChapter(config.unit.id, config);
+            if (nextChapter) {
+                this._showReadingGate(container, config, nextChapter);
+                return;
+            }
+        }
+
         // Show tutorial on first use
         const tutorialSeen = localStorage.getItem('fc-tutorial-seen');
         if (!tutorialSeen) {
@@ -39,6 +55,39 @@ StudyEngine.registerActivity({
         }
 
         this._renderCards(container, config);
+    },
+
+    _showReadingGate(container, config, nextChapter) {
+        var gate = document.createElement('div');
+        gate.className = 'fc-reading-gate';
+
+        var icon = document.createElement('i');
+        icon.className = 'fas fa-book-open';
+        icon.style.cssText = 'font-size:2.5em;color:var(--primary);margin-bottom:16px;display:block;';
+        gate.appendChild(icon);
+
+        var heading = document.createElement('h2');
+        heading.textContent = 'Read First, Then Study!';
+        heading.style.cssText = 'color:var(--text-primary);margin-bottom:12px;';
+        gate.appendChild(heading);
+
+        var desc = document.createElement('p');
+        desc.textContent = 'Before you start flashcards, read Chapter ' + nextChapter.index + ': ' + nextChapter.category + ' in the textbook. This will help you understand the terms!';
+        desc.style.cssText = 'color:var(--text-secondary);margin-bottom:24px;line-height:1.6;max-width:400px;margin-left:auto;margin-right:auto;';
+        gate.appendChild(desc);
+
+        var btn = document.createElement('button');
+        btn.className = 'fc-reading-gate-btn';
+        var btnIcon = document.createElement('i');
+        btnIcon.className = 'fas fa-book-open';
+        btn.appendChild(btnIcon);
+        btn.appendChild(document.createTextNode(' Go to Textbook'));
+        btn.addEventListener('click', function() {
+            StudyEngine.activateActivity('textbook', [nextChapter.segmentId]);
+        });
+        gate.appendChild(btn);
+
+        container.appendChild(gate);
     },
 
     _showTutorial(container, config) {
@@ -120,6 +169,22 @@ StudyEngine.registerActivity({
             wrapper.appendChild(progressBar);
         }
 
+        // --- Term unlock progress ---
+        var allMustKnow = config.vocabulary
+            ? config.vocabulary.filter(function(v) { return !v.tier || v.tier === 'must-know'; })
+            : [];
+        var unlockedMustKnow = this._allUnlockedVocab.filter(function(v) { return !v.tier || v.tier === 'must-know'; });
+        if (unlockedMustKnow.length < allMustKnow.length && allMustKnow.length > 0) {
+            var termProgress = document.createElement('div');
+            termProgress.className = 'fc-term-progress';
+            var nextCh = MasteryManager.getNextUnreadChapter(config.unit.id, config);
+            termProgress.textContent = unlockedMustKnow.length + '/' + allMustKnow.length + ' key terms unlocked';
+            if (nextCh) {
+                termProgress.textContent += ' \u2014 read the next chapter to unlock more!';
+            }
+            wrapper.appendChild(termProgress);
+        }
+
         // --- Weak terms nudge ---
         this._weakTerms = this._getWeakTerms(config);
         if (this._weakTerms.length > 0) {
@@ -176,6 +241,18 @@ StudyEngine.registerActivity({
             opt.value = cat;
             opt.textContent = cat;
             filterSelect.appendChild(opt);
+        });
+        // Show locked categories as disabled options
+        var allCats = MasteryManager.getCategories(config);
+        allCats.forEach(function(cat) {
+            if (!categories.includes(cat) && cat !== 'Bonus') {
+                var opt = document.createElement('option');
+                opt.value = '';
+                opt.textContent = cat + ' (read chapter first)';
+                opt.disabled = true;
+                opt.style.color = '#9ca3af';
+                filterSelect.appendChild(opt);
+            }
         });
         filterSelect.addEventListener('change', () => this._filterByCategory(filterSelect.value));
         optionsPanel.appendChild(filterSelect);
@@ -433,6 +510,22 @@ StudyEngine.registerActivity({
             exText.textContent = card.example;
             backContent.appendChild(exText);
         }
+        // "Read in textbook" deep-link
+        var sectionInfo = this._termSectionMap[card.term];
+        if (sectionInfo) {
+            var tbLink = document.createElement('button');
+            tbLink.className = 'fc-textbook-link';
+            var tbLinkIcon = document.createElement('i');
+            tbLinkIcon.className = 'fas fa-book-open';
+            tbLink.appendChild(tbLinkIcon);
+            tbLink.appendChild(document.createTextNode(' Read in textbook'));
+            tbLink.addEventListener('click', function(e) {
+                e.stopPropagation();
+                StudyEngine.activateActivity('textbook', [sectionInfo.segmentId, sectionInfo.sectionId]);
+            });
+            backContent.appendChild(tbLink);
+        }
+
         if (card.simpleExplanation) {
             const explainBtn = document.createElement('button');
             explainBtn.className = 'fc-explain-btn';

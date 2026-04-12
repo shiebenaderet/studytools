@@ -1303,6 +1303,19 @@ body.light-mode .fc-back .fc-tier-badge {
     color: #d97706;
 }
 
+/* Flashcard reading gate */
+.fc-reading-gate { text-align: center; padding: 60px 20px; }
+.fc-reading-gate-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; background: var(--primary); color: white; border: none; border-radius: 8px; font-size: 1em; font-weight: 600; cursor: pointer; transition: transform 0.2s; font-family: inherit; }
+.fc-reading-gate-btn:hover { transform: scale(1.03); }
+
+/* Term unlock progress */
+.fc-term-progress { text-align: center; color: var(--text-secondary); font-size: 0.9em; padding: 8px 16px; background: var(--bg-surface); border-radius: 8px; margin-bottom: 12px; }
+
+/* Textbook link on flashcard back */
+.fc-textbook-link { display: inline-flex; align-items: center; gap: 6px; background: none; border: none; color: var(--primary); font-size: 0.85em; cursor: pointer; padding: 6px 0; margin-top: 8px; font-weight: 500; opacity: 0.8; transition: opacity 0.2s; font-family: inherit; }
+.fc-textbook-link:hover { opacity: 1; text-decoration: underline; }
+.fc-textbook-link i { font-size: 0.9em; }
+
 /* Confidence rating buttons */
 .fc-confidence {
     width: 100%;
