@@ -2,9 +2,11 @@
 
 **Goal:** Students must read the textbook chapter for a category before that category's flashcards unlock. Creates a Read > Study > Practice > Play learning flow.
 
-**Two features:**
+**Four features:**
 1. Reading level prompt on first textbook visit
 2. Textbook-before-flashcards mastery gate
+3. Unlocked vs locked term visibility in flashcards
+4. "Read in textbook" link on flashcard back face
 
 ---
 
@@ -96,13 +98,48 @@ The Bonus category (5th) has no textbook chapter, so it unlocks purely on master
 
 The existing `sessionStorage.getItem('teacher-unlock') === 'true'` bypass continues to skip ALL gating, including the new reading gate.
 
+---
+
+## Feature 3: Unlocked vs Locked Term Visibility
+
+**Progress indicator at top of flashcards:**
+
+When not all categories are unlocked yet, show a progress bar at the top:
+
+> "7/25 key terms unlocked — read the next chapter to unlock more!"
+
+The existing mastery progress bar (categories unlocked) stays. This new indicator sits below it and shows the term-level unlock count.
+
+**Category filter dropdown:**
+
+In the flashcard Options panel, the category filter already lists unlocked categories. Locked categories should appear greyed out with "(read chapter first)" appended, so students understand what's coming and why it's locked.
+
+---
+
+## Feature 4: "Read in Textbook" Link
+
+**On the flashcard back face:**
+
+After the definition and example, add a small link: "Read in textbook" with a book icon. Clicking it navigates directly to the textbook section where that term appears in context.
+
+**How the mapping works:**
+
+At flashcard render time, load the textbook JSON and scan each section's content (at the student's saved reading level) for each vocab term. Build a lookup: `term -> { segmentId, sectionId }`. Cache this so it's only computed once per session.
+
+If a term isn't found in the textbook (e.g., new encounter terms not yet in text), the link simply doesn't appear for that term.
+
+**Navigation:** Clicking the link switches to the textbook activity using deep-link params: `textbook/segment-id/section-id`. The textbook already supports deep linking via `_deepLinkParams`.
+
+---
+
 ### Files Changed
 
 | File | Change |
 |------|--------|
-| `mastery.js` | New `isChapterRead(unitId, config, categoryName)` method; update `getUnlockedCategories` to check chapter-read prerequisite |
-| `flashcards.js` | Show gate message when no readable categories are unlocked; add "Go to Textbook" button |
+| `mastery.js` | New `isChapterRead(unitId, config, categoryName)` method; update `getUnlockedCategories` to check chapter-read prerequisite; new `getTextbookSectionMap()` for term-to-section lookup |
+| `flashcards.js` | Show gate message when no readable categories available; add unlock progress indicator; grey out locked categories in filter; add "Read in textbook" link on back face |
 | `textbook.js` | Add reading level prompt screen for first-time users |
+| `styles.css` | Styles for reading level prompt, gate message, locked category options, textbook link on flashcards |
 
 ### What Does NOT Change
 
