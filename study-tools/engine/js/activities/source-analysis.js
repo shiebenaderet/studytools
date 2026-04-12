@@ -1044,19 +1044,61 @@ StudyEngine.registerActivity({
 
         card.appendChild(meta);
 
-        // Image (if available)
+        // Image (if available) — click to zoom
         if (source.image) {
             var imgWrap = document.createElement('div');
             imgWrap.className = 'source-image-wrap';
             var img = document.createElement('img');
             img.className = 'source-image';
-            // Support both full relative paths and bare filenames
-            img.src = source.image.indexOf('/') !== -1
+            var imgSrc = source.image.indexOf('/') !== -1
                 ? source.image
                 : '../units/' + this._config.unit.id + '/images/sources/' + source.image;
+            img.src = imgSrc;
             img.alt = source.title;
             img.loading = 'lazy';
+
+            var zoomHint = document.createElement('div');
+            zoomHint.className = 'source-image-zoom-hint';
+            var zoomIcon = document.createElement('i');
+            zoomIcon.className = 'fas fa-search-plus';
+            zoomHint.appendChild(zoomIcon);
+            zoomHint.appendChild(document.createTextNode(' Tap to enlarge'));
+
+            img.addEventListener('click', function() {
+                var overlay = document.createElement('div');
+                overlay.className = 'source-lightbox';
+
+                var closeBtn = document.createElement('button');
+                closeBtn.className = 'source-lightbox-close';
+                closeBtn.textContent = '\u00d7';
+                overlay.appendChild(closeBtn);
+
+                var lgImg = document.createElement('img');
+                lgImg.src = imgSrc;
+                lgImg.alt = source.title;
+                lgImg.className = 'source-lightbox-img';
+                overlay.appendChild(lgImg);
+
+                var caption = document.createElement('div');
+                caption.className = 'source-lightbox-caption';
+                caption.textContent = source.title + (source.year ? ' (' + source.year + ')' : '');
+                overlay.appendChild(caption);
+
+                document.body.appendChild(overlay);
+                requestAnimationFrame(function() { overlay.classList.add('active'); });
+
+                function closeLightbox() { overlay.remove(); }
+                closeBtn.addEventListener('click', closeLightbox);
+                overlay.addEventListener('click', function(e) {
+                    if (e.target === overlay) closeLightbox();
+                });
+                document.addEventListener('keydown', function handler(e) {
+                    if (e.key === 'Escape') { closeLightbox(); document.removeEventListener('keydown', handler); }
+                });
+            });
+
             imgWrap.appendChild(img);
+            imgWrap.appendChild(zoomHint);
             card.appendChild(imgWrap);
         }
 
