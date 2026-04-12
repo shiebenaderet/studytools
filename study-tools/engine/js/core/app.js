@@ -585,11 +585,18 @@ const StudyEngine = {
 
                 // Show term count only on flashcards card
                 if (a.id === 'flashcards') {
-                    const status = MasteryManager.getUnlockStatus(this.config.unit.id, this.config);
-                    if (!status.allUnlocked) {
+                    const hasTiersHome = this.config.vocabulary && this.config.vocabulary.some(v => v.tier);
+                    const readUnlocked = MasteryManager.getReadUnlockedVocabulary(this.config.unit.id, this.config);
+                    const mustKnowAvailable = hasTiersHome
+                        ? readUnlocked.filter(v => !v.tier || v.tier === 'must-know').length
+                        : readUnlocked.length;
+                    const mustKnowTotalHome = hasTiersHome
+                        ? this.config.vocabulary.filter(v => !v.tier || v.tier === 'must-know').length
+                        : (this.config.vocabulary ? this.config.vocabulary.length : 0);
+                    if (mustKnowAvailable < mustKnowTotalHome) {
                         const unlockCount = document.createElement('div');
                         unlockCount.className = 'unlock-count';
-                        unlockCount.textContent = status.unlockedVocab + '/' + status.totalVocab + ' terms available';
+                        unlockCount.textContent = mustKnowAvailable + '/' + mustKnowTotalHome + ' key terms available';
                         card.appendChild(unlockCount);
                     }
                 }

@@ -791,17 +791,25 @@ StudyEngine.registerActivity({
         const stats = document.createElement('div');
         stats.className = 'fc-complete-stats';
 
-        const masteredCount = this._mastered.length;
-        const totalCount = this._allUnlockedVocab.length;
+        const hasTiersComplete = this._allUnlockedVocab.some(v => v.tier);
+        const mustKnowTotalComplete = hasTiersComplete
+            ? this._allUnlockedVocab.filter(v => !v.tier || v.tier === 'must-know').length
+            : this._allUnlockedVocab.length;
+        const mustKnowMasteredComplete = hasTiersComplete
+            ? this._mastered.filter(t => {
+                const v = this._allUnlockedVocab.find(vv => vv.term === t);
+                return v && (!v.tier || v.tier === 'must-know');
+            }).length
+            : this._mastered.length;
 
         const mainStat = document.createElement('div');
         const mainVal = document.createElement('span');
         mainVal.className = 'fc-stat-value';
-        mainVal.textContent = masteredCount + '/' + totalCount;
+        mainVal.textContent = mustKnowMasteredComplete + '/' + mustKnowTotalComplete;
         mainStat.appendChild(mainVal);
         const mainLabel = document.createElement('span');
         mainLabel.className = 'fc-stat-label';
-        mainLabel.textContent = 'Terms Mastered';
+        mainLabel.textContent = 'Key Terms Mastered';
         mainStat.appendChild(mainLabel);
         stats.appendChild(mainStat);
 
@@ -900,11 +908,11 @@ StudyEngine.registerActivity({
             }
         }
 
-        // Filter to unlocked vocab that isn't mastered
+        // Filter to unlocked must-know vocab that isn't mastered
         const unlocked = MasteryManager.getReadUnlockedVocabulary(unitId, config);
-        const unlockedTerms = unlocked.map(v => v.term);
+        const mustKnowTerms = unlocked.filter(v => !v.tier || v.tier === 'must-know').map(v => v.term);
         return Object.keys(weakMap)
-            .filter(t => unlockedTerms.includes(t) && !this._mastered.includes(t))
+            .filter(t => mustKnowTerms.includes(t) && !this._mastered.includes(t))
             .sort((a, b) => weakMap[b] - weakMap[a]);
     },
 
