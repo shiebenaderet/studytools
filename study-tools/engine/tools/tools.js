@@ -1150,7 +1150,8 @@ const StudyTools = {
             : (config.vocabulary ? config.vocabulary.length : 0);
 
         const practiceProgress = ProgressManager.getActivityProgress(unitId, 'practice-test') || {};
-        const practiceAnswered = practiceProgress.answered ? Object.keys(practiceProgress.answered).length : 0;
+        const practiceMastery = ProgressManager.getActivityProgress(unitId, 'practice-test-mastery') || {};
+        const practiceAnswered = (practiceMastery.mastered || []).length;
         const totalQuestions = config.practiceQuestions ? config.practiceQuestions.length : 0;
         const bestScore = practiceProgress.bestScore != null ? practiceProgress.bestScore : 'N/A';
 
@@ -1182,7 +1183,7 @@ const StudyTools = {
         const table = doc.createElement('table');
         const rows = [
             ['Vocabulary Mastered', masteredCount + ' / ' + totalVocab],
-            ['Practice Questions Attempted', practiceAnswered + ' / ' + totalQuestions],
+            ['Questions Mastered', practiceAnswered + ' / ' + totalQuestions],
             ['Best Test Score', bestScore === 'N/A' ? 'N/A' : bestScore + '%'],
             ['Total Study Time', StudyUtils.formatStudyTime(studyTime)],
             ['Current Streak', streak.current + ' days']

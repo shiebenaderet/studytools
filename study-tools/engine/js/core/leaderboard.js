@@ -504,7 +504,7 @@ var LeaderboardManager = {
                 classScores[student.class_id].count++;
             });
 
-            // Sort by average score
+            // Sort by total score (rewards class-wide participation)
             var sorted = Object.keys(classScores).map(function(classId) {
                 var c = classScores[classId];
                 return {
@@ -513,7 +513,7 @@ var LeaderboardManager = {
                     count: c.count,
                     avg: Math.round(c.total / c.count)
                 };
-            }).sort(function(a, b) { return b.avg - a.avg; });
+            }).sort(function(a, b) { return b.total - a.total; });
 
             container.textContent = '';
 
@@ -533,11 +533,11 @@ var LeaderboardManager = {
 
             var desc = document.createElement('p');
             desc.style.cssText = 'color:var(--text-secondary);font-size:0.85em;margin-bottom:16px;text-align:center;';
-            desc.textContent = 'Which period will come out on top?';
+            desc.textContent = 'Every student\'s points add up for the whole class. Get your classmates studying!';
             container.appendChild(desc);
 
             // Bar chart visualization
-            var maxAvg = sorted[0] ? sorted[0].avg : 1;
+            var maxTotal = sorted[0] ? sorted[0].total : 1;
             var barChart = document.createElement('div');
             barChart.className = 'lb-class-bar-wrap';
 
@@ -557,10 +557,10 @@ var LeaderboardManager = {
 
                 var fill = document.createElement('div');
                 fill.className = 'lb-class-bar-fill bar-' + ((i % 6) + 1);
-                var pct = maxAvg > 0 ? Math.round((item.avg / maxAvg) * 100) : 0;
+                var pct = maxTotal > 0 ? Math.round((item.total / maxTotal) * 100) : 0;
                 // Animate in with delay
                 fill.style.width = '0%';
-                fill.textContent = item.avg + ' avg';
+                fill.textContent = item.total.toLocaleString() + ' pts';
                 setTimeout(function(f, p) { return function() { f.style.width = Math.max(p, 15) + '%'; }; }(fill, pct), 100 + i * 150);
 
                 track.appendChild(fill);

@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.8.3] - 2026-04-17
+
+### Changed
+- Class Battle leaderboard now ranks by total class points (was average per student), matching the teacher dashboard and rewarding broad participation over a few high scorers
+
+### Fixed
+- Homepage "Questions Mastered" stat now reads from practice-test mastery data (was always showing 0 due to reading a non-existent property)
+- Print/export study guide shows correct questions mastered count (same root cause)
+- Cross-device sync now merges practice-test mastery arrays (union of mastered questions) instead of "newer wins", preventing mastery data loss when studying on multiple devices
+
 ## [8.8.1] - 2026-04-11
 
 ### Fixed

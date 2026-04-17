@@ -94,8 +94,8 @@ const ProgressManager = {
         const totalVocab = hasTiers
             ? config.vocabulary.filter(v => !v.tier || v.tier === 'must-know').length
             : (config.vocabulary ? config.vocabulary.length : 0);
-        const practiceProgress = this.getActivityProgress(unitId, 'practice-test') || {};
-        const practiceCount = practiceProgress.answered ? Object.keys(practiceProgress.answered).length : 0;
+        const practiceMastery = this.getActivityProgress(unitId, 'practice-test-mastery') || {};
+        const practiceCount = (practiceMastery.mastered || []).length;
         const totalQuestions = config.practiceQuestions ? config.practiceQuestions.length : 0;
 
         const vocabPct = totalVocab > 0 ? Math.round((masteredCount / totalVocab) * 100) : 0;
@@ -153,7 +153,7 @@ const ProgressManager = {
 
         grid.appendChild(createStatBox('Study Time', StudyUtils.formatStudyTime(studyTime), false));
         grid.appendChild(createStatBox('Vocabulary Mastered', `${masteredCount}/${totalVocab}`, true, vocabPct));
-        grid.appendChild(createStatBox('Practice Questions', `${practiceCount}/${totalQuestions}`, true, practicePct));
+        grid.appendChild(createStatBox('Questions Mastered', `${practiceCount}/${totalQuestions}`, true, practicePct));
         grid.appendChild(createStatBox('Current Streak', `${streak.current} days`, false));
             if (learnStreak.currentStreak > 0) {
                 var multiplier = learnStreak.currentStreak >= 3 ? '2x' : learnStreak.currentStreak >= 2 ? '1.75x' : '1.5x';
@@ -229,6 +229,25 @@ const ProgressManager = {
                 ...local,
                 mastered: mergedMastered,
                 ratings: mergedRatings,
+                updatedAt: Math.max(local.updatedAt || 0, remote.updatedAt || 0)
+            };
+        }
+
+        // For practice-test-mastery: union mastered arrays, keep higher sessions
+        if (activity === 'activity_practice-test-mastery') {
+            var localMastered = local.mastered || [];
+            var remoteMastered = remote.mastered || [];
+            var mergedMastered = [...new Set([...localMastered, ...remoteMastered])];
+            var localWrong = local.wrong || [];
+            var remoteWrong = remote.wrong || [];
+            // Wrong list: union, then remove anything now in mastered
+            var mergedWrong = [...new Set([...localWrong, ...remoteWrong])].filter(function(q) {
+                return mergedMastered.indexOf(q) === -1;
+            });
+            return {
+                mastered: mergedMastered,
+                wrong: mergedWrong,
+                sessions: Math.max(local.sessions || 0, remote.sessions || 0),
                 updatedAt: Math.max(local.updatedAt || 0, remote.updatedAt || 0)
             };
         }
