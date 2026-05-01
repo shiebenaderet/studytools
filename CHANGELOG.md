@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.8.4] - 2026-05-01
+
+### Added
+- **Map image exporter** (teacher tool) — New page at `study-tools/engine/tools/map-exporter.html` that exports individual states/territories as PNG images for use in quizzes and worksheets. Supports the 1861 Civil War map (42 regions) and the territorial expansion map (8 regions), in two styles: highlighted on full map, or isolated cropped shape.
+
 ## [8.8.3] - 2026-04-17
 
 ### Changed

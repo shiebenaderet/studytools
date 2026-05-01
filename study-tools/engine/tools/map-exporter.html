@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Map Image Exporter</title>
+<style>
+  :root {
+    --bg: #f7f5f0;
+    --card: #fff;
+    --ink: #2a2a2a;
+    --muted: #666;
+    --accent: #8B4513;
+    --land: #e8e2d4;
+    --land-stroke: #b8ad94;
+    --highlight: #d4883a;
+    --highlight-stroke: #8B4513;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    padding: 24px;
+  }
+  h1 { margin: 0 0 4px 0; font-size: 1.4em; }
+  .sub { color: var(--muted); margin-bottom: 20px; font-size: 0.9em; }
+  .toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    background: var(--card);
+    padding: 14px 16px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+  }
+  .toolbar label { font-size: 0.85em; color: var(--muted); }
+  .toolbar select, .toolbar button {
+    padding: 8px 14px;
+    border: 1px solid #d0c8b6;
+    border-radius: 6px;
+    background: #fff;
+    font-size: 0.9em;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .toolbar button {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+    font-weight: 600;
+  }
+  .toolbar button:hover { opacity: 0.9; }
+  .toolbar button.secondary {
+    background: #fff;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .preview-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .preview {
+    background: var(--card);
+    border-radius: 10px;
+    padding: 14px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+  }
+  .preview h3 {
+    margin: 0 0 8px 0;
+    font-size: 0.95em;
+  }
+  .preview .style-tag {
+    display: inline-block;
+    font-size: 0.7em;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: #eee5d0;
+    color: var(--accent);
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .preview svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    background: #fff;
+    border: 1px solid #ece6d6;
+    border-radius: 6px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+  }
+  .tile {
+    background: var(--card);
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .tile svg {
+    width: 100%;
+    height: 110px;
+    background: #fff;
+    border: 1px solid #ece6d6;
+    border-radius: 4px;
+  }
+  .tile .name { font-size: 0.8em; font-weight: 600; }
+  .tile .actions { display: flex; gap: 4px; }
+  .tile button {
+    flex: 1;
+    font-size: 0.7em;
+    padding: 4px 6px;
+    background: #fff;
+    border: 1px solid #d0c8b6;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .tile button:hover { background: var(--accent); color: white; border-color: var(--accent); }
+  .status {
+    color: var(--muted);
+    font-size: 0.85em;
+    min-height: 1.2em;
+    margin-top: 8px;
+  }
+  hr { border: none; border-top: 1px solid #e0d8c4; margin: 28px 0 20px 0; }
+</style>
+</head>
+<body>
+
+<h1>Map Image Exporter</h1>
+<div class="sub">Export individual states/territories as PNG images for quizzes and worksheets.</div>
+
+<div class="toolbar">
+  <label>Map:</label>
+  <select id="mapSelect">
+    <option value="map1861">1861 Civil War Map (42 regions)</option>
+    <option value="territorial">Territorial Expansion (8 regions)</option>
+  </select>
+  <label>Style:</label>
+  <select id="styleSelect">
+    <option value="highlighted">Highlighted on full map</option>
+    <option value="isolated">Isolated shape (cropped)</option>
+  </select>
+  <label>Export size:</label>
+  <select id="sizeSelect">
+    <option value="800">800 px</option>
+    <option value="1200" selected>1200 px</option>
+    <option value="1600">1600 px</option>
+    <option value="2000">2000 px</option>
+  </select>
+  <button id="downloadAll">Download all as ZIP</button>
+  <button class="secondary" id="downloadOne">Download current selection</button>
+  <span class="status" id="status"></span>
+</div>
+
+<h2 style="font-size:1em;margin:0 0 8px 0;">Style preview</h2>
+<div class="sub">Sample using a single representative region from the selected map.</div>
+<div class="preview-pair">
+  <div class="preview">
+    <h3>Highlighted on full map <span class="style-tag">style 1</span></h3>
+    <div id="previewHighlight"></div>
+  </div>
+  <div class="preview">
+    <h3>Isolated shape <span class="style-tag">style 2</span></h3>
+    <div id="previewIsolated"></div>
+  </div>
+</div>
+
+<hr>
+
+<h2 style="font-size:1em;margin:0 0 8px 0;">All regions</h2>
+<div class="sub">Click a region to download it as PNG in the currently-selected style.</div>
+<div class="grid" id="grid"></div>
+
+<!-- Load the 1861 map data file directly. -->
+<script src="../js/data/map-1861-data.js"></script>
+
+<!-- Embed territorial expansion regions inline (extracted from map-quiz.js). -->
+<script src="map-exporter-territorial.js"></script>
+
+<script>
+'use strict';
+
+const VIEWBOX = { w: 900, h: 700 };
+const SVG_NS = 'http://www.w3.org/2000/svg';
+
+const state = {
+  mapKey: 'map1861',
+  styleKey: 'highlighted',
+  size: 1200,
+};
+
+// ── Region access ────────────────────────────────────────────
+function getRegions(mapKey) {
+  if (mapKey === 'map1861') {
+    // map-1861-data.js exposes window.MAP_1861_REGIONS with paths: [...]
+    return window.MAP_1861_REGIONS.map(r => ({
+      id: r.id,
+      name: r.name,
+      paths: r.paths,
+      // colour by allegiance for highlighted style
+      color: allegianceColor(r.allegiance),
+    }));
+  }
+  // Territorial expansion uses single path string
+  return window.TERRITORIAL_REGIONS.map(r => ({
+    id: r.id,
+    name: r.name,
+    paths: [r.path],
+    color: r.color,
+  }));
+}
+
+function allegianceColor(a) {
+  switch (a) {
+    case 'union':       return '#3b6cb3';
+    case 'confederate': return '#a83232';
+    case 'border':      return '#a37a30';
+    case 'territory':   return '#7a8a7a';
+    default:            return '#8B4513';
+  }
+}
+
+// ── SVG building ─────────────────────────────────────────────
+function buildHighlightedSVG(region, allRegions) {
+  const svg = document.createElementNS(SVG_NS, 'svg');
+  svg.setAttribute('xmlns', SVG_NS);
+  svg.setAttribute('viewBox', `0 0 ${VIEWBOX.w} ${VIEWBOX.h}`);
+
+  // Light background showing all regions in muted gray
+  const bg = document.createElementNS(SVG_NS, 'g');
+  for (const r of allRegions) {
+    if (r.id === region.id) continue;
+    for (const d of r.paths) {
+      const p = document.createElementNS(SVG_NS, 'path');
+      p.setAttribute('d', d);
+      p.setAttribute('fill', 'var(--land, #e8e2d4)');
+      p.setAttribute('fill', '#e8e2d4');
+      p.setAttribute('stroke', '#b8ad94');
+      p.setAttribute('stroke-width', '0.6');
+      bg.appendChild(p);
+    }
+  }
+  svg.appendChild(bg);
+
+  // Highlighted region on top, with strong fill + thicker stroke
+  const fg = document.createElementNS(SVG_NS, 'g');
+  for (const d of region.paths) {
+    const p = document.createElementNS(SVG_NS, 'path');
+    p.setAttribute('d', d);
+    p.setAttribute('fill', region.color || '#d4883a');
+    p.setAttribute('stroke', '#2a2a2a');
+    p.setAttribute('stroke-width', '1.4');
+    fg.appendChild(p);
+  }
+  svg.appendChild(fg);
+  return svg;
+}
+
+function buildIsolatedSVG(region) {
+  // First, render the path into a hidden SVG so we can call getBBox().
+  const probe = document.createElementNS(SVG_NS, 'svg');
+  probe.setAttribute('viewBox', `0 0 ${VIEWBOX.w} ${VIEWBOX.h}`);
+  probe.style.cssText = 'position:absolute;left:-9999px;top:-9999px;width:900px;height:700px;';
+  for (const d of region.paths) {
+    const p = document.createElementNS(SVG_NS, 'path');
+    p.setAttribute('d', d);
+    probe.appendChild(p);
+  }
+  document.body.appendChild(probe);
+  let bbox;
+  try {
+    bbox = probe.getBBox();
+  } finally {
+    document.body.removeChild(probe);
+  }
+
+  // Add a small padding so the shape doesn't touch edges
+  const pad = Math.max(bbox.width, bbox.height) * 0.06;
+  const vbX = bbox.x - pad;
+  const vbY = bbox.y - pad;
+  const vbW = bbox.width  + pad * 2;
+  const vbH = bbox.height + pad * 2;
+
+  const svg = document.createElementNS(SVG_NS, 'svg');
+  svg.setAttribute('xmlns', SVG_NS);
+  svg.setAttribute('viewBox', `${vbX} ${vbY} ${vbW} ${vbH}`);
+
+  for (const d of region.paths) {
+    const p = document.createElementNS(SVG_NS, 'path');
+    p.setAttribute('d', d);
+    p.setAttribute('fill', region.color || '#d4883a');
+    p.setAttribute('stroke', '#2a2a2a');
+    p.setAttribute('stroke-width', Math.max(vbW, vbH) * 0.003);
+    p.setAttribute('stroke-linejoin', 'round');
+    svg.appendChild(p);
+  }
+  return svg;
+}
+
+function buildSVG(region, allRegions, styleKey) {
+  if (styleKey === 'isolated') return buildIsolatedSVG(region);
+  return buildHighlightedSVG(region, allRegions);
+}
+
+// ── PNG export ───────────────────────────────────────────────
+function svgToPNG(svgElement, targetWidth) {
+  return new Promise((resolve, reject) => {
+    const xml = new XMLSerializer().serializeToString(svgElement);
+    const svg64 = btoa(unescape(encodeURIComponent(xml)));
+    const url = 'data:image/svg+xml;base64,' + svg64;
+
+    const vb = svgElement.getAttribute('viewBox').split(/\s+/).map(Number);
+    const aspect = vb[3] / vb[2]; // h / w
+    const W = targetWidth;
+    const H = Math.round(targetWidth * aspect);
+
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = W;
+      canvas.height = H;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, W, H);
+      ctx.drawImage(img, 0, 0, W, H);
+      canvas.toBlob(blob => resolve(blob), 'image/png');
+    };
+    img.onerror = reject;
+    img.src = url;
+  });
+}
+
+function downloadBlob(blob, filename) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => {
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }, 0);
+}
+
+async function downloadOne(region, allRegions) {
+  setStatus(`Exporting ${region.name}…`);
+  const svg = buildSVG(region, allRegions, state.styleKey);
+  const blob = await svgToPNG(svg, state.size);
+  const safe = region.id.replace(/[^a-z0-9-]/gi, '-');
+  downloadBlob(blob, `${state.mapKey}-${state.styleKey}-${safe}.png`);
+  setStatus(`Downloaded ${region.name}.`);
+}
+
+async function downloadAll() {
+  const regions = getRegions(state.mapKey);
+  setStatus(`Exporting ${regions.length} regions, please wait…`);
+  for (let i = 0; i < regions.length; i++) {
+    const r = regions[i];
+    setStatus(`Exporting ${i + 1}/${regions.length}: ${r.name}…`);
+    const svg = buildSVG(r, regions, state.styleKey);
+    const blob = await svgToPNG(svg, state.size);
+    const safe = r.id.replace(/[^a-z0-9-]/gi, '-');
+    downloadBlob(blob, `${state.mapKey}-${state.styleKey}-${safe}.png`);
+    // tiny pause so the browser doesn't choke on rapid downloads
+    await new Promise(r => setTimeout(r, 60));
+  }
+  setStatus(`Done. Exported ${regions.length} images.`);
+}
+
+// ── UI rendering ─────────────────────────────────────────────
+function setStatus(s) { document.getElementById('status').textContent = s; }
+
+function pickPreviewRegion(regions) {
+  // Pick a recognizable example: Texas for 1861, Louisiana Purchase for territorial.
+  const preferred = state.mapKey === 'map1861' ? 'texas' : 'louisiana-purchase';
+  return regions.find(r => r.id === preferred) || regions[0];
+}
+
+function renderPreviews() {
+  const regions = getRegions(state.mapKey);
+  const sample = pickPreviewRegion(regions);
+
+  const hi = document.getElementById('previewHighlight');
+  hi.textContent = '';
+  hi.appendChild(buildHighlightedSVG(sample, regions));
+
+  const iso = document.getElementById('previewIsolated');
+  iso.textContent = '';
+  iso.appendChild(buildIsolatedSVG(sample));
+
+  // small caption: which region we're previewing
+  for (const el of [hi, iso]) {
+    const cap = document.createElement('div');
+    cap.style.cssText = 'font-size:.75em;color:#888;margin-top:6px;text-align:center;';
+    cap.textContent = `sample: ${sample.name}`;
+    el.appendChild(cap);
+  }
+}
+
+function renderGrid() {
+  const regions = getRegions(state.mapKey);
+  const grid = document.getElementById('grid');
+  grid.textContent = '';
+  for (const r of regions) {
+    const tile = document.createElement('div');
+    tile.className = 'tile';
+
+    const svg = buildSVG(r, regions, state.styleKey);
+    tile.appendChild(svg);
+
+    const name = document.createElement('div');
+    name.className = 'name';
+    name.textContent = r.name;
+    tile.appendChild(name);
+
+    const actions = document.createElement('div');
+    actions.className = 'actions';
+    const dl = document.createElement('button');
+    dl.textContent = 'Download PNG';
+    dl.addEventListener('click', () => downloadOne(r, regions));
+    actions.appendChild(dl);
+    tile.appendChild(actions);
+
+    grid.appendChild(tile);
+  }
+}
+
+function rerender() {
+  renderPreviews();
+  renderGrid();
+}
+
+// ── Wire up ──────────────────────────────────────────────────
+document.getElementById('mapSelect').addEventListener('change', e => {
+  state.mapKey = e.target.value;
+  rerender();
+});
+document.getElementById('styleSelect').addEventListener('change', e => {
+  state.styleKey = e.target.value;
+  rerender();
+});
+document.getElementById('sizeSelect').addEventListener('change', e => {
+  state.size = parseInt(e.target.value, 10);
+});
+document.getElementById('downloadAll').addEventListener('click', downloadAll);
+document.getElementById('downloadOne').addEventListener('click', () => {
+  const regions = getRegions(state.mapKey);
+  const sample = pickPreviewRegion(regions);
+  downloadOne(sample, regions);
+});
+
+// Wait for both data scripts to load before first render.
+window.addEventListener('load', rerender);
+</script>
+
+</body>
+</html>
