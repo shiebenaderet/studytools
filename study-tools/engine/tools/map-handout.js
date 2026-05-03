@@ -238,10 +238,79 @@
     return g;
   }
 
+  function buildLegendItems(regions, mapKey, opts) {
+    if (mapKey === 'map1861') {
+      // 4 fixed allegiance entries.
+      return [
+        { color: ALLEGIANCE_COLORS.union,       label: ALLEGIANCE_LABELS.union },
+        { color: ALLEGIANCE_COLORS.confederate, label: ALLEGIANCE_LABELS.confederate },
+        { color: ALLEGIANCE_COLORS.border,      label: ALLEGIANCE_LABELS.border },
+        { color: ALLEGIANCE_COLORS.territory,   label: ALLEGIANCE_LABELS.territory },
+      ];
+    }
+    // Territorial: one entry per region, in the order they appear in the data
+    // (which is roughly chronological).
+    return regions.map(r => ({
+      color: r.color,
+      label: opts.showDate ? `${r.name} (${r.yearAcquired})` : r.name,
+    }));
+  }
+
   function buildLegendLayer(regions, mapKey, opts) {
     const g = document.createElementNS(SVG_NS, 'g');
     g.setAttribute('data-layer', 'legend');
-    // Filled in Task 9
+
+    const items = buildLegendItems(regions, mapKey, opts);
+    if (items.length === 0) return g;
+
+    const fontSize = 11;
+    const swatch = 12;
+    const rowH = swatch + 4;
+    const padX = 10, padY = 8;
+    const labelWidth = Math.max(
+      ...items.map(it => it.label.length * fontSize * 0.55)
+    );
+    const boxW = padX * 2 + swatch + 6 + labelWidth;
+    const boxH = padY * 2 + rowH * items.length;
+
+    // Bottom-right of the 900x700 viewBox.
+    const boxX = 900 - boxW - 10;
+    const boxY = 700 - boxH - 10;
+
+    const rect = document.createElementNS(SVG_NS, 'rect');
+    rect.setAttribute('x', String(boxX));
+    rect.setAttribute('y', String(boxY));
+    rect.setAttribute('width', String(boxW));
+    rect.setAttribute('height', String(boxH));
+    rect.setAttribute('fill', '#ffffff');
+    rect.setAttribute('stroke', '#2a2a2a');
+    rect.setAttribute('stroke-width', '0.8');
+    rect.setAttribute('rx', '4');
+    g.appendChild(rect);
+
+    items.forEach((item, i) => {
+      const rowY = boxY + padY + i * rowH;
+
+      const sw = document.createElementNS(SVG_NS, 'rect');
+      sw.setAttribute('x', String(boxX + padX));
+      sw.setAttribute('y', String(rowY));
+      sw.setAttribute('width', String(swatch));
+      sw.setAttribute('height', String(swatch));
+      sw.setAttribute('fill', item.color);
+      sw.setAttribute('stroke', '#2a2a2a');
+      sw.setAttribute('stroke-width', '0.5');
+      g.appendChild(sw);
+
+      const t = document.createElementNS(SVG_NS, 'text');
+      t.setAttribute('x', String(boxX + padX + swatch + 6));
+      t.setAttribute('y', String(rowY + swatch * 0.85));
+      t.setAttribute('font-family', '-apple-system, "Segoe UI", system-ui, sans-serif');
+      t.setAttribute('font-size', String(fontSize));
+      t.setAttribute('fill', '#1a1a1a');
+      t.textContent = item.label;
+      g.appendChild(t);
+    });
+
     return g;
   }
 
