@@ -55,6 +55,7 @@
         abbr:         r.abbr,
         labelOffset:  r.labelOffset || { x: 0, y: 0 },
         isTiny:       r.isTiny || false,
+        labelLeader:  r.labelLeader || null,
       }));
     }
     return window.TERRITORIAL_REGIONS.map(r => ({
@@ -151,27 +152,42 @@
         ? Math.max(6, Math.min(16, fitWidth * 0.35))
         : Math.max(8, Math.min(20, fitWidth * 0.13));
 
-      // Tiny states get a leader line out into surrounding whitespace, with
-      // their label placed there. We treat very small bboxes the same way.
+      // Tiny states (or auto-detected small bboxes) get a leader line out into
+      // whitespace. If the data has an explicit labelLeader, use it; otherwise
+      // fall back to "place to the right of the bbox".
       const isTinyByBbox = bbox.width < 14;
       if (mapKey === 'map1861' && (r.isTiny || isTinyByBbox)) {
-        // Place label to the right + slightly down; draw a short leader.
-        const leadX = bbox.x + bbox.width + 14;
-        const leadY = cy + 4;
+        const leadX = r.labelLeader?.x ?? (bbox.x + bbox.width + 14);
+        const leadY = r.labelLeader?.y ?? (cy + 4);
+
+        // Anchor end of leader line just before the text so it doesn't visually
+        // touch the letterforms. We draw to a point ~3px before leadX in the
+        // direction the line is travelling.
+        const dx = leadX - cx;
+        const dy = leadY - cy;
+        const len = Math.max(1, Math.hypot(dx, dy));
+        const lineEndX = leadX - (dx / len) * 4;
+        const lineEndY = leadY - (dy / len) * 4;
+
         const line = document.createElementNS(SVG_NS, 'line');
-        line.setAttribute('x1', cx);
-        line.setAttribute('y1', cy);
-        line.setAttribute('x2', leadX - 2);
-        line.setAttribute('y2', leadY - 4);
+        line.setAttribute('x1', String(cx));
+        line.setAttribute('y1', String(cy));
+        line.setAttribute('x2', String(lineEndX));
+        line.setAttribute('y2', String(lineEndY));
         line.setAttribute('stroke', '#444');
         line.setAttribute('stroke-width', '0.6');
         g.appendChild(line);
 
+        // Fixed legible font size for leader-line labels — they sit in whitespace
+        // so we don't need to fit them inside the (tiny) state.
+        const leaderFontSize = 12;
+
         const t = document.createElementNS(SVG_NS, 'text');
         t.setAttribute('x', String(leadX));
-        t.setAttribute('y', String(leadY));
-        t.setAttribute('font-size', String(Math.max(8, fontSize)));
-        t.setAttribute('text-anchor', 'start');
+        t.setAttribute('y', String(leadY + leaderFontSize * 0.35));
+        t.setAttribute('font-size', String(leaderFontSize));
+        t.setAttribute('font-weight', '600');
+        t.setAttribute('text-anchor', 'middle');
         t.textContent = lines.join(' ');
         g.appendChild(t);
         continue;

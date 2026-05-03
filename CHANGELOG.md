@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.9.0] - 2026-05-03
+
+### Added
+- **Full map handout export** (teacher tool) — New "Full map handout" tab in the Map Image Exporter at `study-tools/engine/tools/map-exporter.html`. Exports the full 1861 Civil War map or territorial expansion map as a single landscape-oriented PNG suitable for printing on 8.5×11 paper. Configurable per-export: fill style (Blank / Shaded / Outlined-only), state-abbreviation labels (1861) or region-name labels (territorial), date acquired (territorial), title, and color key with slavery-status framing (Slavery permitted / Slavery prohibited / Slavery undetermined). Legend swatches automatically render empty when the map is blank or outlined (so students can shade in their own colors) and colored when the map is shaded.
+
+### Changed
+- Per-state and territorial map data files now carry additional metadata fields (`abbr`, `isTiny`, `labelOffset`, `labelLeader` on 1861 regions; `yearAcquired` on territorial regions). Existing activities ignore these new fields — they're only used by the new handout exporter.
+
 ## [8.8.4] - 2026-05-01
 
 ### Added
