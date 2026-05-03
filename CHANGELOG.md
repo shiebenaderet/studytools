@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.9.1] - 2026-05-03
+
+### Fixed
+- Label positions on the 1861 handout — multiple states (WA Territory, MN, MI, KY, FL, LA, IT, CA, NE Territory) now have refined `labelOffset` values so abbreviations sit cleanly inside their states rather than on borders or in adjacent states.
+- Tiny-state leader-line layout — VT, NH, MA, CT, RI, NJ, DE, MD now have explicit `labelLeader` endpoints distributed along the right side of the map with varied vertical spacing, so leader lines no longer cross or crowd each other.
+- State abbreviation for Connecticut corrected to USPS standard `CT` (was non-standard `CN`); Colorado Territory changed to `CO` to avoid ambiguity. Both match what students see on official documents.
+
 ## [8.9.0] - 2026-05-03
 
 ### Added
