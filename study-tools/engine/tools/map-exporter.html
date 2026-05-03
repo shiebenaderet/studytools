@@ -133,6 +133,30 @@
     margin-top: 8px;
   }
   hr { border: none; border-top: 1px solid #e0d8c4; margin: 28px 0 20px 0; }
+.tabs {
+    display: flex;
+    gap: 4px;
+    border-bottom: 2px solid #d0c8b6;
+    margin-bottom: 20px;
+}
+.tab-btn {
+    padding: 10px 18px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.95em;
+    color: var(--muted);
+}
+.tab-btn.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+    font-weight: 600;
+}
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
 </style>
 </head>
 <body>
@@ -140,6 +164,12 @@
 <h1>Map Image Exporter</h1>
 <div class="sub">Export individual states/territories as PNG images for quizzes and worksheets.</div>
 
+<div class="tabs">
+  <button class="tab-btn active" data-tab="perstate">Per-state images</button>
+  <button class="tab-btn" data-tab="handout">Full map handout</button>
+</div>
+
+<div class="tab-panel active" id="tab-perstate">
 <div class="toolbar">
   <label>Map:</label>
   <select id="mapSelect">
@@ -181,6 +211,11 @@
 <h2 style="font-size:1em;margin:0 0 8px 0;">All regions</h2>
 <div class="sub">Click a region to download it as PNG in the currently-selected style.</div>
 <div class="grid" id="grid"></div>
+</div>
+
+<div class="tab-panel" id="tab-handout">
+  <p style="color: var(--muted); padding: 20px;">Coming soon (Task 2).</p>
+</div>
 
 <!-- Load the 1861 map data file directly. -->
 <script src="../js/data/map-1861-data.js"></script>
@@ -459,6 +494,17 @@ document.getElementById('downloadOne').addEventListener('click', () => {
   const regions = getRegions(state.mapKey);
   const sample = pickPreviewRegion(regions);
   downloadOne(sample, regions);
+});
+
+// ── Tab switching ──────────────────────────────────────────
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const targetTab = btn.dataset.tab;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b === btn));
+    document.querySelectorAll('.tab-panel').forEach(p => {
+      p.classList.toggle('active', p.id === `tab-${targetTab}`);
+    });
+  });
 });
 
 // Wait for both data scripts to load before first render.
