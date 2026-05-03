@@ -21,6 +21,19 @@
     territory:   'Territory',
   };
 
+  const TITLE_TEXT = {
+    map1861:     'United States in 1861',
+    territorial: 'Territorial Expansion of the United States',
+  };
+
+  const TITLE_PLACEMENT = {
+    // For 1861: top-left over Canadian border / upper Atlantic empty space.
+    map1861:     { x: 10,  y: 10, anchor: 'start' },
+    // For territorial: top-right over Atlantic east of the 13 colonies
+    // (Oregon already occupies the top-left).
+    territorial: { x: 890, y: 10, anchor: 'end'   },
+  };
+
   const handoutState = {
     mapKey:     'map1861',
     fillStyle:  'outlined',  // 'blank' | 'shaded' | 'outlined'
@@ -184,7 +197,44 @@
   function buildTitleLayer(mapKey) {
     const g = document.createElementNS(SVG_NS, 'g');
     g.setAttribute('data-layer', 'title');
-    // Filled in Task 8
+
+    const text = TITLE_TEXT[mapKey];
+    const place = TITLE_PLACEMENT[mapKey];
+    if (!text || !place) return g;
+
+    // Approximate text width to size the background rect. SVG can't measure
+    // before render, but at font-size 18 a roughly-monospace estimate of
+    // 0.55em per char is close enough for letterforms in this title.
+    const fontSize = 18;
+    const padX = 10, padY = 6;
+    const estTextWidth = text.length * fontSize * 0.55;
+    const boxW = estTextWidth + padX * 2;
+    const boxH = fontSize + padY * 2;
+    const boxX = place.anchor === 'end' ? place.x - boxW : place.x;
+    const boxY = place.y;
+
+    const rect = document.createElementNS(SVG_NS, 'rect');
+    rect.setAttribute('x', String(boxX));
+    rect.setAttribute('y', String(boxY));
+    rect.setAttribute('width', String(boxW));
+    rect.setAttribute('height', String(boxH));
+    rect.setAttribute('fill', '#ffffff');
+    rect.setAttribute('stroke', '#2a2a2a');
+    rect.setAttribute('stroke-width', '0.8');
+    rect.setAttribute('rx', '4');
+    g.appendChild(rect);
+
+    const t = document.createElementNS(SVG_NS, 'text');
+    t.setAttribute('x', String(boxX + boxW / 2));
+    t.setAttribute('y', String(boxY + boxH / 2 + fontSize * 0.35));
+    t.setAttribute('font-family', '-apple-system, "Segoe UI", system-ui, sans-serif');
+    t.setAttribute('font-size', String(fontSize));
+    t.setAttribute('font-weight', '700');
+    t.setAttribute('text-anchor', 'middle');
+    t.setAttribute('fill', '#1a1a1a');
+    t.textContent = text;
+    g.appendChild(t);
+
     return g;
   }
 
