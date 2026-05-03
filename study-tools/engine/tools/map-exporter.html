@@ -157,6 +157,81 @@
 }
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
+  .handout-layout {
+    display: grid;
+    grid-template-columns: minmax(280px, 360px) 1fr;
+    gap: 20px;
+    background: var(--card);
+    padding: 16px;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+  }
+  .handout-controls fieldset {
+    border: 1px solid #e0d8c4;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin: 0 0 14px 0;
+  }
+  .handout-controls legend {
+    padding: 0 6px;
+    font-size: 0.85em;
+    color: var(--muted);
+  }
+  .handout-controls label.row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0;
+    font-size: 0.9em;
+    cursor: pointer;
+  }
+  .handout-controls label.row.disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+  .handout-preview-wrap {
+    background: #fff;
+    border: 1px dashed #b8ad94;
+    border-radius: 6px;
+    padding: 10px;
+    align-self: start;
+  }
+  .handout-preview-wrap svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .handout-preview-wrap .printhint {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.75em;
+    margin-top: 8px;
+  }
+  .handout-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .handout-toolbar select {
+    padding: 8px 14px;
+    border: 1px solid #d0c8b6;
+    border-radius: 6px;
+    background: #fff;
+    font-size: 0.9em;
+    font-family: inherit;
+  }
+  .handout-toolbar button {
+    padding: 8px 14px;
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    background: var(--accent);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+  }
 </style>
 </head>
 <body>
@@ -214,7 +289,45 @@
 </div>
 
 <div class="tab-panel" id="tab-handout">
-  <p style="color: var(--muted); padding: 20px;">Coming soon (Task 2).</p>
+  <div class="handout-toolbar">
+    <label>Map:</label>
+    <select id="hMap">
+      <option value="map1861">1861 Civil War Map</option>
+      <option value="territorial">Territorial Expansion</option>
+    </select>
+    <label>Export size:</label>
+    <select id="hSize">
+      <option value="1200">1200 px</option>
+      <option value="1600">1600 px</option>
+      <option value="2000" selected>2000 px (recommended for print)</option>
+    </select>
+    <button id="hDownload">Download PNG</button>
+    <span class="status" id="hStatus" style="margin-left:auto;"></span>
+  </div>
+
+  <div class="handout-layout">
+    <div class="handout-controls">
+      <fieldset>
+        <legend>Fill style</legend>
+        <label class="row"><input type="radio" name="hFill" value="blank">Blank (white interiors)</label>
+        <label class="row"><input type="radio" name="hFill" value="shaded">Shaded (full color fill)</label>
+        <label class="row"><input type="radio" name="hFill" value="outlined" checked>Outlined-only (no fill, color borders)</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Overlays</legend>
+        <label class="row"><input type="checkbox" id="hLabels" checked> <span id="hLabelsText">State abbreviations</span></label>
+        <label class="row" id="hDateRow"><input type="checkbox" id="hDate"> Date acquired</label>
+        <label class="row"><input type="checkbox" id="hTitle" checked> Title</label>
+        <label class="row"><input type="checkbox" id="hLegend" checked> Color key / legend</label>
+      </fieldset>
+    </div>
+
+    <div class="handout-preview-wrap">
+      <div id="hPreview"></div>
+      <div class="printhint">Best printed: 8.5x11 landscape</div>
+    </div>
+  </div>
 </div>
 
 <!-- Load the 1861 map data file directly. -->
@@ -509,6 +622,83 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
     });
   });
 });
+
+// ── Handout tab wiring ─────────────────────────────────────
+function applyHandoutMapDependencies() {
+  const isMap1861 = window.MapHandout.state.mapKey === 'map1861';
+  document.getElementById('hLabelsText').textContent = isMap1861
+    ? 'State abbreviations'
+    : 'Region names';
+  const dateRow = document.getElementById('hDateRow');
+  const dateInput = document.getElementById('hDate');
+  if (isMap1861) {
+    dateRow.classList.add('disabled');
+    dateInput.checked = false;
+    dateInput.disabled = true;
+    window.MapHandout.state.showDate = false;
+  } else {
+    dateRow.classList.remove('disabled');
+    dateInput.disabled = false;
+  }
+}
+
+function renderHandoutPreview() {
+  const previewEl = document.getElementById('hPreview');
+  previewEl.textContent = '';
+  const svg = window.MapHandout.buildHandoutSVG(window.MapHandout.state);
+  previewEl.appendChild(svg);
+}
+
+document.getElementById('hMap').addEventListener('change', e => {
+  window.MapHandout.state.mapKey = e.target.value;
+  applyHandoutMapDependencies();
+  renderHandoutPreview();
+});
+document.getElementById('hSize').addEventListener('change', e => {
+  window.MapHandout.state.size = parseInt(e.target.value, 10);
+});
+document.querySelectorAll('input[name="hFill"]').forEach(input => {
+  input.addEventListener('change', e => {
+    if (e.target.checked) {
+      window.MapHandout.state.fillStyle = e.target.value;
+      renderHandoutPreview();
+    }
+  });
+});
+document.getElementById('hLabels').addEventListener('change', e => {
+  window.MapHandout.state.labels = e.target.checked;
+  renderHandoutPreview();
+});
+document.getElementById('hDate').addEventListener('change', e => {
+  window.MapHandout.state.showDate = e.target.checked;
+  renderHandoutPreview();
+});
+document.getElementById('hTitle').addEventListener('change', e => {
+  window.MapHandout.state.showTitle = e.target.checked;
+  renderHandoutPreview();
+});
+document.getElementById('hLegend').addEventListener('change', e => {
+  window.MapHandout.state.showLegend = e.target.checked;
+  renderHandoutPreview();
+});
+
+document.getElementById('hDownload').addEventListener('click', async () => {
+  const status = document.getElementById('hStatus');
+  status.textContent = 'Generating PNG…';
+  const svg = window.MapHandout.buildHandoutSVG(window.MapHandout.state);
+  // Reuse svgToPNG defined for the per-state tab.
+  const blob = await svgToPNG(svg, window.MapHandout.state.size);
+  const filename = `${window.MapHandout.state.mapKey}-handout-${window.MapHandout.state.fillStyle}.png`;
+  downloadBlob(blob, filename);
+  status.textContent = `Downloaded ${filename}`;
+});
+
+// Sync state.size to the dropdown's initial selection (2000 px).
+window.MapHandout.state.size = 2000;
+
+// Initial handout-tab render so switching to the tab shows something immediately.
+applyHandoutMapDependencies();
+renderHandoutPreview();
 
 // Wait for both data scripts to load before first render.
 window.addEventListener('load', rerender);
