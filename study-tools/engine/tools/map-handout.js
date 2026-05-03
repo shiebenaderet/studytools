@@ -58,7 +58,36 @@
   function buildBackgroundLayer(regions, mapKey, fillStyle) {
     const g = document.createElementNS(SVG_NS, 'g');
     g.setAttribute('data-layer', 'background');
-    // Filled in Task 5
+
+    for (const r of regions) {
+      const regionColor = mapKey === 'map1861'
+        ? ALLEGIANCE_COLORS[r.allegiance]
+        : r.color;
+
+      let fill, stroke, strokeWidth;
+      switch (fillStyle) {
+        case 'blank':
+          fill = '#ffffff'; stroke = '#2a2a2a'; strokeWidth = 1.0;
+          break;
+        case 'shaded':
+          fill = regionColor; stroke = '#2a2a2a'; strokeWidth = 0.8;
+          break;
+        case 'outlined':
+        default:
+          fill = '#ffffff'; stroke = regionColor; strokeWidth = 1.8;
+          break;
+      }
+
+      for (const d of r.paths) {
+        const p = document.createElementNS(SVG_NS, 'path');
+        p.setAttribute('d', d);
+        p.setAttribute('fill', fill);
+        p.setAttribute('stroke', stroke);
+        p.setAttribute('stroke-width', String(strokeWidth));
+        p.setAttribute('stroke-linejoin', 'round');
+        g.appendChild(p);
+      }
+    }
     return g;
   }
 
