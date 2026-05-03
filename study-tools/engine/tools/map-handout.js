@@ -240,12 +240,13 @@
 
   function buildLegendItems(regions, mapKey, opts) {
     if (mapKey === 'map1861') {
-      // 4 fixed allegiance entries.
+      // 3 slavery-status entries (Option A: by legal status in 1861).
+      // Confederate + Border both permitted slavery — they share a row.
+      // Color shown for each row matches the map's allegiance fill.
       return [
-        { color: ALLEGIANCE_COLORS.union,       label: ALLEGIANCE_LABELS.union },
-        { color: ALLEGIANCE_COLORS.confederate, label: ALLEGIANCE_LABELS.confederate },
-        { color: ALLEGIANCE_COLORS.border,      label: ALLEGIANCE_LABELS.border },
-        { color: ALLEGIANCE_COLORS.territory,   label: ALLEGIANCE_LABELS.territory },
+        { color: ALLEGIANCE_COLORS.confederate, label: 'Slavery permitted' },
+        { color: ALLEGIANCE_COLORS.union,       label: 'Slavery prohibited' },
+        { color: ALLEGIANCE_COLORS.territory,   label: 'Slavery undetermined' },
       ];
     }
     // Territorial: one entry per region, in the order they appear in the data
@@ -296,7 +297,9 @@
       sw.setAttribute('y', String(rowY));
       sw.setAttribute('width', String(swatch));
       sw.setAttribute('height', String(swatch));
-      sw.setAttribute('fill', item.color);
+      // Empty swatches for the printable fill-in handout (blank/outlined map).
+      // Colored swatches when the map itself is shaded (teacher's reference).
+      sw.setAttribute('fill', opts.fillStyle === 'shaded' ? item.color : '#ffffff');
       sw.setAttribute('stroke', '#2a2a2a');
       sw.setAttribute('stroke-width', '0.5');
       g.appendChild(sw);
@@ -332,7 +335,10 @@
       }));
     }
     if (state.showTitle)  svg.appendChild(buildTitleLayer(state.mapKey));
-    if (state.showLegend) svg.appendChild(buildLegendLayer(regions, state.mapKey, { showDate: state.showDate }));
+    if (state.showLegend) svg.appendChild(buildLegendLayer(regions, state.mapKey, {
+      showDate:  state.showDate,
+      fillStyle: state.fillStyle,
+    }));
     return svg;
   }
 
