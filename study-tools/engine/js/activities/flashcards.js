@@ -12,6 +12,7 @@ StudyEngine.registerActivity({
     _displayedVocab: [],
     _allUnlockedVocab: [],
     _mastered: [],
+    _everMastered: [],
     _keyHandler: null,
     _queue: [],        // SRS queue of term names
     _ratings: {},      // term -> last rating
@@ -24,6 +25,10 @@ StudyEngine.registerActivity({
         this._displayedVocab = [...this._allUnlockedVocab];
         const saved = ProgressManager.getActivityProgress(config.unit.id, 'flashcards');
         this._mastered = saved?.mastered || [];
+        // everMastered is the leaderboard high-water mark: never shrinks.
+        // Backfill from mastered for students who predate this field.
+        this._everMastered = saved?.everMastered
+            || (saved?.mastered ? saved.mastered.slice() : []);
         this._ratings = saved?.ratings || {};
         this._currentIndex = 0;
         this._isFlipped = false;
@@ -673,6 +678,9 @@ StudyEngine.registerActivity({
         } else if (rating === 'good' || rating === 'easy') {
             if (!this._mastered.includes(card.term)) {
                 this._mastered.push(card.term);
+                if (!this._everMastered.includes(card.term)) {
+                    this._everMastered.push(card.term);
+                }
                 // Only check category mastery for must-know terms
                 if (!card.tier || card.tier === 'must-know') {
                     const config = StudyEngine.config;
@@ -938,6 +946,7 @@ StudyEngine.registerActivity({
     _saveProgress() {
         ProgressManager.saveActivityProgress(StudyEngine.config.unit.id, 'flashcards', {
             mastered: this._mastered,
+            everMastered: this._everMastered,
             ratings: this._ratings
         });
     },
@@ -972,6 +981,8 @@ StudyEngine.registerActivity({
 
     loadProgress(data) {
         if (data?.mastered) this._mastered = data.mastered;
+        if (data?.everMastered) this._everMastered = data.everMastered;
+        else if (data?.mastered) this._everMastered = data.mastered.slice();
         if (data?.ratings) this._ratings = data.ratings;
     }
 });

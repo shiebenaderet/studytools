@@ -27,9 +27,13 @@ var LeaderboardManager = {
         if (!config) return;
         var unitId = config.unit.id;
 
-        // Gather stats — only count must-know terms for scoring
+        // Gather stats — only count must-know terms for scoring.
+        // Use everMastered (high-water mark) so the score never drops when a
+        // term gets pushed back into the study queue by a missed game answer.
         var vocabProgress = ProgressManager.getActivityProgress(unitId, 'flashcards') || {};
-        var vocabMasteredList = vocabProgress.mastered || [];
+        var vocabMasteredList = vocabProgress.everMastered
+            || vocabProgress.mastered
+            || [];
         var lbHasTiers = config.vocabulary && config.vocabulary.some(function(v) { return v.tier; });
         var vocabMastered = lbHasTiers
             ? vocabMasteredList.filter(function(t) { return config.vocabulary.some(function(v) { return v.term === t && (!v.tier || v.tier === 'must-know'); }); }).length

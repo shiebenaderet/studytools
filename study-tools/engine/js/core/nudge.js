@@ -128,6 +128,11 @@ var NudgeManager = {
 
         var fcProgress = ProgressManager.getActivityProgress(unitId, 'flashcards') || {};
         var mastered = fcProgress.mastered ? fcProgress.mastered.slice() : [];
+        // Preserve the everMastered high-water mark so the leaderboard score
+        // doesn't drop when a term gets pushed back into the study queue.
+        var everMastered = fcProgress.everMastered
+            ? fcProgress.everMastered.slice()
+            : mastered.slice();
         var ratings = fcProgress.ratings ? Object.assign({}, fcProgress.ratings) : {};
         var changed = false;
 
@@ -149,6 +154,7 @@ var NudgeManager = {
         if (changed) {
             ProgressManager.saveActivityProgress(unitId, 'flashcards', {
                 mastered: mastered,
+                everMastered: everMastered,
                 ratings: ratings
             });
         }

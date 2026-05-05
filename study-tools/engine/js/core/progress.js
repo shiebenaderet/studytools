@@ -87,7 +87,9 @@ const ProgressManager = {
         var learnStreak = this.load(unitId, 'learn-mode-streak') || { currentStreak: 0 };
         const vocabProgress = this.getActivityProgress(unitId, 'flashcards') || {};
         const hasTiers = config.vocabulary && config.vocabulary.some(v => v.tier);
-        const masteredList = vocabProgress.mastered || [];
+        // Show the high-water mark so the count matches the leaderboard score
+        // and never moves backward after a missed game answer.
+        const masteredList = vocabProgress.everMastered || vocabProgress.mastered || [];
         const masteredCount = hasTiers
             ? masteredList.filter(t => config.vocabulary.some(v => v.term === t && (!v.tier || v.tier === 'must-know'))).length
             : masteredList.length;
@@ -222,12 +224,19 @@ const ProgressManager = {
             var remoteMastered = remote.mastered || [];
             var mergedMastered = [...new Set([...localMastered, ...remoteMastered])];
 
+            // everMastered is a high-water mark — union and never drop entries.
+            // Backfill from each side's mastered for records predating the field.
+            var localEver = local.everMastered || local.mastered || [];
+            var remoteEver = remote.everMastered || remote.mastered || [];
+            var mergedEver = [...new Set([...localEver, ...remoteEver])];
+
             var mergedRatings = { ...(remote.ratings || {}), ...(local.ratings || {}) };
 
             return {
                 ...remote,
                 ...local,
                 mastered: mergedMastered,
+                everMastered: mergedEver,
                 ratings: mergedRatings,
                 updatedAt: Math.max(local.updatedAt || 0, remote.updatedAt || 0)
             };
@@ -1002,7 +1011,7 @@ window.addEventListener('beforeunload', () => {
             var studyTimeSeconds = Math.floor(studyTime / 1000);
             var vocabProgress = ProgressManager.getActivityProgress(uid, 'flashcards') || {};
             var tjHasTiers = config.vocabulary && config.vocabulary.some(function(v) { return v.tier; });
-            var tjMasteredList = vocabProgress.mastered || [];
+            var tjMasteredList = vocabProgress.everMastered || vocabProgress.mastered || [];
             var vocabMastered = tjHasTiers
                 ? tjMasteredList.filter(function(t) { return config.vocabulary.some(function(v) { return v.term === t && (!v.tier || v.tier === 'must-know'); }); }).length
                 : tjMasteredList.length;
