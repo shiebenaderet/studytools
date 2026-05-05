@@ -2692,6 +2692,16 @@ body.timer-active header {
 .activity-card.category-games .card-button { background: #059669; }
 .activity-card.category-games .card-button:hover { background: #10b981; }
 
+/* Subtitle on external-link cards (e.g. simulation launcher warning) */
+.external-link-subtitle {
+    font-size: 0.85em;
+    font-style: italic;
+    opacity: 0.75;
+    margin-top: -8px;
+    margin-bottom: 8px;
+    flex: 0;
+}
+
 /* LOGIN PROMPT */
 .login-prompt {
     position: fixed;

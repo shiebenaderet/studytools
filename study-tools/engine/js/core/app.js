@@ -462,6 +462,16 @@ const StudyEngine = {
             if (groups[cat]) groups[cat].push(a);
         });
 
+        // Append externalLinks (config-only items that open a URL in a new tab)
+        // into the same groups, marked with _isExternal so the picker can
+        // render them differently. Backwards-compatible: units without
+        // externalLinks behave exactly as before.
+        const externalLinks = (this.config && this.config.externalLinks) || [];
+        externalLinks.forEach(link => {
+            const cat = link.category || 'practice';
+            if (groups[cat]) groups[cat].push(Object.assign({ _isExternal: true }, link));
+        });
+
         const groupLabels = { study: 'Study', practice: 'Practice', games: 'Games' };
         const groupIcons = { study: 'fas fa-book', practice: 'fas fa-clipboard-check', games: 'fas fa-gamepad' };
 
@@ -525,7 +535,11 @@ const StudyEngine = {
             icon.className = activity.icon;
             btn.appendChild(icon);
             btn.appendChild(document.createTextNode(' ' + activity.name));
-            btn.addEventListener('click', () => this.activateActivity(activity.id));
+            if (activity._isExternal) {
+                btn.addEventListener('click', () => this._openExternalLink(activity));
+            } else {
+                btn.addEventListener('click', () => this.activateActivity(activity.id));
+            }
             subNav.appendChild(btn);
         });
 
@@ -547,6 +561,15 @@ const StudyEngine = {
 
         items.forEach(a => {
             const card = document.createElement('div');
+
+            // External-link cards (config-driven, open URL in new tab) gate
+            // on requiresMasteredCategory, not on the activity-accessibility rules.
+            if (a._isExternal) {
+                this._renderExternalLinkCard(card, a);
+                grid.appendChild(card);
+                return;
+            }
+
             const accessible = MasteryManager.isActivityAccessible(this.config.unit.id, this.config, a.id);
 
             if (!accessible) {
@@ -612,6 +635,78 @@ const StudyEngine = {
 
         picker.appendChild(grid);
         container.appendChild(picker);
+    },
+
+    // Build an activity-style card for a config externalLinks entry.
+    // Gates on requiresMasteredCategory: until that category's vocab is
+    // mastered, the card renders locked with a category-specific hint.
+    _renderExternalLinkCard(card, link) {
+        const reqCategory = link.requiresMasteredCategory;
+        const unlocked = !reqCategory
+            || MasteryManager.isCategoryMastered(this.config.unit.id, this.config, reqCategory);
+
+        if (!unlocked) {
+            card.className = 'card activity-card category-' + (link.category || 'practice') + ' locked';
+
+            const cardTitle = document.createElement('h2');
+            const cardIcon = document.createElement('i');
+            cardIcon.className = 'fas fa-lock';
+            cardTitle.appendChild(cardIcon);
+            cardTitle.appendChild(document.createTextNode(' ' + link.name));
+            card.appendChild(cardTitle);
+
+            const desc = document.createElement('p');
+            desc.textContent = 'Master "' + reqCategory + '" terms to unlock.';
+            card.appendChild(desc);
+
+            const btn = document.createElement('button');
+            btn.className = 'card-button';
+            btn.textContent = 'Locked';
+            btn.disabled = true;
+            card.appendChild(btn);
+            return;
+        }
+
+        card.className = 'card activity-card category-' + (link.category || 'practice');
+        card.addEventListener('click', () => this._openExternalLink(link));
+
+        const cardTitle = document.createElement('h2');
+        const cardIcon = document.createElement('i');
+        cardIcon.className = link.icon || 'fas fa-external-link-alt';
+        cardTitle.appendChild(cardIcon);
+        cardTitle.appendChild(document.createTextNode(' ' + link.name));
+        card.appendChild(cardTitle);
+
+        const desc = document.createElement('p');
+        desc.textContent = link.description || '';
+        card.appendChild(desc);
+
+        if (link.subtitle) {
+            const sub = document.createElement('p');
+            sub.className = 'external-link-subtitle';
+            sub.textContent = link.subtitle;
+            card.appendChild(sub);
+        }
+
+        const btn = document.createElement('button');
+        btn.className = 'card-button';
+        const btnIcon = document.createElement('i');
+        btnIcon.className = 'fas fa-external-link-alt';
+        btn.appendChild(btnIcon);
+        btn.appendChild(document.createTextNode(' Open'));
+        card.appendChild(btn);
+    },
+
+    _openExternalLink(link) {
+        if (!link || !link.url) return;
+        // requiresMasteredCategory gating is enforced at card render time, but
+        // re-check here so a stale sub-nav button can't bypass the lock.
+        const reqCategory = link.requiresMasteredCategory;
+        if (reqCategory && !MasteryManager.isCategoryMastered(this.config.unit.id, this.config, reqCategory)) {
+            StudyUtils.showToast('Master "' + reqCategory + '" terms first to unlock.', 'info');
+            return;
+        }
+        window.open(link.url, '_blank', 'noopener,noreferrer');
     },
 
     activateActivity(activityId, deepLinkParams) {

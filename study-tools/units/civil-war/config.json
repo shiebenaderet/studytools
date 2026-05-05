@@ -1,0 +1,292 @@
+{
+    "unit": {
+        "id": "civil-war",
+        "title": "The Civil War Study Tool",
+        "subtitle": "Get ready to ace your test! Learn vocabulary, practice questions, and track your progress.",
+        "essentialQuestion": "Is fighting necessary? If so, when and how is it effective?",
+        "categoryQuestions": {
+            "Sectionalism": "How did the issue of slavery intensify the differences between the economies and societies of the North and South?",
+            "Road to War": [
+                "How did western expansion in the 1840s deepen conflict between the North and South?",
+                "What were the key tensions that led to the southern states seceding from the Union?",
+                "What event started the Civil War?"
+            ],
+            "The War Itself": [
+                "How was the Union able to defeat the Confederacy?",
+                "What were the main battles and turning points of the Civil War?"
+            ]
+        },
+        "theme": {
+            "primary": "#2D4A6B",
+            "secondary": "#E8D9B5",
+            "accent": "#8B2914",
+            "bgDeep": "#0f1923",
+            "bgCard": "#1a2738",
+            "bgElevated": "#243349",
+            "bgSurface": "#2f3f57"
+        }
+    },
+    "scoringTiers": true,
+    "activities": [
+        "learn-mode",
+        "flashcards",
+        "textbook",
+        "resources",
+        "typing-practice",
+        "practice-test",
+        "fill-in-blank",
+        "short-answer",
+        "timeline",
+        "map-quiz",
+        "wordle",
+        "hangman",
+        "flip-match",
+        "term-catcher",
+        "lightning-round",
+        "crossword",
+        "four-corners",
+        "who-am-i",
+        "sort-it-out",
+        "quiz-race",
+        "tower-defense"
+    ],
+    "externalLinks": [
+        {
+            "id": "battle-simulation",
+            "name": "Battle Simulation",
+            "icon": "fas fa-chess-board",
+            "category": "practice",
+            "description": "Now that you've learned the war, take command. Make the decisions Lincoln, Davis, Grant, and Lee faced. Read primary sources from soldiers, nurses, and civilians who lived it. Write your reflections.",
+            "subtitle": "You'll spend 2 class periods on this. Bring your full attention.",
+            "url": "https://shiebenaderet.github.io/civil-war-battle-simulation",
+            "requiresMasteredCategory": "The War Itself"
+        }
+    ],
+    "vocabulary": [
+        {
+            "term": "sectionalism",
+            "definition": "Strong loyalty to one region of a country instead of to the country as a whole. In the United States before the Civil War, this meant Northerners and Southerners thinking of themselves as different peoples with different ways of life.",
+            "simpleExplanation": "Imagine if you cared way more about your neighborhood than about your whole town. Now imagine that feeling getting so strong that you start to think your neighborhood and the next one over are basically two different places. That is what was happening between the North and South.",
+            "example": "By the 1850s, sectionalism had grown so strong that Northern and Southern members of Congress could barely sit in the same room without arguing about slavery.",
+            "category": "Sectionalism",
+            "tier": "must-know",
+            "typingSnippet": "Sectionalism is loyalty to one region instead of the whole country. In America before the Civil War, the North and South began to feel like two different countries. They had different economies, different ways of life, and very different views on slavery. This deep divide eventually pulled the nation apart.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Sectionalism"
+        },
+        {
+            "term": "slavery",
+            "definition": "A system in which one person is treated as the legal property of another and forced to work without pay. In the United States, slavery was based on race and was the foundation of the Southern economy.",
+            "simpleExplanation": "Slavery meant that one person could legally own another person, force them to work for free, and treat them like property instead of a human being. In America, this system was used to force Black people, mostly from Africa, to do back breaking work on Southern farms.",
+            "example": "By 1860, about four million enslaved people lived in the United States, almost all of them in the South.",
+            "category": "Sectionalism",
+            "tier": "must-know",
+            "typingSnippet": "Slavery in America forced millions of Black people to work without pay on Southern plantations. Enslaved people had no rights. They could be bought, sold, beaten, or separated from their families. The Southern economy depended on slavery, while the Northern economy did not. This difference became impossible to ignore.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Slavery_in_the_United_States",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Slavery_in_the_United_States"
+        },
+        {
+            "term": "abolitionism",
+            "definition": "The movement to end slavery in the United States. Abolitionists wrote, spoke, and protested to convince Americans that slavery was morally wrong and had to end.",
+            "simpleExplanation": "Abolitionism was the fight to get rid of slavery. People who joined this movement gave speeches, wrote books and newspapers, and helped enslaved people escape. Some risked their lives doing it. They believed slavery was simply wrong, no matter what the law said.",
+            "example": "When Frederick Douglass spoke at abolitionist meetings, audiences were stunned to hear him describe slavery in his own words after escaping it himself.",
+            "category": "Sectionalism",
+            "tier": "must-know",
+            "typingSnippet": "Abolitionism was the movement to end slavery. Abolitionists believed that no person should be allowed to own another. They printed newspapers, gave speeches, and helped people escape to freedom. Some, like Frederick Douglass, had been enslaved themselves. Their work slowly shifted public opinion in the North against slavery.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Abolitionism_in_the_United_States",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Abolitionism"
+        },
+        {
+            "term": "plantation economy",
+            "definition": "An economic system based on large farms, called plantations, that used enslaved labor to grow cash crops like cotton, tobacco, and sugar for sale around the world.",
+            "simpleExplanation": "The Southern economy was built on huge farms that grew one main crop, usually cotton, to sell. These farms only made money because the work was done by enslaved people who were never paid. Without slavery, the whole system would have fallen apart, which is why so many Southern leaders fought to keep it.",
+            "example": "A single plantation in Mississippi might have hundreds of enslaved workers picking cotton from sunrise to sunset, earning the owner a fortune while the workers earned nothing.",
+            "category": "Sectionalism",
+            "tier": "must-know",
+            "typingSnippet": "The plantation economy was the South's main way of making money. Large farms grew crops like cotton and tobacco to sell to the North and to Europe. The whole system depended on enslaved workers who were forced to do the labor for free. Plantation owners became some of the richest people in America.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Plantation_economy",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Plantation"
+        },
+        {
+            "term": "Frederick Douglass",
+            "definition": "A formerly enslaved Black American who escaped to the North in 1838 and became one of the most powerful voices in the abolitionist movement. He wrote books, gave speeches, and edited newspapers calling for an end to slavery.",
+            "simpleExplanation": "Frederick Douglass was born into slavery and taught himself to read in secret. After escaping, he traveled the country telling his story so that white Americans could no longer pretend slavery was not so bad. His books and speeches were so good that some people refused to believe a Black man had written them.",
+            "example": "In 1845, Frederick Douglass published his autobiography describing his life as an enslaved person, and it became a bestseller that turned thousands of readers against slavery.",
+            "category": "Sectionalism",
+            "tier": "must-know",
+            "typingSnippet": "Frederick Douglass escaped slavery in 1838 and became the most famous Black abolitionist in America. He wrote a powerful autobiography about his life in slavery. He gave speeches across the North and even in Europe. He published his own newspaper, The North Star. His words helped change how Americans thought about slavery.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Frederick_Douglass",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Frederick_Douglass"
+        },
+        {
+            "term": "Underground Railroad",
+            "definition": "A secret network of safe houses, hidden routes, and brave volunteers that helped enslaved people escape from the South to free states in the North or to Canada. It was not an actual railroad but used railroad words as code.",
+            "simpleExplanation": "Even though it had no trains and no tracks, this network used train words as code. A safe house was a station, the helpers were conductors, and the people escaping were passengers. Travelers moved at night and hid during the day. Getting caught meant being sent back into slavery, sometimes worse.",
+            "example": "Harriet Tubman made about thirteen trips back into the South as an Underground Railroad conductor and helped around seventy enslaved people reach freedom.",
+            "category": "Sectionalism",
+            "tier": "must-know",
+            "typingSnippet": "The Underground Railroad was a secret network that helped enslaved people escape to freedom. It had no real trains or tracks. Helpers, called conductors, guided travelers from one safe house to the next. Most escapes happened at night. The network reached from the South all the way to free states and Canada. Thousands made it to freedom this way.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Underground_Railroad",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Underground_Railroad"
+        },
+        {
+            "term": "Nat Turner's Rebellion",
+            "definition": "A violent uprising of enslaved people led by Nat Turner in Virginia in 1831. About sixty white people were killed before the rebellion was crushed. It terrified Southern slaveholders, who responded with even harsher laws against enslaved Black people.",
+            "simpleExplanation": "Nat Turner believed God had told him to lead other enslaved people in a fight against their owners. For two days, his group attacked plantations in Virginia. The rebellion was stopped, and Turner was captured and hanged. After this, Southern states passed cruel new laws making it illegal to teach enslaved people to read, even though those laws made the underlying problem worse.",
+            "example": "After Nat Turner's Rebellion, several Southern states made it illegal for enslaved people to learn to read or to gather in groups without a white person present.",
+            "category": "Sectionalism",
+            "tier": "must-know",
+            "typingSnippet": "Nat Turner led the most famous slave rebellion in American history. In 1831, he and his followers attacked plantations in Virginia, killing about sixty white people. The rebellion was put down in two days, and Turner was hanged. Frightened Southern leaders responded with harsh new laws against enslaved people, but the rebellion showed that slavery could not last forever without a fight.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Nat_Turner%27s_slave_rebellion",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Nat_Turner"
+        },
+        {
+            "term": "free state",
+            "definition": "A state in which slavery was illegal before the Civil War. Free states were mostly in the North, where the economy was based on factories, small farms, and trade rather than plantation crops.",
+            "simpleExplanation": "If you were in a free state, slavery was against the law. That did not mean Black Americans had equal rights there, because they often did not. But no one could legally own another person within the state's borders. Most free states were in the North.",
+            "example": "When an enslaved person crossed from Kentucky into Ohio, a free state, they were no longer legally enslaved according to that state's law.",
+            "category": "Sectionalism",
+            "tier": "must-know",
+            "typingSnippet": "A free state was one where slavery was illegal. Most free states were in the North, where the economy did not depend on enslaved labor. Free states still had racism and unfair laws against Black Americans. But within their borders, no one could legally own another person. The number of free states versus slave states was a constant political fight.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Slave_states_and_free_states",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Slave_states_and_free_states"
+        },
+        {
+            "term": "slave state",
+            "definition": "A state in which slavery was legal before the Civil War. Slave states were in the South, where the plantation economy depended on enslaved workers to grow cotton, tobacco, and other crops.",
+            "simpleExplanation": "In a slave state, owning another person was legal. Almost all slave states were in the South, where huge farms needed unpaid workers to function. As the country added new states, the question of whether each new one would be a slave state or a free state became one of the biggest fights in American politics.",
+            "example": "When Missouri tried to enter the Union as a slave state in 1819, Northerners objected so fiercely that Congress had to write the Missouri Compromise.",
+            "category": "Sectionalism",
+            "tier": "must-know",
+            "typingSnippet": "A slave state was one where slavery was legal. Slave states were in the South. Their economies depended on plantations worked by enslaved people. As America added new states, Northerners and Southerners argued bitterly about whether each one should be slave or free. Each new state shifted the balance of power in Congress, raising the stakes of every decision.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Slave_states_and_free_states",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Slave_state"
+        },
+        {
+            "term": "Harriet Tubman",
+            "definition": "A formerly enslaved Black American who escaped to freedom in 1849 and then risked her life again and again to lead others out of slavery on the Underground Railroad. Later she also worked as a nurse and spy for the Union Army during the Civil War.",
+            "simpleExplanation": "Harriet Tubman could have stayed safely in the North after her own escape. Instead, she went back into the South about thirteen times to rescue other enslaved people, including her own family. Slave catchers offered huge rewards for her capture. She never got caught and never lost a single person on her trips.",
+            "example": "Harriet Tubman was nicknamed \"Moses\" by the people she helped because, like the biblical figure, she led her people out of bondage.",
+            "category": "Sectionalism",
+            "tier": "encounter",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Harriet_Tubman",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Harriet_Tubman"
+        },
+        {
+            "term": "William Lloyd Garrison",
+            "definition": "A white Northern newspaper editor and one of the most outspoken abolitionists in America. He founded the anti slavery newspaper The Liberator in 1831 and demanded an immediate end to slavery, not a slow phase out.",
+            "simpleExplanation": "Most early abolitionists wanted to end slavery slowly, over many years. William Lloyd Garrison said no, slavery must end now. His newspaper, The Liberator, attacked slavery in fierce language for thirty five years. Southerners hated him so much that one state offered a five thousand dollar reward for his arrest.",
+            "example": "On the front page of his very first issue, William Lloyd Garrison wrote, \"I will be heard,\" and he kept his word for the next three decades.",
+            "category": "Sectionalism",
+            "tier": "encounter",
+            "wikiUrl": "https://en.wikipedia.org/wiki/William_Lloyd_Garrison",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/William_Lloyd_Garrison"
+        },
+        {
+            "term": "Mason Dixon Line",
+            "definition": "The boundary line surveyed in the 1760s that separated Pennsylvania from Maryland. Before the Civil War, it became the unofficial border between the free North and the slave South in popular speech.",
+            "simpleExplanation": "Two surveyors named Mason and Dixon drew this line in colonial times to settle a land argument. Nobody planned for it to mean anything bigger. But by the 1800s, Americans started using it as shorthand for the divide between the North and the South, between free states and slave states.",
+            "example": "An enslaved person who crossed the Mason Dixon Line into Pennsylvania moved from a slave state into a free state.",
+            "category": "Sectionalism",
+            "tier": "encounter",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Mason%E2%80%93Dixon_line",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Mason%E2%80%93Dixon_line"
+        },
+        {
+            "term": "cotton gin",
+            "definition": "A machine invented by Eli Whitney in 1793 that quickly removed seeds from cotton fibers. It made growing cotton far more profitable, which expanded plantation slavery instead of ending it as some had hoped.",
+            "simpleExplanation": "Before this machine, cleaning seeds out of cotton by hand was so slow that growing cotton was barely worth it. The cotton gin sped up that step about fifty times. Suddenly cotton was a goldmine. Plantation owners planted more of it, which meant they wanted more enslaved workers, not fewer. A machine meant to save labor ended up trapping more people in slavery.",
+            "example": "After the cotton gin was invented, the number of enslaved people in the South grew from about 700,000 in 1790 to nearly 4 million by 1860.",
+            "category": "Sectionalism",
+            "tier": "encounter",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Cotton_gin",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Cotton_gin"
+        }
+    ],
+    "practiceQuestions": [
+        {
+            "question": "What does the term sectionalism mean in the years before the Civil War?",
+            "options": [
+                "Loyalty to a small section of one's town or city",
+                "Strong loyalty to one region of the country instead of to the country as a whole",
+                "The belief that the federal government should be divided into sections",
+                "Support for breaking the country into many smaller states"
+            ],
+            "correct": 1,
+            "explanation": "Sectionalism meant Northerners and Southerners thought of themselves as different peoples with different ways of life. That growing divide is what eventually pulled the country apart.",
+            "topic": "Sectionalism"
+        },
+        {
+            "question": "Why did the Northern and Southern economies become so different by the mid 1800s?",
+            "options": [
+                "The North had better weather for growing crops than the South",
+                "The South built more factories than the North",
+                "The North relied on factories, small farms, and trade, while the South relied on large plantations worked by enslaved people",
+                "The North refused to trade with other countries"
+            ],
+            "correct": 2,
+            "explanation": "The North's economy ran on industry, free labor, and small family farms. The South's economy ran on plantation crops like cotton, which required huge amounts of enslaved labor. These two systems pulled the regions further apart every year.",
+            "topic": "Sectionalism"
+        },
+        {
+            "question": "What was the main goal of the abolitionist movement?",
+            "options": [
+                "To return enslaved people to Africa",
+                "To allow slavery only in new western territories",
+                "To end slavery in the United States",
+                "To pay slaveholders to free their workers slowly over fifty years"
+            ],
+            "correct": 2,
+            "explanation": "Abolitionists believed slavery was morally wrong and worked to end it through speeches, newspapers, books, and helping enslaved people escape. Some wanted slavery ended slowly, but the most famous abolitionists demanded it end immediately.",
+            "topic": "Sectionalism"
+        },
+        {
+            "question": "How did the cotton gin affect slavery in the South after 1793?",
+            "options": [
+                "It made slavery less profitable, so many plantations freed their workers",
+                "It made cotton far more profitable, which expanded slavery instead of ending it",
+                "It replaced enslaved workers with machines, so the South no longer needed slavery",
+                "It had no effect on slavery one way or the other"
+            ],
+            "correct": 1,
+            "explanation": "Many people had hoped slavery would die out on its own. Instead, the cotton gin made cotton hugely profitable, which made plantation owners want even more enslaved workers. The number of enslaved people in the South grew from about 700,000 in 1790 to nearly 4 million by 1860.",
+            "topic": "Sectionalism"
+        },
+        {
+            "question": "Why was Frederick Douglass's voice so powerful in the abolitionist movement?",
+            "options": [
+                "He was a wealthy plantation owner who knew the system from the inside",
+                "He had been enslaved himself and could describe slavery from personal experience",
+                "He was the President of the United States during the Civil War",
+                "He was the only abolitionist who could read and write"
+            ],
+            "correct": 1,
+            "explanation": "Douglass had escaped slavery in 1838. When he stood up at abolitionist meetings and described what slavery was actually like, audiences could no longer pretend it was not so bad. His autobiography sold widely and turned thousands of readers against slavery.",
+            "topic": "Sectionalism"
+        },
+        {
+            "question": "Which best describes the Underground Railroad?",
+            "options": [
+                "A real railroad with trains that ran beneath Northern cities",
+                "A secret network of safe houses and volunteers that helped enslaved people escape to freedom",
+                "A government program that paid for enslaved people to travel north",
+                "A code name for the Northern army during the Civil War"
+            ],
+            "correct": 1,
+            "explanation": "The Underground Railroad had no real trains or tracks. It was a secret network of safe houses called stations, helpers called conductors, and routes that led from the South to free states or Canada. Harriet Tubman is the most famous of its conductors.",
+            "topic": "Sectionalism"
+        },
+        {
+            "question": "What was one major effect of Nat Turner's Rebellion in 1831?",
+            "options": [
+                "Most Southern states immediately ended slavery to prevent more uprisings",
+                "The federal government sent the army to free all enslaved people",
+                "Frightened Southern states passed harsher laws against enslaved people, including bans on teaching them to read",
+                "The rebellion succeeded and Nat Turner became governor of Virginia"
+            ],
+            "correct": 2,
+            "explanation": "About sixty white people were killed in the rebellion before it was crushed. Slaveholders were terrified. Instead of rethinking slavery, Southern states tightened their grip with cruel new laws that made the underlying problem worse.",
+            "topic": "Sectionalism"
+        }
+    ],
+    "fillInBlanks": []
+}

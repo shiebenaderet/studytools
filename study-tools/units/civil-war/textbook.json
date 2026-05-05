@@ -1,0 +1,81 @@
+{
+  "textbookContent": {
+    "readingLevels": {
+      "simplified": {
+        "label": "Easier",
+        "gradeRange": "3rd-5th",
+        "description": "Shorter sentences, simpler vocabulary"
+      },
+      "standard": {
+        "label": "On Grade",
+        "gradeRange": "8th Grade",
+        "description": "Standard reading level"
+      },
+      "advanced": {
+        "label": "Challenge",
+        "gradeRange": "High School",
+        "description": "More detail, complex analysis"
+      }
+    },
+    "segments": [
+      {
+        "id": "segment-1",
+        "number": 1,
+        "title": "Sectionalism",
+        "subtitle": "How slavery split a country in two",
+        "icon": "fas fa-balance-scale",
+        "sections": [
+          {
+            "id": "s1-01-two-economies",
+            "heading": "Two Different Economies",
+            "vocabTerms": [
+              "sectionalism",
+              "slavery",
+              "plantation economy",
+              "free state",
+              "slave state",
+              "cotton gin",
+              "Mason Dixon Line"
+            ],
+            "content": {
+              "simplified": null,
+              "standard": "<p>By the early 1800s, the United States looked like one country on a map but felt like two different ones in real life. The North and the South had grown apart so much that people began to think of them as separate places with separate ways of life. This growing loyalty to a region instead of to the whole country had a name: <strong>sectionalism</strong>.</p><p>Most of the difference came down to how each region made its money. The North had cold winters, rocky soil, and lots of fast moving rivers that could power machines. So Northerners built factories, started small farms, and traded goods in busy port cities like New York and Boston. Their economy was built on free workers who got paid wages and could quit if they wanted to.</p><p>The South had warm weather, rich soil, and long growing seasons. That meant it could grow crops like cotton, tobacco, sugar, and rice that the rest of the world wanted to buy. But these crops needed huge amounts of labor. Southern landowners built large farms called plantations and forced enslaved Black people to do the work. This way of running the economy is called the <strong>plantation economy</strong>, and it was built on <strong>slavery</strong>.</p><p>Slavery was the cruelest part of American life. Enslaved people were treated as property. They could be bought, sold, beaten, or separated from their families. They worked from sunrise to sunset and were never paid. By 1860, about four million enslaved people lived in the United States, almost all of them in the South.</p><p>For a while, some Americans believed slavery would slowly fade away on its own. Then in 1793, a Northerner named Eli Whitney invented the <strong>cotton gin</strong>, a machine that cleaned cotton seeds about fifty times faster than a person could by hand. Cotton suddenly became one of the most profitable crops in the world. Plantation owners planted more of it, which meant they wanted more enslaved workers, not fewer. A machine that was supposed to save labor ended up trapping more people in slavery.</p><p>By the 1820s, states north of the <strong>Mason Dixon Line</strong> had mostly become <strong>free states</strong>, where slavery was illegal. States south of it became <strong>slave states</strong>. The line itself had been drawn back in colonial times to settle a land argument, but Americans started using it as shorthand for the divide between two ways of life.</p>",
+              "advanced": null
+            },
+            "keyIdea": "The North built its economy on factories, free labor, and small farms, while the South built its economy on plantations worked by enslaved people. The cotton gin made cotton hugely profitable and locked slavery deeper into Southern life.",
+            "checkIn": {
+              "type": "stop-and-think",
+              "prompt": "Eli Whitney's cotton gin was supposed to make work easier. Instead, it made slavery grow. Can you think of another invention or change that ended up doing the opposite of what people expected?",
+              "hint": "Think about technology or rules that started with one goal and led somewhere very different."
+            },
+            "sourceNote": "Adapted from American Yawp Ch. 11 and standard 8th grade history texts."
+          },
+          {
+            "id": "s1-02-fight-for-freedom",
+            "heading": "The Fight for Freedom",
+            "vocabTerms": [
+              "abolitionism",
+              "Frederick Douglass",
+              "Underground Railroad",
+              "Harriet Tubman",
+              "William Lloyd Garrison",
+              "Nat Turner's Rebellion"
+            ],
+            "content": {
+              "simplified": null,
+              "standard": "<p>Slavery did not go unchallenged. From the very beginning, enslaved people resisted in every way they could, and free Americans, both Black and white, fought against the system. The movement to end slavery was called <strong>abolitionism</strong>, and the people in it were called abolitionists.</p><p>One of the most powerful voices was <strong>Frederick Douglass</strong>. Douglass had been born into slavery in Maryland and taught himself to read in secret. In 1838, he escaped to the North. Then he did something that took even more courage: he started telling his story in public. He gave speeches, wrote a famous autobiography, and edited his own newspaper called The North Star. White audiences who had only heard about slavery from a distance now had to listen to a man who had lived it. His words changed minds across the country.</p><p>Other abolitionists pushed in different ways. <strong>William Lloyd Garrison</strong> was a white newspaper editor in Boston who started a paper called The Liberator in 1831. While most early abolitionists wanted to end slavery slowly, Garrison demanded it end immediately, and he refused to soften his words. Southerners hated him so much that one state offered five thousand dollars for his arrest.</p><p>Some abolitionists put their lives on the line to help enslaved people escape. They built a secret network called the <strong>Underground Railroad</strong>. It was not a real railroad. It was a chain of safe houses, hidden routes, and brave volunteers stretching from the South all the way to the free states and Canada. People used train words as code. A safe house was a station. A guide was a conductor. A person escaping was a passenger. The most famous conductor was <strong>Harriet Tubman</strong>, who had escaped slavery herself in 1849. She went back into the South about thirteen times to lead others out. She never got caught and never lost a single person.</p><p>Resistance also came from inside slavery itself. In 1831, an enslaved man named Nat Turner led the most famous slave uprising in American history. <strong>Nat Turner's Rebellion</strong> lasted only two days, but about sixty white people were killed before it was crushed. Turner was captured and hanged. Instead of making slaveholders question the system, the rebellion frightened them into making it crueler. Southern states passed harsh new laws banning enslaved people from learning to read or gathering in groups.</p><p>By the 1830s and 1840s, the gap between North and South was no longer just about money. It was about whether one human being could own another. Northerners and Southerners were starting to see each other as moral opposites. That feeling would only grow stronger as the country added new western land and had to decide, again and again, whether each new piece of it would be free or enslaved.</p>",
+              "advanced": null
+            },
+            "keyIdea": "Abolitionists like Frederick Douglass, William Lloyd Garrison, and Harriet Tubman pushed Americans to confront slavery as a moral issue, while events like Nat Turner's Rebellion showed that enslaved people would not stay quiet forever.",
+            "checkIn": {
+              "type": "stop-and-think",
+              "prompt": "Frederick Douglass said that telling the truth about slavery in his own voice was one of the most powerful things he could do. Why do you think a person's own story can change minds when arguments and statistics sometimes cannot?",
+              "hint": "Think about a time someone's personal story changed how you thought about something."
+            },
+            "sourceNote": "Adapted from American Yawp Ch. 11 and the National Park Service Underground Railroad resources."
+          }
+        ]
+      }
+    ]
+  }
+}
