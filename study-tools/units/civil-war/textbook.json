@@ -75,6 +75,83 @@
             "sourceNote": "Adapted from American Yawp Ch. 11 and the National Park Service Underground Railroad resources."
           }
         ]
+      },
+      {
+        "id": "segment-2",
+        "number": 2,
+        "title": "Road to War",
+        "subtitle": "How forty years of compromise finally ran out",
+        "icon": "fas fa-hourglass-half",
+        "sections": [
+          {
+            "id": "s2-01-fights-over-new-land",
+            "heading": "Fights Over New Land",
+            "vocabTerms": [
+              "Missouri Compromise",
+              "Wilmot Proviso",
+              "Compromise of 1850",
+              "Fugitive Slave Law"
+            ],
+            "content": {
+              "simplified": null,
+              "standard": "<p>For the first forty years of the 1800s, almost every fight in Congress about slavery was really a fight about land. As the United States grew westward, each new state had to be either a free state or a slave state. The North and the South each wanted the count to favor them, because more states on your side meant more votes in the Senate.</p><p>The first big test came in 1820, when Missouri asked to join the Union as a slave state. That would have given slave states more votes than free states for the first time. Northern senators refused. After months of arguing, Senator Henry Clay worked out a deal called the <strong>Missouri Compromise</strong>. Missouri came in as a slave state, Maine came in as a free state to balance it, and a line was drawn at 36 degrees 30 minutes across the rest of the Louisiana Purchase. North of that line, slavery would be banned. South of it, slavery would be allowed. The deal kept the peace, but Thomas Jefferson, then in his old age, wrote that he heard it like \"a fire bell in the night,\" warning him that the slavery question would tear the country apart someday.</p><p>The next big fight came after the United States won a war with Mexico in 1848 and took a huge piece of the West. Suddenly there was new territory the Missouri Compromise line did not cover. A Northern congressman named David Wilmot proposed a law called the <strong>Wilmot Proviso</strong>, which would have banned slavery in any land taken from Mexico. The proviso passed the House but failed in the Senate. Even though it never became law, the fight over it pushed Southern leaders to start saying out loud, for the first time, that they might leave the United States if Northerners kept attacking slavery.</p><p>Two years later, Congress tried one more time to settle things. The <strong>Compromise of 1850</strong> was a package of five laws put together by Henry Clay. The North got California as a free state. The South got a tougher law, the <strong>Fugitive Slave Law</strong>, that required Northerners to help capture and return enslaved people who had escaped. Anyone who refused, or who helped a runaway, could be fined or jailed.</p><p>The Fugitive Slave Law backfired badly. For Northerners who had quietly looked away from slavery for years, this law put the system right in their faces. Slave catchers came into Northern cities. Free Black communities were terrified. Abolitionists organized to physically block slave catchers from taking people back south. Slavery was no longer a Southern problem. It was happening in their own towns. The country had bought itself ten more years before war, but the price was that more and more Americans now believed compromise itself was the problem.</p>",
+              "advanced": null
+            },
+            "keyIdea": "From the Missouri Compromise of 1820 through the Compromise of 1850, Congress kept patching over fights about whether new western land would be free or slave. Each compromise bought time but deepened the anger on both sides.",
+            "checkIn": {
+              "type": "stop-and-think",
+              "prompt": "Compromises are usually a good way to solve problems. Why do you think the compromises over slavery in the 1800s ended up making the country angrier instead of calmer?",
+              "hint": "Think about whether you can really compromise on a question of right and wrong."
+            },
+            "sourceNote": "Adapted from American Yawp Ch. 13 and standard 8th grade history texts."
+          },
+          {
+            "id": "s2-02-the-1850s-explode",
+            "heading": "The 1850s Explode",
+            "vocabTerms": [
+              "Uncle Tom's Cabin",
+              "Kansas Nebraska Act",
+              "popular sovereignty",
+              "Bleeding Kansas",
+              "Dred Scott decision",
+              "Lincoln Douglas Debates",
+              "Stephen Douglas",
+              "John Brown's Raid"
+            ],
+            "content": {
+              "simplified": null,
+              "standard": "<p>The 1850s were the decade when the country's slow burning fight over slavery finally caught fire. Each year brought a new crisis that made the next one worse.</p><p>It started with a book. In 1852, Harriet Beecher Stowe published <strong>Uncle Tom's Cabin</strong>, a novel that took readers inside the lives of enslaved people. Within a year, it had sold over 300,000 copies, an enormous number for the time. Northerners cried over the characters. Southerners called the book a lie and banned it from their states. President Lincoln supposedly later joked to Stowe that she was \"the little woman who wrote the book that made this great war.\"</p><p>Two years later, Senator <strong>Stephen Douglas</strong> of Illinois pushed a law called the <strong>Kansas Nebraska Act</strong>. The law created two new territories and let the people living in them vote on whether to allow slavery. Douglas called this idea <strong>popular sovereignty</strong> and said it would settle the question peacefully. It did not. The law threw out the slavery ban from the Missouri Compromise that had stood for thirty four years. Both sides rushed settlers into Kansas to control the vote.</p><p>By 1856, Kansas had become a battlefield. Pro slavery Missourians crossed the border to vote illegally. Anti slavery families came in from the North. Both sides started attacking each other with guns, axes, and torches. Newspapers called it <strong>Bleeding Kansas</strong>. About fifty people died. It was a small civil war years before the big one.</p><p>Then in 1857, the Supreme Court made everything worse. In the <strong>Dred Scott decision</strong>, the court ruled that Black Americans, free or enslaved, were not citizens and had no rights under the Constitution. The court also said Congress had no power to ban slavery in the territories. To Northerners, the decision was a disaster. If Congress could not ban slavery in the West, what was to stop slavery from spreading into the free states themselves?</p><p>The next year, in Illinois, a little known lawyer named Abraham Lincoln challenged Senator Stephen Douglas in a Senate election. The two men held seven public debates, now called the <strong>Lincoln Douglas Debates</strong>. Slavery was the main topic. Douglas defended popular sovereignty. Lincoln argued that slavery was a moral wrong that had to be stopped from spreading. Lincoln lost the Senate race, but newspapers across the country printed the debates. He went from a small time politician to a national figure.</p><p>The decade ended in violence. In October 1859, a white abolitionist named John Brown led a small group of men in <strong>John Brown's Raid</strong> on the federal armory at Harpers Ferry, Virginia. He hoped to grab the weapons and hand them out to enslaved people, sparking a massive uprising. The plan failed in two days. Brown was captured and hanged. Most Northerners had not supported him. But Southern leaders saw the raid as proof that the entire North wanted to come kill them. Across the South, militias began drilling and stockpiling weapons. By the end of 1859, both sides were ready to believe the worst about each other.</p>",
+              "advanced": null
+            },
+            "keyIdea": "The 1850s saw one crisis after another, from Uncle Tom's Cabin to Bleeding Kansas to Dred Scott to John Brown's Raid. Each event pushed the North and South further apart and made compromise harder to imagine.",
+            "checkIn": {
+              "type": "stop-and-think",
+              "prompt": "By the end of the 1850s, both Northerners and Southerners believed the other side was the real threat. How do you think a country gets to that point, where each side stops being able to see the other as fellow citizens?",
+              "hint": "Think about how news, books, and stories shape what we believe about people we have never met."
+            },
+            "sourceNote": "Adapted from American Yawp Ch. 13 and the Library of Congress Civil War teaching resources."
+          },
+          {
+            "id": "s2-03-the-break",
+            "heading": "The Break",
+            "vocabTerms": [
+              "Election of 1860",
+              "secession"
+            ],
+            "content": {
+              "simplified": null,
+              "standard": "<p>By 1860, the country was so divided that the presidential election split into four candidates. Voters in the North chose between Abraham Lincoln, the Republican who said slavery should not spread, and Stephen Douglas, the Democrat who said let each state decide. Voters in the South had two candidates of their own, both committed to defending slavery. Lincoln did not even appear on the ballot in most Southern states.</p><p>The <strong>Election of 1860</strong> was won by Lincoln. He took less than forty percent of the national popular vote, but he won enough free states to take the Electoral College, and that was all that mattered. He had not promised to end slavery. He had promised only to keep it from spreading. But that was enough to terrify the South.</p><p>Within six weeks of the election, before Lincoln was even sworn in, South Carolina announced it was leaving the United States. They called it <strong>secession</strong>, the formal withdrawal of a state from the country. By February 1861, six more states had followed: Mississippi, Florida, Alabama, Georgia, Louisiana, and Texas. Together, they wrote a new constitution and formed the Confederate States of America, with Jefferson Davis as their president.</p><p>Lincoln, now president, refused to accept that any state had the right to leave. The Constitution, he said, did not allow it. The federal government could not just disappear because some states did not like an election result. The Confederacy disagreed. To them, the Union was a partnership of states, and any state could walk away from a partnership it had freely joined.</p><p>That disagreement, more than any single law or compromise or speech, is what made war unavoidable. Talking could not settle it. Voting could not settle it. Compromise had been tried for forty years and had only made things worse. In April 1861, Confederate forces fired on a federal fort in Charleston Harbor, and the Civil War began. But the question of why it happened goes back much further than that single shot. It goes back to a country that tried for decades to be half free and half slave, and finally found out that it could not.</p>",
+              "advanced": null
+            },
+            "keyIdea": "Lincoln's election in 1860, even though he was not an abolitionist, convinced Southern states that the federal government had turned against them. Eleven states seceded and formed the Confederate States of America. Lincoln refused to accept secession, and the disagreement led directly to civil war.",
+            "checkIn": {
+              "type": "stop-and-think",
+              "prompt": "The Southern states said they had a right to leave the Union the way they had once chosen to join it. Lincoln said no state had that right, because the country was permanent, not just a club. Whose argument do you find more convincing, and why?",
+              "hint": "Think about what it means for a country to be permanent versus what it means for it to be a free agreement among states."
+            },
+            "sourceNote": "Adapted from American Yawp Ch. 14 and Lincoln's First Inaugural Address."
+          }
+        ]
       }
     ]
   }

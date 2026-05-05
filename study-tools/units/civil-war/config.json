@@ -200,6 +200,150 @@
             "tier": "encounter",
             "wikiUrl": "https://en.wikipedia.org/wiki/Cotton_gin",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Cotton_gin"
+        },
+        {
+            "term": "Missouri Compromise",
+            "definition": "An 1820 agreement that admitted Missouri to the Union as a slave state and Maine as a free state, and banned slavery in the rest of the Louisiana Purchase territory north of the 36 degree 30 minute line. It kept the peace for a while but drew a line that made the country's divide official.",
+            "simpleExplanation": "By 1820, the country had eleven free states and eleven slave states. Adding Missouri would tip the balance. Congress made a deal: Missouri came in as a slave state, Maine came in as a free state, and a line was drawn across the country saying no more slavery north of it. People called it a compromise, but really it just postponed the fight.",
+            "example": "Thomas Jefferson said the Missouri Compromise was like \"a fire bell in the night,\" warning him that the slavery question would tear the country apart someday.",
+            "category": "Road to War",
+            "tier": "must-know",
+            "typingSnippet": "The Missouri Compromise of 1820 tried to keep peace between free and slave states. Missouri became a slave state and Maine became a free state. Slavery was banned in the rest of the Louisiana Purchase north of a line at 36 degrees 30 minutes. The deal kept the balance, but it also drew a line that made the divide between North and South feel official.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Missouri_Compromise",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Missouri_Compromise"
+        },
+        {
+            "term": "Wilmot Proviso",
+            "definition": "An 1846 proposal by Congressman David Wilmot to ban slavery in any land taken from Mexico in the Mexican American War. It passed the House but failed in the Senate. Even though it never became law, it forced Americans to argue openly about the future of slavery in the West.",
+            "simpleExplanation": "When the United States looked likely to win huge new lands from Mexico, a Northern congressman tried to make sure none of that land would have slavery. The South was furious. Even though the law failed, the fight over it showed how angry both sides were getting. From this moment on, every new piece of territory became a slavery argument.",
+            "example": "After the Wilmot Proviso failed, Southern leaders started saying out loud, for the first time, that they might leave the Union if the North kept attacking slavery.",
+            "category": "Road to War",
+            "tier": "must-know",
+            "typingSnippet": "The Wilmot Proviso was an 1846 proposal to ban slavery in any land taken from Mexico. It passed the House of Representatives but never made it through the Senate. Even though it failed, it forced Congress to argue openly about slavery in new western land. From this point on, the fight over slavery in the territories never went away.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Wilmot_Proviso",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Wilmot_Proviso"
+        },
+        {
+            "term": "Compromise of 1850",
+            "definition": "A package of five laws passed by Congress in 1850 to settle disputes about slavery in the lands won from Mexico. California became a free state, the slave trade was banned in Washington DC, and a tougher Fugitive Slave Law was passed to please the South. It delayed civil war but made Northerners angrier.",
+            "simpleExplanation": "After the war with Mexico, the country had a huge new chunk of land and no agreement about slavery in it. Senator Henry Clay put together a deal with five parts. The North got California as a free state. The South got a much harsher law forcing Northerners to help return escaped enslaved people. Both sides walked away unhappy, which is how compromises sometimes work.",
+            "example": "The Compromise of 1850 brought California into the Union as a free state, but the new Fugitive Slave Law it included turned even some moderate Northerners against the South.",
+            "category": "Road to War",
+            "tier": "must-know",
+            "typingSnippet": "The Compromise of 1850 was a package of five laws meant to settle slavery fights after the Mexican American War. California became a free state. The slave trade was banned in Washington DC. A tougher Fugitive Slave Law was passed to please the South. The compromise delayed civil war by about ten years, but it left people on both sides angrier than before.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Compromise_of_1850",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Compromise_of_1850"
+        },
+        {
+            "term": "Fugitive Slave Law",
+            "definition": "A harsh 1850 law that required citizens in free states to help capture and return people who had escaped slavery. Anyone who refused, or who helped a runaway, could be fined or jailed. It was part of the Compromise of 1850 and outraged Northerners.",
+            "simpleExplanation": "Before this law, an enslaved person who reached a free state was usually safe. After it, slave catchers could chase people deep into the North, and ordinary Northerners could be punished for not helping. Suddenly slavery was no longer a Southern problem, it was happening in Northern towns and cities. Many Northerners who had been quiet about slavery now turned against it.",
+            "example": "After the Fugitive Slave Law passed, abolitionists in cities like Boston physically blocked slave catchers from taking people back south, sometimes leading to riots.",
+            "category": "Road to War",
+            "tier": "must-know",
+            "typingSnippet": "The Fugitive Slave Law of 1850 forced people in free states to help return enslaved people who had escaped. Anyone who refused could be fined or jailed. The law shocked Northerners who had ignored slavery before. Now slavery was happening in their own towns. Many Northerners who had not cared about slavery suddenly turned against it.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Fugitive_Slave_Act_of_1850",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Fugitive_Slave_Act_of_1850"
+        },
+        {
+            "term": "Uncle Tom's Cabin",
+            "definition": "An 1852 anti slavery novel by Harriet Beecher Stowe that became one of the bestselling books of the 1800s. It told the story of an enslaved man named Tom and the cruelty he faced. Many Northerners cried over it. Many Southerners banned it.",
+            "simpleExplanation": "Most Northerners had never seen slavery up close. Then Harriet Beecher Stowe wrote a novel that took readers inside it. People sobbed over the characters. The book sold more than 300,000 copies in its first year, an enormous number back then. It changed how regular Northerners felt about slavery in a way that no political speech ever had.",
+            "example": "When Harriet Beecher Stowe later met President Lincoln, he is said to have joked, \"So you're the little woman who wrote the book that made this great war.\"",
+            "category": "Road to War",
+            "tier": "must-know",
+            "typingSnippet": "Uncle Tom's Cabin was an 1852 anti slavery novel by Harriet Beecher Stowe. It told the story of an enslaved man named Tom and the cruelty he faced. The book sold hundreds of thousands of copies. Many Northerners cried while reading it and turned against slavery for the first time. Many Southerners called the book a lie and banned it from their states.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Uncle_Tom%27s_Cabin",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Uncle_Tom%27s_Cabin"
+        },
+        {
+            "term": "Bleeding Kansas",
+            "definition": "A period of violent fighting in the Kansas Territory between 1854 and 1859 between settlers who wanted Kansas to be a free state and those who wanted it to be a slave state. About fifty people were killed. It showed that the slavery question would not be settled by debate alone.",
+            "simpleExplanation": "When Congress let Kansas settlers vote on slavery, both sides rushed in to swing the result. Pro slavery Missourians crossed the border to vote illegally. Anti slavery families came in from the North. The two sides started attacking each other with guns, axes, and torches. People started calling the territory \"Bleeding Kansas.\" It was a small civil war before the big one.",
+            "example": "In Bleeding Kansas, an abolitionist named John Brown and his sons attacked and killed five pro slavery settlers, showing how brutal the fight had become.",
+            "category": "Road to War",
+            "tier": "must-know",
+            "typingSnippet": "Bleeding Kansas was a period of violent fighting in the Kansas Territory from 1854 to 1859. Pro slavery and anti slavery settlers attacked each other with guns and torches. About fifty people died. The fighting started after Congress let Kansas voters decide whether the territory would be free or slave. It showed that compromise was no longer working.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Bleeding_Kansas",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Bleeding_Kansas"
+        },
+        {
+            "term": "Dred Scott decision",
+            "definition": "An 1857 Supreme Court ruling that said Black people, free or enslaved, were not citizens and had no rights under the Constitution. It also said Congress could not ban slavery in the western territories. The decision shocked the North and made many Americans believe slavery would soon spread everywhere.",
+            "simpleExplanation": "Dred Scott was an enslaved man who sued for his freedom because his owner had taken him to live in free territory. The Supreme Court ruled against him in the worst possible way. The court said Black Americans had no rights at all and that Congress could not stop slavery from spreading. To Northerners, it felt like the South had taken over the federal government itself.",
+            "example": "After the Dred Scott decision, even moderate Northerners worried that the next ruling could legalize slavery in their own free states.",
+            "category": "Road to War",
+            "tier": "must-know",
+            "typingSnippet": "The Dred Scott decision of 1857 was a Supreme Court ruling that said Black Americans were not citizens and had no rights. It also said Congress could not ban slavery in the western territories. The decision was a huge victory for the South and a disaster for the North. Many Northerners now believed slavery would spread across the whole country if they did not stop it.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Dred_Scott_v._Sandford",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Dred_Scott_v._Sandford"
+        },
+        {
+            "term": "Lincoln Douglas Debates",
+            "definition": "A series of seven public debates in 1858 between Abraham Lincoln and Senator Stephen Douglas during their race for an Illinois Senate seat. Slavery was the main topic. Lincoln lost the election but became famous nationwide. Two years later, that fame helped him win the presidency.",
+            "simpleExplanation": "Two men running for one Senate seat in Illinois agreed to debate each other in front of huge crowds, and the country paid attention. Stephen Douglas argued that each state should decide on slavery for itself. Abraham Lincoln argued that slavery was a moral wrong that had to be stopped from spreading. Lincoln lost the Senate race but won something bigger: a national reputation.",
+            "example": "Lincoln lost the 1858 Senate race to Douglas, but the debates made him so well known that he won the Republican nomination for president just two years later.",
+            "category": "Road to War",
+            "tier": "must-know",
+            "typingSnippet": "The Lincoln Douglas Debates were seven public debates in 1858 between Abraham Lincoln and Senator Stephen Douglas of Illinois. They argued mostly about slavery. Lincoln said slavery was a moral wrong and should not spread. Douglas said each state should choose for itself. Lincoln lost the Senate election but became famous, which helped him win the presidency in 1860.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Lincoln%E2%80%93Douglas_debates"
+        },
+        {
+            "term": "John Brown's Raid",
+            "definition": "An 1859 attempt by abolitionist John Brown to start a slave uprising by attacking the federal weapons storehouse at Harpers Ferry, Virginia. Brown was captured by US Marines and hanged. The raid terrified the South into believing the North wanted war, even though most Northerners had not supported him.",
+            "simpleExplanation": "John Brown was a white abolitionist who believed only violence could end slavery. He led 21 men in an attack on a federal armory in Virginia, planning to hand out the weapons to enslaved people and start a massive uprising. The plan failed quickly. Brown was hanged. But Southern leaders saw the raid as proof that the whole North wanted to come kill them in their beds.",
+            "example": "After John Brown's Raid, Southern states began organizing their militias and stockpiling weapons, even before the 1860 election.",
+            "category": "Road to War",
+            "tier": "must-know",
+            "typingSnippet": "John Brown's Raid happened in 1859 when abolitionist John Brown attacked the federal armory at Harpers Ferry, Virginia. He hoped to start a massive slave uprising. The raid failed in two days. Brown was captured and hanged. But the attack convinced many Southerners that the whole North wanted to attack them. The South began preparing for a war they now thought was coming.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/John_Brown%27s_raid_on_Harpers_Ferry",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/John_Brown%27s_raid_on_Harpers_Ferry"
+        },
+        {
+            "term": "Election of 1860",
+            "definition": "The presidential election won by Abraham Lincoln, an anti slavery Republican from Illinois, without receiving a single electoral vote from the South. Southern states saw his victory as proof that the federal government was now against them, and they began leaving the Union within weeks.",
+            "simpleExplanation": "Lincoln did not call himself an abolitionist, but he had said clearly that slavery was wrong and should not spread. Southerners did not trust him. He won the presidency without being on the ballot in most of the South. Within six weeks of his election, South Carolina announced it was leaving the United States. Six more states followed before he was even sworn in.",
+            "example": "Lincoln won the Election of 1860 with less than forty percent of the popular vote, but he won enough free states to take the Electoral College, and that was enough to terrify the South.",
+            "category": "Road to War",
+            "tier": "must-know",
+            "typingSnippet": "The Election of 1860 was won by Abraham Lincoln, an anti slavery Republican. He did not appear on the ballot in most Southern states, and he won with less than forty percent of the national popular vote. But he won enough free states to take the Electoral College. Within weeks, South Carolina announced it was leaving the Union. The country was breaking apart.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/1860_United_States_presidential_election",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/1860_United_States_presidential_election"
+        },
+        {
+            "term": "secession",
+            "definition": "The formal withdrawal of a state from the United States. Beginning with South Carolina in December 1860, eleven Southern states seceded after Lincoln's election and formed the Confederate States of America. The federal government refused to accept secession as legal, and the disagreement led directly to war.",
+            "simpleExplanation": "Secession means leaving. After Lincoln won the 1860 election, Southern states announced one by one that they were no longer part of the United States. They formed their own country called the Confederate States of America. Lincoln said no state had the right to leave the Union. That disagreement, more than anything else, is why a war began.",
+            "example": "South Carolina was the first to secede in December 1860, followed by Mississippi, Florida, Alabama, Georgia, Louisiana, and Texas before Lincoln was even inaugurated.",
+            "category": "Road to War",
+            "tier": "must-know",
+            "typingSnippet": "Secession is the formal act of leaving a country. After Lincoln won the 1860 election, eleven Southern states seceded from the United States and formed the Confederate States of America. Lincoln said secession was illegal. The South said it was a state's right to leave. That disagreement could not be settled by talking. The Civil War began a few months later.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Secession_in_the_United_States",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Secession_in_the_United_States"
+        },
+        {
+            "term": "Kansas Nebraska Act",
+            "definition": "An 1854 law that created the Kansas and Nebraska territories and let the settlers there vote on whether to allow slavery. It threw out the slavery line drawn by the Missouri Compromise, which had stood for 34 years. It led directly to Bleeding Kansas.",
+            "category": "Road to War",
+            "tier": "encounter",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Kansas%E2%80%93Nebraska_Act",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Kansas-Nebraska_Act"
+        },
+        {
+            "term": "popular sovereignty",
+            "definition": "The idea that the people living in a territory should vote on whether to allow slavery there. Senator Stephen Douglas pushed this idea, hoping it would settle the slavery question. Instead, it caused violence in places like Bleeding Kansas.",
+            "category": "Road to War",
+            "tier": "encounter",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Popular_sovereignty_in_the_United_States",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Popular_sovereignty"
+        },
+        {
+            "term": "Stephen Douglas",
+            "definition": "A powerful Democratic senator from Illinois who pushed popular sovereignty as a way to settle the slavery question. He debated Abraham Lincoln in 1858, won that Senate race, then lost to Lincoln in the 1860 presidential election.",
+            "category": "Road to War",
+            "tier": "encounter",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Stephen_A._Douglas",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Stephen_A._Douglas"
         }
     ],
     "practiceQuestions": [
@@ -286,6 +430,126 @@
             "correct": 2,
             "explanation": "About sixty white people were killed in the rebellion before it was crushed. Slaveholders were terrified. Instead of rethinking slavery, Southern states tightened their grip with cruel new laws that made the underlying problem worse.",
             "topic": "Sectionalism"
+        },
+        {
+            "question": "What was the main goal of the Missouri Compromise of 1820?",
+            "options": [
+                "To end slavery in the entire country within ten years",
+                "To balance free and slave states by admitting Maine as free and Missouri as slave, and to ban slavery in the rest of the Louisiana Purchase north of a set line",
+                "To force Missouri to free all of its enslaved people before joining the Union",
+                "To allow each new state to choose for itself whether to allow slavery"
+            ],
+            "correct": 1,
+            "explanation": "The compromise kept the balance of free and slave states equal in the Senate and drew a line across the Louisiana Purchase saying no slavery north of it. Thomas Jefferson worried it was \"a fire bell in the night,\" warning of disasters to come.",
+            "topic": "Road to War"
+        },
+        {
+            "question": "Why did the Wilmot Proviso, even though it failed to pass, matter so much?",
+            "options": [
+                "It freed all enslaved people in the United States",
+                "It started the Mexican American War",
+                "It forced Americans to argue openly about whether slavery should expand into new western territory",
+                "It made California a slave state"
+            ],
+            "correct": 2,
+            "explanation": "The proviso passed the House but failed in the Senate. Even though it never became law, the fight over it pushed Southern leaders to start talking openly about leaving the Union if Northerners kept attacking slavery.",
+            "topic": "Road to War"
+        },
+        {
+            "question": "Which part of the Compromise of 1850 angered Northerners the most?",
+            "options": [
+                "California being admitted as a free state",
+                "The ban on the slave trade in Washington DC",
+                "The much harsher Fugitive Slave Law that required Northerners to help capture escaped enslaved people",
+                "The end of slavery in the United States"
+            ],
+            "correct": 2,
+            "explanation": "The new Fugitive Slave Law made slavery a Northern problem too. Slave catchers came into Northern towns, and ordinary citizens could be punished for refusing to help. Many Northerners who had ignored slavery turned against it because of this law.",
+            "topic": "Road to War"
+        },
+        {
+            "question": "How did Uncle Tom's Cabin change Northern attitudes toward slavery?",
+            "options": [
+                "It made readers feel sorry for slaveholders and want to protect their rights",
+                "It put readers inside the experience of enslaved people and turned hundreds of thousands of Northerners against slavery",
+                "It convinced most Northerners that slavery should be allowed everywhere",
+                "It had no effect on public opinion at all"
+            ],
+            "correct": 1,
+            "explanation": "Harriet Beecher Stowe's 1852 novel sold over 300,000 copies in its first year, an enormous number for the time. By telling the story of enslaved people as people, it changed minds in a way no political speech ever had.",
+            "topic": "Road to War"
+        },
+        {
+            "question": "Why was the Kansas Territory called \"Bleeding Kansas\" in the late 1850s?",
+            "options": [
+                "Because of a long drought that turned the soil red",
+                "Because pro slavery and anti slavery settlers fought each other in violent attacks that killed about fifty people",
+                "Because Native Americans there were resisting being moved off their land",
+                "Because Confederate soldiers had invaded the territory"
+            ],
+            "correct": 1,
+            "explanation": "Both sides rushed settlers in to control the vote on whether Kansas would be slave or free. The fights turned into raids, murders, and burned towns. Bleeding Kansas was a small civil war before the big one and showed compromise was no longer working.",
+            "topic": "Road to War"
+        },
+        {
+            "question": "Why did the Dred Scott decision alarm so many Northerners?",
+            "options": [
+                "It freed Dred Scott but said all other enslaved people were still enslaved",
+                "It said Black Americans were not citizens and Congress had no power to ban slavery in the territories, raising fears that slavery could spread anywhere",
+                "It outlawed slavery in the South",
+                "It gave free states the right to ignore the Fugitive Slave Law"
+            ],
+            "correct": 1,
+            "explanation": "The 1857 ruling shocked the North. If Congress could not ban slavery in the western territories, many believed slavery would soon spread into the free states themselves. To Northerners, the South seemed to control even the Supreme Court.",
+            "topic": "Road to War"
+        },
+        {
+            "question": "What did Abraham Lincoln gain from the 1858 Lincoln Douglas Debates, even though he lost the Senate election?",
+            "options": [
+                "A seat in the United States Supreme Court",
+                "Membership in the Confederate government",
+                "National fame, which helped him win the presidency in 1860",
+                "Control of the federal army"
+            ],
+            "correct": 2,
+            "explanation": "Lincoln lost the Senate race to Stephen Douglas, but the debates were covered in newspapers across the country. He went from a little known Illinois lawyer to a national figure, and just two years later he won the presidency.",
+            "topic": "Road to War"
+        },
+        {
+            "question": "Why did John Brown's 1859 raid at Harpers Ferry frighten Southerners so much, even though the raid itself failed?",
+            "options": [
+                "Brown was a Southerner who turned against his own region",
+                "Brown's plan to start a slave uprising made Southerners believe the entire North wanted to attack them, and they began preparing for war",
+                "The raid actually freed thousands of enslaved people across the South",
+                "The raid forced Lincoln to apologize to the South"
+            ],
+            "correct": 1,
+            "explanation": "Brown was hanged and most Northerners had not supported him. But Southern leaders saw the raid as proof that the whole North was coming for them. Southern states began organizing militias and stockpiling weapons even before the 1860 election.",
+            "topic": "Road to War"
+        },
+        {
+            "question": "What event triggered Southern states to begin seceding from the United States?",
+            "options": [
+                "The Battle of Fort Sumter",
+                "The publication of Uncle Tom's Cabin",
+                "The election of Abraham Lincoln as president in 1860",
+                "The Dred Scott decision"
+            ],
+            "correct": 2,
+            "explanation": "Lincoln's victory was the breaking point. He won without appearing on most Southern ballots and had said clearly that slavery should not spread. Within six weeks of the election, South Carolina announced it was leaving the Union, and six more states followed before Lincoln was even inaugurated.",
+            "topic": "Road to War"
+        },
+        {
+            "question": "What did secession mean, and what did it lead to?",
+            "options": [
+                "It meant the Northern states left the United States, leading to peace",
+                "It meant Southern states formally withdrew from the Union and formed the Confederate States of America, leading directly to civil war",
+                "It meant the federal government dissolved itself peacefully",
+                "It meant California became its own country"
+            ],
+            "correct": 1,
+            "explanation": "Eleven Southern states seceded after Lincoln's election. They formed the Confederate States of America. Lincoln said no state had the right to leave the Union. That disagreement could not be settled by talking, and a few months later the Civil War began.",
+            "topic": "Road to War"
         }
     ],
     "fillInBlanks": []
