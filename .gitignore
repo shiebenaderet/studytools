@@ -1,2 +1,6 @@
 .DS_Store
 .superpowers/
+
+# Per-unit source materials — local-only working files (lesson plans, scans,
+# drafts) that should never reach the public site
+study-tools/units/*/_source-materials/
