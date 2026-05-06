@@ -8,6 +8,13 @@
             "activityCount": 18
         },
         {
+            "id": "civil-war",
+            "title": "The Civil War Study Tool",
+            "subtitle": "Get ready to ace your test! Learn vocabulary, practice questions, and track your progress.",
+            "theme": { "primary": "#2D4A6B" },
+            "activityCount": 22
+        },
+        {
             "id": "early-republic",
             "title": "Early Republic Study Tool",
             "subtitle": "Get ready to ace your test! Learn vocabulary, practice questions, and track your progress.",

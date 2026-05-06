@@ -152,6 +152,91 @@
             "sourceNote": "Adapted from American Yawp Ch. 14 and Lincoln's First Inaugural Address."
           }
         ]
+      },
+      {
+        "id": "segment-3",
+        "number": 3,
+        "title": "The War Itself",
+        "subtitle": "How four years of fighting transformed a country",
+        "icon": "fas fa-flag",
+        "sections": [
+          {
+            "id": "s3-01-the-war-begins",
+            "heading": "The War Begins",
+            "vocabTerms": [
+              "Fort Sumter",
+              "Abraham Lincoln",
+              "Jefferson Davis",
+              "Robert E. Lee",
+              "Anaconda Plan"
+            ],
+            "content": {
+              "simplified": null,
+              "standard": "<p>On April 12, 1861, Confederate cannons in Charleston Harbor opened fire on <strong>Fort Sumter</strong>, a small federal fort held by a tiny Union garrison. After 34 hours of bombardment, the Union surrendered. No soldier was killed in combat. But the Civil War had begun, and within weeks the country was at war with itself.</p><p>Both sides expected a short war. Both sides were wrong. Most Americans on both sides believed one big battle would settle everything. Instead, the war would last four years and kill more Americans than any war before or since.</p><p>The two presidents could not have been more different in personality. <strong>Abraham Lincoln</strong>, the new Republican president, had grown up poor in Kentucky and Indiana, taught himself law, and won the 1860 election without a single Southern electoral vote. He was a careful thinker and a great speaker, but he had little military experience. <strong>Jefferson Davis</strong>, the new Confederate president, had served as a US senator and Secretary of War. He had military experience but little patience for politics, and he often clashed with Confederate state governors who refused to share resources.</p><p>The two sides had very different advantages. The North had about 22 million people, while the South had only about 9 million, including 3.5 million enslaved people. The North also had most of the country's factories, railroads, and ships. The South had less of all of that, but it had something the North did not: most of the best generals in the prewar US Army had been Southerners. The most famous of them, <strong>Robert E. Lee</strong>, was offered command of the Union army by Lincoln himself. Lee turned it down and went south to defend Virginia.</p><p>The Union's overall strategy was called the <strong>Anaconda Plan</strong>, named after the snake that crushes its prey. It called for blockading Southern ports to cut off trade, capturing the Mississippi River to split the Confederacy in two, and slowly squeezing the South into surrender. The plan was mocked at first because it sounded too slow. In the end, it was almost exactly what won the war.</p>",
+              "advanced": null
+            },
+            "keyIdea": "The Civil War began with the Confederate attack on Fort Sumter in April 1861. Both sides expected a short war. The Union had more people, factories, and railroads, while the Confederacy had more skilled generals at the start, including Robert E. Lee.",
+            "checkIn": {
+              "type": "stop-and-think",
+              "prompt": "Robert E. Lee was offered command of the Union army by Lincoln but went with the Confederacy because he could not raise his sword against Virginia. What does that choice tell you about how Americans of his time thought about loyalty to a state versus loyalty to the country?",
+              "hint": "Think about whether \"American\" meant the same thing to people in 1861 as it does today."
+            },
+            "sourceNote": "Adapted from American Yawp Ch. 14 and the National Park Service Civil War resources."
+          },
+          {
+            "id": "s3-02-turning-points",
+            "heading": "Turning Points",
+            "vocabTerms": [
+              "Battle of Antietam",
+              "Emancipation Proclamation",
+              "Siege of Vicksburg",
+              "Battle of Gettysburg",
+              "Gettysburg Address",
+              "54th Massachusetts",
+              "USCT",
+              "Ulysses S. Grant",
+              "William T. Sherman",
+              "total war",
+              "Stonewall Jackson",
+              "Clara Barton",
+              "Minie ball",
+              "Copperheads"
+            ],
+            "content": {
+              "simplified": null,
+              "standard": "<p>The first year and a half of the war went badly for the Union. Confederate generals like Robert E. Lee and <strong>Stonewall Jackson</strong> outmaneuvered Union commanders again and again. New weapons made the fighting brutal. The <strong>Minie ball</strong>, a new type of bullet that expanded when fired, could hit a target accurately from 500 yards away. Old fashioned charges across open ground became suicidal. Volunteer nurses like <strong>Clara Barton</strong> worked on battlefields under fire to save the wounded. Even so, casualties piled up faster than anyone had imagined.</p><p>The first turning point came in September 1862. Lee invaded the North, hoping a big victory on Northern soil would convince Britain and France to support the South. Union forces blocked him at the <strong>Battle of Antietam</strong> in Maryland. The fighting on September 17, 1862 killed or wounded over 22,000 men in twelve hours, the bloodiest single day in American history. The battle ended in a draw, but Lee retreated. Lincoln seized the moment.</p><p>Five days after Antietam, Lincoln issued the <strong>Emancipation Proclamation</strong>. It declared that on January 1, 1863, all enslaved people in Confederate states would be free. The proclamation could not actually free anyone behind Confederate lines, but it changed the war forever. Now any Union advance was also a freedom march. And it kept Britain and France from supporting the South, since neither wanted to be seen defending slavery. The proclamation also opened the door for Black men to enlist in the Union Army. Soon they would form what was called the <strong>USCT</strong>, the United States Colored Troops. Nearly 180,000 Black men served before the war was over.</p><p>The second turning point came in July 1863, in two places at once. In Pennsylvania, Lee's second invasion of the North met disaster at the <strong>Battle of Gettysburg</strong>. Three days of fighting left over 50,000 casualties, the most of any battle ever fought on American soil. On the third day, Lee ordered 12,000 men to charge across open ground at the Union center. They were cut to pieces. Lee retreated, and the Confederacy never invaded the North again. Four months later, Lincoln went to Pennsylvania to dedicate the cemetery for the Union dead and gave the <strong>Gettysburg Address</strong>, a 272 word speech that redefined the war as a fight for human equality.</p><p>The very next day, July 4, 1863, the Confederate stronghold at Vicksburg, Mississippi, surrendered after a 47 day <strong>Siege of Vicksburg</strong> by Union General <strong>Ulysses S. Grant</strong>. The Union now controlled the entire Mississippi River. The Confederacy was split in two. Combined with Gettysburg, July 1863 was the moment the Confederacy lost its hope of winning the war.</p><p>That same month, the <strong>54th Massachusetts</strong>, one of the first official Black regiments, led an assault on Fort Wagner in South Carolina. About half its soldiers were killed or wounded. The attack failed, but the regiment's bravery while the country watched made it impossible to deny that Black men would fight for their own freedom.</p><p>By 1864, Lincoln had finally found his fighter. He put Grant in command of all Union armies. Grant brought General <strong>William T. Sherman</strong> to lead the campaign in the South. Sherman captured Atlanta in September 1864, helping Lincoln win re-election against the <strong>Copperheads</strong>, Northern Democrats who wanted an immediate peace. Then Sherman launched his famous March to the Sea, pioneering the strategy of <strong>total war</strong>, which attacks not just enemy soldiers but the resources and infrastructure that armies need. His army destroyed an estimated $100 million in property across Georgia. The South was running out of soldiers, food, and time.</p>",
+              "advanced": null
+            },
+            "keyIdea": "Antietam, Gettysburg, and Vicksburg were turning points that broke the Confederacy's chances of winning. The Emancipation Proclamation transformed the war into a fight to end slavery and opened the door for nearly 180,000 Black soldiers to serve. By 1864, Grant and Sherman were closing in on the South.",
+            "checkIn": {
+              "type": "stop-and-think",
+              "prompt": "Sherman believed war should be ugly enough that people would never want to fight one again. Total war attacks not just soldiers but the resources and infrastructure that armies need. Do you think that strategy was justified to end the war faster, or did it cross a line? Why?",
+              "hint": "Think about who is harmed in a total war strategy and what the alternatives might have been."
+            },
+            "sourceNote": "Adapted from American Yawp Ch. 14, the National Park Service Civil War resources, and the Civil War Battle Simulation primary source archive."
+          },
+          {
+            "id": "s3-03-the-end-and-after",
+            "heading": "The End, and What Came After",
+            "vocabTerms": [
+              "Appomattox",
+              "13th Amendment",
+              "Reconstruction"
+            ],
+            "content": {
+              "simplified": null,
+              "standard": "<p>By the spring of 1865, Lee's army was starving and trapped. Grant had pursued him relentlessly through Virginia all winter. On April 9, 1865, Lee met Grant in the parlor of a small farmhouse at <strong>Appomattox</strong> Court House to surrender. Lee said, \"There is nothing left for me to do but to go and see General Grant, and I would rather die a thousand deaths.\"</p><p>Grant could have humiliated Lee. He did not. He offered generous terms. Confederate soldiers could go home with their horses. Officers could keep their swords. Grant even shared his rations with the hungry Confederate troops. When Union soldiers started celebrating with cannon fire, Grant ordered them to stop. \"The war is over,\" he said. \"The rebels are our countrymen again.\" Grant's generosity at Appomattox set the tone for what came next, or at least it was supposed to.</p><p>Five days after the surrender, on April 14, 1865, John Wilkes Booth shot Lincoln during a play at Ford's Theatre in Washington. Lincoln died the next morning. The country, which had just begun to relax after four years of war, was thrown back into shock. Lincoln's death changed everything about what came next. Vice President Andrew Johnson took over. He had grown up poor in Tennessee and disliked the Southern aristocracy, but he had little sympathy for Black rights. The plans Lincoln had been making for a generous peace, with strong protections for formerly enslaved people, were now in the hands of someone far less committed to those protections.</p><p>In December 1865, eight months after Lincoln's death, the country took the most important step of all: the states ratified the <strong>13th Amendment</strong> to the Constitution, abolishing slavery throughout the entire United States. The Emancipation Proclamation had been a wartime order that only freed enslaved people in Confederate states. The 13th Amendment was permanent law. About four million people who had been enslaved became legally free, everywhere in the country, for good. It was the most fundamental change in American law since the Constitution itself.</p><p>The years that followed were called <strong>Reconstruction</strong>. Reconstruction lasted from 1865 to 1877. Its goal was to rebuild the South after the war and to make formerly enslaved people full citizens of the United States. There were real successes: the 14th and 15th Amendments granted Black Americans citizenship and voting rights. Black congressmen were elected from Southern states for the first time. Schools were built for Black children. But Reconstruction also faced violent resistance from white Southerners who refused to accept the new order. By 1877, federal protection for Black Southerners was withdrawn, and the gains of Reconstruction were rolled back over the decades that followed.</p><p>The Civil War answered some questions and left others unanswered. It answered, finally, whether one part of the United States could leave when it lost an election. It could not. It answered whether slavery would survive in America. It would not. But the deeper question of what freedom would mean for four million formerly enslaved people, and what the country owed them as fellow citizens, was a question the war did not finish answering. That question is in some ways still being answered today.</p>",
+              "advanced": null
+            },
+            "keyIdea": "Lee surrendered to Grant at Appomattox in April 1865, ending the war. Five days later, Lincoln was assassinated. The 13th Amendment ended slavery permanently across the country. Reconstruction tried to rebuild the South and integrate formerly enslaved people as citizens, with both real successes and major failures.",
+            "checkIn": {
+              "type": "stop-and-think",
+              "prompt": "The Civil War answered some big questions, like whether states could leave the Union and whether slavery would survive. But it left other questions unanswered, like what freedom would mean for four million formerly enslaved people. Why do you think wars sometimes settle questions and sometimes only open new ones?",
+              "hint": "Think about the difference between making something illegal and changing how people actually treat each other."
+            },
+            "sourceNote": "Adapted from American Yawp Ch. 14, the National Park Service Civil War resources, and the Civil War Battle Simulation."
+          }
+        ]
       }
     ]
   }
