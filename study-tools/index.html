@@ -337,7 +337,9 @@
                 const response = await fetch('units/units.json');
                 if (!response.ok) throw new Error('Failed to load units');
                 const data = await response.json();
-                const units = data.units || [];
+                // Hide draft units from the public landing page. They remain
+                // reachable via direct URL (?unit=<id>) for testing.
+                const units = (data.units || []).filter(u => !u.draft);
 
                 container.textContent = '';
 

@@ -12,7 +12,8 @@
             "title": "The Civil War Study Tool",
             "subtitle": "Get ready to ace your test! Learn vocabulary, practice questions, and track your progress.",
             "theme": { "primary": "#2D4A6B" },
-            "activityCount": 22
+            "activityCount": 22,
+            "draft": true
         },
         {
             "id": "early-republic",
