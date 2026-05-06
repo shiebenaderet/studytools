@@ -25,26 +25,29 @@ StudyEngine.registerActivity({
         canada:  '#2d8659'    // green — terminus, freedom
     },
 
-    // Manual label offsets to fix clusters along the Great Lakes — bumped for
-    // 14px labels (more spacing needed than at 11px). Default for unlisted
-    // cities is { x: 0, y: -16 } (above the dot).
+    // Manual label offsets to fix clusters — tuned for 14px labels.
+    // Default for unlisted cities is { x: 0, y: -18 } (above the dot).
     _labelOffsets: {
         // Detroit / Chatham almost overlap horizontally — stack vertically
-        'chatham':    { x: 0, y: 22 },
+        'chatham':    { x: 0, y: 24 },
         'detroit':    { x: 0, y: -18 },
-        // Cleveland / Oberlin cluster
-        'cleveland':  { x: 32, y: -2 },
-        'oberlin':    { x: -28, y: 2 },
-        // Rochester / Syracuse / Buffalo / Albany strip across NY
-        'rochester':  { x: 0, y: -18 },
-        'syracuse':   { x: 0, y: 24 },
-        'buffalo':    { x: 0, y: -18 },
-        'albany':     { x: 0, y: -18 },
-        // Baltimore / Dover / DC near coast
-        'baltimore':  { x: -28, y: -2 },
-        'dover':      { x: 28, y: 24 },
-        'washington': { x: 0, y: 24 },
+        // Cleveland / Oberlin cluster — push labels apart horizontally
+        'cleveland':  { x: 38, y: 4 },
+        'oberlin':    { x: -32, y: 4 },
+        // Rochester / Syracuse / Buffalo / Albany strip across NY:
+        // alternate above/below so labels don't crash into each other
+        'buffalo':    { x: 0, y: -18 },   // above
+        'rochester':  { x: 0, y: 24 },    // below
+        'syracuse':   { x: 0, y: -18 },   // above
+        'albany':     { x: 0, y: 24 },    // below
         'toronto':    { x: 0, y: -18 },
+        // Baltimore / Dover / DC coastal cluster
+        'baltimore':  { x: -32, y: 4 },
+        'washington': { x: 0, y: 26 },
+        'dover':      { x: 28, y: 26 },
+        // Cincinnati / Ripley overlap
+        'cincinnati': { x: 0, y: -18 },   // above
+        'ripley':     { x: 0, y: 24 },    // below
     },
 
     render(container, config) {
@@ -162,12 +165,12 @@ StudyEngine.registerActivity({
         marker.setAttribute('viewBox', '0 0 10 10');
         marker.setAttribute('refX', '8');
         marker.setAttribute('refY', '5');
-        marker.setAttribute('markerWidth', '6');
-        marker.setAttribute('markerHeight', '6');
+        marker.setAttribute('markerWidth', '7');
+        marker.setAttribute('markerHeight', '7');
         marker.setAttribute('orient', 'auto-start-reverse');
         var arrowPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         arrowPath.setAttribute('d', 'M0,0 L10,5 L0,10 Z');
-        arrowPath.setAttribute('fill', '#3a1206');
+        arrowPath.setAttribute('fill', '#2a0a04');
         marker.appendChild(arrowPath);
         defs.appendChild(marker);
         svg.appendChild(defs);
@@ -199,10 +202,10 @@ StudyEngine.registerActivity({
             var flow = document.createElementNS('http://www.w3.org/2000/svg', 'path');
             flow.setAttribute('d', flows[f].d);
             flow.setAttribute('fill', 'none');
-            flow.setAttribute('stroke', '#3a1206');
-            flow.setAttribute('stroke-width', '2.8');
+            flow.setAttribute('stroke', '#2a0a04');
+            flow.setAttribute('stroke-width', '5');
             flow.setAttribute('stroke-linecap', 'round');
-            flow.setAttribute('opacity', '0.85');
+            flow.setAttribute('opacity', '0.95');
             flow.setAttribute('marker-end', 'url(#ugrr-arrowhead)');
             flow.setAttribute('pointer-events', 'none');
             flowGroup.appendChild(flow);
