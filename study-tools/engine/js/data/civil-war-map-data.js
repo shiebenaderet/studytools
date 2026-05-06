@@ -34,6 +34,7 @@
             side: 'battle',
             year: 1861,
             x: 588.5, y: 357.7,
+            labelOffset: { x: -36, y: 4 },
             description: 'Site of the First Battle of Bull Run in July 1861. The Confederate victory shattered Northern hopes for a quick war.'
         },
         {
@@ -43,16 +44,8 @@
             side: 'battle',
             year: 1862,
             x: 261.7, y: 492.2,
+            labelOffset: { x: 0, y: 22 },
             description: 'April 1862 battle in Tennessee. Over 23,000 casualties in two days shocked the nation and ended dreams of an easy war.'
-        },
-        {
-            id: 'fort-henry',
-            name: 'Fort Henry',
-            type: 'battle',
-            side: 'battle',
-            year: 1862,
-            x: 271.8, y: 442.2,
-            description: 'February 1862. Grant’s capture of this Tennessee River fort opened the Confederate heartland to invasion.'
         },
         {
             id: 'fort-donelson',
@@ -61,7 +54,7 @@
             side: 'battle',
             year: 1862,
             x: 276.1, y: 442.7,
-            labelOffset: { x: 0, y: 18 },
+            labelOffset: { x: 0, y: -14 },
             description: 'February 1862. Grant’s "unconditional surrender" demand here made him a Northern hero and broke the Confederate defensive line.'
         },
         {
@@ -71,7 +64,7 @@
             side: 'battle',
             year: 1862,
             x: 622.6, y: 424.6,
-            labelLeader: { x: 788, y: 280 },
+            labelLeader: { x: 760, y: 444 },
             description: 'March 1862 naval battle between the ironclads USS Monitor and CSS Virginia. The age of wooden warships ended that day.'
         },
         {
@@ -81,7 +74,7 @@
             side: 'battle',
             year: 1862,
             x: 580.3, y: 330.6,
-            labelLeader: { x: 558, y: 175 },
+            labelOffset: { x: -42, y: -8 },
             description: 'September 17, 1862, also called Antietam. The bloodiest single day in American history. Lincoln issued the Emancipation Proclamation after the Union victory.'
         },
         {
@@ -100,6 +93,7 @@
             side: 'battle',
             year: 1863,
             x: 595.8, y: 316.2,
+            labelOffset: { x: 0, y: -14 },
             description: 'July 1–3, 1863. Lee’s second invasion of the North ended in disaster. Over 50,000 casualties. The turning point of the war.'
         },
         {
@@ -110,16 +104,6 @@
             year: 1864,
             x: 380.6, y: 542.4,
             description: 'September 1864. Sherman’s capture of Atlanta secured Lincoln’s re-election and split the Deep South.'
-        },
-        {
-            id: 'petersburg',
-            name: 'Petersburg',
-            type: 'battle',
-            side: 'battle',
-            year: 1864,
-            x: 590.7, y: 415.2,
-            labelLeader: { x: 715, y: 318 },
-            description: 'June 1864 – March 1865. The 9-month siege of Petersburg cut off Richmond’s supplies and finally broke Lee’s army.'
         },
         {
             id: 'bentonville',
@@ -137,6 +121,7 @@
             side: 'battle',
             year: 1865,
             x: 548.7, y: 409.7,
+            labelOffset: { x: -8, y: -14 },
             description: 'April 9, 1865. Lee surrendered to Grant in the parlor of a small Virginia farmhouse, effectively ending the Civil War.'
         },
 
@@ -148,7 +133,7 @@
             side: 'union',
             year: null,
             x: 601.7, y: 351.7,
-            labelLeader: { x: 783, y: 195 },
+            labelLeader: { x: 760, y: 365 },
             description: 'Capital of the United States. Lincoln directed the Union war effort from here. Site of his assassination at Ford’s Theatre in April 1865.'
         },
         {
@@ -158,7 +143,7 @@
             side: 'confederate',
             year: null,
             x: 589.7, y: 403.5,
-            labelLeader: { x: 788, y: 247 },
+            labelLeader: { x: 760, y: 405 },
             description: 'Capital of the Confederate States of America. Located only 100 miles from Washington D.C., it was the focus of much of the war’s fighting.'
         },
         {
