@@ -60,8 +60,8 @@ StudyEngine.registerActivity({
         // Drawn back to front: states → lakes → routes → cities.
         var base = window.CIVIL_WAR_MAP_BASE || { states: [], lakes: [], rivers: [] };
 
-        // Reuse the Civil War map's CSS classes for the base layer — same
-        // visual treatment, no duplicate CSS to maintain.
+        // Set fills as SVG attributes directly to bypass any CSS specificity
+        // issues. Same colors as the Civil War map's base layer.
         var statesGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
         statesGroup.setAttribute('class', 'cw-map-states');
         for (var s = 0; s < base.states.length; s++) {
@@ -69,6 +69,10 @@ StudyEngine.registerActivity({
             var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
             path.setAttribute('d', state.d);
             path.setAttribute('class', 'cw-map-state cw-map-state-' + state.admin);
+            path.setAttribute('fill', state.admin === 'CA' ? '#4a7058' : '#5d8c6c');
+            path.setAttribute('stroke', '#f4ead5');
+            path.setAttribute('stroke-width', '0.6');
+            path.setAttribute('stroke-linejoin', 'round');
             statesGroup.appendChild(path);
         }
         svg.appendChild(statesGroup);
@@ -80,6 +84,8 @@ StudyEngine.registerActivity({
             var lakePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
             lakePath.setAttribute('d', lake.d);
             lakePath.setAttribute('class', 'cw-map-lake');
+            lakePath.setAttribute('fill', '#b3d8e8');
+            lakePath.setAttribute('stroke', 'none');
             lakesGroup.appendChild(lakePath);
         }
         svg.appendChild(lakesGroup);
