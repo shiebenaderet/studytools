@@ -60,24 +60,26 @@ StudyEngine.registerActivity({
         // Drawn back to front: states → lakes → routes → cities.
         var base = window.CIVIL_WAR_MAP_BASE || { states: [], lakes: [], rivers: [] };
 
+        // Reuse the Civil War map's CSS classes for the base layer — same
+        // visual treatment, no duplicate CSS to maintain.
         var statesGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-        statesGroup.setAttribute('class', 'ugrr-map-states');
+        statesGroup.setAttribute('class', 'cw-map-states');
         for (var s = 0; s < base.states.length; s++) {
             var state = base.states[s];
             var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
             path.setAttribute('d', state.d);
-            path.setAttribute('class', 'ugrr-map-state ugrr-map-state-' + state.admin);
+            path.setAttribute('class', 'cw-map-state cw-map-state-' + state.admin);
             statesGroup.appendChild(path);
         }
         svg.appendChild(statesGroup);
 
         var lakesGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-        lakesGroup.setAttribute('class', 'ugrr-map-lakes');
+        lakesGroup.setAttribute('class', 'cw-map-lakes');
         for (var l = 0; l < base.lakes.length; l++) {
             var lake = base.lakes[l];
             var lakePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
             lakePath.setAttribute('d', lake.d);
-            lakePath.setAttribute('class', 'ugrr-map-lake');
+            lakePath.setAttribute('class', 'cw-map-lake');
             lakesGroup.appendChild(lakePath);
         }
         svg.appendChild(lakesGroup);

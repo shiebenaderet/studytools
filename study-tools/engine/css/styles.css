@@ -6171,19 +6171,9 @@ a.sift-detail-link:hover { opacity: 0.8; }
 .ugrr-map-svg-wrap { background: var(--bg-card); border: 1px solid var(--border-card); border-radius: 12px; overflow: hidden; }
 .ugrr-map-svg { display: block; width: 100%; height: auto; max-height: 70vh; background: #b3d8e8; }
 
-/* Base map (states + lakes), same palette as the Civil War map */
-.ugrr-map-states .ugrr-map-state {
-    fill: #5d8c6c;
-    stroke: #f4ead5;
-    stroke-width: 0.6;
-    stroke-linejoin: round;
-}
-.ugrr-map-states .ugrr-map-state-CA { fill: #4a7058; }
-.ugrr-map-lakes .ugrr-map-lake { fill: #b3d8e8; stroke: none; }
-
-/* Routes — historical escape paths drawn ON TOP of the land in dark red so
-   they stay visible against green. Slightly thicker than the Civil War map
-   rivers so they read as paths-of-people, not waterways. */
+/* Base map (states + lakes) reuses .cw-map-state and .cw-map-lake classes.
+   Routes drawn on top in dark red so they read as paths-of-people, not
+   waterways. */
 .ugrr-map-routes .ugrr-map-route {
     fill: none;
     stroke: #6e1f10;
