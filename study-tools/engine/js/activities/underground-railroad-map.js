@@ -16,6 +16,36 @@ StudyEngine.registerActivity({
     _container: null,
     _config: null,
     _selectedCity: null,
+    _showStateLabels: false,
+
+    // Visual color-coding by city role in the network
+    _categoryColors: {
+        slavery: '#8B2914',   // dark red — origin point, where people escape FROM
+        station: '#c97a2c',   // amber — middle of network, conductor stations
+        canada:  '#2d8659'    // green — terminus, freedom
+    },
+
+    // Manual label offsets to fix clusters along the Great Lakes
+    // Computed for the new tighter bbox (36-47.5°N, -97 to -67.3°W)
+    _labelOffsets: {
+        // Detroit / Chatham nearly overlap horizontally — push Chatham down
+        'chatham':    { x: 0, y: 18 },
+        'detroit':    { x: 0, y: -14 },
+        // Cleveland / Oberlin cluster
+        'cleveland':  { x: 28, y: -2 },
+        'oberlin':    { x: -22, y: 2 },
+        // Rochester / Syracuse / Buffalo / Albany strip across NY
+        'rochester':  { x: 0, y: -14 },
+        'syracuse':   { x: 0, y: 18 },
+        'buffalo':    { x: 0, y: -14 },
+        'albany':     { x: 0, y: -14 },
+        // Baltimore / Dover near coast — push Dover down
+        'baltimore':  { x: -22, y: -2 },
+        'dover':      { x: 22, y: 18 },
+        'washington': { x: 0, y: 18 },
+        'toronto':    { x: 0, y: -14 },
+        // Default for everything else: above the dot
+    },
 
     render(container, config) {
         this._container = container;
@@ -43,6 +73,17 @@ StudyEngine.registerActivity({
         subtitle.textContent = 'Routes from Harper\'s Atlas of American History (1920). Click any city to learn about the people who made it a station.';
         header.appendChild(subtitle);
 
+        // State names toggle button
+        var toggleBtn = document.createElement('button');
+        toggleBtn.className = 'ugrr-map-toggle-btn';
+        toggleBtn.textContent = this._showStateLabels ? 'Hide state names' : 'Show state names';
+        var self = this;
+        toggleBtn.addEventListener('click', function() {
+            self._showStateLabels = !self._showStateLabels;
+            self._renderMap();
+        });
+        header.appendChild(toggleBtn);
+
         c.appendChild(header);
 
         // Map SVG
@@ -56,19 +97,16 @@ StudyEngine.registerActivity({
         svg.setAttribute('class', 'ugrr-map-svg');
         svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
 
-        // Base map: states + lakes (rivers omitted; the routes are the visual story here)
-        // Drawn back to front: states → lakes → routes → cities.
-        var base = window.CIVIL_WAR_MAP_BASE || { states: [], lakes: [], rivers: [] };
+        // Base map (UGRR-specific tighter bbox so the network reads better).
+        // Drawn back to front: states → state labels → lakes → routes → cities.
+        var base = window.UGRR_MAP_BASE || { states: [], lakes: [], rivers: [] };
 
-        // Set fills as SVG attributes directly to bypass any CSS specificity
-        // issues. Same colors as the Civil War map's base layer.
         var statesGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-        statesGroup.setAttribute('class', 'cw-map-states');
+        statesGroup.setAttribute('class', 'ugrr-map-states');
         for (var s = 0; s < base.states.length; s++) {
             var state = base.states[s];
             var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
             path.setAttribute('d', state.d);
-            path.setAttribute('class', 'cw-map-state cw-map-state-' + state.admin);
             path.setAttribute('fill', state.admin === 'CA' ? '#4a7058' : '#5d8c6c');
             path.setAttribute('stroke', '#f4ead5');
             path.setAttribute('stroke-width', '0.6');
@@ -77,20 +115,47 @@ StudyEngine.registerActivity({
         }
         svg.appendChild(statesGroup);
 
+        // State labels (shown only when toggled on)
+        if (this._showStateLabels) {
+            var stateLabelGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+            stateLabelGroup.setAttribute('class', 'ugrr-map-state-labels');
+            for (var sl = 0; sl < base.states.length; sl++) {
+                var st = base.states[sl];
+                if (!st.abbr || st.cx == null || st.cy == null) continue;
+                // Skip labels that fall outside the visible viewBox
+                if (st.cx < 5 || st.cx > 895 || st.cy < 5 || st.cy > 720) continue;
+                var stl = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                stl.setAttribute('x', st.cx);
+                stl.setAttribute('y', st.cy);
+                stl.setAttribute('class', 'ugrr-map-state-label');
+                stl.setAttribute('text-anchor', 'middle');
+                stl.setAttribute('fill', '#3a4a3a');
+                stl.setAttribute('font-size', '11');
+                stl.setAttribute('font-weight', '700');
+                stl.setAttribute('paint-order', 'stroke');
+                stl.setAttribute('stroke', 'rgba(244,234,213,0.9)');
+                stl.setAttribute('stroke-width', '3');
+                stl.setAttribute('stroke-linejoin', 'round');
+                stl.setAttribute('pointer-events', 'none');
+                stl.textContent = st.abbr;
+                stateLabelGroup.appendChild(stl);
+            }
+            svg.appendChild(stateLabelGroup);
+        }
+
         var lakesGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-        lakesGroup.setAttribute('class', 'cw-map-lakes');
+        lakesGroup.setAttribute('class', 'ugrr-map-lakes');
         for (var l = 0; l < base.lakes.length; l++) {
             var lake = base.lakes[l];
             var lakePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
             lakePath.setAttribute('d', lake.d);
-            lakePath.setAttribute('class', 'cw-map-lake');
             lakePath.setAttribute('fill', '#b3d8e8');
             lakePath.setAttribute('stroke', 'none');
             lakesGroup.appendChild(lakePath);
         }
         svg.appendChild(lakesGroup);
 
-        // Route layer (the historical escape paths from Harper's Atlas)
+        // Route layer — top 30 longest routes only (filtered in data file)
         var routeGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
         routeGroup.setAttribute('class', 'ugrr-map-routes');
         var routes = window.UGRR_MAP_ROUTES || [];
@@ -98,6 +163,13 @@ StudyEngine.registerActivity({
             var poly = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
             poly.setAttribute('points', routes[i]);
             poly.setAttribute('class', 'ugrr-map-route');
+            poly.setAttribute('fill', 'none');
+            poly.setAttribute('stroke', '#5e1a08');
+            poly.setAttribute('stroke-width', '1.4');
+            poly.setAttribute('stroke-linecap', 'round');
+            poly.setAttribute('stroke-linejoin', 'round');
+            poly.setAttribute('opacity', '0.55');
+            poly.setAttribute('pointer-events', 'none');
             routeGroup.appendChild(poly);
         }
         svg.appendChild(routeGroup);
@@ -129,9 +201,11 @@ StudyEngine.registerActivity({
 
     _renderCity(parent, city) {
         var self = this;
+        var category = city.category || 'station';
+        var color = this._categoryColors[category] || this._categoryColors.station;
 
         var g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-        g.setAttribute('class', 'ugrr-map-city');
+        g.setAttribute('class', 'ugrr-map-city ugrr-map-city-' + category);
         g.dataset.cityId = city.id;
 
         // Hitbox (transparent, larger than visible dot)
@@ -143,20 +217,27 @@ StudyEngine.registerActivity({
         hitbox.setAttribute('class', 'ugrr-map-city-hit');
         g.appendChild(hitbox);
 
-        // Visible dot
+        // Visible dot — fill colored by category
         var dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
         dot.setAttribute('cx', city.x);
         dot.setAttribute('cy', city.y);
-        dot.setAttribute('r', 6);
+        dot.setAttribute('r', 7);
+        dot.setAttribute('fill', color);
+        dot.setAttribute('stroke', '#fff');
+        dot.setAttribute('stroke-width', '2');
         dot.setAttribute('class', 'ugrr-map-city-dot');
         g.appendChild(dot);
 
-        // Label always shown for these 20 cities
+        // Label with cluster-aware offset
+        var offset = this._labelOffsets[city.id] || { x: 0, y: -12 };
+        var anchor = 'middle';
+        if (offset.x > 6) anchor = 'start';
+        else if (offset.x < -6) anchor = 'end';
         var label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        label.setAttribute('x', city.x);
-        label.setAttribute('y', city.y - 12);
+        label.setAttribute('x', city.x + offset.x);
+        label.setAttribute('y', city.y + offset.y);
         label.setAttribute('class', 'ugrr-map-label');
-        label.setAttribute('text-anchor', 'middle');
+        label.setAttribute('text-anchor', anchor);
         label.textContent = city.name;
         g.appendChild(label);
 
@@ -195,9 +276,17 @@ StudyEngine.registerActivity({
         panel.className = 'ugrr-map-panel';
 
         if (!this._selectedCity) {
+            // Legend
+            var legend = document.createElement('div');
+            legend.className = 'ugrr-map-legend';
+            legend.appendChild(this._legendItem('slavery', 'Cities where people escaped FROM'));
+            legend.appendChild(this._legendItem('station', 'Stations along the way'));
+            legend.appendChild(this._legendItem('canada', 'Canada — freedom'));
+            panel.appendChild(legend);
+
             var hint = document.createElement('p');
             hint.className = 'ugrr-map-panel-hint';
-            hint.textContent = 'Click any of the 20 highlighted cities to read about the people who turned it into a station of the Underground Railroad. The faded lines show the routes that escapees actually traveled, digitized from a 1920s atlas of historical maps.';
+            hint.textContent = 'Click any city to read about the people who turned it into a station of the Underground Railroad. The faded lines show the major routes that escapees actually traveled, drawn from a 1920s atlas of historical maps.';
             panel.appendChild(hint);
         } else {
             var c = this._selectedCity;
@@ -244,6 +333,19 @@ StudyEngine.registerActivity({
         }
 
         this._container.appendChild(panel);
+    },
+
+    _legendItem(category, label) {
+        var item = document.createElement('div');
+        item.className = 'ugrr-map-legend-item';
+        var dot = document.createElement('span');
+        dot.className = 'ugrr-map-legend-dot';
+        dot.style.background = this._categoryColors[category];
+        item.appendChild(dot);
+        var t = document.createElement('span');
+        t.textContent = label;
+        item.appendChild(t);
+        return item;
     },
 
     deactivate() {

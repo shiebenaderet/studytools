@@ -6164,7 +6164,42 @@ a.sift-detail-link:hover { opacity: 0.8; }
    UNDERGROUND RAILROAD MAP ACTIVITY
    ───────────────────────────────────────────────────────── */
 .ugrr-map-screen { display: flex; flex-direction: column; gap: 16px; padding: 0; }
-.ugrr-map-header { background: var(--bg-card); border: 1px solid var(--border-card); border-radius: 12px; padding: 16px 20px; }
+.ugrr-map-header { background: var(--bg-card); border: 1px solid var(--border-card); border-radius: 12px; padding: 16px 20px; position: relative; }
+.ugrr-map-toggle-btn {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-card);
+    color: var(--text-primary);
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85em;
+}
+.ugrr-map-toggle-btn:hover { background: var(--bg-surface); }
+.ugrr-map-legend {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-subtle);
+}
+.ugrr-map-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-secondary);
+    font-size: 0.88em;
+}
+.ugrr-map-legend-dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+}
 .ugrr-map-title { color: var(--text-primary); margin: 0 0 4px; font-size: 1.5em; }
 .ugrr-map-subtitle { color: var(--text-secondary); margin: 0; font-size: 0.92em; line-height: 1.5; }
 
