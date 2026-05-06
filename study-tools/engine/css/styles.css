@@ -6134,3 +6134,113 @@ a.sift-detail-link:hover { opacity: 0.8; }
     .cw-map-results-stats { grid-template-columns: 1fr; }
     .cw-map-label { font-size: 14px; }
 }
+
+/* ─────────────────────────────────────────────────────────
+   UNDERGROUND RAILROAD MAP ACTIVITY
+   ───────────────────────────────────────────────────────── */
+.ugrr-map-screen { display: flex; flex-direction: column; gap: 16px; padding: 0; }
+.ugrr-map-header { background: var(--bg-card); border: 1px solid var(--border-card); border-radius: 12px; padding: 16px 20px; }
+.ugrr-map-title { color: var(--text-primary); margin: 0 0 4px; font-size: 1.5em; }
+.ugrr-map-subtitle { color: var(--text-secondary); margin: 0; font-size: 0.92em; line-height: 1.5; }
+
+.ugrr-map-svg-wrap { background: var(--bg-card); border: 1px solid var(--border-card); border-radius: 12px; overflow: hidden; }
+.ugrr-map-svg { display: block; width: 100%; height: auto; max-height: 70vh; background: #f4ead5; }
+
+/* Routes — faded historical lines */
+.ugrr-map-routes .ugrr-map-route {
+    fill: none;
+    stroke: #7a4a2c;
+    stroke-width: 1.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0.45;
+}
+
+/* Cities — clickable, with the unit's accent color */
+.ugrr-map-cities .ugrr-map-city { cursor: pointer; }
+.ugrr-map-cities .ugrr-map-city-dot {
+    fill: #8B2914;
+    stroke: #fff;
+    stroke-width: 2;
+    transition: r 0.15s, stroke-width 0.15s;
+}
+.ugrr-map-cities .ugrr-map-city:hover .ugrr-map-city-dot { r: 8; stroke-width: 3; }
+.ugrr-map-cities .ugrr-map-city.selected .ugrr-map-city-dot {
+    r: 10; fill: #2D4A6B; stroke: #fff; stroke-width: 3;
+}
+.ugrr-map-label {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    fill: #2a1810;
+    pointer-events: none;
+    paint-order: stroke;
+    stroke: #f4ead5;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Info panel */
+.ugrr-map-panel {
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
+    border-radius: 12px;
+    padding: 16px 20px;
+}
+.ugrr-map-panel-hint {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+    font-size: 0.95em;
+}
+.ugrr-map-panel-name-row {
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-subtle);
+}
+.ugrr-map-panel-name {
+    color: var(--text-primary);
+    margin: 0;
+    font-size: 1.3em;
+}
+.ugrr-map-panel-role {
+    color: var(--accent);
+    font-size: 0.9em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.ugrr-map-panel-section-label {
+    color: var(--text-muted);
+    font-size: 0.78em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 12px;
+    margin-bottom: 4px;
+}
+.ugrr-map-panel-person, .ugrr-map-panel-detail {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+    font-size: 0.95em;
+}
+.ugrr-map-panel-close {
+    margin-top: 16px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-card);
+    color: var(--text-primary);
+    padding: 6px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+.ugrr-map-panel-close:hover { background: var(--bg-surface); }
+
+@media (max-width: 600px) {
+    .ugrr-map-label { font-size: 13px; }
+}
