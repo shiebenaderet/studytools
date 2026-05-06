@@ -25,26 +25,26 @@ StudyEngine.registerActivity({
         canada:  '#2d8659'    // green — terminus, freedom
     },
 
-    // Manual label offsets to fix clusters along the Great Lakes
-    // Computed for the new tighter bbox (36-47.5°N, -97 to -67.3°W)
+    // Manual label offsets to fix clusters along the Great Lakes — bumped for
+    // 14px labels (more spacing needed than at 11px). Default for unlisted
+    // cities is { x: 0, y: -16 } (above the dot).
     _labelOffsets: {
-        // Detroit / Chatham nearly overlap horizontally — push Chatham down
-        'chatham':    { x: 0, y: 18 },
-        'detroit':    { x: 0, y: -14 },
+        // Detroit / Chatham almost overlap horizontally — stack vertically
+        'chatham':    { x: 0, y: 22 },
+        'detroit':    { x: 0, y: -18 },
         // Cleveland / Oberlin cluster
-        'cleveland':  { x: 28, y: -2 },
-        'oberlin':    { x: -22, y: 2 },
+        'cleveland':  { x: 32, y: -2 },
+        'oberlin':    { x: -28, y: 2 },
         // Rochester / Syracuse / Buffalo / Albany strip across NY
-        'rochester':  { x: 0, y: -14 },
-        'syracuse':   { x: 0, y: 18 },
-        'buffalo':    { x: 0, y: -14 },
-        'albany':     { x: 0, y: -14 },
-        // Baltimore / Dover near coast — push Dover down
-        'baltimore':  { x: -22, y: -2 },
-        'dover':      { x: 22, y: 18 },
-        'washington': { x: 0, y: 18 },
-        'toronto':    { x: 0, y: -14 },
-        // Default for everything else: above the dot
+        'rochester':  { x: 0, y: -18 },
+        'syracuse':   { x: 0, y: 24 },
+        'buffalo':    { x: 0, y: -18 },
+        'albany':     { x: 0, y: -18 },
+        // Baltimore / Dover / DC near coast
+        'baltimore':  { x: -28, y: -2 },
+        'dover':      { x: 28, y: 24 },
+        'washington': { x: 0, y: 24 },
+        'toronto':    { x: 0, y: -18 },
     },
 
     render(container, config) {
@@ -155,24 +155,59 @@ StudyEngine.registerActivity({
         }
         svg.appendChild(lakesGroup);
 
-        // Route layer — top 30 longest routes only (filtered in data file)
+        // Defs — arrowhead marker for the directional flow lines
+        var defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+        var marker = document.createElementNS('http://www.w3.org/2000/svg', 'marker');
+        marker.setAttribute('id', 'ugrr-arrowhead');
+        marker.setAttribute('viewBox', '0 0 10 10');
+        marker.setAttribute('refX', '8');
+        marker.setAttribute('refY', '5');
+        marker.setAttribute('markerWidth', '6');
+        marker.setAttribute('markerHeight', '6');
+        marker.setAttribute('orient', 'auto-start-reverse');
+        var arrowPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        arrowPath.setAttribute('d', 'M0,0 L10,5 L0,10 Z');
+        arrowPath.setAttribute('fill', '#3a1206');
+        marker.appendChild(arrowPath);
+        defs.appendChild(marker);
+        svg.appendChild(defs);
+
+        // Route layer 1: historical Harper's Atlas routes — faded watermark
         var routeGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
         routeGroup.setAttribute('class', 'ugrr-map-routes');
         var routes = window.UGRR_MAP_ROUTES || [];
         for (var i = 0; i < routes.length; i++) {
             var poly = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
             poly.setAttribute('points', routes[i]);
-            poly.setAttribute('class', 'ugrr-map-route');
             poly.setAttribute('fill', 'none');
-            poly.setAttribute('stroke', '#5e1a08');
-            poly.setAttribute('stroke-width', '1.4');
+            poly.setAttribute('stroke', '#7a4a2c');
+            poly.setAttribute('stroke-width', '1');
             poly.setAttribute('stroke-linecap', 'round');
             poly.setAttribute('stroke-linejoin', 'round');
-            poly.setAttribute('opacity', '0.55');
+            poly.setAttribute('opacity', '0.18');
             poly.setAttribute('pointer-events', 'none');
             routeGroup.appendChild(poly);
         }
         svg.appendChild(routeGroup);
+
+        // Route layer 2: hand-curated directional flows connecting our cities.
+        // Heavy strokes with arrowheads — these tell the "people moved north" story.
+        var flowGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        flowGroup.setAttribute('class', 'ugrr-map-flows');
+        var flows = window.UGRR_MAP_FLOWS || [];
+        for (var f = 0; f < flows.length; f++) {
+            var flow = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            flow.setAttribute('d', flows[f].d);
+            flow.setAttribute('fill', 'none');
+            flow.setAttribute('stroke', '#3a1206');
+            flow.setAttribute('stroke-width', '2.8');
+            flow.setAttribute('stroke-linecap', 'round');
+            flow.setAttribute('opacity', '0.85');
+            flow.setAttribute('marker-end', 'url(#ugrr-arrowhead)');
+            flow.setAttribute('pointer-events', 'none');
+            flowGroup.appendChild(flow);
+        }
+        svg.appendChild(flowGroup);
 
         // City layer
         var cityGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
@@ -275,15 +310,16 @@ StudyEngine.registerActivity({
         panel.id = 'ugrr-map-panel';
         panel.className = 'ugrr-map-panel';
 
-        if (!this._selectedCity) {
-            // Legend
-            var legend = document.createElement('div');
-            legend.className = 'ugrr-map-legend';
-            legend.appendChild(this._legendItem('slavery', 'Cities where people escaped FROM'));
-            legend.appendChild(this._legendItem('station', 'Stations along the way'));
-            legend.appendChild(this._legendItem('canada', 'Canada — freedom'));
-            panel.appendChild(legend);
+        // Legend is ALWAYS visible at the top of the panel — students can decode
+        // the colors at any time, whether or not a city is selected.
+        var legend = document.createElement('div');
+        legend.className = 'ugrr-map-legend';
+        legend.appendChild(this._legendItem('slavery', 'Slave state'));
+        legend.appendChild(this._legendItem('station', 'Free state'));
+        legend.appendChild(this._legendItem('canada', 'Canada (free)'));
+        panel.appendChild(legend);
 
+        if (!this._selectedCity) {
             var hint = document.createElement('p');
             hint.className = 'ugrr-map-panel-hint';
             hint.textContent = 'Click any city to read about the people who turned it into a station of the Underground Railroad. The faded lines show the major routes that escapees actually traveled, drawn from a 1920s atlas of historical maps.';

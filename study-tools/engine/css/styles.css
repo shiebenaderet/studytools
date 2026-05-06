@@ -6222,24 +6222,22 @@ a.sift-detail-link:hover { opacity: 0.8; }
 /* Cities — clickable, with the unit's accent color */
 .ugrr-map-cities .ugrr-map-city { cursor: pointer; }
 .ugrr-map-cities .ugrr-map-city-dot {
-    fill: #8B2914;
-    stroke: #fff;
-    stroke-width: 2;
+    /* fill set inline via SVG attribute so per-category colors apply */
     transition: r 0.15s, stroke-width 0.15s;
 }
-.ugrr-map-cities .ugrr-map-city:hover .ugrr-map-city-dot { r: 8; stroke-width: 3; }
+.ugrr-map-cities .ugrr-map-city:hover .ugrr-map-city-dot { r: 9; stroke-width: 3; }
 .ugrr-map-cities .ugrr-map-city.selected .ugrr-map-city-dot {
-    r: 10; fill: #2D4A6B; stroke: #fff; stroke-width: 3;
+    r: 11; stroke-width: 3;
 }
 .ugrr-map-label {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    font-size: 11px;
+    font-size: 14px;
     font-weight: 700;
     fill: #1a2738;
     pointer-events: none;
     paint-order: stroke;
     stroke: rgba(244, 234, 213, 0.95);
-    stroke-width: 3;
+    stroke-width: 4;
     stroke-linecap: round;
     stroke-linejoin: round;
 }

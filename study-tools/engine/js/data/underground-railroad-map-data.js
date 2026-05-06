@@ -166,4 +166,27 @@
 
     // Bounding box used for the projection — kept for reference.
     window.UGRR_MAP_META = { viewBox: "0 0 900 725", routeCount: 166, cityCount: 20 };
+
+    // Hand-curated directional flow lines connecting the displayed cities,
+    // showing how people moved from slave states through stations to Canada.
+    window.UGRR_MAP_FLOWS = [
+        { from: "baltimore", to: "philadelphia", d: "M617.2,470.6 Q635.0,449.5 662.1,444.5" },
+        { from: "philadelphia", to: "new-york", d: "M662.1,444.5 Q673.8,423.3 696.3,414.5" },
+        { from: "new-york", to: "albany", d: "M696.3,414.5 Q686.1,373.4 704.5,335.3" },
+        { from: "albany", to: "toronto", d: "M704.5,335.3 Q626.5,283.7 533.4,293.6" },
+        { from: "washington", to: "philadelphia", d: "M604.9,486.3 Q626.0,455.1 662.1,444.5" },
+        { from: "dover", to: "philadelphia", d: "M650.9,475.8 Q650.9,458.1 662.1,444.5" },
+        { from: "ripley", to: "cincinnati", d: "M398.7,492.5 Q391.3,481.8 378.7,478.2" },
+        { from: "cincinnati", to: "cleveland", d: "M378.7,478.2 Q404.3,415.3 464.2,383.2" },
+        { from: "cleveland", to: "detroit", d: "M464.2,383.2 Q449.4,358.5 422.3,348.9" },
+        { from: "detroit", to: "chatham", d: "M422.3,348.9 Q435.3,342.9 449.2,346.5" },
+        { from: "oberlin", to: "cleveland", d: "M448.0,391.5 Q454.6,384.4 464.2,383.2" },
+        { from: "st-louis", to: "chicago", d: "M206.8,496.8 Q221.9,418.5 283.4,367.8" },
+        { from: "chicago", to: "detroit", d: "M283.4,367.8 Q349.4,333.3 422.3,348.9" },
+        { from: "baltimore", to: "boston", d: "M617.2,470.6 Q679.8,379.0 786.4,348.4" },
+        { from: "buffalo", to: "toronto", d: "M549.6,325.9 Q547.3,306.8 533.4,293.6" },
+        { from: "rochester", to: "toronto", d: "M587.7,314.1 Q564.2,294.1 533.4,293.6" },
+        { from: "syracuse", to: "rochester", d: "M632.3,319.7 Q611.0,308.9 587.7,314.1" },
+        { from: "rochester", to: "buffalo", d: "M587.7,314.1 Q566.5,313.1 549.6,325.9" },
+    ];
 })();
