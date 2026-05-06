@@ -158,16 +158,42 @@ StudyEngine.registerActivity({
         svg.setAttribute('class', 'cw-map-svg');
         svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
 
-        // Land background paths
-        var landGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-        landGroup.setAttribute('class', 'cw-map-land');
-        var landPaths = window.CIVIL_WAR_MAP_LAND_PATHS || [];
-        for (var p = 0; p < landPaths.length; p++) {
+        // Base map: states (filled), lakes (water-colored), rivers (blue lines).
+        // Drawn back to front: states → lakes → rivers → cities.
+        var base = window.CIVIL_WAR_MAP_BASE || { states: [], lakes: [], rivers: [] };
+
+        var statesGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        statesGroup.setAttribute('class', 'cw-map-states');
+        for (var s = 0; s < base.states.length; s++) {
+            var state = base.states[s];
             var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-            path.setAttribute('d', landPaths[p]);
-            landGroup.appendChild(path);
+            path.setAttribute('d', state.d);
+            path.setAttribute('class', 'cw-map-state cw-map-state-' + state.admin);
+            statesGroup.appendChild(path);
         }
-        svg.appendChild(landGroup);
+        svg.appendChild(statesGroup);
+
+        var lakesGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        lakesGroup.setAttribute('class', 'cw-map-lakes');
+        for (var l = 0; l < base.lakes.length; l++) {
+            var lake = base.lakes[l];
+            var lakePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            lakePath.setAttribute('d', lake.d);
+            lakePath.setAttribute('class', 'cw-map-lake');
+            lakesGroup.appendChild(lakePath);
+        }
+        svg.appendChild(lakesGroup);
+
+        var riversGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        riversGroup.setAttribute('class', 'cw-map-rivers');
+        for (var r = 0; r < base.rivers.length; r++) {
+            var river = base.rivers[r];
+            var riverLine = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+            riverLine.setAttribute('points', river.points);
+            riverLine.setAttribute('class', 'cw-map-river');
+            riversGroup.appendChild(riverLine);
+        }
+        svg.appendChild(riversGroup);
 
         // City layer
         var cityGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
@@ -184,11 +210,10 @@ StudyEngine.registerActivity({
         if (mode === 'quiz') {
             svg.addEventListener('click', this._onMapClickQuiz.bind(this));
         } else {
-            // Learn mode: clicking outside a dot dismisses tooltip
+            // Learn mode: clicking outside a city group dismisses tooltip
             svg.addEventListener('click', function(e) {
-                if (e.target === svg || e.target.tagName === 'path') {
-                    this._dismissLearnTooltip();
-                }
+                // City clicks have stopPropagation, so anything reaching here is a non-city click
+                this._dismissLearnTooltip();
             }.bind(this));
         }
 

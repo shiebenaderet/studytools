@@ -6076,8 +6076,23 @@ a.sift-detail-link:hover { opacity: 0.8; }
 .cw-map-score { font-weight: 700; color: var(--accent); }
 
 .cw-map-svg-wrap { background: var(--bg-card); border: 1px solid var(--border-card); border-radius: 12px; overflow: hidden; }
-.cw-map-svg { display: block; width: 100%; height: auto; max-height: 70vh; background: #0a1420; }
-.cw-map-land path { fill: var(--bg-elevated); stroke: var(--border-card); stroke-width: 0.5; }
+.cw-map-svg { display: block; width: 100%; height: auto; max-height: 70vh; background: #b3d8e8; }
+.cw-map-states .cw-map-state {
+    fill: #5d8c6c;
+    stroke: #f4ead5;
+    stroke-width: 0.6;
+    stroke-linejoin: round;
+}
+.cw-map-states .cw-map-state-CA { fill: #4a7058; }
+.cw-map-lakes .cw-map-lake { fill: #b3d8e8; stroke: none; }
+.cw-map-rivers .cw-map-river {
+    fill: none;
+    stroke: #2752c8;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    pointer-events: none;
+}
 
 .cw-map-cities .cw-map-city { cursor: pointer; }
 .cw-map-cities .cw-map-city-dot { transition: r 0.15s, stroke-width 0.15s; }
@@ -6086,7 +6101,17 @@ a.sift-detail-link:hover { opacity: 0.8; }
 .cw-map-cities .cw-map-city.cw-map-flash-correct .cw-map-city-dot { fill: #22c55e; r: 12; stroke: #fff; stroke-width: 3; }
 .cw-map-cities .cw-map-city.cw-map-flash-wrong .cw-map-city-dot { fill: #ef4444; r: 11; stroke: #fff; stroke-width: 3; }
 .cw-map-leader { stroke: var(--text-muted); stroke-width: 1; opacity: 0.6; }
-.cw-map-label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 12px; fill: var(--text-primary); pointer-events: none; font-weight: 600; }
+.cw-map-label {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 12px;
+    fill: #1a2738;
+    pointer-events: none;
+    font-weight: 700;
+    paint-order: stroke;
+    stroke: rgba(244, 234, 213, 0.95);
+    stroke-width: 3;
+    stroke-linejoin: round;
+}
 
 .cw-map-panel { background: var(--bg-card); border: 1px solid var(--border-card); border-radius: 12px; padding: 16px; }
 .cw-map-panel-quiz { text-align: center; }
