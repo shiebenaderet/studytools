@@ -64,7 +64,7 @@
             side: 'battle',
             year: 1862,
             x: 622.6, y: 424.6,
-            labelLeader: { x: 760, y: 444 },
+            labelLeader: { x: 690, y: 442 },
             description: 'March 1862 naval battle between the ironclads USS Monitor and CSS Virginia. The age of wooden warships ended that day.'
         },
         {
@@ -121,7 +121,7 @@
             side: 'battle',
             year: 1865,
             x: 548.7, y: 409.7,
-            labelOffset: { x: -8, y: -14 },
+            labelOffset: { x: -8, y: -20 },
             description: 'April 9, 1865. Lee surrendered to Grant in the parlor of a small Virginia farmhouse, effectively ending the Civil War.'
         },
 
@@ -133,7 +133,8 @@
             side: 'union',
             year: null,
             x: 601.7, y: 351.7,
-            labelLeader: { x: 760, y: 365 },
+            shortName: 'D.C.',
+            labelLeader: { x: 670, y: 358 },
             description: 'Capital of the United States. Lincoln directed the Union war effort from here. Site of his assassination at Ford’s Theatre in April 1865.'
         },
         {
@@ -143,7 +144,7 @@
             side: 'confederate',
             year: null,
             x: 589.7, y: 403.5,
-            labelLeader: { x: 760, y: 405 },
+            labelLeader: { x: 690, y: 400 },
             description: 'Capital of the Confederate States of America. Located only 100 miles from Washington D.C., it was the focus of much of the war’s fighting.'
         },
         {

@@ -296,7 +296,7 @@ StudyEngine.registerActivity({
             leaderText.setAttribute('y', leader.y - 4);
             leaderText.setAttribute('class', 'cw-map-label');
             leaderText.setAttribute('text-anchor', leader.x > 600 ? 'start' : 'end');
-            leaderText.textContent = city.name;
+            leaderText.textContent = city.shortName || city.name;
             parent.appendChild(leaderText);
         } else {
             var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
@@ -304,7 +304,7 @@ StudyEngine.registerActivity({
             text.setAttribute('y', city.y + labelOffset.y);
             text.setAttribute('class', 'cw-map-label');
             text.setAttribute('text-anchor', 'middle');
-            text.textContent = city.name;
+            text.textContent = city.shortName || city.name;
             parent.appendChild(text);
         }
     },
@@ -336,18 +336,18 @@ StudyEngine.registerActivity({
         panel.id = 'cw-map-panel';
         panel.className = 'cw-map-panel';
 
+        // Legend is always visible so students can decode the colors at any time
+        var legend = document.createElement('div');
+        legend.className = 'cw-map-legend';
+        legend.appendChild(this._legendItem('battle', 'Battle'));
+        legend.appendChild(this._legendItem('capital', 'Capital'));
+        legend.appendChild(this._legendItem('strategic', 'Strategic city'));
+        panel.appendChild(legend);
+
         if (!this._selectedCity) {
-            var legend = document.createElement('div');
-            legend.className = 'cw-map-legend';
-
-            legend.appendChild(this._legendItem('battle', 'Battle'));
-            legend.appendChild(this._legendItem('capital', 'Capital'));
-            legend.appendChild(this._legendItem('strategic', 'Strategic city'));
-
             var hint = document.createElement('p');
             hint.className = 'cw-map-panel-hint';
             hint.textContent = 'Click any place on the map to read about it.';
-            panel.appendChild(legend);
             panel.appendChild(hint);
         } else {
             var c = this._selectedCity;

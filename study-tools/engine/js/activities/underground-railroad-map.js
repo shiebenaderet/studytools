@@ -56,7 +56,33 @@ StudyEngine.registerActivity({
         svg.setAttribute('class', 'ugrr-map-svg');
         svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
 
-        // Route layer
+        // Base map: states + lakes (rivers omitted; the routes are the visual story here)
+        // Drawn back to front: states → lakes → routes → cities.
+        var base = window.CIVIL_WAR_MAP_BASE || { states: [], lakes: [], rivers: [] };
+
+        var statesGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        statesGroup.setAttribute('class', 'ugrr-map-states');
+        for (var s = 0; s < base.states.length; s++) {
+            var state = base.states[s];
+            var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            path.setAttribute('d', state.d);
+            path.setAttribute('class', 'ugrr-map-state ugrr-map-state-' + state.admin);
+            statesGroup.appendChild(path);
+        }
+        svg.appendChild(statesGroup);
+
+        var lakesGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        lakesGroup.setAttribute('class', 'ugrr-map-lakes');
+        for (var l = 0; l < base.lakes.length; l++) {
+            var lake = base.lakes[l];
+            var lakePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            lakePath.setAttribute('d', lake.d);
+            lakePath.setAttribute('class', 'ugrr-map-lake');
+            lakesGroup.appendChild(lakePath);
+        }
+        svg.appendChild(lakesGroup);
+
+        // Route layer (the historical escape paths from Harper's Atlas)
         var routeGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
         routeGroup.setAttribute('class', 'ugrr-map-routes');
         var routes = window.UGRR_MAP_ROUTES || [];
