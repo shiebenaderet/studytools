@@ -1187,5 +1187,167 @@
             "topic": "The War Itself"
         }
     ],
-    "fillInBlanks": []
+    "fillInBlanks": [],
+    "shortAnswerQuestions": [
+        {
+            "question": "How did the cotton gin actually make slavery worse instead of ending it? Use at least two specific examples from the unit.",
+            "topic": "Sectionalism",
+            "keyTerms": ["cotton gin", "plantation economy", "slavery", "sectionalism"],
+            "rubric": [
+                "Takes a clear position that the cotton gin expanded slavery rather than ending it",
+                "Includes at least two specific examples (the speed of cleaning cotton, the rise in cotton profits, the growth of plantations, the increase in enslaved population from ~700,000 to ~4 million)",
+                "Explains WHY each example caused slavery to grow, not just what happened",
+                "Uses key vocabulary correctly and writes 4-6 sentences that build a logical argument"
+            ],
+            "exemplar": "Many people thought the cotton gin would end slavery, but it actually made slavery much worse. Before the gin, cleaning cotton seeds by hand was so slow that growing cotton was barely worth the trouble. After Eli Whitney invented the gin in 1793, cotton could be cleaned 50 times faster. This made cotton wildly profitable, so plantation owners started growing more of it. To grow more cotton, they needed more enslaved workers. The number of enslaved people in the South grew from about 700,000 in 1790 to nearly 4 million by 1860. So the cotton gin, which was supposed to save labor, actually trapped millions more people in slavery.",
+            "sentenceStarters": [
+                "The cotton gin made slavery worse because...",
+                "One example of this is when...",
+                "This shows that..."
+            ]
+        },
+        {
+            "question": "What were the key tensions that led to the southern states seceding from the Union? Use at least three specific events from the 1850s.",
+            "topic": "Road to War",
+            "keyTerms": ["Bleeding Kansas", "Dred Scott decision", "Lincoln Douglas Debates", "John Brown's Raid", "Election of 1860", "secession"],
+            "rubric": [
+                "Names at least three specific events from the 1850s",
+                "Explains how each event built up tension between North and South",
+                "Shows how the events connect to each other and lead toward secession",
+                "Uses key vocabulary correctly, 5-7 sentences (slightly longer answer for this one)"
+            ],
+            "exemplar": "Several events in the 1850s built up tension that finally caused Southern states to secede. First, the violent fighting in Kansas, called Bleeding Kansas, showed that pro-slavery and anti-slavery Americans were now willing to kill each other over the question. Second, the Dred Scott decision in 1857 ruled that Black Americans were not citizens and that Congress could not ban slavery in the territories. Northerners worried that slavery would soon spread everywhere. Third, John Brown's Raid in 1859 convinced Southerners that the entire North wanted to attack them with violence. Finally, the Election of 1860 brought Abraham Lincoln to power without a single Southern electoral vote. To Southern leaders, that meant the federal government had turned against them. Within six weeks of the election, South Carolina announced its secession, and other states followed.",
+            "sentenceStarters": [
+                "Several events in the 1850s built up tension between North and South.",
+                "First, ...",
+                "Another major event was...",
+                "Finally, ..."
+            ]
+        },
+        {
+            "question": "How was the Union able to defeat the Confederacy? Use at least three specific advantages or events.",
+            "topic": "The War Itself",
+            "keyTerms": ["Anaconda Plan", "Emancipation Proclamation", "total war", "Battle of Gettysburg", "Siege of Vicksburg", "Ulysses S. Grant", "William T. Sherman"],
+            "rubric": [
+                "Takes a clear position on how the Union won",
+                "Names at least three specific advantages or events (population, factories, railroads, Anaconda Plan, Emancipation Proclamation, USCT, Grant's leadership, Sherman's total war, Gettysburg/Vicksburg)",
+                "Explains how each advantage or event contributed to victory",
+                "Uses key vocabulary correctly, 5-7 sentences"
+            ],
+            "exemplar": "The Union won the Civil War because of a combination of advantages and decisive moments. The North started with more people, more factories, and more railroads, which meant it could keep fighting longer than the South could. The Union followed the Anaconda Plan to blockade Southern ports and capture the Mississippi River, slowly squeezing the Confederacy. The Emancipation Proclamation in 1863 turned the war into a fight to end slavery and opened the door for nearly 180,000 Black soldiers to serve in the USCT. In July 1863, the Union won at Gettysburg and Vicksburg on back-to-back days, breaking the Confederacy in two. Finally, Lincoln gave Grant command of all Union armies, and Sherman's total war strategy on his March to the Sea destroyed the South's ability to keep fighting. The combination of resources, strategy, and the moral cause of ending slavery brought victory.",
+            "sentenceStarters": [
+                "The Union won because of several key advantages.",
+                "One major advantage was...",
+                "Another important factor was...",
+                "Finally, ..."
+            ]
+        },
+        {
+            "question": "When does compromise stop working? The country tried to compromise on slavery for forty years before the Civil War. Pick at least two specific compromises and explain why each one failed in the end.",
+            "topic": "Connections",
+            "keyTerms": ["Missouri Compromise", "Compromise of 1850", "Fugitive Slave Law", "Kansas Nebraska Act", "Bleeding Kansas", "secession"],
+            "rubric": [
+                "Names at least two specific compromises (Missouri Compromise, Compromise of 1850, Kansas Nebraska Act)",
+                "Explains why each compromise eventually failed (it was overturned, it made one side angrier, it created violence)",
+                "Connects this to a larger argument about when compromise can and cannot work",
+                "Wrestles with the bigger question: was the failure inevitable, or could a better compromise have worked?",
+                "5-7 sentences that build a careful argument"
+            ],
+            "exemplar": "Compromise stops working when one side believes the question itself is about right and wrong, not just about how to share power. The Missouri Compromise of 1820 drew a line and said no slavery north of it. That worked for thirty four years, until the Kansas Nebraska Act tore the line up in 1854. The Compromise of 1850 admitted California as a free state but also passed a tougher Fugitive Slave Law that forced Northerners to help capture escaped enslaved people. That law made Northerners who had ignored slavery suddenly furious about it. Each compromise on slavery bought time but made more Americans believe slavery itself was wrong, not just a problem to manage. By 1860, when Lincoln won the election without Southern support, Southern states immediately seceded. They could not be compromised back into a country whose voters had turned against slavery. Compromise can work when both sides want the country to keep going more than they want to win the argument. When one side is willing to leave rather than lose, compromise has already stopped working.",
+            "sentenceStarters": [
+                "Compromise stops working when...",
+                "One example of this is the ____, which...",
+                "Another example is the ____, which...",
+                "What this teaches us about compromise in general is..."
+            ]
+        },
+        {
+            "question": "Did the Civil War answer the question of slavery, or did it leave more questions than it answered? Use specific evidence from the war and from Reconstruction.",
+            "topic": "Connections",
+            "keyTerms": ["Emancipation Proclamation", "13th Amendment", "Reconstruction", "USCT", "54th Massachusetts"],
+            "rubric": [
+                "Takes a clear position",
+                "Acknowledges what the war did answer (slavery is illegal, the Union is permanent, states cannot secede)",
+                "Acknowledges what the war left unanswered (what freedom means in practice, equal rights, the violent reversals of Reconstruction)",
+                "Uses specific evidence from BOTH the war years and from Reconstruction (1865-1877)",
+                "Connects to the unit's overarching question about whether fighting solved the problem",
+                "5-8 sentences"
+            ],
+            "exemplar": "The Civil War answered some questions but left bigger ones open. The war answered, by force, that no state could leave the Union. It answered, with the Emancipation Proclamation and the 13th Amendment, that slavery was illegal everywhere. About four million enslaved people became legally free. Black soldiers in the USCT and the 54th Massachusetts proved with their service that Black men would fight for their own freedom. But the war did not answer the deeper question of what freedom would actually mean for those four million people. Reconstruction tried, with real successes like the 14th and 15th Amendments giving Black Americans citizenship and voting rights, and Black congressmen elected for the first time. But Reconstruction also faced violent resistance from white Southerners, and by 1877 federal protection was withdrawn. The gains were rolled back over the next century. The war ended slavery on paper but did not end the fight over what freedom and equality would actually look like.",
+            "sentenceStarters": [
+                "I think the Civil War ____ the slavery question.",
+                "What the war did answer was...",
+                "But what it left unanswered was...",
+                "When I look at both, I conclude that..."
+            ]
+        }
+    ],
+    "timelineEvents": [
+        {
+            "id": 1,
+            "title": "Missouri Compromise",
+            "year": "1820",
+            "description": "Missouri came in as a slave state, Maine came in as a free state, and Congress drew a line banning slavery in the rest of the Louisiana Purchase north of 36 degrees 30 minutes. The deal kept the peace for 34 years."
+        },
+        {
+            "id": 2,
+            "title": "Nat Turner's Rebellion",
+            "year": "1831",
+            "description": "Nat Turner led the most famous slave uprising in American history. About 60 white people were killed before the rebellion was crushed. Southern states responded with harsh new laws against enslaved people."
+        },
+        {
+            "id": 3,
+            "title": "Wilmot Proviso",
+            "year": "1846",
+            "description": "Northern congressman David Wilmot proposed banning slavery in any land taken from Mexico. The proviso passed the House but failed in the Senate. Even though it failed, it pushed Southern leaders to start talking about leaving the Union."
+        },
+        {
+            "id": 4,
+            "title": "Compromise of 1850",
+            "year": "1850",
+            "description": "A package of five laws. California became a free state. The slave trade was banned in Washington DC. A tougher Fugitive Slave Law forced Northerners to help capture escaped enslaved people. The compromise delayed war but made many Northerners turn against slavery for the first time."
+        },
+        {
+            "id": 5,
+            "title": "Uncle Tom's Cabin Published",
+            "year": "1852",
+            "description": "Harriet Beecher Stowe's anti-slavery novel sold over 300,000 copies in its first year. It changed how Northern readers thought about slavery and infuriated Southerners, who banned it from their states."
+        },
+        {
+            "id": 6,
+            "title": "Kansas Nebraska Act and Bleeding Kansas",
+            "year": "1854-1859",
+            "description": "Senator Stephen Douglas pushed a law letting Kansas settlers vote on slavery, throwing out the Missouri Compromise line. Pro-slavery and anti-slavery settlers rushed in and started killing each other. About 50 people died in the fighting that newspapers called Bleeding Kansas."
+        },
+        {
+            "id": 7,
+            "title": "Dred Scott Decision",
+            "year": "1857",
+            "description": "The Supreme Court ruled that Black Americans were not citizens and that Congress could not ban slavery in the territories. The ruling shocked the North and made many Americans believe slavery would soon spread everywhere."
+        },
+        {
+            "id": 8,
+            "title": "Lincoln Douglas Debates",
+            "year": "1858",
+            "description": "Abraham Lincoln and Senator Stephen Douglas held seven public debates during their Illinois Senate race. Slavery was the main topic. Lincoln lost the election but became famous nationwide, which helped him win the presidency two years later."
+        },
+        {
+            "id": 9,
+            "title": "John Brown's Raid",
+            "year": "1859",
+            "description": "Abolitionist John Brown attacked the federal armory at Harpers Ferry, Virginia, hoping to start a slave uprising. The raid failed in two days and Brown was hanged. But Southern leaders saw the attack as proof that the entire North wanted war."
+        },
+        {
+            "id": 10,
+            "title": "Election of 1860 and Secession",
+            "year": "1860",
+            "description": "Abraham Lincoln won the presidency without a single Southern electoral vote. Within six weeks, South Carolina announced its secession from the Union. Six more states followed before Lincoln was even sworn in."
+        },
+        {
+            "id": 11,
+            "title": "Fort Sumter — Civil War Begins",
+            "year": "1861",
+            "description": "On April 12, 1861, Confederate cannons opened fire on Fort Sumter in Charleston Harbor. After 34 hours of bombardment, the small Union garrison surrendered. The Civil War had begun."
+        }
+    ]
 }
