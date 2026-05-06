@@ -62,6 +62,26 @@
             "requiresMasteredCategory": "The War Itself"
         }
     ],
+    "typingPassages": [
+        {
+            "category": "Sectionalism",
+            "title": "Two Americas, One Country",
+            "source": "Adapted from the unit textbook chapter on Sectionalism.",
+            "passage": "By the early 1800s, the United States looked like one country on a map but felt like two different ones in real life. This growing loyalty to a region instead of to the whole country had a name: sectionalism. The North had cold winters and lots of fast moving rivers, so Northerners built factories, ran small farms, and traded in busy port cities. Their economy was built on free workers who got paid wages. The South had warm weather and rich soil, so it grew cotton, tobacco, and sugar on huge farms called plantations. This plantation economy was built on slavery, the cruelest part of American life. Enslaved people were treated as property and worked from sunrise to sunset for no pay. By 1860, about four million enslaved people lived in the South. Some Americans believed slavery would fade away, but in 1793 Eli Whitney invented the cotton gin, which made cotton hugely profitable and locked slavery deeper into Southern life. By the 1820s, the Mason Dixon Line divided the country. A state north of the line was a free state, and a state south of it was a slave state. Slavery did not go unchallenged. Frederick Douglass had been born into slavery, escaped to the North, and became the most powerful voice in the abolitionism movement. William Lloyd Garrison demanded slavery end immediately. Brave volunteers built the Underground Railroad, a secret network of safe houses that helped enslaved people escape. Harriet Tubman went back into the South thirteen times to lead others to freedom. In 1831, Nat Turner's Rebellion shocked the South and made slaveholders defend their system more harshly than before."
+        },
+        {
+            "category": "Road to War",
+            "title": "Forty Years of Compromise",
+            "source": "Adapted from the unit textbook chapter on the Road to War.",
+            "passage": "For forty years, almost every fight in Congress about slavery was really a fight about land. Each new state had to be either free or slave, because more states on your side meant more votes in the Senate. The first big test came in 1820 with the Missouri Compromise, which admitted Missouri as a slave state and Maine as a free state, and drew a line banning slavery north of it. After the Mexican American War, the Wilmot Proviso tried to ban slavery in any new western land. It failed, but it pushed Southern leaders to start talking about leaving the Union. The Compromise of 1850 admitted California as a free state but included a tougher Fugitive Slave Law that forced Northerners to help capture escaped enslaved people. The law backfired, turning many Northerners against slavery. In 1852, Harriet Beecher Stowe published Uncle Tom's Cabin, a novel that took readers inside the lives of enslaved people. Stephen Douglas pushed the Kansas Nebraska Act, which used popular sovereignty to let settlers vote on slavery. The result was Bleeding Kansas, where pro slavery and anti slavery settlers fought and killed each other. In 1857, the Dred Scott decision said Black Americans were not citizens and that Congress could not ban slavery in the territories. The next year, Abraham Lincoln rose to fame in the Lincoln Douglas Debates. In 1859, John Brown's Raid on Harpers Ferry terrified the South. The Election of 1860 was won by Lincoln, and within weeks South Carolina announced its secession. Six more states followed before Lincoln was even sworn in."
+        },
+        {
+            "category": "The War Itself",
+            "title": "Four Years That Changed America",
+            "source": "Adapted from the unit textbook chapter on The War Itself.",
+            "passage": "On April 12, 1861, Confederate cannons fired on Fort Sumter in Charleston Harbor, and the Civil War began. Both sides expected a short war. Both sides were wrong. Abraham Lincoln, the new Republican president, led the Union. Jefferson Davis led the Confederacy. The Union had more people, factories, and railroads, and it followed an overall strategy called the Anaconda Plan. The Confederacy had better generals, including Robert E. Lee, who turned down command of the Union army to defend his home state of Virginia. Stonewall Jackson and Lee outmaneuvered Union forces again and again. The first turning point came at the Battle of Antietam in September 1862, the bloodiest single day in American history. Five days later, Lincoln issued the Emancipation Proclamation, which declared all enslaved people in Confederate states to be free. Soon Black men formed the USCT, the United States Colored Troops, and nearly 180,000 served. The 54th Massachusetts led a brave assault on Fort Wagner. In July 1863, Union forces won the Battle of Gettysburg and the Siege of Vicksburg on back to back days. Lincoln gave the Gettysburg Address. Volunteer nurses like Clara Barton saved lives. By 1864, Ulysses S. Grant commanded all Union armies. William T. Sherman captured Atlanta and pioneered total war on his March to the Sea. Lee surrendered at Appomattox in April 1865. Five days later, Lincoln was assassinated. In December 1865, the 13th Amendment ended slavery throughout the country. Reconstruction tried to rebuild the South, with both real successes and major failures."
+        }
+    ],
     "vocabulary": [
         {
             "term": "sectionalism",
@@ -911,6 +931,258 @@
             ],
             "correct": 2,
             "explanation": "On April 14, 1865, John Wilkes Booth shot Lincoln during a play at Ford's Theatre in Washington. Lincoln died the next morning. His death changed the course of Reconstruction. Vice President Andrew Johnson took over and was far less sympathetic to Black rights than Lincoln had been.",
+            "topic": "The War Itself"
+        },
+        {
+            "question": "Which best describes the plantation economy of the American South before the Civil War?",
+            "options": [
+                "Small family farms that grew food for local markets",
+                "An economic system based on large farms that used enslaved labor to grow cash crops like cotton, tobacco, and sugar",
+                "Factories powered by water wheels along Southern rivers",
+                "A trading economy built on shipping and merchant banking"
+            ],
+            "correct": 1,
+            "explanation": "Southern landowners built large farms called plantations and forced enslaved Black people to do the labor. The whole system depended on slavery. Without enslaved workers, the plantation economy could not have existed.",
+            "topic": "Sectionalism"
+        },
+        {
+            "question": "What was the main difference between a free state and a slave state before the Civil War?",
+            "options": [
+                "Free states had factories while slave states had farms",
+                "Slavery was illegal in a free state and legal in a slave state",
+                "Free states were larger than slave states",
+                "Free states had more people than slave states"
+            ],
+            "correct": 1,
+            "explanation": "A free state was one where slavery was illegal. A slave state was one where it was legal. The big political fight before the Civil War was about whether each new state added to the country would be free or slave, because each new state shifted the balance of power in the Senate.",
+            "topic": "Sectionalism"
+        },
+        {
+            "question": "Why was Harriet Tubman called \"Moses\" by the people she helped?",
+            "options": [
+                "She wrote a famous book about the Bible",
+                "Like the biblical figure, she led her people out of bondage by guiding enslaved people to freedom on the Underground Railroad",
+                "She was a preacher in a Northern church",
+                "She wore long robes like the prophet Moses"
+            ],
+            "correct": 1,
+            "explanation": "After escaping slavery herself in 1849, Tubman went back into the South about thirteen times as an Underground Railroad conductor. She helped around seventy enslaved people reach freedom. She never got caught and never lost a single person.",
+            "topic": "Sectionalism"
+        },
+        {
+            "question": "How did William Lloyd Garrison's approach to ending slavery differ from many earlier abolitionists?",
+            "options": [
+                "He wanted to end slavery slowly over many years",
+                "He demanded that slavery end immediately and refused to soften his words",
+                "He believed slavery should be ended only in new western territories",
+                "He thought slavery should continue but with better treatment of enslaved people"
+            ],
+            "correct": 1,
+            "explanation": "Most early abolitionists wanted slavery ended gradually. Garrison's newspaper The Liberator demanded immediate emancipation starting in 1831. Southern states hated him so much that one offered five thousand dollars for his arrest.",
+            "topic": "Sectionalism"
+        },
+        {
+            "question": "Why did the Mason Dixon Line become important before the Civil War?",
+            "options": [
+                "It marked the border between the United States and Canada",
+                "It became the unofficial border between free states in the North and slave states in the South",
+                "It was the line that Lewis and Clark followed on their expedition",
+                "It marked where the railroads ended in the West"
+            ],
+            "correct": 1,
+            "explanation": "The line had originally been drawn in colonial times to settle a property dispute between Pennsylvania and Maryland. By the 1800s, Americans started using it as shorthand for the divide between two ways of life: free North and slave South.",
+            "topic": "Sectionalism"
+        },
+        {
+            "question": "Which statement BEST captures why the North and South grew so far apart before the Civil War?",
+            "options": [
+                "They spoke different languages and had different religions",
+                "Their economies were based on completely different labor systems, with the North relying on free wage workers and the South relying on enslaved workers",
+                "The North had a king while the South had a president",
+                "They were originally founded by different countries"
+            ],
+            "correct": 1,
+            "explanation": "The economic divide was the foundation of sectionalism. Northern factories ran on paid workers who could quit. Southern plantations ran on enslaved workers who could not. These two systems were incompatible, and the country could not stay half free and half slave forever.",
+            "topic": "Sectionalism"
+        },
+        {
+            "question": "What did Senator Stephen Douglas mean by popular sovereignty?",
+            "options": [
+                "The President should be chosen by popular vote, not the Electoral College",
+                "The settlers in each new territory should vote on whether to allow slavery there",
+                "States should be allowed to ignore federal laws they disagreed with",
+                "Slavery should be voted on by Congress every four years"
+            ],
+            "correct": 1,
+            "explanation": "Douglas pushed popular sovereignty as a way to settle the slavery question without Congress having to take sides. He believed it would be peaceful. Instead, it led to violence in places like Bleeding Kansas, because both sides rushed in to control the vote.",
+            "topic": "Road to War"
+        },
+        {
+            "question": "What major change did the Kansas Nebraska Act of 1854 make to American law?",
+            "options": [
+                "It freed all enslaved people in the United States",
+                "It threw out the slavery line drawn by the Missouri Compromise and let settlers in those territories vote on slavery themselves",
+                "It made California a slave state",
+                "It banned slavery in all western territories"
+            ],
+            "correct": 1,
+            "explanation": "The Missouri Compromise had stood for 34 years, banning slavery north of a set line. The Kansas Nebraska Act tore up that compromise and replaced it with popular sovereignty. The reaction in the North was furious, and the new Republican Party formed in opposition.",
+            "topic": "Road to War"
+        },
+        {
+            "question": "Why did the Dred Scott decision say Congress had no power to ban slavery in the territories?",
+            "options": [
+                "Because the Supreme Court ruled that enslaved people were property protected by the Constitution",
+                "Because Congress had voted to give that power to state governments",
+                "Because the Constitution explicitly allowed slavery in every state",
+                "Because President Lincoln had signed an executive order saying so"
+            ],
+            "correct": 0,
+            "explanation": "The 1857 ruling said enslaved people were property under the Constitution, and that the federal government could not take property away. To Northerners, this raised a terrifying possibility: if Congress could not ban slavery in the West, what would stop slavery from spreading into free states themselves?",
+            "topic": "Road to War"
+        },
+        {
+            "question": "In the Lincoln Douglas Debates, what was the key difference between the two candidates' views on slavery?",
+            "options": [
+                "Lincoln wanted to end slavery immediately while Douglas wanted to keep it forever",
+                "Lincoln argued slavery was a moral wrong that should not spread, while Douglas defended popular sovereignty and said each state should decide",
+                "Lincoln supported slavery and Douglas opposed it",
+                "They actually agreed on slavery and disagreed about taxes"
+            ],
+            "correct": 1,
+            "explanation": "Lincoln did not call himself an abolitionist, but he argued clearly that slavery was a moral wrong and had to be stopped from spreading. Douglas defended his idea of popular sovereignty. Lincoln lost the Senate race but became famous, which helped him win the presidency two years later.",
+            "topic": "Road to War"
+        },
+        {
+            "question": "What had the Missouri Compromise hoped to settle in 1820, and why did it eventually fail?",
+            "options": [
+                "It hoped to end slavery, but plantation owners refused to accept it",
+                "It hoped to balance free and slave states by drawing a geographic line, but later events like the Kansas Nebraska Act tore that line up",
+                "It hoped to make all new states slave states, but the North refused",
+                "It hoped to give California to Mexico, but California voted to stay American"
+            ],
+            "correct": 1,
+            "explanation": "The Missouri Compromise tried to keep peace by drawing a line across the Louisiana Purchase. North of the line, no slavery. South of it, slavery allowed. The line stood for 34 years until the Kansas Nebraska Act of 1854 threw it out. Each compromise bought time, but eventually each one was destroyed.",
+            "topic": "Road to War"
+        },
+        {
+            "question": "Why did the Election of 1860 cause Southern states to leave the Union, even though Lincoln had not promised to end slavery?",
+            "options": [
+                "Lincoln had said clearly that slavery was wrong and should not spread, and he had won without a single Southern electoral vote, which terrified the South",
+                "Lincoln had promised to free every enslaved person within his first year",
+                "Lincoln was secretly an abolitionist who had hidden his views during the campaign",
+                "Lincoln had refused to take the oath of office"
+            ],
+            "correct": 0,
+            "explanation": "Lincoln had only promised to keep slavery from spreading, not to end it. But the fact that he had won without any Southern support terrified Southerners. They believed the federal government had now turned against them. Within six weeks of the election, South Carolina announced its secession.",
+            "topic": "Road to War"
+        },
+        {
+            "question": "How did the Fugitive Slave Law of 1850 change life for Northerners who had ignored slavery before?",
+            "options": [
+                "It allowed Northerners to legally free enslaved people without penalty",
+                "It forced Northerners to help capture and return escaped enslaved people, bringing slavery into their own towns and turning many of them against the system",
+                "It paid Northerners to move south and become plantation owners",
+                "It made it illegal to publish anti slavery newspapers in the North"
+            ],
+            "correct": 1,
+            "explanation": "Slave catchers came into Northern cities. Anyone who refused to help, or who helped a runaway, could be fined or jailed. For Northerners who had quietly looked away from slavery for years, this law put the system right in their faces. Many turned against slavery for the first time.",
+            "topic": "Road to War"
+        },
+        {
+            "question": "Who were the two presidents at the start of the Civil War?",
+            "options": [
+                "Abraham Lincoln of the Union and Andrew Johnson of the Confederacy",
+                "Abraham Lincoln of the Union and Jefferson Davis of the Confederacy",
+                "Stephen Douglas of the Union and Robert E. Lee of the Confederacy",
+                "Ulysses S. Grant of the Union and William T. Sherman of the Confederacy"
+            ],
+            "correct": 1,
+            "explanation": "Lincoln, the Republican, had just won the 1860 election. Davis, a former US senator and Secretary of War from Mississippi, was chosen as president of the new Confederate States of America. The two men had very different personalities and led their sides in very different ways.",
+            "topic": "The War Itself"
+        },
+        {
+            "question": "Why did Robert E. Lee turn down command of the Union army at the start of the war?",
+            "options": [
+                "He believed the Confederacy would clearly win",
+                "He could not raise his sword against his home state of Virginia",
+                "He had retired from the military and refused to come back",
+                "Lincoln canceled the offer at the last minute"
+            ],
+            "correct": 1,
+            "explanation": "Lee had spent his entire career in the United States Army. When Lincoln offered him command of the Union forces in Virginia, Lee refused. He went south to defend his state. Lee opposed slavery personally, but he believed his loyalty to Virginia came first.",
+            "topic": "The War Itself"
+        },
+        {
+            "question": "What was the Anaconda Plan?",
+            "options": [
+                "A Confederate plan to attack Washington DC",
+                "The Union's overall war strategy of blockading Southern ports, capturing the Mississippi River, and slowly squeezing the South into surrender",
+                "A failed plan to invade Canada",
+                "A plan to free all enslaved people in one day"
+            ],
+            "correct": 1,
+            "explanation": "Named after the snake that crushes its prey, the Anaconda Plan was mocked at first because it sounded too slow. In the end, it was almost exactly what won the war. Vicksburg gave the Union the Mississippi. The naval blockade strangled Southern trade. Sherman supplied the constricting pressure.",
+            "topic": "The War Itself"
+        },
+        {
+            "question": "Why was the fall of Vicksburg in July 1863 a turning point of the war?",
+            "options": [
+                "It captured the Confederate capital",
+                "It gave the Union control of the entire Mississippi River and split the Confederacy in two",
+                "It killed Robert E. Lee",
+                "It ended the war"
+            ],
+            "correct": 1,
+            "explanation": "The Siege of Vicksburg lasted 47 days. When the city surrendered on July 4, 1863, the Confederacy was split in two. Texas, Arkansas, and Louisiana were now sealed off from the rest of the South. Combined with Gettysburg the day before, July 1863 was the moment the Confederacy lost its hopes of winning.",
+            "topic": "The War Itself"
+        },
+        {
+            "question": "What was the USCT, and why did it matter for the war?",
+            "options": [
+                "A Confederate spy organization",
+                "The United States Colored Troops, the official designation for nearly 180,000 Black soldiers who served in the Union Army by the war's end",
+                "A weapon used at the Battle of Gettysburg",
+                "A peace treaty proposed in 1863"
+            ],
+            "correct": 1,
+            "explanation": "The Emancipation Proclamation opened the door for Black men to enlist in the Union Army for the first time. They formed the USCT. Nearly 180,000 served, about 10 percent of all Union soldiers. Many had been enslaved themselves. Their service helped win the war and proved that Black men would fight for their own freedom.",
+            "topic": "The War Itself"
+        },
+        {
+            "question": "Who were the Copperheads, and what did they want?",
+            "options": [
+                "Confederate soldiers who specialized in fighting in mountainous terrain",
+                "Northern Democrats who opposed the war and called for an immediate peace settlement with the Confederacy, even if it meant letting slavery continue",
+                "Abolitionists who wore copper jewelry as a symbol",
+                "A regiment of soldiers from Tennessee"
+            ],
+            "correct": 1,
+            "explanation": "The Copperheads were Northern Democrats who wanted the war to end immediately. The name came from a poisonous snake. Republicans used the term as an insult. Sherman's capture of Atlanta in 1864 helped Lincoln win re-election against the Copperheads, ending their hopes of negotiating peace with the Confederacy.",
+            "topic": "The War Itself"
+        },
+        {
+            "question": "Who was Stonewall Jackson, and how did he die?",
+            "options": [
+                "A Union general who was killed at Gettysburg",
+                "A famous Confederate general under Lee who was accidentally shot by his own men at the Battle of Chancellorsville",
+                "A Confederate spy who was hanged in 1862",
+                "Lincoln's first Secretary of War"
+            ],
+            "correct": 1,
+            "explanation": "Jackson earned his nickname at the First Battle of Bull Run for standing firm under fire. He served as Lee's most trusted commander. At Chancellorsville in May 1863, he was shot by his own men in the darkness while scouting. He died eight days later. Lee never found a replacement who could match Jackson's speed and daring.",
+            "topic": "The War Itself"
+        },
+        {
+            "question": "What does Reconstruction refer to in American history?",
+            "options": [
+                "The period from 1865 to 1877 when the United States tried to rebuild after the Civil War and integrate formerly enslaved people as full citizens",
+                "The rebuilding of Washington DC after the war",
+                "The construction of the transcontinental railroad",
+                "The negotiations that ended the Civil War"
+            ],
+            "correct": 0,
+            "explanation": "Reconstruction had real successes. The 14th and 15th Amendments granted Black Americans citizenship and voting rights. Black congressmen were elected from Southern states for the first time. But Reconstruction also faced violent resistance from white Southerners. By 1877, federal protection was withdrawn, and the gains were rolled back over the decades that followed.",
             "topic": "The War Itself"
         }
     ],
