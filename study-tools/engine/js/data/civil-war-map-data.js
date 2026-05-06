@@ -24,7 +24,7 @@
             type: 'battle',
             side: 'battle',
             year: 1861,
-            x: 632, y: 442,
+            x: 516.3, y: 577.9,
             description: 'The federal fort in Charleston Harbor where the Civil War began on April 12, 1861, when Confederate cannons opened fire.'
         },
         {
@@ -33,7 +33,7 @@
             type: 'battle',
             side: 'battle',
             year: 1861,
-            x: 642, y: 202,
+            x: 588.5, y: 357.7,
             description: 'Site of the First Battle of Bull Run in July 1861. The Confederate victory shattered Northern hopes for a quick war.'
         },
         {
@@ -42,7 +42,7 @@
             type: 'battle',
             side: 'battle',
             year: 1862,
-            x: 339, y: 394,
+            x: 261.7, y: 492.2,
             description: 'April 1862 battle in Tennessee. Over 23,000 casualties in two days shocked the nation and ended dreams of an easy war.'
         },
         {
@@ -51,7 +51,7 @@
             type: 'battle',
             side: 'battle',
             year: 1862,
-            x: 339, y: 345,
+            x: 271.8, y: 442.2,
             description: 'February 1862. Grant’s capture of this Tennessee River fort opened the Confederate heartland to invasion.'
         },
         {
@@ -60,7 +60,7 @@
             type: 'battle',
             side: 'battle',
             year: 1862,
-            x: 355, y: 340,
+            x: 276.1, y: 442.7,
             labelOffset: { x: 0, y: 18 },
             description: 'February 1862. Grant’s "unconditional surrender" demand here made him a Northern hero and broke the Confederate defensive line.'
         },
@@ -70,7 +70,7 @@
             type: 'battle',
             side: 'battle',
             year: 1862,
-            x: 707, y: 269,
+            x: 622.6, y: 424.6,
             labelLeader: { x: 788, y: 280 },
             description: 'March 1862 naval battle between the ironclads USS Monitor and CSS Virginia. The age of wooden warships ended that day.'
         },
@@ -80,7 +80,7 @@
             type: 'battle',
             side: 'battle',
             year: 1862,
-            x: 640, y: 175,
+            x: 580.3, y: 330.6,
             labelLeader: { x: 558, y: 175 },
             description: 'September 17, 1862, also called Antietam. The bloodiest single day in American history. Lincoln issued the Emancipation Proclamation after the Union victory.'
         },
@@ -90,7 +90,7 @@
             type: 'battle',
             side: 'battle',
             year: 1863,
-            x: 278, y: 510,
+            x: 185.5, y: 592.0,
             description: 'July 4, 1863. After a 47-day siege, Vicksburg surrendered to Grant. The Union now controlled the Mississippi River and split the Confederacy in two.'
         },
         {
@@ -99,7 +99,7 @@
             type: 'battle',
             side: 'battle',
             year: 1863,
-            x: 655, y: 155,
+            x: 595.8, y: 316.2,
             description: 'July 1–3, 1863. Lee’s second invasion of the North ended in disaster. Over 50,000 casualties. The turning point of the war.'
         },
         {
@@ -108,7 +108,7 @@
             type: 'battle',
             side: 'battle',
             year: 1864,
-            x: 475, y: 451,
+            x: 380.6, y: 542.4,
             description: 'September 1864. Sherman’s capture of Atlanta secured Lincoln’s re-election and split the Deep South.'
         },
         {
@@ -117,7 +117,7 @@
             type: 'battle',
             side: 'battle',
             year: 1864,
-            x: 680, y: 263,
+            x: 590.7, y: 415.2,
             labelLeader: { x: 715, y: 318 },
             description: 'June 1864 – March 1865. The 9-month siege of Petersburg cut off Richmond’s supplies and finally broke Lee’s army.'
         },
@@ -127,7 +127,7 @@
             type: 'battle',
             side: 'battle',
             year: 1865,
-            x: 648, y: 356,
+            x: 563.0, y: 486.3,
             description: 'March 1865. The last major Confederate offensive against Sherman’s army. The Confederacy was already collapsing.'
         },
         {
@@ -136,7 +136,7 @@
             type: 'battle',
             side: 'battle',
             year: 1865,
-            x: 622, y: 258,
+            x: 548.7, y: 409.7,
             description: 'April 9, 1865. Lee surrendered to Grant in the parlor of a small Virginia farmhouse, effectively ending the Civil War.'
         },
 
@@ -147,7 +147,7 @@
             type: 'capital',
             side: 'union',
             year: null,
-            x: 665, y: 195,
+            x: 601.7, y: 351.7,
             labelLeader: { x: 783, y: 195 },
             description: 'Capital of the United States. Lincoln directed the Union war effort from here. Site of his assassination at Ford’s Theatre in April 1865.'
         },
@@ -157,7 +157,7 @@
             type: 'capital',
             side: 'confederate',
             year: null,
-            x: 678, y: 247,
+            x: 589.7, y: 403.5,
             labelLeader: { x: 788, y: 247 },
             description: 'Capital of the Confederate States of America. Located only 100 miles from Washington D.C., it was the focus of much of the war’s fighting.'
         },
@@ -167,7 +167,7 @@
             type: 'capital',
             side: 'union',
             year: null,
-            x: 747, y: 96,
+            x: 692.8, y: 281.8,
             description: 'Largest city in the Union. Site of the July 1863 Draft Riots, the worst civil disorder in American history before the 20th century.'
         },
 
@@ -178,7 +178,7 @@
             type: 'strategic',
             side: 'confederate',
             year: null,
-            x: 312, y: 618,
+            x: 209.7, y: 675.5,
             description: 'The South’s largest city and main port. Captured by the Union Navy in April 1862, an early blow to the Anaconda Plan’s blockade strategy.'
         },
         {
@@ -187,7 +187,7 @@
             type: 'strategic',
             side: 'confederate',
             year: null,
-            x: 286, y: 396,
+            x: 210.4, y: 491.9,
             description: 'Major Mississippi River city. Captured by the Union Navy in June 1862 as part of the campaign to control the river.'
         },
         {
@@ -196,7 +196,7 @@
             type: 'strategic',
             side: 'confederate',
             year: null,
-            x: 581, y: 498,
+            x: 479.8, y: 601.5,
             description: 'Endpoint of Sherman’s March to the Sea. Captured December 1864. Sherman famously offered the city to Lincoln as a Christmas gift.'
         },
         {
@@ -205,7 +205,7 @@
             type: 'strategic',
             side: 'confederate',
             year: null,
-            x: 584, y: 411,
+            x: 481.5, y: 533.4,
             description: 'Capital of South Carolina, the first state to secede. Sherman’s troops burned much of the city in February 1865.'
         }
     ];
