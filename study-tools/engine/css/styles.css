@@ -1316,6 +1316,37 @@ body.light-mode .fc-back .fc-tier-badge {
 .fc-textbook-link:hover { opacity: 1; text-decoration: underline; }
 .fc-textbook-link i { font-size: 0.9em; }
 
+/* "More" disclosure on the back face: keeps the definition the hero on flip;
+   example, explanation, textbook link, and the personal-example textarea
+   live behind this single toggle. */
+.fc-more-wrap {
+    margin-top: 18px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    padding-top: 12px;
+}
+.fc-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 0.82em;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 4px 0;
+    font-family: inherit;
+    opacity: 0.75;
+    transition: opacity 0.2s;
+}
+.fc-more-btn:hover, .fc-more-btn.active { opacity: 1; }
+.fc-more-btn i { font-size: 0.85em; }
+.fc-more-panel {
+    margin-top: 10px;
+    animation: fadeIn 0.2s ease;
+}
+.fc-more-panel .fc-example { margin-top: 0; }
+
 /* Confidence rating buttons */
 .fc-confidence {
     width: 100%;

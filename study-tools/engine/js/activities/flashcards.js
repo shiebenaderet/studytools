@@ -509,15 +509,45 @@ StudyEngine.registerActivity({
         const defText = document.createElement('div');
         defText.textContent = card.definition;
         backContent.appendChild(defText);
-        if (card.example) {
+
+        // Everything below the definition lives inside a collapsed "More" panel
+        // so the first thing students see on flip is just the definition (+ image).
+        // They opt-in to example, explanation, textbook link, and personal notes
+        // by clicking More. This dramatically reduces the perceived text on the
+        // back face without losing any content.
+        var sectionInfo = this._termSectionMap[card.term];
+        var hasExample = !!card.example;
+        var hasExplain = !!card.simpleExplanation;
+        var hasTextbook = !!sectionInfo;
+        // My-example is always available (any card can be annotated), so More
+        // always renders. But if literally nothing optional exists for this card,
+        // skip it.
+        var hasOptional = hasExample || hasExplain || hasTextbook;
+
+        var moreWrap = document.createElement('div');
+        moreWrap.className = 'fc-more-wrap';
+
+        var moreBtn = document.createElement('button');
+        moreBtn.className = 'fc-more-btn';
+        var moreIcon = document.createElement('i');
+        moreIcon.className = 'fas fa-chevron-down';
+        moreBtn.appendChild(moreIcon);
+        var moreLabel = document.createElement('span');
+        moreLabel.textContent = hasOptional ? ' More' : ' Add a note';
+        moreBtn.appendChild(moreLabel);
+
+        var morePanel = document.createElement('div');
+        morePanel.className = 'fc-more-panel';
+        morePanel.style.display = 'none';
+
+        if (hasExample) {
             const exText = document.createElement('div');
             exText.className = 'fc-example';
             exText.textContent = card.example;
-            backContent.appendChild(exText);
+            morePanel.appendChild(exText);
         }
-        // "Read in textbook" deep-link
-        var sectionInfo = this._termSectionMap[card.term];
-        if (sectionInfo) {
+
+        if (hasTextbook) {
             var tbLink = document.createElement('button');
             tbLink.className = 'fc-textbook-link';
             var tbLinkIcon = document.createElement('i');
@@ -528,10 +558,10 @@ StudyEngine.registerActivity({
                 e.stopPropagation();
                 StudyEngine.activateActivity('textbook', [sectionInfo.segmentId, sectionInfo.sectionId]);
             });
-            backContent.appendChild(tbLink);
+            morePanel.appendChild(tbLink);
         }
 
-        if (card.simpleExplanation) {
+        if (hasExplain) {
             const explainBtn = document.createElement('button');
             explainBtn.className = 'fc-explain-btn';
             var bulbIcon = document.createElement('i');
@@ -550,11 +580,11 @@ StudyEngine.registerActivity({
                 explainBtn.classList.toggle('active', !showing);
                 setTimeout(() => self._syncSceneHeight(), 10);
             });
-            backContent.appendChild(explainBtn);
-            backContent.appendChild(explainBox);
+            morePanel.appendChild(explainBtn);
+            morePanel.appendChild(explainBox);
         }
 
-        // "Your Example" section
+        // Your-example: always available
         const unitId = StudyEngine.config.unit.id;
         const myExamplesKey = 'fc-my-examples-' + unitId;
         const myExamples = JSON.parse(localStorage.getItem(myExamplesKey) || '{}');
@@ -592,8 +622,22 @@ StudyEngine.registerActivity({
             if (!showing) myExInput.focus();
             setTimeout(() => selfRef._syncSceneHeight(), 10);
         });
-        backContent.appendChild(myExBtn);
-        backContent.appendChild(myExBox);
+        morePanel.appendChild(myExBtn);
+        morePanel.appendChild(myExBox);
+
+        var moreSelf = this;
+        moreBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var showing = morePanel.style.display !== 'none';
+            morePanel.style.display = showing ? 'none' : 'block';
+            moreBtn.classList.toggle('active', !showing);
+            moreIcon.className = showing ? 'fas fa-chevron-down' : 'fas fa-chevron-up';
+            setTimeout(() => moreSelf._syncSceneHeight(), 10);
+        });
+
+        moreWrap.appendChild(moreBtn);
+        moreWrap.appendChild(morePanel);
+        backContent.appendChild(moreWrap);
 
         // Category badge
         const existingBadge = scene.querySelector('.fc-cat-badge');
