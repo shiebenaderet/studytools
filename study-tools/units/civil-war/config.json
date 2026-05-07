@@ -1444,5 +1444,203 @@
         "How might an enslaved person, a Northern factory worker, and a Southern plantation owner each see {term} differently?",
         "What did {term} cost in human lives, communities, or freedoms? Was the outcome worth that cost?",
         "Pick one decision someone made during {term}. If you had been in their place, would you have done the same thing?"
-    ]
+    ],
+    "historicalFlavor": {
+        "quotes": [
+            {
+                "text": "A house divided against itself cannot stand. I believe this government cannot endure permanently half slave and half free.",
+                "author": "Abraham Lincoln",
+                "source": "Lincoln's Republican State Convention speech, June 16, 1858",
+                "sourceUrl": "https://en.wikiquote.org/wiki/Abraham_Lincoln",
+                "portrait": "images/portraits/abraham-lincoln.jpg"
+            },
+            {
+                "text": "Government of the people, by the people, for the people, shall not perish from the earth.",
+                "author": "Abraham Lincoln",
+                "source": "Gettysburg Address, November 19, 1863",
+                "sourceUrl": "https://en.wikiquote.org/wiki/Abraham_Lincoln",
+                "portrait": "images/portraits/abraham-lincoln.jpg"
+            },
+            {
+                "text": "With malice toward none, with charity for all, with firmness in the right as God gives us to see the right, let us strive on to finish the work we are in.",
+                "author": "Abraham Lincoln",
+                "source": "Second Inaugural Address, March 4, 1865",
+                "sourceUrl": "https://en.wikiquote.org/wiki/Abraham_Lincoln",
+                "portrait": "images/portraits/abraham-lincoln.jpg"
+            },
+            {
+                "text": "I have always thought that all men should be free; but if any should be slaves, it should be first those who desire it for themselves, and secondly, those who desire it for others.",
+                "author": "Abraham Lincoln",
+                "source": "Letter, attributed to 1858",
+                "sourceUrl": "https://en.wikiquote.org/wiki/Abraham_Lincoln",
+                "portrait": "images/portraits/abraham-lincoln.jpg"
+            },
+            {
+                "text": "Once you learn to read, you will be forever free.",
+                "author": "Frederick Douglass",
+                "source": "Narrative of the Life of Frederick Douglass, 1845",
+                "sourceUrl": "https://en.wikiquote.org/wiki/Frederick_Douglass",
+                "portrait": "images/portraits/frederick-douglass.jpg"
+            },
+            {
+                "text": "If there is no struggle, there is no progress. Power concedes nothing without a demand.",
+                "author": "Frederick Douglass",
+                "source": "West India Emancipation speech, August 3, 1857",
+                "sourceUrl": "https://en.wikiquote.org/wiki/Frederick_Douglass",
+                "portrait": "images/portraits/frederick-douglass.jpg"
+            },
+            {
+                "text": "I freed a thousand slaves. I could have freed a thousand more if only they knew they were slaves.",
+                "author": "Harriet Tubman",
+                "source": "Attributed",
+                "sourceUrl": "https://en.wikiquote.org/wiki/Harriet_Tubman",
+                "portrait": "images/portraits/harriet-tubman.jpg"
+            },
+            {
+                "text": "It is well that war is so terrible, otherwise we would grow too fond of it.",
+                "author": "Robert E. Lee",
+                "source": "Said to General James Longstreet at the Battle of Fredericksburg, December 13, 1862",
+                "sourceUrl": "https://en.wikiquote.org/wiki/Robert_E._Lee",
+                "portrait": "images/portraits/robert-e-lee.jpg"
+            },
+            {
+                "text": "I propose to fight it out on this line if it takes all summer.",
+                "author": "Ulysses S. Grant",
+                "source": "Dispatch from Spotsylvania Court House, May 11, 1864",
+                "sourceUrl": "https://en.wikiquote.org/wiki/Ulysses_S._Grant",
+                "portrait": "images/portraits/ulysses-s-grant.jpg"
+            },
+            {
+                "text": "War is hell.",
+                "author": "William T. Sherman",
+                "source": "Commencement address at Michigan Military Academy, June 19, 1879",
+                "sourceUrl": "https://en.wikiquote.org/wiki/William_Tecumseh_Sherman",
+                "portrait": "images/portraits/william-t-sherman.jpg"
+            },
+            {
+                "text": "All we ask is to be let alone.",
+                "author": "Jefferson Davis",
+                "source": "Inaugural Address as President of the Confederacy, February 18, 1861",
+                "sourceUrl": "https://en.wikiquote.org/wiki/Jefferson_Davis",
+                "portrait": "images/portraits/jefferson-davis.jpg"
+            },
+            {
+                "text": "Always mystify, mislead, and surprise the enemy if possible.",
+                "author": "Stonewall Jackson",
+                "source": "Quoted in his obituary by Richard Taylor, 1879",
+                "sourceUrl": "https://en.wikiquote.org/wiki/Stonewall_Jackson",
+                "portrait": "images/portraits/stonewall-jackson.png"
+            },
+            {
+                "text": "I may be compelled to face danger, but never fear it, and while our soldiers can stand and fight, I can stand and feed and nurse them.",
+                "author": "Clara Barton",
+                "source": "Letter, December 1862",
+                "sourceUrl": "https://en.wikiquote.org/wiki/Clara_Barton",
+                "portrait": "images/portraits/clara-barton.jpg"
+            },
+            {
+                "text": "I am in earnest, I will not equivocate, I will not excuse, I will not retreat a single inch, and I will be heard.",
+                "author": "William Lloyd Garrison",
+                "source": "First issue of The Liberator, January 1, 1831",
+                "sourceUrl": "https://en.wikiquote.org/wiki/William_Lloyd_Garrison",
+                "portrait": "images/portraits/william-lloyd-garrison.jpg"
+            },
+            {
+                "text": "I do not believe that every citizen on becoming a Senator has to take an oath that he will not be a man.",
+                "author": "Stephen Douglas",
+                "source": "Senate speech on the Compromise of 1850",
+                "sourceUrl": "https://en.wikiquote.org/wiki/Stephen_A._Douglas",
+                "portrait": "images/portraits/stephen-douglas.jpg"
+            },
+            {
+                "text": "Truth is powerful and it prevails.",
+                "author": "Sojourner Truth",
+                "source": "Quoted in National Anti-Slavery Standard, 1853",
+                "sourceUrl": "https://en.wikiquote.org/wiki/Sojourner_Truth",
+                "portrait": "images/vocab/abolitionism.jpg"
+            }
+        ],
+        "funFacts": [
+            {
+                "text": "The Battle of Antietam, on September 17, 1862, killed or wounded over 22,000 soldiers in a single day, more American casualties than D-Day.",
+                "source": "American Battlefield Trust",
+                "sourceUrl": "https://www.battlefields.org/learn/civil-war/battles/antietam"
+            },
+            {
+                "text": "About 1 in 4 soldiers who fought in the Civil War died from disease or battle, the highest casualty rate of any war the United States has ever fought.",
+                "source": "American Battlefield Trust",
+                "sourceUrl": "https://www.battlefields.org/learn/articles/civil-war-casualties"
+            },
+            {
+                "text": "Lincoln's Gettysburg Address was only 272 words long and took about two minutes to deliver. The main speaker that day, Edward Everett, spoke for two hours, but his speech is mostly forgotten.",
+                "source": "National Park Service",
+                "sourceUrl": "https://www.nps.gov/gett/learn/historyculture/gettysburg-address.htm"
+            },
+            {
+                "text": "Harriet Tubman returned to the South about 13 times to lead enslaved people to freedom on the Underground Railroad. She was so good at it that her followers nicknamed her 'Moses,' and she was never caught.",
+                "source": "National Park Service",
+                "sourceUrl": "https://www.nps.gov/people/harriet-tubman.htm"
+            },
+            {
+                "text": "Nearly 200,000 Black soldiers served in the Union Army and Navy, making up about 10 percent of all Union forces. Sixteen of them earned the Medal of Honor.",
+                "source": "National Archives",
+                "sourceUrl": "https://www.archives.gov/education/lessons/blacks-civil-war"
+            },
+            {
+                "text": "When Confederate forces fired on Fort Sumter on April 12, 1861, no Union soldiers were killed in the bombardment. The first deaths of the war came two days later, during a 100-gun salute as the fort surrendered.",
+                "source": "National Park Service",
+                "sourceUrl": "https://www.nps.gov/fosu/index.htm"
+            },
+            {
+                "text": "After Vicksburg surrendered to Grant on July 4, 1863, residents of the city refused to celebrate Independence Day for the next 81 years.",
+                "source": "American Battlefield Trust",
+                "sourceUrl": "https://www.battlefields.org/learn/civil-war/battles/vicksburg"
+            },
+            {
+                "text": "Robert E. Lee was offered command of the Union army in April 1861. He refused so he could fight for his home state of Virginia, even though he personally opposed slavery and secession.",
+                "source": "American Battlefield Trust",
+                "sourceUrl": "https://www.battlefields.org/learn/biographies/robert-e-lee"
+            },
+            {
+                "text": "Lincoln grew his famous beard in 1860 because of a letter from an 11-year-old girl named Grace Bedell, who told him whiskers would help him win the election.",
+                "source": "Library of Congress",
+                "sourceUrl": "https://www.loc.gov/collections/abraham-lincoln-papers/articles-and-essays/grace-bedell/"
+            },
+            {
+                "text": "Uncle Tom's Cabin sold 300,000 copies in its first year and was translated into more than 60 languages. It made Harriet Beecher Stowe one of the most famous writers in the world.",
+                "source": "Library of Congress",
+                "sourceUrl": "https://www.loc.gov/exhibits/treasures/trr037.html"
+            },
+            {
+                "text": "Sherman's troops made 'Sherman's neckties' by heating Confederate railroad tracks over fires and bending them around trees, making the rails impossible to use without melting them down again.",
+                "source": "American Battlefield Trust",
+                "sourceUrl": "https://www.battlefields.org/learn/articles/shermans-march-sea"
+            },
+            {
+                "text": "Clara Barton was nicknamed 'the Angel of the Battlefield' for treating wounded soldiers under fire. After the war, she founded the American Red Cross in 1881.",
+                "source": "American Red Cross",
+                "sourceUrl": "https://www.redcross.org/about-us/who-we-are/history/clara-barton.html"
+            },
+            {
+                "text": "The youngest soldier in the Civil War may have been Edward Black, a Union drummer boy who enlisted at age 8. The oldest was John Burns, a 70-year-old veteran of the War of 1812 who fought at Gettysburg.",
+                "source": "American Battlefield Trust",
+                "sourceUrl": "https://www.battlefields.org/learn/articles/young-soldiers-civil-war"
+            },
+            {
+                "text": "Lincoln signed the Emancipation Proclamation on January 1, 1863, but his hand was sore from shaking thousands of hands at the New Year's reception, so he had to wait before signing so the signature would not look weak.",
+                "source": "National Archives",
+                "sourceUrl": "https://www.archives.gov/exhibits/featured-documents/emancipation-proclamation"
+            },
+            {
+                "text": "John Wilkes Booth shot Lincoln on April 14, 1865, just five days after Lee's surrender at Appomattox. Lincoln was the first U.S. president to be assassinated.",
+                "source": "National Park Service",
+                "sourceUrl": "https://www.nps.gov/foth/index.htm"
+            },
+            {
+                "text": "About 750,000 soldiers died in the Civil War, more than the combined American deaths of every other war from the Revolution through the Korean War.",
+                "source": "American Battlefield Trust",
+                "sourceUrl": "https://www.battlefields.org/learn/articles/civil-war-casualties"
+            }
+        ]
+    }
 }
