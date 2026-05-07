@@ -46,7 +46,12 @@ StudyEngine.registerActivity({
     },
 
     render(container, config) {
-        this.questions = MasteryManager.getUnlockedQuestions(config.unit.id, config, 'shortAnswerQuestions') || [];
+        // westward-expansion: gating temporarily lifted so students can answer
+        // short-answer questions without first unlocking categories through
+        // flashcards.
+        this.questions = config.unit.id === 'westward-expansion'
+            ? (config.shortAnswerQuestions || []).slice()
+            : (MasteryManager.getUnlockedQuestions(config.unit.id, config, 'shortAnswerQuestions') || []);
         this.unitId = config.unit.id;
         this._config = config;
         this._activeIndex = -1;

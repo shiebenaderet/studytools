@@ -69,7 +69,11 @@ StudyEngine.registerActivity({
      * then fill with random mastered ones if needed.
      */
     _selectSessionQuestions() {
-        var allQuestions = MasteryManager.getUnlockedQuestions(this._config.unit.id, this._config, 'practiceQuestions') || [];
+        // westward-expansion: gating temporarily lifted so students can take the
+// practice test without first unlocking categories through flashcards.
+var allQuestions = this._config.unit.id === 'westward-expansion'
+    ? (this._config.practiceQuestions || []).slice()
+    : (MasteryManager.getUnlockedQuestions(this._config.unit.id, this._config, 'practiceQuestions') || []);
         var masteredIds = this._masteryData.mastered || [];
         var self = this;
 
@@ -113,7 +117,10 @@ StudyEngine.registerActivity({
 
         this._loadMasteryData();
 
-        var allQuestions = MasteryManager.getUnlockedQuestions(config.unit.id, config, 'practiceQuestions') || [];
+        // westward-expansion: gating temporarily lifted (see _selectSessionQuestions).
+        var allQuestions = config.unit.id === 'westward-expansion'
+            ? (config.practiceQuestions || []).slice()
+            : (MasteryManager.getUnlockedQuestions(config.unit.id, config, 'practiceQuestions') || []);
         this._questions = allQuestions;
 
         // Check if all mastered
