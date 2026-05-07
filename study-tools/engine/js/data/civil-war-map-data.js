@@ -197,18 +197,18 @@
     ];
 
     window.CIVIL_WAR_MAP_TYPE_COLORS = {
-        battle: '#8B2914',     // oxblood (matches unit accent)
-        capital: '#2D4A6B',    // navy (unit primary; capital = political center)
-        strategic: '#5a7a9a'   // muted blue-gray (less emphasis than battles or capitals)
+        battle: '#7A1F1F',     // crimson (matches unit primary)
+        capital: '#4A5568',    // slate (unit secondary; capital = political center)
+        strategic: '#6b7686'   // muted slate (less emphasis than battles or capitals)
     };
 
     // Side colors (used for capitals to show Union vs Confederate)
     window.CIVIL_WAR_MAP_SIDE_COLORS = {
-        union: '#2D4A6B',
-        confederate: '#8B2914',
+        union: '#4A5568',
+        confederate: '#7A1F1F',
         border: '#7a6a5c',
-        battle: '#8B2914',
-        contested: '#5a7a9a'
+        battle: '#7A1F1F',
+        contested: '#6b7686'
     };
 
     // (Base map geometry moved to civil-war-map-base.js — Natural Earth 1:50m states, lakes, rivers.)

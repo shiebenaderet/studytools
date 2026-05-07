@@ -20,7 +20,7 @@ StudyEngine.registerActivity({
 
     // Visual color-coding by city role in the network
     _categoryColors: {
-        slavery: '#8B2914',   // dark red — origin point, where people escape FROM
+        slavery: '#7A1F1F',   // dark red — origin point, where people escape FROM
         station: '#c97a2c',   // amber — middle of network, conductor stations
         canada:  '#2d8659'    // green — terminus, freedom
     },

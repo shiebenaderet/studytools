@@ -17,13 +17,13 @@
             ]
         },
         "theme": {
-            "primary": "#2D4A6B",
-            "secondary": "#E8D9B5",
-            "accent": "#8B2914",
-            "bgDeep": "#0f1923",
-            "bgCard": "#1a2738",
-            "bgElevated": "#243349",
-            "bgSurface": "#2f3f57"
+            "primary": "#7A1F1F",
+            "secondary": "#4A5568",
+            "accent": "#C9A961",
+            "bgDeep": "#1a1816",
+            "bgCard": "#2a2522",
+            "bgElevated": "#3a3530",
+            "bgSurface": "#4a4540"
         }
     },
     "scoringTiers": true,

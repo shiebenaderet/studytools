@@ -6153,8 +6153,8 @@ a.sift-detail-link:hover { opacity: 0.8; }
 .cw-map-panel-name-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; flex-wrap: wrap; }
 .cw-map-panel-name { color: var(--text-primary); margin: 0; font-size: 1.2em; }
 .cw-map-panel-badge { padding: 3px 10px; border-radius: 12px; font-size: 0.75em; font-weight: 600; color: #fff; text-transform: uppercase; letter-spacing: 0.5px; }
-.cw-map-badge-battle { background: #8B2914; }
-.cw-map-badge-capital { background: #2D4A6B; }
+.cw-map-badge-battle { background: #7A1F1F; }
+.cw-map-badge-capital { background: #4A5568; }
 .cw-map-badge-strategic { background: #5a7a9a; }
 .cw-map-panel-desc { color: var(--text-secondary); line-height: 1.5; margin: 0 0 12px; }
 .cw-map-panel-close { background: var(--bg-elevated); border: 1px solid var(--border-card); color: var(--text-primary); padding: 6px 14px; border-radius: 8px; cursor: pointer; font-size: 0.9em; }
