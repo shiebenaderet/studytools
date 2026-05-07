@@ -373,6 +373,10 @@ const StudyEngine = {
         document.documentElement.style.setProperty('--primary', theme.primary);
         document.documentElement.style.setProperty('--secondary', theme.secondary);
         document.documentElement.style.setProperty('--accent', theme.accent);
+        // primaryBold is used for hover/active states. If the unit didn't
+        // author one, fall back to primary so we don't leak a stale blue
+        // from the default :root rule.
+        document.documentElement.style.setProperty('--primary-bold', theme.primaryBold || theme.primary);
         document.title = `${this.config.unit.title} - Study Tool`;
 
         // Unit-specific background colors for visual distinction

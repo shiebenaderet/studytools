@@ -17,7 +17,8 @@
             ]
         },
         "theme": {
-            "primary": "#7A1F1F",
+            "primary": "#C8443A",
+            "primaryBold": "#7A1F1F",
             "secondary": "#4A5568",
             "accent": "#C9A961",
             "bgDeep": "#1a1816",
@@ -1235,7 +1236,6 @@
             "topic": "The War Itself"
         }
     ],
-    "fillInBlanks": [],
     "shortAnswerQuestions": [
         {
             "question": "How did the cotton gin actually make slavery worse instead of ending it? Use at least two specific examples from the unit.",
@@ -1642,5 +1642,82 @@
                 "sourceUrl": "https://www.battlefields.org/learn/articles/civil-war-casualties"
             }
         ]
-    }
+    },
+    "fillInBlankSentences": [
+        {
+            "sentence": "_____ was the system in which one person was treated as the legal property of another and forced to work without pay.",
+            "answer": "slavery",
+            "category": "Sectionalism"
+        },
+        {
+            "sentence": "The movement to end slavery in the United States was called _____.",
+            "answer": "abolitionism",
+            "category": "Sectionalism"
+        },
+        {
+            "sentence": "_____ was a formerly enslaved Black American who escaped to the North in 1838 and became one of the most powerful voices in the abolitionist movement.",
+            "answer": "Frederick Douglass",
+            "category": "Sectionalism"
+        },
+        {
+            "sentence": "The _____ was a secret network of safe houses and volunteers that helped enslaved people escape from the South to freedom.",
+            "answer": "Underground Railroad",
+            "category": "Sectionalism"
+        },
+        {
+            "sentence": "_____ is strong loyalty to one region of a country instead of to the country as a whole.",
+            "answer": "sectionalism",
+            "category": "Sectionalism"
+        },
+        {
+            "sentence": "The _____ of 1820 admitted Missouri as a slave state and Maine as a free state, and banned slavery in northern parts of the Louisiana Purchase.",
+            "answer": "Missouri Compromise",
+            "category": "Road to War"
+        },
+        {
+            "sentence": "An 1852 anti slavery novel by Harriet Beecher Stowe called _____ became one of the bestselling books of the 1800s.",
+            "answer": "Uncle Tom's Cabin",
+            "category": "Road to War"
+        },
+        {
+            "sentence": "The 1857 Supreme Court ruling known as the _____ said Black people were not citizens and that Congress could not ban slavery in the western territories.",
+            "answer": "Dred Scott decision",
+            "category": "Road to War"
+        },
+        {
+            "sentence": "The formal withdrawal of a state from the United States is called _____.",
+            "answer": "secession",
+            "category": "Road to War"
+        },
+        {
+            "sentence": "The 1854 _____ created the Kansas and Nebraska territories and let settlers vote on whether to allow slavery, throwing out the Missouri Compromise line.",
+            "answer": "Kansas Nebraska Act",
+            "category": "Road to War"
+        },
+        {
+            "sentence": "Confederate forces fired on _____ in April 1861, beginning the Civil War.",
+            "answer": "Fort Sumter",
+            "category": "The War Itself"
+        },
+        {
+            "sentence": "Lincoln's _____, issued on January 1, 1863, declared all enslaved people in Confederate states to be free.",
+            "answer": "Emancipation Proclamation",
+            "category": "The War Itself"
+        },
+        {
+            "sentence": "The three day _____ in July 1863 turned back Lee's second invasion of the North and is the largest battle ever fought on American soil.",
+            "answer": "Battle of Gettysburg",
+            "category": "The War Itself"
+        },
+        {
+            "sentence": "Confederate General Robert E. Lee surrendered to Union General Ulysses S. Grant at _____ on April 9, 1865, ending the Civil War.",
+            "answer": "Appomattox",
+            "category": "The War Itself"
+        },
+        {
+            "sentence": "The _____ to the United States Constitution, ratified in December 1865, abolished slavery throughout the entire country.",
+            "answer": "13th Amendment",
+            "category": "The War Itself"
+        }
+    ]
 }

@@ -2707,11 +2707,14 @@ body.timer-active header {
     margin-top: auto;
 }
 
-/* Category visual differentiation */
-.activity-card.category-study { border-top: 4px solid #3b82f6; }
-.activity-card.category-study h2 { color: #93bbfd; }
-.activity-card.category-study .card-button { background: #2563eb; }
-.activity-card.category-study .card-button:hover { background: #3b82f6; }
+/* Category visual differentiation. Study cards use the unit's primary so
+   the Start buttons match the unit theme; Practice and Games keep their
+   semantic purple/green so students can still distinguish activity types
+   at a glance (per the original design choice). */
+.activity-card.category-study { border-top: 4px solid var(--primary); }
+.activity-card.category-study h2 { color: var(--accent); }
+.activity-card.category-study .card-button { background: var(--primary-bold); }
+.activity-card.category-study .card-button:hover { background: var(--primary); }
 
 .activity-card.category-practice { border-top: 4px solid #a78bfa; }
 .activity-card.category-practice h2 { color: #c4b5fd; }
