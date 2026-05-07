@@ -340,7 +340,11 @@ const MasteryManager = {
     isActivityAccessible(unitId, config, activityId) {
         // Teacher unlock bypasses all activity gating
         if (sessionStorage.getItem('teacher-unlock') === 'true') return true;
-        const alwaysAccessible = ['flashcards', 'typing-practice', 'map-quiz', 'textbook', 'sift-practice', 'learn-mode'];
+        // practice-test and short-answer are open from the start so students
+        // can use them to assess what they know before earning category
+        // unlocks. The activities themselves still surface category-locked
+        // content visually inside, but the home card is no longer a wall.
+        const alwaysAccessible = ['flashcards', 'typing-practice', 'map-quiz', 'textbook', 'sift-practice', 'learn-mode', 'practice-test', 'short-answer'];
         if (alwaysAccessible.includes(activityId)) return true;
         const categories = this.getCategories(config);
         if (categories.length === 0) return true;
