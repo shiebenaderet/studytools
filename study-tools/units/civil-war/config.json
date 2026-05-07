@@ -1430,5 +1430,19 @@
             "year": "1861",
             "description": "On April 12, 1861, Confederate cannons opened fire on Fort Sumter in Charleston Harbor. After 34 hours of bombardment, the small Union garrison surrendered. The Civil War had begun."
         }
+    ],
+    "reflectionPrompts": [
+        "How would you explain {term} to a 5th grader in your own words?",
+        "Can you connect {term} to anything happening in the world today?",
+        "If you lived through {term}, how would your life have been different from your life now?",
+        "Was {term} fair or unfair? Explain your thinking.",
+        "Whose voice or perspective is missing from the story of {term}?",
+        "How does {term} connect to our essential question: Is fighting necessary? If so, when and how is it effective?",
+        "How did {term} make the divide between the North and the South wider, or did it try to bring them together?",
+        "If you could interview someone who lived through {term}, what is one question you would ask them?",
+        "Was there a peaceful path that could have been taken instead of {term}, or was conflict unavoidable?",
+        "How might an enslaved person, a Northern factory worker, and a Southern plantation owner each see {term} differently?",
+        "What did {term} cost in human lives, communities, or freedoms? Was the outcome worth that cost?",
+        "Pick one decision someone made during {term}. If you had been in their place, would you have done the same thing?"
     ]
 }
