@@ -158,19 +158,24 @@ StudyEngine.registerActivity({
         }
         svg.appendChild(lakesGroup);
 
-        // Defs — arrowhead marker for the directional flow lines
+        // Defs — arrowhead marker for the directional flow lines.
+        // markerUnits=userSpaceOnUse so arrows DON'T scale with stroke-width
+        // (default behavior is to scale, which produces huge arrowheads).
+        // refX is set to land the arrow tip well before the destination dot
+        // so it doesn't cover the city.
         var defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
         var marker = document.createElementNS('http://www.w3.org/2000/svg', 'marker');
         marker.setAttribute('id', 'ugrr-arrowhead');
         marker.setAttribute('viewBox', '0 0 10 10');
-        marker.setAttribute('refX', '8');
+        marker.setAttribute('refX', '10');
         marker.setAttribute('refY', '5');
-        marker.setAttribute('markerWidth', '7');
-        marker.setAttribute('markerHeight', '7');
+        marker.setAttribute('markerWidth', '10');
+        marker.setAttribute('markerHeight', '10');
+        marker.setAttribute('markerUnits', 'userSpaceOnUse');
         marker.setAttribute('orient', 'auto-start-reverse');
         var arrowPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         arrowPath.setAttribute('d', 'M0,0 L10,5 L0,10 Z');
-        arrowPath.setAttribute('fill', '#2a0a04');
+        arrowPath.setAttribute('fill', '#5a1a0a');
         marker.appendChild(arrowPath);
         defs.appendChild(marker);
         svg.appendChild(defs);
@@ -198,32 +203,19 @@ StudyEngine.registerActivity({
         var flowGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
         flowGroup.setAttribute('class', 'ugrr-map-flows');
         var flows = window.UGRR_MAP_FLOWS || [];
-        // Diagnostic: log how many flows we're rendering. Open the console to
-        // verify. Should show "UGRR map: rendering 18 flows" — if it shows 0,
-        // UGRR_MAP_FLOWS is undefined; if it shows 18 and arrows still
-        // invisible, the rendering itself is the problem.
-        if (typeof console !== 'undefined') {
-            console.log('UGRR map: rendering ' + flows.length + ' flow segments');
-        }
         for (var f = 0; f < flows.length; f++) {
             var flow = document.createElementNS('http://www.w3.org/2000/svg', 'path');
             flow.setAttribute('d', flows[f].d);
             flow.setAttribute('fill', 'none');
-            // TEMP: bright color to make absolutely sure flows are visible.
-            // If this renders, we know flows draw correctly and just need
-            // styling work. If it doesn't render, the issue is upstream.
-            flow.setAttribute('stroke', '#ff6b00');
-            flow.setAttribute('stroke-width', '6');
+            flow.setAttribute('stroke', '#5a1a0a');
+            flow.setAttribute('stroke-width', '4');
             flow.setAttribute('stroke-linecap', 'round');
-            flow.setAttribute('opacity', '1');
+            flow.setAttribute('opacity', '0.92');
             flow.setAttribute('marker-end', 'url(#ugrr-arrowhead)');
             flow.setAttribute('pointer-events', 'none');
             flowGroup.appendChild(flow);
         }
         svg.appendChild(flowGroup);
-
-        // Also bump the arrowhead to a bright color so we can see it
-        arrowPath.setAttribute('fill', '#ff6b00');
 
         // City layer
         var cityGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
