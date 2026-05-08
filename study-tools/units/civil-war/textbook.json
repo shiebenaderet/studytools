@@ -46,7 +46,13 @@
                             "prompt": "If the Cotton Kingdom depended on cotton, and cotton depended on enslaved labor, what does that tell you about how easy or hard it would be for the South to give up slavery peacefully?",
                             "hint": "Think about who would gain or lose money if slavery ended."
                         },
-                        "sourceNote": "Adapted from History Alive! The United States Through Industrialism, Lesson 19."
+                        "sourceNote": "Adapted from History Alive! The United States Through Industrialism, Lesson 19.",
+                        "image": {
+                            "src": "../units/civil-war/images/vocab/cotton-kingdom.jpg",
+                            "caption": "New Orleans levee, 1860. Cotton bales like these traveled by steamboat from Southern plantations to Northern and European factories.",
+                            "credit": "Library of Congress",
+                            "float": "right"
+                        }
                     },
                     {
                         "id": "two-societies",
@@ -66,7 +72,13 @@
                             "prompt": "If you grew up on a Pennsylvania factory street in 1850 and your cousin grew up on a Mississippi cotton plantation, what would each of you think was 'normal'?",
                             "hint": "Think about who you would see every day, what work people did, and what schools looked like."
                         },
-                        "sourceNote": "Adapted from History Alive! The United States Through Industrialism, Lesson 19."
+                        "sourceNote": "Adapted from History Alive! The United States Through Industrialism, Lesson 19.",
+                        "image": {
+                            "src": "../units/civil-war/images/vocab/industrial-revolution.jpg",
+                            "caption": "Lowell, Massachusetts in the early 1800s. Textile mills lined the Merrimack River, drawing workers off small farms and into the city.",
+                            "credit": "Library of Congress",
+                            "float": "left"
+                        }
                     },
                     {
                         "id": "two-roads-one-country",
@@ -84,7 +96,13 @@
                             "prompt": "Why do you think disagreement gets harder when people see each other as 'us' and 'them' instead of as 'we'?",
                             "hint": "Think about a time you've been in a conflict with someone you saw as part of your group versus someone you saw as outside it."
                         },
-                        "sourceNote": "Adapted from History Alive! The United States Through Industrialism, Lesson 19."
+                        "sourceNote": "Adapted from History Alive! The United States Through Industrialism, Lesson 19.",
+                        "image": {
+                            "src": "../units/civil-war/images/vocab/mason-dixon-line.jpg",
+                            "caption": "A surveyor's stone marking the Mason Dixon Line. To enslaved people trying to escape, this line meant freedom.",
+                            "credit": "Public domain",
+                            "float": "right"
+                        }
                     }
                 ]
             },
@@ -115,7 +133,13 @@
                             "prompt": "Frederick Douglass said free Black people were 'almost a freeman' compared to enslaved people. What does the word 'almost' tell you about the limits of Northern freedom?",
                             "hint": "Free didn't mean equal. Think about what was still off limits."
                         },
-                        "sourceNote": "Adapted from History Alive! The United States Through Industrialism, Lesson 20."
+                        "sourceNote": "Adapted from History Alive! The United States Through Industrialism, Lesson 20.",
+                        "image": {
+                            "src": "../units/civil-war/images/portraits/frederick-douglass.jpg",
+                            "caption": "Frederick Douglass, who escaped slavery in 1838, became one of the most powerful voices arguing that no Black person was truly free in a country that allowed slavery.",
+                            "credit": "Public domain",
+                            "float": "left"
+                        }
                     },
                     {
                         "id": "life-under-slavery",
@@ -136,7 +160,13 @@
                             "prompt": "Why might quiet, day-to-day resistance, like breaking tools or working slowly, have been more common than open rebellion?",
                             "hint": "What were the consequences of being caught in open rebellion?"
                         },
-                        "sourceNote": "Adapted from History Alive! The United States Through Industrialism, Lesson 20."
+                        "sourceNote": "Adapted from History Alive! The United States Through Industrialism, Lesson 20.",
+                        "image": {
+                            "src": "../units/civil-war/images/vocab/field-hand.jpg",
+                            "caption": "Enslaved field hands picking cotton on a Mississippi plantation. About three-quarters of enslaved people in rural areas worked in the fields.",
+                            "credit": "Library of Congress",
+                            "float": "right"
+                        }
                     },
                     {
                         "id": "faith-family-culture",
@@ -158,7 +188,13 @@
                             "prompt": "Slaveholders tried to control everything about enslaved people's lives, from work to religion to family. They mostly failed. Why do you think they couldn't fully break the people they enslaved?",
                             "hint": "Think about what people can carry inside themselves that no one else can take away."
                         },
-                        "sourceNote": "Adapted from History Alive! The United States Through Industrialism, Lesson 20."
+                        "sourceNote": "Adapted from History Alive! The United States Through Industrialism, Lesson 20.",
+                        "image": {
+                            "src": "../units/civil-war/images/vocab/african-retentions.jpg",
+                            "caption": "Harriet Powers's Bible quilt, made around 1898. Quilts like this carried African storytelling traditions into a new American form.",
+                            "credit": "Smithsonian, public domain",
+                            "float": "left"
+                        }
                     }
                 ]
             },
@@ -188,7 +224,13 @@
                             "prompt": "If you have to compromise with a friend over the same issue again and again, and each compromise gets harder, what does that say about whether the underlying problem is being solved?",
                             "hint": "A compromise can fix a fight without fixing what caused the fight."
                         },
-                        "sourceNote": "Adapted from History Alive! The United States Through Industrialism, Lesson 21."
+                        "sourceNote": "Adapted from History Alive! The United States Through Industrialism, Lesson 21.",
+                        "image": {
+                            "src": "../units/civil-war/images/vocab/missouri-compromise.png",
+                            "caption": "The Missouri Compromise of 1820 drew an imaginary line across the Louisiana Purchase at 36 degrees 30 minutes. North of the line, slavery was banned. South of it, slavery was allowed.",
+                            "credit": "Public domain",
+                            "float": "right"
+                        }
                     },
                     {
                         "id": "compromises-break",
@@ -209,7 +251,13 @@
                             "prompt": "When the Kansas Nebraska Act let settlers vote on slavery, both sides rushed people into the territory to win the vote. What does that tell you about how far each side was willing to go?",
                             "hint": "If voting becomes a battlefield, the country has stopped being able to solve problems through politics."
                         },
-                        "sourceNote": "Adapted from History Alive! The United States Through Industrialism, Lesson 21."
+                        "sourceNote": "Adapted from History Alive! The United States Through Industrialism, Lesson 21.",
+                        "image": {
+                            "src": "../units/civil-war/images/vocab/uncle-toms-cabin.jpg",
+                            "caption": "First-edition cover of Uncle Tom's Cabin (1852). Harriet Beecher Stowe's novel sold 300,000 copies in its first year and turned millions of Northerners against slavery.",
+                            "credit": "Public domain",
+                            "float": "left"
+                        }
                     },
                     {
                         "id": "from-crisis-to-war",
@@ -231,7 +279,13 @@
                             "prompt": "Lincoln won the presidency without a single Southern electoral vote. Why do you think that fact, more than anything Lincoln himself said, convinced the South to leave?",
                             "hint": "Think about what an election result says about who has power going forward, not just who's in office now."
                         },
-                        "sourceNote": "Adapted from History Alive! The United States Through Industrialism, Lesson 21."
+                        "sourceNote": "Adapted from History Alive! The United States Through Industrialism, Lesson 21.",
+                        "image": {
+                            "src": "../units/civil-war/images/vocab/fort-sumter.png",
+                            "caption": "Confederate cannons bombarded Fort Sumter in Charleston Harbor on April 12, 1861. The fort surrendered after 30 hours of shelling, opening the Civil War.",
+                            "credit": "Public domain",
+                            "float": "right"
+                        }
                     }
                 ]
             },
@@ -260,7 +314,13 @@
                             "prompt": "Northerners expected the war to be over in months. What does the panic of Bull Run tell you about what happens when expectations crash into reality?",
                             "hint": "Think about how a sudden setback changes how people plan for what comes next."
                         },
-                        "sourceNote": "Adapted from History Alive! The United States Through Industrialism, Lesson 22."
+                        "sourceNote": "Adapted from History Alive! The United States Through Industrialism, Lesson 22.",
+                        "image": {
+                            "src": "../units/civil-war/images/vocab/union.png",
+                            "caption": "The Union flag of the Civil War era, with a star for each state. Even after eleven Southern states seceded, the Union army's flag continued to include their stars.",
+                            "credit": "Public domain",
+                            "float": "left"
+                        }
                     },
                     {
                         "id": "turning-the-war",
@@ -282,7 +342,13 @@
                             "prompt": "The Emancipation Proclamation freed enslaved people only in Confederate states, places where the Union had no power to enforce it. So how did the Proclamation actually change anything?",
                             "hint": "Think about what a war is really fighting for, and how that 'why' shapes who joins, who supports, and who stays home."
                         },
-                        "sourceNote": "Adapted from History Alive! The United States Through Industrialism, Lesson 22."
+                        "sourceNote": "Adapted from History Alive! The United States Through Industrialism, Lesson 22.",
+                        "image": {
+                            "src": "../units/civil-war/images/vocab/emancipation-proclamation.jpg",
+                            "caption": "President Lincoln's Emancipation Proclamation, January 1, 1863. It freed enslaved people in Confederate states and changed the war's purpose forever.",
+                            "credit": "National Archives",
+                            "float": "right"
+                        }
                     },
                     {
                         "id": "the-war-ends",
@@ -303,7 +369,13 @@
                             "prompt": "Lincoln said at Gettysburg that those who died there gave 'the last full measure of devotion.' What do you think he meant, and why did he use such serious words for a small dedication ceremony?",
                             "hint": "Think about what those words demanded of the people still alive to hear them."
                         },
-                        "sourceNote": "Adapted from History Alive! The United States Through Industrialism, Lesson 22."
+                        "sourceNote": "Adapted from History Alive! The United States Through Industrialism, Lesson 22.",
+                        "image": {
+                            "src": "../units/civil-war/images/vocab/appomattox.jpg",
+                            "caption": "Tom Lovell's painting of Lee's surrender to Grant at Appomattox Court House on April 9, 1865. Grant's terms were generous: Confederate soldiers could go home with their horses.",
+                            "credit": "Public domain",
+                            "float": "left"
+                        }
                     }
                 ]
             }
