@@ -892,11 +892,45 @@ StudyEngine.registerActivity({
 
         var slides = [];
         var slidesSinceReflection = 0;
+        // Track which categories we've already opened with an EQ banner so we
+        // bookend each chapter exactly once. Chapters get a banner at start
+        // and a synthesis at end; categories without EQs (e.g. unit-wide scope)
+        // skip both bookends.
+        var lastCategory = null;
+        var categoryEQs = null;
 
         // Group terms (2-3 at a time)
         var groupSize = 3;
         for (var g = 0; g < prioritized.length; g += groupSize) {
             var group = prioritized.slice(g, g + groupSize);
+            var currentCategory = group[0] ? group[0].category : null;
+
+            // Chapter boundary: close out previous chapter with EQ synthesis,
+            // then open the new chapter with an EQ banner.
+            if (currentCategory !== lastCategory) {
+                if (lastCategory && categoryEQs && categoryEQs.length > 0) {
+                    slides.push({
+                        type: 'eq-synthesis',
+                        data: {
+                            category: lastCategory,
+                            // Pick one EQ as the closing synthesis prompt
+                            question: categoryEQs[Math.floor(Math.random() * categoryEQs.length)]
+                        }
+                    });
+                }
+                categoryEQs = currentCategory ? this._getEssentialQuestionsForCategory(currentCategory) : null;
+                if (categoryEQs && categoryEQs.length > 0) {
+                    slides.push({
+                        type: 'eq-banner',
+                        data: {
+                            category: currentCategory,
+                            questions: categoryEQs
+                        }
+                    });
+                }
+                lastCategory = currentCategory;
+                slidesSinceReflection = 0;
+            }
 
             // Term cards for this group
             for (var t = 0; t < group.length; t++) {
@@ -946,17 +980,44 @@ StudyEngine.registerActivity({
                 slidesSinceReflection = 0; // reset so reflection doesn't pile on
             }
 
-            // Reflection every 5-7 slides
+            // Reflection every 5-7 slides. Roughly 1 in 3 reflections is
+            // EQ-tied — asks the student to connect the most-recent term to
+            // one of the chapter's essential questions. The other 2 in 3 use
+            // the generic prompt rotation.
             if (slidesSinceReflection >= 5) {
                 var recentTerm = group[group.length - 1] ? group[group.length - 1].term : 'this topic';
-                var prompts = (this._config && this._config.reflectionPrompts && this._config.reflectionPrompts.length > 0) ? this._config.reflectionPrompts : this.REFLECTION_PROMPTS;
-                var promptTemplate = prompts[Math.floor(Math.random() * prompts.length)];
-                slides.push({
-                    type: 'reflection',
-                    data: { prompt: promptTemplate.replace('{term}', recentTerm), term: recentTerm }
-                });
+                var useEQ = categoryEQs && categoryEQs.length > 0 && Math.random() < 0.34;
+                if (useEQ) {
+                    var eq = categoryEQs[Math.floor(Math.random() * categoryEQs.length)];
+                    slides.push({
+                        type: 'reflection',
+                        data: {
+                            prompt: 'How does ' + recentTerm + ' connect to our essential question: ' + eq,
+                            term: recentTerm,
+                            isEQ: true
+                        }
+                    });
+                } else {
+                    var prompts = (this._config && this._config.reflectionPrompts && this._config.reflectionPrompts.length > 0) ? this._config.reflectionPrompts : this.REFLECTION_PROMPTS;
+                    var promptTemplate = prompts[Math.floor(Math.random() * prompts.length)];
+                    slides.push({
+                        type: 'reflection',
+                        data: { prompt: promptTemplate.replace('{term}', recentTerm), term: recentTerm }
+                    });
+                }
                 slidesSinceReflection = 0;
             }
+        }
+
+        // Close out the final chapter with one more EQ synthesis
+        if (lastCategory && categoryEQs && categoryEQs.length > 0) {
+            slides.push({
+                type: 'eq-synthesis',
+                data: {
+                    category: lastCategory,
+                    question: categoryEQs[Math.floor(Math.random() * categoryEQs.length)]
+                }
+            });
         }
 
         return slides;
@@ -972,6 +1033,17 @@ StudyEngine.registerActivity({
                 if (section.vocabTerms && section.vocabTerms.indexOf(termName) !== -1) {
                     return section.keyIdea || null;
                 }
+            }
+        }
+        return null;
+    },
+
+    _getEssentialQuestionsForCategory: function(category) {
+        if (!this._textbookData || !category) return null;
+        for (var s = 0; s < this._textbookData.length; s++) {
+            var segment = this._textbookData[s];
+            if (segment.title === category && Array.isArray(segment.essentialQuestions) && segment.essentialQuestions.length > 0) {
+                return segment.essentialQuestions;
             }
         }
         return null;
@@ -1104,6 +1176,10 @@ StudyEngine.registerActivity({
             this._renderReflectionCard(slideArea, slide.data);
         } else if (slide.type === 'mini-game') {
             this._renderMiniGame(slideArea, slide.data);
+        } else if (slide.type === 'eq-banner') {
+            this._renderEQBanner(slideArea, slide.data);
+        } else if (slide.type === 'eq-synthesis') {
+            this._renderEQSynthesis(slideArea, slide.data);
         }
     },
 
@@ -1453,6 +1529,124 @@ StudyEngine.registerActivity({
             self._advanceSlide();
         });
         btnRow.appendChild(shareBtn);
+
+        var skipLink = this._el('button', null, 'Skip');
+        skipLink.style.cssText = 'padding:10px 20px;border-radius:var(--radius-md);background:none;color:var(--text-secondary);border:none;font-size:0.9rem;cursor:pointer;text-decoration:underline;';
+        skipLink.addEventListener('click', function() {
+            self._advanceSlide();
+        });
+        btnRow.appendChild(skipLink);
+
+        card.appendChild(btnRow);
+        slideArea.appendChild(card);
+    },
+
+    // ─── Essential question slides ───────────────────────────────
+    // Banner shown at the start of each chapter, listing the chapter's
+    // 3 essential questions as the lens for everything that follows.
+
+    _renderEQBanner: function(slideArea, data) {
+        var self = this;
+        if (!data || !data.questions || data.questions.length === 0) {
+            this._advanceSlide();
+            return;
+        }
+
+        var theme = this._config.unit.theme || {};
+        var primary = theme.primary || '#4a90d9';
+
+        var card = this._el('div');
+        card.style.cssText = 'background:linear-gradient(135deg, ' + primary + '22, var(--bg-card));border:1px solid ' + primary + '55;border-radius:var(--radius-md);padding:28px 24px;';
+
+        var label = this._el('div', null, 'Chapter');
+        label.style.cssText = 'color:' + primary + ';font-size:0.75rem;text-transform:uppercase;letter-spacing:1.2px;font-weight:600;margin-bottom:6px;';
+        card.appendChild(label);
+
+        var heading = this._el('h2', null, data.category || 'New Chapter');
+        heading.style.cssText = 'color:var(--text-primary);font-size:1.4rem;margin:0 0 10px;font-weight:700;';
+        card.appendChild(heading);
+
+        var lead = this._el('p', null, "As you study this chapter, hold onto these big questions. We'll come back to them.");
+        lead.style.cssText = 'color:var(--text-secondary);font-size:0.95rem;line-height:1.5;margin:0 0 20px;';
+        card.appendChild(lead);
+
+        var list = this._el('ol');
+        list.style.cssText = 'margin:0 0 24px;padding-left:24px;color:var(--text-primary);';
+        for (var i = 0; i < data.questions.length; i++) {
+            var li = this._el('li', null, data.questions[i]);
+            li.style.cssText = 'font-size:1rem;line-height:1.55;margin-bottom:10px;';
+            list.appendChild(li);
+        }
+        card.appendChild(list);
+
+        var btnWrap = this._el('div');
+        btnWrap.style.cssText = 'text-align:center;';
+        var contBtn = this._el('button', null, 'Begin Chapter');
+        contBtn.style.cssText = 'padding:10px 36px;border-radius:var(--radius-md);background:' + primary + ';color:#fff;border:none;font-size:1rem;cursor:pointer;font-weight:600;';
+        contBtn.addEventListener('click', function() {
+            self._advanceSlide();
+        });
+        btnWrap.appendChild(contBtn);
+        card.appendChild(btnWrap);
+
+        slideArea.appendChild(card);
+    },
+
+    // Synthesis prompt at the end of each chapter that asks the student
+    // to answer one of the chapter's essential questions in their own
+    // words, drawing on what they just studied. Reuses the reflection
+    // save path so synthesis answers show up alongside reflections.
+
+    _renderEQSynthesis: function(slideArea, data) {
+        var self = this;
+        if (!data || !data.question) {
+            this._advanceSlide();
+            return;
+        }
+
+        var theme = this._config.unit.theme || {};
+        var accent = theme.accent || 'var(--accent)';
+
+        var card = this._el('div');
+        card.style.cssText = 'background:var(--bg-card);border:1px solid rgba(255,255,255,0.08);border-left:4px solid ' + accent + ';border-radius:var(--radius-md);padding:28px 24px;';
+
+        var label = this._el('div', null, 'Chapter Synthesis');
+        label.style.cssText = 'color:' + accent + ';font-size:0.75rem;text-transform:uppercase;letter-spacing:1.2px;font-weight:600;margin-bottom:6px;';
+        card.appendChild(label);
+
+        var heading = this._el('div', null, data.category || '');
+        heading.style.cssText = 'color:var(--text-secondary);font-size:0.85rem;margin-bottom:16px;';
+        card.appendChild(heading);
+
+        var lead = this._el('p', null, "Now that you've worked through this chapter, take a moment to answer one of our big questions in your own words.");
+        lead.style.cssText = 'color:var(--text-secondary);font-size:0.95rem;line-height:1.5;margin:0 0 14px;';
+        card.appendChild(lead);
+
+        var qText = this._el('div', null, data.question);
+        qText.style.cssText = 'color:var(--text-primary);font-size:1.1rem;line-height:1.55;font-weight:500;margin-bottom:18px;';
+        card.appendChild(qText);
+
+        var textarea = document.createElement('textarea');
+        textarea.placeholder = 'Take your time. There is no single right answer here.';
+        textarea.style.cssText = 'width:100%;min-height:120px;padding:12px;border-radius:var(--radius-md);background:var(--bg-deep);color:var(--text-primary);border:1px solid rgba(255,255,255,0.1);font-size:0.95rem;resize:vertical;font-family:inherit;box-sizing:border-box;';
+        card.appendChild(textarea);
+
+        var btnRow = this._el('div');
+        btnRow.style.cssText = 'display:flex;justify-content:center;gap:12px;margin-top:16px;';
+
+        var saveBtn = this._el('button', null, 'Save & Continue');
+        saveBtn.style.cssText = 'padding:10px 28px;border-radius:var(--radius-md);background:var(--primary);color:#fff;border:none;font-size:1rem;cursor:pointer;font-weight:600;';
+        saveBtn.addEventListener('click', function() {
+            var val = textarea.value;
+            if (val && val.trim()) {
+                // Reuse the reflection storage so synthesis answers persist
+                // alongside reflections; tagged with the category as the term.
+                self._saveReflection(val, data.category || 'Chapter Synthesis');
+                StudyUtils.showToast('Synthesis saved!', 'success', 2000);
+            }
+            self._advanceSlide();
+        });
+        btnRow.appendChild(saveBtn);
 
         var skipLink = this._el('button', null, 'Skip');
         skipLink.style.cssText = 'padding:10px 20px;border-radius:var(--radius-md);background:none;color:var(--text-secondary);border:none;font-size:0.9rem;cursor:pointer;text-decoration:underline;';

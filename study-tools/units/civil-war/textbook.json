@@ -110,6 +110,11 @@
                             "float": "right"
                         }
                     }
+                ],
+                "essentialQuestions": [
+                    "How did geography shape the economic, social, and political development of the North and the South?",
+                    "Why did two regions of the same country come to feel like two different worlds by 1850?",
+                    "What did the cotton gin change about the trajectory of slavery in America?"
                 ]
             },
             {
@@ -208,6 +213,11 @@
                             "float": "left"
                         }
                     }
+                ],
+                "essentialQuestions": [
+                    "How did enslaved African Americans build family, community, faith, and culture under a system designed to deny them all four?",
+                    "What does resistance look like when overt rebellion is met with deadly force?",
+                    "How did the experience and culture of enslaved people shape American society beyond the institution of slavery itself?"
                 ]
             },
             {
@@ -305,6 +315,11 @@
                             "float": "right"
                         }
                     }
+                ],
+                "essentialQuestions": [
+                    "Why did political compromise stop working? At what point did it become impossible?",
+                    "How can a single court case like Dred Scott shift the trajectory of a nation?",
+                    "Was the Civil War inevitable? Who or what is most responsible for it?"
                 ]
             },
             {
@@ -401,6 +416,11 @@
                             "float": "left"
                         }
                     }
+                ],
+                "essentialQuestions": [
+                    "How did the war change in purpose between 1861 and 1865, and what made it change?",
+                    "What roles did African Americans, women, and ordinary soldiers play in reshaping the war?",
+                    "What does it mean for a war to end, and what was left unresolved at Appomattox?"
                 ]
             }
         ]
