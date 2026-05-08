@@ -153,7 +153,8 @@
             "typingSnippet": "Frederick Douglass escaped slavery in 1838 and became the most famous Black abolitionist in America. He wrote a powerful autobiography about his life in slavery. He gave speeches across the North and even in Europe. He published his own newspaper, The North Star. His words helped change how Americans thought about slavery.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Frederick_Douglass",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Frederick_Douglass",
-            "imageUrl": "images/portraits/frederick-douglass.jpg"
+            "imageUrl": "images/portraits/frederick-douglass.jpg",
+            "tier": "encounter"
         },
         {
             "term": "Underground Railroad",
@@ -197,7 +198,8 @@
             "typingSnippet": "A slave state was one where slavery was legal. Slave states were in the South. Their economies depended on plantations worked by enslaved people. As America added new states, Northerners and Southerners argued bitterly about whether each one should be slave or free. Each new state shifted the balance of power in Congress, raising the stakes of every decision.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Slave_states_and_free_states",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Slave_state",
-            "imageUrl": "images/vocab/slave-state.jpg"
+            "imageUrl": "images/vocab/slave-state.jpg",
+            "tier": "encounter"
         },
         {
             "term": "Harriet Tubman",
@@ -207,7 +209,8 @@
             "category": "African Americans at Mid-Century",
             "wikiUrl": "https://en.wikipedia.org/wiki/Harriet_Tubman",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Harriet_Tubman",
-            "imageUrl": "images/portraits/harriet-tubman.jpg"
+            "imageUrl": "images/portraits/harriet-tubman.jpg",
+            "tier": "encounter"
         },
         {
             "term": "William Lloyd Garrison",
@@ -217,7 +220,8 @@
             "category": "A Dividing Nation",
             "wikiUrl": "https://en.wikipedia.org/wiki/William_Lloyd_Garrison",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/William_Lloyd_Garrison",
-            "imageUrl": "images/portraits/william-lloyd-garrison.jpg"
+            "imageUrl": "images/portraits/william-lloyd-garrison.jpg",
+            "tier": "encounter"
         },
         {
             "term": "Mason Dixon Line",
@@ -447,7 +451,8 @@
             "typingSnippet": "Abraham Lincoln was the 16th president of the United States. He led the Union through the Civil War. He grew up poor and taught himself law. He won the 1860 election without a single Southern electoral vote. He preserved the Union, issued the Emancipation Proclamation, and gave the Gettysburg Address. He was assassinated five days after Lee surrendered at Appomattox.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Abraham_Lincoln",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Abraham_Lincoln",
-            "imageUrl": "images/portraits/abraham-lincoln.jpg"
+            "imageUrl": "images/portraits/abraham-lincoln.jpg",
+            "tier": "encounter"
         },
         {
             "term": "Jefferson Davis",
@@ -458,7 +463,8 @@
             "typingSnippet": "Jefferson Davis was the president of the Confederate States of America for the entire Civil War. He was a former US senator from Mississippi and a former Secretary of War. He had military experience but little patience for politics. He clashed often with Southern governors. After the war, he was captured and imprisoned for two years but was never tried.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Jefferson_Davis",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Jefferson_Davis",
-            "imageUrl": "images/portraits/jefferson-davis.jpg"
+            "imageUrl": "images/portraits/jefferson-davis.jpg",
+            "tier": "encounter"
         },
         {
             "term": "Robert E. Lee",
@@ -469,7 +475,8 @@
             "typingSnippet": "Robert E. Lee was the most famous Confederate general. He commanded the Army of Northern Virginia. He had been a career officer in the US Army before the war. Lincoln offered him command of the Union forces, but he refused, saying he could not fight against Virginia. He won many battles against larger Union armies. He surrendered to Grant at Appomattox in 1865.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Robert_E._Lee",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Robert_E._Lee",
-            "imageUrl": "images/portraits/robert-e-lee.jpg"
+            "imageUrl": "images/portraits/robert-e-lee.jpg",
+            "tier": "encounter"
         },
         {
             "term": "Ulysses S. Grant",
@@ -480,7 +487,8 @@
             "typingSnippet": "Ulysses S. Grant was the Union general who led the United States to victory in the Civil War. He won major battles at Shiloh, Vicksburg, and Chattanooga. Lincoln promoted him to command of all Union armies in 1864. He understood that the war required relentless pressure. He accepted Lee's surrender at Appomattox in 1865 and later became the 18th president.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Ulysses_S._Grant",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Ulysses_S._Grant",
-            "imageUrl": "images/portraits/ulysses-s-grant.jpg"
+            "imageUrl": "images/portraits/ulysses-s-grant.jpg",
+            "tier": "encounter"
         },
         {
             "term": "William T. Sherman",
@@ -491,7 +499,8 @@
             "typingSnippet": "William T. Sherman was a Union general who served under Grant. He led the campaign through Georgia and the Carolinas in 1864 and 1865. His March to the Sea destroyed the South's ability to keep fighting. He pioneered the strategy of total war, attacking not just armies but the resources that armies needed. His campaign helped Lincoln win re-election and helped end the war.",
             "wikiUrl": "https://en.wikipedia.org/wiki/William_Tecumseh_Sherman",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/William_Tecumseh_Sherman",
-            "imageUrl": "images/portraits/william-t-sherman.jpg"
+            "imageUrl": "images/portraits/william-t-sherman.jpg",
+            "tier": "encounter"
         },
         {
             "term": "Emancipation Proclamation",
@@ -670,7 +679,8 @@
             "term": "House servant",
             "definition": "An enslaved person who worked inside the slaveholder's house cooking, cleaning, or caring for children.",
             "example": "House servants worked closer to the family but lived under the constant watch of their master and could be sent to the fields as punishment.",
-            "category": "African Americans at Mid-Century"
+            "category": "African Americans at Mid-Century",
+            "tier": "encounter"
         },
         {
             "term": "Slave family",
@@ -698,7 +708,8 @@
             "definition": "The Confederate States of America — the eleven Southern states that seceded from the Union and formed their own nation in 1861.",
             "example": "The Confederacy elected Jefferson Davis as its president and fought the Civil War to defend its independence and the institution of slavery.",
             "category": "The Civil War",
-            "imageUrl": "images/vocab/confederacy.png"
+            "imageUrl": "images/vocab/confederacy.png",
+            "tier": "encounter"
         },
         {
             "term": "Bull Run",
