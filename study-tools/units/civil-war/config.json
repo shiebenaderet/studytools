@@ -592,6 +592,156 @@
             "wikiUrl": "https://en.wikipedia.org/wiki/Anaconda_Plan",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Anaconda_Plan",
             "imageUrl": "images/vocab/anaconda-plan.jpg"
+        },
+        {
+            "term": "Cotton Kingdom",
+            "definition": "The Deep South cotton-growing region whose economy and society depended on cotton grown by enslaved labor.",
+            "example": "By 1860, cotton from the Cotton Kingdom made up about two-thirds of all American exports.",
+            "category": "Worlds of North & South",
+            "imageUrl": "images/vocab/cotton-kingdom.jpg"
+        },
+        {
+            "term": "Industrial Revolution",
+            "definition": "A major shift in the early 1800s from making goods by hand to making them in factories powered by water and steam.",
+            "example": "The Industrial Revolution gave the North its mills, factories, and wage-paying jobs that drew immigrants to Northern cities.",
+            "category": "Worlds of North & South",
+            "imageUrl": "images/vocab/industrial-revolution.jpg"
+        },
+        {
+            "term": "Yeoman farmer",
+            "definition": "A small Southern farmer who owned and worked his own land, usually without enslaved laborers.",
+            "example": "Yeoman farmers made up the majority of white Southerners, but the wealth and power of the South sat with the larger plantation owners.",
+            "category": "Worlds of North & South"
+        },
+        {
+            "term": "Tariff",
+            "definition": "A tax on imported goods, often used to protect domestic industries.",
+            "example": "Northerners liked tariffs because they protected their factories, while Southerners hated them because they raised the price of goods they had to buy.",
+            "category": "Worlds of North & South",
+            "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Tariff%20of%201828%20cartoon.jpg?width=400"
+        },
+        {
+            "term": "Urbanization",
+            "definition": "The shift of population from rural areas to cities.",
+            "example": "Northern urbanization drew immigrants and former farmers into growing cities like New York, Boston, and Philadelphia.",
+            "category": "Worlds of North & South",
+            "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Broadway,%20New%20York%20City%201850.jpg?width=400"
+        },
+        {
+            "term": "Slave codes",
+            "definition": "Strict Southern laws that controlled enslaved people's movement, work, gatherings, and ability to learn to read.",
+            "example": "After Nat Turner's Rebellion in 1831, Southern states tightened their slave codes to make it illegal even to teach an enslaved person to read.",
+            "category": "African Americans at Mid-Century"
+        },
+        {
+            "term": "Overseer",
+            "definition": "A person hired by a planter to supervise enslaved laborers and force them to work harder.",
+            "example": "Overseers were paid to get the most cotton possible out of the field hands, and they often used whippings and threats to do it.",
+            "category": "African Americans at Mid-Century",
+            "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Slaves%20and%20overseer%20Mississippi%20cotton%20field.jpg?width=400"
+        },
+        {
+            "term": "Spirituals",
+            "definition": "Religious songs created by enslaved African Americans, often containing hidden messages of hope, freedom, or escape.",
+            "example": "The spiritual \"Steal Away to Jesus\" was sometimes a coded signal that a secret religious meeting was about to happen that night.",
+            "category": "African Americans at Mid-Century",
+            "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Steal%20Away%20to%20Jesus%201872%20sheet%20music%20cover.jpg?width=400"
+        },
+        {
+            "term": "Invisible institution",
+            "definition": "The hidden Black church that enslaved people created in secret, away from the white-controlled churches their masters made them attend.",
+            "example": "The invisible institution met in clearings called \"hush arbors,\" where Black preachers told the story of Moses leading his people out of slavery.",
+            "category": "African Americans at Mid-Century"
+        },
+        {
+            "term": "Field hand",
+            "definition": "An enslaved person who worked in the fields growing crops like cotton, tobacco, or sugar.",
+            "example": "About three-quarters of rural enslaved people were field hands, working from dawn until dark under the watch of an overseer.",
+            "category": "African Americans at Mid-Century",
+            "imageUrl": "images/vocab/field-hand.jpg"
+        },
+        {
+            "term": "House servant",
+            "definition": "An enslaved person who worked inside the slaveholder's house cooking, cleaning, or caring for children.",
+            "example": "House servants worked closer to the family but lived under the constant watch of their master and could be sent to the fields as punishment.",
+            "category": "African Americans at Mid-Century"
+        },
+        {
+            "term": "Slave family",
+            "definition": "The family bonds enslaved people built and protected even though Southern law refused to recognize their marriages or parental rights.",
+            "example": "Of all the things they endured, enslaved people most feared being sold away from their slave family.",
+            "category": "African Americans at Mid-Century",
+            "imageUrl": "images/vocab/slave-family.jpg"
+        },
+        {
+            "term": "African retentions",
+            "definition": "Cultural elements from West Africa that enslaved people preserved in America, including music, storytelling, food, and faith traditions.",
+            "example": "African retentions can be heard in spirituals, seen in quilts, and tasted in foods like okra and gumbo that enslaved cooks brought into American kitchens.",
+            "category": "African Americans at Mid-Century",
+            "imageUrl": "images/vocab/african-retentions.jpg"
+        },
+        {
+            "term": "Union",
+            "definition": "The United States as one nation, often used during the Civil War to mean the North and the federal government.",
+            "example": "Lincoln's first goal in the war was not to end slavery but to preserve the Union by stopping the South from leaving it.",
+            "category": "The Civil War",
+            "imageUrl": "images/vocab/union.png"
+        },
+        {
+            "term": "Confederacy",
+            "definition": "The Confederate States of America — the eleven Southern states that seceded from the Union and formed their own nation in 1861.",
+            "example": "The Confederacy elected Jefferson Davis as its president and fought the Civil War to defend its independence and the institution of slavery.",
+            "category": "The Civil War",
+            "imageUrl": "images/vocab/confederacy.png"
+        },
+        {
+            "term": "Bull Run",
+            "definition": "The first major battle of the Civil War, fought in July 1861 in Virginia and won by the Confederacy.",
+            "example": "After Bull Run, both sides realized the war would not be quick and began building large armies for a long fight.",
+            "category": "The Civil War",
+            "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Battle%20of%20Bull%20Run,%20Va%20July%2021st%201861.jpg?width=400"
+        },
+        {
+            "term": "discrimination",
+            "definition": "Unequal treatment based on a person's race, gender, religion, or other characteristic.",
+            "example": "Even free Black Americans in the North faced discrimination in jobs, schools, and churches before the Civil War.",
+            "category": "African Americans at Mid-Century",
+            "tier": "encounter"
+        },
+        {
+            "term": "racism",
+            "definition": "The belief that one race is superior to another, used to justify treating people unfairly.",
+            "example": "Racism was the foundation of American slavery and continued to shape American life long after the war ended it.",
+            "category": "African Americans at Mid-Century",
+            "tier": "encounter"
+        },
+        {
+            "term": "oppression",
+            "definition": "The feeling of being weighed down or held back by severe and unfair force.",
+            "example": "Spirituals gave voice to the oppression enslaved people lived under and to their hopes for freedom.",
+            "category": "African Americans at Mid-Century",
+            "tier": "encounter"
+        },
+        {
+            "term": "segregation",
+            "definition": "The social separation of groups of people, especially by race.",
+            "example": "Segregation kept Black children out of public schools in many Northern states even before the Civil War began.",
+            "category": "African Americans at Mid-Century",
+            "tier": "encounter"
+        },
+        {
+            "term": "fugitive",
+            "definition": "A person who flees or tries to escape — for example, an enslaved person escaping slavery.",
+            "example": "The Fugitive Slave Act required Northerners to help return fugitive enslaved people to their owners in the South.",
+            "category": "A Dividing Nation",
+            "tier": "encounter"
+        },
+        {
+            "term": "habeas corpus",
+            "definition": "The right of an arrested person to appear before a judge to determine whether their imprisonment is lawful.",
+            "example": "During the Civil War, Lincoln suspended habeas corpus so the army could jail people suspected of disloyalty without a trial.",
+            "category": "The Civil War",
+            "tier": "encounter"
         }
     ],
     "practiceQuestions": [
