@@ -5,15 +5,25 @@
         "subtitle": "Get ready to ace your test! Learn vocabulary, practice questions, and track your progress.",
         "essentialQuestion": "Is fighting necessary? If so, when and how is it effective?",
         "categoryQuestions": {
-            "Sectionalism": "How did the issue of slavery intensify the differences between the economies and societies of the North and South?",
-            "Road to War": [
-                "How did western expansion in the 1840s deepen conflict between the North and South?",
-                "What were the key tensions that led to the southern states seceding from the Union?",
-                "What event started the Civil War?"
+            "Worlds of North & South": [
+                "How did geography shape the economic, social, and political development of the North and the South?",
+                "Why did two regions of the same country come to feel like two different worlds by 1850?",
+                "What did the cotton gin change about the trajectory of slavery in America?"
             ],
-            "The War Itself": [
-                "How was the Union able to defeat the Confederacy?",
-                "What were the main battles and turning points of the Civil War?"
+            "African Americans at Mid-Century": [
+                "How did enslaved African Americans build family, community, faith, and culture under a system designed to deny them all four?",
+                "What does resistance look like when overt rebellion is met with deadly force?",
+                "How did the experience and culture of enslaved people shape American society beyond the institution of slavery itself?"
+            ],
+            "A Dividing Nation": [
+                "Why did political compromise stop working, and at what point did it become impossible?",
+                "How can a single court case like Dred Scott shift the trajectory of a nation?",
+                "Was the Civil War inevitable, and who or what is most responsible for it?"
+            ],
+            "The Civil War": [
+                "How did the war change in purpose between 1861 and 1865, and what made it change?",
+                "What roles did African Americans, women, and ordinary soldiers play in reshaping the war?",
+                "What does it mean for a war to end, and what was left unresolved at Appomattox?"
             ]
         },
         "theme": {
@@ -90,8 +100,7 @@
             "definition": "Strong loyalty to one region of a country instead of to the country as a whole.",
             "simpleExplanation": "Imagine if you cared way more about your neighborhood than about your whole town. Now imagine that feeling getting so strong that you start to think your neighborhood and the next one over are basically two different places. That is what was happening between the North and South.",
             "example": "By the 1850s, sectionalism had grown so strong that Northern and Southern members of Congress could barely sit in the same room without arguing about slavery.",
-            "category": "Sectionalism",
-            "tier": "must-know",
+            "category": "Worlds of North & South",
             "typingSnippet": "Sectionalism is loyalty to one region instead of the whole country. In America before the Civil War, the North and South began to feel like two different countries. They had different economies, different ways of life, and very different views on slavery. This deep divide eventually pulled the nation apart.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Sectionalism",
             "imageUrl": "images/vocab/sectionalism.jpg"
@@ -101,8 +110,7 @@
             "definition": "A system in which one person is treated as the legal property of another and forced to work without pay.",
             "simpleExplanation": "Slavery meant that one person could legally own another person, force them to work for free, and treat them like property instead of a human being. In America, this system was used to force Black people, mostly from Africa, to do back breaking work on Southern farms.",
             "example": "By 1860, about four million enslaved people lived in the United States, almost all of them in the South.",
-            "category": "Sectionalism",
-            "tier": "must-know",
+            "category": "African Americans at Mid-Century",
             "typingSnippet": "Slavery in America forced millions of Black people to work without pay on Southern plantations. Enslaved people had no rights. They could be bought, sold, beaten, or separated from their families. The Southern economy depended on slavery, while the Northern economy did not. This difference became impossible to ignore.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Slavery_in_the_United_States",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Slavery_in_the_United_States",
@@ -113,32 +121,29 @@
             "definition": "The movement to end slavery in the United States.",
             "simpleExplanation": "Abolitionism was the fight to get rid of slavery. People who joined this movement gave speeches, wrote books and newspapers, and helped enslaved people escape. Some risked their lives doing it. They believed slavery was simply wrong, no matter what the law said.",
             "example": "When Frederick Douglass spoke at abolitionist meetings, audiences were stunned to hear him describe slavery in his own words after escaping it himself.",
-            "category": "Sectionalism",
-            "tier": "must-know",
+            "category": "A Dividing Nation",
             "typingSnippet": "Abolitionism was the movement to end slavery. Abolitionists believed that no person should be allowed to own another. They printed newspapers, gave speeches, and helped people escape to freedom. Some, like Frederick Douglass, had been enslaved themselves. Their work slowly shifted public opinion in the North against slavery.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Abolitionism_in_the_United_States",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Abolitionism",
             "imageUrl": "images/vocab/abolitionism.jpg"
         },
         {
-            "term": "plantation economy",
+            "term": "Plantation",
             "definition": "An economic system based on large farms that used enslaved labor to grow cash crops like cotton, tobacco, and sugar.",
             "simpleExplanation": "The Southern economy was built on huge farms that grew one main crop, usually cotton, to sell. These farms only made money because the work was done by enslaved people who were never paid. Without slavery, the whole system would have fallen apart, which is why so many Southern leaders fought to keep it.",
             "example": "A single plantation in Mississippi might have hundreds of enslaved workers picking cotton from sunrise to sunset, earning the owner a fortune while the workers earned nothing.",
-            "category": "Sectionalism",
-            "tier": "must-know",
+            "category": "Worlds of North & South",
             "typingSnippet": "The plantation economy was the South's main way of making money. Large farms grew crops like cotton and tobacco to sell to the North and to Europe. The whole system depended on enslaved workers who were forced to do the labor for free. Plantation owners became some of the richest people in America.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Plantation_economy",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Plantation",
-            "imageUrl": "images/vocab/plantation-economy.jpg"
+            "imageUrl": "images/vocab/plantation.jpg"
         },
         {
             "term": "Frederick Douglass",
             "definition": "A formerly enslaved Black American who escaped to the North in 1838 and became one of the most powerful voices in the abolitionist movement.",
             "simpleExplanation": "Frederick Douglass was born into slavery and taught himself to read in secret. After escaping, he traveled the country telling his story so that white Americans could no longer pretend slavery was not so bad. His books and speeches were so good that some people refused to believe a Black man had written them.",
             "example": "In 1845, Frederick Douglass published his autobiography describing his life as an enslaved person, and it became a bestseller that turned thousands of readers against slavery.",
-            "category": "Sectionalism",
-            "tier": "must-know",
+            "category": "African Americans at Mid-Century",
             "typingSnippet": "Frederick Douglass escaped slavery in 1838 and became the most famous Black abolitionist in America. He wrote a powerful autobiography about his life in slavery. He gave speeches across the North and even in Europe. He published his own newspaper, The North Star. His words helped change how Americans thought about slavery.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Frederick_Douglass",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Frederick_Douglass",
@@ -149,8 +154,7 @@
             "definition": "A secret network of safe houses, hidden routes, and volunteers that helped enslaved people escape from the South to freedom.",
             "simpleExplanation": "Even though it had no trains and no tracks, this network used train words as code. A safe house was a station, the helpers were conductors, and the people escaping were passengers. Travelers moved at night and hid during the day. Getting caught meant being sent back into slavery, sometimes worse.",
             "example": "Harriet Tubman made about thirteen trips back into the South as an Underground Railroad conductor and helped around seventy enslaved people reach freedom.",
-            "category": "Sectionalism",
-            "tier": "must-know",
+            "category": "African Americans at Mid-Century",
             "typingSnippet": "The Underground Railroad was a secret network that helped enslaved people escape to freedom. It had no real trains or tracks. Helpers, called conductors, guided travelers from one safe house to the next. Most escapes happened at night. The network reached from the South all the way to free states and Canada. Thousands made it to freedom this way.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Underground_Railroad",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Underground_Railroad",
@@ -161,8 +165,7 @@
             "definition": "A violent 1831 uprising of enslaved people led by Nat Turner in Virginia, in which about sixty white people were killed before it was crushed.",
             "simpleExplanation": "Nat Turner believed God had told him to lead other enslaved people in a fight against their owners. For two days, his group attacked plantations in Virginia. The rebellion was stopped, and Turner was captured and hanged. After this, Southern states passed cruel new laws making it illegal to teach enslaved people to read, even though those laws made the underlying problem worse.",
             "example": "After Nat Turner's Rebellion, several Southern states made it illegal for enslaved people to learn to read or to gather in groups without a white person present.",
-            "category": "Sectionalism",
-            "tier": "must-know",
+            "category": "African Americans at Mid-Century",
             "typingSnippet": "Nat Turner led the most famous slave rebellion in American history. In 1831, he and his followers attacked plantations in Virginia, killing about sixty white people. The rebellion was put down in two days, and Turner was hanged. Frightened Southern leaders responded with harsh new laws against enslaved people, but the rebellion showed that slavery could not last forever without a fight.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Nat_Turner%27s_slave_rebellion",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Nat_Turner",
@@ -173,8 +176,7 @@
             "definition": "A state in which slavery was illegal before the Civil War.",
             "simpleExplanation": "If you were in a free state, slavery was against the law. That did not mean Black Americans had equal rights there, because they often did not. But no one could legally own another person within the state's borders. Most free states were in the North.",
             "example": "When an enslaved person crossed from Kentucky into Ohio, a free state, they were no longer legally enslaved according to that state's law.",
-            "category": "Sectionalism",
-            "tier": "must-know",
+            "category": "Worlds of North & South",
             "typingSnippet": "A free state was one where slavery was illegal. Most free states were in the North, where the economy did not depend on enslaved labor. Free states still had racism and unfair laws against Black Americans. But within their borders, no one could legally own another person. The number of free states versus slave states was a constant political fight.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Slave_states_and_free_states",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Slave_states_and_free_states",
@@ -185,8 +187,7 @@
             "definition": "A state in which slavery was legal before the Civil War.",
             "simpleExplanation": "In a slave state, owning another person was legal. Almost all slave states were in the South, where huge farms needed unpaid workers to function. As the country added new states, the question of whether each new one would be a slave state or a free state became one of the biggest fights in American politics.",
             "example": "When Missouri tried to enter the Union as a slave state in 1819, Northerners objected so fiercely that Congress had to write the Missouri Compromise.",
-            "category": "Sectionalism",
-            "tier": "must-know",
+            "category": "Worlds of North & South",
             "typingSnippet": "A slave state was one where slavery was legal. Slave states were in the South. Their economies depended on plantations worked by enslaved people. As America added new states, Northerners and Southerners argued bitterly about whether each one should be slave or free. Each new state shifted the balance of power in Congress, raising the stakes of every decision.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Slave_states_and_free_states",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Slave_state",
@@ -197,8 +198,7 @@
             "definition": "A formerly enslaved Black American who escaped in 1849 and then risked her life repeatedly to lead others to freedom on the Underground Railroad.",
             "simpleExplanation": "Harriet Tubman could have stayed safely in the North after her own escape. Instead, she went back into the South about thirteen times to rescue other enslaved people, including her own family. Slave catchers offered huge rewards for her capture. She never got caught and never lost a single person on her trips.",
             "example": "Harriet Tubman was nicknamed \"Moses\" by the people she helped because, like the biblical figure, she led her people out of bondage.",
-            "category": "Sectionalism",
-            "tier": "encounter",
+            "category": "African Americans at Mid-Century",
             "wikiUrl": "https://en.wikipedia.org/wiki/Harriet_Tubman",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Harriet_Tubman",
             "imageUrl": "images/portraits/harriet-tubman.jpg"
@@ -208,8 +208,7 @@
             "definition": "A white Northern newspaper editor who founded the anti slavery paper The Liberator in 1831 and demanded an immediate end to slavery.",
             "simpleExplanation": "Most early abolitionists wanted to end slavery slowly, over many years. William Lloyd Garrison said no, slavery must end now. His newspaper, The Liberator, attacked slavery in fierce language for thirty five years. Southerners hated him so much that one state offered a five thousand dollar reward for his arrest.",
             "example": "On the front page of his very first issue, William Lloyd Garrison wrote, \"I will be heard,\" and he kept his word for the next three decades.",
-            "category": "Sectionalism",
-            "tier": "encounter",
+            "category": "A Dividing Nation",
             "wikiUrl": "https://en.wikipedia.org/wiki/William_Lloyd_Garrison",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/William_Lloyd_Garrison",
             "imageUrl": "images/portraits/william-lloyd-garrison.jpg"
@@ -219,8 +218,7 @@
             "definition": "The boundary line between Pennsylvania and Maryland that became the unofficial border between the free North and the slave South.",
             "simpleExplanation": "Two surveyors named Mason and Dixon drew this line in colonial times to settle a land argument. Nobody planned for it to mean anything bigger. But by the 1800s, Americans started using it as shorthand for the divide between the North and the South, between free states and slave states.",
             "example": "An enslaved person who crossed the Mason Dixon Line into Pennsylvania moved from a slave state into a free state.",
-            "category": "Sectionalism",
-            "tier": "encounter",
+            "category": "Worlds of North & South",
             "wikiUrl": "https://en.wikipedia.org/wiki/Mason%E2%80%93Dixon_line",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Mason%E2%80%93Dixon_line",
             "imageUrl": "images/vocab/mason-dixon-line.jpg"
@@ -230,8 +228,7 @@
             "definition": "A machine invented by Eli Whitney in 1793 that quickly removed seeds from cotton fibers, making cotton far more profitable to grow.",
             "simpleExplanation": "Before this machine, cleaning seeds out of cotton by hand was so slow that growing cotton was barely worth it. The cotton gin sped up that step about fifty times. Suddenly cotton was a goldmine. Plantation owners planted more of it, which meant they wanted more enslaved workers, not fewer. A machine meant to save labor ended up trapping more people in slavery.",
             "example": "After the cotton gin was invented, the number of enslaved people in the South grew from about 700,000 in 1790 to nearly 4 million by 1860.",
-            "category": "Sectionalism",
-            "tier": "encounter",
+            "category": "Worlds of North & South",
             "wikiUrl": "https://en.wikipedia.org/wiki/Cotton_gin",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Cotton_gin",
             "imageUrl": "images/vocab/cotton-gin.jpg"
@@ -241,8 +238,7 @@
             "definition": "An 1820 agreement that admitted Missouri as a slave state and Maine as a free state, and banned slavery in northern parts of the Louisiana Purchase.",
             "simpleExplanation": "By 1820, the country had eleven free states and eleven slave states. Adding Missouri would tip the balance. Congress made a deal: Missouri came in as a slave state, Maine came in as a free state, and a line was drawn across the country saying no more slavery north of it. People called it a compromise, but really it just postponed the fight.",
             "example": "Thomas Jefferson said the Missouri Compromise was like \"a fire bell in the night,\" warning him that the slavery question would tear the country apart someday.",
-            "category": "Road to War",
-            "tier": "must-know",
+            "category": "A Dividing Nation",
             "typingSnippet": "The Missouri Compromise of 1820 tried to keep peace between free and slave states. Missouri became a slave state and Maine became a free state. Slavery was banned in the rest of the Louisiana Purchase north of a line at 36 degrees 30 minutes. The deal kept the balance, but it also drew a line that made the divide between North and South feel official.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Missouri_Compromise",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Missouri_Compromise",
@@ -253,8 +249,7 @@
             "definition": "An 1846 proposal to ban slavery in any land taken from Mexico in the Mexican American War.",
             "simpleExplanation": "When the United States looked likely to win huge new lands from Mexico, a Northern congressman tried to make sure none of that land would have slavery. The South was furious. Even though the law failed, the fight over it showed how angry both sides were getting. From this moment on, every new piece of territory became a slavery argument.",
             "example": "After the Wilmot Proviso failed, Southern leaders started saying out loud, for the first time, that they might leave the Union if the North kept attacking slavery.",
-            "category": "Road to War",
-            "tier": "must-know",
+            "category": "A Dividing Nation",
             "typingSnippet": "The Wilmot Proviso was an 1846 proposal to ban slavery in any land taken from Mexico. It passed the House of Representatives but never made it through the Senate. Even though it failed, it forced Congress to argue openly about slavery in new western land. From this point on, the fight over slavery in the territories never went away.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Wilmot_Proviso",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Wilmot_Proviso",
@@ -265,8 +260,7 @@
             "definition": "A package of five 1850 laws that admitted California as a free state and passed a tougher Fugitive Slave Law to please the South.",
             "simpleExplanation": "After the war with Mexico, the country had a huge new chunk of land and no agreement about slavery in it. Senator Henry Clay put together a deal with five parts. The North got California as a free state. The South got a much harsher law forcing Northerners to help return escaped enslaved people. Both sides walked away unhappy, which is how compromises sometimes work.",
             "example": "The Compromise of 1850 brought California into the Union as a free state, but the new Fugitive Slave Law it included turned even some moderate Northerners against the South.",
-            "category": "Road to War",
-            "tier": "must-know",
+            "category": "A Dividing Nation",
             "typingSnippet": "The Compromise of 1850 was a package of five laws meant to settle slavery fights after the Mexican American War. California became a free state. The slave trade was banned in Washington DC. A tougher Fugitive Slave Law was passed to please the South. The compromise delayed civil war by about ten years, but it left people on both sides angrier than before.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Compromise_of_1850",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Compromise_of_1850",
@@ -277,8 +271,7 @@
             "definition": "A harsh 1850 law that required citizens in free states to help capture and return people who had escaped slavery.",
             "simpleExplanation": "Before this law, an enslaved person who reached a free state was usually safe. After it, slave catchers could chase people deep into the North, and ordinary Northerners could be punished for not helping. Suddenly slavery was no longer a Southern problem, it was happening in Northern towns and cities. Many Northerners who had been quiet about slavery now turned against it.",
             "example": "After the Fugitive Slave Law passed, abolitionists in cities like Boston physically blocked slave catchers from taking people back south, sometimes leading to riots.",
-            "category": "Road to War",
-            "tier": "must-know",
+            "category": "A Dividing Nation",
             "typingSnippet": "The Fugitive Slave Law of 1850 forced people in free states to help return enslaved people who had escaped. Anyone who refused could be fined or jailed. The law shocked Northerners who had ignored slavery before. Now slavery was happening in their own towns. Many Northerners who had not cared about slavery suddenly turned against it.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Fugitive_Slave_Act_of_1850",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Fugitive_Slave_Act_of_1850",
@@ -289,8 +282,7 @@
             "definition": "An 1852 anti slavery novel by Harriet Beecher Stowe that became one of the bestselling books of the 1800s and turned many Northerners against slavery.",
             "simpleExplanation": "Most Northerners had never seen slavery up close. Then Harriet Beecher Stowe wrote a novel that took readers inside it. People sobbed over the characters. The book sold more than 300,000 copies in its first year, an enormous number back then. It changed how regular Northerners felt about slavery in a way that no political speech ever had.",
             "example": "When Harriet Beecher Stowe later met President Lincoln, he is said to have joked, \"So you're the little woman who wrote the book that made this great war.\"",
-            "category": "Road to War",
-            "tier": "must-know",
+            "category": "A Dividing Nation",
             "typingSnippet": "Uncle Tom's Cabin was an 1852 anti slavery novel by Harriet Beecher Stowe. It told the story of an enslaved man named Tom and the cruelty he faced. The book sold hundreds of thousands of copies. Many Northerners cried while reading it and turned against slavery for the first time. Many Southerners called the book a lie and banned it from their states.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Uncle_Tom%27s_Cabin",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Uncle_Tom%27s_Cabin",
@@ -301,8 +293,7 @@
             "definition": "A period of violent fighting in the Kansas Territory between 1854 and 1859 over whether Kansas would be a free state or a slave state.",
             "simpleExplanation": "When Congress let Kansas settlers vote on slavery, both sides rushed in to swing the result. Pro slavery Missourians crossed the border to vote illegally. Anti slavery families came in from the North. The two sides started attacking each other with guns, axes, and torches. People started calling the territory \"Bleeding Kansas.\" It was a small civil war before the big one.",
             "example": "In Bleeding Kansas, an abolitionist named John Brown and his sons attacked and killed five pro slavery settlers, showing how brutal the fight had become.",
-            "category": "Road to War",
-            "tier": "must-know",
+            "category": "A Dividing Nation",
             "typingSnippet": "Bleeding Kansas was a period of violent fighting in the Kansas Territory from 1854 to 1859. Pro slavery and anti slavery settlers attacked each other with guns and torches. About fifty people died. The fighting started after Congress let Kansas voters decide whether the territory would be free or slave. It showed that compromise was no longer working.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Bleeding_Kansas",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Bleeding_Kansas",
@@ -313,8 +304,7 @@
             "definition": "An 1857 Supreme Court ruling that said Black people were not citizens and that Congress could not ban slavery in the western territories.",
             "simpleExplanation": "Dred Scott was an enslaved man who sued for his freedom because his owner had taken him to live in free territory. The Supreme Court ruled against him in the worst possible way. The court said Black Americans had no rights at all and that Congress could not stop slavery from spreading. To Northerners, it felt like the South had taken over the federal government itself.",
             "example": "After the Dred Scott decision, even moderate Northerners worried that the next ruling could legalize slavery in their own free states.",
-            "category": "Road to War",
-            "tier": "must-know",
+            "category": "A Dividing Nation",
             "typingSnippet": "The Dred Scott decision of 1857 was a Supreme Court ruling that said Black Americans were not citizens and had no rights. It also said Congress could not ban slavery in the western territories. The decision was a huge victory for the South and a disaster for the North. Many Northerners now believed slavery would spread across the whole country if they did not stop it.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Dred_Scott_v._Sandford",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Dred_Scott_v._Sandford",
@@ -325,8 +315,7 @@
             "definition": "Seven public debates in 1858 between Abraham Lincoln and Senator Stephen Douglas, with slavery as the main topic.",
             "simpleExplanation": "Two men running for one Senate seat in Illinois agreed to debate each other in front of huge crowds, and the country paid attention. Stephen Douglas argued that each state should decide on slavery for itself. Abraham Lincoln argued that slavery was a moral wrong that had to be stopped from spreading. Lincoln lost the Senate race but won something bigger: a national reputation.",
             "example": "Lincoln lost the 1858 Senate race to Douglas, but the debates made him so well known that he won the Republican nomination for president just two years later.",
-            "category": "Road to War",
-            "tier": "must-know",
+            "category": "A Dividing Nation",
             "typingSnippet": "The Lincoln Douglas Debates were seven public debates in 1858 between Abraham Lincoln and Senator Stephen Douglas of Illinois. They argued mostly about slavery. Lincoln said slavery was a moral wrong and should not spread. Douglas said each state should choose for itself. Lincoln lost the Senate election but became famous, which helped him win the presidency in 1860.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Lincoln%E2%80%93Douglas_debates",
             "imageUrl": "images/vocab/lincoln-douglas-debates.jpg"
@@ -336,8 +325,7 @@
             "definition": "An 1859 attempt by abolitionist John Brown to start a slave uprising by attacking the federal weapons storehouse at Harpers Ferry, Virginia.",
             "simpleExplanation": "John Brown was a white abolitionist who believed only violence could end slavery. He led 21 men in an attack on a federal armory in Virginia, planning to hand out the weapons to enslaved people and start a massive uprising. The plan failed quickly. Brown was hanged. But Southern leaders saw the raid as proof that the whole North wanted to come kill them in their beds.",
             "example": "After John Brown's Raid, Southern states began organizing their militias and stockpiling weapons, even before the 1860 election.",
-            "category": "Road to War",
-            "tier": "must-know",
+            "category": "A Dividing Nation",
             "typingSnippet": "John Brown's Raid happened in 1859 when abolitionist John Brown attacked the federal armory at Harpers Ferry, Virginia. He hoped to start a massive slave uprising. The raid failed in two days. Brown was captured and hanged. But the attack convinced many Southerners that the whole North wanted to attack them. The South began preparing for a war they now thought was coming.",
             "wikiUrl": "https://en.wikipedia.org/wiki/John_Brown%27s_raid_on_Harpers_Ferry",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/John_Brown%27s_raid_on_Harpers_Ferry",
@@ -348,8 +336,7 @@
             "definition": "The presidential election won by Abraham Lincoln, an anti slavery Republican, without a single electoral vote from the South.",
             "simpleExplanation": "Lincoln did not call himself an abolitionist, but he had said clearly that slavery was wrong and should not spread. Southerners did not trust him. He won the presidency without being on the ballot in most of the South. Within six weeks of his election, South Carolina announced it was leaving the United States. Six more states followed before he was even sworn in.",
             "example": "Lincoln won the Election of 1860 with less than forty percent of the popular vote, but he won enough free states to take the Electoral College, and that was enough to terrify the South.",
-            "category": "Road to War",
-            "tier": "must-know",
+            "category": "A Dividing Nation",
             "typingSnippet": "The Election of 1860 was won by Abraham Lincoln, an anti slavery Republican. He did not appear on the ballot in most Southern states, and he won with less than forty percent of the national popular vote. But he won enough free states to take the Electoral College. Within weeks, South Carolina announced it was leaving the Union. The country was breaking apart.",
             "wikiUrl": "https://en.wikipedia.org/wiki/1860_United_States_presidential_election",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/1860_United_States_presidential_election",
@@ -360,8 +347,7 @@
             "definition": "The formal withdrawal of a state from the United States.",
             "simpleExplanation": "Secession means leaving. After Lincoln won the 1860 election, Southern states announced one by one that they were no longer part of the United States. They formed their own country called the Confederate States of America. Lincoln said no state had the right to leave the Union. That disagreement, more than anything else, is why a war began.",
             "example": "South Carolina was the first to secede in December 1860, followed by Mississippi, Florida, Alabama, Georgia, Louisiana, and Texas before Lincoln was even inaugurated.",
-            "category": "Road to War",
-            "tier": "must-know",
+            "category": "A Dividing Nation",
             "typingSnippet": "Secession is the formal act of leaving a country. After Lincoln won the 1860 election, eleven Southern states seceded from the United States and formed the Confederate States of America. Lincoln said secession was illegal. The South said it was a state's right to leave. That disagreement could not be settled by talking. The Civil War began a few months later.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Secession_in_the_United_States",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Secession_in_the_United_States",
@@ -370,8 +356,7 @@
         {
             "term": "Kansas Nebraska Act",
             "definition": "An 1854 law that created the Kansas and Nebraska territories and let settlers vote on whether to allow slavery, throwing out the Missouri Compromise line.",
-            "category": "Road to War",
-            "tier": "encounter",
+            "category": "A Dividing Nation",
             "wikiUrl": "https://en.wikipedia.org/wiki/Kansas%E2%80%93Nebraska_Act",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Kansas-Nebraska_Act",
             "imageUrl": "images/vocab/kansas-nebraska-act.jpg"
@@ -379,15 +364,14 @@
         {
             "term": "popular sovereignty",
             "definition": "The idea that the people living in a territory should vote on whether to allow slavery there.",
-            "category": "Road to War",
-            "tier": "encounter",
+            "category": "A Dividing Nation",
             "wikiUrl": "https://en.wikipedia.org/wiki/Popular_sovereignty_in_the_United_States",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Popular_sovereignty"
         },
         {
             "term": "Stephen Douglas",
             "definition": "A powerful Democratic senator from Illinois who pushed popular sovereignty as a way to settle the slavery question.",
-            "category": "Road to War",
+            "category": "A Dividing Nation",
             "tier": "encounter",
             "wikiUrl": "https://en.wikipedia.org/wiki/Stephen_A._Douglas",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Stephen_A._Douglas",
@@ -398,8 +382,7 @@
             "definition": "A federal fort in Charleston Harbor that Confederate forces fired on in April 1861, beginning the Civil War.",
             "simpleExplanation": "After South Carolina seceded, the federal government still held Fort Sumter, a small island fort in Charleston Harbor. Confederate leaders demanded the Union soldiers leave. Lincoln refused. After 34 hours of bombardment, the Union surrendered. No one was killed in combat, but the war had officially begun.",
             "example": "When Confederate cannons opened fire on Fort Sumter on April 12, 1861, the Civil War began without a single Union soldier dying in the battle itself.",
-            "category": "The War Itself",
-            "tier": "must-know",
+            "category": "The Civil War",
             "typingSnippet": "Fort Sumter was a federal fort in Charleston Harbor. After South Carolina seceded, Confederate leaders demanded that Union soldiers leave. Lincoln refused. On April 12, 1861, Confederate cannons opened fire. After 34 hours, the small Union garrison surrendered. The Civil War had begun. The attack united the North overnight.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Battle_of_Fort_Sumter",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Battle_of_Fort_Sumter",
@@ -410,8 +393,7 @@
             "definition": "A September 1862 battle in Maryland that stopped Lee's first invasion of the North and remains the bloodiest single day in American history.",
             "simpleExplanation": "Lee invaded Maryland hoping a big Confederate victory on Northern soil would convince Britain and France to support the South. Instead, Union forces blocked him in twelve hours of brutal fighting. More Americans died on that single day than on any other in our history. The battle was technically a draw, but Lee retreated. Lincoln used the moment to change what the war was about.",
             "example": "After the Battle of Antietam, Lincoln issued the Emancipation Proclamation, transforming the war from a fight to save the Union into a war to end slavery.",
-            "category": "The War Itself",
-            "tier": "must-know",
+            "category": "The Civil War",
             "typingSnippet": "The Battle of Antietam was fought on September 17, 1862 in Maryland. It was the bloodiest single day in American history with over 22,000 casualties. Union forces stopped Lee's first invasion of the North. The Union victory gave Lincoln the chance to issue the Emancipation Proclamation. The war was no longer just about saving the Union. It was now also about ending slavery.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Battle_of_Antietam",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Battle_of_Antietam",
@@ -422,8 +404,7 @@
             "definition": "A 47 day Union siege of the Confederate stronghold at Vicksburg, Mississippi, ending July 4, 1863, that gave the Union control of the Mississippi River.",
             "simpleExplanation": "Vicksburg sat on cliffs above the Mississippi River. Whoever controlled it controlled the river. General Grant surrounded the city for over six weeks until starvation forced the Confederates to surrender on July 4, 1863. The fall of Vicksburg cut the Confederacy in half. Texas, Arkansas, and Louisiana were now sealed off from the rest of the South.",
             "example": "After Vicksburg fell on July 4, 1863, residents of the city were so bitter about the date that they refused to celebrate Independence Day for over 80 years.",
-            "category": "The War Itself",
-            "tier": "must-know",
+            "category": "The Civil War",
             "typingSnippet": "The Siege of Vicksburg lasted 47 days. Union General Ulysses S. Grant surrounded the Confederate city in Mississippi until starvation forced its surrender on July 4, 1863. The Union now controlled the entire Mississippi River. The Confederacy was split in two. Vicksburg, combined with Gettysburg the day before, was a turning point of the war.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Siege_of_Vicksburg",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Siege_of_Vicksburg",
@@ -434,8 +415,7 @@
             "definition": "A three day July 1863 battle in Pennsylvania that turned back Lee's second invasion of the North; the largest battle ever fought on American soil.",
             "simpleExplanation": "Lee invaded the North a second time, hoping a big victory might force the Union to negotiate. Instead, the two armies collided at the small town of Gettysburg, Pennsylvania. For three days they fought across rocky hills and open fields. On the last day, Lee ordered 12,000 men to charge the Union center. They were cut to pieces. Lee retreated, and the Confederacy never invaded the North again.",
             "example": "Four months after the Battle of Gettysburg, Lincoln delivered the Gettysburg Address at the dedication of the cemetery there, one of the most famous speeches in American history.",
-            "category": "The War Itself",
-            "tier": "must-know",
+            "category": "The Civil War",
             "typingSnippet": "The Battle of Gettysburg was fought July 1 to 3, 1863 in Pennsylvania. It was the largest battle ever on American soil with over 50,000 casualties. Union forces stopped Lee's second invasion of the North. On the last day, Lee ordered 12,000 men in Pickett's Charge across open fields. They were cut to pieces. Lee retreated. The Confederacy never invaded the North again.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Battle_of_Gettysburg",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Battle_of_Gettysburg",
@@ -446,8 +426,7 @@
             "definition": "The Virginia courthouse where Confederate General Robert E. Lee surrendered to Union General Ulysses S. Grant on April 9, 1865, ending the Civil War.",
             "simpleExplanation": "After his army was trapped and starving, Lee met Grant in the parlor of a small Virginia farmhouse to surrender. Grant could have humiliated Lee. Instead, he let Confederate soldiers go home in peace and even shared his rations with the hungry Confederate troops. When Union soldiers started celebrating with cannon fire, Grant ordered them to stop. \"The war is over,\" he said. \"The rebels are our countrymen again.\"",
             "example": "Lee told his men, \"There is nothing left for me to do but to go and see General Grant, and I would rather die a thousand deaths,\" before surrendering at Appomattox.",
-            "category": "The War Itself",
-            "tier": "must-know",
+            "category": "The Civil War",
             "typingSnippet": "Appomattox was the Virginia courthouse where General Lee surrendered to General Grant on April 9, 1865. The surrender ended the Civil War. Grant offered generous terms. Confederate soldiers could go home with their horses. Officers could keep their swords. Grant said the rebels were countrymen again. Five days later, Lincoln was assassinated.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Battle_of_Appomattox_Court_House",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Appomattox_Campaign",
@@ -458,8 +437,7 @@
             "definition": "The 16th president of the United States, who led the Union through the Civil War and was assassinated five days after Lee's surrender.",
             "simpleExplanation": "Lincoln grew up poor in Kentucky and Indiana, taught himself law, and won the presidency in 1860 without a single Southern electoral vote. He never wavered from his belief that the Union had to be saved. He freed enslaved people in rebel states with the Emancipation Proclamation. He gave speeches that helped the country understand what it was fighting for. Five days after Lee surrendered, John Wilkes Booth shot him at Ford's Theatre.",
             "example": "Lincoln told the country at Gettysburg that the war was a test of whether \"government of the people, by the people, for the people, shall not perish from the earth.\"",
-            "category": "The War Itself",
-            "tier": "must-know",
+            "category": "The Civil War",
             "typingSnippet": "Abraham Lincoln was the 16th president of the United States. He led the Union through the Civil War. He grew up poor and taught himself law. He won the 1860 election without a single Southern electoral vote. He preserved the Union, issued the Emancipation Proclamation, and gave the Gettysburg Address. He was assassinated five days after Lee surrendered at Appomattox.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Abraham_Lincoln",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Abraham_Lincoln",
@@ -470,8 +448,7 @@
             "definition": "The president of the Confederate States of America for the entire Civil War.",
             "simpleExplanation": "Davis had served the United States as a senator and as Secretary of War before secession. When Mississippi left the Union, he reluctantly went with it and was chosen to lead the new Confederate government. He had military experience but little patience for politics, and he often clashed with Confederate state governors who refused to share resources. After the war, he was captured and held in prison for two years but never tried.",
             "example": "While Lincoln united the North during the war, Jefferson Davis struggled to keep Southern governors from hoarding their states' resources for themselves.",
-            "category": "The War Itself",
-            "tier": "must-know",
+            "category": "The Civil War",
             "typingSnippet": "Jefferson Davis was the president of the Confederate States of America for the entire Civil War. He was a former US senator from Mississippi and a former Secretary of War. He had military experience but little patience for politics. He clashed often with Southern governors. After the war, he was captured and imprisoned for two years but was never tried.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Jefferson_Davis",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Jefferson_Davis",
@@ -482,8 +459,7 @@
             "definition": "The most famous Confederate general, who commanded the Army of Northern Virginia and surrendered to Grant at Appomattox in April 1865.",
             "simpleExplanation": "Lee had spent his whole career in the United States Army. When the war began, Lincoln offered him command of the Union forces. Lee refused, saying he could not raise his sword against Virginia. He became the Confederacy's most successful general, winning many battles against larger Union armies. After the war, he urged former Confederates to accept their defeat peacefully.",
             "example": "After Pickett's Charge failed at Gettysburg, Robert E. Lee rode out to meet his retreating men, telling them, \"It is all my fault.\"",
-            "category": "The War Itself",
-            "tier": "must-know",
+            "category": "The Civil War",
             "typingSnippet": "Robert E. Lee was the most famous Confederate general. He commanded the Army of Northern Virginia. He had been a career officer in the US Army before the war. Lincoln offered him command of the Union forces, but he refused, saying he could not fight against Virginia. He won many battles against larger Union armies. He surrendered to Grant at Appomattox in 1865.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Robert_E._Lee",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Robert_E._Lee",
@@ -494,8 +470,7 @@
             "definition": "The Union general who led the United States to victory in the Civil War, accepted Lee's surrender at Appomattox, and later became the 18th president.",
             "simpleExplanation": "Grant was the opposite of Lee in nearly every way. Lee was a polished aristocrat. Grant was a quiet, plain man who had failed at most things in life before the war. But he understood something other Union generals did not: that the war could only be won by relentless pressure, accepting heavy losses, and refusing to retreat. Lincoln finally found his fighter and put Grant in charge of everything in 1864.",
             "example": "When Lincoln was told that Grant drank too much, he reportedly replied, \"Find out what brand of whiskey he uses, for I would like to send a barrel of it to each of my other generals.\"",
-            "category": "The War Itself",
-            "tier": "must-know",
+            "category": "The Civil War",
             "typingSnippet": "Ulysses S. Grant was the Union general who led the United States to victory in the Civil War. He won major battles at Shiloh, Vicksburg, and Chattanooga. Lincoln promoted him to command of all Union armies in 1864. He understood that the war required relentless pressure. He accepted Lee's surrender at Appomattox in 1865 and later became the 18th president.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Ulysses_S._Grant",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Ulysses_S._Grant",
@@ -506,8 +481,7 @@
             "definition": "A Union general whose March to the Sea through Georgia in 1864 destroyed the South's ability to keep fighting; pioneer of total war.",
             "simpleExplanation": "Sherman believed war should be ugly so that people would never want it again. He marched his army through Georgia, burning Atlanta, tearing up railroads, and destroying farms and supplies along a 60 mile wide path of destruction. His army did not target civilians directly, but they made sure the South could no longer feed or supply its armies. The strategy was brutal and effective.",
             "example": "Sherman famously said, \"War is hell,\" and he made sure the South believed him.",
-            "category": "The War Itself",
-            "tier": "must-know",
+            "category": "The Civil War",
             "typingSnippet": "William T. Sherman was a Union general who served under Grant. He led the campaign through Georgia and the Carolinas in 1864 and 1865. His March to the Sea destroyed the South's ability to keep fighting. He pioneered the strategy of total war, attacking not just armies but the resources that armies needed. His campaign helped Lincoln win re-election and helped end the war.",
             "wikiUrl": "https://en.wikipedia.org/wiki/William_Tecumseh_Sherman",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/William_Tecumseh_Sherman",
@@ -518,8 +492,7 @@
             "definition": "An executive order issued by Lincoln on January 1, 1863, that declared all enslaved people in Confederate states to be free.",
             "simpleExplanation": "Lincoln waited for a Union victory to issue this order, because he did not want it to look like a desperate move. After Antietam, he announced it. The proclamation could not actually free anyone behind Confederate lines, since the Union army did not control that area yet. But it changed everything. Now any Union advance was a freedom march. And it kept Britain and France from supporting the South, since neither wanted to be seen defending slavery.",
             "example": "When Union armies marched into formerly Confederate territory after January 1, 1863, the Emancipation Proclamation meant that the enslaved people they encountered were legally free.",
-            "category": "The War Itself",
-            "tier": "must-know",
+            "category": "The Civil War",
             "typingSnippet": "The Emancipation Proclamation was an executive order issued by Lincoln on January 1, 1863. It declared all enslaved people in Confederate states to be free. It did not free people in border states loyal to the Union. The proclamation transformed the war into a fight to end slavery. It also kept Britain and France from supporting the South. Now any Union advance was also a freedom march.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Emancipation_Proclamation",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Emancipation_Proclamation",
@@ -530,8 +503,7 @@
             "definition": "A short speech Lincoln gave on November 19, 1863, that redefined the war as a fight for human equality and democracy.",
             "simpleExplanation": "Lincoln was not even the main speaker that day. Another man, Edward Everett, gave a two hour speech first. Lincoln then spoke for two minutes. He said the war was about whether \"government of the people, by the people, for the people\" could survive. He said the dead had given \"the last full measure of devotion.\" The speech was so short some newspapers thought it was a failure. Today it is one of the most famous speeches ever given.",
             "example": "Lincoln began the Gettysburg Address with the words \"Four score and seven years ago,\" referring back 87 years to the Declaration of Independence and its claim that all men are created equal.",
-            "category": "The War Itself",
-            "tier": "must-know",
+            "category": "The Civil War",
             "typingSnippet": "The Gettysburg Address was a short speech given by Lincoln on November 19, 1863. He spoke at the dedication of the cemetery for Union soldiers killed at Gettysburg. The speech was just 272 words long and lasted about two minutes. Lincoln said the war was about whether government of the people could survive. It is now one of the most famous speeches in American history.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Gettysburg_Address",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Gettysburg_Address",
@@ -542,8 +514,7 @@
             "definition": "A military strategy that attacks not just enemy soldiers but also the resources, supplies, and infrastructure that armies need to fight.",
             "simpleExplanation": "Most wars before this one had been fought between armies on a battlefield, with civilians left mostly alone. Total war breaks that rule. It says: if your factories make weapons, your factories are targets. If your railroads carry troops, your railroads are targets. If your farms feed soldiers, your farms are targets. It is a brutal strategy designed to make the enemy unable to keep fighting at all.",
             "example": "Sherman's army practiced total war by destroying $100 million in property across Georgia, including railroads, factories, and food supplies meant for Confederate troops.",
-            "category": "The War Itself",
-            "tier": "must-know",
+            "category": "The Civil War",
             "typingSnippet": "Total war is a military strategy that attacks not just enemy soldiers but also the resources, supplies, and infrastructure that armies need to fight. Sherman pioneered this strategy in his March to the Sea, destroying railroads, factories, and farms across Georgia. The goal was to make the South unable to keep fighting. The strategy was brutal but it worked.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Total_war",
             "imageUrl": "images/vocab/total-war.jpg"
@@ -553,8 +524,7 @@
             "definition": "One of the first official Black regiments in the Union Army, famous for its 1863 assault on Fort Wagner in South Carolina.",
             "simpleExplanation": "When the war began, Black men were not allowed to fight in the Union Army. After the Emancipation Proclamation, that changed. The 54th Massachusetts was one of the first official Black regiments. Their attack on Fort Wagner in July 1863 was a tactical failure but a moral victory. They fought and died bravely while the country watched, and the country could no longer pretend Black men would not or could not fight for their own freedom.",
             "example": "The 1989 film Glory tells the story of the 54th Massachusetts and its assault on Fort Wagner, where the regiment lost about half its men.",
-            "category": "The War Itself",
-            "tier": "must-know",
+            "category": "The Civil War",
             "typingSnippet": "The 54th Massachusetts was one of the first official Black regiments in the Union Army. It was formed in 1863 after the Emancipation Proclamation allowed Black men to enlist. The regiment is best known for its assault on Fort Wagner in South Carolina, where about half its soldiers were killed or wounded. Their bravery helped open the door for nearly 180,000 Black soldiers to serve.",
             "wikiUrl": "https://en.wikipedia.org/wiki/54th_Massachusetts_Infantry_Regiment",
             "imageUrl": "images/vocab/54th-massachusetts.jpg"
@@ -564,8 +534,7 @@
             "definition": "An amendment to the United States Constitution, ratified in December 1865, that abolished slavery throughout the entire country.",
             "simpleExplanation": "The Emancipation Proclamation had only freed enslaved people in Confederate states. To make slavery illegal everywhere, you needed an amendment to the Constitution. The 13th Amendment did exactly that. It passed Congress in early 1865 and was ratified by the states in December of that year, eight months after Lincoln's death. For the first time in American history, no person could legally be owned by another anywhere in the United States.",
             "example": "When the 13th Amendment was ratified in December 1865, about four million formerly enslaved people became legally free across the entire United States, not just in former Confederate states.",
-            "category": "The War Itself",
-            "tier": "must-know",
+            "category": "The Civil War",
             "typingSnippet": "The 13th Amendment to the Constitution was ratified in December 1865. It abolished slavery throughout the entire United States, not just in rebel states. The Emancipation Proclamation had been a wartime order. The 13th Amendment was permanent law. About four million formerly enslaved people became legally free. But freedom on paper and freedom in practice were not the same thing.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Thirteenth_Amendment_to_the_United_States_Constitution",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Thirteenth_Amendment_to_the_United_States_Constitution",
@@ -574,7 +543,7 @@
         {
             "term": "Stonewall Jackson",
             "definition": "A famous Confederate general under Lee, who earned his nickname for standing firm under fire at the First Battle of Bull Run.",
-            "category": "The War Itself",
+            "category": "The Civil War",
             "tier": "encounter",
             "wikiUrl": "https://en.wikipedia.org/wiki/Stonewall_Jackson",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Stonewall_Jackson",
@@ -583,7 +552,7 @@
         {
             "term": "Clara Barton",
             "definition": "A volunteer nurse who treated wounded soldiers on Civil War battlefields and later founded the American Red Cross.",
-            "category": "The War Itself",
+            "category": "The Civil War",
             "tier": "encounter",
             "wikiUrl": "https://en.wikipedia.org/wiki/Clara_Barton",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Clara_Barton",
@@ -592,7 +561,7 @@
         {
             "term": "Minie ball",
             "definition": "A new type of Civil War bullet that expanded when fired and could hit a target accurately from 500 yards away.",
-            "category": "The War Itself",
+            "category": "The Civil War",
             "tier": "encounter",
             "wikiUrl": "https://en.wikipedia.org/wiki/Mini%C3%A9_ball",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Mini%C3%A9_ball",
@@ -601,7 +570,7 @@
         {
             "term": "USCT",
             "definition": "United States Colored Troops, the official designation for regiments of Black soldiers in the Union Army.",
-            "category": "The War Itself",
+            "category": "The Civil War",
             "tier": "encounter",
             "wikiUrl": "https://en.wikipedia.org/wiki/United_States_Colored_Troops",
             "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Soldiers_at_Fort_Lincoln.jpg?width=400"
@@ -609,7 +578,7 @@
         {
             "term": "Copperheads",
             "definition": "Northern Democrats who opposed the Civil War and called for an immediate peace settlement with the Confederacy.",
-            "category": "The War Itself",
+            "category": "The Civil War",
             "tier": "encounter",
             "wikiUrl": "https://en.wikipedia.org/wiki/Copperhead_(politics)",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Copperhead",
@@ -618,20 +587,11 @@
         {
             "term": "Anaconda Plan",
             "definition": "The Union's overall war strategy of blockading Southern ports, splitting the Confederacy at the Mississippi, and slowly squeezing the South into surrender.",
-            "category": "The War Itself",
+            "category": "The Civil War",
             "tier": "encounter",
             "wikiUrl": "https://en.wikipedia.org/wiki/Anaconda_Plan",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Anaconda_Plan",
             "imageUrl": "images/vocab/anaconda-plan.jpg"
-        },
-        {
-            "term": "Reconstruction",
-            "definition": "The period from 1865 to 1877 when the United States tried to rebuild after the Civil War and integrate formerly enslaved people as full citizens.",
-            "category": "The War Itself",
-            "tier": "encounter",
-            "wikiUrl": "https://en.wikipedia.org/wiki/Reconstruction_era",
-            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Reconstruction_era_of_the_United_States",
-            "imageUrl": "images/vocab/reconstruction.jpg"
         }
     ],
     "practiceQuestions": [
@@ -645,7 +605,7 @@
             ],
             "correct": 1,
             "explanation": "Sectionalism meant Northerners and Southerners thought of themselves as different peoples with different ways of life. That growing divide is what eventually pulled the country apart.",
-            "topic": "Sectionalism"
+            "topic": "Worlds of North & South"
         },
         {
             "question": "Why did the Northern and Southern economies become so different by the mid 1800s?",
@@ -657,7 +617,7 @@
             ],
             "correct": 2,
             "explanation": "The North's economy ran on industry, free labor, and small family farms. The South's economy ran on plantation crops like cotton, which required huge amounts of enslaved labor. These two systems pulled the regions further apart every year.",
-            "topic": "Sectionalism"
+            "topic": "Worlds of North & South"
         },
         {
             "question": "What was the main goal of the abolitionist movement?",
@@ -669,7 +629,7 @@
             ],
             "correct": 2,
             "explanation": "Abolitionists believed slavery was morally wrong and worked to end it through speeches, newspapers, books, and helping enslaved people escape. Some wanted slavery ended slowly, but the most famous abolitionists demanded it end immediately.",
-            "topic": "Sectionalism"
+            "topic": "Worlds of North & South"
         },
         {
             "question": "How did the cotton gin affect slavery in the South after 1793?",
@@ -681,7 +641,7 @@
             ],
             "correct": 1,
             "explanation": "Many people had hoped slavery would die out on its own. Instead, the cotton gin made cotton hugely profitable, which made plantation owners want even more enslaved workers. The number of enslaved people in the South grew from about 700,000 in 1790 to nearly 4 million by 1860.",
-            "topic": "Sectionalism"
+            "topic": "Worlds of North & South"
         },
         {
             "question": "Why was Frederick Douglass's voice so powerful in the abolitionist movement?",
@@ -693,7 +653,7 @@
             ],
             "correct": 1,
             "explanation": "Douglass had escaped slavery in 1838. When he stood up at abolitionist meetings and described what slavery was actually like, audiences could no longer pretend it was not so bad. His autobiography sold widely and turned thousands of readers against slavery.",
-            "topic": "Sectionalism"
+            "topic": "Worlds of North & South"
         },
         {
             "question": "Which best describes the Underground Railroad?",
@@ -705,7 +665,7 @@
             ],
             "correct": 1,
             "explanation": "The Underground Railroad had no real trains or tracks. It was a secret network of safe houses called stations, helpers called conductors, and routes that led from the South to free states or Canada. Harriet Tubman is the most famous of its conductors.",
-            "topic": "Sectionalism"
+            "topic": "Worlds of North & South"
         },
         {
             "question": "What was one major effect of Nat Turner's Rebellion in 1831?",
@@ -717,7 +677,7 @@
             ],
             "correct": 2,
             "explanation": "About sixty white people were killed in the rebellion before it was crushed. Slaveholders were terrified. Instead of rethinking slavery, Southern states tightened their grip with cruel new laws that made the underlying problem worse.",
-            "topic": "Sectionalism"
+            "topic": "Worlds of North & South"
         },
         {
             "question": "What was the main goal of the Missouri Compromise of 1820?",
@@ -729,7 +689,7 @@
             ],
             "correct": 1,
             "explanation": "The compromise kept the balance of free and slave states equal in the Senate and drew a line across the Louisiana Purchase saying no slavery north of it. Thomas Jefferson worried it was \"a fire bell in the night,\" warning of disasters to come.",
-            "topic": "Road to War"
+            "topic": "A Dividing Nation"
         },
         {
             "question": "Why did the Wilmot Proviso, even though it failed to pass, matter so much?",
@@ -741,7 +701,7 @@
             ],
             "correct": 2,
             "explanation": "The proviso passed the House but failed in the Senate. Even though it never became law, the fight over it pushed Southern leaders to start talking openly about leaving the Union if Northerners kept attacking slavery.",
-            "topic": "Road to War"
+            "topic": "A Dividing Nation"
         },
         {
             "question": "Which part of the Compromise of 1850 angered Northerners the most?",
@@ -753,7 +713,7 @@
             ],
             "correct": 2,
             "explanation": "The new Fugitive Slave Law made slavery a Northern problem too. Slave catchers came into Northern towns, and ordinary citizens could be punished for refusing to help. Many Northerners who had ignored slavery turned against it because of this law.",
-            "topic": "Road to War"
+            "topic": "A Dividing Nation"
         },
         {
             "question": "How did Uncle Tom's Cabin change Northern attitudes toward slavery?",
@@ -765,7 +725,7 @@
             ],
             "correct": 1,
             "explanation": "Harriet Beecher Stowe's 1852 novel sold over 300,000 copies in its first year, an enormous number for the time. By telling the story of enslaved people as people, it changed minds in a way no political speech ever had.",
-            "topic": "Road to War"
+            "topic": "A Dividing Nation"
         },
         {
             "question": "Why was the Kansas Territory called \"Bleeding Kansas\" in the late 1850s?",
@@ -777,7 +737,7 @@
             ],
             "correct": 1,
             "explanation": "Both sides rushed settlers in to control the vote on whether Kansas would be slave or free. The fights turned into raids, murders, and burned towns. Bleeding Kansas was a small civil war before the big one and showed compromise was no longer working.",
-            "topic": "Road to War"
+            "topic": "A Dividing Nation"
         },
         {
             "question": "Why did the Dred Scott decision alarm so many Northerners?",
@@ -789,7 +749,7 @@
             ],
             "correct": 1,
             "explanation": "The 1857 ruling shocked the North. If Congress could not ban slavery in the western territories, many believed slavery would soon spread into the free states themselves. To Northerners, the South seemed to control even the Supreme Court.",
-            "topic": "Road to War"
+            "topic": "A Dividing Nation"
         },
         {
             "question": "What did Abraham Lincoln gain from the 1858 Lincoln Douglas Debates, even though he lost the Senate election?",
@@ -801,7 +761,7 @@
             ],
             "correct": 2,
             "explanation": "Lincoln lost the Senate race to Stephen Douglas, but the debates were covered in newspapers across the country. He went from a little known Illinois lawyer to a national figure, and just two years later he won the presidency.",
-            "topic": "Road to War"
+            "topic": "A Dividing Nation"
         },
         {
             "question": "Why did John Brown's 1859 raid at Harpers Ferry frighten Southerners so much, even though the raid itself failed?",
@@ -813,7 +773,7 @@
             ],
             "correct": 1,
             "explanation": "Brown was hanged and most Northerners had not supported him. But Southern leaders saw the raid as proof that the whole North was coming for them. Southern states began organizing militias and stockpiling weapons even before the 1860 election.",
-            "topic": "Road to War"
+            "topic": "A Dividing Nation"
         },
         {
             "question": "What event triggered Southern states to begin seceding from the United States?",
@@ -825,7 +785,7 @@
             ],
             "correct": 2,
             "explanation": "Lincoln's victory was the breaking point. He won without appearing on most Southern ballots and had said clearly that slavery should not spread. Within six weeks of the election, South Carolina announced it was leaving the Union, and six more states followed before Lincoln was even inaugurated.",
-            "topic": "Road to War"
+            "topic": "A Dividing Nation"
         },
         {
             "question": "What did secession mean, and what did it lead to?",
@@ -837,7 +797,7 @@
             ],
             "correct": 1,
             "explanation": "Eleven Southern states seceded after Lincoln's election. They formed the Confederate States of America. Lincoln said no state had the right to leave the Union. That disagreement could not be settled by talking, and a few months later the Civil War began.",
-            "topic": "Road to War"
+            "topic": "A Dividing Nation"
         },
         {
             "question": "What event officially started the Civil War?",
@@ -849,7 +809,7 @@
             ],
             "correct": 2,
             "explanation": "Although Southern states had been seceding since December 1860, the war officially began when Confederate cannons opened fire on Fort Sumter in Charleston Harbor on April 12, 1861. After 34 hours of bombardment, the small Union garrison surrendered. The attack united the North overnight.",
-            "topic": "The War Itself"
+            "topic": "The Civil War"
         },
         {
             "question": "Why was the Battle of Antietam important even though it ended in a tactical draw?",
@@ -861,7 +821,7 @@
             ],
             "correct": 1,
             "explanation": "September 17, 1862 remains the bloodiest single day in American history with over 22,000 casualties. The battle ended in a draw, but Lee retreated, which counted as a Union victory. Lincoln used the moment to issue the Emancipation Proclamation, transforming what the war was about.",
-            "topic": "The War Itself"
+            "topic": "The Civil War"
         },
         {
             "question": "What did the Emancipation Proclamation do?",
@@ -873,7 +833,7 @@
             ],
             "correct": 1,
             "explanation": "Issued by Lincoln on January 1, 1863, the Emancipation Proclamation freed enslaved people in Confederate states only, not in border states still loyal to the Union. It could not actually free anyone behind Confederate lines, but it transformed the war and kept Britain and France from supporting the South.",
-            "topic": "The War Itself"
+            "topic": "The Civil War"
         },
         {
             "question": "Why is July 1863 considered the turning point of the Civil War?",
@@ -885,7 +845,7 @@
             ],
             "correct": 1,
             "explanation": "On July 3, 1863, Lee was defeated at Gettysburg. The next day, July 4, Vicksburg surrendered to Grant. Together these two Union victories broke the Confederacy in two and ended its hopes of winning the war.",
-            "topic": "The War Itself"
+            "topic": "The Civil War"
         },
         {
             "question": "What did Lincoln say in the Gettysburg Address that made it so famous?",
@@ -897,7 +857,7 @@
             ],
             "correct": 1,
             "explanation": "Speaking for just over two minutes, Lincoln used 272 words to redefine what the Civil War was about. He linked the war back to the Declaration of Independence's promise that all men are created equal, and called the war a test of whether democratic government could survive.",
-            "topic": "The War Itself"
+            "topic": "The Civil War"
         },
         {
             "question": "What advantages helped the Union eventually defeat the Confederacy?",
@@ -909,7 +869,7 @@
             ],
             "correct": 1,
             "explanation": "The North's industrial economy, larger population, and railroad network gave it the resources to keep fighting longer than the South could. After the Emancipation Proclamation, the Union also had the moral cause of ending slavery, which helped attract Black soldiers and kept Britain and France from supporting the Confederacy.",
-            "topic": "The War Itself"
+            "topic": "The Civil War"
         },
         {
             "question": "What was the strategy of total war, and who pioneered it?",
@@ -921,7 +881,7 @@
             ],
             "correct": 1,
             "explanation": "Sherman believed war should be ugly enough that people would never want to fight one again. His March to the Sea destroyed an estimated $100 million in property across Georgia, including railroads, factories, and farms that supplied Confederate armies. The strategy was brutal but it worked.",
-            "topic": "The War Itself"
+            "topic": "The Civil War"
         },
         {
             "question": "Why was the 54th Massachusetts Infantry Regiment historically important?",
@@ -933,7 +893,7 @@
             ],
             "correct": 1,
             "explanation": "Formed in 1863 after the Emancipation Proclamation made it legal for Black men to enlist, the 54th's assault on Fort Wagner in South Carolina was a tactical failure but a moral victory. About half its soldiers were killed or wounded. Their bravery while the country watched made it impossible to deny that Black men would fight for their own freedom.",
-            "topic": "The War Itself"
+            "topic": "The Civil War"
         },
         {
             "question": "What happened at Appomattox Court House in April 1865?",
@@ -945,7 +905,7 @@
             ],
             "correct": 2,
             "explanation": "After his army was trapped and starving, Lee met Grant in the parlor of a Virginia farmhouse on April 9, 1865. Grant offered generous terms. Confederate soldiers could go home with their horses. Officers kept their swords. Grant told his men, \"The war is over. The rebels are our countrymen again.\"",
-            "topic": "The War Itself"
+            "topic": "The Civil War"
         },
         {
             "question": "What did the 13th Amendment to the Constitution do?",
@@ -957,7 +917,7 @@
             ],
             "correct": 1,
             "explanation": "Ratified in December 1865, the 13th Amendment ended slavery as a legal institution everywhere in the country. The Emancipation Proclamation had only freed enslaved people in rebel states. The 13th Amendment was permanent law, freeing about four million people who had been enslaved.",
-            "topic": "The War Itself"
+            "topic": "The Civil War"
         },
         {
             "question": "How did the differences between Lee and Grant as generals shape the war?",
@@ -969,7 +929,7 @@
             ],
             "correct": 0,
             "explanation": "Lee was a brilliant tactician who often beat larger Union armies through clever maneuvers. Grant understood something earlier Union generals had not: that the war could only be won by accepting heavy losses and refusing to retreat. When Lincoln finally put Grant in command of all Union armies in 1864, the war moved toward its end.",
-            "topic": "The War Itself"
+            "topic": "The Civil War"
         },
         {
             "question": "What happened to Lincoln just five days after Lee's surrender at Appomattox?",
@@ -981,7 +941,7 @@
             ],
             "correct": 2,
             "explanation": "On April 14, 1865, John Wilkes Booth shot Lincoln during a play at Ford's Theatre in Washington. Lincoln died the next morning. His death changed the course of Reconstruction. Vice President Andrew Johnson took over and was far less sympathetic to Black rights than Lincoln had been.",
-            "topic": "The War Itself"
+            "topic": "The Civil War"
         },
         {
             "question": "Which best describes the plantation economy of the American South before the Civil War?",
@@ -993,7 +953,7 @@
             ],
             "correct": 1,
             "explanation": "Southern landowners built large farms called plantations and forced enslaved Black people to do the labor. The whole system depended on slavery. Without enslaved workers, the plantation economy could not have existed.",
-            "topic": "Sectionalism"
+            "topic": "Worlds of North & South"
         },
         {
             "question": "What was the main difference between a free state and a slave state before the Civil War?",
@@ -1005,7 +965,7 @@
             ],
             "correct": 1,
             "explanation": "A free state was one where slavery was illegal. A slave state was one where it was legal. The big political fight before the Civil War was about whether each new state added to the country would be free or slave, because each new state shifted the balance of power in the Senate.",
-            "topic": "Sectionalism"
+            "topic": "Worlds of North & South"
         },
         {
             "question": "Why was Harriet Tubman called \"Moses\" by the people she helped?",
@@ -1017,7 +977,7 @@
             ],
             "correct": 1,
             "explanation": "After escaping slavery herself in 1849, Tubman went back into the South about thirteen times as an Underground Railroad conductor. She helped around seventy enslaved people reach freedom. She never got caught and never lost a single person.",
-            "topic": "Sectionalism"
+            "topic": "Worlds of North & South"
         },
         {
             "question": "How did William Lloyd Garrison's approach to ending slavery differ from many earlier abolitionists?",
@@ -1029,7 +989,7 @@
             ],
             "correct": 1,
             "explanation": "Most early abolitionists wanted slavery ended gradually. Garrison's newspaper The Liberator demanded immediate emancipation starting in 1831. Southern states hated him so much that one offered five thousand dollars for his arrest.",
-            "topic": "Sectionalism"
+            "topic": "Worlds of North & South"
         },
         {
             "question": "Why did the Mason Dixon Line become important before the Civil War?",
@@ -1041,7 +1001,7 @@
             ],
             "correct": 1,
             "explanation": "The line had originally been drawn in colonial times to settle a property dispute between Pennsylvania and Maryland. By the 1800s, Americans started using it as shorthand for the divide between two ways of life: free North and slave South.",
-            "topic": "Sectionalism"
+            "topic": "Worlds of North & South"
         },
         {
             "question": "Which statement BEST captures why the North and South grew so far apart before the Civil War?",
@@ -1053,7 +1013,7 @@
             ],
             "correct": 1,
             "explanation": "The economic divide was the foundation of sectionalism. Northern factories ran on paid workers who could quit. Southern plantations ran on enslaved workers who could not. These two systems were incompatible, and the country could not stay half free and half slave forever.",
-            "topic": "Sectionalism"
+            "topic": "Worlds of North & South"
         },
         {
             "question": "What did Senator Stephen Douglas mean by popular sovereignty?",
@@ -1065,7 +1025,7 @@
             ],
             "correct": 1,
             "explanation": "Douglas pushed popular sovereignty as a way to settle the slavery question without Congress having to take sides. He believed it would be peaceful. Instead, it led to violence in places like Bleeding Kansas, because both sides rushed in to control the vote.",
-            "topic": "Road to War"
+            "topic": "A Dividing Nation"
         },
         {
             "question": "What major change did the Kansas Nebraska Act of 1854 make to American law?",
@@ -1077,7 +1037,7 @@
             ],
             "correct": 1,
             "explanation": "The Missouri Compromise had stood for 34 years, banning slavery north of a set line. The Kansas Nebraska Act tore up that compromise and replaced it with popular sovereignty. The reaction in the North was furious, and the new Republican Party formed in opposition.",
-            "topic": "Road to War"
+            "topic": "A Dividing Nation"
         },
         {
             "question": "Why did the Dred Scott decision say Congress had no power to ban slavery in the territories?",
@@ -1089,7 +1049,7 @@
             ],
             "correct": 0,
             "explanation": "The 1857 ruling said enslaved people were property under the Constitution, and that the federal government could not take property away. To Northerners, this raised a terrifying possibility: if Congress could not ban slavery in the West, what would stop slavery from spreading into free states themselves?",
-            "topic": "Road to War"
+            "topic": "A Dividing Nation"
         },
         {
             "question": "In the Lincoln Douglas Debates, what was the key difference between the two candidates' views on slavery?",
@@ -1101,7 +1061,7 @@
             ],
             "correct": 1,
             "explanation": "Lincoln did not call himself an abolitionist, but he argued clearly that slavery was a moral wrong and had to be stopped from spreading. Douglas defended his idea of popular sovereignty. Lincoln lost the Senate race but became famous, which helped him win the presidency two years later.",
-            "topic": "Road to War"
+            "topic": "A Dividing Nation"
         },
         {
             "question": "What had the Missouri Compromise hoped to settle in 1820, and why did it eventually fail?",
@@ -1113,7 +1073,7 @@
             ],
             "correct": 1,
             "explanation": "The Missouri Compromise tried to keep peace by drawing a line across the Louisiana Purchase. North of the line, no slavery. South of it, slavery allowed. The line stood for 34 years until the Kansas Nebraska Act of 1854 threw it out. Each compromise bought time, but eventually each one was destroyed.",
-            "topic": "Road to War"
+            "topic": "A Dividing Nation"
         },
         {
             "question": "Why did the Election of 1860 cause Southern states to leave the Union, even though Lincoln had not promised to end slavery?",
@@ -1125,7 +1085,7 @@
             ],
             "correct": 0,
             "explanation": "Lincoln had only promised to keep slavery from spreading, not to end it. But the fact that he had won without any Southern support terrified Southerners. They believed the federal government had now turned against them. Within six weeks of the election, South Carolina announced its secession.",
-            "topic": "Road to War"
+            "topic": "A Dividing Nation"
         },
         {
             "question": "How did the Fugitive Slave Law of 1850 change life for Northerners who had ignored slavery before?",
@@ -1137,7 +1097,7 @@
             ],
             "correct": 1,
             "explanation": "Slave catchers came into Northern cities. Anyone who refused to help, or who helped a runaway, could be fined or jailed. For Northerners who had quietly looked away from slavery for years, this law put the system right in their faces. Many turned against slavery for the first time.",
-            "topic": "Road to War"
+            "topic": "A Dividing Nation"
         },
         {
             "question": "Who were the two presidents at the start of the Civil War?",
@@ -1149,7 +1109,7 @@
             ],
             "correct": 1,
             "explanation": "Lincoln, the Republican, had just won the 1860 election. Davis, a former US senator and Secretary of War from Mississippi, was chosen as president of the new Confederate States of America. The two men had very different personalities and led their sides in very different ways.",
-            "topic": "The War Itself"
+            "topic": "The Civil War"
         },
         {
             "question": "Why did Robert E. Lee turn down command of the Union army at the start of the war?",
@@ -1161,7 +1121,7 @@
             ],
             "correct": 1,
             "explanation": "Lee had spent his entire career in the United States Army. When Lincoln offered him command of the Union forces in Virginia, Lee refused. He went south to defend his state. Lee opposed slavery personally, but he believed his loyalty to Virginia came first.",
-            "topic": "The War Itself"
+            "topic": "The Civil War"
         },
         {
             "question": "What was the Anaconda Plan?",
@@ -1173,7 +1133,7 @@
             ],
             "correct": 1,
             "explanation": "Named after the snake that crushes its prey, the Anaconda Plan was mocked at first because it sounded too slow. In the end, it was almost exactly what won the war. Vicksburg gave the Union the Mississippi. The naval blockade strangled Southern trade. Sherman supplied the constricting pressure.",
-            "topic": "The War Itself"
+            "topic": "The Civil War"
         },
         {
             "question": "Why was the fall of Vicksburg in July 1863 a turning point of the war?",
@@ -1185,7 +1145,7 @@
             ],
             "correct": 1,
             "explanation": "The Siege of Vicksburg lasted 47 days. When the city surrendered on July 4, 1863, the Confederacy was split in two. Texas, Arkansas, and Louisiana were now sealed off from the rest of the South. Combined with Gettysburg the day before, July 1863 was the moment the Confederacy lost its hopes of winning.",
-            "topic": "The War Itself"
+            "topic": "The Civil War"
         },
         {
             "question": "What was the USCT, and why did it matter for the war?",
@@ -1197,7 +1157,7 @@
             ],
             "correct": 1,
             "explanation": "The Emancipation Proclamation opened the door for Black men to enlist in the Union Army for the first time. They formed the USCT. Nearly 180,000 served, about 10 percent of all Union soldiers. Many had been enslaved themselves. Their service helped win the war and proved that Black men would fight for their own freedom.",
-            "topic": "The War Itself"
+            "topic": "The Civil War"
         },
         {
             "question": "Who were the Copperheads, and what did they want?",
@@ -1209,7 +1169,7 @@
             ],
             "correct": 1,
             "explanation": "The Copperheads were Northern Democrats who wanted the war to end immediately. The name came from a poisonous snake. Republicans used the term as an insult. Sherman's capture of Atlanta in 1864 helped Lincoln win re-election against the Copperheads, ending their hopes of negotiating peace with the Confederacy.",
-            "topic": "The War Itself"
+            "topic": "The Civil War"
         },
         {
             "question": "Who was Stonewall Jackson, and how did he die?",
@@ -1221,7 +1181,7 @@
             ],
             "correct": 1,
             "explanation": "Jackson earned his nickname at the First Battle of Bull Run for standing firm under fire. He served as Lee's most trusted commander. At Chancellorsville in May 1863, he was shot by his own men in the darkness while scouting. He died eight days later. Lee never found a replacement who could match Jackson's speed and daring.",
-            "topic": "The War Itself"
+            "topic": "The Civil War"
         },
         {
             "question": "What does Reconstruction refer to in American history?",
@@ -1233,13 +1193,13 @@
             ],
             "correct": 0,
             "explanation": "Reconstruction had real successes. The 14th and 15th Amendments granted Black Americans citizenship and voting rights. Black congressmen were elected from Southern states for the first time. But Reconstruction also faced violent resistance from white Southerners. By 1877, federal protection was withdrawn, and the gains were rolled back over the decades that followed.",
-            "topic": "The War Itself"
+            "topic": "The Civil War"
         }
     ],
     "shortAnswerQuestions": [
         {
             "question": "How did the cotton gin actually make slavery worse instead of ending it? Use at least two specific examples from the unit.",
-            "topic": "Sectionalism",
+            "topic": "Worlds of North & South",
             "keyTerms": [
                 "cotton gin",
                 "plantation economy",
@@ -1261,7 +1221,7 @@
         },
         {
             "question": "What were the key tensions that led to the southern states seceding from the Union? Use at least three specific events from the 1850s.",
-            "topic": "Road to War",
+            "topic": "A Dividing Nation",
             "keyTerms": [
                 "Bleeding Kansas",
                 "Dred Scott decision",
@@ -1286,7 +1246,7 @@
         },
         {
             "question": "How was the Union able to defeat the Confederacy? Use at least three specific advantages or events.",
-            "topic": "The War Itself",
+            "topic": "The Civil War",
             "keyTerms": [
                 "Anaconda Plan",
                 "Emancipation Proclamation",
@@ -1647,77 +1607,77 @@
         {
             "sentence": "_____ was the system in which one person was treated as the legal property of another and forced to work without pay.",
             "answer": "slavery",
-            "category": "Sectionalism"
+            "category": "African Americans at Mid-Century"
         },
         {
             "sentence": "The movement to end slavery in the United States was called _____.",
             "answer": "abolitionism",
-            "category": "Sectionalism"
+            "category": "A Dividing Nation"
         },
         {
             "sentence": "_____ was a formerly enslaved Black American who escaped to the North in 1838 and became one of the most powerful voices in the abolitionist movement.",
             "answer": "Frederick Douglass",
-            "category": "Sectionalism"
+            "category": "African Americans at Mid-Century"
         },
         {
             "sentence": "The _____ was a secret network of safe houses and volunteers that helped enslaved people escape from the South to freedom.",
             "answer": "Underground Railroad",
-            "category": "Sectionalism"
+            "category": "African Americans at Mid-Century"
         },
         {
             "sentence": "_____ is strong loyalty to one region of a country instead of to the country as a whole.",
             "answer": "sectionalism",
-            "category": "Sectionalism"
+            "category": "Worlds of North & South"
         },
         {
             "sentence": "The _____ of 1820 admitted Missouri as a slave state and Maine as a free state, and banned slavery in northern parts of the Louisiana Purchase.",
             "answer": "Missouri Compromise",
-            "category": "Road to War"
+            "category": "A Dividing Nation"
         },
         {
             "sentence": "An 1852 anti slavery novel by Harriet Beecher Stowe called _____ became one of the bestselling books of the 1800s.",
             "answer": "Uncle Tom's Cabin",
-            "category": "Road to War"
+            "category": "A Dividing Nation"
         },
         {
             "sentence": "The 1857 Supreme Court ruling known as the _____ said Black people were not citizens and that Congress could not ban slavery in the western territories.",
             "answer": "Dred Scott decision",
-            "category": "Road to War"
+            "category": "A Dividing Nation"
         },
         {
             "sentence": "The formal withdrawal of a state from the United States is called _____.",
             "answer": "secession",
-            "category": "Road to War"
+            "category": "A Dividing Nation"
         },
         {
             "sentence": "The 1854 _____ created the Kansas and Nebraska territories and let settlers vote on whether to allow slavery, throwing out the Missouri Compromise line.",
             "answer": "Kansas Nebraska Act",
-            "category": "Road to War"
+            "category": "A Dividing Nation"
         },
         {
             "sentence": "Confederate forces fired on _____ in April 1861, beginning the Civil War.",
             "answer": "Fort Sumter",
-            "category": "The War Itself"
+            "category": "The Civil War"
         },
         {
             "sentence": "Lincoln's _____, issued on January 1, 1863, declared all enslaved people in Confederate states to be free.",
             "answer": "Emancipation Proclamation",
-            "category": "The War Itself"
+            "category": "The Civil War"
         },
         {
             "sentence": "The three day _____ in July 1863 turned back Lee's second invasion of the North and is the largest battle ever fought on American soil.",
             "answer": "Battle of Gettysburg",
-            "category": "The War Itself"
+            "category": "The Civil War"
         },
         {
             "sentence": "Confederate General Robert E. Lee surrendered to Union General Ulysses S. Grant at _____ on April 9, 1865, ending the Civil War.",
             "answer": "Appomattox",
-            "category": "The War Itself"
+            "category": "The Civil War"
         },
         {
             "sentence": "The _____ to the United States Constitution, ratified in December 1865, abolished slavery throughout the entire country.",
             "answer": "13th Amendment",
-            "category": "The War Itself"
+            "category": "The Civil War"
         }
     ]
 }
