@@ -12,6 +12,7 @@ StudyEngine.registerActivity({
     icon: 'fas fa-flag-usa',
     description: 'Find Civil War battles, capitals, and strategic cities on the map.',
     category: 'study',
+    hidden: true, // launched via the maps-hub chooser
 
     _container: null,
     _config: null,

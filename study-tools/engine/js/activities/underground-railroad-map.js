@@ -12,6 +12,7 @@ StudyEngine.registerActivity({
     icon: 'fas fa-map-signs',
     description: 'See the network of routes and people that led enslaved Americans to freedom.',
     category: 'study',
+    hidden: true, // launched via the maps-hub chooser
 
     _container: null,
     _config: null,

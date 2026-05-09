@@ -486,6 +486,7 @@ const StudyEngine = {
             return ai - bi;
         });
         sortedActivities.forEach(a => {
+            if (a.hidden) return; // launched indirectly (e.g. via a hub activity)
             const cat = a.category || 'games';
             if (groups[cat]) groups[cat].push(a);
         });
@@ -800,6 +801,7 @@ const StudyEngine = {
             return ai - bi;
         });
         sortedActivities.forEach(a => {
+            if (a.hidden) return; // launched indirectly (e.g. via a hub activity)
             const cat = a.category || 'games';
             if (groups[cat]) groups[cat].push(a);
         });

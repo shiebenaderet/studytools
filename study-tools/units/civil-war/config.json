@@ -38,6 +38,24 @@
         }
     },
     "scoringTiers": true,
+    "mapsHub": {
+        "title": "Maps",
+        "description": "Two ways to walk the geography of the Civil War era. Pick one to explore.",
+        "maps": [
+            {
+                "id": "civil-war-map",
+                "title": "Civil War Map",
+                "description": "Find Civil War battles, capitals, and strategic cities on the map.",
+                "icon": "fas fa-flag-usa"
+            },
+            {
+                "id": "underground-railroad-map",
+                "title": "Underground Railroad",
+                "description": "See the network of routes and people that led enslaved Americans to freedom.",
+                "icon": "fas fa-map-signs"
+            }
+        ]
+    },
     "activities": [
         "learn-mode",
         "flashcards",
@@ -48,6 +66,7 @@
         "fill-in-blank",
         "short-answer",
         "timeline",
+        "maps-hub",
         "civil-war-map",
         "underground-railroad-map",
         "wordle",
@@ -231,7 +250,8 @@
             "category": "Worlds of North & South",
             "wikiUrl": "https://en.wikipedia.org/wiki/Mason%E2%80%93Dixon_line",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Mason%E2%80%93Dixon_line",
-            "imageUrl": "images/vocab/mason-dixon-line.jpg"
+            "imageUrl": "images/vocab/mason-dixon-line.jpg",
+            "typingSnippet": "The Mason Dixon Line was an old surveyor's boundary that came to mean much more than a state border. By the 1800s, Americans used it to mark the divide between free states to the north and slave states to the south. Crossing it could mean the difference between freedom and bondage. Today the phrase still stands as shorthand for the line that split a nation."
         },
         {
             "term": "cotton gin",
@@ -241,7 +261,8 @@
             "category": "Worlds of North & South",
             "wikiUrl": "https://en.wikipedia.org/wiki/Cotton_gin",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Cotton_gin",
-            "imageUrl": "images/vocab/cotton-gin.jpg"
+            "imageUrl": "images/vocab/cotton-gin.jpg",
+            "typingSnippet": "The cotton gin was a machine invented by Eli Whitney in 1793 that pulled seeds out of cotton fibers. What once took a full day by hand could now be done in minutes. Cotton became wildly profitable, and plantations spread west across the South. Tragically, the cotton gin made slavery grow instead of fade away, because more cotton meant demand for more enslaved workers."
         },
         {
             "term": "Missouri Compromise",
@@ -369,14 +390,16 @@
             "category": "A Dividing Nation",
             "wikiUrl": "https://en.wikipedia.org/wiki/Kansas%E2%80%93Nebraska_Act",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Kansas-Nebraska_Act",
-            "imageUrl": "images/vocab/kansas-nebraska-act.jpg"
+            "imageUrl": "images/vocab/kansas-nebraska-act.jpg",
+            "typingSnippet": "The Kansas Nebraska Act of 1854 let settlers in those territories vote on whether to allow slavery. It overturned the Missouri Compromise, which had banned slavery in that region for decades. Pro-slavery and anti-slavery settlers rushed in, and Kansas erupted into violence. The law meant to ease tensions, but instead it set the country on a faster path to civil war."
         },
         {
             "term": "popular sovereignty",
             "definition": "The idea that the people living in a territory should vote on whether to allow slavery there.",
             "category": "A Dividing Nation",
             "wikiUrl": "https://en.wikipedia.org/wiki/Popular_sovereignty_in_the_United_States",
-            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Popular_sovereignty"
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Popular_sovereignty",
+            "typingSnippet": "Popular sovereignty was the idea that the people living in a territory should vote on whether to allow slavery there. Senator Stephen Douglas pushed this approach, hoping it would let Americans settle the question peacefully. In reality, popular sovereignty turned places like Kansas into battlegrounds. Letting voters decide sounded fair, but it could not solve a moral question with a ballot."
         },
         {
             "term": "Stephen Douglas",
@@ -613,67 +636,77 @@
             "definition": "The Deep South cotton-growing region whose economy and society depended on cotton grown by enslaved labor.",
             "example": "By 1860, cotton from the Cotton Kingdom made up about two-thirds of all American exports.",
             "category": "Worlds of North & South",
-            "imageUrl": "images/vocab/cotton-kingdom.jpg"
+            "imageUrl": "images/vocab/cotton-kingdom.jpg",
+            "typingSnippet": "The Cotton Kingdom was the broad belt of Southern states where cotton was king. From South Carolina across to Texas, plantations stretched for miles, worked by enslaved people. Cotton built fortunes, supplied northern factories, and tied the South to slavery more tightly each year. By 1860, this kingdom produced most of the world's cotton and shaped almost every Southern decision."
         },
         {
             "term": "Industrial Revolution",
             "definition": "A major shift in the early 1800s from making goods by hand to making them in factories powered by water and steam.",
             "example": "The Industrial Revolution gave the North its mills, factories, and wage-paying jobs that drew immigrants to Northern cities.",
             "category": "Worlds of North & South",
-            "imageUrl": "images/vocab/industrial-revolution.jpg"
+            "imageUrl": "images/vocab/industrial-revolution.jpg",
+            "typingSnippet": "The Industrial Revolution was a wave of new machines, factories, and railroads that changed how people lived and worked. In the North, mills and factories drew workers into busy cities. Goods that once took weeks to make by hand could now be made in hours. The Industrial Revolution gave the North a very different economy from the farming South."
         },
         {
             "term": "Yeoman farmer",
             "definition": "A small Southern farmer who owned and worked his own land, usually without enslaved laborers.",
             "example": "Yeoman farmers made up the majority of white Southerners, but the wealth and power of the South sat with the larger plantation owners.",
-            "category": "Worlds of North & South"
+            "category": "Worlds of North & South",
+            "typingSnippet": "A yeoman farmer was a small landowner in the South who worked his own fields, usually without enslaved labor. Most white Southerners were yeoman farmers, not wealthy planters. They grew food for their families and a little extra to sell. Even though they did not own people, many supported slavery because it kept them above the bottom of Southern society."
         },
         {
             "term": "Tariff",
             "definition": "A tax on imported goods, often used to protect domestic industries.",
             "example": "Northerners liked tariffs because they protected their factories, while Southerners hated them because they raised the price of goods they had to buy.",
             "category": "Worlds of North & South",
-            "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Tariff%20of%201828%20cartoon.jpg?width=400"
+            "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Tariff%20of%201828%20cartoon.jpg?width=400",
+            "typingSnippet": "A tariff is a tax on goods coming in from other countries. Northern factories liked tariffs because they made foreign products more expensive, helping American factories compete. Southern planters hated tariffs because they raised prices on goods they had to buy. Tariff fights showed how the two regions had opposite economic needs long before the war."
         },
         {
             "term": "Urbanization",
             "definition": "The shift of population from rural areas to cities.",
             "example": "Northern urbanization drew immigrants and former farmers into growing cities like New York, Boston, and Philadelphia.",
             "category": "Worlds of North & South",
-            "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Broadway,%20New%20York%20City%201850.jpg?width=400"
+            "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Broadway,%20New%20York%20City%201850.jpg?width=400",
+            "typingSnippet": "Urbanization is the movement of people from farms to cities. In the North, factories and ports pulled workers, immigrants, and young people into growing cities like New York, Philadelphia, and Boston. Cities meant new jobs, new ideas, and new problems like crowded housing. Urbanization made the North look and feel very different from the rural, agricultural South."
         },
         {
             "term": "Slave codes",
             "definition": "Strict Southern laws that controlled enslaved people's movement, work, gatherings, and ability to learn to read.",
             "example": "After Nat Turner's Rebellion in 1831, Southern states tightened their slave codes to make it illegal even to teach an enslaved person to read.",
-            "category": "African Americans at Mid-Century"
+            "category": "African Americans at Mid-Century",
+            "typingSnippet": "Slave codes were laws in Southern states that controlled almost every part of an enslaved person's life. They banned reading and writing, travel without a pass, and gathering in groups. The codes also protected enslavers who used violence to keep control. By turning cruelty into law, slave codes tried to make resistance impossible, though they never fully succeeded."
         },
         {
             "term": "Overseer",
             "definition": "A person hired by a planter to supervise enslaved laborers and force them to work harder.",
             "example": "Overseers were paid to get the most cotton possible out of the field hands, and they often used whippings and threats to do it.",
             "category": "African Americans at Mid-Century",
-            "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Slaves%20and%20overseer%20Mississippi%20cotton%20field.jpg?width=400"
+            "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Slaves%20and%20overseer%20Mississippi%20cotton%20field.jpg?width=400",
+            "typingSnippet": "An overseer was a hired man who managed enslaved workers in the fields on behalf of the plantation owner. He set the pace of work, punished anyone he thought slow, and reported back to the enslaver. Overseers were often paid based on how much cotton or sugar the plantation produced. That pay structure pushed many to rely on whips and threats to drive harder work."
         },
         {
             "term": "Spirituals",
             "definition": "Religious songs created by enslaved African Americans, often containing hidden messages of hope, freedom, or escape.",
             "example": "The spiritual \"Steal Away to Jesus\" was sometimes a coded signal that a secret religious meeting was about to happen that night.",
             "category": "African Americans at Mid-Century",
-            "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Steal%20Away%20to%20Jesus%201872%20sheet%20music%20cover.jpg?width=400"
+            "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Steal%20Away%20to%20Jesus%201872%20sheet%20music%20cover.jpg?width=400",
+            "typingSnippet": "Spirituals were religious songs created by enslaved African Americans that mixed African musical traditions with Christian stories. Songs like Go Down, Moses or Wade in the Water carried hope, sorrow, and sometimes hidden messages about escape. Singing together in fields or at night gave people strength and a sense of community. Spirituals are one of America's first true musical art forms."
         },
         {
             "term": "Invisible institution",
             "definition": "The hidden Black church that enslaved people created in secret, away from the white-controlled churches their masters made them attend.",
             "example": "The invisible institution met in clearings called \"hush arbors,\" where Black preachers told the story of Moses leading his people out of slavery.",
-            "category": "African Americans at Mid-Century"
+            "category": "African Americans at Mid-Century",
+            "typingSnippet": "The invisible institution was the secret religious life enslaved African Americans built away from white churches. They held services in cabins, fields, and forests, often at night. Their preaching, singing, and prayers blended African beliefs with Christianity. This hidden church gave enslaved people meaning, leadership, and a faith of their own that no enslaver could fully control."
         },
         {
             "term": "Field hand",
             "definition": "An enslaved person who worked in the fields growing crops like cotton, tobacco, or sugar.",
             "example": "About three-quarters of rural enslaved people were field hands, working from dawn until dark under the watch of an overseer.",
             "category": "African Americans at Mid-Century",
-            "imageUrl": "images/vocab/field-hand.jpg"
+            "imageUrl": "images/vocab/field-hand.jpg",
+            "typingSnippet": "A field hand was an enslaved person who worked in the fields, usually planting, weeding, or picking cotton. Days were long, often from sunup to sundown, and the work was brutal. Children, women, and men all labored side by side under an overseer's watch. Field hands made up most of the enslaved population on Southern plantations."
         },
         {
             "term": "House servant",
@@ -687,21 +720,24 @@
             "definition": "The family bonds enslaved people built and protected even though Southern law refused to recognize their marriages or parental rights.",
             "example": "Of all the things they endured, enslaved people most feared being sold away from their slave family.",
             "category": "African Americans at Mid-Century",
-            "imageUrl": "images/vocab/slave-family.jpg"
+            "imageUrl": "images/vocab/slave-family.jpg",
+            "typingSnippet": "A slave family was an enslaved person's bond with parents, children, husbands, wives, and kin. The law did not protect these families, and enslavers could sell members away at any moment. Even so, enslaved people fought to stay connected through letters, stories, and chosen family. The slave family was a source of love and survival in a system designed to tear it apart."
         },
         {
             "term": "African retentions",
             "definition": "Cultural elements from West Africa that enslaved people preserved in America, including music, storytelling, food, and faith traditions.",
             "example": "African retentions can be heard in spirituals, seen in quilts, and tasted in foods like okra and gumbo that enslaved cooks brought into American kitchens.",
             "category": "African Americans at Mid-Century",
-            "imageUrl": "images/vocab/african-retentions.jpg"
+            "imageUrl": "images/vocab/african-retentions.jpg",
+            "typingSnippet": "African retentions are pieces of African culture that enslaved people kept alive in America. They show up in foods like gumbo and okra, in rhythms and call-and-response singing, in funeral customs, and in folk tales. Even under brutal conditions, people held onto memory and identity. African retentions shaped American music, food, and language in ways the whole country still feels today."
         },
         {
             "term": "Union",
             "definition": "The United States as one nation, often used during the Civil War to mean the North and the federal government.",
             "example": "Lincoln's first goal in the war was not to end slavery but to preserve the Union by stopping the South from leaving it.",
             "category": "The Civil War",
-            "imageUrl": "images/vocab/union.png"
+            "imageUrl": "images/vocab/union.png",
+            "typingSnippet": "The Union meant the United States as one nation under a single government. After Southern states seceded in 1861, Northerners called their side the Union and fought to keep the country whole. President Lincoln saw saving the Union as his most important job. By the war's end, the Union had survived, and the country would never again call itself a loose collection of separate states."
         },
         {
             "term": "Confederacy",
@@ -716,7 +752,8 @@
             "definition": "The first major battle of the Civil War, fought in July 1861 in Virginia and won by the Confederacy.",
             "example": "After Bull Run, both sides realized the war would not be quick and began building large armies for a long fight.",
             "category": "The Civil War",
-            "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Battle%20of%20Bull%20Run,%20Va%20July%2021st%201861.jpg?width=400"
+            "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Battle%20of%20Bull%20Run,%20Va%20July%2021st%201861.jpg?width=400",
+            "typingSnippet": "Bull Run, fought in July 1861, was the first big battle of the Civil War. Crowds from Washington even rode out to watch, expecting a quick Union victory. Instead, Confederate troops held firm, and General Stonewall Jackson earned his nickname there. The shocking Union defeat told both sides that this war would be long, bloody, and not won in a single afternoon."
         },
         {
             "term": "discrimination",
