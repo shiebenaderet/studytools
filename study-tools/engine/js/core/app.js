@@ -352,6 +352,30 @@ const StudyEngine = {
             return;
         }
 
+        // Rewrite relative image paths to point at the unit's directory.
+        // Configs store paths like "images/vocab/foo.jpg" relative to the
+        // unit folder, but the page is served from /engine/, so consumers
+        // (flashcards, learn-mode, etc.) would 404 unless we prepend the
+        // unit path here. URLs that already start with http(s) or / are
+        // left alone.
+        const unitPathPrefix = `../units/${unitId}/`;
+        const rewriteImagePath = (val) => {
+            if (typeof val !== 'string' || !val) return val;
+            if (val.startsWith('http://') || val.startsWith('https://')) return val;
+            if (val.startsWith('/') || val.startsWith('../')) return val;
+            return unitPathPrefix + val;
+        };
+        if (Array.isArray(this.config.vocabulary)) {
+            for (const v of this.config.vocabulary) {
+                if (v.imageUrl) v.imageUrl = rewriteImagePath(v.imageUrl);
+            }
+        }
+        if (this.config.historicalFlavor) {
+            for (const q of this.config.historicalFlavor.quotes || []) {
+                if (q.portrait) q.portrait = rewriteImagePath(q.portrait);
+            }
+        }
+
         // Preload textbook for mastery gating
         if (typeof MasteryManager !== 'undefined') {
             await MasteryManager._loadTextbook(this.config.unit.id);
@@ -1072,12 +1096,8 @@ const StudyEngine = {
             const imgWrap = document.createElement('div');
             imgWrap.className = 'historical-quote-portrait';
             const img = document.createElement('img');
-            const unitId = this.config.unit.id;
-            if (quote.portrait.startsWith('http')) {
-                img.src = quote.portrait;
-            } else {
-                img.src = '../units/' + unitId + '/' + quote.portrait;
-            }
+            // Path was already rewritten in loadConfig, so use it directly.
+            img.src = quote.portrait;
             img.alt = quote.author || '';
             img.loading = 'lazy';
             imgWrap.appendChild(img);
