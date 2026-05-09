@@ -1040,9 +1040,15 @@ StudyEngine.registerActivity({
 
     _getEssentialQuestionsForCategory: function(category) {
         if (!this._textbookData || !category) return null;
+        // Match on `category` (the canonical category id) when present, falling
+        // back to `title` for backward compat with units that only set title.
+        // The vocab `category` field is the source of truth, so segments authored
+        // with a different display title (e.g. "The Worlds of North & South") still
+        // resolve correctly when their `category` matches.
         for (var s = 0; s < this._textbookData.length; s++) {
             var segment = this._textbookData[s];
-            if (segment.title === category && Array.isArray(segment.essentialQuestions) && segment.essentialQuestions.length > 0) {
+            var match = segment.category === category || segment.title === category;
+            if (match && Array.isArray(segment.essentialQuestions) && segment.essentialQuestions.length > 0) {
                 return segment.essentialQuestions;
             }
         }
@@ -1053,7 +1059,8 @@ StudyEngine.registerActivity({
         if (!this._textbookData || !category) return null;
         for (var s = 0; s < this._textbookData.length; s++) {
             var segment = this._textbookData[s];
-            if (segment.title === category && segment.sections && segment.sections.length > 0) {
+            var match = segment.category === category || segment.title === category;
+            if (match && segment.sections && segment.sections.length > 0) {
                 // Pick a random section's key idea
                 var sections = segment.sections.filter(function(sec) { return sec.keyIdea; });
                 if (sections.length === 0) return null;
@@ -1210,12 +1217,14 @@ StudyEngine.registerActivity({
         termName.style.cssText = 'color:var(--text-primary);font-size:1.5rem;font-weight:700;margin:0 0 16px 0;';
         card.appendChild(termName);
 
-        // Image if exists
+        // Image if exists. Hide silently on load error so a missing/404 image
+        // doesn't show a broken-image icon to students.
         if (term.imageUrl) {
             var img = document.createElement('img');
             img.src = term.imageUrl;
             img.alt = term.term;
             img.style.cssText = 'max-height:120px;float:right;border-radius:8px;margin:0 0 12px 16px;';
+            img.addEventListener('error', function() { img.style.display = 'none'; });
             card.appendChild(img);
         }
 
@@ -1224,12 +1233,12 @@ StudyEngine.registerActivity({
         content.style.cssText = 'color:var(--text-secondary);font-size:1rem;line-height:1.6;';
 
         if (tier === 3 && keyIdea) {
+            // At tier 3 the student has demonstrated they know the basic
+            // definition, so we surface the chapter's key idea instead. No
+            // input here — connection prompts come up later as reflections.
             var kiText = this._el('p', null, keyIdea);
-            kiText.style.cssText = 'margin:0 0 12px 0;font-style:italic;color:var(--text-primary);';
+            kiText.style.cssText = 'margin:0;font-style:italic;color:var(--text-primary);';
             content.appendChild(kiText);
-            var connectPrompt = this._el('p', null, 'How does this connect to other topics you\'ve studied?');
-            connectPrompt.style.cssText = 'margin:0;color:var(--text-secondary);font-size:0.9rem;';
-            content.appendChild(connectPrompt);
         } else if (tier === 2) {
             var defText = this._el('p', null, term.definition || '');
             defText.style.cssText = 'margin:0 0 10px 0;';

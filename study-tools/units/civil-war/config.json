@@ -38,6 +38,9 @@
         }
     },
     "scoringTiers": true,
+    "leaderboardMapActivities": [
+        { "id": "civil-war-map", "maxScore": 19 }
+    ],
     "mapsHub": {
         "title": "Maps",
         "description": "Two ways to walk the geography of the Civil War era. Pick one to explore.",
@@ -172,8 +175,7 @@
             "typingSnippet": "Frederick Douglass escaped slavery in 1838 and became the most famous Black abolitionist in America. He wrote a powerful autobiography about his life in slavery. He gave speeches across the North and even in Europe. He published his own newspaper, The North Star. His words helped change how Americans thought about slavery.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Frederick_Douglass",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Frederick_Douglass",
-            "imageUrl": "images/portraits/frederick-douglass.jpg",
-            "tier": "encounter"
+            "imageUrl": "images/portraits/frederick-douglass.jpg"
         },
         {
             "term": "Underground Railroad",

@@ -45,8 +45,27 @@ var LeaderboardManager = {
         var studyTime = ProgressManager.load(unitId, 'studyTime') || 0;
         var studyTimeSeconds = Math.floor(studyTime / 1000);
 
-        var mapProgress = ProgressManager.getActivityProgress(unitId, 'map-quiz') || {};
-        var mapBestTime = (mapProgress.bestScore >= 100 && mapProgress.bestTime) ? Math.max(30, mapProgress.bestTime) : null;
+        // Map bonus: reward perfect runs on any of the unit's map activities.
+        // Each unit can list its scorable maps in `config.leaderboardMapActivities`,
+        // either as a string id (the activity stores bestScore as a percent, e.g.
+        // map-quiz) or as `{ id, maxScore }` for activities that store bestScore
+        // as a raw count (e.g. civil-war-map saves 19 for a perfect run on 19
+        // cities). Older units that don't set the field default to `map-quiz`.
+        // We pick the fastest qualifying time across all listed maps.
+        var mapEntries = (config.leaderboardMapActivities && config.leaderboardMapActivities.length > 0)
+            ? config.leaderboardMapActivities
+            : ['map-quiz'];
+        var mapBestTime = null;
+        for (var mi = 0; mi < mapEntries.length; mi++) {
+            var entry = mapEntries[mi];
+            var mapId = typeof entry === 'string' ? entry : entry.id;
+            var maxScore = typeof entry === 'object' && entry.maxScore ? entry.maxScore : 100;
+            var mp = ProgressManager.getActivityProgress(unitId, mapId) || {};
+            if (mp.bestScore >= maxScore && mp.bestTime) {
+                var t = Math.max(30, mp.bestTime);
+                if (mapBestTime === null || t < mapBestTime) mapBestTime = t;
+            }
+        }
         var mapBonus = mapBestTime ? Math.max(0, 180 - mapBestTime) : 0;
 
         var score = this.calculateScore(vocabMastered, bestTestScore, studyTimeSeconds, mapBonus);
