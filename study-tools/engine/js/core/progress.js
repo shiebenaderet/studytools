@@ -173,6 +173,26 @@ const ProgressManager = {
                 loginPrompt.classList.add('hidden');
             }
         }
+
+        // Restore-progress link. Always visible so a student on a fresh
+        // device (where localStorage is empty) can pull their cloud progress
+        // back without having to type the same name+period and accidentally
+        // create a new row. Also visible when already logged in, in case
+        // they're on the wrong account.
+        const existingRestore = document.getElementById('restore-progress-link');
+        if (existingRestore && existingRestore.parentNode) {
+            existingRestore.parentNode.removeChild(existingRestore);
+        }
+        const restoreWrap = document.createElement('div');
+        restoreWrap.id = 'restore-progress-link';
+        restoreWrap.style.cssText = 'text-align:center;margin-top:14px;font-size:0.85rem;color:var(--text-muted);';
+        const restoreBtn = document.createElement('button');
+        restoreBtn.type = 'button';
+        restoreBtn.textContent = 'Switching computers? Restore your progress';
+        restoreBtn.style.cssText = 'background:none;border:none;padding:0;color:var(--primary);text-decoration:underline;cursor:pointer;font:inherit;';
+        restoreBtn.addEventListener('click', () => this.showRestoreModal());
+        restoreWrap.appendChild(restoreBtn);
+        statsContainer.appendChild(restoreWrap);
     },
 
     // --- Supabase sync ---
@@ -374,12 +394,218 @@ const ProgressManager = {
         }
     },
 
-    // --- Helper ---
+    // --- Helpers ---
 
     getFirstName() {
         if (!this.studentInfo || !this.studentInfo.name) return null;
         if (this.studentInfo.isGuest) return null;
         return this.studentInfo.name.trim().split(/\s+/)[0];
+    },
+
+    // Normalize a name for *matching only*. The display name keeps original
+    // casing — this just collapses whitespace and folds case so "Madison "
+    // and "madison" find each other.
+    _normalizeName(name) {
+        return (name || '').trim().replace(/\s+/g, ' ').toLowerCase();
+    },
+
+    // Levenshtein distance — only used for near-match prompts when the
+    // typed name doesn't already exist in the class. Small candidate set,
+    // so an O(m*n) implementation is fine.
+    _editDistance(a, b) {
+        if (a === b) return 0;
+        if (!a.length) return b.length;
+        if (!b.length) return a.length;
+        var prev = [];
+        for (var j = 0; j <= b.length; j++) prev[j] = j;
+        for (var i = 1; i <= a.length; i++) {
+            var curr = [i];
+            for (var j2 = 1; j2 <= b.length; j2++) {
+                var cost = a[i - 1] === b[j2 - 1] ? 0 : 1;
+                curr[j2] = Math.min(curr[j2 - 1] + 1, prev[j2] + 1, prev[j2 - 1] + cost);
+            }
+            prev = curr;
+        }
+        return prev[b.length];
+    },
+
+    // Look up a class by code (case-insensitive). Returns class id or null.
+    async _findClassId(code) {
+        if (!this.supabase) return null;
+        try {
+            var result = await this.supabase
+                .from('classes')
+                .select('id')
+                .ilike('code', code.trim())
+                .limit(1);
+            if (result.error || !result.data || result.data.length === 0) return null;
+            return result.data[0].id;
+        } catch (err) {
+            console.error('Class lookup error:', err);
+            return null;
+        }
+    },
+
+    // Find students in a class whose name matches (case-insensitive exact).
+    async _findExactStudent(name, classId) {
+        if (!this.supabase) return null;
+        try {
+            var result = await this.supabase
+                .from('students')
+                .select('id, name')
+                .eq('class_id', classId)
+                .ilike('name', name.trim());
+            if (result.error || !result.data || result.data.length === 0) return null;
+            // If somehow >1 returned (e.g. legacy rows differing only by case),
+            // pick the one whose case best matches the user's input so they
+            // continue under their own name.
+            for (var i = 0; i < result.data.length; i++) {
+                if (result.data[i].name === name.trim()) return result.data[i];
+            }
+            return result.data[0];
+        } catch (err) {
+            console.error('Student exact lookup error:', err);
+            return null;
+        }
+    },
+
+    // Find near-matches in a class — used to prompt "Did you mean Madison F.?"
+    // when the typed name has no exact match. Returns up to 3 candidates with
+    // edit-distance ≤ 2 (or substring overlap), excluding the exact match.
+    async _findSimilarStudents(name, classId) {
+        if (!this.supabase) return [];
+        try {
+            var result = await this.supabase
+                .from('students')
+                .select('id, name')
+                .eq('class_id', classId);
+            if (result.error || !result.data) return [];
+            var typed = this._normalizeName(name);
+            var self = this;
+            var candidates = [];
+            for (var i = 0; i < result.data.length; i++) {
+                var row = result.data[i];
+                var rowNorm = this._normalizeName(row.name);
+                if (rowNorm === typed) continue;
+                var dist = self._editDistance(typed, rowNorm);
+                // Only suggest names that are close enough to plausibly be a
+                // typo: short distance, OR one is a prefix of the other (e.g.
+                // student typed "Madi" but registered as "Madison").
+                var prefix = typed.length >= 3 && (rowNorm.indexOf(typed) === 0 || typed.indexOf(rowNorm) === 0);
+                if (dist <= 2 || prefix) {
+                    candidates.push({ id: row.id, name: row.name, dist: dist });
+                }
+            }
+            candidates.sort(function(a, b) { return a.dist - b.dist; });
+            return candidates.slice(0, 3);
+        } catch (err) {
+            console.error('Similar students lookup error:', err);
+            return [];
+        }
+    },
+
+    // Modal: "Did you mean Madison F.?" — resolves to one of:
+    //   { action: 'use', candidate: {id, name} }   (yes, that's me)
+    //   { action: 'new' }                           (no, I'm new)
+    //   { action: 'cancel' }                        (close without choosing)
+    _promptDidYouMean(candidates, typedName) {
+        return new Promise(function(resolve) {
+            var overlay = document.createElement('div');
+            overlay.className = 'welcome-overlay didyoumean-overlay';
+
+            var card = document.createElement('div');
+            card.className = 'welcome-card';
+            card.style.maxWidth = '420px';
+
+            var title = document.createElement('h2');
+            title.textContent = 'Is one of these you?';
+            card.appendChild(title);
+
+            var sub = document.createElement('p');
+            sub.className = 'welcome-subtitle';
+            sub.textContent = 'You typed "' + typedName + '". We found a similar name already in your class.';
+            card.appendChild(sub);
+
+            candidates.forEach(function(c) {
+                var btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'welcome-period-btn';
+                btn.style.cssText = 'display:block;width:100%;text-align:left;margin-bottom:8px;';
+                btn.textContent = 'Yes — I\'m ' + c.name;
+                btn.addEventListener('click', function() {
+                    if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+                    resolve({ action: 'use', candidate: c });
+                });
+                card.appendChild(btn);
+            });
+
+            var newBtn = document.createElement('button');
+            newBtn.type = 'button';
+            newBtn.className = 'welcome-go-btn';
+            newBtn.style.marginTop = '12px';
+            newBtn.textContent = 'No — I\'m new, use "' + typedName + '"';
+            newBtn.addEventListener('click', function() {
+                if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+                resolve({ action: 'new' });
+            });
+            card.appendChild(newBtn);
+
+            var cancelBtn = document.createElement('button');
+            cancelBtn.type = 'button';
+            cancelBtn.className = 'welcome-guest-link';
+            cancelBtn.textContent = 'Cancel';
+            cancelBtn.addEventListener('click', function() {
+                if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+                resolve({ action: 'cancel' });
+            });
+            card.appendChild(cancelBtn);
+
+            overlay.appendChild(card);
+            document.body.appendChild(overlay);
+        });
+    },
+
+    // Resolve (or create) a student row. Used by welcome screen, login modal,
+    // and the restore-progress flow. Handles fuzzy matching:
+    //   1. Look up by case-insensitive exact name.
+    //   2. If no match, look for near-matches; ask the student to pick.
+    //   3. If they say "I'm new" (or no candidates), insert a fresh row.
+    // Returns { id, name } of the resolved student, or null on error/cancel.
+    //
+    // Open issue: two genuinely different students with the same name in the
+    // same period (e.g. two Madisons) will both resolve to the first row,
+    // overwriting each other. A 4-digit recovery PIN per row (Phase 3) fixes
+    // this — until then, teachers should rename collisions explicitly.
+    async _resolveStudent(name, classId, opts) {
+        opts = opts || {};
+        var trimmed = name.trim().replace(/\s+/g, ' ');
+        var exact = await this._findExactStudent(trimmed, classId);
+        if (exact) return exact;
+
+        // Don't prompt for near-matches in restore-only mode — restore should
+        // only succeed when the student exists, not silently create new rows.
+        if (opts.restoreOnly) return null;
+
+        var similar = await this._findSimilarStudents(trimmed, classId);
+        if (similar.length > 0) {
+            var choice = await this._promptDidYouMean(similar, trimmed);
+            if (choice.action === 'use') return choice.candidate;
+            if (choice.action === 'cancel') return null;
+            // 'new' falls through to insert below
+        }
+
+        try {
+            var insertResult = await this.supabase
+                .from('students')
+                .insert({ name: trimmed, class_id: classId })
+                .select('id, name')
+                .single();
+            if (insertResult.error) throw insertResult.error;
+            return insertResult.data;
+        } catch (err) {
+            console.error('Student insert error:', err);
+            return null;
+        }
     },
 
     // --- Welcome Screen ---
@@ -525,39 +751,31 @@ const ProgressManager = {
             if (self.supabase) {
                 (async function() {
                     try {
-                        var classResult = await self.supabase
-                            .from('classes')
-                            .select('id')
-                            .ilike('code', selectedCode)
-                            .limit(1);
-                        if (classResult.error || !classResult.data || classResult.data.length === 0) {
+                        var classId = await self._findClassId(selectedCode);
+                        if (!classId) {
                             // Class not found — still proceed with local save
                             afterLogin();
                             return;
                         }
-                        var classId = classResult.data[0].id;
 
-                        var studentResult = await self.supabase
-                            .from('students')
-                            .select('id')
-                            .eq('name', name)
-                            .eq('class_id', classId)
-                            .limit(1);
-                        if (studentResult.error) throw studentResult.error;
-
-                        if (studentResult.data && studentResult.data.length > 0) {
-                            self.studentId = studentResult.data[0].id;
-                        } else {
-                            var insertResult = await self.supabase
-                                .from('students')
-                                .insert({ name: name, class_id: classId })
-                                .select('id')
-                                .single();
-                            if (insertResult.error) throw insertResult.error;
-                            self.studentId = insertResult.data.id;
+                        var resolved = await self._resolveStudent(name, classId);
+                        if (!resolved) {
+                            afterLogin();
+                            return;
                         }
+                        // If they confirmed an existing student, update local
+                        // display name to that row's casing for consistency.
+                        if (resolved.name && resolved.name !== name) {
+                            self.studentInfo.name = resolved.name;
+                            localStorage.setItem(self.prefix + 'studentInfo', JSON.stringify(self.studentInfo));
+                        }
+                        self.studentId = resolved.id;
 
                         localStorage.setItem(self.prefix + 'studentId', self.studentId);
+                        // Pull any existing cloud progress before starting the
+                        // periodic sync, so a returning student's data isn't
+                        // overwritten by an empty local state.
+                        await self.syncFromSupabase();
                         self.startSyncLoop();
                         self.startSession();
                         self.syncToSupabase();
@@ -615,41 +833,27 @@ const ProgressManager = {
         localStorage.setItem(`${this.prefix}studentInfo`, JSON.stringify(this.studentInfo));
         StudyEngine.closeModal();
 
-        // Supabase registration
         if (this.supabase) {
             try {
-                const { data: classRows, error: classError } = await this.supabase
-                    .from('classes')
-                    .select('id')
-                    .ilike('code', code)
-                    .limit(1);
-                if (classError || !classRows || classRows.length === 0) {
+                const classId = await this._findClassId(code);
+                if (!classId) {
                     StudyUtils.showToast('Invalid class code', 'error');
                     return;
                 }
-                const classId = classRows[0].id;
 
-                const { data: existingStudents, error: studentError } = await this.supabase
-                    .from('students')
-                    .select('id')
-                    .eq('name', name)
-                    .eq('class_id', classId)
-                    .limit(1);
-                if (studentError) throw studentError;
-
-                if (existingStudents && existingStudents.length > 0) {
-                    this.studentId = existingStudents[0].id;
-                } else {
-                    const { data: newStudent, error: insertError } = await this.supabase
-                        .from('students')
-                        .insert({ name, class_id: classId })
-                        .select('id')
-                        .single();
-                    if (insertError) throw insertError;
-                    this.studentId = newStudent.id;
+                const resolved = await this._resolveStudent(name, classId);
+                if (!resolved) return;
+                if (resolved.name && resolved.name !== name) {
+                    this.studentInfo.name = resolved.name;
+                    localStorage.setItem(`${this.prefix}studentInfo`, JSON.stringify(this.studentInfo));
                 }
+                this.studentId = resolved.id;
 
                 localStorage.setItem(`${this.prefix}studentId`, this.studentId);
+                // Fetch + merge before the periodic upload kicks in so the
+                // student's existing cloud progress isn't clobbered by a
+                // fresher-but-emptier localStorage on a new device.
+                await this.syncFromSupabase();
                 this.startSyncLoop();
                 this.startSession();
                 this.syncToSupabase();
@@ -660,6 +864,208 @@ const ProgressManager = {
 
         if (StudyEngine.config) {
             this.renderHomeStats(StudyEngine.config);
+        }
+    },
+
+    // --- Restore Progress (Phase 2) ---
+
+    // Shown when a student lands on a fresh device or after localStorage
+    // was wiped. Looks like the welcome screen but DOES NOT create a new
+    // student row if the name isn't found — it tells them so, and lets
+    // them edit and try again. This is what saves a returning student
+    // from accidentally starting over.
+    showRestoreModal() {
+        var self = this;
+        var selectedCode = null;
+
+        var overlay = document.createElement('div');
+        overlay.className = 'welcome-overlay';
+
+        var card = document.createElement('div');
+        card.className = 'welcome-card';
+
+        var title = document.createElement('h1');
+        title.textContent = 'Welcome back!';
+        card.appendChild(title);
+
+        var subtitle = document.createElement('p');
+        subtitle.className = 'welcome-subtitle';
+        subtitle.textContent = 'Enter the same name and period you used before, and we’ll bring your progress back.';
+        card.appendChild(subtitle);
+
+        var nameLabel = document.createElement('label');
+        nameLabel.setAttribute('for', 'restore-name');
+        nameLabel.textContent = 'Your name';
+        card.appendChild(nameLabel);
+
+        var nameInput = document.createElement('input');
+        nameInput.type = 'text';
+        nameInput.id = 'restore-name';
+        nameInput.className = 'welcome-name-input';
+        nameInput.placeholder = 'First name only';
+        nameInput.autocomplete = 'given-name';
+        nameInput.maxLength = 20;
+        // Pre-fill if we already have a name in localStorage (helps when
+        // localStorage is intact but cloud sync got disconnected).
+        if (this.studentInfo && this.studentInfo.name && !this.studentInfo.isGuest) {
+            nameInput.value = this.studentInfo.name;
+        }
+        card.appendChild(nameInput);
+
+        var periodLabel = document.createElement('label');
+        periodLabel.textContent = 'Which period?';
+        card.appendChild(periodLabel);
+
+        var periodContainer = document.createElement('div');
+        periodContainer.className = 'welcome-period-buttons';
+        var periods = [
+            { label: 'Period 1', code: 'period1' },
+            { label: 'Period 2', code: 'period2' },
+            { label: 'Period 4', code: 'period4' },
+            { label: 'Period 5', code: 'period5' }
+        ];
+        var periodButtons = [];
+        periods.forEach(function(p) {
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'welcome-period-btn';
+            btn.textContent = p.label;
+            // Pre-select if we have a stored period.
+            if (self.studentInfo && self.studentInfo.classCode === p.code) {
+                btn.classList.add('selected');
+                selectedCode = p.code;
+            }
+            btn.addEventListener('click', function() {
+                selectedCode = p.code;
+                periodButtons.forEach(function(b) { b.classList.remove('selected'); });
+                btn.classList.add('selected');
+                updateGoBtn();
+            });
+            periodButtons.push(btn);
+            periodContainer.appendChild(btn);
+        });
+        card.appendChild(periodContainer);
+
+        var statusLine = document.createElement('p');
+        statusLine.className = 'welcome-subtitle';
+        statusLine.style.cssText = 'min-height:1.4em;margin-top:8px;font-size:0.9rem;';
+        statusLine.textContent = '';
+        card.appendChild(statusLine);
+
+        var goBtn = document.createElement('button');
+        goBtn.type = 'button';
+        goBtn.className = 'welcome-go-btn';
+        goBtn.textContent = 'Restore my progress';
+        goBtn.disabled = !(nameInput.value.trim() && selectedCode);
+        card.appendChild(goBtn);
+
+        var cancelBtn = document.createElement('button');
+        cancelBtn.type = 'button';
+        cancelBtn.className = 'welcome-guest-link';
+        cancelBtn.textContent = 'Cancel';
+        cancelBtn.addEventListener('click', function() {
+            if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+        });
+        card.appendChild(cancelBtn);
+
+        function updateGoBtn() {
+            var hasName = nameInput.value.trim().length > 0;
+            goBtn.disabled = !(hasName && selectedCode);
+            statusLine.textContent = '';
+        }
+        nameInput.addEventListener('input', updateGoBtn);
+
+        goBtn.addEventListener('click', async function() {
+            var name = nameInput.value.trim();
+            if (!name || !selectedCode) return;
+            goBtn.disabled = true;
+            goBtn.textContent = 'Looking you up...';
+            statusLine.textContent = '';
+
+            var result = await self.restoreProgress(name, selectedCode);
+            if (result.ok) {
+                statusLine.style.color = '';
+                if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+                if (typeof StudyUtils !== 'undefined') {
+                    StudyUtils.showToast('Welcome back, ' + (result.name || name) + '! Your progress is back.', 'success', 4500);
+                }
+                if (StudyEngine.config) {
+                    StudyEngine.renderHeader();
+                    StudyEngine.renderHomeStats();
+                }
+            } else {
+                goBtn.disabled = false;
+                goBtn.textContent = 'Try again';
+                statusLine.style.color = 'var(--danger, #c33)';
+                statusLine.textContent = result.message || 'We couldn’t find that name in this period.';
+            }
+        });
+
+        nameInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !goBtn.disabled) goBtn.click();
+        });
+
+        overlay.appendChild(card);
+        document.body.appendChild(overlay);
+        setTimeout(function() { nameInput.focus(); }, 400);
+    },
+
+    // Look up an existing student and pull their cloud progress. Returns
+    // { ok: true, name } on success or { ok: false, message } on failure.
+    // Will NOT create a new row — that's the welcome screen's job.
+    async restoreProgress(name, code) {
+        if (!this.supabase) {
+            this.initSupabase();
+        }
+        if (!this.supabase) {
+            return { ok: false, message: 'Couldn’t connect. Check your internet and try again.' };
+        }
+
+        try {
+            var classId = await this._findClassId(code);
+            if (!classId) {
+                return { ok: false, message: 'That period wasn’t found. Ask your teacher to double-check.' };
+            }
+
+            // Restore-only: case-insensitive exact match. We don't auto-create
+            // here so a student doesn't accidentally start fresh thinking
+            // they restored.
+            var existing = await this._findExactStudent(name, classId);
+            if (!existing) {
+                // Offer near-matches if any, since this is exactly the case
+                // where "Maddie vs Madison" would bite a returning student.
+                var similar = await this._findSimilarStudents(name, classId);
+                if (similar.length > 0) {
+                    var choice = await this._promptDidYouMean(similar, name);
+                    if (choice.action === 'use') {
+                        existing = choice.candidate;
+                    } else {
+                        return { ok: false, message: 'No match. Make sure the name is spelled exactly the way you registered.' };
+                    }
+                } else {
+                    return { ok: false, message: 'No match. Make sure the name is spelled exactly the way you registered.' };
+                }
+            }
+
+            this.studentId = existing.id;
+            this.studentInfo = { name: existing.name, classCode: code };
+            localStorage.setItem(this.prefix + 'studentInfo', JSON.stringify(this.studentInfo));
+            localStorage.setItem(this.prefix + 'studentId', this.studentId);
+
+            await this.syncFromSupabase();
+            this.startSyncLoop();
+            this.startSession();
+            // Sync up immediately so any local progress that was already on
+            // this device merges into the cloud row.
+            this.syncToSupabase();
+            if (typeof LeaderboardManager !== 'undefined') {
+                LeaderboardManager.submitScore();
+            }
+
+            return { ok: true, name: existing.name };
+        } catch (err) {
+            console.error('Restore error:', err);
+            return { ok: false, message: 'Something went wrong. Try again in a moment.' };
         }
     },
 
