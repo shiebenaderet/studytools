@@ -39,7 +39,10 @@
     },
     "scoringTiers": true,
     "leaderboardMapActivities": [
-        { "id": "civil-war-map", "maxScore": 19 }
+        {
+            "id": "civil-war-map",
+            "maxScore": 19
+        }
     ],
     "mapsHub": {
         "title": "Maps",
@@ -131,7 +134,8 @@
             "category": "Worlds of North & South",
             "typingSnippet": "Sectionalism is loyalty to one region instead of the whole country. In America before the Civil War, the North and South began to feel like two different countries. They had different economies, different ways of life, and very different views on slavery. This deep divide eventually pulled the nation apart.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Sectionalism",
-            "imageUrl": "images/vocab/sectionalism.jpg"
+            "imageUrl": "images/vocab/sectionalism.jpg",
+            "simpleWikiUrl": "https://en.wikipedia.org/wiki/Sectionalism"
         },
         {
             "term": "slavery",
@@ -351,7 +355,8 @@
             "category": "A Dividing Nation",
             "typingSnippet": "The Lincoln Douglas Debates were seven public debates in 1858 between Abraham Lincoln and Senator Stephen Douglas of Illinois. They argued mostly about slavery. Lincoln said slavery was a moral wrong and should not spread. Douglas said each state should choose for itself. Lincoln lost the Senate election but became famous, which helped him win the presidency in 1860.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Lincoln%E2%80%93Douglas_debates",
-            "imageUrl": "images/vocab/lincoln-douglas-debates.jpg"
+            "imageUrl": "images/vocab/lincoln-douglas-debates.jpg",
+            "simpleWikiUrl": "https://en.wikipedia.org/wiki/Lincoln%E2%80%93Douglas_debates"
         },
         {
             "term": "John Brown's Raid",
@@ -393,7 +398,9 @@
             "wikiUrl": "https://en.wikipedia.org/wiki/Kansas%E2%80%93Nebraska_Act",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Kansas-Nebraska_Act",
             "imageUrl": "images/vocab/kansas-nebraska-act.jpg",
-            "typingSnippet": "The Kansas Nebraska Act of 1854 let settlers in those territories vote on whether to allow slavery. It overturned the Missouri Compromise, which had banned slavery in that region for decades. Pro-slavery and anti-slavery settlers rushed in, and Kansas erupted into violence. The law meant to ease tensions, but instead it set the country on a faster path to civil war."
+            "typingSnippet": "The Kansas Nebraska Act of 1854 let settlers in those territories vote on whether to allow slavery. It overturned the Missouri Compromise, which had banned slavery in that region for decades. Pro-slavery and anti-slavery settlers rushed in, and Kansas erupted into violence. The law meant to ease tensions, but instead it set the country on a faster path to civil war.",
+            "simpleExplanation": "Senator Stephen Douglas wanted to build a railroad through the middle of the country, and he needed Southern votes to do it. So he wrote a law that let settlers in the new Kansas and Nebraska territories vote on slavery themselves. The Missouri Compromise had banned slavery there for 34 years. Douglas threw it out. Northerners were furious that their old deal had just been torn up, and angry settlers from both sides rushed into Kansas to fight over what came next.",
+            "example": "The Kansas Nebraska Act of 1854 destroyed the political truce that had kept the country from breaking apart for decades."
         },
         {
             "term": "popular sovereignty",
@@ -401,7 +408,9 @@
             "category": "A Dividing Nation",
             "wikiUrl": "https://en.wikipedia.org/wiki/Popular_sovereignty_in_the_United_States",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Popular_sovereignty",
-            "typingSnippet": "Popular sovereignty was the idea that the people living in a territory should vote on whether to allow slavery there. Senator Stephen Douglas pushed this approach, hoping it would let Americans settle the question peacefully. In reality, popular sovereignty turned places like Kansas into battlegrounds. Letting voters decide sounded fair, but it could not solve a moral question with a ballot."
+            "typingSnippet": "Popular sovereignty was the idea that the people living in a territory should vote on whether to allow slavery there. Senator Stephen Douglas pushed this approach, hoping it would let Americans settle the question peacefully. In reality, popular sovereignty turned places like Kansas into battlegrounds. Letting voters decide sounded fair, but it could not solve a moral question with a ballot.",
+            "simpleExplanation": "Politicians who supported popular sovereignty thought they had a clever solution: stop fighting in Washington and let the people in each new territory vote on slavery for themselves. It sounded fair and democratic. The problem is that you cannot vote on whether something is morally wrong. And in places like Kansas, the vote turned into a fistfight, then a gunfight, then a small war.",
+            "example": "Stephen Douglas pushed popular sovereignty as a way to take the slavery question out of Congress, but it just moved the fight to Kansas instead."
         },
         {
             "term": "Stephen Douglas",
@@ -410,7 +419,9 @@
             "tier": "encounter",
             "wikiUrl": "https://en.wikipedia.org/wiki/Stephen_A._Douglas",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Stephen_A._Douglas",
-            "imageUrl": "images/portraits/stephen-douglas.jpg"
+            "imageUrl": "images/portraits/stephen-douglas.jpg",
+            "simpleExplanation": "Stephen Douglas was a short, loud, brilliant senator from Illinois who spent the 1850s trying to hold the Union together. His big idea was popular sovereignty: let new territories vote on slavery for themselves. He wrote the Kansas Nebraska Act. He debated Lincoln across Illinois in 1858 and won that race. But two years later, his Democratic Party split over slavery, which split the vote, and helped Lincoln win the White House. Douglas died in 1861, just weeks after the war began.",
+            "example": "Stephen Douglas's Kansas Nebraska Act tried to settle the slavery question by letting voters decide, but it ended up triggering Bleeding Kansas instead."
         },
         {
             "term": "Fort Sumter",
@@ -557,7 +568,8 @@
             "category": "The Civil War",
             "typingSnippet": "Total war is a military strategy that attacks not just enemy soldiers but also the resources, supplies, and infrastructure that armies need to fight. Sherman pioneered this strategy in his March to the Sea, destroying railroads, factories, and farms across Georgia. The goal was to make the South unable to keep fighting. The strategy was brutal but it worked.",
             "wikiUrl": "https://en.wikipedia.org/wiki/Total_war",
-            "imageUrl": "images/vocab/total-war.jpg"
+            "imageUrl": "images/vocab/total-war.jpg",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Total_war"
         },
         {
             "term": "54th Massachusetts",
@@ -567,7 +579,8 @@
             "category": "The Civil War",
             "typingSnippet": "The 54th Massachusetts was one of the first official Black regiments in the Union Army. It was formed in 1863 after the Emancipation Proclamation allowed Black men to enlist. The regiment is best known for its assault on Fort Wagner in South Carolina, where about half its soldiers were killed or wounded. Their bravery helped open the door for nearly 180,000 Black soldiers to serve.",
             "wikiUrl": "https://en.wikipedia.org/wiki/54th_Massachusetts_Infantry_Regiment",
-            "imageUrl": "images/vocab/54th-massachusetts.jpg"
+            "imageUrl": "images/vocab/54th-massachusetts.jpg",
+            "simpleWikiUrl": "https://en.wikipedia.org/wiki/54th_Massachusetts_Infantry_Regiment"
         },
         {
             "term": "13th Amendment",
@@ -587,7 +600,9 @@
             "tier": "encounter",
             "wikiUrl": "https://en.wikipedia.org/wiki/Stonewall_Jackson",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Stonewall_Jackson",
-            "imageUrl": "images/portraits/stonewall-jackson.png"
+            "imageUrl": "images/portraits/stonewall-jackson.png",
+            "simpleExplanation": "Thomas Jackson was a strict, deeply religious officer who became one of the Confederacy's most famous generals. At the First Battle of Bull Run, his men noticed he just stood there in the middle of cannon fire, calm as a stone wall. The nickname stuck. Lee relied on Jackson for his fastest, boldest moves. In 1863, his own men accidentally shot him at night during the Battle of Chancellorsville. He died eight days later, and Lee said he had lost his right arm.",
+            "example": "Stonewall Jackson's death at Chancellorsville is often pointed to as the moment Confederate fortunes started to turn."
         },
         {
             "term": "Clara Barton",
@@ -596,7 +611,9 @@
             "tier": "encounter",
             "wikiUrl": "https://en.wikipedia.org/wiki/Clara_Barton",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Clara_Barton",
-            "imageUrl": "images/portraits/clara-barton.jpg"
+            "imageUrl": "images/portraits/clara-barton.jpg",
+            "simpleExplanation": "When the Civil War began, military hospitals were chaos. Thousands of wounded men lay on battlefields with no real medical help. Clara Barton, a clerk in Washington with no medical training, started gathering supplies and going straight to the front lines herself. Soldiers called her the 'Angel of the Battlefield.' She bandaged wounds, wrote letters home for dying men, and helped track down soldiers who never came back. After the war she founded the American Red Cross, which still helps disaster victims today.",
+            "example": "Clara Barton's work treating wounded soldiers under fire helped change how Americans thought about who could serve in war."
         },
         {
             "term": "Minie ball",
@@ -605,7 +622,9 @@
             "tier": "encounter",
             "wikiUrl": "https://en.wikipedia.org/wiki/Mini%C3%A9_ball",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Mini%C3%A9_ball",
-            "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Bullet_Minie.jpg?width=400"
+            "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Bullet_Minie.jpg?width=400",
+            "simpleExplanation": "Before the Civil War, an old musket could only really hit something accurately at about 50 yards. Then a French inventor came up with a new bullet shaped like a small egg with a hollow base. When it fired, the base expanded to grip the inside of the barrel, sending the bullet spinning straight and far. Suddenly soldiers could hit targets 500 yards away. Combined with old battlefield tactics where soldiers walked toward each other in lines, the Minie ball turned battles into slaughters.",
+            "example": "The terrible casualty numbers at Antietam and Gettysburg were partly the result of generals using old tactics against new weapons like the Minie ball."
         },
         {
             "term": "USCT",
@@ -613,7 +632,10 @@
             "category": "The Civil War",
             "tier": "encounter",
             "wikiUrl": "https://en.wikipedia.org/wiki/United_States_Colored_Troops",
-            "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Soldiers_at_Fort_Lincoln.jpg?width=400"
+            "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Soldiers_at_Fort_Lincoln.jpg?width=400",
+            "simpleExplanation": "USCT stands for United States Colored Troops, the official name for regiments of Black soldiers in the Union Army. After the Emancipation Proclamation, the Union began signing up Black volunteers, and almost 200,000 served by the war's end. They were paid less than white soldiers at first, and faced extra danger if captured. They fought in major battles, served as scouts, dug trenches, and earned 25 Medals of Honor. Their service made it impossible to argue, after the war, that Black men had not earned full citizenship.",
+            "example": "By the end of the war, about one in every ten Union soldiers was a member of the USCT.",
+            "simpleWikiUrl": "https://en.wikipedia.org/wiki/United_States_Colored_Troops"
         },
         {
             "term": "Copperheads",
@@ -622,7 +644,9 @@
             "tier": "encounter",
             "wikiUrl": "https://en.wikipedia.org/wiki/Copperhead_(politics)",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Copperhead",
-            "imageUrl": "images/vocab/copperheads.jpg"
+            "imageUrl": "images/vocab/copperheads.jpg",
+            "simpleExplanation": "Not everyone in the North supported the war. Some Northern Democrats, especially in states like Ohio and Indiana, wanted Lincoln to negotiate peace with the Confederacy and let the South leave. Republicans called these antiwar Democrats Copperheads, after a poisonous snake. The Copperheads said the war was destroying the Constitution and the economy. They were never powerful enough to stop the war, but they did make Lincoln's reelection in 1864 a real fight.",
+            "example": "Lincoln suspended habeas corpus partly to silence Copperhead newspapers that he believed were helping the Confederate cause."
         },
         {
             "term": "Anaconda Plan",
@@ -631,7 +655,9 @@
             "tier": "encounter",
             "wikiUrl": "https://en.wikipedia.org/wiki/Anaconda_Plan",
             "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Anaconda_Plan",
-            "imageUrl": "images/vocab/anaconda-plan.jpg"
+            "imageUrl": "images/vocab/anaconda-plan.jpg",
+            "simpleExplanation": "Early in the war, an old general named Winfield Scott proposed a strategy that newspapers mocked as the 'Anaconda Plan,' after the snake that squeezes its prey to death. The plan had three parts: blockade Southern ports so no goods could come in or out, take control of the Mississippi River so the Confederacy was cut in half, and slowly press in from all sides. People laughed at first, but it turned out to be exactly how the Union won.",
+            "example": "Grant's capture of Vicksburg in 1863 completed the Mississippi River part of the Anaconda Plan."
         },
         {
             "term": "Cotton Kingdom",
@@ -639,7 +665,10 @@
             "example": "By 1860, cotton from the Cotton Kingdom made up about two-thirds of all American exports.",
             "category": "Worlds of North & South",
             "imageUrl": "images/vocab/cotton-kingdom.jpg",
-            "typingSnippet": "The Cotton Kingdom was the broad belt of Southern states where cotton was king. From South Carolina across to Texas, plantations stretched for miles, worked by enslaved people. Cotton built fortunes, supplied northern factories, and tied the South to slavery more tightly each year. By 1860, this kingdom produced most of the world's cotton and shaped almost every Southern decision."
+            "typingSnippet": "The Cotton Kingdom was the broad belt of Southern states where cotton was king. From South Carolina across to Texas, plantations stretched for miles, worked by enslaved people. Cotton built fortunes, supplied northern factories, and tied the South to slavery more tightly each year. By 1860, this kingdom produced most of the world's cotton and shaped almost every Southern decision.",
+            "simpleExplanation": "By the 1850s, a huge stretch of the Deep South was almost entirely about one crop: cotton. From South Carolina across to Texas, plantations grew cotton, traded cotton, and lived or died by the price of cotton. People started calling that whole region the Cotton Kingdom. Its wealth was real, but it depended completely on the unpaid labor of enslaved people.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Antebellum_South",
+            "simpleWikiUrl": "https://en.wikipedia.org/wiki/Antebellum_South"
         },
         {
             "term": "Industrial Revolution",
@@ -647,14 +676,20 @@
             "example": "The Industrial Revolution gave the North its mills, factories, and wage-paying jobs that drew immigrants to Northern cities.",
             "category": "Worlds of North & South",
             "imageUrl": "images/vocab/industrial-revolution.jpg",
-            "typingSnippet": "The Industrial Revolution was a wave of new machines, factories, and railroads that changed how people lived and worked. In the North, mills and factories drew workers into busy cities. Goods that once took weeks to make by hand could now be made in hours. The Industrial Revolution gave the North a very different economy from the farming South."
+            "typingSnippet": "The Industrial Revolution was a wave of new machines, factories, and railroads that changed how people lived and worked. In the North, mills and factories drew workers into busy cities. Goods that once took weeks to make by hand could now be made in hours. The Industrial Revolution gave the North a very different economy from the farming South.",
+            "simpleExplanation": "Up until about 1800, almost everything was made by hand at home or in small shops. The Industrial Revolution changed that. Machines powered by water and then steam started doing in minutes what used to take a person all day. Factories, mills, and railroads spread quickly. The North jumped on this change, while the South mostly stuck with farming. By 1860, the two regions did not even feel like the same country anymore.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Industrial_Revolution_in_the_United_States",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Industrial_Revolution"
         },
         {
             "term": "Yeoman farmer",
             "definition": "A small Southern farmer who owned and worked his own land, usually without enslaved laborers.",
             "example": "Yeoman farmers made up the majority of white Southerners, but the wealth and power of the South sat with the larger plantation owners.",
             "category": "Worlds of North & South",
-            "typingSnippet": "A yeoman farmer was a small landowner in the South who worked his own fields, usually without enslaved labor. Most white Southerners were yeoman farmers, not wealthy planters. They grew food for their families and a little extra to sell. Even though they did not own people, many supported slavery because it kept them above the bottom of Southern society."
+            "typingSnippet": "A yeoman farmer was a small landowner in the South who worked his own fields, usually without enslaved labor. Most white Southerners were yeoman farmers, not wealthy planters. They grew food for their families and a little extra to sell. Even though they did not own people, many supported slavery because it kept them above the bottom of Southern society.",
+            "simpleExplanation": "When people picture the South before the war, they often imagine huge plantations. But most white Southerners were not plantation owners. They were yeoman farmers: regular families who owned a small piece of land, grew their own food, and worked the fields themselves. Most did not own enslaved people. Many still defended slavery, partly because the system kept them above the bottom of Southern society.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Yeoman",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Yeoman"
         },
         {
             "term": "Tariff",
@@ -662,7 +697,10 @@
             "example": "Northerners liked tariffs because they protected their factories, while Southerners hated them because they raised the price of goods they had to buy.",
             "category": "Worlds of North & South",
             "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Tariff%20of%201828%20cartoon.jpg?width=400",
-            "typingSnippet": "A tariff is a tax on goods coming in from other countries. Northern factories liked tariffs because they made foreign products more expensive, helping American factories compete. Southern planters hated tariffs because they raised prices on goods they had to buy. Tariff fights showed how the two regions had opposite economic needs long before the war."
+            "typingSnippet": "A tariff is a tax on goods coming in from other countries. Northern factories liked tariffs because they made foreign products more expensive, helping American factories compete. Southern planters hated tariffs because they raised prices on goods they had to buy. Tariff fights showed how the two regions had opposite economic needs long before the war.",
+            "simpleExplanation": "A tariff is a tax on goods coming in from other countries. It sounds boring, but tariffs were one of the biggest political fights of the 1800s. Northern factory owners loved high tariffs because they made foreign products more expensive, so people would buy American instead. Southern planters hated them, because the South made very little of its own goods and had to buy almost everything. Every tariff fight made the two regions angrier with each other.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Tariffs_in_United_States_history",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Tariff"
         },
         {
             "term": "Urbanization",
@@ -670,14 +708,20 @@
             "example": "Northern urbanization drew immigrants and former farmers into growing cities like New York, Boston, and Philadelphia.",
             "category": "Worlds of North & South",
             "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Broadway,%20New%20York%20City%201850.jpg?width=400",
-            "typingSnippet": "Urbanization is the movement of people from farms to cities. In the North, factories and ports pulled workers, immigrants, and young people into growing cities like New York, Philadelphia, and Boston. Cities meant new jobs, new ideas, and new problems like crowded housing. Urbanization made the North look and feel very different from the rural, agricultural South."
+            "typingSnippet": "Urbanization is the movement of people from farms to cities. In the North, factories and ports pulled workers, immigrants, and young people into growing cities like New York, Philadelphia, and Boston. Cities meant new jobs, new ideas, and new problems like crowded housing. Urbanization made the North look and feel very different from the rural, agricultural South.",
+            "simpleExplanation": "Urbanization just means people moving from the countryside into cities. In the early 1800s, this happened fast in the North. Factories needed workers. Immigrants poured into Boston, New York, and Philadelphia. Cities meant new jobs, new ideas, crowded apartments, and new problems. The South stayed mostly rural, so by 1860 a Northerner and a Southerner could live in completely different worlds without crossing the country.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Urbanization_in_the_United_States",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Urbanization"
         },
         {
             "term": "Slave codes",
             "definition": "Strict Southern laws that controlled enslaved people's movement, work, gatherings, and ability to learn to read.",
             "example": "After Nat Turner's Rebellion in 1831, Southern states tightened their slave codes to make it illegal even to teach an enslaved person to read.",
             "category": "African Americans at Mid-Century",
-            "typingSnippet": "Slave codes were laws in Southern states that controlled almost every part of an enslaved person's life. They banned reading and writing, travel without a pass, and gathering in groups. The codes also protected enslavers who used violence to keep control. By turning cruelty into law, slave codes tried to make resistance impossible, though they never fully succeeded."
+            "typingSnippet": "Slave codes were laws in Southern states that controlled almost every part of an enslaved person's life. They banned reading and writing, travel without a pass, and gathering in groups. The codes also protected enslavers who used violence to keep control. By turning cruelty into law, slave codes tried to make resistance impossible, though they never fully succeeded.",
+            "simpleExplanation": "Slave codes were Southern laws that controlled almost everything about an enslaved person's life. They could not travel without a pass. They could not gather in groups. They could not learn to read. They could not testify in court against a white person. The codes also protected white people who used violence to enforce slavery. The whole point was to make rebellion impossible by writing cruelty into the law itself.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Slave_codes",
+            "simpleWikiUrl": "https://en.wikipedia.org/wiki/Slave_codes"
         },
         {
             "term": "Overseer",
@@ -685,7 +729,10 @@
             "example": "Overseers were paid to get the most cotton possible out of the field hands, and they often used whippings and threats to do it.",
             "category": "African Americans at Mid-Century",
             "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Slaves%20and%20overseer%20Mississippi%20cotton%20field.jpg?width=400",
-            "typingSnippet": "An overseer was a hired man who managed enslaved workers in the fields on behalf of the plantation owner. He set the pace of work, punished anyone he thought slow, and reported back to the enslaver. Overseers were often paid based on how much cotton or sugar the plantation produced. That pay structure pushed many to rely on whips and threats to drive harder work."
+            "typingSnippet": "An overseer was a hired man who managed enslaved workers in the fields on behalf of the plantation owner. He set the pace of work, punished anyone he thought slow, and reported back to the enslaver. Overseers were often paid based on how much cotton or sugar the plantation produced. That pay structure pushed many to rely on whips and threats to drive harder work.",
+            "simpleExplanation": "Most large plantation owners did not actually run their own fields day to day. They hired an overseer to do it for them. The overseer's job was simple: get the most cotton out of the field hands as possible. He was usually paid based on the size of the harvest, which gave him every reason to push enslaved workers harder, often with whippings and threats. Many enslaved people remembered the overseer as the daily face of slavery's brutality.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Treatment_of_the_enslaved_in_the_United_States",
+            "simpleWikiUrl": "https://en.wikipedia.org/wiki/Treatment_of_the_enslaved_in_the_United_States"
         },
         {
             "term": "Spirituals",
@@ -693,14 +740,20 @@
             "example": "The spiritual \"Steal Away to Jesus\" was sometimes a coded signal that a secret religious meeting was about to happen that night.",
             "category": "African Americans at Mid-Century",
             "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Steal%20Away%20to%20Jesus%201872%20sheet%20music%20cover.jpg?width=400",
-            "typingSnippet": "Spirituals were religious songs created by enslaved African Americans that mixed African musical traditions with Christian stories. Songs like Go Down, Moses or Wade in the Water carried hope, sorrow, and sometimes hidden messages about escape. Singing together in fields or at night gave people strength and a sense of community. Spirituals are one of America's first true musical art forms."
+            "typingSnippet": "Spirituals were religious songs created by enslaved African Americans that mixed African musical traditions with Christian stories. Songs like Go Down, Moses or Wade in the Water carried hope, sorrow, and sometimes hidden messages about escape. Singing together in fields or at night gave people strength and a sense of community. Spirituals are one of America's first true musical art forms.",
+            "simpleExplanation": "Spirituals were religious songs that enslaved African Americans created out of two things they had: their faith and their pain. The melodies came from West African musical traditions. The words borrowed Bible stories, especially stories about freedom, like Moses leading his people out of slavery. Some spirituals were prayers. Others carried hidden messages about escape routes or secret meetings. Singing them together was one of the few moments enslaved people could feel fully like themselves.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Spirituals",
+            "simpleWikiUrl": "https://en.wikipedia.org/wiki/Spirituals"
         },
         {
             "term": "Invisible institution",
             "definition": "The hidden Black church that enslaved people created in secret, away from the white-controlled churches their masters made them attend.",
             "example": "The invisible institution met in clearings called \"hush arbors,\" where Black preachers told the story of Moses leading his people out of slavery.",
             "category": "African Americans at Mid-Century",
-            "typingSnippet": "The invisible institution was the secret religious life enslaved African Americans built away from white churches. They held services in cabins, fields, and forests, often at night. Their preaching, singing, and prayers blended African beliefs with Christianity. This hidden church gave enslaved people meaning, leadership, and a faith of their own that no enslaver could fully control."
+            "typingSnippet": "The invisible institution was the secret religious life enslaved African Americans built away from white churches. They held services in cabins, fields, and forests, often at night. Their preaching, singing, and prayers blended African beliefs with Christianity. This hidden church gave enslaved people meaning, leadership, and a faith of their own that no enslaver could fully control.",
+            "simpleExplanation": "Slaveholders made enslaved people attend white churches, where preachers gave sermons about obeying your master. So enslaved people built their own church in secret. They called themselves together at night in clearings and woods, where their own preachers told the parts of the Bible the white preachers left out. Historians later named this hidden church the invisible institution. It gave enslaved people something no master could control: a faith of their own.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Black_church#Invisible_institution",
+            "simpleWikiUrl": "https://en.wikipedia.org/wiki/Black_church#Invisible_institution"
         },
         {
             "term": "Field hand",
@@ -708,14 +761,20 @@
             "example": "About three-quarters of rural enslaved people were field hands, working from dawn until dark under the watch of an overseer.",
             "category": "African Americans at Mid-Century",
             "imageUrl": "images/vocab/field-hand.jpg",
-            "typingSnippet": "A field hand was an enslaved person who worked in the fields, usually planting, weeding, or picking cotton. Days were long, often from sunup to sundown, and the work was brutal. Children, women, and men all labored side by side under an overseer's watch. Field hands made up most of the enslaved population on Southern plantations."
+            "typingSnippet": "A field hand was an enslaved person who worked in the fields, usually planting, weeding, or picking cotton. Days were long, often from sunup to sundown, and the work was brutal. Children, women, and men all labored side by side under an overseer's watch. Field hands made up most of the enslaved population on Southern plantations.",
+            "simpleExplanation": "About three out of every four enslaved people on Southern plantations worked as field hands. They planted, weeded, picked, and processed crops like cotton, sugar, or tobacco. The work was physically brutal and went from sunup to sundown, six days a week, in heat, rain, and cold. Children as young as eight or nine were sent to the fields. The wealth of the Cotton Kingdom was built directly on the bodies of field hands.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Treatment_of_the_enslaved_in_the_United_States",
+            "simpleWikiUrl": "https://en.wikipedia.org/wiki/Treatment_of_the_enslaved_in_the_United_States"
         },
         {
             "term": "House servant",
             "definition": "An enslaved person who worked inside the slaveholder's house cooking, cleaning, or caring for children.",
             "example": "House servants worked closer to the family but lived under the constant watch of their master and could be sent to the fields as punishment.",
             "category": "African Americans at Mid-Century",
-            "tier": "encounter"
+            "tier": "encounter",
+            "simpleExplanation": "House servants were enslaved people who worked inside the slaveholder's house instead of out in the fields. They cooked meals, cleaned, sewed, took care of the white children, and were on call almost every hour. From outside, this might have looked like easier work. In some ways it was. But house servants also lived under the constant watch of the master and mistress, with no privacy, and they could be sent back to the fields at any time as punishment.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Treatment_of_the_enslaved_in_the_United_States",
+            "simpleWikiUrl": "https://en.wikipedia.org/wiki/Treatment_of_the_enslaved_in_the_United_States"
         },
         {
             "term": "Slave family",
@@ -723,7 +782,10 @@
             "example": "Of all the things they endured, enslaved people most feared being sold away from their slave family.",
             "category": "African Americans at Mid-Century",
             "imageUrl": "images/vocab/slave-family.jpg",
-            "typingSnippet": "A slave family was an enslaved person's bond with parents, children, husbands, wives, and kin. The law did not protect these families, and enslavers could sell members away at any moment. Even so, enslaved people fought to stay connected through letters, stories, and chosen family. The slave family was a source of love and survival in a system designed to tear it apart."
+            "typingSnippet": "A slave family was an enslaved person's bond with parents, children, husbands, wives, and kin. The law did not protect these families, and enslavers could sell members away at any moment. Even so, enslaved people fought to stay connected through letters, stories, and chosen family. The slave family was a source of love and survival in a system designed to tear it apart.",
+            "simpleExplanation": "Southern law said enslaved people could not legally marry or have legal parental rights over their own children. Owners could sell husbands, wives, and kids away from each other at any time. But enslaved people built families anyway. They held weddings their masters did not recognize. They gave their children secret last names. They told children about grandparents they would never get to meet. The slave family was an act of love and resistance in a system designed to destroy it.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/African-American_family_structure",
+            "simpleWikiUrl": "https://en.wikipedia.org/wiki/African-American_family_structure"
         },
         {
             "term": "African retentions",
@@ -731,7 +793,10 @@
             "example": "African retentions can be heard in spirituals, seen in quilts, and tasted in foods like okra and gumbo that enslaved cooks brought into American kitchens.",
             "category": "African Americans at Mid-Century",
             "imageUrl": "images/vocab/african-retentions.jpg",
-            "typingSnippet": "African retentions are pieces of African culture that enslaved people kept alive in America. They show up in foods like gumbo and okra, in rhythms and call-and-response singing, in funeral customs, and in folk tales. Even under brutal conditions, people held onto memory and identity. African retentions shaped American music, food, and language in ways the whole country still feels today."
+            "typingSnippet": "African retentions are pieces of African culture that enslaved people kept alive in America. They show up in foods like gumbo and okra, in rhythms and call-and-response singing, in funeral customs, and in folk tales. Even under brutal conditions, people held onto memory and identity. African retentions shaped American music, food, and language in ways the whole country still feels today.",
+            "simpleExplanation": "African retentions are the pieces of African culture that enslaved people kept alive in America, even though slaveholders tried to strip everything African away from them. You can still hear retentions in the call-and-response of spirituals, taste them in foods like okra and gumbo, see them in quilt patterns and basket weaving, and feel them in funeral customs and dance. Enslaved people held onto memory and identity, and through them, the whole country picked up music, food, and language it would never have had otherwise.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Africanisms",
+            "simpleWikiUrl": "https://en.wikipedia.org/wiki/Africanisms"
         },
         {
             "term": "Union",
@@ -739,15 +804,21 @@
             "example": "Lincoln's first goal in the war was not to end slavery but to preserve the Union by stopping the South from leaving it.",
             "category": "The Civil War",
             "imageUrl": "images/vocab/union.png",
-            "typingSnippet": "The Union meant the United States as one nation under a single government. After Southern states seceded in 1861, Northerners called their side the Union and fought to keep the country whole. President Lincoln saw saving the Union as his most important job. By the war's end, the Union had survived, and the country would never again call itself a loose collection of separate states."
+            "typingSnippet": "The Union meant the United States as one nation under a single government. After Southern states seceded in 1861, Northerners called their side the Union and fought to keep the country whole. President Lincoln saw saving the Union as his most important job. By the war's end, the Union had survived, and the country would never again call itself a loose collection of separate states.",
+            "simpleExplanation": "The Union meant the United States as one whole country instead of a collection of separate states going their own ways. After Southern states started leaving in 1861, Northerners called their side the Union, because that is what they were fighting for. President Lincoln said over and over that saving the Union was his most important job, even more important at first than ending slavery. By the end of the war, the country had been kept together, but only at a terrible cost.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Union_(American_Civil_War)",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Union_(American_Civil_War)"
         },
         {
             "term": "Confederacy",
-            "definition": "The Confederate States of America — the eleven Southern states that seceded from the Union and formed their own nation in 1861.",
+            "definition": "The Confederate States of America, the eleven Southern states that seceded from the Union and formed their own nation in 1861.",
             "example": "The Confederacy elected Jefferson Davis as its president and fought the Civil War to defend its independence and the institution of slavery.",
             "category": "The Civil War",
             "imageUrl": "images/vocab/confederacy.png",
-            "tier": "encounter"
+            "tier": "encounter",
+            "simpleExplanation": "After Lincoln's election in 1860, eleven Southern states left the United States and formed their own country: the Confederate States of America. They wrote a constitution that protected slavery, elected Jefferson Davis as their president, and set up a capital in Richmond, Virginia. The Confederacy lasted four years. It never won recognition from any major foreign country, and its surrender at Appomattox ended both the war and the experiment.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Confederate_States_of_America",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Confederate_States_of_America"
         },
         {
             "term": "Bull Run",
@@ -755,49 +826,70 @@
             "example": "After Bull Run, both sides realized the war would not be quick and began building large armies for a long fight.",
             "category": "The Civil War",
             "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Battle%20of%20Bull%20Run,%20Va%20July%2021st%201861.jpg?width=400",
-            "typingSnippet": "Bull Run, fought in July 1861, was the first big battle of the Civil War. Crowds from Washington even rode out to watch, expecting a quick Union victory. Instead, Confederate troops held firm, and General Stonewall Jackson earned his nickname there. The shocking Union defeat told both sides that this war would be long, bloody, and not won in a single afternoon."
+            "typingSnippet": "Bull Run, fought in July 1861, was the first big battle of the Civil War. Crowds from Washington even rode out to watch, expecting a quick Union victory. Instead, Confederate troops held firm, and General Stonewall Jackson earned his nickname there. The shocking Union defeat told both sides that this war would be long, bloody, and not won in a single afternoon.",
+            "simpleExplanation": "Bull Run was the first big battle of the Civil War, fought in Virginia just three months after Fort Sumter. People in Washington were so sure the Union would win quickly that families packed picnic lunches and rode out to watch. Instead, the Confederates held firm, and a general named Thomas Jackson stood his ground so calmly that his men nicknamed him 'Stonewall.' The Union army broke and ran. Both sides realized the war was not going to end in a single afternoon.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/First_Battle_of_Bull_Run",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/First_Battle_of_Bull_Run"
         },
         {
             "term": "discrimination",
             "definition": "Unequal treatment based on a person's race, gender, religion, or other characteristic.",
             "example": "Even free Black Americans in the North faced discrimination in jobs, schools, and churches before the Civil War.",
             "category": "African Americans at Mid-Century",
-            "tier": "encounter"
+            "tier": "encounter",
+            "simpleExplanation": "Discrimination is treating someone unfairly because of who they are: their race, their religion, their gender, where they come from. In the years before the Civil War, free Black Americans in the North faced discrimination almost everywhere. They were turned away from white schools, refused jobs, kept out of churches, and sometimes attacked in the street. Slavery was the worst form of discrimination, but it was not the only one.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Discrimination",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Discrimination"
         },
         {
             "term": "racism",
             "definition": "The belief that one race is superior to another, used to justify treating people unfairly.",
             "example": "Racism was the foundation of American slavery and continued to shape American life long after the war ended it.",
             "category": "African Americans at Mid-Century",
-            "tier": "encounter"
+            "tier": "encounter",
+            "simpleExplanation": "Racism is the belief that one race is better or worse than another. It is not just personal prejudice. It is the thinking that gets used to justify treating whole groups of people unfairly. American slavery was built on racism: the idea that Black people were less than fully human and could be owned. Even after the war ended slavery, racism stayed deeply in American laws, schools, and neighborhoods for generations.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Racism",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Racism"
         },
         {
             "term": "oppression",
             "definition": "The feeling of being weighed down or held back by severe and unfair force.",
             "example": "Spirituals gave voice to the oppression enslaved people lived under and to their hopes for freedom.",
             "category": "African Americans at Mid-Century",
-            "tier": "encounter"
+            "tier": "encounter",
+            "simpleExplanation": "Oppression means being weighed down or held back by harsh, unfair power. It is the feeling of living under a force that wants to crush you. For enslaved people, oppression was every part of life: the law, the work, the violence, the rules about what they could read or where they could go. They survived through faith, family, and small acts of resistance, but the weight of the system never lifted while it lasted.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Oppression",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Oppression"
         },
         {
             "term": "segregation",
             "definition": "The social separation of groups of people, especially by race.",
             "example": "Segregation kept Black children out of public schools in many Northern states even before the Civil War began.",
             "category": "African Americans at Mid-Century",
-            "tier": "encounter"
+            "tier": "encounter",
+            "simpleExplanation": "Segregation is when people are kept separated by group, usually by race. Most Americans today think of segregation as a Southern thing, and yes, the South made it law after the Civil War. But it existed in the North long before the war too. Black children were kept out of white public schools. Black travelers were refused service at hotels and on stagecoaches. Segregation made sure that 'free' did not mean 'equal.'",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Racial_segregation_in_the_United_States",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Racial_segregation"
         },
         {
             "term": "fugitive",
-            "definition": "A person who flees or tries to escape — for example, an enslaved person escaping slavery.",
+            "definition": "A person who flees or tries to escape, for example, an enslaved person escaping slavery.",
             "example": "The Fugitive Slave Act required Northerners to help return fugitive enslaved people to their owners in the South.",
             "category": "A Dividing Nation",
-            "tier": "encounter"
+            "tier": "encounter",
+            "simpleExplanation": "A fugitive is a person on the run, usually trying to escape something. In the years before the Civil War, the word usually meant a fugitive from slavery: a person who had escaped the South and was trying to reach safety in a free state or in Canada. Slave catchers chased fugitives across hundreds of miles. The Fugitive Slave Act of 1850 made every Northerner legally responsible for helping return fugitives, which is what turned thousands of quiet Northerners into outright abolitionists.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Fugitive_slaves_in_the_United_States",
+            "simpleWikiUrl": "https://en.wikipedia.org/wiki/Fugitive_slaves_in_the_United_States"
         },
         {
             "term": "habeas corpus",
             "definition": "The right of an arrested person to appear before a judge to determine whether their imprisonment is lawful.",
             "example": "During the Civil War, Lincoln suspended habeas corpus so the army could jail people suspected of disloyalty without a trial.",
             "category": "The Civil War",
-            "tier": "encounter"
+            "tier": "encounter",
+            "simpleExplanation": "Habeas corpus is a legal protection that goes back hundreds of years. It means that if you are arrested, the government has to bring you in front of a judge and explain why you are being held. You cannot just be locked up and forgotten. During the Civil War, Lincoln suspended habeas corpus in some places so the army could arrest people suspected of helping the Confederacy without going through the courts. Some Americans said this saved the country. Others said it was exactly the kind of thing the Constitution was supposed to prevent.",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Habeas_corpus_in_the_United_States",
+            "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Habeas_corpus"
         }
     ],
     "practiceQuestions": [
