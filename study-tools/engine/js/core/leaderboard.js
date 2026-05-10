@@ -49,9 +49,17 @@ var LeaderboardManager = {
         // Each unit can list its scorable maps in `config.leaderboardMapActivities`,
         // either as a string id (the activity stores bestScore as a percent, e.g.
         // map-quiz) or as `{ id, maxScore }` for activities that store bestScore
-        // as a raw count (e.g. civil-war-map saves 19 for a perfect run on 19
+        // as a raw count (e.g. civil-war-map saves 18 for a perfect run on 18
         // cities). Older units that don't set the field default to `map-quiz`.
         // We pick the fastest qualifying time across all listed maps.
+        //
+        // Scoring (formula C): 100-point floor for finishing at 100% (the
+        // achievement itself is worth points), plus +1 pt per second under
+        // 180s for a speed bonus. So 60s perfect = 220 pts, 30s = 250 pts,
+        // 4-minute slow-but-perfect = 100 pts. No artificial time floor:
+        // real times are surfaced honestly because the 1.4s feedback animation
+        // per question + the 100%-required gate already make speed-clicking
+        // impossible to game.
         var mapEntries = (config.leaderboardMapActivities && config.leaderboardMapActivities.length > 0)
             ? config.leaderboardMapActivities
             : ['map-quiz'];
@@ -62,11 +70,10 @@ var LeaderboardManager = {
             var maxScore = typeof entry === 'object' && entry.maxScore ? entry.maxScore : 100;
             var mp = ProgressManager.getActivityProgress(unitId, mapId) || {};
             if (mp.bestScore >= maxScore && mp.bestTime) {
-                var t = Math.max(30, mp.bestTime);
-                if (mapBestTime === null || t < mapBestTime) mapBestTime = t;
+                if (mapBestTime === null || mp.bestTime < mapBestTime) mapBestTime = mp.bestTime;
             }
         }
-        var mapBonus = mapBestTime ? Math.max(0, 180 - mapBestTime) : 0;
+        var mapBonus = mapBestTime ? 100 + Math.max(0, 180 - mapBestTime) : 0;
 
         var score = this.calculateScore(vocabMastered, bestTestScore, studyTimeSeconds, mapBonus);
 
@@ -191,7 +198,7 @@ var LeaderboardManager = {
 
             var explainer = document.createElement('p');
             explainer.className = 'lb-explainer';
-            explainer.textContent = 'Vocab (\u00d710) + Test Score + Study Time (diminishing) + Map Bonus = Total';
+            explainer.textContent = 'Vocab (\u00d710) + Test Score + Study Time (diminishing) + Map Bonus (100 + speed) = Total';
             container.appendChild(explainer);
 
             if (entries.length === 0) {
