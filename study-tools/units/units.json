@@ -5,15 +5,15 @@
             "title": "Westward Expansion & Reform Study Tool",
             "subtitle": "Get ready to ace your test! Learn vocabulary, practice questions, and track your progress.",
             "theme": { "primary": "#B5651D" },
-            "activityCount": 18
+            "activityCount": 18,
+            "retired": true
         },
         {
             "id": "civil-war",
             "title": "The Civil War Study Tool",
             "subtitle": "Get ready to ace your test! Learn vocabulary, practice questions, and track your progress.",
             "theme": { "primary": "#2D4A6B" },
-            "activityCount": 22,
-            "draft": true
+            "activityCount": 23
         },
         {
             "id": "early-republic",

@@ -303,7 +303,7 @@
             modal.appendChild(heading);
 
             var desc = document.createElement('p');
-            desc.textContent = 'This unit is from an earlier part of the year. Your current unit is Westward Expansion & Reform. Head there to study for your upcoming test!';
+            desc.textContent = 'This unit is from an earlier part of the year. Your current unit is The Civil War. Head there to study for your upcoming test!';
             modal.appendChild(desc);
 
             var btnContainer = document.createElement('div');
@@ -311,15 +311,28 @@
             btnContainer.style.gap = '10px';
             btnContainer.style.justifyContent = 'center';
             btnContainer.style.marginTop = '16px';
+            btnContainer.style.flexWrap = 'wrap';
+
+            // Secondary: actually go to the retired unit. Students should still
+            // be able to review old content (final exams, end-of-year review),
+            // we just don't want them landing there by default.
+            var continueBtn = document.createElement('button');
+            continueBtn.textContent = 'Continue to ' + unit.title.replace(' Study Tool', '');
+            continueBtn.style.background = '#9ca3af';
+            btnContainer.appendChild(continueBtn);
 
             var closeBtn = document.createElement('button');
             closeBtn.textContent = 'Got It';
+            closeBtn.style.background = 'var(--primary, #1669C5)';
             btnContainer.appendChild(closeBtn);
 
             modal.appendChild(btnContainer);
             overlay.appendChild(modal);
             document.body.appendChild(overlay);
 
+            continueBtn.addEventListener('click', function() {
+                window.location.href = 'engine/?unit=' + encodeURIComponent(unit.id);
+            });
             closeBtn.addEventListener('click', function() {
                 overlay.remove();
             });
