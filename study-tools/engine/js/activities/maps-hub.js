@@ -65,9 +65,9 @@ function buildMapCard(m) {
     card.appendChild(p);
 
     card.addEventListener('click', function() {
-        if (window.StudyEngine && typeof StudyEngine.activateActivity === 'function') {
-            StudyEngine.activateActivity(m.id);
-        }
+        // StudyEngine is declared with `const` at script top level, so it's
+        // not a property of `window` — reference it directly.
+        StudyEngine.activateActivity(m.id);
     });
     return card;
 }
