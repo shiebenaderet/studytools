@@ -49,8 +49,35 @@ const ProgressManager = {
             streak.current = (streak.lastDate === yesterday) ? streak.current + 1 : 1;
             streak.lastDate = today;
             this.save(unitId, 'streak', streak);
+            // Also append to the distinct-days set used by the consistency
+            // multiplier on the leaderboard. Separate from `streak.current`,
+            // which resets on a missed day — this one only grows.
+            this._recordStudyDay(unitId, today);
         }
         return streak;
+    },
+
+    // Append today (date string) to the unit's distinct study days, if not
+    // already present. Used by the leaderboard consistency multiplier so a
+    // student who studied over many days outscores one who crammed last night.
+    _recordStudyDay(unitId, dateString) {
+        const days = this.load(unitId, 'studyDays') || [];
+        if (days.indexOf(dateString) === -1) {
+            days.push(dateString);
+            this.save(unitId, 'studyDays', days);
+        }
+    },
+
+    getStudyDayCount(unitId) {
+        const days = this.load(unitId, 'studyDays') || [];
+        // Backfill from streak.lastDate for students who studied before the
+        // studyDays field existed — they don't get retroactive credit for old
+        // sessions but they shouldn't drop to 0 either.
+        if (days.length === 0) {
+            const streak = this.load(unitId, 'streak');
+            if (streak && streak.lastDate) return 1;
+        }
+        return days.length;
     },
 
     // --- Study time ---
@@ -157,6 +184,16 @@ const ProgressManager = {
         grid.appendChild(createStatBox('Vocabulary Mastered', `${masteredCount}/${totalVocab}`, true, vocabPct));
         grid.appendChild(createStatBox('Questions Mastered', `${practiceCount}/${totalQuestions}`, true, practicePct));
         grid.appendChild(createStatBox('Current Streak', `${streak.current} days`, false));
+        // Consistency multiplier: distinct days studied for this unit.
+        // Surfaces the same value the leaderboard uses, so students can see
+        // the multiplier grow as they study across more days.
+        var consistencyDays = this.getStudyDayCount(unitId);
+        if (consistencyDays > 0 && typeof LeaderboardManager !== 'undefined') {
+            var consMult = LeaderboardManager.consistencyMultiplier(consistencyDays);
+            var multLabel = consMult.toFixed(2).replace(/\.?0+$/, '') + 'x';
+            var dayLabel = consistencyDays + ' day' + (consistencyDays !== 1 ? 's' : '');
+            grid.appendChild(createStatBox('Consistency', dayLabel + ' (' + multLabel + ')', false));
+        }
             if (learnStreak.currentStreak > 0) {
                 var multiplier = learnStreak.currentStreak >= 3 ? '2x' : learnStreak.currentStreak >= 2 ? '1.75x' : '1.5x';
                 grid.appendChild(createStatBox('Learn Streak', learnStreak.currentStreak + ' day' + (learnStreak.currentStreak !== 1 ? 's' : '') + ' (' + multiplier + ')', false));
@@ -304,6 +341,16 @@ const ProgressManager = {
                     : local.bestTime || remote.bestTime,
                 updatedAt: Math.max(local.updatedAt || 0, remote.updatedAt || 0)
             };
+        }
+
+        // For studyDays: union the two arrays of date strings so a student
+        // who studied on different devices accumulates all their days.
+        // Stored at the raw `studyDays` key (no `activity_` prefix), so it
+        // arrives as a plain array, not an object.
+        if (activity === 'studyDays') {
+            var localDays = Array.isArray(local) ? local : [];
+            var remoteDays = Array.isArray(remote) ? remote : [];
+            return [...new Set([...localDays, ...remoteDays])];
         }
 
         // Default: newer wins (original behavior)

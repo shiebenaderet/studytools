@@ -20,6 +20,20 @@ var LeaderboardManager = {
         return vocabPts + testPts + timePts + mapPts;
     },
 
+    // Consistency multiplier: rewards distributed practice over cramming.
+    //   1 day  = 1.00x   (no bonus — just started, or crammed today)
+    //   3 days = 1.10x
+    //   7 days = 1.30x
+    //  14 days = 1.65x
+    //  20+     = 2.00x   (cap)
+    // Linear: 1.0 + 0.05 per day, capped at 20 days. A student who studied
+    // every day of a 3-week unit gets double; a kid who studied the night
+    // before the test gets nothing extra.
+    consistencyMultiplier(uniqueStudyDays) {
+        var days = Math.min(20, Math.max(1, uniqueStudyDays || 1));
+        return 1 + 0.05 * (days - 1);
+    },
+
     // Submit or update student's leaderboard entry
     async submitScore() {
         if (!ProgressManager.supabase || !ProgressManager.studentId) return;
@@ -75,7 +89,16 @@ var LeaderboardManager = {
         }
         var mapBonus = mapBestTime ? 100 + Math.max(0, 180 - mapBestTime) : 0;
 
-        var score = this.calculateScore(vocabMastered, bestTestScore, studyTimeSeconds, mapBonus);
+        var rawScore = this.calculateScore(vocabMastered, bestTestScore, studyTimeSeconds, mapBonus);
+
+        // Consistency multiplier: distributed effort wins over cramming.
+        // A kid who studied 14 different days outscores a kid with identical
+        // raw points who crammed it all the night before.
+        var studyDays = ProgressManager.getStudyDayCount
+            ? ProgressManager.getStudyDayCount(unitId)
+            : 1;
+        var multiplier = this.consistencyMultiplier(studyDays);
+        var score = Math.round(rawScore * multiplier);
 
         try {
             await ProgressManager.supabase.from('leaderboard').upsert({
@@ -198,7 +221,7 @@ var LeaderboardManager = {
 
             var explainer = document.createElement('p');
             explainer.className = 'lb-explainer';
-            explainer.textContent = 'Vocab (\u00d710) + Test Score + Study Time (diminishing) + Map Bonus (100 + speed) = Total';
+            explainer.textContent = '(Vocab \u00d710 + Test Score + Study Time + Map Bonus) \u00d7 Consistency (up to 2\u00d7 for 20 study days)';
             container.appendChild(explainer);
 
             if (entries.length === 0) {
