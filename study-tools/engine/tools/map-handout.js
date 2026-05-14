@@ -24,6 +24,7 @@
   const TITLE_TEXT = {
     map1861:     'United States in 1861',
     territorial: 'Territorial Expansion of the United States',
+    fiftystates: 'The Fifty United States',
   };
 
   const TITLE_PLACEMENT = {
@@ -32,6 +33,27 @@
     // For territorial: top-right over Atlantic east of the 13 colonies
     // (Oregon already occupies the top-left).
     territorial: { x: 890, y: 10, anchor: 'end'   },
+    // 50-states: top-left works since the upper region is Canadian border /
+    // empty water; Alaska/Hawaii are inset to the lower-left.
+    fiftystates: { x: 10,  y: 10, anchor: 'start' },
+  };
+
+  // USPS 2-letter abbreviations for 50-states map handout labels. Keyed on
+  // the lowercase state id used in fifty-states-data.js (no spaces).
+  const FIFTY_STATES_ABBRS = {
+    alabama: 'AL', alaska: 'AK', arizona: 'AZ', arkansas: 'AR',
+    california: 'CA', colorado: 'CO', connecticut: 'CT', delaware: 'DE',
+    florida: 'FL', georgia: 'GA', hawaii: 'HI', idaho: 'ID',
+    illinois: 'IL', indiana: 'IN', iowa: 'IA', kansas: 'KS',
+    kentucky: 'KY', louisiana: 'LA', maine: 'ME', maryland: 'MD',
+    massachusetts: 'MA', michigan: 'MI', minnesota: 'MN', mississippi: 'MS',
+    missouri: 'MO', montana: 'MT', nebraska: 'NE', nevada: 'NV',
+    newhampshire: 'NH', newjersey: 'NJ', newmexico: 'NM', newyork: 'NY',
+    northcarolina: 'NC', northdakota: 'ND', ohio: 'OH', oklahoma: 'OK',
+    oregon: 'OR', pennsylvania: 'PA', rhodeisland: 'RI', southcarolina: 'SC',
+    southdakota: 'SD', tennessee: 'TN', texas: 'TX', utah: 'UT',
+    vermont: 'VT', virginia: 'VA', washington: 'WA', westvirginia: 'WV',
+    wisconsin: 'WI', wyoming: 'WY',
   };
 
   const handoutState = {
@@ -56,6 +78,21 @@
         labelOffset:  r.labelOffset || { x: 0, y: 0 },
         isTiny:       r.isTiny || false,
         labelLeader:  r.labelLeader || null,
+      }));
+    }
+    if (mapKey === 'fiftystates') {
+      return window.FIFTY_STATES_DATA.map(r => ({
+        id:           r.id,
+        name:         r.name,
+        paths:        r.paths,
+        abbr:         FIFTY_STATES_ABBRS[r.id] || r.name,
+        // 50-states data has no allegiance/color — use a single neutral
+        // tone so the handout has a consistent look without trying to
+        // invent a color scheme.
+        color:        '#7a8a7a',
+        labelOffset:  { x: 0, y: 0 },
+        isTiny:       false,
+        labelLeader:  null,
       }));
     }
     return window.TERRITORIAL_REGIONS.map(r => ({
@@ -131,7 +168,8 @@
 
     for (const r of regions) {
       const lines = [];
-      if (mapKey === 'map1861') {
+      if (mapKey === 'map1861' || mapKey === 'fiftystates') {
+        // Both state maps label by USPS abbreviation.
         if (r.abbr) lines.push(r.abbr);
       } else {
         // territorial map
@@ -148,7 +186,10 @@
 
       // Auto-size: clamp to a sensible range based on bbox.
       const fitWidth = Math.min(bbox.width, bbox.height * 1.6);
-      let fontSize = mapKey === 'map1861'
+      // Both state maps use short USPS abbreviations, which fit at ~0.35× the
+      // bbox; territorial uses long region names that need a smaller ratio.
+      const isStateMap = mapKey === 'map1861' || mapKey === 'fiftystates';
+      let fontSize = isStateMap
         ? Math.max(6, Math.min(16, fitWidth * 0.35))
         : Math.max(8, Math.min(20, fitWidth * 0.13));
 
@@ -156,7 +197,7 @@
       // whitespace. If the data has an explicit labelLeader, use it; otherwise
       // fall back to "place to the right of the bbox".
       const isTinyByBbox = bbox.width < 14;
-      if (mapKey === 'map1861' && (r.isTiny || isTinyByBbox)) {
+      if (isStateMap && (r.isTiny || isTinyByBbox)) {
         const leadX = r.labelLeader?.x ?? (bbox.x + bbox.width + 14);
         const leadY = r.labelLeader?.y ?? (cy + 4);
 
@@ -264,6 +305,11 @@
         { color: ALLEGIANCE_COLORS.union,       label: 'Slavery prohibited' },
         { color: ALLEGIANCE_COLORS.territory,   label: 'Slavery undetermined' },
       ];
+    }
+    if (mapKey === 'fiftystates') {
+      // No semantic categories on the plain 50-states map — return empty so
+      // buildLegendLayer renders nothing rather than 50 identical rows.
+      return [];
     }
     // Territorial: one entry per region, in the order they appear in the data
     // (which is roughly chronological).

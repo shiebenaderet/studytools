@@ -250,6 +250,7 @@
   <select id="mapSelect">
     <option value="map1861">1861 Civil War Map (42 regions)</option>
     <option value="territorial">Territorial Expansion (8 regions)</option>
+    <option value="fiftystates">50 US States (50 regions)</option>
   </select>
   <label>Style:</label>
   <select id="styleSelect">
@@ -294,6 +295,7 @@
     <select id="hMap">
       <option value="map1861">1861 Civil War Map</option>
       <option value="territorial">Territorial Expansion</option>
+      <option value="fiftystates">50 US States</option>
     </select>
     <label>Export size:</label>
     <select id="hSize">
@@ -319,7 +321,7 @@
         <label class="row"><input type="checkbox" id="hLabels" checked> <span id="hLabelsText">State abbreviations</span></label>
         <label class="row" id="hDateRow"><input type="checkbox" id="hDate"> Date acquired</label>
         <label class="row"><input type="checkbox" id="hTitle" checked> Title</label>
-        <label class="row"><input type="checkbox" id="hLegend" checked> Color key / legend</label>
+        <label class="row" id="hLegendRow"><input type="checkbox" id="hLegend" checked> Color key / legend</label>
       </fieldset>
     </div>
 
@@ -335,6 +337,9 @@
 
 <!-- Embed territorial expansion regions inline (extracted from map-quiz.js). -->
 <script src="map-exporter-territorial.js"></script>
+
+<!-- 50-states data, same viewBox (900x700), shape-compatible with the exporter. -->
+<script src="../js/data/fifty-states-data.js"></script>
 
 <!-- Handout-tab logic. -->
 <script src="map-handout.js"></script>
@@ -361,6 +366,17 @@ function getRegions(mapKey) {
       paths: r.paths,
       // colour by allegiance for highlighted style
       color: allegianceColor(r.allegiance),
+    }));
+  }
+  if (mapKey === 'fiftystates') {
+    // fifty-states-data.js exposes window.FIFTY_STATES_DATA in the same
+    // { id, name, paths: [...] } shape. No natural color scheme so all
+    // states use the default highlight tone.
+    return window.FIFTY_STATES_DATA.map(r => ({
+      id: r.id,
+      name: r.name,
+      paths: r.paths,
+      color: '#d4883a',
     }));
   }
   // Territorial expansion uses single path string
@@ -535,7 +551,10 @@ function setStatus(s) { document.getElementById('status').textContent = s; }
 
 function pickPreviewRegion(regions) {
   // Pick a recognizable example: Texas for 1861, Louisiana Purchase for territorial.
-  const preferred = state.mapKey === 'map1861' ? 'texas' : 'louisiana-purchase';
+  let preferred;
+  if (state.mapKey === 'map1861') preferred = 'texas';
+  else if (state.mapKey === 'fiftystates') preferred = 'texas';
+  else preferred = 'louisiana-purchase';
   return regions.find(r => r.id === preferred) || regions[0];
 }
 
@@ -625,13 +644,18 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
 
 // ── Handout tab wiring ─────────────────────────────────────
 function applyHandoutMapDependencies() {
-  const isMap1861 = window.MapHandout.state.mapKey === 'map1861';
-  document.getElementById('hLabelsText').textContent = isMap1861
+  const mapKey = window.MapHandout.state.mapKey;
+  // Both state maps (1861 and 50-states) label by USPS abbreviation; the
+  // territorial map labels by full region name. Only the territorial map
+  // has a per-region acquisition year, so the date checkbox is only
+  // meaningful there.
+  const isStateMap = mapKey === 'map1861' || mapKey === 'fiftystates';
+  document.getElementById('hLabelsText').textContent = isStateMap
     ? 'State abbreviations'
     : 'Region names';
   const dateRow = document.getElementById('hDateRow');
   const dateInput = document.getElementById('hDate');
-  if (isMap1861) {
+  if (isStateMap) {
     dateRow.classList.add('disabled');
     dateInput.checked = false;
     dateInput.disabled = true;
@@ -639,6 +663,19 @@ function applyHandoutMapDependencies() {
   } else {
     dateRow.classList.remove('disabled');
     dateInput.disabled = false;
+  }
+  // 50-states has no semantic legend (no allegiance, no acquisition years).
+  // Disable the toggle so users don't fiddle with an option that does nothing.
+  const legendRow = document.getElementById('hLegendRow');
+  const legendInput = document.getElementById('hLegend');
+  if (mapKey === 'fiftystates') {
+    legendRow.classList.add('disabled');
+    legendInput.checked = false;
+    legendInput.disabled = true;
+    window.MapHandout.state.showLegend = false;
+  } else {
+    legendRow.classList.remove('disabled');
+    legendInput.disabled = false;
   }
 }
 
