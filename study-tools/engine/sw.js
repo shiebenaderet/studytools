@@ -1,4 +1,4 @@
-const CACHE_NAME = 'studytools-v70';
+const CACHE_NAME = 'studytools-v71';
 const APP_SHELL = [
     './',
     'index.html',
@@ -17,6 +17,8 @@ const APP_SHELL = [
     'js/data/civil-war-map-base.js',
     'js/data/underground-railroad-map-data.js',
     'js/data/underground-railroad-map-base.js',
+    'js/data/fifty-states-data.js',
+    'js/data/fifty-states-facts.js',
     'audio/tracks.json'
 ];
 

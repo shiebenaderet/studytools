@@ -42,11 +42,15 @@
         {
             "id": "civil-war-map",
             "maxScore": 18
+        },
+        {
+            "id": "fifty-states-map",
+            "maxScore": 50
         }
     ],
     "mapsHub": {
         "title": "Maps",
-        "description": "Two ways to walk the geography of the Civil War era. Pick one to explore.",
+        "description": "Three ways to walk the geography. Pick one to explore.",
         "maps": [
             {
                 "id": "civil-war-map",
@@ -59,6 +63,12 @@
                 "title": "Underground Railroad",
                 "description": "See the network of routes and people that led enslaved Americans to freedom.",
                 "icon": "fas fa-map-signs"
+            },
+            {
+                "id": "fifty-states-map",
+                "title": "50 States",
+                "description": "Identify every US state on a map of the country.",
+                "icon": "fas fa-flag"
             }
         ]
     },
@@ -75,6 +85,7 @@
         "maps-hub",
         "civil-war-map",
         "underground-railroad-map",
+        "fifty-states-map",
         "wordle",
         "hangman",
         "flip-match",
