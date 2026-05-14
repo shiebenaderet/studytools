@@ -257,15 +257,22 @@ StudyEngine.registerActivity({
         rubricTitle.appendChild(document.createTextNode(' What to Include:'));
         rubricDiv.appendChild(rubricTitle);
 
-        var rubricItems = document.createElement('ul');
-        rubricItems.className = 'rubric-items';
-        q.rubric.forEach(function(item) {
-            var li = document.createElement('li');
-            li.className = 'rubric-item';
-            li.textContent = item;
-            rubricItems.appendChild(li);
-        });
-        rubricDiv.appendChild(rubricItems);
+        if (Array.isArray(q.rubric)) {
+            var rubricItems = document.createElement('ul');
+            rubricItems.className = 'rubric-items';
+            q.rubric.forEach(function(item) {
+                var li = document.createElement('li');
+                li.className = 'rubric-item';
+                li.textContent = item;
+                rubricItems.appendChild(li);
+            });
+            rubricDiv.appendChild(rubricItems);
+        } else if (typeof q.rubric === 'string' && q.rubric.trim()) {
+            var rubricPara = document.createElement('p');
+            rubricPara.className = 'rubric-paragraph';
+            rubricPara.textContent = q.rubric;
+            rubricDiv.appendChild(rubricPara);
+        }
         contentArea.appendChild(rubricDiv);
 
         // Sentence starters

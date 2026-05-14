@@ -2013,6 +2013,12 @@ body.light-mode .fc-back .fc-tier-badge {
     flex-shrink: 0;
 }
 
+.rubric-paragraph {
+    color: var(--text-secondary);
+    line-height: 1.55;
+    margin: 0;
+}
+
 .exemplar {
     background: rgba(37, 99, 235, 0.1);
     border-left: 4px solid var(--primary);
