@@ -6376,9 +6376,43 @@ a.sift-detail-link:hover { opacity: 0.8; }
     fill: #e74c3c;
     stroke: #a3271e;
 }
+/* Answered (dimmed) state in Quiz mode. No distinction between right and
+   wrong — both look the same — so students don't see a map of their mistakes
+   mid-quiz. Still clickable (and still counts as a wrong answer if clicked
+   for the wrong prompt), so students don't get a free "process of elimination"
+   advantage on the last few questions. Flash classes (correct/wrong) win
+   until the 1.4s timer clears. */
+.fs-state.fs-answered .fs-state-path {
+    fill: #4a5568;
+    opacity: 0.45;
+}
 .fs-state-hitbox {
     cursor: pointer;
     pointer-events: all;
+}
+
+/* Quiz progress bar — lives above the "Find:" prompt in the right panel.
+   Glanceable counterpart to the header text "Question X of 50". */
+.fs-progress {
+    margin-bottom: 16px;
+}
+.fs-progress-label {
+    font-size: 0.85em;
+    color: var(--text-muted, #6b7280);
+    margin-bottom: 6px;
+    text-align: center;
+}
+.fs-progress-bar {
+    height: 8px;
+    background: var(--bg-surface, #e5e7eb);
+    border-radius: 4px;
+    overflow: hidden;
+}
+.fs-progress-fill {
+    height: 100%;
+    background: var(--primary, #4a90d9);
+    border-radius: 4px;
+    transition: width 0.3s ease;
 }
 
 .fs-state-label {

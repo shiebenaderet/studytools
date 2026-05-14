@@ -334,7 +334,14 @@ StudyEngine.registerActivity({
         var self = this;
         setTimeout(function() {
             msg.remove();
-            if (targetEl) targetEl.classList.remove('fs-flash-correct');
+            if (targetEl) {
+                targetEl.classList.remove('fs-flash-correct');
+                // Mark the target state as answered so it dims for the rest of
+                // the quiz. We don't distinguish right vs wrong here — both look
+                // the same — to avoid leaving a visual map of mistakes that
+                // could discourage students mid-quiz.
+                targetEl.classList.add('fs-answered');
+            }
             var w = self._container.querySelector('.fs-flash-wrong');
             if (w) w.classList.remove('fs-flash-wrong');
             self._quizIndex++;
@@ -366,6 +373,29 @@ StudyEngine.registerActivity({
         if (this._quizIndex >= this._quizStates.length) {
             this._renderQuizResults(panel);
         } else {
+            // Progress bar: shows how many states have been asked so far.
+            // Doesn't reveal right vs wrong — just "asked so far / total" so
+            // students get glanceable progress without seeing their mistakes.
+            var total = this._quizStates.length;
+            var done = this._quizIndex;
+            var progWrap = document.createElement('div');
+            progWrap.className = 'fs-progress';
+
+            var progLabel = document.createElement('div');
+            progLabel.className = 'fs-progress-label';
+            progLabel.textContent = done + ' of ' + total + ' states asked';
+            progWrap.appendChild(progLabel);
+
+            var progBar = document.createElement('div');
+            progBar.className = 'fs-progress-bar';
+            var progFill = document.createElement('div');
+            progFill.className = 'fs-progress-fill';
+            progFill.style.width = ((done / total) * 100).toFixed(1) + '%';
+            progBar.appendChild(progFill);
+            progWrap.appendChild(progBar);
+
+            panel.appendChild(progWrap);
+
             var current = this._quizStates[this._quizIndex];
             var prompt = document.createElement('div');
             prompt.className = 'cw-map-prompt';
