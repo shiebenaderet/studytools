@@ -55,6 +55,11 @@ const CommandPalette = {
         cmds.push({ id: 'tool-timer', label: 'Focused Study Timer', icon: 'fas fa-hourglass', category: 'Tools', action: () => { StudyTools.openTimer(); } });
         cmds.push({ id: 'tool-print', label: 'Print Study Guide', icon: 'fas fa-print', category: 'Tools', action: () => { StudyTools.openPrint(); } });
         cmds.push({ id: 'tool-export', label: 'Export Progress', icon: 'fas fa-download', category: 'Tools', action: () => { StudyTools.exportProgress(); } });
+        // Map Image Exporter — teacher-only tool. Shown only when teacher
+        // unlock is active for this session (students won't see it).
+        if (sessionStorage.getItem('teacher-unlock') === 'true') {
+            cmds.push({ id: 'tool-map-exporter', label: 'Map Image Exporter', icon: 'fas fa-map', category: 'Teacher', action: () => { window.open('tools/map-exporter.html', '_blank', 'noopener'); } });
+        }
 
         // Help & info
         cmds.push({ id: 'how-to-study', label: 'How to Study', icon: 'fas fa-brain', category: 'Help', action: () => { var u = new URLSearchParams(window.location.search).get('unit'); window.location.href = 'how-to-study.html' + (u ? '?unit=' + encodeURIComponent(u) : ''); } });

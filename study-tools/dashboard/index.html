@@ -40,9 +40,14 @@
                 <h1><i class="fas fa-chalkboard-teacher"></i> Teacher Dashboard</h1>
                 <span class="dashboard-version" id="dashboard-version"></span>
             </div>
-            <button class="btn btn-logout" onclick="Dashboard.logout()">
-                <i class="fas fa-sign-out-alt"></i> Logout
-            </button>
+            <div class="dashboard-header-actions">
+                <a class="btn btn-logout" href="../engine/tools/map-exporter.html" target="_blank" rel="noopener" title="Open the map image exporter in a new tab">
+                    <i class="fas fa-map"></i> Map Exporter
+                </a>
+                <button class="btn btn-logout" onclick="Dashboard.logout()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
         </header>
 
         <!-- Filter Bar -->

@@ -199,6 +199,15 @@ body {
     gap: 12px;
     flex-wrap: wrap;
 }
+.dashboard-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.dashboard-header-actions .btn-logout {
+    text-decoration: none;
+}
 .dashboard-header h1 {
     font-size: 1.35rem;
 }
