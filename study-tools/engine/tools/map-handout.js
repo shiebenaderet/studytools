@@ -90,9 +90,12 @@
         // tone so the handout has a consistent look without trying to
         // invent a color scheme.
         color:        '#7a8a7a',
-        labelOffset:  { x: 0, y: 0 },
-        isTiny:       false,
-        labelLeader:  null,
+        // Per-state label tweaks live on the data file: labelOffset nudges
+        // the centroid label, isTiny+labelLeader forces a leader-line callout
+        // into nearby whitespace (used for the tightly clustered NE states).
+        labelOffset:  r.labelOffset || { x: 0, y: 0 },
+        isTiny:       r.isTiny || false,
+        labelLeader:  r.labelLeader || null,
       }));
     }
     return window.TERRITORIAL_REGIONS.map(r => ({
