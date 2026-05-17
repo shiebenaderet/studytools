@@ -153,10 +153,10 @@ const MasteryManager = {
         if (sessionStorage.getItem('teacher-unlock') === 'true') return categories.slice();
         const unlocked = [categories[0]];
         for (let i = 1; i < categories.length; i++) {
-            if (this.isCategoryMastered(unitId, config, categories[i - 1])) {
+            const prevMastered = this.isCategoryMastered(unitId, config, categories[i - 1]);
+            const dateUnlocked = this.isCategoryDateUnlocked(config, categories[i]);
+            if (prevMastered || dateUnlocked) {
                 unlocked.push(categories[i]);
-            } else {
-                break;
             }
         }
         return unlocked;
