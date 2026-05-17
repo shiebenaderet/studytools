@@ -103,6 +103,9 @@
             <button class="tab-btn" data-tab="wiki" onclick="Dashboard.switchTab('wiki')">
                 <i class="fas fa-pen-fancy"></i> Wiki Entries
             </button>
+            <button class="tab-btn" data-tab="schedule" onclick="Dashboard.switchTab('schedule')">
+                <i class="fas fa-calendar-alt"></i> Schedule
+            </button>
         </nav>
 
         <!-- Tab Content -->
@@ -146,6 +149,10 @@
             <div id="wiki-container"></div>
         </div>
 
+        <div id="tab-schedule" class="tab-content">
+            <div id="schedule-container"></div>
+        </div>
+
         <!-- Student Edit Modal -->
         <div id="student-edit-modal" class="modal-overlay hidden">
             <div class="modal-card">
@@ -154,6 +161,17 @@
                     <button class="btn-close-modal" onclick="Dashboard.closeStudentModal()"><i class="fas fa-times"></i></button>
                 </div>
                 <div class="modal-card-body" id="student-edit-body"></div>
+            </div>
+        </div>
+
+        <!-- Unlock Snippet Modal -->
+        <div id="schedule-unlock-modal" class="modal-overlay hidden">
+            <div class="modal-card">
+                <div class="modal-card-header">
+                    <h3>Unlock category now</h3>
+                    <button class="btn-close-modal" onclick="Dashboard.closeUnlockModal()"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="modal-card-body" id="schedule-unlock-body"></div>
             </div>
         </div>
     </div>
