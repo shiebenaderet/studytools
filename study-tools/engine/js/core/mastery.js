@@ -163,27 +163,29 @@ const MasteryManager = {
     },
 
     /**
-     * Like getUnlockedCategories but also requires reading the textbook chapter.
-     * Used by flashcards to enforce Read > Study flow.
+     * Like getUnlockedCategories but additionally requires that each category's
+     * own textbook chapter has been read. Used by flashcards to enforce
+     * Read > Study per category. Categories are evaluated independently:
+     * a date-unlocked category with its chapter read will open even if an
+     * earlier category remains locked or unread.
      */
     getReadUnlockedCategories(unitId, config) {
         const categories = this.getCategories(config);
         if (categories.length === 0) return [];
         if (sessionStorage.getItem('teacher-unlock') === 'true') return categories.slice();
 
-        var textbook = this._textbookCache[unitId] !== undefined ? this._textbookCache[unitId] : null;
+        const textbook = this._textbookCache[unitId] !== undefined ? this._textbookCache[unitId] : null;
         const unlocked = [];
         for (let i = 0; i < categories.length; i++) {
-            var chapterRead = this.isChapterRead(unitId, textbook, categories[i]);
+            const chapterRead = this.isChapterRead(unitId, textbook, categories[i]);
             if (i === 0) {
                 if (chapterRead) unlocked.push(categories[i]);
-                else break;
-            } else {
-                if (this.isCategoryMastered(unitId, config, categories[i - 1]) && chapterRead) {
-                    unlocked.push(categories[i]);
-                } else {
-                    break;
-                }
+                continue;
+            }
+            const prevMastered = this.isCategoryMastered(unitId, config, categories[i - 1]);
+            const dateUnlocked = this.isCategoryDateUnlocked(config, categories[i]);
+            if ((prevMastered || dateUnlocked) && chapterRead) {
+                unlocked.push(categories[i]);
             }
         }
         return unlocked;
