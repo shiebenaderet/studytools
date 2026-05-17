@@ -161,7 +161,10 @@ const Dashboard = {
     },
 
     openUnlockModal(unitId, cfg, categoryName) {
-        var todayIso = new Date().toISOString().slice(0,10);
+        var d = new Date();
+        var todayIso = d.getFullYear() + '-' +
+            String(d.getMonth() + 1).padStart(2, '0') + '-' +
+            String(d.getDate()).padStart(2, '0');
         var updated = Object.assign({}, cfg.categorySchedule);
         updated[categoryName] = todayIso;
         var snippet = '"categorySchedule": ' + JSON.stringify(updated, null, 4);
