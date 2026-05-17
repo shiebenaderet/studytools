@@ -293,17 +293,22 @@ const MasteryManager = {
         if (!unitId) return;
         const next = this.getNextLockedCategory(unitId, config);
         const firstName = ProgressManager.getFirstName();
-        if (next) {
-            var nextChapter = this.getNextUnreadChapter(unitId, config);
-            const prefix = firstName ? `Nice work, ${firstName}!` : 'Nice!';
-            if (nextChapter) {
-                StudyUtils.showToast(`${prefix} "${masteredCategory}" mastered! Read the next chapter in the textbook to unlock "${next}" terms.`, 'success');
-            } else {
-                StudyUtils.showToast(`${prefix} "${masteredCategory}" mastered! Now try "${next}" flashcards to unlock more.`, 'success');
-            }
-        } else {
+        if (!next) {
             const prefix = firstName ? `Amazing, ${firstName}!` : 'Amazing!';
             StudyUtils.showToast(`${prefix} All categories mastered! Every activity is now fully unlocked!`, 'success');
+            return;
+        }
+        const prefix = firstName ? `Nice work, ${firstName}!` : 'Nice!';
+        // If next category is already date-unlocked, don't pretend mastery is the gate.
+        if (this.isCategoryDateUnlocked(config, next)) {
+            StudyUtils.showToast(`${prefix} "${masteredCategory}" mastered!`, 'success');
+            return;
+        }
+        const nextChapter = this.getNextUnreadChapter(unitId, config);
+        if (nextChapter) {
+            StudyUtils.showToast(`${prefix} "${masteredCategory}" mastered! Read the next chapter in the textbook to unlock "${next}" terms.`, 'success');
+        } else {
+            StudyUtils.showToast(`${prefix} "${masteredCategory}" mastered! Now try "${next}" flashcards to unlock more.`, 'success');
         }
     },
 
