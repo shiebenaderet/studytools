@@ -48,6 +48,156 @@ const Dashboard = {
         }));
     },
 
+    // ---- Schedule tab ----
+    async renderSchedule() {
+        var container = document.getElementById('schedule-container');
+        if (!container) return;
+        container.textContent = 'Loading…';
+
+        var unitIds = [];
+        var unitSel = document.getElementById('filter-unit');
+        if (unitSel) {
+            unitIds = Array.from(unitSel.options)
+                .map(function(o){ return o.value; })
+                .filter(function(v){ return v; });
+        }
+        // Cold-start fallback: dropdown may not be populated yet. Civil-war is
+        // the only unit with categorySchedule today; add new scheduled units here.
+        if (unitIds.length === 0) unitIds = ['civil-war'];
+
+        await this._preloadUnitConfigs(unitIds);
+
+        while (container.firstChild) container.removeChild(container.firstChild);
+
+        var any = false;
+        var self = this;
+        unitIds.forEach(function(unitId) {
+            var cfg = self._unitConfigCache[unitId];
+            if (!cfg || !cfg.categorySchedule) return;
+            any = true;
+            container.appendChild(self._buildScheduleSection(unitId, cfg));
+        });
+        if (!any) {
+            var p = document.createElement('p');
+            p.textContent = 'No units have a categorySchedule configured.';
+            container.appendChild(p);
+        }
+    },
+
+    _buildScheduleSection(unitId, cfg) {
+        var section = document.createElement('section');
+        section.className = 'schedule-section';
+
+        var h2 = document.createElement('h2');
+        h2.textContent = (cfg.unit && cfg.unit.name) || unitId;
+        section.appendChild(h2);
+
+        var table = document.createElement('table');
+        table.className = 'schedule-table';
+
+        var thead = document.createElement('thead');
+        var headRow = document.createElement('tr');
+        ['Category','Scheduled date','Status',''].forEach(function(label){
+            var th = document.createElement('th');
+            th.textContent = label;
+            headRow.appendChild(th);
+        });
+        thead.appendChild(headRow);
+        table.appendChild(thead);
+
+        var tbody = document.createElement('tbody');
+        var today = new Date();
+        today.setHours(0,0,0,0);
+        var self = this;
+        Object.keys(cfg.categorySchedule).forEach(function(cat) {
+            var iso = cfg.categorySchedule[cat];
+            var tr = document.createElement('tr');
+
+            var tdCat = document.createElement('td');
+            tdCat.textContent = cat;
+            tr.appendChild(tdCat);
+
+            var tdDate = document.createElement('td');
+            tdDate.textContent = self._formatScheduleDate(iso);
+            tr.appendChild(tdDate);
+
+            var parts = iso.split('-');
+            var unlockAt = new Date(parseInt(parts[0],10), parseInt(parts[1],10)-1, parseInt(parts[2],10));
+            var diffDays = Math.round((unlockAt - today) / 86400000);
+
+            var tdStatus = document.createElement('td');
+            if (diffDays <= 0) {
+                tdStatus.textContent = '✓ Unlocked';
+                tdStatus.className = 'status-unlocked';
+            } else {
+                tdStatus.textContent = 'Locked (in ' + diffDays + ' day' + (diffDays===1?'':'s') + ')';
+                tdStatus.className = 'status-locked';
+            }
+            tr.appendChild(tdStatus);
+
+            var tdAction = document.createElement('td');
+            if (diffDays > 0) {
+                var btn = document.createElement('button');
+                btn.className = 'btn btn-primary btn-sm';
+                btn.textContent = 'Unlock now';
+                btn.addEventListener('click', function() {
+                    self.openUnlockModal(unitId, cfg, cat);
+                });
+                tdAction.appendChild(btn);
+            }
+            tr.appendChild(tdAction);
+
+            tbody.appendChild(tr);
+        });
+        table.appendChild(tbody);
+        section.appendChild(table);
+        return section;
+    },
+
+    _formatScheduleDate(iso) {
+        var parts = iso.split('-');
+        var d = new Date(parseInt(parts[0],10), parseInt(parts[1],10)-1, parseInt(parts[2],10));
+        return d.toLocaleDateString(undefined, { weekday:'short', year:'numeric', month:'long', day:'numeric' });
+    },
+
+    openUnlockModal(unitId, cfg, categoryName) {
+        var todayIso = new Date().toISOString().slice(0,10);
+        var updated = Object.assign({}, cfg.categorySchedule);
+        updated[categoryName] = todayIso;
+        var snippet = '"categorySchedule": ' + JSON.stringify(updated, null, 4);
+
+        var body = document.getElementById('schedule-unlock-body');
+        while (body.firstChild) body.removeChild(body.firstChild);
+
+        var p = document.createElement('p');
+        p.textContent = 'Replace the existing categorySchedule block in study-tools/units/' + unitId + '/config.json with the snippet below, then commit and push. Students will see the unlock on their next page load.';
+        body.appendChild(p);
+
+        var pre = document.createElement('pre');
+        pre.className = 'unlock-snippet';
+        pre.textContent = snippet;
+        body.appendChild(pre);
+
+        var copyBtn = document.createElement('button');
+        copyBtn.className = 'btn btn-primary';
+        copyBtn.textContent = 'Copy snippet';
+        copyBtn.addEventListener('click', function() {
+            navigator.clipboard.writeText(snippet).then(function(){
+                copyBtn.textContent = 'Copied ✓';
+                setTimeout(function(){ copyBtn.textContent = 'Copy snippet'; }, 1500);
+            }).catch(function() {
+                copyBtn.textContent = 'Copy failed — select snippet manually';
+            });
+        });
+        body.appendChild(copyBtn);
+
+        document.getElementById('schedule-unlock-modal').classList.remove('hidden');
+    },
+
+    closeUnlockModal() {
+        document.getElementById('schedule-unlock-modal').classList.add('hidden');
+    },
+
     // ---- Helper: create an icon element ----
     _icon(className) {
         const i = document.createElement('i');
@@ -469,6 +619,9 @@ const Dashboard = {
                 break;
             case 'wiki':
                 this.loadWikiEntries(filters);
+                break;
+            case 'schedule':
+                this.renderSchedule();
                 break;
         }
     },
