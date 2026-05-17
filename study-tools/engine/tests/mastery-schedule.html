@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>Mastery Schedule Tests</title>
+<style>
+body{font-family:monospace;padding:1em;}
+.pass{color:#070;}.fail{color:#c00;font-weight:bold;}
+h2{margin-top:1.5em;}
+table{border-collapse:collapse;margin-top:0.5em;}
+th,td{border:1px solid #888;padding:4px 8px;}
+</style></head><body>
+<h1>MasteryManager schedule tests</h1>
+<div id="results"></div>
+
+<!-- Stub the globals mastery.js depends on -->
+<script>
+window.ProgressManager = {
+    getActivityProgress: function(){ return {}; },
+    load: function(){ return {}; },
+    save: function(){},
+    getFirstName: function(){ return ''; }
+};
+window.StudyUtils = { showToast: function(){} };
+</script>
+<script src="../js/core/mastery.js"></script>
+<script>
+var results = document.getElementById('results');
+var passed = 0, failed = 0;
+function assert(name, actual, expected) {
+    var ok = JSON.stringify(actual) === JSON.stringify(expected);
+    var div = document.createElement('div');
+    div.className = ok ? 'pass' : 'fail';
+    div.textContent = (ok ? 'PASS ' : 'FAIL ') + name +
+        (ok ? '' : ' — got ' + JSON.stringify(actual) + ' expected ' + JSON.stringify(expected));
+    results.appendChild(div);
+    ok ? passed++ : failed++;
+}
+
+var pastDate = '2020-01-01';
+var futureDate = '2099-01-01';
+
+function makeConfig(opts) {
+    opts = opts || {};
+    return {
+        unit: { id: 'test-unit' },
+        vocabulary: [
+            { term: 'a1', category: 'A', tier: 'must-know' },
+            { term: 'b1', category: 'B', tier: 'must-know' },
+            { term: 'c1', category: 'C', tier: 'must-know' }
+        ],
+        categorySchedule: opts.schedule || undefined
+    };
+}
+
+assert('date helper: no schedule block',
+    MasteryManager.isCategoryDateUnlocked({}, 'A'), false);
+assert('date helper: empty schedule',
+    MasteryManager.isCategoryDateUnlocked({categorySchedule:{}}, 'A'), false);
+assert('date helper: past date is unlocked',
+    MasteryManager.isCategoryDateUnlocked({categorySchedule:{A:pastDate}}, 'A'), true);
+assert('date helper: future date is locked',
+    MasteryManager.isCategoryDateUnlocked({categorySchedule:{A:futureDate}}, 'A'), false);
+assert('date helper: malformed string is locked',
+    MasteryManager.isCategoryDateUnlocked({categorySchedule:{A:'not-a-date'}}, 'A'), false);
+
+assert('no schedule: cat 1 only when nothing mastered',
+    MasteryManager.getUnlockedCategories('test-unit', makeConfig()),
+    ['A']);
+
+assert('cat B date-unlocked: cat B opens even without A mastered',
+    MasteryManager.getUnlockedCategories('test-unit',
+        makeConfig({ schedule: { B: pastDate } })),
+    ['A', 'B']);
+
+assert('cat C date-unlocked but B locked: C still opens (no early break)',
+    MasteryManager.getUnlockedCategories('test-unit',
+        makeConfig({ schedule: { C: pastDate } })),
+    ['A', 'C']);
+
+assert('all date-unlocked: all open',
+    MasteryManager.getUnlockedCategories('test-unit',
+        makeConfig({ schedule: { B: pastDate, C: pastDate } })),
+    ['A', 'B', 'C']);
+
+assert('future dates only: only cat 1',
+    MasteryManager.getUnlockedCategories('test-unit',
+        makeConfig({ schedule: { B: futureDate, C: futureDate } })),
+    ['A']);
+
+var summary = document.createElement('h2');
+summary.textContent = passed + ' passed, ' + failed + ' failed';
+summary.className = failed === 0 ? 'pass' : 'fail';
+results.appendChild(summary);
+</script>
+</body></html>
