@@ -90,6 +90,26 @@ const MasteryManager = {
     },
 
     /**
+     * Returns true if the category has a scheduled unlock date in config.categorySchedule
+     * that is today-or-earlier (local time). Returns false if no schedule entry exists.
+     * Dates parsed as local midnight via new Date(y, m-1, d) to avoid UTC surprises.
+     * Pure predicate: callers (e.g. getUnlockedCategories) handle the teacher-unlock bypass.
+     */
+    isCategoryDateUnlocked(config, categoryName) {
+        if (!config || !config.categorySchedule) return false;
+        var iso = config.categorySchedule[categoryName];
+        if (!iso) return false;
+        var parts = iso.split('-');
+        if (parts.length !== 3) return false;
+        var y = parseInt(parts[0], 10);
+        var m = parseInt(parts[1], 10);
+        var d = parseInt(parts[2], 10);
+        if (isNaN(y) || isNaN(m) || isNaN(d)) return false;
+        var unlockAt = new Date(y, m - 1, d);
+        return Date.now() >= unlockAt.getTime();
+    },
+
+    /**
      * Returns ordered list of unique category names from config.vocabulary,
      * preserving first-appearance order.
      */
