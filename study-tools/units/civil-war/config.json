@@ -37,6 +37,12 @@
             "bgSurface": "#4a4540"
         }
     },
+    "categorySchedule": {
+        "Worlds of North & South": "2026-05-10",
+        "African Americans at Mid-Century": "2026-05-17",
+        "A Dividing Nation": "2026-05-24",
+        "The Civil War": "2026-05-31"
+    },
     "scoringTiers": true,
     "leaderboardMapActivities": [
         {
