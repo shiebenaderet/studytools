@@ -1356,3 +1356,26 @@ body {
     display: block;
     width: 100%;
 }
+
+/* Schedule tab */
+.schedule-section { margin-bottom: 2rem; }
+.schedule-section h2 { margin-bottom: 0.75rem; font-size: 1.15rem; }
+.schedule-table { width: 100%; border-collapse: collapse; }
+.schedule-table th,
+.schedule-table td { padding: 0.6rem 0.75rem; border-bottom: 1px solid #e2e8f0; text-align: left; }
+.schedule-table th { font-weight: 600; background: #f7fafc; }
+.schedule-table .status-unlocked { color: #2f855a; font-weight: 600; }
+.schedule-table .status-locked { color: #718096; }
+.btn-sm { padding: 0.35rem 0.75rem; font-size: 0.85rem; }
+
+.unlock-snippet {
+    background: #1a202c;
+    color: #e2e8f0;
+    padding: 0.9rem 1rem;
+    border-radius: 6px;
+    font-family: ui-monospace, "SF Mono", Consolas, monospace;
+    font-size: 0.85rem;
+    white-space: pre;
+    overflow-x: auto;
+    margin: 0.75rem 0;
+}
