@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.38.0] - 2026-05-17
+
+### Added
+- **Scheduled category unlocks** — Units can now define a top-level `categorySchedule` block mapping category names to ISO dates (`YYYY-MM-DD`). On the scheduled date, that category opens for every student regardless of prior mastery. Lets teachers pace multi-week units so students who fall behind in week 1 aren't locked out of week 2+ content. Mastery still accelerates: fast students unlock the next category as soon as they master the previous one, ignoring the schedule. Civil War unit launched with weekly Sunday unlocks (May 10, May 17, May 24, May 31).
+- **Teacher dashboard Schedule tab** — New tab in the dashboard listing each scheduled category with its date and unlock status. Includes an "Unlock now" button that generates a copy-paste JSON snippet for opening a category ahead of schedule (paste into the unit's `config.json`, commit, push).
+- **Mastery gating test harness** — Standalone HTML test page at `study-tools/engine/tests/mastery-schedule.html` that exercises `isCategoryDateUnlocked` and `getUnlockedCategories` against synthetic configs. Open in a browser to run regressions whenever the gating logic changes.
+
+### Changed
+- `MasteryManager.getUnlockedCategories` and `getReadUnlockedCategories` now OR the previous-category-mastered check with the new date-unlocked check, and no longer early-`break` on a locked category — a later category opened by date is reached even if an earlier one is still locked.
+- Mastery-celebration toast no longer says "Now try X flashcards to unlock more" when X is already date-unlocked — the wording would have been misleading.
+
 ## [8.9.1] - 2026-05-03
 
 ### Fixed

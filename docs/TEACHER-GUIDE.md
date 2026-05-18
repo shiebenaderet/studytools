@@ -366,6 +366,30 @@ Add any of these to your `activities` array:
 | `wikiUrl` | | Link to Wikipedia article for the Resources page |
 | `simpleWikiUrl` | | Override for Simple Wikipedia link (use when auto-generated link leads to nonexistent page) |
 
+### Scheduled category unlocks (optional)
+
+For multi-week units, you can set calendar-based unlock dates so each category opens on a chosen day regardless of whether students have mastered the previous one. This prevents students who fall behind in week 1 from being locked out of week 2+ content.
+
+Add a top-level `categorySchedule` block to your unit's `config.json`:
+
+```json
+"categorySchedule": {
+  "Worlds of North & South": "2026-05-10",
+  "African Americans at Mid-Century": "2026-05-17",
+  "A Dividing Nation": "2026-05-24",
+  "The Civil War": "2026-05-31"
+}
+```
+
+- Keys must exactly match the `category` field on your vocabulary items.
+- Dates use `YYYY-MM-DD` format and unlock at local midnight on that day.
+- A category with no entry has no date floor — mastery is the only way to unlock it.
+- Omitting the `categorySchedule` block entirely keeps the original mastery-only behavior.
+
+Mastery still works as an accelerator: a fast student who masters category 1 will unlock category 2 immediately, even if its scheduled date is still in the future.
+
+The teacher dashboard has a **Schedule** tab that shows each category's status and provides an "Unlock now" button that generates a JSON snippet you can paste into `config.json` (then commit + push) to open a category ahead of schedule.
+
 ### Learn Mode config fields
 
 These optional fields customize Learn Mode behavior per unit:
