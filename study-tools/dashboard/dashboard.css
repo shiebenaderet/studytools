@@ -1379,3 +1379,20 @@ body {
     overflow-x: auto;
     margin: 0.75rem 0;
 }
+
+/* Feedback tab */
+.feedback-filter-bar { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; }
+.feedback-filter-bar select { padding: 0.35rem 0.6rem; border-radius: 6px; border: 1px solid #cbd5e0; }
+.feedback-count { color: #718096; font-size: 0.9em; }
+.feedback-list { display: flex; flex-direction: column; gap: 0.6rem; }
+.feedback-row { padding: 0.75rem 1rem; border-left: 4px solid #cbd5e0; background: #fff; border-radius: 6px; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+.feedback-row-bug { border-left-color: #c53030; }
+.feedback-row-suggestion { border-left-color: #2b6cb0; }
+.feedback-row-header { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 0.35rem; font-size: 0.88em; }
+.feedback-type-badge { padding: 0.15rem 0.55rem; border-radius: 999px; font-weight: 600; font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.04em; }
+.feedback-type-bug { background: #fed7d7; color: #c53030; }
+.feedback-type-suggestion { background: #bee3f8; color: #2b6cb0; }
+.feedback-row-who { font-weight: 600; color: #2d3748; }
+.feedback-row-meta { color: #718096; font-size: 0.85em; margin-left: auto; }
+.feedback-row-desc { color: #2d3748; line-height: 1.5; white-space: pre-wrap; word-break: break-word; }
+.feedback-row-ctx { margin-top: 0.4rem; padding-top: 0.4rem; border-top: 1px dashed #e2e8f0; color: #4a5568; font-size: 0.92em; white-space: pre-wrap; word-break: break-word; }

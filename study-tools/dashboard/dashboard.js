@@ -626,6 +626,9 @@ const Dashboard = {
             case 'schedule':
                 this.renderSchedule();
                 break;
+            case 'feedback':
+                this.loadFeedback();
+                break;
         }
     },
 
@@ -2911,6 +2914,131 @@ const Dashboard = {
             container.textContent = '';
             container.appendChild(this._emptyState('fas fa-exclamation-circle', 'Could not load wiki entries: ' + (err.message || 'Unknown error')));
         }
+    },
+
+    // ---- Feedback tab ----
+
+    async loadFeedback() {
+        var container = document.getElementById('feedback-container');
+        container.textContent = '';
+        container.appendChild(this._loading());
+
+        try {
+            var { data, error } = await this.supabase
+                .from('feedback')
+                .select('id, student_name, class_code, class_name, type, description, context, activity, unit_id, app_version, created_at')
+                .order('created_at', { ascending: false })
+                .limit(500);
+            if (error) throw error;
+
+            container.textContent = '';
+            this._renderFeedback(container, data || []);
+        } catch (err) {
+            container.textContent = '';
+            container.appendChild(this._emptyState('fas fa-exclamation-circle', 'Could not load feedback: ' + (err.message || 'Unknown error')));
+        }
+    },
+
+    _renderFeedback(container, entries) {
+        // Filter row
+        var filterBar = document.createElement('div');
+        filterBar.className = 'feedback-filter-bar';
+        var filterLabel = document.createElement('label');
+        filterLabel.textContent = 'Show: ';
+        filterBar.appendChild(filterLabel);
+        var filterSelect = document.createElement('select');
+        [
+            { value: 'all', label: 'All' },
+            { value: 'bug', label: 'Bugs only' },
+            { value: 'suggestion', label: 'Suggestions only' }
+        ].forEach(function(o) {
+            var opt = document.createElement('option');
+            opt.value = o.value;
+            opt.textContent = o.label;
+            filterSelect.appendChild(opt);
+        });
+        filterBar.appendChild(filterSelect);
+        var countSpan = document.createElement('span');
+        countSpan.className = 'feedback-count';
+        filterBar.appendChild(countSpan);
+        container.appendChild(filterBar);
+
+        if (entries.length === 0) {
+            container.appendChild(this._emptyState('fas fa-inbox', 'No feedback yet.'));
+            return;
+        }
+
+        var listWrap = document.createElement('div');
+        listWrap.className = 'feedback-list';
+        container.appendChild(listWrap);
+
+        var self = this;
+        function repaint() {
+            var which = filterSelect.value;
+            var filtered = entries.filter(function(e) { return which === 'all' || e.type === which; });
+            countSpan.textContent = '(' + filtered.length + ')';
+            while (listWrap.firstChild) listWrap.removeChild(listWrap.firstChild);
+            filtered.forEach(function(e) { listWrap.appendChild(self._buildFeedbackRow(e)); });
+        }
+        filterSelect.addEventListener('change', repaint);
+        repaint();
+    },
+
+    _buildFeedbackRow(entry) {
+        var row = document.createElement('div');
+        row.className = 'feedback-row feedback-row-' + entry.type;
+
+        var header = document.createElement('div');
+        header.className = 'feedback-row-header';
+
+        var typeBadge = document.createElement('span');
+        typeBadge.className = 'feedback-type-badge feedback-type-' + entry.type;
+        typeBadge.textContent = entry.type === 'bug' ? 'Bug' : 'Suggestion';
+        header.appendChild(typeBadge);
+
+        var who = document.createElement('span');
+        who.className = 'feedback-row-who';
+        who.textContent = entry.student_name || 'Anonymous';
+        if (entry.class_code || entry.class_name) {
+            who.textContent += ' · ' + (entry.class_name || entry.class_code);
+        }
+        header.appendChild(who);
+
+        var meta = document.createElement('span');
+        meta.className = 'feedback-row-meta';
+        var metaParts = [];
+        if (entry.unit_id) metaParts.push(entry.unit_id);
+        if (entry.activity) metaParts.push(entry.activity);
+        if (entry.app_version) metaParts.push('v' + entry.app_version);
+        metaParts.push(this._formatFeedbackDate(entry.created_at));
+        meta.textContent = metaParts.join(' · ');
+        header.appendChild(meta);
+
+        row.appendChild(header);
+
+        var desc = document.createElement('div');
+        desc.className = 'feedback-row-desc';
+        desc.textContent = entry.description;
+        row.appendChild(desc);
+
+        if (entry.context) {
+            var ctx = document.createElement('div');
+            ctx.className = 'feedback-row-ctx';
+            var ctxLabel = document.createElement('strong');
+            ctxLabel.textContent = 'Context: ';
+            ctx.appendChild(ctxLabel);
+            ctx.appendChild(document.createTextNode(entry.context));
+            row.appendChild(ctx);
+        }
+
+        return row;
+    },
+
+    _formatFeedbackDate(iso) {
+        if (!iso) return '';
+        var d = new Date(iso);
+        if (isNaN(d.getTime())) return '';
+        return d.toLocaleString(undefined, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
     },
 
     _renderWikiEntries(container, allEntries, filterTerm, header) {

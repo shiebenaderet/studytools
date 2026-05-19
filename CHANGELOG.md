@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.39.0] - 2026-05-19
+
+### Added
+- **Student feedback channel** — Floating "Send feedback" button on every page of the engine opens a modal where students can submit bugs or feature suggestions. Each submission auto-captures the student name, class, current activity/unit, and app version so the teacher doesn't have to ask "where were you?" Anonymous (guest-mode) submissions are also allowed.
+- **Teacher dashboard Feedback tab** — Read-only list of all submissions sorted by recency, with type/badge color-coding (red for bugs, blue for suggestions), per-row context (student, class, activity, unit, version, timestamp), and a Bug / Suggestion / All filter. New `feedback` Supabase table with RLS that lets anyone insert but only authenticated teachers read.
+
+### Fixed
+- Flashcards now show a "Read Chapter X first" banner when a student has earned a new category (via mastery cascade or scheduled date) but its textbook chapter is unread. Previously the new section's cards just silently didn't appear, with the only hint being a locked option deep in a dropdown panel.
+
 ## [8.38.0] - 2026-05-17
 
 ### Added

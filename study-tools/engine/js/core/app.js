@@ -1233,6 +1233,7 @@ const StudyEngine = {
 
 // Boot on DOM ready
 document.addEventListener('DOMContentLoaded', () => {
+    if (typeof FeedbackManager !== 'undefined') FeedbackManager.init();
     StudyEngine.init().then(async () => {
         // Check for magic link redirect first — skip welcome screen if teacher is logging in
         if (typeof CommandPalette !== 'undefined' && CommandPalette.isMagicLinkRedirect()) {
