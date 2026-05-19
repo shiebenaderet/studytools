@@ -1015,6 +1015,76 @@ const ProgressManager = {
         });
         card.appendChild(cancelBtn);
 
+        // --- Restore-code (UUID) expander: secondary path for when name/period
+        // matching fails (e.g. teacher had to rename or merge the student). ---
+        var codeWrap = document.createElement('div');
+        codeWrap.style.cssText = 'margin-top:18px;text-align:center;font-size:0.85rem;';
+        var codeToggle = document.createElement('button');
+        codeToggle.type = 'button';
+        codeToggle.style.cssText = 'background:none;border:none;color:var(--text-muted);text-decoration:underline;cursor:pointer;font:inherit;';
+        codeToggle.textContent = 'Have a restore code from your teacher?';
+        codeWrap.appendChild(codeToggle);
+
+        var codePanel = document.createElement('div');
+        codePanel.style.cssText = 'display:none;margin-top:10px;text-align:left;';
+        var codeLabel = document.createElement('label');
+        codeLabel.setAttribute('for', 'restore-code-input');
+        codeLabel.textContent = 'Restore code';
+        codeLabel.style.cssText = 'display:block;margin-bottom:4px;';
+        codePanel.appendChild(codeLabel);
+        var codeInput = document.createElement('input');
+        codeInput.type = 'text';
+        codeInput.id = 'restore-code-input';
+        codeInput.placeholder = 'Paste your code here';
+        codeInput.autocomplete = 'off';
+        codeInput.className = 'welcome-name-input';
+        codeInput.style.cssText = 'font-family:ui-monospace,Consolas,monospace;font-size:0.9em;';
+        codePanel.appendChild(codeInput);
+        var codeStatus = document.createElement('p');
+        codeStatus.style.cssText = 'min-height:1.2em;margin:6px 0;font-size:0.85rem;';
+        codePanel.appendChild(codeStatus);
+        var codeGoBtn = document.createElement('button');
+        codeGoBtn.type = 'button';
+        codeGoBtn.className = 'welcome-go-btn';
+        codeGoBtn.textContent = 'Restore with code';
+        codePanel.appendChild(codeGoBtn);
+        codeWrap.appendChild(codePanel);
+        card.appendChild(codeWrap);
+
+        codeToggle.addEventListener('click', function() {
+            var isOpen = codePanel.style.display !== 'none';
+            codePanel.style.display = isOpen ? 'none' : 'block';
+            if (!isOpen) setTimeout(function() { codeInput.focus(); }, 50);
+        });
+
+        codeGoBtn.addEventListener('click', async function() {
+            var code = codeInput.value.trim();
+            if (!code) return;
+            codeGoBtn.disabled = true;
+            codeGoBtn.textContent = 'Looking you up...';
+            codeStatus.textContent = '';
+            var result = await self.restoreProgressById(code);
+            if (result.ok) {
+                if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+                if (typeof StudyUtils !== 'undefined') {
+                    StudyUtils.showToast('Welcome back, ' + result.name + '! Your progress is back.', 'success', 4500);
+                }
+                if (StudyEngine.config) {
+                    StudyEngine.renderHeader();
+                    StudyEngine.renderHomeStats();
+                }
+            } else {
+                codeGoBtn.disabled = false;
+                codeGoBtn.textContent = 'Try again';
+                codeStatus.style.color = 'var(--danger, #c33)';
+                codeStatus.textContent = result.message || 'That code didn’t match. Ask your teacher to double-check.';
+            }
+        });
+
+        codeInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !codeGoBtn.disabled) codeGoBtn.click();
+        });
+
         function updateGoBtn() {
             var hasName = nameInput.value.trim().length > 0;
             goBtn.disabled = !(hasName && selectedCode);
@@ -1112,6 +1182,51 @@ const ProgressManager = {
             return { ok: true, name: existing.name };
         } catch (err) {
             console.error('Restore error:', err);
+            return { ok: false, message: 'Something went wrong. Try again in a moment.' };
+        }
+    },
+
+    // Restore by UUID — the teacher reads the code out of the dashboard and the
+    // student pastes it in. Bypasses name/period fuzzy matching for cases where
+    // the student's record was renamed or where they typed the wrong variant.
+    async restoreProgressById(rawId) {
+        if (!this.supabase) this.initSupabase();
+        if (!this.supabase) {
+            return { ok: false, message: 'Couldn’t connect. Check your internet and try again.' };
+        }
+
+        var id = (rawId || '').trim().toLowerCase();
+        // UUID v4 sanity check: 8-4-4-4-12 hex pattern.
+        if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(id)) {
+            return { ok: false, message: 'That code doesn’t look right. Double-check it with your teacher.' };
+        }
+
+        try {
+            var result = await this.supabase
+                .from('students')
+                .select('id, name, class_id, classes(code, name)')
+                .eq('id', id)
+                .maybeSingle();
+            if (result.error) throw result.error;
+            var student = result.data;
+            if (!student) {
+                return { ok: false, message: 'No student found for that code. Ask your teacher to read it again.' };
+            }
+
+            var classCode = (student.classes && student.classes.code) ? student.classes.code : null;
+            if (!classCode) {
+                return { ok: false, message: 'That student isn’t in a class. Ask your teacher to fix it.' };
+            }
+
+            this.studentId = student.id;
+            this.studentInfo = { name: student.name, classCode: classCode };
+            localStorage.setItem(this.prefix + 'studentInfo', JSON.stringify(this.studentInfo));
+            localStorage.setItem(this.prefix + 'studentId', this.studentId);
+
+            await this.syncFromSupabase();
+            return { ok: true, name: student.name };
+        } catch (err) {
+            console.error('Restore-by-id error:', err);
             return { ok: false, message: 'Something went wrong. Try again in a moment.' };
         }
     },

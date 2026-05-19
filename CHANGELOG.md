@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.39.1] - 2026-05-19
+
+### Added
+- **Restore code (UUID) recovery path** — The teacher dashboard's student editor now shows each student's UUID with a "Copy" button. The engine's "Switching computers?" restore screen gained a "Have a restore code from your teacher?" expander that takes the UUID and bypasses name/period matching. Useful when the original record was renamed, or when a student's spelling drift caused fuzzy match to fail and a duplicate record to be created.
+
+### Note
+The student edit modal already supported moving students between classes via the class dropdown — that ask was already shipped.
+
 ## [8.39.0] - 2026-05-19
 
 ### Added

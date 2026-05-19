@@ -2709,6 +2709,42 @@ const Dashboard = {
         classGroup.appendChild(classSelect);
         body.appendChild(classGroup);
 
+        // Restore code (read-only) — for students who lose their browser session
+        var restoreGroup = document.createElement('div');
+        restoreGroup.className = 'form-group';
+        var restoreLabel = document.createElement('label');
+        restoreLabel.textContent = 'Restore code';
+        restoreGroup.appendChild(restoreLabel);
+        var restoreHelp = document.createElement('div');
+        restoreHelp.style.cssText = 'font-size:0.85em;color:#718096;margin:-2px 0 6px;';
+        restoreHelp.textContent = 'If this student loses their browser data, they can paste this code into the "Switching computers?" restore screen to recover their progress.';
+        restoreGroup.appendChild(restoreHelp);
+        var restoreRow = document.createElement('div');
+        restoreRow.style.cssText = 'display:flex;gap:8px;align-items:center;';
+        var restoreInput = document.createElement('input');
+        restoreInput.type = 'text';
+        restoreInput.value = student.id;
+        restoreInput.readOnly = true;
+        restoreInput.style.cssText = 'flex:1;font-family:ui-monospace,Consolas,monospace;font-size:0.85em;';
+        restoreInput.addEventListener('click', function() { restoreInput.select(); });
+        restoreRow.appendChild(restoreInput);
+        var copyBtn = document.createElement('button');
+        copyBtn.className = 'btn btn-primary btn-sm';
+        copyBtn.type = 'button';
+        copyBtn.textContent = 'Copy';
+        copyBtn.addEventListener('click', function() {
+            navigator.clipboard.writeText(student.id).then(function() {
+                copyBtn.textContent = 'Copied ✓';
+                setTimeout(function() { copyBtn.textContent = 'Copy'; }, 1500);
+            }).catch(function() {
+                restoreInput.select();
+                copyBtn.textContent = 'Select + Cmd-C';
+            });
+        });
+        restoreRow.appendChild(copyBtn);
+        restoreGroup.appendChild(restoreRow);
+        body.appendChild(restoreGroup);
+
         // Save button
         var saveBtn = document.createElement('button');
         saveBtn.className = 'btn btn-primary btn-block';
