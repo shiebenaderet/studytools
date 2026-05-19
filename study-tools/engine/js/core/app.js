@@ -1247,6 +1247,10 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             // Schedule a rare nudge to How to Study page (if badge not yet earned)
             StudyEngine._scheduleHowToStudyNudge();
+            // Retroactive prompt: existing students who never set a recovery
+            // word get a one-time nudge to add one. Delayed so it doesn't
+            // collide with the How to Study nudge or block initial render.
+            setTimeout(function() { ProgressManager.promptForRecoveryWordIfMissing(); }, 1500);
         }
     });
 

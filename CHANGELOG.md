@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.40.0] - 2026-05-19
+
+### Added
+- **Recovery word for self-service session recovery** — At signup, students pick a memorable word (favorite food, pet name, etc.) that's stored as a SHA-256 hash. If they later switch computers or clear their browser and the name+period match fails, they can paste name + period + recovery word to restore their session without teacher intervention. Existing students get a one-time, dismissible prompt to pick one on their next visit.
+- **Teacher dashboard recovery-word status** — The student editor now shows whether each student has set a recovery word and offers a "Reset" button (clears the field so the student can pick a new one if they forget).
+
+### Notes
+- No emails are ever collected; the recovery word stays inside the existing privacy promise.
+- Migration is purely additive (two nullable columns on `students`). Existing student records and progress are unaffected.
+
 ## [8.39.1] - 2026-05-19
 
 ### Added

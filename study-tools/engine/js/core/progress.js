@@ -8,6 +8,25 @@ const ProgressManager = {
     sessionId: null,
     _sessionStartedAt: null,
 
+    // --- Recovery word helpers ---
+
+    // Normalizes a recovery word for hashing: trimmed, lowercased, collapsed whitespace.
+    // Same normalization at signup and at restore so the hash compares correctly.
+    _normalizeRecoveryWord(raw) {
+        return (raw || '').trim().toLowerCase().replace(/\s+/g, ' ');
+    },
+
+    // SHA-256 hex hash. Browser-native via SubtleCrypto — no library needed.
+    async _hashRecoveryWord(raw) {
+        const normalized = this._normalizeRecoveryWord(raw);
+        if (!normalized) return null;
+        const buf = new TextEncoder().encode(normalized);
+        const digest = await crypto.subtle.digest('SHA-256', buf);
+        return Array.from(new Uint8Array(digest))
+            .map(b => b.toString(16).padStart(2, '0'))
+            .join('');
+    },
+
     // --- localStorage tier ---
 
     getKey(unitId, key) {
@@ -499,7 +518,7 @@ const ProgressManager = {
         try {
             var result = await this.supabase
                 .from('students')
-                .select('id, name')
+                .select('id, name, recovery_word_hash')
                 .eq('class_id', classId)
                 .ilike('name', name.trim());
             if (result.error || !result.data || result.data.length === 0) return null;
@@ -642,10 +661,15 @@ const ProgressManager = {
         }
 
         try {
+            var insertPayload = { name: trimmed, class_id: classId };
+            if (opts.recoveryWordHash) {
+                insertPayload.recovery_word_hash = opts.recoveryWordHash;
+                insertPayload.recovery_word_set_at = new Date().toISOString();
+            }
             var insertResult = await this.supabase
                 .from('students')
-                .insert({ name: trimmed, class_id: classId })
-                .select('id, name')
+                .insert(insertPayload)
+                .select('id, name, recovery_word_hash')
                 .single();
             if (insertResult.error) throw insertResult.error;
             return insertResult.data;
@@ -731,6 +755,25 @@ const ProgressManager = {
 
         card.appendChild(periodContainer);
 
+        // Recovery word label + input
+        var recoveryLabel = document.createElement('label');
+        recoveryLabel.setAttribute('for', 'welcome-recovery');
+        recoveryLabel.textContent = 'Pick a recovery word';
+        card.appendChild(recoveryLabel);
+        var recoveryHelp = document.createElement('p');
+        recoveryHelp.className = 'welcome-subtitle';
+        recoveryHelp.style.cssText = 'margin:-6px 0 6px;font-size:0.85rem;';
+        recoveryHelp.textContent = 'Pick a word you\u2019ll remember (favorite food, pet name). You\u2019ll only need it if you switch computers or clear your browser.';
+        card.appendChild(recoveryHelp);
+        var recoveryInput = document.createElement('input');
+        recoveryInput.type = 'text';
+        recoveryInput.id = 'welcome-recovery';
+        recoveryInput.className = 'welcome-name-input';
+        recoveryInput.placeholder = 'e.g. pizza';
+        recoveryInput.autocomplete = 'off';
+        recoveryInput.maxLength = 40;
+        card.appendChild(recoveryInput);
+
         // Go button
         var goBtn = document.createElement('button');
         goBtn.type = 'button';
@@ -761,16 +804,28 @@ const ProgressManager = {
 
         function updateGoBtn() {
             var hasName = nameInput.value.trim().length > 0;
-            goBtn.disabled = !(hasName && selectedCode);
+            var hasRecovery = recoveryInput.value.trim().length > 0;
+            goBtn.disabled = !(hasName && selectedCode && hasRecovery);
         }
 
         nameInput.addEventListener('input', updateGoBtn);
+        recoveryInput.addEventListener('input', updateGoBtn);
 
-        goBtn.addEventListener('click', function() {
+        goBtn.addEventListener('click', async function() {
             var name = nameInput.value.trim().split(/\s+/)[0]; // First name only
-            if (!name || !selectedCode) return;
+            var recoveryRaw = recoveryInput.value.trim();
+            if (!name || !selectedCode || !recoveryRaw) return;
             goBtn.disabled = true;
             goBtn.textContent = 'Setting up...';
+
+            // Hash the recovery word client-side. Stored alongside the student on insert.
+            var recoveryWordHash = null;
+            try {
+                recoveryWordHash = await self._hashRecoveryWord(recoveryRaw);
+            } catch (e) {
+                // Hashing failure shouldn't block signup — proceed without it
+                console.warn('Recovery word hash failed:', e);
+            }
 
             // Store info and run login logic
             self.studentInfo = { name: name, classCode: selectedCode };
@@ -805,7 +860,7 @@ const ProgressManager = {
                             return;
                         }
 
-                        var resolved = await self._resolveStudent(name, classId);
+                        var resolved = await self._resolveStudent(name, classId, { recoveryWordHash: recoveryWordHash });
                         if (!resolved) {
                             afterLogin();
                             return;
@@ -817,6 +872,21 @@ const ProgressManager = {
                             localStorage.setItem(self.prefix + 'studentInfo', JSON.stringify(self.studentInfo));
                         }
                         self.studentId = resolved.id;
+
+                        // If this is a returning student (matched by name) who never
+                        // set a recovery word, attach the one they just provided.
+                        // Never overwrite an existing hash.
+                        if (recoveryWordHash && resolved.recovery_word_hash == null) {
+                            try {
+                                await self.supabase
+                                    .from('students')
+                                    .update({ recovery_word_hash: recoveryWordHash, recovery_word_set_at: new Date().toISOString() })
+                                    .eq('id', resolved.id)
+                                    .is('recovery_word_hash', null);
+                            } catch (e) {
+                                console.warn('Recovery word attach failed:', e);
+                            }
+                        }
 
                         localStorage.setItem(self.prefix + 'studentId', self.studentId);
                         // Pull any existing cloud progress before starting the
@@ -1085,6 +1155,87 @@ const ProgressManager = {
             if (e.key === 'Enter' && !codeGoBtn.disabled) codeGoBtn.click();
         });
 
+        // --- Recovery-word expander: third recovery path. Uses name + period
+        // (from the fields above) plus the recovery word the student set at
+        // signup. Useful when the name spelling drifted but they remember the
+        // word they picked. ---
+        var rwWrap = document.createElement('div');
+        rwWrap.style.cssText = 'margin-top:10px;text-align:center;font-size:0.85rem;';
+        var rwToggle = document.createElement('button');
+        rwToggle.type = 'button';
+        rwToggle.style.cssText = 'background:none;border:none;color:var(--text-muted);text-decoration:underline;cursor:pointer;font:inherit;';
+        rwToggle.textContent = 'Forgot your spelling? Use your recovery word';
+        rwWrap.appendChild(rwToggle);
+
+        var rwPanel = document.createElement('div');
+        rwPanel.style.cssText = 'display:none;margin-top:10px;text-align:left;';
+        var rwHelp = document.createElement('p');
+        rwHelp.className = 'welcome-subtitle';
+        rwHelp.style.cssText = 'margin:0 0 6px;font-size:0.85rem;';
+        rwHelp.textContent = 'Fill in your name and period above, then enter the recovery word you picked when you signed up.';
+        rwPanel.appendChild(rwHelp);
+        var rwLabel = document.createElement('label');
+        rwLabel.setAttribute('for', 'restore-recovery-input');
+        rwLabel.textContent = 'Recovery word';
+        rwLabel.style.cssText = 'display:block;margin-bottom:4px;';
+        rwPanel.appendChild(rwLabel);
+        var rwInput = document.createElement('input');
+        rwInput.type = 'text';
+        rwInput.id = 'restore-recovery-input';
+        rwInput.placeholder = 'The word you picked at signup';
+        rwInput.autocomplete = 'off';
+        rwInput.className = 'welcome-name-input';
+        rwPanel.appendChild(rwInput);
+        var rwStatus = document.createElement('p');
+        rwStatus.style.cssText = 'min-height:1.2em;margin:6px 0;font-size:0.85rem;';
+        rwPanel.appendChild(rwStatus);
+        var rwGoBtn = document.createElement('button');
+        rwGoBtn.type = 'button';
+        rwGoBtn.className = 'welcome-go-btn';
+        rwGoBtn.textContent = 'Restore with recovery word';
+        rwPanel.appendChild(rwGoBtn);
+        rwWrap.appendChild(rwPanel);
+        card.appendChild(rwWrap);
+
+        rwToggle.addEventListener('click', function() {
+            var isOpen = rwPanel.style.display !== 'none';
+            rwPanel.style.display = isOpen ? 'none' : 'block';
+            if (!isOpen) setTimeout(function() { rwInput.focus(); }, 50);
+        });
+
+        rwGoBtn.addEventListener('click', async function() {
+            var name = nameInput.value.trim();
+            var word = rwInput.value.trim();
+            if (!name || !selectedCode || !word) {
+                rwStatus.style.color = 'var(--danger, #c33)';
+                rwStatus.textContent = 'Fill in name, period, and recovery word.';
+                return;
+            }
+            rwGoBtn.disabled = true;
+            rwGoBtn.textContent = 'Looking you up...';
+            rwStatus.textContent = '';
+            var result = await self.restoreProgressByRecoveryWord(name, selectedCode, word);
+            if (result.ok) {
+                if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+                if (typeof StudyUtils !== 'undefined') {
+                    StudyUtils.showToast('Welcome back, ' + result.name + '! Your progress is back.', 'success', 4500);
+                }
+                if (StudyEngine.config) {
+                    StudyEngine.renderHeader();
+                    StudyEngine.renderHomeStats();
+                }
+            } else {
+                rwGoBtn.disabled = false;
+                rwGoBtn.textContent = 'Try again';
+                rwStatus.style.color = 'var(--danger, #c33)';
+                rwStatus.textContent = result.message || 'No match.';
+            }
+        });
+
+        rwInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !rwGoBtn.disabled) rwGoBtn.click();
+        });
+
         function updateGoBtn() {
             var hasName = nameInput.value.trim().length > 0;
             goBtn.disabled = !(hasName && selectedCode);
@@ -1229,6 +1380,177 @@ const ProgressManager = {
             console.error('Restore-by-id error:', err);
             return { ok: false, message: 'Something went wrong. Try again in a moment.' };
         }
+    },
+
+    // Restore by name + period + recovery word. Used when the student
+    // remembers their period and their recovery word but their name spelling
+    // doesn't match exactly (and fuzzy "did you mean" would create a duplicate).
+    // Returns { ok: true, name } on success or { ok: false, message } on failure.
+    async restoreProgressByRecoveryWord(name, code, recoveryWord) {
+        if (!this.supabase) this.initSupabase();
+        if (!this.supabase) {
+            return { ok: false, message: 'Couldn’t connect. Check your internet and try again.' };
+        }
+        if (!name || !code || !recoveryWord) {
+            return { ok: false, message: 'Please fill in all three fields.' };
+        }
+
+        try {
+            var hash = await this._hashRecoveryWord(recoveryWord);
+            if (!hash) return { ok: false, message: 'Recovery word looks empty.' };
+
+            var classId = await this._findClassId(code);
+            if (!classId) {
+                return { ok: false, message: 'That period wasn’t found. Ask your teacher to double-check.' };
+            }
+
+            // Look up by class + recovery word hash. Name is used as a hint
+            // when multiple rows match the hash (rare: two kids picked the
+            // same word). Case-insensitive name match.
+            var result = await this.supabase
+                .from('students')
+                .select('id, name, recovery_word_hash')
+                .eq('class_id', classId)
+                .eq('recovery_word_hash', hash);
+            if (result.error) throw result.error;
+            var matches = result.data || [];
+            if (matches.length === 0) {
+                return { ok: false, message: 'No match. Check your period and recovery word.' };
+            }
+
+            var student = matches[0];
+            if (matches.length > 1) {
+                // Disambiguate by name (case-insensitive)
+                var nameLower = name.trim().toLowerCase();
+                var byName = matches.find(function(s) { return (s.name || '').toLowerCase() === nameLower; });
+                if (byName) {
+                    student = byName;
+                } else {
+                    return { ok: false, message: 'Multiple matches. Try again with the exact name your teacher has.' };
+                }
+            }
+
+            this.studentId = student.id;
+            this.studentInfo = { name: student.name, classCode: code };
+            localStorage.setItem(this.prefix + 'studentInfo', JSON.stringify(this.studentInfo));
+            localStorage.setItem(this.prefix + 'studentId', this.studentId);
+
+            await this.syncFromSupabase();
+            return { ok: true, name: student.name };
+        } catch (err) {
+            console.error('Restore-by-recovery-word error:', err);
+            return { ok: false, message: 'Something went wrong. Try again in a moment.' };
+        }
+    },
+
+    // Checks if the signed-in student has a recovery word set; if not, shows
+    // a one-time modal asking them to pick one. Purely additive: failure or
+    // dismissal leaves the student record untouched, and they'll be prompted
+    // again on the next visit.
+    async promptForRecoveryWordIfMissing() {
+        if (!this.supabase || !this.studentId) return;
+        if (!this.studentInfo || this.studentInfo.isGuest) return;
+        // Skip if we already prompted this session
+        if (sessionStorage.getItem('recovery-word-prompted')) return;
+        sessionStorage.setItem('recovery-word-prompted', '1');
+
+        try {
+            var result = await this.supabase
+                .from('students')
+                .select('recovery_word_hash')
+                .eq('id', this.studentId)
+                .maybeSingle();
+            if (result.error || !result.data) return;
+            if (result.data.recovery_word_hash) return; // already set — done forever
+            this._showRecoveryWordPrompt();
+        } catch (e) {
+            // Silent: this is a best-effort retroactive nudge.
+        }
+    },
+
+    _showRecoveryWordPrompt() {
+        var self = this;
+        var overlay = document.createElement('div');
+        overlay.className = 'welcome-overlay';
+
+        var card = document.createElement('div');
+        card.className = 'welcome-card';
+
+        var title = document.createElement('h1');
+        title.textContent = 'Quick add: recovery word';
+        card.appendChild(title);
+
+        var subtitle = document.createElement('p');
+        subtitle.className = 'welcome-subtitle';
+        subtitle.textContent = 'Pick a word you’ll remember (favorite food, pet name). You’ll only need it if you switch computers or clear your browser. Takes 5 seconds.';
+        card.appendChild(subtitle);
+
+        var input = document.createElement('input');
+        input.type = 'text';
+        input.className = 'welcome-name-input';
+        input.placeholder = 'e.g. pizza';
+        input.autocomplete = 'off';
+        input.maxLength = 40;
+        card.appendChild(input);
+
+        var status = document.createElement('p');
+        status.className = 'welcome-subtitle';
+        status.style.cssText = 'min-height:1.2em;margin:6px 0;font-size:0.85rem;';
+        card.appendChild(status);
+
+        var saveBtn = document.createElement('button');
+        saveBtn.type = 'button';
+        saveBtn.className = 'welcome-go-btn';
+        saveBtn.textContent = 'Save';
+        saveBtn.disabled = true;
+        card.appendChild(saveBtn);
+
+        var laterBtn = document.createElement('button');
+        laterBtn.type = 'button';
+        laterBtn.className = 'welcome-guest-link';
+        laterBtn.textContent = 'Remind me later';
+        laterBtn.addEventListener('click', function() {
+            if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+        });
+        card.appendChild(laterBtn);
+
+        input.addEventListener('input', function() {
+            saveBtn.disabled = input.value.trim().length === 0;
+        });
+        input.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !saveBtn.disabled) saveBtn.click();
+        });
+
+        saveBtn.addEventListener('click', async function() {
+            var raw = input.value.trim();
+            if (!raw) return;
+            saveBtn.disabled = true;
+            saveBtn.textContent = 'Saving...';
+            try {
+                var hash = await self._hashRecoveryWord(raw);
+                if (!hash) throw new Error('hash failed');
+                var res = await self.supabase
+                    .from('students')
+                    .update({ recovery_word_hash: hash, recovery_word_set_at: new Date().toISOString() })
+                    .eq('id', self.studentId)
+                    .is('recovery_word_hash', null);
+                if (res.error) throw res.error;
+                if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+                if (typeof StudyUtils !== 'undefined') {
+                    StudyUtils.showToast('Saved! You’re all set.', 'success', 3000);
+                }
+            } catch (e) {
+                console.warn('Recovery word save failed:', e);
+                saveBtn.disabled = false;
+                saveBtn.textContent = 'Try again';
+                status.style.color = 'var(--danger, #c33)';
+                status.textContent = 'Couldn’t save. Try again in a moment.';
+            }
+        });
+
+        overlay.appendChild(card);
+        document.body.appendChild(overlay);
+        setTimeout(function() { input.focus(); }, 200);
     },
 
     loadStudentInfo() {

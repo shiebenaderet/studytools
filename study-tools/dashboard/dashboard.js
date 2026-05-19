@@ -2709,6 +2709,79 @@ const Dashboard = {
         classGroup.appendChild(classSelect);
         body.appendChild(classGroup);
 
+        // Recovery word status — best-effort lookup, doesn't block modal render
+        var rwGroup = document.createElement('div');
+        rwGroup.className = 'form-group';
+        var rwLabel = document.createElement('label');
+        rwLabel.textContent = 'Recovery word';
+        rwGroup.appendChild(rwLabel);
+        var rwStatus = document.createElement('div');
+        rwStatus.style.cssText = 'display:flex;align-items:center;gap:10px;font-size:0.9em;';
+        rwStatus.textContent = 'Checking…';
+        rwGroup.appendChild(rwStatus);
+        body.appendChild(rwGroup);
+
+        (async function() {
+            try {
+                var res = await Dashboard.supabase
+                    .from('students')
+                    .select('recovery_word_hash, recovery_word_set_at')
+                    .eq('id', student.id)
+                    .maybeSingle();
+                if (res.error || !res.data) {
+                    rwStatus.textContent = 'Unknown';
+                    return;
+                }
+                while (rwStatus.firstChild) rwStatus.removeChild(rwStatus.firstChild);
+                var badge = document.createElement('span');
+                if (res.data.recovery_word_hash) {
+                    badge.textContent = '✓ Set';
+                    badge.style.cssText = 'color:#2f855a;font-weight:600;';
+                } else {
+                    badge.textContent = 'Not set';
+                    badge.style.cssText = 'color:#c0392b;font-weight:600;';
+                }
+                rwStatus.appendChild(badge);
+                if (res.data.recovery_word_hash) {
+                    var resetBtn = document.createElement('button');
+                    resetBtn.type = 'button';
+                    resetBtn.className = 'btn btn-danger-small';
+                    resetBtn.textContent = 'Reset';
+                    resetBtn.title = 'Clear the student’s recovery word so they can pick a new one';
+                    var resetConfirmed = false;
+                    resetBtn.addEventListener('click', async function() {
+                        if (!resetConfirmed) {
+                            resetConfirmed = true;
+                            resetBtn.textContent = 'Click again to confirm';
+                            setTimeout(function() {
+                                resetConfirmed = false;
+                                resetBtn.textContent = 'Reset';
+                            }, 4000);
+                            return;
+                        }
+                        resetBtn.disabled = true;
+                        resetBtn.textContent = 'Resetting…';
+                        try {
+                            await Dashboard.supabase
+                                .from('students')
+                                .update({ recovery_word_hash: null, recovery_word_set_at: null })
+                                .eq('id', student.id);
+                            badge.textContent = 'Not set';
+                            badge.style.cssText = 'color:#c0392b;font-weight:600;';
+                            if (resetBtn.parentNode) resetBtn.parentNode.removeChild(resetBtn);
+                        } catch (e) {
+                            resetBtn.disabled = false;
+                            resetBtn.textContent = 'Reset failed — try again';
+                            console.error('Reset recovery word failed:', e);
+                        }
+                    });
+                    rwStatus.appendChild(resetBtn);
+                }
+            } catch (e) {
+                rwStatus.textContent = 'Could not load';
+            }
+        })();
+
         // Restore code (read-only) — for students who lose their browser session
         var restoreGroup = document.createElement('div');
         restoreGroup.className = 'form-group';
