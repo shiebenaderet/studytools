@@ -155,6 +155,33 @@ StudyEngine.registerActivity({
         const wrapper = document.createElement('div');
         wrapper.className = 'fc-wrapper';
 
+        // --- Read-gate banner ---
+        // If the student has earned categories (via mastery or date floor) that
+        // flashcards still hides because the chapter is unread, surface that here.
+        const earnedCats = MasteryManager.getUnlockedCategories(config.unit.id, config);
+        const blockedCats = earnedCats.filter(function(c) { return !categories.includes(c); });
+        if (blockedCats.length > 0) {
+            const nextChapter = MasteryManager.getNextUnreadChapter(config.unit.id, config);
+            if (nextChapter && blockedCats.indexOf(nextChapter.category) !== -1) {
+                const banner = document.createElement('div');
+                banner.className = 'fc-read-gate-banner';
+                const bIcon = document.createElement('i');
+                bIcon.className = 'fas fa-book-open';
+                banner.appendChild(bIcon);
+                const bText = document.createElement('span');
+                bText.textContent = 'Read Chapter ' + nextChapter.index + ': "' + nextChapter.category + '" in the textbook to unlock those flashcards.';
+                banner.appendChild(bText);
+                const bBtn = document.createElement('button');
+                bBtn.className = 'fc-read-gate-banner-btn';
+                bBtn.textContent = 'Open textbook';
+                bBtn.addEventListener('click', function() {
+                    StudyEngine.activateActivity('textbook', [nextChapter.segmentId]);
+                });
+                banner.appendChild(bBtn);
+                wrapper.appendChild(banner);
+            }
+        }
+
         // --- Mastery progress bar ---
         const unlockStatus = MasteryManager.getUnlockStatus(config.unit.id, config);
         if (!unlockStatus.allUnlocked) {

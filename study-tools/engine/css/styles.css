@@ -1307,6 +1307,11 @@ body.light-mode .fc-back .fc-tier-badge {
 .fc-reading-gate { text-align: center; padding: 60px 20px; }
 .fc-reading-gate-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; background: var(--primary); color: white; border: none; border-radius: 8px; font-size: 1em; font-weight: 600; cursor: pointer; transition: transform 0.2s; font-family: inherit; }
 .fc-reading-gate-btn:hover { transform: scale(1.03); }
+.fc-read-gate-banner { display: flex; align-items: center; gap: 12px; padding: 12px 16px; margin: 0 0 16px; background: var(--bg-subtle, #fef3c7); border: 1px solid var(--border, #f59e0b); border-radius: 8px; color: var(--text-primary); font-size: 0.95em; line-height: 1.4; }
+.fc-read-gate-banner i { color: var(--primary); font-size: 1.2em; flex-shrink: 0; }
+.fc-read-gate-banner span { flex: 1; }
+.fc-read-gate-banner-btn { padding: 6px 14px; background: var(--primary); color: white; border: none; border-radius: 6px; font-size: 0.9em; font-weight: 600; cursor: pointer; font-family: inherit; white-space: nowrap; }
+.fc-read-gate-banner-btn:hover { transform: scale(1.03); }
 
 /* Term unlock progress */
 .fc-term-progress { text-align: center; color: var(--text-secondary); font-size: 0.9em; padding: 8px 16px; background: var(--bg-surface); border-radius: 8px; margin-bottom: 12px; }
