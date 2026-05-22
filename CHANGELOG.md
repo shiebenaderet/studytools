@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.41.0] - 2026-05-21
+
+### Added
+- **Clickable key terms on Short Answer questions** — The key-term chips inside a Short Answer question are now buttons. Clicking one expands a details panel below the chip list showing the term's definition, simple explanation, example, and a "Read in textbook" button that deep-links to the section where the term appears (when the unit has a textbook). Clicking the same chip again closes the panel; clicking a different chip swaps the content. Useful when students see a key term they don't recognize and don't want to lose their place by navigating away.
+
 ## [8.40.0] - 2026-05-19
 
 ### Added
