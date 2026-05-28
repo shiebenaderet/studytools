@@ -90,12 +90,13 @@ civil-war `practiceQuestions` only. By chapter/topic:
 | Flagged/Total | Topic (chapter) |
 |---|---|
 | 8/12 | Worlds of North & South |
-| 9/13 | African Americans at Mid-Century |
+| 12/13 | African Americans at Mid-Century |
 | 16/19 | A Dividing Nation |
-| 16/19 | The Civil War |
+| 17/19 | The Civil War |
 
-(49 flagged across all chapters. The per-question audit script is the
-authoritative list.)
+(53 failing across all chapters at the >10-char acceptance threshold. The
+per-question audit script is the authoritative list and must be re-run before
+editing, since indices are positions in the practiceQuestions array.)
 
 Out of scope: early-republic, game-generated MC (lightning-round/who-am-i pull
 distractors from vocab term names, where length tells are unlikely).
