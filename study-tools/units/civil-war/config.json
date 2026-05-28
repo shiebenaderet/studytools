@@ -925,13 +925,13 @@
         {
             "question": "Why did the Northern and Southern economies become so different by the mid 1800s?",
             "options": [
-                "The North had better weather for growing crops than the South",
-                "The South built more factories than the North",
-                "The North relied on factories, small farms, and trade, while the South relied on large plantations worked by enslaved people",
-                "The North refused to trade with other countries"
+                "The North had richer farmland and a warmer climate than the South",
+                "The South built far more factories and railroads than the North did",
+                "The North relied on factories and trade; the South relied on enslaved labor",
+                "The North refused to trade any cotton with Britain, France, or Spain"
             ],
             "correct": 2,
-            "explanation": "The North's economy ran on industry, free labor, and small family farms. The South's economy ran on plantation crops like cotton, which required huge amounts of enslaved labor. These two systems pulled the regions further apart every year.",
+            "explanation": "The North's economy ran on industry, free wage labor, trade, and small family farms. The South's economy ran on large plantations growing cash crops like cotton, which required huge amounts of enslaved labor. These two systems pulled the regions further apart every year.",
             "topic": "Worlds of North & South"
         },
         {
@@ -1261,13 +1261,13 @@
         {
             "question": "Which best describes the plantation economy of the American South before the Civil War?",
             "options": [
-                "Small family farms that grew food for local markets",
-                "An economic system based on large farms that used enslaved labor to grow cash crops like cotton, tobacco, and sugar",
-                "Factories powered by water wheels along Southern rivers",
-                "A trading economy built on shipping and merchant banking"
+                "Small family farms that grew corn and wheat for nearby village markets",
+                "Large farms that used enslaved labor to grow cash crops like cotton",
+                "Water-powered textile mills run by paid workers along Southern rivers",
+                "A trading economy built on shipping, merchant banking, and fur trapping"
             ],
             "correct": 1,
-            "explanation": "Southern landowners built large farms called plantations and forced enslaved Black people to do the labor. The whole system depended on slavery. Without enslaved workers, the plantation economy could not have existed.",
+            "explanation": "Southern landowners built large farms called plantations and forced enslaved Black people to grow cash crops like cotton, tobacco, and sugar. The whole system depended on slavery. Without enslaved workers, the plantation economy could not have existed.",
             "topic": "Worlds of North & South"
         },
         {
@@ -1309,25 +1309,25 @@
         {
             "question": "Why did the Mason Dixon Line become important before the Civil War?",
             "options": [
-                "It marked the border between the United States and Canada",
-                "It became the unofficial border between free states in the North and slave states in the South",
-                "It was the line that Lewis and Clark followed on their expedition",
-                "It marked where the railroads ended in the West"
+                "It marked the long northern border between the United States and Canada",
+                "It became the unofficial border between free states and slave states",
+                "It was the route that Lewis and Clark followed west to the Pacific Ocean",
+                "It marked where the railroads ended and the open western prairies began"
             ],
             "correct": 1,
-            "explanation": "The line had originally been drawn in colonial times to settle a property dispute between Pennsylvania and Maryland. By the 1800s, Americans started using it as shorthand for the divide between two ways of life: free North and slave South.",
+            "explanation": "The line had originally been drawn in colonial times to settle a property dispute between Pennsylvania and Maryland. By the 1800s, Americans used it as shorthand for the divide between two ways of life: the free North and the slave South.",
             "topic": "Worlds of North & South"
         },
         {
             "question": "Which statement BEST captures why the North and South grew so far apart before the Civil War?",
             "options": [
-                "They spoke different languages and had different religions",
-                "Their economies were based on completely different labor systems, with the North relying on free wage workers and the South relying on enslaved workers",
-                "The North had a king while the South had a president",
-                "They were originally founded by different countries"
+                "They spoke different languages and followed different religions",
+                "Their economies relied on opposite labor systems: free workers and enslaved workers",
+                "The North was ruled by a distant king while the South elected its own president",
+                "They were first founded as colonies by France and by Spain, not England"
             ],
             "correct": 1,
-            "explanation": "The economic divide was the foundation of sectionalism. Northern factories ran on paid workers who could quit. Southern plantations ran on enslaved workers who could not. These two systems were incompatible, and the country could not stay half free and half slave forever.",
+            "explanation": "The economic divide was the foundation of sectionalism. The North relied on free wage workers who could quit, while the South relied on enslaved workers who could not. These two systems were incompatible, and the country could not stay half free and half slave forever.",
             "topic": "Worlds of North & South"
         },
         {
@@ -1609,10 +1609,10 @@
         {
             "question": "What was the Industrial Revolution and how did it affect the North?",
             "options": [
-                "A war fought in the North over factory ownership",
-                "A worldwide shift from making goods by hand to making them in factories powered by water and steam",
-                "A movement to give factory workers the right to vote",
-                "A series of inventions that made farming easier in the South"
+                "A war fought across the Northern states over who owned the factories",
+                "A worldwide shift from making goods by hand to making them in factories",
+                "A reform movement that won factory workers the right to vote and form unions",
+                "A wave of new inventions that made cotton farming far easier in the South"
             ],
             "correct": 1,
             "explanation": "The Industrial Revolution was a worldwide change in how goods were made. The North embraced it, building factories powered by water and steam. This pulled workers off small farms and into growing cities.",
@@ -1633,10 +1633,10 @@
         {
             "question": "Who were the yeoman farmers of the South?",
             "options": [
-                "Wealthy plantation owners who controlled most Southern politics",
-                "Free Black farmers who lived in Northern Maryland",
-                "Small Southern farmers who owned their own land and usually worked it without enslaved laborers",
-                "Northern farmers who moved south to learn cotton farming"
+                "Wealthy plantation owners who controlled most of Southern politics and trade",
+                "Free Black farmers who settled together across the hills of northern Maryland",
+                "Small Southern farmers who owned and worked their own land, usually without slaves",
+                "Northern farmers who moved south after the war to teach cotton farming methods"
             ],
             "correct": 2,
             "explanation": "Yeoman farmers were small Southern landholders who worked their own fields, usually without enslaved people. They made up the majority of white Southerners, but the wealth and political power of the South sat with the larger plantation owners.",
@@ -1645,10 +1645,10 @@
         {
             "question": "What is urbanization, and how did it change the North?",
             "options": [
-                "The growth of cities, which drew people off farms and into Northern factory jobs",
-                "The replacement of city governments with town councils",
-                "The spread of city culture into rural Southern communities",
-                "A federal program that funded city improvements before the war"
+                "The growth of cities, which drew people off farms and into factory jobs",
+                "The replacement of elected city governments with appointed town councils",
+                "The slow spread of Northern city culture into rural Southern communities",
+                "A federal program that funded roads and bridges in cities before the war"
             ],
             "correct": 0,
             "explanation": "Urbanization is the shift of population from rural areas to cities. In the North, factory jobs pulled workers off small farms and into growing cities like New York, Boston, and Philadelphia, which also drew millions of European immigrants.",
@@ -1657,10 +1657,10 @@
         {
             "question": "Why did Northerners and Southerners disagree so strongly about tariffs?",
             "options": [
-                "Northerners wanted higher taxes on slavery; Southerners wanted lower ones",
-                "Northerners wanted tariffs to protect their factories; Southerners hated them because they raised the price of imported goods",
-                "Both sides hated tariffs but couldn't agree on how to remove them",
-                "Tariffs only applied to cotton, which made Southerners angry"
+                "Northerners wanted higher taxes placed on slavery while Southerners wanted lower ones",
+                "Northerners wanted tariffs to protect their factories; Southerners hated the higher prices",
+                "Both regions hated tariffs but could never agree on a fair way to repeal them",
+                "Tariffs were charged only on cotton exports, which angered Southern planters most"
             ],
             "correct": 1,
             "explanation": "Tariffs are taxes on imported goods. Northerners liked tariffs because they protected Northern factories from cheaper foreign products. Southerners hated tariffs because they raised the price of goods Southerners had to import, and the South had no factories of its own to protect.",
