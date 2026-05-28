@@ -89,13 +89,13 @@ civil-war `practiceQuestions` only. By chapter/topic:
 
 | Flagged/Total | Topic (chapter) |
 |---|---|
-| ~9/16 | Worlds of North & South |
-| 7/12 | African Americans at Mid-Century |
-| 14/19 | A Dividing Nation |
-| 13/16 | The Civil War |
+| 8/12 | Worlds of North & South |
+| 9/13 | African Americans at Mid-Century |
+| 16/19 | A Dividing Nation |
+| 16/19 | The Civil War |
 
-(Counts are approximate per-chapter; the per-question audit script is the
-authoritative list. ~49 flagged across all chapters.)
+(49 flagged across all chapters. The per-question audit script is the
+authoritative list.)
 
 Out of scope: early-republic, game-generated MC (lightning-round/who-am-i pull
 distractors from vocab term names, where length tells are unlikely).
