@@ -33,6 +33,9 @@
   .editor .optline { display:flex; gap:6px; align-items:center; margin-top:4px; }
   .editor .optline input[type=radio] { flex:0 0 auto; }
   .over { color:var(--warn); font-size:.75em; }
+  .over-badge { color:var(--warn); font-size:.72em; font-weight:700; margin-left:6px; }
+  .gen-note { max-width:320px; }
+  #sourceControls label { font-size:.85em; color:var(--muted); margin-left:8px; }
 </style>
 </head>
 <body>
@@ -41,6 +44,12 @@
 
 <div class="toolbar">
   <label>Unit <select id="unitSel"></select></label>
+  <label>Source <select id="sourceSel">
+    <option value="practice">Practice Questions</option>
+    <option value="fib">Fill-in-the-Blank</option>
+    <option value="vocab">Vocabulary</option>
+  </select></label>
+  <span id="sourceControls"></span>
   <button id="selAll" class="secondary">Select all</button>
   <button id="selNone" class="secondary">Clear</button>
   <input id="filter" type="text" placeholder="Filter by text..." style="flex:1;min-width:160px;padding:8px 10px;border:1px solid var(--line);border-radius:6px;">
@@ -50,6 +59,7 @@
 <div class="toolbar">
   <label>Platform <select id="platformSel"><option value="blooket">Blooket</option><option value="gimkit">GiMKit</option></select></label>
   <button id="exportBtn" class="primary" disabled>Export CSV</button>
+  <span id="genNote" class="gen-note" style="display:none;color:var(--warn);font-size:.85em;"></span>
 </div>
 
 <div id="list"></div>
@@ -58,7 +68,9 @@
 <script>
 (function () {
   var UNITS_URL = '../../units/units.json';
-  var state = { unitId: null, questions: [], selected: {}, edits: {} };
+  var state = { unitId: null, source: 'practice', questions: [], selected: {}, edits: {},
+                vocabDirection: 'definition-term', includeEncounter: false, fibTyped: false,
+                rawConfig: null };
 
   var el = function (tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
 
@@ -141,6 +153,9 @@
       var radio = el('input'); radio.type = 'radio'; radio.name = 'correct-' + q.id; radio.checked = idx === eq.correctIndex;
       var oin = el('input'); oin.type = 'text'; oin.value = opt; oin.style.flex = '1';
       line.append(radio, oin);
+      if ((opt || '').length > 100) {
+        line.append(el('span', 'over-badge', opt.length + ' chars'));
+      }
       editor.append(line);
       optInputs.push({ radio: radio, input: oin });
     });
@@ -158,18 +173,64 @@
     state.unitId = unitId; state.selected = {}; state.edits = {};
     fetch('../../units/' + unitId + '/config.json')
       .then(function (r) { return r.json(); })
-      .then(function (cfg) { state.questions = window.QExport.normalizeQuestions(cfg); render(); })
+      .then(function (cfg) { state.rawConfig = cfg; rebuildQuestions(); })
       .catch(function (e) { document.getElementById('list').textContent = 'Could not load unit: ' + e; });
+  }
+
+  function rebuildQuestions() {
+    state.selected = {}; state.edits = {};
+    var cfg = state.rawConfig;
+    if (!cfg) { state.questions = []; }
+    else if (state.source === 'fib') state.questions = window.QExport.normalizeFib(cfg);
+    else if (state.source === 'vocab') state.questions = window.QExport.normalizeVocab(cfg, { direction: state.vocabDirection, includeEncounter: state.includeEncounter });
+    else state.questions = window.QExport.normalizeQuestions(cfg);
+    renderSourceControls();
+    render();
+    var note = document.getElementById('genNote');
+    if (state.source === 'practice') { note.style.display = 'none'; }
+    else { note.style.display = ''; note.textContent = 'Wrong answers are auto-generated from the same chapter. Review or edit them before exporting.'; }
+  }
+
+  function renderSourceControls() {
+    var c = document.getElementById('sourceControls');
+    c.textContent = '';
+    if (state.source === 'vocab') {
+      var dirLabel = el('label', null, 'Direction ');
+      var dir = el('select');
+      [['definition-term','Definition to Term'],['term-definition','Term to Definition']].forEach(function (o) {
+        var op = el('option', null, o[1]); op.value = o[0]; if (o[0] === state.vocabDirection) op.selected = true; dir.append(op);
+      });
+      dir.onchange = function () { state.vocabDirection = dir.value; rebuildQuestions(); };
+      dirLabel.append(dir);
+      var tierLabel = el('label', null, ' ');
+      var tier = el('input'); tier.type = 'checkbox'; tier.checked = state.includeEncounter;
+      tier.onchange = function () { state.includeEncounter = tier.checked; rebuildQuestions(); };
+      tierLabel.append(tier, document.createTextNode(' Include encounter tier'));
+      c.append(dirLabel, tierLabel);
+    } else if (state.source === 'fib') {
+      var typedLabel = el('label', null, ' ');
+      var typed = el('input'); typed.type = 'checkbox'; typed.checked = state.fibTyped;
+      typed.onchange = function () { state.fibTyped = typed.checked; };
+      typedLabel.append(typed, document.createTextNode(' Typed answers (GiMKit only)'));
+      c.append(typedLabel);
+    }
   }
 
   function doExport() {
     var platform = document.getElementById('platformSel').value;
     var qs = selectedList();
-    var csv = platform === 'gimkit' ? window.QExport.formatGimkit(qs) : window.QExport.formatBlooket(qs);
+    var csv, suffix;
+    if (state.source === 'fib' && state.fibTyped && platform === 'gimkit') {
+      csv = window.QExport.formatGimkitTyped(qs); suffix = 'gimkit-typed';
+    } else {
+      csv = platform === 'gimkit' ? window.QExport.formatGimkit(qs) : window.QExport.formatBlooket(qs);
+      suffix = platform;
+    }
+    var sourceName = state.source === 'fib' ? 'fib' : (state.source === 'vocab' ? 'vocabulary' : 'practice');
     var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
     var a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = state.unitId + '-' + platform + '.csv';
+    a.download = state.unitId + '-' + sourceName + '-' + suffix + '.csv';
     document.body.append(a); a.click(); a.remove();
     URL.revokeObjectURL(a.href);
   }
@@ -179,6 +240,7 @@
   document.getElementById('filter').oninput = render;
   document.getElementById('exportBtn').onclick = doExport;
   document.getElementById('unitSel').onchange = function () { loadUnit(this.value); };
+  document.getElementById('sourceSel').onchange = function () { state.source = this.value; rebuildQuestions(); };
 
   fetch(UNITS_URL).then(function (r) { return r.json(); }).then(function (data) {
     var sel = document.getElementById('unitSel');
