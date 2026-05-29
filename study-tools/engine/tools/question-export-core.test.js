@@ -48,6 +48,50 @@ var t4lines = t4.replace(/\r\n$/, '').split('\r\n');
 eq('gimkit header', t4lines[0], '"Question","Correct Answer","Incorrect Answer 1","Incorrect Answer 2","Incorrect Answer 3"');
 eq('gimkit data', t4lines[1], '"What, then?","o1","o0","o2","o3"');
 
+// === TASK 5: round-trip integration against real Civil War data ===
+var fs = require('fs');
+var path = require('path');
+
+function parseCsv(text) {
+  var rows = [], row = [], field = '', i = 0, inQ = false, QUOTE = '"';
+  while (i < text.length) {
+    var ch = text[i];
+    if (inQ) {
+      if (ch === QUOTE) { if (text[i+1] === QUOTE) { field += QUOTE; i += 2; continue; } inQ = false; i++; continue; }
+      field += ch; i++; continue;
+    }
+    if (ch === QUOTE) { inQ = true; i++; continue; }
+    if (ch === ',') { row.push(field); field = ''; i++; continue; }
+    if (ch === '\r') { i++; continue; }
+    if (ch === '\n') { row.push(field); rows.push(row); row = []; field = ''; i++; continue; }
+    field += ch; i++;
+  }
+  if (field.length || row.length) { row.push(field); rows.push(row); }
+  return rows.filter(function (r) { return r.length > 1 || r[0] !== ''; });
+}
+
+var cwPath = path.join(__dirname, '..', '..', 'units', 'civil-war', 'config.json');
+var cwConfig = JSON.parse(fs.readFileSync(cwPath, 'utf8'));
+var cwQuestions = core.normalizeQuestions(cwConfig);
+eq('civil-war normalized length', cwQuestions.length, 63);
+
+var blooketRows = parseCsv(core.formatBlooket(cwQuestions));
+eq('blooket row count', blooketRows.length, 64);
+cwQuestions.forEach(function (q, i) {
+  var row = blooketRows[i + 1];
+  var correctNum = parseInt(row[7], 10); // Correct Answer(s) column
+  // answer columns are indices 2..5 (Answer 1..4)
+  var picked = row[2 + (correctNum - 1)];
+  eq('blooket roundtrip q' + i, picked, q.options[q.correctIndex]);
+});
+
+var gimkitRows = parseCsv(core.formatGimkit(cwQuestions));
+eq('gimkit row count', gimkitRows.length, 64);
+cwQuestions.forEach(function (q, i) {
+  var row = gimkitRows[i + 1];
+  eq('gimkit roundtrip q' + i, row[1], q.options[q.correctIndex]); // Correct Answer column
+});
+
 if (failures.length) {
   console.log('FAIL (' + failures.length + ')');
   failures.forEach(function (f) { console.log('- ' + f); });
