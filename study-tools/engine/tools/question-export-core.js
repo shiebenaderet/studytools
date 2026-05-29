@@ -23,5 +23,13 @@
     });
     return out;
   }
-  return { csvField: csvField, toCsv: toCsv, normalizeQuestions: normalizeQuestions };
+  var BLOOKET_TIME = 20;
+  function formatBlooket(questions) {
+    var rows = [['Question #','Question Text','Answer 1','Answer 2','Answer 3','Answer 4','Time Limit (sec)','Correct Answer(s)']];
+    questions.forEach(function (q, i) {
+      rows.push([i + 1, q.question, q.options[0], q.options[1], q.options[2], q.options[3], BLOOKET_TIME, q.correctIndex + 1]);
+    });
+    return toCsv(rows);
+  }
+  return { csvField: csvField, toCsv: toCsv, normalizeQuestions: normalizeQuestions, formatBlooket: formatBlooket };
 });

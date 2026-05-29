@@ -36,6 +36,12 @@ eq('normalize correctIndex', t2[0].correctIndex, 2);
 eq('normalize topic', t2[0].topic, 'T1');
 deepEq('normalize options', t2[0].options, ['a','b','c','d']);
 
+// === TASK 3: formatBlooket ===
+var t3 = core.formatBlooket([{ id:0, question:'What, then?', options:['o0','o1','o2','o3'], correctIndex:1, topic:'T' }]);
+var t3lines = t3.replace(/\r\n$/, '').split('\r\n');
+eq('blooket header', t3lines[0], '"Question #","Question Text","Answer 1","Answer 2","Answer 3","Answer 4","Time Limit (sec)","Correct Answer(s)"');
+eq('blooket data', t3lines[1], '"1","What, then?","o0","o1","o2","o3","20","2"');
+
 if (failures.length) {
   console.log('FAIL (' + failures.length + ')');
   failures.forEach(function (f) { console.log('- ' + f); });
