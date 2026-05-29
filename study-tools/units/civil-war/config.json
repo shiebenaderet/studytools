@@ -962,9 +962,9 @@
             "question": "Why was Frederick Douglass's voice so powerful in the abolitionist movement?",
             "options": [
                 "He was a wealthy plantation owner who knew the system from the inside",
-                "He had been enslaved himself and could describe slavery from personal experience",
-                "He was the President of the United States during the Civil War",
-                "He was the only abolitionist who could read and write"
+                "He had been enslaved himself and could describe slavery firsthand",
+                "He was the President of the United States during the whole Civil War",
+                "He was the only abolitionist in the entire country who could read"
             ],
             "correct": 1,
             "explanation": "Douglass had escaped slavery in 1838. When he stood up at abolitionist meetings and described what slavery was actually like, audiences could no longer pretend it was not so bad. His autobiography sold widely and turned thousands of readers against slavery.",
@@ -974,24 +974,24 @@
             "question": "Which best describes the Underground Railroad?",
             "options": [
                 "A real railroad with trains that ran beneath Northern cities",
-                "A secret network of safe houses and volunteers that helped enslaved people escape to freedom",
+                "A secret network of safe houses and volunteers that aided escapes",
                 "A government program that paid for enslaved people to travel north",
-                "A code name for the Northern army during the Civil War"
+                "A code name used for the entire Northern army during the Civil War"
             ],
             "correct": 1,
-            "explanation": "The Underground Railroad had no real trains or tracks. It was a secret network of safe houses called stations, helpers called conductors, and routes that led from the South to free states or Canada. Harriet Tubman is the most famous of its conductors.",
+            "explanation": "The Underground Railroad had no real trains or tracks. It was a secret network of safe houses called stations, helpers called conductors, and routes that helped enslaved people escape to freedom in free states or Canada. Harriet Tubman is the most famous of its conductors.",
             "topic": "African Americans at Mid-Century"
         },
         {
             "question": "What was one major effect of Nat Turner's Rebellion in 1831?",
             "options": [
-                "Most Southern states immediately ended slavery to prevent more uprisings",
-                "The federal government sent the army to free all enslaved people",
-                "Frightened Southern states passed harsher laws against enslaved people, including bans on teaching them to read",
-                "The rebellion succeeded and Nat Turner became governor of Virginia"
+                "Most Southern states quickly ended slavery to prevent any more uprisings",
+                "The federal government sent in the army to free all enslaved people",
+                "Frightened Southern states passed harsher laws against enslaved people",
+                "The rebellion succeeded and Nat Turner was elected governor of Virginia"
             ],
             "correct": 2,
-            "explanation": "About sixty white people were killed in the rebellion before it was crushed. Slaveholders were terrified. Instead of rethinking slavery, Southern states tightened their grip with cruel new laws that made the underlying problem worse.",
+            "explanation": "About sixty white people were killed in the rebellion before it was crushed. Slaveholders were terrified. Instead of rethinking slavery, Southern states tightened their grip with cruel new laws, including bans on teaching enslaved people to read, which made the underlying problem worse.",
             "topic": "African Americans at Mid-Century"
         },
         {
@@ -1285,13 +1285,13 @@
         {
             "question": "Why was Harriet Tubman called \"Moses\" by the people she helped?",
             "options": [
-                "She wrote a famous book about the Bible",
-                "Like the biblical figure, she led her people out of bondage by guiding enslaved people to freedom on the Underground Railroad",
-                "She was a preacher in a Northern church",
-                "She wore long robes like the prophet Moses"
+                "She wrote a best-selling book retelling the Bible",
+                "Like Moses, she led her people out of bondage toward freedom",
+                "She was the lead preacher at a large Northern church",
+                "She always wore long flowing robes like the prophet Moses"
             ],
             "correct": 1,
-            "explanation": "After escaping slavery herself in 1849, Tubman went back into the South about thirteen times as an Underground Railroad conductor. She helped around seventy enslaved people reach freedom. She never got caught and never lost a single person.",
+            "explanation": "Like the biblical Moses who led his people out of slavery, Tubman guided enslaved people to freedom on the Underground Railroad. After escaping slavery herself in 1849, she went back into the South about thirteen times as a conductor and helped around seventy people reach freedom, never getting caught and never losing a single person.",
             "topic": "African Americans at Mid-Century"
         },
         {
@@ -1513,94 +1513,94 @@
         {
             "question": "What job did an overseer do on a Southern plantation?",
             "options": [
-                "Managed the plantation owner's household and finances",
-                "Supervised enslaved laborers and forced them to work harder, often using whippings",
-                "Taught enslaved children basic reading and writing",
-                "Acted as a doctor for sick enslaved people"
+                "Managed the plantation owner's household money and accounts",
+                "Supervised enslaved laborers and forced them to work harder",
+                "Taught the enslaved children on the plantation to read and write",
+                "Acted as the traveling doctor for the sick enslaved people"
             ],
             "correct": 1,
-            "explanation": "Overseers were paid by plantation owners to extract maximum work from enslaved laborers, commonly using whippings, threats, and punishment to do so.",
+            "explanation": "Overseers were paid by plantation owners to extract maximum work from enslaved laborers, often using whippings, threats, and other punishment to force them to work harder.",
             "topic": "African Americans at Mid-Century"
         },
         {
             "question": "What were spirituals?",
             "options": [
-                "Quiet prayers said before plantation meals",
+                "Quiet table prayers that enslaved people said before each meal",
                 "African religious ceremonies that slaveholders allowed once a year",
-                "Religious songs created by enslaved people, sometimes carrying hidden messages",
-                "A type of dance enslaved people performed at Christmas"
+                "Religious songs created by enslaved people to express faith and hope",
+                "A lively type of dance that enslaved people performed at Christmas"
             ],
             "correct": 2,
-            "explanation": "Spirituals were religious songs created by enslaved African Americans. Some, like 'Steal Away to Jesus,' carried hidden meanings that signaled secret meetings or expressed hope for freedom.",
+            "explanation": "Spirituals were religious songs created by enslaved African Americans. Some, like 'Steal Away to Jesus,' carried hidden messages that signaled secret meetings or expressed hope for freedom.",
             "topic": "African Americans at Mid-Century"
         },
         {
             "question": "What was the 'invisible institution'?",
             "options": [
-                "A Northern abolitionist newspaper printed in secret",
-                "The hidden Black church that enslaved people created in secret away from white-controlled churches",
-                "A network of free Black businesses in Southern cities",
+                "A Northern abolitionist newspaper that was printed in secret",
+                "The hidden Black church that enslaved people created in secret",
+                "A network of free Black-owned businesses in Southern cities",
                 "An informal underground school where enslaved children learned to read"
             ],
             "correct": 1,
-            "explanation": "The invisible institution was the hidden Black church that met in slave quarters or in secret forest clearings called hush arbors, where Black preachers told the story of Moses leading his people out of bondage.",
+            "explanation": "The invisible institution was the hidden Black church that enslaved people created away from white-controlled churches. It met in slave quarters or in secret forest clearings called hush arbors, where Black preachers told the story of Moses leading his people out of bondage.",
             "topic": "African Americans at Mid-Century"
         },
         {
             "question": "What is the difference between a field hand and a house servant?",
             "options": [
                 "Field hands were free Black workers; house servants were enslaved",
-                "Field hands worked the crops while house servants worked inside the slaveholder's home",
-                "Field hands were always men; house servants were always women",
-                "Field hands lived in cities; house servants lived on plantations"
+                "Field hands worked the crops while house servants worked indoors",
+                "Field hands were always grown men; house servants were always women",
+                "Field hands lived in the cities while house servants lived on farms"
             ],
             "correct": 1,
-            "explanation": "Field hands worked the crops outdoors from sunrise to sunset, while house servants did cooking, cleaning, sewing, and child care inside the slaveholder's home. About three-quarters of rural enslaved people were field hands.",
+            "explanation": "Field hands worked the crops outdoors from sunrise to sunset, while house servants did cooking, cleaning, sewing, and child care inside the slaveholder's home. About three quarters of rural enslaved people were field hands.",
             "topic": "African Americans at Mid-Century"
         },
         {
             "question": "Why did slaveholders fear strong slave families?",
             "options": [
-                "They worried that slave families would file legal lawsuits",
-                "Strong family bonds gave enslaved people a reason to resist and made them harder to control",
-                "Slave marriages were illegal under federal law",
-                "Family groups required slaveholders to provide more food and clothing"
+                "They worried that enslaved families would file lawsuits in court",
+                "Strong family bonds gave enslaved people a powerful reason to resist",
+                "Marriages between enslaved people were banned under federal law",
+                "Large family groups forced slaveholders to provide more food and clothing"
             ],
             "correct": 1,
-            "explanation": "Slaveholders preferred enslaved people to be totally dependent on their masters. Strong family bonds gave enslaved people a source of strength and identity that slaveholders did not control, which is why slaveholders often broke up families by selling members away.",
+            "explanation": "Slaveholders preferred enslaved people to be totally dependent on their masters. Strong family bonds gave enslaved people a source of strength and identity that slaveholders did not control and made them harder to control, which is why slaveholders often broke up families by selling members away.",
             "topic": "African Americans at Mid-Century"
         },
         {
             "question": "What are 'African retentions'?",
             "options": [
-                "Laws that returned enslaved people to plantation owners",
-                "Cultural elements from West Africa that enslaved people preserved in America",
+                "Laws that returned escaped enslaved people to their plantation owners",
+                "Cultural elements from West Africa that enslaved people kept alive",
                 "African languages still spoken in some Southern communities today",
-                "A type of clothing worn by enslaved field hands"
+                "A special type of work clothing worn by the enslaved field hands"
             ],
             "correct": 1,
-            "explanation": "African retentions are cultural elements like music, foods, storytelling traditions, and quilt patterns that enslaved people preserved across the Atlantic and passed down through generations in America.",
+            "explanation": "African retentions are cultural elements like music, foods, storytelling traditions, and quilt patterns that enslaved people preserved in America across the Atlantic and passed down through generations.",
             "topic": "African Americans at Mid-Century"
         },
         {
             "question": "What did the Underground Railroad actually consist of?",
             "options": [
-                "A real underground train system built by abolitionists",
+                "A real underground steam train system built by Northern abolitionists",
                 "A federal program funded by Congress to help freed slaves move north",
-                "A secret network of safe houses, hidden routes, and brave volunteers who helped enslaved people escape",
+                "A secret network of safe houses, hidden routes, and brave volunteers",
                 "A group of Northern judges who refused to enforce the Fugitive Slave Law"
             ],
             "correct": 2,
-            "explanation": "The Underground Railroad was not a real railroad. It was a secret network of safe houses, hidden routes, and volunteers, both Black and white, who helped enslaved people travel from the South to freedom in the North or in Canada.",
+            "explanation": "The Underground Railroad was not a real railroad. It was a secret network of safe houses, hidden routes, and brave volunteers, both Black and white, who helped enslaved people escape from the South to freedom in the North or in Canada.",
             "topic": "African Americans at Mid-Century"
         },
         {
             "question": "What kinds of resistance did enslaved people use against slavery?",
             "options": [
-                "Only major rebellions like Nat Turner's Rebellion",
-                "Only running away on the Underground Railroad",
-                "Only writing letters to Northern abolitionists",
-                "Many forms, from quiet sabotage to open defiance to running away"
+                "Only major armed rebellions like Nat Turner's Rebellion of 1831",
+                "Only running away to the North on the Underground Railroad",
+                "Only mailing handwritten letters to the Northern abolitionists",
+                "Many forms, from quiet sabotage to open defiance to escape"
             ],
             "correct": 3,
             "explanation": "Enslaved people resisted in countless ways. Most resistance was quiet: breaking tools, working slowly, sneaking food, or pretending to be sick. Some resisted openly. Thousands tried the riskiest resistance: running away.",
