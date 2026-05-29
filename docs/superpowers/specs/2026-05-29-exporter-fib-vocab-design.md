@@ -54,6 +54,21 @@ A small persistent note near the export button when source is FIB or Vocab:
 "Wrong answers are auto-generated from the same chapter. Review or edit them
 before exporting."
 
+### Review happens inside the exporter (no separate review tool)
+The exporter already renders every question with its four options, marks the
+correct one, and allows inline editing. That IS the review surface for the
+auto-generated FIB/vocab questions — the teacher reviews exactly what will be
+exported and can fix any weak distractor in place. We deliberately do NOT
+extend the separate `question-review.html` tool, which only reads
+`practiceQuestions` from config and would duplicate rendering the exporter
+already does.
+
+To support that review, each option shows a **length warning** when it exceeds
+the platform answer cap (~100 chars, the Blooket limit). This matters most for
+`Term → Definition` vocab, where definitions can run long. The warning is
+non-blocking (a visual marker on the option, e.g. an amber length badge); the
+teacher trims inline if they care. Export is never prevented.
+
 ## Normalizers (source adapter seam)
 
 ### FIB normalizer
@@ -151,8 +166,9 @@ Node-tested in `question-export-core.test.js`. The page wires the new controls.
 - No persistence; reset each session.
 - No write-back to config; export-only.
 - Vocab definitions can be long; Term→Definition MC may exceed Blooket's ~100
-  char answer cap. Show the existing length consideration; the teacher can
-  trim inline. (Not a blocker.)
+  char answer cap. A non-blocking length warning marks over-cap options so the
+  teacher can trim inline. Export is never prevented. (See "Review happens
+  inside the exporter" above.)
 
 ## Out of scope / non-goals
 
