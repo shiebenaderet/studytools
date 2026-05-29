@@ -48,6 +48,22 @@
     });
     return out;
   }
+  function normalizeFib(config, shuffleFn) {
+    var items = (config && config.fillInBlankSentences) || [];
+    var pool = items.map(function (it) { return { value: it.answer, category: it.category || 'Uncategorized' }; });
+    var out = [];
+    items.forEach(function (it, i) {
+      if (!it || !it.sentence || !it.answer) return;
+      var cat = it.category || 'Uncategorized';
+      var distractors = pickDistractors(pool, it.answer, cat, 3, shuffleFn);
+      var options = [it.answer].concat(distractors);
+      while (options.length < 4) options.push('');
+      var order = (shuffleFn || defaultShuffle)([0, 1, 2, 3]);
+      var shuffled = order.map(function (idx) { return options[idx]; });
+      out.push({ id: i, question: it.sentence, options: shuffled, correctIndex: order.indexOf(0), topic: cat });
+    });
+    return out;
+  }
   var BLOOKET_TIME = 20;
   function formatBlooket(questions) {
     var rows = [['Question #','Question Text','Answer 1','Answer 2','Answer 3','Answer 4','Time Limit (sec)','Correct Answer(s)']];
@@ -64,5 +80,5 @@
     });
     return toCsv(rows);
   }
-  return { csvField: csvField, toCsv: toCsv, normalizeQuestions: normalizeQuestions, formatBlooket: formatBlooket, formatGimkit: formatGimkit, pickDistractors: pickDistractors };
+  return { csvField: csvField, toCsv: toCsv, normalizeQuestions: normalizeQuestions, formatBlooket: formatBlooket, formatGimkit: formatGimkit, pickDistractors: pickDistractors, normalizeFib: normalizeFib };
 });

@@ -107,6 +107,23 @@ eq('pickDistractors C2 length', pd2.length, 3);
 eq('pickDistractors C2 excludes correct', pd2.indexOf('x'), -1);
 eq('pickDistractors C2 unique', new Set(pd2).size, 3);
 
+// === TASK 2 (new): normalizeFib ===
+var fibCfg = {
+  fillInBlankSentences: [
+    { sentence: '_____ is one.', answer: 'alpha', category: 'G1' },
+    { sentence: '_____ is two.', answer: 'beta', category: 'G1' },
+    { sentence: '_____ is three.', answer: 'gamma', category: 'G1' },
+    { sentence: '_____ is four.', answer: 'delta', category: 'G1' }
+  ]
+};
+var fib = core.normalizeFib(fibCfg, identityShuffle);
+eq('normalizeFib length', fib.length, 4);
+eq('normalizeFib question', fib[0].question, '_____ is one.');
+eq('normalizeFib topic', fib[0].topic, 'G1');
+eq('normalizeFib correct value', fib[0].options[fib[0].correctIndex], 'alpha');
+eq('normalizeFib options length', fib[0].options.length, 4);
+eq('normalizeFib options unique', new Set(fib[0].options).size, 4);
+
 if (failures.length) {
   console.log('FAIL (' + failures.length + ')');
   failures.forEach(function (f) { console.log('- ' + f); });
