@@ -124,6 +124,27 @@ eq('normalizeFib correct value', fib[0].options[fib[0].correctIndex], 'alpha');
 eq('normalizeFib options length', fib[0].options.length, 4);
 eq('normalizeFib options unique', new Set(fib[0].options).size, 4);
 
+// === TASK 3 (new): normalizeVocab ===
+var vocabCfg = {
+  vocabulary: [
+    { term: 'aterm', definition: 'adef', category: 'V1' },
+    { term: 'bterm', definition: 'bdef', category: 'V1' },
+    { term: 'cterm', definition: 'cdef', category: 'V1' },
+    { term: 'dterm', definition: 'ddef', category: 'V1' },
+    { term: 'eterm', definition: 'edef', category: 'V1', tier: 'encounter' }
+  ]
+};
+var vocabDT = core.normalizeVocab(vocabCfg, { direction: 'definition-term', includeEncounter: false }, identityShuffle);
+eq('normalizeVocab DT length', vocabDT.length, 4);
+eq('normalizeVocab DT question', vocabDT[0].question, 'adef');
+eq('normalizeVocab DT correct', vocabDT[0].options[vocabDT[0].correctIndex], 'aterm');
+eq('normalizeVocab DT topic', vocabDT[0].topic, 'V1');
+var vocabTD = core.normalizeVocab(vocabCfg, { direction: 'term-definition', includeEncounter: false }, identityShuffle);
+eq('normalizeVocab TD question', vocabTD[0].question, 'aterm');
+eq('normalizeVocab TD correct', vocabTD[0].options[vocabTD[0].correctIndex], 'adef');
+var vocabEnc = core.normalizeVocab(vocabCfg, { direction: 'definition-term', includeEncounter: true }, identityShuffle);
+eq('normalizeVocab includeEncounter length', vocabEnc.length, 5);
+
 if (failures.length) {
   console.log('FAIL (' + failures.length + ')');
   failures.forEach(function (f) { console.log('- ' + f); });

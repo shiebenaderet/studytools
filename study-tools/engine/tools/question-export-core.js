@@ -64,6 +64,33 @@
     });
     return out;
   }
+  function normalizeVocab(config, opts, shuffleFn) {
+    opts = opts || {};
+    var direction = opts.direction || 'definition-term';
+    var includeEncounter = !!opts.includeEncounter;
+    var vocab = (config && config.vocabulary) || [];
+    var filtered = vocab.filter(function (v) {
+      if (!v || !v.term || !v.definition) return false;
+      if (v.tier === 'encounter' && !includeEncounter) return false;
+      return true;
+    });
+    var pool = filtered.map(function (v) {
+      return { value: direction === 'term-definition' ? v.definition : v.term, category: v.category || 'Uncategorized' };
+    });
+    var out = [];
+    filtered.forEach(function (v, i) {
+      var cat = v.category || 'Uncategorized';
+      var promptVal = direction === 'term-definition' ? v.term : v.definition;
+      var correctVal = direction === 'term-definition' ? v.definition : v.term;
+      var distractors = pickDistractors(pool, correctVal, cat, 3, shuffleFn);
+      var options = [correctVal].concat(distractors);
+      while (options.length < 4) options.push('');
+      var order = (shuffleFn || defaultShuffle)([0, 1, 2, 3]);
+      var shuffled = order.map(function (idx) { return options[idx]; });
+      out.push({ id: i, question: promptVal, options: shuffled, correctIndex: order.indexOf(0), topic: cat });
+    });
+    return out;
+  }
   var BLOOKET_TIME = 20;
   function formatBlooket(questions) {
     var rows = [['Question #','Question Text','Answer 1','Answer 2','Answer 3','Answer 4','Time Limit (sec)','Correct Answer(s)']];
@@ -80,5 +107,5 @@
     });
     return toCsv(rows);
   }
-  return { csvField: csvField, toCsv: toCsv, normalizeQuestions: normalizeQuestions, formatBlooket: formatBlooket, formatGimkit: formatGimkit, pickDistractors: pickDistractors, normalizeFib: normalizeFib };
+  return { csvField: csvField, toCsv: toCsv, normalizeQuestions: normalizeQuestions, formatBlooket: formatBlooket, formatGimkit: formatGimkit, pickDistractors: pickDistractors, normalizeFib: normalizeFib, normalizeVocab: normalizeVocab };
 });
