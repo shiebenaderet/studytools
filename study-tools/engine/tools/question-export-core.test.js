@@ -153,6 +153,18 @@ eq('formatGimkitTyped header', typedLines[0], '"Question","Answer"');
 eq('formatGimkitTyped data', typedLines[1], '"_____ is one.","alpha"');
 eq('formatGimkitTyped col count', typedLines[1].split('","').length, 2);
 
+// === TASK 5 (new): integration over real Civil War data ===
+var cfgReal = JSON.parse(require('fs').readFileSync(require('path').join(__dirname, '..', '..', 'units', 'civil-war', 'config.json'), 'utf8'));
+var fibReal = core.normalizeFib(cfgReal);
+eq('real fib count', fibReal.length, 15);
+var fibBad = 0; fibReal.forEach(function (q) { if (q.options[q.correctIndex] == null || q.options.indexOf(q.options[q.correctIndex]) === -1) fibBad++; });
+eq('real fib correct present', fibBad, 0);
+eq('real typed cols', core.formatGimkitTyped(fibReal).trim().split('\r\n')[1].split('","').length, 2);
+var vocabReal = core.normalizeVocab(cfgReal, { direction: 'definition-term', includeEncounter: false });
+eq('real vocab mustknow only', vocabReal.length, 47);
+var vocabAll = core.normalizeVocab(cfgReal, { direction: 'definition-term', includeEncounter: true });
+eq('real vocab all', vocabAll.length, 70);
+
 if (failures.length) {
   console.log('FAIL (' + failures.length + ')');
   failures.forEach(function (f) { console.log('- ' + f); });
