@@ -997,10 +997,10 @@
         {
             "question": "What was the main goal of the Missouri Compromise of 1820?",
             "options": [
-                "To end slavery in the entire country within ten years",
-                "To balance free and slave states by admitting Maine as free and Missouri as slave, and to ban slavery in the rest of the Louisiana Purchase north of a set line",
-                "To force Missouri to free all of its enslaved people before joining the Union",
-                "To allow each new state to choose for itself whether to allow slavery"
+                "To end all slavery in the entire country within the next ten years",
+                "To keep free and slave states balanced by pairing Maine and Missouri",
+                "To force Missouri to free its enslaved people before it could join",
+                "To let each new state choose for itself whether to allow slavery or not"
             ],
             "correct": 1,
             "explanation": "The compromise kept the balance of free and slave states equal in the Senate and drew a line across the Louisiana Purchase saying no slavery north of it. Thomas Jefferson worried it was \"a fire bell in the night,\" warning of disasters to come.",
@@ -1009,10 +1009,10 @@
         {
             "question": "Why did the Wilmot Proviso, even though it failed to pass, matter so much?",
             "options": [
-                "It freed all enslaved people in the United States",
-                "It started the Mexican American War",
-                "It forced Americans to argue openly about whether slavery should expand into new western territory",
-                "It made California a slave state"
+                "It immediately freed every enslaved person in the United States",
+                "It started the Mexican American War over the border with Texas",
+                "It forced Americans to argue openly about slavery in new territory",
+                "It made California enter the Union as a brand new slave state"
             ],
             "correct": 2,
             "explanation": "The proviso passed the House but failed in the Senate. Even though it never became law, the fight over it pushed Southern leaders to start talking openly about leaving the Union if Northerners kept attacking slavery.",
@@ -1021,10 +1021,10 @@
         {
             "question": "Which part of the Compromise of 1850 angered Northerners the most?",
             "options": [
-                "California being admitted as a free state",
-                "The ban on the slave trade in Washington DC",
-                "The much harsher Fugitive Slave Law that required Northerners to help capture escaped enslaved people",
-                "The end of slavery in the United States"
+                "California being admitted into the Union as a brand new free state",
+                "The complete ban on the slave trade in the capital, Washington DC",
+                "The harsher Fugitive Slave Law that made Northerners catch runaways",
+                "The end of slavery across every state in the entire United States"
             ],
             "correct": 2,
             "explanation": "The new Fugitive Slave Law made slavery a Northern problem too. Slave catchers came into Northern towns, and ordinary citizens could be punished for refusing to help. Many Northerners who had ignored slavery turned against it because of this law.",
@@ -1033,10 +1033,10 @@
         {
             "question": "How did Uncle Tom's Cabin change Northern attitudes toward slavery?",
             "options": [
-                "It made readers feel sorry for slaveholders and want to protect their rights",
-                "It put readers inside the experience of enslaved people and turned hundreds of thousands of Northerners against slavery",
+                "It made readers feel sorry for slaveholders and protect their rights",
+                "It showed the cruelty of slavery and turned Northerners against it",
                 "It convinced most Northerners that slavery should be allowed everywhere",
-                "It had no effect on public opinion at all"
+                "It had almost no effect at all on how Northern readers felt about slavery"
             ],
             "correct": 1,
             "explanation": "Harriet Beecher Stowe's 1852 novel sold over 300,000 copies in its first year, an enormous number for the time. By telling the story of enslaved people as people, it changed minds in a way no political speech ever had.",
@@ -1045,22 +1045,22 @@
         {
             "question": "Why was the Kansas Territory called \"Bleeding Kansas\" in the late 1850s?",
             "options": [
-                "Because of a long drought that turned the soil red",
-                "Because pro slavery and anti slavery settlers fought each other in violent attacks that killed about fifty people",
-                "Because Native Americans there were resisting being moved off their land",
-                "Because Confederate soldiers had invaded the territory"
+                "Because a long drought ruined the crops and turned the dry soil red",
+                "Because pro slavery and anti slavery settlers attacked each other",
+                "Because Native Americans there resisted being moved off of their land",
+                "Because Confederate soldiers from the South had invaded the territory"
             ],
             "correct": 1,
-            "explanation": "Both sides rushed settlers in to control the vote on whether Kansas would be slave or free. The fights turned into raids, murders, and burned towns. Bleeding Kansas was a small civil war before the big one and showed compromise was no longer working.",
+            "explanation": "Both sides rushed settlers in to control the vote on whether Kansas would be slave or free. The fights turned into raids, murders, and burned towns that killed about fifty people. Bleeding Kansas was a small civil war before the big one and showed compromise was no longer working.",
             "topic": "A Dividing Nation"
         },
         {
             "question": "Why did the Dred Scott decision alarm so many Northerners?",
             "options": [
-                "It freed Dred Scott but said all other enslaved people were still enslaved",
-                "It said Black Americans were not citizens and Congress had no power to ban slavery in the territories, raising fears that slavery could spread anywhere",
-                "It outlawed slavery in the South",
-                "It gave free states the right to ignore the Fugitive Slave Law"
+                "It freed Dred Scott himself but kept all other enslaved people enslaved",
+                "It said Black Americans were not citizens and Congress could not ban slavery",
+                "It suddenly outlawed slavery across every state in the whole South",
+                "It gave the free states the right to ignore the Fugitive Slave Law"
             ],
             "correct": 1,
             "explanation": "The 1857 ruling shocked the North. If Congress could not ban slavery in the western territories, many believed slavery would soon spread into the free states themselves. To Northerners, the South seemed to control even the Supreme Court.",
@@ -1069,10 +1069,10 @@
         {
             "question": "What did Abraham Lincoln gain from the 1858 Lincoln Douglas Debates, even though he lost the Senate election?",
             "options": [
-                "A seat in the United States Supreme Court",
-                "Membership in the Confederate government",
+                "An appointment to a powerful seat on the United States Supreme Court",
+                "A leadership role inside the new Confederate government of the South",
                 "National fame, which helped him win the presidency in 1860",
-                "Control of the federal army"
+                "Direct command and control of the entire United States federal army"
             ],
             "correct": 2,
             "explanation": "Lincoln lost the Senate race to Stephen Douglas, but the debates were covered in newspapers across the country. He went from a little known Illinois lawyer to a national figure, and just two years later he won the presidency.",
@@ -1081,10 +1081,10 @@
         {
             "question": "Why did John Brown's 1859 raid at Harpers Ferry frighten Southerners so much, even though the raid itself failed?",
             "options": [
-                "Brown was a Southerner who turned against his own region",
-                "Brown's plan to start a slave uprising made Southerners believe the entire North wanted to attack them, and they began preparing for war",
-                "The raid actually freed thousands of enslaved people across the South",
-                "The raid forced Lincoln to apologize to the South"
+                "Brown was a wealthy Southerner who had turned against his own region",
+                "His plan to spark a slave uprising convinced the South the North wanted war",
+                "The raid actually freed many thousands of enslaved people across the South",
+                "The raid forced Lincoln to send the South a formal letter of apology"
             ],
             "correct": 1,
             "explanation": "Brown was hanged and most Northerners had not supported him. But Southern leaders saw the raid as proof that the whole North was coming for them. Southern states began organizing militias and stockpiling weapons even before the 1860 election.",
@@ -1093,10 +1093,10 @@
         {
             "question": "What event triggered Southern states to begin seceding from the United States?",
             "options": [
-                "The Battle of Fort Sumter",
-                "The publication of Uncle Tom's Cabin",
+                "The first shots fired at the Battle of Fort Sumter in Charleston",
+                "The publication of the novel Uncle Tom's Cabin back in 1852",
                 "The election of Abraham Lincoln as president in 1860",
-                "The Dred Scott decision"
+                "The Supreme Court's ruling in the Dred Scott decision of 1857"
             ],
             "correct": 2,
             "explanation": "Lincoln's victory was the breaking point. He won without appearing on most Southern ballots and had said clearly that slavery should not spread. Within six weeks of the election, South Carolina announced it was leaving the Union, and six more states followed before Lincoln was even inaugurated.",
@@ -1106,9 +1106,9 @@
             "question": "What did secession mean, and what did it lead to?",
             "options": [
                 "It meant the Northern states left the United States, leading to peace",
-                "It meant Southern states formally withdrew from the Union and formed the Confederate States of America, leading directly to civil war",
-                "It meant the federal government dissolved itself peacefully",
-                "It meant California became its own country"
+                "It meant Southern states withdrew from the Union, leading straight to war",
+                "It meant the federal government peacefully dissolved itself once and for all",
+                "It meant California broke away and became its own separate country"
             ],
             "correct": 1,
             "explanation": "Eleven Southern states seceded after Lincoln's election. They formed the Confederate States of America. Lincoln said no state had the right to leave the Union. That disagreement could not be settled by talking, and a few months later the Civil War began.",
@@ -1345,10 +1345,10 @@
         {
             "question": "What major change did the Kansas Nebraska Act of 1854 make to American law?",
             "options": [
-                "It freed all enslaved people in the United States",
-                "It threw out the slavery line drawn by the Missouri Compromise and let settlers in those territories vote on slavery themselves",
-                "It made California a slave state",
-                "It banned slavery in all western territories"
+                "It freed all of the enslaved people living in the United States",
+                "It threw out the Missouri Compromise line and let settlers vote on slavery",
+                "It made California enter the Union as a brand new slave state",
+                "It permanently banned slavery across all of the western territories"
             ],
             "correct": 1,
             "explanation": "The Missouri Compromise had stood for 34 years, banning slavery north of a set line. The Kansas Nebraska Act tore up that compromise and replaced it with popular sovereignty. The reaction in the North was furious, and the new Republican Party formed in opposition.",
@@ -1357,10 +1357,10 @@
         {
             "question": "Why did the Dred Scott decision say Congress had no power to ban slavery in the territories?",
             "options": [
-                "Because the Supreme Court ruled that enslaved people were property protected by the Constitution",
-                "Because Congress had voted to give that power to state governments",
-                "Because the Constitution explicitly allowed slavery in every state",
-                "Because President Lincoln had signed an executive order saying so"
+                "Because the Supreme Court ruled enslaved people were property protected by the Constitution",
+                "Because Congress had passed a law handing that power over to the state governments",
+                "Because the words of the Constitution clearly required slavery in every single state",
+                "Because President Lincoln had signed an executive order taking that power from Congress"
             ],
             "correct": 0,
             "explanation": "The 1857 ruling said enslaved people were property under the Constitution, and that the federal government could not take property away. To Northerners, this raised a terrifying possibility: if Congress could not ban slavery in the West, what would stop slavery from spreading into free states themselves?",
@@ -1369,10 +1369,10 @@
         {
             "question": "In the Lincoln Douglas Debates, what was the key difference between the two candidates' views on slavery?",
             "options": [
-                "Lincoln wanted to end slavery immediately while Douglas wanted to keep it forever",
-                "Lincoln argued slavery was a moral wrong that should not spread, while Douglas defended popular sovereignty and said each state should decide",
-                "Lincoln supported slavery and Douglas opposed it",
-                "They actually agreed on slavery and disagreed about taxes"
+                "Lincoln wanted to abolish slavery at once while Douglas wanted to keep it forever",
+                "Lincoln said slavery was wrong and should not spread, while Douglas backed popular vote",
+                "Lincoln strongly supported slavery while Douglas worked hard to oppose and end it",
+                "They actually agreed about slavery and only disagreed about taxes and tariffs"
             ],
             "correct": 1,
             "explanation": "Lincoln did not call himself an abolitionist, but he argued clearly that slavery was a moral wrong and had to be stopped from spreading. Douglas defended his idea of popular sovereignty. Lincoln lost the Senate race but became famous, which helped him win the presidency two years later.",
@@ -1381,10 +1381,10 @@
         {
             "question": "What had the Missouri Compromise hoped to settle in 1820, and why did it eventually fail?",
             "options": [
-                "It hoped to end slavery, but plantation owners refused to accept it",
-                "It hoped to balance free and slave states by drawing a geographic line, but later events like the Kansas Nebraska Act tore that line up",
-                "It hoped to make all new states slave states, but the North refused",
-                "It hoped to give California to Mexico, but California voted to stay American"
+                "It hoped to end slavery, but plantation owners flatly refused to accept it",
+                "It hoped to balance free and slave states with a line the Kansas act later tore up",
+                "It hoped to turn every new state into a slave state, but the North refused",
+                "It hoped to hand California to Mexico, but California voted to remain American"
             ],
             "correct": 1,
             "explanation": "The Missouri Compromise tried to keep peace by drawing a line across the Louisiana Purchase. North of the line, no slavery. South of it, slavery allowed. The line stood for 34 years until the Kansas Nebraska Act of 1854 threw it out. Each compromise bought time, but eventually each one was destroyed.",
@@ -1393,10 +1393,10 @@
         {
             "question": "Why did the Election of 1860 cause Southern states to leave the Union, even though Lincoln had not promised to end slavery?",
             "options": [
-                "Lincoln had said clearly that slavery was wrong and should not spread, and he had won without a single Southern electoral vote, which terrified the South",
-                "Lincoln had promised to free every enslaved person within his first year",
-                "Lincoln was secretly an abolitionist who had hidden his views during the campaign",
-                "Lincoln had refused to take the oath of office"
+                "Lincoln opposed slavery's spread and won without a single Southern vote",
+                "Lincoln had promised to free every enslaved person within his very first year",
+                "Lincoln was secretly an abolitionist who had hidden his real views in the campaign",
+                "Lincoln had flatly refused to swear and take the presidential oath of office"
             ],
             "correct": 0,
             "explanation": "Lincoln had only promised to keep slavery from spreading, not to end it. But the fact that he had won without any Southern support terrified Southerners. They believed the federal government had now turned against them. Within six weeks of the election, South Carolina announced its secession.",
@@ -1405,10 +1405,10 @@
         {
             "question": "How did the Fugitive Slave Law of 1850 change life for Northerners who had ignored slavery before?",
             "options": [
-                "It allowed Northerners to legally free enslaved people without penalty",
-                "It forced Northerners to help capture and return escaped enslaved people, bringing slavery into their own towns and turning many of them against the system",
-                "It paid Northerners to move south and become plantation owners",
-                "It made it illegal to publish anti slavery newspapers in the North"
+                "It let Northerners legally free enslaved people without facing any penalty",
+                "It forced Northerners to help capture escaped enslaved people in their own towns",
+                "It paid Northerners money to move south and become plantation owners themselves",
+                "It made it a crime to print anti slavery newspapers anywhere in the North"
             ],
             "correct": 1,
             "explanation": "Slave catchers came into Northern cities. Anyone who refused to help, or who helped a runaway, could be fined or jailed. For Northerners who had quietly looked away from slavery for years, this law put the system right in their faces. Many turned against slavery for the first time.",
