@@ -1117,10 +1117,10 @@
         {
             "question": "What event officially started the Civil War?",
             "options": [
-                "Lincoln's election in 1860",
+                "Lincoln's first inauguration in March 1861",
                 "South Carolina's secession in December 1860",
-                "Confederate forces firing on Fort Sumter in April 1861",
-                "The Battle of Gettysburg"
+                "Confederate guns firing on Fort Sumter in 1861",
+                "The Union defeat at Bull Run in July 1861"
             ],
             "correct": 2,
             "explanation": "Although Southern states had been seceding since December 1860, the war officially began when Confederate cannons opened fire on Fort Sumter in Charleston Harbor on April 12, 1861. After 34 hours of bombardment, the small Union garrison surrendered. The attack united the North overnight.",
@@ -1129,130 +1129,130 @@
         {
             "question": "Why was the Battle of Antietam important even though it ended in a tactical draw?",
             "options": [
-                "It was the first battle of the Civil War",
-                "It stopped Lee's first invasion of the North and gave Lincoln the chance to issue the Emancipation Proclamation",
-                "It ended the Civil War",
-                "It captured the Confederate capital"
+                "It was the opening battle that started the whole war",
+                "It stopped Lee's first invasion of the North in 1862",
+                "It forced General Lee to surrender his army for good",
+                "It let Union troops capture Richmond, the rebel capital"
             ],
             "correct": 1,
-            "explanation": "September 17, 1862 remains the bloodiest single day in American history with over 22,000 casualties. The battle ended in a draw, but Lee retreated, which counted as a Union victory. Lincoln used the moment to issue the Emancipation Proclamation, transforming what the war was about.",
+            "explanation": "September 17, 1862 remains the bloodiest single day in American history with over 22,000 casualties. The battle ended in a draw, but Lee retreated, which counted as a Union victory. Lincoln used that win as the moment to issue the Emancipation Proclamation, transforming what the war was about.",
             "topic": "The Civil War"
         },
         {
             "question": "What did the Emancipation Proclamation do?",
             "options": [
-                "It ended slavery in every state of the United States",
-                "It declared all enslaved people in Confederate states to be free, transforming the war into a fight to end slavery",
-                "It allowed Black men to serve in the Union army for the first time",
-                "It pardoned Confederate soldiers"
+                "It ended slavery in every single state at once in 1863",
+                "It declared enslaved people in Confederate states free",
+                "It gave formerly enslaved men the right to vote in elections",
+                "It paid Southern planters for the loss of enslaved workers"
             ],
             "correct": 1,
-            "explanation": "Issued by Lincoln on January 1, 1863, the Emancipation Proclamation freed enslaved people in Confederate states only, not in border states still loyal to the Union. It could not actually free anyone behind Confederate lines, but it transformed the war and kept Britain and France from supporting the South.",
+            "explanation": "Issued by Lincoln on January 1, 1863, the Emancipation Proclamation freed enslaved people in Confederate states only, not in border states still loyal to the Union. It could not actually free anyone behind Confederate lines, but it transformed the war into a fight to end slavery and kept Britain and France from supporting the South.",
             "topic": "The Civil War"
         },
         {
             "question": "Why is July 1863 considered the turning point of the Civil War?",
             "options": [
-                "Lincoln was re-elected that month",
-                "The Union won two major victories at the same time: Gettysburg in Pennsylvania and Vicksburg in Mississippi",
-                "Lee surrendered to Grant",
-                "The Confederacy invaded New York City"
+                "Lincoln won his re-election vote earlier that summer",
+                "The Union won two big victories at Gettysburg and Vicksburg",
+                "Lee surrendered his whole army to Grant that same month",
+                "The Confederate navy sank the Union fleet near Charleston"
             ],
             "correct": 1,
-            "explanation": "On July 3, 1863, Lee was defeated at Gettysburg. The next day, July 4, Vicksburg surrendered to Grant. Together these two Union victories broke the Confederacy in two and ended its hopes of winning the war.",
+            "explanation": "On July 3, 1863, Lee was defeated at Gettysburg in Pennsylvania. The next day, July 4, Vicksburg in Mississippi surrendered to Grant. Together these two Union victories broke the Confederacy in two and ended its hopes of winning the war.",
             "topic": "The Civil War"
         },
         {
             "question": "What did Lincoln say in the Gettysburg Address that made it so famous?",
             "options": [
-                "He demanded the unconditional surrender of the Confederacy",
-                "He redefined the war as a fight for human equality and for whether \"government of the people, by the people, for the people\" could survive",
-                "He announced the end of the Civil War",
-                "He called for harsh punishment of Confederate leaders"
+                "He demanded that the Confederate states give up at once",
+                "He redefined the war as a fight for human equality and democracy",
+                "He announced that the long and bloody war had finally ended",
+                "He called for the harsh punishment of all Confederate leaders"
             ],
             "correct": 1,
-            "explanation": "Speaking for just over two minutes, Lincoln used 272 words to redefine what the Civil War was about. He linked the war back to the Declaration of Independence's promise that all men are created equal, and called the war a test of whether democratic government could survive.",
+            "explanation": "Speaking for just over two minutes, Lincoln used 272 words to redefine what the Civil War was about. He linked the war to the Declaration of Independence's promise that all men are created equal, and called it a test of whether \"government of the people, by the people, for the people\" could survive.",
             "topic": "The Civil War"
         },
         {
             "question": "What advantages helped the Union eventually defeat the Confederacy?",
             "options": [
-                "The Union had better generals from the very start of the war",
-                "The Union had a larger population, more factories, more railroads, and more wealth, plus the moral cause of ending slavery after 1863",
-                "The Confederacy ran out of food and water during the first year of the war",
-                "Foreign countries invaded the Confederacy"
+                "The Union had far more skilled generals at the very start of the war",
+                "The Union had a larger population, more factories, and more railroads",
+                "The Confederacy completely ran out of food during the first year of war",
+                "Britain and France sent armies to invade the Confederacy from the sea"
             ],
             "correct": 1,
-            "explanation": "The North's industrial economy, larger population, and railroad network gave it the resources to keep fighting longer than the South could. After the Emancipation Proclamation, the Union also had the moral cause of ending slavery, which helped attract Black soldiers and kept Britain and France from supporting the Confederacy.",
+            "explanation": "The North's industrial economy, larger population, and railroad network gave it the resources to keep fighting longer than the South could, plus more wealth to pay for it all. After the Emancipation Proclamation, the Union also had the moral cause of ending slavery, which helped attract Black soldiers and kept Britain and France from supporting the Confederacy.",
             "topic": "The Civil War"
         },
         {
             "question": "What was the strategy of total war, and who pioneered it?",
             "options": [
-                "A strategy of attacking enemy soldiers only, never civilians, pioneered by Robert E. Lee",
-                "A strategy of attacking not just soldiers but the resources, supplies, and infrastructure that armies need to fight, pioneered by William T. Sherman",
-                "A strategy of negotiating peace as quickly as possible",
-                "A strategy of using only naval forces"
+                "Attacking enemy soldiers on the field only, never their supplies, used by Robert E. Lee",
+                "Attacking the resources and supplies that armies need to fight, used by William T. Sherman",
+                "Refusing to fight at all and waiting for the enemy to run out of soldiers, used by George McClellan",
+                "Using only the navy to blockade ports while the army stays home, used by Winfield Scott"
             ],
             "correct": 1,
-            "explanation": "Sherman believed war should be ugly enough that people would never want to fight one again. His March to the Sea destroyed an estimated $100 million in property across Georgia, including railroads, factories, and farms that supplied Confederate armies. The strategy was brutal but it worked.",
+            "explanation": "Total war meant attacking not just soldiers but the resources, supplies, and infrastructure armies need. Sherman believed war should be ugly enough that people would never want to fight one again. His March to the Sea destroyed an estimated $100 million in property across Georgia, including railroads, factories, and farms that supplied Confederate armies.",
             "topic": "The Civil War"
         },
         {
             "question": "Why was the 54th Massachusetts Infantry Regiment historically important?",
             "options": [
-                "It was the first Confederate regiment to surrender",
-                "It was one of the first official Black regiments in the Union Army, and its bravery at Fort Wagner helped open the door for nearly 180,000 Black soldiers to serve",
-                "It was the regiment that captured Atlanta",
-                "It was the only regiment to fight in every major battle of the war"
+                "It was the first Confederate regiment to lay down its arms and surrender",
+                "It was one of the first official Black regiments in the Union Army",
+                "It was the regiment that captured the city of Atlanta in 1864",
+                "It was the only regiment to fight in every single battle of the war"
             ],
             "correct": 1,
-            "explanation": "Formed in 1863 after the Emancipation Proclamation made it legal for Black men to enlist, the 54th's assault on Fort Wagner in South Carolina was a tactical failure but a moral victory. About half its soldiers were killed or wounded. Their bravery while the country watched made it impossible to deny that Black men would fight for their own freedom.",
+            "explanation": "Formed in 1863 after the Emancipation Proclamation made it legal for Black men to enlist, the 54th's assault on Fort Wagner in South Carolina was a tactical failure but a moral victory. About half its soldiers were killed or wounded. Their bravery while the country watched helped open the door for nearly 180,000 Black soldiers to serve.",
             "topic": "The Civil War"
         },
         {
             "question": "What happened at Appomattox Court House in April 1865?",
             "options": [
-                "The Confederate army won its last battle",
-                "Lincoln gave the Gettysburg Address",
-                "Confederate General Robert E. Lee surrendered to Union General Ulysses S. Grant, ending the Civil War",
-                "John Wilkes Booth shot Lincoln"
+                "The Confederate army won its final battle of the entire war there",
+                "Lincoln stood on the field and delivered the Gettysburg Address",
+                "Confederate General Lee surrendered to Union General Grant",
+                "Stonewall Jackson was accidentally shot by his own soldiers"
             ],
             "correct": 2,
-            "explanation": "After his army was trapped and starving, Lee met Grant in the parlor of a Virginia farmhouse on April 9, 1865. Grant offered generous terms. Confederate soldiers could go home with their horses. Officers kept their swords. Grant told his men, \"The war is over. The rebels are our countrymen again.\"",
+            "explanation": "Lee's surrender to Grant ended the Civil War. After his army was trapped and starving, Lee met Grant in the parlor of a Virginia farmhouse on April 9, 1865. Grant offered generous terms: Confederate soldiers could go home with their horses, and officers kept their swords. Grant told his men, \"The war is over. The rebels are our countrymen again.\"",
             "topic": "The Civil War"
         },
         {
             "question": "What did the 13th Amendment to the Constitution do?",
             "options": [
-                "It gave Black Americans the right to vote",
-                "It abolished slavery throughout the entire United States, not just in former Confederate states",
-                "It pardoned Confederate soldiers",
-                "It paid former slaveholders for their lost property"
+                "It gave Black American men the right to vote in elections",
+                "It abolished slavery throughout the entire United States",
+                "It granted citizenship to everyone born in the country",
+                "It paid former slaveholders for the workers they lost"
             ],
             "correct": 1,
-            "explanation": "Ratified in December 1865, the 13th Amendment ended slavery as a legal institution everywhere in the country. The Emancipation Proclamation had only freed enslaved people in rebel states. The 13th Amendment was permanent law, freeing about four million people who had been enslaved.",
+            "explanation": "Ratified in December 1865, the 13th Amendment ended slavery as a legal institution everywhere in the country, not just in former Confederate states. The Emancipation Proclamation had only freed enslaved people in rebel states. The 13th Amendment was permanent law, freeing about four million people who had been enslaved.",
             "topic": "The Civil War"
         },
         {
             "question": "How did the differences between Lee and Grant as generals shape the war?",
             "options": [
-                "Lee was defensive and cautious, while Grant won by relentless pressure and refusing to retreat after losses",
-                "Lee was reckless, while Grant was careful and conservative",
-                "Lee never won a battle, while Grant lost every battle he fought",
-                "There were no real differences between the two generals"
+                "Lee was a careful defender while Grant won by relentless pressure",
+                "Lee was reckless and rash while Grant was timid and slow to act",
+                "Lee never once won a battle while Grant lost every fight he led",
+                "Both generals fought the exact same cautious way the whole war"
             ],
             "correct": 0,
-            "explanation": "Lee was a brilliant tactician who often beat larger Union armies through clever maneuvers. Grant understood something earlier Union generals had not: that the war could only be won by accepting heavy losses and refusing to retreat. When Lincoln finally put Grant in command of all Union armies in 1864, the war moved toward its end.",
+            "explanation": "Lee was a brilliant, often cautious tactician who beat larger Union armies through clever maneuvers. Grant understood something earlier Union generals had not: the war could only be won by accepting heavy losses and refusing to retreat. When Lincoln finally put Grant in command of all Union armies in 1864, the war moved toward its end.",
             "topic": "The Civil War"
         },
         {
             "question": "What happened to Lincoln just five days after Lee's surrender at Appomattox?",
             "options": [
-                "He resigned from the presidency",
-                "He was elected to a third term",
-                "He was assassinated by John Wilkes Booth at Ford's Theatre",
-                "He died of natural causes"
+                "He resigned the presidency and went home to Illinois",
+                "He was elected to a rare third term in the White House",
+                "He was assassinated by John Wilkes Booth at the theatre",
+                "He fell ill and died quietly of disease at the White House"
             ],
             "correct": 2,
             "explanation": "On April 14, 1865, John Wilkes Booth shot Lincoln during a play at Ford's Theatre in Washington. Lincoln died the next morning. His death changed the course of Reconstruction. Vice President Andrew Johnson took over and was far less sympathetic to Black rights than Lincoln had been.",
@@ -1441,61 +1441,61 @@
         {
             "question": "What was the Anaconda Plan?",
             "options": [
-                "A Confederate plan to attack Washington DC",
-                "The Union's overall war strategy of blockading Southern ports, capturing the Mississippi River, and slowly squeezing the South into surrender",
-                "A failed plan to invade Canada",
-                "A plan to free all enslaved people in one day"
+                "A Confederate plan to capture Washington DC in one swift attack",
+                "The Union plan to blockade Southern ports and split the South",
+                "A failed Union scheme to invade British-held Canada from Maine",
+                "A proposal to free every enslaved person on one chosen day"
             ],
             "correct": 1,
-            "explanation": "Named after the snake that crushes its prey, the Anaconda Plan was mocked at first because it sounded too slow. In the end, it was almost exactly what won the war. Vicksburg gave the Union the Mississippi. The naval blockade strangled Southern trade. Sherman supplied the constricting pressure.",
+            "explanation": "The Anaconda Plan was the Union's overall war strategy: blockade Southern ports, capture the Mississippi River, and slowly squeeze the South into surrender, like an anaconda crushing its prey. Mocked at first as too slow, it was almost exactly what won the war. Vicksburg gave the Union the Mississippi, the blockade strangled Southern trade, and Sherman supplied the constricting pressure.",
             "topic": "The Civil War"
         },
         {
             "question": "Why was the fall of Vicksburg in July 1863 a turning point of the war?",
             "options": [
-                "It captured the Confederate capital",
-                "It gave the Union control of the entire Mississippi River and split the Confederacy in two",
-                "It killed Robert E. Lee",
-                "It ended the war"
+                "It let Union troops capture Richmond, the rebel capital",
+                "It gave the Union control of the Mississippi River",
+                "It killed the Confederate commander Robert E. Lee",
+                "It was the final battle that brought the war to an end"
             ],
             "correct": 1,
-            "explanation": "The Siege of Vicksburg lasted 47 days. When the city surrendered on July 4, 1863, the Confederacy was split in two. Texas, Arkansas, and Louisiana were now sealed off from the rest of the South. Combined with Gettysburg the day before, July 1863 was the moment the Confederacy lost its hopes of winning.",
+            "explanation": "The Siege of Vicksburg lasted 47 days. When the city surrendered on July 4, 1863, the Union controlled the entire Mississippi River and the Confederacy was split in two. Texas, Arkansas, and Louisiana were now sealed off from the rest of the South. Combined with Gettysburg the day before, July 1863 was the moment the Confederacy lost its hopes of winning.",
             "topic": "The Civil War"
         },
         {
             "question": "What was the USCT, and why did it matter for the war?",
             "options": [
-                "A Confederate spy organization",
-                "The United States Colored Troops, the official designation for nearly 180,000 Black soldiers who served in the Union Army by the war's end",
-                "A weapon used at the Battle of Gettysburg",
-                "A peace treaty proposed in 1863"
+                "A Confederate spy ring that operated inside Washington DC",
+                "The Union Army regiments made up of Black soldiers",
+                "A new rifle the North first used at the Battle of Gettysburg",
+                "A peace treaty Northern Democrats proposed back in 1863"
             ],
             "correct": 1,
-            "explanation": "The Emancipation Proclamation opened the door for Black men to enlist in the Union Army for the first time. They formed the USCT. Nearly 180,000 served, about 10 percent of all Union soldiers. Many had been enslaved themselves. Their service helped win the war and proved that Black men would fight for their own freedom.",
+            "explanation": "USCT stood for the United States Colored Troops, the official designation for nearly 180,000 Black soldiers who served in the Union Army by the war's end, about 10 percent of all Union soldiers. The Emancipation Proclamation opened the door for them to enlist. Many had been enslaved themselves. Their service helped win the war and proved that Black men would fight for their own freedom.",
             "topic": "The Civil War"
         },
         {
             "question": "Who were the Copperheads, and what did they want?",
             "options": [
-                "Confederate soldiers who specialized in fighting in mountainous terrain",
-                "Northern Democrats who opposed the war and called for an immediate peace settlement with the Confederacy, even if it meant letting slavery continue",
-                "Abolitionists who wore copper jewelry as a symbol",
-                "A regiment of soldiers from Tennessee"
+                "Confederate raiders who specialized in fighting in mountain country",
+                "Northern Democrats who opposed the war and wanted immediate peace",
+                "Abolitionists in the North who wore copper jewelry as their symbol",
+                "A famous regiment of Union volunteer soldiers raised in Tennessee"
             ],
             "correct": 1,
-            "explanation": "The Copperheads were Northern Democrats who wanted the war to end immediately. The name came from a poisonous snake. Republicans used the term as an insult. Sherman's capture of Atlanta in 1864 helped Lincoln win re-election against the Copperheads, ending their hopes of negotiating peace with the Confederacy.",
+            "explanation": "The Copperheads were Northern Democrats who wanted the war to end immediately, even if it meant letting slavery continue. The name came from a poisonous snake, and Republicans used the term as an insult. Sherman's capture of Atlanta in 1864 helped Lincoln win re-election against the Copperheads, ending their hopes of negotiating peace with the Confederacy.",
             "topic": "The Civil War"
         },
         {
             "question": "Who was Stonewall Jackson, and how did he die?",
             "options": [
-                "A Union general who was killed at Gettysburg",
-                "A famous Confederate general under Lee who was accidentally shot by his own men at the Battle of Chancellorsville",
-                "A Confederate spy who was hanged in 1862",
-                "Lincoln's first Secretary of War"
+                "A Union general who was killed leading a charge at Gettysburg",
+                "A Confederate general accidentally shot by his own men in 1863",
+                "A Confederate spy who was captured and hanged by the Union in 1862",
+                "Lincoln's first Secretary of War who resigned early in the conflict"
             ],
             "correct": 1,
-            "explanation": "Jackson earned his nickname at the First Battle of Bull Run for standing firm under fire. He served as Lee's most trusted commander. At Chancellorsville in May 1863, he was shot by his own men in the darkness while scouting. He died eight days later. Lee never found a replacement who could match Jackson's speed and daring.",
+            "explanation": "Stonewall Jackson was a famous Confederate general under Lee. He earned his nickname at the First Battle of Bull Run for standing firm under fire and became Lee's most trusted commander. At Chancellorsville in May 1863, he was shot by his own men in the darkness while scouting and died eight days later. Lee never found a replacement who could match Jackson's speed and daring.",
             "topic": "The Civil War"
         },
         {
