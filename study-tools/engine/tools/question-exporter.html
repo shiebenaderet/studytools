@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Question Export Tool</title>
+<style>
+  :root { --bg:#f7f5f0; --card:#fff; --ink:#2a2a2a; --muted:#666; --accent:#7A1F1F; --line:#d8d2c4; --ok:#2F855A; --warn:#C05621; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--ink); padding:24px; }
+  h1 { margin:0 0 4px; font-size:1.4em; }
+  .sub { color:var(--muted); margin-bottom:20px; font-size:.9em; }
+  .toolbar { display:flex; flex-wrap:wrap; gap:12px; align-items:center; background:var(--card); padding:14px 16px; border-radius:10px; margin-bottom:16px; box-shadow:0 1px 3px rgba(0,0,0,.06); }
+  select, button, input { font:inherit; }
+  select, button { padding:8px 14px; border:1px solid var(--line); border-radius:6px; background:#fff; cursor:pointer; }
+  button.primary { background:var(--accent); color:#fff; border-color:var(--accent); font-weight:600; }
+  button:disabled { opacity:.5; cursor:not-allowed; }
+  .count { color:var(--muted); font-size:.9em; }
+  .chapter { margin-bottom:14px; }
+  .chapter h2 { font-size:1em; margin:12px 0 6px; color:var(--accent); }
+  .qrow { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:10px 12px; margin-bottom:6px; }
+  .qhead { display:flex; gap:10px; align-items:flex-start; }
+  .qhead input[type=checkbox] { margin-top:4px; }
+  .qtext { flex:1; }
+  .badge { font-size:.7em; font-weight:700; color:#fff; background:var(--warn); border-radius:4px; padding:1px 6px; margin-left:6px; }
+  .editbtn { background:none; border:none; color:var(--accent); text-decoration:underline; padding:0; font-size:.85em; }
+  .editor { margin-top:8px; padding:8px; border-top:1px dashed var(--line); display:none; }
+  .editor.open { display:block; }
+  .editor label { display:block; font-size:.8em; color:var(--muted); margin-top:6px; }
+  .editor input[type=text] { width:100%; padding:6px 8px; border:1px solid var(--line); border-radius:6px; }
+  .editor .optline { display:flex; gap:6px; align-items:center; margin-top:4px; }
+  .editor .optline input[type=radio] { flex:0 0 auto; }
+  .over { color:var(--warn); font-size:.75em; }
+</style>
+</head>
+<body>
+<h1>Question Export Tool</h1>
+<div class="sub">Select practice questions, edit if needed, and download a CSV for Blooket or GiMKit. Edits here do not change the study site.</div>
+
+<div class="toolbar">
+  <label>Unit <select id="unitSel"></select></label>
+  <button id="selAll" class="secondary">Select all</button>
+  <button id="selNone" class="secondary">Clear</button>
+  <input id="filter" type="text" placeholder="Filter by text..." style="flex:1;min-width:160px;padding:8px 10px;border:1px solid var(--line);border-radius:6px;">
+  <span class="count" id="count">0 selected</span>
+</div>
+
+<div class="toolbar">
+  <label>Platform <select id="platformSel"><option value="blooket">Blooket</option><option value="gimkit">GiMKit</option></select></label>
+  <button id="exportBtn" class="primary" disabled>Export CSV</button>
+</div>
+
+<div id="list"></div>
+
+<script src="question-export-core.js"></script>
+<script>
+(function () {
+  var UNITS_URL = '../../units/units.json';
+  var state = { unitId: null, questions: [], selected: {}, edits: {} };
+
+  var el = function (tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+
+  function effective(q) {
+    var e = state.edits[q.id];
+    if (!e) return q;
+    return { id:q.id, question:e.question, options:e.options.slice(), correctIndex:e.correctIndex, topic:q.topic };
+  }
+  function isDirty(q) { return !!state.edits[q.id]; }
+
+  function selectedList() {
+    return state.questions.filter(function (q) { return state.selected[q.id]; }).map(effective);
+  }
+
+  function updateCount() {
+    var n = Object.keys(state.selected).filter(function (k) { return state.selected[k]; }).length;
+    document.getElementById('count').textContent = n + ' selected';
+    document.getElementById('exportBtn').disabled = n === 0;
+  }
+
+  function render() {
+    var list = document.getElementById('list');
+    list.textContent = '';
+    var filter = document.getElementById('filter').value.toLowerCase();
+    var byTopic = {};
+    var order = [];
+    state.questions.forEach(function (q) {
+      var eq = effective(q);
+      if (filter && eq.question.toLowerCase().indexOf(filter) === -1) return;
+      if (!byTopic[q.topic]) { byTopic[q.topic] = []; order.push(q.topic); }
+      byTopic[q.topic].push(q);
+    });
+    order.forEach(function (topic) {
+      var sec = el('div', 'chapter');
+      sec.append(el('h2', null, topic));
+      byTopic[topic].forEach(function (q) { sec.append(renderRow(q)); });
+      list.append(sec);
+    });
+    updateCount();
+  }
+
+  function renderRow(q) {
+    var eq = effective(q);
+    var row = el('div', 'qrow');
+    var head = el('div', 'qhead');
+    var cb = el('input'); cb.type = 'checkbox'; cb.checked = !!state.selected[q.id];
+    cb.onchange = function () { state.selected[q.id] = cb.checked; updateCount(); };
+    var txt = el('div', 'qtext'); txt.append(document.createTextNode(eq.question));
+    if (isDirty(q)) txt.append(el('span', 'badge', 'edited'));
+    var edit = el('button', 'editbtn', 'edit');
+    var editor = el('div', 'editor');
+    edit.onclick = function () { editor.classList.toggle('open'); };
+    head.append(cb, txt, edit);
+    row.append(head, buildEditor(q, editor));
+    return row;
+  }
+
+  function buildEditor(q, editor) {
+    var eq = effective(q);
+    editor.textContent = '';
+    editor.append(el('label', null, 'Question'));
+    var qIn = el('input'); qIn.type = 'text'; qIn.value = eq.question;
+    editor.append(qIn);
+    var optInputs = [];
+    eq.options.forEach(function (opt, idx) {
+      var line = el('div', 'optline');
+      var radio = el('input'); radio.type = 'radio'; radio.name = 'correct-' + q.id; radio.checked = idx === eq.correctIndex;
+      var oin = el('input'); oin.type = 'text'; oin.value = opt; oin.style.flex = '1';
+      line.append(radio, oin);
+      editor.append(line);
+      optInputs.push({ radio: radio, input: oin });
+    });
+    var save = el('button', 'secondary', 'Apply edit'); save.style.marginTop = '8px';
+    save.onclick = function () {
+      var ci = 0; optInputs.forEach(function (o, i) { if (o.radio.checked) ci = i; });
+      state.edits[q.id] = { question: qIn.value, options: optInputs.map(function (o) { return o.input.value; }), correctIndex: ci };
+      render();
+    };
+    editor.append(save);
+    return editor;
+  }
+
+  function loadUnit(unitId) {
+    state.unitId = unitId; state.selected = {}; state.edits = {};
+    fetch('../../units/' + unitId + '/config.json')
+      .then(function (r) { return r.json(); })
+      .then(function (cfg) { state.questions = window.QExport.normalizeQuestions(cfg); render(); })
+      .catch(function (e) { document.getElementById('list').textContent = 'Could not load unit: ' + e; });
+  }
+
+  function doExport() {
+    var platform = document.getElementById('platformSel').value;
+    var qs = selectedList();
+    var csv = platform === 'gimkit' ? window.QExport.formatGimkit(qs) : window.QExport.formatBlooket(qs);
+    var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = state.unitId + '-' + platform + '.csv';
+    document.body.append(a); a.click(); a.remove();
+    URL.revokeObjectURL(a.href);
+  }
+
+  document.getElementById('selAll').onclick = function () { state.questions.forEach(function (q) { state.selected[q.id] = true; }); render(); };
+  document.getElementById('selNone').onclick = function () { state.selected = {}; render(); };
+  document.getElementById('filter').oninput = render;
+  document.getElementById('exportBtn').onclick = doExport;
+  document.getElementById('unitSel').onchange = function () { loadUnit(this.value); };
+
+  fetch(UNITS_URL).then(function (r) { return r.json(); }).then(function (data) {
+    var sel = document.getElementById('unitSel');
+    (data.units || []).forEach(function (u) {
+      var o = el('option', null, u.title + (u.retired ? ' (retired)' : ''));
+      o.value = u.id; sel.append(o);
+    });
+    if (data.units && data.units.length) loadUnit(data.units[0].id);
+  });
+})();
+</script>
+</body>
+</html>
