@@ -3,6 +3,31 @@
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   if (typeof window !== 'undefined') window.QExport = api;
 })(this, function () {
+  function defaultShuffle(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
+    return a;
+  }
+  function pickDistractors(items, correctValue, category, n, shuffleFn) {
+    shuffleFn = shuffleFn || defaultShuffle;
+    var seen = {}; seen[correctValue] = true;
+    function collect(pool) {
+      var out = [];
+      shuffleFn(pool).forEach(function (it) {
+        if (out.length >= n) return;
+        if (seen[it.value]) return;
+        seen[it.value] = true; out.push(it.value);
+      });
+      return out;
+    }
+    var sameCat = items.filter(function (it) { return it.category === category; });
+    var result = collect(sameCat);
+    if (result.length < n) {
+      var others = items.filter(function (it) { return it.category !== category; });
+      result = result.concat(collect(others).slice(0, n - result.length));
+    }
+    return result.slice(0, n);
+  }
   function csvField(v) {
     v = String(v == null ? '' : v);
     return '"' + v.replace(/"/g, '""') + '"';
@@ -39,5 +64,5 @@
     });
     return toCsv(rows);
   }
-  return { csvField: csvField, toCsv: toCsv, normalizeQuestions: normalizeQuestions, formatBlooket: formatBlooket, formatGimkit: formatGimkit };
+  return { csvField: csvField, toCsv: toCsv, normalizeQuestions: normalizeQuestions, formatBlooket: formatBlooket, formatGimkit: formatGimkit, pickDistractors: pickDistractors };
 });

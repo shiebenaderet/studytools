@@ -92,6 +92,21 @@ cwQuestions.forEach(function (q, i) {
   eq('gimkit roundtrip q' + i, row[1], q.options[q.correctIndex]); // Correct Answer column
 });
 
+// === TASK 1 (new): pickDistractors + defaultShuffle ===
+var identityShuffle = function (a) { return a.slice(); };
+var pdItems = [
+  {value:'a',category:'C1'},{value:'b',category:'C1'},{value:'c',category:'C1'},{value:'d',category:'C1'},
+  {value:'x',category:'C2'},{value:'y',category:'C2'}
+];
+var pd1 = core.pickDistractors(pdItems, 'a', 'C1', 3, identityShuffle);
+eq('pickDistractors C1 length', pd1.length, 3);
+deepEq('pickDistractors C1 values', pd1, ['b','c','d']);
+eq('pickDistractors C1 excludes correct', pd1.indexOf('a'), -1);
+var pd2 = core.pickDistractors(pdItems, 'x', 'C2', 3, identityShuffle);
+eq('pickDistractors C2 length', pd2.length, 3);
+eq('pickDistractors C2 excludes correct', pd2.indexOf('x'), -1);
+eq('pickDistractors C2 unique', new Set(pd2).size, 3);
+
 if (failures.length) {
   console.log('FAIL (' + failures.length + ')');
   failures.forEach(function (f) { console.log('- ' + f); });
