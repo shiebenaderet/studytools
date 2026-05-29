@@ -18,6 +18,8 @@
   .count { color:var(--muted); font-size:.9em; }
   .chapter { margin-bottom:14px; }
   .chapter h2 { font-size:1em; margin:12px 0 6px; color:var(--accent); }
+  .chapter-head { display:flex; align-items:center; gap:6px; }
+  .chapter-head input[type=checkbox] { cursor:pointer; }
   .qrow { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:10px 12px; margin-bottom:6px; }
   .qhead { display:flex; gap:10px; align-items:flex-start; }
   .qhead input[type=checkbox] { margin-top:4px; }
@@ -91,11 +93,24 @@
     });
     order.forEach(function (topic) {
       var sec = el('div', 'chapter');
-      sec.append(el('h2', null, topic));
+      sec.append(renderChapterHead(topic, byTopic[topic]));
       byTopic[topic].forEach(function (q) { sec.append(renderRow(q)); });
       list.append(sec);
     });
     updateCount();
+  }
+
+  function renderChapterHead(topic, qs) {
+    var head = el('h2', 'chapter-head');
+    var allSelected = qs.every(function (q) { return state.selected[q.id]; });
+    var cb = el('input'); cb.type = 'checkbox'; cb.checked = allSelected;
+    cb.title = allSelected ? 'Deselect all in this chapter' : 'Select all in this chapter';
+    cb.onchange = function () {
+      qs.forEach(function (q) { state.selected[q.id] = cb.checked; });
+      render();
+    };
+    head.append(cb, document.createTextNode(' ' + topic));
+    return head;
   }
 
   function renderRow(q) {
