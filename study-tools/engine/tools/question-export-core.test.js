@@ -145,6 +145,14 @@ eq('normalizeVocab TD correct', vocabTD[0].options[vocabTD[0].correctIndex], 'ad
 var vocabEnc = core.normalizeVocab(vocabCfg, { direction: 'definition-term', includeEncounter: true }, identityShuffle);
 eq('normalizeVocab includeEncounter length', vocabEnc.length, 5);
 
+// === TASK 4 (new): formatGimkitTyped ===
+var typedQ = [{ id:0, question:'_____ is one.', options:['alpha','b','c','d'], correctIndex:0, topic:'G1' }];
+var typedCsv = core.formatGimkitTyped(typedQ);
+var typedLines = typedCsv.replace(/\r\n$/, '').split('\r\n');
+eq('formatGimkitTyped header', typedLines[0], '"Question","Answer"');
+eq('formatGimkitTyped data', typedLines[1], '"_____ is one.","alpha"');
+eq('formatGimkitTyped col count', typedLines[1].split('","').length, 2);
+
 if (failures.length) {
   console.log('FAIL (' + failures.length + ')');
   failures.forEach(function (f) { console.log('- ' + f); });

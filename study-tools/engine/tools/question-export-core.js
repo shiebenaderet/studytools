@@ -99,6 +99,11 @@
     });
     return toCsv(rows);
   }
+  function formatGimkitTyped(questions) {
+    var rows = [['Question', 'Answer']];
+    questions.forEach(function (q) { rows.push([q.question, q.options[q.correctIndex]]); });
+    return toCsv(rows);
+  }
   function formatGimkit(questions) {
     var rows = [['Question','Correct Answer','Incorrect Answer 1','Incorrect Answer 2','Incorrect Answer 3']];
     questions.forEach(function (q) {
@@ -107,5 +112,5 @@
     });
     return toCsv(rows);
   }
-  return { csvField: csvField, toCsv: toCsv, normalizeQuestions: normalizeQuestions, formatBlooket: formatBlooket, formatGimkit: formatGimkit, pickDistractors: pickDistractors, normalizeFib: normalizeFib, normalizeVocab: normalizeVocab };
+  return { csvField: csvField, toCsv: toCsv, normalizeQuestions: normalizeQuestions, formatBlooket: formatBlooket, formatGimkit: formatGimkit, formatGimkitTyped: formatGimkitTyped, pickDistractors: pickDistractors, normalizeFib: normalizeFib, normalizeVocab: normalizeVocab };
 });
