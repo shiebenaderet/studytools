@@ -31,5 +31,13 @@
     });
     return toCsv(rows);
   }
-  return { csvField: csvField, toCsv: toCsv, normalizeQuestions: normalizeQuestions, formatBlooket: formatBlooket };
+  function formatGimkit(questions) {
+    var rows = [['Question','Correct Answer','Incorrect Answer 1','Incorrect Answer 2','Incorrect Answer 3']];
+    questions.forEach(function (q) {
+      var wrong = q.options.filter(function (_, idx) { return idx !== q.correctIndex; });
+      rows.push([q.question, q.options[q.correctIndex], wrong[0] || '', wrong[1] || '', wrong[2] || '']);
+    });
+    return toCsv(rows);
+  }
+  return { csvField: csvField, toCsv: toCsv, normalizeQuestions: normalizeQuestions, formatBlooket: formatBlooket, formatGimkit: formatGimkit };
 });

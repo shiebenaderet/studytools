@@ -42,6 +42,12 @@ var t3lines = t3.replace(/\r\n$/, '').split('\r\n');
 eq('blooket header', t3lines[0], '"Question #","Question Text","Answer 1","Answer 2","Answer 3","Answer 4","Time Limit (sec)","Correct Answer(s)"');
 eq('blooket data', t3lines[1], '"1","What, then?","o0","o1","o2","o3","20","2"');
 
+// === TASK 4: formatGimkit ===
+var t4 = core.formatGimkit([{ id:0, question:'What, then?', options:['o0','o1','o2','o3'], correctIndex:1, topic:'T' }]);
+var t4lines = t4.replace(/\r\n$/, '').split('\r\n');
+eq('gimkit header', t4lines[0], '"Question","Correct Answer","Incorrect Answer 1","Incorrect Answer 2","Incorrect Answer 3"');
+eq('gimkit data', t4lines[1], '"What, then?","o1","o0","o2","o3"');
+
 if (failures.length) {
   console.log('FAIL (' + failures.length + ')');
   failures.forEach(function (f) { console.log('- ' + f); });
