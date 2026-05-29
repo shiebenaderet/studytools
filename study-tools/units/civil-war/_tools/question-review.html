@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Civil War MC Review</title>
+<style>
+  :root {
+    --primary: #C8443A;
+    --primaryBold: #7A1F1F;
+    --secondary: #4A5568;
+    --ok: #2F855A;
+    --okBg: #F0FFF4;
+    --flag: #C05621;
+    --flagBg: #FFFAF0;
+    --line: #E2E8F0;
+    --bg: #F7FAFC;
+    --ink: #1A202C;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.5;
+  }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--primaryBold); color: #fff;
+    padding: 14px 20px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  }
+  header h1 { font-size: 16px; margin: 0; font-weight: 700; }
+  .counts { font-size: 13px; opacity: .95; }
+  .counts b { font-weight: 700; }
+  .bar { flex: 1; min-width: 120px; height: 8px; background: rgba(255,255,255,.25); border-radius: 4px; overflow: hidden; }
+  .bar > i { display: block; height: 100%; background: #fff; width: 0; transition: width .2s; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 20px 16px 120px; }
+  .card {
+    background: #fff; border: 1px solid var(--line); border-radius: 12px;
+    padding: 20px; margin-bottom: 16px; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+    scroll-margin-top: 80px;
+  }
+  .card.approved { border-color: var(--ok); background: var(--okBg); }
+  .card.flagged { border-color: var(--flag); background: var(--flagBg); }
+  .meta { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 8px; }
+  .topic { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--primary); }
+  .idx { font-size: 12px; color: var(--secondary); }
+  .q { font-size: 17px; font-weight: 700; margin: 4px 0 14px; }
+  .opt { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px; margin-bottom: 6px; border: 1px solid transparent; }
+  .opt.correct { background: #F0FFF4; border-color: #9AE6B4; }
+  .dot { flex: 0 0 18px; width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--secondary); }
+  .opt.correct .dot { border-color: var(--ok); background: var(--ok); box-shadow: inset 0 0 0 3px #fff; }
+  .otext { flex: 1; }
+  .olen {
+    flex: 0 0 auto; font-variant-numeric: tabular-nums; font-size: 12px; color: var(--secondary);
+    min-width: 34px; text-align: right;
+  }
+  .lenbar { flex: 0 0 90px; height: 8px; background: #EDF2F7; border-radius: 4px; overflow: hidden; }
+  .lenbar > i { display: block; height: 100%; }
+  .opt.correct .lenbar > i { background: var(--ok); }
+  .opt:not(.correct) .lenbar > i { background: #A0AEC0; }
+  .gap { font-size: 12px; margin: 6px 0 0; color: var(--secondary); }
+  .gap.warn { color: var(--flag); font-weight: 700; }
+  .expl { margin-top: 14px; padding: 12px 14px; background: #F7FAFC; border-left: 3px solid var(--primary); border-radius: 0 8px 8px 0; font-size: 14px; }
+  .expl b { color: var(--primaryBold); }
+  .actions { margin-top: 16px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  button { font: inherit; cursor: pointer; border-radius: 8px; border: 1px solid var(--line); padding: 8px 14px; background: #fff; }
+  button.approve { border-color: var(--ok); color: var(--ok); font-weight: 700; }
+  button.approve.on { background: var(--ok); color: #fff; }
+  button.flag { border-color: var(--flag); color: var(--flag); font-weight: 700; }
+  button.flag.on { background: var(--flag); color: #fff; }
+  .note { flex: 1; min-width: 200px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; font: inherit; }
+  footer {
+    position: fixed; bottom: 0; left: 0; right: 0; background: #fff; border-top: 1px solid var(--line);
+    padding: 10px 16px; display: flex; gap: 12px; align-items: center; justify-content: center; flex-wrap: wrap;
+  }
+  footer button { font-weight: 700; }
+  #summaryBtn { background: var(--primary); color: #fff; border-color: var(--primary); }
+  #out { max-width: 760px; margin: 0 auto; }
+  pre { white-space: pre-wrap; word-break: break-word; background: #1A202C; color: #E2E8F0; padding: 14px; border-radius: 10px; font-size: 12px; }
+  .hint { font-size: 12px; color: var(--secondary); }
+</style>
+</head>
+<body>
+<header>
+  <h1>Civil War MC Review</h1>
+  <span class="counts" id="counts">loading...</span>
+  <span class="bar"><i id="progress"></i></span>
+</header>
+
+<div class="wrap" id="cards"><p>Loading questions from config.json...</p></div>
+
+<footer>
+  <button id="jumpFlag">Next unreviewed</button>
+  <button id="summaryBtn">Show summary &amp; copy flags</button>
+  <span class="hint">Decisions saved in this browser automatically.</span>
+</footer>
+<div class="wrap" id="out"></div>
+
+<script>
+const STORE_KEY = 'cw-mc-review-v1';
+let questions = [];
+let decisions = {}; // qid -> { state: 'approved'|'flagged', note: '' }
+
+function load() {
+  try { decisions = JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } catch (e) { decisions = {}; }
+}
+function save() { localStorage.setItem(STORE_KEY, JSON.stringify(decisions)); }
+
+function qid(q, i) { return i + '::' + (q.question || '').slice(0, 40); }
+
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
+}
+
+function el(tag, className, text) {
+  const e = document.createElement(tag);
+  if (className) e.className = className;
+  if (text != null) e.textContent = text;
+  return e;
+}
+
+function render() {
+  const cards = document.getElementById('cards');
+  cards.textContent = '';
+  questions.forEach((q, i) => {
+    if (!q.options || typeof q.correct !== 'number') return;
+    const id = qid(q, i);
+    const dec = decisions[id] || { state: '', note: '' };
+    const lens = q.options.map(o => (o || '').length);
+    const maxLen = Math.max(...lens);
+    const correctLen = q.options[q.correct].length;
+    const maxDistractor = Math.max(...lens.filter((_, idx) => idx !== q.correct));
+    const gap = correctLen - maxDistractor;
+
+    const card = el('div', 'card' + (dec.state ? ' ' + dec.state : ''));
+    card.id = 'card-' + i;
+
+    const meta = el('div', 'meta');
+    meta.append(el('span', 'topic', q.topic || '(no topic)'), el('span', 'idx', 'Q ' + (i + 1) + ' / ' + questions.length));
+    card.append(meta);
+
+    card.append(el('div', 'q', q.question));
+
+    shuffle(q.options.map((text, origIdx) => ({ text, origIdx }))).forEach(o => {
+      const isCorrect = o.origIdx === q.correct;
+      const row = el('div', 'opt' + (isCorrect ? ' correct' : ''));
+      row.append(el('span', 'dot'));
+      row.append(el('span', 'otext', o.text));
+      const lb = el('span', 'lenbar');
+      const fill = el('i');
+      fill.style.width = Math.round((o.text.length / maxLen) * 100) + '%';
+      lb.append(fill);
+      row.append(lb);
+      row.append(el('span', 'olen', String(o.text.length)));
+      card.append(row);
+    });
+
+    card.append(el('div', 'gap' + (gap > 10 ? ' warn' : ''),
+      gap > 10
+        ? 'WARNING: correct answer is ' + gap + ' chars longer than the longest distractor'
+        : 'Correct answer length gap vs longest distractor: ' + (gap >= 0 ? '+' : '') + gap + ' chars (good)'));
+
+    if (q.explanation) {
+      const ex = el('div', 'expl');
+      ex.append(el('b', null, 'Student sees after answering: '), document.createTextNode(q.explanation));
+      card.append(ex);
+    }
+
+    const actions = el('div', 'actions');
+    const aBtn = el('button', 'approve' + (dec.state === 'approved' ? ' on' : ''), 'Approve');
+    const fBtn = el('button', 'flag' + (dec.state === 'flagged' ? ' on' : ''), 'Needs fix');
+    const note = el('input', 'note');
+    note.placeholder = 'What needs fixing? (optional)';
+    note.value = dec.note || '';
+
+    aBtn.onclick = () => { decisions[id] = { state: 'approved', note: note.value }; save(); render(); };
+    fBtn.onclick = () => { decisions[id] = { state: 'flagged', note: note.value }; save(); render(); };
+    note.oninput = () => { if (decisions[id]) { decisions[id].note = note.value; save(); } };
+
+    actions.append(aBtn, fBtn, note);
+    card.append(actions);
+    cards.append(card);
+  });
+  updateCounts();
+}
+
+function updateCounts() {
+  const total = questions.length;
+  let approved = 0, flagged = 0;
+  questions.forEach((q, i) => {
+    const d = decisions[qid(q, i)];
+    if (d && d.state === 'approved') approved++;
+    if (d && d.state === 'flagged') flagged++;
+  });
+  const reviewed = approved + flagged;
+  const c = document.getElementById('counts');
+  c.textContent = '';
+  c.append(
+    el('b', null, String(approved)), document.createTextNode(' approved | '),
+    el('b', null, String(flagged)), document.createTextNode(' need fix | ' + (total - reviewed) + ' left of ' + total)
+  );
+  document.getElementById('progress').style.width = Math.round((reviewed / total) * 100) + '%';
+}
+
+document.getElementById('jumpFlag').onclick = () => {
+  for (let i = 0; i < questions.length; i++) {
+    if (!decisions[qid(questions[i], i)]) {
+      document.getElementById('card-' + i).scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
+  }
+  alert('Every question has been reviewed.');
+};
+
+document.getElementById('summaryBtn').onclick = () => {
+  const flags = [];
+  questions.forEach((q, i) => {
+    const d = decisions[qid(questions[i], i)];
+    if (d && d.state === 'flagged') {
+      flags.push('Q' + (i + 1) + ' [' + (q.topic || '?') + ']: ' + q.question + (d.note ? '\n    NOTE: ' + d.note : ''));
+    }
+  });
+  const out = document.getElementById('out');
+  out.textContent = '';
+  out.append(el('h3', null, flags.length ? flags.length + ' question(s) flagged for fixing:' : 'No questions flagged. All clear!'));
+  if (flags.length) {
+    out.append(el('pre', null, flags.join('\n\n')));
+    if (navigator.clipboard) navigator.clipboard.writeText(flags.join('\n\n')).catch(() => {});
+    out.append(el('p', 'hint', 'Copied to clipboard. Paste this back to me and I will fix exactly these.'));
+  }
+  out.scrollIntoView({ behavior: 'smooth' });
+};
+
+fetch('../config.json')
+  .then(r => r.json())
+  .then(cfg => {
+    questions = (cfg.practiceQuestions || []).filter(q => q.options && typeof q.correct === 'number');
+    load();
+    render();
+  })
+  .catch(err => {
+    document.getElementById('cards').textContent = 'Could not load config.json: ' + err
+      + '  (Make sure you are viewing this over http://localhost, not file://)';
+  });
+</script>
+</body>
+</html>
