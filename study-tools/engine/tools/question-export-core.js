@@ -189,5 +189,34 @@
       '    </item>'
     ].join('\n');
   }
-  return { csvField: csvField, toCsv: toCsv, normalizeQuestions: normalizeQuestions, formatBlooket: formatBlooket, formatGimkit: formatGimkit, formatGimkitTyped: formatGimkitTyped, pickDistractors: pickDistractors, normalizeFib: normalizeFib, normalizeVocab: normalizeVocab, xmlEscape: xmlEscape, slugify: slugify, renderMCItem: renderMCItem, renderShortAnswerItem: renderShortAnswerItem };
+  function renderEssayItem(q, idx) {
+    var itemId = 'q' + idx;
+    var ess = q._essay || {};
+    var blocks = [String(q.question || '').trim()];
+    if (ess.keyTerms && ess.keyTerms.length) {
+      blocks.push('');
+      blocks.push('Key terms to consider: ' + ess.keyTerms.join(', '));
+    }
+    if (ess.sentenceStarters && ess.sentenceStarters.length) {
+      blocks.push('');
+      blocks.push('Suggested sentence starters:');
+      ess.sentenceStarters.forEach(function (s) { blocks.push('- ' + s); });
+    }
+    var combined = blocks.join('\n');
+    return [
+      '    <item ident="' + itemId + '" title="Question ' + idx + '">',
+      '      <itemmetadata><qtimetadata>',
+      '        <qtimetadatafield><fieldlabel>question_type</fieldlabel><fieldentry>essay_question</fieldentry></qtimetadatafield>',
+      '        <qtimetadatafield><fieldlabel>points_possible</fieldlabel><fieldentry>100</fieldentry></qtimetadatafield>',
+      '      </qtimetadata></itemmetadata>',
+      '      <presentation>',
+      '        <material><mattext texttype="text/plain">' + xmlEscape(combined) + '</mattext></material>',
+      '        <response_str ident="response1" rcardinality="Single">',
+      '          <render_fib><response_label ident="answer1" rshuffle="No"/></render_fib>',
+      '        </response_str>',
+      '      </presentation>',
+      '    </item>'
+    ].join('\n');
+  }
+  return { csvField: csvField, toCsv: toCsv, normalizeQuestions: normalizeQuestions, formatBlooket: formatBlooket, formatGimkit: formatGimkit, formatGimkitTyped: formatGimkitTyped, pickDistractors: pickDistractors, normalizeFib: normalizeFib, normalizeVocab: normalizeVocab, xmlEscape: xmlEscape, slugify: slugify, renderMCItem: renderMCItem, renderShortAnswerItem: renderShortAnswerItem, renderEssayItem: renderEssayItem };
 });

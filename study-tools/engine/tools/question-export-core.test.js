@@ -206,6 +206,22 @@ eq('sa case insensitive flag', (saXml.match(/case="No"/g) || []).length, 2);
 eq('sa has alpha answer', saXml.indexOf('>alpha</') >= 0, true);
 eq('sa has Alpha answer', saXml.indexOf('>Alpha</') >= 0, true);
 
+// renderEssayItem
+var esQ = { id: 0, question: 'How did geography shape the North & South?', _essay: { keyTerms: ['sectionalism', 'Cotton Kingdom'], sentenceStarters: ['Geography pushed...', 'In the North...'] }, options: [], correctIndex: -1, topic: 'T' };
+var esXml = core.renderEssayItem(esQ, 3);
+eq('essay item ident', /<item ident="q3"/.test(esXml), true);
+eq('essay qtype', /<fieldentry>essay_question<\/fieldentry>/.test(esXml), true);
+eq('essay points 100', /<fieldlabel>points_possible<\/fieldlabel>\s*<fieldentry>100<\/fieldentry>/.test(esXml), true);
+eq('essay response_str + render_fib', /<response_str[\s\S]*<render_fib/.test(esXml), true);
+eq('essay no respcondition', /<respcondition/.test(esXml), false);
+eq('essay text/plain mattext', /<mattext texttype="text\/plain">/.test(esXml), true);
+eq('essay contains question', esXml.indexOf('How did geography shape the North &amp; South?') >= 0, true);
+eq('essay contains keyTerms', esXml.indexOf('Key terms to consider: sectionalism, Cotton Kingdom') >= 0, true);
+eq('essay contains starters', esXml.indexOf('Suggested sentence starters:') >= 0, true);
+eq('essay contains starter bullet', esXml.indexOf('- Geography pushed') >= 0, true);
+eq('essay no rubric word', esXml.toLowerCase().indexOf('rubric') === -1, true);
+eq('essay no exemplar', esXml.indexOf('exemplar') === -1, true);
+
 if (failures.length) {
   console.log('FAIL (' + failures.length + ')');
   failures.forEach(function (f) { console.log('- ' + f); });
