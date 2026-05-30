@@ -1,0 +1,11 @@
+JSZip 3.10.1
+Source: https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js
+Downloaded: 2026-05-30
+sha256: acc7e41455a80765b5fd9c7ee1b8078a6d160bbbca455aeae854de65c947d59e
+License: MIT (https://github.com/Stuk/jszip/blob/main/LICENSE.markdown)
+
+Why vendored:
+This project self-hosts every dependency (per the privacy posture documented
+in README.md). JSZip is the only file in this codebase that touches an
+external library; it is wrapped by question-exporter-zip.js so swapping the
+zip library later is a one-file change.
