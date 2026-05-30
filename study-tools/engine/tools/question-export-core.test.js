@@ -165,6 +165,22 @@ eq('real vocab mustknow only', vocabReal.length, 47);
 var vocabAll = core.normalizeVocab(cfgReal, { direction: 'definition-term', includeEncounter: true });
 eq('real vocab all', vocabAll.length, 70);
 
+// xmlEscape
+eq('xml &', core.xmlEscape('a & b'), 'a &amp; b');
+eq('xml <', core.xmlEscape('1 < 2'), '1 &lt; 2');
+eq('xml >', core.xmlEscape('b > a'), 'b &gt; a');
+eq('xml "', core.xmlEscape('say "hi"'), 'say &quot;hi&quot;');
+eq("xml '", core.xmlEscape("it's"), 'it&apos;s');
+eq('xml null', core.xmlEscape(null), '');
+eq('xml number', core.xmlEscape(42), '42');
+
+// slugify
+eq('slug basic', core.slugify('Civil War'), 'civil-war');
+eq('slug strip', core.slugify('  Civil  War!! '), 'civil-war');
+eq('slug unicode', core.slugify('Café & Crémes'), 'cafe-cremes');
+eq('slug already', core.slugify('civil-war-vocab'), 'civil-war-vocab');
+eq('slug empty', core.slugify(''), 'untitled');
+
 if (failures.length) {
   console.log('FAIL (' + failures.length + ')');
   failures.forEach(function (f) { console.log('- ' + f); });
