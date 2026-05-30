@@ -250,6 +250,22 @@ eq('essay assessment id', pkgEss.assessmentId, 'civil-war-shortanswer');
 eq('essay cc_maxattempts 2', pkgEss.fileMap['civil-war-shortanswer/civil-war-shortanswer.xml'].indexOf('<fieldentry>2</fieldentry>') >= 0, true);
 eq('essay uses essay_question', pkgEss.fileMap['civil-war-shortanswer/civil-war-shortanswer.xml'].indexOf('essay_question') >= 0, true);
 
+// validateForCanvas
+function vqMC(opts) { return Object.assign({ id:0, question:'Q', options:['a','b','c','d'], correctIndex:0, topic:'T' }, opts || {}); }
+var vOk = core.validateForCanvas([vqMC()], { title: 'Hello', source: 'practice', unitId: 'u' });
+eq('validate ok', vOk.ok, true);
+eq('validate no errors', vOk.errors.length, 0);
+var vNoTitle = core.validateForCanvas([vqMC()], { title: '   ', source: 'practice', unitId: 'u' });
+eq('validate no title fails', vNoTitle.ok, false);
+eq('validate no title rule', vNoTitle.errors.some(function (e) { return e.ruleId === 'title-present'; }), true);
+var vNoQ = core.validateForCanvas([], { title: 'X', source: 'practice', unitId: 'u' });
+eq('validate empty fails', vNoQ.ok, false);
+eq('validate empty rule', vNoQ.errors.some(function (e) { return e.ruleId === 'at-least-one-selected'; }), true);
+var vBadMc = core.validateForCanvas([vqMC({ correctIndex: -1 })], { title: 'X', source: 'practice', unitId: 'u' });
+eq('validate mc no correct', vBadMc.errors.some(function (e) { return e.ruleId === 'mc-has-correct'; }), true);
+var vBadSA = core.validateForCanvas([{ id:0, question:'Q', options:['','b','c','d'], correctIndex:0, topic:'T' }], { title:'X', source:'fib', unitId:'u' });
+eq('validate short_answer needs answer', vBadSA.errors.some(function (e) { return e.ruleId === 'short-answer-has-accepted'; }), true);
+
 if (failures.length) {
   console.log('FAIL (' + failures.length + ')');
   failures.forEach(function (f) { console.log('- ' + f); });

@@ -286,5 +286,36 @@
     fileMap[assessmentId + '/' + assessmentId + '.xml'] = assessmentXml;
     return { assessmentId: assessmentId, fileMap: fileMap };
   }
-  return { csvField: csvField, toCsv: toCsv, normalizeQuestions: normalizeQuestions, formatBlooket: formatBlooket, formatGimkit: formatGimkit, formatGimkitTyped: formatGimkitTyped, pickDistractors: pickDistractors, normalizeFib: normalizeFib, normalizeVocab: normalizeVocab, xmlEscape: xmlEscape, slugify: slugify, renderMCItem: renderMCItem, renderShortAnswerItem: renderShortAnswerItem, renderEssayItem: renderEssayItem, buildAssessmentXml: buildAssessmentXml, buildManifestXml: buildManifestXml, buildCanvasPackage: buildCanvasPackage };
+  var CANVAS_RULES = [
+    { id: 'title-present', message: 'Quiz title is required.',
+      check: function (qs, opts) { return (!opts.title || !String(opts.title).trim()) ? [-1] : []; } },
+    { id: 'at-least-one-selected', message: 'Select at least one question.',
+      check: function (qs) { return qs.length ? [] : [-1]; } },
+    { id: 'mc-has-correct', message: 'Multiple-choice questions need at least one correct option.',
+      check: function (qs, opts) {
+        if (opts.source !== 'practice' && opts.source !== 'vocab') return [];
+        return qs.filter(function (q) { return q.correctIndex < 0 || !q.options || !q.options[q.correctIndex]; }).map(function (q) { return q.id; });
+      } },
+    { id: 'short-answer-has-accepted', message: 'Short-answer (FIB) needs an accepted answer.',
+      check: function (qs, opts) {
+        if (opts.source !== 'fib') return [];
+        return qs.filter(function (q) { return !q.options || !q.options[q.correctIndex] || !String(q.options[q.correctIndex]).trim(); }).map(function (q) { return q.id; });
+      } },
+    { id: 'essay-no-scoring', message: 'Essay questions must not carry scoring data.',
+      check: function (qs, opts) {
+        if (opts.source !== 'shortAnswer') return [];
+        return qs.filter(function (q) { return q._scoring || (q.options && q.options.length); }).map(function (q) { return q.id; });
+      } }
+  ];
+
+  function validateForCanvas(questions, opts) {
+    opts = opts || {};
+    var errors = [];
+    CANVAS_RULES.forEach(function (r) {
+      var ids = r.check(questions, opts);
+      if (ids && ids.length) errors.push({ ruleId: r.id, message: r.message, questionIds: ids.filter(function (x) { return x !== -1; }) });
+    });
+    return { ok: errors.length === 0, errors: errors };
+  }
+  return { csvField: csvField, toCsv: toCsv, normalizeQuestions: normalizeQuestions, formatBlooket: formatBlooket, formatGimkit: formatGimkit, formatGimkitTyped: formatGimkitTyped, pickDistractors: pickDistractors, normalizeFib: normalizeFib, normalizeVocab: normalizeVocab, xmlEscape: xmlEscape, slugify: slugify, renderMCItem: renderMCItem, renderShortAnswerItem: renderShortAnswerItem, renderEssayItem: renderEssayItem, buildAssessmentXml: buildAssessmentXml, buildManifestXml: buildManifestXml, buildCanvasPackage: buildCanvasPackage, validateForCanvas: validateForCanvas, CANVAS_RULES: CANVAS_RULES };
 });
