@@ -266,6 +266,22 @@ eq('validate mc no correct', vBadMc.errors.some(function (e) { return e.ruleId =
 var vBadSA = core.validateForCanvas([{ id:0, question:'Q', options:['','b','c','d'], correctIndex:0, topic:'T' }], { title:'X', source:'fib', unitId:'u' });
 eq('validate short_answer needs answer', vBadSA.errors.some(function (e) { return e.ruleId === 'short-answer-has-accepted'; }), true);
 
+// selfCheckPackage on real civil-war data, every source
+var cfgRealCw = JSON.parse(require('fs').readFileSync(require('path').join(__dirname, '..', '..', 'units', 'civil-war', 'config.json'), 'utf8'));
+var practiceQs = core.normalizeQuestions(cfgRealCw);
+var pkgPractice = core.buildCanvasPackage(practiceQs, { title: 'Civil War Practice', maxAttempts: 1, unitId: 'civil-war', source: 'practice' });
+eq('selfCheck practice ok', core.selfCheckPackage(pkgPractice).length, 0);
+
+var fibQs = core.normalizeFib(cfgRealCw);
+var pkgFib2 = core.buildCanvasPackage(fibQs, { title: 'Civil War FIB', maxAttempts: 1, unitId: 'civil-war', source: 'fib' });
+eq('selfCheck fib ok', core.selfCheckPackage(pkgFib2).length, 0);
+
+var saQs = (cfgRealCw.shortAnswerQuestions || []).map(function (sa, i) {
+  return { id: i, question: sa.question || '', options: [], correctIndex: -1, topic: sa.topic || 'T', _essay: { keyTerms: sa.keyTerms || [], sentenceStarters: sa.sentenceStarters || [] } };
+});
+var pkgEssayReal = core.buildCanvasPackage(saQs, { title: 'Civil War SA', maxAttempts: 1, unitId: 'civil-war', source: 'shortAnswer' });
+eq('selfCheck essay ok', core.selfCheckPackage(pkgEssayReal).length, 0);
+
 if (failures.length) {
   console.log('FAIL (' + failures.length + ')');
   failures.forEach(function (f) { console.log('- ' + f); });

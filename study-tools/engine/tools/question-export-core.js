@@ -317,5 +317,32 @@
     });
     return { ok: errors.length === 0, errors: errors };
   }
-  return { csvField: csvField, toCsv: toCsv, normalizeQuestions: normalizeQuestions, formatBlooket: formatBlooket, formatGimkit: formatGimkit, formatGimkitTyped: formatGimkitTyped, pickDistractors: pickDistractors, normalizeFib: normalizeFib, normalizeVocab: normalizeVocab, xmlEscape: xmlEscape, slugify: slugify, renderMCItem: renderMCItem, renderShortAnswerItem: renderShortAnswerItem, renderEssayItem: renderEssayItem, buildAssessmentXml: buildAssessmentXml, buildManifestXml: buildManifestXml, buildCanvasPackage: buildCanvasPackage, validateForCanvas: validateForCanvas, CANVAS_RULES: CANVAS_RULES };
+  function selfCheckPackage(pkg) {
+    var errors = [];
+    var manifest = pkg.fileMap['imsmanifest.xml'];
+    if (!manifest) errors.push('Missing imsmanifest.xml');
+    var innerPath = pkg.assessmentId + '/' + pkg.assessmentId + '.xml';
+    if (!pkg.fileMap[innerPath]) errors.push('Missing assessment xml at ' + innerPath);
+    if (manifest && manifest.indexOf('<file href="' + innerPath + '"') < 0) {
+      errors.push('Manifest does not reference ' + innerPath);
+    }
+    var inner = pkg.fileMap[innerPath] || '';
+    if (inner.indexOf('<assessment ident="' + pkg.assessmentId + '"') < 0) {
+      errors.push('Assessment ident does not match folder/file: ' + pkg.assessmentId);
+    }
+    var identMatches = (inner.match(/<response_label ident="([^"]+)"/g) || []);
+    var values = identMatches.map(function (m) { return m.replace(/<response_label ident="/, '').replace(/"$/, ''); });
+    var seen = {};
+    values.forEach(function (v) {
+      // render_fib placeholder "answer1" is scoped per-item and may repeat across items
+      if (v === 'answer1') return;
+      if (seen[v]) errors.push('Duplicate response_label ident in package: ' + v);
+      seen[v] = true;
+    });
+    values.forEach(function (v) {
+      if (/^\d+$/.test(v)) errors.push('Numeric ident not allowed: ' + v);
+    });
+    return errors;
+  }
+  return { csvField: csvField, toCsv: toCsv, normalizeQuestions: normalizeQuestions, formatBlooket: formatBlooket, formatGimkit: formatGimkit, formatGimkitTyped: formatGimkitTyped, pickDistractors: pickDistractors, normalizeFib: normalizeFib, normalizeVocab: normalizeVocab, xmlEscape: xmlEscape, slugify: slugify, renderMCItem: renderMCItem, renderShortAnswerItem: renderShortAnswerItem, renderEssayItem: renderEssayItem, buildAssessmentXml: buildAssessmentXml, buildManifestXml: buildManifestXml, buildCanvasPackage: buildCanvasPackage, validateForCanvas: validateForCanvas, CANVAS_RULES: CANVAS_RULES, selfCheckPackage: selfCheckPackage };
 });
