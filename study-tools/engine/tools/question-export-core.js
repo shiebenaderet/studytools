@@ -159,5 +159,35 @@
       '    </item>'
     ].join('\n');
   }
-  return { csvField: csvField, toCsv: toCsv, normalizeQuestions: normalizeQuestions, formatBlooket: formatBlooket, formatGimkit: formatGimkit, formatGimkitTyped: formatGimkitTyped, pickDistractors: pickDistractors, normalizeFib: normalizeFib, normalizeVocab: normalizeVocab, xmlEscape: xmlEscape, slugify: slugify, renderMCItem: renderMCItem };
+  function renderShortAnswerItem(q, idx) {
+    var itemId = 'q' + idx;
+    var accepted = (q._accepted && q._accepted.length)
+      ? q._accepted
+      : [q.options && q.options[q.correctIndex]].filter(function (x) { return x; });
+    var conds = accepted.map(function (ans) {
+      return '        <respcondition continue="No" case="No">\n' +
+             '          <conditionvar><varequal respident="response1">' + xmlEscape(ans) + '</varequal></conditionvar>\n' +
+             '          <setvar action="Set" varname="SCORE">100</setvar>\n' +
+             '        </respcondition>';
+    }).join('\n');
+    return [
+      '    <item ident="' + itemId + '" title="Question ' + idx + '">',
+      '      <itemmetadata><qtimetadata>',
+      '        <qtimetadatafield><fieldlabel>question_type</fieldlabel><fieldentry>short_answer_question</fieldentry></qtimetadatafield>',
+      '        <qtimetadatafield><fieldlabel>points_possible</fieldlabel><fieldentry>100</fieldentry></qtimetadatafield>',
+      '      </qtimetadata></itemmetadata>',
+      '      <presentation>',
+      '        <material><mattext texttype="text/html">' + xmlEscape(q.question) + '</mattext></material>',
+      '        <response_str ident="response1" rcardinality="Single">',
+      '          <render_fib><response_label ident="answer1" rshuffle="No"/></render_fib>',
+      '        </response_str>',
+      '      </presentation>',
+      '      <resprocessing>',
+      '        <outcomes><decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/></outcomes>',
+                conds,
+      '      </resprocessing>',
+      '    </item>'
+    ].join('\n');
+  }
+  return { csvField: csvField, toCsv: toCsv, normalizeQuestions: normalizeQuestions, formatBlooket: formatBlooket, formatGimkit: formatGimkit, formatGimkitTyped: formatGimkitTyped, pickDistractors: pickDistractors, normalizeFib: normalizeFib, normalizeVocab: normalizeVocab, xmlEscape: xmlEscape, slugify: slugify, renderMCItem: renderMCItem, renderShortAnswerItem: renderShortAnswerItem };
 });

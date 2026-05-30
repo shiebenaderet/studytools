@@ -195,6 +195,17 @@ eq('mc setvar 100', /<setvar[^>]*>100<\/setvar>/.test(mcXml), true);
 eq('mc escapes &', mcXml.indexOf('A &amp; a') >= 0, true);
 eq('mc question text escaped', mcXml.indexOf('Which is true?') >= 0, true);
 
+// renderShortAnswerItem
+var saQ = { id: 0, question: '_____ is one.', _accepted: ['alpha', 'Alpha'], options: ['alpha','','',''], correctIndex: 0, topic: 'T' };
+var saXml = core.renderShortAnswerItem(saQ, 2);
+eq('sa item ident', /<item ident="q2"/.test(saXml), true);
+eq('sa qtype short_answer', /<fieldentry>short_answer_question<\/fieldentry>/.test(saXml), true);
+eq('sa points 100', /<fieldlabel>points_possible<\/fieldlabel>\s*<fieldentry>100<\/fieldentry>/.test(saXml), true);
+eq('sa response_str + render_fib', /<response_str[\s\S]*<render_fib/.test(saXml), true);
+eq('sa case insensitive flag', (saXml.match(/case="No"/g) || []).length, 2);
+eq('sa has alpha answer', saXml.indexOf('>alpha</') >= 0, true);
+eq('sa has Alpha answer', saXml.indexOf('>Alpha</') >= 0, true);
+
 if (failures.length) {
   console.log('FAIL (' + failures.length + ')');
   failures.forEach(function (f) { console.log('- ' + f); });
