@@ -79,6 +79,18 @@
   .source-card .sc-note { font-size: 11px; color: var(--warn); margin-top: 6px; }
   .source-opts { margin-top: 18px; padding: 14px; background: var(--card); border: 1px solid var(--line); border-radius: 10px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
   .source-opts label { font-size: 13px; color: var(--ink); display: inline-flex; align-items: center; gap: 6px; }
+  .canvas-card { margin-top: 14px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
+  .canvas-card .row { display: grid; grid-template-columns: 1fr 140px; gap: 12px; margin-bottom: 12px; }
+  .canvas-card label { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); display: block; margin-bottom: 4px; font-weight: 600; }
+  .canvas-card input[type=text], .canvas-card input[type=number] { width: 100%; padding: 8px 10px; border: 1px solid var(--line); border-radius: 6px; font: inherit; }
+  .canvas-validate { margin: 14px 0; padding: 12px 14px; background: var(--card); border: 1px solid var(--line); border-radius: 10px; font-size: 13px; }
+  .canvas-validate ul { margin: 6px 0 0; padding-left: 18px; }
+  .canvas-validate li.ok { color: var(--ok, #2F855A); }
+  .canvas-validate li.fail { color: var(--warn); cursor: pointer; }
+  .canvas-validate li.fail:hover { text-decoration: underline; }
+  .canvas-actions { display: flex; gap: 10px; align-items: center; margin-top: 12px; }
+  .canvas-actions .fn { font-family: ui-monospace, Menlo, monospace; font-size: 12px; color: var(--muted); margin-left: auto; }
+  .canvas-status { margin-top: 10px; font-size: 13px; }
 </style>
 </head>
 <body>
@@ -169,7 +181,9 @@
   </main>
 </div>
 
+<script src="../vendor/jszip.min.js"></script>
 <script src="question-export-core.js"></script>
+<script src="question-exporter-zip.js"></script>
 <script>
 (function () {
   var UNITS_URL = '../../units/units.json';
@@ -508,15 +522,16 @@
   function refreshStep3() {
     var csv = document.getElementById('csvPanel');
     var canvas = document.getElementById('canvasPanel');
-    var note = document.getElementById('genNote');
-    var nameLabel = document.getElementById('csvNameLabel');
-    var dlBtn = document.getElementById('csvDownloadBtn');
     if (state.destination === 'canvas') {
       csv.style.display = 'none';
       canvas.hidden = false;
+      renderCanvasPanel();
     } else {
       csv.style.display = '';
       canvas.hidden = true;
+      var note = document.getElementById('genNote');
+      var nameLabel = document.getElementById('csvNameLabel');
+      var dlBtn = document.getElementById('csvDownloadBtn');
       nameLabel.textContent = csvFilenameForCurrent();
       var n = selectedList().length;
       dlBtn.disabled = (n === 0);
@@ -524,6 +539,131 @@
       if (state.source === 'practice') { note.style.display = 'none'; }
       else { note.style.display = ''; note.textContent = 'Wrong answers are auto-generated from the same chapter. Review or edit them before exporting.'; }
     }
+  }
+
+  function jumpToQuestion(qid) {
+    // No per-row DOM lookup by qid today; fall back to scrolling Refine into view.
+    showStep(2);
+    setTimeout(function () {
+      var first = document.querySelector('#list .qrow');
+      if (first) first.scrollIntoView({ behavior: 'smooth' });
+    }, 50);
+  }
+
+  function defaultCanvasTitle() {
+    var u = (state.units || []).filter(function (x) { return x.id === state.unitId; })[0];
+    var unitTitle = (u && u.title) || state.unitId || 'Quiz';
+    var srcLabel = ({ practice: 'Practice', vocab: 'Vocabulary', fib: 'Fill-in-the-Blank', shortAnswer: 'Short-Answer' })[state.source] || state.source;
+    return unitTitle + ' — ' + srcLabel;
+  }
+
+  function renderCanvasPanel() {
+    var host = document.getElementById('canvasPanel');
+    host.textContent = '';
+
+    if (!state.canvasOpts.title) state.canvasOpts.title = defaultCanvasTitle();
+
+    var card = el('div', 'canvas-card');
+    var row = el('div', 'row');
+    var titleWrap = el('div');
+    titleWrap.append(el('label', null, 'Quiz title'));
+    var tIn = el('input'); tIn.type = 'text'; tIn.value = state.canvasOpts.title;
+    tIn.oninput = function () { state.canvasOpts.title = tIn.value; refreshCanvasValidation(); };
+    titleWrap.append(tIn);
+    var attemptsWrap = el('div');
+    attemptsWrap.append(el('label', null, 'Max attempts'));
+    var aIn = el('input'); aIn.type = 'number'; aIn.min = '1'; aIn.value = String(state.canvasOpts.maxAttempts || 1);
+    aIn.oninput = function () { state.canvasOpts.maxAttempts = parseInt(aIn.value, 10) || 1; };
+    attemptsWrap.append(aIn);
+    row.append(titleWrap, attemptsWrap);
+    card.append(row);
+    host.append(card);
+
+    var v = el('div', 'canvas-validate');
+    v.id = 'canvasValidate';
+    host.append(v);
+
+    var actions = el('div', 'canvas-actions');
+    var build = el('button', 'primary');
+    build.id = 'canvasBuildBtn';
+    build.textContent = 'Build .zip ▸';
+    build.onclick = doCanvasBuild;
+    var fn = el('span', 'fn');
+    fn.id = 'canvasFn';
+    actions.append(build, fn);
+    host.append(actions);
+
+    var status = el('div', 'canvas-status');
+    status.id = 'canvasStatus';
+    status.style.display = 'none';
+    host.append(status);
+
+    refreshCanvasValidation();
+  }
+
+  function refreshCanvasValidation() {
+    var v = document.getElementById('canvasValidate');
+    if (!v) return;
+    var qs = selectedList();
+    var opts = { title: state.canvasOpts.title, source: state.source, unitId: state.unitId };
+    var result = window.QExport.validateForCanvas(qs, opts);
+    v.textContent = '';
+    var ul = el('ul');
+    var rulesMet = window.QExport.CANVAS_RULES.length - result.errors.length;
+    var head = el('li', 'ok');
+    head.textContent = '✓ ' + rulesMet + ' of ' + window.QExport.CANVAS_RULES.length + ' rules pass';
+    ul.append(head);
+    result.errors.forEach(function (e) {
+      var li = el('li', 'fail');
+      li.textContent = '✗ ' + e.message + (e.questionIds.length ? ' (' + e.questionIds.length + ' question' + (e.questionIds.length === 1 ? '' : 's') + ')' : '');
+      li.onclick = function () { if (e.questionIds.length) jumpToQuestion(e.questionIds[0]); };
+      ul.append(li);
+    });
+    v.append(ul);
+
+    var build = document.getElementById('canvasBuildBtn');
+    var fn = document.getElementById('canvasFn');
+    var assessmentId = window.QExport.slugify((state.unitId || 'quiz') + '-' + state.source);
+    fn.textContent = 'Filename: ' + assessmentId + '-canvas.zip';
+    if (result.ok) {
+      build.disabled = false;
+      build.textContent = 'Build .zip ▸';
+      build.onclick = doCanvasBuild;
+    } else {
+      build.disabled = false;
+      build.textContent = 'Fix ' + result.errors.length + ' issue' + (result.errors.length === 1 ? '' : 's') + ' ▸';
+      build.onclick = function () {
+        if (result.errors[0].questionIds.length) jumpToQuestion(result.errors[0].questionIds[0]);
+        else showStep(2);
+      };
+    }
+  }
+
+  function doCanvasBuild() {
+    var qs = selectedList();
+    var opts = { title: state.canvasOpts.title, maxAttempts: state.canvasOpts.maxAttempts, source: state.source, unitId: state.unitId };
+    var pkg = window.QExport.buildCanvasPackage(qs, opts);
+    var selfErrors = window.QExport.selfCheckPackage(pkg);
+    var status = document.getElementById('canvasStatus');
+    status.style.display = '';
+    if (selfErrors.length) {
+      status.style.color = 'var(--warn)';
+      status.textContent = 'Build aborted: ' + selfErrors.join('; ');
+      return;
+    }
+    status.style.color = 'var(--ok, #2F855A)';
+    status.textContent = 'Building...';
+    window.QExportZip.packageZip(pkg.fileMap).then(function (blob) {
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = pkg.assessmentId + '-canvas.zip';
+      document.body.append(a); a.click(); a.remove();
+      URL.revokeObjectURL(a.href);
+      status.textContent = '✓ Built ' + pkg.assessmentId + '-canvas.zip';
+    }).catch(function (err) {
+      status.style.color = 'var(--warn)';
+      status.textContent = 'Build failed: ' + err.message;
+    });
   }
 
   document.getElementById('selAll').onclick = function () { state.questions.forEach(function (q) { state.selected[q.id] = true; }); render(); };
