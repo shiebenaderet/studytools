@@ -126,5 +126,38 @@
     s = s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
     return s || 'untitled';
   }
-  return { csvField: csvField, toCsv: toCsv, normalizeQuestions: normalizeQuestions, formatBlooket: formatBlooket, formatGimkit: formatGimkit, formatGimkitTyped: formatGimkitTyped, pickDistractors: pickDistractors, normalizeFib: normalizeFib, normalizeVocab: normalizeVocab, xmlEscape: xmlEscape, slugify: slugify };
+  function renderMCItem(q, idx) {
+    var itemId = 'q' + idx;
+    var labels = q.options.map(function (opt, i) {
+      var lid = itemId + '_a' + i;
+      return '            <response_label ident="' + lid + '">\n' +
+             '              <material><mattext texttype="text/plain">' + xmlEscape(opt) + '</mattext></material>\n' +
+             '            </response_label>';
+    }).join('\n');
+    var correctLid = itemId + '_a' + q.correctIndex;
+    return [
+      '    <item ident="' + itemId + '" title="Question ' + idx + '">',
+      '      <itemmetadata><qtimetadata>',
+      '        <qtimetadatafield><fieldlabel>question_type</fieldlabel><fieldentry>multiple_choice_question</fieldentry></qtimetadatafield>',
+      '        <qtimetadatafield><fieldlabel>points_possible</fieldlabel><fieldentry>100</fieldentry></qtimetadatafield>',
+      '      </qtimetadata></itemmetadata>',
+      '      <presentation>',
+      '        <material><mattext texttype="text/html">' + xmlEscape(q.question) + '</mattext></material>',
+      '        <response_lid ident="response1" rcardinality="Single">',
+      '          <render_choice>',
+                  labels,
+      '          </render_choice>',
+      '        </response_lid>',
+      '      </presentation>',
+      '      <resprocessing>',
+      '        <outcomes><decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/></outcomes>',
+      '        <respcondition continue="No">',
+      '          <conditionvar><varequal respident="response1">' + correctLid + '</varequal></conditionvar>',
+      '          <setvar action="Set" varname="SCORE">100</setvar>',
+      '        </respcondition>',
+      '      </resprocessing>',
+      '    </item>'
+    ].join('\n');
+  }
+  return { csvField: csvField, toCsv: toCsv, normalizeQuestions: normalizeQuestions, formatBlooket: formatBlooket, formatGimkit: formatGimkit, formatGimkitTyped: formatGimkitTyped, pickDistractors: pickDistractors, normalizeFib: normalizeFib, normalizeVocab: normalizeVocab, xmlEscape: xmlEscape, slugify: slugify, renderMCItem: renderMCItem };
 });

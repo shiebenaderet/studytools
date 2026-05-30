@@ -181,6 +181,20 @@ eq('slug unicode', core.slugify('Café & Crémes'), 'cafe-cremes');
 eq('slug already', core.slugify('civil-war-vocab'), 'civil-war-vocab');
 eq('slug empty', core.slugify(''), 'untitled');
 
+// renderMCItem
+var mcQ = { id: 0, question: 'Which is true?', options: ['A & a', 'B', 'C', 'D'], correctIndex: 1, topic: 'T' };
+var mcXml = core.renderMCItem(mcQ, 1);
+eq('mc has item ident', /<item ident="q1"/.test(mcXml), true);
+eq('mc has question_type', /<fieldlabel>question_type<\/fieldlabel>\s*<fieldentry>multiple_choice_question<\/fieldentry>/.test(mcXml), true);
+eq('mc has points_possible 100', /<fieldlabel>points_possible<\/fieldlabel>\s*<fieldentry>100<\/fieldentry>/.test(mcXml), true);
+eq('mc has 4 named labels', (mcXml.match(/<response_label ident="q1_a[0-3]"/g) || []).length, 4);
+eq('mc no numeric ident', /<response_label ident="[0-9]+"/.test(mcXml), false);
+eq('mc varequal points at q1_a1', /<varequal[^>]*>q1_a1<\/varequal>/.test(mcXml), true);
+eq('mc maxvalue 100', /maxvalue="100"/.test(mcXml), true);
+eq('mc setvar 100', /<setvar[^>]*>100<\/setvar>/.test(mcXml), true);
+eq('mc escapes &', mcXml.indexOf('A &amp; a') >= 0, true);
+eq('mc question text escaped', mcXml.indexOf('Which is true?') >= 0, true);
+
 if (failures.length) {
   console.log('FAIL (' + failures.length + ')');
   failures.forEach(function (f) { console.log('- ' + f); });
