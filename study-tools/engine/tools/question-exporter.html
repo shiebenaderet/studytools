@@ -57,6 +57,17 @@
   .stage h2 { font-family: Georgia, "Iowan Old Style", serif; font-style: italic; font-weight: 500; font-size: 26px; letter-spacing: -0.01em; margin: 0 0 6px; }
   .stage .lede { color: var(--muted); margin: 0 0 24px; font-size: 14px; max-width: 60ch; }
   .step-actions { display: flex; gap: 12px; justify-content: flex-end; margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--line); }
+  .unit-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+  .unit-card { position: relative; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px 18px 16px; cursor: pointer; transition: border-color .15s ease, transform .12s ease, box-shadow .15s ease; overflow: hidden; }
+  .unit-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px -16px rgba(0,0,0,.2); }
+  .unit-card.on { border-color: #1a1a1a; }
+  .unit-card .stripe { position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: #999; }
+  .unit-card .ut { font-family: Georgia, "Iowan Old Style", serif; font-style: italic; font-size: 17px; letter-spacing: -0.01em; margin: 0 0 6px; padding-left: 10px; }
+  .unit-card .us { color: var(--muted); font-size: 12px; padding-left: 10px; margin: 0 0 10px; }
+  .unit-card .stats { display: flex; flex-wrap: wrap; gap: 6px 12px; font-family: ui-monospace, Menlo, monospace; font-size: 11px; color: var(--ink); padding-left: 10px; }
+  .unit-card .stats b { color: var(--accent); font-weight: 700; }
+  .unit-archived h3 { font-family: Georgia, serif; font-style: italic; color: var(--muted); font-size: 14px; margin: 24px 0 10px; }
+  .unit-card.retired { opacity: .55; }
 </style>
 </head>
 <body>
@@ -278,8 +289,57 @@
     state.unitId = unitId; state.selected = {}; state.edits = {};
     fetch('../../units/' + unitId + '/config.json')
       .then(function (r) { return r.json(); })
-      .then(function (cfg) { state.rawConfig = cfg; rebuildQuestions(); })
+      .then(function (cfg) { state.rawConfig = cfg; rebuildQuestions();
+        var descEl = document.querySelector('.rs-desc-unit');
+        if (descEl) descEl.textContent = (state.units || []).filter(function (u) { return u.id === unitId; }).map(function (u) { return u.title || u.id; })[0] || unitId;
+      })
       .catch(function (e) { document.getElementById('list').textContent = 'Could not load unit: ' + e; });
+  }
+
+  function renderUnitGrid() {
+    var host = document.getElementById('unitGrid');
+    if (!host) return;
+    host.textContent = '';
+    var liveWrap = el('div', 'unit-grid');
+    var retiredWrap = el('div', 'unit-grid');
+    var hasRetired = false;
+    (state.units || []).forEach(function (u) {
+      var card = el('button', 'unit-card' + (u.retired ? ' retired' : '') + (state.unitId === u.id ? ' on' : ''));
+      card.type = 'button';
+      var stripe = el('span', 'stripe');
+      if (u.theme && u.theme.primary) stripe.style.background = u.theme.primary;
+      card.append(stripe);
+      card.append(el('h3', 'ut', u.title || u.id));
+      card.append(el('p', 'us', u.subtitle || ''));
+      var stats = el('div', 'stats');
+      stats.append(document.createTextNode('Loading counts...'));
+      card.append(stats);
+      card.onclick = function () { loadUnit(u.id); showStep(1); };
+      fetch('../../units/' + u.id + '/config.json').then(function (r) { return r.json(); }).then(function (cfg) {
+        stats.textContent = '';
+        var labels = [
+          ['practice', (cfg.practiceQuestions || []).length],
+          ['vocab', (cfg.vocabulary || []).length],
+          ['FIB', (cfg.fillInBlankSentences || []).length],
+          ['short answer', (cfg.shortAnswerQuestions || []).length]
+        ];
+        labels.forEach(function (p) {
+          if (!p[1]) return;
+          var span = el('span');
+          var b = el('b'); b.textContent = String(p[1]);
+          span.append(b, document.createTextNode(' ' + p[0]));
+          stats.append(span);
+        });
+      }).catch(function () { stats.textContent = 'counts unavailable'; });
+      (u.retired ? (hasRetired = true, retiredWrap) : liveWrap).append(card);
+    });
+    host.append(liveWrap);
+    if (hasRetired) {
+      var ar = el('div', 'unit-archived');
+      ar.append(el('h3', null, 'Archived'));
+      ar.append(retiredWrap);
+      host.append(ar);
+    }
   }
 
   function rebuildQuestions() {
@@ -356,6 +416,7 @@
   showStep(state.step);
   fetch(UNITS_URL).then(function (r) { return r.json(); }).then(function (data) {
     state.units = (data.units || []);
+    renderUnitGrid();
     if (state.units.length) loadUnit(state.units[0].id);
   });
   updatePlatformVisibility();
