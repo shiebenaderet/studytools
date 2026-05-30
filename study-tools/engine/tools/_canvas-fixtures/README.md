@@ -5,9 +5,9 @@ regression baselines.
 
 | File | Source | Question count | Generated | Canvas-verified |
 |---|---|---|---|---|
-| `mc.zip` | civil-war / practice (first 4) | 4 multiple_choice | 2026-05-30 | _pending_ |
-| `short-answer.zip` | civil-war / fib (first 2) | 2 short_answer | 2026-05-30 | _pending_ |
-| `essay.zip` | civil-war / shortAnswer (first 2) | 2 essay | 2026-05-30 | _pending_ |
+| `mc.zip` | civil-war / practice (first 4) | 4 multiple_choice | 2026-05-30 | 2026-05-30 |
+| `short-answer.zip` | civil-war / fib (first 2) | 2 short_answer | 2026-05-30 | 2026-05-30 |
+| `essay.zip` | civil-war / shortAnswer (first 2) | 2 essay | 2026-05-30 | 2026-05-30 |
 
 ## Verification status
 
