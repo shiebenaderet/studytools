@@ -68,6 +68,17 @@
   .unit-card .stats b { color: var(--accent); font-weight: 700; }
   .unit-archived h3 { font-family: Georgia, serif; font-style: italic; color: var(--muted); font-size: 14px; margin: 24px 0 10px; }
   .unit-card.retired { opacity: .55; }
+  .source-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+  .source-card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px; cursor: pointer; text-align: left; font: inherit; color: inherit; transition: border-color .15s ease, transform .12s ease; }
+  .source-card:hover:not([disabled]) { transform: translateY(-2px); border-color: #1a1a1a; }
+  .source-card.on { border-color: #1a1a1a; box-shadow: inset 0 0 0 1px #1a1a1a; }
+  .source-card[disabled] { opacity: .5; cursor: not-allowed; }
+  .source-card .sc-name { font-family: Georgia, serif; font-style: italic; font-size: 16px; margin-bottom: 4px; }
+  .source-card .sc-desc { font-size: 12px; color: var(--muted); line-height: 1.35; margin-bottom: 8px; }
+  .source-card .sc-stat { font-family: ui-monospace, Menlo, monospace; font-size: 16px; color: var(--accent); font-weight: 700; }
+  .source-card .sc-note { font-size: 11px; color: var(--warn); margin-top: 6px; }
+  .source-opts { margin-top: 18px; padding: 14px; background: var(--card); border: 1px solid var(--line); border-radius: 10px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .source-opts label { font-size: 13px; color: var(--ink); display: inline-flex; align-items: center; gap: 6px; }
 </style>
 </head>
 <body>
@@ -169,6 +180,7 @@
       b.classList.toggle('cur', i === n);
       b.classList.toggle('done', i < n);
     });
+    if (n === 1) { renderSourceGrid(); renderSourceOpts(); }
     if (n === 2) render();
   }
   function wireRail() {
@@ -184,7 +196,7 @@
   var state = { unitId: null, source: 'practice', questions: [], selected: {}, edits: {},
                 vocabDirection: 'definition-term', includeEncounter: false, fibTyped: false,
                 rawConfig: null };
-  state.step = 2;            // start at Step 2 to preserve current behavior until later tasks
+  state.step = 0;            // start on the unit grid
   state.destination = 'blooket';
   state.canvasOpts = { title: '', maxAttempts: 1 };
 
@@ -264,17 +276,21 @@
     var qIn = el('input'); qIn.type = 'text'; qIn.value = eq.question;
     editor.append(qIn);
     var optInputs = [];
-    eq.options.forEach(function (opt, idx) {
-      var line = el('div', 'optline');
-      var radio = el('input'); radio.type = 'radio'; radio.name = 'correct-' + q.id; radio.checked = idx === eq.correctIndex;
-      var oin = el('input'); oin.type = 'text'; oin.value = opt; oin.style.flex = '1';
-      line.append(radio, oin);
-      if ((opt || '').length > 100) {
-        line.append(el('span', 'over-badge', opt.length + ' chars'));
-      }
-      editor.append(line);
-      optInputs.push({ radio: radio, input: oin });
-    });
+    if (eq.options && eq.options.length) {
+      eq.options.forEach(function (opt, idx) {
+        var line = el('div', 'optline');
+        var radio = el('input'); radio.type = 'radio'; radio.name = 'correct-' + q.id; radio.checked = idx === eq.correctIndex;
+        var oin = el('input'); oin.type = 'text'; oin.value = opt; oin.style.flex = '1';
+        line.append(radio, oin);
+        if ((opt || '').length > 100) {
+          line.append(el('span', 'over-badge', opt.length + ' chars'));
+        }
+        editor.append(line);
+        optInputs.push({ radio: radio, input: oin });
+      });
+    } else {
+      editor.append(el('div', null, '(Essay prompt — no options.)'));
+    }
     var save = el('button', 'secondary', 'Apply edit'); save.style.marginTop = '8px';
     save.onclick = function () {
       var ci = 0; optInputs.forEach(function (o, i) { if (o.radio.checked) ci = i; });
@@ -294,6 +310,81 @@
         if (descEl) descEl.textContent = (state.units || []).filter(function (u) { return u.id === unitId; }).map(function (u) { return u.title || u.id; })[0] || unitId;
       })
       .catch(function (e) { document.getElementById('list').textContent = 'Could not load unit: ' + e; });
+  }
+
+  var SOURCES = [
+    { id: 'practice', name: 'Practice questions', desc: 'The vetted 4-option MC bank used in the practice test.', count: function (c) { return (c.practiceQuestions||[]).length; } },
+    { id: 'vocab', name: 'Vocabulary', desc: 'Defaults to must-know. Becomes 4-option MC with auto distractors from the same chapter.', count: function (c) { return (c.vocabulary||[]).length; } },
+    { id: 'fib', name: 'Fill-in-the-blank', desc: 'The sentence becomes the question; the answer is correct; 3 same-chapter distractors.', count: function (c) { return (c.fillInBlankSentences||[]).length; } },
+    { id: 'shortAnswer', name: 'Short-answer essays', desc: 'Open-ended prompts with key terms and sentence starters. Canvas only.', count: function (c) { return (c.shortAnswerQuestions||[]).length; }, canvasOnly: true }
+  ];
+
+  function renderSourceGrid() {
+    var host = document.getElementById('sourceGrid');
+    if (!host) return;
+    host.textContent = '';
+    var grid = el('div', 'source-grid');
+    var cfg = state.rawConfig || {};
+    SOURCES.forEach(function (s) {
+      var n = s.count(cfg);
+      var disabled = (s.canvasOnly && state.destination !== 'canvas') || n === 0;
+      var card = el('button', 'source-card' + (state.source === s.id ? ' on' : ''));
+      card.type = 'button';
+      if (disabled) card.disabled = true;
+      card.append(el('div', 'sc-name', s.name));
+      card.append(el('div', 'sc-desc', s.desc));
+      var stat = el('div', 'sc-stat');
+      stat.append(document.createTextNode(String(n)));
+      stat.append(document.createTextNode(' '));
+      var u = el('span'); u.style.fontFamily = 'inherit'; u.style.fontSize = '11px'; u.style.color = 'var(--muted)';
+      u.textContent = s.id === 'vocab' ? 'terms' : (s.id === 'fib' ? 'sentences' : 'questions');
+      stat.append(u);
+      card.append(stat);
+      if (s.canvasOnly && state.destination !== 'canvas') {
+        card.append(el('div', 'sc-note', 'Essays export only to Canvas. Switch destination to Canvas in the rail.'));
+      }
+      card.onclick = function () {
+        if (card.disabled) return;
+        state.source = s.id;
+        rebuildQuestions();
+        renderSourceGrid();
+        renderSourceOpts();
+      };
+      grid.append(card);
+    });
+    host.append(grid);
+  }
+
+  function renderSourceOpts() {
+    var host = document.getElementById('sourceOpts');
+    if (!host) return;
+    host.textContent = '';
+    if (state.source === 'vocab') {
+      var wrap = el('div', 'source-opts');
+      var dirLabel = el('label', null, 'Direction ');
+      var dir = el('select');
+      [['definition-term','Definition to Term'],['term-definition','Term to Definition']].forEach(function (o) {
+        var op = el('option', null, o[1]); op.value = o[0]; if (o[0] === state.vocabDirection) op.selected = true; dir.append(op);
+      });
+      dir.onchange = function () { state.vocabDirection = dir.value; rebuildQuestions(); };
+      dirLabel.append(dir);
+      var tierLabel = el('label');
+      var tier = el('input'); tier.type = 'checkbox'; tier.checked = state.includeEncounter;
+      tier.onchange = function () { state.includeEncounter = tier.checked; rebuildQuestions(); };
+      tierLabel.append(tier, document.createTextNode(' Include encounter tier'));
+      wrap.append(dirLabel, tierLabel);
+      host.append(wrap);
+    } else if (state.source === 'fib') {
+      var wrap2 = el('div', 'source-opts');
+      var typedLabel = el('label');
+      var typed = el('input'); typed.type = 'checkbox'; typed.checked = state.fibTyped;
+      typed.disabled = state.destination !== 'gimkit';
+      typed.onchange = function () { state.fibTyped = typed.checked; };
+      typedLabel.append(typed, document.createTextNode(' Typed answers (GiMKit only)'));
+      if (state.destination !== 'gimkit') typedLabel.style.color = 'var(--muted)';
+      wrap2.append(typedLabel);
+      host.append(wrap2);
+    }
   }
 
   function renderUnitGrid() {
@@ -348,6 +439,9 @@
     if (!cfg) { state.questions = []; }
     else if (state.source === 'fib') state.questions = window.QExport.normalizeFib(cfg);
     else if (state.source === 'vocab') state.questions = window.QExport.normalizeVocab(cfg, { direction: state.vocabDirection, includeEncounter: state.includeEncounter });
+    else if (state.source === 'shortAnswer') state.questions = (cfg.shortAnswerQuestions || []).map(function (sa, i) {
+      return { id: i, question: sa.question || '', options: [], correctIndex: -1, topic: sa.topic || 'Uncategorized', _essay: { keyTerms: sa.keyTerms || [], sentenceStarters: sa.sentenceStarters || [] } };
+    });
     else state.questions = window.QExport.normalizeQuestions(cfg);
     renderSourceControls();
     render();
@@ -406,7 +500,11 @@
   document.getElementById('filter').oninput = render;
   document.getElementById('exportBtn').onclick = doExport;
 
-  document.getElementById('destSel').onchange = function () { state.destination = this.value; updatePlatformVisibility(); };
+  document.getElementById('destSel').onchange = function () {
+    state.destination = this.value;
+    updatePlatformVisibility();
+    if (state.step === 1) { renderSourceGrid(); renderSourceOpts(); }
+  };
   function updatePlatformVisibility() {
     var platSel = document.getElementById('platformSel');
     platSel.disabled = (state.destination === 'canvas');
