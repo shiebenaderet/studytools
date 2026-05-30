@@ -152,13 +152,15 @@
       <h2>Send</h2>
       <p class="lede" id="step3Lede">Choose a platform and download.</p>
 
-      <div class="toolbar">
-        <label>Platform <select id="platformSel"><option value="blooket">Blooket</option><option value="gimkit">GiMKit</option></select></label>
-        <button id="exportBtn" class="primary" disabled>Export CSV</button>
+      <div id="csvPanel" class="toolbar" style="display:none;">
+        <span id="csvNameLabel" style="font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--muted);"></span>
+        <button id="csvDownloadBtn" class="primary" disabled>Download CSV</button>
         <span id="genNote" class="gen-note" style="display:none;color:var(--warn);font-size:.85em;"></span>
       </div>
 
-      <div id="canvasPanel" hidden></div>
+      <div id="canvasPanel" hidden>
+        <p style="color:var(--muted);font-size:13px;">Canvas QTI export coming online in the next task.</p>
+      </div>
 
       <div class="step-actions">
         <button id="back3" class="secondary">&larr; Refine</button>
@@ -182,6 +184,7 @@
     });
     if (n === 1) { renderSourceGrid(); renderSourceOpts(); }
     if (n === 2) render();
+    if (n === 3) refreshStep3();
   }
   function wireRail() {
     document.querySelectorAll('.rail-step').forEach(function (b) {
@@ -216,7 +219,6 @@
   function updateCount() {
     var n = Object.keys(state.selected).filter(function (k) { return state.selected[k]; }).length;
     document.getElementById('count').textContent = n + ' selected';
-    document.getElementById('exportBtn').disabled = n === 0;
   }
 
   function render() {
@@ -480,48 +482,67 @@
     }
   }
 
-  function doExport() {
-    var platform = document.getElementById('platformSel').value;
+  function csvFilenameForCurrent() {
+    var dest = state.destination;
+    var src = state.source === 'fib' ? 'fib' : (state.source === 'vocab' ? 'vocabulary' : 'practice');
+    var suffix = (state.source === 'fib' && state.fibTyped && dest === 'gimkit') ? 'gimkit-typed' : dest;
+    return state.unitId + '-' + src + '-' + suffix + '.csv';
+  }
+  function doCsvExport() {
     var qs = selectedList();
-    var csv, suffix;
-    if (state.source === 'fib' && state.fibTyped && platform === 'gimkit') {
-      csv = window.QExport.formatGimkitTyped(qs); suffix = 'gimkit-typed';
+    if (!qs.length) return;
+    var csv;
+    if (state.destination === 'gimkit' && state.source === 'fib' && state.fibTyped) {
+      csv = window.QExport.formatGimkitTyped(qs);
     } else {
-      csv = platform === 'gimkit' ? window.QExport.formatGimkit(qs) : window.QExport.formatBlooket(qs);
-      suffix = platform;
+      csv = state.destination === 'gimkit' ? window.QExport.formatGimkit(qs) : window.QExport.formatBlooket(qs);
     }
-    var sourceName = state.source === 'fib' ? 'fib' : (state.source === 'vocab' ? 'vocabulary' : 'practice');
     var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
     var a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = state.unitId + '-' + sourceName + '-' + suffix + '.csv';
+    a.download = csvFilenameForCurrent();
     document.body.append(a); a.click(); a.remove();
     URL.revokeObjectURL(a.href);
+  }
+
+  function refreshStep3() {
+    var csv = document.getElementById('csvPanel');
+    var canvas = document.getElementById('canvasPanel');
+    var note = document.getElementById('genNote');
+    var nameLabel = document.getElementById('csvNameLabel');
+    var dlBtn = document.getElementById('csvDownloadBtn');
+    if (state.destination === 'canvas') {
+      csv.style.display = 'none';
+      canvas.hidden = false;
+    } else {
+      csv.style.display = '';
+      canvas.hidden = true;
+      nameLabel.textContent = csvFilenameForCurrent();
+      var n = selectedList().length;
+      dlBtn.disabled = (n === 0);
+      dlBtn.textContent = n ? ('Download CSV (' + n + ' questions)') : 'Download CSV';
+      if (state.source === 'practice') { note.style.display = 'none'; }
+      else { note.style.display = ''; note.textContent = 'Wrong answers are auto-generated from the same chapter. Review or edit them before exporting.'; }
+    }
   }
 
   document.getElementById('selAll').onclick = function () { state.questions.forEach(function (q) { state.selected[q.id] = true; }); render(); };
   document.getElementById('selNone').onclick = function () { state.selected = {}; render(); };
   document.getElementById('filter').oninput = render;
-  document.getElementById('exportBtn').onclick = doExport;
 
   document.getElementById('destSel').onchange = function () {
     state.destination = this.value;
-    updatePlatformVisibility();
     if (state.step === 1) { renderSourceGrid(); renderSourceOpts(); }
+    if (state.step === 3) refreshStep3();
   };
-  function updatePlatformVisibility() {
-    var platSel = document.getElementById('platformSel');
-    platSel.disabled = (state.destination === 'canvas');
-    document.getElementById('exportBtn').hidden = (state.destination === 'canvas');
-  }
   wireRail();
+  document.getElementById('csvDownloadBtn').onclick = doCsvExport;
   showStep(state.step);
   fetch(UNITS_URL).then(function (r) { return r.json(); }).then(function (data) {
     state.units = (data.units || []);
     renderUnitGrid();
     if (state.units.length) loadUnit(state.units[0].id);
   });
-  updatePlatformVisibility();
 })();
 </script>
 </body>
