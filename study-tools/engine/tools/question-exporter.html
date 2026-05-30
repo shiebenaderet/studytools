@@ -434,7 +434,11 @@
   }
 
   function rebuildQuestions() {
-    state.selected = {}; state.edits = {};
+    if (rebuildQuestions._lastSource !== state.source || rebuildQuestions._lastUnit !== state.unitId) {
+      state.selected = {}; state.edits = {};
+    }
+    rebuildQuestions._lastSource = state.source;
+    rebuildQuestions._lastUnit = state.unitId;
     var cfg = state.rawConfig;
     if (!cfg) { state.questions = []; }
     else if (state.source === 'fib') state.questions = window.QExport.normalizeFib(cfg);
