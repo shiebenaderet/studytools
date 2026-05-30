@@ -36,41 +36,146 @@
   .over-badge { color:var(--warn); font-size:.72em; font-weight:700; margin-left:6px; }
   .gen-note { max-width:320px; }
   #sourceControls label { font-size:.85em; color:var(--muted); margin-left:8px; }
+  /* Wizard chrome */
+  body { padding: 0; }
+  .wizard { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; background: var(--bg); }
+  .rail { background: #1a1a1a; color: #f4efe6; padding: 28px 22px; display: flex; flex-direction: column; gap: 22px; }
+  .rail-brand { font-family: Georgia, "Iowan Old Style", serif; font-style: italic; font-size: 20px; letter-spacing: -0.01em; }
+  .rail-step { display: grid; grid-template-columns: 28px 1fr; gap: 12px; align-items: start; padding: 4px 0; color: rgba(255,255,255,.55); cursor: pointer; background: none; border: 0; text-align: left; font: inherit; }
+  .rail-step .rs-badge { width: 28px; height: 28px; border: 1px solid rgba(255,255,255,.3); border-radius: 50%; display: inline-grid; place-items: center; font-family: ui-monospace, Menlo, monospace; font-weight: 700; font-size: 12px; }
+  .rail-step .rs-title { font-style: italic; font-size: 14px; margin-top: 4px; }
+  .rail-step .rs-desc { font-size: 11px; color: rgba(255,255,255,.6); margin-top: 2px; line-height: 1.35; }
+  .rail-step.done { color: rgba(255,255,255,.85); }
+  .rail-step.done .rs-badge { background: #f4efe6; color: #1a1a1a; border-color: #f4efe6; }
+  .rail-step.cur { color: #f4efe6; }
+  .rail-step.cur .rs-badge { background: var(--accent); color: #fff; border-color: var(--accent); box-shadow: 0 0 0 4px rgba(200,68,58,.25); }
+  .rail-step[disabled] { cursor: not-allowed; opacity: .5; }
+  .rail-dest { margin-top: auto; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.12); }
+  .rail-dest .dl { font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: rgba(255,255,255,.55); font-weight: 700; margin-bottom: 6px; }
+  .rail-dest select { width: 100%; padding: 8px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,.2); background: #2a2a2a; color: #f4efe6; font: inherit; }
+  .stage { padding: 32px 40px 48px; overflow-x: hidden; }
+  .stage h2 { font-family: Georgia, "Iowan Old Style", serif; font-style: italic; font-weight: 500; font-size: 26px; letter-spacing: -0.01em; margin: 0 0 6px; }
+  .stage .lede { color: var(--muted); margin: 0 0 24px; font-size: 14px; max-width: 60ch; }
+  .step-actions { display: flex; gap: 12px; justify-content: flex-end; margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--line); }
 </style>
 </head>
 <body>
-<h1>Question Export Tool</h1>
-<div class="sub">Select practice questions, edit if needed, and download a CSV for Blooket or GiMKit. Edits here do not change the study site.</div>
+<div class="wizard">
+  <nav class="rail">
+    <div class="rail-brand">Exporter &mdash;</div>
+    <button class="rail-step" data-go="0">
+      <span class="rs-badge">0</span>
+      <span><div class="rs-title">Unit</div><div class="rs-desc rs-desc-unit">(none)</div></span>
+    </button>
+    <button class="rail-step" data-go="1">
+      <span class="rs-badge">1</span>
+      <span><div class="rs-title">Source</div><div class="rs-desc rs-desc-source">Pick what to export.</div></span>
+    </button>
+    <button class="rail-step" data-go="2">
+      <span class="rs-badge">2</span>
+      <span><div class="rs-title">Refine</div><div class="rs-desc">Select, edit, filter.</div></span>
+    </button>
+    <button class="rail-step" data-go="3">
+      <span class="rs-badge">3</span>
+      <span><div class="rs-title">Send</div><div class="rs-desc">Download or build.</div></span>
+    </button>
+    <div class="rail-dest">
+      <div class="dl">Destination</div>
+      <select id="destSel">
+        <option value="blooket">Blooket</option>
+        <option value="gimkit">GiMKit</option>
+        <option value="canvas">Canvas QTI</option>
+      </select>
+    </div>
+  </nav>
 
-<div class="toolbar">
-  <label>Unit <select id="unitSel"></select></label>
-  <label>Source <select id="sourceSel">
-    <option value="practice">Practice Questions</option>
-    <option value="fib">Fill-in-the-Blank</option>
-    <option value="vocab">Vocabulary</option>
-  </select></label>
-  <span id="sourceControls"></span>
-  <button id="selAll" class="secondary">Select all</button>
-  <button id="selNone" class="secondary">Clear</button>
-  <input id="filter" type="text" placeholder="Filter by text..." style="flex:1;min-width:160px;padding:8px 10px;border:1px solid var(--line);border-radius:6px;">
-  <span class="count" id="count">0 selected</span>
+  <main class="stage">
+    <section data-step="0" hidden>
+      <h2>Pick a unit</h2>
+      <p class="lede">Choose which unit's content to export.</p>
+      <div id="unitGrid"></div>
+    </section>
+
+    <section data-step="1" hidden>
+      <h2>Pick a source</h2>
+      <p class="lede">Each source maps from a different pool in this unit.</p>
+      <div id="sourceGrid"></div>
+      <div id="sourceOpts"></div>
+      <div class="step-actions">
+        <button id="back1" class="secondary">&larr; Unit</button>
+        <button id="next1" class="primary">Continue: Refine &rarr;</button>
+      </div>
+    </section>
+
+    <section data-step="2" hidden>
+      <h2>Refine selection</h2>
+      <p class="lede" id="step2Lede">Pick questions to export. You can edit any of them inline.</p>
+
+      <div class="toolbar">
+        <button id="selAll" class="secondary">Select all</button>
+        <button id="selNone" class="secondary">Clear</button>
+        <input id="filter" type="text" placeholder="Filter by text..." style="flex:1;min-width:160px;padding:8px 10px;border:1px solid var(--line);border-radius:6px;">
+        <span class="count" id="count">0 selected</span>
+      </div>
+
+      <div id="list"></div>
+
+      <div class="step-actions">
+        <button id="back2" class="secondary">&larr; Source</button>
+        <button id="next2" class="primary">Continue: Send &rarr;</button>
+      </div>
+    </section>
+
+    <section data-step="3" hidden>
+      <h2>Send</h2>
+      <p class="lede" id="step3Lede">Choose a platform and download.</p>
+
+      <div class="toolbar">
+        <label>Platform <select id="platformSel"><option value="blooket">Blooket</option><option value="gimkit">GiMKit</option></select></label>
+        <button id="exportBtn" class="primary" disabled>Export CSV</button>
+        <span id="genNote" class="gen-note" style="display:none;color:var(--warn);font-size:.85em;"></span>
+      </div>
+
+      <div id="canvasPanel" hidden></div>
+
+      <div class="step-actions">
+        <button id="back3" class="secondary">&larr; Refine</button>
+      </div>
+    </section>
+  </main>
 </div>
-
-<div class="toolbar">
-  <label>Platform <select id="platformSel"><option value="blooket">Blooket</option><option value="gimkit">GiMKit</option></select></label>
-  <button id="exportBtn" class="primary" disabled>Export CSV</button>
-  <span id="genNote" class="gen-note" style="display:none;color:var(--warn);font-size:.85em;"></span>
-</div>
-
-<div id="list"></div>
 
 <script src="question-export-core.js"></script>
 <script>
 (function () {
   var UNITS_URL = '../../units/units.json';
+  var stepEls = function () { return document.querySelectorAll('section[data-step]'); };
+  function showStep(n) {
+    state.step = n;
+    stepEls().forEach(function (s) { s.hidden = (Number(s.dataset.step) !== n); });
+    document.querySelectorAll('.rail-step').forEach(function (b) {
+      var i = Number(b.dataset.go);
+      b.classList.toggle('cur', i === n);
+      b.classList.toggle('done', i < n);
+    });
+    if (n === 2) render();
+  }
+  function wireRail() {
+    document.querySelectorAll('.rail-step').forEach(function (b) {
+      b.onclick = function () { showStep(Number(b.dataset.go)); };
+    });
+    document.getElementById('back1').onclick = function () { showStep(0); };
+    document.getElementById('next1').onclick = function () { showStep(2); };
+    document.getElementById('back2').onclick = function () { showStep(1); };
+    document.getElementById('next2').onclick = function () { showStep(3); };
+    document.getElementById('back3').onclick = function () { showStep(2); };
+  }
   var state = { unitId: null, source: 'practice', questions: [], selected: {}, edits: {},
                 vocabDirection: 'definition-term', includeEncounter: false, fibTyped: false,
                 rawConfig: null };
+  state.step = 2;            // start at Step 2 to preserve current behavior until later tasks
+  state.destination = 'blooket';
+  state.canvasOpts = { title: '', maxAttempts: 1 };
 
   var el = function (tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
 
@@ -193,6 +298,7 @@
 
   function renderSourceControls() {
     var c = document.getElementById('sourceControls');
+    if (!c) return; // Step 1 stub will provide source options later
     c.textContent = '';
     if (state.source === 'vocab') {
       var dirLabel = el('label', null, 'Direction ');
@@ -239,17 +345,20 @@
   document.getElementById('selNone').onclick = function () { state.selected = {}; render(); };
   document.getElementById('filter').oninput = render;
   document.getElementById('exportBtn').onclick = doExport;
-  document.getElementById('unitSel').onchange = function () { loadUnit(this.value); };
-  document.getElementById('sourceSel').onchange = function () { state.source = this.value; rebuildQuestions(); };
 
+  document.getElementById('destSel').onchange = function () { state.destination = this.value; updatePlatformVisibility(); };
+  function updatePlatformVisibility() {
+    var platSel = document.getElementById('platformSel');
+    platSel.disabled = (state.destination === 'canvas');
+    document.getElementById('exportBtn').hidden = (state.destination === 'canvas');
+  }
+  wireRail();
+  showStep(state.step);
   fetch(UNITS_URL).then(function (r) { return r.json(); }).then(function (data) {
-    var sel = document.getElementById('unitSel');
-    (data.units || []).forEach(function (u) {
-      var o = el('option', null, u.title + (u.retired ? ' (retired)' : ''));
-      o.value = u.id; sel.append(o);
-    });
-    if (data.units && data.units.length) loadUnit(data.units[0].id);
+    state.units = (data.units || []);
+    if (state.units.length) loadUnit(state.units[0].id);
   });
+  updatePlatformVisibility();
 })();
 </script>
 </body>
