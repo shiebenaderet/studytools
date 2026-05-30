@@ -218,5 +218,73 @@
       '    </item>'
     ].join('\n');
   }
-  return { csvField: csvField, toCsv: toCsv, normalizeQuestions: normalizeQuestions, formatBlooket: formatBlooket, formatGimkit: formatGimkit, formatGimkitTyped: formatGimkitTyped, pickDistractors: pickDistractors, normalizeFib: normalizeFib, normalizeVocab: normalizeVocab, xmlEscape: xmlEscape, slugify: slugify, renderMCItem: renderMCItem, renderShortAnswerItem: renderShortAnswerItem, renderEssayItem: renderEssayItem };
+  function pickRenderer(source) {
+    if (source === 'shortAnswer') return renderEssayItem;
+    if (source === 'fib') return renderShortAnswerItem;
+    return renderMCItem;
+  }
+
+  function buildAssessmentXml(items, opts) {
+    var assessmentId = opts.assessmentId;
+    var title = xmlEscape(opts.title || assessmentId);
+    var attempts = parseInt(opts.maxAttempts, 10) || 1;
+    return [
+      '<?xml version="1.0" encoding="UTF-8"?>',
+      '<questestinterop xmlns="http://www.imsglobal.org/xsd/ims_qtiasiv1p2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">',
+      '  <assessment ident="' + assessmentId + '" title="' + title + '">',
+      '    <qtimetadata>',
+      '      <qtimetadatafield><fieldlabel>cc_maxattempts</fieldlabel><fieldentry>' + attempts + '</fieldentry></qtimetadatafield>',
+      '    </qtimetadata>',
+      '    <section ident="root_section">',
+            items.join('\n'),
+      '    </section>',
+      '  </assessment>',
+      '</questestinterop>',
+      ''
+    ].join('\n');
+  }
+
+  function buildManifestXml(assessmentId) {
+    var resId = 'res_' + assessmentId;
+    var manId = 'manifest_' + assessmentId;
+    return [
+      '<?xml version="1.0" encoding="UTF-8"?>',
+      '<manifest identifier="' + manId + '"',
+      '  xmlns="http://www.imsglobal.org/xsd/imsccv1p1/imscp_v1p1"',
+      '  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"',
+      '  xsi:schemaLocation="http://www.imsglobal.org/xsd/imsccv1p1/imscp_v1p1 http://www.imsglobal.org/xsd/imscp_v1p1.xsd">',
+      '  <metadata>',
+      '    <schema>IMS Content</schema>',
+      '    <schemaversion>1.1.3</schemaversion>',
+      '  </metadata>',
+      '  <organizations/>',
+      '  <resources>',
+      '    <resource identifier="' + resId + '" type="imsqti_xmlv1p2/imscc_xmlv1p1/assessment">',
+      '      <file href="' + assessmentId + '/' + assessmentId + '.xml"/>',
+      '    </resource>',
+      '  </resources>',
+      '</manifest>',
+      ''
+    ].join('\n');
+  }
+
+  function buildCanvasPackage(questions, opts) {
+    opts = opts || {};
+    var assessmentId = slugify((opts.unitId || 'quiz') + '-' + (opts.source || 'set'));
+    var renderer = pickRenderer(opts.source);
+    var prepped = questions.map(function (q) {
+      if (opts.source === 'fib') {
+        return Object.assign({}, q, { _accepted: [q.options[q.correctIndex]] });
+      }
+      return q;
+    });
+    var items = prepped.map(function (q, i) { return renderer(q, i + 1); });
+    var assessmentXml = buildAssessmentXml(items, { assessmentId: assessmentId, title: opts.title, maxAttempts: opts.maxAttempts });
+    var manifestXml = buildManifestXml(assessmentId);
+    var fileMap = {};
+    fileMap['imsmanifest.xml'] = manifestXml;
+    fileMap[assessmentId + '/' + assessmentId + '.xml'] = assessmentXml;
+    return { assessmentId: assessmentId, fileMap: fileMap };
+  }
+  return { csvField: csvField, toCsv: toCsv, normalizeQuestions: normalizeQuestions, formatBlooket: formatBlooket, formatGimkit: formatGimkit, formatGimkitTyped: formatGimkitTyped, pickDistractors: pickDistractors, normalizeFib: normalizeFib, normalizeVocab: normalizeVocab, xmlEscape: xmlEscape, slugify: slugify, renderMCItem: renderMCItem, renderShortAnswerItem: renderShortAnswerItem, renderEssayItem: renderEssayItem, buildAssessmentXml: buildAssessmentXml, buildManifestXml: buildManifestXml, buildCanvasPackage: buildCanvasPackage };
 });

@@ -222,6 +222,34 @@ eq('essay contains starter bullet', esXml.indexOf('- Geography pushed') >= 0, tr
 eq('essay no rubric word', esXml.toLowerCase().indexOf('rubric') === -1, true);
 eq('essay no exemplar', esXml.indexOf('exemplar') === -1, true);
 
+// buildCanvasPackage MC
+var bcMcQ = { id: 0, question: 'Which is true?', options: ['A','B','C','D'], correctIndex: 1, topic: 'T' };
+var pkgMc = core.buildCanvasPackage([bcMcQ], { title: 'Test Quiz', maxAttempts: 1, unitId: 'civil-war', source: 'practice' });
+eq('pkg has assessmentId', pkgMc.assessmentId, 'civil-war-practice');
+eq('pkg fileMap has manifest', !!pkgMc.fileMap['imsmanifest.xml'], true);
+eq('pkg fileMap has assessment xml', !!pkgMc.fileMap['civil-war-practice/civil-war-practice.xml'], true);
+eq('manifest schemaversion 1.1.3', pkgMc.fileMap['imsmanifest.xml'].indexOf('<schemaversion>1.1.3</schemaversion>') >= 0, true);
+eq('manifest hybrid type', pkgMc.fileMap['imsmanifest.xml'].indexOf('imsqti_xmlv1p2/imscc_xmlv1p1/assessment') >= 0, true);
+eq('manifest namespace imsccv1p1', pkgMc.fileMap['imsmanifest.xml'].indexOf('imsccv1p1') >= 0, true);
+eq('manifest has organizations', /<organizations\s*\/>|<organizations>\s*<\/organizations>/.test(pkgMc.fileMap['imsmanifest.xml']), true);
+eq('manifest file href matches', pkgMc.fileMap['imsmanifest.xml'].indexOf('civil-war-practice/civil-war-practice.xml') >= 0, true);
+eq('assessment ident matches', pkgMc.fileMap['civil-war-practice/civil-war-practice.xml'].indexOf('<assessment ident="civil-war-practice"') >= 0, true);
+eq('assessment title is escaped', pkgMc.fileMap['civil-war-practice/civil-war-practice.xml'].indexOf('title="Test Quiz"') >= 0, true);
+eq('assessment cc_maxattempts', pkgMc.fileMap['civil-war-practice/civil-war-practice.xml'].indexOf('<fieldentry>1</fieldentry>') >= 0, true);
+
+// FIB short_answer wiring: buildCanvasPackage sets _accepted from correct option
+var bcFibQ = { id: 0, question: 'X is _____', options: ['alpha','b','c','d'], correctIndex: 0, topic: 'T' };
+var pkgFib = core.buildCanvasPackage([bcFibQ], { title: 'F', maxAttempts: 1, unitId: 'civil-war', source: 'fib' });
+eq('fib uses short_answer', pkgFib.fileMap['civil-war-fib/civil-war-fib.xml'].indexOf('short_answer_question') >= 0, true);
+eq('fib accepted = correct option', pkgFib.fileMap['civil-war-fib/civil-war-fib.xml'].indexOf('>alpha</varequal>') >= 0, true);
+
+// Essay wiring
+var bcEsQ = { id: 0, question: 'Q?', _essay: { keyTerms: [], sentenceStarters: [] }, options: [], correctIndex: -1, topic: 'T' };
+var pkgEss = core.buildCanvasPackage([bcEsQ], { title: 'E', maxAttempts: 2, unitId: 'civil-war', source: 'shortAnswer' });
+eq('essay assessment id', pkgEss.assessmentId, 'civil-war-shortanswer');
+eq('essay cc_maxattempts 2', pkgEss.fileMap['civil-war-shortanswer/civil-war-shortanswer.xml'].indexOf('<fieldentry>2</fieldentry>') >= 0, true);
+eq('essay uses essay_question', pkgEss.fileMap['civil-war-shortanswer/civil-war-shortanswer.xml'].indexOf('essay_question') >= 0, true);
+
 if (failures.length) {
   console.log('FAIL (' + failures.length + ')');
   failures.forEach(function (f) { console.log('- ' + f); });
