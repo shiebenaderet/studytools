@@ -149,10 +149,10 @@ StudyEngine.registerActivity({
             this._renderState(svg, statesData[s], mode);
         }
 
-        // Quiz mode: clicks outside any state count as a miss.
-        if (mode === 'quiz') {
-            svg.addEventListener('click', this._onMapClickQuiz.bind(this));
-        } else {
+        // Learn mode: clicking blank space dismisses the fact panel.
+        // Quiz mode: clicking blank space does nothing — misclicks should not
+        // be marked wrong (reported by Tianyu, 2026-05-30).
+        if (mode === 'learn') {
             svg.addEventListener('click', this._dismissLearnSelection.bind(this));
         }
 
@@ -302,18 +302,6 @@ StudyEngine.registerActivity({
         var correct = clicked.id === target.id;
         if (correct) this._quizScore++;
         this._showQuizFeedback(correct, target, clicked);
-    },
-
-    _onMapClickQuiz(e) {
-        // Ignore clicks that landed inside a state — those are handled above.
-        var t = e.target;
-        while (t && t !== this._container) {
-            if (t.classList && t.classList.contains('fs-state')) return;
-            t = t.parentNode;
-        }
-        if (this._quizIndex >= this._quizStates.length) return;
-        var target = this._quizStates[this._quizIndex];
-        this._showQuizFeedback(false, target, null);
     },
 
     _showQuizFeedback(correct, target, clicked) {

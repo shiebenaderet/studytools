@@ -207,11 +207,10 @@ StudyEngine.registerActivity({
 
         svg.appendChild(cityGroup);
 
-        // Click anywhere on map (in quiz mode) — handle misses
-        if (mode === 'quiz') {
-            svg.addEventListener('click', this._onMapClickQuiz.bind(this));
-        } else {
-            // Learn mode: clicking outside a city group dismisses tooltip
+        // Learn mode: clicking outside a city group dismisses the tooltip.
+        // Quiz mode: clicking blank background does nothing — misclicks should
+        // not be marked wrong (reported by Tianyu, 2026-05-30).
+        if (mode === 'learn') {
             svg.addEventListener('click', function(e) {
                 // City clicks have stopPropagation, so anything reaching here is a non-city click
                 this._dismissLearnTooltip();
@@ -462,16 +461,6 @@ StudyEngine.registerActivity({
             this._quizMistakes++;
             this._showQuizFeedback(false, target, clickedCity);
         }
-    },
-
-    _onMapClickQuiz(e) {
-        // Only react if click landed on the SVG background, not a city
-        if (e.target.classList.contains('cw-map-city-hit') || e.target.classList.contains('cw-map-city-dot')) return;
-        if (this._quizIndex >= this._quizCities.length) return;
-        // Counts as a miss but no specific wrong-city to show
-        var target = this._quizCities[this._quizIndex];
-        this._quizMistakes++;
-        this._showQuizFeedback(false, target, null);
     },
 
     _showQuizFeedback(correct, target, clickedCity) {
