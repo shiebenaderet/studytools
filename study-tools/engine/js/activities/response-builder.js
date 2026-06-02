@@ -16,6 +16,7 @@ StudyEngine.registerActivity({
     _question: null,
     _step: 1,
     _maxStep: 5,
+    _transitioning: false,
 
     render: function (container, config) {
         this._config = config;
@@ -94,8 +95,14 @@ StudyEngine.registerActivity({
         back.className = 'rb-btn';
         back.textContent = this._step === 1 ? '← Back to question' : '← Back';
         back.addEventListener('click', function () {
-            if (self._step === 1) self._exitToQuestion();
-            else { self._step--; self._renderStep(); }
+            if (self._transitioning) return;
+            self._transitioning = true;
+            if (self._step === 1) { self._exitToQuestion(); return; } // tearing down; no need to clear
+            self._step--;
+            self._renderStep();
+            // Clear on the next tick so a second click queued in the SAME tick
+            // (a fast double-click on the freshly-rendered button) is dropped.
+            setTimeout(function () { self._transitioning = false; }, 0);
         });
         nav.appendChild(back);
         var next = document.createElement('button');
@@ -103,8 +110,14 @@ StudyEngine.registerActivity({
         next.id = 'rb-next';
         next.textContent = this._step === this._maxStep ? 'Finish →' : 'Next: ' + this._stepTitles[this._step] + ' →';
         next.addEventListener('click', function () {
-            if (self._step === self._maxStep) self._exitToQuestion();
-            else { self._step++; self._renderStep(); }
+            if (self._transitioning) return;
+            self._transitioning = true;
+            if (self._step === self._maxStep) { self._exitToQuestion(); return; } // tearing down; no need to clear
+            self._step++;
+            self._renderStep();
+            // Clear on the next tick so a second click queued in the SAME tick
+            // (a fast double-click on the freshly-rendered button) is dropped.
+            setTimeout(function () { self._transitioning = false; }, 0);
         });
         nav.appendChild(next);
         return nav;
@@ -115,6 +128,7 @@ StudyEngine.registerActivity({
     },
 
     _renderUnpack: function (body) {
+        var self = this;
         var h = document.createElement('div'); h.className = 'rb-h'; h.textContent = "What's this question asking?";
         body.appendChild(h);
         var sub = document.createElement('div'); sub.className = 'rb-sub';
@@ -128,6 +142,11 @@ StudyEngine.registerActivity({
         body.appendChild(label);
         var ta = document.createElement('textarea'); ta.className = 'rb-restate'; ta.rows = 3;
         ta.placeholder = 'This question wants me to...';
+        var savedRestate = ProgressManager.getActivityProgress(this._config.unit.id, 'response-builder-restate-' + this._qIndex);
+        if (savedRestate && savedRestate.text) ta.value = savedRestate.text;
+        ta.addEventListener('input', function () {
+            ProgressManager.saveActivityProgress(self._config.unit.id, 'response-builder-restate-' + self._qIndex, { text: ta.value });
+        });
         body.appendChild(ta);
     },
 

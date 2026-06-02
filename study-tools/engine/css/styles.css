@@ -7013,3 +7013,21 @@ body.light-mode .feedback-fab {
     cursor: not-allowed;
     pointer-events: none;
 }
+
+/* --- Responsive: laptop/Chromebook + narrow widths ---------------------- */
+@media (max-width: 760px) {
+    /* Draft view: stack the plan and the textarea so neither is squeezed */
+    .rb-draft-cols {
+        grid-template-columns: 1fr;
+    }
+}
+@media (max-width: 600px) {
+    /* Keep the stepper from overflowing: shrink labels and stop them wrapping */
+    .rb-steps {
+        gap: 4px;
+    }
+    .rb-step-label {
+        font-size: 0.66em;
+        max-width: 9ch;
+    }
+}
