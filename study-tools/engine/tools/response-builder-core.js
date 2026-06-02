@@ -44,16 +44,45 @@
   };
 
   // Deterministic shuffle (seeded by an integer) so the tested core never calls
-  // Math.random. Simple index-rotation + swap based on the seed.
-  api.scramblePlan = function (plan, seed) {
+  // Math.random. Simple Fisher–Yates driven by an LCG.
+  function shuffleOnce(plan, seed) {
     var a = plan.slice();
-    var s = (typeof seed === 'number' ? seed : 0) + 1;
+    var s = (seed & 0x7fffffff) + 1;
     for (var i = a.length - 1; i > 0; i--) {
       s = (s * 1103515245 + 12345) & 0x7fffffff; // LCG step
       var j = s % (i + 1);
       var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
     }
     return a;
+  }
+
+  function sameOrder(a, b) {
+    if (a.length !== b.length) return false;
+    for (var i = 0; i < a.length; i++) {
+      if (a[i] !== b[i]) return false;
+    }
+    return true;
+  }
+
+  // Deterministic scramble that NEVER returns the input order when the plan has
+  // 2+ pieces. The wizard seeds this with the question's index (fixed per
+  // question), so an identity result would pre-arrange the answer for that
+  // question every time. Re-roll by advancing the seed until the order differs;
+  // a final deterministic swap guarantees termination even if the loop can't
+  // find one. A plan of length 0 or 1 can't differ from itself, so return as-is.
+  api.scramblePlan = function (plan, seed) {
+    var base = (typeof seed === 'number' ? seed : 0);
+    if (plan.length < 2) return plan.slice();
+    var result = shuffleOnce(plan, base);
+    // Re-roll on identity. Bounded by plan.length re-rolls; if every attempt
+    // still matches (vanishingly unlikely), fall through to a forced swap.
+    for (var attempt = 0; attempt < plan.length && sameOrder(result, plan); attempt++) {
+      result = shuffleOnce(plan, base + attempt + 1);
+    }
+    if (sameOrder(result, plan)) {
+      var tmp = result[0]; result[0] = result[1]; result[1] = tmp;
+    }
+    return result;
   };
 
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
