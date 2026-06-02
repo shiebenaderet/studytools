@@ -24,6 +24,7 @@ StudyEngine.registerActivity({
     _quizIndex: 0,
     _quizScore: 0,
     _quizStartTime: null,
+    _answerLocked: false,    // Per-question lock; blocks spam-clicks during the 1400ms feedback window
 
     render(container, config) {
         this._container = container;
@@ -107,6 +108,7 @@ StudyEngine.registerActivity({
         this._quizStates = states;
         this._quizIndex = 0;
         this._quizScore = 0;
+        this._answerLocked = false;
         this._quizStartTime = Date.now();
         this._renderMap('quiz');
     },
@@ -297,10 +299,17 @@ StudyEngine.registerActivity({
     // ─── Quiz mode interactions ─────────────────────────
 
     _onStateClickQuiz(clicked) {
-        if (this._quizIndex >= this._quizStates.length) return;
+        var finished = this._quizIndex >= this._quizStates.length;
+        var shouldProcess = window.MapQuizGuard
+            ? window.MapQuizGuard.shouldProcessClick({ locked: this._answerLocked, finished: finished })
+            : (!finished && !this._answerLocked);
+        if (!shouldProcess) return;
         var target = this._quizStates[this._quizIndex];
         var correct = clicked.id === target.id;
         if (correct) this._quizScore++;
+        // Lock before scheduling feedback so spam-clicks during the 1400ms
+        // window are ignored. Cleared when the next question renders.
+        this._answerLocked = true;
         this._showQuizFeedback(correct, target, clicked);
     },
 
@@ -383,6 +392,10 @@ StudyEngine.registerActivity({
             progWrap.appendChild(progBar);
 
             panel.appendChild(progWrap);
+
+            // Next question is now live; release the per-question lock so the
+            // student can click again.
+            this._answerLocked = false;
 
             var current = this._quizStates[this._quizIndex];
             var prompt = document.createElement('div');

@@ -1159,6 +1159,13 @@ StudyEngine.registerActivity({
         var feedback = document.getElementById('mq-feedback');
 
         if (isCorrect) {
+            // Re-entrancy guard: ignore spam clicks on the already-answered region
+            // while the 600ms advance is still pending.
+            var shouldProcess = window.MapQuizGuard
+                ? window.MapQuizGuard.shouldProcessRegionClick({ targetId: this._currentRegion ? this._currentRegion.id : null, answeredIds: this._answeredIds })
+                : (correctId && this._answeredIds.indexOf(correctId) === -1);
+            if (!shouldProcess) return;
+
             this._score++;
             this._answeredIds.push(correctId);
 
@@ -2041,6 +2048,12 @@ StudyEngine.registerActivity({
         var feedback = document.getElementById('mq-feedback');
 
         if (isCorrect) {
+            // Re-entrancy guard: this handler never pushes to _answeredIds, so detect an
+            // already-answered region via the synchronous DOM marker it does set: a correct
+            // path immediately gets the 'mq-correct' class. If it's already marked, a spam
+            // click arrived during the 600ms advance window, so bail without re-scoring.
+            if (correctPath && correctPath.classList.contains('mq-correct')) return;
+
             this._score++;
 
             // Mark as correct permanently

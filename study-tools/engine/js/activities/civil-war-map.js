@@ -22,6 +22,7 @@ StudyEngine.registerActivity({
     _quizScore: 0,
     _quizMistakes: 0,
     _quizStartTime: null,
+    _answerLocked: false, // per-question lock: ignore clicks while feedback window is pending
     _selectedCity: null, // for Learn mode tooltip
 
     render(container, config) {
@@ -120,6 +121,7 @@ StudyEngine.registerActivity({
         this._quizIndex = 0;
         this._quizScore = 0;
         this._quizMistakes = 0;
+        this._answerLocked = false;
         this._quizStartTime = Date.now();
         this._renderMap('quiz');
     },
@@ -424,6 +426,7 @@ StudyEngine.registerActivity({
         if (this._quizIndex >= this._quizCities.length) {
             this._renderQuizResults(panel);
         } else {
+            this._answerLocked = false; // release lock for the new question
             var current = this._quizCities[this._quizIndex];
             var prompt = document.createElement('div');
             prompt.className = 'cw-map-prompt';
@@ -452,8 +455,15 @@ StudyEngine.registerActivity({
     },
 
     _onCityClickQuiz(clickedCity) {
-        if (this._quizIndex >= this._quizCities.length) return;
+        var finished = this._quizIndex >= this._quizCities.length;
+        var ok = window.MapQuizGuard
+            ? window.MapQuizGuard.shouldProcessClick({ locked: this._answerLocked, finished: finished })
+            : (!finished && !this._answerLocked);
+        if (!ok) return;
         var target = this._quizCities[this._quizIndex];
+        // First valid click (correct or wrong) opens a 1400ms feedback window; lock to
+        // prevent spam-clicks from advancing the queue or over-counting the score.
+        this._answerLocked = true;
         if (clickedCity.id === target.id) {
             this._quizScore++;
             this._showQuizFeedback(true, target, null);
