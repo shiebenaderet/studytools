@@ -1,0 +1,233 @@
+// Response Builder — a guided 5-step wizard that helps a student who is stuck on
+// a short-answer question. Launched (hidden) from short-answer.js via
+// activateActivity('response-builder', [questionIndex]). Steps:
+//   1 Unpack  2 Read  3 Terms  4 Plan (CER)  5 Draft
+StudyEngine.registerActivity({
+    id: 'response-builder',
+    name: 'Response Builder',
+    icon: 'fas fa-pen-ruler',
+    description: 'Build a short-answer response step by step.',
+    category: 'practice',
+    hidden: true, // launched from the Short Answer activity, not the home grid
+
+    _config: null,
+    _container: null,
+    _qIndex: -1,
+    _question: null,
+    _step: 1,
+    _maxStep: 5,
+
+    render: function (container, config) {
+        this._config = config;
+        this._container = container;
+        var params = this._deepLinkParams || [];
+        this._qIndex = params.length >= 1 ? parseInt(params[0], 10) : -1;
+        var all = (config.shortAnswerQuestions || []);
+        this._question = (this._qIndex >= 0 && this._qIndex < all.length) ? all[this._qIndex] : null;
+        this._step = 1;
+        if (!this._question) {
+            StudyEngine.activateActivity('short-answer');
+            return;
+        }
+        this._renderStep();
+    },
+
+    _stepTitles: ["What's it asking?", 'Read about it', 'Key terms', 'Make a plan', 'Write your draft'],
+
+    _renderStep: function () {
+        var c = this._container;
+        c.textContent = '';
+        c.className = 'rb-screen';
+        c.appendChild(this._buildStepper());
+        c.appendChild(this._buildQuestionContext());
+        var body = document.createElement('div');
+        body.className = 'rb-step-body';
+        if (this._step === 1) this._renderUnpack(body);
+        else if (this._step === 2) this._renderRead(body);
+        else if (this._step === 3) this._renderTerms(body);
+        else if (this._step === 4) this._renderPlan(body);
+        else if (this._step === 5) this._renderDraft(body);
+        c.appendChild(body);
+        c.appendChild(this._buildNav());
+    },
+
+    _buildStepper: function () {
+        var self = this;
+        var bar = document.createElement('div');
+        bar.className = 'rb-steps';
+        for (var i = 0; i < this._maxStep; i++) {
+            var stepNum = i + 1;
+            var step = document.createElement('div');
+            step.className = 'rb-step' + (stepNum < self._step ? ' rb-done' : stepNum === self._step ? ' rb-active' : '');
+            var dot = document.createElement('div');
+            dot.className = 'rb-dot';
+            dot.textContent = stepNum < self._step ? '✓' : String(stepNum);
+            step.appendChild(dot);
+            var label = document.createElement('div');
+            label.className = 'rb-step-label';
+            label.textContent = self._stepTitles[i];
+            step.appendChild(label);
+            bar.appendChild(step);
+        }
+        return bar;
+    },
+
+    _buildQuestionContext: function () {
+        var wrap = document.createElement('div');
+        wrap.className = 'rb-q-context';
+        var lbl = document.createElement('div');
+        lbl.className = 'rb-q-label';
+        lbl.textContent = 'Building your response to';
+        wrap.appendChild(lbl);
+        var q = document.createElement('div');
+        q.className = 'rb-q-text';
+        q.textContent = this._question.question;
+        wrap.appendChild(q);
+        return wrap;
+    },
+
+    _buildNav: function () {
+        var self = this;
+        var nav = document.createElement('div');
+        nav.className = 'rb-nav';
+        var back = document.createElement('button');
+        back.className = 'rb-btn';
+        back.textContent = this._step === 1 ? '← Back to question' : '← Back';
+        back.addEventListener('click', function () {
+            if (self._step === 1) self._exitToQuestion();
+            else { self._step--; self._renderStep(); }
+        });
+        nav.appendChild(back);
+        var next = document.createElement('button');
+        next.className = 'rb-btn rb-btn-primary';
+        next.id = 'rb-next';
+        next.textContent = this._step === this._maxStep ? 'Finish →' : 'Next: ' + this._stepTitles[this._step] + ' →';
+        next.addEventListener('click', function () {
+            if (self._step === self._maxStep) self._exitToQuestion();
+            else { self._step++; self._renderStep(); }
+        });
+        nav.appendChild(next);
+        return nav;
+    },
+
+    _exitToQuestion: function () {
+        StudyEngine.activateActivity('short-answer', [this._qIndex]);
+    },
+
+    _renderUnpack: function (body) {
+        var h = document.createElement('div'); h.className = 'rb-h'; h.textContent = "What's this question asking?";
+        body.appendChild(h);
+        var sub = document.createElement('div'); sub.className = 'rb-sub';
+        sub.textContent = 'Read it carefully. Look for the task words that tell you what to do, then say it back in your own words.';
+        body.appendChild(sub);
+        var qBox = document.createElement('div'); qBox.className = 'rb-unpack-q';
+        qBox.textContent = this._question.question;
+        body.appendChild(qBox);
+        var label = document.createElement('label'); label.className = 'rb-restate-label';
+        label.textContent = 'In your own words, what is this question asking you to do?';
+        body.appendChild(label);
+        var ta = document.createElement('textarea'); ta.className = 'rb-restate'; ta.rows = 3;
+        ta.placeholder = 'This question wants me to...';
+        body.appendChild(ta);
+    },
+
+    _renderRead: function (body) {
+        var h = document.createElement('div'); h.className = 'rb-h'; h.textContent = 'Read about it';
+        body.appendChild(h);
+        var passages = (this._config.typingPassages || []);
+        var topic = this._question.topic;
+        var match = null;
+        for (var i = 0; i < passages.length; i++) {
+            if (passages[i].category === topic) { match = passages[i]; break; }
+        }
+        if (match) {
+            var title = document.createElement('div'); title.className = 'rb-read-title'; title.textContent = match.title || topic;
+            body.appendChild(title);
+            var p = document.createElement('div'); p.className = 'rb-read-passage'; p.textContent = match.passage;
+            body.appendChild(p);
+        } else {
+            var fb = document.createElement('div'); fb.className = 'rb-read-fallback';
+            fb.textContent = 'Look back through your guided notes on "' + topic + '" before you keep going.';
+            body.appendChild(fb);
+        }
+    },
+
+    _renderTerms: function (body) {
+        var self = this;
+        var h = document.createElement('div'); h.className = 'rb-h'; h.textContent = 'Know the key terms';
+        body.appendChild(h);
+        var sub = document.createElement('div'); sub.className = 'rb-sub';
+        sub.textContent = 'Tap each term to check what it means. You will want these in your answer.';
+        body.appendChild(sub);
+        var details = document.createElement('div'); details.className = 'rb-term-details'; details.style.display = 'none';
+        var list = document.createElement('div'); list.className = 'rb-term-list';
+        var active = null;
+        (this._question.keyTerms || []).forEach(function (term) {
+            var chip = document.createElement('button');
+            chip.type = 'button'; chip.className = 'rb-term-chip'; chip.textContent = term;
+            chip.addEventListener('click', function () {
+                if (active === chip) { details.style.display = 'none'; chip.classList.remove('rb-term-chip-active'); active = null; return; }
+                if (active) active.classList.remove('rb-term-chip-active');
+                chip.classList.add('rb-term-chip-active'); active = chip;
+                details.style.display = '';
+                if (typeof TermDetails !== 'undefined') TermDetails.render(details, term, self._config);
+            });
+            list.appendChild(chip);
+        });
+        body.appendChild(list);
+        body.appendChild(details);
+    },
+
+    _renderPlan: function (body) {
+        var note = document.createElement('div'); note.className = 'rb-sub';
+        note.textContent = '(plan step wired in Task 4)';
+        body.appendChild(note);
+    },
+
+    _renderDraft: function (body) {
+        var self = this;
+        var h = document.createElement('div'); h.className = 'rb-h'; h.textContent = 'Write your draft';
+        body.appendChild(h);
+        var sub = document.createElement('div'); sub.className = 'rb-sub';
+        sub.textContent = 'Use your plan and the sentence starters to write your answer. It saves automatically when you finish.';
+        body.appendChild(sub);
+        var cols = document.createElement('div'); cols.className = 'rb-draft-cols';
+        var outline = document.createElement('div'); outline.className = 'rb-draft-outline';
+        var oTitle = document.createElement('div'); oTitle.className = 'rb-outline-title'; oTitle.textContent = 'Your plan';
+        outline.appendChild(oTitle);
+        var plan = this._question.plan || [];
+        plan.forEach(function (piece) {
+            var row = document.createElement('div'); row.className = 'rb-outline-row rb-outline-' + piece.role;
+            var role = document.createElement('span'); role.className = 'rb-outline-role'; role.textContent = piece.role.toUpperCase();
+            row.appendChild(role);
+            var t = document.createElement('span'); t.textContent = piece.text;
+            row.appendChild(t);
+            outline.appendChild(row);
+        });
+        cols.appendChild(outline);
+        var right = document.createElement('div'); right.className = 'rb-draft-right';
+        var ta = document.createElement('textarea'); ta.className = 'rb-draft-text'; ta.id = 'rb-draft-text'; ta.rows = 12;
+        ta.placeholder = 'Write your response here...';
+        var savedDraft = ProgressManager.getActivityProgress(this._config.unit.id, 'short-answer-' + this._qIndex);
+        if (savedDraft && savedDraft.answer) ta.value = savedDraft.answer;
+        ta.addEventListener('input', function () {
+            ProgressManager.saveActivityProgress(self._config.unit.id, 'short-answer-' + self._qIndex, { answer: ta.value });
+        });
+        right.appendChild(ta);
+        var starters = document.createElement('div'); starters.className = 'rb-starters';
+        (this._question.sentenceStarters || []).forEach(function (s) {
+            var chip = document.createElement('button'); chip.type = 'button'; chip.className = 'rb-starter'; chip.textContent = s;
+            chip.addEventListener('click', function () {
+                if (ta.value.length > 0 && !/\s$/.test(ta.value)) ta.value += ' ';
+                ta.value += s; ta.focus();
+                ProgressManager.saveActivityProgress(self._config.unit.id, 'short-answer-' + self._qIndex, { answer: ta.value });
+            });
+            starters.appendChild(chip);
+        });
+        right.appendChild(starters);
+        cols.appendChild(right);
+        body.appendChild(cols);
+    },
+
+    deactivate: function () { this._question = null; }
+});
