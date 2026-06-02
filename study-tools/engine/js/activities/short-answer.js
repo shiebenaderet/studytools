@@ -50,6 +50,11 @@ StudyEngine.registerActivity({
     // explanation if present, and offers a "Read in textbook" deep link when
     // the term can be located in a textbook section.
     _renderTermDetails(panel, term) {
+        if (typeof TermDetails !== 'undefined') {
+            TermDetails.render(panel, term, this._config);
+            return;
+        }
+        // Fallback (TermDetails not loaded): original inline render preserved below.
         while (panel.firstChild) panel.removeChild(panel.firstChild);
         panel.style.display = 'block';
 
