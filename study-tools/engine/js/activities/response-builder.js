@@ -1,4 +1,4 @@
-// Response Builder — a guided 5-step wizard that helps a student who is stuck on
+// Response Builder: a guided 5-step wizard that helps a student who is stuck on
 // a short-answer question. Launched (hidden) from short-answer.js via
 // activateActivity('response-builder', [questionIndex]). Steps:
 //   1 Unpack  2 Read  3 Terms  4 Plan (CER)  5 Draft
@@ -214,14 +214,22 @@ StudyEngine.registerActivity({
     _renderPlan: function (body) {
         var self = this;
         var plan = this._question.plan || [];
-        if (!plan.length) { this._step++; this._renderStep(); return; } // safety: no plan -> skip
+        if (!plan.length) {
+            // Safety: a question with no plan skips Step 4. Defer the advance to the
+            // next tick so the current _renderStep call fully unwinds first;
+            // re-rendering synchronously here would corrupt the container (the outer
+            // _renderStep would append a stale body/nav onto the rebuilt step).
+            var selfSkip = this;
+            setTimeout(function () { selfSkip._step++; selfSkip._renderStep(); }, 0);
+            return;
+        }
 
         var RB = window.ResponseBuilderCore;
         var rowRoles = RB.rowRolesFor(plan);
         this._planRowRoles = rowRoles;
         // Note: placements reset on every Step 4 entry (Back->Next re-solves the
         // short puzzle from scratch; the scramble is deterministic so pieces land
-        // in the same spots). Intentional -- not persisted like the draft.
+        // in the same spots). Intentional, not persisted like the draft.
         this._planPlacements = rowRoles.map(function () { return null; });
         this._planPicked = null;
 
