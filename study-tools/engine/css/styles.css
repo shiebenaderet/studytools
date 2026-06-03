@@ -1957,6 +1957,15 @@ body.light-mode .fc-back .fc-tier-badge {
     padding: 16px; background: var(--bg-surface);
     border-radius: 10px; border-left: 4px solid var(--primary);
 }
+.sa-help-btn {
+    background: var(--primary); color: #fff; border: none;
+    padding: 12px 22px; border-radius: var(--radius-md);
+    font-family: var(--font-body); font-size: 0.95em; font-weight: 600;
+    cursor: pointer; margin: 4px 0 24px;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: background 0.15s;
+}
+.sa-help-btn:hover { background: var(--primary-bold); }
 .sa-btn-row {
     display: flex; align-items: center; justify-content: space-between;
     gap: 12px; flex-wrap: wrap; margin-top: 4px;
@@ -6657,3 +6666,528 @@ body.light-mode .feedback-fab {
     transition: transform 0.15s;
 }
 .feedback-submit-btn:hover { transform: scale(1.02); }
+
+/* ===========================================================================
+   RESPONSE BUILDER — guided short-answer wizard (Option-A top stepper)
+   Namespaced .rb-*. Launched hidden from the Short Answer activity.
+   =========================================================================== */
+.rb-screen {
+    max-width: 920px;
+    margin: 0 auto;
+}
+
+/* --- Top stepper --------------------------------------------------------- */
+.rb-steps {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 4px 0 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-card);
+}
+.rb-step {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    text-align: center;
+}
+/* connector line between dots */
+.rb-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 14px;
+    left: calc(50% + 18px);
+    right: calc(-50% + 18px);
+    height: 2px;
+    background: var(--border-card);
+}
+.rb-done:not(:last-child)::after {
+    background: var(--success);
+}
+.rb-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85em;
+    font-weight: 700;
+    background: var(--bg-surface);
+    color: var(--text-muted);
+    border: 2px solid var(--border-card);
+    position: relative;
+    z-index: 1;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.rb-active .rb-dot {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+}
+.rb-done .rb-dot {
+    background: var(--success);
+    color: #fff;
+    border-color: var(--success);
+}
+.rb-step-label {
+    font-size: 0.78em;
+    color: var(--text-muted);
+    line-height: 1.3;
+    max-width: 13ch;
+}
+.rb-active .rb-step-label {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+.rb-done .rb-step-label {
+    color: var(--text-secondary);
+}
+
+/* --- Pinned question context --------------------------------------------- */
+.rb-q-context {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-card);
+    border-left: 4px solid var(--primary);
+    border-radius: var(--radius-md);
+    padding: 14px 18px;
+    margin-bottom: 24px;
+}
+.rb-q-label {
+    font-size: 0.72em;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+.rb-q-text {
+    color: var(--text-primary);
+    font-size: 1em;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+/* --- Step body ----------------------------------------------------------- */
+.rb-step-body {
+    min-height: 220px;
+    animation: slideDown 0.2s ease;
+}
+.rb-h {
+    color: var(--text-primary);
+    font-size: 1.25em;
+    font-weight: 700;
+    font-family: var(--font-heading);
+    margin-bottom: 8px;
+}
+.rb-sub {
+    color: var(--text-secondary);
+    font-size: 0.95em;
+    line-height: 1.5;
+    margin-bottom: 18px;
+}
+
+/* --- Step 1: Unpack ------------------------------------------------------ */
+.rb-unpack-q {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-card);
+    border-radius: var(--radius-md);
+    padding: 16px 18px;
+    color: var(--text-primary);
+    font-size: 1.02em;
+    font-weight: 600;
+    line-height: 1.55;
+    margin-bottom: 22px;
+}
+.rb-restate-label {
+    display: block;
+    color: var(--text-secondary);
+    font-size: 0.92em;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+.rb-restate {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 14px;
+    border: 2px solid var(--border-card);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-body);
+    font-size: 0.98em;
+    line-height: 1.5;
+    resize: vertical;
+    background: var(--bg-surface);
+    color: var(--text-primary);
+}
+.rb-restate:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+/* --- Step 2: Read -------------------------------------------------------- */
+.rb-read-title {
+    color: var(--primary);
+    font-size: 1.05em;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+.rb-read-passage {
+    max-width: 70ch;
+    line-height: 1.75;
+    font-size: 1em;
+    color: var(--text-primary);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-card);
+    border-radius: var(--radius-md);
+    padding: 20px 24px;
+    white-space: pre-wrap;
+}
+.rb-read-fallback {
+    color: var(--text-secondary);
+    font-size: 0.98em;
+    line-height: 1.6;
+    background: var(--bg-surface);
+    border: 1px dashed var(--border-card);
+    border-radius: var(--radius-md);
+    padding: 18px 20px;
+}
+
+/* --- Step 3: Terms ------------------------------------------------------- */
+.rb-term-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+.rb-term-chip {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-card);
+    color: var(--text-primary);
+    padding: 8px 16px;
+    border-radius: var(--radius-md);
+    font-family: var(--font-body);
+    font-size: 0.92em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+.rb-term-chip:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+.rb-term-chip-active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+}
+.rb-term-chip-active:hover {
+    color: #fff;
+}
+.rb-term-details {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-card);
+    border-radius: var(--radius-md);
+    padding: 16px 18px;
+}
+
+/* --- Step 5: Draft ------------------------------------------------------- */
+.rb-draft-cols {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 20px;
+    align-items: start;
+}
+.rb-draft-outline {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-card);
+    border-radius: var(--radius-md);
+    padding: 16px;
+}
+.rb-outline-title {
+    font-size: 0.8em;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+.rb-outline-row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: var(--bg-elevated);
+    border-left: 4px solid var(--border-card);
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
+    margin-bottom: 10px;
+    color: var(--text-primary);
+    font-size: 0.92em;
+    line-height: 1.5;
+}
+.rb-outline-claim { border-left-color: var(--primary); }
+.rb-outline-evidence { border-left-color: var(--success); }
+.rb-outline-reasoning { border-left-color: var(--accent); }
+.rb-outline-role {
+    font-size: 0.7em;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 700;
+}
+.rb-draft-right {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.rb-draft-text {
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 240px;
+    padding: 14px 16px;
+    border: 2px solid var(--border-card);
+    border-radius: var(--radius-md);
+    font-family: var(--font-body);
+    font-size: 1em;
+    line-height: 1.6;
+    resize: vertical;
+    background: var(--bg-surface);
+    color: var(--text-primary);
+}
+.rb-draft-text:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+.rb-starters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.rb-starter {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-card);
+    color: var(--text-secondary);
+    padding: 7px 13px;
+    border-radius: var(--radius-md);
+    font-family: var(--font-body);
+    font-size: 0.85em;
+    font-style: italic;
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s;
+}
+.rb-starter:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+/* --- Nav ----------------------------------------------------------------- */
+.rb-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 28px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border-card);
+}
+.rb-btn {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-card);
+    color: var(--text-secondary);
+    padding: 10px 20px;
+    border-radius: var(--radius-md);
+    font-family: var(--font-body);
+    font-size: 0.95em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s, opacity 0.15s;
+}
+.rb-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+.rb-btn-primary {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+}
+.rb-btn-primary:hover {
+    color: #fff;
+    opacity: 0.88;
+}
+.rb-btn-disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* --- Responsive: laptop/Chromebook + narrow widths ---------------------- */
+@media (max-width: 760px) {
+    /* Draft view: stack the plan and the textarea so neither is squeezed */
+    .rb-draft-cols {
+        grid-template-columns: 1fr;
+    }
+}
+@media (max-width: 600px) {
+    /* Keep the stepper from overflowing: shrink labels and stop them wrapping */
+    .rb-steps {
+        gap: 4px;
+    }
+    .rb-step-label {
+        font-size: 0.66em;
+        max-width: 9ch;
+    }
+}
+
+/* --- Step 4: Claim / Evidence / Reasoning plan builder ------------------- */
+.rb-cer-skel {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 18px 0 6px;
+}
+.rb-cer-row {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 12px;
+    align-items: stretch;
+}
+.rb-cer-role {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 4px;
+    padding: 10px 8px;
+    border-radius: var(--radius-md);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.92em;
+    letter-spacing: 0.4px;
+}
+.rb-cer-role-claim { background: var(--primary-bold); }
+.rb-cer-role-evidence { background: #1a6b43; } /* deep green: white text on light --success (#34d399) is only ~1.6:1; this is ~5.8:1 (WCAG AA) */
+.rb-cer-role-reasoning { background: var(--secondary); }
+.rb-cer-role-hint {
+    font-weight: 500;
+    font-size: 0.78em;
+    line-height: 1.25;
+    opacity: 0.92;
+    letter-spacing: 0;
+}
+.rb-cer-drop {
+    display: flex;
+    align-items: center;
+    min-height: 58px;
+    padding: 12px 16px;
+    border: 2px dashed var(--border-card);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    font-size: 0.95em;
+    line-height: 1.4;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+.rb-cer-drop:hover {
+    border-color: var(--primary);
+}
+.rb-cer-drop-filled {
+    border-style: solid;
+    border-color: var(--border-card);
+    background: var(--bg-surface);
+    color: var(--text-primary);
+    cursor: default;
+}
+.rb-cer-drop-correct {
+    border-color: var(--success);
+    background: rgba(52, 211, 153, 0.12);
+}
+.rb-cer-drop-shake {
+    border-style: solid;
+    border-color: var(--danger);
+    background: rgba(248, 113, 113, 0.12);
+    animation: rb-shake 0.42s ease;
+}
+@keyframes rb-shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-7px); }
+    40% { transform: translateX(7px); }
+    60% { transform: translateX(-7px); }
+    80% { transform: translateX(7px); }
+}
+.rb-coach {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 4px 0 14px;
+    padding: 12px 16px;
+    border: 1px solid var(--danger);
+    background: rgba(248, 113, 113, 0.1);
+    border-radius: var(--radius-md);
+}
+.rb-coach-ic {
+    font-size: 1.3em;
+    line-height: 1.3;
+}
+.rb-coach-txt {
+    color: var(--text-primary);
+    font-size: 0.95em;
+    line-height: 1.5;
+}
+.rb-pool-h {
+    margin: 6px 0 8px;
+    font-size: 0.78em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--text-secondary);
+}
+.rb-pool {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.rb-pool-chip {
+    width: 100%;
+    text-align: left;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-card);
+    color: var(--text-primary);
+    padding: 12px 16px;
+    border-radius: var(--radius-md);
+    font-family: var(--font-body);
+    font-size: 0.95em;
+    line-height: 1.4;
+    cursor: pointer;
+    transition: border-color 0.15s, box-shadow 0.15s, opacity 0.15s;
+}
+.rb-pool-chip:hover {
+    border-color: var(--primary);
+}
+.rb-pool-chip-picked {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px var(--accent);
+}
+.rb-pool-chip-placed {
+    opacity: 0.4;
+    text-decoration: line-through;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+@media (max-width: 600px) {
+    /* Narrow widths: let the role box shrink so the dropzone keeps room */
+    .rb-cer-row {
+        grid-template-columns: 96px 1fr;
+        gap: 8px;
+    }
+    .rb-cer-role {
+        font-size: 0.82em;
+        padding: 8px 5px;
+    }
+    .rb-cer-role-hint {
+        font-size: 0.7em;
+    }
+}

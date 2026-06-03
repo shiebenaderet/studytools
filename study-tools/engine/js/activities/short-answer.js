@@ -50,76 +50,11 @@ StudyEngine.registerActivity({
     // explanation if present, and offers a "Read in textbook" deep link when
     // the term can be located in a textbook section.
     _renderTermDetails(panel, term) {
-        while (panel.firstChild) panel.removeChild(panel.firstChild);
-        panel.style.display = 'block';
-
-        var vocab = (this._config && this._config.vocabulary) || [];
-        var termLower = (term || '').toLowerCase();
-        var entry = vocab.find(function(v) { return (v.term || '').toLowerCase() === termLower; });
-
-        var heading = document.createElement('div');
-        heading.className = 'key-term-details-heading';
-        heading.textContent = term;
-        panel.appendChild(heading);
-
-        if (!entry) {
-            var missing = document.createElement('div');
-            missing.className = 'key-term-details-missing';
-            missing.textContent = 'No definition on file for this term yet.';
-            panel.appendChild(missing);
+        if (typeof TermDetails === 'undefined') {
+            console.warn('TermDetails helper not loaded; cannot render term details.');
             return;
         }
-
-        if (entry.definition) {
-            var def = document.createElement('div');
-            def.className = 'key-term-details-def';
-            def.textContent = entry.definition;
-            panel.appendChild(def);
-        }
-
-        if (entry.simpleExplanation) {
-            var simple = document.createElement('div');
-            simple.className = 'key-term-details-simple';
-            simple.textContent = entry.simpleExplanation;
-            panel.appendChild(simple);
-        }
-
-        if (entry.example) {
-            var ex = document.createElement('div');
-            ex.className = 'key-term-details-example';
-            var exLabel = document.createElement('strong');
-            exLabel.textContent = 'Example: ';
-            ex.appendChild(exLabel);
-            ex.appendChild(document.createTextNode(entry.example));
-            panel.appendChild(ex);
-        }
-
-        // Optional: deep link into the textbook section that mentions this term.
-        // Reuses the same map flashcards build, so behavior matches "Read in
-        // textbook" in flashcards.
-        var unitId = this._config && this._config.unit && this._config.unit.id;
-        var textbook = unitId ? MasteryManager._textbookCache[unitId] : null;
-        if (textbook && typeof MasteryManager.buildTermSectionMap === 'function') {
-            var tbProgress = ProgressManager.getActivityProgress(unitId, 'textbook') || {};
-            var sectionMap = MasteryManager.buildTermSectionMap(this._config, textbook, tbProgress.readingLevel || 'standard');
-            var sectionInfo = sectionMap[entry.term];
-            if (sectionInfo) {
-                var actions = document.createElement('div');
-                actions.className = 'key-term-details-actions';
-                var tbBtn = document.createElement('button');
-                tbBtn.type = 'button';
-                tbBtn.className = 'key-term-details-tb-btn';
-                var tbIcon = document.createElement('i');
-                tbIcon.className = 'fas fa-book-open';
-                tbBtn.appendChild(tbIcon);
-                tbBtn.appendChild(document.createTextNode(' Read in textbook'));
-                tbBtn.addEventListener('click', function() {
-                    StudyEngine.activateActivity('textbook', [sectionInfo.segmentId, sectionInfo.sectionId]);
-                });
-                actions.appendChild(tbBtn);
-                panel.appendChild(actions);
-            }
-        }
+        TermDetails.render(panel, term, this._config);
     },
 
     render(container, config) {
@@ -229,6 +164,19 @@ StudyEngine.registerActivity({
         wrapper.appendChild(contentArea);
 
         container.appendChild(wrapper);
+
+        // If launched/returned with a deep-link question index, open it directly
+        // (e.g. returning from the response-builder wizard lands on the question).
+        var rbParams = this._deepLinkParams || [];
+        if (rbParams.length >= 1) {
+            var openIdx = parseInt(rbParams[0], 10);
+            if (!isNaN(openIdx) && openIdx >= 0 && openIdx < this.questions.length) {
+                // openQuestion hides the grid and activates the content area the
+                // same way a normal card click does, so just delegate to it.
+                this.openQuestion(openIdx);
+            }
+            this._deepLinkParams = []; // consume so a later plain open shows the grid
+        }
     },
 
     openQuestion(index) {
@@ -274,6 +222,21 @@ StudyEngine.registerActivity({
         questionDiv.className = 'sa-question-text';
         questionDiv.textContent = q.question;
         contentArea.appendChild(questionDiv);
+
+        // "Help me build a response" — launches the guided wizard for this
+        // question. Only shown when the question has a plan to build (Step 4).
+        if (q.plan && q.plan.length) {
+            var helpBtn = document.createElement('button');
+            helpBtn.className = 'sa-help-btn';
+            var helpIcon = document.createElement('i');
+            helpIcon.className = 'fas fa-pen-ruler';
+            helpBtn.appendChild(helpIcon);
+            helpBtn.appendChild(document.createTextNode(' Help me build a response'));
+            helpBtn.addEventListener('click', function () {
+                StudyEngine.activateActivity('response-builder', [index]);
+            });
+            contentArea.appendChild(helpBtn);
+        }
 
         // Key Terms
         if (q.keyTerms && q.keyTerms.length > 0) {

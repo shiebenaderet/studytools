@@ -87,6 +87,7 @@
         "practice-test",
         "fill-in-blank",
         "short-answer",
+        "response-builder",
         "timeline",
         "maps-hub",
         "civil-war-map",
@@ -1681,6 +1682,24 @@
             ],
             "rubric": "Strong response identifies how each region's climate and natural features pushed it toward different economies (Northern factories vs. Southern plantations), shows how those economies built different societies (urban + immigrant North vs. rural plantation South), and uses at least two specific examples drawn from the chapter.",
             "exemplar": "Geography pushed the North and South down two very different paths. The North had cold winters, rocky soil, and fast moving rivers, so Northerners built factories powered by water and steam during the Industrial Revolution. Their cities, like New York and Boston, grew fast as immigrants arrived looking for work. This is called urbanization. The South had warm weather and rich soil that was perfect for cotton. Wealthy Southerners built plantations and forced enslaved people to work them, creating the Cotton Kingdom. By 1850, the two regions did not just have different economies. They had different ways of life, different politics, and different ideas about what America should be. That growing loyalty to a region rather than to the country had a name: sectionalism.",
+            "plan": [
+                {
+                    "role": "claim",
+                    "text": "The different geography of the North and the South pushed each region to build a very different economy and way of life, so that by 1850 they had grown into two separate worlds."
+                },
+                {
+                    "role": "evidence",
+                    "text": "The North had cold winters, rocky soil, and fast moving rivers, so Northerners built factories powered by water and steam, and cities like New York and Boston grew quickly as immigrants arrived looking for work."
+                },
+                {
+                    "role": "evidence",
+                    "text": "The South had warm weather and rich soil that was perfect for cotton, so wealthy Southerners built plantations and forced enslaved people to work them, creating the Cotton Kingdom."
+                },
+                {
+                    "role": "reasoning",
+                    "text": "Because geography gave each region a different economy, the North and South ended up with different ways of life, politics, and ideas about America, which built a loyalty to region over country called sectionalism."
+                }
+            ],
             "sentenceStarters": [
                 "Geography pushed the North and South down two different paths because...",
                 "In the North, cold winters and fast rivers led to...",
@@ -1701,6 +1720,24 @@
             ],
             "rubric": "Strong response shows that slavery was designed to break human bonds, names at least two ways enslaved people built family/faith/culture anyway (e.g., jumping the broom, the invisible institution, spirituals, African retentions, the Underground Railroad), and explains the larger point that the resilience of enslaved people kept identity and dignity alive in spite of the system.",
             "exemplar": "Slavery tried to break the human ties that hold people together, but enslaved people built family, faith, and culture in spite of it. Even though Southern law refused to recognize slave marriages, enslaved people created their own ceremonies like jumping over a broomstick to mark a wedding. The slave family was the bond they protected most fiercely, even though it could be broken at any moment by the sale of a parent or child. They also built a religion of their own. The invisible institution was the hidden Black church that met in secret in the slave quarters or in clearings called hush arbors. There, Black preachers told the story of Moses leading his people out of slavery, and worshippers sang spirituals that gave voice to their hopes for freedom. African retentions, cultural pieces brought from Africa, can still be heard in those spirituals, seen in the patterns of quilts, and tasted in foods like okra and gumbo. Slavery could control what enslaved people did, but it could not control who they were inside.",
+            "plan": [
+                {
+                    "role": "claim",
+                    "text": "Enslaved African Americans built strong family, faith, and culture even though slavery was designed to take all three away from them."
+                },
+                {
+                    "role": "evidence",
+                    "text": "Because Southern law refused to recognize slave marriages, enslaved people created their own wedding ceremonies, such as jumping over a broomstick, and they fiercely protected the family bond even though a husband, wife, or child could be sold away at any moment."
+                },
+                {
+                    "role": "evidence",
+                    "text": "They built a hidden Black church called the invisible institution that met secretly in slave quarters or in clearings called hush arbors, where preachers told the story of Moses leading his people out of slavery and worshippers sang spirituals about their hope for freedom."
+                },
+                {
+                    "role": "reasoning",
+                    "text": "These examples show that slavery could control what enslaved people were forced to do, but it could not control who they were on the inside, because they kept creating their own bonds, beliefs, and traditions like the African retentions heard in spirituals and tasted in foods like okra and gumbo."
+                }
+            ],
             "sentenceStarters": [
                 "Slavery was designed to break human bonds, but enslaved people...",
                 "One way they built family was...",
@@ -1725,6 +1762,28 @@
             ],
             "rubric": "Strong response identifies at least three events from the 1850s that increased tension (any of: Fugitive Slave Law, Uncle Tom's Cabin, Kansas-Nebraska Act, Bleeding Kansas, Dred Scott, Lincoln-Douglas Debates, John Brown's Raid, 1860 election), explains how each event widened the divide, and connects the chain to Southern secession after Lincoln's election.",
             "exemplar": "Several events in the 1850s built up tension between North and South until secession felt unavoidable. First, the Fugitive Slave Law of 1850 forced Northerners to help capture escaped enslaved people. Many Northerners refused, which infuriated the South. Then the Kansas Nebraska Act of 1854 threw out the Missouri Compromise line and let Kansas settlers vote on slavery. Both sides poured into the territory, and the violence that followed was so bloody that newspapers called it Bleeding Kansas. The Dred Scott decision in 1857 ruled that Black people had no rights and that Congress could not ban slavery in any territory, which shocked Northerners. Finally, in 1860, Lincoln won the presidency without a single electoral vote from the South. Southerners saw his victory as proof that the federal government was now against them, and they began to secede.",
+            "plan": [
+                {
+                    "role": "claim",
+                    "text": "A chain of conflicts during the 1850s built up so much anger between the North and South that secession came to feel unavoidable."
+                },
+                {
+                    "role": "evidence",
+                    "text": "The Fugitive Slave Law of 1850 forced Northerners to help capture escaped enslaved people, and when many refused to obey it, the South was infuriated."
+                },
+                {
+                    "role": "evidence",
+                    "text": "The Kansas Nebraska Act of 1854 threw out the Missouri Compromise line and let settlers vote on slavery, which drew both sides into the territory and sparked fighting so violent it was called Bleeding Kansas."
+                },
+                {
+                    "role": "evidence",
+                    "text": "The Dred Scott decision in 1857 ruled that Black people had no rights and that Congress could not ban slavery in any territory, which shocked Northerners."
+                },
+                {
+                    "role": "reasoning",
+                    "text": "Each of these events deepened the distrust between the two regions, so when Lincoln won the 1860 election without a single Southern electoral vote, Southerners read it as proof the federal government had turned against them and chose to leave the Union."
+                }
+            ],
             "sentenceStarters": [
                 "Several events in the 1850s built up tension between North and South.",
                 "First, ...",
@@ -1747,6 +1806,28 @@
             ],
             "rubric": "Strong response identifies at least three advantages or pivotal events (industrial capacity, manpower, Anaconda Plan, Emancipation Proclamation, Gettysburg/Vicksburg in 1863, total war, Black soldiers including the 54th Massachusetts), and explains how each contributed to Union victory.",
             "exemplar": "The Union won the Civil War because of several major advantages and pivotal events. First, the North had about 22 million people compared to the South's 9 million, and 90 percent of the country's factories. That meant the Union could keep replacing soldiers and weapons while the South could not. Second, the Anaconda Plan blockaded Southern ports and split the Confederacy at the Mississippi River after the Siege of Vicksburg in July 1863. The next day, Lee's army was defeated at the Battle of Gettysburg, and from then on the South fought a defensive war. Third, the Emancipation Proclamation in 1863 changed the war into a fight to end slavery, which let the Union recruit nearly 200,000 Black soldiers, including the famous 54th Massachusetts. By 1864, Grant commanded all Union armies and Sherman's total war through Georgia broke the South's ability to keep fighting. Lee surrendered at Appomattox in April 1865.",
+            "plan": [
+                {
+                    "role": "claim",
+                    "text": "The Union defeated the Confederacy because it had greater resources, a winning military strategy, and a moral cause that brought in new soldiers."
+                },
+                {
+                    "role": "evidence",
+                    "text": "The North had about 22 million people compared to the South's 9 million, plus 90 percent of the country's factories, so it could keep replacing soldiers and weapons while the South could not."
+                },
+                {
+                    "role": "evidence",
+                    "text": "The Anaconda Plan blockaded Southern ports and split the Confederacy at the Mississippi River after the Siege of Vicksburg in July 1863, and the next day Lee lost at Gettysburg, forcing the South into a defensive war."
+                },
+                {
+                    "role": "evidence",
+                    "text": "The Emancipation Proclamation in 1863 turned the war into a fight to end slavery and let the Union recruit nearly 200,000 Black soldiers, including the famous 54th Massachusetts."
+                },
+                {
+                    "role": "reasoning",
+                    "text": "These advantages worked together because the South could not match the North's people, factories, strategy, and growing army, so by 1864 Grant and Sherman's total war wore the Confederacy down until Lee surrendered at Appomattox in April 1865."
+                }
+            ],
             "sentenceStarters": [
                 "The Union won the Civil War because of several major advantages.",
                 "One major advantage was...",
@@ -1767,6 +1848,28 @@
             ],
             "rubric": "Strong response names at least two specific compromises (Missouri Compromise, Compromise of 1850, Kansas-Nebraska Act), explains what each one tried to settle, and identifies what eventually undid each one. Best responses make a larger argument about WHEN compromise can solve a problem versus when it just delays a deeper conflict.",
             "exemplar": "Compromise stops working when the underlying problem cannot actually be split in half. The Missouri Compromise of 1820 admitted Missouri as a slave state and Maine as a free state and drew a line across the country: north of the line, slavery was banned; south of it, allowed. It worked for about 30 years. Then the United States gained huge new territories from Mexico, and there was no way to extend the line that satisfied both sides. The Compromise of 1850 tried again. It admitted California as a free state and ended the slave trade in Washington, D.C., but it also passed a tougher Fugitive Slave Law that forced Northerners to help capture escaped enslaved people. That law made Northerners furious, and the Kansas Nebraska Act four years later threw out the Missouri Compromise line entirely. Each compromise solved one fight but planted the seeds of the next one. The deeper problem, that one half of the country thought slavery was wrong and the other half thought it was the foundation of their economy, could not be split in half. Eventually it had to be answered, and that answer came as war.",
+            "plan": [
+                {
+                    "role": "claim",
+                    "text": "Compromise stops working when the problem underneath it cannot actually be split in half, and slavery was exactly that kind of problem."
+                },
+                {
+                    "role": "evidence",
+                    "text": "The Missouri Compromise of 1820 admitted Missouri as a slave state and Maine as a free state and drew a line across the country with slavery banned north of it and allowed south of it, but it broke down about thirty years later when the United States gained huge new territories from Mexico and there was no way to extend the line that satisfied both sides."
+                },
+                {
+                    "role": "evidence",
+                    "text": "The Compromise of 1850 admitted California as a free state and ended the slave trade in Washington, D.C., but it also passed a tougher Fugitive Slave Law that forced Northerners to help capture escaped enslaved people, which made many Northerners furious."
+                },
+                {
+                    "role": "evidence",
+                    "text": "The Kansas Nebraska Act in 1854 threw out the Missouri Compromise line entirely, undoing the deal that had held the country together for decades."
+                },
+                {
+                    "role": "reasoning",
+                    "text": "Each compromise solved one fight but planted the seeds of the next one, because the deeper disagreement, with one half of the country believing slavery was wrong and the other half believing it was the foundation of their economy, could not be split in half and eventually had to be answered with war."
+                }
+            ],
             "sentenceStarters": [
                 "Compromise stops working when...",
                 "One example is the ____, which...",
@@ -1787,6 +1890,28 @@
             ],
             "rubric": "Strong response shows that Lincoln initially framed the war as a fight to preserve the Union (1861), then expanded its purpose to include ending slavery (Emancipation Proclamation, 1863, and Gettysburg Address), and finally to redefine the country's founding ideals (Second Inaugural, 1865). Identifies forces that pushed the change: military setbacks, public opinion, the courage of Black soldiers like the 54th Massachusetts, the moral pressure of abolitionists.",
             "exemplar": "When the war started in 1861, Lincoln said the goal was to preserve the Union, not to end slavery. Many Northerners would not have fought a war just to free enslaved people. But over four years, the war's purpose changed. The Emancipation Proclamation, issued after the Battle of Antietam in 1863, declared all enslaved people in Confederate states to be free. That changed the war from one to save the Union into one to end slavery. The Gettysburg Address later that year tied the war back to the Declaration of Independence and the idea that all men are created equal. By 1865, the courage of nearly 200,000 Black soldiers, including the 54th Massachusetts at Fort Wagner, made it impossible to argue Black Americans had not earned full citizenship. The 13th Amendment, ratified in December 1865, ended slavery throughout the entire country. What changed the war's purpose was a mix of battlefield setbacks that made a quick peace impossible, the moral force of abolitionist arguments, the political need to keep European powers out of the war, and most of all, the actions of enslaved and free Black Americans themselves.",
+            "plan": [
+                {
+                    "role": "claim",
+                    "text": "Lincoln started the war in 1861 to save the Union but by 1865 it had become a war to end slavery, and the actions of Black Americans along with battlefield and political pressures drove that change."
+                },
+                {
+                    "role": "evidence",
+                    "text": "In 1861 Lincoln said the goal was to preserve the Union and not to end slavery, partly because many Northerners would not have fought a war just to free enslaved people."
+                },
+                {
+                    "role": "evidence",
+                    "text": "After the Battle of Antietam, the Emancipation Proclamation of 1863 declared all enslaved people in Confederate states free, turning the war from one to save the Union into one to end slavery, and the Gettysburg Address that same year linked the war to the Declaration of Independence and the idea that all men are created equal."
+                },
+                {
+                    "role": "evidence",
+                    "text": "Nearly 200,000 Black soldiers fought, including the 54th Massachusetts at Fort Wagner, and the 13th Amendment ratified in December 1865 ended slavery throughout the entire country."
+                },
+                {
+                    "role": "reasoning",
+                    "text": "These steps show the war's purpose did not change all at once but was pushed by battlefield setbacks that blocked a quick peace, abolitionist arguments, the need to keep European powers out, and most of all the courage of Black Americans who proved they had earned full citizenship."
+                }
+            ],
             "sentenceStarters": [
                 "When the war started in 1861, Lincoln said the goal was...",
                 "The Emancipation Proclamation in 1863 changed that because...",
