@@ -1957,6 +1957,15 @@ body.light-mode .fc-back .fc-tier-badge {
     padding: 16px; background: var(--bg-surface);
     border-radius: 10px; border-left: 4px solid var(--primary);
 }
+.sa-help-btn {
+    background: var(--primary); color: #fff; border: none;
+    padding: 12px 22px; border-radius: var(--radius-md);
+    font-family: var(--font-body); font-size: 0.95em; font-weight: 600;
+    cursor: pointer; margin: 4px 0 24px;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: background 0.15s;
+}
+.sa-help-btn:hover { background: var(--primary-bold); }
 .sa-btn-row {
     display: flex; align-items: center; justify-content: space-between;
     gap: 12px; flex-wrap: wrap; margin-top: 4px;

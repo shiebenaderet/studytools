@@ -164,6 +164,20 @@ StudyEngine.registerActivity({
         wrapper.appendChild(contentArea);
 
         container.appendChild(wrapper);
+
+        // If launched/returned with a deep-link question index, open it directly
+        // (e.g. returning from the response-builder wizard lands on the question).
+        var rbParams = this._deepLinkParams || [];
+        if (rbParams.length >= 1) {
+            var openIdx = parseInt(rbParams[0], 10);
+            if (!isNaN(openIdx) && openIdx >= 0 && openIdx < this.questions.length) {
+                // openQuestion hides the grid and activates the content area the
+                // same way a normal card click does, so just delegate to it.
+                grid.style.display = 'none';
+                this.openQuestion(openIdx);
+            }
+            this._deepLinkParams = []; // consume so a later plain open shows the grid
+        }
     },
 
     openQuestion(index) {
@@ -209,6 +223,21 @@ StudyEngine.registerActivity({
         questionDiv.className = 'sa-question-text';
         questionDiv.textContent = q.question;
         contentArea.appendChild(questionDiv);
+
+        // "Help me build a response" — launches the guided wizard for this
+        // question. Only shown when the question has a plan to build (Step 4).
+        if (q.plan && q.plan.length) {
+            var helpBtn = document.createElement('button');
+            helpBtn.className = 'sa-help-btn';
+            var helpIcon = document.createElement('i');
+            helpIcon.className = 'fas fa-pen-ruler';
+            helpBtn.appendChild(helpIcon);
+            helpBtn.appendChild(document.createTextNode(' Help me build a response'));
+            helpBtn.addEventListener('click', function () {
+                StudyEngine.activateActivity('response-builder', [index]);
+            });
+            contentArea.appendChild(helpBtn);
+        }
 
         // Key Terms
         if (q.keyTerms && q.keyTerms.length > 0) {
