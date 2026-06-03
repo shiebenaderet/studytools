@@ -17,6 +17,9 @@ StudyEngine.registerActivity({
     _step: 1,
     _maxStep: 5,
     _transitioning: false,
+    _planRowRoles: null,
+    _planPlacements: null,
+    _planPicked: null,
 
     render: function (container, config) {
         this._config = config;
@@ -109,6 +112,17 @@ StudyEngine.registerActivity({
         next.className = 'rb-btn rb-btn-primary';
         next.id = 'rb-next';
         next.textContent = this._step === this._maxStep ? 'Finish →' : 'Next: ' + this._stepTitles[this._step] + ' →';
+        // Step 4 (the CER plan builder) gates Next until the plan is correctly
+        // assembled. The body is rendered BEFORE this nav is appended, so when
+        // _renderPlan() calls _refreshPlanNext() the #rb-next button does not yet
+        // exist in the DOM. We set the initial disabled state here, at creation,
+        // where _planRowRoles/_planPlacements are already populated. Subsequent
+        // placements re-enable it via _refreshPlanNext() once the button is live.
+        if (this._step === 4 && this._planRowRoles) {
+            var complete = window.ResponseBuilderCore.isPlanComplete(this._planRowRoles, this._planPlacements);
+            next.disabled = !complete;
+            if (!complete) next.classList.add('rb-btn-disabled');
+        }
         next.addEventListener('click', function () {
             if (self._transitioning) return;
             self._transitioning = true;
@@ -198,9 +212,114 @@ StudyEngine.registerActivity({
     },
 
     _renderPlan: function (body) {
-        var note = document.createElement('div'); note.className = 'rb-sub';
-        note.textContent = '(plan step wired in Task 4)';
-        body.appendChild(note);
+        var self = this;
+        var plan = this._question.plan || [];
+        if (!plan.length) { this._step++; this._renderStep(); return; } // safety: no plan -> skip
+
+        var RB = window.ResponseBuilderCore;
+        var rowRoles = RB.rowRolesFor(plan);
+        this._planRowRoles = rowRoles;
+        this._planPlacements = rowRoles.map(function () { return null; });
+        this._planPicked = null;
+
+        var h = document.createElement('div'); h.className = 'rb-h'; h.textContent = 'Build the skeleton of your answer';
+        body.appendChild(h);
+        var sub = document.createElement('div'); sub.className = 'rb-sub';
+        sub.textContent = 'Every strong answer follows Claim, then Evidence, then Reasoning. Tap a piece below, then tap the part it belongs to.';
+        body.appendChild(sub);
+
+        var skel = document.createElement('div'); skel.className = 'rb-cer-skel';
+        var roleHints = { claim: 'your main point', evidence: 'an example that proves it', reasoning: 'why the evidence proves your claim' };
+        rowRoles.forEach(function (role, idx) {
+            var row = document.createElement('div'); row.className = 'rb-cer-row';
+            var roleBox = document.createElement('div'); roleBox.className = 'rb-cer-role rb-cer-role-' + role;
+            var rName = document.createElement('div'); rName.textContent = role.toUpperCase(); roleBox.appendChild(rName);
+            var rHint = document.createElement('div'); rHint.className = 'rb-cer-role-hint'; rHint.textContent = roleHints[role]; roleBox.appendChild(rHint);
+            row.appendChild(roleBox);
+            var drop = document.createElement('div'); drop.className = 'rb-cer-drop'; drop.dataset.row = String(idx);
+            drop.textContent = 'Tap a piece, then tap here';
+            drop.addEventListener('click', function () { self._tryPlace(idx, drop); });
+            row.appendChild(drop);
+            skel.appendChild(row);
+        });
+        body.appendChild(skel);
+
+        var coach = document.createElement('div'); coach.className = 'rb-coach'; coach.id = 'rb-coach'; coach.style.display = 'none';
+        body.appendChild(coach);
+
+        var poolH = document.createElement('div'); poolH.className = 'rb-pool-h'; poolH.textContent = 'Pieces left to place';
+        body.appendChild(poolH);
+        var pool = document.createElement('div'); pool.className = 'rb-pool'; pool.id = 'rb-pool';
+        var scrambled = RB.scramblePlan(plan, this._qIndex >= 0 ? this._qIndex : 0);
+        scrambled.forEach(function (piece) {
+            var chip = document.createElement('button'); chip.type = 'button'; chip.className = 'rb-pool-chip';
+            chip.textContent = piece.text;
+            chip._piece = piece;
+            chip.addEventListener('click', function () { self._pickPiece(chip); });
+            pool.appendChild(chip);
+        });
+        body.appendChild(pool);
+
+        this._refreshPlanNext();
+    },
+
+    _pickPiece: function (chip) {
+        if (chip.classList.contains('rb-pool-chip-placed')) return;
+        var pool = document.getElementById('rb-pool');
+        var chips = pool.querySelectorAll('.rb-pool-chip');
+        for (var i = 0; i < chips.length; i++) chips[i].classList.remove('rb-pool-chip-picked');
+        chip.classList.add('rb-pool-chip-picked');
+        this._planPicked = chip;
+        this._hideCoach();
+    },
+
+    _tryPlace: function (rowIdx, drop) {
+        var self = this;
+        if (!this._planPicked) return;
+        if (this._planPlacements[rowIdx]) return; // row already filled
+        var piece = this._planPicked._piece;
+        var rowRole = this._planRowRoles[rowIdx];
+        if (window.ResponseBuilderCore.checkPlacement(piece, rowRole)) {
+            this._planPlacements[rowIdx] = piece;
+            drop.textContent = piece.text;
+            drop.classList.add('rb-cer-drop-filled', 'rb-cer-drop-correct');
+            this._planPicked.classList.add('rb-pool-chip-placed');
+            this._planPicked.classList.remove('rb-pool-chip-picked');
+            this._planPicked = null;
+            this._hideCoach();
+            this._refreshPlanNext();
+        } else {
+            drop.classList.add('rb-cer-drop-shake');
+            setTimeout(function () { drop.classList.remove('rb-cer-drop-shake'); }, 450);
+            this._showCoach(piece.role, rowRole);
+        }
+    },
+
+    _showCoach: function (pieceRole, attemptedRole) {
+        var coach = document.getElementById('rb-coach');
+        if (!coach) return;
+        coach.textContent = '';
+        var ic = document.createElement('span'); ic.className = 'rb-coach-ic'; ic.textContent = '💡';
+        coach.appendChild(ic);
+        var txt = document.createElement('span'); txt.className = 'rb-coach-txt';
+        txt.textContent = 'That piece is ' + pieceRole.toUpperCase() + '. ' + window.ResponseBuilderCore.roleCoaching(pieceRole) +
+            ' It does not belong in the ' + attemptedRole.toUpperCase() + ' row. Try again.';
+        coach.appendChild(txt);
+        coach.style.display = '';
+    },
+
+    _hideCoach: function () {
+        var coach = document.getElementById('rb-coach');
+        if (coach) coach.style.display = 'none';
+    },
+
+    _refreshPlanNext: function () {
+        var complete = window.ResponseBuilderCore.isPlanComplete(this._planRowRoles, this._planPlacements);
+        var next = document.getElementById('rb-next');
+        if (next) {
+            next.disabled = !complete;
+            next.classList.toggle('rb-btn-disabled', !complete);
+        }
     },
 
     _renderDraft: function (body) {

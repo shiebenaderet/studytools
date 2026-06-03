@@ -7031,3 +7031,154 @@ body.light-mode .feedback-fab {
         max-width: 9ch;
     }
 }
+
+/* --- Step 4: Claim / Evidence / Reasoning plan builder ------------------- */
+.rb-cer-skel {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 18px 0 6px;
+}
+.rb-cer-row {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 12px;
+    align-items: stretch;
+}
+.rb-cer-role {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 4px;
+    padding: 10px 8px;
+    border-radius: var(--radius-md);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.92em;
+    letter-spacing: 0.4px;
+}
+.rb-cer-role-claim { background: var(--primary-bold); }
+.rb-cer-role-evidence { background: var(--success); }
+.rb-cer-role-reasoning { background: var(--secondary); }
+.rb-cer-role-hint {
+    font-weight: 500;
+    font-size: 0.78em;
+    line-height: 1.25;
+    opacity: 0.92;
+    letter-spacing: 0;
+}
+.rb-cer-drop {
+    display: flex;
+    align-items: center;
+    min-height: 58px;
+    padding: 12px 16px;
+    border: 2px dashed var(--border-card);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    font-size: 0.95em;
+    line-height: 1.4;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+.rb-cer-drop:hover {
+    border-color: var(--primary);
+}
+.rb-cer-drop-filled {
+    border-style: solid;
+    border-color: var(--border-card);
+    background: var(--bg-surface);
+    color: var(--text-primary);
+    cursor: default;
+}
+.rb-cer-drop-correct {
+    border-color: var(--success);
+    background: rgba(52, 211, 153, 0.12);
+}
+.rb-cer-drop-shake {
+    border-style: solid;
+    border-color: var(--danger);
+    background: rgba(248, 113, 113, 0.12);
+    animation: rb-shake 0.42s ease;
+}
+@keyframes rb-shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-7px); }
+    40% { transform: translateX(7px); }
+    60% { transform: translateX(-7px); }
+    80% { transform: translateX(7px); }
+}
+.rb-coach {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 4px 0 14px;
+    padding: 12px 16px;
+    border: 1px solid var(--danger);
+    background: rgba(248, 113, 113, 0.1);
+    border-radius: var(--radius-md);
+}
+.rb-coach-ic {
+    font-size: 1.3em;
+    line-height: 1.3;
+}
+.rb-coach-txt {
+    color: var(--text-primary);
+    font-size: 0.95em;
+    line-height: 1.5;
+}
+.rb-pool-h {
+    margin: 6px 0 8px;
+    font-size: 0.78em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--text-secondary);
+}
+.rb-pool {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.rb-pool-chip {
+    width: 100%;
+    text-align: left;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-card);
+    color: var(--text-primary);
+    padding: 12px 16px;
+    border-radius: var(--radius-md);
+    font-family: var(--font-body);
+    font-size: 0.95em;
+    line-height: 1.4;
+    cursor: pointer;
+    transition: border-color 0.15s, box-shadow 0.15s, opacity 0.15s;
+}
+.rb-pool-chip:hover {
+    border-color: var(--primary);
+}
+.rb-pool-chip-picked {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px var(--accent);
+}
+.rb-pool-chip-placed {
+    opacity: 0.4;
+    text-decoration: line-through;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+@media (max-width: 600px) {
+    /* Narrow widths: let the role box shrink so the dropzone keeps room */
+    .rb-cer-row {
+        grid-template-columns: 96px 1fr;
+        gap: 8px;
+    }
+    .rb-cer-role {
+        font-size: 0.82em;
+        padding: 8px 5px;
+    }
+    .rb-cer-role-hint {
+        font-size: 0.7em;
+    }
+}
