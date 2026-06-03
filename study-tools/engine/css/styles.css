@@ -7060,7 +7060,7 @@ body.light-mode .feedback-fab {
     letter-spacing: 0.4px;
 }
 .rb-cer-role-claim { background: var(--primary-bold); }
-.rb-cer-role-evidence { background: var(--success); }
+.rb-cer-role-evidence { background: #1a6b43; } /* deep green: white text on light --success (#34d399) is only ~1.6:1; this is ~5.8:1 (WCAG AA) */
 .rb-cer-role-reasoning { background: var(--secondary); }
 .rb-cer-role-hint {
     font-weight: 500;

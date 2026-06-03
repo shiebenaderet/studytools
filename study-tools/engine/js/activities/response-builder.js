@@ -219,6 +219,9 @@ StudyEngine.registerActivity({
         var RB = window.ResponseBuilderCore;
         var rowRoles = RB.rowRolesFor(plan);
         this._planRowRoles = rowRoles;
+        // Note: placements reset on every Step 4 entry (Back->Next re-solves the
+        // short puzzle from scratch; the scramble is deterministic so pieces land
+        // in the same spots). Intentional -- not persisted like the draft.
         this._planPlacements = rowRoles.map(function () { return null; });
         this._planPicked = null;
 
