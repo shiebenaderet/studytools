@@ -173,7 +173,6 @@ StudyEngine.registerActivity({
             if (!isNaN(openIdx) && openIdx >= 0 && openIdx < this.questions.length) {
                 // openQuestion hides the grid and activates the content area the
                 // same way a normal card click does, so just delegate to it.
-                grid.style.display = 'none';
                 this.openQuestion(openIdx);
             }
             this._deepLinkParams = []; // consume so a later plain open shows the grid
