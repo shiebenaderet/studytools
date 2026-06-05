@@ -8,7 +8,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 
 [![Live Site](https://img.shields.io/badge/Live_Site-study.mrbsocialstudies.org-1669C5?style=for-the-badge&logo=google-chrome&logoColor=white)](https://study.mrbsocialstudies.org)
 [![License](https://img.shields.io/badge/License-Educational_Use-22c55e?style=for-the-badge)](#license)
-[![Version](https://img.shields.io/badge/Version-8.46.0-f59e0b?style=for-the-badge)](#)
+[![Version](https://img.shields.io/badge/Version-8.46.1-f59e0b?style=for-the-badge)](#)
 
 ---
 
@@ -196,6 +196,7 @@ Students who reported bugs or suggested improvements:
 | **Fabian** | Reported Wordle display issue with abbreviated terms |
 | **Tianyu** | Reported that misclicking blank space on map quizzes was incorrectly marked wrong |
 | **Tianyu** | Reported that spam-clicking the answer on map quizzes skipped questions and marked them automatically |
+| **Braden** | Reported that games and other activities stayed locked even after the scheduled unlock dates had passed |
 
 > Want to be listed here? Report a bug or suggest an improvement to your teacher!
 

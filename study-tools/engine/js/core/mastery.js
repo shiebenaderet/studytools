@@ -362,7 +362,10 @@ const MasteryManager = {
 
     /**
      * Study activities (flashcards, typing-practice) are always accessible.
-     * Games/Practice require at least 1 category mastered.
+     * Games/Practice unlock when the first category is mastered OR its scheduled
+     * unlock date has passed. The date-unlock clause keeps this consistent with
+     * getUnlockedCategories: once a category's calendar date arrives, its content
+     * is visible inside activities, so the activity card must not stay walled.
      */
     isActivityAccessible(unitId, config, activityId) {
         // Teacher unlock bypasses all activity gating
@@ -375,18 +378,22 @@ const MasteryManager = {
         if (alwaysAccessible.includes(activityId)) return true;
         const categories = this.getCategories(config);
         if (categories.length === 0) return true;
-        return this.isCategoryMastered(unitId, config, categories[0]);
+        return this.isCategoryMastered(unitId, config, categories[0])
+            || this.isCategoryDateUnlocked(config, categories[0]);
     },
 
     /**
      * Returns a lock message indicating what the user needs to master next.
+     * Skips categories that are already date-unlocked, since those are not the
+     * gate the student needs to clear.
      */
     getLockMessage(unitId, config) {
         const categories = this.getCategories(config);
         if (categories.length === 0) return '';
-        // Find the first category that isn't mastered
+        // Find the first category that isn't mastered and isn't date-unlocked
         for (const cat of categories) {
-            if (!this.isCategoryMastered(unitId, config, cat)) {
+            if (!this.isCategoryMastered(unitId, config, cat)
+                && !this.isCategoryDateUnlocked(config, cat)) {
                 return `Learn the "${cat}" terms first \u2014 then this unlocks!`;
             }
         }
