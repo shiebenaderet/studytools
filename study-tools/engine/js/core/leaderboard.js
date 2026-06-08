@@ -101,15 +101,49 @@ var LeaderboardManager = {
         var score = Math.round(rawScore * multiplier);
 
         try {
-            await ProgressManager.supabase.from('leaderboard').upsert({
-                student_id: ProgressManager.studentId,
-                unit_id: unitId,
+            // Never-shrink floor: a submit must not lower a student's standing.
+            // submitScore computes from localStorage, which on a cleared or
+            // not-yet-hydrated device can be empty (vocab 0, studyTime 0). A
+            // blind upsert would then overwrite the real cloud row with zeros
+            // (Tianyu, 2026-06-07: civil-war 1739 -> 0). So we fetch the current
+            // row and merge, keeping the high-water value of every cumulative
+            // metric. The write boundary is authoritative regardless of how
+            // hydrated localStorage happens to be.
+            var incoming = {
                 score: score,
                 vocab_mastered: vocabMastered,
                 best_test_score: bestTestScore,
                 study_time_seconds: studyTimeSeconds,
                 map_best_time: mapBestTime,
-                map_bonus: mapBonus,
+                map_bonus: mapBonus
+            };
+            var existingRes = await ProgressManager.supabase
+                .from('leaderboard')
+                .select('score, vocab_mastered, best_test_score, study_time_seconds, map_best_time, map_bonus')
+                .eq('student_id', ProgressManager.studentId)
+                .eq('unit_id', unitId)
+                .maybeSingle();
+
+            // If the core didn't load, skip entirely rather than fall back to a
+            // blind unfloored upsert — that blind path is the original bug.
+            if (typeof LeaderboardMergeCore === 'undefined') return;
+
+            // A failed READ means we can't prove the write won't shrink the row,
+            // so on error we skip this submit (it retries on the next save and
+            // every 30s). Only a genuine no-row or a real row lets us proceed.
+            var resolved = LeaderboardMergeCore.resolveExisting(existingRes);
+            if (!resolved.proceed) return;
+            var merged = LeaderboardMergeCore.mergeLeaderboardRow(incoming, resolved.existing);
+
+            await ProgressManager.supabase.from('leaderboard').upsert({
+                student_id: ProgressManager.studentId,
+                unit_id: unitId,
+                score: merged.score,
+                vocab_mastered: merged.vocab_mastered,
+                best_test_score: merged.best_test_score,
+                study_time_seconds: merged.study_time_seconds,
+                map_best_time: merged.map_best_time,
+                map_bonus: merged.map_bonus,
                 updated_at: new Date().toISOString()
             }, { onConflict: 'student_id,unit_id' });
         } catch (err) {
