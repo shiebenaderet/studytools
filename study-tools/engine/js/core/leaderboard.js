@@ -1,14 +1,25 @@
 // Leaderboard — student rankings with teacher approval
 var LeaderboardManager = {
 
-    // Diminishing study-time points: 1pt/min for 0-30, 0.5pt/min for 31-60, 0.25pt/min for 61-100, 0 after 100
+    // Diminishing study-time points: 1pt/min for 0-30, 0.5pt/min for 31-60,
+    // 0.25pt/min for 61-120, then 0.25pt/min forever after (no hard cap).
+    // The post-2h rate was 0.1 until 2026-06-09: a maxed-out top student
+    // (Felynne — 47/47 vocab, 100 test, consistency capped) found that study
+    // time was her only remaining lever, yet hours of genuine study added
+    // almost nothing (0.1 pt/min rounds away across short capped sessions). It
+    // is safe to be more generous because the anti-farming guardrails live in
+    // ActivityTimer, not here: idle/hidden time is never credited, and each
+    // activity is capped at 15 min of points per day. Raising the tail to 0.25
+    // lets long-haul, genuinely-active study keep earning a visible trickle
+    // while still diminishing (a quarter of the opening rate — mastering a
+    // vocab term, 10 pts, always beats grinding minutes).
     calculateTimePts(studyTimeSeconds) {
         var mins = Math.floor((studyTimeSeconds || 0) / 60);
         // Diminishing returns but NO hard cap — students always earn something
         if (mins <= 30) return mins;                                          // 1 pt/min (30 pts by 30 min)
         if (mins <= 60) return 30 + Math.floor((mins - 30) * 0.5);          // 0.5 pt/min (45 pts by 60 min)
         if (mins <= 120) return 45 + Math.floor((mins - 60) * 0.25);        // 0.25 pt/min (60 pts by 120 min)
-        return 60 + Math.floor((mins - 120) * 0.1);                         // 0.1 pt/min forever after
+        return 60 + Math.floor((mins - 120) * 0.25);                        // 0.25 pt/min forever after
     },
 
     // Calculate composite score: vocab mastered * 10 + best test score + study time (diminishing) + map bonus
