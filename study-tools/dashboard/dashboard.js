@@ -233,13 +233,16 @@ const Dashboard = {
     // ---- Helper: score warning pills ----
     _scoreWarningBadges(entry) {
         var badges = [];
-        // Inline tier calculation (mirrors LeaderboardManager.calculateTimePts)
+        // Inline tier calculation (mirrors LeaderboardManager.calculateTimePts).
+        // Keep these tiers in sync with leaderboard.js: 1 / 0.5 / 0.25 pt/min
+        // through 120 min, then 0.25 pt/min forever after (raised from 0.1 on
+        // 2026-06-09 so long-haul study still earns a visible trickle).
         var mins = Math.floor((entry.study_time_seconds || 0) / 60);
         var timePts;
         if (mins <= 30) timePts = mins;
         else if (mins <= 60) timePts = 30 + Math.floor((mins - 30) * 0.5);
-        else if (mins <= 100) timePts = 45 + Math.floor((mins - 60) * 0.25);
-        else timePts = 55;
+        else if (mins <= 120) timePts = 45 + Math.floor((mins - 60) * 0.25);
+        else timePts = 60 + Math.floor((mins - 120) * 0.25);
 
         // Study time heavy: time pts > 60% of score
         if (entry.score > 0 && timePts / entry.score > 0.6) {
