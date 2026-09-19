@@ -28,7 +28,15 @@ StudyEngine.registerActivity({
         this._qIndex = params.length >= 1 ? parseInt(params[0], 10) : -1;
         var all = (config.shortAnswerQuestions || []);
         this._question = (this._qIndex >= 0 && this._qIndex < all.length) ? all[this._qIndex] : null;
-        this._step = 1;
+        // This activity is a registered singleton, so its instance state survives
+        // across exits. The nav handlers set _transitioning=true and, on the exit
+        // paths (Back from step 1, Finish from step 5), return WITHOUT clearing it
+        // because the activity is being torn down. Re-entry must start from the
+        // fresh nav state or a re-opened wizard begins with both nav buttons
+        // dead-clicking (every handler early-returns while _transitioning is true).
+        var nav0 = window.ResponseBuilderCore.freshNavState();
+        this._step = nav0.step;
+        this._transitioning = nav0.transitioning;
         if (!this._question) {
             StudyEngine.activateActivity('short-answer');
             return;
@@ -100,7 +108,7 @@ StudyEngine.registerActivity({
         back.addEventListener('click', function () {
             if (self._transitioning) return;
             self._transitioning = true;
-            if (self._step === 1) { self._exitToQuestion(); return; } // tearing down; no need to clear
+            if (self._step === 1) { self._transitioning = false; self._exitToQuestion(); return; } // leave the singleton clean for re-entry
             self._step--;
             self._renderStep();
             // Clear on the next tick so a second click queued in the SAME tick
@@ -126,7 +134,7 @@ StudyEngine.registerActivity({
         next.addEventListener('click', function () {
             if (self._transitioning) return;
             self._transitioning = true;
-            if (self._step === self._maxStep) { self._exitToQuestion(); return; } // tearing down; no need to clear
+            if (self._step === self._maxStep) { self._transitioning = false; self._exitToQuestion(); return; } // leave the singleton clean for re-entry
             self._step++;
             self._renderStep();
             // Clear on the next tick so a second click queued in the SAME tick

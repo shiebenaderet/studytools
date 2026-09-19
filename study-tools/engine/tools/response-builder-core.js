@@ -43,6 +43,22 @@
     return COACHING[role] || '';
   };
 
+  // Nav re-entrancy state for the wizard. The activity is a registered singleton,
+  // so its _transitioning flag survives across exits: the exit paths (Back from
+  // step 1, Finish from step 5) set it true and tear down before clearing it.
+  // freshNavState() is the state a (re-)opened wizard must start from — never
+  // mid-transition — so both nav buttons respond on the first click. canNavigate()
+  // is the guard the handlers apply: a click is honored only when not already
+  // transitioning. Tested here so the "stuck on step 1 after re-open" regression
+  // is pinned without needing the DOM.
+  api.freshNavState = function () {
+    return { step: 1, transitioning: false };
+  };
+
+  api.canNavigate = function (state) {
+    return !!state && state.transitioning !== true;
+  };
+
   // Deterministic shuffle (seeded by an integer) so the tested core never calls
   // Math.random. Simple Fisher–Yates driven by an LCG.
   function shuffleOnce(plan, seed) {

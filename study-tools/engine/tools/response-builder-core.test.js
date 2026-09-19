@@ -60,6 +60,21 @@ eq('coaching evidence non-empty', core.roleCoaching('evidence').length > 0, true
 eq('coaching reasoning non-empty', core.roleCoaching('reasoning').length > 0, true);
 eq('coaching unknown empty', core.roleCoaching('nonsense'), '');
 
+// Nav re-entrancy: regression for "stuck on step 1 after re-opening the wizard".
+// The activity is a singleton; the exit paths leave _transitioning=true. A
+// re-opened wizard must start clean, and the guard must block clicks only while
+// genuinely mid-transition.
+deepEq('freshNavState starts at step 1, not transitioning',
+  core.freshNavState(), { step: 1, transitioning: false });
+eq('fresh state can navigate', core.canNavigate(core.freshNavState()), true);
+// The bug: a stale singleton left transitioning=true dead-clicks every nav button.
+eq('stale transitioning state blocks navigation',
+  core.canNavigate({ step: 1, transitioning: true }), false);
+// The fix: entering from freshNavState() clears that stale flag so nav works.
+eq('re-entry from fresh state restores navigation', core.canNavigate(core.freshNavState()), true);
+// Guard tolerates a missing state object rather than throwing.
+eq('canNavigate on missing state is false', core.canNavigate(null), false);
+
 // scramblePlan: deterministic given a seed, returns a permutation (same multiset).
 var s1 = core.scramblePlan(PLAN, 0);
 eq('scramble length', s1.length, PLAN.length);
