@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Exporter UX mockups</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,700;9..144,900&family=JetBrains+Mono:wght@400;500;700&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ===== Design tokens =====
+     A teacher's working tool, not a marketing surface. Editorial admin / IDE-grade clarity.
+     Warm-paper neutral (#F4EFE6) carried over from the live exporter. One distinctive serif
+     display face for headings (Fraunces), Inter Tight for UI body, JetBrains Mono for data
+     fragments (counts, idents, char counts). Hairline borders and hot-coral accent for
+     destination actions. */
+  :root {
+    --paper: #F4EFE6;
+    --paper-2: #EEE8DC;
+    --ink: #1A1A1A;
+    --ink-soft: #4A463F;
+    --ink-mute: #7A746A;
+    --line: #D6CFC1;
+    --line-soft: #E5DFD2;
+    --card: #FBF8F1;
+    --accent: #D54A2B;          /* hot coral, destination action */
+    --accent-ink: #FFFFFF;
+    --plum: #5B2E55;            /* secondary accent (used sparingly) */
+    --ok: #2F7D3A;
+    --warn: #B65F00;
+    --select: #FFE2A8;          /* warm highlight wash */
+    --shadow-1: 0 1px 0 rgba(26,26,26,.04), 0 8px 24px -16px rgba(26,26,26,.18);
+
+    --display: "Fraunces", "Iowan Old Style", Georgia, serif;
+    --body: "Inter Tight", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: var(--body);
+    color: var(--ink);
+    background: var(--paper);
+    background-image:
+      radial-gradient(circle at 18% -10%, rgba(213,74,43,.04), transparent 40%),
+      radial-gradient(circle at 90% 110%, rgba(91,46,85,.05), transparent 45%);
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  a { color: inherit; }
+  button, input, select, textarea { font: inherit; color: inherit; }
+
+  /* ===== Page chrome ===== */
+  .page {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 40px 36px 80px;
+  }
+
+  .topbar {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 28px;
+  }
+  .topbar h1 {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+  .topbar h1 em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+  .topbar p {
+    margin: 6px 0 0;
+    color: var(--ink-mute);
+    font-size: 14px;
+    max-width: 56ch;
+  }
+  .topbar .right {
+    text-align: right;
+  }
+  .topbar .right .label {
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--ink-mute);
+    font-weight: 600;
+  }
+  .topbar .right .stamp {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--ink);
+    margin-top: 4px;
+  }
+
+  /* ===== Mockup picker ===== */
+  .picker {
+    display: flex;
+    gap: 0;
+    border: 1px solid var(--line);
+    background: var(--card);
+    border-radius: 12px;
+    padding: 6px;
+    margin-bottom: 32px;
+    overflow: hidden;
+    box-shadow: var(--shadow-1);
+  }
+  .picker label {
+    flex: 1;
+    cursor: pointer;
+    position: relative;
+  }
+  .picker input { position: absolute; opacity: 0; pointer-events: none; }
+  .picker .pcell {
+    padding: 14px 16px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: background .15s ease;
+  }
+  .picker label:hover .pcell { background: var(--paper-2); }
+  .picker input:checked + .pcell {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .picker .pcell .num {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.65;
+    font-weight: 600;
+  }
+  .picker .pcell .name {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+  }
+  .picker .pcell .desc {
+    font-size: 12px;
+    line-height: 1.35;
+    color: var(--ink-mute);
+  }
+  .picker input:checked + .pcell .desc { color: rgba(255,255,255,.65); }
+
+  /* ===== Mockup framing ===== */
+  .stage {
+    border: 1px solid var(--line);
+    background: var(--card);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow-1);
+  }
+  .stage-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--line-soft);
+    background: linear-gradient(180deg, var(--paper-2) 0%, var(--card) 100%);
+  }
+  .stage-head .dot { width: 11px; height: 11px; border-radius: 50%; background: #E1D9C8; border: 1px solid var(--line); }
+  .stage-head .dot:nth-child(2) { background: #E8DFCC; }
+  .stage-head .dot:nth-child(3) { background: #EFE6D2; }
+  .stage-head .addr {
+    flex: 1;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-mute);
+    padding: 6px 14px;
+    background: var(--paper);
+    border-radius: 6px;
+    border: 1px solid var(--line-soft);
+    max-width: 480px;
+    margin: 0 auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .stage-body { padding: 0; min-height: 720px; background: var(--paper); }
+
+  .mockup { display: none; }
+  .mockup.active { display: block; }
+
+  /* =====================================================================
+     OPTION A — Polished current layout (baseline; minimum viable change)
+     Keeps the stacked-toolbar pattern but: tighter density, hairline rules,
+     a cleaner content/destination split, and proper progressive disclosure.
+     ===================================================================== */
+  .a-head {
+    padding: 28px 32px 18px;
+    border-bottom: 1px solid var(--line);
+  }
+  .a-head h2 {
+    font-family: var(--display);
+    font-weight: 500;
+    font-style: italic;
+    letter-spacing: -0.01em;
+    font-size: 24px;
+    margin: 0 0 4px;
+  }
+  .a-head p {
+    margin: 0;
+    color: var(--ink-mute);
+    font-size: 13px;
+    max-width: 60ch;
+  }
+
+  .a-toolbar {
+    display: grid;
+    grid-template-columns: auto auto 1fr auto auto auto;
+    gap: 14px;
+    align-items: center;
+    padding: 14px 32px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .a-toolbar.b { background: var(--paper-2); }
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .field .lbl {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-mute);
+    font-weight: 600;
+  }
+  .ctrl {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 7px 12px;
+    font-size: 13px;
+    min-width: 0;
+  }
+  .ctrl.select { appearance: none; padding-right: 28px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' stroke='%237A746A' stroke-width='1.4' fill='none' stroke-linecap='round'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+  }
+  .ctrl.search {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 13 13'><circle cx='5.5' cy='5.5' r='4' stroke='%237A746A' stroke-width='1.4' fill='none'/><path d='M9 9l3 3' stroke='%237A746A' stroke-width='1.4' stroke-linecap='round'/></svg>");
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    padding-left: 30px;
+    width: 100%;
+  }
+  .ghost {
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--ink);
+    border-radius: 6px;
+    padding: 7px 12px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background .12s ease;
+  }
+  .ghost:hover { background: var(--paper-2); }
+  .primary {
+    background: var(--accent);
+    color: var(--accent-ink);
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    padding: 9px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    box-shadow: 0 1px 0 rgba(0,0,0,.06), 0 0 0 0 rgba(213,74,43,0);
+    transition: box-shadow .15s ease, transform .05s ease;
+  }
+  .primary:hover { box-shadow: 0 1px 0 rgba(0,0,0,.06), 0 0 0 4px rgba(213,74,43,.18); }
+  .primary:active { transform: translateY(1px); }
+  .primary[disabled] { opacity: .5; cursor: not-allowed; box-shadow: none; }
+
+  .count-pill {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-soft);
+    padding: 6px 10px;
+    background: var(--paper-2);
+    border-radius: 999px;
+    border: 1px solid var(--line-soft);
+    white-space: nowrap;
+  }
+  .count-pill b { color: var(--accent); font-weight: 700; }
+
+  /* Conditional / contextual controls (progressive disclosure) */
+  .ctx {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    padding-top: 4px;
+    align-items: center;
+  }
+  .ctx .note {
+    font-size: 12px;
+    color: var(--warn);
+    background: #FFF4E2;
+    border: 1px solid #F2DCB5;
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+  .ctx label { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--ink-soft); }
+
+  /* Question list (shared across mockups) */
+  .qlist { padding: 18px 32px 32px; }
+  .chapter { margin-bottom: 22px; }
+  .chapter-head {
+    display: flex; align-items: center; gap: 10px;
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    text-transform: none;
+    margin: 0 0 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed var(--line);
+  }
+  .chapter-head .ix {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-mute);
+    font-weight: 500;
+    margin-left: auto;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .qrow {
+    display: grid;
+    grid-template-columns: 22px 1fr auto auto;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 11px 12px;
+    background: var(--card);
+    border: 1px solid var(--line-soft);
+    border-radius: 8px;
+    margin-bottom: 6px;
+    transition: border-color .12s ease;
+  }
+  .qrow.sel { border-color: var(--ink); background: var(--select); }
+  .qrow.edited { border-left: 3px solid var(--accent); padding-left: 9px; }
+  .qrow input[type=checkbox] { margin-top: 3px; accent-color: var(--ink); }
+  .qrow .qtext {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  .qrow .qtext .tag {
+    display: inline-block;
+    margin-left: 6px;
+    background: var(--accent);
+    color: var(--accent-ink);
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 1px 5px;
+    border-radius: 3px;
+    vertical-align: middle;
+    font-weight: 700;
+  }
+  .qrow .meta {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-mute);
+    text-align: right;
+  }
+  .qrow .edit {
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--ink-mute);
+    font-size: 12px;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    cursor: pointer;
+    padding: 2px 6px;
+  }
+  .qrow .edit:hover { color: var(--accent); }
+
+  /* =====================================================================
+     OPTION B — Top bar + two-column (recommended)
+     Header strip carries destination + quiz settings; left rail = source +
+     filters + select; right pane = question list. Canvas's heavier controls
+     get a dedicated settings card that slides in only when needed.
+     ===================================================================== */
+  .b-shell {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    min-height: 720px;
+  }
+  .b-topbar {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 28px;
+    border-bottom: 1px solid var(--line);
+    background: linear-gradient(180deg, var(--card) 0%, var(--paper) 100%);
+  }
+  .b-topbar .crumbs {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .b-topbar .crumbs b { color: var(--ink); font-weight: 600; }
+  .b-topbar .crumbs span.sep { color: var(--line); }
+  .b-topbar h2 {
+    font-family: var(--display);
+    font-weight: 500;
+    font-style: italic;
+    font-size: 22px;
+    margin: 6px 0 0;
+    letter-spacing: -0.01em;
+  }
+  .b-dest {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .b-dest .pad {
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 4px;
+    display: inline-flex;
+    gap: 2px;
+  }
+  .b-dest .pad button {
+    background: transparent;
+    border: 0;
+    padding: 7px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: background .12s ease, color .12s ease;
+  }
+  .b-dest .pad button.active {
+    background: var(--ink);
+    color: var(--paper);
+    box-shadow: 0 1px 0 rgba(0,0,0,.1);
+  }
+
+  .b-main {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    min-height: 0;
+  }
+  .b-rail {
+    border-right: 1px solid var(--line);
+    background: var(--card);
+    padding: 22px 22px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+  .b-rail .group { display: flex; flex-direction: column; gap: 8px; }
+  .b-rail .h {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .b-rail .h .num {
+    font-family: var(--mono);
+    font-size: 10px;
+    background: var(--ink);
+    color: var(--paper);
+    width: 18px; height: 18px;
+    border-radius: 4px;
+    display: inline-grid;
+    place-items: center;
+    font-weight: 700;
+  }
+  .b-rail .hint {
+    font-size: 11px;
+    color: var(--ink-mute);
+    margin: -2px 0 4px;
+  }
+  .seg {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--paper);
+  }
+  .seg button {
+    background: transparent;
+    border: 0;
+    padding: 9px 8px;
+    font-size: 12px;
+    cursor: pointer;
+    color: var(--ink-soft);
+    border-right: 1px solid var(--line);
+    transition: background .12s ease;
+  }
+  .seg button:last-child { border-right: 0; }
+  .seg button.on { background: var(--ink); color: var(--paper); }
+
+  .toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 8px 10px;
+    background: var(--paper);
+    border: 1px solid var(--line-soft);
+    border-radius: 8px;
+    font-size: 13px;
+  }
+  .switch {
+    width: 32px; height: 18px;
+    background: var(--line);
+    border-radius: 999px;
+    position: relative;
+    cursor: pointer;
+    transition: background .15s ease;
+  }
+  .switch::after {
+    content: ''; position: absolute; top: 2px; left: 2px;
+    width: 14px; height: 14px; background: #fff; border-radius: 50%;
+    box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    transition: transform .15s ease;
+  }
+  .switch.on { background: var(--ink); }
+  .switch.on::after { transform: translateX(14px); }
+
+  .b-actions {
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid var(--line-soft);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .b-actions .count-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 12px;
+    color: var(--ink-mute);
+  }
+  .b-actions .count-row b {
+    font-family: var(--mono);
+    color: var(--accent);
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .b-actions .primary { width: 100%; padding: 12px; font-size: 14px; }
+
+  .b-pane {
+    padding: 22px 28px 32px;
+    overflow: hidden;
+    background: var(--paper);
+  }
+  .b-pane .search-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 18px;
+  }
+  .b-pane .search-row .ctrl.search { flex: 1; }
+  .b-pane .search-row .quickseg { display: inline-flex; gap: 6px; }
+  .b-pane .search-row .quickseg button {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    color: var(--ink-soft);
+    padding: 7px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  .b-pane .search-row .quickseg button:hover { background: var(--card); }
+
+  /* Canvas settings flyout (appears only when destination = Canvas) */
+  .canvas-card {
+    margin-top: 16px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--card);
+  }
+  .canvas-card .ch {
+    padding: 10px 14px;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 13px;
+    letter-spacing: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .canvas-card .ch .pill {
+    font-family: var(--mono);
+    font-size: 10px;
+    background: rgba(255,255,255,.15);
+    border-radius: 4px;
+    padding: 2px 6px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .canvas-card .cb {
+    padding: 14px;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 12px;
+  }
+  .canvas-card .fld { display: flex; flex-direction: column; gap: 4px; }
+  .canvas-card .fld .l {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-mute);
+    font-weight: 600;
+  }
+  .canvas-card .fld .ctrl { background: var(--paper); }
+
+  /* =====================================================================
+     OPTION C — Wizard (most opinionated; lowest cognitive load)
+     Three numbered steps: Pick source -> Refine selection -> Send.
+     One focused screen at a time; a persistent rail shows progress.
+     ===================================================================== */
+  .c-shell {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    min-height: 720px;
+  }
+  .c-steps {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 32px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    position: relative;
+  }
+  .c-steps::after {
+    content: '';
+    position: absolute;
+    inset: 24px auto 24px 40px;
+    width: 1px;
+    background: rgba(255,255,255,.12);
+    z-index: 0;
+  }
+  .c-steps .brand {
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+    color: var(--paper);
+  }
+  .c-steps .brand em { color: var(--accent); font-style: italic; }
+  .step {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 14px;
+    align-items: start;
+    padding: 4px 0;
+    color: rgba(255,255,255,.55);
+  }
+  .step .badge {
+    width: 32px; height: 32px;
+    border: 1px solid rgba(255,255,255,.3);
+    border-radius: 50%;
+    display: inline-grid; place-items: center;
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 13px;
+    background: var(--ink);
+  }
+  .step.done .badge {
+    border-color: var(--paper);
+    background: var(--paper);
+    color: var(--ink);
+  }
+  .step.cur { color: var(--paper); }
+  .step.cur .badge {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: var(--accent-ink);
+    box-shadow: 0 0 0 4px rgba(213,74,43,.25);
+  }
+  .step .title {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    margin: 6px 0 2px;
+  }
+  .step .desc {
+    font-size: 12px;
+    color: rgba(255,255,255,.6);
+    line-height: 1.4;
+  }
+  .step.cur .desc { color: rgba(255,255,255,.85); }
+
+  .c-stage {
+    padding: 38px 44px;
+    overflow-y: auto;
+  }
+  .c-stage h3 {
+    font-family: var(--display);
+    font-weight: 500;
+    font-style: italic;
+    font-size: 28px;
+    letter-spacing: -0.015em;
+    margin: 0 0 6px;
+  }
+  .c-stage .lede {
+    color: var(--ink-mute);
+    margin: 0 0 28px;
+    font-size: 14px;
+    max-width: 56ch;
+  }
+
+  .source-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .source-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px 18px 16px;
+    cursor: pointer;
+    transition: border-color .15s ease, transform .12s ease, box-shadow .15s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .source-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(213,74,43,.06), transparent 60%);
+    opacity: 0;
+    transition: opacity .15s ease;
+  }
+  .source-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px -16px rgba(0,0,0,.2); }
+  .source-card.on { border-color: var(--ink); }
+  .source-card.on::before { opacity: 1; }
+  .source-card .badge2 {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .source-card .title2 {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 18px;
+    letter-spacing: -0.01em;
+    margin: 6px 0 6px;
+  }
+  .source-card .desc2 {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.4;
+    margin-bottom: 14px;
+  }
+  .source-card .stat {
+    font-family: var(--mono);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+  }
+  .source-card .stat small {
+    font-family: var(--body);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink-mute);
+    margin-left: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .c-cta {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 26px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+  .c-cta .ghost { padding: 11px 18px; }
+  .c-cta .primary { padding: 11px 22px; }
+
+  /* ===== Footer note ===== */
+  .footnote {
+    margin: 28px 0 0;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    font-size: 12px;
+    color: var(--ink-mute);
+    font-family: var(--mono);
+  }
+  .footnote b { font-family: var(--display); font-style: italic; color: var(--ink); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topbar">
+    <div>
+      <h1>Question Exporter <em>&mdash; UX comparison</em></h1>
+      <p>Three layout directions for the same tool, before we add Canvas. Switch between them with the picker below. Real interactions are wired so the patterns are honest, not just pretty pictures.</p>
+    </div>
+    <div class="right">
+      <div class="label">For review</div>
+      <div class="stamp">2026-05-29 / v0.1</div>
+    </div>
+  </div>
+
+  <div class="picker" role="tablist">
+    <label>
+      <input type="radio" name="mock" value="a" checked>
+      <div class="pcell">
+        <span class="num">Option A</span>
+        <span class="name">Polished toolbar</span>
+        <span class="desc">Today's pattern, tightened. Lowest risk; least change.</span>
+      </div>
+    </label>
+    <label>
+      <input type="radio" name="mock" value="b">
+      <div class="pcell">
+        <span class="num">Option B &middot; recommended</span>
+        <span class="name">Top bar + two pane</span>
+        <span class="desc">Rail for setup, pane for content. Canvas gets a real home.</span>
+      </div>
+    </label>
+    <label>
+      <input type="radio" name="mock" value="c">
+      <div class="pcell">
+        <span class="num">Option C</span>
+        <span class="name">Wizard, three steps</span>
+        <span class="desc">Most opinionated. One focused screen at a time.</span>
+      </div>
+    </label>
+  </div>
+
+  <div class="stage">
+    <div class="stage-head">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <span class="addr" id="addr">localhost:8731/study-tools/engine/tools/question-exporter.html</span>
+    </div>
+
+    <div class="stage-body">
+
+      <!-- ============================================ OPTION A ============================================ -->
+      <div class="mockup active" data-key="a">
+        <div class="a-head">
+          <h2>Question exporter</h2>
+          <p>Select questions, edit if needed, and download a CSV for Blooket or GiMKit. Edits here don't change the study site.</p>
+        </div>
+
+        <div class="a-toolbar">
+          <div class="field">
+            <span class="lbl">Unit</span>
+            <select class="ctrl select"><option>The Civil War</option><option>Early Republic (retired)</option></select>
+          </div>
+          <div class="field">
+            <span class="lbl">Source</span>
+            <select class="ctrl select" id="aSource"><option value="practice">Practice questions</option><option value="fib">Fill-in-the-blank</option><option value="vocab" selected>Vocabulary</option></select>
+          </div>
+          <div class="field">
+            <span class="lbl">Filter</span>
+            <input class="ctrl search" type="text" placeholder="Find a question by text&hellip;">
+          </div>
+          <button class="ghost">Select all</button>
+          <button class="ghost">Clear</button>
+          <span class="count-pill"><b>12</b> selected of 47</span>
+
+          <!-- Progressive disclosure: context controls below main row -->
+          <div class="ctx">
+            <label>Direction
+              <select class="ctrl select"><option>Definition &rarr; Term</option><option>Term &rarr; Definition</option></select>
+            </label>
+            <label><input type="checkbox"> Include encounter tier</label>
+            <span class="note">Wrong answers are auto-generated. Review or edit before exporting.</span>
+          </div>
+        </div>
+
+        <div class="a-toolbar b">
+          <div class="field">
+            <span class="lbl">Platform</span>
+            <select class="ctrl select"><option>Blooket</option><option>GiMKit</option><option>Canvas QTI&hellip;</option></select>
+          </div>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <button class="primary">Export CSV &rarr;</button>
+        </div>
+
+        <div class="qlist">
+          <div class="chapter">
+            <h3 class="chapter-head">
+              <input type="checkbox" checked> A Dividing Nation
+              <span class="ix">8 / 16 selected</span>
+            </h3>
+            <div class="qrow sel"><input type="checkbox" checked><div class="qtext">Strong loyalty to one region of a country instead of to the country as a whole.</div><div class="meta">87 chars</div><button class="edit">edit</button></div>
+            <div class="qrow sel edited"><input type="checkbox" checked><div class="qtext">An economic system in which one person was treated as the legal property of another.<span class="tag">edited</span></div><div class="meta">71 chars</div><button class="edit">edit</button></div>
+            <div class="qrow"><input type="checkbox"><div class="qtext">The movement to end slavery in the United States.</div><div class="meta">48 chars</div><button class="edit">edit</button></div>
+            <div class="qrow sel"><input type="checkbox" checked><div class="qtext">A line dividing free and slave states, established by the Missouri Compromise.</div><div class="meta">76 chars</div><button class="edit">edit</button></div>
+          </div>
+
+          <div class="chapter">
+            <h3 class="chapter-head">
+              <input type="checkbox"> The Civil War
+              <span class="ix">0 / 19 selected</span>
+            </h3>
+            <div class="qrow"><input type="checkbox"><div class="qtext">The Union's overall war strategy: blockade Southern ports and split the South.</div><div class="meta">78 chars</div><button class="edit">edit</button></div>
+            <div class="qrow"><input type="checkbox"><div class="qtext">The Union Army regiments made up of Black soldiers.</div><div class="meta">50 chars</div><button class="edit">edit</button></div>
+            <div class="qrow"><input type="checkbox"><div class="qtext">A formal speech given by Lincoln at the dedication of the cemetery at Gettysburg.</div><div class="meta">81 chars</div><button class="edit">edit</button></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================ OPTION B ============================================ -->
+      <div class="mockup" data-key="b">
+        <div class="b-shell">
+          <div class="b-topbar">
+            <div>
+              <div class="crumbs">Tools <span class="sep">/</span> <b>Question exporter</b></div>
+              <h2>The Civil War &middot; Vocabulary</h2>
+            </div>
+            <div class="b-dest">
+              <span class="lbl" style="font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-mute);font-weight:600;margin-right:4px;">Destination</span>
+              <div class="pad" role="tablist">
+                <button>Blooket</button>
+                <button>GiMKit</button>
+                <button class="active">Canvas QTI</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="b-main">
+            <aside class="b-rail">
+              <div class="group">
+                <div class="h"><span class="num">1</span> Source</div>
+                <div class="seg">
+                  <button>Practice</button>
+                  <button>FIB</button>
+                  <button class="on">Vocab</button>
+                </div>
+              </div>
+
+              <div class="group">
+                <div class="h"><span class="num">2</span> Vocab options</div>
+                <div class="hint">Specific to the Vocabulary source.</div>
+                <div class="toggle-row">
+                  Direction
+                  <select class="ctrl select" style="min-width:160px;"><option>Definition &rarr; Term</option><option>Term &rarr; Definition</option></select>
+                </div>
+                <div class="toggle-row">
+                  Include encounter tier <span class="switch"></span>
+                </div>
+              </div>
+
+              <div class="group">
+                <div class="h"><span class="num">3</span> Select</div>
+                <div class="seg">
+                  <button class="on">All</button>
+                  <button>None</button>
+                  <button>By chapter</button>
+                </div>
+                <input class="ctrl search" type="text" placeholder="Filter&hellip;" style="width:100%;">
+              </div>
+
+              <!-- Canvas-only settings card; only visible when Destination = Canvas -->
+              <div class="canvas-card">
+                <div class="ch"><span><em>Canvas</em> settings</span><span class="pill">QTI 1.2 / CC 1.1.3</span></div>
+                <div class="cb">
+                  <div class="fld" style="grid-column:1/-1;">
+                    <span class="l">Quiz title</span>
+                    <input class="ctrl" type="text" value="Civil War &mdash; Vocabulary">
+                  </div>
+                  <div class="fld">
+                    <span class="l">Max attempts</span>
+                    <input class="ctrl" type="number" value="1" min="1">
+                  </div>
+                  <div class="fld">
+                    <span class="l">Image padding</span>
+                    <input class="ctrl" type="number" value="8" min="0">
+                  </div>
+                </div>
+              </div>
+
+              <div class="b-actions">
+                <div class="count-row"><span>Selected</span><b>47</b></div>
+                <button class="primary">Build .zip &rarr;</button>
+                <div class="hint" style="margin:0;">Filename: <span style="font-family:var(--mono)">civil-war-vocab-canvas.zip</span></div>
+              </div>
+            </aside>
+
+            <section class="b-pane">
+              <div class="search-row">
+                <input class="ctrl search" type="text" placeholder="Find a vocabulary item&hellip;">
+                <div class="quickseg">
+                  <button>Show selected only</button>
+                  <button>Show edited only</button>
+                </div>
+              </div>
+
+              <div class="chapter">
+                <h3 class="chapter-head">
+                  <input type="checkbox" checked> Worlds of North &amp; South
+                  <span class="ix">12 / 12 selected</span>
+                </h3>
+                <div class="qrow sel"><input type="checkbox" checked><div class="qtext">Strong loyalty to one region of a country instead of to the country as a whole.</div><div class="meta">87 chars</div><button class="edit">edit</button></div>
+                <div class="qrow sel edited"><input type="checkbox" checked><div class="qtext">A worldwide shift from making goods by hand to making them in factories. <span class="tag">edited</span></div><div class="meta">72 chars</div><button class="edit">edit</button></div>
+                <div class="qrow sel"><input type="checkbox" checked><div class="qtext">A large farm in the South that used enslaved labor to grow cash crops.</div><div class="meta">70 chars</div><button class="edit">edit</button></div>
+              </div>
+
+              <div class="chapter">
+                <h3 class="chapter-head">
+                  <input type="checkbox" checked> A Dividing Nation
+                  <span class="ix">16 / 16 selected</span>
+                </h3>
+                <div class="qrow sel"><input type="checkbox" checked><div class="qtext">The 1820 law that admitted Missouri as a slave state and Maine as free, and drew a line west.</div><div class="meta">94 chars</div><button class="edit">edit</button></div>
+                <div class="qrow sel"><input type="checkbox" checked><div class="qtext">A Supreme Court decision that said Black Americans were not citizens.</div><div class="meta">70 chars</div><button class="edit">edit</button></div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================ OPTION C ============================================ -->
+      <div class="mockup" data-key="c">
+        <div class="c-shell">
+          <nav class="c-steps">
+            <div class="brand">Exporter <em>&mdash;</em></div>
+            <div class="step done">
+              <span class="badge">&#10003;</span>
+              <div>
+                <div class="title">Unit</div>
+                <div class="desc">The Civil War</div>
+              </div>
+            </div>
+            <div class="step cur">
+              <span class="badge">1</span>
+              <div>
+                <div class="title">Pick a source</div>
+                <div class="desc">Choose which pool of questions to export.</div>
+              </div>
+            </div>
+            <div class="step">
+              <span class="badge">2</span>
+              <div>
+                <div class="title">Refine selection</div>
+                <div class="desc">Select, filter, and edit before sending.</div>
+              </div>
+            </div>
+            <div class="step">
+              <span class="badge">3</span>
+              <div>
+                <div class="title">Send</div>
+                <div class="desc">Choose a destination and download.</div>
+              </div>
+            </div>
+          </nav>
+
+          <main class="c-stage">
+            <h3>Pick a source</h3>
+            <p class="lede">Each source maps from a different pool in this unit's study config. You can export from any of them.</p>
+
+            <div class="source-grid">
+              <div class="source-card">
+                <span class="badge2">Practice</span>
+                <div class="title2">Practice questions</div>
+                <p class="desc2">The vetted 4-option multiple choice bank used in the practice test.</p>
+                <span class="stat">63<small>questions</small></span>
+              </div>
+              <div class="source-card on">
+                <span class="badge2">Vocabulary</span>
+                <div class="title2">Vocabulary terms</div>
+                <p class="desc2">Defaults to must-know. Becomes 4-option MC with auto distractors from the same chapter.</p>
+                <span class="stat">47<small>must-know</small></span>
+              </div>
+              <div class="source-card">
+                <span class="badge2">FIB</span>
+                <div class="title2">Fill-in-the-blank</div>
+                <p class="desc2">The sentence becomes the question; the answer is correct; 3 distractors from same chapter.</p>
+                <span class="stat">15<small>sentences</small></span>
+              </div>
+            </div>
+
+            <div class="canvas-card" style="margin-top:8px;">
+              <div class="ch"><span>Selected source: <em>Vocabulary</em></span><span class="pill">opts</span></div>
+              <div class="cb">
+                <div class="fld">
+                  <span class="l">Direction</span>
+                  <select class="ctrl select"><option>Definition &rarr; Term</option><option>Term &rarr; Definition</option></select>
+                </div>
+                <div class="fld">
+                  <span class="l">Tier</span>
+                  <div class="toggle-row" style="background:var(--paper);">Include encounter <span class="switch"></span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="c-cta">
+              <button class="ghost">&larr; Unit</button>
+              <button class="primary">Continue: Refine selection &rarr;</button>
+            </div>
+          </main>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footnote">
+    <b>Why three?</b> &nbsp;Option A keeps shipping risk minimal &mdash; same toolbar, polished, with new Canvas controls as another row. Option B (recommended) separates <em>what to export</em> from <em>where it goes</em>, giving Canvas's heavier settings a proper card without crowding the toolbar. Option C trades flexibility for clarity: one decision per screen, hard to get lost. The implementation cost rises left to right.
+  </div>
+</div>
+
+<script>
+  var radios = document.querySelectorAll('input[name=mock]');
+  var addr = document.getElementById('addr');
+  function show(key) {
+    document.querySelectorAll('.mockup').forEach(function (m) {
+      m.classList.toggle('active', m.dataset.key === key);
+    });
+  }
+  radios.forEach(function (r) { r.addEventListener('change', function () { show(this.value); }); });
+</script>
+</body>
+</html>
