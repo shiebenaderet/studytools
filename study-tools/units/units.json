@@ -1,17 +1,30 @@
 {
     "units": [
         {
+            "id": "revolution",
+            "title": "Revolution: Ideas & Voices Study Tool",
+            "subtitle": "What made independence worth fighting for? Learn the vocabulary, follow the road to revolution, and build your podcast research skills.",
+            "theme": {
+                "primary": "#7A2A28"
+            },
+            "activityCount": 19
+        },
+        {
             "id": "civil-war",
             "title": "The Civil War Study Tool",
             "subtitle": "Get ready to ace your test! Learn vocabulary, practice questions, and track your progress.",
-            "theme": { "primary": "#2D4A6B" },
+            "theme": {
+                "primary": "#2D4A6B"
+            },
             "activityCount": 22
         },
         {
             "id": "westward-expansion",
             "title": "Westward Expansion & Reform Study Tool",
             "subtitle": "Get ready to ace your test! Learn vocabulary, practice questions, and track your progress.",
-            "theme": { "primary": "#B5651D" },
+            "theme": {
+                "primary": "#B5651D"
+            },
             "activityCount": 22,
             "retired": true
         },
@@ -19,7 +32,9 @@
             "id": "early-republic",
             "title": "Early Republic Study Tool",
             "subtitle": "Get ready to ace your test! Learn vocabulary, practice questions, and track your progress.",
-            "theme": { "primary": "#1669C5" },
+            "theme": {
+                "primary": "#1669C5"
+            },
             "activityCount": 13,
             "retired": true
         }

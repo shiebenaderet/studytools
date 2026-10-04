@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.48.0] - 2026-10-04
+
+### Added
+- **Revolution unit (`?unit=revolution`)** for 2026-27 Unit 2, Revolution: Ideas & Voices. 17 vocabulary terms in four categories that unlock Oct 7, 12, 19 and 26, with must-know/encounter tiers; 11 timeline events from the Treaty of Paris (1763) to Shays' Rebellion; 33 practice questions; 4 short-answer prompts with claim/evidence/reasoning plans; 17 fill-in-the-blank sentences. Practice questions carry their vocabulary category as `topic`, so the Question Export Tool can export Quiz 2 (Causes of Unrest + Choosing Sides) to Canvas.
+- Replaces the old standalone review site (revreview.shieb.com). 21 of its 30 questions carried over, rewritten so the correct answer is no longer the longest option; the six questions on the musical *1776* were dropped. `units/revolution/_tools/audit-mc-lengths.js` passes all 33.
+
 ## [8.41.0] - 2026-05-21
 
 ### Added

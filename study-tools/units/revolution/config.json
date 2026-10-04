@@ -1,0 +1,897 @@
+{
+  "unit": {
+    "id": "revolution",
+    "title": "Revolution: Ideas & Voices Study Tool",
+    "subtitle": "What made independence worth fighting for? Learn the vocabulary, follow the road to revolution, and build your podcast research skills.",
+    "essentialQuestion": "What made independence worth fighting for — and for whom was it left incomplete?",
+    "theme": {
+      "primary": "#7A2A28",
+      "secondary": "#9A423F",
+      "accent": "#B8893B",
+      "primaryBold": "#5E1F1D"
+    }
+  },
+  "activities": [
+    "learn-mode",
+    "flashcards",
+    "resources",
+    "typing-practice",
+    "practice-test",
+    "fill-in-blank",
+    "short-answer",
+    "response-builder",
+    "timeline",
+    "wordle",
+    "hangman",
+    "flip-match",
+    "term-catcher",
+    "lightning-round",
+    "crossword",
+    "four-corners",
+    "who-am-i",
+    "sort-it-out",
+    "quiz-race"
+  ],
+  "categorySchedule": {
+    "Causes of Unrest": "2026-10-07",
+    "Choosing Sides": "2026-10-12",
+    "The Declaration": "2026-10-19",
+    "Research & Voices": "2026-10-26"
+  },
+  "vocabulary": [
+    {
+      "term": "Proclamation of 1763",
+      "definition": "A British order banning colonial settlement west of the Appalachian Mountains after the French and Indian War",
+      "simpleExplanation": "Britain won a huge war and then told colonists: that western land you fought for? Off limits. It was meant to keep peace with Native nations, but to colonists it felt like a locked door — the first crack between Britain and its colonies.",
+      "example": "A Virginia farmer hoping to claim land in the Ohio Valley found the Proclamation of 1763 had slammed the door shut",
+      "category": "Causes of Unrest",
+      "typingSnippet": "The Proclamation of 1763 banned colonial settlement west of the Appalachian Mountains. Britain hoped to prevent conflict with Native nations after the French and Indian War. Colonists who wanted that land saw the proclamation as the first sign that Britain would put its own interests ahead of theirs.",
+      "tier": "encounter"
+    },
+    {
+      "term": "Taxation without Representation",
+      "definition": "Being taxed by a government in which you have no elected voice",
+      "simpleExplanation": "Imagine the ASB charging you fees when you're not allowed to vote for ASB officers. Colonists paid taxes passed by a Parliament an ocean away, where not a single seat belonged to them — and that, more than the money itself, is what made them furious.",
+      "example": "The Stamp Act taxed newspapers and legal papers, and colonists protested that no one in Parliament represented them",
+      "category": "Causes of Unrest",
+      "typingSnippet": "Taxation without representation means being taxed by a government in which you have no elected voice. Colonists paid taxes passed by a Parliament where they held no seats at all. Their rallying cry was less about the money and more about the principle of having a say.",
+      "tier": "must-know"
+    },
+    {
+      "term": "Boycott",
+      "definition": "An organized refusal to buy certain goods as a form of protest",
+      "simpleExplanation": "Protest with your wallet. When colonists stopped buying British tea, cloth, and paper, British merchants lost money fast — and suddenly Parliament started listening. It was one of the few weapons every colonist, including women running households, could use.",
+      "example": "Colonial women organized boycotts of British cloth, spinning their own homespun fabric instead",
+      "category": "Causes of Unrest",
+      "typingSnippet": "A boycott is an organized refusal to buy certain goods as a form of protest. Colonists boycotted British products to pressure Parliament into repealing unpopular taxes. Because everyone shops, boycotts let ordinary people, including women and children, take part in the resistance.",
+      "tier": "must-know"
+    },
+    {
+      "term": "Repeal",
+      "definition": "To officially cancel a law",
+      "simpleExplanation": "When protests and boycotts worked, Parliament would repeal — officially cancel — a hated tax. The Stamp Act lasted barely a year before it was repealed. Each repeal taught colonists a dangerous lesson: pressure works.",
+      "example": "After months of colonial boycotts, Parliament repealed the Stamp Act in 1766",
+      "category": "Causes of Unrest",
+      "typingSnippet": "To repeal a law is to officially cancel it. Parliament repealed the Stamp Act after colonial boycotts hurt British merchants. Every repeal proved to colonists that organized resistance could actually change what a government did.",
+      "tier": "bonus"
+    },
+    {
+      "term": "Intolerable Acts",
+      "definition": "The 1774 laws punishing Massachusetts for the Boston Tea Party, which Britain called the Coercive Acts",
+      "simpleExplanation": "Britain's punishment for the Boston Tea Party: close Boston Harbor until the tea was paid for, shut down Massachusetts self-government, and force colonists to house British soldiers in their towns (quartering). Meant to isolate Boston, the acts backfired — the other colonies rushed to help.",
+      "example": "When the Intolerable Acts closed Boston Harbor, other colonies sent food and supplies overland to the city",
+      "category": "Causes of Unrest",
+      "typingSnippet": "The Intolerable Acts were the 1774 laws that punished Massachusetts for the Boston Tea Party. They closed Boston Harbor, shut down local government, and forced colonists to quarter British troops. Instead of isolating Boston, the acts united the colonies against Britain.",
+      "tier": "must-know"
+    },
+    {
+      "term": "Patriot",
+      "definition": "A colonist who supported independence from Britain",
+      "simpleExplanation": "The side that said: enough — we should govern ourselves. Patriots ranged from firebrands like Samuel Adams to farmers who had never left their county. Choosing this side meant risking your property, and if the Revolution failed, your life.",
+      "example": "Mercy Otis Warren used her pen as a Patriot, writing plays that mocked British officials",
+      "category": "Choosing Sides",
+      "typingSnippet": "A Patriot was a colonist who supported independence from Britain. Patriots came from every colony and every walk of life, from wealthy lawyers to poor farmers. Declaring yourself a Patriot was a serious risk, because if the Revolution failed it would be treason.",
+      "tier": "must-know"
+    },
+    {
+      "term": "Loyalist",
+      "definition": "A colonist who stayed loyal to Britain and the king during the Revolution",
+      "simpleExplanation": "Roughly one in five colonists picked the other side — and they had reasons. Some believed Britain protected them, some depended on British trade, and many enslaved people saw more promise of freedom in British lines than in Patriot ones. History is more complicated than heroes and villains.",
+      "example": "Thousands of Loyalists fled to Canada after the war, losing their homes and property",
+      "category": "Choosing Sides",
+      "typingSnippet": "A Loyalist was a colonist who stayed loyal to Britain and the king. Loyalists had many motives, from business ties to a genuine belief that British rule was best. Understanding their perspective is essential to telling the full story of the Revolution.",
+      "tier": "must-know"
+    },
+    {
+      "term": "Neutral",
+      "definition": "Choosing not to take either side in a conflict",
+      "simpleExplanation": "Not everyone picked a team. Many colonists — Quakers whose faith forbade war, families just trying to survive, communities caught between armies — stayed neutral. But when the war arrived at your doorstep, neutrality got harder and harder to keep.",
+      "example": "Many Quakers in Pennsylvania stayed neutral because their religious beliefs opposed all war",
+      "category": "Choosing Sides",
+      "typingSnippet": "To be neutral is to take neither side in a conflict. Many colonists tried to stay neutral during the Revolution, whether from religious belief or self-preservation. As the war spread, staying out of it became nearly impossible.",
+      "tier": "encounter"
+    },
+    {
+      "term": "Rebellion",
+      "definition": "Open, organized resistance against a government or authority",
+      "simpleExplanation": "When protest stops asking and starts defying. To Britain, the colonists were rebels breaking the law; to Patriots, rebellion was the last option left after every petition was ignored. Whether a rebellion becomes a 'revolution' usually depends on who wins — and who writes the story.",
+      "example": "King George declared the colonies in open rebellion in 1775, months before the Declaration of Independence",
+      "category": "Choosing Sides",
+      "typingSnippet": "A rebellion is open, organized resistance against a government or authority. Britain saw the colonists as rebels, while Patriots saw themselves as defenders of their rights. The same events can look like crime or courage depending on whose perspective you take.",
+      "tier": "encounter"
+    },
+    {
+      "term": "Independence",
+      "definition": "Freedom from control by another country; the right of a people to govern themselves",
+      "simpleExplanation": "The big prize: no more king, no more Parliament — Americans making American laws. Declaring it in 1776 was the easy part; winning it took seven more years of war, and deciding who actually got to enjoy it took far longer.",
+      "example": "The colonies declared independence in July 1776, but Britain did not recognize it until the Treaty of Paris in 1783",
+      "category": "The Declaration",
+      "typingSnippet": "Independence is freedom from control by another country and the right of a people to govern themselves. The colonies declared independence in 1776 and fought seven more years to win it. Our driving question asks what made it worth fighting for, and for whom it was left incomplete.",
+      "tier": "must-know"
+    },
+    {
+      "term": "Unalienable Rights",
+      "definition": "Rights that belong to every person and cannot be taken away or given up, such as life, liberty, and the pursuit of happiness",
+      "simpleExplanation": "Rights you're born with — not gifts from a king that can be revoked. The Declaration names three: life, liberty, and the pursuit of happiness. The bold claim was that these belong to everyone; the painful truth was that the new nation denied them to millions.",
+      "example": "Jefferson wrote that all people are endowed with unalienable rights, even as he enslaved more than 600 people in his lifetime",
+      "category": "The Declaration",
+      "typingSnippet": "Unalienable rights are rights that belong to every person and cannot be taken away or given up. The Declaration of Independence names life, liberty, and the pursuit of happiness. Generations of Americans have fought to make that promise apply to everyone.",
+      "tier": "must-know"
+    },
+    {
+      "term": "Consent of the Governed",
+      "definition": "The idea that a government's power comes from the agreement of the people it rules",
+      "simpleExplanation": "Governments work for the people, not the other way around. If rulers only have power because the people agree to it, then the people can withdraw that agreement — which is exactly the argument the Declaration makes for breaking up with Britain.",
+      "example": "The Declaration argues that because Britain ruled the colonies without their consent, the colonists had the right to form their own government",
+      "category": "The Declaration",
+      "typingSnippet": "Consent of the governed is the idea that a government's power comes from the agreement of the people it rules. The Declaration used this idea to justify breaking away from Britain. It remains the core principle behind voting and representative government today.",
+      "tier": "must-know"
+    },
+    {
+      "term": "Tyranny",
+      "definition": "The cruel and unjust use of power by a ruler or government",
+      "simpleExplanation": "Power with no limits and no accountability. The Declaration is basically a breakup letter with a list of receipts — 27 grievances accusing King George of tyranny, from dissolving colonial legislatures to keeping standing armies in peacetime.",
+      "example": "The Declaration lists 27 grievances to prove the king's 'absolute tyranny over these States'",
+      "category": "The Declaration",
+      "typingSnippet": "Tyranny is the cruel and unjust use of power by a ruler or government. The Declaration of Independence accuses King George of tyranny and lists dozens of specific grievances as evidence. Fear of tyranny later shaped how Americans designed their Constitution.",
+      "tier": "encounter"
+    },
+    {
+      "term": "Thesis",
+      "definition": "A clear, arguable claim that your evidence works to prove",
+      "simpleExplanation": "The backbone of your podcast episode. Not a fact ('Deborah Sampson was a soldier') and not a topic ('my episode is about spies') — a claim someone could push back on, that every source you cite helps you defend.",
+      "example": "A strong thesis: 'James Armistead Lafayette did more to win Yorktown than most generals — yet he had to petition for his own freedom'",
+      "category": "Research & Voices",
+      "typingSnippet": "A thesis is a clear, arguable claim that your evidence works to prove. It is not a fact or a topic, but a position someone could disagree with. Every source in your podcast episode should help defend your thesis.",
+      "tier": "must-know"
+    },
+    {
+      "term": "Credibility",
+      "definition": "How trustworthy and reliable a source of information is",
+      "simpleExplanation": "Before you trust a source, interrogate it: Who made this? When? Why? What do they gain if you believe them? A museum's research page and a random meme might make the same claim — but they haven't earned the same trust.",
+      "example": "For your podcast, a Library of Congress page about Phillis Wheatley has more credibility than an unsourced fan site",
+      "category": "Research & Voices",
+      "typingSnippet": "Credibility is how trustworthy and reliable a source of information is. Historians judge credibility by asking who created a source, when, and for what purpose. Building your podcast on credible sources is what separates research from rumor.",
+      "tier": "must-know"
+    },
+    {
+      "term": "Citation",
+      "definition": "A note giving credit to the source your information came from",
+      "simpleExplanation": "Your receipts. A citation tells your audience exactly where each fact came from, so they can check it themselves. It gives credit to the people who did the work — and it's what makes your podcast trustworthy instead of just confident.",
+      "example": "Your podcast script ends with citations for every source you used, from primary documents to museum websites",
+      "category": "Research & Voices",
+      "typingSnippet": "A citation is a note giving credit to the source your information came from. Citations let your audience verify your facts and give credit to the researchers who found them. In this project, every claim in your script needs a citation to back it up.",
+      "tier": "must-know"
+    },
+    {
+      "term": "Overlooked Voices",
+      "definition": "People whose real roles in history rarely make it into the usual telling of the story",
+      "simpleExplanation": "The Revolution was won by more than the faces on money. Poets like Phillis Wheatley, spies like James Armistead Lafayette, soldiers like Deborah Sampson, leaders like Joseph Brant, and thinkers like Abigail Adams and Mercy Otis Warren all shaped it — your podcast puts one of them back in the story.",
+      "example": "Crispus Attucks, a sailor of African and Native descent, was the first to die at the Boston Massacre — yet many textbooks give him a single sentence",
+      "category": "Research & Voices",
+      "typingSnippet": "Overlooked voices are people whose real roles in history rarely make it into the usual telling. Women, African Americans, and Native nations all shaped the Revolution, yet their stories are often reduced to a sentence or skipped entirely. Recovering those voices is the whole point of our podcast project.",
+      "tier": "encounter"
+    }
+  ],
+  "timelineEvents": [
+    {
+      "title": "Treaty of Paris ends the French & Indian War",
+      "year": "1763",
+      "description": "France gives Canada and its land east of the Mississippi to Britain. Britain has won, but its war debt has nearly doubled.",
+      "id": 1
+    },
+    {
+      "id": 2,
+      "title": "Proclamation of 1763",
+      "year": "1763",
+      "description": "Britain bans settlement west of the Appalachians, angering colonists who expected that land"
+    },
+    {
+      "id": 3,
+      "title": "Stamp Act",
+      "year": "1765",
+      "description": "The first direct tax on the colonies sparks the cry of taxation without representation"
+    },
+    {
+      "id": 4,
+      "title": "Boston Massacre",
+      "year": "1770",
+      "description": "British soldiers fire into a crowd, killing five colonists including Crispus Attucks"
+    },
+    {
+      "id": 5,
+      "title": "Boston Tea Party",
+      "year": "1773",
+      "description": "Colonists dump 342 chests of British tea into Boston Harbor to protest the Tea Act"
+    },
+    {
+      "id": 6,
+      "title": "Intolerable Acts",
+      "year": "1774",
+      "description": "Britain punishes Massachusetts by closing Boston Harbor and quartering troops, uniting the colonies instead"
+    },
+    {
+      "id": 7,
+      "title": "First Continental Congress",
+      "year": "1774",
+      "description": "Delegates from twelve colonies meet in Philadelphia to coordinate a response to Britain"
+    },
+    {
+      "id": 8,
+      "title": "Battles of Lexington & Concord",
+      "year": "1775",
+      "description": "The 'shot heard round the world' — the Revolutionary War begins in Massachusetts"
+    },
+    {
+      "id": 9,
+      "title": "Declaration of Independence",
+      "year": "1776",
+      "description": "Congress declares the colonies free and independent states, justified by unalienable rights and consent of the governed"
+    },
+    {
+      "id": 10,
+      "title": "Treaty of Paris",
+      "year": "1783",
+      "description": "Britain officially recognizes American independence, ending the Revolutionary War"
+    },
+    {
+      "id": 11,
+      "title": "Shays' Rebellion Exposes the Articles",
+      "year": "1786–1787",
+      "description": "A farmers' uprising in Massachusetts reveals how weak the Articles of Confederation really are, fueling calls for a new constitution"
+    }
+  ],
+  "reflectionPrompts": [
+    "How does {term} help explain what made independence worth fighting for?",
+    "Who benefited most from {term} — and for whom was its promise left incomplete?",
+    "If your podcast episode covered {term}, whose overlooked voice would you choose to tell that part of the story?"
+  ],
+  "fillInBlankSentences": [
+    {
+      "sentence": "The _____ banned colonists from settling west of the Appalachian Mountains.",
+      "answer": "Proclamation of 1763",
+      "category": "Causes of Unrest"
+    },
+    {
+      "sentence": "Colonists said the Stamp Act was _____, because they had no elected voice in Parliament.",
+      "answer": "Taxation without Representation",
+      "category": "Causes of Unrest"
+    },
+    {
+      "sentence": "When colonists refused to buy British goods as a protest, they were holding a _____.",
+      "answer": "boycott",
+      "category": "Causes of Unrest"
+    },
+    {
+      "sentence": "To officially cancel a law is to _____ it.",
+      "answer": "repeal",
+      "category": "Causes of Unrest"
+    },
+    {
+      "sentence": "Britain punished Massachusetts for the Boston Tea Party with laws colonists called the _____.",
+      "answer": "Intolerable Acts",
+      "category": "Causes of Unrest"
+    },
+    {
+      "sentence": "A colonist who supported independence from Britain was a _____.",
+      "answer": "Patriot",
+      "category": "Choosing Sides"
+    },
+    {
+      "sentence": "A colonist who stayed loyal to the British king was a _____.",
+      "answer": "Loyalist",
+      "category": "Choosing Sides"
+    },
+    {
+      "sentence": "A colonist who chose not to take either side was _____.",
+      "answer": "neutral",
+      "category": "Choosing Sides"
+    },
+    {
+      "sentence": "Open, organized resistance against a government is a _____.",
+      "answer": "rebellion",
+      "category": "Choosing Sides"
+    },
+    {
+      "sentence": "Freedom from control by another country is called _____.",
+      "answer": "Independence",
+      "category": "The Declaration"
+    },
+    {
+      "sentence": "Rights that belong to every person and cannot be taken away are _____.",
+      "answer": "Unalienable Rights",
+      "category": "The Declaration"
+    },
+    {
+      "sentence": "The idea that a government's power comes from the people is called the _____.",
+      "answer": "Consent of the Governed",
+      "category": "The Declaration"
+    },
+    {
+      "sentence": "The cruel and unjust use of power by a ruler is _____.",
+      "answer": "tyranny",
+      "category": "The Declaration"
+    },
+    {
+      "sentence": "A clear, arguable claim that your evidence works to prove is a _____.",
+      "answer": "thesis",
+      "category": "Research & Voices"
+    },
+    {
+      "sentence": "How trustworthy and reliable a source is, is its _____.",
+      "answer": "credibility",
+      "category": "Research & Voices"
+    },
+    {
+      "sentence": "A note that gives credit to the source your information came from is a _____.",
+      "answer": "citation",
+      "category": "Research & Voices"
+    },
+    {
+      "sentence": "People whose real roles in history rarely make it into the usual telling are _____.",
+      "answer": "Overlooked Voices",
+      "category": "Research & Voices"
+    }
+  ],
+  "practiceQuestions": [
+    {
+      "question": "Why did Britain and France go to war in North America in 1754?",
+      "options": [
+        "They both wanted to rule over England itself",
+        "They both claimed the land of the Ohio River Valley",
+        "France wanted to end the Atlantic slave trade",
+        "Britain wanted to stop colonists from moving east"
+      ],
+      "correct": 1,
+      "explanation": "Both empires claimed the Ohio Valley. French forts and British colonists moving west collided there in 1754.",
+      "topic": "Causes of Unrest"
+    },
+    {
+      "question": "What did France lose in the Treaty of Paris of 1763?",
+      "options": [
+        "Canada and almost all of its land in North America",
+        "Only its sugar islands in the West Indies and Africa",
+        "Florida, which it then gave to the thirteen colonies",
+        "Nothing at all, because the war ended in a tie"
+      ],
+      "correct": 0,
+      "explanation": "France gave Canada and its land east of the Mississippi to Britain, and Louisiana to Spain.",
+      "topic": "Causes of Unrest"
+    },
+    {
+      "question": "Why did Britain look to the colonies for money after the French & Indian War?",
+      "options": [
+        "The colonies had lost the war and owed Britain",
+        "The king wanted to build a new palace in Boston",
+        "Britain's war debt had nearly doubled",
+        "The colonies asked Parliament to raise their taxes"
+      ],
+      "correct": 2,
+      "explanation": "Britain won, but borrowing to pay for the war nearly doubled its debt. Parliament decided the colonies should help pay.",
+      "topic": "Causes of Unrest"
+    },
+    {
+      "question": "Why did the Proclamation of 1763 anger colonists?",
+      "options": [
+        "It placed a new tax on tea and paper goods",
+        "It made colonists house British soldiers",
+        "It closed Boston Harbor to all trade ships",
+        "It banned settling west of the Appalachians"
+      ],
+      "correct": 3,
+      "explanation": "The Proclamation closed the land west of the Appalachians to colonial settlement, land many colonists had expected to claim after the war.",
+      "topic": "Causes of Unrest"
+    },
+    {
+      "question": "In his 1767 letter to William Crawford, how did George Washington describe the Proclamation?",
+      "options": [
+        "As a quick fix that would end in a few years",
+        "As a fair law that colonists should obey",
+        "As a reason to declare independence right away",
+        "As a gift to colonists from the king"
+      ],
+      "correct": 0,
+      "explanation": "Washington called it \"a temporary expedient to quiet the Minds of the Indians\" and planned to claim western land anyway, in secret.",
+      "topic": "Causes of Unrest"
+    },
+    {
+      "question": "What did the Quartering Act require colonists to do?",
+      "options": [
+        "Pay a tax on every newspaper and legal paper",
+        "House and supply British soldiers",
+        "Stop trading with any country but Britain",
+        "Move east of the Appalachian Mountains"
+      ],
+      "correct": 1,
+      "explanation": "The Quartering Act of 1765 made colonies provide housing and supplies for British troops.",
+      "topic": "Causes of Unrest"
+    },
+    {
+      "question": "What did colonists mean by \"no taxation without representation\"?",
+      "options": [
+        "No one in the colonies should ever pay a tax",
+        "Only British citizens living in England should pay taxes",
+        "Only their own elected representatives should tax them",
+        "Taxes should be paid in goods, not in money"
+      ],
+      "correct": 2,
+      "explanation": "Colonists elected no one to Parliament, so they argued Parliament had no right to tax them.",
+      "topic": "Causes of Unrest"
+    },
+    {
+      "question": "What did the Stamp Act of 1765 tax?",
+      "options": [
+        "Printed papers like newspapers and legal documents",
+        "Imported goods like tea, glass, paint and lead",
+        "Land that colonists owned west of the mountains",
+        "Clothing, shoes and other household goods"
+      ],
+      "correct": 0,
+      "explanation": "The Stamp Act taxed printed paper: newspapers, legal documents, even playing cards.",
+      "topic": "Causes of Unrest"
+    },
+    {
+      "question": "How did colonists get the Stamp Act repealed in 1766?",
+      "options": [
+        "They won a battle against British soldiers in Boston",
+        "They elected their own members to sit in Parliament",
+        "They asked the king to dismiss Parliament for a year",
+        "They boycotted British goods until merchants lost money"
+      ],
+      "correct": 3,
+      "explanation": "Colonists stopped buying British goods. British merchants lost money and pushed Parliament to repeal the tax.",
+      "topic": "Causes of Unrest"
+    },
+    {
+      "question": "What is a boycott?",
+      "options": [
+        "An organized refusal to buy certain goods",
+        "A law that cancels an earlier law",
+        "A tax on goods brought in from another place",
+        "A meeting of leaders from different colonies"
+      ],
+      "correct": 0,
+      "explanation": "A boycott is a protest with your wallet: people agree together not to buy something.",
+      "topic": "Causes of Unrest"
+    },
+    {
+      "question": "What did the Townshend Acts of 1767 tax?",
+      "options": [
+        "Newspapers, legal papers and playing cards",
+        "Land that colonists owned west of the mountains",
+        "Every ship that sailed out of a colonial port",
+        "Imported goods like glass, paint, paper and tea"
+      ],
+      "correct": 3,
+      "explanation": "The Townshend Acts taxed goods the colonies imported from Britain. Colonists boycotted them, and Parliament dropped every tax but the one on tea in 1770.",
+      "topic": "Causes of Unrest"
+    },
+    {
+      "question": "In 1770, British soldiers fired into a crowd in Boston and killed five people, including Crispus Attucks. What is this event called?",
+      "options": [
+        "The Boston Tea Party",
+        "The Boston Massacre",
+        "The Battle of Lexington",
+        "The Intolerable Acts"
+      ],
+      "correct": 1,
+      "explanation": "The Boston Massacre, March 5, 1770. Crispus Attucks, a sailor of African and Native descent, was among those killed.",
+      "topic": "Causes of Unrest"
+    },
+    {
+      "question": "What were colonists protesting at the Boston Tea Party in 1773?",
+      "options": [
+        "The Quartering Act and the soldiers living in Boston",
+        "The Proclamation Line along the Appalachian Mountains",
+        "Parliament's tax on tea and its rules for selling it",
+        "The arrest of leaders of the First Continental Congress"
+      ],
+      "correct": 2,
+      "explanation": "Colonists dumped British tea into Boston Harbor to protest Parliament's tea tax and the Tea Act of 1773.",
+      "topic": "Causes of Unrest"
+    },
+    {
+      "question": "What were the Intolerable Acts a response to?",
+      "options": [
+        "The Boston Tea Party",
+        "The Stamp Act protests",
+        "The Battle of Lexington",
+        "The Declaration of Independence"
+      ],
+      "correct": 0,
+      "explanation": "Parliament passed them in 1774 to punish Massachusetts for the Boston Tea Party. Britain called them the Coercive Acts.",
+      "topic": "Causes of Unrest"
+    },
+    {
+      "question": "What did the Intolerable Acts do to the other colonies?",
+      "options": [
+        "They made the other colonies turn against Boston",
+        "They had no effect outside Massachusetts",
+        "They made the other colonies stop all trade with Boston",
+        "They pulled the colonies together to help Boston"
+      ],
+      "correct": 3,
+      "explanation": "Britain meant to isolate Boston. Instead, other colonies sent food and supplies and met at the First Continental Congress.",
+      "topic": "Causes of Unrest"
+    },
+    {
+      "question": "Why did the First Continental Congress meet in Philadelphia in 1774?",
+      "options": [
+        "To plan a joint response to Britain, including a boycott",
+        "To sign the Declaration of Independence from Britain",
+        "To elect George Washington as the first president",
+        "To write the Articles of Confederation for the states"
+      ],
+      "correct": 0,
+      "explanation": "Delegates from twelve colonies agreed to boycott British goods and to meet again if things did not change.",
+      "topic": "Causes of Unrest"
+    },
+    {
+      "question": "Why do the Battles of Lexington and Concord (1775) matter?",
+      "options": [
+        "They were the last battles of the Revolutionary War",
+        "They were the first fighting of the Revolutionary War",
+        "They were where the Declaration of Independence was signed",
+        "They finally forced Parliament to repeal the Stamp Act"
+      ],
+      "correct": 1,
+      "explanation": "On April 19, 1775, British soldiers and colonial militia fought at Lexington and Concord: the first battles of the war.",
+      "topic": "Causes of Unrest"
+    },
+    {
+      "question": "What was a Patriot during the Revolution?",
+      "options": [
+        "A colonist who stayed loyal to King George III of Britain",
+        "A colonist who refused to take either side in the war",
+        "A colonist who supported independence from Britain",
+        "A British soldier who fought in the colonies"
+      ],
+      "correct": 2,
+      "explanation": "Patriots supported independence. About one in five colonists stayed loyal to the king instead.",
+      "topic": "Choosing Sides"
+    },
+    {
+      "question": "What was a Loyalist (also called a Tory)?",
+      "options": [
+        "A colonist who supported independence from Britain",
+        "A colonist who fought alongside Native nations",
+        "A spy who secretly worked for both sides at once",
+        "A colonist who stayed loyal to the British king"
+      ],
+      "correct": 3,
+      "explanation": "Loyalists stayed loyal to the Crown, for reasons like business ties, government jobs, family or fear of war.",
+      "topic": "Choosing Sides"
+    },
+    {
+      "question": "What did it mean to stay neutral in the Revolution?",
+      "options": [
+        "To fight for whichever side paid more",
+        "To support the Patriots without fighting",
+        "To not take either side",
+        "To move to Britain until the war ended"
+      ],
+      "correct": 2,
+      "explanation": "Many colonists tried to stay out of the fight and protect their families and farms.",
+      "topic": "Choosing Sides"
+    },
+    {
+      "question": "Why did some enslaved people side with the British?",
+      "options": [
+        "A British governor promised freedom to those who joined the British",
+        "The British promised each of them free land in the Ohio Valley",
+        "Patriot leaders ordered them to go and join the British army",
+        "The British paid them twice as much as the Patriot army offered"
+      ],
+      "correct": 0,
+      "explanation": "In 1775, Lord Dunmore, the royal governor of Virginia, promised freedom to enslaved people who escaped Patriot enslavers and joined British forces.",
+      "topic": "Choosing Sides"
+    },
+    {
+      "question": "Why did different people take different sides on independence?",
+      "options": [
+        "Everyone in a colony thought the same way about the king",
+        "Their background and circumstances shaped what they wanted",
+        "Only wealthy colonists were allowed to have opinions on it",
+        "The king told each colony which side it had to take"
+      ],
+      "correct": 1,
+      "explanation": "Where you lived, what you did for work, your family and whether you were free all shaped your view of independence.",
+      "topic": "Choosing Sides"
+    },
+    {
+      "question": "What turns a protest into a rebellion?",
+      "options": [
+        "When people ask the government politely to change a law",
+        "When people agree together to stop buying certain goods",
+        "When people write a letter to the king about a problem",
+        "When people openly defy the government and its power"
+      ],
+      "correct": 3,
+      "explanation": "A protest asks for change. A rebellion is open, organized resistance against the government itself.",
+      "topic": "Choosing Sides"
+    },
+    {
+      "question": "What does \"unalienable rights\" mean in the Declaration of Independence?",
+      "options": [
+        "Rights that cannot be taken away",
+        "Rights the government gives out each year",
+        "Rights that belong only to landowners",
+        "Rights that must be earned by serving"
+      ],
+      "correct": 0,
+      "explanation": "Unalienable rights belong to every person from birth. No king can grant them or take them away.",
+      "topic": "The Declaration"
+    },
+    {
+      "question": "Which three rights does the Declaration name?",
+      "options": [
+        "Freedom, justice, equality and safety for all",
+        "Liberty, property, security and fair trials",
+        "Life, liberty and the pursuit of happiness",
+        "Speech, religion and the right to vote freely"
+      ],
+      "correct": 2,
+      "explanation": "\"Life, Liberty and the pursuit of Happiness.\"",
+      "topic": "The Declaration"
+    },
+    {
+      "question": "What does \"consent of the governed\" mean?",
+      "options": [
+        "The king decides who may vote",
+        "Only rich people should be allowed to vote",
+        "Government gets its power from the people",
+        "Kings get their power to rule from God"
+      ],
+      "correct": 2,
+      "explanation": "The Declaration argues a government only has the power the people agree to give it.",
+      "topic": "The Declaration"
+    },
+    {
+      "question": "According to the Declaration, what can people do when a government destroys their rights?",
+      "options": [
+        "Change or get rid of that government",
+        "Accept it, because rebellion is always wrong",
+        "Move to a different country",
+        "Wait for the king to fix it"
+      ],
+      "correct": 0,
+      "explanation": "The Declaration says people have the right \"to alter or to abolish\" a government that destroys their rights.",
+      "topic": "The Declaration"
+    },
+    {
+      "question": "What did the Declaration accuse King George III of?",
+      "options": [
+        "Being too generous with the colonies",
+        "Starting the French & Indian War",
+        "Not paying enough attention to the colonies",
+        "Repeated injuries meant to create a tyranny"
+      ],
+      "correct": 3,
+      "explanation": "The long list of grievances charges the king with \"repeated injuries and usurpations,\" all aimed at \"an absolute Tyranny.\"",
+      "topic": "The Declaration"
+    },
+    {
+      "question": "The colonists asked Britain for change many times before declaring independence. What does this show?",
+      "options": [
+        "The colonists were too afraid to fight Britain",
+        "Independence came after peaceful attempts failed",
+        "King George was always willing to compromise",
+        "The colonists never really wanted independence at all"
+      ],
+      "correct": 1,
+      "explanation": "The Declaration says the colonists \"Petitioned for Redress\" again and again and were answered \"only by repeated injury.\"",
+      "topic": "The Declaration"
+    },
+    {
+      "question": "When Jefferson wrote \"all men are created equal,\" whose rights were left out?",
+      "options": [
+        "Poor white men who owned no land",
+        "Loyalists who had left for Canada",
+        "British soldiers serving in the colonies",
+        "Women, enslaved people and Native nations"
+      ],
+      "correct": 3,
+      "explanation": "Women could not vote, enslaved people had no liberty at all, and the Declaration itself calls Native people \"merciless Indian Savages.\"",
+      "topic": "The Declaration"
+    },
+    {
+      "question": "Which of these is a thesis?",
+      "options": [
+        "Phillis Wheatley was born in West Africa in about 1753 and enslaved in Boston",
+        "Phillis Wheatley's poems proved the colonists wrong about who could be a writer",
+        "This podcast episode is all about the life and poems of Phillis Wheatley",
+        "Phillis Wheatley wrote poems and published a book of them in London in 1773"
+      ],
+      "correct": 1,
+      "explanation": "A thesis is an arguable claim your evidence works to prove. The others are a fact, a topic and a fact.",
+      "topic": "Research & Voices"
+    },
+    {
+      "question": "Which question best checks a source's credibility?",
+      "options": [
+        "How long is the source?",
+        "Does the source agree with what I already think?",
+        "Who made this source, when, and why?",
+        "Does the source have pictures?"
+      ],
+      "correct": 2,
+      "explanation": "Who made it, when and why tells you whether a source has earned your trust.",
+      "topic": "Research & Voices"
+    },
+    {
+      "question": "Why does a podcast script need citations?",
+      "options": [
+        "To give credit to the sources the facts came from",
+        "To make the script longer so it meets the time",
+        "To show the listener which parts are made up",
+        "To replace the need for a thesis in the intro"
+      ],
+      "correct": 0,
+      "explanation": "A citation is your receipt: it shows where every fact came from so a listener can check it.",
+      "topic": "Research & Voices"
+    }
+  ],
+  "shortAnswerQuestions": [
+    {
+      "question": "Which event pushed the colonists closest to rebellion, and what made it worse than the events before it?",
+      "topic": "Causes of Unrest",
+      "keyTerms": [
+        "Intolerable Acts",
+        "Taxation without Representation",
+        "Boycott",
+        "Rebellion"
+      ],
+      "rubric": "Strong response names one specific event, explains with details what it did to colonists, and compares it with earlier events to show what made it a tipping point (for example, punishing a whole colony rather than taxing goods).",
+      "exemplar": "The Intolerable Acts pushed the colonists closest to rebellion. Earlier laws like the Stamp Act taxed goods, and colonists could fight back with boycotts until Parliament repealed them. The Intolerable Acts were different: they punished everyone in Massachusetts for the Boston Tea Party. Britain closed Boston Harbor, so people could not work or get supplies, and it took away Massachusetts' right to govern itself. This showed colonists that Britain would destroy a whole colony's freedom to make a point, so the other colonies started working together against Britain.",
+      "plan": [
+        {
+          "role": "claim",
+          "text": "The Intolerable Acts pushed the colonists closest to rebellion, because they punished a whole colony instead of just taxing goods."
+        },
+        {
+          "role": "evidence",
+          "text": "Britain closed Boston Harbor in 1774, so people in Boston could not work or get supplies."
+        },
+        {
+          "role": "evidence",
+          "text": "Britain also took away Massachusetts' right to govern itself."
+        },
+        {
+          "role": "reasoning",
+          "text": "Earlier taxes could be beaten with boycotts, but this showed Britain would take away colonists' freedom, so other colonies joined Massachusetts against Britain."
+        }
+      ],
+      "sentenceStarters": [
+        "The event that pushed colonists closest to rebellion was ___ because ___.",
+        "Earlier events were different because ___.",
+        "This showed colonists that ___."
+      ]
+    },
+    {
+      "question": "Colonists did not rebel after the Proclamation of 1763, but they fought at Lexington and Concord in 1775. What changed in those twelve years?",
+      "topic": "Causes of Unrest",
+      "keyTerms": [
+        "Proclamation of 1763",
+        "Boycott",
+        "Repeal",
+        "Intolerable Acts",
+        "Rebellion"
+      ],
+      "rubric": "Strong response explains escalation: names at least two events in order, shows how each response made the next conflict worse, and explains why peaceful protest no longer seemed to work by 1775.",
+      "exemplar": "Over those twelve years, colonists tried peaceful ways to change Britain's rules, and each time Britain answered with something harsher. Boycotts got the Stamp Act repealed, but Parliament passed new taxes in the Townshend Acts. When colonists protested, Britain sent troops to Boston, and soldiers killed five people in the Boston Massacre. After the Boston Tea Party, Britain passed the Intolerable Acts. Each event made colonists angrier and more sure that Britain would not listen. By 1775, many felt that petitions and boycotts had failed, so when British soldiers marched to Concord, the militia fought back.",
+      "plan": [
+        {
+          "role": "claim",
+          "text": "Between 1763 and 1775, each conflict made the next one worse, until colonists believed peaceful protest had failed."
+        },
+        {
+          "role": "evidence",
+          "text": "Boycotts got the Stamp Act repealed, but Parliament passed new taxes and sent troops to Boston, where soldiers killed five people in 1770."
+        },
+        {
+          "role": "evidence",
+          "text": "After the Boston Tea Party, Britain punished Massachusetts with the Intolerable Acts in 1774."
+        },
+        {
+          "role": "reasoning",
+          "text": "Because Britain answered every protest with harsher rules, colonists stopped asking for change and started defying Britain, which is what rebellion is."
+        }
+      ],
+      "sentenceStarters": [
+        "In 1763, colonists ___.",
+        "Each event made things worse because ___.",
+        "By 1775, colonists believed ___."
+      ]
+    },
+    {
+      "question": "Choose one group: enslaved people, Native nations, women, or Loyalists. Why did that group see independence differently from the Patriots?",
+      "topic": "Choosing Sides",
+      "keyTerms": [
+        "Patriot",
+        "Loyalist",
+        "Neutral",
+        "Independence"
+      ],
+      "rubric": "Strong response names one group, explains what that group wanted or feared, gives a specific example (such as Dunmore's promise or western land), and contrasts it with what Patriots meant by liberty.",
+      "exemplar": "Enslaved people saw independence very differently from white Patriots. Patriots fought for liberty from British tyranny, but enslaved people had no liberty at all, and many of the people declaring independence were their enslavers. In 1775, Lord Dunmore promised freedom to enslaved people who escaped and joined the British, and thousands did. For them, the side that offered freedom mattered more than who ruled the colonies. The Patriots' talk of liberty did not include them.",
+      "plan": [
+        {
+          "role": "claim",
+          "text": "Enslaved people saw independence differently because the Patriots' liberty did not include them."
+        },
+        {
+          "role": "evidence",
+          "text": "Many Patriot leaders, the people declaring independence, enslaved people themselves."
+        },
+        {
+          "role": "evidence",
+          "text": "In 1775, Lord Dunmore promised freedom to enslaved people who joined the British, and thousands did."
+        },
+        {
+          "role": "reasoning",
+          "text": "For enslaved people, freedom from slavery mattered more than whether Britain or the Patriots ruled, so the British side could look like the side of liberty."
+        }
+      ],
+      "sentenceStarters": [
+        "___ saw independence differently because ___.",
+        "While Patriots wanted ___, this group wanted ___.",
+        "For example, ___."
+      ]
+    },
+    {
+      "question": "The Declaration says \"all men are created equal.\" Whose rights did it protect in 1776, and whose did it leave out?",
+      "topic": "The Declaration",
+      "keyTerms": [
+        "Unalienable Rights",
+        "Consent of the Governed",
+        "Independence",
+        "Overlooked Voices"
+      ],
+      "rubric": "Strong response says whose rights were protected (mostly white men who owned property), names at least two groups left out with a specific example for each, and explains the contradiction between the words and the reality.",
+      "exemplar": "In 1776, the Declaration's rights mostly protected white men who owned property. They could vote and take part in the new government. Enslaved people were left out completely: they had no liberty, and Jefferson, who wrote \"all men are created equal,\" enslaved people himself. Women could not vote or hold office. The Declaration even calls Native people \"merciless Indian Savages.\" This shows the Declaration's promise of unalienable rights was not yet true for most people in America.",
+      "plan": [
+        {
+          "role": "claim",
+          "text": "In 1776, the Declaration's rights mostly protected white men who owned property and left most other people out."
+        },
+        {
+          "role": "evidence",
+          "text": "Enslaved people had no liberty at all, and the author of \"all men are created equal,\" Thomas Jefferson, enslaved people himself."
+        },
+        {
+          "role": "evidence",
+          "text": "Women could not vote or hold office, and the Declaration calls Native people \"merciless Indian Savages.\""
+        },
+        {
+          "role": "reasoning",
+          "text": "This shows a contradiction: the Declaration promised unalienable rights to everyone but protected them for only some."
+        }
+      ],
+      "sentenceStarters": [
+        "In 1776, the Declaration protected the rights of ___.",
+        "It left out ___, because ___.",
+        "This shows that ___."
+      ]
+    }
+  ]
+}

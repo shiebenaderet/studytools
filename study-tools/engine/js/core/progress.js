@@ -732,7 +732,7 @@ const ProgressManager = {
         var periods = [
             { label: 'Period 1', code: 'period1' },
             { label: 'Period 2', code: 'period2' },
-            { label: 'Period 4', code: 'period4' },
+            { label: 'Period 3', code: 'period3' },
             { label: 'Period 5', code: 'period5' }
         ];
 
@@ -1038,7 +1038,7 @@ const ProgressManager = {
         var periods = [
             { label: 'Period 1', code: 'period1' },
             { label: 'Period 2', code: 'period2' },
-            { label: 'Period 4', code: 'period4' },
+            { label: 'Period 3', code: 'period3' },
             { label: 'Period 5', code: 'period5' }
         ];
         var periodButtons = [];
@@ -1626,7 +1626,7 @@ const ProgressManager = {
         var periods = [
             { label: 'Period 1', code: 'period1' },
             { label: 'Period 2', code: 'period2' },
-            { label: 'Period 4', code: 'period4' },
+            { label: 'Period 3', code: 'period3' },
             { label: 'Period 5', code: 'period5' }
         ];
 
