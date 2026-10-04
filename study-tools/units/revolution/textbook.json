@@ -1,0 +1,320 @@
+{
+  "textbookContent": {
+    "readingLevels": {
+      "simplified": {
+        "label": "Easier",
+        "gradeRange": "3rd-5th",
+        "description": "Shorter sentences, simpler vocabulary"
+      },
+      "standard": {
+        "label": "On Grade",
+        "gradeRange": "8th Grade",
+        "description": "Standard reading level"
+      },
+      "advanced": {
+        "label": "Challenge",
+        "gradeRange": "High School",
+        "description": "More detail, complex analysis"
+      }
+    },
+    "segments": [
+      {
+        "id": "causes-of-unrest",
+        "number": 1,
+        "title": "Causes of Unrest",
+        "category": "Causes of Unrest",
+        "subtitle": "How winning a war turned Britain and its colonies against each other",
+        "icon": "fas fa-fire",
+        "essentialQuestions": [
+          "Why did winning the French and Indian War leave Britain looking for money?",
+          "Why did colonists see new taxes as unfair, even when the taxes were small?",
+          "How did each side's choices between 1763 and 1774 make the next fight worse?"
+        ],
+        "sections": [
+          {
+            "id": "costly-victory",
+            "heading": "A Costly Victory",
+            "vocabTerms": [
+              "Proclamation of 1763"
+            ],
+            "content": {
+              "simplified": "<p>From 1754 to 1763, Britain and France fought a war in North America. It is called the French and Indian War. Both countries wanted the Ohio River Valley. Many Native nations fought on the side of the French.</p><p>Britain won. In the Treaty of Paris of 1763, France gave up almost all of its land in North America. Britain now claimed the land east of the Mississippi River.</p><p>But winning cost a lot. Britain had borrowed money to pay for the war. Its debt almost doubled. British leaders thought the colonists should help pay, because the war had protected them.</p><p>The land Britain won was not empty. Native nations lived there. In 1763, an Ottawa leader named Pontiac led attacks on British forts. Britain did not want another costly war.</p><p>So the king made a rule called the <strong>Proclamation of 1763</strong>. It was a British order that banned colonists from settling west of the Appalachian Mountains. Many colonists were angry. They had fought for that land, and now they could not move there.</p>",
+              "standard": "<p>From 1754 to 1763, Britain and France fought for control of North America in the French and Indian War. The fight started over the Ohio River Valley, which both empires claimed. France had fewer colonists, but it had more Native allies who knew the land. Britain had about twenty times as many colonists, and once William Pitt poured soldiers and money into the war, Britain began to win. Quebec, the capital of New France, fell in 1759.</p><p>In the Treaty of Paris of 1763, France gave up Canada and almost all of its land in North America. Britain now claimed everything east of the Mississippi River. It looked like a total victory.</p><p>Victory came with a bill. Britain had borrowed heavily to fight a war on several continents, and its national debt nearly doubled. Now it also had to guard a much larger territory. British leaders reasoned that the colonists, who had been protected by British soldiers, should help pay.</p><p>The land Britain had won was home to Native nations who had never agreed to the treaty. In 1763, the Ottawa leader Pontiac led attacks on British forts around the Great Lakes. Britain did not want to pay for another frontier war. Its answer was the <strong>Proclamation of 1763</strong>, a British order banning colonial settlement west of the Appalachian Mountains. To many colonists, it felt like a betrayal: they had fought for that land, and now the king had closed it to them. Speculators like George Washington, who had claimed western land, quietly treated the line as temporary.</p>",
+              "advanced": "<p>The French and Indian War (1754&ndash;1763) was the North American front of a global struggle between Britain and France. It began in the Ohio River Valley, a region both empires claimed and that Native nations already called home. France held the early advantage through its alliances with Native nations, but Britain's colonial population, roughly twenty times larger, and William Pitt's decision to fund the war on a massive scale eventually turned the tide. The fall of Quebec in 1759 broke French power in North America.</p><p>The Treaty of Paris (1763) removed France from the continent: Britain gained Canada and the land east of the Mississippi, and Spain received Louisiana. Yet the victory carried a crushing cost. Britain's national debt had nearly doubled, and the empire now had to garrison a vast new territory. To Parliament, it seemed only fair that the colonists, whose frontier the army had defended, should share the expense.</p><p>Native nations, who had signed nothing at Paris, resisted British control. Pontiac's War, launched in 1763 by an Ottawa leader and his allies, captured or besieged forts across the Great Lakes region. Hoping to avoid an expensive frontier war, the Crown issued the <strong>Proclamation of 1763</strong>, a British order banning colonial settlement west of the Appalachian Mountains. Colonists who had fought, or invested, in hopes of western land saw the line as an insult. Even George Washington, writing privately in 1767, called it \"a temporary expedient\" that would not last. The empire had won the war and, in the same moment, planted the first seeds of resentment.</p>"
+            },
+            "keyIdea": "Britain won the French and Indian War but nearly doubled its debt. To avoid another war with Native nations, it closed the land west of the Appalachians, angering colonists who had wanted that land.",
+            "checkIn": {
+              "type": "stop-and-think",
+              "prompt": "Why would a colonist who fought in the war be angry about the Proclamation of 1763?",
+              "hint": "Look at the Treaty of Paris paragraph and the paragraph about the Proclamation. Start with: \"A colonist who fought might be angry because ___.\""
+            },
+            "sourceNote": "Washington's view of the line comes from his letter to William Crawford, September 17, 1767 (Founders Online), the second source on your Proclamation handout.",
+            "image": {
+              "src": "../units/revolution/images/proclamation-1763.jpg",
+              "caption": "The Proclamation Line of 1763. Land west of the line was closed to colonial settlement.",
+              "credit": "Map: Mr. B, from Natural Earth data",
+              "float": "right"
+            }
+          },
+          {
+            "id": "no-taxation",
+            "heading": "Taxes and How Colonists Fought Back",
+            "vocabTerms": [
+              "Taxation without Representation",
+              "Boycott",
+              "Repeal"
+            ],
+            "content": {
+              "simplified": "<p>Britain still needed money. So Parliament, Britain's lawmakers, passed new taxes on the colonies. The Sugar Act of 1764 taxed sugar and molasses. The Stamp Act of 1765 taxed paper things, like newspapers, legal papers, and even playing cards.</p><p>Colonists could not vote for anyone in Parliament. They had no one there to speak for them. Being taxed by a government where you have no elected voice is called <strong>taxation without representation</strong>. Colonists said, \"No taxation without representation!\"</p><p>Colonists fought back without violence. They used a <strong>boycott</strong>. A boycott is an organized refusal to buy certain goods as a protest. Colonists stopped buying British goods. Women made their own cloth instead of buying British cloth.</p><p>The boycott hurt British merchants, who lost money. They asked Parliament for help. In 1766, Parliament decided to <strong>repeal</strong> the Stamp Act. To repeal means to officially cancel a law.</p><p>But in 1767, Parliament passed new taxes, called the Townshend Acts. Colonists boycotted again. In 1770, Parliament canceled all of those taxes except one: the tax on tea.</p>",
+              "standard": "<p>To pay its war debt, Parliament turned to the colonies. The Sugar Act (1764) taxed sugar and molasses coming into the colonies. The Stamp Act (1765) went further: it taxed almost every piece of printed paper, from newspapers and legal documents to diplomas and playing cards. For the first time, Parliament was taxing colonists directly, just to raise money.</p><p>The colonists' main complaint was not the size of the tax. It was who was doing the taxing. The colonies elected their own assemblies, but they sent no members to Parliament. Being taxed by a government in which you have no elected voice is <strong>taxation without representation</strong>, and colonists argued that only their own assemblies had the right to tax them.</p><p>Colonists fought back mostly without violence. Merchants in Boston, New York and Philadelphia organized a <strong>boycott</strong>, an organized refusal to buy certain goods as a form of protest, and stopped importing British goods. Women spun and wove their own cloth so their families would not need British fabric. Nine colonies sent delegates to a Stamp Act Congress to protest together.</p><p>The boycott worked. British merchants who were losing sales pressured Parliament, and in 1766 Parliament voted to <strong>repeal</strong> the Stamp Act, which means to officially cancel a law. But on the same day it passed the Declaratory Act, saying it could make laws for the colonies \"in all cases whatsoever.\" In 1767 it tried again with the Townshend Acts, which taxed glass, paint, paper, lead and tea. Colonists boycotted again, and in 1770 Parliament repealed every Townshend tax except the one on tea.</p>",
+              "advanced": "<p>Facing an enormous debt, Parliament looked across the Atlantic for revenue. The Sugar Act (1764) tightened the collection of duties on sugar and molasses; the Stamp Act (1765) required a tax stamp on nearly every printed document, from newspapers and court papers to diplomas and playing cards. Unlike earlier trade regulations, these were direct taxes designed purely to raise money.</p><p>Colonial objections rested on principle more than price. Colonists elected their own assemblies but held no seats in Parliament, so they argued that a Parliament they could not vote for had no right to take their property. <strong>Taxation without representation</strong>, being taxed by a government in which you have no elected voice, became the rallying cry. British officials answered that colonists were \"virtually represented\" by members who spoke for the whole empire; colonists rejected the idea.</p><p>Resistance was organized and largely peaceful. Merchants signed non-importation agreements, a <strong>boycott</strong>, meaning an organized refusal to buy certain goods as a form of protest. Women's spinning bees turned homespun cloth into a political statement, and delegates from nine colonies met in the Stamp Act Congress. Economic pressure proved effective: British merchants, losing their colonial customers, lobbied Parliament, which voted in 1766 to <strong>repeal</strong> the Stamp Act, that is, to officially cancel the law.</p><p>Repeal was not surrender. The same day, Parliament passed the Declaratory Act, asserting its authority over the colonies \"in all cases whatsoever.\" The Townshend Acts (1767) taxed imported glass, paint, lead, paper and tea, and colonists responded with a second boycott. In 1770 Parliament repealed every Townshend duty except the tax on tea, kept deliberately to prove that it still had the right to tax.</p>"
+            },
+            "keyIdea": "Colonists objected less to the size of the taxes than to being taxed by a Parliament they could not vote for. Their main weapon was the boycott, and it worked well enough to get two sets of taxes repealed.",
+            "checkIn": {
+              "type": "stop-and-think",
+              "prompt": "Why did boycotts work better than complaints alone?",
+              "hint": "Look at the paragraph about the boycott and the paragraph about the repeal. Start with: \"Boycotts worked because they hurt ___, who then ___.\""
+            },
+            "sourceNote": "The Declaratory Act's words \"in all cases whatsoever\" are quoted from the act of March 18, 1766."
+          },
+          {
+            "id": "boston-to-intolerable",
+            "heading": "Boston and the Intolerable Acts",
+            "vocabTerms": [
+              "Intolerable Acts"
+            ],
+            "content": {
+              "simplified": "<p>Britain sent soldiers to Boston to keep order. Many people in Boston did not want them there. On March 5, 1770, a crowd yelled at soldiers and threw snowballs. The soldiers fired. Five colonists died. One of them was Crispus Attucks, a sailor of African and Native descent. Colonists called it the Boston Massacre.</p><p>In 1773, Parliament passed the Tea Act. It made British tea cheap, but the tea tax was still there. On December 16, 1773, colonists dressed as Mohawk people boarded ships in Boston Harbor. They dumped 342 chests of tea into the water. This was the Boston Tea Party.</p><p>Britain punished Boston hard. In 1774, Parliament passed laws that colonists called the <strong>Intolerable Acts</strong>. They were laws punishing Massachusetts for the Boston Tea Party. Britain called them the Coercive Acts. They closed Boston's port until the tea was paid for. They took power away from the colony's own government. They let soldiers be housed in colonists' buildings.</p><p>Britain wanted to scare the other colonies. It did the opposite. Other colonies sent food to Boston. In September 1774, twelve colonies sent leaders to the First Continental Congress to decide what to do together.</p>",
+              "standard": "<p>In 1768, Britain sent soldiers to Boston to enforce its laws. Tension grew. On March 5, 1770, a crowd taunted a group of soldiers and threw snowballs and rocks. The soldiers fired, and five colonists died, including Crispus Attucks, a sailor of African and Native American descent. Colonial leaders called it the Boston Massacre, and Paul Revere's engraving of the scene spread the story across the colonies.</p><p>In 1773, Parliament passed the Tea Act. It actually made British tea cheaper, but it kept the tax on tea and gave one company control of the trade. On December 16, 1773, colonists disguised as Mohawk men boarded three ships in Boston Harbor and dumped 342 chests of tea into the water. This was the Boston Tea Party.</p><p>Parliament decided to make an example of Massachusetts. In 1774 it passed the Coercive Acts, which colonists named the <strong>Intolerable Acts</strong>: laws punishing Massachusetts for the Boston Tea Party. They closed the port of Boston until the tea was paid for, took away much of the colony's right to govern itself, allowed British officials accused of crimes to be tried in another colony or in Britain, and expanded the quartering of soldiers in colonists' buildings.</p><p>The punishment backfired. Instead of isolating Massachusetts, it pulled the colonies together. Other colonies sent food and supplies to Boston, and in September 1774 twelve colonies sent delegates to the First Continental Congress in Philadelphia. The Congress called for a new boycott of British goods and asked Parliament to reverse the acts.</p>",
+              "advanced": "<p>British troops arrived in Boston in 1768 to enforce imperial law, and the town's resentment simmered. On March 5, 1770, a crowd confronted soldiers outside the Custom House, hurling insults, snowballs and stones. The soldiers fired, killing five colonists, among them Crispus Attucks, a sailor of African and Native American ancestry. Colonial printers branded the event the Boston Massacre, and Paul Revere's widely copied engraving turned a chaotic street fight into a symbol of British cruelty. (John Adams, notably, defended the soldiers in court, and most were acquitted.)</p><p>The Tea Act of 1773 lowered the price of British tea while keeping the tax on it and granting the East India Company control of the trade. Colonists read it as a trick to make them accept Parliament's right to tax. On December 16, 1773, men disguised as Mohawks boarded three ships in Boston Harbor and destroyed 342 chests of tea.</p><p>Parliament responded in 1774 with the Coercive Acts, which colonists renamed the <strong>Intolerable Acts</strong>: a set of laws punishing Massachusetts for the Boston Tea Party. The Boston Port Act closed the harbor until the tea was paid for; the Massachusetts Government Act gutted the colony's charter and town meetings; the Administration of Justice Act let accused royal officials be tried elsewhere; and a new Quartering Act eased the housing of troops in colonial buildings.</p><p>The strategy rested on a miscalculation. Parliament expected the other colonies to abandon Boston; instead, they rallied to it, shipping food and supplies and treating Massachusetts's punishment as a threat to all of them. In September 1774, delegates from twelve colonies gathered at the First Continental Congress, adopted a sweeping boycott, and petitioned the king. A punishment meant to divide the colonies had taught them to act together.</p>"
+            },
+            "keyIdea": "Each British crackdown in Boston drew a bigger colonial response. The Intolerable Acts were meant to isolate Massachusetts, but they pushed the colonies to act together for the first time.",
+            "checkIn": {
+              "type": "stop-and-think",
+              "prompt": "How did punishing Massachusetts change the way the other colonies acted?",
+              "hint": "Look at the last paragraph of this section. Start with: \"Before the Intolerable Acts, the colonies ___. After them, the colonies ___.\""
+            },
+            "sourceNote": "Dates and numbers checked against the Massachusetts Historical Society and the Boston Tea Party Ships & Museum."
+          }
+        ]
+      },
+      {
+        "id": "choosing-sides",
+        "number": 2,
+        "title": "Choosing Sides",
+        "category": "Choosing Sides",
+        "subtitle": "Not every colonist wanted to break with Britain",
+        "icon": "fas fa-people-arrows",
+        "essentialQuestions": [
+          "Why did colonists who lived through the same events choose different sides?",
+          "What did enslaved people and Native nations weigh when they chose a side?",
+          "When does protest become rebellion?"
+        ],
+        "sections": [
+          {
+            "id": "three-choices",
+            "heading": "Three Choices",
+            "vocabTerms": [
+              "Patriot",
+              "Loyalist",
+              "Neutral"
+            ],
+            "content": {
+              "simplified": "<p>By 1775, colonists had to make a hard choice. Should they stay with Britain or break away?</p><p>A <strong>Patriot</strong> was a colonist who wanted the colonies to be free from Britain. Patriots joined protests and later joined the army. Famous Patriots include Samuel Adams and George Washington.</p><p>A <strong>Loyalist</strong> was a colonist who stayed loyal to Britain and the king. Historians think about 1 in 5 colonists were Loyalists. Many Loyalists were government workers, wealthy merchants, or people who thought the king would keep order.</p><p>Many people tried to stay <strong>neutral</strong>. Being neutral means choosing not to take either side in a conflict. Some farmers just wanted to be left alone. Some religious groups, like the Quakers, did not believe in fighting wars.</p><p>Choosing a side was risky. Patriots sometimes attacked Loyalists. After the war, tens of thousands of Loyalists left the colonies for good.</p>",
+              "standard": "<p>The road from protest to war forced every colonist to make a choice, and colonists who had lived through the same events chose very differently.</p><p>A <strong>Patriot</strong> was a colonist who supported cutting all ties with Britain. Patriots led the boycotts, joined groups like the Sons of Liberty and the Daughters of Liberty, and later fought in the Continental Army. Many were merchants, lawyers, farmers and artisans who believed Parliament was taking away rights they had always had.</p><p>A <strong>Loyalist</strong> was a colonist who stayed loyal to Britain and the king during the Revolution. Historians estimate that about 1 in 5 colonists were Loyalists. They included royal officials, many wealthy merchants, some religious leaders, and ordinary people who believed that breaking away from the most powerful empire on Earth would end in disaster.</p><p>Many colonists tried to stay <strong>neutral</strong>, choosing not to take either side in a conflict. Some just wanted to protect their farms and families. Some, like many Quakers, refused to fight in any war for religious reasons. Staying neutral was hard, because both armies demanded food, horses and loyalty.</p><p>Choosing a side could cost you. Patriot crowds sometimes tarred and feathered Loyalists or took their property. By the war's end, somewhere between 60,000 and 80,000 Loyalists had left for Canada, Britain or the Caribbean.</p>",
+              "advanced": "<p>The imperial crisis forced a choice on every colonist, and the choices did not fall neatly along lines of wealth, region or religion. Neighbors, congregations and even families divided.</p><p>A <strong>Patriot</strong> was a colonist who supported a complete break from Britain. Patriots organized the boycotts, filled the ranks of the Sons and Daughters of Liberty and the local committees that enforced them, and eventually fought in the Continental Army. Most believed Parliament was stripping them of rights they held as English subjects.</p><p>A <strong>Loyalist</strong> was a colonist who stayed loyal to Britain and the king during the Revolution. Historians estimate that roughly 15 to 20 percent of white colonists, about 1 in 5, were Loyalists. They included royal officeholders, Anglican clergy, many merchants tied to British trade, and ordinary colonists who feared that rebellion against the world's strongest empire would bring chaos, mob rule, or defeat.</p><p>A large share of the population tried to remain <strong>neutral</strong>, choosing not to take either side in a conflict. Some were simply cautious; others, such as many Quakers, held pacifist convictions. Neutrality was precarious, since both armies requisitioned supplies and both sides treated fence-sitters with suspicion.</p><p>The costs of choosing were real. Patriot committees confiscated Loyalist property and sometimes subjected Loyalists to tarring and feathering. By 1783, an estimated 60,000 to 80,000 Loyalists had fled to Canada, Britain or the Caribbean, many never to return.</p>"
+            },
+            "keyIdea": "Colonists split into Patriots, Loyalists, and people trying to stay neutral. About 1 in 5 colonists stayed loyal to the king, and many others wanted no part of the fight.",
+            "checkIn": {
+              "type": "stop-and-think",
+              "prompt": "Which choice would have been hardest for a family that ran a store in a busy port town, and why?",
+              "hint": "Look at the paragraphs on Loyalists and on staying neutral. Start with: \"The hardest choice would have been ___ because ___.\""
+            },
+            "sourceNote": "Loyalist estimates from the American Battlefield Trust and the Museum of the American Revolution."
+          },
+          {
+            "id": "who-chose-what",
+            "heading": "Choosing for Freedom and for Land",
+            "vocabTerms": [],
+            "content": {
+              "simplified": "<p>Not everyone chose a side for the same reasons. Enslaved people and Native nations had their own choices to make.</p><p>About 1 in 5 people in the colonies was enslaved. In 1775, the British governor of Virginia, Lord Dunmore, promised freedom to enslaved people who ran away from Patriot owners and fought for Britain. Thousands of people escaped to the British side. Other Black men, like Peter Salem in Massachusetts, fought for the Patriots, and some were freed for it.</p><p>Most Native nations sided with Britain. Why? The Proclamation of 1763 had tried to keep colonists off their land. Native leaders thought the colonists were the bigger danger. Joseph Brant, a Mohawk leader, fought for the British. A few nations, like the Oneida, helped the Patriots.</p><p>Each group asked the same question: which side gives us the best chance at freedom and keeping our land?</p>",
+              "standard": "<p>For many people in the colonies, the choice was not about taxes at all. It was about freedom and land.</p><p>About 1 in 5 people living in the thirteen colonies was enslaved. In November 1775, Lord Dunmore, the royal governor of Virginia, promised freedom to enslaved people who escaped from Patriot enslavers and joined the British army. Thousands of people risked their lives to reach British lines. Other Black men chose the Patriot side: Peter Salem, born enslaved in Massachusetts, was freed to enlist and fought at Bunker Hill. For enslaved people, the side that mattered was whichever side offered a real chance at freedom.</p><p>Most Native nations sided with Britain. The British government had drawn the Proclamation Line to limit settlement, while land-hungry colonists kept pushing west. Native leaders judged that a colonial victory would cost them their homelands. The Mohawk leader Joseph Brant (Thayendanegea) led warriors for the British. The Six Nations of the Iroquois Confederacy split apart: the Oneida and Tuscarora supported the Patriots while most of the others fought for Britain.</p><p>These choices show that \"choosing sides\" meant something different depending on who you were and what you stood to lose.</p>",
+              "advanced": "<p>For many inhabitants of the colonies, the dispute over Parliament's taxing power was secondary. What they weighed was freedom, land and survival.</p><p>Roughly one in five people in the thirteen colonies was enslaved, about half a million people. In November 1775, Virginia's royal governor, Lord Dunmore, offered freedom to enslaved people who fled Patriot enslavers and took up arms for the Crown. Thousands escaped to British lines, a choice that exposed the contradiction in Patriot claims to be fighting \"slavery\" to Parliament. Others enlisted with the Patriots, often in exchange for a promise of freedom: Peter Salem, born enslaved in Framingham, was freed to serve and fought at Bunker Hill. Black Americans chose sides strategically, backing whichever side offered a credible route to liberty.</p><p>Native nations made a similar calculation about land. The Crown, however inconsistently, had tried to restrain westward settlement; colonists had pressed against every boundary. Most Native nations concluded that a Patriot victory would cost them their homelands. The Mohawk leader Joseph Brant (Thayendanegea) led Iroquois and Loyalist forces for Britain, while the Oneida and Tuscarora sided with the Patriots, a split that shattered the centuries-old unity of the Iroquois Confederacy.</p><p>Seen from these vantage points, the Revolution was several wars at once, and each group's choice reflected what it stood to gain or lose.</p>"
+            },
+            "keyIdea": "Enslaved people and Native nations chose sides based on which side offered them the best chance at freedom and at keeping their land. For many of them, that side was Britain.",
+            "checkIn": {
+              "type": "stop-and-think",
+              "prompt": "Why did most Native nations side with Britain instead of the colonists?",
+              "hint": "Look at the paragraph about Native nations, and what you learned about the Proclamation of 1763. Start with: \"Most Native nations sided with Britain because ___.\""
+            },
+            "sourceNote": "Dunmore's Proclamation (November 7, 1775), Library of Virginia. Peter Salem and Joseph Brant are both in the Revolutionary Voices reading library."
+          },
+          {
+            "id": "protest-to-rebellion",
+            "heading": "From Protest to Rebellion",
+            "vocabTerms": [
+              "Rebellion"
+            ],
+            "content": {
+              "simplified": "<p>For ten years, colonists protested. They wrote letters, held meetings, and boycotted British goods. They asked the king to change the laws. In 1775, protest turned into fighting.</p><p>On April 19, 1775, British soldiers marched out of Boston to take colonists' guns and gunpowder at Concord. Local militia met them at Lexington and at Concord. Shots were fired. These were the first battles of the war. In June, the two sides fought again at the Battle of Bunker Hill.</p><p>A <strong>rebellion</strong> is open, organized resistance against a government or authority. Protest asks a government to change. Rebellion refuses to obey it. In August 1775, King George III declared that the colonies were in rebellion.</p><p>In January 1776, Thomas Paine wrote a short book called Common Sense. It said the colonies should break away from Britain for good. Thousands of people read it.</p>",
+              "standard": "<p>For more than ten years, colonists protested by writing petitions, holding meetings and boycotting British goods. They still called themselves loyal subjects of the king and asked him to fix Parliament's laws. In 1775, protest turned into war.</p><p>On April 19, 1775, British troops marched from Boston to seize weapons and gunpowder stored at Concord. Colonial militia met them at Lexington and again at Concord, and the British were chased back to Boston under fire. In June, the Battle of Bunker Hill showed that colonial militia could stand up to the British army. A Second Continental Congress met in May and created a Continental Army led by George Washington.</p><p>There is a difference between protest and <strong>rebellion</strong>, which is open, organized resistance against a government or authority. Protest asks a government to change; rebellion refuses to obey it. In July 1775, Congress made one more peaceful offer, the Olive Branch Petition. King George III refused to read it. In August he declared the colonies to be in open rebellion.</p><p>In January 1776, Thomas Paine published Common Sense, a pamphlet arguing in plain language that the colonies should stop asking and break away from Britain completely. It sold tens of thousands of copies in a few months, and it moved many colonists who had been undecided.</p>",
+              "advanced": "<p>For a decade, colonial resistance had stayed within the boundaries of loyal protest: petitions, resolutions, boycotts, and appeals to the king to restrain Parliament. In 1775 those boundaries collapsed.</p><p>On April 19, 1775, British regulars marched from Boston to seize military stores at Concord. Militia confronted them at Lexington and Concord, and the column was harried all the way back to Boston. Two months later, at Bunker Hill, colonial forces inflicted heavy casualties before giving up the ground. The Second Continental Congress, convening in May, organized a Continental Army under George Washington.</p><p>These events mark the shift from protest to <strong>rebellion</strong>: open, organized resistance against a government or authority. Protest petitions those in power; rebellion denies their right to command. Congress still hedged, sending the Olive Branch Petition in July 1775, but George III refused to receive it and in August proclaimed the colonies to be in \"open and avowed rebellion.\"</p><p>Thomas Paine's Common Sense, published in January 1776, gave the moment its argument. Rejecting monarchy itself, Paine insisted that \"there is something very absurd, in supposing a continent to be perpetually governed by an island.\" The pamphlet's plain style and enormous circulation pushed many undecided colonists toward a complete break.</p>"
+            },
+            "keyIdea": "Protest asks a government to change; rebellion refuses to obey it. Lexington and Concord turned ten years of protest into open rebellion, and the king's refusal to compromise pushed colonists toward a full break.",
+            "checkIn": {
+              "type": "stop-and-think",
+              "prompt": "At what moment did the colonists' protest become rebellion?",
+              "hint": "Look at the paragraph that explains the difference between protest and rebellion. Start with: \"I think protest became rebellion when ___, because ___.\""
+            },
+            "sourceNote": "The king's words are from his Proclamation for Suppressing Rebellion and Sedition, August 23, 1775. Paine quoted from Common Sense (1776)."
+          }
+        ]
+      },
+      {
+        "id": "the-declaration",
+        "number": 3,
+        "title": "The Declaration",
+        "category": "The Declaration",
+        "subtitle": "The argument for breaking away, and who it left out",
+        "icon": "fas fa-scroll",
+        "essentialQuestions": [
+          "What did the Declaration of Independence argue, and why did it matter?",
+          "Where does a government's power come from, according to the Declaration?",
+          "Whose rights did the Declaration actually protect?"
+        ],
+        "sections": [
+          {
+            "id": "breaking-away",
+            "heading": "Breaking Away",
+            "vocabTerms": [
+              "Independence"
+            ],
+            "content": {
+              "simplified": "<p>By the summer of 1776, the colonies had been fighting Britain for more than a year. Many leaders now wanted <strong>independence</strong>. Independence means freedom from control by another country. It means a people have the right to govern themselves.</p><p>The Second Continental Congress asked five men to write a statement explaining why the colonies were breaking away. Thomas Jefferson, a young lawyer from Virginia, wrote most of it. Benjamin Franklin and John Adams helped.</p><p>On July 2, 1776, Congress voted for independence. On July 4, 1776, Congress approved the Declaration of Independence. The thirteen colonies now called themselves the United States of America.</p><p>Declaring independence was dangerous. To the king, the signers were traitors. If the war was lost, they could be hanged.</p>",
+              "standard": "<p>By June 1776, the colonies had been at war with Britain for more than a year, and many delegates in Congress believed there was no going back. They wanted <strong>independence</strong>: freedom from control by another country, and the right of a people to govern themselves.</p><p>Congress chose a committee of five to write a statement explaining the decision to the world. Thomas Jefferson, a 33-year-old Virginia lawyer, wrote the first draft, and John Adams and Benjamin Franklin suggested changes. Congress then made its own edits, cutting about a quarter of Jefferson's words.</p><p>On July 2, 1776, Congress voted that the colonies were \"free and independent states.\" On July 4, it approved the final wording of the Declaration of Independence. The thirteen colonies now called themselves the United States of America.</p><p>Signing was an enormous risk. In Britain's eyes, the signers had committed treason, a crime punished by death. They were betting their lives on winning a war against the most powerful empire in the world.</p>",
+              "advanced": "<p>By mid-1776, more than a year of open war had made reconciliation look impossible to a growing majority in Congress. On June 7, Richard Henry Lee of Virginia moved that the colonies \"are, and of right ought to be, free and independent States.\" The question was now <strong>independence</strong>: freedom from control by another country, and the right of a people to govern themselves.</p><p>Congress appointed a committee of five, including John Adams, Benjamin Franklin and Thomas Jefferson, to draft a declaration justifying the break. Jefferson, then 33, wrote the draft; Adams and Franklin revised it, and Congress cut roughly a quarter of the text, including a passage blaming the king for the Atlantic slave trade.</p><p>Congress voted for Lee's resolution on July 2, 1776, and approved the Declaration's final text on July 4. The document was addressed less to the king than to the world: it was an argument meant to win foreign allies and convince undecided colonists.</p><p>The signers understood the stakes. Under British law their act was treason, and Franklin reportedly warned that they must all hang together, or \"most assuredly we shall all hang separately.\"</p>"
+            },
+            "keyIdea": "In July 1776, Congress declared independence and explained why in the Declaration, written mostly by Thomas Jefferson. Signing it was treason in Britain's eyes.",
+            "checkIn": {
+              "type": "stop-and-think",
+              "prompt": "Why would someone risk being hanged to sign the Declaration?",
+              "hint": "Look at the last paragraph, and what you learned about the war in Chapter 2. Start with: \"Someone might risk it because ___.\""
+            },
+            "sourceNote": "Lee Resolution and Declaration quoted from the National Archives. The Franklin line is a well-known story first printed after his death; historians cannot confirm he said it."
+          },
+          {
+            "id": "rights-no-king-can-take",
+            "heading": "Rights No King Can Take",
+            "vocabTerms": [
+              "Unalienable Rights",
+              "Consent of the Governed"
+            ],
+            "content": {
+              "simplified": "<p>The most famous part of the Declaration is near the beginning. It says: \"We hold these truths to be self-evident, that all men are created equal, that they are endowed by their Creator with certain unalienable Rights, that among these are Life, Liberty and the pursuit of Happiness.\"</p><p><strong>Unalienable rights</strong> are rights that belong to every person and cannot be taken away or given up. The Declaration names three: life, liberty, and the pursuit of happiness. You are born with them. A king does not give them to you, so a king cannot take them away.</p><p>Next, the Declaration says governments get \"their just powers from the consent of the governed.\" <strong>Consent of the governed</strong> is the idea that a government's power comes from the agreement of the people it rules.</p><p>So what if a government stops protecting people's rights? The Declaration says the people have the right to change it or get rid of it and make a new one.</p>",
+              "standard": "<p>The Declaration's second paragraph holds its central idea: \"We hold these truths to be self-evident, that all men are created equal, that they are endowed by their Creator with certain unalienable Rights, that among these are Life, Liberty and the pursuit of Happiness.\"</p><p><strong>Unalienable rights</strong> are rights that belong to every person and cannot be taken away or given up. The Declaration names life, liberty and the pursuit of happiness as examples. Because people are born with these rights, they are not gifts from a king, and a king has no power to take them back.</p><p>The Declaration continues: \"to secure these rights, Governments are instituted among Men, deriving their just powers from the consent of the governed.\" <strong>Consent of the governed</strong> is the idea that a government's power comes from the agreement of the people it rules. A government exists to protect people's rights, and it gets its power from them, not the other way around.</p><p>That led to the Declaration's boldest claim. When a government destroys the rights it was created to protect, \"it is the Right of the People to alter or to abolish it, and to institute new Government.\" Jefferson drew these ideas from Enlightenment thinkers like John Locke, who wrote that people are born with natural rights to life, liberty and property.</p>",
+              "advanced": "<p>The philosophical core of the Declaration sits in its second paragraph: \"We hold these truths to be self-evident, that all men are created equal, that they are endowed by their Creator with certain unalienable Rights, that among these are Life, Liberty and the pursuit of Happiness.\"</p><p><strong>Unalienable rights</strong> are rights that belong to every person and cannot be taken away or given up. By grounding them in nature and a Creator rather than in royal grants or acts of Parliament, Jefferson made them prior to any government, and therefore beyond any government's legitimate reach.</p><p>The next clause defines government's purpose and source: \"to secure these rights, Governments are instituted among Men, deriving their just powers from the consent of the governed.\" <strong>Consent of the governed</strong>, the idea that a government's power comes from the agreement of the people it rules, reverses the logic of monarchy, in which authority flows downward from the Crown.</p><p>From those premises the conclusion follows: when a government \"becomes destructive of these ends, it is the Right of the People to alter or to abolish it.\" The argument owes much to John Locke's Second Treatise of Government (1689), which held that people possess natural rights to life, liberty and property and may resist rulers who violate them. Jefferson's substitution of \"the pursuit of Happiness\" for property remains one of the most discussed edits in American history.</p>"
+            },
+            "keyIdea": "The Declaration argues that people are born with rights no government can take away, that governments get their power from the people, and that people may replace a government that destroys their rights.",
+            "checkIn": {
+              "type": "stop-and-think",
+              "prompt": "According to the Declaration, where does a government get its power?",
+              "hint": "Look at the quotation in the third paragraph. Start with: \"According to the Declaration, a government gets its power from ___, which means ___.\""
+            },
+            "sourceNote": "All Declaration quotations from the National Archives transcription."
+          },
+          {
+            "id": "grievances-and-promises",
+            "heading": "Grievances, and Who Was Left Out",
+            "vocabTerms": [
+              "Tyranny"
+            ],
+            "content": {
+              "simplified": "<p>Most of the Declaration is a list of complaints against King George III. These complaints are called grievances. The Declaration says the king wanted \"an absolute Tyranny over these States.\"</p><p><strong>Tyranny</strong> is the cruel and unjust use of power by a ruler or government. The Declaration lists many grievances to prove the king was a tyrant. It says he taxed colonists without their consent, cut off their trade, kept soldiers among them in peacetime, and took away trials by jury.</p><p>But the Declaration's promise had limits. It said \"all men are created equal.\" In 1776, about 1 in 5 people in the colonies was enslaved. Jefferson himself enslaved more than 600 people during his life. Women could not vote. The Declaration called Native people \"merciless Indian Savages.\"</p><p>Later, many people used the Declaration's own words to demand their rights. In 1848, women at Seneca Falls wrote \"all men and women are created equal.\" Frederick Douglass and Martin Luther King Jr. both pointed to its promise.</p>",
+              "standard": "<p>The longest part of the Declaration is a list of 27 grievances, or complaints, against King George III. The list opens by charging that the king's actions all aimed at \"the establishment of an absolute Tyranny over these States.\"</p><p><strong>Tyranny</strong> is the cruel and unjust use of power by a ruler or government. To prove the charge, the Declaration lists what the king had done: \"imposing Taxes on us without our Consent,\" \"cutting off our Trade with all parts of the world,\" keeping standing armies among the colonists in peacetime, and \"depriving us in many cases, of the benefits of Trial by Jury.\" Many of the grievances point straight back to the events of 1763 to 1775.</p><p>The Declaration's promise also had clear limits. It said \"all men are created equal,\" yet about 1 in 5 people in the new nation was enslaved, and Jefferson himself enslaved more than 600 people over his lifetime. Women could not vote. The grievance list even accused the king of turning \"merciless Indian Savages\" against the colonists, describing Native nations as enemies rather than as people with rights.</p><p>Still, the words outlived their authors' limits. In 1848, the women's rights convention at Seneca Falls declared that \"all men and women are created equal.\" Frederick Douglass, Abraham Lincoln and Martin Luther King Jr. all held the nation to the Declaration's promise. Whose rights did it actually protect in 1776? That question is the center of this unit.</p>",
+              "advanced": "<p>Most of the Declaration is an indictment: 27 grievances against George III, introduced by the charge that \"the history of the present King of Great Britain is a history of repeated injuries and usurpations, all having in direct object the establishment of an absolute Tyranny over these States.\"</p><p><strong>Tyranny</strong> is the cruel and unjust use of power by a ruler or government, and the grievances were chosen to prove the king guilty of it: \"imposing Taxes on us without our Consent,\" \"cutting off our Trade with all parts of the world,\" maintaining standing armies in peacetime, and \"depriving us in many cases, of the benefits of Trial by Jury.\" Notably, the document blames the king personally for policies largely made by Parliament, a rhetorical choice that let the colonists cast off the monarch who was their last remaining tie to Britain.</p><p>The Declaration's universal language sat uneasily beside the society that produced it. \"All men are created equal\" was written by a man who enslaved more than 600 people over his lifetime, in a nation where roughly one person in five was enslaved. Women were excluded from political life, and the grievances describe Native nations as \"merciless Indian Savages.\" Congress also struck Jefferson's passage condemning the slave trade, in part to satisfy delegates from South Carolina and Georgia.</p><p>Yet the document's ideals proved more expansive than its authors' practice. The Seneca Falls Declaration of Sentiments (1848) rewrote its opening to read \"all men and women are created equal\"; Frederick Douglass, Abraham Lincoln and Martin Luther King Jr. each appealed to it as a promise not yet kept. Whose rights the Declaration protected in 1776, and whose it left incomplete, is the question this unit asks you to answer.</p>"
+            },
+            "keyIdea": "The Declaration used a list of grievances to prove the king was a tyrant. Its promise that \"all men are created equal\" left out enslaved people, women and Native people, but later Americans used those same words to demand their rights.",
+            "checkIn": {
+              "type": "stop-and-think",
+              "prompt": "Whose rights did the Declaration protect in 1776, and whose did it leave out?",
+              "hint": "Look at the third paragraph of this section. Start with: \"In 1776, the Declaration protected the rights of ___, but it left out ___ because ___.\""
+            },
+            "sourceNote": "Grievances quoted from the National Archives transcription. Jefferson's enslavement figures from Monticello (Thomas Jefferson Foundation)."
+          }
+        ]
+      },
+      {
+        "id": "research-and-voices",
+        "number": 4,
+        "title": "Research & Voices",
+        "category": "Research & Voices",
+        "subtitle": "Finding the people the usual story leaves out, and proving what you say",
+        "icon": "fas fa-microphone",
+        "essentialQuestions": [
+          "Who helped win the Revolution but rarely appears in the usual story?",
+          "How can you tell whether a source deserves your trust?",
+          "How do you turn research into a claim you can defend?"
+        ],
+        "sections": [
+          {
+            "id": "voices-left-out",
+            "heading": "The Voices Left Out",
+            "vocabTerms": [
+              "Overlooked Voices"
+            ],
+            "content": {
+              "simplified": "<p>When people tell the story of the Revolution, they often name the same few men: Washington, Jefferson, Franklin, Adams. But thousands of other people helped.</p><p><strong>Overlooked voices</strong> are people whose real roles in history rarely make it into the usual telling of the story. They were women, Black Americans, Native people, teenagers, and poor farmers and workers.</p><p>James Armistead Lafayette was enslaved in Virginia. In 1781 he spied on the British for the Americans, and his reports helped win the Battle of Yorktown. Afterward, he still had to ask Virginia for his freedom.</p><p>Deborah Sampson was not allowed to be a soldier because she was a woman. In 1782 she cut her hair, dressed as a man, and joined the army as \"Robert Shurtliff.\"</p><p>Phillis Wheatley was kidnapped from West Africa as a child and enslaved in Boston. She became a famous poet. In your podcast, you will bring one of these voices back into the story.</p>",
+              "standard": "<p>The usual story of the Revolution has a small cast: Washington, Jefferson, Franklin, Adams. But the war was fought, supplied, spied on and argued about by hundreds of thousands of people whose names rarely appear in textbooks.</p><p><strong>Overlooked voices</strong> are people whose real roles in history rarely make it into the usual telling of the story. Some were left out because the people who wrote history did not think their stories mattered; others because they left few written records of their own.</p><p>James Armistead Lafayette, enslaved in Virginia, posed as a runaway helping the British in 1781 while secretly reporting their plans to the Marquis de Lafayette. His intelligence helped trap the British at Yorktown, yet after the war he had to petition the Virginia legislature for his own freedom. Deborah Sampson, barred from the army as a woman, enlisted in 1782 as \"Robert Shurtliff\" and served in a Massachusetts light-infantry regiment. Mercy Otis Warren wrote plays and poems mocking British officials and later published one of the first histories of the Revolution.</p><p>Your podcast episode puts one of these people back in the story. The goal is not just to retell their life, but to argue why their part mattered.</p>",
+              "advanced": "<p>Popular memory of the Revolution centers on a few founders, but the war depended on the labor, courage and ideas of hundreds of thousands of people whom that memory has largely erased.</p><p><strong>Overlooked voices</strong> are people whose real roles in history rarely make it into the usual telling of the story. Their absence has causes: historians long focused on political and military elites, and many enslaved, female, Native and poor participants left few records in their own words, so their stories survive in pension files, petitions, account books and the writings of others.</p><p>Consider James Armistead Lafayette, an enslaved Virginian who in 1781 posed as a runaway serving the British while feeding intelligence to the Marquis de Lafayette; his reports contributed to the British defeat at Yorktown, yet he had to petition the Virginia legislature for his freedom. Deborah Sampson enlisted in 1782 as \"Robert Shurtliff\" and served in the 4th Massachusetts Regiment's light infantry. Joseph Brant (Thayendanegea) led Mohawk and Loyalist forces for Britain, and Mercy Otis Warren wielded satire and, later, history as political weapons.</p><p>Recovering such voices does more than add names. It changes the answer to the unit's question, for whom independence was won and for whom it was left incomplete.</p>"
+            },
+            "keyIdea": "The Revolution was won by far more people than the famous founders. Overlooked voices are people whose real roles rarely make it into the usual story, and your podcast brings one of them back.",
+            "checkIn": {
+              "type": "stop-and-think",
+              "prompt": "Why might a person's role in the Revolution be left out of the usual story?",
+              "hint": "Look at the second paragraph of this section. Start with: \"A person might be left out because ___.\""
+            },
+            "sourceNote": "Every figure named here has a leveled reading in the Revolutionary Voices library you will use for research."
+          },
+          {
+            "id": "can-you-trust-it",
+            "heading": "Can You Trust This Source?",
+            "vocabTerms": [
+              "Credibility"
+            ],
+            "content": {
+              "simplified": "<p>When you research, you will find many sources. Some are good. Some are not. You have to check before you trust one.</p><p><strong>Credibility</strong> is how trustworthy and reliable a source of information is. A credible source is one you can believe.</p><p>Ask three questions about every source. Who made it? Do they know the topic? When was it made? A letter from 1776 tells you what someone thought then. Why was it made? Was it made to teach, to sell, or to persuade?</p><p>Good sources include museums, libraries, the National Archives, and history websites run by experts. Be careful with websites where anyone can post.</p><p>One more trick: check a fact in two sources. If two good sources agree, you can trust the fact more.</p>",
+              "standard": "<p>Research means sorting through many sources, and not every source deserves your trust. Before you use a fact in your podcast, you need to check where it came from.</p><p><strong>Credibility</strong> is how trustworthy and reliable a source of information is. A credible source is created by someone who knows the topic, is honest about where its information came from, and has no strong reason to mislead you.</p><p>Ask three questions of every source. Who made it? A historian, a museum or the National Archives is more reliable than an anonymous post. When was it made? A primary source from 1776 shows how people thought at the time, while a secondary source written later can explain the bigger picture. Why was it made? A source created to persuade, sell or entertain may leave out facts that do not help its purpose.</p><p>Finally, corroborate: check important facts in a second source. Stories like Molly Pitcher's mix real events with legend, and the only way to tell them apart is to see what several credible sources agree on.</p>",
+              "advanced": "<p>Every research project is also an exercise in judgment. The internet offers endless claims about the Revolution, and a podcast built on unreliable sources will spread errors with a confident voice.</p><p><strong>Credibility</strong> is how trustworthy and reliable a source of information is. Historians assess it by examining a source's author, date, purpose and evidence, a practice called sourcing.</p><p>Who created it, and what expertise do they have? Institutions such as the National Archives, the Library of Congress and university presses apply editorial standards that an anonymous website does not. When was it created? Primary sources reveal contemporary perspectives but also contemporary biases; secondary sources offer analysis but may simplify. Why was it created? Patriot newspapers, Loyalist pamphlets and modern tourism sites all have purposes that shape what they include and omit.</p><p>Strong researchers also corroborate, testing each important claim against independent sources. Some popular Revolutionary stories, like parts of the Molly Pitcher legend, rest on thin evidence; agreement among credible sources is what separates documented history from a good story.</p>"
+            },
+            "keyIdea": "A source's credibility depends on who made it, when, and why. Check important facts in more than one credible source before you use them.",
+            "checkIn": {
+              "type": "stop-and-think",
+              "prompt": "Which would you trust more for a fact about Deborah Sampson: a museum website or a social media post, and why?",
+              "hint": "Look at the paragraph with the three questions. Start with: \"I would trust ___ more because ___.\""
+            }
+          },
+          {
+            "id": "claim-and-credit",
+            "heading": "Making a Claim and Giving Credit",
+            "vocabTerms": [
+              "Thesis",
+              "Citation"
+            ],
+            "content": {
+              "simplified": "<p>Your podcast needs a main point. A <strong>thesis</strong> is a clear, arguable claim that your evidence works to prove.</p><p>A thesis is not just a fact. \"Deborah Sampson was a soldier\" is a fact. Nobody would argue with it. A thesis says why your person matters: \"Deborah Sampson's service proves that women fought for independence even when the law said they could not.\"</p><p>Every fact in your episode needs to come from a source. A <strong>citation</strong> is a note giving credit to the source your information came from. It tells your listener where to check your facts.</p><p>A citation usually tells who wrote the source, its title, who published it, and the date. Keep track of your sources while you research. Do not wait until the end.</p>",
+              "standard": "<p>Every strong podcast episode is built around one main point. A <strong>thesis</strong> is a clear, arguable claim that your evidence works to prove. It is not a topic (\"my episode is about spies\") and not a plain fact (\"Deborah Sampson was a soldier\"). It is a claim someone could push back on, such as \"James Armistead Lafayette did more to win Yorktown than most generals, yet he had to petition for his own freedom.\"</p><p>A good thesis grows out of your research, not the other way around. Start with what your sources show, notice what surprises you, and then decide what you can argue about your person's significance. Every part of your script should help prove the thesis.</p><p>Because you are making a claim, you must show where your evidence came from. A <strong>citation</strong> is a note giving credit to the source your information came from. It lets listeners check your facts, and it gives credit to the people whose work you used. A citation usually includes the author, the title, the publisher or website, and the date.</p><p>Record each source as you take notes, not at the end. A fact you cannot trace back to a source is a fact you cannot use.</p>",
+              "advanced": "<p>Research becomes history when it takes a position. A <strong>thesis</strong> is a clear, arguable claim that your evidence works to prove. It differs from a topic, which only names a subject, and from a fact, which no reasonable person would dispute. \"Deborah Sampson served in the Continental Army\" is a fact; \"Deborah Sampson's service exposed how the Revolution's promise of liberty excluded the women who fought for it\" is a thesis.</p><p>Effective theses are built inductively: gather evidence, look for patterns and tensions, then frame a claim about significance that your evidence can defend. A thesis should be specific enough to be proven wrong, and every segment of your script should advance or support it.</p><p>Claims require accountability. A <strong>citation</strong> is a note giving credit to the source your information came from. Citations allow your audience to verify your evidence, acknowledge the scholars and archivists whose work you used, and distinguish your analysis from your sources' words. A standard citation records the author, title, publisher or site, and date.</p><p>Track sources continuously while you research. Reconstructing citations afterward invites errors, and an untraceable fact has no place in a sourced argument.</p>"
+            },
+            "keyIdea": "A thesis is an arguable claim about why your person matters, built from your research. Citations show where every fact came from, so your listeners can check your work.",
+            "checkIn": {
+              "type": "stop-and-think",
+              "prompt": "Is \"Phillis Wheatley wrote poems\" a thesis? Why or why not?",
+              "hint": "Look at the examples of a fact and a thesis in the first paragraph. Start with: \"It is / is not a thesis because ___.\""
+            },
+            "sourceNote": "The Armistead example is the one the podcast's script builder uses for a working thesis."
+          }
+        ]
+      }
+    ]
+  }
+}

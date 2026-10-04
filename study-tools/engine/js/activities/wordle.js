@@ -112,6 +112,7 @@ StudyEngine.registerActivity({
         const grid = document.createElement('div');
         grid.className = 'wordle-grid';
         grid.id = 'wordle-grid';
+        grid.style.setProperty('--wordle-n', this._targetWord.length);
 
         for (let r = 0; r < this._maxGuesses; r++) {
             const row = document.createElement('div');

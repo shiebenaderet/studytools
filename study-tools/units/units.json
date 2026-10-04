@@ -7,7 +7,8 @@
             "theme": {
                 "primary": "#7A2A28"
             },
-            "activityCount": 20
+            "activityCount": 21,
+            "opens": "2026-10-04"
         },
         {
             "id": "civil-war",
@@ -16,7 +17,8 @@
             "theme": {
                 "primary": "#2D4A6B"
             },
-            "activityCount": 22
+            "activityCount": 22,
+            "hidden": true
         },
         {
             "id": "westward-expansion",
@@ -26,7 +28,7 @@
                 "primary": "#B5651D"
             },
             "activityCount": 22,
-            "retired": true
+            "hidden": true
         },
         {
             "id": "early-republic",
@@ -36,7 +38,7 @@
                 "primary": "#1669C5"
             },
             "activityCount": 13,
-            "retired": true
+            "hidden": true
         }
     ]
 }

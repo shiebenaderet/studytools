@@ -26,7 +26,8 @@ const MasteryManager = {
         if (!textbookContent || !textbookContent.segments) return null;
         for (var i = 0; i < textbookContent.segments.length; i++) {
             var seg = textbookContent.segments[i];
-            if (seg.title === categoryName) {
+            // Match on the chapter's category; older textbooks without one fall back to title.
+            if ((seg.category || seg.title) === categoryName) {
                 return { segmentId: seg.id, sectionIds: seg.sections.map(function(s) { return s.id; }) };
             }
         }

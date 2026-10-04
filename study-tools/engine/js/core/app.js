@@ -343,6 +343,23 @@ const StudyEngine = {
             return;
         }
 
+        // Students only reach units that are open (units.json `opens` / `hidden`);
+        // the teacher unlock previews anything. See tools/unit-access-core.js.
+        if (typeof UnitAccess !== 'undefined') {
+            try {
+                const listResp = await fetch('../units/units.json');
+                if (listResp.ok) {
+                    const list = (await listResp.json()).units || [];
+                    const teacher = sessionStorage.getItem('teacher-unlock') === 'true';
+                    const access = UnitAccess.canOpen(list, unitId, UnitAccess.today(), teacher);
+                    if (!access.ok) {
+                        this.showUnitClosed(access, UnitAccess.currentUnit(list, UnitAccess.today()));
+                        return;
+                    }
+                }
+            } catch (e) { /* units.json unreachable: fall through and load the unit */ }
+        }
+
         try {
             const response = await fetch(`../units/${unitId}/config.json`);
             if (!response.ok) throw new Error(`Unit "${unitId}" not found`);
@@ -1157,6 +1174,44 @@ const StudyEngine = {
         var factText = typeof fact === 'string' ? fact : fact.text;
         factEl.appendChild(document.createTextNode(factText));
         footer.insertBefore(factEl, footer.firstChild);
+    },
+
+    // A unit students can't open yet (or any more). Points them to the current
+    // unit, and lets the teacher unlock this session to preview it.
+    showUnitClosed(access, current) {
+        const loadingScreen = document.getElementById('loading-screen');
+        if (loadingScreen) loadingScreen.style.display = 'none';
+        const unitTitle = (access.unit && access.unit.title || 'This unit').replace(' Study Tool', '');
+        document.getElementById('title-text').textContent = unitTitle;
+        const headerIcon = document.querySelector('#site-title i');
+        if (headerIcon) headerIcon.className = 'fas fa-lock';
+        document.getElementById('site-subtitle').textContent = access.reason === 'not-open'
+            ? 'This unit isn\u2019t open yet.'
+            : 'This unit isn\u2019t part of this year\u2019s class.';
+        const q = document.getElementById('site-question');
+        if (!q) return;
+        q.textContent = '';
+        if (current) {
+            const a = document.createElement('a');
+            a.href = '?unit=' + encodeURIComponent(current.id);
+            a.textContent = 'Go to the current unit: ' + current.title.replace(' Study Tool', '');
+            a.style.cssText = 'color:inherit;font-weight:600;text-decoration:underline;';
+            q.appendChild(a);
+        }
+        if (typeof CommandPalette !== 'undefined') {
+            const t = document.createElement('button');
+            t.type = 'button';
+            t.textContent = 'Teacher preview';
+            t.style.cssText = 'display:block;margin:12px auto 0;background:none;border:0;color:inherit;opacity:.6;font-size:.8rem;text-decoration:underline;cursor:pointer;';
+            t.addEventListener('click', () => {
+                CommandPalette.promptTeacherUnlock();
+                // promptTeacherUnlock sets the flag on success; reload once it does.
+                const poll = setInterval(() => {
+                    if (sessionStorage.getItem('teacher-unlock') === 'true') { clearInterval(poll); location.reload(); }
+                }, 300);
+            });
+            q.appendChild(t);
+        }
     },
 
     showUnitError(message) {

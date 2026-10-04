@@ -287,6 +287,7 @@
         <a href="dashboard/"><i class="fas fa-chalkboard-teacher"></i> Teacher Dashboard</a>
     </footer>
 
+    <script src="engine/tools/unit-access-core.js"></script>
     <script>
         function showRetiredModal(unit) {
             var overlay = document.createElement('div');
@@ -303,7 +304,7 @@
             modal.appendChild(heading);
 
             var desc = document.createElement('p');
-            desc.textContent = 'This unit is from an earlier part of the year. Your current unit is The Civil War. Head there to study for your upcoming test!';
+            desc.textContent = 'This unit is from an earlier part of the year. Head to your current unit to study for your upcoming test!';
             modal.appendChild(desc);
 
             var btnContainer = document.createElement('div');
@@ -350,9 +351,12 @@
                 const response = await fetch('units/units.json');
                 if (!response.ok) throw new Error('Failed to load units');
                 const data = await response.json();
-                // Hide draft units from the public landing page. They remain
-                // reachable via direct URL (?unit=<id>) for testing.
-                const units = (data.units || []).filter(u => !u.draft);
+                // Students see only the current unit: the open unit with the latest
+                // `opens` date (engine/tools/unit-access-core.js). Last year's units
+                // are `hidden`; future units appear on their `opens` date; drafts
+                // stay reachable by direct URL (?unit=<id>) for testing.
+                const current = UnitAccess.currentUnit(data.units || [], UnitAccess.today());
+                const units = current ? [current] : [];
 
                 container.textContent = '';
 
@@ -365,7 +369,7 @@
                     empty.appendChild(icon);
 
                     const msg = document.createElement('p');
-                    msg.textContent = 'No study units available yet. Check back soon!';
+                    msg.textContent = 'No unit is open right now. Check back when the next unit starts!';
                     empty.appendChild(msg);
 
                     container.appendChild(empty);

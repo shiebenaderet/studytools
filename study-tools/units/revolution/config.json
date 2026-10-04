@@ -14,6 +14,7 @@
   "activities": [
     "learn-mode",
     "flashcards",
+    "textbook",
     "resources",
     "typing-practice",
     "practice-test",
@@ -912,6 +913,32 @@
     {
       "id": "thirteen-colonies-map",
       "maxScore": 13
+    }
+  ],
+  "typingPassages": [
+    {
+      "category": "Causes of Unrest",
+      "title": "A Costly Victory, a Growing Anger",
+      "source": "Written for the Revolution unit",
+      "passage": "In 1763, Britain won the French and Indian War, but winning nearly doubled its debt. To avoid a new war with Native nations, the king issued the Proclamation of 1763, a British order banning colonial settlement west of the Appalachian Mountains. Colonists who had fought for that land were furious. Then Parliament passed new taxes, like the Stamp Act of 1765, to help pay for the war. The colonists had no members in Parliament, so they called this taxation without representation: being taxed by a government in which you have no elected voice. They fought back with a boycott, an organized refusal to buy certain goods as a form of protest. British merchants lost money, and in 1766 Parliament voted to repeal the Stamp Act, which means to officially cancel a law. The calm did not last. After the Boston Tea Party in 1773, Parliament passed the Intolerable Acts, laws punishing Massachusetts that closed the port of Boston and took away much of the colony's self-government. Britain hoped to frighten the other colonies. Instead, they sent food to Boston and met together at the First Continental Congress."
+    },
+    {
+      "category": "Choosing Sides",
+      "title": "Patriot, Loyalist, or Neither",
+      "source": "Written for the Revolution unit",
+      "passage": "As protest turned into war, every colonist faced a choice. A Patriot was a colonist who supported independence from Britain. Patriots led boycotts, joined the Sons and Daughters of Liberty, and later fought in the Continental Army. A Loyalist was a colonist who stayed loyal to Britain and the king during the Revolution. Historians estimate that about one in five colonists were Loyalists. Many other people tried to stay neutral, choosing not to take either side in a conflict. Enslaved people and Native nations weighed the choice differently. In 1775, Lord Dunmore promised freedom to enslaved people who escaped and fought for Britain, and thousands did. Most Native nations sided with Britain, hoping to protect their land from settlers. On April 19, 1775, fighting began at Lexington and Concord. Protest had become rebellion, which is open, organized resistance against a government or authority. Protest asks a government to change. Rebellion refuses to obey it. When the king rejected a final peace offer and declared the colonies in rebellion, many undecided colonists began to think about breaking away for good."
+    },
+    {
+      "category": "The Declaration",
+      "title": "The Words of 1776",
+      "source": "Written for the Revolution unit, quoting the Declaration of Independence",
+      "passage": "On July 4, 1776, Congress approved the Declaration of Independence. Independence means freedom from control by another country, and the right of a people to govern themselves. Thomas Jefferson wrote that all men are created equal and are born with unalienable rights, rights that belong to every person and cannot be taken away or given up. Among these rights are life, liberty, and the pursuit of happiness. The Declaration also said that governments get their just powers from the consent of the governed, the idea that a government's power comes from the agreement of the people it rules. When a government destroys the rights it was created to protect, the people have the right to change it. Most of the Declaration is a list of grievances meant to prove that King George III was guilty of tyranny, the cruel and unjust use of power by a ruler or government. Yet the promise of equality had limits. About one in five people in the new nation was enslaved, women could not vote, and Native nations were described as enemies. Later Americans would use the Declaration's own words to demand the rights it had left out."
+    },
+    {
+      "category": "Research & Voices",
+      "title": "Recovering a Voice",
+      "source": "Written for the Revolution unit",
+      "passage": "The usual story of the Revolution names only a few famous men, but the war depended on many more people. Overlooked voices are people whose real roles in history rarely make it into the usual telling of the story. James Armistead Lafayette, an enslaved man from Virginia, spied on the British in 1781, and his reports helped win the Battle of Yorktown. Deborah Sampson disguised herself as a man named Robert Shurtliff so she could fight. To tell their stories well, a historian needs strong sources. Credibility is how trustworthy and reliable a source of information is. Ask who made a source, when it was made, and why it was made, and check important facts in a second source. Next, build a thesis, a clear, arguable claim that your evidence works to prove. A thesis is not a topic and not a plain fact. It is a claim that someone could argue with. Finally, give credit with a citation, a note giving credit to the source your information came from. Citations let your listeners check your facts and show respect for the people whose work you used."
     }
   ]
 }
