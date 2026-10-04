@@ -30,7 +30,9 @@
     "four-corners",
     "who-am-i",
     "sort-it-out",
-    "quiz-race"
+    "quiz-race",
+    "maps-hub",
+    "thirteen-colonies-map"
   ],
   "categorySchedule": {
     "Causes of Unrest": "2026-10-07",
@@ -892,6 +894,24 @@
         "It left out ___, because ___.",
         "This shows that ___."
       ]
+    }
+  ],
+  "mapsHub": {
+    "title": "Maps",
+    "description": "The map behind the road to revolution. Pick one to explore.",
+    "maps": [
+      {
+        "id": "thirteen-colonies-map",
+        "title": "13 Colonies",
+        "description": "Find each of the thirteen colonies on the map you labeled in Unit 1.",
+        "icon": "fas fa-map"
+      }
+    ]
+  },
+  "leaderboardMapActivities": [
+    {
+      "id": "thirteen-colonies-map",
+      "maxScore": 13
     }
   ]
 }
