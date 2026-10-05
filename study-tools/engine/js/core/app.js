@@ -630,13 +630,18 @@ const StudyEngine = {
                 card.appendChild(cardTitle);
 
                 const desc = document.createElement('p');
-                desc.textContent = MasteryManager.getLockMessage(this.config.unit.id, this.config);
+                desc.textContent = MasteryManager.getLockMessage(this.config.unit.id, this.config, a.id);
                 card.appendChild(desc);
 
                 const btn = document.createElement('button');
                 btn.className = 'card-button';
-                btn.textContent = 'Locked';
-                btn.disabled = true;
+                if (MasteryManager._needsFirstChapter(this.config.unit.id, this.config, a.id) && this.activities.textbook) {
+                    btn.textContent = 'Read Chapter 1';
+                    btn.addEventListener('click', () => this.activateActivity('textbook'));
+                } else {
+                    btn.textContent = 'Locked';
+                    btn.disabled = true;
+                }
                 card.appendChild(btn);
             } else {
                 card.className = 'card activity-card category-' + (a.category || 'games');
@@ -761,7 +766,12 @@ const StudyEngine = {
         if (!activity) return;
 
         if (!MasteryManager.isActivityAccessible(this.config.unit.id, this.config, activityId)) {
-            StudyUtils.showToast(MasteryManager.getLockMessage(this.config.unit.id, this.config), 'info');
+            StudyUtils.showToast(MasteryManager.getLockMessage(this.config.unit.id, this.config, activityId), 'info');
+            // Read before study: take them to the chapter instead of leaving them on a wall
+            if (MasteryManager._needsFirstChapter(this.config.unit.id, this.config, activityId) && this.activities.textbook) {
+                const next = MasteryManager.getNextUnreadChapter(this.config.unit.id, this.config);
+                this.activateActivity('textbook', next ? [next.segmentId] : []);
+            }
             return;
         }
 

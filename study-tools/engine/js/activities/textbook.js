@@ -16,12 +16,42 @@ StudyEngine.registerActivity({
     _vocabMap: null,
     _popupEl: null,
 
-    // Reading level definitions — labels are non-stigmatizing
-    _LEVELS: [
+    // Reading level definitions — labels are non-stigmatizing. A unit's
+    // textbook.json can replace these with its own readingLevels map
+    // (see _applyLevels).
+    _DEFAULT_LEVELS: [
         { id: 'simplified', label: 'Easier', icon: 'fas fa-feather' },
         { id: 'standard', label: 'On Grade', icon: 'fas fa-book' },
         { id: 'advanced', label: 'Challenge', icon: 'fas fa-graduation-cap' }
     ],
+    _LEVELS: null,
+    _defaultLevel: 'standard',
+    _needsLevelPrompt: false,
+
+    // readingLevels: { id: { label, description, icon?, default? }, ... } in order.
+    _applyLevels(readingLevels) {
+        var fallbackIcons = ['fas fa-seedling', 'fas fa-feather', 'fas fa-book', 'fas fa-graduation-cap'];
+        if (readingLevels && typeof readingLevels === 'object' && Object.keys(readingLevels).length) {
+            var ids = Object.keys(readingLevels);
+            var self = this;
+            this._LEVELS = ids.map(function(id, i) {
+                var l = readingLevels[id] || {};
+                if (l['default']) self._defaultLevel = id;
+                return {
+                    id: id,
+                    label: l.label || id,
+                    description: l.description || '',
+                    icon: l.icon || fallbackIcons[Math.min(i + (4 - ids.length), 3)]
+                };
+            });
+            if (!readingLevels[this._defaultLevel]) this._defaultLevel = ids[Math.floor((ids.length - 1) / 2)];
+        } else {
+            this._LEVELS = this._DEFAULT_LEVELS;
+            this._defaultLevel = 'standard';
+        }
+        var known = this._LEVELS.some(function(l) { return l.id === this._readingLevel; }.bind(this));
+        if (!known) this._readingLevel = this._defaultLevel;
+    },
 
     // Allowlist of safe HTML tags for content rendering
     _SAFE_TAGS: ['p', 'br', 'strong', 'em', 'b', 'i', 'u', 'ul', 'ol', 'li', 'h4', 'h5', 'h6', 'span', 'div', 'blockquote', 'hr'],
@@ -41,21 +71,17 @@ StudyEngine.registerActivity({
         }
 
         // Load saved progress
-        this._progress = ProgressManager.getActivityProgress(config.unit.id, 'textbook') || {
-            sectionsRead: {},
-            quickChecks: {},
-            readingLevel: 'standard'
-        };
-        this._readingLevel = this._progress.readingLevel || 'standard';
+        var saved = ProgressManager.getActivityProgress(config.unit.id, 'textbook');
+        this._progress = saved || { sectionsRead: {}, quickChecks: {} };
+        if (!this._progress.sectionsRead) this._progress.sectionsRead = {};
+        if (!this._progress.quickChecks) this._progress.quickChecks = {};
+        this._readingLevel = this._progress.readingLevel || null;
 
         container.textContent = '';
 
-        // Show level prompt for brand-new textbook users
-        var hasExistingProgress = this._progress.sectionsRead && Object.keys(this._progress.sectionsRead).length > 0;
-        if (!this._progress.readingLevel && !hasExistingProgress) {
-            this._showLevelPrompt();
-            return;
-        }
+        // Brand-new textbook users choose a level once the unit's levels are known
+        var hasExistingProgress = Object.keys(this._progress.sectionsRead).length > 0;
+        this._needsLevelPrompt = !this._progress.readingLevel && !hasExistingProgress;
 
         this._loadContent();
     },
@@ -91,6 +117,7 @@ StudyEngine.registerActivity({
             standard: 'Standard 8th grade reading level',
             advanced: 'More detail, deeper analysis'
         };
+        this._LEVELS.forEach(function(l) { if (l.description) descriptions[l.id] = l.description; });
 
         this._LEVELS.forEach(function(level) {
             var card = document.createElement('button');
@@ -116,7 +143,8 @@ StudyEngine.registerActivity({
                 self._progress.readingLevel = level.id;
                 self._saveProgress();
                 container.textContent = '';
-                self._loadContent();
+                self._renderTextbook();
+                self._updateHash();
             });
 
             cards.appendChild(card);
@@ -139,6 +167,7 @@ StudyEngine.registerActivity({
             .then(function(data) {
                 // Support both { segments: [...] } and { textbookContent: { segments: [...] } }
                 self._content = data.textbookContent || data;
+                self._applyLevels(self._content.readingLevels);
                 // Deep link: #textbook/segment-id/section-id
                 var params = self._deepLinkParams || [];
                 var deepLinked = false;
@@ -165,6 +194,11 @@ StudyEngine.registerActivity({
                 if (!deepLinked && self._progress.lastSegment !== undefined) {
                     self._currentSegment = self._progress.lastSegment;
                     self._currentSection = self._progress.lastSection || 0;
+                }
+                if (self._needsLevelPrompt) {
+                    self._needsLevelPrompt = false;
+                    self._showLevelPrompt();
+                    return;
                 }
                 self._renderTextbook();
                 self._updateHash();
@@ -406,6 +440,11 @@ StudyEngine.registerActivity({
         heading.appendChild(linkBtn);
         readingArea.appendChild(heading);
 
+        // Listen (read aloud) control; attached once the section is built below
+        var listenHost = document.createElement('div');
+        listenHost.className = 'tb-listen';
+        readingArea.appendChild(listenHost);
+
         // Section image (figure with caption)
         if (section.image) {
             var figure = document.createElement('figure');
@@ -446,7 +485,7 @@ StudyEngine.registerActivity({
         // Main content — sanitize, then highlight vocab
         var contentDiv = document.createElement('div');
         contentDiv.className = 'tb-content';
-        var rawContent = typeof section.content === 'object' ? (section.content[this._readingLevel] || section.content.standard || '') : (section.content || '');
+        var rawContent = typeof section.content === 'object' ? (section.content[this._readingLevel] || section.content[this._defaultLevel] || section.content.standard || '') : (section.content || '');
         var sanitized = this._sanitizeHTML(rawContent);
         var highlighted = this._highlightVocab(sanitized);
         contentDiv.innerHTML = highlighted;
@@ -528,6 +567,8 @@ StudyEngine.registerActivity({
         if (section.checkIn && section.checkIn.type === 'quick-check') {
             this._renderQuickCheck(readingArea, section, seg.id);
         }
+
+        if (window.ReadAloud) ReadAloud.attach(listenHost, readingArea);
 
         // Mark as Read button
         var isRead = this._isSectionRead(seg.id, section.id);

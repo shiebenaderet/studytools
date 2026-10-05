@@ -7225,3 +7225,24 @@ body.light-mode .feedback-fab {
 .map-still-q { margin-top: 16px; padding: 14px 16px; border-left: 3px solid var(--accent, #B8893B); background: var(--bg-surface); border-radius: 8px; line-height: 1.5; color: var(--text-primary); }
 .map-still-qtext { font-weight: 700; margin-bottom: 6px; }
 .map-still-q strong { color: var(--accent, #B8893B); }
+
+/* ---- Read aloud (textbook Listen) ---- */
+.tb-listen { margin: -4px 0 14px; }
+.ra-bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.ra-controls { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.ra-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    min-height: 36px; padding: 6px 12px;
+    border: 1px solid var(--border, rgba(127,127,127,0.35)); border-radius: 8px;
+    background: var(--bg-card, transparent); color: var(--text-primary);
+    font: inherit; font-size: 0.9em; font-weight: 600; cursor: pointer;
+}
+.ra-btn:hover, .ra-btn:focus-visible { border-color: var(--primary); }
+.ra-listen { background: var(--primary); border-color: var(--primary); color: #fff; }
+.ra-speed {
+    min-height: 36px; padding: 4px 8px; border-radius: 8px;
+    border: 1px solid var(--border, rgba(127,127,127,0.35));
+    background: var(--bg-card, transparent); color: var(--text-primary); font: inherit; font-size: 0.9em;
+}
+::highlight(ra-sent) { background-color: #ffd54f; color: #1a1a1a; }
+.ra-cur { background: #ffd54f; color: #1a1a1a; border-radius: 4px; }

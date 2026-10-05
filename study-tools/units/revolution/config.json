@@ -116,7 +116,7 @@
     {
       "term": "Loyalist",
       "definition": "A colonist who stayed loyal to Britain and the king during the Revolution",
-      "simpleExplanation": "Roughly one in five colonists picked the other side — and they had reasons. Some believed Britain protected them, some depended on British trade, and many enslaved people saw more promise of freedom in British lines than in Patriot ones. History is more complicated than heroes and villains.",
+      "simpleExplanation": "Roughly one in five white colonists picked the other side — and they had reasons. Some believed Britain protected them, some depended on British trade, and many enslaved people saw more promise of freedom in British lines than in Patriot ones. History is more complicated than heroes and villains.",
       "example": "Thousands of Loyalists fled to Canada after the war, losing their homes and property",
       "category": "Choosing Sides",
       "typingSnippet": "A Loyalist was a colonist who stayed loyal to Britain and the king. Loyalists had many motives, from business ties to a genuine belief that British rule was best. Understanding their perspective is essential to telling the full story of the Revolution.",
@@ -247,7 +247,7 @@
       "term": "Thesis",
       "definition": "A clear, arguable claim that your evidence works to prove",
       "simpleExplanation": "The backbone of your podcast episode. Not a fact ('Deborah Sampson was a soldier') and not a topic ('my episode is about spies') — a claim someone could push back on, that every source you cite helps you defend.",
-      "example": "A strong thesis: 'James Armistead Lafayette did more to win Yorktown than most generals — yet he had to petition for his own freedom'",
+      "example": "A strong thesis: 'James Armistead Lafayette’s spying helped trap the British at Yorktown, yet the nation he helped free made him petition for his own freedom'",
       "category": "Research & Voices",
       "typingSnippet": "A thesis is a clear, arguable claim that your evidence works to prove. It is not a fact or a topic, but a position someone could disagree with. Every source in your podcast episode should help defend your thesis.",
       "tier": "must-know",
@@ -292,7 +292,7 @@
       "term": "Primary Source",
       "definition": "A record created by someone who was there at the time, such as a letter, diary, newspaper, or picture",
       "simpleExplanation": "It's evidence straight from the time. George Washington's 1767 letter about the Proclamation is a primary source because he wrote it while it was happening.",
-      "example": "Paul Revere's 1770 engraving of the Boston Massacre is a primary source",
+      "example": "A witness's testimony at the 1770 Boston Massacre trial is a primary source",
       "category": "Research & Voices",
       "typingSnippet": "A primary source is a record created by someone who was there at the time, such as a letter, diary, newspaper, or picture. Primary sources show what people thought and saw in their own moment, but they also show that person's point of view.",
       "wikiUrl": "https://en.wikipedia.org/wiki/Primary_source",
@@ -333,7 +333,7 @@
     {
       "title": "Townshend Acts",
       "year": "1767",
-      "description": "New taxes on glass, paint, lead, paper and tea bring a second boycott. In 1770 Parliament repeals all of them except the tax on tea",
+      "description": "New taxes on glass, paint, lead, paper and tea bring a second boycott. In 1770 Parliament repeals all of the new taxes except the tax on tea",
       "id": 4
     },
     {
@@ -445,7 +445,7 @@
       "category": "The Declaration"
     },
     {
-      "sentence": "Rights that belong to every person and cannot be taken away are _____.",
+      "sentence": "The Declaration's word for rights that belong to every person and cannot be taken away is _____.",
       "answer": "Unalienable Rights",
       "category": "The Declaration"
     },
@@ -532,7 +532,7 @@
         "Nothing at all, because the war ended in a tie"
       ],
       "correct": 0,
-      "explanation": "France gave Canada and its land east of the Mississippi to Britain, and Louisiana to Spain.",
+      "explanation": "France gave Canada and its land east of the Mississippi to Britain. (It had already handed Louisiana to Spain in a separate deal.)",
       "topic": "Causes of Unrest"
     },
     {
@@ -724,7 +724,7 @@
         "A British soldier who fought in the colonies"
       ],
       "correct": 2,
-      "explanation": "Patriots supported independence. About one in five colonists stayed loyal to the king instead.",
+      "explanation": "Patriots supported independence. About one in five white colonists stayed loyal to the king instead.",
       "topic": "Choosing Sides"
     },
     {
@@ -862,13 +862,13 @@
     {
       "question": "When Jefferson wrote \"all men are created equal,\" whose rights were left out?",
       "options": [
-        "Poor white men who owned no land",
+        "Members of the Continental Congress",
         "Loyalists who had left for Canada",
         "British soldiers serving in the colonies",
         "Women, enslaved people and Native nations"
       ],
       "correct": 3,
-      "explanation": "Women could not vote, enslaved people had no liberty at all, and the Declaration itself calls Native people \"merciless Indian Savages.\"",
+      "explanation": "Women almost everywhere could not vote, enslaved people had no liberty at all, and the Declaration itself calls Native people \"merciless Indian Savages.\"",
       "topic": "The Declaration"
     },
     {
@@ -1078,13 +1078,13 @@
     {
       "question": "Which of these is a primary source about the Boston Massacre?",
       "options": [
-        "Paul Revere's engraving of the event, made in 1770",
+        "A witness's testimony at the soldiers' trial in 1770",
         "A textbook chapter about the event written in 2015",
         "A museum website article about the event",
         "A documentary about the event made in 2020"
       ],
       "correct": 0,
-      "explanation": "A primary source was made by someone who was there at the time.",
+      "explanation": "The witness was there and spoke at the time, so the testimony is a primary source.",
       "topic": "Research & Voices"
     },
     {
@@ -1268,7 +1268,7 @@
         "Overlooked Voices"
       ],
       "rubric": "Strong response says whose rights were protected (mostly white men who owned property), names at least two groups left out with a specific example for each, and explains the contradiction between the words and the reality.",
-      "exemplar": "In 1776, the Declaration's rights mostly protected white men who owned property. They could vote and take part in the new government. Enslaved people were left out completely: they had no liberty, and Jefferson, who wrote \"all men are created equal,\" enslaved people himself. Women could not vote or hold office. The Declaration even calls Native people \"merciless Indian Savages.\" This shows the Declaration's promise of unalienable rights was not yet true for most people in America.",
+      "exemplar": "In 1776, the Declaration's rights mostly protected white men who owned property. They could vote and take part in the new government. Enslaved people were left out completely: they had no liberty, and Jefferson, who wrote \"all men are created equal,\" enslaved people himself. Women almost everywhere could not vote or hold office. The Declaration even calls Native people \"merciless Indian Savages.\" This shows the Declaration's promise of unalienable rights was not yet true for most people in America.",
       "plan": [
         {
           "role": "claim",
@@ -1280,7 +1280,7 @@
         },
         {
           "role": "evidence",
-          "text": "Women could not vote or hold office, and the Declaration calls Native people \"merciless Indian Savages.\""
+          "text": "Women almost everywhere could not vote or hold office, and the Declaration calls Native people \"merciless Indian Savages.\""
         },
         {
           "role": "reasoning",
@@ -1341,7 +1341,7 @@
         "Citation"
       ],
       "rubric": "Strong response makes an arguable claim about the person's significance (a thesis, not a fact), supports it with at least two specific facts from credible sources, and explains why the usual story leaves the person out.",
-      "exemplar": "James Armistead Lafayette deserves a place in the story because his spying helped win the war's final battle, yet the country he helped free did not free him. In 1781 he posed as a runaway helping the British while reporting their plans to the Marquis de Lafayette, and his reports helped trap the British at Yorktown. After the war, he had to petition the Virginia legislature for his own freedom. His story shows that the Revolution was won by people whose liberty it did not promise.",
+      "exemplar": "James Armistead Lafayette deserves a place in the story because his spying helped win the war's last major battle, yet the country he helped free did not free him. In 1781 he posed as a runaway helping the British while reporting their plans to the Marquis de Lafayette, and his reports helped trap the British at Yorktown. After the war, he had to petition the Virginia legislature for his own freedom. His story shows that the Revolution was won by people whose liberty it did not promise.",
       "plan": [
         {
           "role": "claim",
@@ -1432,13 +1432,13 @@
       "category": "Choosing Sides",
       "title": "Patriot, Loyalist, or Neither",
       "source": "Written for the Revolution unit",
-      "passage": "As protest turned into war, every colonist faced a choice. A Patriot was a colonist who supported independence from Britain. Patriots led boycotts, joined the Sons and Daughters of Liberty, and later fought in the Continental Army. A Loyalist was a colonist who stayed loyal to Britain and the king during the Revolution. Historians estimate that about one in five colonists were Loyalists. Many other people tried to stay neutral, choosing not to take either side in a conflict. Enslaved people and Native nations weighed the choice differently. In 1775, Lord Dunmore promised freedom to enslaved people who escaped and fought for Britain, and thousands did. Most Native nations sided with Britain, hoping to protect their land from settlers. On April 19, 1775, fighting began at Lexington and Concord. Protest had become rebellion, which is open, organized resistance against a government or authority. Protest asks a government to change. Rebellion refuses to obey it. When the king rejected a final peace offer and declared the colonies in rebellion, many undecided colonists began to think about breaking away for good."
+      "passage": "As protest turned into war, every colonist faced a choice. A Patriot was a colonist who supported independence from Britain. Patriots led boycotts, joined the Sons and Daughters of Liberty, and later fought in the Continental Army. A Loyalist was a colonist who stayed loyal to Britain and the king during the Revolution. Historians estimate that about one in five white colonists were Loyalists. Many other people tried to stay neutral, choosing not to take either side in a conflict. Enslaved people and Native nations weighed the choice differently. In 1775, Lord Dunmore promised freedom to enslaved people who escaped and fought for Britain, and thousands did. Most Native nations sided with Britain, hoping to protect their land from settlers. On April 19, 1775, fighting began at Lexington and Concord. Protest had become rebellion, which is open, organized resistance against a government or authority. Protest asks a government to change. Rebellion refuses to obey it. When the king rejected a final peace offer and declared the colonies in rebellion, many undecided colonists began to think about breaking away for good."
     },
     {
       "category": "The Declaration",
       "title": "The Words of 1776",
       "source": "Written for the Revolution unit, quoting the Declaration of Independence",
-      "passage": "On July 4, 1776, Congress approved the Declaration of Independence. Independence means freedom from control by another country, and the right of a people to govern themselves. Thomas Jefferson wrote that all men are created equal and are born with unalienable rights, rights that belong to every person and cannot be taken away or given up. Among these rights are life, liberty, and the pursuit of happiness. The Declaration also said that governments get their just powers from the consent of the governed, the idea that a government's power comes from the agreement of the people it rules. When a government destroys the rights it was created to protect, the people have the right to change it. Most of the Declaration is a list of grievances meant to prove that King George III was guilty of tyranny, the cruel and unjust use of power by a ruler or government. Yet the promise of equality had limits. About one in five people in the new nation was enslaved, women could not vote, and Native nations were described as enemies. Later Americans would use the Declaration's own words to demand the rights it had left out."
+      "passage": "On July 4, 1776, Congress approved the Declaration of Independence. Independence means freedom from control by another country, and the right of a people to govern themselves. Thomas Jefferson wrote that all men are created equal and are born with unalienable rights, rights that belong to every person and cannot be taken away or given up. Among these rights are life, liberty, and the pursuit of happiness. The Declaration also said that governments get their just powers from the consent of the governed, the idea that a government's power comes from the agreement of the people it rules. When a government destroys the rights it was created to protect, the people have the right to change it. Most of the Declaration is a list of grievances meant to prove that King George III was guilty of tyranny, the cruel and unjust use of power by a ruler or government. Yet the promise of equality had limits. About one in five people in the new nation was enslaved, women almost everywhere could not vote, and Native nations were described as enemies. Later Americans would use the Declaration's own words to demand the rights it had left out."
     },
     {
       "category": "Research & Voices",
@@ -1466,7 +1466,7 @@
       {
         "text": "These are the times that try men's souls.",
         "author": "Thomas Paine",
-        "source": "The American Crisis, December 23, 1776",
+        "source": "The American Crisis, December 1776",
         "sourceUrl": "https://en.wikiquote.org/wiki/Thomas_Paine",
         "portrait": "images/portraits/thomas-paine.jpg"
       },

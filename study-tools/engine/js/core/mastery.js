@@ -149,6 +149,16 @@ const MasteryManager = {
      * This is mastery-only gating used by most activities.
      */
     getUnlockedCategories(unitId, config) {
+        // Read > Study: a category's terms reach every activity only once its
+        // chapter is read (units without a textbook are unaffected).
+        return this.getReadUnlockedCategories(unitId, config);
+    },
+
+    /**
+     * Categories earned by mastery or date, whether or not the chapter is read.
+     * Used to tell students which chapter to read next.
+     */
+    getEarnedCategories(unitId, config) {
         const categories = this.getCategories(config);
         if (categories.length === 0) return [];
         if (sessionStorage.getItem('teacher-unlock') === 'true') return categories.slice();
@@ -384,9 +394,11 @@ const MasteryManager = {
         // unlocks. The activities themselves still surface category-locked
         // content visually inside, but the home card is no longer a wall.
         const alwaysAccessible = ['flashcards', 'typing-practice', 'map-quiz', 'maps-hub', 'civil-war-map', 'underground-railroad-map', 'fifty-states-map', 'thirteen-colonies-map', 'textbook', 'sift-practice', 'learn-mode', 'practice-test', 'short-answer', 'response-builder'];
-        if (alwaysAccessible.includes(activityId)) return true;
         const categories = this.getCategories(config);
         if (categories.length === 0) return true;
+        // Read before study: nothing but the textbook opens until Chapter 1 is read.
+        if (this._needsFirstChapter(unitId, config, activityId)) return false;
+        if (alwaysAccessible.includes(activityId)) return true;
         return this.isCategoryMastered(unitId, config, categories[0])
             || this.isCategoryDateUnlocked(config, categories[0]);
     },
@@ -396,9 +408,23 @@ const MasteryManager = {
      * Skips categories that are already date-unlocked, since those are not the
      * gate the student needs to clear.
      */
-    getLockMessage(unitId, config) {
+    _READ_EXEMPT: ['textbook', 'resources'],
+
+    _needsFirstChapter(unitId, config, activityId) {
+        if (this._READ_EXEMPT.indexOf(activityId) !== -1) return false;
+        const categories = this.getCategories(config);
+        if (categories.length === 0) return false;
+        const textbook = this._textbookCache[unitId];
+        if (!textbook) return false;
+        return !this.isChapterRead(unitId, textbook, categories[0]);
+    },
+
+    getLockMessage(unitId, config, activityId) {
         const categories = this.getCategories(config);
         if (categories.length === 0) return '';
+        if (this._needsFirstChapter(unitId, config, activityId || '')) {
+            return 'Read Chapter 1, "' + categories[0] + '," in the textbook first. Then this unlocks!';
+        }
         // Find the first category that isn't mastered and isn't date-unlocked
         for (const cat of categories) {
             if (!this.isCategoryMastered(unitId, config, cat)

@@ -158,7 +158,7 @@ StudyEngine.registerActivity({
         // --- Read-gate banner ---
         // If the student has earned categories (via mastery or date floor) that
         // flashcards still hides because the chapter is unread, surface that here.
-        const earnedCats = MasteryManager.getUnlockedCategories(config.unit.id, config);
+        const earnedCats = MasteryManager.getEarnedCategories(config.unit.id, config);
         const blockedCats = earnedCats.filter(function(c) { return !categories.includes(c); });
         if (blockedCats.length > 0) {
             const nextChapter = MasteryManager.getNextUnreadChapter(config.unit.id, config);

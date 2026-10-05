@@ -1,4 +1,4 @@
-const CACHE_NAME = 'studytools-v80';
+const CACHE_NAME = 'studytools-v81';
 const APP_SHELL = [
     './',
     'index.html',
@@ -10,6 +10,7 @@ const APP_SHELL = [
     'tools/unit-access-core.js',
     'js/core/mastery.js',
     'js/core/command-palette.js',
+    'js/core/read-aloud.js',
     'js/core/supabase-config.js',
     'js/core/app.js',
     'tools/tools.js',

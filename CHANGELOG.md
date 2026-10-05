@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.53.0] - 2026-10-04
+
+### Added
+- **Reading Levels 0-3 in the textbook**, matching the class readings. A unit's `textbook.json` now sets its own levels (`readingLevels`, in order, with `label`, `description`, optional `icon` and `default`); units without one keep Easier / On Grade / Challenge. Revolution adds new Level 0 text (grades 2-3) for all 12 sections and relabels the others Level 1-3, keeping the old keys so saved choices still work. Level 2 is the default.
+- **Listen button** on every textbook section (`js/core/read-aloud.js`, ported from the ams readings' reader-tools): reads the section one sentence at a time with the sentence highlighted, with pause/resume, back/next sentence, stop, and three speeds.
+
+### Changed
+- **Read before study.** Nothing but the textbook and resources opens until Chapter 1 is read; a locked card says so and its button opens the chapter. After that, a category's terms reach every activity only once its own chapter is read (this was flashcards only). `getUnlockedCategories` now includes the reading check; `getEarnedCategories` is the old mastery/date-only list. Teacher unlock still bypasses it.
+- The reading-level prompt now actually appears for students opening the textbook for the first time (default progress already carried a level, so it never showed).
+
+### Fixed (Revolution content accuracy pass)
+- Louisiana went to Spain in a separate 1762 deal, not the 1763 Treaty of Paris; the Sugar Act was not a direct tax; spinning bees moved to the Townshend boycott; Loyalists are "1 in 5 white colonists"; "women almost everywhere could not vote" (New Jersey let some vote); "no taxation without representation" no longer quoted as a chant.
+- Primary-source example and question use a witness's trial testimony instead of Revere's engraving (Revere copied Pelham and was not a known eyewitness).
+- Jefferson "left out" question had two defensible answers; Yorktown is the "last major battle"; Townshend timeline entry says the taxes were repealed; The American Crisis dated December 1776; the Unalienable Rights fill-in points at the Declaration's word; model thesis made provable.
+
 ## [8.52.0] - 2026-10-04
 
 ### Changed
