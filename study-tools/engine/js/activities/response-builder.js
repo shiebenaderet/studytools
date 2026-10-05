@@ -159,6 +159,12 @@ StudyEngine.registerActivity({
         var qBox = document.createElement('div'); qBox.className = 'rb-unpack-q';
         qBox.textContent = this._question.question;
         body.appendChild(qBox);
+        if (this._question.lookAt) {
+            var look = document.createElement('div'); look.className = 'sa-look-at';
+            var ll = document.createElement('strong'); ll.textContent = 'Look at: ';
+            look.appendChild(ll); look.appendChild(document.createTextNode(this._question.lookAt));
+            body.appendChild(look);
+        }
         var label = document.createElement('label'); label.className = 'rb-restate-label';
         label.textContent = 'In your own words, what is this question asking you to do?';
         body.appendChild(label);

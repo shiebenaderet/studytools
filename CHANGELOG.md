@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.51.0] - 2026-10-04
+
+### Added
+- **Revolution unit, filled out.** Six side terms (Minutemen, Escalation, Grievance, Treason, Primary Source, Secondary Source) worked into the reading; 20 more practice questions (53); two more short-answer prompts (6); 12 Learn Mode reflection prompts; header quotes with portraits and footer fun facts; Wikipedia and Simple English links on every term; flashcard pictures for 15 terms (public domain / CC0, `units/revolution/images/CREDITS.md`); Practice cards for the colonial-unrest activity and the podcast script builder; timeline adds the Townshend Acts, drops Shays' Rebellion, and dates same-year events by month.
+- **Short answer "Look at" line.** A `lookAt` field on a short-answer question prints under the question (and in the Response Builder): where to find the evidence.
+- **Still maps in the Maps hub.** A `mapsHub.maps` entry with an `image` opens the picture, caption and credit, with an optional question, Look at and Start with, instead of launching a map activity. Revolution adds the 1754, 1763 and Proclamation Line maps.
+- Service worker cache v79.
+
 ## [8.50.0] - 2026-10-04
 
 ### Fixed

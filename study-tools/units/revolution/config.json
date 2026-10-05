@@ -49,7 +49,10 @@
       "example": "A Virginia farmer hoping to claim land in the Ohio Valley found the Proclamation of 1763 had slammed the door shut",
       "category": "Causes of Unrest",
       "typingSnippet": "The Proclamation of 1763 banned colonial settlement west of the Appalachian Mountains. Britain hoped to prevent conflict with Native nations after the French and Indian War. Colonists who wanted that land saw the proclamation as the first sign that Britain would put its own interests ahead of theirs.",
-      "tier": "encounter"
+      "tier": "encounter",
+      "wikiUrl": "https://en.wikipedia.org/wiki/Royal_Proclamation_of_1763",
+      "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Royal_Proclamation_of_1763",
+      "imageUrl": "images/vocab/proclamation-of-1763.jpg"
     },
     {
       "term": "Taxation without Representation",
@@ -58,7 +61,10 @@
       "example": "The Stamp Act taxed newspapers and legal papers, and colonists protested that no one in Parliament represented them",
       "category": "Causes of Unrest",
       "typingSnippet": "Taxation without representation means being taxed by a government in which you have no elected voice. Colonists paid taxes passed by a Parliament where they held no seats at all. Their rallying cry was less about the money and more about the principle of having a say.",
-      "tier": "must-know"
+      "tier": "must-know",
+      "wikiUrl": "https://en.wikipedia.org/wiki/No_taxation_without_representation",
+      "simpleWikiUrl": "https://en.wikipedia.org/wiki/No_taxation_without_representation",
+      "imageUrl": "images/vocab/taxation-without-representation.jpg"
     },
     {
       "term": "Boycott",
@@ -67,7 +73,10 @@
       "example": "Colonial women organized boycotts of British cloth, spinning their own homespun fabric instead",
       "category": "Causes of Unrest",
       "typingSnippet": "A boycott is an organized refusal to buy certain goods as a form of protest. Colonists boycotted British products to pressure Parliament into repealing unpopular taxes. Because everyone shops, boycotts let ordinary people, including women and children, take part in the resistance.",
-      "tier": "must-know"
+      "tier": "must-know",
+      "wikiUrl": "https://en.wikipedia.org/wiki/Boycott",
+      "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Boycott",
+      "imageUrl": "images/vocab/boycott.jpg"
     },
     {
       "term": "Repeal",
@@ -76,7 +85,10 @@
       "example": "After months of colonial boycotts, Parliament repealed the Stamp Act in 1766",
       "category": "Causes of Unrest",
       "typingSnippet": "To repeal a law is to officially cancel it. Parliament repealed the Stamp Act after colonial boycotts hurt British merchants. Every repeal proved to colonists that organized resistance could actually change what a government did.",
-      "tier": "bonus"
+      "tier": "bonus",
+      "wikiUrl": "https://en.wikipedia.org/wiki/Stamp_Act_1765",
+      "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Stamp_Act_1765",
+      "imageUrl": "images/vocab/repeal.jpg"
     },
     {
       "term": "Intolerable Acts",
@@ -85,7 +97,9 @@
       "example": "When the Intolerable Acts closed Boston Harbor, other colonies sent food and supplies overland to the city",
       "category": "Causes of Unrest",
       "typingSnippet": "The Intolerable Acts were the 1774 laws that punished Massachusetts for the Boston Tea Party. They closed Boston Harbor, shut down local government, and forced colonists to quarter British troops. Instead of isolating Boston, the acts united the colonies against Britain.",
-      "tier": "must-know"
+      "tier": "must-know",
+      "wikiUrl": "https://en.wikipedia.org/wiki/Intolerable_Acts",
+      "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Intolerable_Acts"
     },
     {
       "term": "Patriot",
@@ -94,7 +108,10 @@
       "example": "Mercy Otis Warren used her pen as a Patriot, writing plays that mocked British officials",
       "category": "Choosing Sides",
       "typingSnippet": "A Patriot was a colonist who supported independence from Britain. Patriots came from every colony and every walk of life, from wealthy lawyers to poor farmers. Declaring yourself a Patriot was a serious risk, because if the Revolution failed it would be treason.",
-      "tier": "must-know"
+      "tier": "must-know",
+      "wikiUrl": "https://en.wikipedia.org/wiki/Patriot_(American_Revolution)",
+      "simpleWikiUrl": "https://en.wikipedia.org/wiki/Patriot_(American_Revolution)",
+      "imageUrl": "images/vocab/patriot.jpg"
     },
     {
       "term": "Loyalist",
@@ -103,7 +120,10 @@
       "example": "Thousands of Loyalists fled to Canada after the war, losing their homes and property",
       "category": "Choosing Sides",
       "typingSnippet": "A Loyalist was a colonist who stayed loyal to Britain and the king. Loyalists had many motives, from business ties to a genuine belief that British rule was best. Understanding their perspective is essential to telling the full story of the Revolution.",
-      "tier": "must-know"
+      "tier": "must-know",
+      "wikiUrl": "https://en.wikipedia.org/wiki/Loyalist_(American_Revolution)",
+      "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Loyalist_(American_Revolution)",
+      "imageUrl": "images/vocab/loyalist.jpg"
     },
     {
       "term": "Neutral",
@@ -112,7 +132,9 @@
       "example": "Many Quakers in Pennsylvania stayed neutral because their religious beliefs opposed all war",
       "category": "Choosing Sides",
       "typingSnippet": "To be neutral is to take neither side in a conflict. Many colonists tried to stay neutral during the Revolution, whether from religious belief or self-preservation. As the war spread, staying out of it became nearly impossible.",
-      "tier": "encounter"
+      "tier": "encounter",
+      "wikiUrl": "https://en.wikipedia.org/wiki/Neutrality_(philosophy)",
+      "simpleWikiUrl": "https://en.wikipedia.org/wiki/Neutrality_(philosophy)"
     },
     {
       "term": "Rebellion",
@@ -121,6 +143,33 @@
       "example": "King George declared the colonies in open rebellion in 1775, months before the Declaration of Independence",
       "category": "Choosing Sides",
       "typingSnippet": "A rebellion is open, organized resistance against a government or authority. Britain saw the colonists as rebels, while Patriots saw themselves as defenders of their rights. The same events can look like crime or courage depending on whose perspective you take.",
+      "tier": "encounter",
+      "wikiUrl": "https://en.wikipedia.org/wiki/Rebellion",
+      "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Rebellion",
+      "imageUrl": "images/vocab/rebellion.jpg"
+    },
+    {
+      "term": "Minutemen",
+      "definition": "Colonial militia members trained to be ready to fight at a minute's notice",
+      "simpleExplanation": "Think of a volunteer fire crew: ordinary townspeople, farmers, blacksmiths and shopkeepers, who kept their muskets by the door and promised to turn out fast when the alarm came. At Lexington in April 1775, minutemen were the first to face British soldiers.",
+      "example": "When riders spread the alarm on the night of April 18, 1775, minutemen gathered on Lexington Green before dawn",
+      "category": "Choosing Sides",
+      "typingSnippet": "Minutemen were colonial militia members trained to be ready to fight at a minute's notice. They were farmers and craftsmen, not full-time soldiers. On April 19, 1775, minutemen faced British troops at Lexington and Concord, and the Revolutionary War began.",
+      "wikiUrl": "https://en.wikipedia.org/wiki/Minutemen",
+      "simpleWikiUrl": "https://en.wikipedia.org/wiki/Minutemen",
+      "imageUrl": "images/vocab/minutemen.jpg",
+      "tier": "encounter"
+    },
+    {
+      "term": "Escalation",
+      "definition": "When a conflict grows step by step, each side's response making the next fight bigger",
+      "simpleExplanation": "Picture an argument where every reply is a little louder than the last, until it turns into a shoving match. From 1763 to 1775, each British law and each colonial protest pushed the other side to go further.",
+      "example": "The Boston Tea Party led to the Intolerable Acts, which led colonies to unite, which led to fighting at Lexington: escalation",
+      "category": "Choosing Sides",
+      "typingSnippet": "Escalation is when a conflict grows step by step, each side's response making the next fight bigger. After 1763, every new British law brought a bigger protest, and every protest brought a harsher law, until the colonies and Britain were at war.",
+      "wikiUrl": "https://en.wikipedia.org/wiki/American_Revolution",
+      "simpleWikiUrl": "https://simple.wikipedia.org/wiki/American_Revolution",
+      "imageUrl": "images/vocab/escalation.jpg",
       "tier": "encounter"
     },
     {
@@ -130,7 +179,10 @@
       "example": "The colonies declared independence in July 1776, but Britain did not recognize it until the Treaty of Paris in 1783",
       "category": "The Declaration",
       "typingSnippet": "Independence is freedom from control by another country and the right of a people to govern themselves. The colonies declared independence in 1776 and fought seven more years to win it. Our driving question asks what made it worth fighting for, and for whom it was left incomplete.",
-      "tier": "must-know"
+      "tier": "must-know",
+      "wikiUrl": "https://en.wikipedia.org/wiki/United_States_Declaration_of_Independence",
+      "simpleWikiUrl": "https://simple.wikipedia.org/wiki/United_States_Declaration_of_Independence",
+      "imageUrl": "images/vocab/independence.jpg"
     },
     {
       "term": "Unalienable Rights",
@@ -139,7 +191,10 @@
       "example": "Jefferson wrote that all people are endowed with unalienable rights, even as he enslaved more than 600 people in his lifetime",
       "category": "The Declaration",
       "typingSnippet": "Unalienable rights are rights that belong to every person and cannot be taken away or given up. The Declaration of Independence names life, liberty, and the pursuit of happiness. Generations of Americans have fought to make that promise apply to everyone.",
-      "tier": "must-know"
+      "tier": "must-know",
+      "wikiUrl": "https://en.wikipedia.org/wiki/Life,_Liberty_and_the_pursuit_of_Happiness",
+      "simpleWikiUrl": "https://en.wikipedia.org/wiki/Life,_Liberty_and_the_pursuit_of_Happiness",
+      "imageUrl": "images/vocab/unalienable-rights.jpg"
     },
     {
       "term": "Consent of the Governed",
@@ -148,7 +203,10 @@
       "example": "The Declaration argues that because Britain ruled the colonies without their consent, the colonists had the right to form their own government",
       "category": "The Declaration",
       "typingSnippet": "Consent of the governed is the idea that a government's power comes from the agreement of the people it rules. The Declaration used this idea to justify breaking away from Britain. It remains the core principle behind voting and representative government today.",
-      "tier": "must-know"
+      "tier": "must-know",
+      "wikiUrl": "https://en.wikipedia.org/wiki/Consent_of_the_governed",
+      "simpleWikiUrl": "https://en.wikipedia.org/wiki/Consent_of_the_governed",
+      "imageUrl": "images/vocab/consent-of-the-governed.jpg"
     },
     {
       "term": "Tyranny",
@@ -157,6 +215,32 @@
       "example": "The Declaration lists 27 grievances to prove the king's 'absolute tyranny over these States'",
       "category": "The Declaration",
       "typingSnippet": "Tyranny is the cruel and unjust use of power by a ruler or government. The Declaration of Independence accuses King George of tyranny and lists dozens of specific grievances as evidence. Fear of tyranny later shaped how Americans designed their Constitution.",
+      "tier": "encounter",
+      "wikiUrl": "https://en.wikipedia.org/wiki/Tyrant",
+      "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Tyrant",
+      "imageUrl": "images/vocab/tyranny.jpg"
+    },
+    {
+      "term": "Grievance",
+      "definition": "A complaint about something believed to be wrong or unfair",
+      "simpleExplanation": "It's more than a gripe. A grievance is a complaint you can point to and explain. The Declaration of Independence is mostly a list of them, each one meant to prove the king had treated the colonies unfairly.",
+      "example": "One grievance in the Declaration accuses the king of \"imposing Taxes on us without our Consent\"",
+      "category": "The Declaration",
+      "typingSnippet": "A grievance is a complaint about something believed to be wrong or unfair. Most of the Declaration of Independence is a list of 27 grievances against King George III, from taxing colonists without their consent to taking away trial by jury.",
+      "wikiUrl": "https://en.wikipedia.org/wiki/United_States_Declaration_of_Independence",
+      "simpleWikiUrl": "https://simple.wikipedia.org/wiki/United_States_Declaration_of_Independence",
+      "imageUrl": "images/vocab/grievance.jpg",
+      "tier": "encounter"
+    },
+    {
+      "term": "Treason",
+      "definition": "The crime of betraying your own country or ruler, especially by fighting against it",
+      "simpleExplanation": "To Britain, the colonists were British subjects, so declaring independence was not a brave new start. It was treason, and the punishment for treason was death. The signers knew they were risking their lives.",
+      "example": "If Britain had won the war, the signers of the Declaration could have been hanged for treason",
+      "category": "The Declaration",
+      "typingSnippet": "Treason is the crime of betraying your own country or ruler, especially by fighting against it. When the colonists declared independence, Britain saw it as treason. The men who signed the Declaration knew they could be hanged if the war was lost.",
+      "wikiUrl": "https://en.wikipedia.org/wiki/Treason",
+      "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Treason",
       "tier": "encounter"
     },
     {
@@ -166,7 +250,9 @@
       "example": "A strong thesis: 'James Armistead Lafayette did more to win Yorktown than most generals — yet he had to petition for his own freedom'",
       "category": "Research & Voices",
       "typingSnippet": "A thesis is a clear, arguable claim that your evidence works to prove. It is not a fact or a topic, but a position someone could disagree with. Every source in your podcast episode should help defend your thesis.",
-      "tier": "must-know"
+      "tier": "must-know",
+      "wikiUrl": "https://en.wikipedia.org/wiki/Thesis_statement",
+      "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Thesis_statement"
     },
     {
       "term": "Credibility",
@@ -175,7 +261,9 @@
       "example": "For your podcast, a Library of Congress page about Phillis Wheatley has more credibility than an unsourced fan site",
       "category": "Research & Voices",
       "typingSnippet": "Credibility is how trustworthy and reliable a source of information is. Historians judge credibility by asking who created a source, when, and for what purpose. Building your podcast on credible sources is what separates research from rumor.",
-      "tier": "must-know"
+      "tier": "must-know",
+      "wikiUrl": "https://en.wikipedia.org/wiki/Source_criticism",
+      "simpleWikiUrl": "https://en.wikipedia.org/wiki/Source_criticism"
     },
     {
       "term": "Citation",
@@ -184,7 +272,9 @@
       "example": "Your podcast script ends with citations for every source you used, from primary documents to museum websites",
       "category": "Research & Voices",
       "typingSnippet": "A citation is a note giving credit to the source your information came from. Citations let your audience verify your facts and give credit to the researchers who found them. In this project, every claim in your script needs a citation to back it up.",
-      "tier": "must-know"
+      "tier": "must-know",
+      "wikiUrl": "https://en.wikipedia.org/wiki/Citation",
+      "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Citation"
     },
     {
       "term": "Overlooked Voices",
@@ -193,81 +283,115 @@
       "example": "Crispus Attucks, a sailor of African and Native descent, was the first to die at the Boston Massacre — yet many textbooks give him a single sentence",
       "category": "Research & Voices",
       "typingSnippet": "Overlooked voices are people whose real roles in history rarely make it into the usual telling. Women, African Americans, and Native nations all shaped the Revolution, yet their stories are often reduced to a sentence or skipped entirely. Recovering those voices is the whole point of our podcast project.",
+      "tier": "encounter",
+      "wikiUrl": "https://en.wikipedia.org/wiki/African_Americans_in_the_Revolutionary_War",
+      "simpleWikiUrl": "https://en.wikipedia.org/wiki/African_Americans_in_the_Revolutionary_War",
+      "imageUrl": "images/vocab/overlooked-voices.jpg"
+    },
+    {
+      "term": "Primary Source",
+      "definition": "A record created by someone who was there at the time, such as a letter, diary, newspaper, or picture",
+      "simpleExplanation": "It's evidence straight from the time. George Washington's 1767 letter about the Proclamation is a primary source because he wrote it while it was happening.",
+      "example": "Paul Revere's 1770 engraving of the Boston Massacre is a primary source",
+      "category": "Research & Voices",
+      "typingSnippet": "A primary source is a record created by someone who was there at the time, such as a letter, diary, newspaper, or picture. Primary sources show what people thought and saw in their own moment, but they also show that person's point of view.",
+      "wikiUrl": "https://en.wikipedia.org/wiki/Primary_source",
+      "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Primary_source",
+      "tier": "encounter"
+    },
+    {
+      "term": "Secondary Source",
+      "definition": "An account written later by someone who studied the past but was not there, such as a textbook or history book",
+      "simpleExplanation": "A secondary source is someone else explaining history after studying it, like your textbook or a museum website. It can give the big picture, but it is one step away from the events.",
+      "example": "A 2004 biography of Deborah Sampson, written by a historian who studied her records, is a secondary source",
+      "category": "Research & Voices",
+      "typingSnippet": "A secondary source is an account written later by someone who studied the past but was not there, such as a textbook or history book. Secondary sources explain the big picture, and good ones show which primary sources they used.",
+      "wikiUrl": "https://en.wikipedia.org/wiki/Secondary_source",
+      "simpleWikiUrl": "https://simple.wikipedia.org/wiki/Secondary_source",
       "tier": "encounter"
     }
   ],
   "timelineEvents": [
     {
       "title": "Treaty of Paris ends the French & Indian War",
-      "year": "1763",
+      "year": "Feb 1763",
       "description": "France gives Canada and its land east of the Mississippi to Britain. Britain has won, but its war debt has nearly doubled.",
       "id": 1
     },
     {
-      "id": 2,
       "title": "Proclamation of 1763",
-      "year": "1763",
-      "description": "Britain bans settlement west of the Appalachians, angering colonists who expected that land"
+      "year": "Oct 1763",
+      "description": "Britain bans settlement west of the Appalachians, angering colonists who expected that land",
+      "id": 2
     },
     {
-      "id": 3,
       "title": "Stamp Act",
       "year": "1765",
-      "description": "The first direct tax on the colonies sparks the cry of taxation without representation"
+      "description": "The first direct tax on the colonies sparks the cry of taxation without representation",
+      "id": 3
     },
     {
-      "id": 4,
+      "title": "Townshend Acts",
+      "year": "1767",
+      "description": "New taxes on glass, paint, lead, paper and tea bring a second boycott. In 1770 Parliament repeals all of them except the tax on tea",
+      "id": 4
+    },
+    {
       "title": "Boston Massacre",
       "year": "1770",
-      "description": "British soldiers fire into a crowd, killing five colonists including Crispus Attucks"
+      "description": "British soldiers fire into a crowd, killing five colonists including Crispus Attucks",
+      "id": 5
     },
     {
-      "id": 5,
       "title": "Boston Tea Party",
       "year": "1773",
-      "description": "Colonists dump 342 chests of British tea into Boston Harbor to protest the Tea Act"
+      "description": "Colonists dump 342 chests of British tea into Boston Harbor to protest the Tea Act",
+      "id": 6
     },
     {
-      "id": 6,
       "title": "Intolerable Acts",
-      "year": "1774",
-      "description": "Britain punishes Massachusetts by closing Boston Harbor and quartering troops, uniting the colonies instead"
+      "year": "Spring 1774",
+      "description": "Britain punishes Massachusetts by closing Boston Harbor and quartering troops, uniting the colonies instead",
+      "id": 7
     },
     {
-      "id": 7,
       "title": "First Continental Congress",
-      "year": "1774",
-      "description": "Delegates from twelve colonies meet in Philadelphia to coordinate a response to Britain"
+      "year": "Sept 1774",
+      "description": "Delegates from twelve colonies meet in Philadelphia to coordinate a response to Britain",
+      "id": 8
     },
     {
-      "id": 8,
       "title": "Battles of Lexington & Concord",
       "year": "1775",
-      "description": "The 'shot heard round the world' — the Revolutionary War begins in Massachusetts"
+      "description": "The 'shot heard round the world': the Revolutionary War begins in Massachusetts",
+      "id": 9
     },
     {
-      "id": 9,
       "title": "Declaration of Independence",
       "year": "1776",
-      "description": "Congress declares the colonies free and independent states, justified by unalienable rights and consent of the governed"
+      "description": "Congress declares the colonies free and independent states, justified by unalienable rights and consent of the governed",
+      "id": 10
     },
     {
-      "id": 10,
       "title": "Treaty of Paris",
       "year": "1783",
-      "description": "Britain officially recognizes American independence, ending the Revolutionary War"
-    },
-    {
-      "id": 11,
-      "title": "Shays' Rebellion Exposes the Articles",
-      "year": "1786–1787",
-      "description": "A farmers' uprising in Massachusetts reveals how weak the Articles of Confederation really are, fueling calls for a new constitution"
+      "description": "Britain officially recognizes American independence, ending the Revolutionary War",
+      "id": 11
     }
   ],
   "reflectionPrompts": [
-    "How does {term} help explain what made independence worth fighting for?",
-    "Who benefited most from {term} — and for whom was its promise left incomplete?",
-    "If your podcast episode covered {term}, whose overlooked voice would you choose to tell that part of the story?"
+    "How would you explain {term} to a younger student, in your own words?",
+    "What is one example of {term} from your reading, and what makes it a good example?",
+    "Which person from this unit best shows what {term} means, and why?",
+    "How does {term} help answer our question: what made independence worth fighting for?",
+    "How would a Patriot, a Loyalist and an enslaved person each see {term}, and why would they differ?",
+    "What is one question about {term} you would ask someone who lived in 1776?",
+    "Which other word from this unit connects to {term}, and what links them?",
+    "What part of {term} is easiest to mix up, and how will you remember it?",
+    "If your podcast episode used {term}, where in the script would it fit, and why?",
+    "Whose voice is missing when people talk about {term}, and why might it be missing?",
+    "Where have you seen something like {term} in your own life or in the news, and how is it alike?",
+    "How sure are you that you understand {term}, and what would make you more sure?"
   ],
   "fillInBlankSentences": [
     {
@@ -353,6 +477,36 @@
     {
       "sentence": "People whose real roles in history rarely make it into the usual telling are _____.",
       "answer": "Overlooked Voices",
+      "category": "Research & Voices"
+    },
+    {
+      "sentence": "Colonial militia members trained to be ready to fight at a minute's notice were called _____.",
+      "answer": "minutemen",
+      "category": "Choosing Sides"
+    },
+    {
+      "sentence": "When a conflict grows step by step, with each side's response making the next fight bigger, it is called _____.",
+      "answer": "escalation",
+      "category": "Choosing Sides"
+    },
+    {
+      "sentence": "A complaint about something believed to be wrong or unfair is a _____.",
+      "answer": "grievance",
+      "category": "The Declaration"
+    },
+    {
+      "sentence": "The crime of betraying your own country or ruler, especially by fighting against it, is _____.",
+      "answer": "treason",
+      "category": "The Declaration"
+    },
+    {
+      "sentence": "A record created by someone who was there at the time, such as a letter or diary, is a _____.",
+      "answer": "primary source",
+      "category": "Research & Voices"
+    },
+    {
+      "sentence": "An account written later by someone who studied the past but was not there is a _____.",
+      "answer": "secondary source",
       "category": "Research & Voices"
     }
   ],
@@ -752,6 +906,246 @@
       "correct": 0,
       "explanation": "A citation is your receipt: it shows where every fact came from so a listener can check it.",
       "topic": "Research & Voices"
+    },
+    {
+      "question": "Who led Native nations in attacks on British forts around the Great Lakes in 1763?",
+      "options": [
+        "George Washington, a Virginia militia officer",
+        "Pontiac, an Ottawa leader",
+        "William Pitt, a British war leader",
+        "Joseph Brant, a Mohawk leader"
+      ],
+      "correct": 1,
+      "explanation": "Pontiac's War began in 1763. Britain answered with the Proclamation of 1763 to avoid another costly frontier war.",
+      "topic": "Causes of Unrest"
+    },
+    {
+      "question": "On the same day Parliament repealed the Stamp Act in 1766, what did it pass?",
+      "options": [
+        "A law giving each colony two elected seats in the House of Commons",
+        "A law ending the tax on tea for good so that the boycotts would stop",
+        "The Declaratory Act, saying it could make colony laws \"in all cases whatsoever\"",
+        "A law closing Boston Harbor until every unused stamp was paid for in full"
+      ],
+      "correct": 2,
+      "explanation": "Repeal was not surrender: the Declaratory Act said Parliament still had full power over the colonies.",
+      "topic": "Causes of Unrest"
+    },
+    {
+      "question": "Why did most Native nations side with Britain during the Revolution?",
+      "options": [
+        "Britain had tried to limit colonial settlement on their land",
+        "Britain promised them seats in Parliament",
+        "The colonists refused to trade with them at all",
+        "France ordered its old allies to fight for Britain"
+      ],
+      "correct": 0,
+      "explanation": "The Proclamation Line had tried to keep settlers out. Native leaders judged that a colonial victory would cost them their homelands.",
+      "topic": "Choosing Sides"
+    },
+    {
+      "question": "What did Lord Dunmore, the royal governor of Virginia, promise in November 1775?",
+      "options": [
+        "Free land in Canada to every Loyalist family who left the colonies",
+        "A lower tax on tea for any colonist who stayed loyal to the king",
+        "A year of pay to any Patriot soldier who switched to the British side",
+        "Freedom to enslaved people who escaped Patriot enslavers and fought for Britain"
+      ],
+      "correct": 3,
+      "explanation": "Dunmore's Proclamation led thousands of enslaved people to risk escape to British lines.",
+      "topic": "Choosing Sides"
+    },
+    {
+      "question": "Who were the minutemen?",
+      "options": [
+        "British soldiers housed in colonists' homes",
+        "Colonial militia ready to fight at a minute's notice",
+        "Messengers who carried letters to the king",
+        "Loyalists who spied for the British army"
+      ],
+      "correct": 1,
+      "explanation": "Minutemen were ordinary farmers and craftsmen. They faced British troops at Lexington and Concord on April 19, 1775.",
+      "topic": "Choosing Sides"
+    },
+    {
+      "question": "What does escalation mean on the road to revolution?",
+      "options": [
+        "Each side's response made the next conflict bigger",
+        "Colonists moved west across the mountains",
+        "Britain slowly lowered its taxes over time",
+        "The colonies voted on each new law together"
+      ],
+      "correct": 0,
+      "explanation": "Taxes led to boycotts, troops led to the Boston Massacre, the Tea Party led to the Intolerable Acts, and those led to war.",
+      "topic": "Choosing Sides"
+    },
+    {
+      "question": "Why does the Olive Branch Petition (July 1775) matter?",
+      "options": [
+        "It was the first tax the colonists agreed to pay without a boycott",
+        "It ended the fighting at Lexington and Concord with a peace treaty",
+        "It was Congress's last peaceful offer, and the king refused to read it",
+        "It gave each colony one elected seat in Parliament for the first time"
+      ],
+      "correct": 2,
+      "explanation": "George III refused it and in August declared the colonies in open rebellion, which pushed many colonists toward independence.",
+      "topic": "Choosing Sides"
+    },
+    {
+      "question": "What did Thomas Paine argue in Common Sense (January 1776)?",
+      "options": [
+        "The colonies should pay Britain's war debt quickly",
+        "Colonists should stay neutral in the war",
+        "Parliament should give the colonies more seats",
+        "The colonies should break away from Britain completely"
+      ],
+      "correct": 3,
+      "explanation": "Paine wrote in plain language that it was absurd for an island to rule a continent. The pamphlet moved many undecided colonists.",
+      "topic": "Choosing Sides"
+    },
+    {
+      "question": "Why can no king take away unalienable rights, according to the Declaration?",
+      "options": [
+        "Parliament voted to protect them forever in the Stamp Act of 1765",
+        "People are born with them; they are not gifts from a ruler",
+        "They are written into every colonial charter the king ever signed",
+        "Only the elected colonial assemblies are allowed to change them"
+      ],
+      "correct": 1,
+      "explanation": "Rights you are born with do not come from a king, so a king has no power to take them back.",
+      "topic": "The Declaration"
+    },
+    {
+      "question": "According to the Declaration, where does a government get its power?",
+      "options": [
+        "From the agreement of the people it rules",
+        "From the king, who receives it from God",
+        "From the army that protects the country",
+        "From the richest landowners in each colony"
+      ],
+      "correct": 0,
+      "explanation": "This is consent of the governed: \"deriving their just powers from the consent of the governed.\"",
+      "topic": "The Declaration"
+    },
+    {
+      "question": "Which thinker's idea of natural rights to life, liberty and property shaped the Declaration?",
+      "options": [
+        "Thomas Paine",
+        "King George III",
+        "John Locke",
+        "William Pitt"
+      ],
+      "correct": 2,
+      "explanation": "Locke wrote in 1689 that people are born with natural rights and may resist rulers who violate them.",
+      "topic": "The Declaration"
+    },
+    {
+      "question": "What is a grievance?",
+      "options": [
+        "A law passed by Parliament for the colonies without a vote",
+        "A promise to fight for independence until the war is won",
+        "A tax on paper goods like newspapers and playing cards",
+        "A complaint about something believed to be wrong or unfair"
+      ],
+      "correct": 3,
+      "explanation": "Most of the Declaration is a list of 27 grievances against King George III.",
+      "topic": "The Declaration"
+    },
+    {
+      "question": "Which of these is a grievance the Declaration lists against the king?",
+      "options": [
+        "\"For imposing Taxes on us without our Consent\"",
+        "\"For refusing to sell tea to the colonies\"",
+        "\"For moving the capital away from Boston\"",
+        "\"For forbidding colonists to build any ships\""
+      ],
+      "correct": 0,
+      "explanation": "The Declaration names taxing without consent as one example of the king's tyranny.",
+      "topic": "The Declaration"
+    },
+    {
+      "question": "Why was signing the Declaration so dangerous for the signers?",
+      "options": [
+        "They would lose the seats they held in Parliament in London",
+        "France had threatened to arrest them if they sided with Spain",
+        "Britain saw it as treason, which was punished by death",
+        "Their colonies would have to pay new taxes on every signed paper"
+      ],
+      "correct": 2,
+      "explanation": "To Britain, declaring independence was treason. The signers were betting their lives on winning the war.",
+      "topic": "The Declaration"
+    },
+    {
+      "question": "Which of these is a primary source about the Boston Massacre?",
+      "options": [
+        "Paul Revere's engraving of the event, made in 1770",
+        "A textbook chapter about the event written in 2015",
+        "A museum website article about the event",
+        "A documentary about the event made in 2020"
+      ],
+      "correct": 0,
+      "explanation": "A primary source was made by someone who was there at the time.",
+      "topic": "Research & Voices"
+    },
+    {
+      "question": "Which of these is a secondary source?",
+      "options": [
+        "Abigail Adams's 1776 letter to John Adams",
+        "A historian's 2004 book about Deborah Sampson",
+        "A newspaper printed in Boston in 1773",
+        "George Washington's 1767 letter to Crawford"
+      ],
+      "correct": 1,
+      "explanation": "A secondary source is written later by someone who studied the past but was not there.",
+      "topic": "Research & Voices"
+    },
+    {
+      "question": "Who are \"overlooked voices\" in the history of the Revolution?",
+      "options": [
+        "Only the 56 men who signed the Declaration of Independence in 1776",
+        "British leaders in Parliament who made the laws for the colonies",
+        "People whose real roles rarely make it into the usual telling of the story",
+        "Colonists who never left their own towns during the whole war"
+      ],
+      "correct": 2,
+      "explanation": "Women, Black Americans, Native people and poor colonists shaped the Revolution but are often left out of the story.",
+      "topic": "Research & Voices"
+    },
+    {
+      "question": "Why is James Armistead Lafayette an overlooked voice?",
+      "options": [
+        "He signed the Declaration of Independence, but his name was later erased",
+        "He led the British army at Yorktown and then joined the Patriots",
+        "He wrote Common Sense under a different name to keep himself safe",
+        "His spying helped win Yorktown, yet he had to petition for his own freedom"
+      ],
+      "correct": 3,
+      "explanation": "Armistead, enslaved in Virginia, spied on the British in 1781. Virginia did not free him until he petitioned years later.",
+      "topic": "Research & Voices"
+    },
+    {
+      "question": "What should a citation for a podcast source include?",
+      "options": [
+        "The author, the title, the publisher or website, and the date",
+        "Only the website address, copied from the top of the page",
+        "Your own opinion of whether the source's topic is interesting",
+        "The number of people who have read or shared the source online"
+      ],
+      "correct": 0,
+      "explanation": "A citation tells listeners exactly where a fact came from so they can check it.",
+      "topic": "Research & Voices"
+    },
+    {
+      "question": "Two websites disagree about what Molly Pitcher did. What should a careful researcher do?",
+      "options": [
+        "Use whichever site has more pictures",
+        "Pick the site that agrees with your thesis",
+        "Leave the person out of the episode",
+        "Check what other credible sources agree on"
+      ],
+      "correct": 3,
+      "explanation": "Corroborating, checking a claim against other credible sources, is how historians separate documented history from legend.",
+      "topic": "Research & Voices"
     }
   ],
   "shortAnswerQuestions": [
@@ -788,10 +1182,11 @@
         "The event that pushed colonists closest to rebellion was ___ because ___.",
         "Earlier events were different because ___.",
         "This showed colonists that ___."
-      ]
+      ],
+      "lookAt": "the timeline, and Chapter 1, Section 3 of the reading (Boston and the Intolerable Acts)."
     },
     {
-      "question": "Colonists did not rebel after the Proclamation of 1763, but they fought at Lexington and Concord in 1775. What changed in those twelve years?",
+      "question": "What changed between 1763 and 1775 that turned colonists' protests into fighting?",
       "topic": "Causes of Unrest",
       "keyTerms": [
         "Proclamation of 1763",
@@ -824,10 +1219,11 @@
         "In 1763, colonists ___.",
         "Each event made things worse because ___.",
         "By 1775, colonists believed ___."
-      ]
+      ],
+      "lookAt": "the timeline, and Chapter 2, Section 3 of the reading (From Protest to Rebellion)."
     },
     {
-      "question": "Choose one group: enslaved people, Native nations, women, or Loyalists. Why did that group see independence differently from the Patriots?",
+      "question": "Which group (enslaved people, Native nations, women or Loyalists) saw independence differently from the Patriots, and why?",
       "topic": "Choosing Sides",
       "keyTerms": [
         "Patriot",
@@ -859,10 +1255,11 @@
         "___ saw independence differently because ___.",
         "While Patriots wanted ___, this group wanted ___.",
         "For example, ___."
-      ]
+      ],
+      "lookAt": "Chapter 2, Sections 1 and 2 of the reading (Three Choices; Choosing for Freedom and for Land)."
     },
     {
-      "question": "The Declaration says \"all men are created equal.\" Whose rights did it protect in 1776, and whose did it leave out?",
+      "question": "Whose rights did \"all men are created equal\" protect in 1776, and whose did it leave out?",
       "topic": "The Declaration",
       "keyTerms": [
         "Unalienable Rights",
@@ -894,6 +1291,79 @@
         "In 1776, the Declaration protected the rights of ___.",
         "It left out ___, because ___.",
         "This shows that ___."
+      ],
+      "lookAt": "Chapter 3, Section 3 of the reading (Grievances, and Who Was Left Out)."
+    },
+    {
+      "question": "When did the colonists' protest become rebellion, and what made that moment different from the protests before it?",
+      "topic": "Choosing Sides",
+      "lookAt": "Chapter 2, Section 3 of the reading (From Protest to Rebellion), and the timeline from 1773 to 1775.",
+      "keyTerms": [
+        "Rebellion",
+        "Escalation",
+        "Minutemen",
+        "Boycott"
+      ],
+      "rubric": "Strong response names one specific moment, explains the difference between asking a government to change and refusing to obey it, and uses a detail from before and after that moment.",
+      "exemplar": "I think protest became rebellion at Lexington and Concord on April 19, 1775. Before that, colonists protested by boycotting British goods and sending petitions, which asked Britain to change its laws. At Lexington, minutemen stood against British soldiers with guns, and at Concord they chased the army back to Boston. That was different because they were no longer asking Britain to listen; they were refusing to obey it.",
+      "plan": [
+        {
+          "role": "claim",
+          "text": "Protest became rebellion at Lexington and Concord on April 19, 1775."
+        },
+        {
+          "role": "evidence",
+          "text": "Before 1775, colonists boycotted British goods and sent petitions asking Britain to change its laws."
+        },
+        {
+          "role": "evidence",
+          "text": "At Lexington and Concord, minutemen fought British soldiers and chased them back to Boston."
+        },
+        {
+          "role": "reasoning",
+          "text": "Protest asks a government to change; rebellion refuses to obey it, and fighting the king's army is refusing to obey."
+        }
+      ],
+      "sentenceStarters": [
+        "I think protest became rebellion when ___.",
+        "Before that, colonists ___.",
+        "This was different because ___."
+      ]
+    },
+    {
+      "question": "Why does the person you are researching for your podcast deserve a place in the story of the Revolution?",
+      "topic": "Research & Voices",
+      "lookAt": "your research notes and sources, and Chapter 4, Section 1 of the reading (The Voices Left Out).",
+      "keyTerms": [
+        "Overlooked Voices",
+        "Thesis",
+        "Credibility",
+        "Citation"
+      ],
+      "rubric": "Strong response makes an arguable claim about the person's significance (a thesis, not a fact), supports it with at least two specific facts from credible sources, and explains why the usual story leaves the person out.",
+      "exemplar": "James Armistead Lafayette deserves a place in the story because his spying helped win the war's final battle, yet the country he helped free did not free him. In 1781 he posed as a runaway helping the British while reporting their plans to the Marquis de Lafayette, and his reports helped trap the British at Yorktown. After the war, he had to petition the Virginia legislature for his own freedom. His story shows that the Revolution was won by people whose liberty it did not promise.",
+      "plan": [
+        {
+          "role": "claim",
+          "text": "James Armistead Lafayette deserves a place in the story because his spying helped win at Yorktown, yet he was not free."
+        },
+        {
+          "role": "evidence",
+          "text": "In 1781 he posed as a runaway helping the British while reporting their plans to Lafayette."
+        },
+        {
+          "role": "evidence",
+          "text": "After the war, he had to petition the Virginia legislature for his own freedom."
+        },
+        {
+          "role": "reasoning",
+          "text": "His story shows the Revolution depended on people whose liberty it did not promise, which is why the usual story leaves him out."
+        }
+      ],
+      "sentenceStarters": [
+        "___ deserves a place in the story because ___.",
+        "One fact that shows this is ___.",
+        "The usual story leaves this person out because ___."
       ]
     }
   ],
@@ -906,6 +1376,42 @@
         "title": "13 Colonies",
         "description": "Find each of the thirteen colonies on the map you labeled in Unit 1.",
         "icon": "fas fa-map"
+      },
+      {
+        "id": "map-claims-1754",
+        "title": "North America in 1754",
+        "icon": "fas fa-map-marked-alt",
+        "description": "Who claimed what before the French & Indian War.",
+        "image": "images/maps/claims-1754.png",
+        "caption": "European claims in 1754. Native nations lived on almost all of this land.",
+        "credit": "Map: Mr. B, from Natural Earth data. Simplified, modern map.",
+        "question": "Which empire claimed the land west of the British colonies, and who already lived there?",
+        "lookAt": "the colors west of the Appalachian Mountains, and the line under the map.",
+        "startWith": "In 1754, ___ claimed the land west of the colonies, but it was home to ___."
+      },
+      {
+        "id": "map-claims-1763",
+        "title": "North America in 1763",
+        "icon": "fas fa-map-marked-alt",
+        "description": "What changed after the Treaty of Paris.",
+        "image": "images/maps/claims-1763.png",
+        "caption": "Claims after the Treaty of Paris, 1763. France is gone from the mainland.",
+        "credit": "Map: Mr. B, from Natural Earth data. Simplified, modern map.",
+        "question": "What did Britain gain between 1754 and 1763, and what problem came with it?",
+        "lookAt": "the red areas on this map and the 1754 map.",
+        "startWith": "By 1763, Britain gained ___, which used to be ___. The problem was ___."
+      },
+      {
+        "id": "map-proclamation-1763",
+        "title": "The Proclamation Line",
+        "icon": "fas fa-ban",
+        "description": "The line colonists were told not to cross.",
+        "image": "images/maps/proclamation-1763.png",
+        "caption": "The Proclamation Line of 1763 ran roughly along the Appalachian Mountains. Land west of it was reserved for Native nations.",
+        "credit": "Map: Mr. B, from Natural Earth data. Simplified, modern map.",
+        "question": "Why would a colonist who fought in the French & Indian War be angry about this line?",
+        "lookAt": "where the line runs, and which side of it the colonies are on.",
+        "startWith": "A colonist who fought might be angry because ___."
       }
     ]
   },
@@ -939,6 +1445,148 @@
       "title": "Recovering a Voice",
       "source": "Written for the Revolution unit",
       "passage": "The usual story of the Revolution names only a few famous men, but the war depended on many more people. Overlooked voices are people whose real roles in history rarely make it into the usual telling of the story. James Armistead Lafayette, an enslaved man from Virginia, spied on the British in 1781, and his reports helped win the Battle of Yorktown. Deborah Sampson disguised herself as a man named Robert Shurtliff so she could fight. To tell their stories well, a historian needs strong sources. Credibility is how trustworthy and reliable a source of information is. Ask who made a source, when it was made, and why it was made, and check important facts in a second source. Next, build a thesis, a clear, arguable claim that your evidence works to prove. A thesis is not a topic and not a plain fact. It is a claim that someone could argue with. Finally, give credit with a citation, a note giving credit to the source your information came from. Citations let your listeners check your facts and show respect for the people whose work you used."
+    }
+  ],
+  "historicalFlavor": {
+    "quotes": [
+      {
+        "text": "I know not what course others may take; but as for me, give me liberty or give me death!",
+        "author": "Patrick Henry",
+        "source": "Speech to the Virginia Convention, March 23, 1775, as written down by William Wirt in 1817",
+        "sourceUrl": "https://en.wikiquote.org/wiki/Patrick_Henry",
+        "portrait": "images/portraits/patrick-henry.jpg"
+      },
+      {
+        "text": "There is something very absurd, in supposing a continent to be perpetually governed by an island.",
+        "author": "Thomas Paine",
+        "source": "Common Sense, January 1776",
+        "sourceUrl": "https://en.wikiquote.org/wiki/Thomas_Paine",
+        "portrait": "images/portraits/thomas-paine.jpg"
+      },
+      {
+        "text": "These are the times that try men's souls.",
+        "author": "Thomas Paine",
+        "source": "The American Crisis, December 23, 1776",
+        "sourceUrl": "https://en.wikiquote.org/wiki/Thomas_Paine",
+        "portrait": "images/portraits/thomas-paine.jpg"
+      },
+      {
+        "text": "Remember the Ladies, and be more generous and favourable to them than your ancestors.",
+        "author": "Abigail Adams",
+        "source": "Letter to John Adams, March 31, 1776",
+        "sourceUrl": "https://www.masshist.org/digitaladams/archive/doc?id=L17760331aa",
+        "portrait": "images/portraits/abigail-adams.jpg"
+      },
+      {
+        "text": "We hold these truths to be self-evident, that all men are created equal, that they are endowed by their Creator with certain unalienable Rights, that among these are Life, Liberty and the pursuit of Happiness.",
+        "author": "Thomas Jefferson",
+        "source": "Declaration of Independence, July 4, 1776",
+        "sourceUrl": "https://www.archives.gov/founding-docs/declaration-transcript",
+        "portrait": "images/portraits/thomas-jefferson.jpg"
+      },
+      {
+        "text": "Facts are stubborn things; and whatever may be our wishes, our inclinations, or the dictates of our passion, they cannot alter the state of facts and evidence.",
+        "author": "John Adams",
+        "source": "Defending the British soldiers at the Boston Massacre trial, December 1770",
+        "sourceUrl": "https://en.wikiquote.org/wiki/John_Adams",
+        "portrait": "images/portraits/john-adams.jpg"
+      },
+      {
+        "text": "I can never look upon that Proclamation in any other light (but this I say between ourselves) than as a temporary expedient to quiet the Minds of the Indians.",
+        "author": "George Washington",
+        "source": "Letter to William Crawford, September 17, 1767",
+        "sourceUrl": "https://founders.archives.gov/documents/Washington/02-08-02-0020",
+        "portrait": "images/portraits/george-washington.jpg"
+      },
+      {
+        "text": "In every human Breast, God has implanted a Principle, which we call Love of Freedom; it is impatient of Oppression, and pants for Deliverance.",
+        "author": "Phillis Wheatley",
+        "source": "Letter to Samson Occom, February 11, 1774",
+        "sourceUrl": "https://en.wikiquote.org/wiki/Phillis_Wheatley",
+        "portrait": "images/portraits/phillis-wheatley.jpg"
+      }
+    ],
+    "funFacts": [
+      {
+        "text": "The Stamp Act taxed almost every piece of printed paper in the colonies: newspapers, legal papers, diplomas, and even playing cards.",
+        "source": "Wikipedia: Stamp Act 1765",
+        "sourceUrl": "https://en.wikipedia.org/wiki/Stamp_Act_1765"
+      },
+      {
+        "text": "At the Boston Tea Party, colonists dumped 342 chests of tea into Boston Harbor, about 92,000 pounds of it.",
+        "source": "Boston Tea Party Ships & Museum",
+        "sourceUrl": "https://www.bostonteapartyship.com/"
+      },
+      {
+        "text": "Crispus Attucks, a sailor of African and Native American descent, was one of the five people killed in the Boston Massacre. He is often called the first person to die in the American Revolution.",
+        "source": "Wikipedia: Crispus Attucks",
+        "sourceUrl": "https://en.wikipedia.org/wiki/Crispus_Attucks"
+      },
+      {
+        "text": "John Adams, a Patriot, was the lawyer who defended the British soldiers after the Boston Massacre. Most of them were found not guilty.",
+        "source": "Wikipedia: Boston Massacre",
+        "sourceUrl": "https://en.wikipedia.org/wiki/Boston_Massacre"
+      },
+      {
+        "text": "Congress voted for independence on July 2, 1776. John Adams predicted July 2 would be the day Americans celebrated forever.",
+        "source": "National Archives",
+        "sourceUrl": "https://www.archives.gov/founding-docs/declaration-history"
+      },
+      {
+        "text": "Most delegates signed the official copy of the Declaration on August 2, 1776, not on July 4.",
+        "source": "National Archives",
+        "sourceUrl": "https://www.archives.gov/founding-docs/declaration-history"
+      },
+      {
+        "text": "Thomas Jefferson was 33 years old when he wrote the first draft of the Declaration of Independence.",
+        "source": "National Archives",
+        "sourceUrl": "https://www.archives.gov/founding-docs/declaration-history"
+      },
+      {
+        "text": "Common Sense sold tens of thousands of copies in its first few months, at a time when the colonies had about 2.5 million people.",
+        "source": "American Battlefield Trust",
+        "sourceUrl": "https://www.battlefields.org/learn/articles/common-sense"
+      },
+      {
+        "text": "Phillis Wheatley, kidnapped from West Africa as a child and enslaved in Boston, published a book of poems in 1773. It was the first book of poetry by an African American woman.",
+        "source": "Wikipedia: Phillis Wheatley",
+        "sourceUrl": "https://en.wikipedia.org/wiki/Phillis_Wheatley"
+      },
+      {
+        "text": "Deborah Sampson served in the Continental Army disguised as a man named Robert Shurtliff. After the war she gave paid talks about her service.",
+        "source": "National Women's History Museum",
+        "sourceUrl": "https://www.womenshistory.org/education-resources/biographies/deborah-sampson"
+      },
+      {
+        "text": "George Washington, writing in 1767, called the Proclamation Line \"a temporary expedient,\" and kept claiming western land anyway.",
+        "source": "Founders Online",
+        "sourceUrl": "https://founders.archives.gov/documents/Washington/02-08-02-0020"
+      },
+      {
+        "text": "The fight at Concord's North Bridge on April 19, 1775 is remembered as \"the shot heard round the world,\" a line from an 1837 poem by Ralph Waldo Emerson.",
+        "source": "Wikipedia: Battles of Lexington and Concord",
+        "sourceUrl": "https://en.wikipedia.org/wiki/Battles_of_Lexington_and_Concord"
+      }
+    ]
+  },
+  "externalLinks": [
+    {
+      "id": "colonial-unrest",
+      "name": "Unrest in the Colonies",
+      "icon": "fas fa-temperature-high",
+      "category": "practice",
+      "description": "Read nine events from 1763 to 1775, rate how much unrest each caused, then spend your 36-point budget on the ones that mattered most.",
+      "subtitle": "In class Oct 9 to 13. Your work saves on the computer you use.",
+      "url": "https://shiebenaderet.github.io/colonial-unrest/"
+    },
+    {
+      "id": "revolutionary-voices",
+      "name": "Podcast Script Builder",
+      "icon": "fas fa-microphone",
+      "category": "practice",
+      "description": "Research your overlooked voice in the reading library, then build your episode script step by step.",
+      "subtitle": "For the podcast project, starting in Week 9.",
+      "url": "https://voices.mrbsocialstudies.org/"
     }
   ]
 }

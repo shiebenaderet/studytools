@@ -7209,3 +7209,19 @@ body.light-mode .feedback-fab {
         font-size: 0.7em;
     }
 }
+
+/* Short answer / response builder: where to find the evidence */
+.sa-look-at { margin: 8px 0 14px; padding: 10px 14px; border-left: 3px solid var(--accent, #B8893B); background: var(--bg-surface); border-radius: 6px; color: var(--text-primary); font-size: 0.95em; line-height: 1.45; }
+.sa-look-at strong { color: var(--accent, #B8893B); }
+
+/* Maps hub: still maps (handout and primary-source maps) */
+.map-still { max-width: 980px; margin: 0 auto; padding: 8px 4px 24px; }
+.map-still h2 { margin: 8px 0 12px; color: var(--text-primary); }
+.map-still-back { background: none; border: none; color: var(--text-secondary); cursor: pointer; font-weight: 600; padding: 6px 0; font-family: var(--font-body); }
+.map-still figure { margin: 0; }
+.map-still img { width: 100%; height: auto; border-radius: 10px; display: block; background: #fff; }
+.map-still figcaption { margin-top: 8px; color: var(--text-secondary); font-size: 0.9em; line-height: 1.4; }
+.map-still-credit { font-style: italic; opacity: 0.85; }
+.map-still-q { margin-top: 16px; padding: 14px 16px; border-left: 3px solid var(--accent, #B8893B); background: var(--bg-surface); border-radius: 8px; line-height: 1.5; color: var(--text-primary); }
+.map-still-qtext { font-weight: 700; margin-bottom: 6px; }
+.map-still-q strong { color: var(--accent, #B8893B); }

@@ -223,6 +223,17 @@ StudyEngine.registerActivity({
         questionDiv.textContent = q.question;
         contentArea.appendChild(questionDiv);
 
+        // "Look at": where to find the evidence (course question standard).
+        if (q.lookAt) {
+            var lookDiv = document.createElement('div');
+            lookDiv.className = 'sa-look-at';
+            var lookLabel = document.createElement('strong');
+            lookLabel.textContent = 'Look at: ';
+            lookDiv.appendChild(lookLabel);
+            lookDiv.appendChild(document.createTextNode(q.lookAt));
+            contentArea.appendChild(lookDiv);
+        }
+
         // "Help me build a response" — launches the guided wizard for this
         // question. Only shown when the question has a plan to build (Step 4).
         if (q.plan && q.plan.length) {
