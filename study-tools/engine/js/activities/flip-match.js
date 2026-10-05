@@ -35,7 +35,7 @@ StudyEngine.registerActivity({
         const title = document.createElement('h2');
         title.textContent = 'Flip Match';
         title.style.textAlign = 'center';
-        title.style.color = 'var(--primary)';
+        title.style.color = 'var(--primary-text)';
         title.style.marginBottom = '20px';
         wrapper.appendChild(title);
 

@@ -421,6 +421,12 @@ const StudyEngine = {
         document.documentElement.style.setProperty('--primary-bold', theme.primaryBold || theme.primary);
         document.title = `${this.config.unit.title} - Study Tool`;
 
+        // Dark mode: unit colors are picked for print and light pages, so a deep
+        // red or navy used as TEXT on the dark cards can drop below 2:1. Text uses
+        // --primary-text / --secondary-text / --accent-text, lightened here until
+        // they reach 4.5:1 on every dark surface. Backgrounds keep the unit color.
+        this._setReadableTextColors(theme);
+
         // Unit-specific background colors for visual distinction
         if (theme.bgDeep) {
             document.documentElement.style.setProperty('--bg-deep', theme.bgDeep);
@@ -428,6 +434,47 @@ const StudyEngine = {
             document.documentElement.style.setProperty('--bg-elevated', theme.bgElevated || theme.bgCard || theme.bgDeep);
             document.documentElement.style.setProperty('--bg-surface', theme.bgSurface || theme.bgElevated || theme.bgDeep);
         }
+    },
+
+    _setReadableTextColors(theme) {
+        const root = document.documentElement;
+        const cs = getComputedStyle(root);
+        const surfaces = ['--bg-deep', '--bg-card', '--bg-elevated', '--bg-surface']
+            .map(v => StudyEngine._parseColor(cs.getPropertyValue(v)))
+            .filter(Boolean);
+        const pairs = { '--primary-text-dark': theme.primary, '--secondary-text-dark': theme.secondary, '--accent-text-dark': theme.accent };
+        Object.keys(pairs).forEach(name => {
+            const base = StudyEngine._parseColor(pairs[name] || '');
+            if (!base || !surfaces.length) return;
+            let c = base;
+            for (let t = 0; t <= 1.0001; t += 0.05) {
+                c = base.map(ch => Math.round(ch + (255 - ch) * t));
+                const worst = Math.min.apply(null, surfaces.map(s => StudyEngine._contrast(c, s)));
+                if (worst >= 4.5) break;
+            }
+            root.style.setProperty(name, 'rgb(' + c.join(',') + ')');
+        });
+    },
+
+    _parseColor(str) {
+        str = (str || '').trim();
+        let m = /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.exec(str);
+        if (m) {
+            let h = m[1];
+            if (h.length === 3) h = h.split('').map(x => x + x).join('');
+            return [0, 2, 4].map(i => parseInt(h.substr(i, 2), 16));
+        }
+        m = /^rgba?\(\s*(\d+)[ ,]+(\d+)[ ,]+(\d+)/i.exec(str);
+        return m ? [+m[1], +m[2], +m[3]] : null;
+    },
+
+    _contrast(a, b) {
+        const lum = c => {
+            const v = c.map(x => { x /= 255; return x <= 0.03928 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4); });
+            return 0.2126 * v[0] + 0.7152 * v[1] + 0.0722 * v[2];
+        };
+        const la = lum(a), lb = lum(b);
+        return (Math.max(la, lb) + 0.05) / (Math.min(la, lb) + 0.05);
     },
 
     renderHeader() {
@@ -862,7 +909,7 @@ const StudyEngine = {
         const actIcon = document.createElement('i');
         actIcon.className = activity.icon;
         actIcon.style.marginRight = '6px';
-        actIcon.style.color = 'var(--primary)';
+        actIcon.style.color = 'var(--primary-text)';
         title.appendChild(actIcon);
         title.appendChild(document.createTextNode(activity.name));
         topbar.appendChild(title);
@@ -874,7 +921,7 @@ const StudyEngine = {
         Object.keys(groupLabels).forEach(groupId => {
             const btn = document.createElement('button');
             btn.textContent = groupLabels[groupId];
-            if (activity.category === groupId) btn.style.color = 'var(--primary)';
+            if (activity.category === groupId) btn.style.color = 'var(--primary-text)';
             btn.addEventListener('click', () => {
                 const navBtn = document.querySelector('.nav-btn[data-group="' + groupId + '"]');
                 if (navBtn) navBtn.click();
@@ -1015,7 +1062,7 @@ const StudyEngine = {
             flow.appendChild(flowTitle);
 
             const steps = [
-                { num: '1', icon: 'fas fa-book', title: 'Learn', desc: 'Read through Flashcards to learn key terms and definitions.', group: 'study', cta: 'Open Study' },
+                { num: '1', icon: 'fas fa-book', title: 'Learn', desc: 'Read the chapter in the Textbook, then use Flashcards to learn its key terms.', group: 'study', cta: 'Open Study' },
                 { num: '2', icon: 'fas fa-clipboard-check', title: 'Practice', desc: 'Take the Practice Test and Fill-in-the-Blank to check yourself.', group: 'practice', cta: 'Open Practice' },
                 { num: '3', icon: 'fas fa-gamepad', title: 'Play', desc: 'Play Wordle, Crossword, and more to lock it in.', group: 'games', cta: 'Open Games' }
             ];

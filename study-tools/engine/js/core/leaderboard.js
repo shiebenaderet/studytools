@@ -170,7 +170,7 @@ var LeaderboardManager = {
         heading.style.cssText = 'color:var(--text-primary);margin-bottom:16px;';
         var icon = document.createElement('i');
         icon.className = 'fas fa-trophy';
-        icon.style.color = 'var(--accent)';
+        icon.style.color = 'var(--accent-text)';
         heading.appendChild(icon);
         heading.appendChild(document.createTextNode(' Leaderboard'));
         container.appendChild(heading);
@@ -700,7 +700,7 @@ var LeaderboardManager = {
         heading.style.cssText = 'color:var(--text-primary);margin-bottom:16px;';
         var icon = document.createElement('i');
         icon.className = 'fas fa-trophy';
-        icon.style.color = 'var(--accent)';
+        icon.style.color = 'var(--accent-text)';
         heading.appendChild(icon);
         heading.appendChild(document.createTextNode(' Leaderboard Management'));
         section.appendChild(heading);
@@ -831,7 +831,7 @@ var LeaderboardManager = {
                     statusBadge.textContent = 'Approved';
                 } else {
                     statusBadge.style.background = 'rgba(251,191,36,0.15)';
-                    statusBadge.style.color = 'var(--accent)';
+                    statusBadge.style.color = 'var(--accent-text)';
                     statusBadge.textContent = 'Pending';
                 }
                 statusTd.appendChild(statusBadge);
@@ -848,7 +848,7 @@ var LeaderboardManager = {
                 tr.appendChild(classTd);
 
                 var scoreTd = document.createElement('td');
-                scoreTd.style.cssText = 'padding:10px;color:var(--primary);font-weight:700;';
+                scoreTd.style.cssText = 'padding:10px;color:var(--primary-text);font-weight:700;';
                 scoreTd.textContent = entry.score;
                 tr.appendChild(scoreTd);
 

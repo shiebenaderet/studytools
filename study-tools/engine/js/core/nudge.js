@@ -186,6 +186,22 @@ var NudgeManager = {
             }
         }
 
+        // Read before study: an earned chapter that is still unread comes first.
+        if (typeof MasteryManager !== 'undefined' && MasteryManager.getNextUnreadChapter) {
+            var unread = MasteryManager.getNextUnreadChapter(unitId, config);
+            var earned = MasteryManager.getEarnedCategories ? MasteryManager.getEarnedCategories(unitId, config) : [];
+            if (unread && earned.indexOf(unread.category) !== -1 && this.ACTIVITY_INFO.textbook
+                && !suggestions.some(function(s) { return s.activityId === 'textbook'; })) {
+                suggestions.unshift({
+                    activityId: 'textbook',
+                    icon: this.ACTIVITY_INFO.textbook.icon,
+                    name: 'Read Chapter ' + unread.index,
+                    group: this.ACTIVITY_INFO.textbook.group,
+                    reason: '"' + unread.category + '" unlocks when you finish reading it'
+                });
+            }
+        }
+
         var weakCount = this._getWeakTermCount(unitId);
         var triedActivities = this._getTriedActivities(unitId);
         var fcProgress = ProgressManager.getActivityProgress(unitId, 'flashcards') || {};

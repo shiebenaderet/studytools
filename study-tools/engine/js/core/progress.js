@@ -245,7 +245,7 @@ const ProgressManager = {
         const restoreBtn = document.createElement('button');
         restoreBtn.type = 'button';
         restoreBtn.textContent = 'Switching computers? Restore your progress';
-        restoreBtn.style.cssText = 'background:none;border:none;padding:0;color:var(--primary);text-decoration:underline;cursor:pointer;font:inherit;';
+        restoreBtn.style.cssText = 'background:none;border:none;padding:0;color:var(--primary-text);text-decoration:underline;cursor:pointer;font:inherit;';
         restoreBtn.addEventListener('click', () => this.showRestoreModal());
         restoreWrap.appendChild(restoreBtn);
         statsContainer.appendChild(restoreWrap);

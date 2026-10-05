@@ -857,13 +857,13 @@ StudyEngine.registerActivity({
         var icon = document.createElement('i');
         icon.className = 'fas fa-scroll';
         icon.style.fontSize = '3em';
-        icon.style.color = 'var(--primary)';
+        icon.style.color = 'var(--primary-text)';
         icon.style.marginBottom = '15px';
         intro.appendChild(icon);
 
         var title = document.createElement('h2');
         title.textContent = 'Source Analysis';
-        title.style.color = 'var(--primary)';
+        title.style.color = 'var(--primary-text)';
         title.style.marginBottom = '10px';
         intro.appendChild(title);
 
@@ -933,13 +933,13 @@ StudyEngine.registerActivity({
         var icon = document.createElement('i');
         icon.className = 'fas fa-scroll';
         icon.style.fontSize = '3em';
-        icon.style.color = 'var(--primary)';
+        icon.style.color = 'var(--primary-text)';
         icon.style.marginBottom = '15px';
         intro.appendChild(icon);
 
         var title = document.createElement('h2');
         title.textContent = 'Source Analysis';
-        title.style.color = 'var(--primary)';
+        title.style.color = 'var(--primary-text)';
         title.style.marginBottom = '10px';
         intro.appendChild(title);
 
@@ -1454,7 +1454,7 @@ StudyEngine.registerActivity({
 
         var title = document.createElement('h2');
         title.textContent = 'Analysis Complete!';
-        title.style.color = 'var(--primary)';
+        title.style.color = 'var(--primary-text)';
         results.appendChild(title);
 
         var scoreEl = document.createElement('div');
@@ -1463,7 +1463,7 @@ StudyEngine.registerActivity({
         results.appendChild(scoreEl);
 
         var detail = document.createElement('p');
-        detail.style.color = '#4b5563';
+        detail.style.color = 'var(--text-secondary)';
         detail.style.marginBottom = '20px';
         detail.textContent = this._score + ' correct out of ' + this._total + ' total questions';
         results.appendChild(detail);
@@ -1476,7 +1476,7 @@ StudyEngine.registerActivity({
             perfMsg.style.color = '#166534';
         } else if (pct >= 70) {
             perfMsg.textContent = 'Good work! Keep practicing to strengthen your source analysis skills.';
-            perfMsg.style.color = 'var(--primary)';
+            perfMsg.style.color = 'var(--primary-text)';
         } else {
             perfMsg.textContent = 'Keep studying! Remember: primary sources are from the time period, secondary sources are created later by researchers.';
             perfMsg.style.color = '#b45309';

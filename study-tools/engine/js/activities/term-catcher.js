@@ -82,13 +82,13 @@ StudyEngine.registerActivity({
 
         var title = document.createElement('h2');
         title.textContent = 'Term Catcher';
-        title.style.color = 'var(--primary)';
+        title.style.color = 'var(--primary-text)';
         title.style.marginBottom = '10px';
         startScreen.appendChild(title);
 
         var desc = document.createElement('p');
         desc.textContent = 'Catch the falling term that matches the definition!';
-        desc.style.color = '#4b5563';
+        desc.style.color = 'var(--text-secondary)';
         desc.style.marginBottom = '20px';
         startScreen.appendChild(desc);
 
@@ -96,7 +96,7 @@ StudyEngine.registerActivity({
             var highEl = document.createElement('p');
             highEl.textContent = 'High Score: ' + this._highScore;
             highEl.style.fontWeight = '600';
-            highEl.style.color = 'var(--accent)';
+            highEl.style.color = 'var(--accent-text)';
             highEl.style.marginBottom = '15px';
             startScreen.appendChild(highEl);
         }
@@ -479,7 +479,7 @@ StudyEngine.registerActivity({
 
         var heading = document.createElement('h2');
         heading.textContent = 'Game Over';
-        heading.style.color = 'var(--primary)';
+        heading.style.color = 'var(--primary-text)';
         heading.style.marginBottom = '10px';
         overlay.appendChild(heading);
 
@@ -490,14 +490,14 @@ StudyEngine.registerActivity({
 
         var label = document.createElement('p');
         label.textContent = 'Points';
-        label.style.color = '#4b5563';
+        label.style.color = 'var(--text-secondary)';
         label.style.marginBottom = '15px';
         overlay.appendChild(label);
 
         if (isNewHigh) {
             var newHighEl = document.createElement('p');
             newHighEl.textContent = 'New High Score!';
-            newHighEl.style.color = 'var(--accent)';
+            newHighEl.style.color = 'var(--accent-text)';
             newHighEl.style.fontWeight = 'bold';
             newHighEl.style.fontSize = '1.2em';
             newHighEl.style.marginBottom = '10px';
@@ -505,14 +505,14 @@ StudyEngine.registerActivity({
         } else {
             var highEl = document.createElement('p');
             highEl.textContent = 'High Score: ' + this._highScore;
-            highEl.style.color = '#4b5563';
+            highEl.style.color = 'var(--text-secondary)';
             highEl.style.marginBottom = '10px';
             overlay.appendChild(highEl);
         }
 
         var statsEl = document.createElement('p');
         statsEl.textContent = 'Correct answers: ' + this._correctCount;
-        statsEl.style.color = '#4b5563';
+        statsEl.style.color = 'var(--text-secondary)';
         statsEl.style.marginBottom = '20px';
         overlay.appendChild(statsEl);
 

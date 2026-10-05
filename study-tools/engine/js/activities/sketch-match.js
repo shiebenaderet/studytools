@@ -306,7 +306,7 @@ StudyEngine.registerActivity({
 
         const icon = document.createElement('i');
         icon.className = this._score >= this._total * 0.8 ? 'fas fa-trophy' : 'fas fa-chart-line';
-        icon.style.cssText = 'font-size:2.5em;color:var(--accent);margin-bottom:12px;display:block;';
+        icon.style.cssText = 'font-size:2.5em;color:var(--accent-text);margin-bottom:12px;display:block;';
         results.appendChild(icon);
 
         const title = document.createElement('h2');

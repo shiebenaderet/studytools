@@ -96,7 +96,7 @@ StudyEngine.registerActivity({
 
         var iconEl = document.createElement('i');
         iconEl.className = 'fas fa-book-open';
-        iconEl.style.cssText = 'font-size:2.5em;color:var(--primary);margin-bottom:16px;display:block;';
+        iconEl.style.cssText = 'font-size:2.5em;color:var(--primary-text);margin-bottom:16px;display:block;';
         prompt.appendChild(iconEl);
 
         var heading = document.createElement('h2');
@@ -125,7 +125,7 @@ StudyEngine.registerActivity({
 
             var cardIcon = document.createElement('i');
             cardIcon.className = level.icon;
-            cardIcon.style.cssText = 'font-size:1.8em;color:var(--primary);margin-bottom:10px;display:block;';
+            cardIcon.style.cssText = 'font-size:1.8em;color:var(--primary-text);margin-bottom:10px;display:block;';
             card.appendChild(cardIcon);
 
             var cardLabel = document.createElement('div');

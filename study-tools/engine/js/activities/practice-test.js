@@ -236,7 +236,7 @@ var allQuestions = this._config.unit.id === 'westward-expansion'
         var icon = document.createElement('i');
         icon.className = 'fas fa-trophy';
         icon.style.fontSize = '3rem';
-        icon.style.color = 'var(--accent)';
+        icon.style.color = 'var(--accent-text)';
         div.appendChild(icon);
 
         var title = document.createElement('div');

@@ -100,7 +100,7 @@ StudyEngine.registerActivity({
 
         const lengthHint = document.createElement('div');
         lengthHint.style.marginTop = '10px';
-        lengthHint.style.color = '#4b5563';
+        lengthHint.style.color = 'var(--text-secondary)';
         lengthHint.style.fontSize = '0.9em';
         var hasPunctuation = /[^a-zA-Z\s]/.test(this._targetVocab.term);
         lengthHint.textContent = 'Word length: ' + this._targetWord.length + ' letters' + (hasPunctuation ? ' (letters only, no punctuation)' : '');
@@ -226,7 +226,7 @@ StudyEngine.registerActivity({
         // Stats display
         const statsBar = document.createElement('div');
         statsBar.style.marginTop = '15px';
-        statsBar.style.color = '#4b5563';
+        statsBar.style.color = 'var(--text-secondary)';
         statsBar.style.fontSize = '0.85em';
         statsBar.id = 'wordle-stats';
         statsBar.textContent = 'Wins: ' + this._stats.wins + ' | Losses: ' + this._stats.losses + ' | Streak: ' + this._stats.streak;

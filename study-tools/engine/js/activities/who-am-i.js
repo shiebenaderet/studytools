@@ -36,12 +36,12 @@ StudyEngine.registerActivity({
 
         var icon = document.createElement('i');
         icon.className = 'fas fa-question-circle';
-        icon.style.cssText = 'font-size: 3em; color: var(--accent); margin-bottom: 15px;';
+        icon.style.cssText = 'font-size: 3em; color: var(--accent-text); margin-bottom: 15px;';
         wrapper.appendChild(icon);
 
         var title = document.createElement('h2');
         title.textContent = 'Who Am I?';
-        title.style.cssText = 'color: var(--primary); margin-bottom: 10px;';
+        title.style.cssText = 'color: var(--primary-text); margin-bottom: 10px;';
         wrapper.appendChild(title);
 
         var desc = document.createElement('p');
@@ -211,7 +211,7 @@ StudyEngine.registerActivity({
         header.style.cssText = 'display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;';
 
         var scoreDisplay = document.createElement('div');
-        scoreDisplay.style.cssText = 'font-weight: 600; color: var(--primary); font-size: 1.1em;';
+        scoreDisplay.style.cssText = 'font-weight: 600; color: var(--primary-text); font-size: 1.1em;';
         scoreDisplay.textContent = 'Score: ' + this._score;
         header.appendChild(scoreDisplay);
 
@@ -243,7 +243,7 @@ StudyEngine.registerActivity({
         clueCard.style.cssText = 'background: var(--bg-card, #f9fafb); border-radius: 12px; padding: 24px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); text-align: left;';
 
         var clueLabel = document.createElement('div');
-        clueLabel.style.cssText = 'font-size: 0.8em; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;';
+        clueLabel.style.cssText = 'font-size: 0.8em; font-weight: 600; color: var(--accent-text); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;';
         clueLabel.textContent = this._getClueLabel(this._currentClue);
         clueCard.appendChild(clueLabel);
 
@@ -353,7 +353,7 @@ StudyEngine.registerActivity({
 
         // Show the term
         var termEl = document.createElement('p');
-        termEl.style.cssText = 'font-size: 1.2em; font-weight: 600; color: var(--primary); margin-bottom: 6px;';
+        termEl.style.cssText = 'font-size: 1.2em; font-weight: 600; color: var(--primary-text); margin-bottom: 6px;';
         termEl.textContent = this._currentTerm.term;
         wrapper.appendChild(termEl);
 
@@ -418,13 +418,13 @@ StudyEngine.registerActivity({
         // Title
         var h2 = document.createElement('h2');
         h2.textContent = 'Round Complete!';
-        h2.style.cssText = 'color: var(--primary); margin-bottom: 10px;';
+        h2.style.cssText = 'color: var(--primary-text); margin-bottom: 10px;';
         wrapper.appendChild(h2);
 
         // Score display
         var maxScore = this._totalRounds * 5;
         var scoreEl = document.createElement('div');
-        scoreEl.style.cssText = 'font-size: 2.5em; font-weight: 700; color: var(--accent); margin-bottom: 6px;';
+        scoreEl.style.cssText = 'font-size: 2.5em; font-weight: 700; color: var(--accent-text); margin-bottom: 6px;';
         scoreEl.textContent = this._score + ' / ' + maxScore;
         wrapper.appendChild(scoreEl);
 
@@ -445,7 +445,7 @@ StudyEngine.registerActivity({
 
         // Results breakdown
         var breakdownTitle = document.createElement('h3');
-        breakdownTitle.style.cssText = 'color: var(--primary); margin-bottom: 12px; font-size: 1em;';
+        breakdownTitle.style.cssText = 'color: var(--primary-text); margin-bottom: 12px; font-size: 1em;';
         breakdownTitle.textContent = 'Term Breakdown';
         wrapper.appendChild(breakdownTitle);
 

@@ -36,7 +36,7 @@ StudyEngine.registerActivity({
         card.style.cssText = 'max-width:700px;margin:0 auto;text-align:center;';
 
         var title = document.createElement('h2');
-        title.style.cssText = 'color:var(--primary);margin-bottom:12px;font-size:1.8em;';
+        title.style.cssText = 'color:var(--primary-text);margin-bottom:12px;font-size:1.8em;';
         var icon = document.createElement('i');
         icon.className = 'fas fa-users';
         title.appendChild(icon);
@@ -52,7 +52,7 @@ StudyEngine.registerActivity({
         var controls = document.createElement('div');
         controls.style.cssText = 'display:flex;gap:20px;justify-content:center;margin-bottom:24px;flex-wrap:wrap;';
 
-        var p1Card = this._createPlayerCard('Player 1', 'var(--primary)', ['1', '2', '3', '4'], 'Left side');
+        var p1Card = this._createPlayerCard('Player 1', 'var(--primary-text)', ['1', '2', '3', '4'], 'Left side');
         controls.appendChild(p1Card);
 
         var vsEl = document.createElement('div');
@@ -138,7 +138,7 @@ StudyEngine.registerActivity({
 
         var p1Score = document.createElement('div');
         p1Score.id = 'qr-p1-score';
-        p1Score.style.cssText = 'font-size:1.4em;font-weight:800;color:var(--primary);';
+        p1Score.style.cssText = 'font-size:1.4em;font-weight:800;color:var(--primary-text);';
         p1Score.textContent = 'P1: 0';
         scoreboard.appendChild(p1Score);
 
@@ -150,7 +150,7 @@ StudyEngine.registerActivity({
 
         var p2Score = document.createElement('div');
         p2Score.id = 'qr-p2-score';
-        p2Score.style.cssText = 'font-size:1.4em;font-weight:800;color:var(--accent);';
+        p2Score.style.cssText = 'font-size:1.4em;font-weight:800;color:var(--accent-text);';
         p2Score.textContent = 'P2: 0';
         scoreboard.appendChild(p2Score);
 
@@ -389,8 +389,8 @@ StudyEngine.registerActivity({
 
         var winnerEl = document.createElement('h2');
         winnerEl.style.cssText = 'font-size:2em;margin-bottom:16px;';
-        if (this._scores[0] > this._scores[1]) winnerEl.style.color = 'var(--primary)';
-        else if (this._scores[1] > this._scores[0]) winnerEl.style.color = 'var(--accent)';
+        if (this._scores[0] > this._scores[1]) winnerEl.style.color = 'var(--primary-text)';
+        else if (this._scores[1] > this._scores[0]) winnerEl.style.color = 'var(--accent-text)';
         else winnerEl.style.color = 'var(--text-primary)';
         winnerEl.textContent = winner;
         result.appendChild(winnerEl);
@@ -402,11 +402,11 @@ StudyEngine.registerActivity({
         var p1Box = document.createElement('div');
         p1Box.style.cssText = 'text-align:center;';
         var p1Label = document.createElement('div');
-        p1Label.style.cssText = 'font-weight:600;color:var(--primary);margin-bottom:4px;';
+        p1Label.style.cssText = 'font-weight:600;color:var(--primary-text);margin-bottom:4px;';
         p1Label.textContent = 'Player 1';
         p1Box.appendChild(p1Label);
         var p1Score = document.createElement('div');
-        p1Score.style.cssText = 'font-size:3em;font-weight:800;color:var(--primary);';
+        p1Score.style.cssText = 'font-size:3em;font-weight:800;color:var(--primary-text);';
         p1Score.textContent = String(this._scores[0]);
         p1Box.appendChild(p1Score);
         scoreDisplay.appendChild(p1Box);
@@ -419,11 +419,11 @@ StudyEngine.registerActivity({
         var p2Box = document.createElement('div');
         p2Box.style.cssText = 'text-align:center;';
         var p2Label = document.createElement('div');
-        p2Label.style.cssText = 'font-weight:600;color:var(--accent);margin-bottom:4px;';
+        p2Label.style.cssText = 'font-weight:600;color:var(--accent-text);margin-bottom:4px;';
         p2Label.textContent = 'Player 2';
         p2Box.appendChild(p2Label);
         var p2Score = document.createElement('div');
-        p2Score.style.cssText = 'font-size:3em;font-weight:800;color:var(--accent);';
+        p2Score.style.cssText = 'font-size:3em;font-weight:800;color:var(--accent-text);';
         p2Score.textContent = String(this._scores[1]);
         p2Box.appendChild(p2Score);
         scoreDisplay.appendChild(p2Box);

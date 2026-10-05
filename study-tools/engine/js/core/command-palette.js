@@ -1128,7 +1128,7 @@ const CommandPalette = {
         heading.style.cssText = 'color:var(--text-primary);margin-bottom:16px;';
         var icon = document.createElement('i');
         icon.className = 'fas fa-chart-bar';
-        icon.style.color = 'var(--primary)';
+        icon.style.color = 'var(--primary-text)';
         heading.appendChild(icon);
         heading.appendChild(document.createTextNode(' Insights & Analytics'));
         section.appendChild(heading);
@@ -1233,7 +1233,7 @@ const CommandPalette = {
                 warning.style.cssText = 'margin-top:10px;padding:8px 10px;background:rgba(251,191,36,0.1);border-radius:8px;border-left:3px solid var(--accent);';
                 var warnIcon = document.createElement('i');
                 warnIcon.className = 'fas fa-exclamation-triangle';
-                warnIcon.style.cssText = 'color:var(--accent);margin-right:6px;font-size:0.8em;';
+                warnIcon.style.cssText = 'color:var(--accent-text);margin-right:6px;font-size:0.8em;';
                 warning.appendChild(warnIcon);
                 var warnText = document.createElement('span');
                 warnText.style.cssText = 'font-size:0.8em;color:var(--text-secondary);';

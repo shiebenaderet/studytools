@@ -37,12 +37,12 @@ StudyEngine.registerActivity({
 
         var icon = document.createElement('i');
         icon.className = 'fas fa-th-large';
-        icon.style.cssText = 'font-size: 3em; color: var(--accent); margin-bottom: 15px;';
+        icon.style.cssText = 'font-size: 3em; color: var(--accent-text); margin-bottom: 15px;';
         wrapper.appendChild(icon);
 
         var title = document.createElement('h2');
         title.textContent = 'Four Corners';
-        title.style.cssText = 'color: var(--primary); margin-bottom: 10px;';
+        title.style.cssText = 'color: var(--primary-text); margin-bottom: 10px;';
         wrapper.appendChild(title);
 
         var desc = document.createElement('p');
@@ -226,7 +226,7 @@ StudyEngine.registerActivity({
         header.style.cssText = 'display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;';
 
         var scoreDisplay = document.createElement('div');
-        scoreDisplay.style.cssText = 'font-weight: 600; color: var(--primary); font-size: 1.1em;';
+        scoreDisplay.style.cssText = 'font-weight: 600; color: var(--primary-text); font-size: 1.1em;';
         scoreDisplay.id = 'fc-game-score';
         scoreDisplay.textContent = 'Score: ' + this._score;
         header.appendChild(scoreDisplay);
@@ -412,7 +412,7 @@ StudyEngine.registerActivity({
                 } else {
                     // Majority cards show category badge
                     var badge = document.createElement('div');
-                    badge.style.cssText = 'font-size: 0.7em; color: var(--primary); font-weight: 600; margin-top: 4px; padding: 2px 8px; background: rgba(99, 102, 241, 0.1); border-radius: 10px;';
+                    badge.style.cssText = 'font-size: 0.7em; color: var(--primary-text); font-weight: 600; margin-top: 4px; padding: 2px 8px; background: rgba(99, 102, 241, 0.1); border-radius: 10px;';
                     badge.textContent = data.majorityCat;
                     cards[i].appendChild(badge);
                 }
@@ -524,12 +524,12 @@ StudyEngine.registerActivity({
         // Title
         var h2 = document.createElement('h2');
         h2.textContent = 'Round Complete!';
-        h2.style.cssText = 'color: var(--primary); margin-bottom: 10px;';
+        h2.style.cssText = 'color: var(--primary-text); margin-bottom: 10px;';
         wrapper.appendChild(h2);
 
         // Score
         var scoreEl = document.createElement('div');
-        scoreEl.style.cssText = 'font-size: 2.5em; font-weight: 700; color: var(--accent); margin-bottom: 6px;';
+        scoreEl.style.cssText = 'font-size: 2.5em; font-weight: 700; color: var(--accent-text); margin-bottom: 6px;';
         scoreEl.textContent = this._score;
         wrapper.appendChild(scoreEl);
 
@@ -541,7 +541,7 @@ StudyEngine.registerActivity({
         // Accuracy
         var accuracy = this._totalRounds > 0 ? Math.round((this._correct / this._totalRounds) * 100) : 0;
         var accEl = document.createElement('p');
-        accEl.style.cssText = 'font-size: 1.1em; font-weight: 600; color: var(--primary); margin-bottom: 20px;';
+        accEl.style.cssText = 'font-size: 1.1em; font-weight: 600; color: var(--primary-text); margin-bottom: 20px;';
         accEl.textContent = 'Accuracy: ' + accuracy + '%';
         wrapper.appendChild(accEl);
 
@@ -561,7 +561,7 @@ StudyEngine.registerActivity({
 
         // Results breakdown
         var breakdownTitle = document.createElement('h3');
-        breakdownTitle.style.cssText = 'color: var(--primary); margin-bottom: 12px; font-size: 1em;';
+        breakdownTitle.style.cssText = 'color: var(--primary-text); margin-bottom: 12px; font-size: 1em;';
         breakdownTitle.textContent = 'Round Breakdown';
         wrapper.appendChild(breakdownTitle);
 

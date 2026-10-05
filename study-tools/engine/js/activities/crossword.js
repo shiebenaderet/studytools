@@ -314,7 +314,7 @@ StudyEngine.registerActivity({
         var statsEl = document.createElement('div');
         statsEl.id = 'crossword-stats';
         statsEl.style.marginTop = '10px';
-        statsEl.style.color = '#4b5563';
+        statsEl.style.color = 'var(--text-secondary)';
         statsEl.style.fontSize = '0.85em';
         statsEl.textContent = 'Puzzles completed: ' + this._stats.completed;
         gridWrapper.appendChild(statsEl);

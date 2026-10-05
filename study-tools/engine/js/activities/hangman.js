@@ -136,7 +136,7 @@ StudyEngine.registerActivity({
         // Tip
         const tip = document.createElement('p');
         tip.style.textAlign = 'center';
-        tip.style.color = '#4b5563';
+        tip.style.color = 'var(--text-secondary)';
         tip.style.fontSize = '0.85rem';
         tip.style.marginTop = '12px';
         tip.textContent = 'Type A-Z on your keyboard or click the letters above';

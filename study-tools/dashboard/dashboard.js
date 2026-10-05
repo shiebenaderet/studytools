@@ -372,7 +372,7 @@ const Dashboard = {
         icon.className = 'fas fa-key';
         title.appendChild(icon);
         title.appendChild(document.createTextNode(' Set New Password'));
-        title.style.cssText = 'color:var(--primary);margin-bottom:6px;font-size:1.5rem;';
+        title.style.cssText = 'color:var(--primary-text);margin-bottom:6px;font-size:1.5rem;';
         card.appendChild(title);
 
         var subtitle = document.createElement('p');

@@ -38,19 +38,19 @@ StudyEngine.registerActivity({
         var icon = document.createElement('i');
         icon.className = 'fas fa-bolt';
         icon.style.fontSize = '3em';
-        icon.style.color = 'var(--accent)';
+        icon.style.color = 'var(--accent-text)';
         icon.style.marginBottom = '15px';
         wrapper.appendChild(icon);
 
         var title = document.createElement('h2');
         title.textContent = 'Lightning Round';
-        title.style.color = 'var(--primary)';
+        title.style.color = 'var(--primary-text)';
         title.style.marginBottom = '10px';
         wrapper.appendChild(title);
 
         var desc = document.createElement('p');
         desc.textContent = 'See a definition, pick the correct term. Answer as many as you can in 60 seconds!';
-        desc.style.color = '#4b5563';
+        desc.style.color = 'var(--text-secondary)';
         desc.style.marginBottom = '25px';
         wrapper.appendChild(desc);
 
@@ -61,7 +61,7 @@ StudyEngine.registerActivity({
         );
         if (saved && saved.bestScore !== undefined) {
             var bestEl = document.createElement('p');
-            bestEl.style.color = '#4b5563';
+            bestEl.style.color = 'var(--text-secondary)';
             bestEl.style.fontSize = '0.9em';
             bestEl.style.marginBottom = '20px';
             bestEl.textContent = 'Best score: ' + saved.bestScore;
@@ -74,7 +74,7 @@ StudyEngine.registerActivity({
             var lbTitle = document.createElement('p');
             lbTitle.style.fontWeight = '600';
             lbTitle.style.marginBottom = '8px';
-            lbTitle.style.color = 'var(--primary)';
+            lbTitle.style.color = 'var(--primary-text)';
             lbTitle.textContent = 'Leaderboard';
             wrapper.appendChild(lbTitle);
 
@@ -106,7 +106,7 @@ StudyEngine.registerActivity({
                 row.appendChild(tdScore);
                 var tdDate = document.createElement('td');
                 tdDate.textContent = lb[i].date;
-                tdDate.style.color = '#4b5563';
+                tdDate.style.color = 'var(--text-secondary)';
                 row.appendChild(tdDate);
                 tbody.appendChild(row);
             }
@@ -449,7 +449,7 @@ StudyEngine.registerActivity({
 
         var h2 = document.createElement('h2');
         h2.textContent = 'Time\'s Up!';
-        h2.style.color = 'var(--primary)';
+        h2.style.color = 'var(--primary-text)';
         results.appendChild(h2);
 
         var finalScore = document.createElement('div');
@@ -459,7 +459,7 @@ StudyEngine.registerActivity({
 
         var pct = this._answered > 0 ? Math.round((this._score / this._answered) * 100) : 0;
         var statsText = document.createElement('p');
-        statsText.style.color = '#4b5563';
+        statsText.style.color = 'var(--text-secondary)';
         statsText.style.marginBottom = '15px';
         statsText.textContent = this._score + ' correct out of ' + this._answered + ' answered (' + pct + '%)';
         results.appendChild(statsText);
@@ -485,7 +485,7 @@ StudyEngine.registerActivity({
                 item.appendChild(termSpan);
 
                 var defSpan = document.createElement('span');
-                defSpan.style.color = '#4b5563';
+                defSpan.style.color = 'var(--text-secondary)';
                 defSpan.style.fontSize = '0.9em';
                 defSpan.textContent = this._missed[i].definition;
                 item.appendChild(defSpan);
@@ -504,7 +504,7 @@ StudyEngine.registerActivity({
 
             var lbTitle = document.createElement('h3');
             lbTitle.textContent = 'Leaderboard';
-            lbTitle.style.color = 'var(--primary)';
+            lbTitle.style.color = 'var(--primary-text)';
             lbTitle.style.marginBottom = '10px';
             lbSection.appendChild(lbTitle);
 
@@ -547,7 +547,7 @@ StudyEngine.registerActivity({
 
                 var tdDate = document.createElement('td');
                 tdDate.textContent = lb[j].date;
-                tdDate.style.color = '#4b5563';
+                tdDate.style.color = 'var(--text-secondary)';
                 row.appendChild(tdDate);
 
                 tbody.appendChild(row);

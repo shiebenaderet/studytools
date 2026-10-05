@@ -67,7 +67,7 @@ const StudyTools = {
         hIcon.className = 'fas fa-edit';
         h2.appendChild(hIcon);
         h2.appendChild(document.createTextNode(' My Study Guide'));
-        h2.style.color = 'var(--primary)';
+        h2.style.color = 'var(--primary-text)';
         header.appendChild(h2);
 
         const progress = document.createElement('p');
@@ -180,7 +180,7 @@ const StudyTools = {
         nIcon.className = 'fas fa-sticky-note';
         nTitle.appendChild(nIcon);
         nTitle.appendChild(document.createTextNode(' My Notes'));
-        nTitle.style.color = 'var(--primary)';
+        nTitle.style.color = 'var(--primary-text)';
         notesSection.appendChild(nTitle);
 
         categories.forEach((cat, i) => {

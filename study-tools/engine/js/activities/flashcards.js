@@ -68,7 +68,7 @@ StudyEngine.registerActivity({
 
         var icon = document.createElement('i');
         icon.className = 'fas fa-book-open';
-        icon.style.cssText = 'font-size:2.5em;color:var(--primary);margin-bottom:16px;display:block;';
+        icon.style.cssText = 'font-size:2.5em;color:var(--primary-text);margin-bottom:16px;display:block;';
         gate.appendChild(icon);
 
         var heading = document.createElement('h2');

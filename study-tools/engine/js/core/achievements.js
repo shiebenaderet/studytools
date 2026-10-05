@@ -245,7 +245,7 @@ var AchievementManager = {
         heading.style.marginBottom = '6px';
 
         var title = document.createElement('span');
-        title.style.color = 'var(--primary)';
+        title.style.color = 'var(--primary-text)';
         title.style.fontWeight = '700';
         title.style.fontSize = '0.85em';
         title.textContent = 'Achievements';

@@ -241,7 +241,7 @@ StudyEngine.registerActivity({
         wrap.style.cssText = 'max-width:480px;margin:40px auto;text-align:center;padding:30px 20px;';
 
         var icon = this._icon('fas fa-bookmark');
-        icon.style.cssText = 'font-size:2.5rem;color:var(--primary);margin-bottom:16px;display:block;';
+        icon.style.cssText = 'font-size:2.5rem;color:var(--primary-text);margin-bottom:16px;display:block;';
         wrap.appendChild(icon);
 
         var title = this._el('h2', null, 'Session in Progress');
@@ -303,7 +303,7 @@ StudyEngine.registerActivity({
         var header = this._el('div');
         header.style.cssText = 'text-align:center;margin-bottom:28px;';
         var titleIcon = this._icon('fas fa-brain');
-        titleIcon.style.cssText = 'font-size:2rem;color:var(--primary);margin-bottom:8px;display:block;';
+        titleIcon.style.cssText = 'font-size:2rem;color:var(--primary-text);margin-bottom:8px;display:block;';
         header.appendChild(titleIcon);
         var title = this._el('h2', null, 'Learn Mode');
         title.style.cssText = 'color:var(--text-primary);margin:0 0 4px 0;font-size:1.4rem;';
@@ -339,7 +339,7 @@ StudyEngine.registerActivity({
                 row.style.cssText = 'display:flex;align-items:center;gap:14px;';
 
                 var ic = self._icon(mode.icon);
-                ic.style.cssText = 'font-size:1.4rem;color:var(--primary);width:32px;text-align:center;';
+                ic.style.cssText = 'font-size:1.4rem;color:var(--primary-text);width:32px;text-align:center;';
                 row.appendChild(ic);
 
                 var text = self._el('div');
@@ -652,7 +652,7 @@ StudyEngine.registerActivity({
         wrap.style.cssText = 'max-width:560px;margin:0 auto;padding:20px;';
 
         var label = this._el('div', null, 'Quick Check');
-        label.style.cssText = 'color:var(--accent);font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:12px;';
+        label.style.cssText = 'color:var(--accent-text);font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:12px;';
         wrap.appendChild(label);
 
         var qText = this._el('div', null, q.question);
@@ -712,7 +712,7 @@ StudyEngine.registerActivity({
         wrap.style.cssText = 'max-width:560px;margin:0 auto;padding:20px;';
 
         var label = this._el('div', null, 'Fill in the Blank');
-        label.style.cssText = 'color:var(--accent);font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:12px;';
+        label.style.cssText = 'color:var(--accent-text);font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:12px;';
         wrap.appendChild(label);
 
         var sentence = this._el('div', null, fib.sentence);
@@ -803,7 +803,7 @@ StudyEngine.registerActivity({
         wrap.style.cssText = 'max-width:480px;margin:40px auto;text-align:center;padding:20px;';
 
         var icon = this._icon('fas fa-chart-bar');
-        icon.style.cssText = 'font-size:2rem;color:var(--primary);margin-bottom:12px;display:block;';
+        icon.style.cssText = 'font-size:2rem;color:var(--primary-text);margin-bottom:12px;display:block;';
         wrap.appendChild(icon);
 
         var heading = this._el('h2', null, 'You know ' + pct + '%!');
@@ -1284,7 +1284,7 @@ StudyEngine.registerActivity({
         card.style.cssText = 'background:var(--bg-deep);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius-md);padding:28px 24px;';
 
         var label = this._el('div', null, 'Key Idea');
-        label.style.cssText = 'color:var(--accent);font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:6px;';
+        label.style.cssText = 'color:var(--accent-text);font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:6px;';
         card.appendChild(label);
 
         if (data.heading) {
@@ -1330,7 +1330,7 @@ StudyEngine.registerActivity({
         card.style.cssText = 'background:var(--bg-deep);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius-md);padding:28px 24px;';
 
         var label = this._el('div', null, 'Quick Check');
-        label.style.cssText = 'color:var(--accent);font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:12px;';
+        label.style.cssText = 'color:var(--accent-text);font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:12px;';
         card.appendChild(label);
 
         var qText = this._el('div', null, q.question);
@@ -1428,7 +1428,7 @@ StudyEngine.registerActivity({
         card.style.cssText = 'background:linear-gradient(135deg, var(--bg-deep), ' + primary + '10);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius-md);padding:28px 24px;';
 
         var label = this._el('div', null, 'Fill in the Blank');
-        label.style.cssText = 'color:var(--accent);font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:12px;';
+        label.style.cssText = 'color:var(--accent-text);font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:12px;';
         card.appendChild(label);
 
         var sentence = this._el('div', null, fib.sentence);
@@ -1508,11 +1508,11 @@ StudyEngine.registerActivity({
         card.style.cssText = 'background:var(--bg-card);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius-md);padding:28px 24px;text-align:center;';
 
         var icon = this._icon('fas fa-lightbulb');
-        icon.style.cssText = 'font-size:1.8rem;color:var(--accent);margin-bottom:12px;display:block;';
+        icon.style.cssText = 'font-size:1.8rem;color:var(--accent-text);margin-bottom:12px;display:block;';
         card.appendChild(icon);
 
         var label = this._el('div', null, 'Reflection');
-        label.style.cssText = 'color:var(--accent);font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:14px;';
+        label.style.cssText = 'color:var(--accent-text);font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:14px;';
         card.appendChild(label);
 
         var prompt = this._el('div', null, data.prompt || 'What have you learned so far?');
@@ -1683,7 +1683,7 @@ StudyEngine.registerActivity({
         header.style.cssText = 'margin-bottom:20px;';
         var icon = document.createElement('i');
         icon.className = 'fas fa-gamepad';
-        icon.style.cssText = 'font-size:2em;color:var(--accent);display:block;margin-bottom:8px;';
+        icon.style.cssText = 'font-size:2em;color:var(--accent-text);display:block;margin-bottom:8px;';
         header.appendChild(icon);
         var title = document.createElement('h3');
         title.style.cssText = 'color:var(--text-primary);margin-bottom:4px;';
@@ -1840,7 +1840,7 @@ StudyEngine.registerActivity({
             var clueCard = document.createElement('div');
             clueCard.style.cssText = 'background:var(--bg-card);border:1px solid var(--border-card);border-radius:12px;padding:16px;margin-bottom:16px;';
             var clueLabel = document.createElement('div');
-            clueLabel.style.cssText = 'color:var(--accent);font-weight:600;font-size:0.8em;margin-bottom:6px;';
+            clueLabel.style.cssText = 'color:var(--accent-text);font-weight:600;font-size:0.8em;margin-bottom:6px;';
             clueLabel.textContent = 'Who Am I?';
             clueCard.appendChild(clueLabel);
             var clueText = document.createElement('div');
@@ -2074,7 +2074,7 @@ StudyEngine.registerActivity({
         wonderBtn.style.cssText = 'position:fixed;bottom:24px;right:24px;width:44px;height:44px;border-radius:50%;background:var(--bg-elevated);border:1px solid rgba(255,255,255,0.1);' +
             'cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:100;transition:transform 0.15s;box-shadow:var(--shadow-card);';
         var bulb = this._icon('fas fa-lightbulb');
-        bulb.style.cssText = 'color:var(--accent);font-size:1rem;';
+        bulb.style.cssText = 'color:var(--accent-text);font-size:1rem;';
         wonderBtn.appendChild(bulb);
 
         wonderBtn.addEventListener('mouseenter', function() { wonderBtn.style.transform = 'scale(1.1)'; });
@@ -2267,7 +2267,7 @@ StudyEngine.registerActivity({
         wrap.style.cssText = 'max-width:500px;margin:30px auto;padding:24px 20px;text-align:center;';
 
         var trophy = this._icon('fas fa-trophy');
-        trophy.style.cssText = 'font-size:2.5rem;color:var(--accent);margin-bottom:12px;display:block;';
+        trophy.style.cssText = 'font-size:2.5rem;color:var(--accent-text);margin-bottom:12px;display:block;';
         wrap.appendChild(trophy);
 
         var heading = this._el('h2', null, 'Session Complete!');
@@ -2289,7 +2289,7 @@ StudyEngine.registerActivity({
         barsWrap.appendChild(beforeCol);
 
         var arrow = this._icon('fas fa-arrow-right');
-        arrow.style.cssText = 'color:var(--primary);font-size:1.5rem;align-self:center;';
+        arrow.style.cssText = 'color:var(--primary-text);font-size:1.5rem;align-self:center;';
         barsWrap.appendChild(arrow);
 
         var afterCol = this._el('div');
@@ -2369,7 +2369,7 @@ StudyEngine.registerActivity({
         wikiBonus.style.cssText = 'background:var(--bg-elevated);border:1px solid var(--border-card);border-radius:var(--radius-md);padding:20px;margin-top:20px;text-align:left;';
 
         var wikiIcon = this._icon('fas fa-pen-fancy');
-        wikiIcon.style.cssText = 'color:var(--accent);font-size:1.3rem;margin-bottom:8px;display:block;text-align:center;';
+        wikiIcon.style.cssText = 'color:var(--accent-text);font-size:1.3rem;margin-bottom:8px;display:block;text-align:center;';
         wikiBonus.appendChild(wikiIcon);
 
         var wikiTitle = this._el('div', null, 'Bonus Challenge: Write a Wiki Entry');
@@ -2463,7 +2463,7 @@ StudyEngine.registerActivity({
                 // Replace the form with a thank you
                 wikiBonus.textContent = '';
                 var thankIcon = self._icon('fas fa-star');
-                thankIcon.style.cssText = 'color:var(--accent);font-size:2rem;display:block;text-align:center;margin-bottom:8px;';
+                thankIcon.style.cssText = 'color:var(--accent-text);font-size:2rem;display:block;text-align:center;margin-bottom:8px;';
                 wikiBonus.appendChild(thankIcon);
                 var thankMsg = self._el('div', null, 'Wiki entry submitted! +10 min bonus points awarded.');
                 thankMsg.style.cssText = 'color:#2ecc71;font-weight:600;font-size:1rem;text-align:center;margin-bottom:6px;';

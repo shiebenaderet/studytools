@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.54.0] - 2026-10-04
+
+### Fixed
+- **Dark-mode contrast.** A unit's theme colors were used as text on the dark cards, so Revolution's deep red (#7A2A28) read at under 2:1 (timeline years, headings, links, icons). Text now uses `--primary-text` / `--secondary-text` / `--accent-text`, which `StudyEngine._setReadableTextColors` lightens until they reach 4.5:1 on every dark surface; backgrounds keep the unit color. Also: hardcoded #4b5563 grays in five games, white text on the short-answer topic badges, and a slightly brighter `--text-muted`.
+- **Light-mode contrast.** `--text-muted`, `--accent`, `--success` and `--warning` darkened; text in the primary color uses `--primary-bold`. A scan of every activity's first screen now finds no text under 4.5:1 (3:1 for large text) in either mode.
+- "What to Do Next" puts an earned, unread chapter first ("Read Chapter 1"), and the How to Study step 1 says to read the chapter before Flashcards.
+
 ## [8.53.0] - 2026-10-04
 
 ### Added

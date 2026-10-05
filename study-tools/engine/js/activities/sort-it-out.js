@@ -42,12 +42,12 @@ StudyEngine.registerActivity({
 
         var icon = document.createElement('i');
         icon.className = 'fas fa-layer-group';
-        icon.style.cssText = 'font-size: 3em; color: var(--accent); margin-bottom: 15px;';
+        icon.style.cssText = 'font-size: 3em; color: var(--accent-text); margin-bottom: 15px;';
         wrapper.appendChild(icon);
 
         var title = document.createElement('h2');
         title.textContent = 'Sort It Out';
-        title.style.cssText = 'color: var(--primary); margin-bottom: 10px;';
+        title.style.cssText = 'color: var(--primary-text); margin-bottom: 10px;';
         wrapper.appendChild(title);
 
         var desc = document.createElement('p');
@@ -182,13 +182,13 @@ StudyEngine.registerActivity({
         header.style.cssText = 'display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;';
 
         var scoreDisplay = document.createElement('div');
-        scoreDisplay.style.cssText = 'font-weight: 600; color: var(--primary); font-size: 1.1em;';
+        scoreDisplay.style.cssText = 'font-weight: 600; color: var(--primary-text); font-size: 1.1em;';
         scoreDisplay.textContent = 'Score: ' + this._score;
         header.appendChild(scoreDisplay);
 
         var streakDisplay = document.createElement('div');
         streakDisplay.id = 'sio-streak';
-        streakDisplay.style.cssText = 'font-weight: 600; color: var(--accent); font-size: 1em;';
+        streakDisplay.style.cssText = 'font-weight: 600; color: var(--accent-text); font-size: 1em;';
         streakDisplay.textContent = this._streak > 0 ? 'Streak: ' + this._streak : '';
         header.appendChild(streakDisplay);
 
@@ -412,12 +412,12 @@ StudyEngine.registerActivity({
         // Title
         var h2 = document.createElement('h2');
         h2.textContent = 'All Sorted!';
-        h2.style.cssText = 'color: var(--primary); margin-bottom: 10px;';
+        h2.style.cssText = 'color: var(--primary-text); margin-bottom: 10px;';
         wrapper.appendChild(h2);
 
         // Score
         var scoreEl = document.createElement('div');
-        scoreEl.style.cssText = 'font-size: 2.5em; font-weight: 700; color: var(--accent); margin-bottom: 12px;';
+        scoreEl.style.cssText = 'font-size: 2.5em; font-weight: 700; color: var(--accent-text); margin-bottom: 12px;';
         scoreEl.textContent = this._score + ' points';
         wrapper.appendChild(scoreEl);
 
@@ -439,7 +439,7 @@ StudyEngine.registerActivity({
             statBox.style.cssText = 'text-align: center;';
 
             var statValue = document.createElement('div');
-            statValue.style.cssText = 'font-size: 1.5em; font-weight: 700; color: var(--primary);';
+            statValue.style.cssText = 'font-size: 1.5em; font-weight: 700; color: var(--primary-text);';
             statValue.textContent = stats[s].value;
             statBox.appendChild(statValue);
 
