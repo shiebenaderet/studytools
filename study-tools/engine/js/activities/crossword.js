@@ -48,7 +48,8 @@ StudyEngine.registerActivity({
                 var word = v.term.replace(/[^a-zA-Z]/g, '').toUpperCase();
                 return { word: word, vocab: v };
             })
-            .filter(function(item) { return item.word.length >= 3 && item.word.length <= 18; });
+            // Skip terms with numbers: "Proclamation of 1763" became the answer PROCLAMATIONOF.
+            .filter(function(item) { return !/\d/.test(item.vocab.term) && item.word.length >= 3 && item.word.length <= 18; });
 
         candidates.sort(function(a, b) { return b.word.length - a.word.length; });
 

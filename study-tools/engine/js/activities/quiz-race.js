@@ -106,7 +106,10 @@ StudyEngine.registerActivity({
 
     _startGame() {
         // Shuffle and pick questions
-        var allQ = this._config.practiceQuestions.slice();
+        // Only questions from unlocked categories, like the practice test; it used to
+        // draw from the whole unit, so week-one students got Declaration questions.
+        var allQ = (MasteryManager.getUnlockedQuestions(this._config.unit.id, this._config, 'practiceQuestions') || []).slice();
+        if (allQ.length < 4) allQ = this._config.practiceQuestions.slice();
         for (var i = allQ.length - 1; i > 0; i--) {
             var j = Math.floor(Math.random() * (i + 1));
             var tmp = allQ[i]; allQ[i] = allQ[j]; allQ[j] = tmp;

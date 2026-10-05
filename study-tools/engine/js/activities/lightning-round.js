@@ -252,7 +252,20 @@ StudyEngine.registerActivity({
         if (!this._gameActive) return;
 
         var vocab = MasteryManager.getMustKnowVocabulary(this._config.unit.id, this._config);
-        if (vocab.length < 4) return;
+        if (vocab.length < 4) {
+            // Not enough terms for four choices: say so instead of a blank card under a running clock.
+            this._gameActive = false;
+            if (this._timer) clearInterval(this._timer);
+            var wrapper = document.getElementById('lightning-wrapper');
+            if (wrapper) {
+                while (wrapper.firstChild) wrapper.removeChild(wrapper.firstChild);
+                var msg = document.createElement('p');
+                msg.style.cssText = 'text-align:center;color:var(--text-secondary);padding:40px 20px;';
+                msg.textContent = 'You need at least 4 unlocked vocabulary terms to play. Keep studying your flashcards!';
+                wrapper.appendChild(msg);
+            }
+            return;
+        }
 
         // Pick a term we haven't used yet
         var availableIndices = [];

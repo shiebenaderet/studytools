@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.50.0] - 2026-10-04
+
+### Fixed
+- **Games in a unit's first week.** Games draw on must-know terms, and Revolution's first category has only three, so on its first day Lightning Round stalled on a blank card under a running clock, Flip Match's "6 pairs" dealt 3, Wordle had one word, and Who Am I? refused to start. Below six must-know terms, games now fill in with the category's other unlocked terms (`MasteryManager.MIN_GAME_TERMS`).
+- Lightning Round with fewer than 4 terms now says so instead of showing an empty card.
+- Quiz Race drew from the whole unit, so week-one students got Declaration questions. It now uses unlocked categories only, like the practice test.
+- Crossword and Hangman skip terms with numbers ("Proclamation of 1763" became the crossword answer PROCLAMATIONOF).
+- Term Catcher: long terms fell half off the right edge of the play area.
+- Service worker cache v78.
+
 ## [8.49.0] - 2026-10-04
 
 ### Added

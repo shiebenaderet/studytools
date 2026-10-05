@@ -154,8 +154,11 @@ StudyEngine.registerActivity({
 
     _newGame() {
         var vocab = MasteryManager.getMustKnowVocabulary(this._config.unit.id, this._config);
+        // Terms with numbers can't be guessed letter by letter ("Proclamation of 1763").
+        var playable = vocab.filter(function(v) { return !/\d/.test(v.term); });
+        if (playable.length) vocab = playable;
         var item = vocab[Math.floor(Math.random() * vocab.length)];
-        this._targetWord = item.term.toUpperCase().replace(/[^A-Z\s]/g, '');
+        this._targetWord = item.term.toUpperCase().replace(/[^A-Z\s]/g, '').replace(/\s+/g, ' ').trim();
         this._currentDefinition = item.definition;
         this._guessedLetters = [];
         this._wrongCount = 0;

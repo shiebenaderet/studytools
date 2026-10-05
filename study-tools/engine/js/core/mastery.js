@@ -200,8 +200,16 @@ const MasteryManager = {
         const unlocked = this.getUnlockedVocabulary(unitId, config);
         const hasTiers = unlocked.some(v => v.tier);
         if (!hasTiers) return unlocked;
-        return unlocked.filter(v => !v.tier || v.tier === 'must-know');
+        const mustKnow = unlocked.filter(v => !v.tier || v.tier === 'must-know');
+        // Games need enough terms to play. In a unit's first week only one category
+        // is open, and it may hold just 3 must-know terms (Revolution: Lightning Round
+        // stalled on a blank card, Flip Match "6 pairs" dealt 3, Wordle had one word).
+        // Below the floor, fill in with the category's other unlocked terms, must-know first.
+        if (mustKnow.length >= this.MIN_GAME_TERMS) return mustKnow;
+        return mustKnow.concat(unlocked.filter(v => mustKnow.indexOf(v) === -1));
     },
+
+    MIN_GAME_TERMS: 6,
 
     /**
      * Returns config.vocabulary filtered to only unlocked categories.

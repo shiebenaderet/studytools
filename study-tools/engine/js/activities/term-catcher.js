@@ -305,6 +305,14 @@ StudyEngine.registerActivity({
             })(termText, el, ftObj));
 
             this._gameArea.appendChild(el);
+            // Long terms ("Taxation without Representation") are wider than the 150px
+            // the spacing assumes and fell half off the right edge; pull them back in.
+            var w = el.offsetWidth;
+            if (x + w > areaWidth - 5) {
+                x = Math.max(5, areaWidth - w - 5);
+                el.style.left = x + 'px';
+                ftObj.x = x;
+            }
             this._fallingTerms.push(ftObj);
         }
     },
