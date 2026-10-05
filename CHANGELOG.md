@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.0] - 2026-10-05
+
+### Added
+- **Revolution short answer: the Unit 2 essential question**, verbatim: "How did loyal British subjects turn into revolutionaries in barely a decade?" (Causes of Unrest, 7 prompts in all). Its Look at line points to the Unrest Tracker's "Our group" and "Class average" columns and the class unrest chart from the Day 5 discussion, so students rehearse it before Quiz 2.
+
+### Changed
+- The Unrest in the Colonies card links to `https://unrest.mrbsocialstudies.org/` and describes the Day 5 group budget and the backup option.
+
 ## [8.54.0] - 2026-10-04
 
 ### Fixed

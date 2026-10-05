@@ -1223,6 +1223,42 @@
       "lookAt": "the timeline, and Chapter 2, Section 3 of the reading (From Protest to Rebellion)."
     },
     {
+      "question": "How did loyal British subjects turn into revolutionaries in barely a decade?",
+      "topic": "Causes of Unrest",
+      "keyTerms": [
+        "Proclamation of 1763",
+        "Taxation without Representation",
+        "Boycott",
+        "Intolerable Acts"
+      ],
+      "rubric": "Strong response explains that the change built up over a series of British actions and colonial responses (not one event), uses specific evidence such as the class unrest chart or named events with dates, and explains why the anger grew: colonists lost a voice in their own government and then were punished as a group.",
+      "exemplar": "Colonists did not turn against Britain all at once. In 1763 most still saw themselves as British, but the Proclamation of 1763 and then the Stamp Act made them feel Britain was making choices for them without asking. They called this taxation without representation, and boycotts taught them they could push back together. In our class unrest chart, the line climbed fastest at the Intolerable Acts in 1774, when Britain punished all of Massachusetts. That showed colonists Britain would take away their freedom, not just tax them, so the colonies united and by 1775 were ready to fight.",
+      "plan": [
+        {
+          "role": "claim",
+          "text": "Loyal subjects became revolutionaries step by step, as each British action took away more of their voice and freedom."
+        },
+        {
+          "role": "evidence",
+          "text": "The Stamp Act (1765) and Townshend Acts (1767) taxed colonists who had no representatives in Parliament, and colonists answered with boycotts."
+        },
+        {
+          "role": "evidence",
+          "text": "In our class unrest chart, the biggest jump was the Intolerable Acts (1774), when Britain closed Boston's port and took away Massachusetts' self-government."
+        },
+        {
+          "role": "reasoning",
+          "text": "Each step showed colonists that Britain would not listen, so protest grew into unity and then into fighting at Lexington and Concord in 1775."
+        }
+      ],
+      "sentenceStarters": [
+        "In 1763, most colonists ___, but by 1775 ___.",
+        "The class unrest chart shows the biggest jump at ___, because ___.",
+        "Step by step, colonists changed because ___."
+      ],
+      "lookAt": "your Unrest Tracker (the “Our group” and “Class average” columns), the class unrest chart, and the timeline."
+    },
+    {
       "question": "Which group (enslaved people, Native nations, women or Loyalists) saw independence differently from the Patriots, and why?",
       "topic": "Choosing Sides",
       "keyTerms": [
@@ -1575,9 +1611,9 @@
       "name": "Unrest in the Colonies",
       "icon": "fas fa-temperature-high",
       "category": "practice",
-      "description": "Read nine events from 1763 to 1775, rate how much unrest each caused, then spend your 36-point budget on the ones that mattered most.",
-      "subtitle": "In class Oct 9 to 13. Your work saves on the computer you use.",
-      "url": "https://shiebenaderet.github.io/colonial-unrest/"
+      "description": "Read nine events from 1763 to 1775, rate how much unrest each caused, then agree with your group on a 36-point budget.",
+      "subtitle": "In class Oct 9 to 13. Save a backup if you switch computers.",
+      "url": "https://unrest.mrbsocialstudies.org/"
     },
     {
       "id": "revolutionary-voices",
