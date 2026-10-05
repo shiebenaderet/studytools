@@ -686,6 +686,9 @@ const Dashboard = {
                 var unitsResp = await fetch('../units/units.json');
                 var unitsData = await unitsResp.json();
                 (unitsData.units || []).forEach(function(u) {
+                    // Last year's units are hidden from students; leave them out here too.
+                    // If old progress for one is still in the database it is added below.
+                    if (u.hidden || u.draft) return;
                     if (!seen[u.id]) {
                         seen[u.id] = true;
                         unitIds.push(u.id);

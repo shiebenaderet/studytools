@@ -4,6 +4,7 @@ const CommandPalette = {
     commands: [],
     filteredCommands: [],
     teacherMode: false,
+    // Typing this in the palette opens the teacher sign-in (it grants nothing by itself).
     teacherSecret: 'teacher',
 
     open() {
@@ -335,14 +336,42 @@ const CommandPalette = {
 
     // --- Teacher Unlock (bypass mastery gating for demos) ---
 
-    promptTeacherUnlock() {
+    // Teacher unlock (opens every category and hidden or not-yet-open units for this
+    // browser session). Oct 4 2026: it used to take the password "teacher", written in
+    // this file where any student could read it. Now it takes the teacher's own
+    // dashboard sign-in, and only for an email that teaches a class in the database.
+    async isTeacherSession() {
+        if (!ProgressManager.supabase) return false;
+        try {
+            const { data: { session } } = await ProgressManager.supabase.auth.getSession();
+            const email = session && session.user && session.user.email;
+            if (!email) return false;
+            const { data, error } = await ProgressManager.supabase
+                .from('classes').select('id').ilike('teacher_email', email).limit(1);
+            return !error && !!(data && data.length);
+        } catch (e) {
+            return false;
+        }
+    },
+
+    _grantUnlock() {
+        sessionStorage.setItem('teacher-unlock', 'true');
+        StudyEngine.closeModal();
+        StudyUtils.showToast('All activities unlocked for this session!', 'success');
+        if (typeof StudyEngine !== 'undefined' && StudyEngine.config) StudyEngine.showHome();
+    },
+
+    async promptTeacherUnlock() {
         // If already unlocked, offer to lock again
         if (sessionStorage.getItem('teacher-unlock') === 'true') {
             sessionStorage.removeItem('teacher-unlock');
             StudyUtils.showToast('Teacher unlock disabled. Mastery gating restored.', 'info');
-            if (typeof StudyEngine !== 'undefined') StudyEngine.showHome();
+            if (typeof StudyEngine !== 'undefined' && StudyEngine.config) StudyEngine.showHome();
             return;
         }
+
+        // Already signed in to the teacher dashboard in this browser: unlock straight away.
+        if (await this.isTeacherSession()) { this._grantUnlock(); return; }
 
         var overlay = document.getElementById('modal-overlay');
         var content = document.createElement('div');
@@ -365,18 +394,28 @@ const CommandPalette = {
 
         var desc = document.createElement('p');
         desc.style.cssText = 'color:var(--text-secondary);margin-bottom:20px;';
-        desc.textContent = 'Enter the teacher password to unlock all activities and content for this session.';
+        desc.textContent = 'Sign in with your Teacher Dashboard account to unlock all activities and units for this session.';
         content.appendChild(desc);
 
         var form = document.createElement('div');
         form.style.cssText = 'display:flex;flex-direction:column;gap:12px;';
+        var fieldCss = 'padding:10px 14px;border:1px solid var(--border-card);border-radius:8px;background:var(--bg-surface);color:var(--text-primary);font-size:1em;';
 
-        var input = document.createElement('input');
-        input.type = 'password';
-        input.placeholder = 'Password';
-        input.className = 'modal-input';
-        input.style.cssText = 'padding:10px 14px;border:1px solid var(--border-card);border-radius:8px;background:var(--bg-surface);color:var(--text-primary);font-size:1em;';
-        form.appendChild(input);
+        var emailIn = document.createElement('input');
+        emailIn.type = 'email';
+        emailIn.placeholder = 'School email';
+        emailIn.autocomplete = 'username';
+        emailIn.className = 'modal-input';
+        emailIn.style.cssText = fieldCss;
+        form.appendChild(emailIn);
+
+        var pwIn = document.createElement('input');
+        pwIn.type = 'password';
+        pwIn.placeholder = 'Password';
+        pwIn.autocomplete = 'current-password';
+        pwIn.className = 'modal-input';
+        pwIn.style.cssText = fieldCss;
+        form.appendChild(pwIn);
 
         var statusEl = document.createElement('p');
         statusEl.style.cssText = 'color:var(--text-muted);font-size:0.9em;min-height:1.2em;';
@@ -385,36 +424,41 @@ const CommandPalette = {
         var btn = document.createElement('button');
         btn.className = 'nav-button';
         btn.style.cssText = 'width:100%;padding:10px;font-size:1em;';
-        btn.textContent = 'Unlock';
+        btn.textContent = 'Sign in and unlock';
 
         var self = this;
-        var doUnlock = function() {
-            var pw = input.value.trim();
-            if (!pw) return;
-            if (pw === self.teacherSecret) {
-                sessionStorage.setItem('teacher-unlock', 'true');
-                StudyEngine.closeModal();
-                StudyUtils.showToast('All activities unlocked for this session!', 'success');
-                if (typeof StudyEngine !== 'undefined') StudyEngine.showHome();
-            } else {
-                statusEl.style.color = '#ef4444';
-                statusEl.textContent = 'Incorrect password. Try again.';
-                input.value = '';
-                input.focus();
+        var fail = function(msg) {
+            statusEl.style.color = '#ef4444';
+            statusEl.textContent = msg;
+            btn.disabled = false;
+            btn.textContent = 'Sign in and unlock';
+        };
+        var doUnlock = async function() {
+            var email = emailIn.value.trim(), pw = pwIn.value;
+            if (!email || !pw) return;
+            if (!ProgressManager.supabase) { fail('Sign-in is unavailable right now.'); return; }
+            btn.disabled = true;
+            btn.textContent = 'Signing in...';
+            try {
+                const { error } = await ProgressManager.supabase.auth.signInWithPassword({ email: email, password: pw });
+                if (error) { fail('That email and password did not work.'); return; }
+                if (await self.isTeacherSession()) { self._grantUnlock(); return; }
+                await ProgressManager.supabase.auth.signOut();
+                fail('That account is not a teacher account for this site.');
+            } catch (e) {
+                fail('Sign-in failed. Try again.');
             }
         };
 
         btn.addEventListener('click', doUnlock);
-        input.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') doUnlock();
-        });
+        pwIn.addEventListener('keydown', function(e) { if (e.key === 'Enter') doUnlock(); });
         form.appendChild(btn);
         content.appendChild(form);
 
         overlay.textContent = '';
         overlay.appendChild(content);
         overlay.classList.add('active');
-        setTimeout(function() { input.focus(); }, 100);
+        setTimeout(function() { emailIn.focus(); }, 100);
     },
 
     // --- Teacher Dashboard ---

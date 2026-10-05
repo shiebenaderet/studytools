@@ -54,10 +54,17 @@ StudyEngine.registerActivity({
             { name: 'Hard', pairs: 12 }
         ];
 
+        // Early in a unit fewer terms are open than a level asks for: label the real
+        // number of pairs, and skip a level that would deal the same game as the one before.
+        const available = (MasteryManager.getMustKnowVocabulary(config.unit.id, config) || []).length;
+        let lastCount = 0;
         difficulties.forEach(diff => {
+            const count = Math.min(diff.pairs, available || diff.pairs);
+            if (count === lastCount) return;
+            lastCount = count;
             const btn = document.createElement('button');
             btn.className = 'nav-button';
-            btn.textContent = diff.name + ' (' + diff.pairs + ' pairs)';
+            btn.textContent = diff.name + ' (' + count + ' pairs)';
             btn.addEventListener('click', () => this._startGame(diff.name.toLowerCase()));
             controls.appendChild(btn);
         });

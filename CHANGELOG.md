@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.52.0] - 2026-10-04
+
+### Changed
+- **Sign-up asks for first name and last initial** ("Emma R."). Sign-in matched first name + period alone, so two students with the same first name in one period shared an account. `ProgressManager.formatStudentName` normalizes "emma rodriguez", "Emma R", "emma r." to "Emma R."; welcome, restore and edit-profile all use it, and the button stays off until both parts are there.
+- **Teacher unlock uses the dashboard sign-in, not a password.** The old password ("teacher") was in this site's public code. Unlock now takes the teacher's Supabase sign-in and checks the email teaches a class in the database; already signed in to the dashboard in that browser, it unlocks at once.
+- **Map Image Exporter:** adds the 13 Colonies map (per-colony images, colored by region, on the coastline) and a Unit maps tab with each current unit's still maps for download.
+
+### Fixed
+- A closed unit showed the sign-in screen on top of its "not open" message.
+- Teacher dashboard's unit filter listed last year's hidden units.
+- Flip Match labeled levels "6 pairs" when fewer terms were open; it now shows the real count and drops levels that would deal the same game.
+- Service worker cache v80.
+
 ## [8.51.0] - 2026-10-04
 
 ### Added

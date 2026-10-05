@@ -353,6 +353,7 @@ const StudyEngine = {
                     const teacher = sessionStorage.getItem('teacher-unlock') === 'true';
                     const access = UnitAccess.canOpen(list, unitId, UnitAccess.today(), teacher);
                     if (!access.ok) {
+                        this.unitClosed = true;   // boot skips the sign-in screen for a closed unit
                         this.showUnitClosed(access, UnitAccess.currentUnit(list, UnitAccess.today()));
                         return;
                     }
@@ -1295,6 +1296,9 @@ document.addEventListener('DOMContentLoaded', () => {
             await CommandPalette.checkAuthRedirect();
             return;
         }
+
+        // A closed unit shows only its "not open" message; no sign-in on top of it.
+        if (StudyEngine.unitClosed) return;
 
         // Show welcome screen on first visit (after app has loaded)
         if (!ProgressManager.studentInfo) {

@@ -495,6 +495,19 @@ const ProgressManager = {
         return prev[b.length];
     },
 
+    // First name + last initial ("Emma R."). Oct 4 2026: sign-in matched on first
+    // name and period alone, so two Emmas in one period shared an account. Returns
+    // null until both parts are there. "emma rodriguez", "Emma R", "emma r." all
+    // become "Emma R."; a middle name is dropped ("Mary Ann S" -> "Mary S.").
+    formatStudentName(raw) {
+        var parts = String(raw || '').replace(/[^A-Za-z\u00C0-\u024F\s'\-.]/g, '').trim().split(/\s+/)
+            .map(function(w) { return w.replace(/\.+$/, ''); }).filter(Boolean);
+        if (parts.length < 2) return null;
+        var first = parts[0].charAt(0).toUpperCase() + parts[0].slice(1);
+        var initial = parts[parts.length - 1].charAt(0).toUpperCase();
+        return first + ' ' + initial + '.';
+    },
+
     // Look up a class by code (case-insensitive). Returns class id or null.
     async _findClassId(code) {
         if (!this.supabase) return null;
@@ -707,7 +720,7 @@ const ProgressManager = {
         // Name label
         var nameLabel = document.createElement('label');
         nameLabel.setAttribute('for', 'welcome-name');
-        nameLabel.textContent = 'What\u2019s your name?';
+        nameLabel.textContent = 'Your first name and last initial';
         card.appendChild(nameLabel);
 
         // Name input
@@ -715,9 +728,9 @@ const ProgressManager = {
         nameInput.type = 'text';
         nameInput.id = 'welcome-name';
         nameInput.className = 'welcome-name-input';
-        nameInput.placeholder = 'First name only';
-        nameInput.autocomplete = 'given-name';
-        nameInput.maxLength = 20;
+        nameInput.placeholder = 'Like: Emma R';
+        nameInput.autocomplete = 'off';
+        nameInput.maxLength = 30;
         card.appendChild(nameInput);
 
         // Period label
@@ -803,7 +816,7 @@ const ProgressManager = {
         });
 
         function updateGoBtn() {
-            var hasName = nameInput.value.trim().length > 0;
+            var hasName = !!self.formatStudentName(nameInput.value);
             var hasRecovery = recoveryInput.value.trim().length > 0;
             goBtn.disabled = !(hasName && selectedCode && hasRecovery);
         }
@@ -812,7 +825,7 @@ const ProgressManager = {
         recoveryInput.addEventListener('input', updateGoBtn);
 
         goBtn.addEventListener('click', async function() {
-            var name = nameInput.value.trim().split(/\s+/)[0]; // First name only
+            var name = self.formatStudentName(nameInput.value); // "Emma R." 
             var recoveryRaw = recoveryInput.value.trim();
             if (!name || !selectedCode || !recoveryRaw) return;
             goBtn.disabled = true;
@@ -1012,16 +1025,16 @@ const ProgressManager = {
 
         var nameLabel = document.createElement('label');
         nameLabel.setAttribute('for', 'restore-name');
-        nameLabel.textContent = 'Your name';
+        nameLabel.textContent = 'Your first name and last initial';
         card.appendChild(nameLabel);
 
         var nameInput = document.createElement('input');
         nameInput.type = 'text';
         nameInput.id = 'restore-name';
         nameInput.className = 'welcome-name-input';
-        nameInput.placeholder = 'First name only';
-        nameInput.autocomplete = 'given-name';
-        nameInput.maxLength = 20;
+        nameInput.placeholder = 'Like: Emma R';
+        nameInput.autocomplete = 'off';
+        nameInput.maxLength = 30;
         // Pre-fill if we already have a name in localStorage (helps when
         // localStorage is intact but cloud sync got disconnected).
         if (this.studentInfo && this.studentInfo.name && !this.studentInfo.isGuest) {
@@ -1073,7 +1086,7 @@ const ProgressManager = {
         goBtn.type = 'button';
         goBtn.className = 'welcome-go-btn';
         goBtn.textContent = 'Restore my progress';
-        goBtn.disabled = !(nameInput.value.trim() && selectedCode);
+        goBtn.disabled = !(self.formatStudentName(nameInput.value) && selectedCode);
         card.appendChild(goBtn);
 
         var cancelBtn = document.createElement('button');
@@ -1204,11 +1217,11 @@ const ProgressManager = {
         });
 
         rwGoBtn.addEventListener('click', async function() {
-            var name = nameInput.value.trim();
+            var name = self.formatStudentName(nameInput.value);
             var word = rwInput.value.trim();
             if (!name || !selectedCode || !word) {
                 rwStatus.style.color = 'var(--danger, #c33)';
-                rwStatus.textContent = 'Fill in name, period, and recovery word.';
+                rwStatus.textContent = 'Fill in your first name and last initial, period, and recovery word.';
                 return;
             }
             rwGoBtn.disabled = true;
@@ -1237,14 +1250,14 @@ const ProgressManager = {
         });
 
         function updateGoBtn() {
-            var hasName = nameInput.value.trim().length > 0;
+            var hasName = !!self.formatStudentName(nameInput.value);
             goBtn.disabled = !(hasName && selectedCode);
             statusLine.textContent = '';
         }
         nameInput.addEventListener('input', updateGoBtn);
 
         goBtn.addEventListener('click', async function() {
-            var name = nameInput.value.trim();
+            var name = self.formatStudentName(nameInput.value);
             if (!name || !selectedCode) return;
             goBtn.disabled = true;
             goBtn.textContent = 'Looking you up...';
@@ -1611,7 +1624,7 @@ const ProgressManager = {
         nameInput.type = 'text';
         nameInput.id = 'edit-profile-name';
         nameInput.className = 'welcome-name-input';
-        nameInput.placeholder = 'First name';
+        nameInput.placeholder = 'Like: Emma R';
         nameInput.value = currentName;
         card.appendChild(nameInput);
 
@@ -1670,8 +1683,11 @@ const ProgressManager = {
         saveBtn.style.flex = '1';
         saveBtn.textContent = 'Save Changes';
         saveBtn.addEventListener('click', function() {
-            var newName = nameInput.value.trim();
-            if (!newName || !selectedCode) return;
+            var newName = self.formatStudentName(nameInput.value);
+            if (!newName || !selectedCode) {
+                if (!newName && typeof StudyUtils !== 'undefined') StudyUtils.showToast('Use your first name and last initial, like Emma R', 'info');
+                return;
+            }
 
             saveBtn.disabled = true;
             saveBtn.textContent = 'Saving...';

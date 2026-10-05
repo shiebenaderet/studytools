@@ -237,11 +237,12 @@
 <body>
 
 <h1>Map Image Exporter</h1>
-<div class="sub">Export individual states/territories as PNG images for quizzes and worksheets.</div>
+<div class="sub">Export individual states, territories and colonies as PNG images for quizzes and worksheets.</div>
 
 <div class="tabs">
   <button class="tab-btn active" data-tab="perstate">Per-state images</button>
   <button class="tab-btn" data-tab="handout">Full map handout</button>
+  <button class="tab-btn" data-tab="unitmaps">Unit maps</button>
 </div>
 
 <div class="tab-panel active" id="tab-perstate">
@@ -251,6 +252,7 @@
     <option value="map1861">1861 Civil War Map (42 regions)</option>
     <option value="territorial">Territorial Expansion (8 regions)</option>
     <option value="fiftystates">50 US States (50 regions)</option>
+    <option value="colonies13">13 Colonies (13 colonies)</option>
   </select>
   <label>Style:</label>
   <select id="styleSelect">
@@ -287,6 +289,11 @@
 <h2 style="font-size:1em;margin:0 0 8px 0;">All regions</h2>
 <div class="sub">Click a region to download it as PNG in the currently-selected style.</div>
 <div class="grid" id="grid"></div>
+</div>
+
+<div class="tab-panel" id="tab-unitmaps">
+  <div class="sub">The still maps in each unit's Maps section (handout maps), ready to download for slides or Canvas questions. Current and upcoming units only.</div>
+  <div class="grid" id="unitMapsGrid"></div>
 </div>
 
 <div class="tab-panel" id="tab-handout">
@@ -341,6 +348,11 @@
 <!-- 50-states data, same viewBox (900x700), shape-compatible with the exporter. -->
 <script src="../js/data/fifty-states-data.js"></script>
 
+<!-- 13 Colonies: the study site's activity file carries the data. A stub keeps its
+     registerActivity() call harmless outside the engine. -->
+<script>window.StudyEngine = window.StudyEngine || { registerActivity: function() {} };</script>
+<script src="../js/activities/thirteen-colonies-map.js"></script>
+
 <!-- Handout-tab logic. -->
 <script src="map-handout.js"></script>
 
@@ -348,6 +360,15 @@
 'use strict';
 
 const VIEWBOX = { w: 900, h: 700 };
+// The colonies map keeps its own frame (thirteen-colonies-map.js), not 900x700.
+function vb() {
+  if (state.mapKey === 'colonies13') {
+    const v = (window.THIRTEEN_COLONIES_VIEWBOX || '0 0 1000 930').split(/\s+/).map(Number);
+    return { w: v[2], h: v[3] };
+  }
+  return VIEWBOX;
+}
+const COLONY_REGION_COLOR = { 'New England Colonies': '#3b6cb3', 'Middle Colonies': '#5b8a3a', 'Southern Colonies': '#a83232' };
 const SVG_NS = 'http://www.w3.org/2000/svg';
 
 const state = {
@@ -366,6 +387,14 @@ function getRegions(mapKey) {
       paths: r.paths,
       // colour by allegiance for highlighted style
       color: allegianceColor(r.allegiance),
+    }));
+  }
+  if (mapKey === 'colonies13') {
+    return (window.THIRTEEN_COLONIES_DATA || []).map(r => ({
+      id: r.id,
+      name: r.name,
+      paths: r.paths,
+      color: COLONY_REGION_COLOR[r.region] || '#d4883a',
     }));
   }
   if (mapKey === 'fiftystates') {
@@ -402,7 +431,25 @@ function allegianceColor(a) {
 function buildHighlightedSVG(region, allRegions) {
   const svg = document.createElementNS(SVG_NS, 'svg');
   svg.setAttribute('xmlns', SVG_NS);
-  svg.setAttribute('viewBox', `0 0 ${VIEWBOX.w} ${VIEWBOX.h}`);
+  svg.setAttribute('viewBox', `0 0 ${vb().w} ${vb().h}`);
+
+  // Colonies: the coastline and the land around them, so they don't float like islands.
+  if (state.mapKey === 'colonies13' && window.THIRTEEN_COLONIES_LAND) {
+    const defs = document.createElementNS(SVG_NS, 'defs');
+    const clip = document.createElementNS(SVG_NS, 'clipPath');
+    clip.setAttribute('id', 'mx-frame');
+    const cr = document.createElementNS(SVG_NS, 'rect');
+    cr.setAttribute('width', vb().w); cr.setAttribute('height', vb().h);
+    clip.appendChild(cr); defs.appendChild(clip); svg.appendChild(defs);
+    const sea = document.createElementNS(SVG_NS, 'rect');
+    sea.setAttribute('width', vb().w); sea.setAttribute('height', vb().h); sea.setAttribute('fill', '#dbe9f0');
+    svg.appendChild(sea);
+    const land = document.createElementNS(SVG_NS, 'path');
+    land.setAttribute('d', window.THIRTEEN_COLONIES_LAND);
+    land.setAttribute('fill', '#f6f2ea'); land.setAttribute('stroke', '#9aa5ab'); land.setAttribute('stroke-width', '1.2');
+    land.setAttribute('clip-path', 'url(#mx-frame)');
+    svg.appendChild(land);
+  }
 
   // Light background showing all regions in muted gray
   const bg = document.createElementNS(SVG_NS, 'g');
@@ -437,7 +484,7 @@ function buildHighlightedSVG(region, allRegions) {
 function buildIsolatedSVG(region) {
   // First, render the path into a hidden SVG so we can call getBBox().
   const probe = document.createElementNS(SVG_NS, 'svg');
-  probe.setAttribute('viewBox', `0 0 ${VIEWBOX.w} ${VIEWBOX.h}`);
+  probe.setAttribute('viewBox', `0 0 ${vb().w} ${vb().h}`);
   probe.style.cssText = 'position:absolute;left:-9999px;top:-9999px;width:900px;height:700px;';
   for (const d of region.paths) {
     const p = document.createElementNS(SVG_NS, 'path');
@@ -554,6 +601,7 @@ function pickPreviewRegion(regions) {
   let preferred;
   if (state.mapKey === 'map1861') preferred = 'texas';
   else if (state.mapKey === 'fiftystates') preferred = 'texas';
+  else if (state.mapKey === 'colonies13') preferred = 'virginia';
   else preferred = 'louisiana-purchase';
   return regions.find(r => r.id === preferred) || regions[0];
 }
@@ -631,6 +679,44 @@ document.getElementById('downloadOne').addEventListener('click', () => {
   downloadOne(sample, regions);
 });
 
+// ── Unit maps tab: still maps from each open or upcoming unit's mapsHub ──────
+async function renderUnitMaps() {
+  const grid = document.getElementById('unitMapsGrid');
+  if (grid.dataset.done) return;
+  grid.dataset.done = '1';
+  try {
+    const units = ((await (await fetch('../../units/units.json')).json()).units || []).filter(u => !u.hidden);
+    for (const u of units) {
+      const cfg = await (await fetch(`../../units/${u.id}/config.json`)).json();
+      const stills = ((cfg.mapsHub && cfg.mapsHub.maps) || []).filter(m => m.image);
+      for (const m of stills) {
+        const src = `../../units/${u.id}/${m.image}`;
+        const tile = document.createElement('div');
+        tile.className = 'tile';
+        const img = document.createElement('img');
+        img.src = src; img.alt = m.title; img.style.cssText = 'width:100%;height:auto;display:block;';
+        tile.appendChild(img);
+        const name = document.createElement('div');
+        name.className = 'name';
+        name.textContent = `${m.title} (${u.title.replace(' Study Tool', '')})`;
+        tile.appendChild(name);
+        const actions = document.createElement('div');
+        actions.className = 'actions';
+        const a = document.createElement('a');
+        a.href = src; a.download = m.image.split('/').pop();
+        a.textContent = 'Download PNG';
+        a.style.cssText = 'font-weight:600;';
+        actions.appendChild(a);
+        tile.appendChild(actions);
+        grid.appendChild(tile);
+      }
+    }
+    if (!grid.children.length) grid.textContent = 'No still maps in the current units yet.';
+  } catch (e) {
+    grid.textContent = 'Could not load the unit maps.';
+  }
+}
+
 // ── Tab switching ──────────────────────────────────────────
 document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -639,6 +725,7 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
     document.querySelectorAll('.tab-panel').forEach(p => {
       p.classList.toggle('active', p.id === `tab-${targetTab}`);
     });
+    if (targetTab === 'unitmaps') renderUnitMaps();
   });
 });
 
