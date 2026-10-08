@@ -181,25 +181,7 @@ const MasteryManager = {
      * earlier category remains locked or unread.
      */
     getReadUnlockedCategories(unitId, config) {
-        const categories = this.getCategories(config);
-        if (categories.length === 0) return [];
-        if (sessionStorage.getItem('teacher-unlock') === 'true') return categories.slice();
-
-        const textbook = this._textbookCache[unitId] !== undefined ? this._textbookCache[unitId] : null;
-        const unlocked = [];
-        for (let i = 0; i < categories.length; i++) {
-            const chapterRead = this.isChapterRead(unitId, textbook, categories[i]);
-            if (i === 0) {
-                if (chapterRead) unlocked.push(categories[i]);
-                continue;
-            }
-            const prevMastered = this.isCategoryMastered(unitId, config, categories[i - 1]);
-            const dateUnlocked = this.isCategoryDateUnlocked(config, categories[i]);
-            if ((prevMastered || dateUnlocked) && chapterRead) {
-                unlocked.push(categories[i]);
-            }
-        }
-        return unlocked;
+        return this.getEarnedCategories(unitId, config);
     },
 
     /**
@@ -323,12 +305,7 @@ const MasteryManager = {
             StudyUtils.showToast(`${prefix} "${masteredCategory}" mastered!`, 'success');
             return;
         }
-        const nextChapter = this.getNextUnreadChapter(unitId, config);
-        if (nextChapter) {
-            StudyUtils.showToast(`${prefix} "${masteredCategory}" mastered! Read the next chapter in the textbook to unlock "${next}" terms.`, 'success');
-        } else {
-            StudyUtils.showToast(`${prefix} "${masteredCategory}" mastered! Now try "${next}" flashcards to unlock more.`, 'success');
-        }
+        StudyUtils.showToast(`${prefix} "${masteredCategory}" mastered! Now try "${next}" flashcards to unlock more.`, 'success');
     },
 
     /**
@@ -411,21 +388,12 @@ const MasteryManager = {
     _READ_EXEMPT: ['textbook', 'resources'],
 
     _needsFirstChapter(unitId, config, activityId) {
-        if (this._READ_EXEMPT.indexOf(activityId) !== -1) return false;
-        const categories = this.getCategories(config);
-        if (categories.length === 0) return false;
-        const textbook = this._textbookCache[unitId];
-        if (!textbook) return false;
-        return !this.isChapterRead(unitId, textbook, categories[0]);
+        return false;
     },
 
     getLockMessage(unitId, config, activityId) {
         const categories = this.getCategories(config);
         if (categories.length === 0) return '';
-        if (this._needsFirstChapter(unitId, config, activityId || '')) {
-            return 'Read Chapter 1, "' + categories[0] + '," in the textbook first. Then this unlocks!';
-        }
-        // Find the first category that isn't mastered and isn't date-unlocked
         for (const cat of categories) {
             if (!this.isCategoryMastered(unitId, config, cat)
                 && !this.isCategoryDateUnlocked(config, cat)) {
