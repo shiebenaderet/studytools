@@ -39,9 +39,9 @@
   ],
   "categorySchedule": {
     "Causes of Unrest": "2026-10-07",
-    "Choosing Sides": "2026-10-12",
-    "The Declaration": "2026-10-19",
-    "Research & Voices": "2026-10-26"
+    "Choosing Sides": "2026-10-07",
+    "The Declaration": "2026-10-07",
+    "Research & Voices": "2026-10-07"
   },
   "vocabulary": [
     {
@@ -1432,14 +1432,6 @@
   "leaderboardMapActivities": [
     {
       "id": "thirteen-colonies-map",
-      "maxScore": 13
-    },
-    {
-      "id": "colonial-regions-map",
-      "maxScore": 13
-    },
-    {
-      "id": "colonial-geography-map",
       "maxScore": 13
     }
   ],

@@ -455,9 +455,12 @@ StudyEngine.registerActivity({
         var saved = ProgressManager.getActivityProgress(unitId, 'thirteen-colonies-map') || {};
         var prevBest = typeof saved.bestScore === 'number' ? saved.bestScore : -1;
         var prevTime = saved.bestTime || null;
+        // A time is only a record if the run was perfect and at least as long
+        // as the 1.4s-per-question feedback lockout allows.
+        var timeCounts = pct === 100 && elapsed >= Math.floor(total * 1.4);
         ProgressManager.saveActivityProgress(unitId, 'thirteen-colonies-map', {
             bestScore: Math.max(prevBest, this._quizScore),
-            bestTime: pct === 100 ? (prevTime === null ? elapsed : Math.min(prevTime, elapsed)) : prevTime,
+            bestTime: timeCounts ? (prevTime === null ? elapsed : Math.min(prevTime, elapsed)) : prevTime,
             attempts: (saved.attempts || 0) + 1,
             lastPlayed: new Date().toISOString()
         });

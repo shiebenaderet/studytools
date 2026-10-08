@@ -95,7 +95,11 @@ var LeaderboardManager = {
             var maxScore = typeof entry === 'object' && entry.maxScore ? entry.maxScore : 100;
             var mp = ProgressManager.getActivityProgress(unitId, mapId) || {};
             if (mp.bestScore >= maxScore && mp.bestTime) {
-                if (mapBestTime === null || mp.bestTime < mapBestTime) mapBestTime = mp.bestTime;
+                // Every map quiz locks 1.4s per question, so a real 13-question
+                // run can't finish under ~18s; a stored time below 20s can only
+                // come from a tampered localStorage value.
+                var t = Math.max(20, mp.bestTime);
+                if (mapBestTime === null || t < mapBestTime) mapBestTime = t;
             }
         }
         var mapBonus = mapBestTime ? 100 + Math.max(0, 180 - mapBestTime) : 0;
