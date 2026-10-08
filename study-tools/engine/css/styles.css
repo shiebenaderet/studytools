@@ -6551,6 +6551,29 @@ a.sift-detail-link:hover { opacity: 0.8; }
     .fs-state-label { font-size: 9px; }
 }
 
+/* ===================== Colonial Regions Map ===================== */
+.cr-legend-panel { display: flex; flex-direction: column; gap: 6px; }
+.cr-legend-row { display: flex; align-items: center; gap: 8px; font-size: 0.95em; color: var(--text-primary); }
+.cr-legend-row.cr-legend-done { opacity: 0.6; }
+.cr-legend-swatch { display: inline-block; width: 16px; height: 16px; border-radius: 4px; flex-shrink: 0; }
+.cr-region-pickers { display: flex; flex-direction: column; gap: 16px; margin: 16px 0; }
+.cr-picker-row { display: flex; flex-direction: column; gap: 6px; }
+.cr-picker-label { font-weight: 600; color: var(--text-primary); font-size: 0.95em; }
+.cr-swatches { display: flex; gap: 8px; flex-wrap: wrap; }
+.cr-swatch { width: 40px; height: 40px; border-radius: 8px; border: 3px solid transparent; cursor: pointer; transition: transform 0.15s, border-color 0.15s; }
+.cr-swatch:hover { transform: scale(1.1); }
+.cr-swatch.selected { border-color: var(--text-primary); transform: scale(1.15); box-shadow: 0 0 0 2px var(--bg-card), 0 0 0 4px var(--text-primary); }
+.cr-go-btn { margin-top: 16px; font-size: 1em; }
+.cr-go-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.cr-back-btn { margin-top: 8px; }
+.cr-color-progress { color: var(--text-muted); font-size: 0.85em; margin: 4px 0 8px; }
+.cr-colony.cr-painted { pointer-events: none; }
+.cr-colony.cr-painted .fs-state-path { stroke: #fff; stroke-width: 1.5; }
+.cr-region-buttons { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+.cr-region-btn { padding: 10px 16px; border-radius: 8px; border: 2px solid var(--border-card); border-left-width: 5px; background: var(--bg-elevated); color: var(--text-primary); cursor: pointer; font-weight: 600; font-size: 0.95em; text-align: left; transition: background 0.15s; }
+.cr-region-btn:hover { background: var(--bg-card); }
+.cr-panel-others { color: var(--text-muted); font-size: 0.85em; margin: 4px 0 0; }
+
 /* ===================== Feedback FAB & Modal ===================== */
 .feedback-fab {
     position: fixed;

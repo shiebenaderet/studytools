@@ -33,7 +33,8 @@
     "sort-it-out",
     "quiz-race",
     "maps-hub",
-    "thirteen-colonies-map"
+    "thirteen-colonies-map",
+    "colonial-regions-map"
   ],
   "categorySchedule": {
     "Causes of Unrest": "2026-10-07",
@@ -1378,6 +1379,12 @@
         "icon": "fas fa-map"
       },
       {
+        "id": "colonial-regions-map",
+        "title": "Colonial Regions",
+        "description": "Learn which colonies belong to New England, the Middle, and the Southern regions.",
+        "icon": "fas fa-palette"
+      },
+      {
         "id": "map-claims-1754",
         "title": "North America in 1754",
         "icon": "fas fa-map-marked-alt",
@@ -1418,6 +1425,10 @@
   "leaderboardMapActivities": [
     {
       "id": "thirteen-colonies-map",
+      "maxScore": 13
+    },
+    {
+      "id": "colonial-regions-map",
       "maxScore": 13
     }
   ],
