@@ -54,6 +54,12 @@ StudyEngine.registerActivity({
         this._showMenu();
     },
 
+    deactivate() {
+        this._container = null;
+        this._config = null;
+        this._mode = null;
+    },
+
     _regionForColony(colonyId) {
         for (var i = 0; i < this._REGIONS.length; i++) {
             if (this._REGIONS[i].colonies.indexOf(colonyId) !== -1) return this._REGIONS[i];

@@ -23,12 +23,13 @@ StudyEngine.registerActivity({
         'new-england': { color: '#2563eb', label: 'New England' },
         'middle':      { color: '#d97706', label: 'Middle' },
         'southern':    { color: '#059669', label: 'Southern' },
-        'frontier':    { color: '#dc2626', label: 'Frontier' },
+        'frontier':    { color: '#dc2626', label: 'British frontier' },
         'french':      { color: '#7c3aed', label: 'French' },
         'spanish':     { color: '#ea580c', label: 'Spanish' }
     },
 
     _quizItems: null,
+    _quizType: null,         // 'cities' | 'full'
     _quizIndex: 0,
     _quizScore: 0,
     _quizTotal: 0,
@@ -40,6 +41,13 @@ StudyEngine.registerActivity({
         this._container = container;
         this._config = config;
         this._showMenu();
+    },
+
+    deactivate() {
+        this._container = null;
+        this._config = null;
+        this._mode = null;
+        this._svg = null;
     },
 
     // ─── Menu ─────────────────────────────────────────────
@@ -82,11 +90,16 @@ StudyEngine.registerActivity({
 
         var unitId = this._config.unit.id;
         var saved = ProgressManager.getActivityProgress(unitId, 'colonial-geography-map') || {};
-        if (typeof saved.bestScore === 'number') {
+        var bests = [
+            ['City Quiz', saved.bestScore, saved.bestTotal, saved.bestTime],
+            ['Full Challenge', saved.bestFullScore, saved.bestFullTotal, saved.bestFullTime]
+        ];
+        for (var i = 0; i < bests.length; i++) {
+            if (typeof bests[i][1] !== 'number') continue;
             var best = document.createElement('div');
             best.className = 'cw-map-best';
-            best.textContent = 'Personal best: ' + saved.bestScore + '/' + saved.bestTotal +
-                (saved.bestTime ? ' in ' + this._formatTime(saved.bestTime) : '');
+            best.textContent = bests[i][0] + ' best: ' + bests[i][1] + '/' + bests[i][2] +
+                (bests[i][3] ? ' in ' + this._formatTime(bests[i][3]) : '');
             wrap.appendChild(best);
         }
 
@@ -124,16 +137,22 @@ StudyEngine.registerActivity({
 
     _startQuiz(type) {
         this._mode = 'quiz';
+        this._quizType = type;
         var items = [];
         var cities = window.COLONIAL_GEO_CITIES || [];
+        var self = this;
         cities.forEach(function(c) {
-            items.push({ type: 'city', id: c.id, name: c.name, x: c.x, y: c.y, data: c });
+            if (c.quiz === false) return;
+            if (c.quiz === 'full' && type !== 'full') return;
+            items.push({ type: 'city', marker: c.marker, id: c.id, name: c.name, x: c.x, y: c.y, data: c });
         });
 
         if (type === 'full') {
             var features = window.COLONIAL_GEO_FEATURES || [];
             features.forEach(function(f) {
-                items.push({ type: 'feature', id: f.id, name: f.name, x: f.x, y: f.y, data: f });
+                var hitPath = f.hitPath || (f.hitRiver ? self._riverPoints(f.hitRiver) : null);
+                items.push({ type: 'feature', id: f.id, name: f.name, x: f.x, y: f.y,
+                    hitPath: hitPath, hitRadius: f.hitRadius, data: f });
             });
             var base = window.CIVIL_WAR_MAP_BASE;
             if (base && base.lakes) {
@@ -144,7 +163,7 @@ StudyEngine.registerActivity({
                         var ys = coords.map(function(c) { return parseFloat(c.split(',')[1]); });
                         var cx = (Math.min.apply(null, xs) + Math.max.apply(null, xs)) / 2;
                         var cy = (Math.min.apply(null, ys) + Math.max.apply(null, ys)) / 2;
-                        items.push({ type: 'lake', id: lake.name.toLowerCase().replace(/[^a-z]/g, '-'), name: lake.name, x: cx, y: cy, data: lake });
+                        items.push({ type: 'lake', id: lake.name.toLowerCase().replace(/[^a-z]/g, '-'), name: lake.name, x: cx, y: cy, hitRadius: 55, data: lake });
                     }
                 });
             }
@@ -191,7 +210,7 @@ StudyEngine.registerActivity({
         svgWrap.className = 'cw-map-svg-wrap';
 
         var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        svg.setAttribute('viewBox', '0 0 900 725');
+        svg.setAttribute('viewBox', window.COLONIAL_GEO_VIEWBOX || '0 0 900 725');
         svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
         svg.setAttribute('class', 'fs-map-svg cg-svg');
         svg.style.background = '#b3d8e8';
@@ -207,6 +226,12 @@ StudyEngine.registerActivity({
         this._renderCities(svg, mode);
         if (mode === 'learn') {
             this._renderFeatureLabels(svg);
+        } else if (mode === 'quiz') {
+            // One click path for the whole quiz: the answer is whichever eligible
+            // place is nearest the tap, so crowded markers (Boston / Plymouth /
+            // Providence) can't steal each other's clicks by draw order.
+            svg.style.cursor = 'crosshair';
+            svg.addEventListener('click', this._onQuizMapClick.bind(this));
         }
 
         svgWrap.appendChild(svg);
@@ -219,7 +244,6 @@ StudyEngine.registerActivity({
     _renderBaseMap(svg, base, mode) {
         var colonies = window.COLONIAL_GEO_COLONIES || [];
         var regions = window.COLONIAL_GEO_REGIONS || {};
-        var context = window.COLONIAL_GEO_CONTEXT || [];
         var self = this;
 
         // Draw all states
@@ -232,20 +256,15 @@ StudyEngine.registerActivity({
                 if (colonies.indexOf(state.name) !== -1) {
                     var regionId = regions[state.name];
                     p.setAttribute('fill', self._REGION_FILLS[regionId] || '#d4d4d4');
-                    p.setAttribute('fill-opacity', '0.5');
-                    p.setAttribute('stroke', '#555');
-                    p.setAttribute('stroke-width', '1');
+                    p.setAttribute('fill-opacity', '0.65');
+                    p.setAttribute('stroke', '#fff');
+                    p.setAttribute('stroke-width', '1.2');
                     p.setAttribute('class', 'cg-colony');
                     p.dataset.colony = state.name;
-                } else if (context.indexOf(state.name) !== -1 || state.admin === 'CA') {
-                    p.setAttribute('fill', '#e8e0d0');
-                    p.setAttribute('stroke', '#999');
-                    p.setAttribute('stroke-width', '0.5');
-                    p.setAttribute('class', 'cg-context');
                 } else {
-                    p.setAttribute('fill', '#e8e0d0');
-                    p.setAttribute('stroke', '#999');
-                    p.setAttribute('stroke-width', '0.5');
+                    p.setAttribute('fill', '#ece6da');
+                    p.setAttribute('stroke', '#b9b2a4');
+                    p.setAttribute('stroke-width', '0.6');
                     p.setAttribute('class', 'cg-context');
                 }
                 svg.appendChild(p);
@@ -258,6 +277,12 @@ StudyEngine.registerActivity({
                         var ys = coords.map(function(c) { return parseFloat(c.split(',')[1]); });
                         var cx = (Math.min.apply(null, xs) + Math.max.apply(null, xs)) / 2;
                         var cy = (Math.min.apply(null, ys) + Math.max.apply(null, ys)) / 2;
+                        var overrides = window.COLONIAL_GEO_COLONY_LABELS || {};
+                        if (overrides.hasOwnProperty(state.name)) {
+                            if (!overrides[state.name]) return;
+                            cx = overrides[state.name][0];
+                            cy = overrides[state.name][1];
+                        }
                         var label = self._colonyAbbrev(state.name);
                         var t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
                         t.setAttribute('x', cx);
@@ -278,9 +303,9 @@ StudyEngine.registerActivity({
             base.lakes.forEach(function(lake) {
                 var p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
                 p.setAttribute('d', lake.d);
-                p.setAttribute('fill', '#7bbde0');
-                p.setAttribute('stroke', '#5a9bbf');
-                p.setAttribute('stroke-width', '0.75');
+                p.setAttribute('fill', '#8cc4e4');
+                p.setAttribute('stroke', '#4f90b5');
+                p.setAttribute('stroke-width', '1');
                 p.setAttribute('pointer-events', 'none');
                 p.setAttribute('class', 'cg-lake');
                 svg.appendChild(p);
@@ -306,66 +331,80 @@ StudyEngine.registerActivity({
             });
         }
 
-        // Draw rivers
-        if (base.rivers) {
-            var riverNames = {};
-            base.rivers.forEach(function(river) {
-                var pts = river.points.split(' ').map(function(p) { return p.trim(); }).filter(function(p) { return p; });
-                if (pts.length < 2) return;
-                var d = 'M ' + pts.join(' L ');
+        // Draw rivers: a white casing under the blue line so they read over land.
+        // River names are placed by COLONIAL_GEO_FEATURES, not here.
+        var rivers = (base.rivers || []).concat(window.COLONIAL_GEO_EXTRA_RIVERS || []);
+        var riverDs = [];
+        rivers.forEach(function(river) {
+            var pts = river.points.trim().split(/\s+/);
+            if (pts.length >= 2) riverDs.push('M ' + pts.join(' L '));
+        });
+        [['#fff', '4.5', '0.7'], ['#3b8ac4', '2.4', '1']].forEach(function(style) {
+            riverDs.forEach(function(d) {
                 var p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
                 p.setAttribute('d', d);
                 p.setAttribute('fill', 'none');
-                p.setAttribute('stroke', '#5a9bbf');
-                p.setAttribute('stroke-width', '1.5');
+                p.setAttribute('stroke', style[0]);
+                p.setAttribute('stroke-width', style[1]);
+                p.setAttribute('stroke-opacity', style[2]);
                 p.setAttribute('stroke-linecap', 'round');
+                p.setAttribute('stroke-linejoin', 'round');
                 p.setAttribute('pointer-events', 'none');
                 p.setAttribute('class', 'cg-river');
                 svg.appendChild(p);
-
-                // Place river name label once per river, at midpoint of longest segment
-                if (mode === 'learn' && !riverNames[river.name] && pts.length >= 4) {
-                    riverNames[river.name] = true;
-                    var midIdx = Math.floor(pts.length / 2);
-                    var midPt = pts[midIdx].split(',');
-                    if (midPt.length === 2) {
-                        var t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                        t.setAttribute('x', parseFloat(midPt[0]));
-                        t.setAttribute('y', parseFloat(midPt[1]) - 6);
-                        t.setAttribute('class', 'cg-river-label');
-                        t.setAttribute('text-anchor', 'middle');
-                        t.setAttribute('pointer-events', 'none');
-                        t.textContent = river.name + ' R.';
-                        svg.appendChild(t);
-                    }
-                }
             });
-        }
+        });
+    },
+
+    _riverPoints(name) {
+        var base = window.CIVIL_WAR_MAP_BASE || {};
+        var rivers = (base.rivers || []).concat(window.COLONIAL_GEO_EXTRA_RIVERS || []);
+        var pts = [];
+        rivers.forEach(function(river) {
+            if (river.name !== name) return;
+            river.points.trim().split(/\s+/).forEach(function(p) {
+                var xy = p.split(',');
+                if (xy.length === 2) pts.push([parseFloat(xy[0]), parseFloat(xy[1])]);
+            });
+        });
+        return pts;
     },
 
     _renderProclamationLine(svg, mode) {
         var lineD = window.COLONIAL_GEO_PROCLAMATION_LINE;
         if (!lineD) return;
 
+        var casing = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        casing.setAttribute('d', lineD);
+        casing.setAttribute('fill', 'none');
+        casing.setAttribute('stroke', '#fff');
+        casing.setAttribute('stroke-width', '5.5');
+        casing.setAttribute('stroke-opacity', '0.75');
+        casing.setAttribute('stroke-linecap', 'round');
+        casing.setAttribute('stroke-linejoin', 'round');
+        casing.setAttribute('pointer-events', 'none');
+        svg.appendChild(casing);
+
         var p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         p.setAttribute('d', lineD);
         p.setAttribute('fill', 'none');
         p.setAttribute('stroke', '#dc2626');
-        p.setAttribute('stroke-width', '2.5');
-        p.setAttribute('stroke-dasharray', '8,4');
+        p.setAttribute('stroke-width', '3');
+        p.setAttribute('stroke-dasharray', '9,5');
         p.setAttribute('stroke-linecap', 'round');
+        p.setAttribute('stroke-linejoin', 'round');
         p.setAttribute('pointer-events', 'none');
         p.setAttribute('class', 'cg-proclamation');
         svg.appendChild(p);
 
         if (mode === 'learn') {
             var t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-            t.setAttribute('x', 510);
-            t.setAttribute('y', 310);
+            t.setAttribute('x', 507);
+            t.setAttribute('y', 360);
             t.setAttribute('class', 'cg-proclamation-label');
-            t.setAttribute('text-anchor', 'start');
+            t.setAttribute('text-anchor', 'middle');
             t.setAttribute('pointer-events', 'none');
-            t.setAttribute('transform', 'rotate(-62, 510, 310)');
+            t.setAttribute('transform', 'rotate(-66, 507, 360)');
             t.textContent = 'Proclamation Line 1763';
             svg.appendChild(t);
         }
@@ -376,29 +415,43 @@ StudyEngine.registerActivity({
         var self = this;
 
         cities.forEach(function(city) {
+            if (mode === 'quiz') {
+                // Only places that can be asked appear; an explore-only marker
+                // next to a quiz target would otherwise invite a wrong tap.
+                if (city.quiz === false) return;
+                if (city.quiz === 'full' && self._quizType !== 'full') return;
+            }
+            var isFort = city.marker === 'fort';
             var g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-            g.setAttribute('class', 'cg-city');
+            g.setAttribute('class', 'cg-city' + (isFort ? ' cg-fort' : ''));
             g.dataset.cityId = city.id;
 
             var typeInfo = self._CITY_TYPES[city.region] || { color: '#666' };
 
-            // Clickable hitbox (larger than the dot)
+            // Hover/click area for Learn mode (larger than the dot)
             var hitbox = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
             hitbox.setAttribute('cx', city.x);
             hitbox.setAttribute('cy', city.y);
-            hitbox.setAttribute('r', mode === 'quiz' ? 15 : 10);
+            hitbox.setAttribute('r', 10);
             hitbox.setAttribute('fill', 'transparent');
             hitbox.setAttribute('cursor', 'pointer');
             g.appendChild(hitbox);
 
-            // City dot
-            var dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-            dot.setAttribute('cx', city.x);
-            dot.setAttribute('cy', city.y);
-            dot.setAttribute('r', 4);
+            // Marker: a dot for cities, a star for forts
+            var dot;
+            if (isFort) {
+                dot = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+                dot.setAttribute('points', self._starPoints(city.x, city.y, 6.5, 2.8));
+            } else {
+                dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                dot.setAttribute('cx', city.x);
+                dot.setAttribute('cy', city.y);
+                dot.setAttribute('r', 4);
+            }
             dot.setAttribute('fill', typeInfo.color);
             dot.setAttribute('stroke', '#fff');
             dot.setAttribute('stroke-width', '1.5');
+            dot.setAttribute('stroke-linejoin', 'round');
             dot.setAttribute('pointer-events', 'none');
             dot.setAttribute('class', 'cg-city-dot');
             g.appendChild(dot);
@@ -406,8 +459,8 @@ StudyEngine.registerActivity({
             // Label (learn mode only)
             if (mode === 'learn') {
                 var t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                t.setAttribute('x', city.x + 7);
-                t.setAttribute('y', city.y + 3);
+                t.setAttribute('x', city.x + (isFort ? 9 : 7) + (city.labelDx || 0));
+                t.setAttribute('y', city.y + 3 + (city.labelDy || 0));
                 t.setAttribute('class', 'cg-city-label');
                 t.setAttribute('pointer-events', 'none');
                 t.textContent = city.name;
@@ -419,13 +472,8 @@ StudyEngine.registerActivity({
                     e.stopPropagation();
                     self._selectCity(city);
                 });
-            } else if (mode === 'quiz') {
-                g.addEventListener('click', function(e) {
-                    var target = self._quizItems && self._quizItems[self._quizIndex];
-                    if (!target || target.type !== 'city') return;
-                    e.stopPropagation();
-                    self._onQuizCityClick(city);
-                });
+            } else {
+                g.setAttribute('pointer-events', 'none');
             }
 
             svg.appendChild(g);
@@ -466,6 +514,16 @@ StudyEngine.registerActivity({
             'Georgia': 'GA'
         };
         return abbr[name] || name;
+    },
+
+    _starPoints(cx, cy, outer, inner) {
+        var pts = [];
+        for (var i = 0; i < 10; i++) {
+            var r = i % 2 === 0 ? outer : inner;
+            var a = -Math.PI / 2 + i * Math.PI / 5;
+            pts.push((cx + r * Math.cos(a)).toFixed(1) + ',' + (cy + r * Math.sin(a)).toFixed(1));
+        }
+        return pts.join(' ');
     },
 
     // ─── Learn mode interactions ─────────────────────────
@@ -537,11 +595,22 @@ StudyEngine.registerActivity({
                 legend.appendChild(row);
             });
 
+            var fortRow = document.createElement('div');
+            fortRow.className = 'cr-legend-row';
+            var star = document.createElement('span');
+            star.className = 'cg-legend-star';
+            star.textContent = '★';
+            fortRow.appendChild(star);
+            var fortTxt = document.createElement('span');
+            fortTxt.textContent = 'Fort (French & Indian War era)';
+            fortRow.appendChild(fortTxt);
+            legend.appendChild(fortRow);
+
             panel.appendChild(legend);
 
             var hint = document.createElement('p');
             hint.className = 'cw-map-panel-hint';
-            hint.textContent = 'Click any city dot to learn about it.';
+            hint.textContent = 'Click any city or fort to learn about it.';
             panel.appendChild(hint);
         } else {
             var name = document.createElement('h3');
@@ -657,7 +726,8 @@ StudyEngine.registerActivity({
             prompt.className = 'cw-map-prompt';
             var promptLabel = document.createElement('div');
             promptLabel.className = 'cw-map-prompt-label';
-            promptLabel.textContent = current.type === 'city' ? 'Find this city:' : 'Find this feature:';
+            promptLabel.textContent = current.marker === 'fort' ? 'Find this fort:'
+                : current.type === 'city' ? 'Find this city:' : 'Find this feature:';
             prompt.appendChild(promptLabel);
             var promptName = document.createElement('div');
             promptName.className = 'cw-map-prompt-name';
@@ -665,65 +735,82 @@ StudyEngine.registerActivity({
             prompt.appendChild(promptName);
             panel.appendChild(prompt);
 
-            // For non-city quiz items, show "Click anywhere near it" hint
             if (current.type !== 'city') {
                 var hint = document.createElement('p');
                 hint.className = 'cw-map-panel-hint';
                 hint.textContent = 'Click on or near it on the map.';
                 panel.appendChild(hint);
-
-                // Add a click handler on the SVG for proximity-based answers
-                this._setupProximityClick(current);
             }
         }
 
         this._container.appendChild(panel);
     },
 
-    _setupProximityClick(target) {
+    // Tap radius for picking a city marker, in viewBox units. On a phone the
+    // 750-unit map is ~360px wide, so 24 units is roughly a fingertip.
+    _CITY_TAP_RADIUS: 24,
+
+    _svgPoint(e) {
+        // Map the click through the SVG's own transform so letterboxing
+        // (preserveAspectRatio) and the cropped viewBox are both accounted for.
+        var pt = this._svg.createSVGPoint();
+        pt.x = e.clientX; pt.y = e.clientY;
+        return pt.matrixTransform(this._svg.getScreenCTM().inverse());
+    },
+
+    _onQuizMapClick(e) {
+        if (this._quizLocked || !this._svg) return;
+        if (!this._quizItems || this._quizIndex >= this._quizItems.length) return;
+        var target = this._quizItems[this._quizIndex];
+        var p = this._svgPoint(e);
+
+        if (target.type === 'city') {
+            var nearest = null, best = Infinity;
+            for (var i = 0; i < this._quizItems.length; i++) {
+                var item = this._quizItems[i];
+                if (item.type !== 'city') continue;
+                var d = Math.sqrt(Math.pow(p.x - item.x, 2) + Math.pow(p.y - item.y, 2));
+                if (d < best) { best = d; nearest = item; }
+            }
+            // A tap on open map is a miss-click, not a wrong answer.
+            if (!nearest || best > this._CITY_TAP_RADIUS) return;
+            this._onQuizCityClick(nearest.data);
+            return;
+        }
+
+        // Long features (a river, a mountain range) accept a click anywhere
+        // along their path, not just at the label point.
+        var candidates = target.hitPath && target.hitPath.length ? target.hitPath : [[target.x, target.y]];
+        var dist = Infinity;
+        for (var j = 0; j < candidates.length; j++) {
+            var dj = Math.sqrt(Math.pow(p.x - candidates[j][0], 2) + Math.pow(p.y - candidates[j][1], 2));
+            if (dj < dist) dist = dj;
+        }
+        var correct = dist < (target.hitRadius || 40);
+        if (correct) this._quizScore++;
+        this._quizLocked = true;
+
+        var marker = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        marker.setAttribute('cx', target.x);
+        marker.setAttribute('cy', target.y);
+        marker.setAttribute('r', 8);
+        marker.setAttribute('fill', correct ? '#22c55e' : '#ef4444');
+        marker.setAttribute('stroke', '#fff');
+        marker.setAttribute('stroke-width', '2');
+        marker.setAttribute('pointer-events', 'none');
+        this._svg.appendChild(marker);
+
+        this._showFeedback(correct, correct
+            ? 'Correct! ' + target.name + '.'
+            : 'Not quite. ' + target.name + ' is shown now.');
+
         var self = this;
-        var svg = this._svg;
-        if (!svg) return;
-
-        var handler = function(e) {
-            if (self._quizLocked) return;
-            var rect = svg.getBoundingClientRect();
-            var svgX = ((e.clientX - rect.left) / rect.width) * 900;
-            var svgY = ((e.clientY - rect.top) / rect.height) * 725;
-
-            var dist = Math.sqrt(Math.pow(svgX - target.x, 2) + Math.pow(svgY - target.y, 2));
-            var correct = dist < 40;
-
-            if (correct) self._quizScore++;
-            self._quizLocked = true;
-
-            var feedbackText = correct
-                ? 'Correct! ' + target.name + '.'
-                : 'Not quite. ' + target.name + ' is shown now.';
-
-            // Show a marker at the correct location
-            var marker = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-            marker.setAttribute('cx', target.x);
-            marker.setAttribute('cy', target.y);
-            marker.setAttribute('r', 8);
-            marker.setAttribute('fill', correct ? '#22c55e' : '#ef4444');
-            marker.setAttribute('stroke', '#fff');
-            marker.setAttribute('stroke-width', '2');
-            marker.setAttribute('class', 'cg-quiz-marker');
-            svg.appendChild(marker);
-
-            self._showFeedback(correct, feedbackText);
-
-            svg.removeEventListener('click', handler);
-            setTimeout(function() {
-                if (marker.parentNode) marker.remove();
-                self._quizIndex++;
-                self._quizLocked = false;
-                self._renderQuizPanel();
-            }, 1400);
-        };
-
-        svg.addEventListener('click', handler);
+        setTimeout(function() {
+            if (marker.parentNode) marker.remove();
+            self._quizIndex++;
+            self._quizLocked = false;
+            self._renderQuizPanel();
+        }, 1400);
     },
 
     _renderQuizResults(panel) {
@@ -731,17 +818,24 @@ StudyEngine.registerActivity({
         var total = this._quizTotal;
         var pct = Math.round((this._quizScore / total) * 100);
 
+        // The leaderboard reads bestScore (City Quiz, maxScore in config); the
+        // Full Challenge keeps its own keys so a 26-item score can't inflate it.
+        var full = this._quizType === 'full';
+        var scoreKey = full ? 'bestFullScore' : 'bestScore';
+        var totalKey = full ? 'bestFullTotal' : 'bestTotal';
+        var timeKey = full ? 'bestFullTime' : 'bestTime';
         var unitId = this._config.unit.id;
         var saved = ProgressManager.getActivityProgress(unitId, 'colonial-geography-map') || {};
-        var prevBest = typeof saved.bestScore === 'number' ? saved.bestScore : -1;
-        var prevTime = saved.bestTime || null;
-        ProgressManager.saveActivityProgress(unitId, 'colonial-geography-map', {
-            bestScore: Math.max(prevBest, this._quizScore),
-            bestTotal: total,
-            bestTime: pct === 100 ? (prevTime === null ? elapsed : Math.min(prevTime, elapsed)) : prevTime,
+        var prevBest = typeof saved[scoreKey] === 'number' ? saved[scoreKey] : -1;
+        var prevTime = saved[timeKey] || null;
+        var update = {
             attempts: (saved.attempts || 0) + 1,
             lastPlayed: new Date().toISOString()
-        });
+        };
+        update[scoreKey] = Math.max(prevBest, this._quizScore);
+        update[totalKey] = total;
+        update[timeKey] = pct === 100 ? (prevTime === null ? elapsed : Math.min(prevTime, elapsed)) : prevTime;
+        ProgressManager.saveActivityProgress(unitId, 'colonial-geography-map', update);
 
         var heading = document.createElement('h2');
         heading.className = 'cw-map-results-heading';
@@ -759,7 +853,7 @@ StudyEngine.registerActivity({
         var again = document.createElement('button');
         again.className = 'cw-map-results-btn primary';
         again.textContent = 'Try Again';
-        again.addEventListener('click', function() { self._startQuiz(self._quizTotal > 18 ? 'full' : 'cities'); });
+        again.addEventListener('click', function() { self._startQuiz(self._quizType); });
         actions.appendChild(again);
         var menu = document.createElement('button');
         menu.className = 'cw-map-results-btn';
