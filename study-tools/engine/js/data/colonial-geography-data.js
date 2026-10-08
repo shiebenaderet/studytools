@@ -74,11 +74,11 @@
         { id: 'new-orleans', name: 'New Orleans', region: 'french', x: 210, y: 675,
           description: 'Founded by France in 1718. Controlled the mouth of the Mississippi River, vital for trade.' },
         { id: 'st-augustine', name: 'St. Augustine', region: 'spanish', x: 473, y: 678,
-          description: 'Founded 1565 by Spain. Oldest European settlement in what is now the United States.' },
+          description: 'Founded 1565 by Spain. The oldest continuously occupied European settlement in the continental United States. Britain took Florida from Spain in 1763.' },
         { id: 'fort-duquesne', name: 'Fort Duquesne', region: 'french', marker: 'fort', x: 512, y: 294,
           description: 'French fort where the Allegheny and Monongahela rivers form the Ohio (modern Pittsburgh). Washington\'s 1754 clash nearby started the French & Indian War. Renamed Fort Pitt after the British took it in 1758.' },
         { id: 'fort-detroit', name: 'Fort Detroit', region: 'french', marker: 'fort', x: 421, y: 217,
-          description: 'French fort on the strait between Lakes Erie and Huron. In 1763 Pontiac led Native nations against British forts around the Great Lakes and besieged this one for months.' }
+          description: 'Built by France in 1701 on the strait between Lakes Erie and Huron; British after 1760. In 1763 Pontiac led Native nations against British forts around the Great Lakes and besieged this one for months.' }
     ];
 
     // Rivers the civil-war base lacks, drawn but not labeled. Same format as
@@ -103,7 +103,7 @@
     window.COLONIAL_GEO_FEATURES = [
         { id: 'appalachian-mtns', name: 'Appalachian Mountains', type: 'mountain',
           x: 468, y: 468, angle: -53, hitPath: PROCLAMATION_POINTS, hitRadius: 45,
-          description: 'Mountain range running from Georgia to Maine. The Proclamation of 1763 banned settlement west of these mountains.' },
+          description: 'Mountain range running from Alabama to Canada, behind all thirteen colonies. The Proclamation of 1763 banned settlement west of these mountains.' },
         { id: 'ohio-valley', name: 'Ohio River Valley', type: 'region',
           x: 390, y: 340, angle: 0, hitRadius: 70,
           description: 'The territory both France and Britain claimed. Conflict here sparked the French & Indian War in 1754.' },
@@ -118,7 +118,7 @@
           description: 'The ocean separating the colonies from Britain. It took 6-8 weeks to cross by ship.' },
         { id: 'gulf-of-mexico', name: 'Gulf of Mexico', type: 'water',
           x: 340, y: 703, angle: 0, hitRadius: 80,
-          description: 'The sea south of the colonies. France held its coast at New Orleans; Spain held Florida.' }
+          description: 'The sea south of the colonies. Before 1763, France held its coast at New Orleans and Spain held Florida; the Treaty of Paris handed Florida to Britain and Louisiana to Spain.' }
     ];
 
 })();
