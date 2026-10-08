@@ -428,13 +428,20 @@ StudyEngine.registerActivity({
         linkBtn.appendChild(linkIcon);
         linkBtn.addEventListener('click', function() {
             var url = window.location.origin + window.location.pathname + window.location.search + '#textbook/' + seg.id + '/' + section.id;
-            navigator.clipboard.writeText(url).then(function() {
+            // navigator.clipboard is absent on non-HTTPS pages and can deny
+            // permission; fall back to a prompt the student can copy from.
+            var write = (navigator.clipboard && navigator.clipboard.writeText)
+                ? navigator.clipboard.writeText(url)
+                : Promise.reject(new Error('clipboard unavailable'));
+            write.then(function() {
                 linkIcon.className = 'fas fa-check';
                 linkBtn.classList.add('copied');
                 setTimeout(function() {
                     linkIcon.className = 'fas fa-link';
                     linkBtn.classList.remove('copied');
                 }, 2000);
+            }).catch(function() {
+                window.prompt('Copy this link:', url);
             });
         });
         heading.appendChild(linkBtn);
