@@ -34,7 +34,8 @@
     "quiz-race",
     "maps-hub",
     "thirteen-colonies-map",
-    "colonial-regions-map"
+    "colonial-regions-map",
+    "colonial-geography-map"
   ],
   "categorySchedule": {
     "Causes of Unrest": "2026-10-07",
@@ -1385,6 +1386,12 @@
         "icon": "fas fa-palette"
       },
       {
+        "id": "colonial-geography-map",
+        "title": "Colonial Geography (Challenge)",
+        "description": "Bonus map: major cities, the Ohio and Mississippi rivers, the Great Lakes, and the Proclamation Line.",
+        "icon": "fas fa-globe-americas"
+      },
+      {
         "id": "map-claims-1754",
         "title": "North America in 1754",
         "icon": "fas fa-map-marked-alt",
@@ -1430,6 +1437,10 @@
     {
       "id": "colonial-regions-map",
       "maxScore": 13
+    },
+    {
+      "id": "colonial-geography-map",
+      "maxScore": 18
     }
   ],
   "typingPassages": [

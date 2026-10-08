@@ -296,7 +296,7 @@ StudyEngine.registerActivity({
         svgWrap.className = 'cw-map-svg-wrap';
 
         var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        svg.setAttribute('viewBox', window.THIRTEEN_COLONIES_VIEWBOX);
+        svg.setAttribute('viewBox', window.THIRTEEN_COLONIES_VIEWBOX || '0 0 1000 930');
 
         var defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
         var clip = document.createElementNS('http://www.w3.org/2000/svg', 'clipPath');
@@ -311,7 +311,7 @@ StudyEngine.registerActivity({
         svg.appendChild(ocean);
 
         var land = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-        land.setAttribute('d', window.THIRTEEN_COLONIES_LAND);
+        land.setAttribute('d', window.THIRTEEN_COLONIES_LAND || '');
         land.setAttribute('fill', '#F3EFE6'); land.setAttribute('stroke', '#7d8a92');
         land.setAttribute('stroke-width', '1.5'); land.setAttribute('pointer-events', 'none');
         land.setAttribute('clip-path', 'url(#cr-frame)');

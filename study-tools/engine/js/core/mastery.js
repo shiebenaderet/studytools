@@ -370,7 +370,7 @@ const MasteryManager = {
         // can use them to assess what they know before earning category
         // unlocks. The activities themselves still surface category-locked
         // content visually inside, but the home card is no longer a wall.
-        const alwaysAccessible = ['flashcards', 'typing-practice', 'map-quiz', 'maps-hub', 'civil-war-map', 'underground-railroad-map', 'fifty-states-map', 'thirteen-colonies-map', 'colonial-regions-map', 'textbook', 'sift-practice', 'learn-mode', 'practice-test', 'short-answer', 'response-builder'];
+        const alwaysAccessible = ['flashcards', 'typing-practice', 'map-quiz', 'maps-hub', 'civil-war-map', 'underground-railroad-map', 'fifty-states-map', 'thirteen-colonies-map', 'colonial-regions-map', 'colonial-geography-map', 'textbook', 'sift-practice', 'learn-mode', 'practice-test', 'short-answer', 'response-builder'];
         const categories = this.getCategories(config);
         if (categories.length === 0) return true;
         // Read before study: nothing but the textbook opens until Chapter 1 is read.

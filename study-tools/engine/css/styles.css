@@ -6574,6 +6574,25 @@ a.sift-detail-link:hover { opacity: 0.8; }
 .cr-region-btn:hover { background: var(--bg-card); }
 .cr-panel-others { color: var(--text-muted); font-size: 0.85em; margin: 4px 0 0; }
 
+/* ===================== Colonial Geography Map =================== */
+.cg-colony-label { fill: #333; font-family: 'Outfit', system-ui, sans-serif; font-size: 9px; font-weight: 700; text-shadow: 0 0 3px rgba(255,255,255,0.8); }
+.cg-lake-label { fill: #1e5f8a; font-family: 'Outfit', system-ui, sans-serif; font-size: 7px; font-style: italic; }
+.cg-river-label { fill: #1e5f8a; font-family: 'Outfit', system-ui, sans-serif; font-size: 6.5px; font-style: italic; }
+.cg-ocean-label { fill: #155e8a; font-family: 'Outfit', system-ui, sans-serif; font-size: 14px; font-style: italic; letter-spacing: 6px; opacity: 0.4; }
+.cg-mountain-label { fill: #6b4c2a; font-family: 'Outfit', system-ui, sans-serif; font-size: 7px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; }
+.cg-feature-label { fill: #555; font-family: 'Outfit', system-ui, sans-serif; font-size: 7px; font-style: italic; }
+.cg-proclamation-label { fill: #dc2626; font-family: 'Outfit', system-ui, sans-serif; font-size: 7px; font-weight: 700; letter-spacing: 1px; }
+.cg-city-label { fill: #222; font-family: 'Outfit', system-ui, sans-serif; font-size: 7px; font-weight: 600; }
+.cg-city { cursor: pointer; }
+.cg-city:hover .cg-city-dot { r: 6; }
+.cg-city.selected .cg-city-dot { r: 7; stroke-width: 2.5; }
+.cg-city.cg-flash-correct .cg-city-dot { fill: #22c55e; r: 7; }
+.cg-city.cg-flash-wrong .cg-city-dot { fill: #ef4444; r: 7; }
+.cg-city.cg-answered .cg-city-dot { fill: #4a5568; opacity: 0.5; }
+.cg-city-badge { display: inline-block; padding: 2px 8px; border-radius: 10px; color: #fff; font-size: 0.75em; font-weight: 600; margin-bottom: 8px; }
+.cg-legend { display: flex; flex-direction: column; gap: 4px; margin-bottom: 8px; }
+.cg-legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
 /* ===================== Feedback FAB & Modal ===================== */
 .feedback-fab {
     position: fixed;
