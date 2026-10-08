@@ -431,7 +431,7 @@ var LeaderboardManager = {
 
             var desc = document.createElement('p');
             desc.className = 'lb-explainer';
-            desc.textContent = 'Get 100% on the Map Quiz to post your time. Faster = more bonus points!';
+            desc.textContent = 'Get 100% on a map quiz (under Maps) to post your time. Faster = more bonus points!';
             container.appendChild(desc);
 
             if (entries.length === 0) {

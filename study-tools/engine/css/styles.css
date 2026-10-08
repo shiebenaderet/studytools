@@ -6478,9 +6478,13 @@ a.sift-detail-link:hover { opacity: 0.8; }
     display: block;
     width: 100%;
     height: auto;
-    max-height: 70vh;
+    max-height: 60vh;
     background: #b3d8e8;
 }
+/* Prompt above the map: on a 1366x768 Chromebook a 70vh map pushed the
+   "Find: ___" panel below the fold on every question. */
+.fs-map .cw-map-header { order: -2; }
+.fs-map .cw-map-panel { order: -1; }
 
 .fs-state .fs-state-path {
     fill: var(--primary, #4a90d9);
@@ -6585,14 +6589,14 @@ a.sift-detail-link:hover { opacity: 0.8; }
 .cg-colony-label, .cg-lake-label, .cg-river-label, .cg-mountain-label, .cg-feature-label, .cg-proclamation-label, .cg-city-label {
     font-family: 'Outfit', system-ui, sans-serif; paint-order: stroke; stroke: rgba(255,255,255,0.9); stroke-width: 2.5px; stroke-linejoin: round;
 }
-.cg-colony-label { fill: #2b2b2b; font-size: 10px; font-weight: 700; }
-.cg-lake-label { fill: #1b4f73; font-size: 7.5px; font-style: italic; stroke: rgba(140,196,228,0.9); }
-.cg-river-label { fill: #1b4f73; font-size: 7px; font-style: italic; font-weight: 600; }
-.cg-ocean-label { fill: #155e8a; font-family: 'Outfit', system-ui, sans-serif; font-size: 15px; font-style: italic; letter-spacing: 6px; opacity: 0.45; }
-.cg-mountain-label { fill: #6b4c2a; font-size: 7px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
-.cg-feature-label { fill: #4a4a4a; font-size: 7.5px; font-style: italic; font-weight: 600; }
-.cg-proclamation-label { fill: #b91c1c; font-size: 7px; font-weight: 700; letter-spacing: 1px; }
-.cg-city-label { fill: #1a1a1a; font-size: 7.5px; font-weight: 700; }
+.cg-colony-label { fill: #2b2b2b; font-size: 12px; font-weight: 700; }
+.cg-lake-label { fill: #1b4f73; font-size: 9px; font-style: italic; stroke: rgba(140,196,228,0.9); }
+.cg-river-label { fill: #1b4f73; font-size: 9px; font-style: italic; font-weight: 600; }
+.cg-ocean-label { fill: #155e8a; font-family: 'Outfit', system-ui, sans-serif; font-size: 16px; font-style: italic; letter-spacing: 6px; opacity: 0.45; }
+.cg-mountain-label { fill: #6b4c2a; font-size: 8.5px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+.cg-feature-label { fill: #4a4a4a; font-size: 9px; font-style: italic; font-weight: 600; }
+.cg-proclamation-label { fill: #b91c1c; font-size: 8.5px; font-weight: 700; letter-spacing: 1px; }
+.cg-city-label { fill: #1a1a1a; font-size: 10px; font-weight: 700; }
 .cg-city { cursor: pointer; }
 .cg-city:hover .cg-city-dot { r: 6; }
 .cg-city.selected .cg-city-dot { r: 7; stroke-width: 2.5; }

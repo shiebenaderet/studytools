@@ -500,7 +500,9 @@ StudyEngine.registerActivity({
 
     activate() {},
 
-    deactivate() {},
+    deactivate() {
+        this._clearTimer();
+    },
 
     cleanup() {
         this._clearTimer();

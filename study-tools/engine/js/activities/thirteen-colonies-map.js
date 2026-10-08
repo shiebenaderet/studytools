@@ -33,7 +33,14 @@ StudyEngine.registerActivity({
         this._showMenu();
     },
 
+    deactivate() {
+        this._container = null;
+        this._config = null;
+        this._mode = null;
+    },
+
     _showMenu() {
+        this._mode = 'menu';
         var c = this._container;
         c.textContent = '';
         c.className = 'cw-map-screen';
@@ -351,8 +358,11 @@ StudyEngine.registerActivity({
         this._container.appendChild(msg);
 
         var self = this;
+        var run = this._quizStartTime;
         setTimeout(function() {
             msg.remove();
+            // The student may have left the quiz during the feedback window.
+            if (self._mode !== 'quiz' || self._quizStartTime !== run || !self._container) return;
             if (targetEl) {
                 targetEl.classList.remove('fs-flash-correct');
                 // Mark the target state as answered so it dims for the rest of

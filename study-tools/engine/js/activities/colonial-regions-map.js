@@ -564,7 +564,7 @@ StudyEngine.registerActivity({
             if (paintedInRegion === currentRegion.colonies.length) {
                 this._colorRegionIndex++;
                 if (this._colorRegionIndex >= this._REGIONS.length) {
-                    setTimeout(function() { self._renderColorResults(); }, 800);
+                    setTimeout(function() { if (self._mode === 'color' && self._container) self._renderColorResults(); }, 800);
                 } else {
                     var nextRegion = this._REGIONS[this._colorRegionIndex];
                     this._showColorFeedback(true, currentRegion.name + ' complete! Now paint the ' + nextRegion.name + '.');
@@ -794,8 +794,11 @@ StudyEngine.registerActivity({
         this._container.appendChild(msg);
 
         var self = this;
+        var run = this._quizStartTime;
         setTimeout(function() {
             msg.remove();
+            // The student may have left the quiz during the feedback window.
+            if (self._mode !== 'quiz' || self._quizStartTime !== run || !self._container) return;
             if (g) {
                 g.classList.remove('fs-flash-correct', 'fs-flash-wrong');
                 g.classList.add('fs-answered');

@@ -23,7 +23,6 @@ StudyEngine.registerActivity({
         'new-england': { color: '#2563eb', label: 'New England' },
         'middle':      { color: '#d97706', label: 'Middle' },
         'southern':    { color: '#059669', label: 'Southern' },
-        'frontier':    { color: '#dc2626', label: 'British frontier' },
         'french':      { color: '#7c3aed', label: 'French' },
         'spanish':     { color: '#ea580c', label: 'Spanish' }
     },
@@ -79,11 +78,11 @@ StudyEngine.registerActivity({
             'fas fa-book-open', function() { self._startLearn(); }
         ));
         modes.appendChild(this._modeCard(
-            'City Quiz', 'Find each city on the map. How many can you get right?',
+            'City Quiz', 'Find each city and fort on the map. How many can you get right?',
             'fas fa-map-marker-alt', function() { self._startQuiz('cities'); }
         ));
         modes.appendChild(this._modeCard(
-            'Full Challenge', 'Cities, rivers, lakes, and mountains. The ultimate geography test.',
+            'Full Challenge', 'Cities, rivers, the Great Lakes, and mountains. The ultimate geography test.',
             'fas fa-trophy', function() { self._startQuiz('full'); }
         ));
         wrap.appendChild(modes);
@@ -660,7 +659,10 @@ StudyEngine.registerActivity({
         this._showFeedback(correct, feedbackText);
 
         var self = this;
+        var run = this._quizStartTime;
         setTimeout(function() {
+            // The student may have left the quiz during the feedback window.
+            if (self._mode !== 'quiz' || self._quizStartTime !== run || !self._container) return;
             if (targetG) { targetG.classList.remove('cg-flash-correct'); targetG.classList.add('cg-answered'); }
             if (!correct && g) g.classList.remove('cg-flash-wrong');
             self._quizIndex++;
@@ -805,8 +807,10 @@ StudyEngine.registerActivity({
             : 'Not quite. ' + target.name + ' is shown now.');
 
         var self = this;
+        var run = this._quizStartTime;
         setTimeout(function() {
             if (marker.parentNode) marker.remove();
+            if (self._mode !== 'quiz' || self._quizStartTime !== run || !self._container) return;
             self._quizIndex++;
             self._quizLocked = false;
             self._renderQuizPanel();

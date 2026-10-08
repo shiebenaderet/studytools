@@ -40,7 +40,15 @@ const ProgressManager = {
 
     load(unitId, key) {
         const stored = localStorage.getItem(this.getKey(unitId, key));
-        return stored ? JSON.parse(stored) : null;
+        if (!stored) return null;
+        try {
+            return JSON.parse(stored);
+        } catch (e) {
+            // One corrupt key must not take down every read for the student.
+            console.warn('Discarding unreadable progress for', unitId, key);
+            localStorage.removeItem(this.getKey(unitId, key));
+            return null;
+        }
     },
 
     getActivityProgress(unitId, activityId) {
@@ -349,9 +357,10 @@ const ProgressManager = {
             };
         }
 
-        // For map-quiz: keep the better bestScore and bestTime
-        if (activity === 'activity_map-quiz') {
-            return {
+        // For map quizzes (map-quiz and every *-map activity): keep the better
+        // bestScore and bestTime on each device, never the newer one.
+        if (activity === 'activity_map-quiz' || /^activity_.*-map$/.test(activity)) {
+            var merged = {
                 ...remote,
                 ...local,
                 bestScore: Math.max(local.bestScore || 0, remote.bestScore || 0),
@@ -360,6 +369,16 @@ const ProgressManager = {
                     : local.bestTime || remote.bestTime,
                 updatedAt: Math.max(local.updatedAt || 0, remote.updatedAt || 0)
             };
+            if ('bestFullScore' in local || 'bestFullScore' in remote) {
+                merged.bestFullScore = Math.max(local.bestFullScore || 0, remote.bestFullScore || 0);
+                merged.bestFullTime = (local.bestFullTime && remote.bestFullTime)
+                    ? Math.min(local.bestFullTime, remote.bestFullTime)
+                    : local.bestFullTime || remote.bestFullTime;
+            }
+            if (typeof local.attempts === 'number' || typeof remote.attempts === 'number') {
+                merged.attempts = Math.max(local.attempts || 0, remote.attempts || 0);
+            }
+            return merged;
         }
 
         // For studyDays: union the two arrays of date strings so a student
@@ -1908,43 +1927,7 @@ window.addEventListener('beforeunload', () => {
         // best-effort
     }
 
-    // Update leaderboard study_time_seconds with keepalive fetch
-    try {
-        var config = typeof StudyEngine !== 'undefined' && StudyEngine.config;
-        if (config) {
-            var uid = config.unit.id;
-            var studyTime = ProgressManager.load(uid, 'studyTime') || 0;
-            var studyTimeSeconds = Math.floor(studyTime / 1000);
-            var vocabProgress = ProgressManager.getActivityProgress(uid, 'flashcards') || {};
-            var tjHasTiers = config.vocabulary && config.vocabulary.some(function(v) { return v.tier; });
-            var tjMasteredList = vocabProgress.everMastered || vocabProgress.mastered || [];
-            var vocabMastered = tjHasTiers
-                ? tjMasteredList.filter(function(t) { return config.vocabulary.some(function(v) { return v.term === t && (!v.tier || v.tier === 'must-know'); }); }).length
-                : tjMasteredList.length;
-            var practiceProgress = ProgressManager.getActivityProgress(uid, 'practice-test') || {};
-            var bestTestScore = typeof practiceProgress.bestScore === 'number' ? practiceProgress.bestScore : null;
-            var mapProgress = ProgressManager.getActivityProgress(uid, 'map-quiz') || {};
-            var mapBestTime = (mapProgress.bestScore >= 100 && mapProgress.bestTime) ? Math.max(30, mapProgress.bestTime) : null;
-            var mapBonus = mapBestTime ? Math.max(0, 180 - mapBestTime) : 0;
-            var score = LeaderboardManager.calculateScore(vocabMastered, bestTestScore, studyTimeSeconds, mapBonus);
-            fetch(SUPABASE_URL + '/rest/v1/leaderboard', {
-                method: 'POST',
-                headers: Object.assign({}, headers, { 'Prefer': 'resolution=merge-duplicates' }),
-                body: JSON.stringify({
-                    student_id: ProgressManager.studentId,
-                    unit_id: uid,
-                    score: score,
-                    vocab_mastered: vocabMastered,
-                    best_test_score: bestTestScore,
-                    study_time_seconds: studyTimeSeconds,
-                    map_best_time: mapBestTime,
-                    map_bonus: mapBonus,
-                    updated_at: new Date().toISOString()
-                }),
-                keepalive: true
-            });
-        }
-    } catch (e) {
-        // best-effort
-    }
+    // Leaderboard rows are only written through LeaderboardManager.submitScore
+    // (never-shrink merge, runs every 30s and on every save). A raw upsert here
+    // used an older formula and overwrote better scores on every tab close.
 });
