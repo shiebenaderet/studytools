@@ -6478,11 +6478,12 @@ a.sift-detail-link:hover { opacity: 0.8; }
     display: block;
     width: 100%;
     height: auto;
-    max-height: 60vh;
+    max-height: 50vh;
     background: #b3d8e8;
 }
-/* Prompt above the map: on a 1366x768 Chromebook a 70vh map pushed the
-   "Find: ___" panel below the fold on every question. */
+/* Prompt above the map, and the whole map on screen: on a 1366x768 Chromebook
+   (~660px viewport under the site header) a 70vh map pushed the "Find: ___"
+   panel below the fold on every question. */
 .fs-map .cw-map-header { order: -2; }
 .fs-map .cw-map-panel { order: -1; }
 
