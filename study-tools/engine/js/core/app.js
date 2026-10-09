@@ -1367,7 +1367,12 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(v => {
             if (!v) return;
             var storedVersion = localStorage.getItem('st_app_version');
-            if (storedVersion && storedVersion !== v.version) {
+            // No stored version but a service worker already controls the page:
+            // this device cached the site before version tracking existed, so
+            // its files may be a stale mix. Purge once (the version is stored
+            // before reloading, so this cannot loop).
+            var staleUntracked = !storedVersion && !!(navigator.serviceWorker && navigator.serviceWorker.controller);
+            if ((storedVersion && storedVersion !== v.version) || staleUntracked) {
                 localStorage.setItem('st_app_version', v.version);
                 // Clear service worker caches and reload
                 if ('caches' in window) {

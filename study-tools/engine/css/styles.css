@@ -6610,6 +6610,19 @@ a.sift-detail-link:hover { opacity: 0.8; }
 .cg-legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
 .cg-legend-star { display: inline-block; width: 10px; text-align: center; color: #7c3aed; font-size: 13px; line-height: 10px; flex-shrink: 0; }
 
+/* ===================== Hover lifts disabled ===================== */
+/* A hover translateY moves the element out from under a pointer resting near
+   its bottom edge; the hover ends, it drops back, re-hovers, and bounces
+   (reported on Chromebooks). Keep the border/shadow feedback, drop the lift. */
+.card:hover, .card-button:hover, .home-continue-btn:hover, .badge:hover, .fc-rate-btn:hover,
+.option:hover, .sa-question-card:hover, .key-term-chip-clickable:hover, .tool-card:hover,
+.save-progress-btn:hover, .fib-mode-btn:hover, .lightning-option:hover, .res-link-btn:hover,
+.ach-badge:hover, .lb-podium-place:hover, .welcome-go-btn:hover:not(:disabled), .mq-mode-card:hover,
+.sm-choice-btn:hover:not(:disabled), .sm-choice-img-btn:hover:not(:disabled), .sm-result-btn:hover,
+.sift-verdict-btn:hover, .tb-level-card:hover, .nudge-card:hover, .cw-map-mode-card:hover {
+    transform: none;
+}
+
 /* ===================== Feedback FAB & Modal ===================== */
 .feedback-fab {
     position: fixed;

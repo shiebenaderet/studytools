@@ -1,4 +1,4 @@
-const CACHE_NAME = 'studytools-v84';
+const CACHE_NAME = 'studytools-v85';
 const APP_SHELL = [
     './',
     'index.html',
@@ -69,18 +69,21 @@ self.addEventListener('fetch', event => {
         return;
     }
 
-    // Stale-while-revalidate for app shell and config
+    // Network-first for the app shell, activities, and unit content; the cache
+    // is only the offline fallback. The site is edited between classes, and
+    // the previous stale-while-revalidate strategy could serve a mix of old
+    // and new files (one activity's script from last month, the core from
+    // today), which broke activities until a hard refresh.
+    if (event.request.method !== 'GET') return;
     event.respondWith(
-        caches.match(event.request).then(cached => {
-            const fetchPromise = fetch(event.request).then(response => {
-                if (response.ok) {
-                    const clone = response.clone();
-                    caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
-                }
-                return response;
-            }).catch(() => cached);
-
-            return cached || fetchPromise;
-        })
+        fetch(event.request).then(response => {
+            if (response.ok) {
+                const clone = response.clone();
+                caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+            }
+            return response;
+        }).catch(() => caches.match(event.request).then(cached =>
+            cached || new Response('Offline', { status: 503, statusText: 'Offline' })
+        ))
     );
 });
