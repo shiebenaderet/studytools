@@ -209,10 +209,12 @@ StudyEngine.registerActivity({
         if (unlockedMustKnow.length < allMustKnow.length && allMustKnow.length > 0) {
             var termProgress = document.createElement('div');
             termProgress.className = 'fc-term-progress';
-            var nextCh = MasteryManager.getNextUnreadChapter(config.unit.id, config);
+            // Categories open by mastery or on their scheduled date; reading no
+            // longer gates them.
+            var nextLocked = MasteryManager.getNextLockedCategory(config.unit.id, config);
             termProgress.textContent = unlockedMustKnow.length + '/' + allMustKnow.length + ' key terms unlocked';
-            if (nextCh) {
-                termProgress.textContent += ' \u2014 read the next chapter to unlock more!';
+            if (nextLocked) {
+                termProgress.textContent += ' \u2014 master these to unlock "' + nextLocked + '"';
             }
             wrapper.appendChild(termProgress);
         }

@@ -186,7 +186,8 @@ var NudgeManager = {
             }
         }
 
-        // Read before study: an earned chapter that is still unread comes first.
+        // Read before study: an unread chapter is the best first step, though
+        // nothing is locked behind it anymore.
         if (typeof MasteryManager !== 'undefined' && MasteryManager.getNextUnreadChapter) {
             var unread = MasteryManager.getNextUnreadChapter(unitId, config);
             var earned = MasteryManager.getEarnedCategories ? MasteryManager.getEarnedCategories(unitId, config) : [];
@@ -197,7 +198,7 @@ var NudgeManager = {
                     icon: this.ACTIVITY_INFO.textbook.icon,
                     name: 'Read Chapter ' + unread.index,
                     group: this.ACTIVITY_INFO.textbook.group,
-                    reason: '"' + unread.category + '" unlocks when you finish reading it'
+                    reason: 'Read it before you study the "' + unread.category + '" terms'
                 });
             }
         }
