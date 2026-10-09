@@ -641,7 +641,9 @@ const StudyEngine = {
         document.getElementById('home-section').classList.remove('active');
         const container = document.getElementById('activity-container');
         container.textContent = '';
-        container.classList.add('active');
+        // Activities (the maps especially) set layout classes on the shared
+        // container; start every screen from the base class.
+        container.className = 'section active';
 
         const picker = document.createElement('div');
         picker.className = 'activity-picker';
@@ -823,7 +825,9 @@ const StudyEngine = {
 
         const container = document.getElementById('activity-container');
         container.textContent = '';
-        container.classList.add('active');
+        // Start from the base class so one activity's layout classes (the
+        // maps' two-column grid) never leak into the next.
+        container.className = 'section active';
         document.getElementById('home-section').classList.remove('active');
         document.getElementById('sub-nav').classList.remove('active');
 
