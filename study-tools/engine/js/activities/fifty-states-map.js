@@ -127,7 +127,7 @@ StudyEngine.registerActivity({
         var backIcon = document.createElement('i');
         backIcon.className = 'fas fa-arrow-left';
         backBtn.appendChild(backIcon);
-        backBtn.appendChild(document.createTextNode(' Back'));
+        backBtn.appendChild(document.createTextNode(' Map menu'));
         backBtn.addEventListener('click', this._showMenu.bind(this));
         header.appendChild(backBtn);
         var headerInfo = document.createElement('div');

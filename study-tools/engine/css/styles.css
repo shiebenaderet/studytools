@@ -3238,11 +3238,14 @@ body.timer-active header {
 }
 
 /* TOAST NOTIFICATIONS */
+/* Toasts drop in from the top, under the nav bar: at the bottom edge they
+   covered game controls (Wordle's keyboard, the Save Progress button) on
+   short Chromebook viewports. */
 .toast {
     position: fixed;
-    bottom: 20px;
+    top: 92px;
     left: 50%;
-    transform: translateX(-50%) translateY(100px);
+    transform: translateX(-50%) translateY(-40px);
     padding: 12px 24px;
     border-radius: 8px;
     color: white;
