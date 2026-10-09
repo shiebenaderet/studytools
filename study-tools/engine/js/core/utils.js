@@ -52,6 +52,10 @@ const StudyUtils = {
         const toast = document.createElement('div');
         toast.className = 'toast toast-' + (type || 'info');
         toast.textContent = message;
+        // Toasts that overlap in time stack downward instead of covering
+        // each other (an achievement and a mastery nudge often fire together).
+        const visible = document.querySelectorAll('.toast').length;
+        if (visible) toast.style.marginTop = (visible * 52) + 'px';
         document.body.appendChild(toast);
 
         // Trigger animation

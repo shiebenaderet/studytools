@@ -6230,7 +6230,7 @@ a.sift-detail-link:hover { opacity: 0.8; }
 .cw-map-best { margin-top: 16px; padding: 8px 12px; background: var(--bg-elevated); border-radius: 8px; color: var(--text-secondary); font-size: 0.9em; display: inline-block; }
 
 .cw-map-header { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: var(--bg-card); border: 1px solid var(--border-card); border-radius: 10px; gap: 12px; }
-.cw-map-back-btn { background: transparent; border: 1px solid var(--border-card); color: var(--text-primary); padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 0.9em; }
+.cw-map-back-btn { background: transparent; border: 1px solid var(--border-card); color: var(--text-primary); padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 0.9em; white-space: nowrap; }
 .cw-map-back-btn:hover { background: var(--bg-elevated); }
 .cw-map-header-info { display: flex; gap: 16px; color: var(--text-secondary); font-size: 0.9em; flex-wrap: wrap; }
 .cw-map-score { font-weight: 700; color: var(--accent-text); }
