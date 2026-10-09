@@ -5818,7 +5818,7 @@ a.sift-detail-link:hover { opacity: 0.8; }
 .tb-level-btn i { font-size: 0.85em; }
 
 /* Reading level prompt (first-time) */
-.tb-level-prompt { text-align: center; padding: 60px 20px; max-width: 600px; margin: 0 auto; }
+.tb-level-prompt { text-align: center; padding: 60px 20px; max-width: 740px; margin: 0 auto; }  /* four 160px level cards in one row */
 .tb-level-cards { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 .tb-level-card { background: var(--bg-elevated); border: 2px solid var(--border-card); border-radius: 12px; padding: 24px 20px; width: 160px; cursor: pointer; transition: all 0.2s; text-align: center; font-family: inherit; }
 .tb-level-card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
@@ -6645,6 +6645,34 @@ a.sift-detail-link:hover { opacity: 0.8; }
 .sm-choice-btn:hover:not(:disabled), .sm-choice-img-btn:hover:not(:disabled), .sm-result-btn:hover,
 .sift-verdict-btn:hover, .tb-level-card:hover, .nudge-card:hover, .cw-map-mode-card:hover {
     transform: none;
+}
+
+/* ===================== Chromebook fit (1366x768, ~660px viewport) ========= */
+/* Measured on a 1366x660 viewport: Hangman's letter buttons started at
+   y=604, Wordle's keyboard at y=677, Flip Match's last row at 718. These keep
+   the controls students need on the first screen. */
+@media (min-width: 900px) {
+    /* Hangman: the 250px figure sits beside the word and letters. Children
+       keep the DOM order stats, clue, figure, word, message, letters, button. */
+    .hangman-container { max-width: 720px; display: grid; grid-template-columns: 200px 1fr; column-gap: 28px; align-items: center; }
+    .hangman-container > * { grid-column: 1 / -1; }
+    .hangman-figure { grid-column: 1; grid-row: 3 / span 3; margin: 0; }
+    .hangman-word, .hangman-word + div, .hangman-letters { grid-column: 2; }
+    .hangman-letters { max-width: 412px; }   /* 9 letters per row: 3 rows, not 4 */
+}
+@media (max-height: 740px) {
+    .hangman-clue, .wordle-clue { padding: 12px 16px; margin-bottom: 12px; }
+    .hangman-stats { margin-bottom: 8px; }
+    .hangman-word { margin: 10px 0; font-size: 1.6em; }
+    .wordle-cell { width: min(38px, calc((100vw - 48px - (var(--wordle-n, 5) - 1) * 4px) / var(--wordle-n, 5))); font-size: 1.2em; }
+    .wordle-grid { gap: 4px; margin-bottom: 10px; }
+    .wordle-row { gap: 4px; }
+    .wordle-key { padding: 7px 10px; min-width: 30px; font-size: 0.85em; }
+    .wordle-key.wide { padding: 7px 14px; }
+    .wordle-message { margin: 8px 0; padding: 10px; }
+    .match-card { height: 100px; }
+    .flip-match-controls, .flip-match-stats { margin-bottom: 10px; }
+    .tb-level-prompt { padding: 30px 20px; }
 }
 
 /* ===================== Feedback FAB & Modal ===================== */
