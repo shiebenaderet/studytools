@@ -6486,6 +6486,30 @@ a.sift-detail-link:hover { opacity: 0.8; }
    panel below the fold on every question. */
 .fs-map .cw-map-header { order: -2; }
 .fs-map .cw-map-panel { order: -1; }
+/* Landscape screens (Chromebooks, laptops): panel beside the map, and the map
+   sized by the height that is actually free, instead of a full-width panel
+   stacked above a map capped at 50vh (which left a ~350px map on a 1366px
+   display). Phones keep the stacked layout above. */
+@media (min-width: 900px) {
+    .fs-map.cw-map-screen {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 320px;
+        grid-template-rows: auto 1fr;
+        align-items: start;
+    }
+    /* Header (Back + score) and prompt stack in the right column; the map
+       takes the full height of the left column and the card hugs it. */
+    .fs-map .cw-map-header { grid-column: 2; grid-row: 1; }
+    .fs-map .cw-map-panel { grid-column: 2; grid-row: 2; position: sticky; top: 8px; }
+    .fs-map .cw-map-svg-wrap { grid-column: 1; grid-row: 1 / span 2; justify-self: center; width: fit-content; max-width: 100%; }
+    .fs-map .fs-map-svg {
+        width: auto;
+        max-width: 100%;
+        height: calc(100vh - 115px);
+        min-height: 320px;
+        max-height: 800px;
+    }
+}
 
 .fs-state .fs-state-path {
     fill: var(--primary, #4a90d9);
