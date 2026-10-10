@@ -141,6 +141,29 @@ create policy "Students read sessions" on public.sessions for select using (true
 create policy "Students update sessions" on public.sessions for update using (true);
 create policy "Teachers delete sessions" on public.sessions for delete using (public.is_teacher());
 
+-- A student's own "reset my progress" (progress.js _resetProgress) used the
+-- open DELETE. Keep it working through a function scoped to one student and
+-- one unit; the one-call "delete everything" path is gone.
+create or replace function public.reset_unit_progress(p_student uuid, p_unit text)
+returns integer
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  n int;
+begin
+  if p_student is null or p_unit is null or p_unit = '' then
+    return 0;
+  end if;
+  delete from public.progress where student_id = p_student and unit_id = p_unit;
+  get diagnostics n = row_count;
+  return n;
+end;
+$$;
+revoke all on function public.reset_unit_progress(uuid, text) from public;
+grant execute on function public.reset_unit_progress(uuid, text) to anon, authenticated;
+
 -- ---------------------------------------------------------------------------
 -- leaderboard: students can insert/read/update their score rows but can never
 -- set or change `approved`; only a teacher can approve or delete. Done with a

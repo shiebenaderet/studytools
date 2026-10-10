@@ -1855,11 +1855,17 @@ const ProgressManager = {
         if (this.supabase && this.studentId) {
             (async () => {
                 try {
-                    await this.supabase
-                        .from('progress')
-                        .delete()
-                        .eq('student_id', this.studentId)
-                        .eq('unit_id', unitId);
+                    // Direct deletes are teacher-only once the hardening
+                    // migration is applied; reset_unit_progress() is scoped to
+                    // this student and unit. Fall back for a database without it.
+                    var rpc = await this.supabase.rpc('reset_unit_progress', { p_student: this.studentId, p_unit: unitId });
+                    if (rpc.error) {
+                        await this.supabase
+                            .from('progress')
+                            .delete()
+                            .eq('student_id', this.studentId)
+                            .eq('unit_id', unitId);
+                    }
                 } catch (err) {
                     console.error('Failed to clear cloud progress:', err);
                 }

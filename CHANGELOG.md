@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.24] - 2026-10-10
+
+### Security
+- The hardening migration adds `reset_unit_progress(student, unit)` so a student's own "reset my progress" keeps working once anonymous deletes are removed; the app calls it and falls back to the direct delete on a database without it.
+
 ## [8.55.23] - 2026-10-10
 
 ### Security
