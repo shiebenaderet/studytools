@@ -514,9 +514,19 @@
     var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
     var a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = csvFilenameForCurrent();
+    var filename = csvFilenameForCurrent();
+    a.download = filename;
     document.body.append(a); a.click(); a.remove();
     URL.revokeObjectURL(a.href);
+    // Browsers save silently; confirm on the page so a quiet download isn't
+    // mistaken for a dead button.
+    var status = document.getElementById('csvStatus');
+    if (!status) {
+      status = el('div', 'canvas-status');
+      status.id = 'csvStatus';
+      document.getElementById('csvPanel').append(status);
+    }
+    status.textContent = '✓ Downloaded ' + filename + ' (' + qs.length + ' question' + (qs.length === 1 ? '' : 's') + '). Look in your browser’s Downloads folder.';
   }
 
   function refreshStep3() {
