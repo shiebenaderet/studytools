@@ -12,6 +12,7 @@ StudyEngine.registerActivity({
     _wins: 0,
     _losses: 0,
     _gameOver: false,
+    _kylerMode: false,       // Clue hidden until the word is solved (a student's idea)
     _keyHandler: null,
     _container: null,
     _config: null,
@@ -24,6 +25,7 @@ StudyEngine.registerActivity({
         if (saved) {
             this._wins = saved.wins || 0;
             this._losses = saved.losses || 0;
+            this._kylerMode = !!saved.kylerMode;
         }
 
         // Main wrapper
@@ -47,6 +49,24 @@ StudyEngine.registerActivity({
         lossStat.textContent = 'Losses: ' + this._losses;
         stats.appendChild(lossStat);
 
+        // Kyler Mode: play without the clue; it is revealed when the round ends.
+        const kyler = document.createElement('label');
+        kyler.className = 'hangman-stat hangman-kyler';
+        kyler.title = 'Hide the clue until you solve the word';
+        const kylerBox = document.createElement('input');
+        kylerBox.type = 'checkbox';
+        kylerBox.id = 'hangman-kyler-toggle';
+        kylerBox.checked = this._kylerMode;
+        const self = this;
+        kylerBox.addEventListener('change', function() {
+            self._kylerMode = kylerBox.checked;
+            self._saveProgress();
+            self._newGame();
+        });
+        kyler.appendChild(kylerBox);
+        kyler.appendChild(document.createTextNode(' Kyler Mode'));
+        stats.appendChild(kyler);
+
         wrapper.appendChild(stats);
 
         // Clue
@@ -55,6 +75,7 @@ StudyEngine.registerActivity({
         clue.id = 'hangman-clue';
 
         const clueLabel = document.createElement('strong');
+        clueLabel.id = 'hangman-clue-label';
         clueLabel.textContent = 'Clue: ';
         clue.appendChild(clueLabel);
 
@@ -164,9 +185,8 @@ StudyEngine.registerActivity({
         this._wrongCount = 0;
         this._gameOver = false;
 
-        // Reset clue
-        var clueText = document.getElementById('hangman-clue-text');
-        if (clueText) clueText.textContent = this._currentDefinition;
+        // Reset clue (hidden in Kyler Mode until the round ends)
+        this._showClue(!this._kylerMode, 'Clue: ');
 
         // Reset figure parts
         var figure = document.getElementById('hangman-figure');
@@ -277,11 +297,14 @@ StudyEngine.registerActivity({
             buttons[i].disabled = true;
         }
 
+        // Kyler Mode: now that the round is over, show what the clue was.
+        if (this._kylerMode) this._showClue(true, 'The clue was: ');
+
         var message = document.getElementById('hangman-message');
         if (won) {
             this._wins++;
             if (message) {
-                message.textContent = 'You got it!';
+                message.textContent = this._kylerMode ? 'You got it — with no clue!' : 'You got it!';
                 message.style.color = '#22c55e';
             }
         } else {
@@ -322,8 +345,19 @@ StudyEngine.registerActivity({
     _saveProgress() {
         ProgressManager.saveActivityProgress(StudyEngine.config.unit.id, 'hangman', {
             wins: this._wins,
-            losses: this._losses
+            losses: this._losses,
+            kylerMode: this._kylerMode
         });
+    },
+
+    _showClue(visible, label) {
+        var box = document.getElementById('hangman-clue');
+        var labelEl = document.getElementById('hangman-clue-label');
+        var text = document.getElementById('hangman-clue-text');
+        if (!box || !labelEl || !text) return;
+        box.classList.toggle('hangman-clue-hidden', !visible);
+        labelEl.textContent = visible ? label : 'Kyler Mode: ';
+        text.textContent = visible ? this._currentDefinition : 'no clue — solve the word to reveal it';
     },
 
     activate() {
@@ -353,6 +387,7 @@ StudyEngine.registerActivity({
         if (data) {
             this._wins = data.wins || 0;
             this._losses = data.losses || 0;
+            this._kylerMode = !!data.kylerMode;
         }
     }
 });
