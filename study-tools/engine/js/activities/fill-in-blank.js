@@ -198,6 +198,9 @@ StudyEngine.registerActivity({
             input.placeholder = 'Type your answer...';
             input.id = 'fib-type-input';
             input.value = self._answers[idx] || '';
+            // Cap typing at the longest answer in the set (plus a little slack).
+            var longest = self._sentences.reduce(function(m, s) { return Math.max(m, (s.answer || '').length); }, 0);
+            input.maxLength = Math.max(20, longest + 4);
             input.addEventListener('input', function() {
                 self._answers[idx] = input.value.trim();
                 var s = document.getElementById('fib-slot-0');
@@ -205,6 +208,10 @@ StudyEngine.registerActivity({
                     s.textContent = input.value.trim() || '\u00A0\u00A0\u00A0\u00A0\u00A0';
                     s.classList.toggle('filled', !!input.value.trim());
                 }
+                // Enable Next as soon as there is an answer; the button was
+                // rendered disabled and nothing else re-renders while typing.
+                var nb = document.getElementById('fib-next-btn');
+                if (nb) nb.classList.toggle('fib-btn-disabled', !input.value.trim());
             });
             input.addEventListener('keydown', function(e) {
                 if (e.key === 'Enter' && self._answers[idx]) {
@@ -297,6 +304,7 @@ StudyEngine.registerActivity({
         if (idx < total - 1) {
             var nextBtn = document.createElement('button');
             nextBtn.className = 'nav-button fib-nav-btn';
+            nextBtn.id = 'fib-next-btn';
             nextBtn.appendChild(document.createTextNode('Next '));
             var nextIcon = document.createElement('i');
             nextIcon.className = 'fas fa-arrow-right';
