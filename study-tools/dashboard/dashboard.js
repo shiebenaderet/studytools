@@ -202,6 +202,16 @@ const Dashboard = {
     },
 
     // ---- Helper: create an icon element ----
+    // YYYY-MM-DD in the teacher's local time zone. Supabase timestamps are
+    // UTC, and toISOString() is UTC too: after 5 pm Pacific both already read
+    // as tomorrow, which shifted every day's sessions one bar to the left.
+    _localDateKey(d) {
+        var y = d.getFullYear();
+        var m = String(d.getMonth() + 1).padStart(2, '0');
+        var day = String(d.getDate()).padStart(2, '0');
+        return y + '-' + m + '-' + day;
+    },
+
     _icon(className) {
         const i = document.createElement('i');
         className.split(' ').forEach(c => i.classList.add(c));
@@ -895,11 +905,11 @@ const Dashboard = {
                 for (var d = 0; d < 7; d++) {
                     var day = new Date();
                     day.setDate(day.getDate() - (6 - d));
-                    var key = day.toISOString().slice(0, 10);
+                    var key = Dashboard._localDateKey(day);
                     dayCounts[key] = { count: 0, label: dayNames[day.getDay()], isToday: d === 6 };
                 }
                 trendSessions.forEach(function(s) {
-                    var dayKey = s.started_at.slice(0, 10);
+                    var dayKey = Dashboard._localDateKey(new Date(s.started_at));
                     if (dayCounts[dayKey]) dayCounts[dayKey].count++;
                 });
 
@@ -1049,9 +1059,9 @@ const Dashboard = {
 
                 // Calculate daily study minutes per class from trend sessions
                 var classDailyMinutes = {};
-                var todayStr = new Date().toISOString().slice(0, 10);
+                var todayStr = Dashboard._localDateKey(new Date());
                 (trendRes.data || []).forEach(function(s) {
-                    if (s.started_at.slice(0, 10) !== todayStr) return;
+                    if (Dashboard._localDateKey(new Date(s.started_at)) !== todayStr) return;
                     var cid = studentClassMap[s.student_id];
                     if (!cid) return;
                     if (!classDailyMinutes[cid]) classDailyMinutes[cid] = 0;
