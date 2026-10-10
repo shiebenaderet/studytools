@@ -6551,6 +6551,11 @@ a.sift-detail-link:hover { opacity: 0.8; }
     fill: #4a5568;
     opacity: 0.45;
 }
+.fs-state.fs-answered-correct .fs-state-path {
+    fill: #2ecc71;
+    stroke: #1f8a4d;
+    opacity: 0.9;
+}
 .fs-state-hitbox {
     cursor: pointer;
     pointer-events: all;
@@ -6681,6 +6686,18 @@ a.sift-detail-link:hover { opacity: 0.8; }
     .flip-match-controls, .flip-match-stats { margin-bottom: 10px; }
     .tb-level-prompt { padding: 30px 20px; }
 }
+
+/* ===================== 13 Colonies: Maddy's Madness Mode ======== */
+.cw-map-mode-madness { border-color: rgba(251, 191, 36, 0.45); }
+.cw-map-mode-madness .cw-map-mode-icon { color: var(--accent); }
+.cw-map-mode-card.locked { opacity: 0.55; cursor: not-allowed; }
+.cw-map-mode-card.locked:hover { border-color: var(--border-card); }
+.cw-map-best-madness { margin-left: 8px; color: var(--accent-text); }
+/* No 300ms tap delay or double-tap zoom on the map: taps register immediately. */
+.fs-map-svg { touch-action: manipulation; }
+/* Madness runs go full screen; the map takes the whole display. */
+#activity-container:fullscreen { background: var(--bg-deep); padding: 12px 16px; overflow: auto; }
+#activity-container:fullscreen .fs-map-svg { height: calc(100vh - 48px); max-height: none; }
 
 /* ===================== Feedback FAB & Modal ===================== */
 .feedback-fab {

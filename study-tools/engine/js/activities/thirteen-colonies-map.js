@@ -25,7 +25,11 @@ StudyEngine.registerActivity({
     _quizIndex: 0,
     _quizScore: 0,
     _quizStartTime: null,
-    _answerLocked: false,    // Per-question lock; blocks spam-clicks during the 1400ms feedback window
+    _answerLocked: false,    // Per-question lock; blocks spam-clicks during the feedback window
+    _madness: false,         // Maddy's Madness Mode: speed run, 0.35s lock, one wrong tap ends the run
+
+    FEEDBACK_MS: 1400,
+    MADNESS_FEEDBACK_MS: 350,
 
     render(container, config) {
         this._container = container;
@@ -34,13 +38,26 @@ StudyEngine.registerActivity({
     },
 
     deactivate() {
+        this._exitFullscreen();
         this._container = null;
         this._config = null;
         this._mode = null;
     },
 
+    _enterFullscreen() {
+        var el = this._container;
+        if (!el || document.fullscreenElement || !el.requestFullscreen) return;
+        try { var p = el.requestFullscreen(); if (p && p.catch) p.catch(function() {}); } catch (e) { /* not allowed here; the mode still works */ }
+    },
+
+    _exitFullscreen() {
+        if (!document.fullscreenElement || !document.exitFullscreen) return;
+        try { var p = document.exitFullscreen(); if (p && p.catch) p.catch(function() {}); } catch (e) { /* ignore */ }
+    },
+
     _showMenu() {
         this._mode = 'menu';
+        this._exitFullscreen();
         var c = this._container;
         c.textContent = '';
         c.className = 'cw-map-screen';
@@ -62,16 +79,36 @@ StudyEngine.registerActivity({
         var self = this;
         modes.appendChild(this._modeCard('Learn Mode', 'Click any colony to see its name, its region and a quick fact. No scoring.', 'fas fa-book-open', function() { self._startLearn(); }));
         modes.appendChild(this._modeCard('Quiz Mode', 'You\'ll be given a colony. Click it on the map. Track your score.', 'fas fa-bullseye', function() { self._startQuiz(); }));
+
+        // Maddy's Madness Mode unlocks with a perfect Quiz Mode score.
+        var saved = ProgressManager.getActivityProgress(this._config.unit.id, 'thirteen-colonies-map') || {};
+        var total = window.THIRTEEN_COLONIES_DATA.length;
+        var madnessUnlocked = (saved.bestScore || 0) >= total;
+        var madCard = this._modeCard(
+            'Maddy’s Madness Mode',
+            madnessUnlocked
+                ? 'Speed run: full screen, no waiting between colonies, one wrong tap ends the run. Perfect runs set your Madness time.'
+                : 'Locked — get 100% on Quiz Mode to unlock the speed run.',
+            madnessUnlocked ? 'fas fa-bolt' : 'fas fa-lock',
+            function() { if (madnessUnlocked) self._startQuiz({ madness: true }); }
+        );
+        madCard.classList.add('cw-map-mode-madness');
+        if (!madnessUnlocked) madCard.classList.add('locked');
+        modes.appendChild(madCard);
         wrap.appendChild(modes);
 
-        var saved = ProgressManager.getActivityProgress(this._config.unit.id, 'thirteen-colonies-map') || {};
         if (typeof saved.bestScore === 'number') {
             var best = document.createElement('div');
             best.className = 'cw-map-best';
-            var total = window.THIRTEEN_COLONIES_DATA.length;
             best.textContent = 'Personal best: ' + saved.bestScore + '/' + total +
                 (saved.bestTime ? ' in ' + this._formatTime(saved.bestTime) : '');
             wrap.appendChild(best);
+        }
+        if (typeof saved.bestMadnessTime === 'number') {
+            var mbest = document.createElement('div');
+            mbest.className = 'cw-map-best cw-map-best-madness';
+            mbest.textContent = '⚡ Madness best: ' + saved.bestMadnessTime.toFixed(1) + 's';
+            wrap.appendChild(mbest);
         }
 
         c.appendChild(wrap);
@@ -106,8 +143,9 @@ StudyEngine.registerActivity({
 
     // ─── Quiz ─────────────────────────────────────────────
 
-    _startQuiz() {
+    _startQuiz(opts) {
         this._mode = 'quiz';
+        this._madness = !!(opts && opts.madness);
         var states = window.THIRTEEN_COLONIES_DATA.slice();
         for (var i = states.length - 1; i > 0; i--) {
             var j = Math.floor(Math.random() * (i + 1));
@@ -119,6 +157,7 @@ StudyEngine.registerActivity({
         this._answerLocked = false;
         this._quizStartTime = Date.now();
         this._renderMap('quiz');
+        if (this._madness) this._enterFullscreen();
     },
 
     // ─── Map render ───────────────────────────────────────
@@ -336,9 +375,14 @@ StudyEngine.registerActivity({
         var target = this._quizStates[this._quizIndex];
         var correct = clicked.id === target.id;
         if (correct) this._quizScore++;
-        // Lock before scheduling feedback so spam-clicks during the 1400ms
+        // Lock before scheduling feedback so spam-clicks during the feedback
         // window are ignored. Cleared when the next question renders.
         this._answerLocked = true;
+        if (this._madness && !correct) {
+            // One wrong tap ends a Madness run: no exploring the map for free.
+            this._quizIndex = this._quizStates.length;
+            this._madnessMiss = { clicked: clicked.name, target: target.name };
+        }
         this._showQuizFeedback(correct, target, clicked);
     },
 
@@ -350,32 +394,37 @@ StudyEngine.registerActivity({
             if (wrongEl) wrongEl.classList.add('fs-flash-wrong');
         }
 
-        var msg = document.createElement('div');
-        msg.className = 'cw-map-feedback ' + (correct ? 'correct' : 'wrong');
-        if (correct) msg.textContent = 'Correct! ' + target.name + '.';
-        else if (clicked) msg.textContent = 'That was ' + clicked.name + '. ' + target.name + ' is highlighted.';
-        else msg.textContent = target.name + ' is highlighted.';
-        this._container.appendChild(msg);
+        // Madness Mode skips the banner: the flash on the map is the feedback.
+        var msg = null;
+        if (!this._madness) {
+            msg = document.createElement('div');
+            msg.className = 'cw-map-feedback ' + (correct ? 'correct' : 'wrong');
+            if (correct) msg.textContent = 'Correct! ' + target.name + '.';
+            else if (clicked) msg.textContent = 'That was ' + clicked.name + '. ' + target.name + ' is highlighted.';
+            else msg.textContent = target.name + ' is highlighted.';
+            this._container.appendChild(msg);
+        }
+        var delay = this._madness ? (correct ? this.MADNESS_FEEDBACK_MS : 900) : this.FEEDBACK_MS;
 
         var self = this;
         var run = this._quizStartTime;
         setTimeout(function() {
-            msg.remove();
+            if (msg) msg.remove();
             // The student may have left the quiz during the feedback window.
             if (self._mode !== 'quiz' || self._quizStartTime !== run || !self._container) return;
             if (targetEl) {
                 targetEl.classList.remove('fs-flash-correct');
-                // Mark the target state as answered so it dims for the rest of
-                // the quiz. We don't distinguish right vs wrong here — both look
-                // the same — to avoid leaving a visual map of mistakes that
-                // could discourage students mid-quiz.
-                targetEl.classList.add('fs-answered');
+                // Correct colonies stay green for the rest of the quiz (a
+                // student asked for the GeoGuessr feel); misses just dim, so
+                // there is no visual map of mistakes to discourage anyone.
+                targetEl.classList.add(correct ? 'fs-answered-correct' : 'fs-answered');
             }
             var w = self._container.querySelector('.fs-flash-wrong');
             if (w) w.classList.remove('fs-flash-wrong');
-            self._quizIndex++;
+            // A Madness miss already jumped the index to the end.
+            if (self._quizIndex < self._quizStates.length) self._quizIndex++;
             self._renderQuizPanel();
-        }, 1400);
+        }, delay);
     },
 
     _renderQuizPanel() {
@@ -451,6 +500,8 @@ StudyEngine.registerActivity({
         var total = this._quizStates.length;
         var pct = Math.round((this._quizScore / total) * 100);
 
+        if (this._madness) { this._renderMadnessResults(panel, total, pct); return; }
+
         var unitId = this._config.unit.id;
         var saved = ProgressManager.getActivityProgress(unitId, 'thirteen-colonies-map') || {};
         var prevBest = typeof saved.bestScore === 'number' ? saved.bestScore : -1;
@@ -482,6 +533,56 @@ StudyEngine.registerActivity({
         again.className = 'cw-map-results-btn primary';
         again.textContent = 'Try Again';
         again.addEventListener('click', function() { self._startQuiz(); });
+        actions.appendChild(again);
+        var menu = document.createElement('button');
+        menu.className = 'cw-map-results-btn';
+        menu.textContent = 'Back to Menu';
+        menu.addEventListener('click', function() { self._showMenu(); });
+        actions.appendChild(menu);
+        panel.appendChild(actions);
+    },
+
+    // Madness results: tenths of a second, a separate personal best, and the
+    // same two anti-cheat rules as the quiz (perfect run only; never faster
+    // than the per-question lock allows). Not sent to the leaderboard.
+    _renderMadnessResults(panel, total, pct) {
+        var seconds = Math.round((Date.now() - this._quizStartTime) / 100) / 10;
+        var unitId = this._config.unit.id;
+        var saved = ProgressManager.getActivityProgress(unitId, 'thirteen-colonies-map') || {};
+        var prev = typeof saved.bestMadnessTime === 'number' ? saved.bestMadnessTime : null;
+        var floor = Math.round(total * (this.MADNESS_FEEDBACK_MS / 1000) * 10) / 10;
+        var counts = pct === 100 && seconds >= floor;
+        var newBest = counts && (prev === null || seconds < prev);
+        ProgressManager.saveActivityProgress(unitId, 'thirteen-colonies-map', Object.assign({}, saved, {
+            bestMadnessTime: newBest ? seconds : prev,
+            madnessRuns: (saved.madnessRuns || 0) + 1,
+            lastPlayed: new Date().toISOString()
+        }));
+
+        var heading = document.createElement('h2');
+        heading.className = 'cw-map-results-heading';
+        heading.textContent = pct === 100 ? (newBest ? '⚡ New Madness record!' : '⚡ Perfect run!') : 'Run over';
+        panel.appendChild(heading);
+
+        var summary = document.createElement('p');
+        summary.className = 'cw-map-results-summary';
+        if (pct === 100) {
+            summary.textContent = seconds.toFixed(1) + 's for all ' + total + ' colonies.' +
+                (prev !== null && !newBest ? ' Your best is ' + prev.toFixed(1) + 's.' : '');
+        } else {
+            var miss = this._madnessMiss;
+            summary.textContent = (miss ? 'You tapped ' + miss.clicked + ' for ' + miss.target + '. ' : '') +
+                'One wrong tap ends the run — Madness times only count on a perfect run.';
+        }
+        panel.appendChild(summary);
+
+        var actions = document.createElement('div');
+        actions.className = 'cw-map-results-actions';
+        var self = this;
+        var again = document.createElement('button');
+        again.className = 'cw-map-results-btn primary';
+        again.textContent = 'Run it again';
+        again.addEventListener('click', function() { self._startQuiz({ madness: true }); });
         actions.appendChild(again);
         var menu = document.createElement('button');
         menu.className = 'cw-map-results-btn';

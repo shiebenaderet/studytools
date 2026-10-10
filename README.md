@@ -198,6 +198,10 @@ Students who reported bugs or suggested improvements:
 | **Tianyu** | Reported that spam-clicking the answer on map quizzes skipped questions and marked them automatically |
 | **Braden** | Reported that games and other activities stayed locked even after the scheduled unlock dates had passed |
 | **Tianyu** | Lost his first-place progress after clearing his browser, which revealed a bug where logging in on a fresh device could overwrite a saved leaderboard score |
+| **Brandon K** | Reported that Fill in the Blank's Next button stayed stuck after typing an answer, and that the answer box had no length limit |
+| **Kyler** | Suggested playing Hangman without the clue and revealing it afterward — now **Kyler Mode** |
+| **Maddy W** | Pointed out the long pause after each correct colony on the 13 Colonies quiz and that correct colonies should stay colored, GeoGuessr-style — now **Maddy's Madness Mode** and sticky green colonies |
+| **Tiffany** | Asked for GimKit-style games; the question exporter now confirms GimKit downloads on the page |
 
 > Want to be listed here? Report a bug or suggest an improvement to your teacher!
 

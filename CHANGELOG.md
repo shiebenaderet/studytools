@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.18] - 2026-10-10
+
+Launch week for the Revolution unit (8.55.0 through 8.55.18). Several items came straight from student feedback on day one; those students are named.
+
+### Added
+- **Colonial Regions map** (Maps hub): Learn, Color, and Quiz modes for New England, Middle, and Southern colonies. Color mode has students pick three colors and paint the colonies from memory.
+- **Colonial Geography challenge map** (Maps hub): 11 cities and 2 forts (Fort Duquesne, Fort Detroit), the Ohio, Mississippi, Hudson and St. Lawrence rivers, the Great Lakes, the Appalachians and the Proclamation Line of 1763, on the Civil War base geometry. City positions are computed from latitude/longitude. Explore, City Quiz, and Full Challenge modes; quiz taps resolve to the nearest marker so crowded markers never steal each other's clicks.
+- **Maddy's Madness Mode** (13 Colonies, suggested by **Maddy W**): a speed run unlocked by a perfect Quiz Mode score. Full screen, a 0.35 s lock instead of 1.4 s between colonies, no banner, and one wrong tap ends the run. Times count only on a perfect run, never below the lock floor, and are a separate personal best (not the leaderboard).
+- **Kyler Mode** (Hangman, suggested by **Kyler**): a toggle that hides the clue until the round ends, then shows what it was. Persists with wins and losses.
+- Question exporter confirms CSV downloads on the page with the filename and question count (**Tiffany** asked about GimKit-style games; the GimKit export already existed but downloaded silently).
+
+### Changed
+- Reading no longer gates study. Categories open by mastering the previous set or on their scheduled date; Revolution opens one category every four days from launch (Oct 7, 13, 17, 21). Leftover "unlocks when you read it" wording removed from the home nudge and flashcards.
+- 13 Colonies is the only map that feeds the leaderboard speed bonus. A perfect-run time is saved only if it is at least the 1.4 s-per-question lockout floor, and the leaderboard clamps stored map times at 20 s.
+- Correctly answered colonies stay green for the rest of a 13 Colonies quiz; misses dim (also **Maddy W**).
+- Map screens: on landscape screens the prompt and header sit in a right column and the map fills the free height (586x545 px on a 1366x768 Chromebook, up from 355x330); phones keep the stacked layout. Hangman, Wordle, Flip Match and the textbook level cards fit a Chromebook screen without scrolling. The maps' inner button says "Map menu" instead of a second "Back"; toasts drop in under the nav bar and stack.
+- Service worker is network-first for same-origin files (cache only as the offline fallback), and a device that cached the site before version tracking purges once on its next visit. Hover lifts (`translateY`) removed from all hover rules; they made cards bounce under a resting pointer on Chromebooks.
+- Fact-check pass over the Revolution unit found no factual errors; two wordings tightened (the First Continental Congress petitioned the king; map notes state the 1763 ownership changes).
+
+### Fixed
+- **Fill in the Blank (reported by Brandon K):** in Type It mode the Next button stayed disabled after typing an answer until the student went back and forward; it now enables as they type. Answers are capped at the longest answer in the set.
+- Leaderboard scores could be overwritten with a lower score on every tab close (a `beforeunload` upsert with an old formula). Removed; `submitScore` is the only writer.
+- Teacher dashboard's Daily Activity chart and today's per-class minutes bucketed sessions by UTC day, so after 5 pm Pacific the whole school day showed under the previous weekday. Both use the local day now.
+- `.cw-map-results-btn` and friends were never defined, leaving bare browser buttons on every map results screen and the Colonial Regions color picker.
+- Leaving a map quiz mid-question no longer resurrects a quiz panel on the menu; 13 Colonies gained `deactivate()`; Sort It Out clears its timer on leave; one corrupt localStorage key no longer breaks every progress read; map progress merges across devices by best score/time; the textbook copy-link button falls back to a prompt when the clipboard is unavailable; the shared activity container's classes reset between screens (the Study grid was rendering inside the map layout after leaving a map).
+
 ## [8.54.0] - 2026-10-04
 
 ### Fixed
