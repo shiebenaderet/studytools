@@ -347,7 +347,7 @@ const StudyEngine = {
         // the teacher unlock previews anything. See tools/unit-access-core.js.
         if (typeof UnitAccess !== 'undefined') {
             try {
-                const listResp = await fetch('../units/units.json');
+                const listResp = await fetch('../units/units.json', { cache: 'no-cache' });
                 if (listResp.ok) {
                     const list = (await listResp.json()).units || [];
                     const teacher = sessionStorage.getItem('teacher-unlock') === 'true';
@@ -362,7 +362,8 @@ const StudyEngine = {
         }
 
         try {
-            const response = await fetch(`../units/${unitId}/config.json`);
+            // Unit content is edited between classes; always revalidate it.
+            const response = await fetch(`../units/${unitId}/config.json`, { cache: 'no-cache' });
             if (!response.ok) throw new Error(`Unit "${unitId}" not found`);
             this.config = await response.json();
         } catch (err) {
@@ -1419,7 +1420,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(function() {});
 
-    fetch('version.json')
+    fetch('version.json', { cache: 'no-cache' })
         .then(r => r.ok ? r.json() : null)
         .then(v => {
             if (v) {

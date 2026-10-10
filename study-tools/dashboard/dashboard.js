@@ -9,7 +9,7 @@ const Dashboard = {
         var config = this._unitConfigCache[unitId];
         if (!config) {
             try {
-                var resp = await fetch('../units/' + unitId + '/config.json');
+                var resp = await fetch('../units/' + unitId + '/config.json', { cache: 'no-cache' });
                 config = await resp.json();
                 this._unitConfigCache[unitId] = config;
             } catch (e) {
@@ -42,7 +42,7 @@ const Dashboard = {
         await Promise.all(unitIds.map(async function(id) {
             if (self._unitConfigCache[id]) return;
             try {
-                var resp = await fetch('../units/' + id + '/config.json');
+                var resp = await fetch('../units/' + id + '/config.json', { cache: 'no-cache' });
                 self._unitConfigCache[id] = await resp.json();
             } catch (e) { /* skip */ }
         }));
@@ -493,7 +493,7 @@ const Dashboard = {
 
     async loadVersion() {
         try {
-            var resp = await fetch('../engine/version.json');
+            var resp = await fetch('../engine/version.json', { cache: 'no-cache' });
             var data = await resp.json();
             var el = document.getElementById('dashboard-version');
             if (el && data.version) {
@@ -693,7 +693,7 @@ const Dashboard = {
 
             // First: get units from units.json so all configured units show up
             try {
-                var unitsResp = await fetch('../units/units.json');
+                var unitsResp = await fetch('../units/units.json', { cache: 'no-cache' });
                 var unitsData = await unitsResp.json();
                 (unitsData.units || []).forEach(function(u) {
                     // Last year's units are hidden from students; leave them out here too.

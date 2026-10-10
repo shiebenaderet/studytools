@@ -348,7 +348,7 @@
             const container = document.getElementById('units-list');
 
             try {
-                const response = await fetch('units/units.json');
+                const response = await fetch('units/units.json', { cache: 'no-cache' });
                 if (!response.ok) throw new Error('Failed to load units');
                 const data = await response.json();
                 // Students see only the current unit: the open unit with the latest

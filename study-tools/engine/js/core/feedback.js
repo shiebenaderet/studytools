@@ -11,7 +11,7 @@ const FeedbackManager = {
 
     async _loadVersion() {
         try {
-            const resp = await fetch('version.json');
+            const resp = await fetch('version.json', { cache: 'no-cache' });
             if (resp.ok) {
                 const v = await resp.json();
                 this._appVersion = v.version || null;

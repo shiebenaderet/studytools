@@ -188,7 +188,7 @@ StudyEngine.registerActivity({
         var self = this;
         this._textbookData = null;
         try {
-            fetch('../units/' + config.unit.id + '/textbook.json')
+            fetch('../units/' + config.unit.id + '/textbook.json', { cache: 'no-cache' })
                 .then(function(resp) {
                     if (resp.ok) return resp.json();
                     return null;

@@ -8,7 +8,7 @@ const MasteryManager = {
     async _loadTextbook(unitId) {
         if (this._textbookCache[unitId] !== undefined) return this._textbookCache[unitId];
         try {
-            var resp = await fetch('../units/' + unitId + '/textbook.json');
+            var resp = await fetch('../units/' + unitId + '/textbook.json', { cache: 'no-cache' });
             if (!resp.ok) { this._textbookCache[unitId] = null; return null; }
             var data = await resp.json();
             this._textbookCache[unitId] = data.textbookContent || data;

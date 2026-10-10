@@ -27,7 +27,9 @@ const APP_SHELL = [
 
 self.addEventListener('install', event => {
     event.waitUntil(
-        caches.open(CACHE_NAME).then(cache => cache.addAll(APP_SHELL))
+        // Precache straight from the server: right after a deploy the browser's
+        // HTTP cache can still hold 10-minute-old copies of these files.
+        caches.open(CACHE_NAME).then(cache => cache.addAll(APP_SHELL.map(url => new Request(url, { cache: 'reload' }))))
     );
     self.skipWaiting();
 });

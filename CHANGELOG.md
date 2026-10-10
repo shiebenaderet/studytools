@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.21] - 2026-10-10
+
+### Fixed
+- Same stale-cache class as 8.55.20, closed everywhere else it existed: the service worker now precaches straight from the server (it could install 10-minute-old copies right after a deploy); the engine, landing page and teacher dashboard revalidate `units.json`, `config.json`, `textbook.json` and `version.json` on every load (`cache: 'no-cache'`), so a schedule edit reaches students on their next load without a version bump; and the teacher dashboard's own scripts and stylesheet, which sit outside the service worker's scope, load with a fresh stamp so the dashboard can't run a pre-deploy copy.
+
 ## [8.55.20] - 2026-10-10
 
 ### Fixed

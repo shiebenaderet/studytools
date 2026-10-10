@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teacher Dashboard</title>
     <link rel="stylesheet" href="../engine/vendor/font-awesome.min.css">
-    <link rel="stylesheet" href="dashboard.css">
+    <script>document.write('<link rel="stylesheet" href="dashboard.css?v=' + Date.now() + '">');</script>
 </head>
 <body>
 
@@ -192,7 +192,16 @@
         const SUPABASE_URL = 'https://opfzhgqbaomakovocpeb.supabase.co';
         const SUPABASE_ANON_KEY = 'sb_publishable_sFGHZl9kkwDmL1VA2cINdQ_UQI6urlK';
     </script>
-    <script src="rankings-viz.js"></script>
-    <script src="dashboard.js"></script>
+    <script>
+        // This page is outside the student app's service worker, so nothing
+        // revalidates its scripts; GitHub Pages caches them for 10 minutes and
+        // the dashboard could run a pre-deploy copy. Stamp them per load.
+        // document.write keeps them parser-blocking so DOMContentLoaded waits.
+        (function () {
+            var v = Date.now();
+            document.write('<script src="rankings-viz.js?v=' + v + '"><\/script>');
+            document.write('<script src="dashboard.js?v=' + v + '"><\/script>');
+        })();
+    </script>
 </body>
 </html>
