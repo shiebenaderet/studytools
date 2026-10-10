@@ -1,4 +1,4 @@
-const CACHE_NAME = 'studytools-v85';
+const CACHE_NAME = 'studytools-v86';
 const APP_SHELL = [
     './',
     'index.html',
@@ -75,8 +75,11 @@ self.addEventListener('fetch', event => {
     // and new files (one activity's script from last month, the core from
     // today), which broke activities until a hard refresh.
     if (event.request.method !== 'GET') return;
+    // cache: 'no-cache' revalidates with the server (ETag -> 304 when unchanged)
+    // instead of trusting the browser's HTTP cache, which GitHub Pages fills
+    // with 10-minute max-age entries that outlive a deploy.
     event.respondWith(
-        fetch(event.request).then(response => {
+        fetch(event.request, { cache: 'no-cache' }).then(response => {
             if (response.ok) {
                 const clone = response.clone();
                 caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));

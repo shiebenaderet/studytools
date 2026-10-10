@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.20] - 2026-10-10
+
+### Fixed
+- After a deploy, a page could show the new version number while still running an old activity script for up to ten minutes: GitHub Pages serves files with a 10-minute max-age, and neither the network-first service worker (`fetch()` honors HTTP freshness) nor the version purge (`caches.delete` clears only service-worker caches) touched the browser's HTTP cache. Activity scripts are now version-stamped in their URL, the service worker revalidates same-origin files with the server (`cache: 'no-cache'`), and the version purge refreshes the page's scripts and styles before reloading.
+
 ## [8.55.19] - 2026-10-10
 
 ### Added

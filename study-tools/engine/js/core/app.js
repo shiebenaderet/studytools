@@ -500,10 +500,13 @@ const StudyEngine = {
 
     async loadActivities() {
         const enabledActivities = this.config.activities || [];
+        // Version-stamp the URL: GitHub Pages caches files for 10 minutes and a
+        // plain reload keeps a stale script, so a new version must be a new URL.
+        const stamp = encodeURIComponent(localStorage.getItem('st_app_version') || Date.now());
         const loadPromises = enabledActivities.map(id => {
             return new Promise((resolve, reject) => {
                 const script = document.createElement('script');
-                script.src = `js/activities/${id}.js`;
+                script.src = `js/activities/${id}.js?v=${stamp}`;
                 script.onload = resolve;
                 script.onerror = () => {
                     console.warn(`Failed to load activity: ${id}`);
@@ -1393,16 +1396,23 @@ document.addEventListener('DOMContentLoaded', () => {
             var staleUntracked = !storedVersion && !!(navigator.serviceWorker && navigator.serviceWorker.controller);
             if ((storedVersion && storedVersion !== v.version) || staleUntracked) {
                 localStorage.setItem('st_app_version', v.version);
-                // Clear service worker caches and reload
-                if ('caches' in window) {
-                    caches.keys().then(function(keys) {
-                        return Promise.all(keys.map(function(k) { return caches.delete(k); }));
-                    }).then(function() {
-                        window.location.reload();
-                    });
-                } else {
+                // Clear service worker caches, refresh the browser's HTTP cache
+                // for this page's own scripts and styles (caches.delete does
+                // not touch it, and GitHub Pages serves 10-minute max-age), then
+                // reload.
+                var pageUrls = [window.location.pathname]
+                    .concat(Array.prototype.map.call(document.scripts, function(s) { return s.src; }))
+                    .concat(Array.prototype.map.call(document.querySelectorAll('link[rel="stylesheet"]'), function(l) { return l.href; }))
+                    .filter(function(u) { return u && u.indexOf(window.location.origin) === 0 || (u && u.charAt(0) === '/'); });
+                var refresh = Promise.all(pageUrls.map(function(u) {
+                    return fetch(u, { cache: 'reload' }).catch(function() {});
+                }));
+                var purge = ('caches' in window)
+                    ? caches.keys().then(function(keys) { return Promise.all(keys.map(function(k) { return caches.delete(k); })); })
+                    : Promise.resolve();
+                Promise.all([purge, refresh]).catch(function() {}).then(function() {
                     window.location.reload();
-                }
+                });
                 return;
             }
             localStorage.setItem('st_app_version', v.version);
