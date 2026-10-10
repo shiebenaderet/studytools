@@ -186,6 +186,12 @@ create policy "Teachers delete scores" on public.leaderboard for delete using (p
 drop policy if exists "Teachers manage snapshots" on public.leaderboard_snapshots;
 create policy "Teachers manage snapshots" on public.leaderboard_snapshots for all using (public.is_teacher()) with check (public.is_teacher());
 
+-- Feedback is an open insert; cap its size so it cannot be used to fill the database.
+alter table public.feedback drop constraint if exists feedback_description_length;
+alter table public.feedback add constraint feedback_description_length check (length(description) <= 2000);
+alter table public.feedback drop constraint if exists feedback_context_length;
+alter table public.feedback add constraint feedback_context_length check (context is null or length(context) <= 4000);
+
 drop policy if exists "Teachers read feedback" on public.feedback;
 drop policy if exists "Teachers update feedback" on public.feedback;
 drop policy if exists "Teachers delete feedback" on public.feedback;

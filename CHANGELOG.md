@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.23] - 2026-10-10
+
+### Security
+- The landing page loaded Font Awesome from cdnjs and Roboto/Lexend from Google Fonts, contradicting the privacy page's "all fonts, icons, and scripts are self-hosted"; it now uses the engine's vendored Font Awesome and self-hosted Outfit, so a visit sends nothing to a third party. (Still open: Tower Defense, in the three hidden units, loads three.js r128 from cdnjs without an integrity hash — vendor it to `engine/vendor/three.min.js`.)
+- The hardening migration also caps feedback text (2,000 characters; context 4,000) so the open feedback insert cannot be used to fill the database.
+
 ## [8.55.22] - 2026-10-10
 
 ### Security
