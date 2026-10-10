@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.25] - 2026-10-10
+
+### Changed
+- Privacy page now describes data access accurately: the database is reachable only through the site's access key, only the teacher can delete or approve records, and per-student scoping is in progress; the FERPA note says access is "intended for" the student and teacher; the self-hosting statement notes the Tower Defense exception. The RLS hardening migration was applied to production on 2026-10-10.
+
 ## [8.55.24] - 2026-10-10
 
 ### Security
