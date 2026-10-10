@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.22] - 2026-10-10
+
+### Security
+- Security review of the site and the live Supabase project. The deployed row-level-security policies were looser than the SQL in `database/`: `progress`, `sessions` and `leaderboard` each had a single `FOR ALL USING (true)` policy, so the public key could delete any student's work or flip `leaderboard.approved`; "teacher" meant any signed-in Supabase account. `database/migrate-rls-hardening.sql` (not applied automatically; review and run in the SQL editor) removes anonymous deletes, pins `approved` to teachers with a trigger, gates every teacher action on an email that teaches a class, restores class creation, and adds `set_recovery_word()` so attaching a recovery word to an existing student works (the direct update it replaces was never allowed by the live policies; the app now calls the function and falls back to the update).
+
 ## [8.55.21] - 2026-10-10
 
 ### Fixed

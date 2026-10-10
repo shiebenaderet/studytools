@@ -910,11 +910,19 @@ const ProgressManager = {
                         // Never overwrite an existing hash.
                         if (recoveryWordHash && resolved.recovery_word_hash == null) {
                             try {
-                                await self.supabase
-                                    .from('students')
-                                    .update({ recovery_word_hash: recoveryWordHash, recovery_word_set_at: new Date().toISOString() })
-                                    .eq('id', resolved.id)
-                                    .is('recovery_word_hash', null);
+                                // The students table is not writable with the
+                                // public key; set_recovery_word() (see
+                                // database/migrate-rls-hardening.sql) sets the
+                                // word only where none exists. Fall back to the
+                                // direct update for a database without it.
+                                var rpc = await self.supabase.rpc('set_recovery_word', { p_student: resolved.id, p_hash: recoveryWordHash });
+                                if (rpc.error) {
+                                    await self.supabase
+                                        .from('students')
+                                        .update({ recovery_word_hash: recoveryWordHash, recovery_word_set_at: new Date().toISOString() })
+                                        .eq('id', resolved.id)
+                                        .is('recovery_word_hash', null);
+                                }
                             } catch (e) {
                                 console.warn('Recovery word attach failed:', e);
                             }
