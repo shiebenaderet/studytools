@@ -25,6 +25,7 @@ var AchievementManager = {
         { id: 'top-student', name: 'Top Student', description: 'Reached #1 on the leaderboard!', icon: 'fas fa-crown', unlocked: false, unlockedAt: null },
         { id: 'cartographer', name: 'Cartographer', description: 'Got 100% on the Map Quiz with no mistakes.', icon: 'fas fa-map-marked-alt', unlocked: false, unlockedAt: null },
         { id: 'map-master', name: 'Map Master', description: 'Completed the Map Quiz in under 60 seconds!', icon: 'fas fa-globe-americas', unlocked: false, unlockedAt: null },
+        { id: 'maddys-madness', name: "Maddy's Madness", description: "Finished a perfect Maddy's Madness Mode run on the 13 Colonies map.", icon: 'fas fa-map-marked', unlocked: false, unlockedAt: null },
         { id: 'study-smart', name: 'Study Smart', description: 'Passed the How to Study comprehension quiz.', icon: 'fas fa-graduation-cap', unlocked: false, unlockedAt: null }
     ],
 
@@ -149,13 +150,18 @@ var AchievementManager = {
         }
 
         // Cartographer - perfect map quiz
-        if (context.activity === 'map-quiz' && context.event === 'cartographer') {
+        if ((context.activity === 'map-quiz' || context.activity === 'thirteen-colonies-map') && context.event === 'cartographer') {
             this.unlock('cartographer');
         }
 
         // Map Master - perfect map quiz under 60 seconds
-        if (context.activity === 'map-quiz' && context.event === 'map-master') {
+        if ((context.activity === 'map-quiz' || context.activity === 'thirteen-colonies-map') && context.event === 'map-master') {
             this.unlock('map-master');
+        }
+
+        // Maddy's Madness - a perfect speed run on the 13 Colonies map
+        if (context.activity === 'thirteen-colonies-map' && context.event === 'madness-perfect') {
+            this.unlock('maddys-madness');
         }
 
         // Night Owl - study after 8 PM

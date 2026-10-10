@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.19] - 2026-10-10
+
+### Added
+- **Maddy's Madness achievement** (map badge): awarded for a perfect Maddy's Madness Mode run. The 13 Colonies quiz now also awards First Steps, Perfect Score, Cartographer (a perfect run) and Map Master (perfect in under 60 s), which previously only the older map activities could trigger.
+- A live clock in the 13 Colonies header while a quiz or Madness run is going (display only; recorded times still come from the start timestamp). A Perfect Score result offers "Maddy's Madness Mode" right there.
+
+### Changed
+- The nav bar's Back returns to the activity you came from when you opened one from inside another (Maps hub -> a map, Flashcards -> a textbook section) instead of the activity picker.
+
 ## [8.55.18] - 2026-10-10
 
 Launch week for the Revolution unit (8.55.0 through 8.55.18). Several items came straight from student feedback on day one; those students are named.

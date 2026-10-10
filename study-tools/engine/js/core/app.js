@@ -805,9 +805,16 @@ const StudyEngine = {
         window.open(link.url, '_blank', 'noopener,noreferrer');
     },
 
-    activateActivity(activityId, deepLinkParams) {
+    activateActivity(activityId, deepLinkParams, opts) {
         const activity = this.activities[activityId];
         if (!activity) return;
+
+        // Opened from inside another activity (Maps hub -> a map, Flashcards ->
+        // a textbook section)? Remember it so Back returns there, not to the
+        // picker. Returning to the launcher itself clears the link.
+        const returning = !!(opts && opts.returning);
+        this._launchedFrom = (!returning && this.activeActivity && this.activeActivity !== activityId)
+            ? this.activeActivity : null;
 
         if (!MasteryManager.isActivityAccessible(this.config.unit.id, this.config, activityId)) {
             StudyUtils.showToast(MasteryManager.getLockMessage(this.config.unit.id, this.config, activityId), 'info');
@@ -860,6 +867,14 @@ const StudyEngine = {
     },
 
     _goBackToGroup(activity) {
+        // Came here from another activity? Go back to it.
+        if (this._launchedFrom && this.activities[this._launchedFrom]) {
+            const from = this._launchedFrom;
+            this._launchedFrom = null;
+            this.activateActivity(from, [], { returning: true });
+            return;
+        }
+
         const groups = { study: [], practice: [], games: [] };
         const configOrder = (this.config && this.config.activities) || [];
         var sortedActivities = Object.values(this.activities).sort(function(a, b) {

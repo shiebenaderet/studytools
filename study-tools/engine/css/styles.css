@@ -6693,6 +6693,8 @@ a.sift-detail-link:hover { opacity: 0.8; }
 .cw-map-mode-card.locked { opacity: 0.55; cursor: not-allowed; }
 .cw-map-mode-card.locked:hover { border-color: var(--border-card); }
 .cw-map-best-madness { margin-left: 8px; color: var(--accent-text); }
+.cw-map-timer { font-weight: 700; color: var(--text-primary); font-variant-numeric: tabular-nums; }
+.cw-map-results-madness { border-color: rgba(251, 191, 36, 0.6); color: var(--accent-text); }
 /* No 300ms tap delay or double-tap zoom on the map: taps register immediately. */
 .fs-map-svg { touch-action: manipulation; }
 /* Madness runs go full screen; the map takes the whole display. */

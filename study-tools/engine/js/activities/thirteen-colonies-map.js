@@ -39,6 +39,7 @@ StudyEngine.registerActivity({
 
     deactivate() {
         this._exitFullscreen();
+        this._stopTimerDisplay();
         this._container = null;
         this._config = null;
         this._mode = null;
@@ -58,6 +59,7 @@ StudyEngine.registerActivity({
     _showMenu() {
         this._mode = 'menu';
         this._exitFullscreen();
+        this._stopTimerDisplay();
         var c = this._container;
         c.textContent = '';
         c.className = 'cw-map-screen';
@@ -157,7 +159,27 @@ StudyEngine.registerActivity({
         this._answerLocked = false;
         this._quizStartTime = Date.now();
         this._renderMap('quiz');
+        this._startTimerDisplay();
         if (this._madness) this._enterFullscreen();
+    },
+
+    // Live clock in the header while a quiz runs. Display only: recorded
+    // times are computed from the start timestamp, so this cannot drift them.
+    _startTimerDisplay() {
+        this._stopTimerDisplay();
+        var self = this;
+        var tick = function() {
+            var el = document.getElementById('fs-map-timer');
+            if (!el) return;
+            var ms = Date.now() - self._quizStartTime;
+            el.textContent = self._madness ? (ms / 1000).toFixed(1) + 's' : self._formatTime(Math.floor(ms / 1000));
+        };
+        tick();
+        this._timerInterval = setInterval(tick, this._madness ? 100 : 500);
+    },
+
+    _stopTimerDisplay() {
+        if (this._timerInterval) { clearInterval(this._timerInterval); this._timerInterval = null; }
     },
 
     // ─── Map render ───────────────────────────────────────
@@ -446,7 +468,14 @@ StudyEngine.registerActivity({
             progEl.className = 'cw-map-progress';
             progEl.textContent = 'Question ' + Math.min(this._quizIndex + 1, this._quizStates.length) + ' of ' + this._quizStates.length;
             info.appendChild(progEl);
+            var timerEl = document.createElement('span');
+            timerEl.className = 'cw-map-timer';
+            timerEl.id = 'fs-map-timer';
+            var ms = Date.now() - this._quizStartTime;
+            timerEl.textContent = this._madness ? (ms / 1000).toFixed(1) + 's' : this._formatTime(Math.floor(ms / 1000));
+            info.appendChild(timerEl);
         }
+        if (this._quizIndex >= this._quizStates.length) this._stopTimerDisplay();
 
         if (this._quizIndex >= this._quizStates.length) {
             this._renderQuizResults(panel);
@@ -516,6 +545,15 @@ StudyEngine.registerActivity({
             lastPlayed: new Date().toISOString()
         });
 
+        if (typeof AchievementManager !== 'undefined') {
+            AchievementManager.checkAndAward({ activity: 'thirteen-colonies-map', event: 'complete', score: pct });
+            if (pct === 100) {
+                AchievementManager.checkAndAward({ activity: 'thirteen-colonies-map', event: 'perfect', score: 100 });
+                AchievementManager.checkAndAward({ activity: 'thirteen-colonies-map', event: 'cartographer' });
+                if (elapsed < 60) AchievementManager.checkAndAward({ activity: 'thirteen-colonies-map', event: 'map-master' });
+            }
+        }
+
         var heading = document.createElement('h2');
         heading.className = 'cw-map-results-heading';
         heading.textContent = pct === 100 ? 'Perfect Score!' : 'Quiz Complete';
@@ -534,6 +572,14 @@ StudyEngine.registerActivity({
         again.textContent = 'Try Again';
         again.addEventListener('click', function() { self._startQuiz(); });
         actions.appendChild(again);
+        if (pct === 100) {
+            // A perfect score is exactly what unlocks the speed run; offer it here.
+            var madness = document.createElement('button');
+            madness.className = 'cw-map-results-btn cw-map-results-madness';
+            madness.textContent = '⚡ Maddy’s Madness Mode';
+            madness.addEventListener('click', function() { self._startQuiz({ madness: true }); });
+            actions.appendChild(madness);
+        }
         var menu = document.createElement('button');
         menu.className = 'cw-map-results-btn';
         menu.textContent = 'Back to Menu';
@@ -558,6 +604,11 @@ StudyEngine.registerActivity({
             madnessRuns: (saved.madnessRuns || 0) + 1,
             lastPlayed: new Date().toISOString()
         }));
+
+        if (typeof AchievementManager !== 'undefined') {
+            AchievementManager.checkAndAward({ activity: 'thirteen-colonies-map', event: 'complete', score: pct });
+            if (pct === 100) AchievementManager.checkAndAward({ activity: 'thirteen-colonies-map', event: 'madness-perfect', seconds: seconds });
+        }
 
         var heading = document.createElement('h2');
         heading.className = 'cw-map-results-heading';
