@@ -19,7 +19,13 @@
 -- from editing their own (or a classmate's) progress or score. That needs
 -- Supabase anonymous auth plus owner-scoped policies: see the notes at the end.
 --
--- Run in the Supabase SQL editor as one transaction.
+-- APPLIED to production 2026-10-10 (verified against pg_policies afterward).
+-- Safe to re-run: every statement is CREATE OR REPLACE / DROP ... IF EXISTS.
+--
+-- Run in the Supabase SQL editor as one transaction. The editor's "destructive
+-- operations" prompt is expected (it sees the DROP POLICY lines); if it reports
+-- "no function body specified", it split the text on a semicolon inside a
+-- function body -- run it again as a single query.
 
 begin;
 
