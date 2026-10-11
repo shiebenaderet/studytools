@@ -1607,6 +1607,22 @@
     {
       "category": "Causes of Unrest",
       "type": "video",
+      "title": "How Land, Taxes and Rebellion Sparked the American Revolution",
+      "source": "Ken Burns, The American Revolution (PBS)",
+      "minutes": 7,
+      "url": "https://www.pbs.org/video/how-land-taxes-and-rebellion-sparked-the-american-revolution-rg7vcn/"
+    },
+    {
+      "category": "Causes of Unrest",
+      "type": "video",
+      "title": "Tea, Tar and Tyranny: How the Boston Tea Party Changed Everything",
+      "source": "Ken Burns, The American Revolution (PBS)",
+      "minutes": 9,
+      "url": "https://www.pbs.org/video/tea-tar-and-tyranny-how-the-boston-tea-party-changed-everything-o8bvmf/"
+    },
+    {
+      "category": "Causes of Unrest",
+      "type": "video",
       "title": "Taxes & Smuggling: Prelude to Revolution",
       "source": "Crash Course US History #6",
       "minutes": 12,
@@ -1637,9 +1653,23 @@
     {
       "category": "Choosing Sides",
       "type": "video",
-      "title": "Patriots and Loyalists",
-      "source": "History Brief, Reading Through History",
-      "url": "https://www.youtube.com/watch?v=LZ5lPeyBJmg"
+      "title": "Patriot, Loyalist, Neutral: Three People, Three Choices",
+      "source": "PBS LearningMedia, grades 6–8",
+      "url": "https://www.pbslearningmedia.org/resource/patriot-loyalist-neutral-perspective-video-gallery/the-american-revolution/"
+    },
+    {
+      "category": "Choosing Sides",
+      "type": "video",
+      "title": "Dunmore's Proclamation: Black Americans in the Revolution",
+      "source": "Ken Burns, The American Revolution (PBS)",
+      "url": "https://www.pbs.org/video/dunmores-proclamation-black-americans-in-the-revolution-s12xyy/"
+    },
+    {
+      "category": "Choosing Sides",
+      "type": "video",
+      "title": "The Franklins Choose Opposing Sides",
+      "source": "Ken Burns, Benjamin Franklin (PBS)",
+      "url": "https://www.pbs.org/video/franklins-choose-opposing-sides-revolution-pg11qh/"
     },
     {
       "category": "Choosing Sides",
@@ -1662,6 +1692,22 @@
       "title": "Daughters of Liberty",
       "source": "Britannica Students",
       "url": "https://kids.britannica.com/students/article/Daughters-of-Liberty/641827"
+    },
+    {
+      "category": "The Declaration",
+      "type": "video",
+      "title": "Drafting the Declaration",
+      "source": "Ken Burns, The American Revolution (PBS)",
+      "minutes": 3,
+      "url": "https://www.pbs.org/video/drafting-the-declaration-eidzrc/"
+    },
+    {
+      "category": "The Declaration",
+      "type": "video",
+      "title": "The Meaning of the Declaration to Different Groups",
+      "source": "Ken Burns, The American Revolution (PBS)",
+      "minutes": 2,
+      "url": "https://www.pbs.org/video/the-meaning-of-the-declaration-to-different-groups-xtcgdz/"
     },
     {
       "category": "The Declaration",
@@ -1696,9 +1742,24 @@
     {
       "category": "Research & Voices",
       "type": "video",
-      "title": "The American Revolution",
-      "source": "Crash Course Black American History #8",
-      "url": "https://www.youtube.com/watch?v=y75yPx9WKHY"
+      "title": "Voices of the Revolution: How the Film Used Letters and Diaries",
+      "source": "Ken Burns, The American Revolution (PBS)",
+      "minutes": 11,
+      "url": "https://www.pbs.org/video/inside-look-voices-of-the-revolution-v6yaic/"
+    },
+    {
+      "category": "Research & Voices",
+      "type": "video",
+      "title": "Liberty for Whom? Slavery, Protest and the Ideals of the Revolution",
+      "source": "Ken Burns, The American Revolution (PBS)",
+      "url": "https://www.pbs.org/video/liberty-for-whom-slavery-protest-and-the-ideals-of-the-revolution-1gjg0d/"
+    },
+    {
+      "category": "Research & Voices",
+      "type": "reference",
+      "title": "Black Soldiers in the Revolutionary War (interactive)",
+      "source": "PBS LearningMedia, grades 6–8",
+      "url": "https://www.pbslearningmedia.org/resource/ush22-soc-blacksoldiers/black-soldiers-in-the-revolutionary-war-interactive-image/"
     },
     {
       "category": "Research & Voices",

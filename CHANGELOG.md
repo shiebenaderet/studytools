@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.31] - 2026-10-11
+
+### Changed
+- Revolution "Go deeper" links now lead with PBS: seven clips from Ken Burns' *The American Revolution* and *Benjamin Franklin* on pbs.org, plus the PBS LearningMedia "Patriot, Loyalist, Neutral" video gallery and "Black Soldiers in the Revolutionary War" interactive (both grades 6–8). PBS is usually reachable on school networks where YouTube is not. The unvetted History Brief video and the Crash Course Black American History link were dropped to keep each category at six links. A vetting checklist for all 24 links is in `docs/plans/2026-10-11-student-feedback-plan.md`.
+
 ## [8.55.30] - 2026-10-11
 
 ### Added
