@@ -601,6 +601,12 @@ StudyEngine.registerActivity({
         }
         readingArea.appendChild(markBtn);
 
+        // Go Deeper: at the end of a chapter, curated links for its category
+        if (this._currentSection === seg.sections.length - 1 && typeof GoDeeper !== 'undefined') {
+            var deeper = GoDeeper.render(this._config, seg.category || seg.title, 'textbook');
+            if (deeper) readingArea.appendChild(deeper);
+        }
+
         // Section navigation
         var navRow = document.createElement('div');
         navRow.className = 'tb-nav-row';

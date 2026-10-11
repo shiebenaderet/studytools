@@ -26,12 +26,12 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 | Activity | Description |
 |----------|-------------|
 | **Learn Mode** | Guided study sessions inspired by Seneca Learning. Short interactive slides with adaptive depth (3 tiers), pre/post assessments, reflection prompts, Wiki Writer bonus challenge, 1.5x points multiplier |
-| **Textbook** | Interactive reading with 3 reading levels (Easier/On Grade/Challenge), collapsible sidebar navigation, vocab highlighting, primary source quotes, Key Idea callouts, Quick Checks, and reading progress tracking |
+| **Textbook** | Interactive reading with 3 reading levels (Easier/On Grade/Challenge), collapsible sidebar navigation, vocab highlighting, primary source quotes, Key Idea callouts, Quick Checks, reading progress tracking, and "Keep going" links at the end of each chapter |
 | **Flashcards** | Anki-style spaced repetition with 3D flip animation, confidence rating, "Make Your Own Example", vocab tiers (must-know/encounter/bonus), and "Read in textbook" deep-links |
 | **Short Answer** | Visual card-based question selector with topic images, color-coded categories, and key term chips |
 | **Source Analysis** | Primary source analysis using the SIFT method with scoring |
 | **Typing Practice** | Monkeytype-inspired typing with full passages and per-term snippets |
-| **Resource Library** | Searchable vocabulary reference with mastery indicators, Wikipedia, Kids Wiki, and YouTube links |
+| **Resource Library** | Searchable vocabulary reference with mastery indicators, Simple Wikipedia and Wikipedia links, and teacher-curated "Go deeper" links (videos, challenge readings, reference articles) per category |
 | **How to Study** | Interactive study strategies page with comprehension quiz and Study Smart badge |
 
 ### 📝 Practice

@@ -96,6 +96,10 @@ StudyEngine.registerActivity({
             var termsList = document.createElement('div');
             termsList.className = 'res-terms-list';
 
+            // Go Deeper: curated links for this category (config.goDeeper)
+            var deeper = GoDeeper.render(config, cat, 'resources');
+            if (deeper) termsList.appendChild(deeper);
+
             terms.forEach(function(item) {
                 var card = document.createElement('div');
                 card.className = 'res-term-card';

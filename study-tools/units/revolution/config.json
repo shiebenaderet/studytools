@@ -1602,5 +1602,125 @@
       "subtitle": "For the podcast project, starting in Week 9.",
       "url": "https://voices.mrbsocialstudies.org/"
     }
+  ],
+  "goDeeper": [
+    {
+      "category": "Causes of Unrest",
+      "type": "video",
+      "title": "Taxes & Smuggling: Prelude to Revolution",
+      "source": "Crash Course US History #6",
+      "minutes": 12,
+      "url": "https://www.youtube.com/watch?v=Eytc9ZaNWyc"
+    },
+    {
+      "category": "Causes of Unrest",
+      "type": "reading",
+      "level": "challenge",
+      "title": "The Causes of the American Revolution",
+      "source": "The American Yawp, ch. 5 sec. III",
+      "url": "https://www.americanyawp.com/text/05-the-american-revolution/#III_The_Causes_of_the_American_Revolution"
+    },
+    {
+      "category": "Causes of Unrest",
+      "type": "reference",
+      "title": "Proclamation of 1763",
+      "source": "Britannica Students",
+      "url": "https://kids.britannica.com/students/article/Proclamation-of-1763/631453"
+    },
+    {
+      "category": "Causes of Unrest",
+      "type": "reference",
+      "title": "Intolerable Acts",
+      "source": "Britannica Kids",
+      "url": "https://kids.britannica.com/kids/article/Intolerable-Acts/601072"
+    },
+    {
+      "category": "Choosing Sides",
+      "type": "video",
+      "title": "Patriots and Loyalists",
+      "source": "History Brief, Reading Through History",
+      "url": "https://www.youtube.com/watch?v=LZ5lPeyBJmg"
+    },
+    {
+      "category": "Choosing Sides",
+      "type": "reading",
+      "level": "challenge",
+      "title": "The War for Independence",
+      "source": "The American Yawp, ch. 5 sec. V",
+      "url": "https://www.americanyawp.com/text/05-the-american-revolution/#V_The_War_for_Independence"
+    },
+    {
+      "category": "Choosing Sides",
+      "type": "reference",
+      "title": "Patriots and Loyalists",
+      "source": "Britannica Students",
+      "url": "https://kids.britannica.com/students/article/Patriots-and-Loyalists/703694"
+    },
+    {
+      "category": "Choosing Sides",
+      "type": "reference",
+      "title": "Daughters of Liberty",
+      "source": "Britannica Students",
+      "url": "https://kids.britannica.com/students/article/Daughters-of-Liberty/641827"
+    },
+    {
+      "category": "The Declaration",
+      "type": "video",
+      "title": "What you might not know about the Declaration of Independence",
+      "source": "TED-Ed, Kenneth C. Davis",
+      "minutes": 4,
+      "url": "https://ed.ted.com/lessons/what-you-might-not-know-about-the-declaration-of-independence-kenneth-c-davis"
+    },
+    {
+      "category": "The Declaration",
+      "type": "reading",
+      "title": "Declaration of Independence, 1776 (full text)",
+      "source": "The American Yawp Reader",
+      "url": "https://www.americanyawp.com/reader/the-american-revolution/declaration-of-independence-1776/"
+    },
+    {
+      "category": "The Declaration",
+      "type": "reading",
+      "level": "challenge",
+      "title": "Independence",
+      "source": "The American Yawp, ch. 5 sec. IV",
+      "url": "https://www.americanyawp.com/text/05-the-american-revolution/#IV_Independence"
+    },
+    {
+      "category": "The Declaration",
+      "type": "reference",
+      "title": "Declaration of Independence",
+      "source": "Britannica Students",
+      "url": "https://kids.britannica.com/students/article/Declaration-of-Independence/273945"
+    },
+    {
+      "category": "Research & Voices",
+      "type": "video",
+      "title": "The American Revolution",
+      "source": "Crash Course Black American History #8",
+      "url": "https://www.youtube.com/watch?v=y75yPx9WKHY"
+    },
+    {
+      "category": "Research & Voices",
+      "type": "reading",
+      "level": "challenge",
+      "title": "The Consequences of the American Revolution",
+      "source": "The American Yawp, ch. 5 sec. VI",
+      "url": "https://www.americanyawp.com/text/05-the-american-revolution/#VI_The_Consequences_of_the_American_Revolution"
+    },
+    {
+      "category": "Research & Voices",
+      "type": "reference",
+      "title": "Primary source",
+      "source": "Britannica Students",
+      "url": "https://kids.britannica.com/students/article/primary-source/643030"
+    },
+    {
+      "category": "Research & Voices",
+      "type": "reference",
+      "title": "Secondary source",
+      "source": "Britannica Students",
+      "url": "https://kids.britannica.com/students/article/secondary-source/650910"
+    }
   ]
 }

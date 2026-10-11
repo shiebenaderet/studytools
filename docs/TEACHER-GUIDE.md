@@ -390,6 +390,38 @@ Mastery still works as an accelerator: a fast student who masters category 1 wil
 
 The teacher dashboard has a **Schedule** tab that shows each category's status and provides an "Unlock now" button that generates a JSON snippet you can paste into `config.json` (then commit + push) to open a category ahead of schedule.
 
+### Go Deeper links (optional)
+
+Strong readers run out of textbook before they run out of curiosity. A top-level `goDeeper` list in `config.json` adds curated links, grouped by vocabulary category, in two places: a "Go deeper" row at the top of each category in the Resource Library, and a "Keep going" box at the end of each textbook chapter.
+
+```json
+"goDeeper": [
+  {
+    "category": "Causes of Unrest",
+    "type": "video",
+    "title": "Taxes & Smuggling: Prelude to Revolution",
+    "source": "Crash Course US History #6",
+    "minutes": 12,
+    "url": "https://www.youtube.com/watch?v=Eytc9ZaNWyc"
+  },
+  {
+    "category": "Causes of Unrest",
+    "type": "reading",
+    "level": "challenge",
+    "title": "The Origins of the American Revolution",
+    "source": "The American Yawp, ch. 5",
+    "url": "https://www.americanyawp.com/text/05-the-american-revolution/"
+  }
+]
+```
+
+- `category` must exactly match a vocabulary `category`.
+- `type` is `video`, `reading`, or `reference` and picks the chip's icon and color.
+- `level: "challenge"` tags a link as challenge reading (use it for college-level texts such as The American Yawp).
+- `source` and `minutes` are optional and show under the title.
+- Links open in a new tab. Nothing is embedded, so no third-party player or script loads on your site.
+- Pick videos you have watched. YouTube is blocked on some school devices; a link that does not open at school still works at home.
+
 ### Learn Mode config fields
 
 These optional fields customize Learn Mode behavior per unit:

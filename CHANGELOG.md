@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.29] - 2026-10-11
+
+### Added
+- "Go deeper" links (a period 1 student who has outgrown the games asked for more reading and study options). A unit's `config.json` can carry a `goDeeper` list of curated links per vocabulary category, each a video, a reading or a reference article, with an optional source, length and "Challenge reading" tag. They show as a chip row at the top of each Resource Library category and as a "Keep going" box at the end of each textbook chapter. Links open in a new tab; nothing is embedded, so the site still loads no third-party scripts or players. The Revolution unit ships with 16 links drafted for the teacher to vet: one Crash Course or TED-Ed video per category (Crash Course Black American History for Research & Voices), the matching American Yawp chapter 5 section as challenge reading, the Declaration's full text from the Yawp Reader, and Britannica Kids/Students articles. Documented in the Teacher Guide.
+
+### Fixed
+- README said the Resource Library had YouTube links; it had not for some time.
+
 ## [8.55.28] - 2026-10-11
 
 ### Added

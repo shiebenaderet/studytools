@@ -4,6 +4,7 @@ const APP_SHELL = [
     'index.html',
     'css/styles.css',
     'js/core/utils.js',
+    'js/core/go-deeper.js',
     'js/core/progress.js',
     'js/core/achievements.js',
     'js/core/leaderboard.js',
