@@ -380,6 +380,13 @@ StudyEngine.registerActivity({
             tabList.appendChild(tab);
         });
         sidebar.appendChild(tabList);
+
+        // My highlights (filled by _renderHighlightPanel)
+        var hlPanel = document.createElement('div');
+        hlPanel.className = 'tb-hl-panel';
+        hlPanel.id = 'tb-hl-panel';
+        sidebar.appendChild(hlPanel);
+
         body.appendChild(sidebar);
 
         // Reading area
@@ -401,6 +408,76 @@ StudyEngine.registerActivity({
         // Render current section
         this._renderSection(wrapper);
         this._renderProgress();
+        this._renderHighlightPanel();
+    },
+
+    // ---- Highlights ----
+
+    _getHighlights(key) {
+        if (!this._progress.highlights) this._progress.highlights = {};
+        return (this._progress.highlights[key] || []).slice();
+    },
+
+    _setHighlights(key, list) {
+        if (!this._progress.highlights) this._progress.highlights = {};
+        if (list && list.length) this._progress.highlights[key] = list;
+        else delete this._progress.highlights[key];
+        this._saveProgress();
+    },
+
+    // Sidebar list of this chapter's highlights at the current reading level
+    _renderHighlightPanel() {
+        var panel = document.getElementById('tb-hl-panel');
+        if (!panel || !this._content) return;
+        panel.textContent = '';
+        var self = this;
+        var seg = this._content.segments[this._currentSegment];
+        var items = [];
+        seg.sections.forEach(function(section, si) {
+            var list = self._getHighlights(seg.id + '/' + section.id + '/' + self._readingLevel);
+            list.forEach(function(h, hi) {
+                items.push({ si: si, hi: hi, text: h.t || '', heading: section.heading });
+            });
+        });
+
+        var title = document.createElement('div');
+        title.className = 'tb-hl-panel-title';
+        var icon = document.createElement('i');
+        icon.className = 'fas fa-highlighter';
+        title.appendChild(icon);
+        title.appendChild(document.createTextNode(' My highlights' + (items.length ? ' (' + items.length + ')' : '')));
+        panel.appendChild(title);
+
+        if (items.length === 0) {
+            var hint = document.createElement('div');
+            hint.className = 'tb-hl-hint';
+            hint.textContent = 'Select any text in the chapter and tap Highlight. Your highlights are saved with your progress.';
+            panel.appendChild(hint);
+            return;
+        }
+
+        items.forEach(function(item) {
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'tb-hl-item';
+            var snippet = item.text.replace(/\s+/g, ' ').trim();
+            if (snippet.length > 80) snippet = snippet.slice(0, 77) + '\u2026';
+            btn.appendChild(document.createTextNode('\u201C' + snippet + '\u201D'));
+            var sec = document.createElement('span');
+            sec.className = 'tb-hl-item-sec';
+            sec.textContent = (item.si + 1) + '. ' + item.heading;
+            btn.appendChild(sec);
+            btn.addEventListener('click', function() {
+                if (self._currentSection !== item.si) {
+                    self._currentSection = item.si;
+                    self._renderTextbook();
+                }
+                if (typeof TextbookHighlights !== 'undefined') {
+                    setTimeout(function() { TextbookHighlights.reveal(item.hi); }, 50);
+                }
+            });
+            panel.appendChild(btn);
+        });
     },
 
     _renderSection(wrapper) {
@@ -500,6 +577,16 @@ StudyEngine.registerActivity({
 
         // Attach vocab popup listeners
         this._attachVocabListeners(contentDiv);
+
+        // Highlighter: select text to highlight; stored per section and level
+        this._hlKey = seg.id + '/' + section.id + '/' + this._readingLevel;
+        if (typeof TextbookHighlights !== 'undefined') {
+            TextbookHighlights.attach(contentDiv, this._getHighlights(this._hlKey), function(list) {
+                self._setHighlights(self._hlKey, list);
+                self._renderHighlightPanel();
+            });
+        }
+        this._renderHighlightPanel();
 
         // Key Idea callout (if present)
         if (section.keyIdea) {
@@ -948,6 +1035,7 @@ StudyEngine.registerActivity({
 
     deactivate() {
         this._removePopup();
+        if (typeof TextbookHighlights !== 'undefined') TextbookHighlights.detach();
         if (this._docClickHandler) {
             document.removeEventListener('click', this._docClickHandler);
             this._docClickHandler = null;

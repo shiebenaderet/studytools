@@ -302,6 +302,28 @@ const ProgressManager = {
         if (!local) return remote;
         if (!remote) return local;
 
+        // Textbook: union sections read, quick checks and highlights, so reading
+        // on a phone and on a Chromebook add up instead of overwriting each other.
+        // (A highlight removed on one device can come back from the other.)
+        if (activity === 'activity_textbook') {
+            var tbMerged = Object.assign({}, remote, local);
+            tbMerged.sectionsRead = Object.assign({}, remote.sectionsRead || {}, local.sectionsRead || {});
+            tbMerged.quickChecks = Object.assign({}, remote.quickChecks || {}, local.quickChecks || {});
+            var hl = {};
+            [remote.highlights, local.highlights].forEach(function(src) {
+                Object.keys(src || {}).forEach(function(key) {
+                    hl[key] = hl[key] || [];
+                    (src[key] || []).forEach(function(h) {
+                        var dup = hl[key].some(function(x) { return x.s === h.s && x.e === h.e; });
+                        if (!dup) hl[key].push(h);
+                    });
+                    hl[key].sort(function(a, b) { return a.s - b.s; });
+                });
+            });
+            if (Object.keys(hl).length) tbMerged.highlights = hl;
+            return tbMerged;
+        }
+
         // For flashcards: union mastered arrays, merge ratings keeping latest
         if (activity === 'activity_flashcards') {
             var localMastered = local.mastered || [];

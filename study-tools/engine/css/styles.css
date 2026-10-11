@@ -4486,6 +4486,23 @@ body.light-mode .settings-panel {
     pointer-events: none;
 }
 
+/* Textbook highlighter */
+/* The site's default theme is dark; body.light-mode is the light theme. */
+mark.tb-hl { background: rgba(250, 204, 21, 0.32); color: inherit; border-radius: 2px; padding: 0 1px; cursor: pointer; -webkit-box-decoration-break: clone; box-decoration-break: clone; transition: background 0.2s; }
+mark.tb-hl:hover { background: rgba(250, 204, 21, 0.5); }
+mark.tb-hl.tb-hl-flash { background: rgba(250, 204, 21, 0.75); outline: 2px solid var(--accent, #f59e0b); }
+body.light-mode mark.tb-hl { background: rgba(250, 204, 21, 0.5); }
+body.light-mode mark.tb-hl:hover { background: rgba(250, 204, 21, 0.75); }
+.tb-hl-btn { position: fixed; z-index: 1200; display: inline-flex; align-items: center; gap: 6px; background: var(--primary); color: #fff; border: none; border-radius: 999px; padding: 9px 16px; font-family: inherit; font-size: 0.9em; font-weight: 600; box-shadow: 0 4px 14px rgba(0,0,0,0.28); cursor: pointer; touch-action: manipulation; }
+.tb-hl-btn:active { transform: scale(0.97); }
+.tb-hl-panel { margin-top: 14px; border-top: 1px solid var(--border-card); padding-top: 10px; }
+.tb-sidebar.collapsed .tb-hl-panel { display: none; }
+.tb-hl-panel-title { display: flex; align-items: center; gap: 6px; font-size: 0.75em; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; padding-left: 10px; }
+.tb-hl-hint { font-size: 0.75em; color: var(--text-secondary); opacity: 0.85; line-height: 1.4; padding: 0 10px; }
+.tb-hl-item { display: block; width: 100%; background: none; border: none; border-left: 3px solid rgba(250, 204, 21, 0.85); text-align: left; color: var(--text-secondary); font-size: 0.78em; padding: 6px 8px; margin-bottom: 2px; cursor: pointer; font-family: inherit; line-height: 1.35; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; transition: all 0.15s; }
+.tb-hl-item:hover { background: var(--bg-surface); color: var(--text-primary); }
+.tb-hl-item-sec { display: block; font-size: 0.9em; opacity: 0.7; margin-top: 2px; }
+
 /* Go Deeper: curated links per category (Resource Library + end of chapter) */
 .gd-box { background: var(--bg-card, #f9fafb); border: 1px solid var(--border-color, rgba(0,0,0,0.08)); border-left: 4px solid var(--accent, #f59e0b); border-radius: 12px; padding: 14px 16px; margin: 0 0 14px; text-align: left; }
 .gd-textbook { margin: 22px 0 10px; }

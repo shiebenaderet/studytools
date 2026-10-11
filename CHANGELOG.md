@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.30] - 2026-10-11
+
+### Added
+- Textbook highlighter (asked for by a period 5 student). Select any text in a chapter and tap the "Highlight" button that appears; tap a highlight to remove it. Highlights are stored with textbook progress as character offsets per section and reading level, with the highlighted snippet kept so a highlight whose text is later edited is skipped instead of landing on the wrong words. Overlapping highlights merge. The sidebar gains a "My highlights" list for the chapter at the current reading level; tapping an entry jumps to it. Marks wrap text only, so Read Aloud and the tap-to-define vocab terms keep working. Cloud sync now merges textbook progress (sections read, quick checks, highlights) from two devices instead of keeping whichever saved last.
+
 ## [8.55.29] - 2026-10-11
 
 ### Added
