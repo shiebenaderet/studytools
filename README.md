@@ -8,7 +8,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 
 [![Live Site](https://img.shields.io/badge/Live_Site-study.mrbsocialstudies.org-1669C5?style=for-the-badge&logo=google-chrome&logoColor=white)](https://study.mrbsocialstudies.org)
 [![License](https://img.shields.io/badge/License-Educational_Use-22c55e?style=for-the-badge)](#license)
-[![Version](https://img.shields.io/badge/Version-8.47.1-f59e0b?style=for-the-badge)](#)
+[![Version](https://img.shields.io/badge/Version-8.55.33-f59e0b?style=for-the-badge)](#)
 
 ---
 
@@ -30,7 +30,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 | **Flashcards** | Anki-style spaced repetition with 3D flip animation, confidence rating, "Make Your Own Example", vocab tiers (must-know/encounter/bonus), and "Read in textbook" deep-links |
 | **Short Answer** | Visual card-based question selector with topic images, color-coded categories, and key term chips |
 | **Source Analysis** | Primary source analysis using the SIFT method with scoring |
-| **Typing Practice** | Monkeytype-inspired typing with full passages and per-term snippets |
+| **Typing Practice** | Monkeytype-inspired typing with full passages and per-term snippets; works with phone keyboards |
 | **Resource Library** | Searchable vocabulary reference with mastery indicators, Simple Wikipedia and Wikipedia links, and teacher-curated "Go deeper" links (videos, challenge readings, reference articles) per category |
 | **How to Study** | Interactive study strategies page with comprehension quiz and Study Smart badge |
 
@@ -114,13 +114,14 @@ study-tools/
 │   ├── css/styles.css      # Theming via CSS custom properties
 │   ├── js/core/            # App shell, progress, mastery, leaderboard
 │   ├── js/activities/      # One file per activity (plugin system)
-│   ├── tools/              # Study tools (notes, timer, music, export)
+│   ├── tools/              # Study tools (notes, timer, music, export) + unit-content-check.js
 │   ├── vendor/             # Self-hosted fonts, icons, Supabase SDK
 │   └── index.html          # Main app shell
 ├── units/                  # Your content goes here
 │   ├── units.json          # Unit manifest
 │   └── early-republic/     # Example unit (complete reference)
-│       └── config.json     # Vocabulary, questions, timeline, theme
+│       ├── config.json     # Vocabulary, questions, timeline, theme, Go Deeper links
+│       └── textbook.json   # Leveled textbook chapters, one per vocabulary category
 ├── dashboard/              # Teacher dashboard (standalone)
 └── database/               # Supabase schema + migrations
 ```
@@ -155,6 +156,14 @@ open http://localhost:8000/study-tools/engine/?unit=early-republic
 ```
 
 No build step. No dependencies to install. Just HTML, CSS, and JavaScript.
+
+Before a unit goes live, check it:
+
+```bash
+node study-tools/engine/tools/unit-content-check.js <unit-id>
+```
+
+Conventions for building units and changing the engine (phone keyboards, Go Deeper links, sync, testing) are in [CLAUDE.md](CLAUDE.md), which Claude Code also reads at the start of every session.
 
 ---
 
@@ -202,6 +211,10 @@ Students who reported bugs or suggested improvements:
 | **Kyler** | Suggested playing Hangman without the clue and revealing it afterward — now **Kyler Mode** |
 | **Maddy W** | Pointed out the long pause after each correct colony on the 13 Colonies quiz and that correct colonies should stay colored, GeoGuessr-style — now **Maddy's Madness Mode** and sticky green colonies |
 | **Tiffany** | Asked for GimKit-style games; the question exporter now confirms GimKit downloads on the page |
+| **Anderson A** | Reported that Typing Practice let you type any word on a phone, which revealed that Android keyboards never sent the space bar to the site |
+| **Tiffany N** | Asked for a harder Who Am I, which revealed that most clues contained the answer; now masked, plus a typed-answer **Challenge mode** |
+| **Tiffany N** | Asked for a textbook highlighter, now with a "My highlights" list |
+| **Anderson A** | Asked for more reading and study options after outgrowing the games; now **Go deeper** links in every chapter |
 
 > Want to be listed here? Report a bug or suggest an improvement to your teacher!
 

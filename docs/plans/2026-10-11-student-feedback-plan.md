@@ -1,5 +1,11 @@
 # Student feedback, Oct 10 (Revolution unit, v8.55.25): plan
 
+> **Status (2026-10-11):** all four items shipped in 8.55.26 to 8.55.31 and
+> merged to `main`. Still open: the teacher's vetting of the Revolution Go
+> Deeper links (checklist at the end), a real-phone test of Typing Practice,
+> and Go Deeper links for the Civil War, Westward Expansion and Early Republic
+> units before they open.
+
 Four pieces of feedback came in on Oct 10. This document works through each one
 against the code as it stands today, proposes an approach, sizes it, and lists
 the decisions the teacher needs to make before anything major is built.

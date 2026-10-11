@@ -13,10 +13,15 @@ changing a unit.
 - One change per commit. Each commit bumps the patch version in
   `study-tools/engine/version.json` and adds a dated entry at the top of
   `CHANGELOG.md` (Added / Changed / Fixed / Security). Name the student request
-  it answers by period, never by student name.
+  it answers by period, never by student name. Credit the student in the
+  README's Student Contributors table instead (first name, last initial).
 - Never put a model name or ID in commits, code or docs.
 - New engine scripts go in both `study-tools/engine/index.html` and the
   precache list in `study-tools/engine/sw.js`.
+- When a change alters what a teacher configures or a student sees, update
+  `README.md` (feature tables, version badge) and `docs/TEACHER-GUIDE.md`
+  (activity table, field reference, section 7 checklists, FAQ) in the same
+  change.
 - Bigger requests start as a plan in `docs/plans/YYYY-MM-DD-<topic>.md` with
   findings, a size estimate per item, and the decisions the teacher must make.
   Build only after the teacher answers.

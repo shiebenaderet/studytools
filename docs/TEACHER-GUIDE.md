@@ -237,6 +237,15 @@ This is the fastest way to build your content. Use any AI assistant — Claude, 
 </details>
 
 <details>
+<summary><strong>Draft Go Deeper links</strong></summary>
+
+> For each vocabulary category in this config.json, suggest about six links for a `goDeeper` list, in the format shown in the Teacher Guide. Prefer short PBS or PBS LearningMedia clips (grades 6–8) first, then one Crash Course or TED-Ed video, the matching section of The American Yawp marked `"level": "challenge"`, and one or two Britannica Kids or Students articles. Include at least one link about people the textbook leaves out. For each link, tell me whether you actually opened it.
+
+Then click every link yourself before students see them (see the Go Deeper checklist in section 7).
+
+</details>
+
+<details>
 <summary><strong>Add images to vocabulary (dual coding)</strong></summary>
 
 > For each vocabulary term, find a relevant public domain image from Wikimedia Commons. Download each image and save it to `study-tools/units/my-unit/images/vocab/` with a simple filename (e.g., `hamilton.jpg`). Then add an `imageUrl` field to each term like: `"imageUrl": "../units/my-unit/images/vocab/hamilton.jpg"`. Skip abstract concepts that don't have a natural visual.
@@ -275,6 +284,7 @@ When using AI to generate your content, here's a checklist of things to review b
 - [ ] **Simple explanations are actually simple** — Read them as if you're a student encountering this word for the first time. If the "simple" explanation uses other vocabulary words, it's not simple enough
 - [ ] **Examples are relatable** — The best examples connect to things students already know or experience in their daily lives
 - [ ] **Categories are meaningful** — Categories group related terms together. Don't let AI create too many categories (3-6 is ideal) or put unrelated terms in the same category
+- [ ] **Who Am I clues don't give the answer away** — Run `node study-tools/engine/tools/unit-content-check.js my-unit`. The game blanks the term out of each clue, but an example can still name it another way (a nickname, an abbreviation)
 - [ ] **Terms work for Wordle/Hangman** — Very long terms (3+ words) or terms with special characters don't work well in word games. If you have terms like "Checks and Balances," they'll still work in flashcards and quizzes but may be skipped by word games
 
 ### Fill-in-the-blank
@@ -292,6 +302,13 @@ When using AI to generate your content, here's a checklist of things to review b
 - [ ] **The rubric matches the question** — Make sure the rubric bullet points actually address what the question asks
 - [ ] **Key terms are relevant** — The `keyTerms` array should contain terms a good answer would naturally include
 - [ ] **The exemplar response would score full marks** — Read the exemplar against your own rubric to make sure it hits every point
+
+### Go Deeper links
+
+- [ ] **Every link opens** — Click each one from a school device and from home. School filters often block YouTube; PBS and PBS LearningMedia usually get through
+- [ ] **No login needed** — Britannica School may need a school login; Britannica Kids and Students articles usually do not. PBS full episodes can go behind a Passport login after their free window, so link short clips
+- [ ] **You watched it** — AI-suggested video titles can be wrong or point to the wrong clip. Never publish a video you have not seen
+- [ ] **Level is labeled honestly** — Mark college-level readings such as The American Yawp `"level": "challenge"`
 
 ### General quality checks
 
@@ -324,9 +341,10 @@ Add any of these to your `activities` array:
 | Activity ID | What it does | Required content |
 |------------|-------------|-----------------|
 | `learn-mode` | Guided study sessions with adaptive depth, pre/post assessments, reflection prompts, and Wiki Writer bonus. 1.5x points, 30-min cap. | `vocabulary`, `practiceQuestions`, `fillInBlankSentences`, textbook.json (optional, for Key Idea cards) |
+| `textbook` | Leveled chapters with vocab pop-ups, Read Aloud, Quick Checks, a highlighter, and end-of-chapter Go Deeper links | `textbook.json` (one segment per vocabulary category), `goDeeper` (optional) |
 | `flashcards` | Spaced repetition flashcards | `vocabulary` |
-| `resources` | Searchable vocabulary reference | `vocabulary` |
-| `typing-practice` | Typing passages + per-term snippets | `vocabulary` (with `typingSnippet`), `typingPassages` |
+| `resources` | Searchable vocabulary reference with Go Deeper links per category | `vocabulary`, `goDeeper` (optional) |
+| `typing-practice` | Typing passages + per-term snippets; works with phone keyboards | `vocabulary` (with `typingSnippet`), `typingPassages` |
 | `source-analysis` | Primary source analysis (SIFT method) | Sources in `source-analysis.js` |
 | `how-to-study` | Interactive study strategies with quiz | Built-in (no config needed) |
 
@@ -350,6 +368,9 @@ Add any of these to your `activities` array:
 | `quiz-race` | Timed quiz race | `practiceQuestions` |
 | `tower-defense` | 3D tower defense (desktop only) | `vocabulary` |
 | `sketch-match` | Draw/identify vocabulary images | `vocabulary` (with `imageUrl`) |
+| `who-am-i` | Guess the term from progressive clues; Challenge mode is typed answers over every term | `vocabulary` (at least 6 must-know terms) |
+| `sort-it-out` | Sort terms into their categories | `vocabulary` (2+ categories) |
+| `four-corners` | Find the term that does not belong | `vocabulary` (2+ categories) |
 | `map-quiz` | Click-on-the-map geography quiz | Custom (see source) |
 
 ### Vocabulary fields
@@ -359,7 +380,7 @@ Add any of these to your `activities` array:
 | `term` | Yes | The vocabulary word |
 | `definition` | Yes | Short definition |
 | `simpleExplanation` | | Longer, student-friendly explanation |
-| `example` | | A sentence using the term in context |
+| `example` | | A sentence using the term in context. Also the first Who Am I clue; the term is blanked out automatically |
 | `category` | | Groups terms for mastery gating (order matters — first category unlocks first) |
 | `typingSnippet` | | 2-3 sentence passage for typing practice per term |
 | `imageUrl` | | Image shown on flashcards and resources (use local path, see below) |
@@ -525,6 +546,13 @@ const SUPABASE_ANON_KEY = 'your-anon-key-here';
 <summary><strong>How do I test changes before my students see them?</strong></summary>
 
 Edit files on a branch other than `main`. GitHub Pages only deploys from `main`, so your changes won't be live until you merge.
+
+</details>
+
+<details>
+<summary><strong>What happens to student highlights if I edit the textbook?</strong></summary>
+
+Highlights are saved per section and reading level, using each section's `id`. If you change a section's wording, highlights on the changed words are dropped and the rest stay. If you rename a section `id`, every highlight and "read" checkmark in that section is lost, so keep ids the same once students have started.
 
 </details>
 

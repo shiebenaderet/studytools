@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.33] - 2026-10-11
+
+### Changed
+- Documentation caught up with the October changes. README: version badge, Typing Practice on phones, unit folder layout with `textbook.json`, the content check and `CLAUDE.md` under "For developers", and four new Student Contributors entries. Teacher Guide: `textbook`, `who-am-i`, `sort-it-out` and `four-corners` added to the activity tables; a Go Deeper checklist and a Who Am I clue check in section 7; a "Draft Go Deeper links" AI prompt; an FAQ on what editing the textbook does to student highlights. `CLAUDE.md` now says to update both documents with every change a teacher or student would notice. The feedback plan carries a status line.
+
 ## [8.55.32] - 2026-10-11
 
 ### Added
