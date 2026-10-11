@@ -169,6 +169,7 @@ StudyEngine.registerActivity({
 
     _getClueText(clueIndex) {
         var term = this._currentTerm;
+        var text;
         if (clueIndex === 0) {
             // Distinguishing hint: use example (catchy, specific) or first sentence of simpleExplanation
             var hint = term.example || '';
@@ -176,19 +177,45 @@ StudyEngine.registerActivity({
                 var explanation = term.simpleExplanation || term.definition || '';
                 hint = explanation.split(/[.!?]/)[0].trim() + '.';
             }
-            return hint;
+            text = hint;
         } else if (clueIndex === 1) {
             // Full simple explanation
-            return term.simpleExplanation || term.definition || '';
+            text = term.simpleExplanation || term.definition || '';
         } else if (clueIndex === 2) {
             // Category + keyword from definition
             var cat = term.category || 'this unit';
             var defWords = (term.definition || '').split(' ').slice(0, 8).join(' ');
-            return 'From "' + cat + '" — ' + defWords + '...';
+            text = 'From "' + cat + '" — ' + defWords + '...';
         } else {
             // Full definition (safety net)
-            return term.definition || '';
+            text = term.definition || '';
         }
+        return this._maskTerm(text, term.term);
+    },
+
+    // Words in a term too generic to give the answer away on their own, so they
+    // stay visible ("Act" in "Stamp Act", "of" in "Declaration of Independence").
+    _MASK_SKIP_WORDS: ['the', 'of', 'and', 'in', 'on', 'at', 'to', 'for', 'a', 'an', 'act', 'war', 'battle', 'treaty', 'party', 'plan', 'law', 'laws', 'system', 'new', 'first', 'great'],
+
+    // Vocab examples and explanations were written for flashcards, where naming
+    // the term is the point. As clues they gave the answer away (20 of the 23
+    // Revolution "Quick Hint" clues contained it verbatim). Blank out the whole
+    // term and each of its distinctive words, with plural and possessive forms.
+    _maskTerm(text, term) {
+        if (!text || !term) return text || '';
+        var escape = function(w) { return w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); };
+        var masked = text.replace(new RegExp(escape(term) + "(?:'s|s|es|ed|ing)?", 'gi'), '___');
+        var words = term.split(/[\s-]+/);
+        for (var i = 0; i < words.length; i++) {
+            var w = words[i].replace(/[^A-Za-z0-9]/g, '');
+            if (w.length < 3 || this._MASK_SKIP_WORDS.indexOf(w.toLowerCase()) !== -1) continue;
+            // Match the word's stem plus a short ending, so "Repeal" also hides
+            // "repealed" and "Representation" hides "represented".
+            var stem = w.replace(/(ation|tion|ion|ing|ed|es|s)$/i, '');
+            if (stem.length < 4) stem = w;
+            masked = masked.replace(new RegExp('\\b' + escape(stem) + "[a-z]{0,6}(?:'s)?\\b", 'gi'), '___');
+        }
+        return masked.replace(/(___\s*){2,}/g, '___ ');
     },
 
     _getClueLabel(clueIndex) {

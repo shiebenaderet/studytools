@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.27] - 2026-10-11
+
+### Fixed
+- Who Am I? gave the answer away: its clues are the vocab `example`, `simpleExplanation` and `definition` fields, which were written for flashcards and name the term. In the Revolution unit 20 of the 23 five-point "Quick Hint" clues contained the answer verbatim, and 11 of the explanations did (a period 5 student asked for a harder game). Every clue now blanks out the term and each of its distinctive words, including plural, possessive and verb forms ("the ___ closed Boston Harbor"; "Parliament ___ the Stamp Act"). Checked across all four units: 848 clues, none still contain their term.
+
 ## [8.55.26] - 2026-10-11
 
 ### Fixed
