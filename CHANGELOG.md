@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.32] - 2026-10-11
+
+### Added
+- `CLAUDE.md` at the repository root records how units are built and shipped here, including everything learned from the October student feedback: Go Deeper links for every category (PBS and Ken Burns clips first, Yawp as challenge reading, nothing embedded), phone-keyboard rules for any typed input, the shared lenient answer matcher, stable textbook ids for highlights, sync merge rules, and the browser smoke-test recipe.
+- `study-tools/engine/tools/unit-content-check.js` checks a unit before it goes live: categories line up across vocabulary, textbook, schedule and Go Deeper; no Who Am I clue still contains its answer; Go Deeper links are well formed and about six per category. Documented in the Teacher Guide.
+
+### Fixed
+- Early Republic's first textbook chapter had no `category`, and its title did not match the vocabulary category "The First Presidencies", so the read-before-flashcards gate silently skipped it. Found by the new check; the unit is hidden, so no student was affected.
+
 ## [8.55.31] - 2026-10-11
 
 ### Changed

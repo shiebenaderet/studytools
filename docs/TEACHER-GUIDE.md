@@ -422,6 +422,14 @@ Strong readers run out of textbook before they run out of curiosity. A top-level
 - Links open in a new tab. Nothing is embedded, so no third-party player or script loads on your site.
 - Pick videos you have watched. YouTube is blocked on some school devices; a link that does not open at school still works at home.
 
+### Check a unit before it goes live
+
+Run this from the repository root. It reports any category that does not line up between the vocabulary, the textbook and the schedule, any Who Am I clue that still gives its answer away, and any Go Deeper link that is malformed:
+
+```
+node study-tools/engine/tools/unit-content-check.js my-unit
+```
+
 ### Learn Mode config fields
 
 These optional fields customize Learn Mode behavior per unit:
