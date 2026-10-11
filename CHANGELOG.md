@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.26] - 2026-10-11
+
+### Fixed
+- Typing Practice on phones: both typing modes submitted a word only when the space bar arrived on `keydown`, which Android keyboards never report (every key comes through as "Unidentified" while the keyboard composes). The space landed in the hidden text box instead, the next word was typed into the same buffer, and nothing was ever checked, so a student could "write any word" (reported by a period 1 student). Whitespace in the value is now treated as the word break on every platform; the input also declares `autocorrect="off"`, `inputmode="text"` and `enterkeyhint="next"`, and is 1x1 px instead of 0x0 so every phone browser raises the keyboard. Bug reports now record the browser and screen size, so the next "on my phone" report says which phone.
+
 ## [8.55.25] - 2026-10-10
 
 ### Changed

@@ -279,37 +279,7 @@ StudyEngine.registerActivity({
         darkBox.appendChild(display);
         darkBox.appendChild(focusHint);
 
-        var input = document.createElement('input');
-        input.type = 'text';
-        input.id = 'typing-input';
-        input.className = 'typing-hidden-input';
-        input.autocomplete = 'off';
-        input.autocapitalize = 'off';
-        input.spellcheck = false;
-
-        input.addEventListener('keydown', function(e) {
-            if (e.key === ' ' || e.key === 'Enter') {
-                e.preventDefault();
-                self._submitWord(input);
-            }
-        });
-
-        input.addEventListener('input', function() {
-            self._updateLiveTyping(input);
-        });
-
-        input.addEventListener('focus', function() {
-            darkBox.classList.add('focused');
-            focusHint.style.display = 'none';
-        });
-
-        input.addEventListener('blur', function() {
-            darkBox.classList.remove('focused');
-            if (self._active) {
-                focusHint.style.display = '';
-            }
-        });
-
+        var input = this._createTypingInput(darkBox, focusHint);
         darkBox.appendChild(input);
         darkBox.addEventListener('click', function() {
             input.focus();
@@ -445,38 +415,7 @@ StudyEngine.registerActivity({
         darkBox.appendChild(display);
         darkBox.appendChild(focusHint);
 
-        // Hidden input
-        var input = document.createElement('input');
-        input.type = 'text';
-        input.id = 'typing-input';
-        input.className = 'typing-hidden-input';
-        input.autocomplete = 'off';
-        input.autocapitalize = 'off';
-        input.spellcheck = false;
-
-        input.addEventListener('keydown', function(e) {
-            if (e.key === ' ' || e.key === 'Enter') {
-                e.preventDefault();
-                self._submitWord(input);
-            }
-        });
-
-        input.addEventListener('input', function() {
-            self._updateLiveTyping(input);
-        });
-
-        input.addEventListener('focus', function() {
-            darkBox.classList.add('focused');
-            focusHint.style.display = 'none';
-        });
-
-        input.addEventListener('blur', function() {
-            darkBox.classList.remove('focused');
-            if (self._active) {
-                focusHint.style.display = '';
-            }
-        });
-
+        var input = this._createTypingInput(darkBox, focusHint);
         darkBox.appendChild(input);
 
         // Click on dark box focuses input
@@ -549,6 +488,71 @@ StudyEngine.registerActivity({
     _resetWordText(span, expected) {
         while (span.firstChild) span.removeChild(span.firstChild);
         span.textContent = expected;
+    },
+
+    // The hidden text box both typing modes type into. Desktop keyboards report
+    // the space bar on keydown, where it is intercepted before it reaches the
+    // value. Phone keyboards (Android IME especially) report most keys as
+    // "Unidentified" on keydown, so the space lands in the value instead; the
+    // input handler treats any whitespace in the value as the word break, which
+    // is what makes submitting (and backspacing within a word) work on phones.
+    _createTypingInput(darkBox, focusHint) {
+        var self = this;
+        var input = document.createElement('input');
+        input.type = 'text';
+        input.id = 'typing-input';
+        input.className = 'typing-hidden-input';
+        input.autocomplete = 'off';
+        input.autocapitalize = 'off';
+        input.spellcheck = false;
+        input.setAttribute('autocorrect', 'off');
+        input.setAttribute('inputmode', 'text');
+        input.setAttribute('enterkeyhint', 'next');
+        input.setAttribute('aria-label', 'Type the highlighted word');
+
+        input.addEventListener('keydown', function(e) {
+            if (e.key === ' ' || e.key === 'Enter') {
+                e.preventDefault();
+                self._submitWord(input);
+            }
+        });
+
+        input.addEventListener('input', function() {
+            self._consumeWordBreaks(input);
+            if (self._active) self._updateLiveTyping(input);
+        });
+
+        input.addEventListener('focus', function() {
+            darkBox.classList.add('focused');
+            focusHint.style.display = 'none';
+        });
+
+        input.addEventListener('blur', function() {
+            darkBox.classList.remove('focused');
+            if (self._active) {
+                focusHint.style.display = '';
+            }
+        });
+
+        return input;
+    },
+
+    // Submit every whitespace-terminated word sitting in the input value and
+    // leave the unfinished remainder (the start of the next word) in place.
+    _consumeWordBreaks(input) {
+        var value = input.value;
+        if (!/\s/.test(value)) return;
+        while (this._active) {
+            var brk = value.search(/\s/);
+            if (brk === -1) break;
+            var word = value.slice(0, brk);
+            value = value.slice(brk + 1).replace(/^\s+/, '');
+            if (word) {
+                input.value = word;
+                this._submitWord(input);
+            }
+        }
+        input.value = this._active ? value : '';
     },
 
     _updateLiveTyping(input) {

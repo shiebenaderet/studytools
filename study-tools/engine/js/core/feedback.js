@@ -150,6 +150,19 @@ const FeedbackManager = {
         if (m) m.parentNode.removeChild(m);
     },
 
+    // Bug reports carry the browser and screen size so a "doesn't work on my
+    // phone" report says which phone. Kept short; the database caps context.
+    _bugContext(context) {
+        var ua = (typeof navigator !== 'undefined' && navigator.userAgent) ? navigator.userAgent : '';
+        var device = ua.slice(0, 200);
+        if (typeof window !== 'undefined' && window.innerWidth) {
+            device += ' (' + window.innerWidth + 'x' + window.innerHeight + ')';
+        }
+        var out = context || '';
+        if (device) out += (out ? '\n\n' : '') + '[device] ' + device;
+        return out || null;
+    },
+
     async _submit() {
         const status = document.getElementById('feedback-status');
         const type = document.querySelector('input[name="feedback-type"]:checked')?.value;
@@ -165,7 +178,7 @@ const FeedbackManager = {
         const payload = {
             type: type,
             description: description,
-            context: (type === 'bug' && context) ? context : null,
+            context: (type === 'bug') ? this._bugContext(context) : null,
             student_id: (typeof ProgressManager !== 'undefined') ? ProgressManager.studentId : null,
             student_name: (typeof ProgressManager !== 'undefined' && ProgressManager.studentInfo && !ProgressManager.studentInfo.isGuest) ? ProgressManager.studentInfo.name : null,
             class_code: (typeof ProgressManager !== 'undefined' && ProgressManager.studentInfo) ? ProgressManager.studentInfo.classCode : null,
