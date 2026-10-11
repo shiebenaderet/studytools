@@ -56,7 +56,9 @@ A unit is `study-tools/units/<id>/config.json` plus `textbook.json`, listed in
      sources (full text) are a good `reading` link too.
    - Britannica Kids or Students articles for reference. The district has
      Britannica School, which may need a school login, so prefer articles
-     that open from home.
+     that open from home. Some Students-level articles need a login even
+     where others on the same site open; check each one. The Library of
+     Congress and National Archives are free, stable fallbacks.
    - A clip or interactive that brings in overlooked voices for the unit's
      research category.
    Links open in a new tab. Never embed a player or third-party script: the

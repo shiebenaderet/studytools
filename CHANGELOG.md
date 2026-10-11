@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.36] - 2026-10-11
+
+### Changed
+- Revolution Go Deeper, Research & Voices: the Britannica Students "primary source" and "secondary source" articles would not load in the teacher's check and are replaced by PBS Wisconsin's "Straight to the Source: Primary and Secondary Sources" (PBS LearningMedia) and the Library of Congress guide to primary sources for middle and high school students. The teacher's link check is complete: 20 of 24 links passed, four were replaced; results are in the feedback plan.
+
 ## [8.55.35] - 2026-10-11
 
 ### Changed

@@ -1,8 +1,9 @@
 # Student feedback, Oct 10 (Revolution unit, v8.55.25): plan
 
 > **Status (2026-10-11):** all four items shipped in 8.55.26 to 8.55.31 and
-> merged to `main`. Still open: the teacher's vetting of the Revolution Go
-> Deeper links (checklist at the end), a real-phone test of Typing Practice,
+> merged to `main`. The teacher vetted the Revolution Go Deeper links; four
+> were replaced (results at the end; recheck 23 and 24). Still open: a
+> real-phone test of Typing Practice,
 > and Go Deeper links for the Civil War, Westward Expansion and Early Republic
 > units before they open.
 
@@ -358,29 +359,36 @@ Before students see them, check each link from a school device and from home:
 it plays or opens, needs no login, and the content fits 8th grade. Remove or
 replace a link by editing `goDeeper` in `study-tools/units/revolution/config.json`.
 
-| Category | Link | Source | What to check |
-|---|---|---|---|
-| Causes of Unrest | [How Land, Taxes and Rebellion Sparked the American Revolution](https://www.pbs.org/video/how-land-taxes-and-rebellion-sparked-the-american-revolution-rg7vcn/) | Ken Burns, The American Revolution (PBS) | Confirm it covers the Proclamation and the Stamp Act; search snippet says Stamp Act and related taxes. |
-| Causes of Unrest | [Tea, Tar and Tyranny: How the Boston Tea Party Changed Everything](https://www.pbs.org/video/tea-tar-and-tyranny-how-the-boston-tea-party-changed-everything-o8bvmf/) | Ken Burns, The American Revolution (PBS) | Confirmed title and length from PBS listing. |
-| Causes of Unrest | [Taxes & Smuggling: Prelude to Revolution](https://www.youtube.com/watch?v=Eytc9ZaNWyc) | Crash Course US History #6 | Fast and jokey; YouTube may be blocked at school. |
-| Causes of Unrest | [The Causes of the American Revolution](https://www.americanyawp.com/text/05-the-american-revolution/#III_The_Causes_of_the_American_Revolution) | The American Yawp, ch. 5 sec. III | Anchor drafted from memory; if it lands at the top of the chapter, scroll to section III. |
-| Causes of Unrest | [Proclamation of 1763](https://kids.britannica.com/students/article/Proclamation-of-1763/631453) | Britannica Students | Check it opens from home without a school login. |
-| Causes of Unrest | [Intolerable Acts](https://kids.britannica.com/kids/article/Intolerable-Acts/601072) | Britannica Kids | Britannica Kids level; check from home. |
-| Choosing Sides | [Patriot, Loyalist, Neutral: Three People, Three Choices](https://www.pbslearningmedia.org/resource/patriot-loyalist-neutral-perspective-video-gallery/the-american-revolution/) | PBS LearningMedia, grades 6–8 | PBS LearningMedia gallery, tagged grades 6–8. Replaces the unvetted History Brief video. |
-| Choosing Sides | [Dunmore's Proclamation: Black Americans in the Revolution](https://www.pbs.org/video/dunmores-proclamation-black-americans-in-the-revolution-s12xyy/) | Ken Burns, The American Revolution (PBS) | Ken Burns episode 2 clip. Matches the 'Choosing for Freedom and for Land' section. Length not confirmed. |
-| Choosing Sides | [The Franklins Choose Opposing Sides](https://www.pbs.org/video/franklins-choose-opposing-sides-revolution-pg11qh/) | Ken Burns, Benjamin Franklin (PBS) | From Burns' 2022 Benjamin Franklin series, not the Revolution series. Length not confirmed. |
-| Choosing Sides | [The War for Independence](https://www.americanyawp.com/text/05-the-american-revolution/#V_The_War_for_Independence) | The American Yawp, ch. 5 sec. V | Anchor drafted from memory. |
-| Choosing Sides | [Patriots and Loyalists](https://kids.britannica.com/students/article/Patriots-and-Loyalists/703694) | Britannica Students | Check from home. |
-| Choosing Sides | [Daughters of Liberty](https://kids.britannica.com/students/article/Daughters-of-Liberty/641827) | Britannica Students | Check from home. |
-| The Declaration | [Drafting the Declaration](https://www.pbs.org/video/drafting-the-declaration-eidzrc/) | Ken Burns, The American Revolution (PBS) | About 3 minutes per PBS listing. |
-| The Declaration | [The Meaning of the Declaration to Different Groups](https://www.pbs.org/video/the-meaning-of-the-declaration-to-different-groups-xtcgdz/) | Ken Burns, The American Revolution (PBS) | About 1.5 minutes. Pairs with 'Grievances, and Who Was Left Out'. |
-| The Declaration | [What you might not know about the Declaration of Independence](https://ed.ted.com/lessons/what-you-might-not-know-about-the-declaration-of-independence-kenneth-c-davis) | TED-Ed, Kenneth C. Davis | TED-Ed lesson page; video plays from YouTube inside it. |
-| The Declaration | [Declaration of Independence, 1776 (full text)](https://www.americanyawp.com/reader/the-american-revolution/declaration-of-independence-1776/) | The American Yawp Reader | Full text, Yawp Reader. |
-| The Declaration | [Independence](https://www.americanyawp.com/text/05-the-american-revolution/#IV_Independence) | The American Yawp, ch. 5 sec. IV | Anchor drafted from memory. |
-| The Declaration | [Declaration of Independence](https://kids.britannica.com/students/article/Declaration-of-Independence/273945) | Britannica Students | Check from home. |
-| Research & Voices | [Voices of the Revolution: How the Film Used Letters and Diaries](https://www.pbs.org/video/inside-look-voices-of-the-revolution-v6yaic/) | Ken Burns, The American Revolution (PBS) | Behind-the-scenes piece on how the film used letters and diaries, including lesser-known people. Fits sourcing and overlooked voices. About 10.5 minutes. |
-| Research & Voices | [Liberty for Whom? Slavery, Protest and the Ideals of the Revolution](https://www.pbs.org/video/liberty-for-whom-slavery-protest-and-the-ideals-of-the-revolution-1gjg0d/) | Ken Burns, The American Revolution (PBS) | Title from search results only. Length and content not confirmed: watch before keeping. |
-| Research & Voices | [Black Soldiers in the Revolutionary War (interactive)](https://www.pbslearningmedia.org/resource/ush22-soc-blacksoldiers/black-soldiers-in-the-revolutionary-war-interactive-image/) | PBS LearningMedia, grades 6–8 | Interactive image, grades 6–8: 1st Rhode Island, Peter Salem, James Armistead Lafayette, Black Loyalists. |
-| Research & Voices | [The Consequences of the American Revolution](https://www.americanyawp.com/text/05-the-american-revolution/#VI_The_Consequences_of_the_American_Revolution) | The American Yawp, ch. 5 sec. VI | Anchor drafted from memory. |
-| Research & Voices | [Primary source](https://kids.britannica.com/students/article/primary-source/643030) | Britannica Students | Check from home. |
-| Research & Voices | [Secondary source](https://kids.britannica.com/students/article/secondary-source/650910) | Britannica Students | Check from home. |
+Teacher's results, 2026-10-11 (links as they stand after the fixes):
+
+| # | Category | Link | Source | Result |
+|---|---|---|---|---|
+| 1 | Causes of Unrest | [How Land, Taxes and Rebellion Sparked the American Revolution](https://www.pbs.org/video/how-land-taxes-and-rebellion-sparked-the-american-revolution-rg7vcn/) | Ken Burns, The American Revolution (PBS) | Pass |
+| 2 | Causes of Unrest | [Tea, Tar and Tyranny: How the Boston Tea Party Changed Everything](https://www.pbs.org/video/tea-tar-and-tyranny-how-the-boston-tea-party-changed-everything-o8bvmf/) | Ken Burns, The American Revolution (PBS) | Pass |
+| 3 | Causes of Unrest | [Taxes & Smuggling: Prelude to Revolution](https://www.youtube.com/watch?v=Eytc9ZaNWyc) | Crash Course US History #6 | Pass |
+| 4 | Causes of Unrest | [The Causes of the American Revolution](https://www.americanyawp.com/text/05-the-american-revolution/#III_The_Causes_of_the_American_Revolution) | The American Yawp, ch. 5 sec. III | Pass |
+| 5 | Causes of Unrest | [Proclamation of 1763](https://kids.britannica.com/students/article/Proclamation-of-1763/631453) | Britannica Students | Pass |
+| 6 | Causes of Unrest | [Intolerable Acts](https://kids.britannica.com/kids/article/Intolerable-Acts/601072) | Britannica Kids | Pass |
+| 7 | Choosing Sides | [Patriot, Loyalist, Neutral: Three People, Three Choices](https://www.pbslearningmedia.org/resource/patriot-loyalist-neutral-perspective-video-gallery/the-american-revolution/) | PBS LearningMedia, grades 6–8 | Pass |
+| 8 | Choosing Sides | [Dunmore's Proclamation: Black Americans in the Revolution](https://www.pbs.org/video/dunmores-proclamation-black-americans-in-the-revolution-s12xyy/) | Ken Burns, The American Revolution (PBS) | Pass |
+| 9 | Choosing Sides | [The Franklins Choose Opposing Sides](https://www.pbs.org/video/franklins-choose-opposing-sides-revolution-pg11qh/) | Ken Burns, Benjamin Franklin (PBS) | Pass |
+| 10 | Choosing Sides | [The War for Independence](https://www.americanyawp.com/text/05-the-american-revolution/#V_The_War_for_Independence) | The American Yawp, ch. 5 sec. V | Pass |
+| 11 | Choosing Sides | [Patriots and Loyalists](https://kids.britannica.com/students/article/Patriots-and-Loyalists/703694) | Britannica Students | Pass |
+| 12 | Choosing Sides | [Daughters of Liberty](https://kids.britannica.com/students/article/Daughters-of-Liberty/641827) | Britannica Students | Pass |
+| 13 | The Declaration | [The Declaration of Independence & Birth of the United States](https://www.pbs.org/video/the-declaration-of-independence-birth-of-the-united-states-2bndcu/) | Ken Burns, The American Revolution (PBS) | Failed; replaced with Ken Burns "The Declaration of Independence & Birth of the United States" (teacher approved) |
+| 14 | The Declaration | [The Meaning of the Declaration to Different Groups](https://www.pbs.org/video/the-meaning-of-the-declaration-to-different-groups-xtcgdz/) | Ken Burns, The American Revolution (PBS) | Pass |
+| 15 | The Declaration | [What you might not know about the Declaration of Independence](https://ed.ted.com/lessons/what-you-might-not-know-about-the-declaration-of-independence-kenneth-c-davis) | TED-Ed, Kenneth C. Davis | Pass |
+| 16 | The Declaration | [Declaration of Independence: A Transcription (full text)](https://www.archives.gov/founding-docs/declaration-transcript) | National Archives | Yawp Reader address failed; replaced with the National Archives transcription; pass |
+| 17 | The Declaration | [Independence](https://www.americanyawp.com/text/05-the-american-revolution/#IV_Independence) | The American Yawp, ch. 5 sec. IV | Pass |
+| 18 | The Declaration | [Declaration of Independence](https://kids.britannica.com/students/article/Declaration-of-Independence/273945) | Britannica Students | Pass |
+| 19 | Research & Voices | [Voices of the Revolution: How the Film Used Letters and Diaries](https://www.pbs.org/video/inside-look-voices-of-the-revolution-v6yaic/) | Ken Burns, The American Revolution (PBS) | Pass |
+| 20 | Research & Voices | [Liberty for Whom? Slavery, Protest and the Ideals of the Revolution](https://www.pbs.org/video/liberty-for-whom-slavery-protest-and-the-ideals-of-the-revolution-1gjg0d/) | Ken Burns, The American Revolution (PBS) | Pass |
+| 21 | Research & Voices | [Black Soldiers in the Revolutionary War (interactive)](https://www.pbslearningmedia.org/resource/ush22-soc-blacksoldiers/black-soldiers-in-the-revolutionary-war-interactive-image/) | PBS LearningMedia, grades 6–8 | Pass |
+| 22 | Research & Voices | [The Consequences of the American Revolution](https://www.americanyawp.com/text/05-the-american-revolution/#VI_The_Consequences_of_the_American_Revolution) | The American Yawp, ch. 5 sec. VI | Pass |
+| 23 | Research & Voices | [Straight to the Source: Primary and Secondary Sources](https://www.pbslearningmedia.org/resource/ilwpt18-soc-ilprimsec/straight-to-the-source-primary-and-secondary-sources/) | PBS Wisconsin, PBS LearningMedia | Britannica Students article would not load; replaced with PBS Wisconsin "Straight to the Source". Recheck |
+| 24 | Research & Voices | [Primary Sources: A Guide for Middle and High School Students](https://guides.loc.gov/student-resources/primary-sources) | Library of Congress | Britannica Students article would not load; replaced with the Library of Congress student guide. Recheck |
+
+Lessons for the next unit: PBS pages can fail once and load on a retry (14
+did); Yawp Reader addresses can move during the second-edition
+reorganization; some Britannica Students articles need a login even from
+home, so check each one rather than the site as a whole.

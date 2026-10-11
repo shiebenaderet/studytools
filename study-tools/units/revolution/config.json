@@ -1771,17 +1771,17 @@
     },
     {
       "category": "Research & Voices",
-      "type": "reference",
-      "title": "Primary source",
-      "source": "Britannica Students",
-      "url": "https://kids.britannica.com/students/article/primary-source/643030"
+      "type": "video",
+      "title": "Straight to the Source: Primary and Secondary Sources",
+      "source": "PBS Wisconsin, PBS LearningMedia",
+      "url": "https://www.pbslearningmedia.org/resource/ilwpt18-soc-ilprimsec/straight-to-the-source-primary-and-secondary-sources/"
     },
     {
       "category": "Research & Voices",
       "type": "reference",
-      "title": "Secondary source",
-      "source": "Britannica Students",
-      "url": "https://kids.britannica.com/students/article/secondary-source/650910"
+      "title": "Primary Sources: A Guide for Middle and High School Students",
+      "source": "Library of Congress",
+      "url": "https://guides.loc.gov/student-resources/primary-sources"
     }
   ]
 }
