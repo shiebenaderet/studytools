@@ -2,7 +2,7 @@
 
 > **Status (2026-10-11):** all four items shipped in 8.55.26 to 8.55.31 and
 > merged to `main`. The teacher vetted the Revolution Go Deeper links; four
-> were replaced (results at the end; recheck 23 and 24). Still open: a
+> were replaced; all 24 pass (results at the end). Still open: a
 > real-phone test of Typing Practice,
 > and Go Deeper links for the Civil War, Westward Expansion and Early Republic
 > units before they open.
@@ -385,8 +385,8 @@ Teacher's results, 2026-10-11 (links as they stand after the fixes):
 | 20 | Research & Voices | [Liberty for Whom? Slavery, Protest and the Ideals of the Revolution](https://www.pbs.org/video/liberty-for-whom-slavery-protest-and-the-ideals-of-the-revolution-1gjg0d/) | Ken Burns, The American Revolution (PBS) | Pass |
 | 21 | Research & Voices | [Black Soldiers in the Revolutionary War (interactive)](https://www.pbslearningmedia.org/resource/ush22-soc-blacksoldiers/black-soldiers-in-the-revolutionary-war-interactive-image/) | PBS LearningMedia, grades 6–8 | Pass |
 | 22 | Research & Voices | [The Consequences of the American Revolution](https://www.americanyawp.com/text/05-the-american-revolution/#VI_The_Consequences_of_the_American_Revolution) | The American Yawp, ch. 5 sec. VI | Pass |
-| 23 | Research & Voices | [Straight to the Source: Primary and Secondary Sources](https://www.pbslearningmedia.org/resource/ilwpt18-soc-ilprimsec/straight-to-the-source-primary-and-secondary-sources/) | PBS Wisconsin, PBS LearningMedia | Britannica Students article would not load; replaced with PBS Wisconsin "Straight to the Source". Recheck |
-| 24 | Research & Voices | [Primary Sources: A Guide for Middle and High School Students](https://guides.loc.gov/student-resources/primary-sources) | Library of Congress | Britannica Students article would not load; replaced with the Library of Congress student guide. Recheck |
+| 23 | Research & Voices | [Straight to the Source: Primary and Secondary Sources](https://www.pbslearningmedia.org/resource/ilwpt18-soc-ilprimsec/straight-to-the-source-primary-and-secondary-sources/) | PBS Wisconsin, PBS LearningMedia | Britannica Students article would not load; replaced with PBS Wisconsin "Straight to the Source"; pass |
+| 24 | Research & Voices | [Primary Sources: A Guide for Middle and High School Students](https://guides.loc.gov/student-resources/primary-sources) | Library of Congress | Britannica Students article would not load; replaced with the Library of Congress student guide; pass |
 
 Lessons for the next unit: PBS pages can fail once and load on a retry (14
 did); Yawp Reader addresses can move during the second-edition
