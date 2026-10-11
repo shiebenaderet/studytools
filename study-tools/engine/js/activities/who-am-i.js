@@ -15,6 +15,8 @@ StudyEngine.registerActivity({
     _container: null,
     _config: null,
     _roundTerms: [],
+    _mode: 'classic',
+    _lastWrongGuess: null,
 
     render(container, config) {
         this._container = container;
@@ -49,7 +51,7 @@ StudyEngine.registerActivity({
         desc.style.cssText = 'color: var(--text-secondary, #4b5563); margin-bottom: 25px;';
         wrapper.appendChild(desc);
 
-        // Show best score if exists
+        // Show best scores if they exist
         var saved = ProgressManager.getActivityProgress(
             this._config ? this._config.unit.id : '',
             'who-am-i'
@@ -60,6 +62,12 @@ StudyEngine.registerActivity({
             bestEl.textContent = 'Best score: ' + saved.bestScore + ' / 50';
             wrapper.appendChild(bestEl);
         }
+        if (saved && saved.bestChallengeScore !== undefined) {
+            var bestChEl = document.createElement('p');
+            bestChEl.style.cssText = 'color: var(--text-secondary, #4b5563); font-size: 0.9em; margin-bottom: 5px;';
+            bestChEl.textContent = 'Best challenge score: ' + saved.bestChallengeScore + ' / 80';
+            wrapper.appendChild(bestChEl);
+        }
         if (saved && saved.gamesPlayed !== undefined) {
             var gamesEl = document.createElement('p');
             gamesEl.style.cssText = 'color: var(--text-secondary, #4b5563); font-size: 0.85em; margin-bottom: 20px;';
@@ -68,6 +76,9 @@ StudyEngine.registerActivity({
         }
 
         var self = this;
+        var btnRow = document.createElement('div');
+        btnRow.className = 'wai-mode-row';
+
         var startBtn = document.createElement('button');
         startBtn.className = 'nav-button';
         startBtn.style.cssText = 'background: var(--primary); color: white; font-size: 1.2em; padding: 12px 30px;';
@@ -76,18 +87,39 @@ StudyEngine.registerActivity({
         startBtn.appendChild(btnIcon);
         startBtn.appendChild(document.createTextNode(' Start'));
         startBtn.addEventListener('click', function() {
-            self._startGame();
+            self._startGame('classic');
         });
-        wrapper.appendChild(startBtn);
+        btnRow.appendChild(startBtn);
+
+        var challengeBtn = document.createElement('button');
+        challengeBtn.className = 'nav-button';
+        challengeBtn.style.cssText = 'background: var(--bg-card, white); color: var(--primary-text); border: 2px solid var(--primary); font-size: 1.2em; padding: 12px 30px;';
+        var chIcon = document.createElement('i');
+        chIcon.className = 'fas fa-bolt';
+        challengeBtn.appendChild(chIcon);
+        challengeBtn.appendChild(document.createTextNode(' Challenge'));
+        challengeBtn.addEventListener('click', function() {
+            self._startGame('challenge');
+        });
+        btnRow.appendChild(challengeBtn);
+        wrapper.appendChild(btnRow);
+
+        var modeNote = document.createElement('p');
+        modeNote.className = 'wai-mode-note';
+        modeNote.textContent = 'Challenge: no answer buttons, you type the term. Every unlocked term in the unit is fair game, and points are 1.5x. A wrong guess costs you a clue.';
+        wrapper.appendChild(modeNote);
     },
 
-    _startGame() {
+    _startGame(mode) {
+        this._mode = mode === 'challenge' ? 'challenge' : 'classic';
         this._score = 0;
         this._round = 0;
         this._results = [];
+        this._lastWrongGuess = null;
 
-        // Get unlocked vocab and pick 10 terms
-        var vocab = MasteryManager.getMustKnowVocabulary(this._config.unit.id, this._config);
+        // Get unlocked vocab and pick 10 terms. Challenge draws from every
+        // unlocked tier, not just must-know, so the pool is bigger.
+        var vocab = this._getPool();
         if (vocab.length < 4) {
             this._showNotEnoughTerms();
             return;
@@ -105,6 +137,21 @@ StudyEngine.registerActivity({
         this._roundTerms = shuffled.slice(0, this._totalRounds);
 
         this._nextRound();
+    },
+
+    _isChallenge() {
+        return this._mode === 'challenge';
+    },
+
+    _getPool() {
+        if (this._isChallenge()) {
+            return MasteryManager.getUnlockedVocabulary(this._config.unit.id, this._config);
+        }
+        return MasteryManager.getMustKnowVocabulary(this._config.unit.id, this._config);
+    },
+
+    _maxScore() {
+        return this._totalRounds * this._getCluePoints(0);
     },
 
     _showNotEnoughTerms() {
@@ -138,8 +185,10 @@ StudyEngine.registerActivity({
         this._currentTerm = this._roundTerms[this._round - 1];
         this._currentClue = 0;
 
-        // Build distractor options from full unlocked vocab
-        var vocab = MasteryManager.getMustKnowVocabulary(this._config.unit.id, this._config);
+        this._lastWrongGuess = null;
+
+        // Build distractor options from the same pool the term came from
+        var vocab = this._getPool();
         var distractorPool = [];
         for (var i = 0; i < vocab.length; i++) {
             if (vocab[i].term !== this._currentTerm.term) {
@@ -224,7 +273,8 @@ StudyEngine.registerActivity({
     },
 
     _getCluePoints(clueIndex) {
-        var points = [5, 4, 3, 2];
+        // Challenge is the classic table at 1.5x, rounded up
+        var points = this._isChallenge() ? [8, 6, 5, 3] : [5, 4, 3, 2];
         return points[clueIndex] || 0;
     },
 
@@ -286,13 +336,18 @@ StudyEngine.registerActivity({
 
         wrapper.appendChild(clueCard);
 
-        // Answer buttons
+        var self = this;
+
+        if (this._isChallenge()) {
+            wrapper.appendChild(this._buildAnswerForm());
+        }
+
+        // Answer buttons (classic only)
         var optionsArea = document.createElement('div');
         optionsArea.style.cssText = 'display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px;';
         optionsArea.id = 'wai-options';
 
-        var self = this;
-        for (var o = 0; o < this._options.length; o++) {
+        for (var o = 0; o < (this._isChallenge() ? 0 : this._options.length); o++) {
             (function(idx) {
                 var btn = document.createElement('button');
                 btn.className = 'nav-button wai-option';
@@ -320,10 +375,73 @@ StudyEngine.registerActivity({
         }
     },
 
+    // Challenge mode: a text box instead of answer buttons
+    _buildAnswerForm() {
+        var self = this;
+        var form = document.createElement('form');
+        form.className = 'wai-answer-form';
+
+        if (this._lastWrongGuess) {
+            var note = document.createElement('div');
+            note.className = 'wai-wrong-note';
+            note.textContent = '"' + this._lastWrongGuess + '" is not it. Here is another clue.';
+            form.appendChild(note);
+        }
+
+        var row = document.createElement('div');
+        row.className = 'wai-answer-row';
+
+        var input = document.createElement('input');
+        input.type = 'text';
+        input.className = 'wai-answer-input';
+        input.placeholder = 'Type the term...';
+        input.autocomplete = 'off';
+        input.autocapitalize = 'off';
+        input.spellcheck = false;
+        input.setAttribute('autocorrect', 'off');
+        input.setAttribute('aria-label', 'Your answer');
+        row.appendChild(input);
+
+        var btn = document.createElement('button');
+        btn.type = 'submit';
+        btn.className = 'nav-button';
+        btn.style.cssText = 'background: var(--primary); color: white; padding: 12px 20px;';
+        btn.textContent = 'Guess';
+        row.appendChild(btn);
+        form.appendChild(row);
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            var typed = input.value.trim();
+            if (!typed) return;
+            self._handleTypedGuess(typed);
+        });
+
+        setTimeout(function() { input.focus(); }, 50);
+        return form;
+    },
+
+    _handleTypedGuess(typed) {
+        if (StudyUtils.answerMatches(typed, this._currentTerm.term)) {
+            this._resolveGuess(true);
+            return;
+        }
+        // A wrong guess costs a clue; wrong on the last clue misses the round
+        if (this._currentClue < 3) {
+            this._currentClue++;
+            this._lastWrongGuess = typed;
+            this._showClue();
+            return;
+        }
+        this._resolveGuess(false);
+    },
+
     _handleGuess(selectedIdx) {
         var selected = this._options[selectedIdx];
-        var isCorrect = (selected.term === this._currentTerm.term);
+        this._resolveGuess(selected.term === this._currentTerm.term, selectedIdx);
+    },
 
+    _resolveGuess(isCorrect, selectedIdx) {
         var cluesUsed = this._currentClue + 1;
         var pointsEarned = 0;
 
@@ -444,12 +562,12 @@ StudyEngine.registerActivity({
 
         // Title
         var h2 = document.createElement('h2');
-        h2.textContent = 'Round Complete!';
+        h2.textContent = this._isChallenge() ? 'Challenge Complete!' : 'Round Complete!';
         h2.style.cssText = 'color: var(--primary-text); margin-bottom: 10px;';
         wrapper.appendChild(h2);
 
         // Score display
-        var maxScore = this._totalRounds * 5;
+        var maxScore = this._maxScore();
         var scoreEl = document.createElement('div');
         scoreEl.style.cssText = 'font-size: 2.5em; font-weight: 700; color: var(--accent-text); margin-bottom: 6px;';
         scoreEl.textContent = this._score + ' / ' + maxScore;
@@ -531,10 +649,18 @@ StudyEngine.registerActivity({
         var unitId = this._config.unit.id;
         var saved = ProgressManager.getActivityProgress(unitId, 'who-am-i') || {};
 
-        if (!saved.bestScore || this._score > saved.bestScore) {
-            saved.bestScore = this._score;
+        if (this._isChallenge()) {
+            if (!saved.bestChallengeScore || this._score > saved.bestChallengeScore) {
+                saved.bestChallengeScore = this._score;
+            }
+            saved.lastChallengeScore = this._score;
+        } else {
+            if (!saved.bestScore || this._score > saved.bestScore) {
+                saved.bestScore = this._score;
+            }
+            saved.lastScore = this._score;
         }
-        saved.lastScore = this._score;
+        saved.lastMode = this._mode;
         saved.gamesPlayed = (saved.gamesPlayed || 0) + 1;
         saved.lastPlayed = new Date().toISOString();
 

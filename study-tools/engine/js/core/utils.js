@@ -47,6 +47,35 @@ const StudyUtils = {
         return term.toLowerCase().trim().replace(/[^a-z0-9\s]/g, '');
     },
 
+    editDistance(a, b) {
+        // Levenshtein distance between two strings
+        var prev = [];
+        for (var j = 0; j <= b.length; j++) prev.push(j);
+        for (var i = 1; i <= a.length; i++) {
+            var cur = [i];
+            for (var k = 1; k <= b.length; k++) {
+                var cost = a[i - 1] === b[k - 1] ? 0 : 1;
+                cur.push(Math.min(prev[k] + 1, cur[k - 1] + 1, prev[k - 1] + cost));
+            }
+            prev = cur;
+        }
+        return prev[b.length];
+    },
+
+    // Lenient check for a typed answer: case, punctuation, extra spaces and a
+    // leading "the" are ignored, and one typo is forgiven (two for long answers).
+    answerMatches(typed, answer) {
+        var norm = function(str) {
+            return StudyUtils.normalizeTerm(String(str || '')).replace(/^the\s+/, '').replace(/\s+/g, ' ').trim();
+        };
+        var t = norm(typed);
+        var a = norm(answer);
+        if (!t || !a) return false;
+        if (t === a) return true;
+        var allowed = a.length >= 10 ? 2 : (a.length >= 5 ? 1 : 0);
+        return StudyUtils.editDistance(t, a) <= allowed;
+    },
+
     showToast(message, type, duration) {
         // type: 'success', 'error', 'info'
         const toast = document.createElement('div');

@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.28] - 2026-10-11
+
+### Added
+- Who Am I? Challenge mode (asked for by a period 5 student). A second button on the start screen: there are no answer buttons, the student types the term; every unlocked term in the unit is in play, not only the must-know tier (23 terms in Revolution instead of 11); points are the classic table at 1.5x (8/6/5/3, 80 max); and a wrong guess costs a clue, with a miss only on the last one. Typed answers are checked leniently: case, punctuation, a leading "the" and one typo (two for long terms) are forgiven (`StudyUtils.answerMatches`). Best challenge score is stored separately from the classic best, mastery is recorded the same way, and the leaderboard is unaffected.
+
 ## [8.55.27] - 2026-10-11
 
 ### Fixed

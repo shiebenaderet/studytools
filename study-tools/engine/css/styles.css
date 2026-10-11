@@ -4486,6 +4486,15 @@ body.light-mode .settings-panel {
     pointer-events: none;
 }
 
+/* Who Am I? */
+.wai-mode-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 12px; }
+.wai-mode-note { color: var(--text-secondary, #6b7280); font-size: 0.85em; max-width: 420px; margin: 0 auto; line-height: 1.4; }
+.wai-answer-form { margin-bottom: 16px; }
+.wai-answer-row { display: flex; gap: 8px; }
+.wai-answer-input { flex: 1; min-width: 0; padding: 12px 14px; font-size: 1.05em; border: 2px solid var(--primary); border-radius: 10px; background: var(--bg-card, white); color: var(--text-primary, #1f2937); }
+.wai-answer-input:focus { outline: none; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2); }
+.wai-wrong-note { color: #b45309; font-size: 0.9em; margin-bottom: 8px; text-align: left; }
+
 /* Focus hint overlay */
 .typing-focus-hint {
     position: absolute;

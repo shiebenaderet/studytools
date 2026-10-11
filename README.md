@@ -45,7 +45,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 | Activity | Description |
 |----------|-------------|
 | **Sort It Out** | Sort terms into category buckets with streak bonuses and speed timer (1.25x analysis tier) |
-| **Who Am I?** | Guess the term from progressive clues — fewer clues = more points (1.25x analysis tier) |
+| **Who Am I?** | Guess the term from progressive clues — fewer clues = more points (1.25x analysis tier). Challenge mode: type the answer, every unit term in play, 1.5x points |
 | **Four Corners** | Find the odd one out — 3 terms share a category, 1 does not belong (1.25x analysis tier) |
 | **Map Quiz** | Click-on-the-map geography quiz with 3-strike hint system. Includes 1861 States & Territories map with Learn/Quiz modes and Union/Confederate/Border/Territory color-coding |
 | **Lightning Round** | 60-second speed quiz with leaderboard |
