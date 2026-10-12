@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.38] - 2026-10-12
+
+### Fixed
+- Maddy's Madness best times now sync between devices. Cross-device sync kept the faster Quiz Mode time but not the Madness time, so a save from a second device (a phone after a Chromebook run) could replace a faster Madness best with a slower one or erase it. The sync now keeps the faster Madness time and the higher run count.
+
 ## [8.55.37] - 2026-10-12
 
 ### Fixed

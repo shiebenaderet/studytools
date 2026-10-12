@@ -400,6 +400,15 @@ const ProgressManager = {
             if (typeof local.attempts === 'number' || typeof remote.attempts === 'number') {
                 merged.attempts = Math.max(local.attempts || 0, remote.attempts || 0);
             }
+            // 13 Colonies Madness Mode: fastest time and total runs.
+            if (typeof local.bestMadnessTime === 'number' || typeof remote.bestMadnessTime === 'number') {
+                merged.bestMadnessTime = (typeof local.bestMadnessTime === 'number' && typeof remote.bestMadnessTime === 'number')
+                    ? Math.min(local.bestMadnessTime, remote.bestMadnessTime)
+                    : (typeof local.bestMadnessTime === 'number' ? local.bestMadnessTime : remote.bestMadnessTime);
+            }
+            if (typeof local.madnessRuns === 'number' || typeof remote.madnessRuns === 'number') {
+                merged.madnessRuns = Math.max(local.madnessRuns || 0, remote.madnessRuns || 0);
+            }
             return merged;
         }
 
