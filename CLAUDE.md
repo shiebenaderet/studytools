@@ -39,10 +39,16 @@ A unit is `study-tools/units/<id>/config.json` plus `textbook.json`, listed in
 2. **At least 6 must-know terms per unit,** ideally per category. Games pad
    with other tiers below 6. Who Am I Challenge mode uses every tier.
 3. **Vocab `example` and `simpleExplanation` may name the term.** Who Am I
-   blanks the term and its word stems out of its clues. Run the checker
-   (below) to confirm no clue still gives the answer away; if one does, reword
-   that example or explanation. `_MASK_SKIP_WORDS` in `who-am-i.js` lists
-   words that are never masked, so do not add a giveaway word to it.
+   replaces the whole term with one blank per word ("Intolerable Acts"
+   becomes "___ ___"), absorbing plural and possessive endings, plus verb
+   endings for one-word terms ("repealed" becomes "___"). It never blanks a
+   single word out of a longer term or part of a word: both left clues that
+   made no grammatical sense. So when a clue gives the answer away through a
+   related word ("neutrality" for Neutral, "consent" for Consent of the
+   Governed), reword that example or explanation instead. The checker
+   (below) reports leaks and broken blanks as errors and strong one-word
+   hints in the 5-point clue as warnings. Clues must read as correct
+   English with the blank in place.
 4. **Go Deeper links for every category** (`goDeeper` in config). This answers
    students who outgrow the games and want more to read. About 6 links per
    category, in this order of preference:

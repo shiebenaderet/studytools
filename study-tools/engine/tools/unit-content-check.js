@@ -37,14 +37,31 @@ ids.forEach(function(id) {
     if (cats.indexOf(k) === -1) err(id, 'categorySchedule key "' + k + '" is not a vocabulary category');
   });
 
-  // Who Am I: no clue may contain its own answer after masking
+  // Who Am I: no clue may contain its own answer after masking, and every
+  // blank must stand alone so the sentence still reads ("___ity" does not)
+  var GENERIC = ['without', 'with', 'from', 'into', 'over', 'rights', 'acts', 'source', 'sources', 'voices'];
   vocab.forEach(function(t) {
     var o = Object.create(whoAmI);
     o._currentTerm = t;
     for (var c = 0; c < 4; c++) {
-      if (o._getClueText(c).toLowerCase().indexOf(t.term.toLowerCase()) !== -1) {
-        err(id, 'Who Am I clue ' + (c + 1) + ' for "' + t.term + '" still contains the term');
+      var clue = o._getClueText(c);
+      if (clue.toLowerCase().indexOf(t.term.toLowerCase()) !== -1) {
+        err(id, 'Who Am I clue ' + (c + 1) + ' for "' + t.term + '" still contains the term; reword the example or explanation');
       }
+      if (/[A-Za-z0-9]___|___[A-Za-z0-9]/.test(clue)) {
+        err(id, 'Who Am I clue ' + (c + 1) + ' for "' + t.term + '" has a blank joined to other letters: ' + clue.slice(0, 90));
+      }
+    }
+    // The 5-point clue should not hand over a distinctive word of a longer term
+    var words = t.term.trim().split(/\s+/);
+    if (words.length > 1) {
+      var first = o._getClueText(0);
+      words.filter(function(w, i) { return words.indexOf(w) === i; }).forEach(function(w) {
+        if (w.length < 5 || GENERIC.indexOf(w.toLowerCase()) !== -1) return;
+        if (new RegExp('\\b' + w.slice(0, Math.max(5, w.length - 3)), 'i').test(first)) {
+          warn(id, 'Who Am I first clue for "' + t.term + '" contains "' + w + '"; consider rewording the example');
+        }
+      });
     }
   });
   var mustKnow = vocab.filter(function(v) { return !v.tier || v.tier === 'must-know'; }).length;

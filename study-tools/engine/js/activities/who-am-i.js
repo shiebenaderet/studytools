@@ -242,29 +242,28 @@ StudyEngine.registerActivity({
         return this._maskTerm(text, term.term);
     },
 
-    // Words in a term too generic to give the answer away on their own, so they
-    // stay visible ("Act" in "Stamp Act", "of" in "Declaration of Independence").
-    _MASK_SKIP_WORDS: ['the', 'of', 'and', 'in', 'on', 'at', 'to', 'for', 'a', 'an', 'act', 'war', 'battle', 'treaty', 'party', 'plan', 'law', 'laws', 'system', 'new', 'first', 'great'],
-
     // Vocab examples and explanations were written for flashcards, where naming
     // the term is the point. As clues they gave the answer away (20 of the 23
-    // Revolution "Quick Hint" clues contained it verbatim). Blank out the whole
-    // term and each of its distinctive words, with plural and possessive forms.
+    // Revolution "Quick Hint" clues contained it verbatim). Replace the whole
+    // term with one blank per word ("Intolerable Acts" -> "___ ___"), so the
+    // blank always stands for the answer and the sentence still reads right.
+    // Plural and possessive endings are absorbed into the blank; one-word terms
+    // also absorb verb endings ("repealed" -> "___"). Words inside a longer term
+    // are never blanked on their own: "represented" stays in a clue for
+    // "Taxation without Representation", because blanking it left a verb-shaped
+    // hole the answer could not fill.
     _maskTerm(text, term) {
         if (!text || !term) return text || '';
+        var name = term.trim();
+        var words = name.split(/\s+/);
+        // One blank per word; a separator such as "/" stays as written
+        var blank = words.map(function(w) { return /[A-Za-z0-9]/.test(w) ? '___' : w; }).join(' ');
         var escape = function(w) { return w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); };
-        var masked = text.replace(new RegExp(escape(term) + "(?:'s|s|es|ed|ing)?", 'gi'), '___');
-        var words = term.split(/[\s-]+/);
-        for (var i = 0; i < words.length; i++) {
-            var w = words[i].replace(/[^A-Za-z0-9]/g, '');
-            if (w.length < 3 || this._MASK_SKIP_WORDS.indexOf(w.toLowerCase()) !== -1) continue;
-            // Match the word's stem plus a short ending, so "Repeal" also hides
-            // "repealed" and "Representation" hides "represented".
-            var stem = w.replace(/(ation|tion|ion|ing|ed|es|s)$/i, '');
-            if (stem.length < 4) stem = w;
-            masked = masked.replace(new RegExp('\\b' + escape(stem) + "[a-z]{0,6}(?:'s)?\\b", 'gi'), '___');
-        }
-        return masked.replace(/(___\s*){2,}/g, '___ ');
+        var endings = words.length === 1 ? "(?:'s|s|es|ed|d|ing)?" : "(?:'s|s|es)?";
+        // No lookbehind (older iPhones reject it): capture the character before
+        // the term instead, and require a non-letter after the ending.
+        var re = new RegExp('(^|[^A-Za-z0-9])' + escape(name) + endings + '(?![A-Za-z0-9])', 'gi');
+        return text.replace(re, function(match, before) { return before + blank; });
     },
 
     _getClueLabel(clueIndex) {

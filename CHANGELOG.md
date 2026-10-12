@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.37] - 2026-10-12
+
+### Fixed
+- Who Am I? clues no longer break grammar. The 8.55.27 masking also blanked related word forms and single words out of longer terms, so a clue for "Taxation without Representation" read "no one in Parliament ___ them" (185 of 848 clues across the four units had a blank that was not the answer). Clues now replace only the whole term, with one blank per word ("the ___ ___ closed Boston Harbor"), absorbing plural and possessive endings and, for one-word terms, verb endings ("Parliament ___ the Stamp Act"). Three explanations or examples that still gave the answer away through a related word were reworded: Neutral and Consent of the Governed (Revolution) and Abolition (Westward Expansion). The content check now reports a blank joined to other letters as an error and a strong one-word hint in the 5-point clue as a warning. Reported by the teacher.
+
 ## [8.55.36] - 2026-10-11
 
 ### Changed

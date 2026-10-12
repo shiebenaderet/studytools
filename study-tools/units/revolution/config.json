@@ -130,7 +130,7 @@
     {
       "term": "Neutral",
       "definition": "Choosing not to take either side in a conflict",
-      "simpleExplanation": "Not everyone picked a team. Many colonists — Quakers whose faith forbade war, families just trying to survive, communities caught between armies — stayed neutral. But when the war arrived at your doorstep, neutrality got harder and harder to keep.",
+      "simpleExplanation": "Not everyone picked a team. Many colonists — Quakers whose faith forbade war, families just trying to survive, communities caught between armies — stayed neutral. But when the war arrived at your doorstep, staying out of it got harder and harder.",
       "example": "Many Quakers in Pennsylvania stayed neutral because their religious beliefs opposed all war",
       "category": "Choosing Sides",
       "typingSnippet": "To be neutral is to take neither side in a conflict. Many colonists tried to stay neutral during the Revolution, whether from religious belief or self-preservation. As the war spread, staying out of it became nearly impossible.",
@@ -202,7 +202,7 @@
       "term": "Consent of the Governed",
       "definition": "The idea that a government's power comes from the agreement of the people it rules",
       "simpleExplanation": "Governments work for the people, not the other way around. If rulers only have power because the people agree to it, then the people can withdraw that agreement — which is exactly the argument the Declaration makes for breaking up with Britain.",
-      "example": "The Declaration argues that because Britain ruled the colonies without their consent, the colonists had the right to form their own government",
+      "example": "The Declaration argues that because Britain ruled the colonies without their approval, the colonists had the right to replace that rule with one of their own choosing",
       "category": "The Declaration",
       "typingSnippet": "Consent of the governed is the idea that a government's power comes from the agreement of the people it rules. The Declaration used this idea to justify breaking away from Britain. It remains the core principle behind voting and representative government today.",
       "tier": "must-know",
