@@ -164,6 +164,36 @@ var LeaderboardManager = {
         } catch (err) {
             console.error('Leaderboard submit error:', err);
         }
+
+        await this.submitMadnessTime(unitId);
+    },
+
+    // Maddy's Madness Mode (13 Colonies) has its own board, ranked in tenths of
+    // a second. It does not change the points: the map bonus still comes from
+    // Quiz Mode. Written in a separate update so a database that has not run
+    // migrate-madness-leaderboard.sql yet only skips this step.
+    async submitMadnessTime(unitId) {
+        if (typeof LeaderboardMergeCore === 'undefined' || !LeaderboardMergeCore.madnessTimeToWrite) return;
+        var mp = ProgressManager.getActivityProgress(unitId, 'thirteen-colonies-map') || {};
+        if (typeof mp.bestMadnessTime !== 'number') return;
+        try {
+            var res = await ProgressManager.supabase
+                .from('leaderboard')
+                .select('madness_best_time')
+                .eq('student_id', ProgressManager.studentId)
+                .eq('unit_id', unitId)
+                .maybeSingle();
+            if (res.error || !res.data) return;
+            var t = LeaderboardMergeCore.madnessTimeToWrite(mp.bestMadnessTime, res.data.madness_best_time);
+            if (t === null) return;
+            await ProgressManager.supabase
+                .from('leaderboard')
+                .update({ madness_best_time: t })
+                .eq('student_id', ProgressManager.studentId)
+                .eq('unit_id', unitId);
+        } catch (err) {
+            console.error('Madness time submit error:', err);
+        }
     },
 
     // Render full leaderboard page (called from nav)
@@ -185,9 +215,15 @@ var LeaderboardManager = {
         var tabs = [
             { id: 'students', label: 'Top Students', icon: 'fas fa-user' },
             { id: 'map', label: 'Map Speed Run', icon: 'fas fa-map-marked-alt' },
+            { id: 'madness', label: 'Madness', icon: 'fas fa-bolt' },
             { id: 'classes', label: 'Class Battle', icon: 'fas fa-users' },
             { id: 'achievements', label: 'Achievements', icon: 'fas fa-medal' }
         ];
+        // The Madness board only exists where the 13 Colonies map does.
+        var hasMadness = !!(StudyEngine.config && (StudyEngine.config.leaderboardMapActivities || []).some(function(e) {
+            return (typeof e === 'string' ? e : e.id) === 'thirteen-colonies-map';
+        }));
+        if (!hasMadness) tabs = tabs.filter(function(t) { return t.id !== 'madness'; });
         var contentArea = document.createElement('div');
         contentArea.className = 'lb-content';
 
@@ -205,6 +241,7 @@ var LeaderboardManager = {
                 btn.classList.add('active');
                 if (tab.id === 'students') self.renderStudentRankings(contentArea);
                 else if (tab.id === 'map') self.renderMapSpeedRun(contentArea);
+                else if (tab.id === 'madness') self.renderMadnessBoard(contentArea);
                 else if (tab.id === 'classes') self.renderClassRankings(contentArea);
                 else if (tab.id === 'achievements') self.renderAchievements(contentArea);
             });
@@ -383,14 +420,50 @@ var LeaderboardManager = {
         }
     },
 
-    async renderMapSpeedRun(container) {
+    renderMapSpeedRun(container) {
+        var self = this;
+        return this._renderTimeBoard(container, {
+            column: 'map_best_time',
+            loadingText: ' Loading map times...',
+            description: 'Get 100% on a map quiz (under Maps) to post your time. Faster = more bonus points!',
+            emptyIcon: 'fas fa-map-marked-alt',
+            emptyText: 'No perfect map runs yet. Get 100% to post your time!',
+            errorText: 'Failed to load map speed runs.',
+            formatTime: function(t) { return self._formatMinSec(t); },
+            sideText: function(entry) { return '+' + (entry.map_bonus || 0) + ' pts'; }
+        });
+    },
+
+    // Maddy's Madness board: 13 Colonies speed runs in tenths of a second.
+    // A ranking only; the points still come from Quiz Mode.
+    renderMadnessBoard(container) {
+        return this._renderTimeBoard(container, {
+            column: 'madness_best_time',
+            loadingText: ' Loading Madness times...',
+            description: 'Maddy\u2019s Madness Mode on the 13 Colonies map: a perfect Quiz Mode score unlocks it, and only perfect runs count. Bragging rights only; points still come from Quiz Mode.',
+            emptyIcon: 'fas fa-bolt',
+            emptyText: 'No Madness runs posted yet. Be the first!',
+            errorText: 'The Madness board isn\u2019t available yet.',
+            formatTime: function(t) { return Number(t).toFixed(1) + 's'; },
+            // Phones hide the stats column, so the time goes in the right slot.
+            timeOnRight: true
+        });
+    },
+
+    _formatMinSec(t) {
+        var m = Math.floor(t / 60);
+        var s = t % 60;
+        return m + ':' + (s < 10 ? '0' : '') + s;
+    },
+
+    async _renderTimeBoard(container, opts) {
         container.textContent = '';
         var loading = document.createElement('div');
         loading.style.cssText = 'text-align:center;padding:30px;color:var(--text-muted);';
         var spinner = document.createElement('i');
         spinner.className = 'fas fa-spinner fa-spin';
         loading.appendChild(spinner);
-        loading.appendChild(document.createTextNode(' Loading map times...'));
+        loading.appendChild(document.createTextNode(opts.loadingText));
         container.appendChild(loading);
 
         if (!ProgressManager.supabase) {
@@ -408,10 +481,10 @@ var LeaderboardManager = {
 
             var query = ProgressManager.supabase
                 .from('leaderboard')
-                .select('student_id, map_best_time, map_bonus')
+                .select('student_id, map_bonus, ' + opts.column)
                 .eq('approved', true)
-                .not('map_best_time', 'is', null)
-                .order('map_best_time', { ascending: true })
+                .not(opts.column, 'is', null)
+                .order(opts.column, { ascending: true })
                 .limit(50);
             if (unitId) query = query.eq('unit_id', unitId);
 
@@ -435,18 +508,18 @@ var LeaderboardManager = {
 
             var desc = document.createElement('p');
             desc.className = 'lb-explainer';
-            desc.textContent = 'Get 100% on a map quiz (under Maps) to post your time. Faster = more bonus points!';
+            desc.textContent = opts.description;
             container.appendChild(desc);
 
             if (entries.length === 0) {
                 var empty = document.createElement('div');
                 empty.style.cssText = 'text-align:center;padding:40px;color:var(--text-muted);';
                 var emptyIcon = document.createElement('i');
-                emptyIcon.className = 'fas fa-map-marked-alt';
+                emptyIcon.className = opts.emptyIcon;
                 emptyIcon.style.cssText = 'font-size:2em;display:block;margin-bottom:12px;opacity:0.3;';
                 empty.appendChild(emptyIcon);
                 var emptyText = document.createElement('p');
-                emptyText.textContent = 'No perfect map runs yet. Get 100% to post your time!';
+                emptyText.textContent = opts.emptyText;
                 empty.appendChild(emptyText);
                 container.appendChild(empty);
                 return;
@@ -475,9 +548,7 @@ var LeaderboardManager = {
 
                     var time = document.createElement('div');
                     time.className = 'lb-podium-score';
-                    var m = Math.floor(entry.map_best_time / 60);
-                    var s = entry.map_best_time % 60;
-                    time.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+                    time.textContent = opts.formatTime(entry[opts.column]);
                     place.appendChild(time);
 
                     podium.appendChild(place);
@@ -510,18 +581,20 @@ var LeaderboardManager = {
                 }
                 row.appendChild(nameEl);
 
-                var stats = document.createElement('div');
-                stats.className = 'lb-stats';
-                var timeStat = document.createElement('span');
-                var m = Math.floor(entry.map_best_time / 60);
-                var s = entry.map_best_time % 60;
-                timeStat.textContent = m + ':' + (s < 10 ? '0' : '') + s;
-                stats.appendChild(timeStat);
-                row.appendChild(stats);
+                if (!opts.timeOnRight) {
+                    var stats = document.createElement('div');
+                    stats.className = 'lb-stats';
+                    var timeStat = document.createElement('span');
+                    timeStat.textContent = opts.formatTime(entry[opts.column]);
+                    stats.appendChild(timeStat);
+                    row.appendChild(stats);
+                }
 
                 var scoreEl = document.createElement('div');
                 scoreEl.className = 'lb-score';
-                scoreEl.textContent = '+' + (entry.map_bonus || 0) + ' pts';
+                scoreEl.textContent = opts.timeOnRight
+                    ? opts.formatTime(entry[opts.column])
+                    : opts.sideText(entry);
                 row.appendChild(scoreEl);
 
                 list.appendChild(row);
@@ -530,11 +603,11 @@ var LeaderboardManager = {
             container.appendChild(list);
 
         } catch (err) {
-            console.error('Map speed run error:', err);
+            console.error('Time board error:', err);
             container.textContent = '';
             var errEl = document.createElement('p');
             errEl.style.cssText = 'text-align:center;color:var(--danger);padding:20px;';
-            errEl.textContent = 'Failed to load map speed runs.';
+            errEl.textContent = opts.errorText;
             container.appendChild(errEl);
         }
     },

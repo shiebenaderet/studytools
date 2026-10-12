@@ -8,7 +8,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 
 [![Live Site](https://img.shields.io/badge/Live_Site-study.mrbsocialstudies.org-1669C5?style=for-the-badge&logo=google-chrome&logoColor=white)](https://study.mrbsocialstudies.org)
 [![License](https://img.shields.io/badge/License-Educational_Use-22c55e?style=for-the-badge)](#license)
-[![Version](https://img.shields.io/badge/Version-8.55.38-f59e0b?style=for-the-badge)](#)
+[![Version](https://img.shields.io/badge/Version-8.55.39-f59e0b?style=for-the-badge)](#)
 
 ---
 
@@ -94,7 +94,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 - Config-driven — one JSON file powers everything
 - Hidden teacher dashboard (via command palette)
 - Student progress table with edit/delete
-- Leaderboard with teacher approval
+- Leaderboard with teacher approval (Top Students, Map Speed Run, Madness, Class Battle, Achievements)
 - Class-vs-class competition view
 - Analytics: activity popularity, weak topics
 - Question Exporter — turn a unit's practice questions into Blooket or GiMKit CSVs
@@ -209,7 +209,7 @@ Students who reported bugs or suggested improvements:
 | **Tianyu** | Lost his first-place progress after clearing his browser, which revealed a bug where logging in on a fresh device could overwrite a saved leaderboard score |
 | **Brandon K** | Reported that Fill in the Blank's Next button stayed stuck after typing an answer, and that the answer box had no length limit |
 | **Kyler** | Suggested playing Hangman without the clue and revealing it afterward — now **Kyler Mode** |
-| **Maddy W** | Pointed out the long pause after each correct colony on the 13 Colonies quiz and that correct colonies should stay colored, GeoGuessr-style — now **Maddy's Madness Mode** and sticky green colonies |
+| **Maddy W** | Pointed out the long pause after each correct colony on the 13 Colonies quiz and that correct colonies should stay colored, GeoGuessr-style — now **Maddy's Madness Mode** and sticky green colonies; then noticed Madness times weren't on the leaderboard — now the **Madness** tab |
 | **Tiffany** | Asked for GimKit-style games; the question exporter now confirms GimKit downloads on the page |
 | **Anderson A** | Reported that Typing Practice let you type any word on a phone, which revealed that Android keyboards never sent the space bar to the site |
 | **Tiffany N** | Asked for a harder Who Am I, which revealed that most clues contained the answer; now masked, plus a typed-answer **Challenge mode** |

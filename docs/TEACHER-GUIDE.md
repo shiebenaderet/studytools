@@ -531,6 +531,8 @@ const SUPABASE_ANON_KEY = 'your-anon-key-here';
 
 6. Create classes in Supabase for your periods (the `classes` table needs a `code` matching your period codes)
 
+**Already set up?** When an update adds a column, run its `study-tools/database/migrate-*.sql` file in the SQL Editor once. The leaderboard's **Madness** tab (13 Colonies speed runs in tenths of a second) needs `migrate-madness-leaderboard.sql`; until it runs, that tab says it isn't available yet and everything else works as before. Madness times are a ranking only: the leaderboard's map bonus points still come from Quiz Mode.
+
 ### Is it worth it?
 
 | Situation | Recommendation |

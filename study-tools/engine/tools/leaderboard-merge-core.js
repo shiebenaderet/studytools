@@ -77,6 +77,24 @@
     return { proceed: true, existing: existing || null };
   };
 
+  // Maddy's Madness time (13 Colonies speed run, tenths of a second). It lives
+  // in its own column and is written in its own update after the main row, so
+  // a database without the column yet never blocks the main submit.
+  // localBest: the device's best Madness time (or null); existing: the value in
+  // the DB (or null). Returns the time to write, or null when the DB already
+  // holds the same or a faster time. Times under MADNESS_FLOOR are clamped up:
+  // the 0.35 s lock per colony makes a real 13-colony run at least 4.6 s, so a
+  // smaller stored value can only come from tampered localStorage.
+  api.MADNESS_FLOOR = 4.6;
+  api.madnessTimeToWrite = function (localBest, existing) {
+    if (typeof localBest !== 'number' || !isFinite(localBest) || localBest <= 0) return null;
+    var t = Math.round(Math.max(api.MADNESS_FLOOR, localBest) * 10) / 10;
+    // numeric columns come back from PostgREST as strings ("18.3").
+    var prev = (existing === null || existing === undefined || existing === '') ? NaN : Number(existing);
+    if (isFinite(prev) && prev <= t) return null;
+    return t;
+  };
+
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   if (typeof window !== 'undefined') window.LeaderboardMergeCore = api;
 })();

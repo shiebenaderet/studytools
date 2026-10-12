@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.39] - 2026-10-12
+
+### Added
+- **Madness tab on the leaderboard** (Revolution, and any unit with the 13 Colonies map): Maddy's Madness Mode times ranked in tenths of a second, so the faster speed-run times students post now show up. Map Speed Run and the map bonus points still come from Quiz Mode, so points stay comparable between students who have and haven't unlocked Madness. A device posts its best Madness time on its next save; times under the 0.35 s-per-colony floor (4.6 s) are clamped. Needs `study-tools/database/migrate-madness-leaderboard.sql` run once in Supabase; until then the tab says it isn't available yet. Suggested by a student who noticed their Madness time wasn't on the board.
+
+### Changed
+- On phones the leaderboard tabs wrap to two rows instead of running off the screen.
+
 ## [8.55.38] - 2026-10-12
 
 ### Fixed

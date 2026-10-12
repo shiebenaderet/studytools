@@ -4025,6 +4025,9 @@ body.timer-active header {
     .lb-medal { font-size: 1.5em; }
     .lb-podium-name { font-size: 0.8em; }
     .lb-stats { display: none; }
+    /* Five tabs don't fit one row on a phone: wrap to three plus two. */
+    .lb-tabs { flex-wrap: wrap; }
+    .lb-tab { flex: 1 1 30%; padding: 8px 6px; }
     .lb-class-bar-label { width: 70px; font-size: 0.75em; }
 }
 

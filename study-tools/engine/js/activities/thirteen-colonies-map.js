@@ -590,7 +590,8 @@ StudyEngine.registerActivity({
 
     // Madness results: tenths of a second, a separate personal best, and the
     // same two anti-cheat rules as the quiz (perfect run only; never faster
-    // than the per-question lock allows). Not sent to the leaderboard.
+    // than the per-question lock allows). Posted to the leaderboard's Madness
+    // tab (a ranking only; the map bonus points still come from Quiz Mode).
     _renderMadnessResults(panel, total, pct) {
         var seconds = Math.round((Date.now() - this._quizStartTime) / 100) / 10;
         var unitId = this._config.unit.id;

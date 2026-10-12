@@ -108,6 +108,18 @@ eq('undefined result existing null', core.resolveExisting(undefined).existing, n
 // so the real row is untouched. (Documents the intended wiring.)
 eq('blip path never writes (proceed=false)', core.resolveExisting({ error: { code: 'PGRST000' } }).proceed, false);
 
+// ── Maddy's Madness time: only a faster time is written ──
+eq('madness: first time is written', core.madnessTimeToWrite(18.3, null), 18.3);
+eq('madness: faster time replaces slower', core.madnessTimeToWrite(18.3, 21.4), 18.3);
+eq('madness: slower time is not written', core.madnessTimeToWrite(22.0, 18.3), null);
+eq('madness: equal time is not written', core.madnessTimeToWrite(18.3, 18.3), null);
+eq('madness: no local time writes nothing', core.madnessTimeToWrite(null, 18.3), null);
+eq('madness: undefined local writes nothing', core.madnessTimeToWrite(undefined, null), null);
+eq('madness: tampered tiny time clamps to the floor', core.madnessTimeToWrite(0.5, null), 4.6);
+eq('madness: numeric column as string, slower local', core.madnessTimeToWrite(19.0, '18.3'), null);
+eq('madness: numeric column as string, faster local', core.madnessTimeToWrite(17.9, '18.3'), 17.9);
+eq('madness: rounds to tenths', core.madnessTimeToWrite(18.349999, null), 18.3);
+
 if (failures.length) {
   console.log('FAIL (' + failures.length + ')');
   failures.forEach(function (f) { console.log('- ' + f); });

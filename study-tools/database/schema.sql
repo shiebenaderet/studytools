@@ -44,6 +44,7 @@ CREATE TABLE leaderboard (
     study_time_seconds integer NOT NULL DEFAULT 0,
     map_best_time integer,
     map_bonus integer NOT NULL DEFAULT 0,
+    madness_best_time numeric(5,1),
     approved boolean NOT NULL DEFAULT false,
     created_at timestamp DEFAULT now(),
     updated_at timestamp DEFAULT now(),
