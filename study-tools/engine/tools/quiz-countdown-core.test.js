@@ -14,10 +14,10 @@ eq('across the November clock change', core.daysUntil('2026-11-12', new Date(202
 eq('bad date', core.daysUntil('Nov 12', oct13), null);
 eq('impossible date', core.daysUntil('2026-02-30', oct13), null);
 
-eq('countdown', core.describe('2026-11-12', null, oct13), { date: 'Quiz: Thu, Nov 12', countdown: '30 days to go', days: 30 });
+eq('countdown', core.describe('2026-11-12', null, oct13), { date: 'Quiz: Thu, Nov 12', countdown: '30 days to go', days: 30, label: 'Quiz', longDate: 'Thursday, November 12' });
 eq('custom label', core.describe('2026-11-12', 'Unit Test', oct13).date, 'Unit Test: Thu, Nov 12');
 eq('tomorrow', core.describe('2026-11-12', null, new Date(2026, 10, 11, 15, 0)).countdown, 'tomorrow');
-eq('today', core.describe('2026-11-12', null, new Date(2026, 10, 12, 7, 0)).countdown, 'today. Good luck!');
+eq('today', core.describe('2026-11-12', null, new Date(2026, 10, 12, 7, 0)).countdown, 'today!');
 eq('gone after the quiz', core.describe('2026-11-12', null, new Date(2026, 10, 13, 0, 1)), null);
 eq('no date', core.describe(undefined, null, oct13), null);
 

@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.40] - 2026-10-13
+
+### Changed
+- The quiz countdown is easier to see. A large banner now opens the Your Progress section with the number of days left and the full date ("30 days until the Quiz, Thursday, November 12"; "Quiz day is today. Good luck!" on the day), shaded in the last three days. The note under the essential question has brighter text and an accent-colored outline, and says "today!" on quiz day so it fits on one line on phones. Requested by the teacher.
+
 ## [8.55.39] - 2026-10-13
 
 ### Added

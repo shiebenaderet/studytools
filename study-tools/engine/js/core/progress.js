@@ -164,6 +164,35 @@ const ProgressManager = {
         heading.textContent = 'Your Progress';
         statsContainer.appendChild(heading);
 
+        // Quiz countdown banner (unit.quizDate): big and full width so it is
+        // hard to miss. The header carries a smaller copy.
+        const quiz = typeof QuizCountdown !== 'undefined'
+            ? QuizCountdown.describe(config.unit.quizDate, config.unit.quizLabel) : null;
+        if (quiz) {
+            const banner = document.createElement('div');
+            banner.className = 'quiz-banner' + (quiz.days <= 3 ? ' quiz-banner-soon' : '');
+            banner.id = 'quiz-banner';
+            const num = document.createElement('div');
+            num.className = 'quiz-banner-num';
+            const text = document.createElement('div');
+            text.className = 'quiz-banner-text';
+            const title = document.createElement('div');
+            title.className = 'quiz-banner-title';
+            const sub = document.createElement('div');
+            sub.className = 'quiz-banner-date';
+            if (quiz.days === 0) {
+                num.appendChild(Object.assign(document.createElement('i'), { className: 'fas fa-star' }));
+                title.textContent = quiz.label + ' day is today. Good luck!';
+            } else {
+                num.textContent = quiz.days;
+                title.textContent = (quiz.days === 1 ? 'day' : 'days') + ' until the ' + quiz.label;
+            }
+            sub.textContent = quiz.longDate;
+            text.append(title, sub);
+            banner.append(num, text);
+            statsContainer.appendChild(banner);
+        }
+
         const grid = document.createElement('div');
         grid.className = 'stats-grid';
 

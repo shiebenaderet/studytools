@@ -8,6 +8,9 @@
   var api = {};
   var DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  var LONG_DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  var LONG_MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
+    'September', 'October', 'November', 'December'];
 
   function parse(ymd) {
     var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(ymd || '');
@@ -25,7 +28,8 @@
     return Math.round((target - today) / 86400000);
   };
 
-  // { date, countdown, days } for the home screen, or null when there is
+  // { date, countdown, days, label, longDate } for the home screen (header
+  // note and Your Progress banner), or null when there is
   // nothing to show (no date, a bad date, or the quiz is over).
   api.describe = function (ymd, label, now) {
     var days = api.daysUntil(ymd, now);
@@ -33,10 +37,11 @@
     var d = parse(ymd);
     var name = label || 'Quiz';
     var date = name + ': ' + DAYS[d.getDay()] + ', ' + MONTHS[d.getMonth()] + ' ' + d.getDate();
-    var countdown = days === 0 ? 'today. Good luck!'
+    var countdown = days === 0 ? 'today!'
       : days === 1 ? 'tomorrow'
       : days + ' days to go';
-    return { date: date, countdown: countdown, days: days };
+    var longDate = LONG_DAYS[d.getDay()] + ', ' + LONG_MONTHS[d.getMonth()] + ' ' + d.getDate();
+    return { date: date, countdown: countdown, days: days, label: name, longDate: longDate };
   };
 
   if (typeof module !== 'undefined' && module.exports) module.exports = api;

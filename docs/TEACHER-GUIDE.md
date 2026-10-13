@@ -390,7 +390,7 @@ Add any of these to your `activities` array:
 
 ### Quiz date countdown (optional)
 
-Add `quizDate` (and, if you like, `quizLabel`) inside the `unit` block to show a small note under the essential question on the unit's home screen, such as **Quiz: Thu, Nov 12 · 30 days to go**:
+Add `quizDate` (and, if you like, `quizLabel`) inside the `unit` block to show the quiz date and a days-left countdown on the unit's home screen in two places: a large banner across the top of **Your Progress** ("**30** days until the Quiz · Thursday, November 12") and a smaller note under the essential question (**Quiz: Thu, Nov 12 · 30 days to go**):
 
 ```json
 "unit": {
@@ -406,8 +406,8 @@ Add `quizDate` (and, if you like, `quizLabel`) inside the `unit` block to show a
 | `quizDate` | | Quiz or test day, `YYYY-MM-DD`, in the students' local time |
 | `quizLabel` | | Word shown before the date. Defaults to `Quiz`; use `Unit Test`, `Test`, etc. |
 
-- The note counts down in days, says "tomorrow" the day before and "today. Good luck!" on the day, and turns your theme's accent color in the last three days.
-- It disappears on its own the day after the quiz, and it is hidden while a student is inside an activity.
+- Both count down in days. The day before says "tomorrow" (header) and "1 day until the Quiz" (banner); on the day they say "today!" and "Quiz day is today. Good luck!". In the last three days the countdown turns your theme's accent color and the banner is shaded.
+- Both disappear on their own the day after the quiz. The header note is hidden while a student is inside an activity.
 - If the quiz moves, change the date and push; students see the new date the next time they open the unit.
 - Leave `quizDate` out and nothing is shown.
 
@@ -576,7 +576,7 @@ Edit files on a branch other than `main`. GitHub Pages only deploys from `main`,
 <details>
 <summary><strong>How do I show students when the quiz is?</strong></summary>
 
-Add `"quizDate": "YYYY-MM-DD"` to the `unit` block of `config.json`. A small "Quiz: date · N days to go" note appears under the essential question and goes away the day after. See [Quiz date countdown](#quiz-date-countdown-optional).
+Add `"quizDate": "YYYY-MM-DD"` to the `unit` block of `config.json`. A countdown banner appears at the top of Your Progress, with a smaller note under the essential question, and both go away the day after. See [Quiz date countdown](#quiz-date-countdown-optional).
 
 </details>
 

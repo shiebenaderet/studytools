@@ -388,16 +388,16 @@ header .essential-question {
     gap: 6px;
     margin-top: 8px;
     padding: 3px 12px;
-    font-size: 0.82em;
-    color: var(--text-secondary);
-    border: 1px solid var(--border-subtle);
+    font-size: 0.9em;
+    color: var(--text-primary);
+    background: var(--bg-surface);
+    border: 1px solid var(--accent);
     border-radius: 999px;
 }
 
-.quiz-countdown i { font-size: 0.95em; color: var(--text-muted); }
+.quiz-countdown i { font-size: 0.95em; color: var(--accent-text); }
 .quiz-countdown-date { font-weight: 600; }
-.quiz-countdown-left::before { content: '\00b7'; margin-right: 6px; color: var(--text-muted); }
-.quiz-countdown-soon { border-color: var(--accent); }
+.quiz-countdown-left::before { content: '\00b7'; margin-right: 6px; color: var(--text-secondary); }
 .quiz-countdown-soon .quiz-countdown-left { color: var(--accent-text); font-weight: 600; }
 
 /* Collapsed header when activity is active */
@@ -681,6 +681,43 @@ body.activity-active header {
     font-size: 0.85em;
     font-weight: 700;
     margin-bottom: 8px;
+}
+
+/* Quiz countdown banner at the top of Your Progress (unit.quizDate) */
+.quiz-banner {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 8px;
+    padding: 10px 16px;
+    background: var(--bg-surface);
+    border: 1px solid var(--accent);
+    border-left: 6px solid var(--accent);
+    border-radius: var(--radius-sm);
+}
+
+.quiz-banner-num {
+    font-size: 2.4em;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--accent-text);
+    min-width: 1.4em;
+    text-align: center;
+}
+
+.quiz-banner-title {
+    font-size: 1.1em;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.quiz-banner-date {
+    font-size: 0.9em;
+    color: var(--text-secondary);
+}
+
+.quiz-banner-soon {
+    background: color-mix(in srgb, var(--accent) 14%, var(--bg-surface));
 }
 
 .stats-grid {
