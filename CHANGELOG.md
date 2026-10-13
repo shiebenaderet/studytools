@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.38] - 2026-10-13
+
+### Changed
+- Hangman's "Kyler Mode" toggle is renamed **Hard Mode**. It works the same way: the clue stays hidden until the round ends. Students who already had it on keep it on. Kyler is still credited in the README. Requested by the teacher.
+
 ## [8.55.37] - 2026-10-12
 
 ### Fixed

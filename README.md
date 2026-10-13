@@ -8,7 +8,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 
 [![Live Site](https://img.shields.io/badge/Live_Site-study.mrbsocialstudies.org-1669C5?style=for-the-badge&logo=google-chrome&logoColor=white)](https://study.mrbsocialstudies.org)
 [![License](https://img.shields.io/badge/License-Educational_Use-22c55e?style=for-the-badge)](#license)
-[![Version](https://img.shields.io/badge/Version-8.55.37-f59e0b?style=for-the-badge)](#)
+[![Version](https://img.shields.io/badge/Version-8.55.38-f59e0b?style=for-the-badge)](#)
 
 ---
 
@@ -208,7 +208,7 @@ Students who reported bugs or suggested improvements:
 | **Braden** | Reported that games and other activities stayed locked even after the scheduled unlock dates had passed |
 | **Tianyu** | Lost his first-place progress after clearing his browser, which revealed a bug where logging in on a fresh device could overwrite a saved leaderboard score |
 | **Brandon K** | Reported that Fill in the Blank's Next button stayed stuck after typing an answer, and that the answer box had no length limit |
-| **Kyler** | Suggested playing Hangman without the clue and revealing it afterward — now **Kyler Mode** |
+| **Kyler** | Suggested playing Hangman without the clue and revealing it afterward — now Hangman's **Hard Mode** |
 | **Maddy W** | Pointed out the long pause after each correct colony on the 13 Colonies quiz and that correct colonies should stay colored, GeoGuessr-style — now **Maddy's Madness Mode** and sticky green colonies |
 | **Tiffany** | Asked for GimKit-style games; the question exporter now confirms GimKit downloads on the page |
 | **Anderson A** | Reported that Typing Practice let you type any word on a phone, which revealed that Android keyboards never sent the space bar to the site |

@@ -49,7 +49,7 @@ StudyEngine.registerActivity({
         lossStat.textContent = 'Losses: ' + this._losses;
         stats.appendChild(lossStat);
 
-        // Kyler Mode: play without the clue; it is revealed when the round ends.
+        // Hard Mode (originally Kyler Mode): play without the clue; it is revealed when the round ends.
         const kyler = document.createElement('label');
         kyler.className = 'hangman-stat hangman-kyler';
         kyler.title = 'Hide the clue until you solve the word';
@@ -64,7 +64,7 @@ StudyEngine.registerActivity({
             self._newGame();
         });
         kyler.appendChild(kylerBox);
-        kyler.appendChild(document.createTextNode(' Kyler Mode'));
+        kyler.appendChild(document.createTextNode(' Hard Mode'));
         stats.appendChild(kyler);
 
         wrapper.appendChild(stats);
@@ -185,7 +185,7 @@ StudyEngine.registerActivity({
         this._wrongCount = 0;
         this._gameOver = false;
 
-        // Reset clue (hidden in Kyler Mode until the round ends)
+        // Reset clue (hidden in Hard Mode until the round ends)
         this._showClue(!this._kylerMode, 'Clue: ');
 
         // Reset figure parts
@@ -297,7 +297,7 @@ StudyEngine.registerActivity({
             buttons[i].disabled = true;
         }
 
-        // Kyler Mode: now that the round is over, show what the clue was.
+        // Hard Mode: now that the round is over, show what the clue was.
         if (this._kylerMode) this._showClue(true, 'The clue was: ');
 
         var message = document.getElementById('hangman-message');
@@ -356,7 +356,7 @@ StudyEngine.registerActivity({
         var text = document.getElementById('hangman-clue-text');
         if (!box || !labelEl || !text) return;
         box.classList.toggle('hangman-clue-hidden', !visible);
-        labelEl.textContent = visible ? label : 'Kyler Mode: ';
+        labelEl.textContent = visible ? label : 'Hard Mode: ';
         text.textContent = visible ? this._currentDefinition : 'no clue — solve the word to reveal it';
     },
 
