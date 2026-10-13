@@ -379,6 +379,27 @@ header .essential-question {
     transition: all 0.3s ease;
 }
 
+/* Quiz date note under the essential question (unit.quizDate) */
+.quiz-countdown {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 8px;
+    padding: 3px 12px;
+    font-size: 0.82em;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 999px;
+}
+
+.quiz-countdown i { font-size: 0.95em; color: var(--text-muted); }
+.quiz-countdown-date { font-weight: 600; }
+.quiz-countdown-left::before { content: '\00b7'; margin-right: 6px; color: var(--text-muted); }
+.quiz-countdown-soon { border-color: var(--accent); }
+.quiz-countdown-soon .quiz-countdown-left { color: var(--accent-text); font-weight: 600; }
+
 /* Collapsed header when activity is active */
 body.activity-active header {
     padding: 8px 20px;
@@ -391,7 +412,8 @@ body.activity-active header h1 {
 
 body.activity-active header .subtitle,
 body.activity-active header .essential-question,
-body.activity-active header .student-greeting {
+body.activity-active header .student-greeting,
+body.activity-active header .quiz-countdown {
     display: none;
 }
 

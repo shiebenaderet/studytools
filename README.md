@@ -8,7 +8,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 
 [![Live Site](https://img.shields.io/badge/Live_Site-study.mrbsocialstudies.org-1669C5?style=for-the-badge&logo=google-chrome&logoColor=white)](https://study.mrbsocialstudies.org)
 [![License](https://img.shields.io/badge/License-Educational_Use-22c55e?style=for-the-badge)](#license)
-[![Version](https://img.shields.io/badge/Version-8.55.38-f59e0b?style=for-the-badge)](#)
+[![Version](https://img.shields.io/badge/Version-8.55.39-f59e0b?style=for-the-badge)](#)
 
 ---
 
@@ -86,12 +86,14 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 - Deep linking to activities (`#activity-name`)
 - Progress tracking (local + optional cloud sync)
 - Personalized welcome screen and progress stats
+- Quiz date with a days-left countdown on the unit home screen
 
 </td>
 <td width="50%">
 
 **For Teachers**
 - Config-driven — one JSON file powers everything
+- Optional quiz date countdown (`quizDate` in the unit config)
 - Hidden teacher dashboard (via command palette)
 - Student progress table with edit/delete
 - Leaderboard with teacher approval

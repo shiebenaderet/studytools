@@ -497,6 +497,31 @@ const StudyEngine = {
             const subtitle = document.getElementById('site-subtitle');
             header.insertBefore(greeting, subtitle);
         }
+
+        this.renderQuizCountdown();
+    },
+
+    // Small quiz-date note under the essential question (unit.quizDate).
+    renderQuizCountdown() {
+        const existing = document.getElementById('quiz-countdown');
+        if (existing) existing.remove();
+        if (typeof QuizCountdown === 'undefined') return;
+        const info = QuizCountdown.describe(this.config.unit.quizDate, this.config.unit.quizLabel);
+        if (!info) return;
+        const note = document.createElement('div');
+        note.id = 'quiz-countdown';
+        note.className = 'quiz-countdown' + (info.days <= 3 ? ' quiz-countdown-soon' : '');
+        const icon = document.createElement('i');
+        icon.className = 'far fa-calendar';
+        icon.setAttribute('aria-hidden', 'true');
+        const date = document.createElement('span');
+        date.className = 'quiz-countdown-date';
+        date.textContent = info.date;
+        const left = document.createElement('span');
+        left.className = 'quiz-countdown-left';
+        left.textContent = info.countdown;
+        note.append(icon, date, left);
+        document.getElementById('site-header').appendChild(note);
     },
 
     async loadActivities() {

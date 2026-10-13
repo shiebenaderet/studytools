@@ -315,6 +315,7 @@ When using AI to generate your content, here's a checklist of things to review b
 - [ ] **Read level is appropriate** — Ask AI to write for your specific grade level, then read it yourself. Would your struggling readers understand it?
 - [ ] **Content is culturally sensitive** — Review examples and explanations for assumptions or stereotypes
 - [ ] **No AI hallucinations** — AI sometimes invents plausible-sounding facts, quotes, or dates. If you're not sure about something, look it up
+- [ ] **Quiz date is current** — If the unit has a `quizDate`, check it matches the day you are giving the quiz, especially after a schedule change
 - [ ] **Consistent tone** — All explanations and examples should feel like they're written by the same person. Ask AI: *"Make the tone consistent — warm, encouraging, and conversational throughout"*
 
 ### Quick prompts for quality fixes
@@ -386,6 +387,29 @@ Add any of these to your `activities` array:
 | `imageUrl` | | Image shown on flashcards and resources (use local path, see below) |
 | `wikiUrl` | | Link to Wikipedia article for the Resources page |
 | `simpleWikiUrl` | | Override for Simple Wikipedia link (use when auto-generated link leads to nonexistent page) |
+
+### Quiz date countdown (optional)
+
+Add `quizDate` (and, if you like, `quizLabel`) inside the `unit` block to show a small note under the essential question on the unit's home screen, such as **Quiz: Thu, Nov 12 · 30 days to go**:
+
+```json
+"unit": {
+    "id": "revolution",
+    "quizDate": "2026-11-12",
+    "quizLabel": "Quiz",
+    ...
+}
+```
+
+| Field | Required | Description |
+|-------|:--------:|-------------|
+| `quizDate` | | Quiz or test day, `YYYY-MM-DD`, in the students' local time |
+| `quizLabel` | | Word shown before the date. Defaults to `Quiz`; use `Unit Test`, `Test`, etc. |
+
+- The note counts down in days, says "tomorrow" the day before and "today. Good luck!" on the day, and turns your theme's accent color in the last three days.
+- It disappears on its own the day after the quiz, and it is hidden while a student is inside an activity.
+- If the quiz moves, change the date and push; students see the new date the next time they open the unit.
+- Leave `quizDate` out and nothing is shown.
 
 ### Scheduled category unlocks (optional)
 
@@ -546,6 +570,13 @@ const SUPABASE_ANON_KEY = 'your-anon-key-here';
 <summary><strong>How do I test changes before my students see them?</strong></summary>
 
 Edit files on a branch other than `main`. GitHub Pages only deploys from `main`, so your changes won't be live until you merge.
+
+</details>
+
+<details>
+<summary><strong>How do I show students when the quiz is?</strong></summary>
+
+Add `"quizDate": "YYYY-MM-DD"` to the `unit` block of `config.json`. A small "Quiz: date · N days to go" note appears under the essential question and goes away the day after. See [Quiz date countdown](#quiz-date-countdown-optional).
 
 </details>
 

@@ -10,6 +10,7 @@ const APP_SHELL = [
     'js/core/achievements.js',
     'js/core/leaderboard.js',
     'tools/unit-access-core.js',
+    'tools/quiz-countdown-core.js',
     'js/core/mastery.js',
     'js/core/command-palette.js',
     'js/core/read-aloud.js',

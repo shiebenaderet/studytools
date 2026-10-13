@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.39] - 2026-10-13
+
+### Added
+- Quiz date countdown: a small note under the essential question on a unit's home screen shows the quiz date and the days left ("Quiz: Thu, Nov 12 · 30 days to go"). It says "tomorrow" the day before and "today. Good luck!" on the day, turns the accent color in the last three days, hides during activities and disappears the day after. Set with `quizDate` (and optional `quizLabel`) in the unit config; the Revolution quiz is set for November 12. Requested by the teacher.
+
 ## [8.55.38] - 2026-10-13
 
 ### Changed
