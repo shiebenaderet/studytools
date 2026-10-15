@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.50] - 2026-10-15
+
+### Added
+- Unit notes for the next revision, in `docs/unit-notes/`: one file per unit that holds what was noticed and left for later. Early Republic's lists the "Hamilton's side" wording and its very hard Deep tier (two summaries above grade 21); Westward Expansion's lists a likely error (Polk settling Oregon to secure his "southern flank"; it was his northern border) and the women's rights typo that was fixed. `CLAUDE.md` now says to read a unit's notes before revising it. Requested by the teacher.
+
 ## [8.55.49] - 2026-10-15
 
 ### Changed
