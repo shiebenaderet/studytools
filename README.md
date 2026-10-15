@@ -8,7 +8,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 
 [![Live Site](https://img.shields.io/badge/Live_Site-study.mrbsocialstudies.org-1669C5?style=for-the-badge&logo=google-chrome&logoColor=white)](https://study.mrbsocialstudies.org)
 [![License](https://img.shields.io/badge/License-Educational_Use-22c55e?style=for-the-badge)](#license)
-[![Version](https://img.shields.io/badge/Version-8.55.42-f59e0b?style=for-the-badge)](#)
+[![Version](https://img.shields.io/badge/Version-8.55.43-f59e0b?style=for-the-badge)](#)
 
 ---
 
@@ -118,7 +118,7 @@ study-tools/
 │   ├── css/styles.css      # Theming via CSS custom properties
 │   ├── js/core/            # App shell, progress, mastery, leaderboard
 │   ├── js/activities/      # One file per activity (plugin system)
-│   ├── tools/              # Study tools (notes, timer, music, export) + unit-content-check.js
+│   ├── tools/              # Study tools (notes, timer, music, export) + unit-content-check.js, check-levels.js
 │   ├── vendor/             # Self-hosted fonts, icons, Supabase SDK
 │   └── index.html          # Main app shell
 ├── units/                  # Your content goes here
@@ -165,7 +165,10 @@ Before a unit goes live, check it:
 
 ```bash
 node study-tools/engine/tools/unit-content-check.js <unit-id>
+node study-tools/engine/tools/check-levels.js <unit-id>
 ```
+
+`check-levels.js` measures each textbook reading level (Flesch-Kincaid grade, the measure in [docs/READING-LEVELS.md](docs/READING-LEVELS.md)) and fails if a tier named Quick, Clear, Full or Deep does not measure in that band. It also runs with the other `*.test.js` files.
 
 Conventions for building units and changing the engine (phone keyboards, Go Deeper links, sync, testing) are in [CLAUDE.md](CLAUDE.md), which Claude Code also reads at the start of every session.
 

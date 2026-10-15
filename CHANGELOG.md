@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.43] - 2026-10-15
+
+### Added
+- `check-levels.js` measures every unit's textbook reading levels with the shared Flesch-Kincaid measure from `docs/READING-LEVELS.md` (copied unchanged) and prints each level's average grade, its easiest and hardest section, and the band it falls in. It fails if a level named Quick, Clear, Full or Deep measures outside its band (Quick 5.0, Clear 7.5, Full 10.5, Deep above Full) or the levels do not step up, so a name always means the same difficulty. Levels still labeled Easier / On Grade / Challenge are measured and given suggested names but do not fail. `check-levels.test.js` runs it on every unit with the other tests. Requested by the teacher.
+
 ## [8.55.42] - 2026-10-15
 
 ### Added

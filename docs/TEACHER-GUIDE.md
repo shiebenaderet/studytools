@@ -476,6 +476,14 @@ Run this from the repository root. It reports any category that does not line up
 node study-tools/engine/tools/unit-content-check.js my-unit
 ```
 
+If your textbook has reading levels, also run:
+
+```
+node study-tools/engine/tools/check-levels.js my-unit
+```
+
+It prints each level's measured reading grade (Flesch-Kincaid, averaged over the whole textbook, with the easiest and hardest section) and the band that grade falls in. A level named Quick, Clear, Full or Deep must measure in its band, defined in [READING-LEVELS.md](READING-LEVELS.md): Quick at 5.0 or below, Clear at 7.5 or below, Full at 10.5 or below, Deep above Full, each one harder than the last. A level that measures too hard needs its text rewritten, not a new name. Levels still labeled Easier / On Grade / Challenge are measured and given suggested names but never fail.
+
 ### Learn Mode config fields
 
 These optional fields customize Learn Mode behavior per unit:
