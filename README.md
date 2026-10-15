@@ -8,7 +8,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 
 [![Live Site](https://img.shields.io/badge/Live_Site-study.mrbsocialstudies.org-1669C5?style=for-the-badge&logo=google-chrome&logoColor=white)](https://study.mrbsocialstudies.org)
 [![License](https://img.shields.io/badge/License-Educational_Use-22c55e?style=for-the-badge)](#license)
-[![Version](https://img.shields.io/badge/Version-8.55.47-f59e0b?style=for-the-badge)](#)
+[![Version](https://img.shields.io/badge/Version-8.55.48-f59e0b?style=for-the-badge)](#)
 
 ---
 
@@ -34,7 +34,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 | **Resource Library** | Searchable vocabulary reference with mastery indicators, Simple Wikipedia and Wikipedia links, and teacher-curated "Go deeper" links (videos, challenge readings, reference articles) per category |
 | **How to Study** | Interactive study strategies page with comprehension quiz and Study Smart badge |
 
-> Reading levels are named Quick, Clear, Full, Deep (formerly Level 0–3). Each name means one difficulty, so a unit's tiers are named by what their text measures at, not by position: Revolution has all four, and Civil War's three tiers measure as Clear, Full and Deep (set in each unit's `readingLevels` in `textbook.json`). Early Republic's Easier and On Grade text was rewritten (8.55.47) to measure in the Clear and Full bands. Westward Expansion keeps Easier / On Grade / Challenge for now, because its easier tier measures above Clear and its on-grade tier above Full. Rewriting a section's text drops highlights on the words that changed. The four names and what each one means are defined once in [docs/READING-LEVELS.md](docs/READING-LEVELS.md).
+> Reading levels are named Quick, Clear, Full, Deep (formerly Level 0–3). Each name means one difficulty, so a unit's tiers are named by what their text measures at, not by position: Revolution has all four, and Civil War's three tiers measure as Clear, Full and Deep (set in each unit's `readingLevels` in `textbook.json`). Early Republic's and Westward Expansion's Easier and On Grade text was rewritten (8.55.47, 8.55.48) to measure in the Clear and Full bands; they keep the Easier / On Grade / Challenge labels until they are renamed. Rewriting a section's text drops highlights on the words that changed. The four names and what each one means are defined once in [docs/READING-LEVELS.md](docs/READING-LEVELS.md).
 
 ### 📝 Practice
 | Activity | Description |

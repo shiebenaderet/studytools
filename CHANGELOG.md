@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.48] - 2026-10-15
+
+### Changed
+- Westward Expansion's textbook is re-leveled the same way. The Easier text now measures Flesch-Kincaid 6.2 (every section 7.3 or below; it was 7.9, with sections up to 9.6) and the On Grade text 8.9 (every section 10.2 or below; it was 11.1, up to 13.8), the bands of Clear and Full. Only the language changed; every name, date, number and vocabulary term is still there, no fact was added, the section ids and order are the same, and the Challenge text is untouched. 16 Easier and 15 On Grade sections were rewritten; the rest were left exactly as they were. One broken sentence in the Easier "The Fight for Women's Rights" ("...completely. reminding people...") is now a whole sentence. Highlights on rewritten words are dropped (the rest stay, and reading progress is kept); the unit is hidden this year, so no current student has any there. Requested by the teacher.
+
 ## [8.55.47] - 2026-10-15
 
 ### Changed
