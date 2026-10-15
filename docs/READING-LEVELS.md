@@ -29,7 +29,8 @@ Flesch–Kincaid grade, computed the same way in every repo (`check-levels` in e
 repo; the formula and syllable counter are copied, not reinvented):
 
 - Strip HTML tags and text in parentheses (glosses), then split sentences on
-  `. ! ?` followed by a space or the end; ignore fragments of two words or fewer.
+  `. ! ?` (and any closing quote mark or parenthesis right after it) followed by
+  a space or the end; ignore fragments of two words or fewer.
 - Syllables: lowercase letters only; words of three letters or fewer count 1;
   drop a final silent `-es`, `-ed` or `-e` (not after `l`); drop a leading `y`;
   count groups of one or two vowels (`aeiouy`).

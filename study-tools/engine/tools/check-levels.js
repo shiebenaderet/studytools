@@ -42,7 +42,7 @@ function syllables(word) {
 
 function fkGrade(html) {
   const text = String(html || '').replace(/<[^>]+>/g, ' ').replace(/\([^)]*\)/g, ' ');
-  const sentences = text.split(/[.!?]+(?=\s|$)/).filter(s => s.trim().split(/\s+/).length > 2);
+  const sentences = text.split(/[.!?]+["”’')]*(?=\s|$)/).filter(s => s.trim().split(/\s+/).length > 2);
   const words = text.split(/\s+/).filter(w => /[a-z]/i.test(w));
   if (!sentences.length || !words.length) return { grade: 0, wordsPerSentence: 0 };
   const syl = words.reduce((a, w) => a + syllables(w), 0);

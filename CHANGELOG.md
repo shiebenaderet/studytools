@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.46] - 2026-10-15
+
+### Fixed
+- check-levels.js ends a sentence after a closing quote mark or parenthesis (`."` or `.)`), as docs/READING-LEVELS.md now says in every course repo; texts with quotes no longer measure harder than they are. No student-facing change.
+
 ## [8.55.45] - 2026-10-15
 
 ### Changed
