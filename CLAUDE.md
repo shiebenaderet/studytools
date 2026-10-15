@@ -26,6 +26,13 @@ changing a unit.
   findings, a size estimate per item, and the decisions the teacher must make.
   Build only after the teacher answers.
 
+## Revising a unit: read its notes first
+
+`docs/unit-notes/<unit-id>.md` holds what was noticed last time and left for later
+(possible errors, reading-level outliers, wording the teacher should decide). Read it
+before changing a unit's textbook, vocabulary or games, raise any open item with the
+teacher, and add new observations there rather than leaving them in a plan doc.
+
 ## Building a new unit: checklist
 
 A unit is `study-tools/units/<id>/config.json` plus `textbook.json`, listed in

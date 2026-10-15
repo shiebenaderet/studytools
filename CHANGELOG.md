@@ -5,6 +5,61 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.50] - 2026-10-15
+
+### Added
+- Unit notes for the next revision, in `docs/unit-notes/`: one file per unit that holds what was noticed and left for later. Early Republic's lists the "Hamilton's side" wording and its very hard Deep tier (two summaries above grade 21); Westward Expansion's lists a likely error (Polk settling Oregon to secure his "southern flank"; it was his northern border) and the women's rights typo that was fixed. `CLAUDE.md` now says to read a unit's notes before revising it. Requested by the teacher.
+
+## [8.55.49] - 2026-10-15
+
+### Changed
+- Early Republic's and Westward Expansion's textbook reading levels are renamed **Clear, Full, Deep** (formerly Easier, On Grade, Challenge), on the first-visit level cards and the level picker, with the shared blurbs word for word ("Plain words, a little more detail." / "The grade-level reading." / "Adds real quotes from the time and what historians argue.") and the same grade ranges as Civil War (Grades 5-6, Grades 7-8, Grade 8 and up). The names come from what each tier now measures at after the 8.55.47 and 8.55.48 rewrites: Early Republic 6.1 / 8.9 / 16.4 and Westward Expansion 6.2 / 8.9 / 13.9. Only the labels changed: the level keys, saved level choices, highlights and reading progress are untouched, and Full is still the default. All four units now use the course's reading-level names, and `check-levels.js` checks every one of them. Requested by the teacher.
+
+## [8.55.48] - 2026-10-15
+
+### Changed
+- Westward Expansion's textbook is re-leveled the same way. The Easier text now measures Flesch-Kincaid 6.2 (every section 7.3 or below; it was 7.9, with sections up to 9.6) and the On Grade text 8.9 (every section 10.2 or below; it was 11.1, up to 13.8), the bands of Clear and Full. Only the language changed; every name, date, number and vocabulary term is still there, no fact was added, the section ids and order are the same, and the Challenge text is untouched. 16 Easier and 15 On Grade sections were rewritten; the rest were left exactly as they were. One broken sentence in the Easier "The Fight for Women's Rights" ("...completely. reminding people...") is now a whole sentence. Highlights on rewritten words are dropped (the rest stay, and reading progress is kept); the unit is hidden this year, so no current student has any there. Requested by the teacher.
+
+## [8.55.47] - 2026-10-15
+
+### Changed
+- Early Republic's textbook is re-leveled so its tiers can carry the course's reading-level names. The Easier text now measures Flesch-Kincaid 6.1 (every section 7.3 or below; it was 8.3, with sections up to 14.0) and the On Grade text 8.9 (every section 10.3 or below; it was 10.8, up to 15.5), the bands of Clear and Full in docs/READING-LEVELS.md. Only the language changed: shorter sentences, plainer words, terms explained where they appear. Every name, date, number and vocabulary term is still there, no fact was added, the section ids and order are the same, and the Challenge text is untouched. 17 Easier and 15 On Grade sections were rewritten; the sections already in range were left exactly as they were. Highlights on rewritten words are dropped (the rest stay, and reading progress is kept); the unit is hidden this year, so no current student has any there. Plan and findings in docs/plans/2026-10-15-relevel-early-republic-westward.md. Requested by the teacher.
+
+## [8.55.46] - 2026-10-15
+
+### Fixed
+- check-levels.js ends a sentence after a closing quote mark or parenthesis (`."` or `.)`), as docs/READING-LEVELS.md now says in every course repo; texts with quotes no longer measure harder than they are. No student-facing change.
+
+## [8.55.45] - 2026-10-15
+
+### Changed
+- Revolution's reading-level blurbs now use the course's canonical wording from docs/READING-LEVELS.md, word for word: Quick "Short sentences. Key words explained.", Clear "Plain words, a little more detail.", Full "The grade-level reading.", Deep "Adds real quotes from the time and what historians argue." Labels only; the text, keys and saved choices are unchanged. Requested by the teacher.
+
+## [8.55.44] - 2026-10-15
+
+### Changed
+- Civil War's textbook reading levels are renamed **Clear, Full, Deep** (formerly Easier, On Grade, Challenge), on the first-visit level cards and the level picker, with the shared blurbs that describe the text ("Plain words, a little more detail." / "The grade-level reading." / "Adds real quotes from the time and what historians argue."). The names come from what each tier measures at (Flesch-Kincaid 7.0, 8.1 and 12.4), not from its position, so the easiest tier is Clear, not Quick. Only the labels changed: the level keys, saved level choices, highlights and reading progress are untouched, and Full is still the default. Early Republic and Westward Expansion keep Easier / On Grade / Challenge, because their text measures too hard for those names. Requested by the teacher.
+
+## [8.55.43] - 2026-10-15
+
+### Added
+- `check-levels.js` measures every unit's textbook reading levels with the shared Flesch-Kincaid measure from `docs/READING-LEVELS.md` (copied unchanged) and prints each level's average grade, its easiest and hardest section, and the band it falls in. It fails if a level named Quick, Clear, Full or Deep measures outside its band (Quick 5.0, Clear 7.5, Full 10.5, Deep above Full) or the levels do not step up, so a name always means the same difficulty. Levels still labeled Easier / On Grade / Challenge are measured and given suggested names but do not fail. `check-levels.test.js` runs it on every unit with the other tests. Requested by the teacher.
+
+## [8.55.42] - 2026-10-15
+
+### Added
+- `docs/READING-LEVELS.md`, the one definition of the Quick, Clear, Full and Deep reading levels shared by all of Mr. B's course sites: what each name means, its reader band and measured grade, the student-facing blurbs, and what may and may not be renamed. Copied unchanged from the shared definition and linked from the README and Teacher Guide. Requested by the teacher.
+
+## [8.55.41] - 2026-10-15
+
+### Changed
+- Revolution's Podcast Script Builder card describes the new crew flow at voices.mrbsocialstudies.org: research in the reading library, plan the episode with your crew, then build the lines for your voice. Requested by the teacher.
+
+## [8.55.40] - 2026-10-15
+
+### Changed
+- Revolution's textbook reading levels are renamed **Quick, Clear, Full, Deep** (formerly Level 0, Level 1, Level 2, Level 3), on the first-visit level cards and the level picker. The names describe the text, not the reader, and match the class readings at unrest.mrbsocialstudies.org. Only the labels changed: the level keys, saved level choices, highlights and reading progress are untouched, and Full is still the default. Other units keep Easier / On Grade / Challenge. Requested by the teacher.
+
 ## [8.55.39] - 2026-10-13
 
 ### Added

@@ -313,6 +313,7 @@ When using AI to generate your content, here's a checklist of things to review b
 ### General quality checks
 
 - [ ] **Read level is appropriate** — Ask AI to write for your specific grade level, then read it yourself. Would your struggling readers understand it?
+- [ ] **Reading level names mean the same thing everywhere** — Quick, Clear, Full and Deep each stand for one difficulty, defined in [READING-LEVELS.md](READING-LEVELS.md). Name a textbook tier by what its text measures at, not by its position
 - [ ] **Content is culturally sensitive** — Review examples and explanations for assumptions or stereotypes
 - [ ] **No AI hallucinations** — AI sometimes invents plausible-sounding facts, quotes, or dates. If you're not sure about something, look it up
 - [ ] **Quiz date is current** — If the unit has a `quizDate`, check it matches the day you are giving the quiz, especially after a schedule change
@@ -342,7 +343,7 @@ Add any of these to your `activities` array:
 | Activity ID | What it does | Required content |
 |------------|-------------|-----------------|
 | `learn-mode` | Guided study sessions with adaptive depth, pre/post assessments, reflection prompts, and Wiki Writer bonus. 1.5x points, 30-min cap. | `vocabulary`, `practiceQuestions`, `fillInBlankSentences`, textbook.json (optional, for Key Idea cards) |
-| `textbook` | Leveled chapters with vocab pop-ups, Read Aloud, Quick Checks, a highlighter, and end-of-chapter Go Deeper links | `textbook.json` (one segment per vocabulary category), `goDeeper` (optional) |
+| `textbook` | Leveled chapters (Easier / On Grade / Challenge, or the unit's own `readingLevels` in `textbook.json`; Revolution uses Quick / Clear / Full / Deep; Civil War, Westward Expansion and Early Republic use Clear / Full / Deep; name tiers by what `check-levels.js` measures) with vocab pop-ups, Read Aloud, Quick Checks, a highlighter, and end-of-chapter Go Deeper links | `textbook.json` (one segment per vocabulary category), `goDeeper` (optional) |
 | `flashcards` | Spaced repetition flashcards | `vocabulary` |
 | `resources` | Searchable vocabulary reference with Go Deeper links per category | `vocabulary`, `goDeeper` (optional) |
 | `typing-practice` | Typing passages + per-term snippets; works with phone keyboards | `vocabulary` (with `typingSnippet`), `typingPassages` |
@@ -474,6 +475,14 @@ Run this from the repository root. It reports any category that does not line up
 ```
 node study-tools/engine/tools/unit-content-check.js my-unit
 ```
+
+If your textbook has reading levels, also run:
+
+```
+node study-tools/engine/tools/check-levels.js my-unit
+```
+
+It prints each level's measured reading grade (Flesch-Kincaid, averaged over the whole textbook, with the easiest and hardest section) and the band that grade falls in. A level named Quick, Clear, Full or Deep must measure in its band, defined in [READING-LEVELS.md](READING-LEVELS.md): Quick at 5.0 or below, Clear at 7.5 or below, Full at 10.5 or below, Deep above Full, each one harder than the last. A level that measures too hard needs its text rewritten, not a new name. Levels still labeled Easier / On Grade / Challenge are measured and given suggested names but never fail.
 
 ### Learn Mode config fields
 
