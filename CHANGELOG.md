@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.49] - 2026-10-15
+
+### Changed
+- Early Republic's and Westward Expansion's textbook reading levels are renamed **Clear, Full, Deep** (formerly Easier, On Grade, Challenge), on the first-visit level cards and the level picker, with the shared blurbs word for word ("Plain words, a little more detail." / "The grade-level reading." / "Adds real quotes from the time and what historians argue.") and the same grade ranges as Civil War (Grades 5-6, Grades 7-8, Grade 8 and up). The names come from what each tier now measures at after the 8.55.47 and 8.55.48 rewrites: Early Republic 6.1 / 8.9 / 16.4 and Westward Expansion 6.2 / 8.9 / 13.9. Only the labels changed: the level keys, saved level choices, highlights and reading progress are untouched, and Full is still the default. All four units now use the course's reading-level names, and `check-levels.js` checks every one of them. Requested by the teacher.
+
 ## [8.55.48] - 2026-10-15
 
 ### Changed
