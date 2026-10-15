@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.47] - 2026-10-15
+
+### Changed
+- Early Republic's textbook is re-leveled so its tiers can carry the course's reading-level names. The Easier text now measures Flesch-Kincaid 6.1 (every section 7.3 or below; it was 8.3, with sections up to 14.0) and the On Grade text 8.9 (every section 10.3 or below; it was 10.8, up to 15.5), the bands of Clear and Full in docs/READING-LEVELS.md. Only the language changed: shorter sentences, plainer words, terms explained where they appear. Every name, date, number and vocabulary term is still there, no fact was added, the section ids and order are the same, and the Challenge text is untouched. 17 Easier and 15 On Grade sections were rewritten; the sections already in range were left exactly as they were. Highlights on rewritten words are dropped (the rest stay, and reading progress is kept); the unit is hidden this year, so no current student has any there. Plan and findings in docs/plans/2026-10-15-relevel-early-republic-westward.md. Requested by the teacher.
+
 ## [8.55.46] - 2026-10-15
 
 ### Fixed
