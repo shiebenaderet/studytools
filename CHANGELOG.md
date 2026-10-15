@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.40] - 2026-10-15
+
+### Changed
+- Revolution's textbook reading levels are renamed **Quick, Clear, Full, Deep** (formerly Level 0, Level 1, Level 2, Level 3), on the first-visit level cards and the level picker. The names describe the text, not the reader, and match the class readings at unrest.mrbsocialstudies.org. Only the labels changed: the level keys, saved level choices, highlights and reading progress are untouched, and Full is still the default. Other units keep Easier / On Grade / Challenge. Requested by the teacher.
+
 ## [8.55.39] - 2026-10-13
 
 ### Added
