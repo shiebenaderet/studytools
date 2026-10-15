@@ -313,6 +313,7 @@ When using AI to generate your content, here's a checklist of things to review b
 ### General quality checks
 
 - [ ] **Read level is appropriate** — Ask AI to write for your specific grade level, then read it yourself. Would your struggling readers understand it?
+- [ ] **Reading level names mean the same thing everywhere** — Quick, Clear, Full and Deep each stand for one difficulty, defined in [READING-LEVELS.md](READING-LEVELS.md). Name a textbook tier by what its text measures at, not by its position
 - [ ] **Content is culturally sensitive** — Review examples and explanations for assumptions or stereotypes
 - [ ] **No AI hallucinations** — AI sometimes invents plausible-sounding facts, quotes, or dates. If you're not sure about something, look it up
 - [ ] **Quiz date is current** — If the unit has a `quizDate`, check it matches the day you are giving the quiz, especially after a schedule change

@@ -8,7 +8,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 
 [![Live Site](https://img.shields.io/badge/Live_Site-study.mrbsocialstudies.org-1669C5?style=for-the-badge&logo=google-chrome&logoColor=white)](https://study.mrbsocialstudies.org)
 [![License](https://img.shields.io/badge/License-Educational_Use-22c55e?style=for-the-badge)](#license)
-[![Version](https://img.shields.io/badge/Version-8.55.41-f59e0b?style=for-the-badge)](#)
+[![Version](https://img.shields.io/badge/Version-8.55.42-f59e0b?style=for-the-badge)](#)
 
 ---
 
@@ -34,7 +34,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 | **Resource Library** | Searchable vocabulary reference with mastery indicators, Simple Wikipedia and Wikipedia links, and teacher-curated "Go deeper" links (videos, challenge readings, reference articles) per category |
 | **How to Study** | Interactive study strategies page with comprehension quiz and Study Smart badge |
 
-> Reading levels are named Quick, Clear, Full, Deep (formerly Level 0–3). That is the Revolution textbook's set (its `readingLevels` in `textbook.json`); units without their own set use Easier / On Grade / Challenge.
+> Reading levels are named Quick, Clear, Full, Deep (formerly Level 0–3). That is the Revolution textbook's set (its `readingLevels` in `textbook.json`); units without their own set use Easier / On Grade / Challenge. The four names and what each one means are defined once in [docs/READING-LEVELS.md](docs/READING-LEVELS.md).
 
 ### 📝 Practice
 | Activity | Description |

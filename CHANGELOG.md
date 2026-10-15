@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.42] - 2026-10-15
+
+### Added
+- `docs/READING-LEVELS.md`, the one definition of the Quick, Clear, Full and Deep reading levels shared by all of Mr. B's course sites: what each name means, its reader band and measured grade, the student-facing blurbs, and what may and may not be renamed. Copied unchanged from the shared definition and linked from the README and Teacher Guide. Requested by the teacher.
+
 ## [8.55.41] - 2026-10-15
 
 ### Changed
