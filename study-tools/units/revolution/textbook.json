@@ -4,26 +4,26 @@
       "level0": {
         "label": "Quick",
         "gradeRange": "Grades 2-3",
-        "description": "Short sentences and everyday words",
+        "description": "Short sentences. Key words explained.",
         "icon": "fas fa-seedling"
       },
       "simplified": {
         "label": "Clear",
         "gradeRange": "Grades 5-6",
-        "description": "Shorter sentences, simpler vocabulary",
+        "description": "Plain words, a little more detail.",
         "icon": "fas fa-feather"
       },
       "standard": {
         "label": "Full",
         "gradeRange": "Grades 7-8",
-        "description": "On-grade 8th grade reading",
+        "description": "The grade-level reading.",
         "icon": "fas fa-book",
         "default": true
       },
       "advanced": {
         "label": "Deep",
         "gradeRange": "Grade 8 and up",
-        "description": "More detail and deeper analysis",
+        "description": "Adds real quotes from the time and what historians argue.",
         "icon": "fas fa-graduation-cap"
       }
     },
