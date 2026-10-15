@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.44] - 2026-10-15
+
+### Changed
+- Civil War's textbook reading levels are renamed **Clear, Full, Deep** (formerly Easier, On Grade, Challenge), on the first-visit level cards and the level picker, with the shared blurbs that describe the text ("Plain words, a little more detail." / "The grade-level reading." / "Adds real quotes from the time and what historians argue."). The names come from what each tier measures at (Flesch-Kincaid 7.0, 8.1 and 12.4), not from its position, so the easiest tier is Clear, not Quick. Only the labels changed: the level keys, saved level choices, highlights and reading progress are untouched, and Full is still the default. Early Republic and Westward Expansion keep Easier / On Grade / Challenge, because their text measures too hard for those names. Requested by the teacher.
+
 ## [8.55.43] - 2026-10-15
 
 ### Added

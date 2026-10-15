@@ -8,7 +8,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 
 [![Live Site](https://img.shields.io/badge/Live_Site-study.mrbsocialstudies.org-1669C5?style=for-the-badge&logo=google-chrome&logoColor=white)](https://study.mrbsocialstudies.org)
 [![License](https://img.shields.io/badge/License-Educational_Use-22c55e?style=for-the-badge)](#license)
-[![Version](https://img.shields.io/badge/Version-8.55.43-f59e0b?style=for-the-badge)](#)
+[![Version](https://img.shields.io/badge/Version-8.55.44-f59e0b?style=for-the-badge)](#)
 
 ---
 
@@ -26,7 +26,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 | Activity | Description |
 |----------|-------------|
 | **Learn Mode** | Guided study sessions inspired by Seneca Learning. Short interactive slides with adaptive depth (3 tiers), pre/post assessments, reflection prompts, Wiki Writer bonus challenge, 1.5x points multiplier |
-| **Textbook** | Interactive reading with leveled text (Easier/On Grade/Challenge by default; a unit can set its own, and Revolution uses Quick/Clear/Full/Deep), collapsible sidebar navigation, vocab highlighting, primary source quotes, Key Idea callouts, Quick Checks, reading progress tracking, a highlighter with a "My highlights" list in the sidebar, and "Keep going" links at the end of each chapter |
+| **Textbook** | Interactive reading with leveled text (Easier/On Grade/Challenge by default; a unit can set its own: Revolution uses Quick/Clear/Full/Deep and Civil War uses Clear/Full/Deep), collapsible sidebar navigation, vocab highlighting, primary source quotes, Key Idea callouts, Quick Checks, reading progress tracking, a highlighter with a "My highlights" list in the sidebar, and "Keep going" links at the end of each chapter |
 | **Flashcards** | Anki-style spaced repetition with 3D flip animation, confidence rating, "Make Your Own Example", vocab tiers (must-know/encounter/bonus), and "Read in textbook" deep-links |
 | **Short Answer** | Visual card-based question selector with topic images, color-coded categories, and key term chips |
 | **Source Analysis** | Primary source analysis using the SIFT method with scoring |
@@ -34,7 +34,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 | **Resource Library** | Searchable vocabulary reference with mastery indicators, Simple Wikipedia and Wikipedia links, and teacher-curated "Go deeper" links (videos, challenge readings, reference articles) per category |
 | **How to Study** | Interactive study strategies page with comprehension quiz and Study Smart badge |
 
-> Reading levels are named Quick, Clear, Full, Deep (formerly Level 0–3). That is the Revolution textbook's set (its `readingLevels` in `textbook.json`); units without their own set use Easier / On Grade / Challenge. The four names and what each one means are defined once in [docs/READING-LEVELS.md](docs/READING-LEVELS.md).
+> Reading levels are named Quick, Clear, Full, Deep (formerly Level 0–3). Each name means one difficulty, so a unit's tiers are named by what their text measures at, not by position: Revolution has all four, and Civil War's three tiers measure as Clear, Full and Deep (set in each unit's `readingLevels` in `textbook.json`). Early Republic and Westward Expansion keep Easier / On Grade / Challenge for now, because their easier tiers measure above Clear and their on-grade tiers above Full. The four names and what each one means are defined once in [docs/READING-LEVELS.md](docs/READING-LEVELS.md).
 
 ### 📝 Practice
 | Activity | Description |

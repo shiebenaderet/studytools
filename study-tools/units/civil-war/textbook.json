@@ -2,19 +2,20 @@
     "textbookContent": {
         "readingLevels": {
             "simplified": {
-                "label": "Easier",
-                "gradeRange": "3rd-5th",
-                "description": "Shorter sentences, simpler vocabulary"
+                "label": "Clear",
+                "gradeRange": "Grades 5-6",
+                "description": "Plain words, a little more detail."
             },
             "standard": {
-                "label": "On Grade",
-                "gradeRange": "8th Grade",
-                "description": "Standard reading level"
+                "label": "Full",
+                "gradeRange": "Grades 7-8",
+                "description": "The grade-level reading.",
+                "default": true
             },
             "advanced": {
-                "label": "Challenge",
-                "gradeRange": "High School",
-                "description": "More detail, complex analysis"
+                "label": "Deep",
+                "gradeRange": "Grade 8 and up",
+                "description": "Adds real quotes from the time and what historians argue."
             }
         },
         "segments": [

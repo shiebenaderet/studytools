@@ -343,7 +343,7 @@ Add any of these to your `activities` array:
 | Activity ID | What it does | Required content |
 |------------|-------------|-----------------|
 | `learn-mode` | Guided study sessions with adaptive depth, pre/post assessments, reflection prompts, and Wiki Writer bonus. 1.5x points, 30-min cap. | `vocabulary`, `practiceQuestions`, `fillInBlankSentences`, textbook.json (optional, for Key Idea cards) |
-| `textbook` | Leveled chapters (Easier / On Grade / Challenge, or the unit's own `readingLevels` in `textbook.json`; Revolution uses Quick / Clear / Full / Deep) with vocab pop-ups, Read Aloud, Quick Checks, a highlighter, and end-of-chapter Go Deeper links | `textbook.json` (one segment per vocabulary category), `goDeeper` (optional) |
+| `textbook` | Leveled chapters (Easier / On Grade / Challenge, or the unit's own `readingLevels` in `textbook.json`; Revolution uses Quick / Clear / Full / Deep, Civil War uses Clear / Full / Deep; name tiers by what `check-levels.js` measures) with vocab pop-ups, Read Aloud, Quick Checks, a highlighter, and end-of-chapter Go Deeper links | `textbook.json` (one segment per vocabulary category), `goDeeper` (optional) |
 | `flashcards` | Spaced repetition flashcards | `vocabulary` |
 | `resources` | Searchable vocabulary reference with Go Deeper links per category | `vocabulary`, `goDeeper` (optional) |
 | `typing-practice` | Typing passages + per-term snippets; works with phone keyboards | `vocabulary` (with `typingSnippet`), `typingPassages` |
