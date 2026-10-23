@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.41] - 2026-10-23
+
+### Added
+- Revolution timeline: the war itself, seven new events between Lexington & Concord and the Treaty of Paris (Bunker Hill, Trenton, Saratoga, Valley Forge, Britain's 1779 freedom offer and Yorktown), so the timeline no longer jumps from the Declaration to the peace. Lexington and the Declaration now show their months, since they share years with new events. 17 events in all. Timeline events do not feed the Question Export Tool, so Quiz 2 is unchanged. Requested by the teacher for Week 9.
+
 ## [8.55.40] - 2026-10-23
 
 ### Added

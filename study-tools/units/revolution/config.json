@@ -365,21 +365,57 @@
     },
     {
       "title": "Battles of Lexington & Concord",
-      "year": "1775",
+      "year": "Apr 1775",
       "description": "The 'shot heard round the world': the Revolutionary War begins in Massachusetts",
       "id": 9
     },
     {
-      "title": "Declaration of Independence",
-      "year": "1776",
-      "description": "Congress declares the colonies free and independent states, justified by unalienable rights and consent of the governed",
+      "title": "Battle of Bunker Hill",
+      "year": "June 1775",
+      "description": "Near Boston, the British take the hill on their third charge, but more than 1,000 of their soldiers are killed or wounded, about twice the American losses",
       "id": 10
+    },
+    {
+      "title": "Declaration of Independence",
+      "year": "July 1776",
+      "description": "Congress declares the colonies free and independent states, justified by unalienable rights and consent of the governed",
+      "id": 11
+    },
+    {
+      "title": "Battle of Trenton",
+      "year": "Dec 1776",
+      "description": "On Christmas night Washington's army crosses the icy Delaware River, surprises the enemy camp at Trenton, New Jersey, and captures about 900 soldiers",
+      "id": 12
+    },
+    {
+      "title": "Battle of Saratoga",
+      "year": "Oct 1777",
+      "description": "A British army of about 6,000 soldiers surrenders in New York, the turning point that brings France into the war in 1778",
+      "id": 13
+    },
+    {
+      "title": "Winter at Valley Forge",
+      "year": "Winter 1777-78",
+      "description": "About 12,000 soldiers camp in Pennsylvania short of food, clothes and shoes; about 2,000 die of disease, and in the spring Baron von Steuben trains a stronger army",
+      "id": 14
+    },
+    {
+      "title": "Britain's Freedom Offer",
+      "year": "June 1779",
+      "description": "Widening Lord Dunmore's 1775 promise, a British general offers freedom to people enslaved by Patriots who escape to British lines, and thousands do",
+      "id": 15
+    },
+    {
+      "title": "Battle of Yorktown",
+      "year": "Oct 1781",
+      "description": "American and French armies trap a British army in Virginia while a French fleet blocks help from the sea, and Cornwallis surrenders more than 7,000 soldiers",
+      "id": 16
     },
     {
       "title": "Treaty of Paris",
       "year": "1783",
       "description": "Britain officially recognizes American independence, ending the Revolutionary War",
-      "id": 11
+      "id": 17
     }
   ],
   "reflectionPrompts": [
@@ -1591,7 +1627,7 @@
       "icon": "fas fa-temperature-high",
       "category": "practice",
       "description": "Read nine events from 1763 to 1775, rate how much unrest each caused, then spend your 36-point budget on the ones that mattered most.",
-      "subtitle": "In class Oct 12 to 14. Your work saves on the computer you use.",
+      "subtitle": "Your work saves on the computer you use.",
       "url": "https://shiebenaderet.github.io/colonial-unrest/"
     },
     {
