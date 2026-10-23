@@ -1591,15 +1591,24 @@
       "icon": "fas fa-temperature-high",
       "category": "practice",
       "description": "Read nine events from 1763 to 1775, rate how much unrest each caused, then spend your 36-point budget on the ones that mattered most.",
-      "subtitle": "Your work saves on the computer you use.",
+      "subtitle": "In class Oct 12 to 14. Your work saves on the computer you use.",
       "url": "https://shiebenaderet.github.io/colonial-unrest/"
+    },
+    {
+      "id": "war-timeline",
+      "name": "The War in Seven Stops",
+      "icon": "fas fa-flag",
+      "category": "practice",
+      "description": "From Bunker Hill to the Treaty of Paris: seven stops, a reading at your level, and the hidden voices at each one.",
+      "subtitle": "For Week 9 and your podcast research.",
+      "url": "https://unrest.mrbsocialstudies.org/war-timeline.html"
     },
     {
       "id": "revolutionary-voices",
       "name": "Podcast Script Builder",
       "icon": "fas fa-microphone",
       "category": "practice",
-      "description": "Research your overlooked voice in the reading library, then build your episode script step by step.",
+      "description": "Research your overlooked voice in the reading library, plan the episode with your crew, then build the lines for your voice.",
       "subtitle": "For the podcast project, starting in Week 9.",
       "url": "https://voices.mrbsocialstudies.org/"
     }

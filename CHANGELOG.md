@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.40] - 2026-10-23
+
+### Added
+- Revolution: a "The War in Seven Stops" card under Practice opens the war timeline page on the unrest site (unrest.mrbsocialstudies.org/war-timeline.html): Bunker Hill to the Treaty of Paris in seven stops, each with a reading at four levels and the hidden voices students can research for the podcast. Requested by the teacher for Week 9.
+
 ## [8.55.39] - 2026-10-13
 
 ### Added
