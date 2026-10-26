@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.42] - 2026-10-26
+
+### Changed
+- Revolution: "The War in Seven Stops" card now opens voices.mrbsocialstudies.org/war-timeline.html, where the page moved (the old unrest address redirects there). The Podcast Script Builder card says "group," not "crew." Requested by the teacher.
+
 ## [8.55.41] - 2026-10-23
 
 ### Added
