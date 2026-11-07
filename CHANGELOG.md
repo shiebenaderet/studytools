@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.43] - 2026-11-06
+
+### Changed
+- Map Exporter: the map drawing code moved into a shared `tools/map-render.js` so the Question Exporter can draw the same maps. The exported PNGs are unchanged (checked pixel for pixel on all four maps). Requested by the teacher.
+
 ## [8.55.42] - 2026-10-26
 
 ### Changed

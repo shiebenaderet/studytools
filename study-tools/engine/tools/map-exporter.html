@@ -354,6 +354,8 @@
 <script src="../js/activities/thirteen-colonies-map.js"></script>
 
 <!-- Handout-tab logic. -->
+<!-- Shared map drawing (also used by the Question Exporter). -->
+<script src="map-render.js"></script>
 <script src="map-handout.js"></script>
 
 <script>
@@ -368,7 +370,6 @@ function vb() {
   }
   return VIEWBOX;
 }
-const COLONY_REGION_COLOR = { 'New England Colonies': '#3b6cb3', 'Middle Colonies': '#5b8a3a', 'Southern Colonies': '#a83232' };
 const SVG_NS = 'http://www.w3.org/2000/svg';
 
 const state = {
@@ -377,110 +378,13 @@ const state = {
   size: 1200,
 };
 
-// ── Region access ────────────────────────────────────────────
-function getRegions(mapKey) {
-  if (mapKey === 'map1861') {
-    // map-1861-data.js exposes window.MAP_1861_REGIONS with paths: [...]
-    return window.MAP_1861_REGIONS.map(r => ({
-      id: r.id,
-      name: r.name,
-      paths: r.paths,
-      // colour by allegiance for highlighted style
-      color: allegianceColor(r.allegiance),
-    }));
-  }
-  if (mapKey === 'colonies13') {
-    return (window.THIRTEEN_COLONIES_DATA || []).map(r => ({
-      id: r.id,
-      name: r.name,
-      paths: r.paths,
-      color: COLONY_REGION_COLOR[r.region] || '#d4883a',
-    }));
-  }
-  if (mapKey === 'fiftystates') {
-    // fifty-states-data.js exposes window.FIFTY_STATES_DATA in the same
-    // { id, name, paths: [...] } shape. No natural color scheme so all
-    // states use the default highlight tone.
-    return window.FIFTY_STATES_DATA.map(r => ({
-      id: r.id,
-      name: r.name,
-      paths: r.paths,
-      color: '#d4883a',
-    }));
-  }
-  // Territorial expansion uses single path string
-  return window.TERRITORIAL_REGIONS.map(r => ({
-    id: r.id,
-    name: r.name,
-    paths: [r.path],
-    color: r.color,
-  }));
-}
-
-function allegianceColor(a) {
-  switch (a) {
-    case 'union':       return '#3b6cb3';
-    case 'confederate': return '#a83232';
-    case 'border':      return '#a37a30';
-    case 'territory':   return '#7a8a7a';
-    default:            return '#8B4513';
-  }
-}
-
+// ── Region access (shared with the Question Exporter: map-render.js) ──
+function getRegions(mapKey) { return window.MapRender.getRegions(mapKey); }
+function allegianceColor(a) { return window.MapRender.allegianceColor(a); }
 // ── SVG building ─────────────────────────────────────────────
 function buildHighlightedSVG(region, allRegions) {
-  const svg = document.createElementNS(SVG_NS, 'svg');
-  svg.setAttribute('xmlns', SVG_NS);
-  svg.setAttribute('viewBox', `0 0 ${vb().w} ${vb().h}`);
-
-  // Colonies: the coastline and the land around them, so they don't float like islands.
-  if (state.mapKey === 'colonies13' && window.THIRTEEN_COLONIES_LAND) {
-    const defs = document.createElementNS(SVG_NS, 'defs');
-    const clip = document.createElementNS(SVG_NS, 'clipPath');
-    clip.setAttribute('id', 'mx-frame');
-    const cr = document.createElementNS(SVG_NS, 'rect');
-    cr.setAttribute('width', vb().w); cr.setAttribute('height', vb().h);
-    clip.appendChild(cr); defs.appendChild(clip); svg.appendChild(defs);
-    const sea = document.createElementNS(SVG_NS, 'rect');
-    sea.setAttribute('width', vb().w); sea.setAttribute('height', vb().h); sea.setAttribute('fill', '#dbe9f0');
-    svg.appendChild(sea);
-    const land = document.createElementNS(SVG_NS, 'path');
-    land.setAttribute('d', window.THIRTEEN_COLONIES_LAND);
-    land.setAttribute('fill', '#f6f2ea'); land.setAttribute('stroke', '#9aa5ab'); land.setAttribute('stroke-width', '1.2');
-    land.setAttribute('clip-path', 'url(#mx-frame)');
-    svg.appendChild(land);
-  }
-
-  // Light background showing all regions in muted gray
-  const bg = document.createElementNS(SVG_NS, 'g');
-  for (const r of allRegions) {
-    if (r.id === region.id) continue;
-    for (const d of r.paths) {
-      const p = document.createElementNS(SVG_NS, 'path');
-      p.setAttribute('d', d);
-      p.setAttribute('fill', 'var(--land, #e8e2d4)');
-      p.setAttribute('fill', '#e8e2d4');
-      p.setAttribute('stroke', '#b8ad94');
-      p.setAttribute('stroke-width', '0.6');
-      bg.appendChild(p);
-    }
-  }
-  svg.appendChild(bg);
-
-  // Highlighted region on top, with strong fill + thicker stroke
-  const fg = document.createElementNS(SVG_NS, 'g');
-  for (const d of region.paths) {
-    const p = document.createElementNS(SVG_NS, 'path');
-    p.setAttribute('d', d);
-    p.setAttribute('fill', region.color || '#d4883a');
-    p.setAttribute('stroke', '#2a2a2a');
-    p.setAttribute('stroke-width', '1.4');
-    fg.appendChild(p);
-  }
-  svg.appendChild(fg);
-  return svg;
+  return window.MapRender.buildHighlightedSVG(state.mapKey, region, allRegions);
 }
-
 function buildIsolatedSVG(region) {
   // First, render the path into a hidden SVG so we can call getBBox().
   const probe = document.createElementNS(SVG_NS, 'svg');
@@ -529,32 +433,8 @@ function buildSVG(region, allRegions, styleKey) {
 
 // ── PNG export ───────────────────────────────────────────────
 function svgToPNG(svgElement, targetWidth) {
-  return new Promise((resolve, reject) => {
-    const xml = new XMLSerializer().serializeToString(svgElement);
-    const svg64 = btoa(unescape(encodeURIComponent(xml)));
-    const url = 'data:image/svg+xml;base64,' + svg64;
-
-    const vb = svgElement.getAttribute('viewBox').split(/\s+/).map(Number);
-    const aspect = vb[3] / vb[2]; // h / w
-    const W = targetWidth;
-    const H = Math.round(targetWidth * aspect);
-
-    const img = new Image();
-    img.onload = () => {
-      const canvas = document.createElement('canvas');
-      canvas.width = W;
-      canvas.height = H;
-      const ctx = canvas.getContext('2d');
-      ctx.fillStyle = '#ffffff';
-      ctx.fillRect(0, 0, W, H);
-      ctx.drawImage(img, 0, 0, W, H);
-      canvas.toBlob(blob => resolve(blob), 'image/png');
-    };
-    img.onerror = reject;
-    img.src = url;
-  });
+  return window.MapRender.svgToPNG(svgElement, targetWidth);
 }
-
 function downloadBlob(blob, filename) {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
