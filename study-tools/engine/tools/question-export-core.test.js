@@ -282,6 +282,64 @@ var saQs = (cfgRealCw.shortAnswerQuestions || []).map(function (sa, i) {
 var pkgEssayReal = core.buildCanvasPackage(saQs, { title: 'Civil War SA', maxAttempts: 1, unitId: 'civil-war', source: 'shortAnswer' });
 eq('selfCheck essay ok', core.selfCheckPackage(pkgEssayReal).length, 0);
 
+// === Timeline source ===
+var noShuffle = function (a) { return a.slice(); };
+eq('timelineYear month', core.timelineYear('Feb 1763'), 1763);
+eq('timelineYear range', core.timelineYear('1828-1833'), 1828);
+eq('timelineYear none', core.timelineYear('long ago'), null);
+var tlCfg = { timelineEvents: [
+  { title: 'A', year: 'Feb 1763' }, { title: 'B', year: 'Oct 1763' }, { title: 'C', year: '1765' },
+  { title: 'D', year: '1767' }, { title: 'E', year: '1770' }, { title: 'F', year: 'someday' }
+] };
+var tl = core.normalizeTimeline(tlCfg, noShuffle);
+eq('timeline skips unparseable year', tl.length, 5);
+eq('timeline prompt', tl[0].question, 'When did this happen? A');
+eq('timeline correct is year only', tl[0].options[tl[0].correctIndex], '1763');
+eq('timeline never offers same year twice', tl[1].options.filter(function (o) { return o === '1763'; }).length, 1);
+eq('timeline 4 distinct options', new Set(tl[0].options).size, 4);
+eq('timeline topic is decade', tl[2].topic, '1760s');
+var tlFew = core.normalizeTimeline({ timelineEvents: [{ title: 'Only', year: '1800' }] }, noShuffle);
+eq('timeline pads when unit has few years', new Set(tlFew[0].options).size, 4);
+['civil-war', 'revolution', 'westward-expansion', 'early-republic'].forEach(function (u) {
+  var c = JSON.parse(require('fs').readFileSync(require('path').join(__dirname, '../../units/' + u + '/config.json'), 'utf8'));
+  var qs = core.normalizeTimeline(c);
+  eq(u + ' timeline every event exported', qs.length, c.timelineEvents.length);
+  qs.forEach(function (q) {
+    eq(u + ' timeline distinct options ' + q.id, new Set(q.options).size, 4);
+  });
+  var pkg = core.buildCanvasPackage(qs, { title: u + ' Timeline', maxAttempts: 1, unitId: u, source: 'timeline' });
+  eq(u + ' timeline selfCheck', core.selfCheckPackage(pkg).length, 0);
+  eq(u + ' timeline validate', core.validateForCanvas(qs, { title: 'T', source: 'timeline' }).ok, true);
+});
+
+// === Map regions source ===
+var regions = [
+  { id: 'texas', name: 'Texas', group: 'Confederate' }, { id: 'ohio', name: 'Ohio', group: 'Union' },
+  { id: 'maine', name: 'Maine', group: 'Union' }, { id: 'kansas', name: 'Kansas', group: 'Union' },
+  { id: 'new mexico', name: 'New Mexico Territory', group: 'Territories' }
+];
+var mq = core.normalizeMapRegions(regions, 'map1861', noShuffle);
+eq('map one question per region', mq.length, 5);
+eq('map prompt color-neutral', mq[0].question, 'Which region is highlighted on the map below?');
+eq('map correct name', mq[1].options[mq[1].correctIndex], 'Ohio');
+eq('map image file safe', mq[4]._image.file, 'new-mexico.png');
+eq('map distractors from same map', mq[0].options.every(function (o) { return regions.some(function (r) { return r.name === o; }); }), true);
+var fakePng = new Uint8Array([137, 80, 78, 71]);
+var imgs = {}; mq.forEach(function (q) { imgs[q._image.file] = fakePng; });
+var mopts = { title: 'Civil War Maps', maxAttempts: 1, unitId: 'civil-war', source: 'mapRegions', mapKey: 'map1861', images: imgs };
+var mpkg = core.buildCanvasPackage(mq, mopts);
+eq('map assessment id has map', mpkg.assessmentId, 'civil-war-mapregions-map1861');
+eq('map selfCheck ok', core.selfCheckPackage(mpkg).length, 0);
+var mxml = mpkg.fileMap[mpkg.assessmentId + '/' + mpkg.assessmentId + '.xml'];
+eq('map img escaped with filebase', mxml.indexOf('&lt;img src=&quot;%24IMS-CC-FILEBASE%24/civil-war-mapregions-map1861/images/texas.png&quot;') > 0, true);
+eq('map manifest lists image', mpkg.fileMap['imsmanifest.xml'].indexOf('<file href="civil-war-mapregions-map1861/images/texas.png"/>') > 0, true);
+eq('map image in fileMap', mpkg.fileMap['civil-war-mapregions-map1861/images/texas.png'] === fakePng, true);
+var missing = Object.assign({}, mopts, { images: {} });
+eq('map selfCheck catches missing image', core.selfCheckPackage(core.buildCanvasPackage(mq, missing)).length > 0, true);
+var redQ = mq.map(function (q, i) { return i ? q : Object.assign({}, q, { question: 'Which state is shaded red?' }); });
+eq('map color word rule', core.validateForCanvas(redQ, mopts).errors.some(function (e) { return e.ruleId === 'map-prompt-color-neutral'; }), true);
+eq('map validate ok', core.validateForCanvas(mq, mopts).ok, true);
+
 if (failures.length) {
   console.log('FAIL (' + failures.length + ')');
   failures.forEach(function (f) { console.log('- ' + f); });

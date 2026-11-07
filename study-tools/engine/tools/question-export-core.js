@@ -91,6 +91,77 @@
     });
     return out;
   }
+  // Timeline: "When did this happen?" with 4 year choices. The choices show
+  // the starting year only ("Feb 1763" and "1828-1833" become 1763 and 1828),
+  // so a month or a range can't give the answer away. Wrong answers are the
+  // years of the nearest other events, never the same year as the answer.
+  function timelineYear(v) {
+    var m = String(v == null ? '' : v).match(/\d{3,4}/);
+    return m ? parseInt(m[0], 10) : null;
+  }
+  function normalizeTimeline(config, shuffleFn) {
+    shuffleFn = shuffleFn || defaultShuffle;
+    var events = (config && config.timelineEvents) || [];
+    var years = [];
+    events.forEach(function (e) {
+      var y = e && timelineYear(e.year);
+      if (y != null && years.indexOf(y) < 0) years.push(y);
+    });
+    var out = [];
+    events.forEach(function (e, i) {
+      if (!e || !e.title) return;
+      var y = timelineYear(e.year);
+      if (y == null) return;
+      var near = years.filter(function (x) { return x !== y; })
+        .sort(function (a, b) { return Math.abs(a - y) - Math.abs(b - y) || a - b; })
+        .slice(0, 6);
+      var distractors = shuffleFn(near).slice(0, 3);
+      // Fewer than 3 other years in the unit: fill with nearby years.
+      for (var step = 1; distractors.length < 3; step++) {
+        [y - step, y + step].forEach(function (c) {
+          if (distractors.length < 3 && distractors.indexOf(c) < 0) distractors.push(c);
+        });
+      }
+      var options = [String(y)].concat(distractors.map(String));
+      var order = shuffleFn([0, 1, 2, 3]);
+      out.push({
+        id: i,
+        question: 'When did this happen? ' + e.title,
+        options: order.map(function (idx) { return options[idx]; }),
+        correctIndex: order.indexOf(0),
+        topic: (Math.floor(y / 10) * 10) + 's'
+      });
+    });
+    return out;
+  }
+
+  // Map regions: "Which region is highlighted on the map below?" with the
+  // region's picture and 4 names from the same map. regions is the list from
+  // MapRender.getRegions(mapKey): [{ id, name, group }].
+  var MAP_PROMPT = 'Which region is highlighted on the map below?';
+  function mapImageFile(regionId) {
+    return String(regionId).replace(/[^A-Za-z0-9_-]+/g, '-') + '.png';
+  }
+  function normalizeMapRegions(regions, mapKey, shuffleFn) {
+    shuffleFn = shuffleFn || defaultShuffle;
+    regions = regions || [];
+    var pool = regions.map(function (r) { return { value: r.name, category: r.group || 'Regions' }; });
+    return regions.map(function (r, i) {
+      var distractors = pickDistractors(pool, r.name, r.group || 'Regions', 3, shuffleFn);
+      var options = [r.name].concat(distractors);
+      while (options.length < 4) options.push('');
+      var order = shuffleFn([0, 1, 2, 3]);
+      return {
+        id: i,
+        question: MAP_PROMPT,
+        options: order.map(function (idx) { return options[idx]; }),
+        correctIndex: order.indexOf(0),
+        topic: r.group || 'Regions',
+        _image: { mapKey: mapKey, regionId: r.id, file: mapImageFile(r.id), alt: 'Map with highlighted region' }
+      };
+    });
+  }
+
   var BLOOKET_TIME = 20;
   function formatBlooket(questions) {
     var rows = [['Question #','Question Text','Answer 1','Answer 2','Answer 3','Answer 4','Time Limit (sec)','Correct Answer(s)']];
@@ -158,6 +229,15 @@
       '      </resprocessing>',
       '    </item>'
     ].join('\n');
+  }
+  // Image questions follow the verified Canvas pattern: escaped <img> inside a
+  // text/html mattext, src on %24IMS-CC-FILEBASE%24/<id>/images/.
+  function renderImageMCItem(q, idx, assessmentId) {
+    var html = '<p>' + xmlEscape(q.question) + '</p>' +
+      '<p><img src="%24IMS-CC-FILEBASE%24/' + assessmentId + '/images/' + q._image.file + '" alt="' +
+      xmlEscape(q._image.alt || 'Map with highlighted region') + '"/></p>';
+    var item = renderMCItem(Object.assign({}, q, { question: '' }), idx);
+    return item.replace('<mattext texttype="text/html"></mattext>', '<mattext texttype="text/html">' + xmlEscape(html) + '</mattext>');
   }
   function renderShortAnswerItem(q, idx) {
     var itemId = 'q' + idx;
@@ -244,7 +324,7 @@
     ].join('\n');
   }
 
-  function buildManifestXml(assessmentId) {
+  function buildManifestXml(assessmentId, imageFiles) {
     var resId = 'res_' + assessmentId;
     var manId = 'manifest_' + assessmentId;
     return [
@@ -261,16 +341,26 @@
       '  <resources>',
       '    <resource identifier="' + resId + '" type="imsqti_xmlv1p2/imscc_xmlv1p1/assessment">',
       '      <file href="' + assessmentId + '/' + assessmentId + '.xml"/>',
+    ].concat((imageFiles || []).map(function (f) {
+      return '      <file href="' + assessmentId + '/images/' + f + '"/>';
+    })).concat([
       '    </resource>',
       '  </resources>',
       '</manifest>',
       ''
-    ].join('\n');
+    ]).join('\n');
   }
 
+  // Map quizzes get the map in the id, so two maps from one unit don't collide.
+  function canvasAssessmentId(opts) {
+    opts = opts || {};
+    var parts = [opts.unitId || 'quiz', opts.source || 'set'];
+    if (opts.mapKey) parts.push(opts.mapKey);
+    return slugify(parts.join('-'));
+  }
   function buildCanvasPackage(questions, opts) {
     opts = opts || {};
-    var assessmentId = slugify((opts.unitId || 'quiz') + '-' + (opts.source || 'set'));
+    var assessmentId = canvasAssessmentId(opts);
     var renderer = pickRenderer(opts.source);
     var prepped = questions.map(function (q) {
       if (opts.source === 'fib') {
@@ -278,14 +368,26 @@
       }
       return q;
     });
-    var items = prepped.map(function (q, i) { return renderer(q, i + 1); });
+    var items = prepped.map(function (q, i) {
+      return q._image ? renderImageMCItem(q, i + 1, assessmentId) : renderer(q, i + 1);
+    });
+    // opts.images: { 'file.png': Blob or bytes } drawn by the page before building.
+    var images = opts.images || {};
+    var imageFiles = [];
+    prepped.forEach(function (q) {
+      if (q._image && imageFiles.indexOf(q._image.file) < 0) imageFiles.push(q._image.file);
+    });
     var assessmentXml = buildAssessmentXml(items, { assessmentId: assessmentId, title: opts.title, maxAttempts: opts.maxAttempts });
-    var manifestXml = buildManifestXml(assessmentId);
+    var manifestXml = buildManifestXml(assessmentId, imageFiles);
     var fileMap = {};
     fileMap['imsmanifest.xml'] = manifestXml;
     fileMap[assessmentId + '/' + assessmentId + '.xml'] = assessmentXml;
+    imageFiles.forEach(function (f) {
+      if (images[f]) fileMap[assessmentId + '/images/' + f] = images[f];
+    });
     return { assessmentId: assessmentId, fileMap: fileMap };
   }
+  var COLOR_WORDS = /\b(red|blue|green|yellow|orange|purple|pink|gray|grey|shaded|colored|coloured)\b/i;
   var CANVAS_RULES = [
     { id: 'title-present', message: 'Quiz title is required.',
       check: function (qs, opts) { return (!opts.title || !String(opts.title).trim()) ? [-1] : []; } },
@@ -293,13 +395,18 @@
       check: function (qs) { return qs.length ? [] : [-1]; } },
     { id: 'mc-has-correct', message: 'Multiple-choice questions need at least one correct option.',
       check: function (qs, opts) {
-        if (opts.source !== 'practice' && opts.source !== 'vocab') return [];
+        if (['practice', 'vocab', 'timeline', 'mapRegions'].indexOf(opts.source) < 0) return [];
         return qs.filter(function (q) { return q.correctIndex < 0 || !q.options || !q.options[q.correctIndex]; }).map(function (q) { return q.id; });
       } },
     { id: 'short-answer-has-accepted', message: 'Short-answer (FIB) needs an accepted answer.',
       check: function (qs, opts) {
         if (opts.source !== 'fib') return [];
         return qs.filter(function (q) { return !q.options || !q.options[q.correctIndex] || !String(q.options[q.correctIndex]).trim(); }).map(function (q) { return q.id; });
+      } },
+    { id: 'map-prompt-color-neutral', message: 'Map questions must not name a color (highlight colors shift in Canvas). Say "highlighted".',
+      check: function (qs, opts) {
+        if (opts.source !== 'mapRegions') return [];
+        return qs.filter(function (q) { return COLOR_WORDS.test(q.question || ''); }).map(function (q) { return q.id; });
       } },
     { id: 'essay-no-scoring', message: 'Essay questions must not carry scoring data.',
       check: function (qs, opts) {
@@ -330,6 +437,16 @@
     if (inner.indexOf('<assessment ident="' + pkg.assessmentId + '"') < 0) {
       errors.push('Assessment ident does not match folder/file: ' + pkg.assessmentId);
     }
+    // Every image in the zip is listed in the manifest, and every <img> points at one.
+    Object.keys(pkg.fileMap).forEach(function (path) {
+      if (path.indexOf(pkg.assessmentId + '/images/') !== 0) return;
+      if (!manifest || manifest.indexOf('<file href="' + path + '"/>') < 0) errors.push('Image not listed in manifest: ' + path);
+    });
+    var srcs = inner.match(/%24IMS-CC-FILEBASE%24\/[^&"]+/g) || [];
+    srcs.forEach(function (src) {
+      var path = src.replace('%24IMS-CC-FILEBASE%24/', '');
+      if (!pkg.fileMap[path]) errors.push('Question image missing from package: ' + path);
+    });
     var identMatches = (inner.match(/<response_label ident="([^"]+)"/g) || []);
     var values = identMatches.map(function (m) { return m.replace(/<response_label ident="/, '').replace(/"$/, ''); });
     var seen = {};
@@ -344,5 +461,5 @@
     });
     return errors;
   }
-  return { csvField: csvField, toCsv: toCsv, normalizeQuestions: normalizeQuestions, formatBlooket: formatBlooket, formatGimkit: formatGimkit, formatGimkitTyped: formatGimkitTyped, pickDistractors: pickDistractors, normalizeFib: normalizeFib, normalizeVocab: normalizeVocab, xmlEscape: xmlEscape, slugify: slugify, renderMCItem: renderMCItem, renderShortAnswerItem: renderShortAnswerItem, renderEssayItem: renderEssayItem, buildAssessmentXml: buildAssessmentXml, buildManifestXml: buildManifestXml, buildCanvasPackage: buildCanvasPackage, validateForCanvas: validateForCanvas, CANVAS_RULES: CANVAS_RULES, selfCheckPackage: selfCheckPackage };
+  return { csvField: csvField, toCsv: toCsv, normalizeQuestions: normalizeQuestions, formatBlooket: formatBlooket, formatGimkit: formatGimkit, formatGimkitTyped: formatGimkitTyped, pickDistractors: pickDistractors, normalizeFib: normalizeFib, normalizeVocab: normalizeVocab, normalizeTimeline: normalizeTimeline, timelineYear: timelineYear, normalizeMapRegions: normalizeMapRegions, mapImageFile: mapImageFile, MAP_PROMPT: MAP_PROMPT, renderImageMCItem: renderImageMCItem, canvasAssessmentId: canvasAssessmentId, xmlEscape: xmlEscape, slugify: slugify, renderMCItem: renderMCItem, renderShortAnswerItem: renderShortAnswerItem, renderEssayItem: renderEssayItem, buildAssessmentXml: buildAssessmentXml, buildManifestXml: buildManifestXml, buildCanvasPackage: buildCanvasPackage, validateForCanvas: validateForCanvas, CANVAS_RULES: CANVAS_RULES, selfCheckPackage: selfCheckPackage };
 });

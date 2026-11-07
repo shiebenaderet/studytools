@@ -184,6 +184,13 @@
 <script src="../vendor/jszip.min.js"></script>
 <script src="question-export-core.js"></script>
 <script src="question-exporter-zip.js"></script>
+<!-- Map data + shared drawing for the Map Regions source (same files the Map Exporter loads). -->
+<script src="../js/data/map-1861-data.js"></script>
+<script src="map-exporter-territorial.js"></script>
+<script src="../js/data/fifty-states-data.js"></script>
+<script>window.StudyEngine = window.StudyEngine || { registerActivity: function() {} };</script>
+<script src="../js/activities/thirteen-colonies-map.js"></script>
+<script src="map-render.js"></script>
 <script>
 (function () {
   var UNITS_URL = '../../units/units.json';
@@ -216,13 +223,19 @@
   state.step = 0;            // start on the unit grid
   state.destination = 'blooket';
   state.canvasOpts = { title: '', maxAttempts: 1 };
+  state.mapKey = 'map1861';
+  // The map each unit's quiz most likely wants; the teacher can switch maps in Step 1.
+  var UNIT_DEFAULT_MAP = { 'revolution': 'colonies13', 'early-republic': 'territorial', 'westward-expansion': 'territorial', 'civil-war': 'map1861' };
+  function mapTitle(key) {
+    return (window.MapRender.MAPS.filter(function (m) { return m.key === key; })[0] || {}).title || key;
+  }
 
   var el = function (tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
 
   function effective(q) {
     var e = state.edits[q.id];
     if (!e) return q;
-    return { id:q.id, question:e.question, options:e.options.slice(), correctIndex:e.correctIndex, topic:q.topic };
+    return Object.assign({}, q, { question:e.question, options:e.options.slice(), correctIndex:e.correctIndex });
   }
   function isDirty(q) { return !!state.edits[q.id]; }
 
@@ -243,7 +256,7 @@
     var order = [];
     state.questions.forEach(function (q) {
       var eq = effective(q);
-      if (filter && eq.question.toLowerCase().indexOf(filter) === -1) return;
+      if (filter && rowLabel(eq).toLowerCase().indexOf(filter) === -1) return;
       if (!byTopic[q.topic]) { byTopic[q.topic] = []; order.push(q.topic); }
       byTopic[q.topic].push(q);
     });
@@ -269,13 +282,18 @@
     return head;
   }
 
+  // Map questions all share one prompt, so the row names the region instead.
+  function rowLabel(eq) {
+    if (eq._image) return (eq.options[eq.correctIndex] || '') + ' \u2014 ' + eq.question;
+    return eq.question;
+  }
   function renderRow(q) {
     var eq = effective(q);
     var row = el('div', 'qrow');
     var head = el('div', 'qhead');
     var cb = el('input'); cb.type = 'checkbox'; cb.checked = !!state.selected[q.id];
     cb.onchange = function () { state.selected[q.id] = cb.checked; updateCount(); };
-    var txt = el('div', 'qtext'); txt.append(document.createTextNode(eq.question));
+    var txt = el('div', 'qtext'); txt.append(document.createTextNode(rowLabel(eq)));
     if (isDirty(q)) txt.append(el('span', 'badge', 'edited'));
     var edit = el('button', 'editbtn', 'edit');
     var editor = el('div', 'editor');
@@ -319,6 +337,7 @@
 
   function loadUnit(unitId) {
     state.unitId = unitId; state.selected = {}; state.edits = {};
+    state.mapKey = UNIT_DEFAULT_MAP[unitId] || 'map1861';
     fetch('../../units/' + unitId + '/config.json')
       .then(function (r) { return r.json(); })
       .then(function (cfg) { state.rawConfig = cfg; rebuildQuestions();
@@ -332,7 +351,9 @@
     { id: 'practice', name: 'Practice questions', desc: 'The vetted 4-option MC bank used in the practice test.', count: function (c) { return (c.practiceQuestions||[]).length; } },
     { id: 'vocab', name: 'Vocabulary', desc: 'Defaults to must-know. Becomes 4-option MC with auto distractors from the same chapter.', count: function (c) { return (c.vocabulary||[]).length; } },
     { id: 'fib', name: 'Fill-in-the-blank', desc: 'The sentence becomes the question; the answer is correct; 3 same-chapter distractors.', count: function (c) { return (c.fillInBlankSentences||[]).length; } },
-    { id: 'shortAnswer', name: 'Short-answer essays', desc: 'Open-ended prompts with key terms and sentence starters. Canvas only.', count: function (c) { return (c.shortAnswerQuestions||[]).length; }, canvasOnly: true }
+    { id: 'shortAnswer', name: 'Short-answer essays', desc: 'Open-ended prompts with key terms and sentence starters. Canvas only.', count: function (c) { return (c.shortAnswerQuestions||[]).length; }, canvasOnly: true, canvasNote: 'Essays export only to Canvas.' },
+    { id: 'timeline', name: 'Timeline', desc: '"When did this happen?" for each timeline event, with 4 year choices from nearby events.', count: function (c) { return (c.timelineEvents||[]).length; }, unit: 'events' },
+    { id: 'mapRegions', name: 'Map regions', desc: '"Which region is highlighted on the map below?" with a picture of the map. Pick the map below. Canvas only.', count: function () { return window.MapRender.getRegions(state.mapKey).length; }, canvasOnly: true, canvasNote: 'Map questions need images, which only Canvas supports.', unit: 'regions' }
   ];
 
   function renderSourceGrid() {
@@ -353,11 +374,11 @@
       stat.append(document.createTextNode(String(n)));
       stat.append(document.createTextNode(' '));
       var u = el('span'); u.style.fontFamily = 'inherit'; u.style.fontSize = '11px'; u.style.color = 'var(--muted)';
-      u.textContent = s.id === 'vocab' ? 'terms' : (s.id === 'fib' ? 'sentences' : 'questions');
+      u.textContent = s.unit || (s.id === 'vocab' ? 'terms' : (s.id === 'fib' ? 'sentences' : 'questions'));
       stat.append(u);
       card.append(stat);
       if (s.canvasOnly && state.destination !== 'canvas') {
-        card.append(el('div', 'sc-note', 'Essays export only to Canvas. Switch destination to Canvas in the rail.'));
+        card.append(el('div', 'sc-note', (s.canvasNote || 'Canvas only.') + ' Switch destination to Canvas in the rail.'));
       }
       card.onclick = function () {
         if (card.disabled) return;
@@ -390,6 +411,21 @@
       tierLabel.append(tier, document.createTextNode(' Include encounter tier'));
       wrap.append(dirLabel, tierLabel);
       host.append(wrap);
+    } else if (state.source === 'mapRegions') {
+      var wrap3 = el('div', 'source-opts');
+      var mapLabel = el('label', null, 'Map ');
+      var mapSel = el('select'); mapSel.id = 'mapKeySel';
+      window.MapRender.MAPS.forEach(function (m) {
+        var op = el('option', null, m.title + ' (' + window.MapRender.getRegions(m.key).length + ')');
+        op.value = m.key; if (m.key === state.mapKey) op.selected = true; mapSel.append(op);
+      });
+      mapSel.onchange = function () {
+        state.mapKey = mapSel.value; state.canvasOpts.title = '';
+        rebuildQuestions(); renderSourceGrid();
+      };
+      mapLabel.append(mapSel);
+      wrap3.append(mapLabel);
+      host.append(wrap3);
     } else if (state.source === 'fib') {
       var wrap2 = el('div', 'source-opts');
       var typedLabel = el('label');
@@ -450,15 +486,18 @@
   }
 
   function rebuildQuestions() {
-    if (rebuildQuestions._lastSource !== state.source || rebuildQuestions._lastUnit !== state.unitId) {
+    if (rebuildQuestions._lastSource !== state.source || rebuildQuestions._lastUnit !== state.unitId || rebuildQuestions._lastMap !== state.mapKey) {
       state.selected = {}; state.edits = {};
     }
     rebuildQuestions._lastSource = state.source;
     rebuildQuestions._lastUnit = state.unitId;
+    rebuildQuestions._lastMap = state.mapKey;
     var cfg = state.rawConfig;
     if (!cfg) { state.questions = []; }
     else if (state.source === 'fib') state.questions = window.QExport.normalizeFib(cfg);
     else if (state.source === 'vocab') state.questions = window.QExport.normalizeVocab(cfg, { direction: state.vocabDirection, includeEncounter: state.includeEncounter });
+    else if (state.source === 'timeline') state.questions = window.QExport.normalizeTimeline(cfg);
+    else if (state.source === 'mapRegions') state.questions = window.QExport.normalizeMapRegions(window.MapRender.getRegions(state.mapKey), state.mapKey);
     else if (state.source === 'shortAnswer') state.questions = (cfg.shortAnswerQuestions || []).map(function (sa, i) {
       return { id: i, question: sa.question || '', options: [], correctIndex: -1, topic: sa.topic || 'Uncategorized', _essay: { keyTerms: sa.keyTerms || [], sentenceStarters: sa.sentenceStarters || [] } };
     });
@@ -466,8 +505,16 @@
     renderSourceControls();
     render();
     var note = document.getElementById('genNote');
-    if (state.source === 'practice') { note.style.display = 'none'; }
-    else { note.style.display = ''; note.textContent = 'Wrong answers are auto-generated from the same chapter. Review or edit them before exporting.'; }
+    setGenNote(note);
+  }
+  function setGenNote(note) {
+    if (state.source === 'practice' || state.source === 'shortAnswer') { note.style.display = 'none'; return; }
+    note.style.display = '';
+    note.textContent = state.source === 'timeline'
+      ? 'Wrong answers are the years of nearby events. Choices show the year only. Review or edit them before exporting.'
+      : (state.source === 'mapRegions'
+        ? 'Wrong answers are other regions from the same map.'
+        : 'Wrong answers are auto-generated from the same chapter. Review or edit them before exporting.');
   }
 
   function renderSourceControls() {
@@ -498,13 +545,16 @@
 
   function csvFilenameForCurrent() {
     var dest = state.destination;
-    var src = state.source === 'fib' ? 'fib' : (state.source === 'vocab' ? 'vocabulary' : 'practice');
+    var src = state.source === 'fib' ? 'fib' : (state.source === 'vocab' ? 'vocabulary' : (state.source === 'timeline' ? 'timeline' : 'practice'));
     var suffix = (state.source === 'fib' && state.fibTyped && dest === 'gimkit') ? 'gimkit-typed' : dest;
     return state.unitId + '-' + src + '-' + suffix + '.csv';
   }
+  function isCanvasOnlySource() {
+    return SOURCES.some(function (s) { return s.id === state.source && s.canvasOnly; });
+  }
   function doCsvExport() {
     var qs = selectedList();
-    if (!qs.length) return;
+    if (!qs.length || isCanvasOnlySource()) return;
     var csv;
     if (state.destination === 'gimkit' && state.source === 'fib' && state.fibTyped) {
       csv = window.QExport.formatGimkitTyped(qs);
@@ -544,10 +594,10 @@
       var dlBtn = document.getElementById('csvDownloadBtn');
       nameLabel.textContent = csvFilenameForCurrent();
       var n = selectedList().length;
-      dlBtn.disabled = (n === 0);
+      dlBtn.disabled = (n === 0) || isCanvasOnlySource();
       dlBtn.textContent = n ? ('Download CSV (' + n + ' questions)') : 'Download CSV';
-      if (state.source === 'practice') { note.style.display = 'none'; }
-      else { note.style.display = ''; note.textContent = 'Wrong answers are auto-generated from the same chapter. Review or edit them before exporting.'; }
+      setGenNote(note);
+      if (isCanvasOnlySource()) { note.style.display = ''; note.textContent = 'This source exports only to Canvas. Switch destination to Canvas QTI in the rail.'; }
     }
   }
 
@@ -563,7 +613,8 @@
   function defaultCanvasTitle() {
     var u = (state.units || []).filter(function (x) { return x.id === state.unitId; })[0];
     var unitTitle = (u && u.title) || state.unitId || 'Quiz';
-    var srcLabel = ({ practice: 'Practice', vocab: 'Vocabulary', fib: 'Fill-in-the-Blank', shortAnswer: 'Short-Answer' })[state.source] || state.source;
+    var srcLabel = ({ practice: 'Practice', vocab: 'Vocabulary', fib: 'Fill-in-the-Blank', shortAnswer: 'Short-Answer', timeline: 'Timeline' })[state.source] || state.source;
+    if (state.source === 'mapRegions') srcLabel = mapTitle(state.mapKey) + ' Map';
     return unitTitle + ' — ' + srcLabel;
   }
 
@@ -615,7 +666,7 @@
     var v = document.getElementById('canvasValidate');
     if (!v) return;
     var qs = selectedList();
-    var opts = { title: state.canvasOpts.title, source: state.source, unitId: state.unitId };
+    var opts = { title: state.canvasOpts.title, source: state.source, unitId: state.unitId, mapKey: mapKeyOpt() };
     var result = window.QExport.validateForCanvas(qs, opts);
     v.textContent = '';
     var ul = el('ul');
@@ -633,7 +684,7 @@
 
     var build = document.getElementById('canvasBuildBtn');
     var fn = document.getElementById('canvasFn');
-    var assessmentId = window.QExport.slugify((state.unitId || 'quiz') + '-' + state.source);
+    var assessmentId = window.QExport.canvasAssessmentId({ unitId: state.unitId, source: state.source, mapKey: mapKeyOpt() });
     fn.textContent = 'Filename: ' + assessmentId + '-canvas.zip';
     if (result.ok) {
       build.disabled = false;
@@ -649,13 +700,41 @@
     }
   }
 
+  function mapKeyOpt() { return state.source === 'mapRegions' ? state.mapKey : undefined; }
+
+  // Draw each selected region's picture (cropped PNG) before packaging.
+  function renderMapImages(qs, status) {
+    var images = {};
+    var chain = Promise.resolve();
+    qs.forEach(function (q, i) {
+      if (!q._image) return;
+      chain = chain.then(function () {
+        status.textContent = 'Drawing map ' + (i + 1) + ' of ' + qs.length + '...';
+        return window.MapRender.renderRegionPng(q._image.mapKey, q._image.regionId, { width: 1000, pad: 0.05 })
+          .then(function (blob) { images[q._image.file] = blob; });
+      });
+    });
+    return chain.then(function () { return images; });
+  }
+
   function doCanvasBuild() {
     var qs = selectedList();
-    var opts = { title: state.canvasOpts.title, maxAttempts: state.canvasOpts.maxAttempts, source: state.source, unitId: state.unitId };
+    var status = document.getElementById('canvasStatus');
+    status.style.display = '';
+    status.style.color = 'var(--ok, #2F855A)';
+    var needsImages = qs.some(function (q) { return q._image; });
+    var imagesReady = needsImages ? renderMapImages(qs, status) : Promise.resolve({});
+    imagesReady.then(function (images) { finishCanvasBuild(qs, images); }).catch(function (err) {
+      status.style.color = 'var(--warn)';
+      status.textContent = 'Could not draw the maps: ' + err.message;
+    });
+  }
+
+  function finishCanvasBuild(qs, images) {
+    var opts = { title: state.canvasOpts.title, maxAttempts: state.canvasOpts.maxAttempts, source: state.source, unitId: state.unitId, mapKey: mapKeyOpt(), images: images };
     var pkg = window.QExport.buildCanvasPackage(qs, opts);
     var selfErrors = window.QExport.selfCheckPackage(pkg);
     var status = document.getElementById('canvasStatus');
-    status.style.display = '';
     if (selfErrors.length) {
       status.style.color = 'var(--warn)';
       status.textContent = 'Build aborted: ' + selfErrors.join('; ');

@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.44] - 2026-11-06
+
+### Added
+- Question Exporter: a **Timeline** source. Each timeline event becomes "When did this happen? (event)" with 4 year choices. Wrong answers are the years of nearby events, never the same year, and choices show the year only so a month or a range can't give the answer away. Exports to Canvas QTI, Blooket and GiMKit. Requested by the teacher.
+- Question Exporter: a **Map regions** source (Canvas only). Pick the 1861 Civil War, Territorial Expansion, 50 States or 13 Colonies map, check the regions, and each becomes "Which region is highlighted on the map below?" with a cropped picture of the map and 4 names from the same map. Very small regions (Rhode Island, Delaware, Connecticut) get a ring drawn around them so students can find them. Images are packaged the way Canvas has accepted before (escaped `<img>`, `%24IMS-CC-FILEBASE%24` path, each image listed in the manifest). Requested by the teacher.
+- Canvas checks: map prompts must not name a color, every question image must be in the package, and every image in the package must be listed in the manifest.
+
+### Changed
+- Canvas filenames for map quizzes include the map (`civil-war-mapregions-map1861-canvas.zip`), so two maps from one unit don't collide.
+
 ## [8.55.43] - 2026-11-06
 
 ### Changed
