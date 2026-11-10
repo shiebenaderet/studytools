@@ -1,4 +1,7 @@
--- Responses table, November 2026. REVIEW BEFORE RUNNING. NOT YET APPLIED.
+-- Responses table, November 2026.
+--
+-- APPLIED to production 2026-11-09 by the teacher in the Supabase SQL editor;
+-- verified with pg_policies (three teacher policies on responses, none for anon).
 --
 -- Holds students' written answers from two places:
 --   * 'short-answer': the Short Answer activity and Response Builder (the June

@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [8.55.47] - 2026-11-09
 
 ### Security
-- New migration `database/migrate-responses.sql` (**not yet applied**): a `responses` table for Short Answer and Read More answers. Students cannot read, insert, change or delete rows directly; they save through `save_response()`, which writes one row and rejects bad input. Only a teacher can read or mark responses. This replaces the June design's open read access, which would have let anyone with the site's public key read every student's answers. Tested against a local Postgres 16 copy of the Supabase roles. Requested by the teacher.
+- New migration `database/migrate-responses.sql` (applied to production 2026-11-09): a `responses` table for Short Answer and Read More answers. Students cannot read, insert, change or delete rows directly; they save through `save_response()`, which writes one row and rejects bad input. Only a teacher can read or mark responses. This replaces the June design's open read access, which would have let anyone with the site's public key read every student's answers. Tested against a local Postgres 16 copy of the Supabase roles. Requested by the teacher.
 
 ## [8.55.46] - 2026-11-09
 
