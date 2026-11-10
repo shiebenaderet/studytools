@@ -1396,3 +1396,15 @@ body {
 .feedback-row-meta { color: #718096; font-size: 0.85em; margin-left: auto; }
 .feedback-row-desc { color: #2d3748; line-height: 1.5; white-space: pre-wrap; word-break: break-word; }
 .feedback-row-ctx { margin-top: 0.4rem; padding-top: 0.4rem; border-top: 1px dashed #e2e8f0; color: #4a5568; font-size: 0.92em; white-space: pre-wrap; word-break: break-word; }
+
+/* Responses tab */
+.responses-filter-bar { flex-wrap: wrap; gap: 0.9rem; }
+.responses-filter-bar label { display: inline-flex; align-items: center; gap: 0.35rem; }
+.responses-filter-bar select { max-width: 28rem; }
+.response-row { border-left-color: #3E5F87; }
+.response-featured { border-left-color: #B8893B; background: #fffaf0; }
+.response-star { background: none; border: none; cursor: pointer; color: #B8893B; font-size: 1.05em; padding: 0 0.2rem; }
+.response-star:disabled { opacity: 0.5; cursor: default; }
+.response-source-short-answer { background: #e8edf4; color: #1B2D45; }
+.response-source-read-more { background: #fdf3dc; color: #7a5a16; }
+.response-question { color: #4a5568; font-size: 0.9em; font-style: italic; margin-bottom: 0.35rem; }

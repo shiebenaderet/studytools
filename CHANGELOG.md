@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.54] - 2026-11-09
+
+### Added
+- Teacher dashboard: a **Responses** tab lists sent Short Answer, Response Builder and Read More Check answers with name, class, word count and time. The Class, Unit and date filters apply; the tab adds Source, Question and Starred only filters, and a star marks a good example (`responses.featured`). Requested by the teacher.
+
 ## [8.55.53] - 2026-11-09
 
 ### Added
