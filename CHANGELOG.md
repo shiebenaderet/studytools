@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.51] - 2026-11-09
+
+### Changed
+- Textbook: tap-to-define now also works on the plural of a vocabulary word, so "delegates" opens the card for **delegate** and "amendments" opens **amendment**. Found while building Unit 3, where several key terms appear in the plural.
+
 ## [8.55.50] - 2026-11-09
 
 ### Added

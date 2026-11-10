@@ -1112,15 +1112,16 @@ StudyEngine.registerActivity({
         var escaped = terms.map(function(t) {
             return t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         });
-        var pattern = new RegExp('\\b(' + escaped.join('|') + ')\\b', 'gi');
+        // An optional plural ending lets "delegates" open the card for "delegate".
+        var pattern = new RegExp('\\b(' + escaped.join('|') + ')(?:s|es)?\\b', 'gi');
 
         // Split on HTML tags to avoid replacing inside tags
         var parts = html.split(/(<[^>]+>)/);
         for (var i = 0; i < parts.length; i++) {
             // Only process text nodes (odd indices are tags)
             if (i % 2 === 0) {
-                parts[i] = parts[i].replace(pattern, function(match) {
-                    var key = match.toLowerCase();
+                parts[i] = parts[i].replace(pattern, function(match, base) {
+                    var key = base.toLowerCase();
                     if (self._vocabMap[key]) {
                         return '<span class="tb-vocab" data-term="' + self._escapeAttr(key) + '">' + match + '</span>';
                     }
