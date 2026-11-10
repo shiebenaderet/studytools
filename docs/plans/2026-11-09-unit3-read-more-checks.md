@@ -2,7 +2,7 @@
 
 **Date:** 2026-11-09
 **Requested by:** the teacher
-**Status:** Plan. Build only after the decisions at the end are answered.
+**Status:** Decisions 1, 2, 4, 5 and 6 answered (see end). Decision 3 waiting on the teacher.
 
 ## The Request
 
@@ -110,3 +110,19 @@ entry, on a branch, and goes live only with the teacher's OK.
 6. **Names on responses.** The dashboard would show the student's name with each
    answer, like feedback does. Guest-mode students could read but not earn
    points. OK?
+
+## Answers (2026-11-09)
+
+1. **15 points** per finished Read More Check.
+2. **20-word minimum** to earn points, with the **paste guard on**.
+3. Waiting: the teacher asked to be reminded what the June plan covers.
+4. **Read More at Full first**, then add Clear.
+5. **Split Chapter 1.** Unit 3 gets five categories: Sections 1 to 3 unlock 11/16, and the compromises (Sections 4 and 5) unlock 11/18.
+6. **Names shown** on responses in the dashboard. Guest-mode students read but do not earn points.
+
+## Found While Answering Decision 5
+
+Sort It Out uses only the first four unlocked categories
+(`categories.slice(0, 4)` in `sort-it-out.js`). With five categories, the last
+one would never appear. Fix: pick four of the unlocked categories at random each
+round. **Size:** S. Ships as its own commit before the unit opens.
