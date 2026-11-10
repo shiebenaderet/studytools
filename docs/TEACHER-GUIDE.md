@@ -494,6 +494,14 @@ A textbook section can carry a longer version of itself in `readMore`. It shows 
 
 Paste is blocked in the answer box. A signed-in student's answer is sent to the `responses` table (see `database/migrate-responses.sql`), which only a teacher can read; a guest's answer stays on their device. A check is complete when the Quick Check is answered (right or wrong) and a sent answer has at least 20 words. Each completed check adds **15 points** to the student's leaderboard score, once per section; the consistency multiplier applies to them like any other points.
 
+### Short answers sent to you
+
+Short Answer and the Response Builder share one draft per question. The draft saves on the device as the student types. When the student taps **Save Response** (Short Answer) or **Save my response** (Response Builder's last step), a signed-in student's answer is sent to the same `responses` table with the source `short-answer`, keyed by question number. Sending again replaces the earlier answer; a featured mark you set stays.
+
+Paste is blocked in both answer boxes, and a word count shows under each. The first time an answer of at least **20 words** reaches you, the student earns **20 points**, once per question. Editing or shortening the answer later never takes the points away. Guests keep their drafts on the device and earn no points.
+
+A student who opens a game before writing any short answer sees one reminder per session to try writing one.
+
 ### Reading responses in the dashboard
 
 Open the teacher dashboard and choose the **Responses** tab. It lists every sent Short Answer, Response Builder and Read More Check answer with the student's name, class, word count and time. The Class, Unit and date filters at the top apply. Inside the tab, narrow to one source or one question, and click the star to mark a response as a good example; **Starred only** shows just those. A student who edits and resends an answer keeps your star.

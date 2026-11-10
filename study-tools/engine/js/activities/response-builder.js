@@ -352,7 +352,7 @@ StudyEngine.registerActivity({
         var h = document.createElement('div'); h.className = 'rb-h'; h.textContent = 'Write your draft';
         body.appendChild(h);
         var sub = document.createElement('div'); sub.className = 'rb-sub';
-        sub.textContent = 'Use your plan and the sentence starters to write your answer. It saves automatically when you finish.';
+        sub.textContent = 'Use your plan and the sentence starters to write your answer. Your draft saves as you type. When it is finished, tap Save my response to send it to your teacher.';
         body.appendChild(sub);
         var cols = document.createElement('div'); cols.className = 'rb-draft-cols';
         var outline = document.createElement('div'); outline.className = 'rb-draft-outline';
@@ -373,21 +373,45 @@ StudyEngine.registerActivity({
         ta.placeholder = 'Write your response here...';
         var savedDraft = ProgressManager.getActivityProgress(this._config.unit.id, 'short-answer-' + this._qIndex);
         if (savedDraft && savedDraft.answer) ta.value = savedDraft.answer;
-        ta.addEventListener('input', function () {
-            ProgressManager.saveActivityProgress(self._config.unit.id, 'short-answer-' + self._qIndex, { answer: ta.value });
-        });
+        ta.setAttribute('aria-label', 'Your response');
+        var autosave = function () {
+            if (typeof ResponseCapture !== 'undefined') ResponseCapture.autosaveShortAnswer(self._config.unit.id, self._qIndex, ta.value);
+            else ProgressManager.saveActivityProgress(self._config.unit.id, 'short-answer-' + self._qIndex, { answer: ta.value });
+        };
+        ta.addEventListener('input', autosave);
         right.appendChild(ta);
+        var updateCount = null;
+        if (typeof ResponseCapture !== 'undefined') {
+            ResponseCapture.guardPaste(ta);
+            updateCount = ResponseCapture.attachWordCounter(ta, right);
+        }
         var starters = document.createElement('div'); starters.className = 'rb-starters';
         (this._question.sentenceStarters || []).forEach(function (s) {
             var chip = document.createElement('button'); chip.type = 'button'; chip.className = 'rb-starter'; chip.textContent = s;
             chip.addEventListener('click', function () {
                 if (ta.value.length > 0 && !/\s$/.test(ta.value)) ta.value += ' ';
                 ta.value += s; ta.focus();
-                ProgressManager.saveActivityProgress(self._config.unit.id, 'short-answer-' + self._qIndex, { answer: ta.value });
+                autosave();
+                if (updateCount) updateCount();
             });
             starters.appendChild(chip);
         });
         right.appendChild(starters);
+        if (typeof ResponseCapture !== 'undefined') {
+            var save = document.createElement('button'); save.type = 'button'; save.className = 'rb-btn rb-btn-primary rb-save-btn';
+            var si = document.createElement('i'); si.className = 'fas fa-paper-plane'; save.appendChild(si);
+            save.appendChild(document.createTextNode(' Save my response'));
+            save.addEventListener('click', function () {
+                save.disabled = true;
+                ResponseCapture.saveShortAnswer(self._config.unit.id, self._qIndex, self._question.question || '', ta.value).then(function (r) {
+                    save.disabled = false;
+                    var points = (typeof LeaderboardManager !== 'undefined' && LeaderboardManager.SHORT_ANSWER_POINTS) || 20;
+                    var msg = ResponseCapture.shortAnswerMessage(r, points);
+                    StudyUtils.showToast(msg.text, msg.type);
+                });
+            });
+            right.appendChild(save);
+        }
         cols.appendChild(right);
         body.appendChild(cols);
     },

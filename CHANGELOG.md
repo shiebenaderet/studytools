@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.56] - 2026-11-09
+
+### Added
+- Short Answer and Response Builder (the June 2026 Response Incentives design): **Save Response** and a new **Save my response** button on the Response Builder's draft step send a signed-in student's answer to the teacher (`responses`, source `short-answer`). The first sent answer of 20+ words earns **20 study points** per question, kept once earned and merged across devices. Paste is blocked and a word count shows in both boxes, Short Answer now autosaves as the student types, and opening a game with no short answers written shows one reminder per session. Requested by the teacher.
+
 ## [8.55.55] - 2026-11-09
 
 ### Added

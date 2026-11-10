@@ -7521,6 +7521,21 @@ body.light-mode .feedback-fab {
 ::highlight(ra-sent) { background-color: #ffd54f; color: #1a1a1a; }
 .ra-cur { background: #ffd54f; color: #1a1a1a; border-radius: 4px; }
 
+/* Short Answer and Response Builder: word count and Save my response */
+.sa-word-count {
+    font-size: 0.85em;
+    color: var(--text-secondary);
+    margin: 6px 0 10px;
+}
+.sa-word-count-ok {
+    color: var(--success, #16a34a);
+    font-weight: 600;
+}
+.rb-save-btn {
+    margin-top: 12px;
+    align-self: flex-start;
+}
+
 /* Power Sort */
 .ps-container { max-width: 680px; margin: 0 auto; padding: 16px; }
 .ps-head, .ps-results { text-align: center; margin-bottom: 18px; }

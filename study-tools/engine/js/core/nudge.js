@@ -69,6 +69,19 @@ var NudgeManager = {
             return;
         }
 
+        // Nudge 3: Opening a game with no short answers written yet this unit
+        // (once per session).
+        if (actInfo && actInfo.group === 'games' && !this._shortAnswerNudged
+            && typeof ResponseCapture !== 'undefined'
+            && config.activities && config.activities.indexOf('short-answer') !== -1
+            && (config.shortAnswerQuestions || []).length
+            && ResponseCapture.answeredCount(unitId, config) === 0) {
+            this._shortAnswerNudged = true;
+            StudyUtils.showToast(prefix + 'try writing a short answer! Putting ideas in your own words helps you remember, and each finished answer earns study points.', 'info');
+            this._smartNudgeCount++;
+            return;
+        }
+
         // Nudge 2: Playing recognition-tier game 2+ times
         if (this.RECOGNITION_GAMES.indexOf(activityId) !== -1 && this._sessionActivityCounts[activityId] >= 2) {
             var suggestions = this.ANALYSIS_GAMES.filter(function(g) {
