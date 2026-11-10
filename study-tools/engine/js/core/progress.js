@@ -310,6 +310,16 @@ const ProgressManager = {
             tbMerged.sectionsRead = Object.assign({}, remote.sectionsRead || {}, local.sectionsRead || {});
             tbMerged.quickChecks = Object.assign({}, remote.quickChecks || {}, local.quickChecks || {});
             tbMerged.readMoreOpened = Object.assign({}, remote.readMoreOpened || {}, local.readMoreOpened || {});
+            // Read More answers: keep whichever device saved last; a sent answer
+            // beats an unsent one saved at the same moment.
+            var rmA = remote.readMore || {}, rmB = local.readMore || {}, rm = {};
+            Object.keys(rmA).concat(Object.keys(rmB)).forEach(function(k) {
+                var a = rmA[k], b = rmB[k];
+                if (!a || !b) { rm[k] = a || b; return; }
+                var ta = a.savedAt || 0, tb = b.savedAt || 0;
+                rm[k] = tb > ta ? b : ta > tb ? a : (b.sent ? b : a);
+            });
+            if (Object.keys(rm).length) tbMerged.readMore = rm;
             var hl = {};
             [remote.highlights, local.highlights].forEach(function(src) {
                 Object.keys(src || {}).forEach(function(key) {

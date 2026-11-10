@@ -482,6 +482,17 @@ A textbook section can carry a longer version of itself in `readMore`. It shows 
 
 `content` uses the same level ids as the section. A level without its own Read More text falls back to `standard`, and the panel tells the student which level it is written at.
 
+**Read More Check (optional).** Add `check` to end the panel with a Quick Check and one written question that only the Read More text answers:
+
+```json
+"check": {
+  "quickCheck": { "question": "...", "options": ["...", "...", "...", "..."], "correct": 1, "explanation": "..." },
+  "prompt": { "label": "Tell Mr. B", "question": "Was Burke right to worry? Use one example." }
+}
+```
+
+Paste is blocked in the answer box. A signed-in student's answer is sent to the `responses` table (see `database/migrate-responses.sql`), which only a teacher can read; a guest's answer stays on their device. A check is complete when the Quick Check is answered and a sent answer has at least 20 words.
+
 ### Check a unit before it goes live
 
 Run this from the repository root. It reports any category that does not line up between the vocabulary, the textbook and the schedule, any Who Am I clue that still gives its answer away, and any Go Deeper link that is malformed:

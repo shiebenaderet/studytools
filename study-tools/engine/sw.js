@@ -1,10 +1,11 @@
-const CACHE_NAME = 'studytools-v86';
+const CACHE_NAME = 'studytools-v87';
 const APP_SHELL = [
     './',
     'index.html',
     'css/styles.css',
     'js/core/utils.js',
     'js/core/go-deeper.js',
+    'js/core/response-capture.js',
     'js/core/textbook-highlights.js',
     'js/core/progress.js',
     'js/core/achievements.js',

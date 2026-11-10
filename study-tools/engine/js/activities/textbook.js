@@ -951,9 +951,148 @@ StudyEngine.registerActivity({
         });
     },
 
-    // Filled in by the Read More Check (next change); a hook keeps the panel
-    // usable on its own.
-    _readMoreExtras(body, seg, section) {},
+    // Read More Check: an optional Quick Check plus one written question that
+    // only the Read More text answers. The answer is kept locally (draft as the
+    // student types, final on Send) and sent to the teacher through
+    // ResponseCapture. readMore.check = { quickCheck, prompt: { label, question } }.
+    READ_MORE_MIN_WORDS: 20,
+
+    _readMoreExtras(body, seg, section) {
+        var check = section.readMore && section.readMore.check;
+        if (!check) return;
+        var self = this;
+        var key = seg.id + '/' + section.id;
+        if (!this._progress.readMore) this._progress.readMore = {};
+        var state = this._progress.readMore[key] || {};
+
+        var box = document.createElement('div');
+        box.className = 'tb-callout tb-callout-qc tb-rm-check';
+        var title = document.createElement('div');
+        title.className = 'tb-callout-title';
+        var tIcon = document.createElement('i');
+        tIcon.className = 'fas fa-pen-to-square';
+        title.appendChild(tIcon);
+        title.appendChild(document.createTextNode(' Read More Check'));
+        box.appendChild(title);
+        body.appendChild(box);
+
+        var status = document.createElement('div');
+        status.className = 'tb-rm-status';
+        status.setAttribute('role', 'status');
+
+        function refreshStatus() {
+            var st = self._progress.readMore[key] || {};
+            var qcDone = !check.quickCheck || self._progress.quickChecks[key + '/readMore'] !== undefined;
+            var words = st.words || 0;
+            status.className = 'tb-rm-status';
+            if (st.sent && words >= self.READ_MORE_MIN_WORDS && qcDone) {
+                status.classList.add('done');
+                status.textContent = 'Sent. This Read More Check is complete.';
+            } else if (st.sent) {
+                status.textContent = words < self.READ_MORE_MIN_WORDS
+                    ? 'Sent. Write at least ' + self.READ_MORE_MIN_WORDS + ' words to complete this check.'
+                    : 'Sent. Answer the Quick Check to complete this check.';
+            } else if (st.answer && !ResponseCapture.canSend()) {
+                status.textContent = 'Saved on this device. Sign in with your class to send it.';
+            } else if (st.answer) {
+                status.textContent = 'Saved on this device, not sent yet. Tap Send to try again.';
+            } else {
+                status.textContent = '';
+            }
+        }
+
+        if (check.quickCheck) {
+            this._renderQuickCheckBox(box, check.quickCheck, key + '/readMore', refreshStatus);
+            var qc = box.querySelector('.tb-callout-qc');
+            if (qc) qc.classList.add('tb-rm-qc');
+        }
+
+        if (check.prompt && check.prompt.question) {
+            var label = document.createElement('label');
+            label.className = 'tb-rm-label';
+            var lb = document.createElement('strong');
+            lb.textContent = (check.prompt.label || 'Tell your teacher') + ': ';
+            label.appendChild(lb);
+            label.appendChild(document.createTextNode(check.prompt.question));
+            var taId = 'tb-rm-answer-' + seg.id + '-' + section.id;
+            label.htmlFor = taId;
+            box.appendChild(label);
+
+            var ta = document.createElement('textarea');
+            ta.id = taId;
+            ta.className = 'tb-rm-answer';
+            ta.rows = 4;
+            ta.value = state.draft != null ? state.draft : (state.answer || '');
+            ta.setAttribute('autocapitalize', 'sentences');
+            box.appendChild(ta);
+            ResponseCapture.guardPaste(ta);
+
+            var row = document.createElement('div');
+            row.className = 'tb-rm-row';
+            var counter = document.createElement('span');
+            counter.className = 'tb-rm-count';
+            row.appendChild(counter);
+            var send = document.createElement('button');
+            send.type = 'button';
+            send.className = 'tb-rm-send';
+            var sIcon = document.createElement('i');
+            sIcon.className = 'fas fa-paper-plane';
+            send.appendChild(sIcon);
+            send.appendChild(document.createTextNode(' Send'));
+            row.appendChild(send);
+            box.appendChild(row);
+
+            var updateCount = function() {
+                var n = ResponseCapture.countWords(ta.value);
+                counter.textContent = n + (n === 1 ? ' word' : ' words') + (n < self.READ_MORE_MIN_WORDS ? ' (' + self.READ_MORE_MIN_WORDS + ' to complete)' : '');
+                send.disabled = n === 0;
+            };
+            updateCount();
+
+            var draftTimer = null;
+            ta.addEventListener('input', function() {
+                updateCount();
+                clearTimeout(draftTimer);
+                draftTimer = setTimeout(function() {
+                    var st = self._progress.readMore[key] || {};
+                    st.draft = ta.value;
+                    self._progress.readMore[key] = st;
+                    self._saveProgress();
+                }, 600);
+            });
+
+            send.addEventListener('click', function() {
+                var text = ta.value.trim();
+                if (!text) return;
+                clearTimeout(draftTimer);
+                var st = self._progress.readMore[key] || {};
+                st.answer = text;
+                st.draft = text;
+                st.words = ResponseCapture.countWords(text);
+                st.savedAt = Date.now();
+                st.sent = false;
+                self._progress.readMore[key] = st;
+                self._saveProgress();
+                send.disabled = true;
+                status.className = 'tb-rm-status';
+                status.textContent = 'Sending...';
+                ResponseCapture.capture(self._config.unit.id, 'read-more', key, check.prompt.question, text).then(function(res) {
+                    var cur = self._progress.readMore[key] || {};
+                    if (res.ok && cur.savedAt === st.savedAt) {
+                        cur.sent = true;
+                        cur.words = res.words;
+                        self._progress.readMore[key] = cur;
+                        self._saveProgress();
+                    }
+                    send.disabled = ResponseCapture.countWords(ta.value) === 0;
+                    refreshStatus();
+                });
+            });
+        }
+
+        box.appendChild(status);
+        refreshStatus();
+    },
 
     _highlightVocab(html) {
         if (!this._vocabMap) return html;

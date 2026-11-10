@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.49] - 2026-11-09
+
+### Added
+- Textbook: **Read More Check** at the end of a Read More panel (`readMore.check`): an optional Quick Check and one written question. The answer box blocks paste, counts words, saves a draft as the student types, and sends the finished answer to the teacher with **Send**. A guest's answer stays on the device. Answers sync across devices (the last one saved wins). Requested by the teacher.
+- `js/core/response-capture.js`: one helper that sends a written answer through `save_response()` and blocks paste in response boxes. Short Answer will use it next.
+
 ## [8.55.48] - 2026-11-09
 
 ### Added
