@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.53] - 2026-11-09
+
+### Added
+- Unit 3, **Building a Government** (`units/building-a-government`): 50 vocabulary terms in five categories, 61 practice questions, 32 fill-in-the-blank sentences, 6 short-answer questions with plans and starters, 19 timeline events, 5 typing passages, and a five-chapter textbook (17 short sections with images, Key Ideas and Read More panels with checks). Opens to students **Friday, November 13, 2026** (`opens` in `units.json`); before then only a signed-in teacher can preview it. Category dates: Why the Articles Failed 11/13, Compromises in Philadelphia 11/18, Inside the Constitution 11/19, Treaties and Sovereignty 11/30, Ratification and Rights 12/2. Reading is Full only for now; Go Deeper links wait for the teacher's vetting. Requested by the teacher.
+
 ## [8.55.52] - 2026-11-09
 
 ### Changed

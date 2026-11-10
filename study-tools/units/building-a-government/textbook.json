@@ -1,0 +1,758 @@
+{
+    "textbookContent": {
+        "readingLevels": {
+            "standard": {
+                "label": "Full",
+                "gradeRange": "Grades 7-8",
+                "description": "On-grade 8th grade reading",
+                "icon": "fas fa-book",
+                "default": true
+            }
+        },
+        "segments": [
+            {
+                "id": "why-articles-failed",
+                "number": 1,
+                "title": "Why the Articles Failed",
+                "category": "Why the Articles Failed",
+                "icon": "fas fa-landmark",
+                "essentialQuestions": [
+                    "Why did the states create such a weak national government?",
+                    "What problems showed that the Articles of Confederation were not working?",
+                    "Who was included at the Constitutional Convention, and who was left out?"
+                ],
+                "sections": [
+                    {
+                        "id": "a-government-afraid-of-power",
+                        "heading": "A Government Afraid of Power",
+                        "vocabTerms": [
+                            "Articles of Confederation",
+                            "confederation"
+                        ],
+                        "content": {
+                            "standard": "<p>In July 1776, about a week after the colonies declared independence, John Dickinson of Pennsylvania handed Congress a plan for a national government. Many delegates thought it gave Congress too much power. They had just declared war on a king, and most Americans felt loyal first to their own state.</p><h4>A League of Friendship</h4><p>So Congress spent more than a year cutting the plan down. In November 1777, it approved the <strong>Articles of Confederation</strong>, the first written plan of government for the United States. The plan created a <strong>confederation</strong>, a loose union of independent states that work together for a common purpose. Each state kept most of its own power. There was no president and no system of national courts, and each state had one vote no matter its size. The states finished approving the plan in 1781.</p><h4>The Tax That Failed</h4><p>Congress needed money to pay soldiers and war debts, but the Articles did not let it collect taxes. It could only ask the states, and they often sent little or nothing. In 1781, Congress asked for the power to tax goods from other countries. But changing the Articles required all thirteen states to agree. In 1782, Rhode Island voted no, and the plan ended.</p>"
+                        },
+                        "keyIdea": "The Articles of Confederation had thirteen numbered parts called articles. The Constitution, written in 1787, also has articles. They are two different plans.",
+                        "image": {
+                            "src": "../units/building-a-government/images/articles-of-confederation.jpg",
+                            "caption": "The first page of the Articles of Confederation. Congress approved the plan in 1777, and it was in effect from 1781 to 1789.",
+                            "credit": "National Archives",
+                            "float": "right"
+                        },
+                        "readMore": {
+                            "content": {
+                                "standard": "<p>In July 1776, about a week after the colonies declared independence, John Dickinson of Pennsylvania handed the Continental Congress a plan for a national government. Dickinson had not signed the Declaration of Independence. He thought the break with Britain came too soon. Now that it had come anyway, he wanted the thirteen states to stay together. His plan gave Congress more power than most states were willing to give.</p><h4>Arguing Over Power</h4><p>The delegates who read Dickinson's plan had just declared war on a king. For years, that king and Parliament had made laws for the colonies from across an ocean. Many delegates did not want a new government that could do the same thing. Most Americans also felt loyal first to their own state. A farmer in Virginia called Virginia his country, and a merchant in Boston said the same about Massachusetts.</p><p>So Congress spent more than a year cutting Dickinson's plan down. Thomas Burke of North Carolina argued that Congress, given the chance, would keep taking power away from the states. In 1777 he proposed a rule that each state would keep its own power and independence. Eleven states voted for it. In November 1777, Congress approved the <strong>Articles of Confederation</strong>, the first written plan of government for the United States. It sent the plan to the states to approve.</p><h4>A League of Friendship</h4><p>The Articles created a <strong>confederation</strong>, a loose union of independent states that agree to work together for a common purpose. The plan itself called the union \"a firm league of friendship.\" The states promised to defend one another and to follow the decisions of Congress. But Congress had no way to make a state keep that promise.</p><p>Under the Articles, the same Congress that had declared independence now ran the country. There was no president to carry out laws and no system of national courts. Each state sent delegates, but each state had only one vote. Virginia had more than ten times as many people as Delaware, yet the two states counted the same. The large states would argue about this again in 1787.</p><h4>Waiting for Maryland</h4><p>The states were slow to approve the plan because they did not trust one another. Several large states, including Virginia, claimed land in the West, between the Appalachian Mountains and the Mississippi River. Many Native nations lived on that land. Maryland had no western claims, and its leaders feared that Virginia would grow rich selling the land to settlers. So Maryland refused to sign until the large states gave up their claims to Congress. Virginia finally agreed, and on March 1, 1781, Maryland's delegates signed. The Articles of Confederation went into effect while the war against Britain was still going on.</p><h4>The Tax That Failed</h4><p>Congress needed money. Soldiers had gone months without pay, and the country owed money to France and to its own citizens. But the Articles did not let Congress collect taxes. It could only ask each state to send money, and the states often sent little or nothing. In 1781, Congress asked the states for the power to collect a tax of 5 percent on goods brought in from other countries. That meant $5 on every $100 of goods. Almost every state agreed. But changing the Articles required the votes of all thirteen states. In November 1782, Rhode Island voted no. A month later, Virginia took back its own approval, and the tax plan ended.</p><p><strong>Why It Matters:</strong> The Articles of Confederation was the first government of the United States. The problems Congress faced under it led the states to send delegates to Philadelphia in 1787.</p>"
+                            },
+                            "check": {
+                                "quickCheck": {
+                                    "question": "Why did Maryland refuse to sign the Articles at first?",
+                                    "options": [
+                                        "It wanted the new government to have a president.",
+                                        "It feared that states with western land claims would grow rich selling that land.",
+                                        "It wanted more votes in Congress than the other states.",
+                                        "It wanted to stay part of the British Empire."
+                                    ],
+                                    "correct": 1,
+                                    "explanation": "Maryland had no western land, so it held out until Virginia and other large states gave their claims to Congress."
+                                },
+                                "prompt": {
+                                    "label": "Tell Mr. B",
+                                    "question": "Thomas Burke worried that Congress would keep taking power away from the states. Was he right to worry? Use one example from the reading."
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "id": "cracks-in-the-confederation",
+                        "heading": "Cracks in the Confederation",
+                        "vocabTerms": [
+                            "Northwest Ordinance"
+                        ],
+                        "content": {
+                            "standard": "<p>In January 1787, more than a thousand armed farmers marched toward the federal arsenal, a building where weapons were stored, at Springfield, Massachusetts. Their leader, Daniel Shays, had been a captain in the Continental Army. The trouble that brought them there had started with money.</p><h4>Hard Times</h4><p>After the war, paper money from Congress was nearly worthless, and states printed their own. Some states taxed goods from their neighbors. In Massachusetts, lawmakers raised taxes and demanded payment in gold or silver coins, which few farmers had. Courts took the farms of people who could not pay. In 1786, armed farmers closed courthouses to stop them.</p><h4>Shays' Rebellion</h4><p>Congress had almost no army and no money, so it could not help. Massachusetts raised its own militia, paid for partly by Boston merchants. On January 25, 1787, the militia fired cannon at Shays' men near the arsenal. Four rebels were killed, and the rest scattered.</p><h4>One Success</h4><p>Congress did solve one problem. In July 1787, it passed the <strong>Northwest Ordinance</strong>, a law that set up a government for the land north of the Ohio River. It explained how parts of that land could become new states, and it banned slavery there. By then, Congress had already invited the states to send delegates to Philadelphia to fix the Articles.</p>"
+                        },
+                        "image": {
+                            "src": "../units/building-a-government/images/shays-proclamation-1787.jpg",
+                            "caption": "In 1787, Pennsylvania’s government, led by Benjamin Franklin, offered rewards for the capture of Daniel Shays and three other leaders of the rebellion. This copy was printed in a Philadelphia newspaper on May 19, 1787.",
+                            "credit": "Library of Congress",
+                            "float": "right"
+                        },
+                        "readMore": {
+                            "content": {
+                                "standard": "<p>On a snowy day in January 1787, more than a thousand armed farmers marched toward the federal arsenal at Springfield, Massachusetts. An arsenal is a building where weapons are stored, and this one held thousands of muskets. Many of the farmers had fought in the Revolution. Their leader, Daniel Shays, had been a captain in the Continental Army. The trouble that brought them to Springfield had started with money.</p><h4>Money Nobody Trusted</h4><p>During the war, Congress paid for soldiers and supplies by printing paper money called Continental dollars. It printed so many that each one lost almost all its value. People began saying that something useless was \"not worth a Continental.\" After the war, many states printed their own paper money. Bills from one state often were not accepted in the next. A merchant could not be sure what the money in his hand was worth.</p><h4>Trouble With Neighbors</h4><p>The states also fought over trade. Some states taxed goods that came from other states, the same way they taxed goods from Britain. Maryland and Virginia argued over who could fish and ship goods on the Potomac River, which ran between them. In 1785, leaders from the two states met at George Washington's home, Mount Vernon, and settled the problem themselves. Congress had played no part.</p><p>Other countries took advantage of the weak national government. British soldiers stayed in forts around the Great Lakes, even though Britain had agreed in the peace treaty to leave. In 1784, Spain closed the port of New Orleans to American boats. Farmers west of the Appalachians depended on the Mississippi River to ship their crops to market. Congress had no money for an army or navy, so it could not force either country to back down.</p><h4>Organizing the West</h4><p>Congress did solve one big problem. It now controlled the land the states had given up, north of the Ohio River and east of the Mississippi. In 1785, Congress ordered surveyors to divide this land into square townships, each six miles on a side. Each township had 36 sections of 640 acres, and one section was set aside to pay for a public school.</p><p>In July 1787, Congress passed the <strong>Northwest Ordinance</strong>, a law that set up a government for this region, called the Northwest Territory. When a part of the territory had 5,000 free adult men, they could elect their own lawmakers. When it reached 60,000 people, it could ask to join the union as a new state, equal to the original thirteen. The law banned slavery in the territory. It also promised that Native nations' \"lands and property shall never be taken from them without their consent.\" Within a few years, settlers and the U.S. Army were fighting Native nations for that same land.</p><h4>Shays' Rebellion</h4><p>In Massachusetts, the state government owed money from the war. In 1786, lawmakers raised taxes and demanded payment in gold or silver coins, which few farmers had. When farmers could not pay their taxes or debts, courts took their farms, and some farmers went to jail. That summer and fall, armed farmers in western Massachusetts closed the courthouses so judges could not take any more land.</p><p>The march on Springfield was the next step. Congress could not help Massachusetts, because it had almost no army and no money to pay one. So Governor James Bowdoin raised a state militia, paid for partly by Boston merchants. On January 25, 1787, the militia fired cannon at Shays' men as they approached the arsenal. Four rebels were killed, and the rest scattered. Shays escaped to Vermont and was later pardoned.</p><h4>A Call to Philadelphia</h4><p>Leaders in other states watched Massachusetts with alarm. Some had already been trying to fix the Articles. In September 1786, delegates from five states met at Annapolis, Maryland, to talk about trade. Too few states came to get anything done. But two delegates, Alexander Hamilton of New York and James Madison of Virginia, wrote a report calling for a larger meeting in Philadelphia the next May. After Shays' Rebellion, Congress agreed. In February 1787, it invited every state to send delegates to Philadelphia to revise the Articles of Confederation.</p><p><strong>Why It Matters:</strong> The Northwest Ordinance's ban on slavery made the Ohio River a dividing line between free and slave land. Shays' Rebellion helped convince twelve states to send delegates to Philadelphia.</p>"
+                            },
+                            "check": {
+                                "quickCheck": {
+                                    "question": "What did Spain do in 1784 that hurt American farmers west of the Appalachians?",
+                                    "options": [
+                                        "It sent an army into Kentucky.",
+                                        "It refused to buy American crops.",
+                                        "It closed the port of New Orleans to American boats.",
+                                        "It taxed goods sold in the United States."
+                                    ],
+                                    "correct": 2,
+                                    "explanation": "Western farmers shipped crops down the Mississippi River to New Orleans. Congress had no army or navy to push back."
+                                },
+                                "prompt": {
+                                    "label": "Tell Mr. B",
+                                    "question": "The Northwest Ordinance promised that Native nations' land would never be taken without their consent. Based on the reading, was that promise kept? Explain."
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "id": "philadelphia-1787",
+                        "heading": "Philadelphia, 1787",
+                        "vocabTerms": [
+                            "convention",
+                            "delegate",
+                            "included",
+                            "excluded"
+                        ],
+                        "content": {
+                            "standard": "<p>James Madison of Virginia reached Philadelphia in early May 1787, more than a week before the meeting was set to begin. While he waited for other delegates, he and the Virginians wrote a plan for a new national government.</p><h4>Behind Closed Doors</h4><p>A <strong>convention</strong> is a formal meeting held for a special purpose. Each state chose <strong>delegates</strong>, people sent to represent the state. The Constitutional Convention began on May 25 in the Pennsylvania State House, and the delegates chose George Washington to lead it. Over the summer, 55 delegates from twelve states took part. Rhode Island refused to come. The delegates agreed to keep their debates secret so they could argue freely.</p><h4>Who Was Left Out</h4><p>To be <strong>included</strong> means to be part of a group and have a voice in it. To be <strong>excluded</strong> means to be kept out. All 55 delegates were white men, and most were wealthy. Women, enslaved people and Native nations had no one at the convention. In 1790, nearly one in five people in the United States was enslaved, and in most states only men who owned property could vote.</p>"
+                        },
+                        "keyIdea": "Congress invited the states to revise, or fix, the Articles. Within a week, the delegates voted to write a completely new plan.",
+                        "image": {
+                            "src": "../units/building-a-government/images/state-house-1800.jpg",
+                            "caption": "The Pennsylvania State House, where the convention met, in a hand-colored engraving by William Birch and his son from 1800. Today the building is called Independence Hall.",
+                            "credit": "Library of Congress",
+                            "float": "right"
+                        },
+                        "readMore": {
+                            "content": {
+                                "standard": "<p>James Madison of Virginia reached Philadelphia in early May 1787, more than a week before the meeting was set to begin. He was 36 years old, short and quiet, and he had spent the past year reading about governments in history. When May 14 came, only the delegates from Virginia and Pennsylvania had arrived. So Madison and the other Virginians met each day while they waited. Together they wrote a plan for a new national government.</p><h4>The Delegates Gather</h4><p>A <strong>convention</strong> is a formal meeting held for a special purpose. Each state chose <strong>delegates</strong>, people sent to represent the state at the meeting. Travel was slow, and by May 25 only seven states had enough delegates present to begin. The Constitutional Convention met in the Pennsylvania State House, in the same room where Congress had approved the Declaration of Independence eleven years earlier. The delegates' first vote made George Washington the president of the convention.</p><p>Over the summer, 55 delegates from twelve states took part. Rhode Island refused to send anyone, because its leaders did not want a stronger national government. Some famous leaders were also missing. Thomas Jefferson and John Adams were in Europe working for the United States. Patrick Henry of Virginia was chosen as a delegate but would not go.</p><h4>Behind Closed Doors</h4><p>Early on, the delegates agreed to keep everything said in the meeting secret. Guards stood at the doors, and no one was allowed to share notes or speak to newspapers about the debates. The delegates wanted to argue freely and change their minds without the public reading about every idea. Madison took a seat near the front of the room and wrote down nearly every speech. His notes were not published until 1840, after his death. Most of what historians know about the debates comes from them.</p><h4>Who Was in the Room</h4><p>All 55 delegates were white men, and most were wealthy. Benjamin Franklin of Pennsylvania was the oldest at 81. Jonathan Dayton of New Jersey was the youngest at 26. More than half had trained as lawyers, and most had served in a state government or in Congress. Close to half of the delegates held people in slavery. From Paris, Jefferson wrote to John Adams that the convention was \"an assembly of demigods,\" or a group of nearly superhuman men.</p><h4>Who Was Left Out</h4><p>To be <strong>included</strong> means to be part of a group and to have a voice in it. To be <strong>excluded</strong> means to be kept out. Most people in the United States were excluded from the convention. About 3.9 million people lived in the country, and nearly 700,000 of them, almost one in five, were enslaved. Women made up about half the population, and in every state except New Jersey, women could not vote. In most states, only men who owned property or paid taxes could vote. Native nations sent no delegates, even though the convention would make decisions about the land they lived on.</p><p>On May 29, the delegates got down to work. Edmund Randolph, the governor of Virginia, stood up and presented the plan that Madison had helped write.</p><p><strong>Why It Matters:</strong> Because of the secrecy rule, the public did not learn what the delegates had decided until the finished Constitution was printed in September 1787.</p>"
+                            },
+                            "check": {
+                                "quickCheck": {
+                                    "question": "Why are James Madison's notes so important to historians?",
+                                    "options": [
+                                        "They were printed in newspapers every week that summer.",
+                                        "The debates were secret, so his notes are the main record of what was said.",
+                                        "He was the only delegate who could write.",
+                                        "They were the final copy of the Constitution."
+                                    ],
+                                    "correct": 1,
+                                    "explanation": "Madison sat near the front and wrote down nearly every speech. His notes were not published until 1840."
+                                },
+                                "prompt": {
+                                    "label": "Tell Mr. B",
+                                    "question": "Thomas Jefferson called the delegates \"an assembly of demigods.\" Using what the reading says about who was in the room and who was left out, do you agree with him? Explain."
+                                }
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "compromises-in-philadelphia",
+                "number": 2,
+                "title": "Compromises in Philadelphia",
+                "category": "Compromises in Philadelphia",
+                "icon": "fas fa-handshake",
+                "essentialQuestions": [
+                    "How did the Great Compromise settle the fight between large and small states?",
+                    "How did the delegates’ compromises protect slavery?"
+                ],
+                "sections": [
+                    {
+                        "id": "two-plans-and-the-great-compromise",
+                        "heading": "Two Plans and the Great Compromise",
+                        "vocabTerms": [
+                            "legislature",
+                            "bicameral",
+                            "representation",
+                            "compromise",
+                            "Great Compromise"
+                        ],
+                        "content": {
+                            "standard": "<p>On May 29, 1787, Edmund Randolph of Virginia presented the plan Madison had helped write. It did not fix the Articles. It replaced them with a much stronger national government.</p><h4>Two Plans</h4><p>The Virginia Plan created three branches. The lawmaking branch, or <strong>legislature</strong>, would be <strong>bicameral</strong>, meaning it would have two houses. The biggest change was in <strong>representation</strong>, the way people are given a voice in government. A state's number of lawmakers would depend on its population, so large states would have the most power. Small states objected. William Paterson of New Jersey offered the New Jersey Plan, which kept one house with one vote per state. Most delegates voted it down, but the argument went on for weeks.</p><h4>Meeting in the Middle</h4><p>A <strong>compromise</strong> is an agreement in which each side gives up part of what it wants. Roger Sherman of Connecticut had suggested one. Congress would have two houses. In the House of Representatives, a state's number of members would depend on its population. In the Senate, every state would have two senators. On July 16, 1787, the convention approved the <strong>Great Compromise</strong> by a single vote.</p>"
+                        },
+                        "image": {
+                            "src": "../units/building-a-government/images/roger-sherman.jpg",
+                            "caption": "Roger Sherman of Connecticut, on a postcard printed in 1935 for Connecticut’s 300th anniversary. The picture is based on a portrait painted in his lifetime.",
+                            "credit": "Library of Congress",
+                            "float": "right"
+                        },
+                        "readMore": {
+                            "content": {
+                                "standard": "<p>Edmund Randolph spoke for most of the day on May 29, 1787. He listed the problems of the Articles of Confederation one by one. Then he laid out fifteen proposals that Madison and the other Virginians had written. Their plan did not fix the Articles. It replaced them with a new and much stronger national government.</p><h4>The Virginia Plan</h4><p>The Virginia Plan divided the national government into three branches. One branch would make laws, one would carry them out, and one would act as the courts. The lawmaking branch, or <strong>legislature</strong>, would have two houses. A legislature with two houses is called <strong>bicameral</strong>, from Latin words meaning \"two rooms.\"</p><p>The biggest change was in <strong>representation</strong>, the way people are given a voice in government. Under the Articles, every state had one vote. Under the Virginia Plan, a state's number of lawmakers in both houses would depend on its population. Virginia, the largest state, would have about ten times as many votes as Delaware. Delegates from the large states liked this idea. Delegates from the small states saw it as a way for the large states to run the country.</p><h4>The New Jersey Plan</h4><p>On June 15, William Paterson of New Jersey offered a different plan. It kept a one-house Congress in which every state had one vote, as under the Articles. It gave Congress new powers, including the power to tax goods from other countries and to control trade. Paterson argued that the states had sent them to Philadelphia to revise the Articles, not to throw them out. Four days later, most of the delegates voted against his plan.</p><h4>A Summer Stuck in One Place</h4><p>That vote did not end the fight. Through the hot weeks of late June and early July, the delegates argued about representation almost every day. On July 2, they voted on whether each state should have an equal vote in the second house. The vote was a tie, five states to five, with one state split. Some delegates began to talk about going home. So the convention chose a committee, with one delegate from each state, to look for a middle path.</p><h4>Meeting in the Middle</h4><p>A <strong>compromise</strong> is an agreement in which each side gives up part of what it wants. Benjamin Franklin compared it to a carpenter fitting two boards whose edges do not match. The builder, he said, \"takes a little from both, and makes a good joint.\" The committee started from an idea that Roger Sherman of Connecticut had been suggesting for weeks.</p><p>Under Sherman's plan, Congress would have two houses. In the House of Representatives, each state's number of members would depend on its population, which would be counted every ten years. Voters would elect House members every two years. In the Senate, every state would have two senators, no matter its size, chosen by the state's legislature. The large states got their way in one house, and the small states got theirs in the other.</p><p>On July 16, 1787, the convention approved the plan by a single vote, five states to four, with Massachusetts split. The plan became known as the <strong>Great Compromise</strong>. The next day, the delegates moved on to other questions.</p><p><strong>Why It Matters:</strong> Congress still follows the Great Compromise. California, with about 39 million people, has 52 members in the House, and Wyoming, with fewer than 600,000, has one. Each state has two senators.</p>"
+                            },
+                            "check": {
+                                "quickCheck": {
+                                    "question": "What did Benjamin Franklin compare a compromise to?",
+                                    "options": [
+                                        "Two armies agreeing to stop fighting",
+                                        "A carpenter fitting two boards whose edges do not match",
+                                        "A merchant and a farmer making a trade",
+                                        "A judge settling an argument"
+                                    ],
+                                    "correct": 1,
+                                    "explanation": "Franklin said the builder takes a little from both boards to make a good joint, the way each side gives up a little in a compromise."
+                                },
+                                "prompt": {
+                                    "label": "Tell Mr. B",
+                                    "question": "On July 2, the vote on the Senate was a tie. Which side had the stronger argument, the large states or the small states? Use evidence from the reading."
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "id": "compromises-over-slavery",
+                        "heading": "Compromises Over Slavery",
+                        "vocabTerms": [
+                            "Three-Fifths Compromise"
+                        ],
+                        "content": {
+                            "standard": "<p>Once seats in the House depended on population, the delegates had to decide who counted. The first national count, in 1790, found nearly 700,000 enslaved people in the United States, and nine out of ten lived in the South.</p><h4>Counting People for Power</h4><p>Southern delegates wanted enslaved people counted the same as free people. That would give the South more seats, even though enslaved people could not vote. Northern delegates objected. In July, the delegates agreed that three out of every five enslaved people would be counted. This rule was the <strong>Three-Fifths Compromise</strong>.</p><h4>More Compromises</h4><p>Delegates from South Carolina and Georgia said their states would leave if the slave trade were banned. So the Constitution said Congress could not end the trade before 1808. Another rule required free states to return people who escaped from slavery. The finished Constitution protected slavery in at least three places, but it never used the word slave.</p>"
+                        },
+                        "keyIdea": "The Three-Fifths Compromise was a rule for counting population to divide up power. Counting enslaved people more fully would have given slaveholders more power, not given enslaved people any rights.",
+                        "image": {
+                            "src": "../units/building-a-government/images/am-i-not-a-man.jpg",
+                            "caption": "This image first appeared in 1787 on a medallion made in England for a group working to end the slave trade. American abolitionists printed this copy in 1837.",
+                            "credit": "Library of Congress",
+                            "float": "right"
+                        },
+                        "readMore": {
+                            "content": {
+                                "standard": "<p>Once the delegates agreed that seats in the House would depend on population, a harder question followed. The delegates had to decide who would count as part of a state's population. The first national count, in 1790, found nearly 700,000 enslaved people in the United States. Nine out of ten of them lived in the South. Their answer to that question would decide how much power each region had in the new government.</p><h4>Counting People for Power</h4><p>Delegates from the South wanted enslaved people counted the same as free people. More people meant more seats in the House. Enslaved people could not vote, so the extra seats would go to the white men who held them in slavery. Delegates from the North objected. Southern law treated enslaved people as property, and northern delegates argued that property should not earn seats in Congress.</p><p>In 1783, Congress had used a ratio of three to five to divide war costs among the states. James Wilson of Pennsylvania suggested using the same ratio for representation. Under this rule, three out of every five enslaved people would be counted when seats in the House were divided. The same rule would be used for certain taxes. In July, after more argument, the delegates accepted the <strong>Three-Fifths Compromise</strong>. The Constitution describes enslaved people only as \"three fifths of all other Persons.\"</p><h4>Trading in Human Beings</h4><p>In August, the delegates turned to the slave trade, the business of bringing captured Africans to America by ship to be sold. Many delegates wanted Congress to have the power to end it. Luther Martin of Maryland argued that the trade went against the ideals of the Revolution. Delegates from South Carolina and Georgia said their states would never join a union that banned it.</p><p>Again the delegates compromised. The Constitution said Congress could not ban the slave trade before 1808. In exchange, southern delegates agreed to let Congress control trade with other countries by a simple majority vote. Congress did ban the slave trade starting January 1, 1808. By then, tens of thousands more Africans had been brought to the United States in chains.</p><h4>People Who Escaped</h4><p>Near the end of the summer, delegates from South Carolina added one more rule. If an enslaved person escaped to another state, that state had to return the person to the enslaver. This rule is known as the fugitive slave clause, because a fugitive is a person who runs away. It passed with almost no debate.</p><p>At the time, slavery was already ending in parts of the North. Vermont had banned it in 1777, and Pennsylvania, Massachusetts, Connecticut and Rhode Island had laws or court rulings that were ending it step by step. The fugitive slave clause meant that crossing into one of those states did not make an enslaved person free.</p><p>The delegates signed the finished Constitution on September 17, 1787. It protected slavery in at least three places, but it never used the word slave.</p><p><strong>Why It Matters:</strong> The Three-Fifths Compromise gave slaveholding states extra seats in the House until it was ended by the Fourteenth Amendment in 1868.</p>"
+                            },
+                            "check": {
+                                "quickCheck": {
+                                    "question": "Where did the three-to-five ratio first come from?",
+                                    "options": [
+                                        "A rule in the Declaration of Independence",
+                                        "A British law about the colonies",
+                                        "A 1783 plan to divide war costs among the states",
+                                        "A suggestion from the New Jersey Plan"
+                                    ],
+                                    "correct": 2,
+                                    "explanation": "Congress had used the ratio in 1783 to divide war costs. James Wilson suggested using it for representation."
+                                },
+                                "prompt": {
+                                    "label": "Tell Mr. B",
+                                    "question": "Luther Martin argued that the slave trade went against the ideals of the Revolution. Why did the delegates protect slavery anyway? Use evidence from the reading."
+                                }
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "inside-the-constitution",
+                "number": 3,
+                "title": "Inside the Constitution",
+                "category": "Inside the Constitution",
+                "icon": "fas fa-scroll",
+                "essentialQuestions": [
+                    "Where does the Constitution say the government’s power comes from?",
+                    "How does the Constitution divide power among three branches and between the nation and the states?",
+                    "How do checks and balances keep any one branch from becoming too powerful?"
+                ],
+                "sections": [
+                    {
+                        "id": "we-the-people",
+                        "heading": "\"We the People\"",
+                        "vocabTerms": [
+                            "popular sovereignty",
+                            "preamble"
+                        ],
+                        "content": {
+                            "standard": "<p>In September 1787, Gouverneur Morris of Pennsylvania wrote the final wording of the Constitution. He began it with three words: \"We the People.\"</p><h4>Power From the People</h4><p>The Articles of Confederation had been an agreement among states. The Constitution claimed its power from the people. This idea is called <strong>popular sovereignty</strong>. <em>Sovereignty</em> means the highest power to govern. Under popular sovereignty, a government has power only because the people agree to give it.</p><h4>Six Goals</h4><p>The Constitution's opening sentence is called the <strong>preamble</strong>. It does not create laws. It explains why the Constitution was written. It lists six goals. The first three are to form a more perfect union, establish justice and keep peace at home. The last three are to defend the country, help people live well and protect liberty for the future. Each goal answered a problem the country had faced under the Articles.</p><p>In 1787, \"We the People\" did not mean everyone. Enslaved people, Native nations and most women had no part in choosing the new government. On September 17, 1787, 39 delegates signed the Constitution.</p>"
+                        },
+                        "primarySource": {
+                            "text": "We the People of the United States, in Order to form a more perfect Union, establish Justice, insure domestic Tranquility, provide for the common defence, promote the general Welfare, and secure the Blessings of Liberty to ourselves and our Posterity, do ordain and establish this Constitution for the United States of America.",
+                            "attribution": "Preamble to the Constitution, 1787"
+                        },
+                        "image": {
+                            "src": "../units/building-a-government/images/constitution-page-1.jpg",
+                            "caption": "The first page of the Constitution, copied by hand by Jacob Shallus in September 1787. The words \"We the People\" are written larger than the rest.",
+                            "credit": "National Archives",
+                            "float": "right"
+                        },
+                        "readMore": {
+                            "content": {
+                                "standard": "<p>In September 1787, the delegates handed their notes to a small committee and asked it to write the final wording of the Constitution. Gouverneur Morris of Pennsylvania did most of the writing. An earlier draft had begun by naming every state, from New Hampshire to Georgia. Morris crossed out the list. No one knew which states would agree to the new plan, and naming a state that later said no would cause problems. So Morris began the Constitution with three new words: \"We the People.\"</p><h4>A Government Built by the People</h4><p>Those words were a big change. The Articles of Confederation had been an agreement among states. The Constitution claimed its power from the people themselves. This idea is called <strong>popular sovereignty</strong>. <em>Popular</em> comes from a Latin word for \"people,\" and <em>sovereignty</em> means the highest power to govern. Under popular sovereignty, a government has power only because the people have agreed to give it that power.</p><h4>Six Goals</h4><p>Morris wrote one long sentence to open the Constitution. This introduction is called the <strong>preamble</strong>, from Latin words meaning \"walking before.\" It does not create any laws. It explains why the Constitution was written.</p><p>The Preamble lists six goals, and each one answered a problem the country had faced under the Articles. To \"form a more perfect Union\" meant that the states would work together instead of quarreling. To \"establish Justice\" meant creating national courts that treated people fairly. To \"insure domestic Tranquility\" meant keeping peace at home, after the fighting of Shays' Rebellion. To \"provide for the common defence\" meant protecting the country with a national army and navy, which Congress had lacked when British troops stayed in American forts.</p><p>The last two goals looked ahead. To \"promote the general Welfare\" meant helping all Americans live well, for example by building roads and protecting trade. To \"secure the Blessings of Liberty to ourselves and our Posterity\" meant protecting freedom for the people alive then and for their posterity, or the generations to come.</p><h4>Who Counted as \"the People\"</h4><p>The words \"We the People\" did not mean everyone in 1787. Enslaved people, Native nations and most women had no part in choosing the new government. In most states, only white men who owned property could vote for the delegates who would approve it. Over the next two centuries, Americans used the Constitution's own process to widen who counted as \"the People.\"</p><p>On September 17, 1787, the delegates met for the last time. Morris's Preamble now stood at the top of four large sheets of parchment. Thirty-nine delegates signed their names below it.</p><p><strong>Why It Matters:</strong> Because of popular sovereignty, the Constitution can be changed only with the approval of the people's representatives in Congress and in the states.</p>"
+                            },
+                            "check": {
+                                "quickCheck": {
+                                    "question": "Why did Morris replace the list of state names at the start of the Constitution with \"We the People\"?",
+                                    "options": [
+                                        "The list was too long to fit on the page.",
+                                        "No one knew which states would agree to the new plan.",
+                                        "The states asked him to leave their names out.",
+                                        "Congress ordered him to change it."
+                                    ],
+                                    "correct": 1,
+                                    "explanation": "Naming a state that later said no would cause problems, so Morris used \"We the People\" instead."
+                                },
+                                "prompt": {
+                                    "label": "Tell Mr. B",
+                                    "question": "Choose one goal from the Preamble. Which problem under the Articles was it meant to fix? Use the reading."
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "id": "seven-articles-three-branches",
+                        "heading": "Seven Articles, Three Branches",
+                        "vocabTerms": [
+                            "separation of powers",
+                            "legislative",
+                            "executive",
+                            "judicial"
+                        ],
+                        "content": {
+                            "standard": "<p>The Constitution is divided into seven articles, and each article is split into numbered sections. A rule is named by where it sits. \"Article I, Section 8\" points to the list of powers given to Congress, the way a street address points to a house.</p><h4>Separation of Powers</h4><p>The delegates believed liberty was safest when no one person or group held all the power. So they divided the government's work among three branches. This is called <strong>separation of powers</strong>.</p><h4>The Three Branches</h4><p>Article I creates the <strong>legislative</strong> branch, Congress, which makes the laws. Article II creates the <strong>executive</strong> branch, led by the president, which carries out the laws. Article III creates the <strong>judicial</strong> branch, the Supreme Court and other federal courts, which decides what the laws mean. The other four articles cover how states treat one another, how to change the Constitution, the Constitution's place as the highest law, and how it would be approved.</p>"
+                        },
+                        "keyIdea": "Article I is Congress, Article II is the president, and Article III is the courts. The order of the articles matches the order of the branches.",
+                        "image": {
+                            "src": "../units/building-a-government/images/three-branches.png",
+                            "caption": "Articles I, II and III of the Constitution each create one branch of the national government.",
+                            "credit": "Diagram: Mr. B"
+                        },
+                        "readMore": {
+                            "content": {
+                                "standard": "<p>In September 1787, a clerk named Jacob Shallus sat down with a quill pen and a stack of parchment. The delegates had paid him $30 to copy the final Constitution in his best handwriting. It took him about two days. The four pages he wrote are on display today at the National Archives in Washington, D.C. Their organization is the reason a reader can still find any rule in the Constitution in a few seconds.</p><h4>A Plan in Seven Parts</h4><p>After the Preamble, the Constitution is divided into seven articles. Each article is split into numbered sections, and some sections are split again into short paragraphs called clauses. A rule is named by where it sits. \"Article I, Section 8\" points to the list of powers given to Congress, the same way a street address points to a house.</p><p>The first three articles each create one part of the national government. Article I creates Congress. Article II creates the office of president. Article III creates the Supreme Court. The other four articles cover the rest. Article IV explains how the states treat one another, and Article V explains how to change the Constitution. Article VI makes the Constitution the highest law in the country, and Article VII explains how it would be approved.</p><h4>An Idea From France</h4><p>The delegates had read the work of a French writer named Montesquieu. In 1748, he argued that liberty is safest when no single person or group holds all the power of government. He described three kinds of power. One makes the laws, one carries them out, and one judges whether the laws have been broken. When one ruler holds all three, Montesquieu wrote, nothing stops that ruler from becoming a tyrant.</p><p>The delegates built this idea into the Constitution. Dividing the government's work among three branches is called <strong>separation of powers</strong>. Each branch has its own job and its own people.</p><h4>The Three Branches</h4><p>The <strong>legislative</strong> branch makes the laws. Article I gives this power to Congress, which is made up of the House of Representatives and the Senate. Article I is the longest article, and its list of powers includes collecting taxes, coining money and declaring war.</p><p>The <strong>executive</strong> branch carries out, or executes, the laws. Article II gives this power to the president. The president must be at least 35 years old, must have been born a citizen, and serves a term of four years. The president also commands the army and navy.</p><p>The <strong>judicial</strong> branch decides what the laws mean and settles disputes over them in court. Article III creates the Supreme Court and lets Congress set up lower courts. Federal judges keep their jobs for life as long as they behave well, so that they can decide cases without fearing that they will be fired.</p><p>When Shallus finished copying, the delegates checked his work against their notes. On September 17, 1787, they signed the four pages he had written.</p><p><strong>Why It Matters:</strong> The Constitution has the same seven articles today. When people argue about a rule in it, they name its article and section, such as \"Article II, Section 1.\"</p>"
+                            },
+                            "check": {
+                                "quickCheck": {
+                                    "question": "Why do federal judges keep their jobs for life as long as they behave well?",
+                                    "options": [
+                                        "So they never have to retire",
+                                        "Because the president cannot find replacements",
+                                        "So they can decide cases without fearing they will be fired",
+                                        "Because they are elected by the people"
+                                    ],
+                                    "correct": 2,
+                                    "explanation": "Lifetime terms protect judges from pressure by the other branches."
+                                },
+                                "prompt": {
+                                    "label": "Tell Mr. B",
+                                    "question": "Montesquieu wrote that a ruler who holds all three powers can become a tyrant. Describe one thing that could go wrong if one person made the laws, carried them out and judged them."
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "id": "choosing-a-president",
+                        "heading": "Choosing a President",
+                        "vocabTerms": [
+                            "Electoral College"
+                        ],
+                        "content": {
+                            "standard": "<p>The delegates agreed on a single president, but they argued all summer about how to choose one. Some wanted Congress to choose. Others wanted voters to choose.</p><h4>The Electors</h4><p>In September, a committee offered a new plan. Each state would choose people called electors, and the electors would vote for president. All the electors together became known as the <strong>Electoral College</strong>. Here <em>college</em> means a group with a shared job, not a school. Each state gets as many electors as it has members of Congress. Washington has 10 representatives and 2 senators, so it has 12 electors.</p><h4>How It Works Today</h4><p>In most states, the candidate who wins the most votes in the state wins all of its electors. There are 538 electors, and a candidate needs 270 to win. A candidate can win the most votes across the country and still lose. This has happened five times, most recently in 2016.</p>"
+                        },
+                        "image": {
+                            "src": "../units/building-a-government/images/electoral-college.png",
+                            "caption": "Voters choose electors, electors choose the president, and Congress counts the votes. Washington state has 12 electors.",
+                            "credit": "Diagram: Mr. B"
+                        },
+                        "readMore": {
+                            "content": {
+                                "standard": "<p>On June 1, 1787, James Wilson of Pennsylvania proposed that one person should lead the executive branch. Madison's notes record a long pause before anyone answered. Many delegates remembered King George III and did not want to give that much power to anyone. Edmund Randolph of Virginia argued for three leaders instead of one. In the end, the delegates agreed on a single president. Deciding how to choose that president took them most of the summer.</p><h4>Three Ideas That Did Not Work</h4><p>The Virginia Plan said Congress should choose the president. Many delegates worried that a president picked by Congress would always try to please Congress. Wilson and Gouverneur Morris wanted the voters to choose. Others argued that voters in 1787 had no way to learn about a candidate from a faraway state, since news traveled by horse and ship.</p><p>A vote by the people raised one more problem. Enslaved people made up a large share of the population in the South, but they could not vote. Madison pointed out that in a direct election, the southern states would have fewer voters and less say. Letting state legislatures choose the president was the third idea, and it also failed. The delegates voted on these choices again and again and kept changing their minds.</p><h4>The Electors</h4><p>In early September, a committee offered a new plan. Each state would choose a group of people called electors, and the electors would vote for president. Together, all the electors became known as the <strong>Electoral College</strong>. The word <em>college</em> here means a group of people with a shared job. It is not a school.</p><p>Each state gets as many electors as it has members of Congress. Washington state has 10 representatives and 2 senators, so it has 12 electors. Because the number of House seats depended on population, and population included three-fifths of enslaved people, the plan kept the southern states' extra power from the Three-Fifths Compromise. The Constitution let each state decide how to pick its electors. At first, many state legislatures picked them. Today, the voters in every state do.</p><h4>How It Works Today</h4><p>In a presidential election, voters are choosing between groups of electors who have promised to support a candidate. In 48 states and Washington, D.C., the candidate who wins the most votes in the state wins all of its electors. Maine and Nebraska divide theirs. There are 538 electors in all, and a candidate needs 270, a majority, to win.</p><p>Under this system, a candidate can win the most votes across the country and still lose. This has happened five times, most recently in 2016. The electors meet in each state's capital in December and cast their votes. On January 6, Congress counts the electoral votes and announces the winner.</p><p><strong>Why It Matters:</strong> The Electoral College still decides every presidential election. How many electors a state has depends on its population, which is counted every ten years.</p>"
+                            },
+                            "check": {
+                                "quickCheck": {
+                                    "question": "Why did James Madison think a direct vote by the people would hurt the southern states?",
+                                    "options": [
+                                        "Southern states had fewer newspapers.",
+                                        "Enslaved people could not vote, so the South would have fewer voters.",
+                                        "Southern voters lived too far from the capital.",
+                                        "Southern states did not want a president."
+                                    ],
+                                    "correct": 1,
+                                    "explanation": "Electors were based on House seats, which counted three-fifths of enslaved people, so the plan kept the South's extra power."
+                                },
+                                "prompt": {
+                                    "label": "Tell Mr. B",
+                                    "question": "The delegates thought voters in 1787 could not learn enough about candidates from faraway states. Was the Electoral College a good solution for 1787? Explain."
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "id": "sharing-power-with-the-states",
+                        "heading": "Sharing Power With the States",
+                        "vocabTerms": [
+                            "federalism",
+                            "reserved powers",
+                            "concurrent powers"
+                        ],
+                        "content": {
+                            "standard": "<p>James Madison wanted Congress to have the power to cancel any state law. On July 17, 1787, the delegates voted his idea down, seven states to three. Most delegates wanted the states to keep governing much of daily life.</p><h4>Two Levels of Government</h4><p>The Constitution divides power between the national government and the states. This system is called <strong>federalism</strong>. Some powers belong only to the national government, such as coining money, declaring war and making treaties. Powers not given to the national government are kept by the states. These <strong>reserved powers</strong> include running schools and setting the rules for driver's licenses. Some powers, called <strong>concurrent powers</strong>, belong to both levels at once, such as collecting taxes and building roads.</p>"
+                        },
+                        "keyIdea": "Federalism, the federal government and the Federalists are three different things. Federalism is the system of sharing power. The federal government is the national government. The Federalists were people who supported the Constitution in 1787 and 1788.",
+                        "image": {
+                            "src": "../units/building-a-government/images/james-madison.jpg",
+                            "caption": "James Madison in a lithograph printed about 1828, copied from a portrait by Gilbert Stuart. Madison wanted Congress to be able to cancel state laws, and the convention voted no.",
+                            "credit": "Library of Congress",
+                            "float": "right"
+                        },
+                        "readMore": {
+                            "content": {
+                                "standard": "<p>James Madison came to Philadelphia with one idea he cared about more than almost any other. He wanted Congress to have the power to cancel any state law it disagreed with. Madison believed that state lawmakers had caused many of the country's problems, and that only a strong national government could stop them. On July 17, 1787, the delegates voted on his idea. Seven states voted no, and only three voted yes.</p><h4>Two Levels of Government</h4><p>Most delegates did not want the states to disappear. They wanted a strong national government, but they also wanted the states to keep governing much of daily life. So the Constitution set up two levels of government, national and state, and divided power between them. This system of sharing power is called <strong>federalism</strong>. The national government is also called the federal government.</p><p>In 1788, Madison explained the system to New York readers in a newspaper essay. The national government's powers, he wrote, were \"few and defined.\" The states' powers were \"numerous and indefinite,\" meaning there were many of them and they had no exact limits.</p><h4>Who Does What</h4><p>Some powers belong only to the national government. Article I gives Congress the power to coin money, declare war, set up post offices, and control trade between the states and with other countries. Only the national government can make treaties. These powers had caused trouble under the Articles, when each state printed its own money and taxed its neighbors' goods.</p><p>Other powers belong to the states. The Constitution does not list them. Instead, the Tenth Amendment, added in 1791, says that powers not given to the national government are kept by the states or the people. These are called <strong>reserved powers</strong>, because they are reserved, or held back, for the states. States run schools, set the rules for driver's licenses and marriage, and create city and county governments. That is why the age to get a driver's license is different in Washington than in some other states.</p><p>Some powers belong to both levels at once. These shared powers are called <strong>concurrent powers</strong>, from a word meaning \"happening at the same time.\" Both the national government and the states can collect taxes, borrow money, build roads, set up courts, and make and enforce laws. A person living in Washington pays some taxes to the federal government and other taxes to the state.</p><h4>When the Two Levels Disagree</h4><p>The delegates knew the two levels would sometimes clash. They did not give Congress Madison's power to cancel state laws. Instead, they wrote that the Constitution and national laws are the highest law in the country. When a state law conflicts with them, the national law wins, and the courts decide whether a conflict exists. Chapter 3 explains this rule, called the Supremacy Clause.</p><p><strong>Why It Matters:</strong> Americans still argue about where national power ends and state power begins. Many cases in the Supreme Court are about that line.</p>"
+                            },
+                            "check": {
+                                "quickCheck": {
+                                    "question": "In 1788, Madison described the national government's powers as \"few and defined.\" How did he describe the states' powers?",
+                                    "options": [
+                                        "Many, and without exact limits",
+                                        "Few and weak",
+                                        "Equal to the national government's",
+                                        "Temporary"
+                                    ],
+                                    "correct": 0,
+                                    "explanation": "Madison wrote that the states' powers were \"numerous and indefinite.\""
+                                },
+                                "prompt": {
+                                    "label": "Tell Mr. B",
+                                    "question": "The delegates did not give Congress the power to cancel state laws. Using the reading, explain what happens instead when a state law and a national law conflict."
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "id": "checks-and-balances",
+                        "heading": "Checks and Balances",
+                        "vocabTerms": [
+                            "checks and balances",
+                            "veto",
+                            "impeachment",
+                            "judicial review"
+                        ],
+                        "content": {
+                            "standard": "<p>In April 1792, President George Washington sent a bill back to Congress unsigned, because he believed it broke the Constitution. It was the first time a president rejected a law passed by Congress.</p><h4>Each Branch Limits the Others</h4><p>The delegates gave each branch ways to limit the other two. This system is called <strong>checks and balances</strong>. A president can <strong>veto</strong>, or reject, a bill, but Congress can still pass it with a two-thirds vote in both houses. The Senate must approve the president's choices for judges. The House can vote for <strong>impeachment</strong>, a formal accusation that a president or judge committed serious crimes, and the Senate then holds a trial. Being impeached does not mean being removed.</p><h4>The Courts</h4><p>In 1803, in <em>Marbury v. Madison</em>, Chief Justice John Marshall ruled that part of a law broke the Constitution, so it could not stand. This power is called <strong>judicial review</strong>. The Constitution does not name it, but the Supreme Court has used it ever since.</p>"
+                        },
+                        "keyIdea": "Separation of powers gives each branch its own job. Checks and balances give each branch ways to limit the other two.",
+                        "image": {
+                            "src": "../units/building-a-government/images/john-marshall.jpg",
+                            "caption": "John Marshall in 1808, five years after his ruling in Marbury v. Madison. He served as Chief Justice for 34 years.",
+                            "credit": "Library of Congress",
+                            "float": "right"
+                        },
+                        "readMore": {
+                            "content": {
+                                "standard": "<p>In April 1792, President George Washington received a bill from Congress. It set the number of seats each state would have in the House of Representatives. Washington believed the bill broke the Constitution's rules for dividing seats. So he sent it back to Congress unsigned, with a letter explaining his reasons. It was the first time a president had ever rejected a law passed by Congress.</p><h4>Each Branch Can Stop the Others</h4><p>Separation of powers gave each branch its own job. But the delegates worried that one branch might still grow too strong and take over the others. So they gave each branch ways to limit, or check, the other two. This system is called <strong>checks and balances</strong>. Madison explained the idea in an essay in 1788. \"Ambition must be made to counteract ambition,\" he wrote. Each branch would guard its own power and keep the others from taking too much.</p><h4>The President Checks Congress</h4><p>When Washington sent the bill back, he used a <strong>veto</strong>, a president's power to reject a bill passed by Congress. <em>Veto</em> is Latin for \"I forbid.\" A veto does not have to be final. Congress can still pass the bill into law if two-thirds of the members in both the House and the Senate vote for it again. Overriding a veto is hard, so it does not happen often. Congress did not override a president's veto until 1845, more than fifty years after Washington's first one.</p><h4>Congress Checks the President and the Courts</h4><p>Congress has several checks of its own. The president chooses judges for the federal courts, but the Senate must vote to approve them. The president makes treaties with other countries, but two-thirds of the Senate must approve each one. Only Congress can spend money, so a president cannot carry out a plan that Congress will not pay for.</p><p>Congress can also remove a president or a federal judge who commits serious crimes. First, the House votes on <strong>impeachment</strong>, a formal accusation against the official. Then the Senate holds a trial. If two-thirds of the senators vote guilty, the official is removed from office. Being impeached does not mean being removed. Andrew Johnson was impeached in 1868, and the Senate fell one vote short of removing him. No president has ever been removed by the Senate.</p><h4>The Courts Check the Other Two</h4><p>The last check came from a court case, not from the delegates. In 1803, in a case called <em>Marbury v. Madison</em>, Chief Justice John Marshall ruled that part of a law passed by Congress broke the Constitution. Because the Constitution is the highest law, he wrote, a law that conflicts with it cannot stand. This power to decide whether a law or an action of government follows the Constitution is called <strong>judicial review</strong>. The Constitution does not name this power, but the Supreme Court has used it ever since.</p><p>Washington's veto in 1792 worked the way the delegates had planned. Congress did not override it. Instead, Congress wrote a new bill that followed the president's objections, and Washington signed it a few days later.</p><p><strong>Why It Matters:</strong> Checks and balances appear in the news often, whenever a president vetoes a bill, the Senate votes on a judge, or a court rules on whether a law follows the Constitution.</p>"
+                            },
+                            "check": {
+                                "quickCheck": {
+                                    "question": "When did Congress first override a president's veto?",
+                                    "options": [
+                                        "1792",
+                                        "1803",
+                                        "1845",
+                                        "1868"
+                                    ],
+                                    "correct": 2,
+                                    "explanation": "Overriding takes two-thirds of both houses, so it is rare. The first override came more than fifty years after Washington's first veto."
+                                },
+                                "prompt": {
+                                    "label": "Tell Mr. B",
+                                    "question": "How did Washington's 1792 veto end? What does that show about how checks and balances are supposed to work?"
+                                }
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "treaties-and-sovereignty",
+                "number": 4,
+                "title": "Treaties and Sovereignty",
+                "category": "Treaties and Sovereignty",
+                "icon": "fas fa-feather-pointed",
+                "essentialQuestions": [
+                    "What does tribal sovereignty mean, and how does the Constitution recognize it?",
+                    "Why are treaties part of the supreme law of the land?",
+                    "How did the Treaty of Greenville change who controlled the Ohio Country?"
+                ],
+                "sections": [
+                    {
+                        "id": "nations-within-a-nation",
+                        "heading": "Nations Within a Nation",
+                        "vocabTerms": [
+                            "time immemorial",
+                            "sovereignty",
+                            "Commerce Clause"
+                        ],
+                        "content": {
+                            "standard": "<p>In the summer of 1790, more than two dozen Muscogee (Creek) leaders traveled to New York City, then the nation's capital. Their leader, Alexander McGillivray, had come to make a treaty with President George Washington.</p><h4>Nations Before the United States</h4><p>Native nations governed themselves long before Europeans arrived. Many tribes in Washington state say their history on this land reaches back to <strong>time immemorial</strong>. That phrase means a time so long ago that no one can remember or measure it. The power of a nation to govern itself is called <strong>sovereignty</strong>. The United States dealt with Native nations as sovereign nations and made treaties with them.</p><h4>What the Constitution Changed</h4><p>Article I, Section 8, gives Congress the power to regulate trade \"with foreign Nations, and among the several States, and with the Indian Tribes.\" This is part of the <strong>Commerce Clause</strong>. By naming tribes next to foreign nations and states, the Constitution treated them as governments of their own. In August 1790, McGillivray and Washington signed the Treaty of New York, and the Senate approved it.</p>"
+                        },
+                        "keyIdea": "Tribal sovereignty did not end when the United States formed. Washington state has 29 federally recognized tribes, each with its own government, laws and courts.",
+                        "readMore": {
+                            "content": {
+                                "standard": "<p>In the summer of 1790, more than two dozen Muscogee (Creek) leaders traveled hundreds of miles from present-day Georgia and Alabama to New York City. It was then the nation's capital. Their leader, Alexander McGillivray, had come to make a treaty with President George Washington. The Creek Nation and the state of Georgia had been fighting over land for years. McGillivray wanted the national government, not Georgia, to settle the matter.</p><h4>Nations Before the United States</h4><p>Native nations governed themselves long before Europeans arrived. They had their own leaders, laws and ways of making decisions. Many tribes in Washington state say their history on this land reaches back to <strong>time immemorial</strong>. That phrase means a time so long ago that no one can remember or measure it.</p><p>The power of a nation to govern itself is called <strong>sovereignty</strong>. European countries, and later the United States, dealt with Native nations as sovereign nations. They made treaties with them, the same kind of formal agreements they made with France or Spain.</p><h4>A Problem Under the Articles</h4><p>The Articles of Confederation gave Congress the power to deal with Native nations. But the Articles also said that this power could not interfere with a state's rights inside its own borders. No one agreed on what that meant. Georgia and New York made their own deals for Native land without Congress. In the 1780s, Georgia signed land treaties with a few Creek leaders. Most of the Creek Nation, led by McGillivray, said those leaders had no right to sign away land that belonged to all of them. Fighting broke out along Georgia's frontier.</p><h4>What the Constitution Changed</h4><p>The Constitution gave the national government clear control over relations with Native nations. Article I, Section 8, gives Congress the power \"to regulate Commerce with foreign Nations, and among the several States, and with the Indian Tribes.\" This is called the <strong>Commerce Clause</strong>. Commerce means trade and business. By naming tribes next to foreign nations and states, the Constitution treated them as governments of their own.</p><p>President Washington's secretary of war, Henry Knox, was in charge of relations with Native nations. Knox argued that the United States should buy Native land only through treaties that the tribes agreed to, not take it by force. In 1790, Congress passed a law saying that no one could buy land from a Native nation without the approval of the national government.</p><p>That August, McGillivray and Washington signed the Treaty of New York. The Creek Nation gave up some of the land Georgia claimed. In return, the United States promised to protect the rest of the Creek Nation's land. The Senate approved the treaty, as the Constitution required.</p><p><strong>Why It Matters:</strong> Since 2015, Washington law has required public schools to teach about tribal sovereignty and the history of the tribes in the state.</p>"
+                            },
+                            "check": {
+                                "quickCheck": {
+                                    "question": "What problem did the Articles of Confederation cause in dealing with Native nations?",
+                                    "options": [
+                                        "Congress was not allowed to meet with any tribe.",
+                                        "States such as Georgia made their own land deals without Congress.",
+                                        "Tribes had to send delegates to Congress.",
+                                        "Only the president could make treaties."
+                                    ],
+                                    "correct": 1,
+                                    "explanation": "The Articles left it unclear who was in charge, and Georgia's deals led to fighting with the Creek Nation."
+                                },
+                                "prompt": {
+                                    "label": "Tell Mr. B",
+                                    "question": "Henry Knox argued that the United States should buy Native land only through treaties the tribes agreed to. Why might that rule protect both Native nations and the United States?"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "id": "the-supreme-law-of-the-land",
+                        "heading": "The Supreme Law of the Land",
+                        "vocabTerms": [
+                            "treaty",
+                            "reservation",
+                            "Supremacy Clause"
+                        ],
+                        "content": {
+                            "standard": "<p>In December 1945, a 14-year-old Nisqually boy named Billy Frank Jr. was arrested for fishing for salmon on the Nisqually River, near Olympia. He and his family believed a treaty gave the Nisqually people the right to fish there.</p><h4>Treaties and Reservations</h4><p>A <strong>treaty</strong> is a formal agreement between nations. The president makes treaties, and two-thirds of the Senate must approve them. In treaties, many tribes gave up land to the United States but kept part of it for themselves. That land is called a <strong>reservation</strong>, because the tribes reserved, or held on to, it. In 1854 and 1855, tribes around Puget Sound signed treaties that promised they could keep fishing in their usual places.</p><h4>The Supremacy Clause</h4><p>Washington later passed its own fishing laws, and wardens arrested tribal fishers. But Article VI of the Constitution says treaties are \"the supreme Law of the Land.\" This rule is the <strong>Supremacy Clause</strong>. When a state law conflicts with a treaty, the treaty wins. In 1974, Judge George Boldt ruled that the treaty tribes had the right to up to half the salmon catch. In 1979, the U.S. Supreme Court agreed.</p>"
+                        },
+                        "readMore": {
+                            "content": {
+                                "standard": "<p>In December 1945, a 14-year-old Nisqually boy named Billy Frank Jr. was fishing for salmon on the Nisqually River, near what is now Olympia, Washington. State game wardens arrested him. Washington's laws limited where, when and how people could fish. Frank and his family believed that a treaty signed ninety years earlier gave the Nisqually people the right to fish there. Over the next thirty years, he was arrested more than fifty times as he fought to prove it.</p><h4>How Treaties Are Made</h4><p>A <strong>treaty</strong> is a formal agreement between two or more nations. Under the Constitution, the president makes treaties, and two-thirds of the Senate must approve them. Between 1778 and 1871, the United States made about 370 treaties with Native nations. In most of them, tribes gave up some of their land. In return, the United States promised to protect the land the tribes kept, along with other rights such as hunting and fishing.</p><p>The land a tribe kept for itself in a treaty is called a <strong>reservation</strong>. The word is often misunderstood. The United States did not give reservations to tribes. The tribes reserved, or held on to, that land from the much larger territory they gave up.</p><h4>Treaties in Washington</h4><p>In 1854 and 1855, Isaac Stevens, the governor of Washington Territory, made treaties with many of the tribes around Puget Sound and beyond. In the Treaty of Medicine Creek, the Nisqually and nearby tribes gave up most of their land. The 1855 Treaty of Point Elliott did the same for tribes from the Duwamish to the Snohomish, near today's Seattle and Everett. These treaties promised that tribes could keep fishing \"at all usual and accustomed grounds and stations.\" For the tribes, salmon were food, trade and a center of their culture, so this promise was one of the most important parts of the deal.</p><h4>The Supremacy Clause</h4><p>As Washington's cities and fishing industry grew, the state passed its own fishing laws. Wardens arrested tribal members who fished in their usual places. The tribes argued that the state was breaking promises made in treaties.</p><p>The Constitution answers what happens when a state law and a treaty conflict. Article VI says that the Constitution, the laws of the United States, and all treaties made by the United States are \"the supreme Law of the Land.\" This rule is called the <strong>Supremacy Clause</strong>. When a state law conflicts with a treaty, the treaty wins, and every judge in every state must follow it.</p><p>In the 1960s, Billy Frank Jr. and other tribal members held \"fish-ins,\" fishing in protest even when they knew they would be arrested. In 1970, the United States government sued the state of Washington on the tribes' behalf. In 1974, federal judge George Boldt ruled that the treaties still held. Treaty tribes had the right to catch up to half of the salmon that could be harvested in their usual fishing places. Many fishermen and state officials fought the ruling for years. In 1979, the U.S. Supreme Court agreed with Boldt.</p><p><strong>Why It Matters:</strong> The Boldt Decision still shapes how salmon are managed in Washington. Tribes and the state now manage the fish together.</p>"
+                            },
+                            "check": {
+                                "quickCheck": {
+                                    "question": "What were the \"fish-ins\" of the 1960s?",
+                                    "options": [
+                                        "Fishing contests held by the state",
+                                        "Protests in which tribal members fished even though they knew they could be arrested",
+                                        "Meetings where tribes and the state shared fish",
+                                        "Classes that taught fishing laws"
+                                    ],
+                                    "correct": 1,
+                                    "explanation": "Billy Frank Jr. and others fished in their usual places to protest the state's laws, and many were arrested."
+                                },
+                                "prompt": {
+                                    "label": "Tell Mr. B",
+                                    "question": "Billy Frank Jr. was arrested more than fifty times. Why do you think he kept fishing? Use evidence from the reading about what the treaties promised."
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "id": "the-treaty-of-greenville",
+                        "heading": "The Treaty of Greenville",
+                        "vocabTerms": [
+                            "cede",
+                            "boundary",
+                            "guarantee"
+                        ],
+                        "content": {
+                            "standard": "<p>In the summer of 1795, more than a thousand Native people from twelve nations gathered at Fort Greenville, in what is now western Ohio. They came to make a treaty with General Anthony Wayne.</p><h4>War in the Ohio Country</h4><p>American settlers had been moving onto Native land north of the Ohio River. Many nations joined together to stop them. Led by Little Turtle of the Miami and Blue Jacket of the Shawnee, they defeated two American armies in 1790 and 1791. In 1794, Wayne's army defeated them at the Battle of Fallen Timbers.</p><h4>The Greenville Line</h4><p>In the Treaty of Greenville, the Native nations agreed to <strong>cede</strong>, or give up, most of what is now Ohio. The treaty drew a <strong>boundary</strong>, a line marking the edge of a territory. The United States made a <strong>guarantee</strong>, a formal promise, that the nations could live on their land north of the line for as long as they wanted. It also promised them goods every year.</p>"
+                        },
+                        "image": {
+                            "src": "../units/building-a-government/images/greenville-treaty-line.png",
+                            "caption": "The Treaty of Greenville divided the Ohio Country along this line. Land south and east of it went to the United States.",
+                            "credit": "Map: Mr. B, from Natural Earth data"
+                        },
+                        "readMore": {
+                            "content": {
+                                "standard": "<p>In the summer of 1795, more than a thousand Native people gathered at Fort Greenville, a U.S. Army post in what is now western Ohio. They came from twelve nations, including the Miami, Shawnee, Delaware, Wyandot and Potawatomi. For weeks, their leaders met with General Anthony Wayne. A year earlier, Wayne's army had defeated their warriors in battle. Now the two sides were writing a treaty that would decide who controlled the Ohio Country.</p><h4>A Promise and a War</h4><p>The Northwest Ordinance of 1787 had promised that Native lands would never be taken without the nations' consent. But the United States was deeply in debt, and Congress planned to pay it partly by selling land in the Northwest Territory to settlers. American settlers were already crossing the Ohio River. In 1788, a group from New England founded the town of Marietta.</p><p>Many Native nations in the region joined together to stop them. They became known as the Western Confederacy. Two of their war leaders were Little Turtle of the Miami and Blue Jacket of the Shawnee. In 1790, they defeated an American army sent to attack their towns. In November 1791, they defeated a second, larger army under General Arthur St. Clair. More than 600 American soldiers were killed in a single morning. It was one of the worst defeats the U.S. Army has ever suffered.</p><h4>Fallen Timbers</h4><p>President Washington and Congress responded by building a larger and better-trained army and placing Wayne in command. On August 20, 1794, Wayne's soldiers attacked the confederacy's warriors at a place where a storm had knocked down many trees, near present-day Toledo, Ohio. The battle became known as Fallen Timbers. It lasted about an hour. The warriors retreated to a nearby British fort and expected help, but the British commander kept the gates closed. Wayne's army then burned Native towns and cornfields along the river.</p><h4>The Greenville Line</h4><p>The Treaty of Greenville was signed on August 3, 1795. In it, the Native nations agreed to <strong>cede</strong>, or give up, most of what is now Ohio and part of Indiana. The treaty drew a <strong>boundary</strong>, a line marking the edge of a territory, across Ohio. Land south and east of the line went to the United States. In return, the United States paid the nations $20,000 in goods and promised them $9,500 more in goods every year.</p><p>The treaty also made a <strong>guarantee</strong>, a formal promise. On their side of the line, the nations could live, hunt and plant \"so long as they please, without any molestation from the United States.\" <em>Molestation</em> here means interference. If the nations ever chose to sell that land, they could sell it only to the United States.</p><p>Little Turtle and Blue Jacket both signed. Settlers poured into the land south of the line, and Ohio became a state in 1803. Six years later, in 1809, the United States made another treaty that took about 3 million more acres north of the Ohio River. That same year, the Shawnee leader Tecumseh began building a new alliance of nations to stop the loss of their land.</p><p><strong>Why It Matters:</strong> The Greenville line opened Ohio to American settlement. The fight over the land north of it led to Tecumseh's resistance and to the War of 1812.</p>"
+                            },
+                            "check": {
+                                "quickCheck": {
+                                    "question": "After the Battle of Fallen Timbers, why could the Native warriors not take shelter at the nearby British fort?",
+                                    "options": [
+                                        "The fort had been destroyed.",
+                                        "The British commander kept the gates closed.",
+                                        "Wayne's army surrounded it first.",
+                                        "The fort was too far away."
+                                    ],
+                                    "correct": 1,
+                                    "explanation": "The warriors expected British help, but it never came. Wayne's army then burned Native towns and cornfields."
+                                },
+                                "prompt": {
+                                    "label": "Tell Mr. B",
+                                    "question": "Compare the treaty's guarantee with what happened by 1809. Did the United States keep its promise? Use evidence from the reading."
+                                }
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "ratification-and-rights",
+                "number": 5,
+                "title": "Ratification and Rights",
+                "category": "Ratification and Rights",
+                "icon": "fas fa-file-signature",
+                "essentialQuestions": [
+                    "Why did the Anti-Federalists demand a bill of rights?",
+                    "How can the Constitution be changed?",
+                    "How have amendments widened who is included in \"We the People\"?"
+                ],
+                "sections": [
+                    {
+                        "id": "the-great-debate",
+                        "heading": "The Great Debate",
+                        "vocabTerms": [
+                            "ratify",
+                            "Federalist",
+                            "Anti-Federalist"
+                        ],
+                        "content": {
+                            "standard": "<p>On September 12, 1787, George Mason of Virginia asked the delegates to add a list of rights to the Constitution. They voted no. Five days later, Mason refused to sign.</p><h4>Nine States Needed</h4><p>The Constitution was only a proposal until the states agreed to it. To <strong>ratify</strong> means to formally approve. Article VII said the Constitution would take effect once nine of the thirteen states ratified it. People who supported the Constitution called themselves <strong>Federalists</strong>. People who opposed it were called <strong>Anti-Federalists</strong>.</p><h4>Two Sides</h4><p>The Federalists argued that only a stronger national government could fix the country's problems. Alexander Hamilton, James Madison and John Jay wrote 85 newspaper essays defending the Constitution, later collected as <em>The Federalist Papers</em>. The Anti-Federalists feared the new government was too strong and could take away people's rights. Their biggest complaint was that the Constitution had no list of rights.</p><p>On June 21, 1788, New Hampshire became the ninth state to ratify, and the Constitution became law. George Washington became the first president in 1789.</p>"
+                        },
+                        "keyIdea": "The Anti-Federalists were not against having a national government. They wanted the states to keep more power and wanted rights written down.",
+                        "image": {
+                            "src": "../units/building-a-government/images/the-federalist-1788.jpg",
+                            "caption": "The first book edition of The Federalist, printed in New York in 1788. Elizabeth Hamilton, Alexander Hamilton’s wife, gave this copy to her sister, and it later belonged to Thomas Jefferson.",
+                            "credit": "Library of Congress",
+                            "float": "right"
+                        },
+                        "readMore": {
+                            "content": {
+                                "standard": "<p>On September 12, 1787, with the Constitution almost finished, George Mason of Virginia rose to make one more proposal. Eleven years earlier, Mason had written Virginia's Declaration of Rights, a list of freedoms the state government could not take away. Now he asked the delegates to add a similar list to the Constitution. After nearly four months of work, the delegates voted no. Not a single state supported the idea. Five days later, Mason refused to sign the Constitution.</p><h4>Nine States Needed</h4><p>Mason was one of three delegates still in the room who would not sign. Edmund Randolph of Virginia and Elbridge Gerry of Massachusetts also refused. The other 39 signed. But the Constitution was only a proposal until the states agreed to it. To <strong>ratify</strong> means to formally approve. Article VII said the Constitution would go into effect once special conventions in nine of the thirteen states ratified it. Voters in each state would elect delegates to those conventions.</p><p>Newspapers printed the Constitution within days, and Americans began arguing about it everywhere, in taverns, churches and town meetings. The people who supported the Constitution called themselves <strong>Federalists</strong>. The people who opposed it became known as <strong>Anti-Federalists</strong>.</p><h4>The Federalists</h4><p>The Federalists argued that the Articles had nearly ruined the country, and that a stronger national government was the only fix. In New York, where the fight was close, Alexander Hamilton, James Madison and John Jay wrote 85 newspaper essays defending the Constitution. They signed them all with the same made-up name, Publius, after a hero of ancient Rome. The essays, later collected as <strong>The Federalist Papers</strong>, explained how separation of powers and checks and balances would keep the new government from abusing its power.</p><h4>The Anti-Federalists</h4><p>The Anti-Federalists were not against having a national government. They feared that this one was too strong. They worried that the president could become like a king, that Congress would tax the people heavily, and that the national courts would overpower the state courts. Mason wrote a list of his objections. The first one read, \"There is no Declaration of Rights.\" Patrick Henry of Virginia and Mercy Otis Warren of Massachusetts, who wrote under the name \"A Columbian Patriot,\" made the same argument. Without a written list of rights, they said, nothing would stop the government from taking those rights away.</p><h4>The Race to Nine</h4><p>Delaware ratified first, on December 7, 1787, with every delegate voting yes. Pennsylvania, New Jersey, Georgia and Connecticut soon followed. Massachusetts was harder. Many of its delegates were farmers who remembered Shays' Rebellion and distrusted distant governments. The Federalists won them over by promising to push for a bill of rights after the Constitution took effect. Massachusetts ratified by a vote of 187 to 168. Other states used the same promise.</p><p>On June 21, 1788, New Hampshire became the ninth state to ratify, and the Constitution became law. But the new government could hardly work without Virginia and New York, two of the largest states. Virginia ratified four days later, by ten votes, and New York ratified in July by three. George Washington took the oath as the first president on April 30, 1789. Rhode Island, which had refused to send delegates to Philadelphia, ratified last, on May 29, 1790, by just two votes.</p><p><strong>Why It Matters:</strong> The Federalists' promise to add a bill of rights helped win ratification in several close states. Keeping that promise became one of the first jobs of the new Congress.</p>"
+                            },
+                            "check": {
+                                "quickCheck": {
+                                    "question": "How did the Federalists win the vote in Massachusetts?",
+                                    "options": [
+                                        "They offered the state more seats in Congress.",
+                                        "They promised to push for a bill of rights after the Constitution took effect.",
+                                        "They agreed to move the capital to Boston.",
+                                        "They threatened to leave Massachusetts out of the union."
+                                    ],
+                                    "correct": 1,
+                                    "explanation": "Massachusetts ratified 187 to 168, and other close states used the same promise."
+                                },
+                                "prompt": {
+                                    "label": "Tell Mr. B",
+                                    "question": "Which Anti-Federalist worry do you think was most reasonable? Use evidence from the reading."
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "id": "changing-the-constitution",
+                        "heading": "Changing the Constitution",
+                        "vocabTerms": [
+                            "amendment",
+                            "proposal"
+                        ],
+                        "content": {
+                            "standard": "<p>In 1982, a college student named Gregory Watson wrote a paper about an amendment James Madison had proposed in 1789. It said a pay raise Congress voted for itself could not start until after the next election. His teacher gave the paper a C.</p><h4>Two Steps</h4><p>A change to the Constitution is called an <strong>amendment</strong>. The framers made changes possible but not easy. Article V describes two steps. First comes a <strong>proposal</strong>, a formal suggestion for a change. Usually two-thirds of both the House and the Senate must vote for it. Second, three-fourths of the states must ratify it. Today that means 38 of the 50 states.</p><h4>Twenty-Seven Amendments</h4><p>More than 11,000 amendments have been proposed since 1789, and only 27 have been ratified. Amendments are added at the end of the Constitution. They do not erase the original words. Watson wrote letters to state lawmakers for ten years. In 1992, Madison's amendment became the Twenty-seventh.</p>"
+                        },
+                        "image": {
+                            "src": "../units/building-a-government/images/amending-the-constitution.png",
+                            "caption": "Article V sets out two steps for changing the Constitution: proposing an amendment and ratifying it.",
+                            "credit": "Diagram: Mr. B"
+                        },
+                        "readMore": {
+                            "content": {
+                                "standard": "<p>In 1982, Gregory Watson, a 19-year-old student at the University of Texas, was looking for a topic for a government paper. In a library book he found an amendment that James Madison had proposed in 1789. It said that when Congress voted itself a pay raise, the raise could not start until after the next election. Only a few states had ever approved it, but it had no deadline. Watson argued in his paper that it could still be added to the Constitution. His teacher gave him a C.</p><h4>Why the Framers Allowed Change</h4><p>The delegates in Philadelphia knew their plan was not perfect. They had seen what happened under the Articles of Confederation, when a single state could block any change. So they made it possible to change the Constitution, but not easy. A change to the Constitution is called an <strong>amendment</strong>.</p><p>Article V describes two steps. First, an amendment must be proposed. A <strong>proposal</strong> is a formal suggestion for a change. Two-thirds of the members of both the House and the Senate can propose an amendment. Two-thirds of the state legislatures can also ask Congress to call a national convention to propose one, but that has never happened.</p><p>Second, three-fourths of the states must ratify the amendment. With 50 states today, that means 38 states must say yes. Under the Articles, one state could stop a change. Under the Constitution, it takes 13 states saying no.</p><h4>Twenty-Seven Amendments</h4><p>Members of Congress have proposed more than 11,000 amendments since 1789. Only 27 have been ratified. The first ten, the Bill of Rights, were added together in 1791. The others came one at a time over more than two hundred years.</p><p>An amendment does not erase words from the original Constitution. It is added at the end, and it can change or cancel an earlier rule. In 1919, the Eighteenth Amendment banned the sale of alcohol. The ban did not work as planned, and in 1933 the Twenty-first Amendment repealed, or canceled, it. Both amendments are still printed in the Constitution today.</p><h4>A Student's Campaign</h4><p>After getting his grade, Watson began writing letters to state lawmakers across the country. He asked them to ratify Madison's old amendment, and one state after another did. On May 7, 1992, Michigan became the 38th state to approve it. More than 202 years after Madison proposed it, it became the Twenty-seventh Amendment. In 2017, the University of Texas changed Watson's grade to an A.</p><p><strong>Why It Matters:</strong> Americans still propose amendments every year. Any change to the Constitution must pass through the same two steps written in Article V.</p>"
+                            },
+                            "check": {
+                                "quickCheck": {
+                                    "question": "Which amendment repealed, or canceled, the Eighteenth Amendment's ban on selling alcohol?",
+                                    "options": [
+                                        "The Nineteenth",
+                                        "The Twentieth",
+                                        "The Twenty-first",
+                                        "The Twenty-seventh"
+                                    ],
+                                    "correct": 2,
+                                    "explanation": "The ban began in 1919 and ended in 1933. Both amendments are still printed in the Constitution."
+                                },
+                                "prompt": {
+                                    "label": "Tell Mr. B",
+                                    "question": "Under the Articles, one state could block a change. Under the Constitution, it takes 13 states saying no. Is that the right balance? Explain."
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "id": "the-bill-of-rights",
+                        "heading": "The Bill of Rights",
+                        "vocabTerms": [
+                            "Bill of Rights",
+                            "individual rights",
+                            "freedom of speech",
+                            "warrant",
+                            "due process"
+                        ],
+                        "content": {
+                            "standard": "<p>In December 1965, Mary Beth Tinker, a 13-year-old eighth grader in Des Moines, Iowa, wore a black armband to school to protest the Vietnam War. She was suspended. Her family argued that the school broke her right to free speech.</p><h4>Keeping a Promise</h4><p>In 1789, James Madison proposed amendments to keep the Federalists' promise. In 1791, the states ratified ten of them. These first ten amendments are the <strong>Bill of Rights</strong>. Most protect <strong>individual rights</strong>, freedoms that belong to each person.</p><h4>Rights in the Bill of Rights</h4><p>The First Amendment protects religion, <strong>freedom of speech</strong>, the press, peaceful gatherings, and the right to ask the government for change. The Fourth Amendment protects people from unreasonable searches; police usually need a <strong>warrant</strong>, a judge's written order, to search a home. The Fifth Amendment requires <strong>due process</strong>, meaning the government must follow fair rules before it punishes anyone. In 1969, the Supreme Court ruled that Tinker's armband was protected speech.</p>"
+                        },
+                        "keyIdea": "At first, the Bill of Rights limited only the national government. After the Fourteenth Amendment in 1868, the courts slowly applied most of these rights to states and public schools too.",
+                        "image": {
+                            "src": "../units/building-a-government/images/bill-of-rights.jpg",
+                            "caption": "The joint resolution Congress sent to the states in 1789. It lists twelve amendments; the states ratified the last ten, which became the Bill of Rights.",
+                            "credit": "National Archives",
+                            "float": "right"
+                        },
+                        "readMore": {
+                            "content": {
+                                "standard": "<p>In December 1965, Mary Beth Tinker, a 13-year-old eighth grader in Des Moines, Iowa, wore a black armband to school. She and a few other students wore the armbands to mourn the people killed in the Vietnam War and to call for a truce. The school district had banned armbands two days earlier. When Tinker refused to take hers off, she was suspended. Her family took the school district to court, arguing that the suspension broke her right to free speech. That right came from an amendment written almost two hundred years earlier.</p><h4>Keeping a Promise</h4><p>In Philadelphia, James Madison had argued that a list of rights was not needed. The Constitution gave the national government only certain powers, he said, so it had no power to take away people's rights. But during ratification, the Federalists had promised several states a bill of rights. In 1789, Madison ran for a seat in the first House of Representatives against James Monroe. Many voters in his district wanted those rights written down, and Madison promised to work for them. He won the seat.</p><p>On June 8, 1789, Madison stood up in the House and proposed a list of amendments. Congress debated them through the summer and sent twelve to the states. Ten were ratified by December 15, 1791. Together, these first ten amendments are called the <strong>Bill of Rights</strong>. Most of them protect <strong>individual rights</strong>, freedoms that belong to each person and that the government cannot take away.</p><h4>The First Amendment</h4><p>The First Amendment protects five freedoms. People may practice any religion or none, and the government may not set up an official church. People have <strong>freedom of speech</strong>, the right to say what they think without being punished by the government, and freedom of the press. They may gather peacefully in groups, and they may petition, or ask, the government to change things.</p><h4>Protections in the Law</h4><p>The Second Amendment protects the right \"to keep and bear arms,\" and Americans disagree about how far that right reaches. In 2008, the Supreme Court ruled that it protects a person's right to keep a handgun at home for self-defense. The Third Amendment says the government cannot force people to house soldiers in peacetime, as the British had done.</p><p>The Fourth Amendment protects people from unreasonable searches of their homes and belongings. In most cases, police need a <strong>warrant</strong>, a written order from a judge, before they search a home. To get one, they must show the judge a good reason to believe a crime took place.</p><p>The Fifth Amendment says no person can lose life, liberty or property \"without due process of law.\" <strong>Due process</strong> means the government must follow fair rules and procedures before it punishes anyone. A person accused of a crime cannot be forced to testify against himself or herself. The Sixth Amendment gives an accused person the right to a quick, public trial, a jury, and a lawyer. The Seventh and Eighth Amendments add jury trials in many other cases and ban \"cruel and unusual punishments.\" The Ninth and Tenth Amendments say that people keep rights not listed, and that states keep powers not given to the national government.</p><h4>The Schoolhouse Gate</h4><p>The Tinker case reached the U.S. Supreme Court. On February 24, 1969, the justices ruled 7 to 2 that the school had broken the students' First Amendment rights. The armbands were a quiet form of speech and had not disrupted classes. Students, Justice Abe Fortas wrote, do not \"shed their constitutional rights to freedom of speech or expression at the schoolhouse gate.\" The Court also said that schools can limit speech that seriously disrupts learning.</p><p><strong>Why It Matters:</strong> Every one of these rights has limits, and courts still decide where those limits fall. Cases about speech, searches and fair trials reach the Supreme Court every year.</p>"
+                            },
+                            "check": {
+                                "quickCheck": {
+                                    "question": "In the Tinker case, what kind of student speech did the Supreme Court say schools CAN limit?",
+                                    "options": [
+                                        "Any speech about politics",
+                                        "Any speech the principal disagrees with",
+                                        "Speech that seriously disrupts learning",
+                                        "Speech outside of school"
+                                    ],
+                                    "correct": 2,
+                                    "explanation": "The armbands were quiet and did not disrupt classes, so they were protected."
+                                },
+                                "prompt": {
+                                    "label": "Tell Mr. B",
+                                    "question": "Madison first argued that a list of rights was not needed. What changed his mind? Use evidence from the reading."
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "id": "widening-we-the-people",
+                        "heading": "Widening \"We the People\"",
+                        "vocabTerms": [
+                            "amendment"
+                        ],
+                        "content": {
+                            "standard": "<p>On November 5, 1872, Susan B. Anthony voted for president in Rochester, New York. Two weeks later, she was arrested, because women were not allowed to vote.</p><h4>After the Civil War</h4><p>Three <strong>amendments</strong> followed the Civil War. The Thirteenth (1865) ended slavery. The Fourteenth (1868) made everyone born in the United States a citizen and promised equal protection of the laws. The Fifteenth (1870) said no one could be denied the vote because of race. Many states later found ways around it, and most Black Southerners could not vote again until the Voting Rights Act of 1965.</p><h4>More Voters</h4><p>In 1920, the Nineteenth Amendment gave women the right to vote. Washington women had won that right in 1910. In 1971, the Twenty-sixth Amendment lowered the voting age to 18. Many people had argued that anyone old enough to be drafted to fight was old enough to vote.</p>"
+                        },
+                        "keyIdea": "None of these amendments changed the words \"We the People.\" They changed who the Constitution protects.",
+                        "image": {
+                            "src": "../units/building-a-government/images/ratification-banner-1920.jpg",
+                            "caption": "Alice Paul of the National Woman’s Party raises a banner in Washington, D.C., after Tennessee ratified the Nineteenth Amendment in August 1920. Each star stands for a state that ratified.",
+                            "credit": "Library of Congress",
+                            "float": "right"
+                        },
+                        "readMore": {
+                            "content": {
+                                "standard": "<p>On November 5, 1872, Susan B. Anthony walked into a polling place in Rochester, New York, and voted for president. Two weeks later, a federal marshal came to her house and arrested her. Women were not allowed to vote in New York. Anthony argued that a recent amendment had made women citizens, and that citizens had the right to vote. A judge found her guilty and fined her $100. She never paid it.</p><h4>Amendments After the Civil War</h4><p>The amendment Anthony pointed to was one of three added after the Civil War. The Thirteenth Amendment, ratified in 1865, ended slavery in the United States. The Fourteenth Amendment, ratified in 1868, said that every person born in the United States is a citizen. It required states to give every person \"the equal protection of the laws.\" It also ended the Three-Fifths Compromise, so that formerly enslaved people would now be counted fully when seats in the House were divided.</p><p>The Fifteenth Amendment, ratified in 1870, said that no state could deny a citizen the right to vote because of race. For the first time, Black men across the country could vote, and hundreds were elected to state and national offices. But within a few decades, many states, especially in the South, found ways around the amendment. They charged poll taxes, a fee to vote, and gave unfair reading tests. White mobs used threats and violence to keep Black citizens from the polls. Most Black Southerners could not vote again until Congress passed the Voting Rights Act in 1965.</p><h4>Native Americans and the Vote</h4><p>The Fourteenth Amendment's promise of citizenship did not include most Native Americans, who were treated as members of separate nations. In 1924, Congress passed a law making all Native Americans born in the United States citizens. Even then, some states kept Native Americans from voting. Arizona and New Mexico did not allow them to vote until 1948.</p><h4>Votes for Women</h4><p>Anthony died in 1906 without ever voting legally. Other women kept up the fight state by state. In 1910, men in Washington state voted to give women the right to vote, years before most of the country. In 1919, Congress proposed the Nineteenth Amendment. It said the right to vote \"shall not be denied or abridged by the United States or by any State on account of sex.\" <em>Abridged</em> means limited or cut short.</p><p>Thirty-six states had to ratify it. In August 1920, the last vote came down to Tennessee. A 24-year-old lawmaker named Harry Burn had planned to vote no. That morning, he read a letter from his mother asking him to vote yes. He did, and on August 18, 1920, Tennessee became the 36th state to ratify.</p><h4>Younger Voters</h4><p>During the Vietnam War, the government drafted young men at 18 to fight, but in most states a person had to be 21 to vote. Many Americans argued that anyone old enough to fight was old enough to vote. In 1964, the Twenty-fourth Amendment had already banned poll taxes in national elections. In 1971, the Twenty-sixth Amendment lowered the voting age to 18 across the country. The states ratified it in about one hundred days, faster than any other amendment.</p><p><strong>Why It Matters:</strong> Today, every citizen 18 or older has the right to vote, whatever their race or sex. Each part of that right was won through an amendment or a law passed long after 1787.</p>"
+                            },
+                            "check": {
+                                "quickCheck": {
+                                    "question": "What helped convince Harry Burn to cast the deciding vote for the Nineteenth Amendment in Tennessee?",
+                                    "options": [
+                                        "A speech by the president",
+                                        "A letter from his mother",
+                                        "A newspaper poll",
+                                        "A promise of a new job"
+                                    ],
+                                    "correct": 1,
+                                    "explanation": "Burn had planned to vote no. His vote made Tennessee the 36th state to ratify on August 18, 1920."
+                                },
+                                "prompt": {
+                                    "label": "Tell Mr. B",
+                                    "question": "Native Americans became citizens by law in 1924, but some states did not let them vote until 1948. What does this show about the difference between having a right on paper and being able to use it?"
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}

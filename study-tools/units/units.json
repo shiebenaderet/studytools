@@ -11,6 +11,16 @@
             "opens": "2026-10-04"
         },
         {
+            "id": "building-a-government",
+            "title": "Building a Government Study Tool",
+            "subtitle": "Who should have the power to decide? Learn the vocabulary, follow the delegates through Philadelphia, and see how the Constitution still shapes your life.",
+            "theme": {
+                "primary": "#1B2D45"
+            },
+            "activityCount": 20,
+            "opens": "2026-11-13"
+        },
+        {
             "id": "civil-war",
             "title": "The Civil War Study Tool",
             "subtitle": "Get ready to ace your test! Learn vocabulary, practice questions, and track your progress.",
