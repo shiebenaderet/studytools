@@ -68,6 +68,10 @@ var ReadAloud = (function () {
             var b = blocks[i];
             var parentBlock = b.parentElement && b.parentElement.closest('.tb-content p, .tb-content li, .tb-content blockquote');
             if (parentBlock && el.contains(parentBlock)) continue;
+            // A closed or separate Read More panel is not part of the section's
+            // reading; it has its own Listen control.
+            var rmBody = b.closest('.tb-readmore-body');
+            if (rmBody && !(rmBody === el || rmBody.contains(el))) continue;
             var text = b.textContent;
             var sents = split(text);
             for (var s = 0; s < sents.length; s++) {

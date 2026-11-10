@@ -6053,6 +6053,23 @@ a.sift-detail-link:hover { opacity: 0.8; }
 }
 .tb-callout-text { font-size: 0.95em; line-height: 1.6; color: var(--text-primary); }
 
+/* Read More panel (textbook) */
+.tb-readmore { margin: 22px 0; border: 1px solid var(--border-color, rgba(148,163,184,0.35)); border-radius: var(--radius-md); overflow: hidden; }
+.tb-readmore-toggle {
+    width: 100%; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    padding: 14px 16px; background: transparent; border: 0; cursor: pointer;
+    color: var(--text-primary); font: inherit; text-align: left;
+}
+.tb-readmore-toggle:hover, .tb-readmore-toggle:focus-visible { background: rgba(148,163,184,0.10); }
+.tb-readmore-toggle .fa-book-open { color: var(--primary-text, var(--primary)); }
+.tb-readmore-label { font-weight: 700; }
+.tb-readmore-meta { color: var(--text-secondary); font-size: 0.9em; }
+.tb-readmore-caret { margin-left: auto; transition: transform 0.2s; color: var(--text-secondary); }
+.tb-readmore.open .tb-readmore-caret { transform: rotate(180deg); }
+.tb-readmore-body { padding: 4px 18px 18px; border-top: 1px solid var(--border-color, rgba(148,163,184,0.35)); }
+.tb-readmore-note { font-size: 0.85em; color: var(--text-secondary); margin: 8px 0; }
+@media (prefers-reduced-motion: reduce) { .tb-readmore-caret { transition: none; } }
+
 /* Key Idea */
 .tb-callout-key {
     background: rgba(251, 191, 36, 0.08); border-color: var(--accent);

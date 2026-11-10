@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.48] - 2026-11-09
+
+### Added
+- Textbook: optional **Read More** panels. A section's `readMore.content` holds a longer version that opens under the short text and never counts toward the reading gate. Listen and the highlighter switch to whichever text is open, Read More highlights are saved under their own key, and a student reading at a level with no Read More version sees the Full text with a note saying so. Which panels a student opened syncs across devices. Requested by the teacher for Unit 3.
+
 ## [8.55.47] - 2026-11-09
 
 ### Security

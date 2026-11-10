@@ -662,6 +662,10 @@ StudyEngine.registerActivity({
             this._renderQuickCheck(readingArea, section, seg.id);
         }
 
+        // Read More: the longer version of the section, closed by default.
+        // It never counts toward the reading gate.
+        if (section.readMore) this._renderReadMore(readingArea, seg, section, listenHost, contentDiv);
+
         if (window.ReadAloud) ReadAloud.attach(listenHost, readingArea);
 
         // Mark as Read button
@@ -761,9 +765,13 @@ StudyEngine.registerActivity({
     },
 
     _renderQuickCheck(parent, section, segId) {
+        this._renderQuickCheckBox(parent, section.checkIn, segId + '/' + section.id);
+    },
+
+    // One multiple-choice Quick Check, saved in quickChecks under checkKey.
+    // onAnswer(index) runs after a first answer is saved (Read More uses it).
+    _renderQuickCheckBox(parent, checkIn, checkKey, onAnswer) {
         var self = this;
-        var checkIn = section.checkIn;
-        var checkKey = segId + '/' + section.id;
         var savedAnswer = this._progress.quickChecks[checkKey];
 
         var qcBox = document.createElement('div');
@@ -798,7 +806,9 @@ StudyEngine.registerActivity({
             optBtn.addEventListener('click', function() {
                 if (savedAnswer !== undefined) return;
                 self._progress.quickChecks[checkKey] = oi;
+                savedAnswer = oi;
                 self._saveProgress();
+                if (onAnswer) onAnswer(oi);
 
                 // Disable all and show result
                 optionsDiv.querySelectorAll('.tb-qc-option').forEach(function(b, bi) {
@@ -836,6 +846,114 @@ StudyEngine.registerActivity({
 
         parent.appendChild(qcBox);
     },
+
+    // Read More panel. Listen and the highlighter follow whichever text is
+    // open: opening the panel moves them onto the longer text (highlights
+    // keyed seg/section/readMore/level, so offsets never mix with the short
+    // text), and closing it moves them back.
+    _renderReadMore(parent, seg, section, mainListenHost, mainContentDiv) {
+        var self = this;
+        var rm = section.readMore;
+        var content = rm.content || {};
+        var level = content[this._readingLevel] ? this._readingLevel : (content.standard ? 'standard' : Object.keys(content)[0]);
+        var raw = typeof rm.content === 'string' ? rm.content : (content[level] || '');
+        if (!raw) return;
+
+        var box = document.createElement('div');
+        box.className = 'tb-readmore';
+
+        var plain = raw.replace(/<[^>]+>/g, ' ');
+        var words = plain.split(/\s+/).filter(Boolean).length;
+        var minutes = Math.max(1, Math.round(words / 150));
+
+        var toggle = document.createElement('button');
+        toggle.type = 'button';
+        toggle.className = 'tb-readmore-toggle';
+        toggle.setAttribute('aria-expanded', 'false');
+        var tIcon = document.createElement('i');
+        tIcon.className = 'fas fa-book-open';
+        toggle.appendChild(tIcon);
+        var tLabel = document.createElement('span');
+        tLabel.className = 'tb-readmore-label';
+        tLabel.textContent = ' Read More';
+        toggle.appendChild(tLabel);
+        var tMeta = document.createElement('span');
+        tMeta.className = 'tb-readmore-meta';
+        tMeta.textContent = 'The full story, about ' + minutes + ' min';
+        toggle.appendChild(tMeta);
+        var tCaret = document.createElement('i');
+        tCaret.className = 'fas fa-chevron-down tb-readmore-caret';
+        toggle.appendChild(tCaret);
+        box.appendChild(toggle);
+
+        var body = document.createElement('div');
+        body.className = 'tb-readmore-body';
+        body.hidden = true;
+
+        var rmListen = document.createElement('div');
+        rmListen.className = 'tb-listen';
+        body.appendChild(rmListen);
+
+        if (level !== this._readingLevel) {
+            var lvl = (this._LEVELS || []).filter(function(l) { return l.id === level; })[0];
+            var note = document.createElement('div');
+            note.className = 'tb-readmore-note';
+            note.textContent = 'Read More is written at the ' + (lvl ? lvl.label : 'Full') + ' level.';
+            body.appendChild(note);
+        }
+
+        var rmContent = document.createElement('div');
+        rmContent.className = 'tb-content tb-readmore-content';
+        rmContent.innerHTML = this._highlightVocab(this._sanitizeHTML(raw));
+        body.appendChild(rmContent);
+        this._attachVocabListeners(rmContent);
+
+        this._readMoreExtras(body, seg, section);
+
+        box.appendChild(body);
+        parent.appendChild(box);
+
+        var mainKey = seg.id + '/' + section.id + '/' + this._readingLevel;
+        var rmKey = seg.id + '/' + section.id + '/readMore/' + level;
+
+        function useText(open) {
+            if (window.ReadAloud) ReadAloud.stop();
+            if (open) {
+                mainListenHost.textContent = '';
+                if (window.ReadAloud) ReadAloud.attach(rmListen, body);
+            } else {
+                rmListen.textContent = '';
+                if (window.ReadAloud) ReadAloud.attach(mainListenHost, parent);
+            }
+            self._hlKey = open ? rmKey : mainKey;
+            if (typeof TextbookHighlights !== 'undefined') {
+                TextbookHighlights.attach(open ? rmContent : mainContentDiv, self._getHighlights(self._hlKey), function(list) {
+                    self._setHighlights(self._hlKey, list);
+                    self._renderHighlightPanel();
+                });
+            }
+            self._renderHighlightPanel();
+        }
+
+        toggle.addEventListener('click', function() {
+            var open = body.hidden;
+            body.hidden = !open;
+            toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            box.classList.toggle('open', open);
+            useText(open);
+            if (open) {
+                if (!self._progress.readMoreOpened) self._progress.readMoreOpened = {};
+                if (!self._progress.readMoreOpened[seg.id + '/' + section.id]) {
+                    self._progress.readMoreOpened[seg.id + '/' + section.id] = true;
+                    self._saveProgress();
+                }
+            }
+        });
+    },
+
+    // Filled in by the Read More Check (next change); a hook keeps the panel
+    // usable on its own.
+    _readMoreExtras(body, seg, section) {},
 
     _highlightVocab(html) {
         if (!this._vocabMap) return html;

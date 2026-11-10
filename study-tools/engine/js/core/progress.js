@@ -309,6 +309,7 @@ const ProgressManager = {
             var tbMerged = Object.assign({}, remote, local);
             tbMerged.sectionsRead = Object.assign({}, remote.sectionsRead || {}, local.sectionsRead || {});
             tbMerged.quickChecks = Object.assign({}, remote.quickChecks || {}, local.quickChecks || {});
+            tbMerged.readMoreOpened = Object.assign({}, remote.readMoreOpened || {}, local.readMoreOpened || {});
             var hl = {};
             [remote.highlights, local.highlights].forEach(function(src) {
                 Object.keys(src || {}).forEach(function(key) {

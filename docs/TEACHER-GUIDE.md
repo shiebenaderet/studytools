@@ -467,6 +467,21 @@ Strong readers run out of textbook before they run out of curiosity. A top-level
 - Links open in a new tab. Nothing is embedded, so no third-party player or script loads on your site.
 - Pick videos you have watched. YouTube is blocked on some school devices; a link that does not open at school still works at home.
 
+### Read More panels (optional)
+
+A textbook section can carry a longer version of itself in `readMore`. It shows as a closed **Read More** panel under the section. Opening it never counts toward the reading gate, so the short text stays the only required reading. Listen and the highlighter follow whichever text is open, and Read More highlights are saved separately from the short text's.
+
+```json
+"readMore": {
+  "content": {
+    "standard": "<p>The longer version at the Full level...</p>",
+    "simplified": "<p>Optional Clear version...</p>"
+  }
+}
+```
+
+`content` uses the same level ids as the section. A level without its own Read More text falls back to `standard`, and the panel tells the student which level it is written at.
+
 ### Check a unit before it goes live
 
 Run this from the repository root. It reports any category that does not line up between the vocabulary, the textbook and the schedule, any Who Am I clue that still gives its answer away, and any Go Deeper link that is malformed:
