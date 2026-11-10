@@ -110,8 +110,12 @@ StudyEngine.registerActivity({
             return;
         }
 
-        // Limit to 4 categories max
-        this._categories = categories.slice(0, 4);
+        // Limit to 4 categories max. A unit with more than four picks four at
+        // random each round, so every category gets its turn (slice(0, 4)
+        // always left out the last ones).
+        this._categories = categories.length > 4
+            ? StudyUtils.shuffle(categories).slice(0, 4)
+            : categories.slice(0, 4);
 
         // Get unlocked vocab filtered to our categories
         var vocab = MasteryManager.getMustKnowVocabulary(this._config.unit.id, this._config);

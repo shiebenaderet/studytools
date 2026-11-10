@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.46] - 2026-11-09
+
+### Fixed
+- Sort It Out: a unit with more than four vocabulary categories now picks four at random each round. Before, the game always used the first four, so a fifth category never appeared. Unit 3 will have five categories. Requested by the teacher.
+
 ## [8.55.45] - 2026-11-09
 
 ### Changed
