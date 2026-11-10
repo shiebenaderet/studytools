@@ -639,6 +639,9 @@ const Dashboard = {
             case 'schedule':
                 this.renderSchedule();
                 break;
+            case 'responses':
+                this.loadResponses(filters);
+                break;
             case 'feedback':
                 this.loadFeedback();
                 break;
@@ -667,7 +670,9 @@ const Dashboard = {
             if (error) throw error;
 
             if (data) {
+                this._classCodeById = {};
                 data.forEach(cls => {
+                    this._classCodeById[cls.id] = cls.code;
                     const opt = document.createElement('option');
                     opt.value = cls.id;
                     opt.textContent = cls.code + ' - ' + cls.name;
@@ -3039,6 +3044,178 @@ const Dashboard = {
             container.textContent = '';
             container.appendChild(this._emptyState('fas fa-exclamation-circle', 'Could not load wiki entries: ' + (err.message || 'Unknown error')));
         }
+    },
+
+    // ---- Responses tab ----
+    // Students' written answers from Short Answer, the Response Builder and the
+    // textbook's Read More Checks (table `responses`, teacher-only reads; see
+    // database/migrate-responses.sql). The unit and class filters at the top
+    // apply; the star marks a response as a good example.
+
+    async loadResponses(filters) {
+        var container = document.getElementById('responses-container');
+        container.textContent = '';
+        container.appendChild(this._loading());
+        try {
+            var q = this.supabase
+                .from('responses')
+                .select('id, student_name, class_code, unit_id, source, item_key, question_text, answer_text, word_count, featured, updated_at')
+                .order('updated_at', { ascending: false })
+                .limit(1000);
+            if (filters && filters.unitId) q = q.eq('unit_id', filters.unitId);
+            var code = filters && filters.classId && this._classCodeById ? this._classCodeById[filters.classId] : null;
+            if (code) q = q.eq('class_code', code);
+            if (filters && filters.dateStart) q = q.gte('updated_at', filters.dateStart);
+            if (filters && filters.dateEnd) q = q.lte('updated_at', filters.dateEnd + 'T23:59:59');
+            var { data, error } = await q;
+            if (error) throw error;
+            container.textContent = '';
+            this._renderResponses(container, data || []);
+        } catch (err) {
+            container.textContent = '';
+            container.appendChild(this._emptyState('fas fa-exclamation-circle', 'Could not load responses: ' + (err.message || 'Unknown error') + '. If the table is missing, run database/migrate-responses.sql.'));
+        }
+    },
+
+    _renderResponses(container, rows) {
+        var self = this;
+        var bar = document.createElement('div');
+        bar.className = 'feedback-filter-bar responses-filter-bar';
+
+        function addSelect(labelText, options) {
+            var label = document.createElement('label');
+            label.textContent = labelText;
+            var sel = document.createElement('select');
+            options.forEach(function(o) {
+                var opt = document.createElement('option');
+                opt.value = o.value; opt.textContent = o.label;
+                sel.appendChild(opt);
+            });
+            label.appendChild(sel);
+            bar.appendChild(label);
+            return sel;
+        }
+
+        var sourceSel = addSelect('Source ', [
+            { value: 'all', label: 'All' },
+            { value: 'short-answer', label: 'Short Answer' },
+            { value: 'read-more', label: 'Read More Checks' }
+        ]);
+
+        // One entry per question, labeled with its text, newest question first.
+        var items = [], seen = {};
+        rows.forEach(function(r) {
+            var k = r.unit_id + '|' + r.source + '|' + r.item_key;
+            if (seen[k]) return;
+            seen[k] = true;
+            var label = (r.source === 'read-more' ? 'Read More: ' : 'Short Answer ' + (parseInt(r.item_key, 10) + 1) + ': ') + (r.question_text || r.item_key);
+            if (label.length > 90) label = label.slice(0, 87) + '...';
+            items.push({ value: k, label: label, source: r.source });
+        });
+        items.sort(function(a, b) { return a.label.localeCompare(b.label); });
+        var itemSel = addSelect('Question ', [{ value: 'all', label: 'All questions' }].concat(items));
+
+        var featLabel = document.createElement('label');
+        var featBox = document.createElement('input');
+        featBox.type = 'checkbox';
+        featLabel.appendChild(featBox);
+        featLabel.appendChild(document.createTextNode(' Starred only'));
+        bar.appendChild(featLabel);
+
+        var countSpan = document.createElement('span');
+        countSpan.className = 'feedback-count';
+        bar.appendChild(countSpan);
+        container.appendChild(bar);
+
+        if (rows.length === 0) {
+            container.appendChild(this._emptyState('fas fa-pen-nib', 'No responses yet. They appear here when signed-in students send a Short Answer, a Response Builder answer or a Read More Check.'));
+            return;
+        }
+
+        var list = document.createElement('div');
+        list.className = 'feedback-list';
+        container.appendChild(list);
+
+        function repaint() {
+            var src = sourceSel.value, item = itemSel.value, feat = featBox.checked;
+            Array.prototype.forEach.call(itemSel.options, function(o) {
+                if (o.value === 'all') return;
+                o.hidden = src !== 'all' && o.value.split('|')[1] !== src;
+            });
+            if (itemSel.selectedOptions[0] && itemSel.selectedOptions[0].hidden) { itemSel.value = 'all'; item = 'all'; }
+            var shown = rows.filter(function(r) {
+                if (src !== 'all' && r.source !== src) return false;
+                if (item !== 'all' && (r.unit_id + '|' + r.source + '|' + r.item_key) !== item) return false;
+                if (feat && !r.featured) return false;
+                return true;
+            });
+            countSpan.textContent = '(' + shown.length + ')';
+            list.textContent = '';
+            shown.forEach(function(r) { list.appendChild(self._buildResponseRow(r)); });
+        }
+        [sourceSel, itemSel, featBox].forEach(function(el) { el.addEventListener('change', repaint); });
+        repaint();
+    },
+
+    _buildResponseRow(r) {
+        var self = this;
+        var row = document.createElement('div');
+        row.className = 'feedback-row response-row' + (r.featured ? ' response-featured' : '');
+
+        var header = document.createElement('div');
+        header.className = 'feedback-row-header';
+
+        var star = document.createElement('button');
+        star.type = 'button';
+        star.className = 'response-star';
+        var paintStar = function() {
+            star.textContent = '';
+            var i = document.createElement('i');
+            i.className = (r.featured ? 'fas' : 'far') + ' fa-star';
+            star.appendChild(i);
+            star.title = r.featured ? 'Starred as a good example. Click to unstar.' : 'Star as a good example';
+            star.setAttribute('aria-pressed', r.featured ? 'true' : 'false');
+            row.classList.toggle('response-featured', !!r.featured);
+        };
+        paintStar();
+        star.addEventListener('click', async function() {
+            star.disabled = true;
+            var next = !r.featured;
+            var { error } = await self.supabase.from('responses').update({ featured: next }).eq('id', r.id);
+            star.disabled = false;
+            if (error) { alert('Could not save the star: ' + error.message); return; }
+            r.featured = next;
+            paintStar();
+        });
+        header.appendChild(star);
+
+        var badge = document.createElement('span');
+        badge.className = 'feedback-type-badge response-source-' + r.source;
+        badge.textContent = r.source === 'read-more' ? 'Read More' : 'Short Answer';
+        header.appendChild(badge);
+
+        var who = document.createElement('span');
+        who.className = 'feedback-row-who';
+        who.textContent = (r.student_name || 'Unnamed student') + (r.class_code ? ' · ' + r.class_code : '');
+        header.appendChild(who);
+
+        var meta = document.createElement('span');
+        meta.className = 'feedback-row-meta';
+        meta.textContent = [r.unit_id, r.word_count + ' words', this._formatFeedbackDate(r.updated_at)].join(' · ');
+        header.appendChild(meta);
+        row.appendChild(header);
+
+        if (r.question_text) {
+            var qEl = document.createElement('div');
+            qEl.className = 'response-question';
+            qEl.textContent = r.question_text;
+            row.appendChild(qEl);
+        }
+        var a = document.createElement('div');
+        a.className = 'feedback-row-desc';
+        a.textContent = r.answer_text;
+        row.appendChild(a);
+        return row;
     },
 
     // ---- Feedback tab ----

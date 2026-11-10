@@ -501,6 +501,10 @@ Paste is blocked in both answer boxes, and a word count shows under each. The fi
 
 A student who opens a game before writing any short answer sees one reminder per session to try writing one.
 
+### Reading responses in the dashboard
+
+Open the teacher dashboard and choose the **Responses** tab. It lists every sent Short Answer, Response Builder and Read More Check answer with the student's name, class, word count and time. The Class, Unit and date filters at the top apply. Inside the tab, narrow to one source or one question, and click the star to mark a response as a good example; **Starred only** shows just those. A student who edits and resends an answer keeps your star.
+
 ### Check a unit before it goes live
 
 Run this from the repository root. It reports any category that does not line up between the vocabulary, the textbook and the schedule, any Who Am I clue that still gives its answer away, and any Go Deeper link that is malformed:
