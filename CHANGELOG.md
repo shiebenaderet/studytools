@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.50] - 2026-11-09
+
+### Added
+- Leaderboard: each completed Read More Check (Quick Check answered and a sent answer of at least 20 words) adds **15 points**, once per section. The points are part of the raw score, so the consistency multiplier and the never-shrink floor apply as usual. The check's status line shows the points when it completes. Requested by the teacher.
+
 ## [8.55.49] - 2026-11-09
 
 ### Added

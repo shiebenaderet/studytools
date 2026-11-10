@@ -984,10 +984,16 @@ StudyEngine.registerActivity({
             var st = self._progress.readMore[key] || {};
             var qcDone = !check.quickCheck || self._progress.quickChecks[key + '/readMore'] !== undefined;
             var words = st.words || 0;
+            var complete = !!(st.sent && words >= self.READ_MORE_MIN_WORDS && qcDone);
+            if (st.answer && !!st.complete !== complete) {
+                st.complete = complete;
+                self._progress.readMore[key] = st;
+                self._saveProgress();
+            }
             status.className = 'tb-rm-status';
-            if (st.sent && words >= self.READ_MORE_MIN_WORDS && qcDone) {
+            if (complete) {
                 status.classList.add('done');
-                status.textContent = 'Sent. This Read More Check is complete.';
+                status.textContent = 'Sent. This Read More Check is complete: +' + (typeof LeaderboardManager !== 'undefined' ? LeaderboardManager.READ_MORE_POINTS : 15) + ' study points.';
             } else if (st.sent) {
                 status.textContent = words < self.READ_MORE_MIN_WORDS
                     ? 'Sent. Write at least ' + self.READ_MORE_MIN_WORDS + ' words to complete this check.'

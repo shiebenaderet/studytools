@@ -491,7 +491,7 @@ A textbook section can carry a longer version of itself in `readMore`. It shows 
 }
 ```
 
-Paste is blocked in the answer box. A signed-in student's answer is sent to the `responses` table (see `database/migrate-responses.sql`), which only a teacher can read; a guest's answer stays on their device. A check is complete when the Quick Check is answered and a sent answer has at least 20 words.
+Paste is blocked in the answer box. A signed-in student's answer is sent to the `responses` table (see `database/migrate-responses.sql`), which only a teacher can read; a guest's answer stays on their device. A check is complete when the Quick Check is answered (right or wrong) and a sent answer has at least 20 words. Each completed check adds **15 points** to the student's leaderboard score, once per section; the consistency multiplier applies to them like any other points.
 
 ### Check a unit before it goes live
 
