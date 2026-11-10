@@ -195,7 +195,9 @@ StudyEngine.registerActivity({
                     self._currentSegment = self._progress.lastSegment;
                     self._currentSection = self._progress.lastSection || 0;
                 }
-                if (self._needsLevelPrompt) {
+                // One level means nothing to choose. The level is not saved, so the
+                // prompt still appears once the unit adds more levels.
+                if (self._needsLevelPrompt && self._LEVELS.length > 1) {
                     self._needsLevelPrompt = false;
                     self._showLevelPrompt();
                     return;
@@ -313,7 +315,7 @@ StudyEngine.registerActivity({
             });
             levelPicker.appendChild(btn);
         });
-        topBar.appendChild(levelPicker);
+        if (this._LEVELS.length > 1) topBar.appendChild(levelPicker);
         wrapper.appendChild(topBar);
 
         // Body: sidebar tabs + reading area

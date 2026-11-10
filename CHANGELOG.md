@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.52] - 2026-11-09
+
+### Changed
+- Textbook: when a unit offers only one reading level, the "Choose Your Reading Level" screen and the level buttons are skipped. The choice is not saved, so students still see the screen once more levels are added. Unit 3 opens at Full only while its other levels are written.
+
 ## [8.55.51] - 2026-11-09
 
 ### Changed
