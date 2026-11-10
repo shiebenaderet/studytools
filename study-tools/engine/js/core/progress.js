@@ -424,6 +424,20 @@ const ProgressManager = {
             return [...new Set([...localDays, ...remoteDays])];
         }
 
+        // Power Sort: keep the better score for each sort, and any perfect run.
+        if (activity === 'activity_power-sort') {
+            var psBest = Object.assign({}, remote.best || {});
+            Object.keys(local.best || {}).forEach(function(k) {
+                psBest[k] = Math.max(psBest[k] || 0, local.best[k] || 0);
+            });
+            return Object.assign({}, remote, local, {
+                best: psBest,
+                perfect: Object.assign({}, remote.perfect || {}, local.perfect || {}),
+                gamesPlayed: Math.max(local.gamesPlayed || 0, remote.gamesPlayed || 0),
+                updatedAt: Math.max(local.updatedAt || 0, remote.updatedAt || 0)
+            });
+        }
+
         // Short answers: the newer draft wins, but points once earned stay
         // earned, whichever device earned them.
         if (/^activity_short-answer-\d+$/.test(activity)) {

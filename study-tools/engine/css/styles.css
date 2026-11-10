@@ -7535,3 +7535,68 @@ body.light-mode .feedback-fab {
     margin-top: 12px;
     align-self: flex-start;
 }
+
+/* Power Sort */
+.ps-container { max-width: 680px; margin: 0 auto; padding: 16px; }
+.ps-head, .ps-results { text-align: center; margin-bottom: 18px; }
+.ps-head-icon { font-size: 2.6em; color: var(--accent-text); margin-bottom: 10px; display: block; }
+.ps-title { color: var(--primary-text); margin: 0 0 6px; }
+.ps-sub { color: var(--text-secondary); margin: 0 auto; max-width: 34em; line-height: 1.5; }
+.ps-set-list { display: grid; gap: 12px; }
+.ps-set-card {
+    text-align: left; background: var(--bg-card); border: 1px solid var(--border-card);
+    border-radius: var(--radius-lg, 14px); padding: 16px 18px; cursor: pointer;
+    font-family: var(--font-body); color: var(--text-primary); transition: border-color 0.15s, transform 0.15s;
+}
+.ps-set-card:hover:not(:disabled) { border-color: var(--primary); transform: translateY(-1px); }
+.ps-set-title { font-family: var(--font-heading); font-size: 1.15em; font-weight: 700; margin-bottom: 4px; }
+.ps-set-bins { color: var(--text-secondary); font-size: 0.92em; margin-bottom: 6px; }
+.ps-set-meta { color: var(--text-muted); font-size: 0.85em; }
+.ps-locked { opacity: 0.55; cursor: not-allowed; }
+.ps-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.ps-count { color: var(--text-secondary); font-size: 0.88em; }
+.ps-link-btn {
+    background: none; border: none; color: var(--primary-text); font-family: var(--font-body);
+    font-size: 0.92em; cursor: pointer; padding: 8px 4px; min-height: 40px;
+}
+.ps-bar { height: 6px; background: var(--bg-surface); border-radius: 3px; overflow: hidden; margin-bottom: 18px; }
+.ps-bar-fill { height: 100%; background: var(--primary); transition: width 0.3s; }
+.ps-prompt { text-align: center; color: var(--text-secondary); font-size: 0.95em; margin-bottom: 8px; }
+.ps-item {
+    text-align: center; font-family: var(--font-heading); font-size: 1.3em; font-weight: 700;
+    color: var(--text-primary); background: var(--bg-card); border: 2px solid var(--border-card);
+    border-radius: var(--radius-lg, 14px); padding: 22px 18px; margin-bottom: 16px; line-height: 1.35;
+}
+.ps-bins { display: grid; gap: 10px; grid-template-columns: repeat(3, 1fr); }
+.ps-bins-2, .ps-bins-4 { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 480px) { .ps-bins { grid-template-columns: 1fr; } }
+.ps-bin {
+    display: flex; flex-direction: column; align-items: center; gap: 2px; min-height: 64px; justify-content: center;
+    background: var(--bg-surface); border: 2px solid var(--border-card); border-radius: var(--radius-md, 10px);
+    color: var(--text-primary); font-family: var(--font-body); cursor: pointer; padding: 10px;
+    transition: border-color 0.15s, background 0.15s;
+}
+.ps-bin:hover:not(:disabled) { border-color: var(--primary); }
+.ps-bin:disabled { cursor: default; }
+.ps-bin-label { font-weight: 700; font-size: 1.05em; }
+.ps-bin-hint { color: var(--text-secondary); font-size: 0.8em; }
+.ps-bin-right { border-color: var(--success, #16a34a); background: rgba(22, 163, 74, 0.12); }
+.ps-bin-wrong { border-color: var(--danger, #dc2626); background: rgba(220, 38, 38, 0.10); }
+.ps-feedback { margin-top: 16px; text-align: center; }
+.ps-verdict { font-weight: 700; font-size: 1.05em; margin-bottom: 6px; }
+.ps-verdict-right { color: var(--success, #16a34a); }
+.ps-verdict-wrong { color: var(--danger, #dc2626); }
+.ps-explain { color: var(--text-secondary); line-height: 1.5; margin: 0 auto 12px; max-width: 36em; }
+.ps-next-btn {
+    background: var(--primary); color: #fff; border: none; border-radius: 10px; padding: 11px 22px;
+    font-family: var(--font-body); font-weight: 600; font-size: 0.95em; cursor: pointer; min-height: 44px;
+    display: inline-flex; align-items: center; gap: 8px;
+}
+.ps-score { font-family: var(--font-heading); font-size: 2.4em; font-weight: 700; color: var(--primary-text); margin: 4px 0; }
+.ps-missed { background: var(--bg-card); border: 1px solid var(--border-card); border-radius: var(--radius-lg, 14px); padding: 14px 18px; margin-bottom: 16px; }
+.ps-missed-title { margin: 0 0 8px; font-size: 1em; color: var(--text-primary); }
+.ps-missed-row { padding: 8px 0; border-top: 1px solid var(--border-subtle); }
+.ps-missed-row:first-of-type { border-top: none; }
+.ps-missed-item { color: var(--text-primary); margin-bottom: 4px; }
+.ps-missed-row .ps-explain { text-align: left; margin: 0; font-size: 0.92em; }
+.ps-result-btns { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; align-items: center; }

@@ -21,6 +21,7 @@ var NudgeManager = {
         'typing-practice':  { icon: 'fas fa-keyboard',        name: 'Typing Practice',   group: 'study' },
         'practice-test':    { icon: 'fas fa-pencil',          name: 'Practice Test',     group: 'practice' },
         'timeline':         { icon: 'fas fa-clock',           name: 'Timeline',          group: 'practice' },
+        'power-sort':       { icon: 'fas fa-sitemap',         name: 'Power Sort',        group: 'practice' },
         'wordle':           { icon: 'fas fa-th',              name: 'Wordle',            group: 'games' },
         'hangman':          { icon: 'fas fa-skull-crossbones',name: 'Hangman',           group: 'games' },
         'flip-match':       { icon: 'fas fa-clone',           name: 'Flip Match',        group: 'games' },

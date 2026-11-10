@@ -23,6 +23,7 @@
         "short-answer",
         "response-builder",
         "timeline",
+        "power-sort",
         "wordle",
         "hangman",
         "flip-match",
@@ -220,7 +221,7 @@
             "example": "Article I describes this branch, which includes the House of Representatives and the Senate.",
             "category": "Inside the Constitution",
             "typingSnippet": "The legislative branch makes the laws. It is Congress, created by Article I of the Constitution.",
-            "tier": "must-know"
+            "tier": "encounter"
         },
         {
             "term": "executive",
@@ -229,7 +230,7 @@
             "example": "Article II describes this branch, which commands the army and navy.",
             "category": "Inside the Constitution",
             "typingSnippet": "The executive branch carries out the laws. It is led by the president and created by Article II.",
-            "tier": "must-know"
+            "tier": "encounter"
         },
         {
             "term": "judicial",
@@ -238,7 +239,7 @@
             "example": "Article III creates the Supreme Court, and its judges serve for life.",
             "category": "Inside the Constitution",
             "typingSnippet": "The judicial branch is the courts. It decides what laws mean and was created by Article III.",
-            "tier": "must-know"
+            "tier": "encounter"
         },
         {
             "term": "Electoral College",
@@ -1833,5 +1834,227 @@
             }
         ]
     },
+    "powerSorts": [
+        {
+            "id": "branches",
+            "title": "Which Branch?",
+            "category": "Inside the Constitution",
+            "prompt": "Which branch of the national government has this power?",
+            "bins": [
+                {
+                    "id": "legislative",
+                    "label": "Legislative",
+                    "hint": "Congress, Article I"
+                },
+                {
+                    "id": "executive",
+                    "label": "Executive",
+                    "hint": "President, Article II"
+                },
+                {
+                    "id": "judicial",
+                    "label": "Judicial",
+                    "hint": "Courts, Article III"
+                }
+            ],
+            "items": [
+                {
+                    "text": "Writes and passes laws",
+                    "bin": "legislative",
+                    "explanation": "Article I gives Congress the power to make laws."
+                },
+                {
+                    "text": "Declares war",
+                    "bin": "legislative",
+                    "explanation": "Only Congress can declare war, even though the president commands the military."
+                },
+                {
+                    "text": "Decides how to spend the nation's money",
+                    "bin": "legislative",
+                    "explanation": "Congress controls the budget. Spending bills start in the House."
+                },
+                {
+                    "text": "Overrides a veto with a two-thirds vote",
+                    "bin": "legislative",
+                    "explanation": "If two-thirds of both the House and the Senate vote again, a bill becomes law without the president."
+                },
+                {
+                    "text": "Approves treaties with a two-thirds vote",
+                    "bin": "legislative",
+                    "explanation": "The president makes treaties, but two-thirds of the Senate must approve them."
+                },
+                {
+                    "text": "Impeaches and removes officials",
+                    "bin": "legislative",
+                    "explanation": "The House impeaches, or accuses, and the Senate holds the trial. Both are part of Congress."
+                },
+                {
+                    "text": "Approves the president's choices for judges",
+                    "bin": "legislative",
+                    "explanation": "The Senate must confirm judges and other top officials, a check on the president."
+                },
+                {
+                    "text": "Carries out and enforces the laws",
+                    "bin": "executive",
+                    "explanation": "Article II puts the president in charge of carrying out the laws Congress passes."
+                },
+                {
+                    "text": "Commands the army and navy",
+                    "bin": "executive",
+                    "explanation": "The president is commander in chief, so the military answers to an elected civilian."
+                },
+                {
+                    "text": "Vetoes bills passed by Congress",
+                    "bin": "executive",
+                    "explanation": "A veto is the president's check on Congress."
+                },
+                {
+                    "text": "Makes treaties with other nations",
+                    "bin": "executive",
+                    "explanation": "The president makes treaties. The Senate then approves or rejects them."
+                },
+                {
+                    "text": "Chooses Supreme Court justices",
+                    "bin": "executive",
+                    "explanation": "The president nominates justices, and the Senate confirms them."
+                },
+                {
+                    "text": "Pardons people convicted of federal crimes",
+                    "bin": "executive",
+                    "explanation": "Article II gives the president the power to pardon."
+                },
+                {
+                    "text": "Decides whether a law follows the Constitution",
+                    "bin": "judicial",
+                    "explanation": "This is judicial review, first used in Marbury v. Madison in 1803."
+                },
+                {
+                    "text": "Decides what a law means in a real case",
+                    "bin": "judicial",
+                    "explanation": "Courts apply and interpret laws when people disagree about them."
+                },
+                {
+                    "text": "Settles disputes between two states",
+                    "bin": "judicial",
+                    "explanation": "Article III gives federal courts the power to hear cases between states."
+                },
+                {
+                    "text": "Can declare an action of the president unconstitutional",
+                    "bin": "judicial",
+                    "explanation": "The courts check the president as well as Congress."
+                }
+            ]
+        },
+        {
+            "id": "federalism",
+            "title": "National, State or Both?",
+            "category": "Inside the Constitution",
+            "prompt": "Under federalism, who holds this power?",
+            "bins": [
+                {
+                    "id": "national",
+                    "label": "National",
+                    "hint": "Delegated powers"
+                },
+                {
+                    "id": "state",
+                    "label": "State",
+                    "hint": "Reserved powers"
+                },
+                {
+                    "id": "both",
+                    "label": "Both",
+                    "hint": "Concurrent powers"
+                }
+            ],
+            "items": [
+                {
+                    "text": "Prints and coins money",
+                    "bin": "national",
+                    "explanation": "One national money lets people trade across state lines. Under the Articles, states printed their own."
+                },
+                {
+                    "text": "Declares war",
+                    "bin": "national",
+                    "explanation": "Only the national government can declare war, so the country speaks with one voice."
+                },
+                {
+                    "text": "Makes treaties with other nations",
+                    "bin": "national",
+                    "explanation": "The Constitution bars states from making treaties."
+                },
+                {
+                    "text": "Runs the post office",
+                    "bin": "national",
+                    "explanation": "Article I gives Congress the power to set up post offices."
+                },
+                {
+                    "text": "Regulates trade between states",
+                    "bin": "national",
+                    "explanation": "The Commerce Clause gives this power to Congress."
+                },
+                {
+                    "text": "Raises an army and navy",
+                    "bin": "national",
+                    "explanation": "Defense is a national job. Congress raises and pays for the military."
+                },
+                {
+                    "text": "Deals with tribal nations through treaties and trade",
+                    "bin": "national",
+                    "explanation": "The Commerce Clause and the treaty power put relations with tribes in national hands."
+                },
+                {
+                    "text": "Runs public schools",
+                    "bin": "state",
+                    "explanation": "Education is a reserved power. States and local school districts run schools."
+                },
+                {
+                    "text": "Issues driver's licenses",
+                    "bin": "state",
+                    "explanation": "Each state sets its own rules for licenses."
+                },
+                {
+                    "text": "Sets up city and county governments",
+                    "bin": "state",
+                    "explanation": "Local governments are created by the states."
+                },
+                {
+                    "text": "Issues marriage licenses",
+                    "bin": "state",
+                    "explanation": "Marriage licenses come from the state, usually through a county office."
+                },
+                {
+                    "text": "Runs elections",
+                    "bin": "state",
+                    "explanation": "States run elections, even for national offices, though the Constitution and Congress set some rules."
+                },
+                {
+                    "text": "Collects taxes",
+                    "bin": "both",
+                    "explanation": "Taxing is a concurrent power. You may pay both federal and state taxes."
+                },
+                {
+                    "text": "Builds roads",
+                    "bin": "both",
+                    "explanation": "Both levels pay for roads. Interstate highways use national and state money."
+                },
+                {
+                    "text": "Sets up courts",
+                    "bin": "both",
+                    "explanation": "There are federal courts and state courts."
+                },
+                {
+                    "text": "Borrows money",
+                    "bin": "both",
+                    "explanation": "Both the national government and the states can borrow money."
+                },
+                {
+                    "text": "Makes and enforces laws",
+                    "bin": "both",
+                    "explanation": "Congress and every state legislature make laws. Police enforce both."
+                }
+            ]
+        }
+    ],
     "goDeeper": []
 }
