@@ -20,9 +20,9 @@ StudyEngine.registerActivity({
     // textbook.json can replace these with its own readingLevels map
     // (see _applyLevels).
     _DEFAULT_LEVELS: [
-        { id: 'simplified', label: 'Easier', icon: 'fas fa-feather' },
-        { id: 'standard', label: 'On Grade', icon: 'fas fa-book' },
-        { id: 'advanced', label: 'Challenge', icon: 'fas fa-graduation-cap' }
+        { id: 'simplified', label: 'Clear', icon: 'fas fa-feather' },
+        { id: 'standard', label: 'Full', icon: 'fas fa-book' },
+        { id: 'advanced', label: 'Deep', icon: 'fas fa-graduation-cap' }
     ],
     _LEVELS: null,
     _defaultLevel: 'standard',

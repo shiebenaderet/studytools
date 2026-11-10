@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.45] - 2026-11-09
+
+### Changed
+- Reading levels are now named **Quick, Clear, Full and Deep** (were Level 0, 1, 2 and 3), matching the names on class handouts and the other course sites. The names describe the text, not the reader. Only the labels changed: the level ids stay `level0`, `simplified`, `standard` and `advanced`, so saved highlights and each student's chosen level carry over. Units without their own levels now show Clear, Full and Deep. Requested by the teacher.
+
 ## [8.55.44] - 2026-11-06
 
 ### Added
