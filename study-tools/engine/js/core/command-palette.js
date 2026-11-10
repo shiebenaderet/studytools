@@ -1188,7 +1188,7 @@ const CommandPalette = {
 
             var activityNames = {
                 'flashcards': 'Flashcards', 'practice-test': 'Practice Test', 'short-answer': 'Short Answer',
-                'fill-in-blank': 'Fill-in-the-Blank', 'timeline': 'Timeline', 'category-sort': 'Category Sort',
+                'fill-in-blank': 'Fill-in-the-Blank', 'timeline': 'Timeline', 'category-sort': 'Category Sort', 'power-sort': 'Power Sort',
                 'wordle': 'Wordle', 'hangman': 'Hangman', 'flip-match': 'Flip Match',
                 'typing-race': 'Typing Race', 'typing-practice': 'Typing Practice',
                 'term-catcher': 'Term Catcher', 'lightning-round': 'Lightning Round',

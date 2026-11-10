@@ -21,6 +21,7 @@ const ActivityTimer = {
         // Deep Study (1.5x) — handled by LEARN_MODE_MULTIPLIER
         // Analysis (1.25x)
         'sort-it-out': 1.25,
+        'power-sort': 1.25,
         'who-am-i': 1.25,
         'four-corners': 1.25,
         'map-quiz': 1.25,

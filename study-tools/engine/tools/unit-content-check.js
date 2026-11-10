@@ -67,6 +67,22 @@ ids.forEach(function(id) {
   var mustKnow = vocab.filter(function(v) { return !v.tier || v.tier === 'must-know'; }).length;
   if (vocab.length && mustKnow < 6) warn(id, 'only ' + mustKnow + ' must-know terms; games pad with other tiers below 6');
 
+  // Power Sort sets
+  var vocabCats = {};
+  vocab.forEach(function(v) { vocabCats[v.category] = true; });
+  (cfg.powerSorts || []).forEach(function(set, i) {
+    var where = 'powerSorts[' + i + '] "' + (set.title || set.id || '') + '"';
+    if (!set.id) err(id, where + ' has no id');
+    if (set.category && !vocabCats[set.category]) err(id, where + ' category "' + set.category + '" matches no vocabulary category');
+    var bins = (set.bins || []).map(function(b) { return b.id; });
+    if (bins.length < 2 || bins.length > 4) err(id, where + ' needs 2 to 4 bins');
+    (set.items || []).forEach(function(it, j) {
+      if (bins.indexOf(it.bin) === -1) err(id, where + ' item ' + j + ' "' + it.text + '" uses unknown bin "' + it.bin + '"');
+      if (!it.explanation) warn(id, where + ' item "' + it.text + '" has no explanation');
+    });
+    if ((set.items || []).length < 6) warn(id, where + ' has fewer than 6 items');
+  });
+
   // Go Deeper links
   var gd = cfg.goDeeper;
   if (!gd) {

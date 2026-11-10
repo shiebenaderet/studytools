@@ -356,6 +356,7 @@ Add any of these to your `activities` array:
 | `fill-in-blank` | Complete sentences with terms | `fillInBlankSentences` |
 | `short-answer` | Open-ended response with rubric | `shortAnswerQuestions` |
 | `timeline` | Order events chronologically | `timelineEvents` |
+| `power-sort` | Tap each power or job into the branch or level of government that holds it, with an explanation after every answer | `powerSorts` |
 
 #### 🎮 Games
 | Activity ID | What it does | Required content |
@@ -534,6 +535,38 @@ These optional fields customize Learn Mode behavior per unit:
 | `correct` | Yes | Index of correct answer (0-3) |
 | `explanation` | | Why the answer is correct |
 | `topic` | | Category name — links to vocabulary categories for weakness tracking |
+
+### Power Sort fields
+
+`powerSorts` is a list of sorts. Each one is a short practice set with two to four bins.
+
+```json
+"powerSorts": [{
+    "id": "branches",
+    "title": "Which Branch?",
+    "category": "Inside the Constitution",
+    "prompt": "Which branch of the national government has this power?",
+    "bins": [
+        { "id": "legislative", "label": "Legislative", "hint": "Congress, Article I" },
+        { "id": "executive", "label": "Executive", "hint": "President, Article II" },
+        { "id": "judicial", "label": "Judicial", "hint": "Courts, Article III" }
+    ],
+    "items": [
+        { "text": "Writes and passes laws", "bin": "legislative", "explanation": "Article I gives Congress the power to make laws." }
+    ]
+}]
+```
+
+| Field | Required | Description |
+|-------|:--------:|-------------|
+| `id` | Yes | Short name, used for the student's best score. Keep it stable once students start |
+| `title` | Yes | Shown on the sort's card |
+| `category` | | A vocabulary category; the sort stays locked until that category unlocks |
+| `prompt` | | The question above each item |
+| `bins` | Yes | Two to four bins, each with an `id`, a `label` and an optional `hint` |
+| `items` | Yes | Each has `text`, the `bin` id it belongs in, and an `explanation` shown after the student answers |
+
+Items come in a random order and there is no timer. Missed items are listed with their explanations at the end, and **Practice the ones I missed** replays only those. The best score for each sort syncs across devices.
 
 ### Theme colors
 
