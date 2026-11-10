@@ -424,6 +424,15 @@ const ProgressManager = {
             return [...new Set([...localDays, ...remoteDays])];
         }
 
+        // Short answers: the newer draft wins, but points once earned stay
+        // earned, whichever device earned them.
+        if (/^activity_short-answer-\d+$/.test(activity)) {
+            var saNewer = (remote.updatedAt || 0) > (local.updatedAt || 0) ? remote : local;
+            var saMerged = Object.assign({}, saNewer);
+            if (local.complete || remote.complete) saMerged.complete = true;
+            return saMerged;
+        }
+
         // Default: newer wins (original behavior)
         var remoteTime = remote.updatedAt || 0;
         var localTime = local.updatedAt || 0;

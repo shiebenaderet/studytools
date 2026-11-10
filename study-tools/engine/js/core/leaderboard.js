@@ -23,7 +23,7 @@ var LeaderboardManager = {
     },
 
     // Calculate composite score: vocab mastered * 10 + best test score + study time (diminishing) + map bonus
-    // + written-work points (Read More Checks completed; see writtenWorkPts)
+    // + written-work points (Read More Checks and short answers; see writtenWorkPts)
     calculateScore(vocabMastered, bestTestScore, studyTimeSeconds, mapBonus, writtenPts) {
         var vocabPts = (vocabMastered || 0) * 10;
         var testPts = bestTestScore || 0;
@@ -35,14 +35,24 @@ var LeaderboardManager = {
     // 15 points for each Read More Check the textbook marked complete (Quick
     // Check answered and a sent answer of at least 20 words). Counted once per
     // section; editing an answer never adds more.
+    // 20 points for each short-answer question whose answer (20+ words) reached
+    // the teacher, from Short Answer or the Response Builder. Once per question.
     READ_MORE_POINTS: 15,
-    writtenWorkPts(unitId) {
-        var tb = (typeof ProgressManager !== 'undefined' && ProgressManager.getActivityProgress(unitId, 'textbook')) || {};
+    SHORT_ANSWER_POINTS: 20,
+    writtenWorkPts(unitId, config) {
+        if (typeof ProgressManager === 'undefined') return 0;
+        var tb = ProgressManager.getActivityProgress(unitId, 'textbook') || {};
         var rm = tb.readMore || {};
         var self = this;
-        return Object.keys(rm).reduce(function(sum, k) {
+        var pts = Object.keys(rm).reduce(function(sum, k) {
             return sum + (rm[k] && rm[k].complete ? self.READ_MORE_POINTS : 0);
         }, 0);
+        var qs = (config && config.shortAnswerQuestions) || [];
+        for (var i = 0; i < qs.length; i++) {
+            var sa = ProgressManager.getActivityProgress(unitId, 'short-answer-' + i);
+            if (sa && sa.complete) pts += this.SHORT_ANSWER_POINTS;
+        }
+        return pts;
     },
 
     // Consistency multiplier: rewards distributed practice over cramming.
@@ -118,7 +128,7 @@ var LeaderboardManager = {
         }
         var mapBonus = mapBestTime ? 100 + Math.max(0, 180 - mapBestTime) : 0;
 
-        var rawScore = this.calculateScore(vocabMastered, bestTestScore, studyTimeSeconds, mapBonus, this.writtenWorkPts(unitId));
+        var rawScore = this.calculateScore(vocabMastered, bestTestScore, studyTimeSeconds, mapBonus, this.writtenWorkPts(unitId, config));
 
         // Consistency multiplier: distributed effort wins over cramming.
         // A kid who studied 14 different days outscores a kid with identical

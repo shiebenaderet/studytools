@@ -390,7 +390,16 @@ StudyEngine.registerActivity({
         textarea.id = 'sa-answer-text';
         textarea.placeholder = 'Write your response here...';
         textarea.rows = 8;
+        textarea.setAttribute('aria-label', 'Your response');
         contentArea.appendChild(textarea);
+        var updateCount = null;
+        if (typeof ResponseCapture !== 'undefined') {
+            ResponseCapture.guardPaste(textarea);
+            updateCount = ResponseCapture.attachWordCounter(textarea, contentArea);
+            textarea.addEventListener('input', function() {
+                ResponseCapture.autosaveShortAnswer(self.unitId, index, textarea.value);
+            });
+        }
 
         // Button row
         var btnRow = document.createElement('div');
@@ -468,6 +477,7 @@ StudyEngine.registerActivity({
         var saved = ProgressManager.getActivityProgress(this.unitId, 'short-answer-' + index);
         if (saved && saved.answer) {
             textarea.value = saved.answer;
+            if (updateCount) updateCount();
         }
 
         // Hide card grid, show content
@@ -479,12 +489,10 @@ StudyEngine.registerActivity({
     },
 
     saveAnswer(index) {
+        var self = this;
         var text = document.getElementById('sa-answer-text');
         var answer = text ? text.value : '';
-        ProgressManager.saveActivityProgress(this.unitId, 'short-answer-' + index, {
-            answer: answer
-        });
-        StudyUtils.showToast('Response saved!', 'success');
+        var q = this.questions[index] || {};
 
         // Update the card's checkmark in the grid
         var card = document.querySelector('.sa-question-card[data-index="' + index + '"]');
@@ -497,10 +505,23 @@ StudyEngine.registerActivity({
                 topRow.appendChild(check);
             }
         }
-
-        if (typeof AchievementManager !== 'undefined') {
+        if (answer.trim() && typeof AchievementManager !== 'undefined') {
             AchievementManager.checkAndAward({ activity: 'short-answer', event: 'complete' });
         }
+
+        if (typeof ResponseCapture === 'undefined') {
+            ProgressManager.saveActivityProgress(this.unitId, 'short-answer-' + index, { answer: answer });
+            StudyUtils.showToast('Response saved!', 'success');
+            return;
+        }
+        var btn = document.querySelector('.sa-save-btn');
+        if (btn) btn.disabled = true;
+        ResponseCapture.saveShortAnswer(this.unitId, index, q.question || '', answer).then(function(r) {
+            if (btn) btn.disabled = false;
+            var points = (typeof LeaderboardManager !== 'undefined' && LeaderboardManager.SHORT_ANSWER_POINTS) || 20;
+            var msg = ResponseCapture.shortAnswerMessage(r, points);
+            StudyUtils.showToast(msg.text, msg.type);
+        });
     },
 
     activate() {},
