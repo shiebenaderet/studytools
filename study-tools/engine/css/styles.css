@@ -5859,6 +5859,14 @@ a.sift-detail-link:hover { opacity: 0.8; }
 
 /* ===== Textbook Mode ===== */
 .tb-wrapper { max-width: 900px; margin: 0 auto; padding: 0 16px 40px; }
+/* Wide screens: use more of the width, with larger text so lines do not get
+   too long to read comfortably. The reading column stops growing at 860px. */
+@media (min-width: 1200px) {
+    .tb-wrapper { max-width: 1140px; }
+    .tb-body { justify-content: center; }
+    .tb-reading { max-width: 860px; }
+    .tb-wrapper .tb-content { font-size: 1.12em; }
+}
 
 /* Top bar: segments + level picker */
 .tb-top-bar {
@@ -5987,7 +5995,7 @@ a.sift-detail-link:hover { opacity: 0.8; }
 }
 .tb-figure-img {
     width: 100%; height: auto; display: block;
-    object-fit: cover; max-height: 400px;
+    object-fit: contain; max-height: 400px;   /* contain: a picture is never cropped */
 }
 .tb-figure-caption {
     padding: 10px 14px; font-size: 0.82em; line-height: 1.5;
@@ -5998,11 +6006,14 @@ a.sift-detail-link:hover { opacity: 0.8; }
 }
 /* Float variants for inline placement */
 .tb-figure-right {
-    float: right; width: 45%; margin: 0 0 16px 20px;
+    float: right; width: 45%; max-width: 300px; margin: 0 0 16px 20px;
 }
 .tb-figure-left {
-    float: left; width: 45%; margin: 0 20px 16px 0;
+    float: left; width: 45%; max-width: 300px; margin: 0 20px 16px 0;
 }
+/* A picture beside the text shows whole. Its width is capped above, so a
+   tall portrait stays a sensible size without losing the top of a head. */
+.tb-figure-right .tb-figure-img, .tb-figure-left .tb-figure-img { max-height: none; }
 
 /* Content typography */
 .tb-content {
@@ -6289,8 +6300,8 @@ body.light-mode .tb-vocab-popup { --tb-noun: #c62828; --tb-verb: #1b7a34; --tb-a
     .tb-tab.active { border-left-color: transparent; border-bottom-color: var(--primary); }
     .tb-tab-label { max-width: 90px; }
     .tb-section-heading { font-size: 1.15em; }
-    .tb-figure-right, .tb-figure-left { float: none; width: 100%; margin: 0 0 16px 0; }
-    .tb-figure-img { max-height: 280px; }
+    .tb-figure-right, .tb-figure-left { float: none; width: 100%; max-width: none; margin: 0 0 16px 0; }
+    .tb-figure-right .tb-figure-img, .tb-figure-left .tb-figure-img, .tb-figure-img { max-height: 320px; }
     .tb-content { font-size: 0.95em; }
     .tb-vocab-popup { max-width: calc(100vw - 32px); }
 }

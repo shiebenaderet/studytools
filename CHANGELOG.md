@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.70] - 2026-11-11
+
+### Fixed
+- Textbook pictures are never cropped. A tall portrait beside the text lost the top of the person's head when the section list was hidden, and on phones, because the picture was cut to a fixed height. A picture beside the text now shows whole at up to 300 px wide, and a full-width picture is fitted inside its frame. Applies to every unit. Found by the teacher while testing Unit 3.
+
+### Changed
+- Textbook on wide screens (1200 px and up): the reading column grows from about 630 px to 860 px and the text is about 10% larger, so less of the screen is left blank and lines stay a comfortable length. Smaller screens are unchanged. Applies to every unit. Requested by the teacher.
+
 ## [8.55.69] - 2026-11-11
 
 ### Added
