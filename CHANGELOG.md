@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.58] - 2026-11-11
+
+### Added
+- Unit 3 readings: Chapter 1, **Why the Articles Failed**, at Quick, Clear and Deep (three sections). Unit 3 now offers all four reading levels, so the "Choose Your Reading Level" screen and the level buttons are back. Every level keeps the same facts, headings and vocabulary words; Deep adds quotations from the time and a short "What Historians Argue" part. Chapters 2 to 5 show the Full text at every level until theirs are written, and Read More stays at Full. Requested by the teacher.
+
 ## [8.55.57] - 2026-11-11
 
 ### Added
