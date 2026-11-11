@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.71] - 2026-11-11
+
+### Fixed
+- Home page suggestions ("Read Chapter 1", "Flashcards" and the rest) now open what they name. Tapping one used to drop the student on the Study, Practice or Games menu, and then keep throwing them back to that menu about ten times a second, so the menu's own buttons flickered and did nothing until the page was reloaded. The card was looking for a button tagged with the activity and the only thing carrying that tag was the card itself, so it kept tapping itself. It now opens the activity directly, and "Read Chapter N" opens the textbook at that chapter. This has been on the live site in every unit since the suggestions were added. Found by the teacher while testing Unit 3.
+
 ## [8.55.70] - 2026-11-11
 
 ### Fixed

@@ -211,6 +211,7 @@ var NudgeManager = {
                     activityId: 'textbook',
                     icon: this.ACTIVITY_INFO.textbook.icon,
                     name: 'Read Chapter ' + unread.index,
+                    params: [unread.segmentId],   // open the textbook at that chapter
                     group: this.ACTIVITY_INFO.textbook.group,
                     reason: 'Read it before you study the "' + unread.category + '" terms'
                 });
@@ -440,12 +441,14 @@ var NudgeManager = {
 
             (function(suggestion) {
                 card.addEventListener('click', function() {
-                    var navBtn = document.querySelector('.nav-btn[data-group="' + suggestion.group + '"]');
-                    if (navBtn) navBtn.click();
-                    setTimeout(function() {
-                        var actBtn = document.querySelector('[data-activity="' + suggestion.activityId + '"]');
-                        if (actBtn) actBtn.click();
-                    }, 100);
+                    // Open the activity directly. This used to click the group
+                    // tab and then look for a button tagged with the activity,
+                    // but the only element with that tag was this card, so it
+                    // clicked itself every 100 ms and kept throwing the student
+                    // back to the group menu.
+                    if (typeof StudyEngine !== 'undefined' && StudyEngine.activateActivity) {
+                        StudyEngine.activateActivity(suggestion.activityId, suggestion.params || []);
+                    }
                 });
             })(s);
 
