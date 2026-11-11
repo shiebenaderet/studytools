@@ -80,6 +80,12 @@ A unit is `study-tools/units/<id>/config.json` plus `textbook.json`, listed in
    below automatically if they reuse the existing helpers.
 7. Run `node study-tools/engine/tools/unit-content-check.js <unit-id>` and fix
    every ERROR. WARN lines are advisory.
+8. **Reading levels are measured, not guessed.** `docs/READING-LEVELS.md`
+   defines Quick, Clear, Full and Deep (data keys `level0`, `simplified`,
+   `standard`, `advanced`). Run
+   `node study-tools/engine/tools/reading-levels-check.js <unit-id>` and
+   rewrite any reading that fails. Every level keeps the same facts and every
+   `vocabTerms` word, spelled the same.
 
 ## Engine conventions
 
@@ -109,6 +115,7 @@ A unit is `study-tools/units/<id>/config.json` plus `textbook.json`, listed in
 
 - Node unit tests: `node study-tools/engine/tools/<name>.test.js`.
 - Content check: `node study-tools/engine/tools/unit-content-check.js`.
+- Reading levels: `node study-tools/engine/tools/reading-levels-check.js <unit-id>`.
 - Browser smoke tests: serve `study-tools/` with `python3 -m http.server 8765`
   (start it as a background job and stop it by job, not with `pkill -f`,
   which can kill the calling shell), then drive Playwright (preinstalled) to

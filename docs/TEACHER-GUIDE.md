@@ -514,6 +514,16 @@ Run this from the repository root. It reports any category that does not line up
 node study-tools/engine/tools/unit-content-check.js my-unit
 ```
 
+### Check a unit's reading levels
+
+A textbook can offer up to four reading levels: Quick, Clear, Full and Deep. `docs/READING-LEVELS.md` defines them. This command measures every section at each level it has and prints the grade and word count:
+
+```
+node study-tools/engine/tools/reading-levels-check.js my-unit
+```
+
+It reports an ERROR when a reading measures above its level's limit (Quick 5.0, Clear 7.5, Full 10.5), when the levels of one section do not step up from Quick to Deep, when a unit offers a level that a section has no text for, or when a level leaves out one of the section's `vocabTerms` (tap-to-define needs the exact word). A reading that fails is rewritten, not relabeled. Add `--read-more` to measure the Read More panels too.
+
 ### Learn Mode config fields
 
 These optional fields customize Learn Mode behavior per unit:

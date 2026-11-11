@@ -8,7 +8,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 
 [![Live Site](https://img.shields.io/badge/Live_Site-study.mrbsocialstudies.org-1669C5?style=for-the-badge&logo=google-chrome&logoColor=white)](https://study.mrbsocialstudies.org)
 [![License](https://img.shields.io/badge/License-Educational_Use-22c55e?style=for-the-badge)](#license)
-[![Version](https://img.shields.io/badge/Version-8.55.56-f59e0b?style=for-the-badge)](#)
+[![Version](https://img.shields.io/badge/Version-8.55.57-f59e0b?style=for-the-badge)](#)
 
 ---
 
@@ -164,7 +164,10 @@ Before a unit goes live, check it:
 
 ```bash
 node study-tools/engine/tools/unit-content-check.js <unit-id>
+node study-tools/engine/tools/reading-levels-check.js <unit-id>
 ```
+
+The second command measures every textbook section at each reading level (Quick, Clear, Full, Deep) against [docs/READING-LEVELS.md](docs/READING-LEVELS.md).
 
 Conventions for building units and changing the engine (phone keyboards, Go Deeper links, sync, testing) are in [CLAUDE.md](CLAUDE.md), which Claude Code also reads at the start of every session.
 
