@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.74] - 2026-11-11
+
+### Fixed
+- Listen no longer picks a robot voice. On a Mac or iPad with no online voice, the textbook's read-aloud chose the first English voice in the device's list, which is "Albert," one of Apple's novelty voices. It now skips the novelty and old synthetic voices, prefers the device's own default voice, and uses a downloaded Premium or Enhanced voice when the device has one. Chrome, Chromebooks and Edge keep their online voices. Applies to every unit. Reported by the teacher.
+
 ## [8.55.73] - 2026-11-11
 
 ### Changed

@@ -19,6 +19,11 @@ var ReadAloud = (function () {
     var rate = 1;
     try { rate = +localStorage.getItem(PREF_KEY) || 1; } catch (e) { rate = 1; }
 
+    // Apple ships dozens of English voices. These are the ordinary speaking
+    // voices, and these are the novelty and old robot voices to stay away from.
+    var STANDARD_VOICES = /^(Samantha|Ava|Allison|Alex|Evan|Nathan|Susan|Zoe|Tom|Joelle|Noelle|Nicky|Aaron|Karen|Daniel|Moira|Tessa)\b/i;
+    var NOVELTY_VOICES = /^(Albert|Bad News|Bahh|Bells|Boing|Bubbles|Cellos|Good News|Jester|Organ|Superstar|Trinoids|Whisper|Wobble|Zarvox|Fred|Junior|Kathy|Ralph|Eddy|Flo|Grandma|Grandpa|Reed|Rocko|Sandy|Shelley)\b/i;
+
     function pickVoice() {
         if (!synth) return;
         var vs = synth.getVoices(), best = null, score = -1;
@@ -26,10 +31,20 @@ var ReadAloud = (function () {
             var v = vs[i], l = (v.lang || '').toLowerCase().replace('_', '-');
             if (l.split('-')[0] !== 'en') continue;
             var s = 1;
+            // Best first: a device's downloaded high-quality voices, then the
+            // browsers' online voices.
+            if (/premium/i.test(v.name)) s += 6;
+            else if (/enhanced|siri/i.test(v.name)) s += 5;
             if (/natural|online|neural/i.test(v.name)) s += 4;
             if (/google/i.test(v.name)) s += 3;
             if (l === 'en-us') s += 2;
             if (v.localService === false) s += 1;
+            // The device's own default voice beats an arbitrary one. Without
+            // this, a Mac or iPad with no online voice read in "Albert", the
+            // first name in its alphabetical list and one of the robot voices.
+            if (v['default']) s += 2;
+            if (STANDARD_VOICES.test(v.name)) s += 2;
+            if (NOVELTY_VOICES.test(v.name)) s -= 20;
             if (s > score) { score = s; best = v; }
         }
         voice = best;
