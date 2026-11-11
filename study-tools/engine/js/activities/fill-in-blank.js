@@ -153,7 +153,7 @@ StudyEngine.registerActivity({
         var card = document.createElement('div');
         card.className = 'fib-sentence-card fib-single';
 
-        var parts = item.sentence.split('___');
+        var parts = item.sentence.split(/_{3,}/);
         for (var p = 0; p < parts.length; p++) {
             var textSpan = document.createElement('span');
             textSpan.textContent = parts[p];
@@ -346,6 +346,17 @@ StudyEngine.registerActivity({
         container.appendChild(wrapper);
     },
 
+
+    // A typed answer is checked leniently (typos, "3/5" for "three-fifths"),
+    // but never accepted when it is closer to a different term in the unit.
+    // A word-bank answer is one of the bank's own strings, so it must match.
+    _isRight(placed, item) {
+        if (!placed) return false;
+        if (placed.toLowerCase() === item.answer.toLowerCase()) return true;
+        if (this._mode !== 'type') return false;
+        var others = ((this._config && this._config.vocabulary) || []).map(function(v) { return v.term; });
+        return StudyUtils.answerMatches(placed, item.answer, others);
+    },
     _nextQuestion() {
         if (this._currentIndex < this._sentences.length - 1) {
             this._currentIndex++;
@@ -378,7 +389,7 @@ StudyEngine.registerActivity({
             row.className = 'fib-result-row';
 
             var placed = self._answers[index] || '';
-            var isCorrect = placed.toLowerCase() === item.answer.toLowerCase();
+            var isCorrect = self._isRight(placed, item);
             if (isCorrect) correct++;
 
             row.classList.add(isCorrect ? 'fib-result-correct' : 'fib-result-incorrect');
@@ -391,7 +402,7 @@ StudyEngine.registerActivity({
             var contentDiv = document.createElement('div');
             contentDiv.className = 'fib-result-content';
 
-            var parts = item.sentence.split('___');
+            var parts = item.sentence.split(/_{3,}/);
             var sentenceSpan = document.createElement('div');
             sentenceSpan.className = 'fib-result-sentence';
             for (var p = 0; p < parts.length; p++) {
@@ -404,6 +415,14 @@ StudyEngine.registerActivity({
                 }
             }
             contentDiv.appendChild(sentenceSpan);
+
+            // Accepted with a typo or a different form: show the exact term
+            if (isCorrect && StudyUtils.answerKey(placed) !== StudyUtils.answerKey(item.answer)) {
+                var spellLabel = document.createElement('div');
+                spellLabel.className = 'fib-correct-label fib-spelling-label';
+                spellLabel.textContent = 'Counted as correct. The term is written: ' + item.answer;
+                contentDiv.appendChild(spellLabel);
+            }
 
             if (!isCorrect) {
                 var correctLabel = document.createElement('div');
@@ -491,7 +510,7 @@ StudyEngine.registerActivity({
         var missedTerms = [];
         this._sentences.forEach(function(item, index) {
             var placed = self._answers[index] || '';
-            if (placed.toLowerCase() !== item.answer.toLowerCase()) {
+            if (!self._isRight(placed, item)) {
                 missedTerms.push(item.answer);
             }
         });

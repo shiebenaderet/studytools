@@ -103,8 +103,12 @@ A unit is `study-tools/units/<id>/config.json` plus `textbook.json`, listed in
   `autocorrect="off"`, `autocapitalize="off"`, `spellcheck=false`. A hidden
   input must be at least 1x1 px or some phones will not raise the keyboard.
 - **Typed answers** go through `StudyUtils.answerMatches(typed, answer)`,
-  which forgives case, punctuation, a leading "the" and one typo (two for long
-  answers). Do not write a new matcher.
+  which forgives case, punctuation, hyphens, spacing, a leading "the", "a" or
+  "an", digits for number words ("3/5" for "three-fifths", "14th" for
+  "fourteenth") and a few typos (one for 4 to 7 letters, up to four for long
+  answers). Pass the unit's other terms as the third argument so a guess that
+  is closer to a different term ("legislative" for "legislature") stays wrong.
+  Do not write a new matcher. Tests: `answer-matches.test.js`.
 - **Text selection features** (the highlighter) must coexist with the
   tap-to-define `.tb-vocab` spans and Read Aloud. Wrap text nodes only; never
   change a section's `textContent`, because Read Aloud and the highlighter

@@ -62,18 +62,70 @@ const StudyUtils = {
         return prev[b.length];
     },
 
-    // Lenient check for a typed answer: case, punctuation, extra spaces and a
-    // leading "the" are ignored, and one typo is forgiven (two for long answers).
-    answerMatches(typed, answer) {
-        var norm = function(str) {
-            return StudyUtils.normalizeTerm(String(str || '')).replace(/^the\s+/, '').replace(/\s+/g, ' ').trim();
-        };
-        var t = norm(typed);
-        var a = norm(answer);
+    // Puts a typed answer and the expected one into the same plain form, so
+    // "3/5 Compromise", "three fifths compromise" and "Three-Fifths Compromise"
+    // compare as equal, as do "14th Amendment" and "Fourteenth Amendment".
+    _NUM_WORDS: ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten',
+        'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty'],
+    _ORD_WORDS: ['zeroth', 'first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth', 'tenth',
+        'eleventh', 'twelfth', 'thirteenth', 'fourteenth', 'fifteenth', 'sixteenth', 'seventeenth', 'eighteenth', 'nineteenth', 'twentieth'],
+    _TENS: { 2: 'twenty', 3: 'thirty' },
+    _numWord(n, ordinal) {
+        n = parseInt(n, 10);
+        if (n <= 20) return (ordinal ? this._ORD_WORDS : this._NUM_WORDS)[n];
+        if (n < 40) {
+            var ones = n % 10, tens = this._TENS[Math.floor(n / 10)];
+            if (!ones) return ordinal ? tens.replace(/y$/, 'ieth') : tens;
+            return tens + ' ' + (ordinal ? this._ORD_WORDS : this._NUM_WORDS)[ones];
+        }
+        return String(n);
+    },
+    answerKey(str) {
+        var self = this;
+        var s = String(str || '').toLowerCase()
+            .replace(/[‘’]/g, "'").replace(/[‐-―]/g, '-')
+            .replace(/&/g, ' and ');
+        // Fractions: 3/5, 3/5ths, 3-5ths -> "three fifths"; 1/2 -> "one half"
+        s = s.replace(/\b(\d{1,2})\s*[\/-]\s*(\d{1,2})(?:ths?|rds?|nds?)?\b/g, function(m, a, b) {
+            if (+b < 2 || +a > 20 || +b > 20) return m;
+            var den = +b === 2 ? 'half' : self._numWord(b, true);
+            return self._numWord(a) + ' ' + den + (+a > 1 && +b !== 2 ? 's' : (+a > 1 ? 's' : ''));
+        }).replace(/halfs\b/g, 'halves');
+        // Ordinals and plain numbers: 14th -> fourteenth, 13 -> thirteen
+        s = s.replace(/\b(\d{1,2})(st|nd|rd|th)\b/g, function(m, n) { return self._numWord(n, true); });
+        s = s.replace(/\b\d{1,2}\b/g, function(n) { return self._numWord(n); });
+        return s.replace(/[-\/]/g, ' ').replace(/[^a-z0-9\s]/g, '')
+            .replace(/\s+/g, ' ').trim().replace(/^(the|a|an)\s+/, '');
+    },
+
+    // How many wrong letters are forgiven, by the length of the answer.
+    typoAllowance(len) {
+        return len >= 20 ? 4 : len >= 13 ? 3 : len >= 8 ? 2 : len >= 4 ? 1 : 0;
+    },
+
+    // Lenient check for a typed answer. Case, punctuation, hyphens, spacing and
+    // a leading "the", "a" or "an" are ignored; numbers may be digits or words;
+    // and a few typos are forgiven, more for longer answers.
+    // `others` (optional) lists the other terms the student could have meant.
+    // A guess that is closer to one of those than to the answer is wrong, so
+    // "legislative" is never accepted for "legislature".
+    answerMatches(typed, answer, others) {
+        var t = this.answerKey(typed);
+        var a = this.answerKey(answer);
         if (!t || !a) return false;
         if (t === a) return true;
-        var allowed = a.length >= 10 ? 2 : (a.length >= 5 ? 1 : 0);
-        return StudyUtils.editDistance(t, a) <= allowed;
+        // Spaces do not count: "bill ofrights", "anti federalist"
+        var ts = t.replace(/ /g, ''), as = a.replace(/ /g, '');
+        var d = ts === as ? 0 : this.editDistance(ts, as);
+        if (d > this.typoAllowance(as.length)) return false;
+        if (others && d > 0) {
+            for (var i = 0; i < others.length; i++) {
+                var o = this.answerKey(others[i]).replace(/ /g, '');
+                if (!o || o === as) continue;
+                if (o === ts || this.editDistance(ts, o) <= d) return false;
+            }
+        }
+        return true;
     },
 
     showToast(message, type, duration) {

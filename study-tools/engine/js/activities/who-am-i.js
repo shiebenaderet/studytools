@@ -421,7 +421,8 @@ StudyEngine.registerActivity({
     },
 
     _handleTypedGuess(typed) {
-        if (StudyUtils.answerMatches(typed, this._currentTerm.term)) {
+        var others = ((this._config && this._config.vocabulary) || []).map(function(v) { return v.term; });
+        if (StudyUtils.answerMatches(typed, this._currentTerm.term, others)) {
             this._resolveGuess(true);
             return;
         }

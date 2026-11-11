@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.84] - 2026-11-11
+
+### Changed
+- Typed answers are graded more forgivingly in **Fill in the Blank** (typing mode) and **Who Am I**. Fill in the Blank used to need the exact spelling. Both now use one shared check that ignores case, punctuation, hyphens, spacing and a leading "the," "a" or "an"; accepts digits for number words ("3/5 Compromise," "3/5ths," "14th Amendment"); and forgives a few typos, more for longer answers (one for 4 to 7 letters, two for 8 to 12, three for 13 to 19, four beyond that). A guess that is closer to a different term in the unit is still wrong, so "legislative" is not accepted for "legislature." When a typed answer is counted with a spelling difference, the results show how the term is written. Word-bank answers are unchanged. Requested by the teacher.
+
+### Fixed
+- Fill in the Blank no longer shows two stray underscores after the blank ("federalism__") in units whose sentences are written with five underscores (Unit 1 and Unit 3), while answering or in the results. Reported by the teacher.
+
+### Added
+- `answer-matches.test.js`: tests for the shared check, including that no two terms in any unit can be accepted for each other.
+
 ## [8.55.83] - 2026-11-11
 
 ### Fixed

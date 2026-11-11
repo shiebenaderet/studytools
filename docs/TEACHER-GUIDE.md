@@ -353,7 +353,7 @@ Add any of these to your `activities` array:
 | Activity ID | What it does | Required content |
 |------------|-------------|-----------------|
 | `practice-test` | Multiple choice quiz | `practiceQuestions` |
-| `fill-in-blank` | Complete sentences with terms | `fillInBlankSentences` |
+| `fill-in-blank` | Complete sentences with terms, from a word bank or by typing. Typed answers forgive case, hyphens, spacing, a few typos and digits for number words ("3/5 Compromise"), but never accept a different term from the unit. Write the blank as three or more underscores. | `fillInBlankSentences` |
 | `short-answer` | Open-ended response with rubric | `shortAnswerQuestions` |
 | `timeline` | Order events chronologically | `timelineEvents` |
 | `power-sort` | Tap each power or job into the branch or level of government that holds it, with an explanation after every answer | `powerSorts` |

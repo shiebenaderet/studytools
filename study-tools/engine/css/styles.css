@@ -3182,6 +3182,7 @@ body.timer-active header {
 .fib-answer-correct { font-weight: 700; color: var(--success); text-decoration: underline; text-decoration-color: var(--success); }
 .fib-answer-incorrect { font-weight: 700; color: var(--error); text-decoration: line-through; }
 .fib-correct-label { color: var(--success); font-size: 0.85em; font-weight: 600; margin-top: 4px; }
+.fib-spelling-label { color: var(--text-secondary); font-weight: 500; }
 .fib-result-icon { font-size: 1.1em; padding-top: 2px; }
 .fib-result-correct .fib-result-icon { color: var(--success); }
 .fib-result-incorrect .fib-result-icon { color: var(--error); }
