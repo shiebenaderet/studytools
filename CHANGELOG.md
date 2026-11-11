@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.83] - 2026-11-11
+
+### Fixed
+- James Wilson's portrait in Unit 3 is cropped to his head and shoulders. The picture is a miniature in a locket, and the round frame was showing the locket's ring and black background around a small face. Reported by the teacher.
+
 ## [8.55.82] - 2026-11-11
 
 ### Changed
