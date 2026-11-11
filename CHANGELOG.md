@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.72] - 2026-11-11
+
+### Added
+- Unit 3 home page quotes now show portraits: James Madison (two quotes), Benjamin Franklin and Thomas Jefferson. The Preamble has none because it is a document. Each quote's source link now opens the page that holds the words (Federalist No. 51 and Madison's notes at the Avalon Project, and Jefferson's letter at The Founders' Constitution) in place of a site's front page, and all four were checked word for word against those pages. Requested by the teacher.
+
 ## [8.55.71] - 2026-11-11
 
 ### Fixed

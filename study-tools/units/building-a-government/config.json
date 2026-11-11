@@ -1830,25 +1830,29 @@
                 "text": "If men were angels, no government would be necessary.",
                 "author": "James Madison",
                 "source": "The Federalist No. 51, February 1788",
-                "sourceUrl": "https://guides.loc.gov/federalist-papers/full-text"
+                "sourceUrl": "https://avalon.law.yale.edu/18th_century/fed51.asp",
+                "portrait": "images/portraits/james-madison.jpg"
             },
             {
                 "text": "Ambition must be made to counteract ambition.",
                 "author": "James Madison",
                 "source": "The Federalist No. 51, February 1788",
-                "sourceUrl": "https://guides.loc.gov/federalist-papers/full-text"
+                "sourceUrl": "https://avalon.law.yale.edu/18th_century/fed51.asp",
+                "portrait": "images/portraits/james-madison.jpg"
             },
             {
                 "text": "I confess that there are several parts of this constitution which I do not at present approve, but I am not sure I shall never approve them.",
                 "author": "Benjamin Franklin",
-                "source": "Speech at the Constitutional Convention, September 17, 1787",
-                "sourceUrl": "https://founders.archives.gov/"
+                "source": "Speech at the Constitutional Convention, September 17, 1787, from James Madison’s notes",
+                "sourceUrl": "https://avalon.law.yale.edu/18th_century/debates_917.asp",
+                "portrait": "images/portraits/benjamin-franklin.jpg"
             },
             {
                 "text": "A bill of rights is what the people are entitled to against every government on earth.",
                 "author": "Thomas Jefferson",
                 "source": "Letter to James Madison, December 20, 1787",
-                "sourceUrl": "https://founders.archives.gov/"
+                "sourceUrl": "https://press-pubs.uchicago.edu/founders/documents/v1ch14s30.html",
+                "portrait": "images/portraits/thomas-jefferson.jpg"
             }
         ],
         "funFacts": [
