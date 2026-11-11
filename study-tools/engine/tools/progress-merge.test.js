@@ -19,7 +19,8 @@ const ctx = {
 };
 vm.createContext(ctx);
 vm.runInContext(src + '\nthis.PM = ProgressManager;', ctx);
-const merge = (a, l, r) => ctx.PM.mergeActivityData(a, l, r);
+// Round-trip through JSON so results compare cleanly across the vm boundary.
+const merge = (a, l, r) => { const m = ctx.PM.mergeActivityData(a, l, r); return m == null ? m : JSON.parse(JSON.stringify(m)); };
 
 let passed = 0;
 function test(name, fn) { fn(); passed++; console.log('ok - ' + name); }
@@ -54,5 +55,37 @@ test('learn-mode-streak: same-day tie keeps higher count', () => {
         { currentStreak: 1, longestStreak: 1, lastSessionDate: 'Wed Oct 28 2026' },
         { currentStreak: 21, longestStreak: 21, lastSessionDate: 'Wed Oct 28 2026' });
     assert.strictEqual(r.currentStreak, 21);
+});
+test('term-mastery: fresh device keeps terms from the cloud, higher count wins', () => {
+    const r = merge('term-mastery',
+        { Repeal: { sources: ['learn-mode'], count: { 'learn-mode': 1 } } },
+        { Repeal: { sources: ['learn-mode', 'wordle'], count: { 'learn-mode': 2, wordle: 1 } },
+          Boycott: { sources: ['learn-mode'], count: { 'learn-mode': 3 } } });
+    assert.deepStrictEqual(r.Repeal.count, { 'learn-mode': 2, wordle: 1 });
+    assert.deepStrictEqual(r.Repeal.sources.sort(), ['learn-mode', 'wordle']);
+    assert.strictEqual(r.Boycott.count['learn-mode'], 3);
+});
+test('learn-mode-tiers: union of terms, device wins a clash', () => {
+    const r = merge('learn-mode-tiers', { tyranny: 3 }, { tyranny: 2, Repeal: 2 });
+    assert.deepStrictEqual(r, { tyranny: 3, Repeal: 2 });
+});
+test('weakness_tracker: union of terms', () => {
+    const r = merge('weakness_tracker', { terms: { Boycott: 1 } }, { terms: { Loyalist: 2 } });
+    assert.deepStrictEqual(r.terms, { Boycott: 1, Loyalist: 2 });
+});
+test('reflections: both devices kept, no duplicates, oldest first', () => {
+    const a = { text: 'a', timestamp: 1 }, b = { text: 'b', timestamp: 2 }, c = { text: 'c', timestamp: 3 };
+    const r = merge('learn-mode-reflections', [c, a], [a, b]);
+    assert.deepStrictEqual(r.map(e => e.text), ['a', 'b', 'c']);
+});
+test('learn-mode-sessions: union keeps the 20 newest', () => {
+    const mk = n => ({ mode: 'smart', timestamp: n });
+    const r = merge('learn-mode-sessions', Array.from({ length: 15 }, (_, i) => mk(i + 10)), Array.from({ length: 15 }, (_, i) => mk(i)));
+    assert.strictEqual(r.length, 20);
+    assert.strictEqual(r[0].timestamp, 5);
+    assert.strictEqual(r[19].timestamp, 24);
+});
+test('badges: union', () => {
+    assert.deepStrictEqual(merge('badges', ['a'], ['b', 'a']).sort(), ['a', 'b']);
 });
 console.log(passed + ' passed');

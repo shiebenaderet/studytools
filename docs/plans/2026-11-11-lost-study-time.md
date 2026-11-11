@@ -56,3 +56,20 @@ Size: small, done. Goes live only when merged.
    since it already merged correctly. Recommend leaving the streak alone.
 4. **Badges** use the same newer-wins default (an array with no timestamp) and
    could lose a badge the same way. Fix as a separate change? Small.
+
+## Outcome (2026-11-11)
+
+Teacher approved all of the above.
+
+- 8.55.45 merged to `main`.
+- Restored `studyTime`: period 5 student to 54,260 s (15 h 04 min); period 1
+  student to 7,359 s (2 h 03 min).
+- The period 1 student had a duplicate period 3 account (Nov 3, one day). The
+  teacher confirmed period 1 is correct, so the accounts were merged: study time
+  added, study days and term mastery combined, unique rows moved, sessions
+  reassigned, the period 3 account deleted. His study days were also restored
+  from his session log (2 stored, 7 real); no other student had that gap.
+- Badges turned out to be unused (nothing awards them). 8.55.46 instead gives
+  merge rules to every synced key that had no timestamp: term-mastery,
+  learn-mode-tiers, learn-mode-reflections, learn-mode-wiki-entries,
+  learn-mode-sessions, weakness_tracker, and badges.

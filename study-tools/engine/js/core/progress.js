@@ -439,6 +439,58 @@ const ProgressManager = {
             return pick;
         }
 
+        // The keys below also have no updatedAt, so the default let a fresh
+        // device's copy replace everything in the cloud. They only build up,
+        // so combine both copies instead.
+
+        // term-mastery: { term: { sources: [...], count: { activity: n } } }.
+        // Union the sources and keep the higher count per activity.
+        if (activity === 'term-mastery') {
+            var tm = {};
+            Object.keys(Object.assign({}, remote, local)).forEach(function(term) {
+                var a = local[term] || {}, b = remote[term] || {};
+                var count = Object.assign({}, b.count || {});
+                Object.keys(a.count || {}).forEach(function(act) {
+                    count[act] = Math.max(count[act] || 0, a.count[act] || 0);
+                });
+                tm[term] = Object.assign({}, b, a, {
+                    sources: [...new Set([...(a.sources || []), ...(b.sources || [])])],
+                    count: count
+                });
+            });
+            return tm;
+        }
+
+        // Per-term maps: keep every term from both, device copy on a clash.
+        if (activity === 'learn-mode-tiers') {
+            return Object.assign({}, remote, local);
+        }
+        if (activity === 'weakness_tracker') {
+            return Object.assign({}, remote, local, {
+                terms: Object.assign({}, remote.terms || {}, local.terms || {})
+            });
+        }
+
+        // Timestamped lists the student writes over time: union by timestamp
+        // and text, oldest first, with the same caps the activities apply.
+        var listCaps = { 'learn-mode-reflections': 50, 'learn-mode-wiki-entries': 100, 'learn-mode-sessions': 20 };
+        if (listCaps[activity]) {
+            var seen = {};
+            var all = [].concat(Array.isArray(remote) ? remote : [], Array.isArray(local) ? local : [])
+                .filter(function(e) {
+                    var k = (e && e.timestamp) + '|' + (e && (e.text || e.mode || ''));
+                    if (seen[k]) return false;
+                    seen[k] = true;
+                    return true;
+                })
+                .sort(function(a, b) { return (a.timestamp || 0) - (b.timestamp || 0); });
+            return all.slice(Math.max(0, all.length - listCaps[activity]));
+        }
+
+        if (activity === 'badges') {
+            return [...new Set([...(Array.isArray(local) ? local : []), ...(Array.isArray(remote) ? remote : [])])];
+        }
+
         // Default: newer wins (original behavior)
         var remoteTime = remote.updatedAt || 0;
         var localTime = local.updatedAt || 0;

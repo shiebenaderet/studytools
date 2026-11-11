@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.46] - 2026-11-11
+
+### Fixed
+- Logging in on a fresh device no longer wipes term mastery, Learn Mode tiers, reflections, wiki entries, Learn Mode session history or the weakness tracker. Like study time (8.55.45), these had no timestamp, so the device's copy always replaced the cloud's. Each now combines both copies: term mastery keeps every activity and the higher count, per-term maps keep every term, and the written lists keep every entry by timestamp within their existing limits. Badges get the same union rule, though nothing awards them yet. Follow-up to a period 5 bug report.
+
 ## [8.55.45] - 2026-11-11
 
 ### Fixed
