@@ -717,7 +717,11 @@ StudyEngine.registerActivity({
                 self._updateTocState();
             });
         }
-        readingArea.appendChild(markBtn);
+        // Mark as Read sits above Read More, so the required step comes first
+        // and the optional longer reading follows it.
+        var rmBox = readingArea.querySelector('.tb-readmore');
+        if (rmBox) readingArea.insertBefore(markBtn, rmBox);
+        else readingArea.appendChild(markBtn);
 
         // Go Deeper: at the end of a chapter, curated links for its category
         if (this._currentSection === seg.sections.length - 1 && typeof GoDeeper !== 'undefined') {
