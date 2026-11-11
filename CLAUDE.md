@@ -86,6 +86,13 @@ A unit is `study-tools/units/<id>/config.json` plus `textbook.json`, listed in
    `node study-tools/engine/tools/reading-levels-check.js <unit-id>` and
    rewrite any reading that fails. Every level keeps the same facts and every
    `vocabTerms` word, spelled the same.
+9. **Key terms and pronunciations.** Give each section two to four
+   `keyTerms` (new words that are not tested vocabulary), each with a `pos`
+   and a one-sentence `note`, and keep vocabulary plus key terms to about 7
+   per section so Word colors does not turn the page into a rainbow. Tag
+   every vocabulary word with `pos`. Put hard names and words in the
+   textbook's `pronunciations`; the teacher checks every guide, above all
+   the names of Native nations.
 
 ## Engine conventions
 
@@ -102,6 +109,11 @@ A unit is `study-tools/units/<id>/config.json` plus `textbook.json`, listed in
   tap-to-define `.tb-vocab` spans and Read Aloud. Wrap text nodes only; never
   change a section's `textContent`, because Read Aloud and the highlighter
   both work by character offset.
+- **Marks in textbook text** (vocabulary, key terms, pronunciation guides)
+  are added when a section is drawn, by `_highlightVocab` in `textbook.js`.
+  A pronunciation guide is drawn with CSS `::after` from a `data-say`
+  attribute, so it never becomes part of the text. Add new marks the same
+  way. Marks skip subheads.
 - **Progress sync.** Progress saves to localStorage and syncs to Supabase.
   `ProgressManager.mergeActivityData` decides how two devices combine. Any new
   progress field that a student builds up over time (highlights, sections

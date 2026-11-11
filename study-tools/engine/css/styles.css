@@ -6021,6 +6021,51 @@ a.sift-detail-link:hover { opacity: 0.8; }
 }
 .tb-vocab:hover { background: rgba(251, 191, 36, 0.15); border-radius: 3px; }
 
+/* Key terms: new words a section uses that are not tested vocabulary. Marked
+   once per section, lighter than vocabulary, tap for a short note. */
+.tb-key {
+    text-decoration: underline; text-decoration-style: solid; text-decoration-thickness: 1px;
+    text-decoration-color: var(--text-muted); text-underline-offset: 3px;
+    cursor: pointer; transition: background 0.15s;
+}
+.tb-key:hover { background: rgba(148, 163, 184, 0.18); border-radius: 3px; }
+
+/* Pronunciation guide beside a word (Quick and Clear). Drawn by CSS so the
+   section's text, Listen and highlight offsets stay the same. inline-block
+   keeps the word's underline off the guide. */
+[data-say]::after {
+    content: " (" attr(data-say) ")"; display: inline-block; white-space: pre;
+    font-weight: 400; font-style: normal; font-size: 0.88em; color: var(--text-secondary);
+}
+
+/* Word colors (off by default): the first time a section's new word appears,
+   it takes the color of its part of speech. Each part of speech also has its
+   own underline, so the code does not depend on telling red from green. */
+.tb-wrapper { --tb-noun: #ff8a80; --tb-verb: #6fd08c; --tb-adjective: #8ab4f8; --tb-adverb: #ffb74d; }
+body.light-mode .tb-wrapper { --tb-noun: #c62828; --tb-verb: #1b7a34; --tb-adjective: #1558b0; --tb-adverb: #b45309; }
+.tb-vocab-popup { --tb-noun: #ff8a80; --tb-verb: #6fd08c; --tb-adjective: #8ab4f8; --tb-adverb: #ffb74d; }
+body.light-mode .tb-vocab-popup { --tb-noun: #c62828; --tb-verb: #1b7a34; --tb-adjective: #1558b0; --tb-adverb: #b45309; }
+.tb-colors-on .tb-new.tb-pos-noun, .tb-colors-legend .tb-pos-noun, .tb-popup-pos.tb-pos-noun { color: var(--tb-noun); text-decoration: underline solid var(--tb-noun) 2px; text-underline-offset: 3px; }
+.tb-colors-on .tb-new.tb-pos-verb, .tb-colors-legend .tb-pos-verb, .tb-popup-pos.tb-pos-verb { color: var(--tb-verb); text-decoration: underline dashed var(--tb-verb) 2px; text-underline-offset: 3px; }
+.tb-colors-on .tb-new.tb-pos-adjective, .tb-colors-legend .tb-pos-adjective, .tb-popup-pos.tb-pos-adjective { color: var(--tb-adjective); text-decoration: underline dotted var(--tb-adjective) 2px; text-underline-offset: 3px; }
+.tb-colors-on .tb-new.tb-pos-adverb, .tb-colors-legend .tb-pos-adverb, .tb-popup-pos.tb-pos-adverb { color: var(--tb-adverb); text-decoration: underline double var(--tb-adverb) 1px; text-underline-offset: 3px; }
+.tb-colors-btn {
+    padding: 5px 10px; border-radius: 8px; border: 1.5px solid var(--border-color);
+    background: var(--bg-card); color: var(--text-secondary); cursor: pointer;
+    font-family: inherit; font-size: 0.8em; font-weight: 500;
+    transition: all 0.2s ease; display: flex; align-items: center; gap: 4px;
+}
+.tb-colors-btn:hover { border-color: var(--primary); color: var(--primary-text); }
+.tb-colors-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+.tb-colors-legend {
+    display: none; flex-wrap: wrap; gap: 6px 14px; align-items: center;
+    font-size: 0.8em; color: var(--text-secondary); margin: -6px 0 14px;
+}
+.tb-colors-on > .tb-colors-legend { display: flex; }
+.tb-colors-legend .tb-new { font-weight: 600; }
+.tb-popup-meta { font-size: 0.8em; color: var(--text-secondary); margin-bottom: 6px; }
+.tb-popup-pos { font-weight: 600; }
+
 /* Vocab popup */
 .tb-vocab-popup {
     position: fixed; z-index: 9999; background: var(--bg-elevated);

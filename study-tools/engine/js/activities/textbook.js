@@ -15,6 +15,15 @@ StudyEngine.registerActivity({
     _progress: null,
     _vocabMap: null,
     _popupEl: null,
+    _wordColors: false,
+
+    // Parts of speech a vocabulary word or key term can carry (`pos`). The
+    // colors follow the science team's SIOP code: noun red, verb green,
+    // adjective blue, adverb orange.
+    _POS: ['noun', 'verb', 'adjective', 'adverb'],
+    // Pronunciation guides print beside a word at these levels only; at the
+    // others they show in the word's card.
+    _SAY_LEVELS: ['level0', 'simplified'],
 
     // Reading level definitions — labels are non-stigmatizing. A unit's
     // textbook.json can replace these with its own readingLevels map
@@ -316,7 +325,42 @@ StudyEngine.registerActivity({
             levelPicker.appendChild(btn);
         });
         if (this._LEVELS.length > 1) topBar.appendChild(levelPicker);
+
+        // Word colors: off by default, remembered on this device. Shown only
+        // when the unit tags words with a part of speech.
+        var legend = null;
+        if (this._hasPosTags()) {
+            try { this._wordColors = localStorage.getItem('tb-word-colors') === '1'; } catch (e) { this._wordColors = false; }
+            var colorsBtn = document.createElement('button');
+            colorsBtn.type = 'button';
+            colorsBtn.className = 'tb-colors-btn' + (this._wordColors ? ' active' : '');
+            colorsBtn.setAttribute('aria-pressed', this._wordColors ? 'true' : 'false');
+            colorsBtn.title = 'Color new words by part of speech';
+            var colorsIcon = document.createElement('i');
+            colorsIcon.className = 'fas fa-palette';
+            colorsBtn.appendChild(colorsIcon);
+            colorsBtn.appendChild(document.createTextNode(' Word colors'));
+            legend = document.createElement('div');
+            legend.className = 'tb-colors-legend';
+            legend.appendChild(document.createTextNode('New words: '));
+            this._POS.forEach(function(pos) {
+                var chip = document.createElement('span');
+                chip.className = 'tb-new tb-pos-' + pos;
+                chip.textContent = pos;
+                legend.appendChild(chip);
+            });
+            colorsBtn.addEventListener('click', function() {
+                self._wordColors = !self._wordColors;
+                try { localStorage.setItem('tb-word-colors', self._wordColors ? '1' : '0'); } catch (e) { /* private window */ }
+                colorsBtn.classList.toggle('active', self._wordColors);
+                colorsBtn.setAttribute('aria-pressed', self._wordColors ? 'true' : 'false');
+                wrapper.classList.toggle('tb-colors-on', self._wordColors);
+            });
+            topBar.appendChild(colorsBtn);
+            wrapper.classList.toggle('tb-colors-on', this._wordColors);
+        }
         wrapper.appendChild(topBar);
+        if (legend) wrapper.appendChild(legend);
 
         // Body: sidebar tabs + reading area
         var seg = segments[this._currentSegment];
@@ -573,12 +617,12 @@ StudyEngine.registerActivity({
         contentDiv.className = 'tb-content';
         var rawContent = typeof section.content === 'object' ? (section.content[this._readingLevel] || section.content[this._defaultLevel] || section.content.standard || '') : (section.content || '');
         var sanitized = this._sanitizeHTML(rawContent);
-        var highlighted = this._highlightVocab(sanitized);
+        var highlighted = this._highlightVocab(sanitized, section);
         contentDiv.innerHTML = highlighted;
         readingArea.appendChild(contentDiv);
 
         // Attach vocab popup listeners
-        this._attachVocabListeners(contentDiv);
+        this._attachVocabListeners(contentDiv, section);
 
         // Highlighter: select text to highlight; stored per section and level
         this._hlKey = seg.id + '/' + section.id + '/' + this._readingLevel;
@@ -906,9 +950,9 @@ StudyEngine.registerActivity({
 
         var rmContent = document.createElement('div');
         rmContent.className = 'tb-content tb-readmore-content';
-        rmContent.innerHTML = this._highlightVocab(this._sanitizeHTML(raw));
+        rmContent.innerHTML = this._highlightVocab(this._sanitizeHTML(raw), section, level);
         body.appendChild(rmContent);
-        this._attachVocabListeners(rmContent);
+        this._attachVocabListeners(rmContent, section);
 
         this._readMoreExtras(body, seg, section);
 
@@ -1102,10 +1146,60 @@ StudyEngine.registerActivity({
         refreshStatus();
     },
 
-    _highlightVocab(html) {
+    _hasPosTags() {
+        var has = false;
+        (this._config.vocabulary || []).forEach(function(v) { if (v.pos) has = true; });
+        ((this._content && this._content.segments) || []).forEach(function(seg) {
+            (seg.sections || []).forEach(function(sec) {
+                (sec.keyTerms || []).forEach(function(k) { if (k.pos) has = true; });
+            });
+        });
+        return has;
+    },
+
+    _sayFor(term) {
+        var map = (this._content && this._content.pronunciations) || {};
+        if (!this._sayMap || this._sayMapSrc !== map) {
+            this._sayMap = {};
+            this._sayMapSrc = map;
+            for (var k in map) if (Object.prototype.hasOwnProperty.call(map, k)) this._sayMap[k.toLowerCase()] = map[k];
+        }
+        return this._sayMap[String(term).toLowerCase()] || '';
+    },
+
+    // Marks three kinds of words in a section's text, wrapping text only (the
+    // section's textContent never changes, so Listen and the highlighter keep
+    // their character offsets):
+    //   vocabulary  .tb-vocab  every occurrence, tap for the definition
+    //   key terms   .tb-key    first occurrence only (section.keyTerms)
+    //   pronunciation guides   data-say, drawn by CSS ::after, first occurrence
+    //                          only, at the Quick and Clear levels
+    // The first occurrence of a word this section teaches (its own vocabTerms
+    // and keyTerms) also gets .tb-new and .tb-pos-<part of speech>, which the
+    // Word colors switch colors.
+    _highlightVocab(html, section, level) {
         if (!this._vocabMap) return html;
         var self = this;
-        var terms = Object.keys(this._vocabMap).sort(function(a, b) {
+        section = section || {};
+        level = level || this._readingLevel;
+        var showSay = this._SAY_LEVELS.indexOf(level) !== -1;
+
+        var keyMap = {};
+        (section.keyTerms || []).forEach(function(k, i) {
+            if (k && k.term && !self._vocabMap[k.term.toLowerCase()]) keyMap[k.term.toLowerCase()] = { index: i, entry: k };
+        });
+        var own = {};
+        (section.vocabTerms || []).forEach(function(t) { own[String(t).toLowerCase()] = true; });
+        var sayOnly = {};
+        var pron = (this._content && this._content.pronunciations) || {};
+        if (showSay) {
+            Object.keys(pron).forEach(function(k) {
+                var lk = k.toLowerCase();
+                if (!self._vocabMap[lk] && !keyMap[lk]) sayOnly[lk] = true;
+            });
+        }
+
+        var terms = Object.keys(this._vocabMap).concat(Object.keys(keyMap), Object.keys(sayOnly)).sort(function(a, b) {
             return b.length - a.length; // Longest first to avoid partial matches
         });
         if (terms.length === 0) return html;
@@ -1117,16 +1211,44 @@ StudyEngine.registerActivity({
         // An optional plural ending lets "delegates" open the card for "delegate".
         var pattern = new RegExp('\\b(' + escaped.join('|') + ')(?:s|es)?\\b', 'gi');
 
+        var seen = {};
+        var inHeading = false;
         // Split on HTML tags to avoid replacing inside tags
         var parts = html.split(/(<[^>]+>)/);
         for (var i = 0; i < parts.length; i++) {
             // Only process text nodes (odd indices are tags)
+            if (i % 2 === 1) {
+                // A subhead is not a word's first use: marks, colors and guides
+                // wait for the sentence that follows it.
+                if (/^<h[1-6][\s>]/i.test(parts[i])) inHeading = true;
+                else if (/^<\/h[1-6]>/i.test(parts[i])) inHeading = false;
+            }
             if (i % 2 === 0) {
                 parts[i] = parts[i].replace(pattern, function(match, base) {
                     var key = base.toLowerCase();
-                    if (self._vocabMap[key]) {
-                        return '<span class="tb-vocab" data-term="' + self._escapeAttr(key) + '">' + match + '</span>';
+                    if (inHeading) {
+                        return self._vocabMap[key] ? '<span class="tb-vocab" data-term="' + self._escapeAttr(key) + '">' + match + '</span>' : match;
                     }
+                    var first = !seen[key];
+                    seen[key] = true;
+                    var vocab = self._vocabMap[key];
+                    var keyTerm = keyMap[key];
+                    var say = first && showSay ? self._sayFor(key) : '';
+                    // A vocabulary word shows its guide only in the section that teaches it.
+                    if (vocab && !own[key]) say = '';
+                    var sayAttr = say ? ' data-say="' + self._escapeAttr(say) + '"' : '';
+                    if (vocab) {
+                        var cls = 'tb-vocab';
+                        if (first && own[key] && self._POS.indexOf(vocab.pos) !== -1) cls += ' tb-new tb-pos-' + vocab.pos;
+                        return '<span class="' + cls + '" data-term="' + self._escapeAttr(key) + '"' + sayAttr + '>' + match + '</span>';
+                    }
+                    if (keyTerm) {
+                        if (!first) return match;
+                        var kcls = 'tb-key tb-new';
+                        if (self._POS.indexOf(keyTerm.entry.pos) !== -1) kcls += ' tb-pos-' + keyTerm.entry.pos;
+                        return '<span class="' + kcls + '" data-key="' + keyTerm.index + '"' + sayAttr + '>' + match + '</span>';
+                    }
+                    if (say) return '<span class="tb-say"' + sayAttr + '>' + match + '</span>';
                     return match;
                 });
             }
@@ -1138,9 +1260,19 @@ StudyEngine.registerActivity({
         return str.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     },
 
-    _attachVocabListeners(contentDiv) {
+    _attachVocabListeners(contentDiv, section) {
         var self = this;
         var vocabSpans = contentDiv.querySelectorAll('.tb-vocab');
+
+        // Key terms: a short note, not a flashcard definition.
+        contentDiv.querySelectorAll('.tb-key').forEach(function(span) {
+            span.addEventListener('click', function(e) {
+                e.stopPropagation();
+                var k = section && section.keyTerms && section.keyTerms[+span.dataset.key];
+                if (!k) return;
+                self._showVocabPopup(span, { term: k.term, definition: k.note || '', pos: k.pos, keyTerm: true });
+            });
+        });
 
         vocabSpans.forEach(function(span) {
             span.addEventListener('click', function(e) {
@@ -1157,7 +1289,7 @@ StudyEngine.registerActivity({
             document.removeEventListener('click', this._docClickHandler);
         }
         this._docClickHandler = function(e) {
-            if (self._popupEl && !self._popupEl.contains(e.target) && !e.target.classList.contains('tb-vocab')) {
+            if (self._popupEl && !self._popupEl.contains(e.target) && !e.target.classList.contains('tb-vocab') && !e.target.classList.contains('tb-key')) {
                 self._removePopup();
             }
         };
@@ -1175,10 +1307,27 @@ StudyEngine.registerActivity({
         termEl.textContent = entry.term;
         popup.appendChild(termEl);
 
-        var defEl = document.createElement('div');
-        defEl.className = 'tb-popup-def';
-        defEl.textContent = entry.definition;
-        popup.appendChild(defEl);
+        // Part of speech and how to say it, when the unit provides them.
+        var say = this._sayFor(entry.term);
+        if (this._POS.indexOf(entry.pos) !== -1 || say) {
+            var metaEl = document.createElement('div');
+            metaEl.className = 'tb-popup-meta';
+            if (this._POS.indexOf(entry.pos) !== -1) {
+                var posEl = document.createElement('span');
+                posEl.className = 'tb-popup-pos tb-pos-' + entry.pos;
+                posEl.textContent = entry.pos;
+                metaEl.appendChild(posEl);
+            }
+            if (say) metaEl.appendChild(document.createTextNode((metaEl.childNodes.length ? ' \u00b7 ' : '') + 'Say it: ' + say));
+            popup.appendChild(metaEl);
+        }
+
+        if (entry.definition) {
+            var defEl = document.createElement('div');
+            defEl.className = 'tb-popup-def';
+            defEl.textContent = entry.definition;
+            popup.appendChild(defEl);
+        }
 
         if (entry.simpleExplanation) {
             var simpleEl = document.createElement('div');

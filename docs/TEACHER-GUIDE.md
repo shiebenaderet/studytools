@@ -468,6 +468,31 @@ Strong readers run out of textbook before they run out of curiosity. A top-level
 - Links open in a new tab. Nothing is embedded, so no third-party player or script loads on your site.
 - Pick videos you have watched. YouTube is blocked on some school devices; a link that does not open at school still works at home.
 
+### Key terms, Word colors and pronunciation guides (optional)
+
+**Key terms** are new words a section uses that are not tested vocabulary, such as *Congress*, *bill* or a person's name. List two to four per section:
+
+```json
+"keyTerms": [
+  { "term": "Congress", "pos": "noun", "note": "The group of delegates from the states that made decisions for the whole country." },
+  { "term": "approved", "pos": "verb", "note": "Agreed to something in an official way, often by a vote." }
+]
+```
+
+- The textbook underlines a key term the **first time** it appears in the section, at every reading level and in Read More. Tapping it shows the note. Key terms never appear in flashcards, games or quizzes.
+- Write `term` the way it appears in the text ("approved", not "approve"). A plural ending is matched for you. A key term cannot repeat a vocabulary word.
+- `pos` is `noun`, `verb`, `adjective` or `adverb`. Add `"pos"` to each vocabulary word in `config.json` too.
+
+**Word colors** is a switch at the top of the textbook, off until a student turns it on, and remembered on that device. When it is on, the first appearance of each word the section teaches (its own `vocabTerms` and `keyTerms`) takes its part-of-speech color: noun red, verb green, adjective blue, adverb orange. Each part of speech also has its own underline (solid, dashed, dotted, double), so the code works for students who cannot tell red from green, and the word's card names its part of speech. Keep vocabulary plus key terms to about 7 per section; the checker warns above 8. The switch appears only when a unit has `pos` tags.
+
+**Pronunciation guides** live in one list at the top of `textbook.json`:
+
+```json
+"pronunciations": { "Nisqually": "nis-KWAH-lee", "bicameral": "by-KAM-er-ul" }
+```
+
+Write the stressed syllable in capitals. At the Quick and Clear levels the guide prints in parentheses after the word's first appearance in a section; at every level it shows in the word's card as "Say it". A vocabulary word shows its guide only in the section that teaches it. The guide is not part of the reading's text, so Listen does not read it aloud and highlights are not affected. Check every guide yourself, above all the names of Native nations; ask the tribe's own website or language program when unsure.
+
 ### Read More panels (optional)
 
 A textbook section can carry a longer version of itself in `readMore`. It shows as a closed **Read More** panel under the section. Opening it never counts toward the reading gate, so the short text stays the only required reading. Listen and the highlighter follow whichever text is open, and Read More highlights are saved separately from the short text's.

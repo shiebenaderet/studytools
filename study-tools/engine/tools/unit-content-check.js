@@ -114,6 +114,38 @@ ids.forEach(function(id) {
       var cat = seg.category || seg.title;
       if (cats.indexOf(cat) === -1) err(id, 'textbook segment "' + seg.id + '" category "' + cat + '" is not a vocabulary category');
     });
+
+    // Key terms, parts of speech and pronunciation guides
+    var POS = ['noun', 'verb', 'adjective', 'adverb'];
+    var vocabTerms = vocab.map(function(v) { return String(v.term).toLowerCase(); });
+    vocab.forEach(function(v) {
+      if (v.pos && POS.indexOf(v.pos) === -1) err(id, 'vocabulary "' + v.term + '": pos must be one of ' + POS.join(', '));
+    });
+    var plain = function(html) { return String(html || '').replace(/<h[1-6][^>]*>.*?<\/h[1-6]>/g, ' ').replace(/<[^>]+>/g, ' '); };
+    var has = function(html, term) {
+      return new RegExp('\\b' + String(term).replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(?:s|es)?\\b', 'i').test(plain(html));
+    };
+    (tb.segments || []).forEach(function(seg) {
+      (seg.sections || []).forEach(function(sec) {
+        var where = 'textbook ' + seg.id + '/' + sec.id;
+        var levels = typeof sec.content === 'object' ? sec.content : { standard: sec.content };
+        (sec.keyTerms || []).forEach(function(k) {
+          if (!k.term) return err(id, where + ': a key term has no term');
+          if (/[^A-Za-z0-9]$/.test(k.term)) err(id, where + ': key term "' + k.term + '" must end in a letter or number, or it will never match');
+          if (vocabTerms.indexOf(k.term.toLowerCase()) !== -1) err(id, where + ': key term "' + k.term + '" is already a vocabulary word');
+          if (k.pos && POS.indexOf(k.pos) === -1) err(id, where + ': key term "' + k.term + '" pos must be one of ' + POS.join(', '));
+          if (!k.note) warn(id, where + ': key term "' + k.term + '" has no note');
+          var found = Object.keys(levels).filter(function(lv) { return has(levels[lv], k.term); });
+          if (!found.length) err(id, where + ': key term "' + k.term + '" is not in the section text (outside subheads)');
+          else if (found.length < Object.keys(levels).length) warn(id, where + ': key term "' + k.term + '" is missing at ' + Object.keys(levels).filter(function(lv) { return found.indexOf(lv) === -1; }).join(', '));
+        });
+        var marked = (sec.keyTerms || []).length + (sec.vocabTerms || []).length;
+        if ((sec.keyTerms || []).length && marked > 8) warn(id, where + ': ' + marked + ' words are colored by Word colors; keep it to about 7');
+      });
+    });
+    Object.keys(tb.pronunciations || {}).forEach(function(word) {
+      if (!tb.pronunciations[word] || /[()]/.test(tb.pronunciations[word])) err(id, 'pronunciation for "' + word + '" must be plain text with no parentheses');
+    });
   }
 });
 

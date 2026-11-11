@@ -8,7 +8,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 
 [![Live Site](https://img.shields.io/badge/Live_Site-study.mrbsocialstudies.org-1669C5?style=for-the-badge&logo=google-chrome&logoColor=white)](https://study.mrbsocialstudies.org)
 [![License](https://img.shields.io/badge/License-Educational_Use-22c55e?style=for-the-badge)](#license)
-[![Version](https://img.shields.io/badge/Version-8.55.65-f59e0b?style=for-the-badge)](#)
+[![Version](https://img.shields.io/badge/Version-8.55.66-f59e0b?style=for-the-badge)](#)
 
 ---
 
@@ -26,7 +26,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 | Activity | Description |
 |----------|-------------|
 | **Learn Mode** | Guided study sessions inspired by Seneca Learning. Short interactive slides with adaptive depth (3 tiers), pre/post assessments, reflection prompts, Wiki Writer bonus challenge, 1.5x points multiplier |
-| **Textbook** | Interactive reading with 4 reading levels (Quick/Clear/Full/Deep), collapsible sidebar navigation, vocab highlighting, primary source quotes, Key Idea callouts, Quick Checks, optional Read More panels with the longer version of a section and a Read More Check that sends a written answer to the teacher, reading progress tracking, a highlighter with a "My highlights" list in the sidebar, and "Keep going" links at the end of each chapter |
+| **Textbook** | Interactive reading with 4 reading levels (Quick/Clear/Full/Deep), collapsible sidebar navigation, vocab highlighting, key terms with tap-for-a-note, an optional Word colors switch that colors each section's new words by part of speech (noun, verb, adjective, adverb), pronunciation guides beside hard words at Quick and Clear, primary source quotes, Key Idea callouts, Quick Checks, optional Read More panels with the longer version of a section and a Read More Check that sends a written answer to the teacher, reading progress tracking, a highlighter with a "My highlights" list in the sidebar, and "Keep going" links at the end of each chapter |
 | **Flashcards** | Anki-style spaced repetition with 3D flip animation, confidence rating, "Make Your Own Example", vocab tiers (must-know/encounter/bonus), and "Read in textbook" deep-links |
 | **Short Answer** | Visual card-based question selector with topic images, color-coded categories, and key term chips. Answers save as the student types; **Save Response** sends a signed-in student's answer to the teacher, and an answer of 20+ words earns 20 study points once per question. Paste is blocked |
 | **Source Analysis** | Primary source analysis using the SIFT method with scoring |

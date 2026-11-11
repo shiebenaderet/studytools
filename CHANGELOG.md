@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.66] - 2026-11-11
+
+### Added
+- Textbook: **key terms**, a **Word colors** switch and **pronunciation guides**. A section can list key terms (`keyTerms`), new words that are not tested vocabulary; each is underlined the first time it appears and opens a one-sentence note. Word colors, off until a student turns it on, colors the first appearance of each word a section teaches by part of speech, following the science team's code (noun red, verb green, adjective blue, adverb orange), with a different underline for each so it does not depend on telling red from green. Hard names and words can carry a pronunciation guide (`pronunciations`), printed beside the word at Quick and Clear and shown in its card at every level; Listen does not read the guide and highlights are unaffected. Unit 3 gets 53 key terms, a part of speech on all 50 vocabulary words, and 41 pronunciation guides. The content checker validates all three. Requested by the teacher.
+
 ## [8.55.65] - 2026-11-11
 
 ### Fixed

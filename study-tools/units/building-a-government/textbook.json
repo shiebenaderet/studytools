@@ -27,6 +27,49 @@
                 "icon": "fas fa-graduation-cap"
             }
         },
+        "pronunciations": {
+            "Daniel Shays": "shayz",
+            "Gouverneur Morris": "GUV-er-neer",
+            "Montesquieu": "MON-tes-kyoo",
+            "Muscogee": "mus-KOH-ghee",
+            "Alexander McGillivray": "muh-GIL-uh-vray",
+            "Nisqually": "nis-KWAH-lee",
+            "Puget Sound": "PYOO-jit",
+            "Duwamish": "doo-WAH-mish",
+            "Snohomish": "snoh-HOH-mish",
+            "Shawnee": "shaw-NEE",
+            "Miami": "my-AM-ee",
+            "Potawatomi": "pot-uh-WAH-tuh-mee",
+            "Wyandot": "WY-un-dot",
+            "Tecumseh": "tuh-KUM-suh",
+            "Publius": "PUB-lee-us",
+            "Des Moines": "duh-MOYN",
+            "confederation": "kun-fed-er-AY-shun",
+            "legislature": "LEJ-is-lay-cher",
+            "bicameral": "by-KAM-er-ul",
+            "representation": "rep-rih-zen-TAY-shun",
+            "compromise": "KOM-pruh-myz",
+            "preamble": "PREE-am-bul",
+            "popular sovereignty": "SOV-rin-tee",
+            "sovereignty": "SOV-rin-tee",
+            "legislative": "LEJ-is-lay-tiv",
+            "executive": "eg-ZEK-yoo-tiv",
+            "judicial": "joo-DISH-ul",
+            "Electoral College": "ih-LEK-ter-ul",
+            "federalism": "FED-er-ul-iz-um",
+            "concurrent powers": "kun-KUR-ent",
+            "veto": "VEE-toh",
+            "impeachment": "im-PEECH-ment",
+            "time immemorial": "im-uh-MOR-ee-ul",
+            "treaty": "TREE-tee",
+            "reservation": "rez-er-VAY-shun",
+            "cede": "seed",
+            "boundary": "BOWN-dree",
+            "guarantee": "gair-un-TEE",
+            "ratify": "RAT-uh-fy",
+            "amendment": "uh-MEND-ment",
+            "warrant": "WOR-unt"
+        },
         "segments": [
             {
                 "id": "why-articles-failed",
@@ -46,6 +89,28 @@
                         "vocabTerms": [
                             "Articles of Confederation",
                             "confederation"
+                        ],
+                        "keyTerms": [
+                            {
+                                "term": "Congress",
+                                "pos": "noun",
+                                "note": "The group of delegates from the states that made decisions for the whole country. Under the Articles, it was the only branch of the national government."
+                            },
+                            {
+                                "term": "loyal",
+                                "pos": "adjective",
+                                "note": "Faithful to a person, a group or a place."
+                            },
+                            {
+                                "term": "approved",
+                                "pos": "verb",
+                                "note": "Agreed to something in an official way, often by a vote."
+                            },
+                            {
+                                "term": "tax",
+                                "pos": "noun",
+                                "note": "Money that people must pay to a government."
+                            }
                         ],
                         "content": {
                             "level0": "<p>In July 1776, the colonies had just broken away from Britain. John Dickinson gave Congress a plan for a new government. Many leaders said it gave Congress too much power. They had just gone to war with a king. Most people also felt loyal to their own state first.</p><h4>A League of Friendship</h4><p>So Congress cut the plan down. In 1777, it approved the <strong>Articles of Confederation</strong>. This was the first plan of government for the United States. It made a <strong>confederation</strong>. A confederation is a group of states that work together but mostly rule themselves. There was no president. Each state had one vote, big or small.</p><h4>The Tax That Failed</h4><p>Congress needed money to pay soldiers. But it could not collect taxes. It could only ask the states for money. They often sent little. In 1781, Congress asked for the power to tax goods from other countries. All thirteen states had to agree. Rhode Island voted no, so the plan ended.</p>",
@@ -89,6 +154,28 @@
                         "heading": "Cracks in the Confederation",
                         "vocabTerms": [
                             "Northwest Ordinance"
+                        ],
+                        "keyTerms": [
+                            {
+                                "term": "Daniel Shays",
+                                "pos": "noun",
+                                "note": "A Massachusetts farmer and former army captain who led the uprising of 1786 and 1787."
+                            },
+                            {
+                                "term": "paper money",
+                                "pos": "noun",
+                                "note": "Printed bills used as money. Paper money is worth only what people trust it to be worth."
+                            },
+                            {
+                                "term": "passed",
+                                "pos": "verb",
+                                "note": "Approved by a vote. When Congress passes a bill, it becomes a law."
+                            },
+                            {
+                                "term": "slavery",
+                                "pos": "noun",
+                                "note": "A system in which people are owned by others, forced to work without pay, and not free to leave."
+                            }
                         ],
                         "content": {
                             "level0": "<p>In January 1787, more than a thousand farmers marched with guns. They were going to an arsenal in Springfield, Massachusetts. An arsenal is a building where weapons are kept. Their leader was Daniel Shays. The trouble started with money.</p><h4>Hard Times</h4><p>After the war, paper money from Congress was worth almost nothing. Massachusetts raised its taxes. People had to pay in gold or silver coins. Few farmers had coins. Courts took the farms of people who could not pay. In 1786, farmers with guns closed the courts.</p><h4>Shays' Rebellion</h4><p>Congress had almost no army and no money. It could not help. So Massachusetts sent its own soldiers. On January 25, 1787, they fired cannons at Shays' men. Four farmers were killed. The rest ran away.</p><h4>One Success</h4><p>Congress did fix one problem. In July 1787, it passed the <strong>Northwest Ordinance</strong>. This law set up a government for the land north of the Ohio River. It told how that land could become new states. It also banned slavery there. By then, Congress had asked the states to meet in Philadelphia to fix the Articles.</p>",
@@ -134,6 +221,23 @@
                             "delegate",
                             "included",
                             "excluded"
+                        ],
+                        "keyTerms": [
+                            {
+                                "term": "James Madison",
+                                "pos": "noun",
+                                "note": "A delegate from Virginia who helped plan the new government and kept the main record of the debates. He later became the fourth president."
+                            },
+                            {
+                                "term": "secret",
+                                "pos": "adjective",
+                                "note": "Kept hidden from other people."
+                            },
+                            {
+                                "term": "freely",
+                                "pos": "adverb",
+                                "note": "Without being stopped or punished."
+                            }
                         ],
                         "content": {
                             "level0": "<p>James Madison of Virginia got to Philadelphia in early May 1787. He came more than a week early. While he waited, he and other men from Virginia wrote a plan for a new government.</p><h4>Behind Closed Doors</h4><p>A <strong>convention</strong> is a big meeting held for a special reason. Each state chose <strong>delegates</strong>. A delegate is a person sent to speak for a group. The Constitutional Convention began on May 25. The delegates chose George Washington to lead it. In all, 55 delegates from twelve states came. Rhode Island did not. The delegates kept their talks secret so they could argue freely.</p><h4>Who Was Left Out</h4><p>To be <strong>included</strong> means to be part of a group and have a say. To be <strong>excluded</strong> means to be kept out. All 55 delegates were white men. Most were rich. Women, enslaved people and Native nations had no one there. In 1790, almost one in five people in the country was enslaved. In most states, only men who owned property could vote.</p>",
@@ -195,6 +299,18 @@
                             "compromise",
                             "Great Compromise"
                         ],
+                        "keyTerms": [
+                            {
+                                "term": "House of Representatives",
+                                "pos": "noun",
+                                "note": "The house of Congress in which states with more people have more members."
+                            },
+                            {
+                                "term": "Senate",
+                                "pos": "noun",
+                                "note": "The house of Congress in which every state has two members."
+                            }
+                        ],
                         "content": {
                             "level0": "<p>On May 29, 1787, Edmund Randolph of Virginia shared the plan James Madison had helped write. The plan did not fix the Articles. It replaced them with a much stronger government.</p><h4>Two Plans</h4><p>The Virginia Plan had three branches. One branch was the <strong>legislature</strong>. A legislature is a group that makes laws. It would be <strong>bicameral</strong>. That means it has two houses. The big change was in <strong>representation</strong>. Representation is how people get a voice in government. States with more people would get more lawmakers and more power. Small states said no. William Paterson gave the New Jersey Plan. It kept one house and one vote for each state. Most delegates voted it down, but the fight went on for weeks.</p><h4>Meeting in the Middle</h4><p>A <strong>compromise</strong> is a deal. Each side gives up part of what it wants. Roger Sherman of Connecticut had an idea. Congress would have two houses. In the House of Representatives, states with more people would get more members. In the Senate, each state would get two. On July 16, 1787, the delegates passed this plan by one vote. It is called the <strong>Great Compromise</strong>.</p>",
                             "simplified": "<p>On May 29, 1787, Edmund Randolph of Virginia presented the plan Madison had helped write. The plan did not fix the Articles. It replaced them with a much stronger national government.</p><h4>Two Plans</h4><p>The Virginia Plan created three branches. The lawmaking branch is called the <strong>legislature</strong>. It would be <strong>bicameral</strong>, which means it would have two houses. The biggest change was in <strong>representation</strong>, the way people get a voice in government. A state with more people would get more lawmakers, so large states would have the most power. Small states objected. William Paterson of New Jersey offered the New Jersey Plan. It kept one house with one vote for each state. Most delegates voted it down, but the argument went on for weeks.</p><h4>Meeting in the Middle</h4><p>A <strong>compromise</strong> is an agreement in which each side gives up part of what it wants. Roger Sherman of Connecticut had suggested one. Congress would have two houses. In the House of Representatives, states with more people would have more members. In the Senate, every state would have two senators. On July 16, 1787, the convention approved the <strong>Great Compromise</strong> by one vote.</p>",
@@ -236,6 +352,23 @@
                         "heading": "Compromises Over Slavery",
                         "vocabTerms": [
                             "Three-Fifths Compromise"
+                        ],
+                        "keyTerms": [
+                            {
+                                "term": "population",
+                                "pos": "noun",
+                                "note": "The number of people who live in a place."
+                            },
+                            {
+                                "term": "counted",
+                                "pos": "verb",
+                                "note": "Included in a total."
+                            },
+                            {
+                                "term": "slave trade",
+                                "pos": "noun",
+                                "note": "The business of capturing people in Africa, bringing them across the ocean by ship, and selling them."
+                            }
                         ],
                         "content": {
                             "level0": "<p>Seats in the House now depended on population. So the delegates had to decide who counted. In 1790, nearly 700,000 people in the United States were enslaved. Nine out of ten lived in the South.</p><h4>Counting People for Power</h4><p>Delegates from the South wanted to count every enslaved person. That would give the South more seats. But enslaved people could not vote. Delegates from the North said no. In July, the two sides made a deal. Three out of every five enslaved people would be counted. This rule was the <strong>Three-Fifths Compromise</strong>.</p><h4>More Compromises</h4><p>South Carolina and Georgia said they would leave if the slave trade was banned. The slave trade brought captured Africans to America to be sold. So the Constitution said Congress could not end the trade before 1808. Another rule said free states had to send back people who escaped from slavery. The Constitution protected slavery in at least three places. But it never used the word slave.</p>",
@@ -295,6 +428,28 @@
                             "popular sovereignty",
                             "preamble"
                         ],
+                        "keyTerms": [
+                            {
+                                "term": "Gouverneur Morris",
+                                "pos": "noun",
+                                "note": "A delegate from Pennsylvania who wrote the final wording of the Constitution. Gouverneur was his first name."
+                            },
+                            {
+                                "term": "goal",
+                                "pos": "noun",
+                                "note": "Something a person or group is trying to do."
+                            },
+                            {
+                                "term": "Native nation",
+                                "pos": "noun",
+                                "note": "One of the peoples who lived in North America before Europeans came, each with its own government."
+                            },
+                            {
+                                "term": "signed",
+                                "pos": "verb",
+                                "note": "Wrote their names on a document to show they agreed to it."
+                            }
+                        ],
                         "content": {
                             "level0": "<p>In September 1787, Gouverneur Morris wrote the final words of the Constitution. He began with three words. They were \"We the People.\"</p><h4>Power From the People</h4><p>The Articles had been a deal among states. The new plan said its power came from the people. This idea is called <strong>popular sovereignty</strong>. <em>Sovereignty</em> means the highest power to rule. A government has power only because the people give it.</p><h4>Six Goals</h4><p>The first sentence of the Constitution is called the <strong>preamble</strong>. It does not make laws. It tells why the plan was written. It lists six goals. Three are to join the states, to be fair, and to keep peace at home. Three more are to defend the country, to help people live well, and to keep people free. Each goal fixed a problem from the years under the Articles.</p><p>In 1787, \"We the People\" did not mean everyone. Enslaved people, Native nations and most women had no say in the new government. On September 17, 1787, 39 delegates signed the Constitution.</p>",
                             "simplified": "<p>In September 1787, Gouverneur Morris of Pennsylvania wrote the final wording of the Constitution. He began it with three words: \"We the People.\"</p><h4>Power From the People</h4><p>The Articles of Confederation had been an agreement among states. The Constitution said its power came from the people. This idea is called <strong>popular sovereignty</strong>. <em>Sovereignty</em> means the highest power to govern. Under popular sovereignty, a government has power only because the people agree to give it.</p><h4>Six Goals</h4><p>The first sentence of the Constitution is called the <strong>preamble</strong>. It does not create laws. It explains why the Constitution was written. It lists six goals. The first three are to form a more perfect union, establish justice and keep peace at home. The last three are to defend the country, help people live well and protect liberty for the future. Each goal answered a problem the country had faced under the Articles.</p><p>In 1787, \"We the People\" did not mean everyone. Enslaved people, Native nations and most women had no part in choosing the new government. On September 17, 1787, 39 delegates signed the Constitution.</p>",
@@ -344,6 +499,18 @@
                             "executive",
                             "judicial"
                         ],
+                        "keyTerms": [
+                            {
+                                "term": "article",
+                                "pos": "noun",
+                                "note": "One of the main numbered parts of a document. The Constitution has seven."
+                            },
+                            {
+                                "term": "carries out",
+                                "pos": "verb",
+                                "note": "Puts into action. To carry out a law is to make sure it is followed."
+                            }
+                        ],
                         "content": {
                             "level0": "<p>The Constitution has seven parts called articles. Each article is split into numbered sections. A rule is named by where it sits. \"Article I, Section 8\" is the list of powers given to Congress. It works like a street address for a house.</p><h4>Separation of Powers</h4><p>The delegates did not want one person or group to hold all the power. They thought freedom was safer that way. So they split the work of government among three branches. This is called <strong>separation of powers</strong>.</p><h4>The Three Branches</h4><p>Article I sets up the <strong>legislative</strong> branch. This is Congress. It makes the laws. Article II sets up the <strong>executive</strong> branch. The president leads it. It carries out the laws. Article III sets up the <strong>judicial</strong> branch. This is the Supreme Court and other national courts. They decide what the laws mean. The other four articles tell how states treat each other and how to change the Constitution. They also say the Constitution is the highest law and tell how it would be approved.</p>",
                             "simplified": "<p>The Constitution is divided into seven articles. Each article is split into numbered sections. A rule is named by where it sits. \"Article I, Section 8\" points to the list of powers given to Congress, the way a street address points to a house.</p><h4>Separation of Powers</h4><p>The delegates believed liberty was safest when no one person or group held all the power. So they divided the work of government among three branches. This is called <strong>separation of powers</strong>.</p><h4>The Three Branches</h4><p>Article I creates the <strong>legislative</strong> branch. This is Congress, which makes the laws. Article II creates the <strong>executive</strong> branch. The president leads it, and it carries out the laws. Article III creates the <strong>judicial</strong> branch. It is made up of the Supreme Court and other federal courts, which decide what the laws mean. The other four articles cover how states treat one another and how to change the Constitution. They also make the Constitution the highest law and explain how it would be approved.</p>",
@@ -385,6 +552,23 @@
                         "heading": "Choosing a President",
                         "vocabTerms": [
                             "Electoral College"
+                        ],
+                        "keyTerms": [
+                            {
+                                "term": "president",
+                                "pos": "noun",
+                                "note": "The leader of the executive branch of the United States."
+                            },
+                            {
+                                "term": "elector",
+                                "pos": "noun",
+                                "note": "A person chosen by a state to cast one of its votes for president."
+                            },
+                            {
+                                "term": "candidate",
+                                "pos": "noun",
+                                "note": "A person who is trying to be elected to an office."
+                            }
                         ],
                         "content": {
                             "level0": "<p>The delegates agreed to have one president. But they argued all summer about how to pick one. Some wanted Congress to pick. Others wanted voters to pick.</p><h4>The Electors</h4><p>In September, a small group of delegates gave a new plan. Each state would choose people called electors. The electors would vote for president. All the electors together are called the <strong>Electoral College</strong>. Here <em>college</em> means a group with a shared job. It is not a school. Each state gets one elector for each of its members of Congress. Washington has 10 representatives and 2 senators. So it has 12 electors.</p><h4>How It Works Today</h4><p>In most states, the winner of the state's vote gets all of its electors. There are 538 electors. A candidate needs 270 to win. A candidate can get the most votes in the country and still lose. This has happened five times. The last time was in 2016.</p>",
@@ -428,6 +612,18 @@
                             "federalism",
                             "reserved powers",
                             "concurrent powers"
+                        ],
+                        "keyTerms": [
+                            {
+                                "term": "cancel",
+                                "pos": "verb",
+                                "note": "To stop something from counting or taking effect."
+                            },
+                            {
+                                "term": "national government",
+                                "pos": "noun",
+                                "note": "The government of the whole country. It is also called the federal government."
+                            }
                         ],
                         "content": {
                             "level0": "<p>James Madison wanted Congress to be able to cancel any state law. On July 17, 1787, the delegates voted on his idea. Seven states voted no. Three voted yes. Most delegates wanted the states to keep running much of daily life.</p><h4>Two Levels of Government</h4><p>The Constitution splits power between the national government and the states. This is called <strong>federalism</strong>. Some powers belong only to the national government. It can coin money and declare war. It can make treaties, which are deals with other nations. Other powers are kept by the states. These are called <strong>reserved powers</strong>. States run schools. States set the rules for a driver's license. Some powers belong to both levels. These are called <strong>concurrent powers</strong>. Both levels can collect taxes and build roads.</p>",
@@ -474,6 +670,18 @@
                             "veto",
                             "impeachment",
                             "judicial review"
+                        ],
+                        "keyTerms": [
+                            {
+                                "term": "bill",
+                                "pos": "noun",
+                                "note": "A written plan for a new law. A bill becomes a law after Congress passes it and the president signs it."
+                            },
+                            {
+                                "term": "ruled",
+                                "pos": "verb",
+                                "note": "Made an official decision as a judge or a court."
+                            }
                         ],
                         "content": {
                             "level0": "<p>In April 1792, Congress sent a bill to President George Washington. He thought the bill broke the Constitution. So he sent it back without signing it. No president had ever turned down a law from Congress before.</p><h4>Each Branch Limits the Others</h4><p>The delegates gave each branch ways to limit the other two. This is called <strong>checks and balances</strong>. A president can <strong>veto</strong> a bill. To veto means to reject. But Congress can still pass the bill. Two-thirds of both houses must vote yes. The Senate must approve the judges a president picks. The House can vote for <strong>impeachment</strong>. Impeachment is a formal accusation that a president or judge committed serious crimes. Then the Senate holds a trial. Being impeached does not mean being removed.</p><h4>The Courts</h4><p>In 1803, the Supreme Court decided a case called <em>Marbury v. Madison</em>. Chief Justice John Marshall ruled that part of a law broke the Constitution. So that part could not stand. This power is called <strong>judicial review</strong>. The Constitution does not name it. But the Supreme Court has used it ever since.</p>",
@@ -534,6 +742,28 @@
                             "sovereignty",
                             "Commerce Clause"
                         ],
+                        "keyTerms": [
+                            {
+                                "term": "Muscogee",
+                                "pos": "noun",
+                                "note": "A Native nation whose homeland is in what is now Georgia and Alabama. English speakers often called its people the Creek."
+                            },
+                            {
+                                "term": "Alexander McGillivray",
+                                "pos": "noun",
+                                "note": "A leader of the Muscogee (Creek) Nation who signed the Treaty of New York in 1790."
+                            },
+                            {
+                                "term": "tribe",
+                                "pos": "noun",
+                                "note": "A Native nation. Each tribe has its own government."
+                            },
+                            {
+                                "term": "trade",
+                                "pos": "noun",
+                                "note": "Buying, selling or exchanging goods."
+                            }
+                        ],
                         "content": {
                             "level0": "<p>In the summer of 1790, more than two dozen Muscogee (Creek) leaders went to New York City. It was the capital then. Their leader was Alexander McGillivray. He came to make a treaty with President George Washington.</p><h4>Nations Before the United States</h4><p>Native nations ruled themselves long before Europeans came. Many tribes in Washington state say their history on this land goes back to <strong>time immemorial</strong>. That means a time so long ago that no one can measure it. The power of a nation to rule itself is called <strong>sovereignty</strong>. The United States dealt with Native nations as nations. It made treaties with them.</p><h4>What the Constitution Changed</h4><p>The Constitution lets Congress make rules for trade. It lists trade with other nations and among the states. It also lists trade \"with the Indian Tribes.\" This is part of the <strong>Commerce Clause</strong>. Commerce means trade. The clause names tribes next to nations and states. So it treats each tribe as its own government. In August 1790, McGillivray and Washington signed the Treaty of New York. The Senate approved it.</p>",
                             "simplified": "<p>In the summer of 1790, more than two dozen Muscogee (Creek) leaders traveled to New York City. It was then the nation's capital. Their leader, Alexander McGillivray, had come to make a treaty with President George Washington.</p><h4>Nations Before the United States</h4><p>Native nations governed themselves long before Europeans arrived. Many tribes in Washington state say their history on this land reaches back to <strong>time immemorial</strong>. That phrase means a time so long ago that no one can remember or measure it. The power of a nation to govern itself is called <strong>sovereignty</strong>. The United States dealt with Native nations as sovereign nations. It made treaties with them.</p><h4>What the Constitution Changed</h4><p>Article I, Section 8, gives Congress the power to make rules for trade. It lists trade \"with foreign Nations, and among the several States, and with the Indian Tribes.\" This is part of the <strong>Commerce Clause</strong>. Commerce means trade. The clause names tribes next to foreign nations and states. In this way, the Constitution treated tribes as governments of their own. In August 1790, McGillivray and Washington signed the Treaty of New York, and the Senate approved it.</p>",
@@ -579,6 +809,28 @@
                             "reservation",
                             "Supremacy Clause"
                         ],
+                        "keyTerms": [
+                            {
+                                "term": "Nisqually",
+                                "pos": "noun",
+                                "note": "A Native nation whose homeland is along the Nisqually River, at the south end of Puget Sound."
+                            },
+                            {
+                                "term": "Billy Frank",
+                                "pos": "noun",
+                                "note": "A Nisqually fisherman who spent his life defending the fishing rights promised in treaties."
+                            },
+                            {
+                                "term": "arrested",
+                                "pos": "verb",
+                                "note": "Taken and held by officers of the law."
+                            },
+                            {
+                                "term": "Puget Sound",
+                                "pos": "noun",
+                                "note": "The large arm of the Pacific Ocean in western Washington. Seattle, Tacoma and Olympia are on its shores."
+                            }
+                        ],
                         "content": {
                             "level0": "<p>In December 1945, a Nisqually boy named Billy Frank Jr. went fishing for salmon. He was 14. He fished on the Nisqually River, near Olympia. He was arrested. He and his family believed a treaty gave the Nisqually people the right to fish there.</p><h4>Treaties and Reservations</h4><p>A <strong>treaty</strong> is a formal deal between nations. The president makes treaties. Two-thirds of the Senate must approve them. In treaties, many tribes gave up land to the United States. But they kept part of it. That land is called a <strong>reservation</strong>. The tribes reserved it, which means they held on to it. In 1854 and 1855, tribes around Puget Sound signed treaties. The treaties promised that they could keep fishing in their usual places.</p><h4>The Supremacy Clause</h4><p>Later, Washington passed its own fishing laws. Wardens arrested tribal fishers. But the Constitution says treaties are \"the supreme Law of the Land.\" This rule is the <strong>Supremacy Clause</strong>. Supreme means highest. When a state law and a treaty do not agree, the treaty wins. In 1974, Judge George Boldt ruled for the treaty tribes. He said they had the right to up to half the salmon catch. In 1979, the U.S. Supreme Court agreed.</p>",
                             "simplified": "<p>In December 1945, a 14-year-old Nisqually boy named Billy Frank Jr. was fishing for salmon on the Nisqually River, near Olympia. He was arrested. He and his family believed a treaty gave the Nisqually people the right to fish there.</p><h4>Treaties and Reservations</h4><p>A <strong>treaty</strong> is a formal agreement between nations. The president makes treaties, and two-thirds of the Senate must approve them. In treaties, many tribes gave up land to the United States but kept part of it. That land is called a <strong>reservation</strong>, because the tribes reserved it, or held on to it. In 1854 and 1855, tribes around Puget Sound signed treaties. The treaties promised that they could keep fishing in their usual places.</p><h4>The Supremacy Clause</h4><p>Washington later passed its own fishing laws, and wardens arrested tribal fishers. But Article VI of the Constitution says treaties are \"the supreme Law of the Land.\" This rule is the <strong>Supremacy Clause</strong>. When a state law conflicts with a treaty, the treaty wins. In 1974, Judge George Boldt ruled that the treaty tribes had the right to up to half the salmon catch. In 1979, the U.S. Supreme Court agreed.</p>",
@@ -622,6 +874,23 @@
                             "cede",
                             "boundary",
                             "guarantee"
+                        ],
+                        "keyTerms": [
+                            {
+                                "term": "settler",
+                                "pos": "noun",
+                                "note": "A person who moves to a place to build a home and live there."
+                            },
+                            {
+                                "term": "Little Turtle",
+                                "pos": "noun",
+                                "note": "A leader of the Miami nation who led Native armies to two victories over the United States."
+                            },
+                            {
+                                "term": "Battle of Fallen Timbers",
+                                "pos": "noun",
+                                "note": "A battle near present-day Toledo, Ohio, in August 1794. The U.S. Army defeated the allied Native nations."
+                            }
                         ],
                         "content": {
                             "level0": "<p>In the summer of 1795, more than a thousand Native people met at Fort Greenville. They came from twelve nations. The fort was in what is now western Ohio. They came to make a treaty with General Anthony Wayne.</p><h4>War in the Ohio Country</h4><p>American settlers had been moving onto Native land north of the Ohio River. Many nations joined together to stop them. Their leaders were Little Turtle of the Miami and Blue Jacket of the Shawnee. They beat two American armies in 1790 and 1791. In 1794, Wayne's army beat them at the Battle of Fallen Timbers.</p><h4>The Greenville Line</h4><p>In the Treaty of Greenville, the Native nations agreed to <strong>cede</strong> most of what is now Ohio. To cede means to give up. The treaty drew a <strong>boundary</strong>. A boundary is a line that marks the edge of a land. The United States made a <strong>guarantee</strong>. A guarantee is a formal promise. It said the nations could live on their land north of the line. They could stay as long as they wanted. It also promised them goods every year.</p>",
@@ -680,6 +949,23 @@
                             "Federalist",
                             "Anti-Federalist"
                         ],
+                        "keyTerms": [
+                            {
+                                "term": "George Mason",
+                                "pos": "noun",
+                                "note": "A delegate from Virginia who refused to sign the Constitution because it had no list of rights."
+                            },
+                            {
+                                "term": "formally",
+                                "pos": "adverb",
+                                "note": "In an official way, following set rules."
+                            },
+                            {
+                                "term": "essay",
+                                "pos": "noun",
+                                "note": "A short piece of writing that argues for an idea."
+                            }
+                        ],
                         "content": {
                             "level0": "<p>On September 12, 1787, George Mason of Virginia asked for one more thing. He wanted a list of rights added to the Constitution. The delegates voted no. Five days later, Mason would not sign.</p><h4>Nine States Needed</h4><p>The Constitution was only a plan. The states had to agree to it first. To <strong>ratify</strong> means to formally approve. Nine of the thirteen states had to ratify the plan. Then it would be law. People who wanted it called themselves <strong>Federalists</strong>. People who were against it were called <strong>Anti-Federalists</strong>.</p><h4>Two Sides</h4><p>The Federalists said the country needed a stronger government to fix its problems. Three of them wrote 85 essays for newspapers. They were Alexander Hamilton, James Madison and John Jay. Their essays are now called <em>The Federalist Papers</em>. The Anti-Federalists feared the new government was too strong. They thought it could take away people's rights. Most of all, they wanted a list of rights.</p><p>On June 21, 1788, New Hampshire became the ninth state to ratify. The plan was now law. George Washington became the first president in 1789.</p>",
                             "simplified": "<p>On September 12, 1787, George Mason of Virginia asked the delegates to add a list of rights to the Constitution. They voted no. Five days later, Mason refused to sign.</p><h4>Nine States Needed</h4><p>The Constitution was only a proposal until the states agreed to it. To <strong>ratify</strong> means to formally approve. Article VII said nine of the thirteen states had to ratify it. Then it would take effect. People who supported the Constitution called themselves <strong>Federalists</strong>. People who opposed it were called <strong>Anti-Federalists</strong>.</p><h4>Two Sides</h4><p>The Federalists argued that the country needed a stronger national government to fix its problems. Alexander Hamilton, James Madison and John Jay wrote 85 newspaper essays to defend the plan. The essays were later collected as <em>The Federalist Papers</em>. The Anti-Federalists feared the new government was too strong. They thought it could take away people's rights. Their biggest complaint was that the Constitution had no list of rights.</p><p>On June 21, 1788, New Hampshire became the ninth state to ratify. The Constitution became law. George Washington became the first president in 1789.</p>",
@@ -723,6 +1009,28 @@
                         "vocabTerms": [
                             "amendment",
                             "proposal"
+                        ],
+                        "keyTerms": [
+                            {
+                                "term": "election",
+                                "pos": "noun",
+                                "note": "A vote in which people choose their leaders."
+                            },
+                            {
+                                "term": "formal",
+                                "pos": "adjective",
+                                "note": "Official, and done by following set rules."
+                            },
+                            {
+                                "term": "lawmaker",
+                                "pos": "noun",
+                                "note": "A person elected to make laws."
+                            },
+                            {
+                                "term": "erase",
+                                "pos": "verb",
+                                "note": "To remove something so it is no longer there."
+                            }
                         ],
                         "content": {
                             "level0": "<p>In 1982, a college student named Gregory Watson wrote a paper. It was about an amendment James Madison had proposed in 1789. The amendment was about pay for Congress. If Congress voted itself a raise, the raise had to wait until after the next election. Watson's teacher gave the paper a C.</p><h4>Two Steps</h4><p>A change to the Constitution is called an <strong>amendment</strong>. Its writers made change possible but not easy. There are two steps. First comes a <strong>proposal</strong>. A proposal is a formal idea for a change. Most of the time, two-thirds of the House and the Senate must vote yes. Second, three-fourths of the states must ratify it. Today that means 38 of the 50 states.</p><h4>Twenty-Seven Amendments</h4><p>More than 11,000 amendments have been proposed since 1789. Only 27 have been ratified. They go at the end. They do not erase the first words. Watson wrote letters to state lawmakers for ten years. In 1992, Madison's amendment became the Twenty-seventh.</p>",
@@ -769,6 +1077,18 @@
                             "warrant",
                             "due process"
                         ],
+                        "keyTerms": [
+                            {
+                                "term": "suspended",
+                                "pos": "verb",
+                                "note": "Sent home from school for a time as a punishment."
+                            },
+                            {
+                                "term": "peaceful",
+                                "pos": "adjective",
+                                "note": "Without fighting or violence."
+                            }
+                        ],
                         "content": {
                             "level0": "<p>In December 1965, Mary Beth Tinker was 13 and in eighth grade in Des Moines, Iowa. She wore a black armband to school. It was a protest against the Vietnam War. She was suspended. Her family said the school broke her right to free speech.</p><h4>Keeping a Promise</h4><p>In 1789, James Madison proposed amendments. He was keeping the Federalists' promise. In 1791, the states ratified ten of them. These first ten amendments are the <strong>Bill of Rights</strong>. Most protect <strong>individual rights</strong>. These are freedoms that belong to each person.</p><h4>Rights in the Bill of Rights</h4><p>The First Amendment protects religion and <strong>freedom of speech</strong>. Freedom of speech is the right of people to say what they think. It also protects the press, peaceful gatherings, and the right to ask the government for change. The Fourth Amendment protects people from searches without a good reason. Police most often need a <strong>warrant</strong> to search a home. A warrant is a written order from a judge. The Fifth Amendment calls for <strong>due process</strong>. That means the government must follow fair rules before it punishes anyone. In 1969, the Supreme Court ruled that Tinker's armband was protected speech.</p>",
                             "simplified": "<p>In December 1965, Mary Beth Tinker was a 13-year-old eighth grader in Des Moines, Iowa. She wore a black armband to school to protest the Vietnam War. She was suspended. Her family argued that the school broke her right to free speech.</p><h4>Keeping a Promise</h4><p>In 1789, James Madison proposed amendments to keep the Federalists' promise. In 1791, the states ratified ten of them. These first ten amendments are the <strong>Bill of Rights</strong>. Most protect <strong>individual rights</strong>, freedoms that belong to each person.</p><h4>Rights in the Bill of Rights</h4><p>The First Amendment protects religion, <strong>freedom of speech</strong> and the press. It also protects peaceful gatherings and the right to ask the government for change. The Fourth Amendment protects people from unreasonable searches. Police usually need a <strong>warrant</strong>, a judge's written order, to search a home. The Fifth Amendment requires <strong>due process</strong>. This means the government must follow fair rules before it punishes anyone. In 1969, the Supreme Court ruled that Tinker's armband was protected speech.</p>",
@@ -811,6 +1131,28 @@
                         "heading": "Widening \"We the People\"",
                         "vocabTerms": [
                             "amendment"
+                        ],
+                        "keyTerms": [
+                            {
+                                "term": "Susan B. Anthony",
+                                "pos": "noun",
+                                "note": "A leader in the long fight to win the vote for women."
+                            },
+                            {
+                                "term": "citizen",
+                                "pos": "noun",
+                                "note": "A full member of a country, with rights such as voting."
+                            },
+                            {
+                                "term": "equal",
+                                "pos": "adjective",
+                                "note": "The same for everyone."
+                            },
+                            {
+                                "term": "drafted",
+                                "pos": "verb",
+                                "note": "Ordered by the government to serve in the armed forces."
+                            }
                         ],
                         "content": {
                             "level0": "<p>On November 5, 1872, Susan B. Anthony voted for president in Rochester, New York. Two weeks later, she was arrested. Women were not allowed to vote.</p><h4>After the Civil War</h4><p>Three <strong>amendments</strong> came after the Civil War. The Thirteenth (1865) ended slavery. The Fourteenth (1868) made everyone born in the United States a citizen. It also promised equal protection of the laws. The Fifteenth (1870) said no one could be kept from voting because of race. But many states later found ways around it. Most Black Southerners could not vote again until the Voting Rights Act of 1965.</p><h4>More Voters</h4><p>In 1920, the Nineteenth Amendment gave women the right to vote. Women in Washington had won that right in 1910. In 1971, the Twenty-sixth Amendment lowered the voting age to 18. At 18, young men could be drafted to fight in a war. Many people said they were old enough to vote too.</p>",

@@ -45,6 +45,7 @@
     "vocabulary": [
         {
             "term": "Articles of Confederation",
+            "pos": "noun",
             "definition": "The first written plan of government for the United States, in effect from 1781 to 1789",
             "simpleExplanation": "The country's first rulebook. It kept the states strong and the national government weak, with no president, no national courts and no power to tax.",
             "example": "Under the Articles of Confederation, Congress could only ask the states for money, and Rhode Island's no vote blocked a national tax in 1782.",
@@ -54,6 +55,7 @@
         },
         {
             "term": "confederation",
+            "pos": "noun",
             "definition": "A loose union of independent states that agree to work together for a common purpose",
             "simpleExplanation": "A team where every member keeps most of its own power and only agrees to cooperate on a few things.",
             "example": "The thirteen states formed a confederation in 1781, promising to defend one another but each keeping most of its own power.",
@@ -63,6 +65,7 @@
         },
         {
             "term": "Northwest Ordinance",
+            "pos": "noun",
             "definition": "A 1787 law that set up a government for the land north of the Ohio River, explained how it could become new states, and banned slavery there",
             "simpleExplanation": "One of the few things Congress got right under the Articles: a plan for turning western land into new, equal states.",
             "example": "Because of the Northwest Ordinance, Ohio, Indiana and Illinois later joined the union as free states.",
@@ -72,6 +75,7 @@
         },
         {
             "term": "convention",
+            "pos": "noun",
             "definition": "A formal meeting held for a special purpose",
             "simpleExplanation": "A big, official meeting where people come together to make decisions about one important job.",
             "example": "In the summer of 1787, delegates from twelve states met at a convention in Philadelphia.",
@@ -81,6 +85,7 @@
         },
         {
             "term": "delegate",
+            "pos": "noun",
             "definition": "A person chosen to represent others at a meeting",
             "simpleExplanation": "Someone sent to speak and vote for a larger group that cannot all be in the room.",
             "example": "Virginia sent seven men to Philadelphia, including James Madison and George Washington, to speak for the state.",
@@ -90,6 +95,7 @@
         },
         {
             "term": "included",
+            "pos": "adjective",
             "definition": "Being part of a group and having a voice in it",
             "simpleExplanation": "Having a seat at the table when decisions are made.",
             "example": "In 1787, white men who owned property had a voice in choosing the new government.",
@@ -99,6 +105,7 @@
         },
         {
             "term": "excluded",
+            "pos": "adjective",
             "definition": "Kept out of a group or left without a voice in it",
             "simpleExplanation": "Shut out of the room where decisions are made, even when those decisions affect you.",
             "example": "Women, enslaved people and Native nations had no one at the meeting in Philadelphia.",
@@ -108,6 +115,7 @@
         },
         {
             "term": "republic",
+            "pos": "noun",
             "definition": "A country governed by representatives that the citizens elect",
             "simpleExplanation": "Instead of a king, the people choose leaders to make decisions for them.",
             "example": "The founders wanted a government where voters choose their leaders, not one ruled by a king.",
@@ -117,6 +125,7 @@
         },
         {
             "term": "legislature",
+            "pos": "noun",
             "definition": "The branch or body of government that makes laws",
             "simpleExplanation": "The lawmakers. In the United States, it is Congress.",
             "example": "Congress, with its House and Senate, writes the nation's laws.",
@@ -126,6 +135,7 @@
         },
         {
             "term": "bicameral",
+            "pos": "adjective",
             "definition": "Having two houses, or parts, in a lawmaking body",
             "simpleExplanation": "From Latin words meaning \"two rooms.\" Congress has two: the House and the Senate.",
             "example": "Under the Great Compromise, Congress was split into the House of Representatives and the Senate.",
@@ -135,6 +145,7 @@
         },
         {
             "term": "representation",
+            "pos": "noun",
             "definition": "The way people are given a voice in government through people who speak for them",
             "simpleExplanation": "Having someone in government who speaks and votes for you.",
             "example": "Large states wanted seats in Congress to depend on population; small states wanted every state to count the same.",
@@ -144,6 +155,7 @@
         },
         {
             "term": "compromise",
+            "pos": "noun",
             "definition": "An agreement in which each side gives up part of what it wants",
             "simpleExplanation": "A deal where nobody gets everything, but everyone gets something.",
             "example": "Large states got seats based on population in the House, and small states got equal seats in the Senate.",
@@ -153,6 +165,7 @@
         },
         {
             "term": "Great Compromise",
+            "pos": "noun",
             "definition": "The 1787 agreement that created a two-house Congress: the House based on population and the Senate with two members from every state",
             "simpleExplanation": "The deal that saved the convention by giving large states and small states each one house of Congress.",
             "example": "Roger Sherman of Connecticut suggested the plan, and it passed on July 16, 1787, by one vote.",
@@ -162,6 +175,7 @@
         },
         {
             "term": "Three-Fifths Compromise",
+            "pos": "noun",
             "definition": "The 1787 agreement to count three out of every five enslaved people when dividing seats in the House",
             "simpleExplanation": "A counting rule that gave slaveholding states more power in Congress, even though enslaved people could not vote.",
             "example": "Because of this rule, southern states gained extra seats in the House until 1868.",
@@ -171,6 +185,7 @@
         },
         {
             "term": "Virginia Plan",
+            "pos": "noun",
             "definition": "The plan written by James Madison that gave states seats in Congress based on population",
             "simpleExplanation": "The large states' plan: more people, more votes.",
             "example": "Edmund Randolph presented this plan on May 29, 1787, and it favored the states with the most people.",
@@ -180,6 +195,7 @@
         },
         {
             "term": "New Jersey Plan",
+            "pos": "noun",
             "definition": "The plan that kept a one-house Congress in which every state had one vote",
             "simpleExplanation": "The small states' plan: every state counts the same.",
             "example": "William Paterson offered this plan on June 15, 1787, to protect the small states.",
@@ -189,6 +205,7 @@
         },
         {
             "term": "preamble",
+            "pos": "noun",
             "definition": "The introduction to the Constitution that explains its purpose",
             "simpleExplanation": "The opening sentence that says why the Constitution was written. It starts with \"We the People.\"",
             "example": "The opening sentence lists six goals, from forming a more perfect union to protecting liberty for the future.",
@@ -198,6 +215,7 @@
         },
         {
             "term": "popular sovereignty",
+            "pos": "noun",
             "definition": "The idea that a government's power comes from the people",
             "simpleExplanation": "The people are the boss. The government only has power because the people agree to give it.",
             "example": "The words \"We the People\" show that the Constitution gets its power from citizens, not from the states or a king.",
@@ -207,6 +225,7 @@
         },
         {
             "term": "separation of powers",
+            "pos": "noun",
             "definition": "Dividing the work of government among three branches so no one group holds all the power",
             "simpleExplanation": "Splitting the government's jobs into three parts so no single person can run everything.",
             "example": "Congress makes the laws, the president carries them out, and the courts decide what they mean.",
@@ -216,6 +235,7 @@
         },
         {
             "term": "legislative",
+            "pos": "adjective",
             "definition": "The branch of government that makes laws, created by Article I",
             "simpleExplanation": "The lawmaking branch: Congress.",
             "example": "Article I describes this branch, which includes the House of Representatives and the Senate.",
@@ -225,6 +245,7 @@
         },
         {
             "term": "executive",
+            "pos": "adjective",
             "definition": "The branch of government that carries out laws, led by the president and created by Article II",
             "simpleExplanation": "The branch that puts laws into action. The president is in charge of it.",
             "example": "Article II describes this branch, which commands the army and navy.",
@@ -234,6 +255,7 @@
         },
         {
             "term": "judicial",
+            "pos": "adjective",
             "definition": "The branch of government that decides what laws mean, made up of the Supreme Court and other federal courts",
             "simpleExplanation": "The courts. They settle arguments about what the law says.",
             "example": "Article III creates the Supreme Court, and its judges serve for life.",
@@ -243,6 +265,7 @@
         },
         {
             "term": "Electoral College",
+            "pos": "noun",
             "definition": "The group of people chosen in each state who formally elect the president and vice president",
             "simpleExplanation": "Voters choose electors, and electors choose the president. The word college here means a group, not a school.",
             "example": "Washington state casts 12 of these votes, and a candidate needs 270 of the 538 to win.",
@@ -252,6 +275,7 @@
         },
         {
             "term": "federalism",
+            "pos": "noun",
             "definition": "The system of dividing power between the national government and the state governments",
             "simpleExplanation": "Two levels of government share power. The nation handles some jobs, and the states handle others.",
             "example": "The national government prints money, while states run schools and give driver's licenses.",
@@ -261,6 +285,7 @@
         },
         {
             "term": "concurrent powers",
+            "pos": "noun",
             "definition": "Powers held by both the national government and the state governments",
             "simpleExplanation": "Jobs both levels of government can do at the same time, like collecting taxes.",
             "example": "Both the national government and Washington state can collect taxes and build roads.",
@@ -270,6 +295,7 @@
         },
         {
             "term": "reserved powers",
+            "pos": "noun",
             "definition": "Powers kept by the states or the people because the Constitution does not give them to the national government",
             "simpleExplanation": "Powers the states hold on to, like running schools.",
             "example": "Running public schools and setting driver's license rules are left to each state.",
@@ -279,6 +305,7 @@
         },
         {
             "term": "checks and balances",
+            "pos": "noun",
             "definition": "The system that gives each branch of government ways to limit the other two",
             "simpleExplanation": "Each branch can stop the others from going too far.",
             "example": "A president can reject a bill, Congress can pass it anyway with a two-thirds vote, and the courts can strike it down.",
@@ -288,6 +315,7 @@
         },
         {
             "term": "veto",
+            "pos": "verb",
             "definition": "A president's power to reject a bill passed by Congress",
             "simpleExplanation": "From a Latin word meaning \"I forbid.\" Congress can override it with a two-thirds vote.",
             "example": "In 1792, George Washington sent a bill back to Congress unsigned for the first time.",
@@ -297,6 +325,7 @@
         },
         {
             "term": "impeachment",
+            "pos": "noun",
             "definition": "The process in which the House formally accuses an official of serious crimes, followed by a trial in the Senate",
             "simpleExplanation": "It is an accusation, not a removal. The Senate must hold a trial and vote to remove.",
             "example": "Andrew Johnson was formally accused by the House in 1868, and the Senate fell one vote short of removing him.",
@@ -306,6 +335,7 @@
         },
         {
             "term": "judicial review",
+            "pos": "noun",
             "definition": "The power of the courts to decide whether a law or government action follows the Constitution",
             "simpleExplanation": "The courts can cancel a law that breaks the Constitution.",
             "example": "In 1803, Chief Justice John Marshall ruled in Marbury v. Madison that part of a law could not stand.",
@@ -315,6 +345,7 @@
         },
         {
             "term": "sovereignty",
+            "pos": "noun",
             "definition": "The power of a nation or people to govern itself",
             "simpleExplanation": "Being in charge of your own nation, with your own leaders, laws and courts.",
             "example": "Washington's 29 federally recognized tribes each have their own government, laws and courts.",
@@ -324,6 +355,7 @@
         },
         {
             "term": "treaty",
+            "pos": "noun",
             "definition": "A formal agreement between two or more nations",
             "simpleExplanation": "An official deal between nations. Under the Constitution, the president makes them and the Senate approves them.",
             "example": "In 1855, tribes around Puget Sound signed agreements with the United States that promised they could keep fishing.",
@@ -333,6 +365,7 @@
         },
         {
             "term": "Commerce Clause",
+            "pos": "noun",
             "definition": "The part of Article I that gives Congress power to regulate trade with foreign nations, among the states, and with tribes",
             "simpleExplanation": "The rule that puts Congress in charge of trade, and names tribes next to foreign nations and states.",
             "example": "Article I, Section 8, names \"the Indian Tribes\" in the same sentence as foreign nations and the states.",
@@ -342,6 +375,7 @@
         },
         {
             "term": "Supremacy Clause",
+            "pos": "noun",
             "definition": "The part of Article VI that makes the Constitution, national laws and treaties the supreme law of the land",
             "simpleExplanation": "When a state law conflicts with the Constitution, a national law or a treaty, the state law loses.",
             "example": "In 1974, a federal judge ruled that treaty fishing rights beat Washington's state fishing laws.",
@@ -351,6 +385,7 @@
         },
         {
             "term": "time immemorial",
+            "pos": "noun",
             "definition": "A time so long ago that no one can remember or measure it",
             "simpleExplanation": "A phrase many tribes use for how long their people have lived on their land: longer than anyone can count.",
             "example": "Washington's required tribal history curriculum is named for this phrase.",
@@ -360,6 +395,7 @@
         },
         {
             "term": "reservation",
+            "pos": "noun",
             "definition": "Land a tribe kept for itself in a treaty",
             "simpleExplanation": "Tribes held on to this land when they gave up the rest. The United States did not give it to them.",
             "example": "The Nisqually kept a small part of their homeland in the 1854 Treaty of Medicine Creek.",
@@ -369,6 +405,7 @@
         },
         {
             "term": "cede",
+            "pos": "verb",
             "definition": "To formally give up land or power to another nation",
             "simpleExplanation": "To hand over land, usually in a treaty.",
             "example": "At Greenville in 1795, Native nations gave up most of present-day Ohio to the United States.",
@@ -378,6 +415,7 @@
         },
         {
             "term": "boundary",
+            "pos": "noun",
             "definition": "A line that marks the edge of a territory",
             "simpleExplanation": "A border line on a map.",
             "example": "The Greenville Treaty Line ran across Ohio from Lake Erie to the Ohio River.",
@@ -387,6 +425,7 @@
         },
         {
             "term": "guarantee",
+            "pos": "noun",
             "definition": "A formal promise",
             "simpleExplanation": "A promise written into an agreement.",
             "example": "The United States promised the nations they could live north of the Greenville line for as long as they wanted.",
@@ -396,6 +435,7 @@
         },
         {
             "term": "ratify",
+            "pos": "verb",
             "definition": "To formally approve",
             "simpleExplanation": "To say an official yes. Nine states had to approve the Constitution before it took effect.",
             "example": "New Hampshire became the ninth state to approve the Constitution on June 21, 1788.",
@@ -405,6 +445,7 @@
         },
         {
             "term": "Federalist",
+            "pos": "noun",
             "definition": "A supporter of the Constitution and a stronger national government in 1787 and 1788",
             "simpleExplanation": "Someone who said yes to the new Constitution.",
             "example": "Alexander Hamilton and James Madison argued for the new plan in newspaper essays.",
@@ -414,6 +455,7 @@
         },
         {
             "term": "Anti-Federalist",
+            "pos": "noun",
             "definition": "An opponent of the Constitution in 1787 and 1788 who feared a strong national government and wanted a bill of rights",
             "simpleExplanation": "Someone who said no to the Constitution without a list of rights.",
             "example": "George Mason and Patrick Henry worried that the new government could take away people's freedoms.",
@@ -423,6 +465,7 @@
         },
         {
             "term": "The Federalist Papers",
+            "pos": "noun",
             "definition": "A series of 85 essays by Alexander Hamilton, James Madison and John Jay arguing for the Constitution",
             "simpleExplanation": "Newspaper essays written under the made-up name Publius to convince New Yorkers to approve the Constitution.",
             "example": "Madison explained checks and balances in one of these essays in 1788.",
@@ -432,6 +475,7 @@
         },
         {
             "term": "amendment",
+            "pos": "noun",
             "definition": "A change or addition to the Constitution",
             "simpleExplanation": "A new rule added to the end of the Constitution. There are 27 of them.",
             "example": "The Nineteenth gave women the right to vote in 1920.",
@@ -441,6 +485,7 @@
         },
         {
             "term": "proposal",
+            "pos": "noun",
             "definition": "A formal suggestion for a change, the first step in amending the Constitution",
             "simpleExplanation": "A suggested change that still has to be approved.",
             "example": "Two-thirds of both the House and the Senate must vote yes before the states consider a change.",
@@ -450,6 +495,7 @@
         },
         {
             "term": "Bill of Rights",
+            "pos": "noun",
             "definition": "The first ten amendments to the Constitution, ratified in 1791",
             "simpleExplanation": "The list of rights the Anti-Federalists demanded, added to the Constitution in 1791.",
             "example": "James Madison proposed these amendments in 1789 to keep a promise made during ratification.",
@@ -459,6 +505,7 @@
         },
         {
             "term": "individual rights",
+            "pos": "noun",
             "definition": "Freedoms that belong to each person and that the government cannot take away",
             "simpleExplanation": "Rights that belong to you as a person, like the right to speak your mind.",
             "example": "The First Amendment protects each person's religion, speech and press.",
@@ -468,6 +515,7 @@
         },
         {
             "term": "freedom of speech",
+            "pos": "noun",
             "definition": "The right to say what you think without being punished by the government",
             "simpleExplanation": "You can share your opinions, even unpopular ones. It has limits, like threats.",
             "example": "In 1969, the Supreme Court ruled that Mary Beth Tinker's black armband was protected.",
@@ -477,6 +525,7 @@
         },
         {
             "term": "due process",
+            "pos": "noun",
             "definition": "The rule that the government must follow fair procedures before it punishes anyone",
             "simpleExplanation": "Before the government can punish you, it has to follow fair rules.",
             "example": "The Fifth Amendment says no one can lose life, liberty or property without fair legal steps.",
@@ -486,6 +535,7 @@
         },
         {
             "term": "warrant",
+            "pos": "noun",
             "definition": "A written order from a judge that allows police to search a place or arrest a person",
             "simpleExplanation": "Permission from a judge that police usually need before searching a home.",
             "example": "Under the Fourth Amendment, police usually need a judge's permission to search a home.",
