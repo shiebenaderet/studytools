@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.62] - 2026-11-11
+
+### Added
+- Unit 3 readings: Chapter 5, **Ratification and Rights**, at Quick, Clear and Deep (four sections). Every Unit 3 section now has all four reading levels, and the reading levels check passes for the unit. Deep adds quotations from George Mason, Alexander Hamilton, Thomas Jefferson, Susan B. Anthony and the Tinker ruling and a "What Historians Argue" part. Read More stays at Full for now. Requested by the teacher.
+
 ## [8.55.61] - 2026-11-11
 
 ### Added
