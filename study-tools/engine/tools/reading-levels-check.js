@@ -122,9 +122,11 @@ function checkUnit(unitId, opts) {
           if (gone.length && !tag) errors.push(`${name}: ${n} is missing vocab term(s): ${gone.join(', ')}`);
           if (/—|&mdash;/.test(content[LEVEL_KEYS[LEVEL_NAMES.indexOf(n)]])) warnings.push(`${name}: ${n} has an em dash`);
         });
-        // Length should step up too: Quick is the shortest reading.
-        if (levels.Quick && levels.Clear && words(levels.Quick) >= words(levels.Clear)) warnings.push(`${name}: Quick is not shorter than Clear`);
-        if (levels.Clear && levels.Full && words(levels.Clear) > words(levels.Full)) warnings.push(`${name}: Clear is longer than Full`);
+        // Quick and Clear explain more words in the text, so they may run close
+        // to Full's length. More than a tenth longer means detail was added.
+        ['Quick', 'Clear'].forEach(n => {
+          if (levels[n] && levels.Full && words(levels[n]) > words(levels.Full) * 1.1) warnings.push(`${name}: ${n} is more than 10% longer than Full`);
+        });
       }
     }
   }

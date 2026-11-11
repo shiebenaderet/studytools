@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.59] - 2026-11-11
+
+### Added
+- Unit 3 readings: Chapter 2, **Compromises in Philadelphia**, at Quick, Clear and Deep (two sections). Same facts, headings and vocabulary words at every level; Deep adds quotations from the convention and a "What Historians Argue" part. The reading levels check now warns when a Quick or Clear reading runs more than 10% longer than Full, in place of comparing Quick with Clear, because explaining each key word in its own sentence makes those readings nearly as long as Unit 3's short Full text. Requested by the teacher.
+
 ## [8.55.58] - 2026-11-11
 
 ### Added
