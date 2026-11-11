@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.77] - 2026-11-11
+
+### Changed
+- The Susan B. Anthony source link opens the PDF at the page with her words. The quotation is on the page numbered 65, which is the 71st page of the file, so the link now asks the browser's PDF viewer for that page, and the link's label says "PDF, page 65" for viewers that open at the start anyway. A PDF still cannot highlight a phrase. Page found by the teacher.
+
 ## [8.55.76] - 2026-11-11
 
 ### Fixed
