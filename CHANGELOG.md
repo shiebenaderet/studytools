@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.76] - 2026-11-11
+
+### Fixed
+- The Mercy Otis Warren source link now highlights her words. The link carried only the first and last words of the quotation, and the University of Michigan page did not highlight them when the teacher clicked through. It now carries the whole sentence, in the form the teacher tested on that page. Reported by the teacher.
+
 ## [8.55.75] - 2026-11-11
 
 ### Changed
