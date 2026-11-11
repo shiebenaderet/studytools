@@ -125,7 +125,7 @@
                             "attribution": "Articles of Confederation, Article III, 1777",
                             "means": "Each state joins a strong friendship with the others. They will defend one another, protect their freedom and help each other.",
                             "sourceName": "The Avalon Project, Yale Law School",
-                            "sourceUrl": "https://avalon.law.yale.edu/18th_century/artconf.asp"
+                            "sourceUrl": "https://avalon.law.yale.edu/18th_century/artconf.asp#:~:text=The%20said%20States%20hereby%20severally%20enter,their%20mutual%20and%20general%20welfare"
                         },
                         "image": {
                             "src": "../units/building-a-government/images/articles-of-confederation.jpg",
@@ -197,7 +197,7 @@
                             "attribution": "George Washington, letter to Henry Lee Jr., October 31, 1786",
                             "means": "You say I should use my good name to calm the trouble in Massachusetts. I do not think that would work. Being respected is not the same as having a government that can act.",
                             "sourceName": "Founders Online, National Archives",
-                            "sourceUrl": "https://founders.archives.gov/documents/Washington/04-04-02-0286",
+                            "sourceUrl": "https://founders.archives.gov/documents/Washington/04-04-02-0286#:~:text=You%20talk%2C%20my%20good%20Sir%2C%20of,disorders.%20Influence%20is%20no%20government",
                             "image": {
                                 "src": "../units/building-a-government/images/portraits/george-washington.jpg",
                                 "credit": "Gilbert Stuart, The Metropolitan Museum of Art"
@@ -272,7 +272,7 @@
                             "attribution": "Thomas Jefferson, letter to John Adams, August 30, 1787",
                             "means": "I am sure the delegates will make good and wise choices. They are a gathering of men who seem almost like gods.",
                             "sourceName": "Founders Online, National Archives",
-                            "sourceUrl": "https://founders.archives.gov/documents/Jefferson/01-12-02-0075",
+                            "sourceUrl": "https://founders.archives.gov/documents/Jefferson/01-12-02-0075#:~:text=I%20have%20no%20doubt%20that%20all,really%20an%20assembly%20of%20demigods",
                             "image": {
                                 "src": "../units/building-a-government/images/portraits/thomas-jefferson.jpg",
                                 "credit": "Rembrandt Peale, White House Collection"
@@ -355,7 +355,7 @@
                             "attribution": "Benjamin Franklin, speech at the Constitutional Convention, June 30, 1787, from James Madison’s notes",
                             "means": "When a builder makes a wide table and two boards do not fit together, he trims a little off each one so they join well.",
                             "sourceName": "The Avalon Project, Yale Law School",
-                            "sourceUrl": "https://avalon.law.yale.edu/18th_century/debates_630.asp",
+                            "sourceUrl": "https://avalon.law.yale.edu/18th_century/debates_630.asp#:~:text=When%20a%20broad%20table%20is%20to,and%20makes%20a%20good%20joint",
                             "image": {
                                 "src": "../units/building-a-government/images/portraits/benjamin-franklin.jpg",
                                 "credit": "Joseph Siffred Duplessis, The Metropolitan Museum of Art"
@@ -427,7 +427,7 @@
                             "attribution": "Gouverneur Morris on slavery, speech at the Constitutional Convention, August 8, 1787, as James Madison wrote it down",
                             "means": "Slavery was an evil system. It was a curse on the states that allowed it.",
                             "sourceName": "The Avalon Project, Yale Law School",
-                            "sourceUrl": "https://avalon.law.yale.edu/18th_century/debates_808.asp",
+                            "sourceUrl": "https://avalon.law.yale.edu/18th_century/debates_808.asp#:~:text=It%20was%20a%20nefarious%20institution.%20It,the%20States%20where%20it%20prevailed",
                             "image": {
                                 "src": "../units/building-a-government/images/portraits/gouverneur-morris.jpg",
                                 "credit": "Pierre Henri, The Metropolitan Museum of Art"
@@ -518,7 +518,7 @@
                             "attribution": "Preamble to the Constitution, 1787",
                             "means": "We, the people of the United States, are creating this Constitution. We want a better union, fair courts, peace at home, a strong defense, a good life for everyone, and freedom for ourselves and for people in the future.",
                             "sourceName": "National Archives",
-                            "sourceUrl": "https://www.archives.gov/founding-docs/constitution-transcript"
+                            "sourceUrl": "https://www.archives.gov/founding-docs/constitution-transcript#:~:text=We%20the%20People%20of%20the%20United,the%20United%20States%20of%20America"
                         },
                         "image": {
                             "src": "../units/building-a-government/images/constitution-page-1.jpg",
@@ -584,7 +584,7 @@
                             "attribution": "Montesquieu, The Spirit of Laws, 1748, translated by Thomas Nugent",
                             "means": "When the same person or group both makes the laws and carries them out, people cannot be free.",
                             "sourceName": "The Founders’ Constitution, University of Chicago Press",
-                            "sourceUrl": "https://press-pubs.uchicago.edu/founders/documents/v1ch17s9.html",
+                            "sourceUrl": "https://press-pubs.uchicago.edu/founders/documents/v1ch17s9.html#:~:text=When%20the%20legislative%20and%20executive%20powers,there%20can%20be%20no%20liberty",
                             "image": {
                                 "src": "../units/building-a-government/images/portraits/montesquieu.jpg",
                                 "credit": "After Jacques-Antoine Dassier, Palace of Versailles"
@@ -654,7 +654,7 @@
                             "attribution": "James Wilson, speech at the Constitutional Convention, September 4, 1787, from James Madison’s notes",
                             "means": "The delegates disagree strongly about how to choose a president, and people outside this room will disagree too. It is the hardest question we have had to settle.",
                             "sourceName": "The Avalon Project, Yale Law School",
-                            "sourceUrl": "https://avalon.law.yale.edu/18th_century/debates_904.asp",
+                            "sourceUrl": "https://avalon.law.yale.edu/18th_century/debates_904.asp#:~:text=This%20subject%20has%20greatly%20divided%20the,we%20have%20had%20to%20decide",
                             "image": {
                                 "src": "../units/building-a-government/images/portraits/james-wilson.jpg",
                                 "credit": "Jean Pierre Henri Elouis, Smithsonian American Art Museum"
@@ -722,7 +722,7 @@
                             "attribution": "James Madison, Federalist No. 45, January 1788",
                             "means": "The Constitution gives the national government only a few powers, and it lists them. The states keep many powers, and those are not listed one by one.",
                             "sourceName": "The Avalon Project, Yale Law School",
-                            "sourceUrl": "https://avalon.law.yale.edu/18th_century/fed45.asp"
+                            "sourceUrl": "https://avalon.law.yale.edu/18th_century/fed45.asp#:~:text=The%20powers%20delegated%20by%20the%20proposed,governments%20are%20numerous%20and%20indefinite"
                         },
                         "image": {
                             "src": "../units/building-a-government/images/james-madison.jpg",
@@ -788,7 +788,7 @@
                             "attribution": "Chief Justice John Marshall, Marbury v. Madison, 1803",
                             "means": "It is clearly the job of the courts to say what the law means.",
                             "sourceName": "Legal Information Institute, Cornell Law School",
-                            "sourceUrl": "https://www.law.cornell.edu/supremecourt/text/5/137"
+                            "sourceUrl": "https://www.law.cornell.edu/supremecourt/text/5/137#:~:text=It%20is%20emphatically%20the%20province%20and,say%20what%20the%20law%20is"
                         },
                         "image": {
                             "src": "../units/building-a-government/images/john-marshall.jpg",
@@ -877,7 +877,7 @@
                             "attribution": "Secretary of War Henry Knox, report to President Washington, June 15, 1789",
                             "means": "Native people lived on this land first, so the land is theirs. It can be taken only if they freely agree, or if they lose a war that was fought for a fair reason.",
                             "sourceName": "Founders Online, National Archives",
-                            "sourceUrl": "https://founders.archives.gov/documents/Washington/05-02-02-0357-0002",
+                            "sourceUrl": "https://founders.archives.gov/documents/Washington/05-02-02-0357-0002#:~:text=The%20Indians%20being%20the%20prior%20occupants,case%20of%20a%20just%20War",
                             "image": {
                                 "src": "../units/building-a-government/images/portraits/henry-knox.jpg",
                                 "credit": "Charles Peale Polk, National Portrait Gallery, Smithsonian"
@@ -950,7 +950,7 @@
                             "attribution": "Treaty of Greenville, Article 5, 1795",
                             "means": "The Native nations who own these lands may live, hunt and plant on them in peace for as long as they want. The United States will not bother them.",
                             "sourceName": "The Avalon Project, Yale Law School",
-                            "sourceUrl": "https://avalon.law.yale.edu/18th_century/greenvil.asp"
+                            "sourceUrl": "https://avalon.law.yale.edu/18th_century/greenvil.asp#:~:text=The%20Indian%20tribes%20who%20have%20a,molestation%20from%20the%20United%20States"
                         },
                         "image": {
                             "src": "../units/building-a-government/images/greenville-treaty-line.png",
@@ -1023,7 +1023,7 @@
                             "attribution": "Treaty of Medicine Creek, Article 3, 1854",
                             "means": "The tribes keep the right to fish in all the places where they have always fished, sharing those places with the other people of the territory.",
                             "sourceName": "Washington Governor’s Office of Indian Affairs",
-                            "sourceUrl": "https://goia.wa.gov/resources/treaties/treaty-medicine-creek-1854"
+                            "sourceUrl": "https://goia.wa.gov/resources/treaties/treaty-medicine-creek-1854#:~:text=The%20right%20of%20taking%20fish%2C%20at,all%20citizens%20of%20the%20Territory"
                         },
                         "image": {
                             "src": "../units/building-a-government/images/medicine-creek-treaty-1854-article-3.jpg",
@@ -1107,7 +1107,7 @@
                             "attribution": "Mercy Otis Warren, writing as “A Columbian Patriot,” Observations on the New Constitution, 1788",
                             "means": "The plan being offered does not protect people’s right to believe what they choose or the freedom of newspapers to print what they want.",
                             "sourceName": "Evans Early American Imprint Collection, University of Michigan Library",
-                            "sourceUrl": "https://quod.lib.umich.edu/e/evans/N16431.0001.001/1:2?rgn=div1;view=fulltext",
+                            "sourceUrl": "https://quod.lib.umich.edu/e/evans/N16431.0001.001/1:2?rgn=div1;view=fulltext#:~:text=There%20is%20no%20security%20in%20the,the%20liberty%20of%20the%20press",
                             "image": {
                                 "src": "../units/building-a-government/images/portraits/mercy-otis-warren.jpg",
                                 "credit": "John Singleton Copley, Museum of Fine Arts, Boston"
@@ -1184,7 +1184,7 @@
                             "attribution": "George Mason, speech at the Constitutional Convention, June 11, 1787, from James Madison’s notes",
                             "means": "The plan will need changes. It is better to set up a calm, lawful way to make them than to leave change to luck and fighting.",
                             "sourceName": "The Avalon Project, Yale Law School",
-                            "sourceUrl": "https://avalon.law.yale.edu/18th_century/debates_611.asp"
+                            "sourceUrl": "https://avalon.law.yale.edu/18th_century/debates_611.asp#:~:text=Amendments%20therefore%20will%20be%20necessary%2C%20and,trust%20to%20chance%20and%20violence"
                         },
                         "image": {
                             "src": "../units/building-a-government/images/amending-the-constitution.png",
@@ -1250,7 +1250,7 @@
                             "attribution": "Justice Abe Fortas, Tinker v. Des Moines, 1969",
                             "means": "No one can seriously claim that students or teachers lose their right to free speech when they walk into school.",
                             "sourceName": "Legal Information Institute, Cornell Law School",
-                            "sourceUrl": "https://www.law.cornell.edu/supremecourt/text/393/503"
+                            "sourceUrl": "https://www.law.cornell.edu/supremecourt/text/393/503#:~:text=It%20can%20hardly%20be%20argued%20that,expression%20at%20the%20schoolhouse%20gate"
                         },
                         "image": {
                             "src": "../units/building-a-government/images/bill-of-rights.jpg",

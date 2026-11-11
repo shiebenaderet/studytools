@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.75] - 2026-11-11
+
+### Changed
+- Unit 3 source links now open the page at the quotation and highlight it, for the 16 Primary Source boxes and 5 home page quotes that link to a web page. Each link carries the first and last words of the quotation, which current versions of Chrome, Edge, Safari and Firefox scroll to and mark. The words were checked against 17 of the pages, and 12 were watched jumping to the right place in a test browser. Four pages (three at Founders Online and one at the University of Michigan) turn automated readers away and still need a click by a person. The Susan B. Anthony source is a PDF, which cannot be opened at a phrase. Requested by the teacher.
+
 ## [8.55.74] - 2026-11-11
 
 ### Fixed
