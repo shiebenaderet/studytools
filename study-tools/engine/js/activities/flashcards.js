@@ -585,7 +585,7 @@ StudyEngine.registerActivity({
             tbLink.appendChild(document.createTextNode(' Read in textbook'));
             tbLink.addEventListener('click', function(e) {
                 e.stopPropagation();
-                StudyEngine.activateActivity('textbook', [sectionInfo.segmentId, sectionInfo.sectionId]);
+                StudyEngine.activateActivity('textbook', [sectionInfo.segmentId, sectionInfo.sectionId, card.term]);
             });
             morePanel.appendChild(tbLink);
         }

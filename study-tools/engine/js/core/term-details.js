@@ -70,7 +70,7 @@
         tbBtn.appendChild(tbIcon);
         tbBtn.appendChild(document.createTextNode(' Read in textbook'));
         tbBtn.addEventListener('click', function() {
-          StudyEngine.activateActivity('textbook', [sectionInfo.segmentId, sectionInfo.sectionId]);
+          StudyEngine.activateActivity('textbook', [sectionInfo.segmentId, sectionInfo.sectionId, entry.term]);
         });
         actions.appendChild(tbBtn);
         panel.appendChild(actions);

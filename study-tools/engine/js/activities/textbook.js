@@ -183,6 +183,9 @@ StudyEngine.registerActivity({
                 if (params.length >= 1 && self._content.segments) {
                     var segId = params[0];
                     var secId = params[1];
+                    // A third part names the word the student came from (a
+                    // flashcard or term panel), so the section can point to it.
+                    if (params[2]) self._focusTerm = String(params[2]).toLowerCase();
                     for (var si = 0; si < self._content.segments.length; si++) {
                         if (self._content.segments[si].id === segId) {
                             self._currentSegment = si;
@@ -797,6 +800,26 @@ StudyEngine.registerActivity({
         }
 
         readingArea.appendChild(navRow);
+
+        // Arrived from "Read in textbook" on a word: mark its first use in
+        // the reading and bring it into view. A class only, so the text and
+        // every character offset stay the same.
+        if (this._focusTerm) {
+            var wanted = this._focusTerm;
+            this._focusTerm = null;
+            var marks = contentDiv.querySelectorAll('.tb-vocab');
+            for (var fi = 0; fi < marks.length; fi++) {
+                if (marks[fi].dataset.term === wanted) {
+                    marks[fi].classList.add('tb-vocab-focus');
+                    (function(el) {
+                        setTimeout(function() {
+                            if (el.isConnected) el.scrollIntoView({ block: 'center', behavior: 'auto' });
+                        }, 200);
+                    })(marks[fi]);
+                    break;
+                }
+            }
+        }
 
         // Save position
         this._progress.lastSegment = this._currentSegment;

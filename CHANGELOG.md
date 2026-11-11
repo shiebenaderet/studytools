@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.81] - 2026-11-11
+
+### Changed
+- **Read in textbook** now points to the word. Opening the textbook from a flashcard or a term's details panel used to land on the right section with nothing marked. The word's first use in the reading now has a yellow marker around it and is scrolled into view; the marker stays until the student moves to another section. Works in every unit. Requested by the teacher.
+
 ## [8.55.80] - 2026-11-11
 
 ### Added
