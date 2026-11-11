@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.65] - 2026-11-11
+
+### Fixed
+- Unit 3, Read More for **Sharing Power With the States** (Full): the last paragraph pointed to Chapter 3 for the Supremacy Clause. It is in Chapter 4, Treaties and Sovereignty. One word changed, so a highlight on that sentence may need redoing. Found while writing the Clear version.
+
 ## [8.55.64] - 2026-11-11
 
 ### Added
