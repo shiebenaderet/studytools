@@ -139,6 +139,17 @@ ids.forEach(function(id) {
           if (!found.length) err(id, where + ': key term "' + k.term + '" is not in the section text (outside subheads)');
           else if (found.length < Object.keys(levels).length) warn(id, where + ': key term "' + k.term + '" is missing at ' + Object.keys(levels).filter(function(lv) { return found.indexOf(lv) === -1; }).join(', '));
         });
+        // Quote boxes: a real link, and a portrait file that exists
+        (sec.primarySource ? [].concat(sec.primarySource) : []).forEach(function(q) {
+          if (!q.text) err(id, where + ': primarySource has no text');
+          if (q.sourceUrl && !/^https:\/\//.test(q.sourceUrl)) err(id, where + ': primarySource sourceUrl must start with https://');
+          if (!q.sourceUrl) warn(id, where + ': primarySource has no sourceUrl');
+          if (q.image && q.image.src) {
+            var imgPath = path.join(unitsDir, '..', 'engine', q.image.src);
+            if (!fs.existsSync(imgPath)) err(id, where + ': primarySource image not found: ' + q.image.src);
+            if (!q.image.credit) err(id, where + ': primarySource image has no credit');
+          }
+        });
         var marked = (sec.keyTerms || []).length + (sec.vocabTerms || []).length;
         if ((sec.keyTerms || []).length && marked > 8) warn(id, where + ': ' + marked + ' words are colored by Word colors; keep it to about 7');
       });

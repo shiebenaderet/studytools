@@ -493,6 +493,28 @@ Strong readers run out of textbook before they run out of curiosity. A top-level
 
 Write the stressed syllable in capitals. At the Quick and Clear levels the guide prints in parentheses after the word's first appearance in a section; at every level it shows in the word's card as "Say it". A vocabulary word shows its guide only in the section that teaches it. The guide is not part of the reading's text, so Listen does not read it aloud and highlights are not affected. Check every guide yourself, above all the names of Native nations; ask the tribe's own website or language program when unsure.
 
+### Primary Source quote boxes (optional)
+
+A section can show one quotation in a **Primary Source** box under the reading. It appears at every reading level and is never required reading.
+
+```json
+"primarySource": {
+  "text": "When a broad table is to be made, and the edges of planks do not fit, the artist takes a little from both, and makes a good joint.",
+  "speaker": "Benjamin Franklin",
+  "attribution": "Benjamin Franklin, speech at the Constitutional Convention, June 30, 1787, from James Madison's notes",
+  "means": "When a builder makes a wide table and two boards do not fit together, he trims a little off each one so they join well.",
+  "sourceName": "The Avalon Project, Yale Law School",
+  "sourceUrl": "https://avalon.law.yale.edu/18th_century/debates_630.asp",
+  "image": { "src": "../units/my-unit/images/portraits/benjamin-franklin.jpg", "credit": "Joseph Siffred Duplessis, The Metropolitan Museum of Art" }
+}
+```
+
+- `text` is the exact wording the source prints, old spelling and all. Check it against the page at `sourceUrl`.
+- `sourceUrl` opens in a new tab as "Read the source". Use a library, archive, university or court site, never a quote site.
+- `means` restates the quotation in plain words. It shows at Quick and Clear only.
+- `image` is a public-domain portrait stored in the unit's `images/portraits` folder, about 240 px wide, with a `credit`. Leave it out when no free portrait exists; the box then shows the name alone.
+- A list of these objects shows several boxes.
+
 ### Read More panels (optional)
 
 A textbook section can carry a longer version of itself in `readMore`. It shows as a closed **Read More** panel under the section. Opening it never counts toward the reading gate, so the short text stays the only required reading. Listen and the highlighter follow whichever text is open, and Read More highlights are saved separately from the short text's.

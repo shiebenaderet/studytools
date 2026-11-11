@@ -6155,6 +6155,21 @@ body.light-mode .tb-vocab-popup { --tb-noun: #c62828; --tb-verb: #1b7a34; --tb-a
 .tb-quote-attr {
     font-size: 0.85em; color: var(--text-muted); text-align: right; margin-top: 6px;
 }
+/* Quote box with a portrait and a link to the source */
+.tb-quote-row { display: flex; gap: 14px; align-items: flex-start; }
+.tb-quote-body { flex: 1; min-width: 0; }
+.tb-quote-portrait {
+    width: 72px; height: 72px; flex: 0 0 72px; border-radius: 50%;
+    object-fit: cover; object-position: center top; border: 2px solid var(--border-card);
+    background: var(--bg-card);
+}
+.tb-quote-means {
+    font-size: 0.9em; line-height: 1.5; color: var(--text-primary); margin-top: 10px;
+    padding-top: 10px; border-top: 1px solid var(--border-card);
+}
+.tb-quote-source { font-size: 0.8em; color: var(--text-muted); margin-top: 10px; }
+.tb-quote-source a { color: var(--primary-text); text-decoration: underline; }
+@media (max-width: 480px) { .tb-quote-portrait { width: 56px; height: 56px; flex-basis: 56px; } }
 
 /* Stop & Think */
 .tb-callout-think {

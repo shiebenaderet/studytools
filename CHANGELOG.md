@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.69] - 2026-11-11
+
+### Added
+- Textbook: **Primary Source** quote boxes can now show a portrait, a plain-words line at Quick and Clear (`means`), and a **Read the source** link that opens the original document in a new tab. Unit 3 gets a box on all 17 sections, each quotation checked word for word against its source (Founders Online, the Avalon Project, the National Archives, Cornell's Legal Information Institute and others), with nine public-domain portraits stored in the unit. Speakers without a free portrait show by name. Three quotations in the Deep readings were corrected to the sources' exact wording (Washington, Knox, Anthony). The content checker now checks each box's link and portrait file. Requested by the teacher.
+
 ## [8.55.68] - 2026-11-11
 
 ### Fixed

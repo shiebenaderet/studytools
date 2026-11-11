@@ -106,3 +106,38 @@ with a source record and rights line for the teacher to vet, as with the section
 - How vocabulary works in flashcards and games.
 - The privacy promise: all images are stored in the repository, nothing loads from another
   site.
+
+## Built on Nov 11: What Shipped and What to Check
+
+The teacher chose: quote boxes at every level, a portrait where a free one exists and the name alone where it does not, and a link to a trustworthy source on every quotation. Key terms, the Word colors switch and pronunciation guides were built the same day (see the changelog).
+
+Each quotation below was matched word for word against its source page on Nov 11. Four pages (the three Founders Online letters and the University of Michigan pamphlet) block automated readers and were read through a page-extraction service, so each of those deserves one click. Portrait rights were read from the museum or Wikimedia Commons record, not from a signed statement.
+
+| Section | Who | Source to click | Portrait |
+|---|---|---|---|
+| A Government Afraid of Power | Articles of Confederation | [The Avalon Project, Yale Law School](https://avalon.law.yale.edu/18th_century/artconf.asp) | none, name only |
+| Cracks in the Confederation | George Washington | [Founders Online, National Archives](https://founders.archives.gov/documents/Washington/04-04-02-0286) | Gilbert Stuart, The Metropolitan Museum of Art |
+| Philadelphia, 1787 | Thomas Jefferson | [Founders Online, National Archives](https://founders.archives.gov/documents/Jefferson/01-12-02-0075) | Rembrandt Peale, White House Collection |
+| Two Plans and the Great Compromise | Benjamin Franklin | [The Avalon Project, Yale Law School](https://avalon.law.yale.edu/18th_century/debates_630.asp) | Joseph Siffred Duplessis, The Metropolitan Museum of Art |
+| Compromises Over Slavery | Gouverneur Morris | [The Avalon Project, Yale Law School](https://avalon.law.yale.edu/18th_century/debates_808.asp) | Pierre Henri, The Metropolitan Museum of Art |
+| We the People | Preamble to the Constitution | [National Archives](https://www.archives.gov/founding-docs/constitution-transcript) | none, name only |
+| Seven Articles, Three Branches | Montesquieu | [The Founders’ Constitution, University of Chicago Press](https://press-pubs.uchicago.edu/founders/documents/v1ch17s9.html) | After Jacques-Antoine Dassier, Palace of Versailles |
+| Choosing a President | James Wilson | [The Avalon Project, Yale Law School](https://avalon.law.yale.edu/18th_century/debates_904.asp) | Jean Pierre Henri Elouis, Smithsonian American Art Museum |
+| Sharing Power With the States | James Madison | [The Avalon Project, Yale Law School](https://avalon.law.yale.edu/18th_century/fed45.asp) | none, name only |
+| Checks and Balances | John Marshall | [Legal Information Institute, Cornell Law School](https://www.law.cornell.edu/supremecourt/text/5/137) | none, name only |
+| Nations Within a Nation | Henry Knox | [Founders Online, National Archives](https://founders.archives.gov/documents/Washington/05-02-02-0357-0002) | Charles Peale Polk, National Portrait Gallery, Smithsonian |
+| The Supreme Law of the Land | Treaty of Medicine Creek | [Washington Governor’s Office of Indian Affairs](https://goia.wa.gov/resources/treaties/treaty-medicine-creek-1854) | none, name only |
+| The Treaty of Greenville | Treaty of Greenville | [The Avalon Project, Yale Law School](https://avalon.law.yale.edu/18th_century/greenvil.asp) | none, name only |
+| The Great Debate | Mercy Otis Warren | [Evans Early American Imprint Collection, University of Michigan Library](https://quod.lib.umich.edu/e/evans/N16431.0001.001/1:2?rgn=div1;view=fulltext) | John Singleton Copley, Museum of Fine Arts, Boston |
+| Changing the Constitution | George Mason | [The Avalon Project, Yale Law School](https://avalon.law.yale.edu/18th_century/debates_611.asp) | none, name only |
+| The Bill of Rights | Abe Fortas | [Legal Information Institute, Cornell Law School](https://www.law.cornell.edu/supremecourt/text/393/503) | none, name only |
+| Widening We the People | Susan B. Anthony | [Federal Judicial Center](https://www.fjc.gov/sites/default/files/trials/susanbanthony.pdf) | Frances Benjamin Johnston, Library of Congress |
+
+**Left out on purpose**
+
+- **George Mason portrait.** The only copy found has no holding institution on its record, so his box shows his name alone. Gunston Hall or the Virginia Museum of History and Culture may have a documented one.
+- **Little Turtle.** A speech of his at the Greenville council was found ("I have now informed you of the boundaries of the Miami nation, where the Great Spirit placed my forefather a long time ago, and charged him not to sell, or part with his lands, but to preserve them for his posterity."). It was verified only in an 1847 reprint whose link is a 20 MB book file, and the one portrait found has no stated origin. The Greenville box uses the treaty’s Article 5 for now. Swap in his words once the American State Papers page at the Library of Congress can be linked.
+- **James Madison and John Marshall** have no portrait in their boxes because each is already the section’s main picture.
+- **Justice Abe Fortas** has no clearly free portrait.
+
+**Wording corrected to match the sources.** Three quotations in the Deep readings were written from memory and differed slightly from the sources: Washington ("Influence is no government," lower case), Knox (capital letters in "Soil," "Conquest" and "War") and Anthony (commas, and "this Union"). They now match. The other Deep quotations and every "What Historians Argue" paragraph are still unchecked against sources.

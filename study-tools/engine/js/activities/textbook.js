@@ -652,29 +652,10 @@ StudyEngine.registerActivity({
             readingArea.appendChild(keyBox);
         }
 
-        // Primary Source quote (if present)
-        if (section.primarySource) {
-            var quoteBox = document.createElement('div');
-            quoteBox.className = 'tb-callout tb-callout-source';
-            var quoteTitle = document.createElement('div');
-            quoteTitle.className = 'tb-callout-title';
-            var quoteIcon = document.createElement('i');
-            quoteIcon.className = 'fas fa-quote-left';
-            quoteTitle.appendChild(quoteIcon);
-            quoteTitle.appendChild(document.createTextNode(' Primary Source'));
-            quoteBox.appendChild(quoteTitle);
-            var quoteText = document.createElement('blockquote');
-            quoteText.className = 'tb-quote';
-            quoteText.textContent = section.primarySource.text;
-            quoteBox.appendChild(quoteText);
-            if (section.primarySource.attribution) {
-                var attr = document.createElement('div');
-                attr.className = 'tb-quote-attr';
-                attr.textContent = '\u2014 ' + section.primarySource.attribution;
-                quoteBox.appendChild(attr);
-            }
-            readingArea.appendChild(quoteBox);
-        }
+        // Primary Source quote boxes (one object or a list). Shown at every
+        // level; never required reading.
+        var sources = section.primarySource ? (Array.isArray(section.primarySource) ? section.primarySource : [section.primarySource]) : [];
+        sources.forEach(function(src) { readingArea.appendChild(self._renderPrimarySource(src)); });
 
         // Check-in: Stop & Think (reflection, no tracking)
         if (section.checkIn && section.checkIn.type === 'stop-and-think') {
@@ -1144,6 +1125,70 @@ StudyEngine.registerActivity({
 
         box.appendChild(status);
         refreshStatus();
+    },
+
+    // { text, attribution, image: { src, credit }, sourceName, sourceUrl, means }
+    // `means` restates the quotation in plain words at the Quick and Clear levels.
+    _renderPrimarySource(src) {
+        var box = document.createElement('div');
+        box.className = 'tb-callout tb-callout-source';
+        var title = document.createElement('div');
+        title.className = 'tb-callout-title';
+        var icon = document.createElement('i');
+        icon.className = 'fas fa-quote-left';
+        title.appendChild(icon);
+        title.appendChild(document.createTextNode(' Primary Source'));
+        box.appendChild(title);
+
+        var row = document.createElement('div');
+        row.className = 'tb-quote-row';
+        if (src.image && src.image.src) {
+            var img = document.createElement('img');
+            img.className = 'tb-quote-portrait';
+            img.src = src.image.src;
+            img.alt = src.speaker || src.attribution || '';
+            img.loading = 'lazy';
+            if (src.image.credit) img.title = 'Image: ' + src.image.credit;
+            row.appendChild(img);
+        }
+        var body = document.createElement('div');
+        body.className = 'tb-quote-body';
+        var quote = document.createElement('blockquote');
+        quote.className = 'tb-quote';
+        quote.textContent = src.text;
+        body.appendChild(quote);
+        if (src.attribution) {
+            var attr = document.createElement('div');
+            attr.className = 'tb-quote-attr';
+            attr.textContent = '— ' + src.attribution;
+            body.appendChild(attr);
+        }
+        row.appendChild(body);
+        box.appendChild(row);
+
+        if (src.means && this._SAY_LEVELS.indexOf(this._readingLevel) !== -1) {
+            var means = document.createElement('div');
+            means.className = 'tb-quote-means';
+            var label = document.createElement('strong');
+            label.textContent = 'In plain words: ';
+            means.appendChild(label);
+            means.appendChild(document.createTextNode(src.means));
+            box.appendChild(means);
+        }
+        // Opens in a new tab. Nothing from the source site loads on this page.
+        if (src.sourceUrl && /^https:\/\//.test(src.sourceUrl)) {
+            var foot = document.createElement('div');
+            foot.className = 'tb-quote-source';
+            var link = document.createElement('a');
+            link.href = src.sourceUrl;
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            link.textContent = 'Read the source: ' + (src.sourceName || 'original document');
+            foot.appendChild(link);
+            if (src.image && src.image.credit) foot.appendChild(document.createTextNode(' · Portrait: ' + src.image.credit));
+            box.appendChild(foot);
+        }
+        return box;
     },
 
     _hasPosTags() {
