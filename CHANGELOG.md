@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.64] - 2026-11-11
+
+### Added
+- Unit 3 Read More: every section's Read More panel now has a **Clear** version beside Full (17 panels). A student reading at Clear gets the Clear text; Quick and Deep still show the Full text with the "written at the Full level" note. Each Clear version keeps the facts, subheads, quotations and vocabulary words that the Read More Check asks about, and measures about one grade below its Full version. Requested by the teacher.
+
 ## [8.55.63] - 2026-11-11
 
 ### Added
