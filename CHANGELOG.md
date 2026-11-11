@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.73] - 2026-11-11
+
+### Changed
+- Unit 3, Chapter 4, **Treaties and Sovereignty**: the three sections now run in time order (New York in 1790, the Treaty of Greenville in 1795, then Washington's treaties and the Boldt decision), and each one opens with a sentence or two that connects it to the one before. The old order jumped from 1790 to 1945 and back to 1795. The Greenville section now ends by saying the guarantee did not last (the 1809 treaty), which sets up the Washington section, where a treaty promise was upheld. Quick and Clear also say what a treaty is the first time the word appears. All four levels changed, including a few added sentences in the Full text; section ids are the same. Found by the teacher while reading the Clear level.
+
 ## [8.55.72] - 2026-11-11
 
 ### Added
