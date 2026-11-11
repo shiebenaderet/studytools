@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.61] - 2026-11-11
+
+### Added
+- Unit 3 readings: Chapter 4, **Treaties and Sovereignty**, at Quick, Clear and Deep (three sections). Same facts, headings and vocabulary words at every level; Deep adds quotations from Henry Knox, John Marshall, the Medicine Creek and Greenville treaties and a "What Historians Argue" part. Requested by the teacher.
+
 ## [8.55.60] - 2026-11-11
 
 ### Added
