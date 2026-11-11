@@ -5867,6 +5867,16 @@ a.sift-detail-link:hover { opacity: 0.8; }
     .tb-reading { max-width: 860px; }
     .tb-wrapper .tb-content { font-size: 1.12em; }
 }
+/* Large laptop and desktop screens: the page shell itself widens for the
+   textbook, and the text grows with the column so a line stays about the same
+   number of words long. Chromebooks are narrower than this and are unchanged. */
+@media (min-width: 1500px) {
+    .container:has(.tb-wrapper) { max-width: 1480px; }
+    .tb-wrapper { max-width: 1420px; }
+    .tb-reading { max-width: 1060px; padding: 34px 32px; }
+    .tb-wrapper .tb-content { font-size: 1.3em; }
+    .tb-figure-right, .tb-figure-left { max-width: 360px; }
+}
 
 /* Top bar: segments + level picker */
 .tb-top-bar {

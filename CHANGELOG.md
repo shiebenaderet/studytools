@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.82] - 2026-11-11
+
+### Changed
+- The textbook uses more of a large screen. On screens 1500 px wide or more (a MacBook, a desktop monitor), the page widens for the textbook, the reading column grows from 860 to 1060 px, and the text and floated pictures grow with it so a line stays about the same number of words long. Chromebooks and phones are narrower than that and look the same as before. Reported by the teacher: about half of a MacBook screen was blank beside the reading.
+
 ## [8.55.81] - 2026-11-11
 
 ### Changed
