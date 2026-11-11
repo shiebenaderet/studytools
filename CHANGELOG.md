@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.80] - 2026-11-11
+
+### Added
+- Textbook pictures open large when clicked or tapped, in every unit. The picture fills the screen over the page with its caption, and a second click, the X or the Escape key closes it. A small magnifier badge on each picture shows it can be opened, and the picture can be reached and opened from the keyboard. A section's `image` can name a bigger `full` file that loads only when enlarged. Reported by the teacher: the Treaty of Medicine Creek page in Unit 3 could not be read and clicking it did nothing.
+
+### Changed
+- Unit 3's Treaty of Medicine Creek picture has a larger file (1800 px wide, from the same National Archives scan) for the enlarged view, so Article III can be read.
+- The content checker reports a section picture whose file is missing.
+
 ## [8.55.79] - 2026-11-11
 
 ### Changed

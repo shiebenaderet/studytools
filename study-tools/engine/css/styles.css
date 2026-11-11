@@ -5997,6 +5997,20 @@ a.sift-detail-link:hover { opacity: 0.8; }
     width: 100%; height: auto; display: block;
     object-fit: contain; max-height: 400px;   /* contain: a picture is never cropped */
 }
+.tb-figure-zoom {
+    display: block; width: 100%; padding: 0; margin: 0; border: 0;
+    background: none; cursor: zoom-in; position: relative; font: inherit;
+}
+.tb-figure-zoom::after {   /* magnifier badge, drawn in CSS so it adds no text */
+    content: "\f00e"; font-family: "Font Awesome 6 Free", "Font Awesome 5 Free"; font-weight: 900;
+    position: absolute; right: 8px; bottom: 8px; width: 30px; height: 30px;
+    display: flex; align-items: center; justify-content: center; font-size: 13px;
+    color: #fff; background: rgba(15, 23, 42, 0.72); border-radius: 50%;
+}
+.tb-figure-zoom:focus-visible { outline: 3px solid var(--primary); outline-offset: -3px; }
+.tb-lightbox { cursor: zoom-out; }
+.tb-lightbox .source-lightbox-img { max-height: 82vh; background: #fff; }
+.tb-lightbox .source-lightbox-caption { max-width: 760px; line-height: 1.45; }
 .tb-figure-caption {
     padding: 10px 14px; font-size: 0.82em; line-height: 1.5;
     color: var(--text-secondary); border-top: 1px solid var(--border-card);

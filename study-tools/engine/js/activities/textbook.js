@@ -585,7 +585,16 @@ StudyEngine.registerActivity({
             img.src = section.image.src;
             img.alt = section.image.caption || section.heading;
             img.loading = 'lazy';
-            figure.appendChild(img);
+            // The picture is a button: click or tap opens it large. A button
+            // (not a bare click handler) so keyboard users can open it too.
+            var zoomBtn = document.createElement('button');
+            zoomBtn.type = 'button';
+            zoomBtn.className = 'tb-figure-zoom';
+            zoomBtn.setAttribute('aria-label', 'Enlarge picture');
+            zoomBtn.title = 'Click to enlarge';
+            zoomBtn.appendChild(img);
+            zoomBtn.addEventListener('click', function() { self._openFigure(section.image, section.heading, zoomBtn); });
+            figure.appendChild(zoomBtn);
             if (section.image.caption) {
                 var figcaption = document.createElement('figcaption');
                 figcaption.className = 'tb-figure-caption';
@@ -876,6 +885,52 @@ StudyEngine.registerActivity({
         }
 
         parent.appendChild(qcBox);
+    },
+
+    // Shows a section picture large, over the page. image.full, when given,
+    // is a bigger file loaded only here. Reuses the Source Analysis lightbox.
+    _openFigure(image, heading, opener) {
+        var overlay = document.createElement('div');
+        overlay.className = 'source-lightbox tb-lightbox';
+        overlay.setAttribute('role', 'dialog');
+        overlay.setAttribute('aria-modal', 'true');
+        overlay.setAttribute('aria-label', 'Enlarged picture');
+
+        var closeBtn = document.createElement('button');
+        closeBtn.type = 'button';
+        closeBtn.className = 'source-lightbox-close';
+        closeBtn.setAttribute('aria-label', 'Close');
+        closeBtn.textContent = '\u00d7';
+        overlay.appendChild(closeBtn);
+
+        var big = document.createElement('img');
+        big.src = image.full || image.src;
+        big.alt = image.caption || heading || '';
+        big.className = 'source-lightbox-img';
+        overlay.appendChild(big);
+
+        if (image.caption) {
+            var cap = document.createElement('div');
+            cap.className = 'source-lightbox-caption';
+            cap.textContent = image.caption + (image.credit ? ' ' + image.credit : '');
+            overlay.appendChild(cap);
+        }
+
+        function onKey(e) { if (e.key === 'Escape') close(); }
+        function close() {
+            document.removeEventListener('keydown', onKey);
+            overlay.remove();
+            if (opener && opener.focus) opener.focus();
+        }
+        closeBtn.addEventListener('click', close);
+        // A click anywhere closes it, the picture included: students expect
+        // a second tap to put the picture back.
+        overlay.addEventListener('click', close);
+        document.addEventListener('keydown', onKey);
+
+        document.body.appendChild(overlay);
+        requestAnimationFrame(function() { overlay.classList.add('active'); });
+        closeBtn.focus();
     },
 
     // Read More panel. Listen and the highlighter follow whichever text is

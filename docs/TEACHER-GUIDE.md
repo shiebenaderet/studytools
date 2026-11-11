@@ -515,6 +515,24 @@ A section can show one quotation in a **Primary Source** box under the reading. 
 - `image` is a public-domain portrait stored in the unit's `images/portraits` folder, about 240 px wide, with a `credit`. Leave it out when no free portrait exists; the box then shows the name alone.
 - A list of these objects shows several boxes.
 
+### Section pictures
+
+A textbook section can carry one picture in `image`:
+
+```json
+"image": {
+  "src": "../units/my-unit/images/treaty-page.jpg",
+  "full": "../units/my-unit/images/treaty-page-large.jpg",
+  "caption": "What the picture shows, when it was made and by whom.",
+  "credit": "National Archives",
+  "float": "right"
+}
+```
+
+- Clicking or tapping the picture opens it large over the page, with its caption. Clicking again, the X, or Escape closes it.
+- `full` is optional: a bigger file (about 1800 px wide) that loads only when the picture is enlarged. Use it for documents and maps a student should be able to read. Without it, the enlarged view shows `src`.
+- Keep `src` about 900 px wide. `float` is `right` or `left`; leave it out for a full-width picture.
+
 ### Read More panels (optional)
 
 A textbook section can carry a longer version of itself in `readMore`. It shows as a closed **Read More** panel under the section. Opening it never counts toward the reading gate, so the short text stays the only required reading. Listen and the highlighter follow whichever text is open, and Read More highlights are saved separately from the short text's.

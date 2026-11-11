@@ -150,6 +150,10 @@ ids.forEach(function(id) {
             if (!q.image.credit) err(id, where + ': primarySource image has no credit');
           }
         });
+        // Section picture, and its larger file for the enlarged view
+        if (sec.image) ['src', 'full'].forEach(function(k) {
+          if (sec.image[k] && !/^https?:/.test(sec.image[k]) && !fs.existsSync(path.join(unitsDir, '..', 'engine', sec.image[k]))) err(id, where + ': image ' + k + ' not found: ' + sec.image[k]);
+        });
         var marked = (sec.keyTerms || []).length + (sec.vocabTerms || []).length;
         if ((sec.keyTerms || []).length && marked > 8) warn(id, where + ': ' + marked + ' words are colored by Word colors; keep it to about 7');
       });
