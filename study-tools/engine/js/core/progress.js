@@ -413,6 +413,32 @@ const ProgressManager = {
             return [...new Set([...localDays, ...remoteDays])];
         }
 
+        // studyTime is a bare number of ms with no updatedAt, so the default
+        // below always picked the local copy. A fresh login whose timer had
+        // already ticked a few seconds then overwrote hours of cloud time.
+        // It only ever grows, so keep the larger total.
+        if (activity === 'studyTime') {
+            var lt = typeof local === 'number' ? local : 0;
+            var rt = typeof remote === 'number' ? remote : 0;
+            return Math.max(lt, rt);
+        }
+
+        // Streaks have no updatedAt either; a fresh login wrote a 1-day streak
+        // locally and that beat the real one. Keep the copy studied on the
+        // later day (the higher count on a tie), and the longer best streak.
+        if (activity === 'streak' || activity === 'learn-mode-streak') {
+            var dateKey = activity === 'streak' ? 'lastDate' : 'lastSessionDate';
+            var countKey = activity === 'streak' ? 'current' : 'currentStreak';
+            var ld = Date.parse(local[dateKey]) || 0;
+            var rd = Date.parse(remote[dateKey]) || 0;
+            var pick = (rd > ld || (rd === ld && (remote[countKey] || 0) > (local[countKey] || 0))) ? remote : local;
+            if (activity === 'learn-mode-streak') {
+                var best = Math.max(local.longestStreak || 0, remote.longestStreak || 0, pick.currentStreak || 0);
+                if (best !== (pick.longestStreak || 0)) pick = Object.assign({}, pick, { longestStreak: best });
+            }
+            return pick;
+        }
+
         // Default: newer wins (original behavior)
         var remoteTime = remote.updatedAt || 0;
         var localTime = local.updatedAt || 0;

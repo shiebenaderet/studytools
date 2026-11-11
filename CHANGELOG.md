@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.45] - 2026-11-11
+
+### Fixed
+- Logging back in no longer wipes study time or streaks. Study time and both streaks had no timestamp, so when two copies met (the cloud copy and the one on the device), the device's copy always won, even if it held only a few seconds from a fresh login. That small number then synced up over the real total. Study time now keeps the larger total, and streaks keep the copy from the later day. The leaderboard was already protected (it never lowers a score), which is why the reporting student's score froze instead of dropping: it would not rise until her lost hours were earned back. Reported by a period 5 student; a period 1 student was hit the same way.
+
 ## [8.55.44] - 2026-11-06
 
 ### Added
