@@ -447,6 +447,84 @@ const ProgressManager = {
             return saMerged;
         }
 
+        // studyTime is a bare number of ms with no updatedAt, so the default
+        // below always picked the local copy. A fresh login whose timer had
+        // already ticked a few seconds then overwrote hours of cloud time.
+        // It only ever grows, so keep the larger total.
+        if (activity === 'studyTime') {
+            var lt = typeof local === 'number' ? local : 0;
+            var rt = typeof remote === 'number' ? remote : 0;
+            return Math.max(lt, rt);
+        }
+
+        // Streaks have no updatedAt either; a fresh login wrote a 1-day streak
+        // locally and that beat the real one. Keep the copy studied on the
+        // later day (the higher count on a tie), and the longer best streak.
+        if (activity === 'streak' || activity === 'learn-mode-streak') {
+            var dateKey = activity === 'streak' ? 'lastDate' : 'lastSessionDate';
+            var countKey = activity === 'streak' ? 'current' : 'currentStreak';
+            var ld = Date.parse(local[dateKey]) || 0;
+            var rd = Date.parse(remote[dateKey]) || 0;
+            var pick = (rd > ld || (rd === ld && (remote[countKey] || 0) > (local[countKey] || 0))) ? remote : local;
+            if (activity === 'learn-mode-streak') {
+                var best = Math.max(local.longestStreak || 0, remote.longestStreak || 0, pick.currentStreak || 0);
+                if (best !== (pick.longestStreak || 0)) pick = Object.assign({}, pick, { longestStreak: best });
+            }
+            return pick;
+        }
+
+        // The keys below also have no updatedAt, so the default let a fresh
+        // device's copy replace everything in the cloud. They only build up,
+        // so combine both copies instead.
+
+        // term-mastery: { term: { sources: [...], count: { activity: n } } }.
+        // Union the sources and keep the higher count per activity.
+        if (activity === 'term-mastery') {
+            var tm = {};
+            Object.keys(Object.assign({}, remote, local)).forEach(function(term) {
+                var a = local[term] || {}, b = remote[term] || {};
+                var count = Object.assign({}, b.count || {});
+                Object.keys(a.count || {}).forEach(function(act) {
+                    count[act] = Math.max(count[act] || 0, a.count[act] || 0);
+                });
+                tm[term] = Object.assign({}, b, a, {
+                    sources: [...new Set([...(a.sources || []), ...(b.sources || [])])],
+                    count: count
+                });
+            });
+            return tm;
+        }
+
+        // Per-term maps: keep every term from both, device copy on a clash.
+        if (activity === 'learn-mode-tiers') {
+            return Object.assign({}, remote, local);
+        }
+        if (activity === 'weakness_tracker') {
+            return Object.assign({}, remote, local, {
+                terms: Object.assign({}, remote.terms || {}, local.terms || {})
+            });
+        }
+
+        // Timestamped lists the student writes over time: union by timestamp
+        // and text, oldest first, with the same caps the activities apply.
+        var listCaps = { 'learn-mode-reflections': 50, 'learn-mode-wiki-entries': 100, 'learn-mode-sessions': 20 };
+        if (listCaps[activity]) {
+            var seen = {};
+            var all = [].concat(Array.isArray(remote) ? remote : [], Array.isArray(local) ? local : [])
+                .filter(function(e) {
+                    var k = (e && e.timestamp) + '|' + (e && (e.text || e.mode || ''));
+                    if (seen[k]) return false;
+                    seen[k] = true;
+                    return true;
+                })
+                .sort(function(a, b) { return (a.timestamp || 0) - (b.timestamp || 0); });
+            return all.slice(Math.max(0, all.length - listCaps[activity]));
+        }
+
+        if (activity === 'badges') {
+            return [...new Set([...(Array.isArray(local) ? local : []), ...(Array.isArray(remote) ? remote : [])])];
+        }
+
         // Default: newer wins (original behavior)
         var remoteTime = remote.updatedAt || 0;
         var localTime = local.updatedAt || 0;

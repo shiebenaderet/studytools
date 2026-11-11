@@ -8,7 +8,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 
 [![Live Site](https://img.shields.io/badge/Live_Site-study.mrbsocialstudies.org-1669C5?style=for-the-badge&logo=google-chrome&logoColor=white)](https://study.mrbsocialstudies.org)
 [![License](https://img.shields.io/badge/License-Educational_Use-22c55e?style=for-the-badge)](#license)
-[![Version](https://img.shields.io/badge/Version-8.55.66-f59e0b?style=for-the-badge)](#)
+[![Version](https://img.shields.io/badge/Version-8.55.68-f59e0b?style=for-the-badge)](#)
 
 ---
 
@@ -221,6 +221,7 @@ Students who reported bugs or suggested improvements:
 | **Tiffany N** | Asked for a harder Who Am I, which revealed that most clues contained the answer; now masked, plus a typed-answer **Challenge mode** |
 | **Tiffany N** | Asked for a textbook highlighter, now with a "My highlights" list |
 | **Anderson A** | Asked for more reading and study options after outgrowing the games; now **Go deeper** links in every chapter |
+| **Tiffany N.** | Reported losing 14 hours of study time and her streak after logging back in, which revealed that a fresh login could overwrite saved study time and streaks |
 
 > Want to be listed here? Report a bug or suggest an improvement to your teacher!
 
