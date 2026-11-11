@@ -882,7 +882,11 @@ StudyEngine.registerActivity({
         var self = this;
         var rm = section.readMore;
         var content = rm.content || {};
-        var level = content[this._readingLevel] ? this._readingLevel : (content.standard ? 'standard' : Object.keys(content)[0]);
+        // A Quick reader with no Quick text gets Clear, not Full: fall back to
+        // the nearest easier-to-read level that exists before using standard.
+        var level = content[this._readingLevel] ? this._readingLevel
+            : (this._readingLevel === 'level0' && content.simplified) ? 'simplified'
+            : (content.standard ? 'standard' : Object.keys(content)[0]);
         var raw = typeof rm.content === 'string' ? rm.content : (content[level] || '');
         if (!raw) return;
 

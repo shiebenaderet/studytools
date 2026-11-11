@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.78] - 2026-11-11
+
+### Fixed
+- A student reading at Quick now gets the Clear version of a Read More panel. Read More is written at Clear and Full only, and a Quick reader was being shown the Full text because the textbook fell back to Full for any missing level. It now falls back from Quick to Clear when a Clear version exists. Deep still shows Full. Only Unit 3 has Read More panels, and it has not opened, so no saved highlights are affected. Requested by the teacher.
+
 ## [8.55.77] - 2026-11-11
 
 ### Changed

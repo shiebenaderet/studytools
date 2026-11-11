@@ -528,7 +528,7 @@ A textbook section can carry a longer version of itself in `readMore`. It shows 
 }
 ```
 
-`content` uses the same level ids as the section. A level without its own Read More text falls back to `standard`, and the panel tells the student which level it is written at.
+`content` uses the same level ids as the section. A level without its own Read More text falls back to `standard`, except that Quick falls back to Clear (`simplified`) when there is one, and the panel tells the student which level it is written at.
 
 **Read More Check (optional).** Add `check` to end the panel with a Quick Check and one written question that only the Read More text answers:
 
