@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.86] - 2026-11-11
+
+### Changed
+- **Learn Mode** no longer asks a student to write about a term it has not checked, in every unit. Three changes, all requested by the teacher after testing Unit 3:
+  - The questions before the lesson are now labeled as a warm-up. A note says they are not graded and only decide what to teach first, and an **I don't know yet** button shows the answer and moves on. They used to be labeled "Quick Check," which read like a quiz a student should pass.
+  - The question after each group of three terms is now about one of those three terms whenever the unit has one (it used to be any question from the chapter). A Reflection writing card follows only when the student got that question right, and it asks about that term. After a wrong answer the writing card is skipped.
+  - The Reflection card shows the term's definition above the writing box.
+
 ## [8.55.85] - 2026-11-11
 
 ### Fixed

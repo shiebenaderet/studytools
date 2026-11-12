@@ -341,7 +341,7 @@ Add any of these to your `activities` array:
 #### 📖 Study Activities
 | Activity ID | What it does | Required content |
 |------------|-------------|-----------------|
-| `learn-mode` | Guided study sessions with adaptive depth, pre/post assessments, reflection prompts, and Wiki Writer bonus. 1.5x points, 30-min cap. | `vocabulary`, `practiceQuestions`, `fillInBlankSentences`, textbook.json (optional, for Key Idea cards) |
+| `learn-mode` | Guided study sessions with adaptive depth, an ungraded warm-up before the lesson (with an "I don't know yet" button) and a check after it, reflection prompts, and Wiki Writer bonus. A reflection asks for writing only about a term the student just answered a question on correctly, and shows that term's definition. 1.5x points, 30-min cap. | `vocabulary`, `practiceQuestions`, `fillInBlankSentences`, textbook.json (optional, for Key Idea cards) |
 | `textbook` | Leveled chapters with vocab pop-ups, Read Aloud, Quick Checks, a highlighter, and end-of-chapter Go Deeper links | `textbook.json` (one segment per vocabulary category), `goDeeper` (optional) |
 | `flashcards` | Spaced repetition flashcards | `vocabulary` |
 | `resources` | Searchable vocabulary reference with Go Deeper links per category | `vocabulary`, `goDeeper` (optional) |

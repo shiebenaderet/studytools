@@ -169,7 +169,7 @@ StudyEngine.registerActivity({
     _serializeSlides: function(slides) {
         if (!slides) return [];
         return slides.map(function(s) {
-            return { type: s.type, data: s.data, tier: s.tier, keyIdea: s.keyIdea || null };
+            return { type: s.type, data: s.data, tier: s.tier, keyIdea: s.keyIdea || null, term: s.term || null };
         });
     },
 
@@ -525,6 +525,7 @@ StudyEngine.registerActivity({
     // ─── Pre-Assessment ──────────────────────────────────────────
 
     _startPreAssessment: function(scope) {
+        this._assessPhase = 'pre';
         this._container.textContent = '';
         var config = this._config;
         var allMastered = this._allCategoriesMastered();
@@ -643,6 +644,35 @@ StudyEngine.registerActivity({
         return terms;
     },
 
+    // Before the lesson, the questions are a warm-up, not a quiz. Say so, so a
+    // student who has not learned the terms yet does not think they are failing.
+    _assessmentIntro: function(wrap) {
+        if (this._assessPhase !== 'pre') return;
+        var note = this._el('div');
+        note.className = 'lm-warmup-note';
+        note.style.cssText = 'background:var(--bg-card);border:1px solid rgba(255,255,255,0.08);border-left:3px solid var(--primary);border-radius:var(--radius-md);padding:12px 14px;margin-bottom:18px;color:var(--text-secondary);font-size:0.9rem;line-height:1.45;';
+        var strong = this._el('strong', null, 'Warm-up: what do you already know? ');
+        strong.style.color = 'var(--text-primary)';
+        note.appendChild(strong);
+        note.appendChild(document.createTextNode('This is not graded. It only decides what to teach you first, so it is fine to guess or to say you do not know yet.'));
+        wrap.appendChild(note);
+    },
+
+    // "I don't know yet": shows the answer and counts as not known.
+    _assessmentSkip: function(wrap, reveal, callback) {
+        var self = this;
+        var skip = this._el('button', null, this._assessPhase === 'pre' ? "I don't know yet" : "I'm not sure");
+        skip.className = 'lm-idk-btn';
+        skip.style.cssText = 'display:block;margin:14px auto 0;padding:9px 18px;border-radius:var(--radius-md);background:none;color:var(--text-secondary);border:1px dashed rgba(148,163,184,0.5);font-size:0.9rem;cursor:pointer;';
+        skip.addEventListener('click', function() {
+            var btns = wrap.querySelectorAll('button');
+            for (var b = 0; b < btns.length; b++) { btns[b].disabled = true; btns[b].style.cursor = 'default'; }
+            reveal();
+            setTimeout(function() { callback(false); }, 1800);
+        });
+        wrap.appendChild(skip);
+    },
+
     _renderAssessmentMC: function(q, callback) {
         var container = this._container;
         container.textContent = '';
@@ -651,7 +681,8 @@ StudyEngine.registerActivity({
         var wrap = this._el('div');
         wrap.style.cssText = 'max-width:560px;margin:0 auto;padding:20px;';
 
-        var label = this._el('div', null, 'Quick Check');
+        this._assessmentIntro(wrap);
+        var label = this._el('div', null, this._assessPhase === 'pre' ? 'Warm-up' : 'Quick Check');
         label.style.cssText = 'color:var(--accent-text);font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:12px;';
         wrap.appendChild(label);
 
@@ -700,6 +731,13 @@ StudyEngine.registerActivity({
             })(shuffled[i], i);
         }
 
+        this._assessmentSkip(wrap, function() {
+            var opts = wrap.querySelectorAll('button:not(.lm-idk-btn)');
+            for (var k = 0; k < shuffled.length; k++) {
+                if (shuffled[k] === q.correct && opts[k]) { opts[k].style.background = '#1a5c2a'; opts[k].style.borderColor = '#2ecc71'; }
+            }
+        }, callback);
+
         container.appendChild(wrap);
     },
 
@@ -711,7 +749,8 @@ StudyEngine.registerActivity({
         var wrap = this._el('div');
         wrap.style.cssText = 'max-width:560px;margin:0 auto;padding:20px;';
 
-        var label = this._el('div', null, 'Fill in the Blank');
+        this._assessmentIntro(wrap);
+        var label = this._el('div', null, this._assessPhase === 'pre' ? 'Warm-up: fill in the blank' : 'Fill in the Blank');
         label.style.cssText = 'color:var(--accent-text);font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:12px;';
         wrap.appendChild(label);
 
@@ -758,6 +797,12 @@ StudyEngine.registerActivity({
         }
 
         wrap.appendChild(chipWrap);
+        this._assessmentSkip(wrap, function() {
+            var chips = chipWrap.querySelectorAll('button');
+            for (var k = 0; k < chips.length; k++) {
+                if (chips[k].textContent.toLowerCase() === fib.answer.toLowerCase()) { chips[k].style.background = '#1a5c2a'; chips[k].style.borderColor = '#2ecc71'; }
+            }
+        }, callback);
         container.appendChild(wrap);
     },
 
@@ -992,6 +1037,7 @@ StudyEngine.registerActivity({
                     slides.push({
                         type: 'reflection',
                         data: {
+                            template: 'How does {term} connect to our essential question: ' + eq,
                             prompt: 'How does ' + recentTerm + ' connect to our essential question: ' + eq,
                             term: recentTerm,
                             isEQ: true
@@ -1002,7 +1048,7 @@ StudyEngine.registerActivity({
                     var promptTemplate = prompts[Math.floor(Math.random() * prompts.length)];
                     slides.push({
                         type: 'reflection',
-                        data: { prompt: promptTemplate.replace('{term}', recentTerm), term: recentTerm }
+                        data: { template: promptTemplate, prompt: promptTemplate.replace('{term}', recentTerm), term: recentTerm }
                     });
                 }
                 slidesSinceReflection = 0;
@@ -1102,12 +1148,29 @@ StudyEngine.registerActivity({
             }
         }
 
-        // Alternate between MC and FIB
+        // Which of this group's terms does each question check? A fill-in
+        // checks its answer; a multiple-choice question checks a term named in
+        // the question or its correct option.
         var allCandidates = mcCandidates.concat(fibCandidates);
+        for (var c = 0; c < allCandidates.length; c++) {
+            var cand = allCandidates[c];
+            var hay = cand.type === 'fib'
+                ? null
+                : (String(cand.data.question || '') + ' ' + String((cand.data.options || [])[cand.data.correct] || '')).toLowerCase();
+            for (var g = 0; g < group.length; g++) {
+                var name = termNames[g];
+                var hit = cand.type === 'fib'
+                    ? String(cand.data.answer || '').toLowerCase() === name
+                    : new RegExp('\\b' + name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).test(hay);
+                if (hit) { cand.term = group[g].term; break; }
+            }
+        }
+        // Prefer a question about a term the student was just taught, so the
+        // writing prompt that may follow rests on something they were checked on.
         this._shuffleArray(allCandidates);
-
-        if (allCandidates.length > 0) {
-            var picked = allCandidates[0];
+        var tied = allCandidates.filter(function(x) { return !!x.term; });
+        var picked = tied[0] || allCandidates[0];
+        if (picked) {
             this._questionsUsed.push(picked.index);
             return picked;
         }
@@ -1174,13 +1237,25 @@ StudyEngine.registerActivity({
         if (slide.type === 'term') {
             this._renderTermCard(slideArea, slide.data, slide.tier, slide.keyIdea);
         } else if (slide.type === 'mc') {
+            this._lastCheck = { term: slide.term || null, correct: null };
             this._renderMCCard(slideArea, slide.data);
         } else if (slide.type === 'fib') {
+            this._lastCheck = { term: slide.term || null, correct: null };
             this._renderFIBCard(slideArea, slide.data);
         } else if (slide.type === 'keyIdea') {
             this._renderKeyIdeaCard(slideArea, slide.data);
         } else if (slide.type === 'reflection') {
-            this._renderReflectionCard(slideArea, slide.data);
+            // Writing is asked only about a term the student has just been
+            // checked on and got right. Otherwise the card is skipped. (Slides
+            // saved by an older version have no template and show as before.)
+            var rdata = slide.data || {};
+            if (rdata.template) {
+                var lc = this._lastCheck;
+                if (!lc || !lc.term || lc.correct !== true) { this._advanceSlide(); return; }
+                rdata = { template: rdata.template, isEQ: rdata.isEQ, term: lc.term, prompt: rdata.template.replace('{term}', lc.term) };
+                this._lastCheck = null;
+            }
+            this._renderReflectionCard(slideArea, rdata);
         } else if (slide.type === 'mini-game') {
             this._renderMiniGame(slideArea, slide.data);
         } else if (slide.type === 'eq-banner') {
@@ -1357,6 +1432,7 @@ StudyEngine.registerActivity({
                         allBtns[b].style.cursor = 'default';
                     }
 
+                    if (self._lastCheck) self._lastCheck.correct = isCorrect;
                     if (isCorrect) {
                         btn.style.background = '#1a5c2a';
                         btn.style.borderColor = '#2ecc71';
@@ -1455,6 +1531,7 @@ StudyEngine.registerActivity({
                         allChips[c].disabled = true;
                         allChips[c].style.cursor = 'default';
                     }
+                    if (self._lastCheck) self._lastCheck.correct = isCorrect;
 
                     if (isCorrect) {
                         chip.style.background = '#1a5c2a';
@@ -1518,6 +1595,19 @@ StudyEngine.registerActivity({
         var prompt = this._el('div', null, data.prompt || 'What have you learned so far?');
         prompt.style.cssText = 'color:var(--text-primary);font-size:1.05rem;line-height:1.5;margin-bottom:18px;text-align:left;';
         card.appendChild(prompt);
+
+        // The term's meaning stays in view while the student writes
+        var entry = data.term ? this._findVocabByTerm(data.term) : null;
+        if (entry && entry.definition) {
+            var remind = this._el('div');
+            remind.className = 'lm-reflect-def';
+            remind.style.cssText = 'text-align:left;background:var(--bg-deep);border:1px solid rgba(255,255,255,0.08);border-left:3px solid var(--accent-text);border-radius:var(--radius-md);padding:10px 14px;margin-bottom:16px;font-size:0.92rem;line-height:1.5;color:var(--text-secondary);';
+            var tName = this._el('strong', null, entry.term + ': ');
+            tName.style.color = 'var(--text-primary)';
+            remind.appendChild(tName);
+            remind.appendChild(document.createTextNode(entry.definition));
+            card.appendChild(remind);
+        }
 
         var textarea = document.createElement('textarea');
         textarea.placeholder = 'Type your reflection here...';
@@ -2138,6 +2228,7 @@ StudyEngine.registerActivity({
     // ─── Post-Assessment ─────────────────────────────────────────
 
     _startPostAssessment: function() {
+        this._assessPhase = 'post';
         var container = this._container;
         container.textContent = '';
         var self = this;
