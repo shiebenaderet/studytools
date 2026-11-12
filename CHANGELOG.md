@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.88] - 2026-11-11
+
+### Fixed
+- Unit 3: every quotation in the readings and Read More panels was checked against its source for wording, speaker and date. Of 55, 54 were confirmed and one had a wrong capital letter (the Second Amendment's "to keep and bear Arms"). Five small edits around the quotations: John Marshall's word "considered" is restored; the fishing-rights wording is tied to the Treaty of Medicine Creek, since the Treaty of Point Elliott words it differently; Franklin's comparison says "carpenter" at every level; and Gouverneur Morris's "a nefarious institution" now comes after the July vote on the Three-Fifths Compromise, because he said it in August. The record with sources is in `docs/plans/2026-11-11-unit3-historians-audit.md`. Requested by the teacher.
+
 ## [8.55.87] - 2026-11-11
 
 ### Changed

@@ -4,7 +4,7 @@ The teacher asked that every "What Historians Argue" paragraph in the Deep readi
 
 **Result:** 12 paragraphs needed changes and 5 were rated safe as written. Two of the safe ones still got a small precision edit, so 14 paragraphs were edited in all and 3 were left untouched. The changes are in 8.55.85. Three claims could not be confirmed and were cut: that Edmund Morgan argued "the people" never act as a single body; that Colin Calloway contrasted the 1791 defeat with Fallen Timbers; and that the name Anti-Federalist made the critics sound opposed to any national government. "Textbooks once said that Marshall invented judicial review" was also unsupported and was reworded.
 
-**Limits.** Several books could not be opened online (Morgan, Neustadt, LaCroix, Calloway, Maier), so those rows rest on publishers' pages, reviews and the authors' own essays. The tables below show the paragraphs as they were before the fixes, with each claim's verdict, source and supporting words. The other quotations inside the Deep readings (outside these paragraphs and the Primary Source boxes) have not been audited.
+**Limits.** Several books could not be opened online (Morgan, Neustadt, LaCroix, Calloway, Maier), so those rows rest on publishers' pages, reviews and the authors' own essays. The tables below show the paragraphs as they were before the fixes, with each claim's verdict, source and supporting words. The quotations in the readings and Read More panels were audited separately the same day; that record is the second half of this file.
 
 ## Chapters 1 and 2
 
@@ -335,4 +335,257 @@ Paragraph as written: NEEDS THESE CHANGES: break the last sentence in two so tha
 | ...in which the national government was responsible for protecting the rights of citizens against the states | CONFIRMED | https://www.dijkstraagency.com/book-page.php?isbn13=9780393652574 ; http://www.ericfoner.com/articles/090819nytimes.html ; Lincoln Lore interview (above) | Book description: "The federal government, not the states, was charged with enforcement, reversing the priority of the original Constitution and the Bill of Rights." Foner's essay: "All three empowered Congress to enforce their provisions, radically shifting the balance of power from the states to the nation." Interview: the amendments reflect "a new conception of where the ultimate responsibility lies for protecting the rights of all Americans." |
 
 Paragraph as written: NEEDS THESE CHANGES: change "passed after the Civil War" to "ratified between 1865 and 1870" (or "added after the Civil War"). Everything else is confirmed, including "created a new one."
+
+# Quotations in the Readings and Read More Panels
+
+Every passage in quotation marks, at all four reading levels and in both Read More versions, was checked for exact wording, speaker and date or document. The Primary Source boxes and the "What Historians Argue" paragraphs were checked separately.
+
+**Result:** 55 quotations checked, 54 confirmed, 1 wrong in a capital letter (the Second Amendment's "Arms"), none unconfirmed, nothing cut. Six small edits shipped in 8.55.88: the capital in "Arms"; John Marshall's word "considered" restored; the fishing-rights wording tied to the Treaty of Medicine Creek, because the Treaty of Point Elliott has no "all"; "builder" changed to "carpenter" so Franklin's comparison reads the same at every level (his own word was "the artist"); and Gouverneur Morris's "nefarious institution" moved after the July vote, since he said it on August 8.
+
+**Notes for anyone adding sources later.** "I do not, gentlemen, trust you" (Gunning Bedford, June 30) is from Robert Yates's notes, not Madison's. Federalist 51 is assigned to Madison by modern editions; the Avalon copy still says "Hamilton or Madison." On September 12, 1787, Elbridge Gerry moved for a bill of rights and George Mason seconded; the readings say Mason "asked the delegates to add a list of rights." The Founders Online letters were read through a page-extraction service because the site refuses automated readers.
+
+## Quotations: Chapters 1 to 3
+
+Scope: every passage in quotation marks at all four levels (level0, simplified, standard, advanced) and in Read More (simplified, standard). Skipped as instructed: "What Historians Argue" paragraphs, primarySource boxes, and quotation marks that only mention a word (etymology claims were still checked).
+
+Method: each source page was downloaded and the wording matched by text search against the page itself, not from memory. Founders Online refuses plain fetches, so its three letters and Federalist 45 were read through a page-extraction tool (full letter text returned). Level abbreviations: L0 = level0, Simp = simplified, Std = standard, Adv = advanced, RM-S = Read More simplified, RM-F = Read More standard.
+
+Result: 31 quoted items checked. 31 CONFIRMED, 0 WRONG, 0 NOT CONFIRMED. Five carry a note (marked NOTE) that the teacher may want to act on; none is a wording error inside quotation marks.
+
+---
+
+### why-articles-failed / a-government-afraid-of-power
+
+| Quotation as printed | Level(s) | Verdict | Source URL | Source's exact words / notes |
+|---|---|---|---|---|
+| Article II "each state retains its sovereignty, freedom, and independence" (with "Thomas Burke of North Carolina proposed the rule that became Article II") | Adv | CONFIRMED | https://avalon.law.yale.edu/18th_century/artconf.asp ; Burke: https://docsouth.unc.edu/csr/index.php/document/csr11-0333 | Avalon: "II. Each state retains its sovereignty, freedom, and independence, and every power, jurisdiction, and right, which is not by this Confederation expressly delegated to the United States, in Congress assembled." Punctuation matches. Burke to Gov. Caswell, Philadelphia, April 29, 1777: "the second a declaration of the sovreigntry of the States ... I proposed, therefore an amendment ... the question was carried for my proposition, eleven ayes, one no, and one divided. The no was Virginia; the divided, New Hampshire." This also confirms the Read More statements "In 1777 he proposed a rule" and "Eleven states voted for it." Avalon also gives "Agreed to by Congress 15 November 1777." |
+| "a firm league of friendship" | Adv, RM-S, RM-F | CONFIRMED | https://avalon.law.yale.edu/18th_century/artconf.asp | "III. The said States hereby severally enter into a firm league of friendship with each other, for their common defense..." Same wording at all three places. |
+
+### why-articles-failed / cracks-in-the-confederation
+
+| Quotation as printed | Level(s) | Verdict | Source URL | Source's exact words / notes |
+|---|---|---|---|---|
+| George Washington wrote in October 1786 that "Influence is no government." | Adv | CONFIRMED | https://founders.archives.gov/documents/Washington/04-04-02-0286 | To Henry Lee, Jr., "Mount Vernon 31st October 1786": "You talk, my good Sir, of employing influence to appease the tumults in Massachusetts—I know not where that influence is to be found; and if attainable, that it would be a proper remedy for the disorders. Influence is no government." Capitalization and period match. |
+| Thomas Jefferson wrote from Paris in January 1787 that "a little rebellion now and then is a good thing." | Adv | CONFIRMED | https://founders.archives.gov/documents/Jefferson/01-11-02-0095 | To James Madison, "Paris Jan. 30. 1787.": "I hold it that a little rebellion now and then is a good thing, and as necessary in the political world as storms in the physical." (The printed period falls where the source has a comma; normal for a clipped quotation.) |
+| The law declared that "there shall be neither slavery nor involuntary servitude" in the territory. | Adv | CONFIRMED | https://avalon.law.yale.edu/18th_century/nworder.asp | "Art. 6. There shall be neither slavery nor involuntary servitude in the said territory, otherwise than in the punishment of crimes..." Page title: "Northwest Ordinance; July 13, 1787". |
+| lands of Native nations "shall never be taken from them without their consent." (Adv) / the "lands and property" of Native nations "shall never be taken from them without their consent." (RM-S) / Native nations' "lands and property shall never be taken from them without their consent." (RM-F) | Adv, RM-S, RM-F | CONFIRMED | https://avalon.law.yale.edu/18th_century/nworder.asp | Art. 3: "The utmost good faith shall always be observed towards the Indians; their lands and property shall never be taken from them without their consent; and, in their property, rights, and liberty, they shall never be invaded or disturbed..." The three levels cut the quotation at different points but every quoted word is the source's. No conflict. |
+| People began saying that something useless was "not worth a Continental." | RM-S, RM-F | CONFIRMED (as a saying) | https://www.uscurrency.gov/history | U.S. Currency Education Program (Federal Reserve/Treasury): "The phrase “not worth a Continental” is coined after the Continental Congress issues paper currency to finance the Revolutionary War, currency that quickly loses its value..." It is a saying, not a quotation from a person, and the text presents it that way. |
+
+### why-articles-failed / philadelphia-1787
+
+| Quotation as printed | Level(s) | Verdict | Source URL | Source's exact words / notes |
+|---|---|---|---|---|
+| Congress had called this meeting "for the sole and express purpose of revising the Articles of Confederation." | Adv | CONFIRMED | https://avalon.law.yale.edu/18th_century/const04.asp | Report of Proceedings in Congress, Wednesday Feb. 21, 1787: "...a Convention of delegates who shall have been appointed by the several states be held at Philadelphia for the sole and express purpose of revising the Articles of Confederation and reporting to Congress and the several legislatures such alterations..." |
+| From Paris, Thomas Jefferson called the convention "an assembly of demigods." (Adv) / From Paris, Jefferson wrote to John Adams that the convention was "an assembly of demigods." (RM-S, RM-F) | Adv, RM-S, RM-F | CONFIRMED | https://founders.archives.gov/documents/Jefferson/01-12-02-0075 | To John Adams, "Paris Aug. 30. 1787.": "I have no doubt that all their other measures will be good and wise. It is really an assembly of demigods." Writer, recipient and place all match. |
+
+### compromises-in-philadelphia / two-plans-and-the-great-compromise
+
+| Quotation as printed | Level(s) | Verdict | Source URL | Source's exact words / notes |
+|---|---|---|---|---|
+| On June 30, Gunning Bedford of Delaware told the delegates from the large states, "I do not, gentlemen, trust you." | Adv | CONFIRMED. NOTE | https://avalon.law.yale.edu/18th_century/yates.asp | Robert Yates's notes, "SATURDAY, JUNE 30TH, 1787", "Mr. BEDFORD. ... and although the three great States form nearly a majority of the people of America, they never will hurt or injure the lesser States. I do not, gentlemen, trust you. If you possess the power, the abuse of it could not be checked..." NOTE: the sentence is in Yates's notes, NOT in Madison's. Madison's June 30 entry (https://avalon.law.yale.edu/18th_century/debates_630.asp) reports Bedford in the third person and does not contain these words. The textbook does not name a source for this line, so it is accurate as printed; just never caption it "Madison's notes." |
+| Benjamin Franklin compared it to the work of a carpenter who "takes a little from both, and makes a good joint." (Adv) / The carpenter, he said, "takes a little from both, and makes a good joint." (RM-S) / The builder, he said, "takes a little from both, and makes a good joint." (RM-F) | Adv, RM-S, RM-F | CONFIRMED. NOTE (levels differ outside the quotation marks) | https://avalon.law.yale.edu/18th_century/debates_630.asp | Madison's notes, Saturday June 30, 1787, "Docr. FRANKLIN": "When a broad table is to be made, and the edges of planks do not fit, the artist takes a little from both, and makes a good joint. In like manner here both sides must part with some of their demands..." Quoted words and comma match. NOTE: Franklin's own noun is "the artist" (a table-maker). The lead-in is a paraphrase and is "carpenter" at two levels but "builder" in Read More standard. Suggest one word everywhere (see Fixes). |
+| bicameral, from Latin words meaning "two rooms" | RM-S, RM-F | CONFIRMED (etymology) | https://www.ahdictionary.com/word/search.html?q=bicameral | American Heritage: "[BI- + Latin camera, chamber...]". "Two rooms/chambers" is a fair gloss. |
+
+### compromises-in-philadelphia / compromises-over-slavery
+
+| Quotation as printed | Level(s) | Verdict | Source URL | Source's exact words / notes |
+|---|---|---|---|---|
+| Gouverneur Morris of Pennsylvania called slavery "a nefarious institution" on the convention floor. | Adv | CONFIRMED. NOTE (sequence) | https://avalon.law.yale.edu/18th_century/debates_808.asp | Madison's notes, August 8, 1787: "Mr. Govr. MORRIS moved to insert "free" before the word inhabitants. Much he said would depend on this point. He never would concur in upholding domestic slavery. It was a nefarious institution. It was the curse of heaven on the States where it prevailed." NOTE: Morris said this on August 8. The textbook gives no date but puts the sentence just before "In July, the delegates agreed...", which makes it read as part of the debate that led to the July vote. It came after. Optional reorder in Fixes. |
+| the Constitution describes the people it counted only as "three fifths of all other Persons." | Adv, RM-S, RM-F | CONFIRMED | https://www.archives.gov/founding-docs/constitution-transcript | Art. I, Sec. 2: "...and excluding Indians not taxed, three fifths of all other Persons." No hyphen, capital P, matches. |
+| Madison's notes record that he "thought it wrong to admit in the Constitution the idea that there could be property in men." | Adv | CONFIRMED | https://avalon.law.yale.edu/18th_century/debates_825.asp | Madison's notes, August 25, 1787: "Mr. MADISON thought it wrong to admit in the Constitution the idea that there could be property in men." Exact. |
+
+### inside-the-constitution / we-the-people
+
+| Quotation as printed | Level(s) | Verdict | Source URL | Source's exact words / notes |
+|---|---|---|---|---|
+| "We the People" | L0, Simp, Std, Adv, RM-S, RM-F (and the section title) | CONFIRMED | https://www.archives.gov/founding-docs/constitution-transcript | "We the People of the United States, in Order to form a more perfect Union..." Capitalization matches at every level. ("the People" in the Read More heading and last line of that part also matches.) |
+| At Virginia's convention in June 1788, Patrick Henry asked, "Who authorized them to speak the language of, We, the people, instead of, We, the states?" | Adv | CONFIRMED | https://press-pubs.uchicago.edu/founders/documents/preambles14.html | Founders' Constitution, "Patrick Henry, Virginia Ratifying Convention, 4 June 1788, Elliot 3:22--23": "My political curiosity, exclusive of my anxious solicitude for the public welfare, leads me to ask, Who authorized them to speak the language of, We, the people, instead of, We, the states?" Exact match to Elliot's Debates, including commas and lower-case "people" and "states". (A different modern edition of the same speech, Storing's, at https://press-pubs.uchicago.edu/founders/documents/v1ch8s38.html, prints "who authorised them to speak the language of, We, the People, instead of We, the States?" Both are legitimate; the textbook follows Elliot.) |
+| The first three are to "form a more perfect Union, establish Justice, insure domestic Tranquility," ... promote "the general Welfare" and secure "the Blessings of Liberty" (Adv); "form a more perfect Union", "establish Justice", "insure domestic Tranquility", "provide for the common defence", "promote the general Welfare", "secure the Blessings of Liberty to ourselves and our Posterity" (RM-S, RM-F) | Adv, RM-S, RM-F | CONFIRMED | https://www.archives.gov/founding-docs/constitution-transcript | "...in Order to form a more perfect Union, establish Justice, insure domestic Tranquility, provide for the common defence, promote the general Welfare, and secure the Blessings of Liberty to ourselves and our Posterity, do ordain and establish this Constitution..." Every phrase matches in spelling ("defence", "insure") and capitalization. |
+| Popular comes from a Latin word for "people" | RM-S, RM-F | CONFIRMED (etymology) | https://www.ahdictionary.com/word/search.html?q=popular | "from Latin populāris, from populus, the people". |
+| preamble, from Latin words meaning "walking before" | RM-S, RM-F | CONFIRMED (etymology) | https://www.ahdictionary.com/word/search.html?q=preamble | "from Late Latin praeambulus, walking in front : Latin prae-, pre- + Latin ambulāre, to walk". |
+
+### inside-the-constitution / seven-articles-three-branches
+
+| Quotation as printed | Level(s) | Verdict | Source URL | Source's exact words / notes |
+|---|---|---|---|---|
+| "Article I, Section 8" points to the list of powers given to Congress (and "Article II, Section 1" as an example of a citation) | L0, Simp, Std, Adv, RM-S, RM-F | CONFIRMED (a citation, not a quotation) | https://www.archives.gov/founding-docs/constitution-transcript | "Section. 8. The Congress shall have Power To lay and collect Taxes, Duties, Imposts and Excises..." under Article I. Article II, Section 1 exists: "Section. 1. The executive Power shall be vested in a President..." |
+| Montesquieu, who argued in 1748 that "when the legislative and executive powers are united in the same person," there can be "no liberty." | Adv | CONFIRMED | https://press-pubs.uchicago.edu/founders/documents/v1ch17s9.html | Founders' Constitution, "Montesquieu, Spirit of Laws ... 1748", Book 11, ch. 6: "When the legislative and executive powers are united in the same person, or in the same body of magistrates, there can be no liberty; because apprehensions may arise..." This is the standard English (Nugent) translation; the original is French. The Read More paraphrase (one ruler holding all three powers) is supported on the same page: "There would be an end of everything, were the same man or the same body ... to exercise those three powers". |
+| In 1788, Madison wrote that placing all three kinds of power "in the same hands" was "the very definition of tyranny." | Adv | CONFIRMED | https://avalon.law.yale.edu/18th_century/fed47.asp | Federalist 47, "From the New York Packet. Friday, February 1, 1788. MADISON": "The accumulation of all powers, legislative, executive, and judiciary, in the same hands, whether of one, a few, or many, and whether hereditary, selfappointed, or elective, may justly be pronounced the very definition of tyranny." |
+
+### inside-the-constitution / choosing-a-president
+
+| Quotation as printed | Level(s) | Verdict | Source URL | Source's exact words / notes |
+|---|---|---|---|---|
+| George Mason of Virginia said that leaving the choice to the people would be like referring "a trial of colours to a blind man," | Adv | CONFIRMED | https://avalon.law.yale.edu/18th_century/debates_717.asp | Madison's notes, July 17, 1787 (Col. Mason): "He conceived it would be as unnatural to refer the choice of a proper character for chief Magistrate to the people, as it would, to refer a trial of colours to a blind man. The extent of the Country renders it impossible that the people can have the requisite capacity to judge of the respective pretensions of the Candidates." British spelling "colours" is correct. The reason the textbook gives also matches. |
+| James Wilson of Pennsylvania called the question "the most difficult of all on which we have had to decide." | Adv | CONFIRMED | https://avalon.law.yale.edu/18th_century/debates_904.asp | Madison's notes, September 4, 1787: "Mr. WILSON. This subject has greatly divided the House, and will also divide people out of doors. It is in truth the most difficult of all on which we have had to decide." Fits the textbook's "In September" paragraph. (Unquoted Read More detail also checks out: June 1 notes read "A considerable pause ensuing" after Wilson's motion for a single executive, https://avalon.law.yale.edu/18th_century/debates_601.asp.) |
+
+### inside-the-constitution / sharing-power-with-the-states
+
+| Quotation as printed | Level(s) | Verdict | Source URL | Source's exact words / notes |
+|---|---|---|---|---|
+| In 1788, Madison described these national powers as "few and defined" and the powers of the states as "numerous and indefinite." (Adv; RM-S and RM-F add "to New York readers in a newspaper essay") | Adv, RM-S, RM-F | CONFIRMED | https://founders.archives.gov/documents/Madison/01-10-02-0254 ; https://avalon.law.yale.edu/18th_century/fed45.asp | Founders Online, "The Federalist Number 45, [26 January 1788]": "The powers delegated by the proposed constitution to the federal government, are few and defined. Those which are to remain in the state governments are numerous and indefinite." Avalon heading: "For the Independent Journal. MADISON. To the People of the State of New York". Same wording at all three levels. |
+| The Tenth Amendment, added in 1791, says they "are reserved to the States respectively, or to the people." | Adv | CONFIRMED | https://www.archives.gov/founding-docs/bill-of-rights-transcript | "Amendment X. The powers not delegated to the United States by the Constitution, nor prohibited by it to the States, are reserved to the States respectively, or to the people." Capital S in "States", lower-case "people", comma all match. Same page: "ratified December 15, 1791". |
+| concurrent, from a word meaning "happening at the same time" | RM-S, RM-F | CONFIRMED (etymology, loosely) | https://www.ahdictionary.com/word/search.html?q=concurrent | "from Latin concurrēns, present participle of concurrere, to coincide" (literally com- + currere, to run together). "Happening at the same time" is a fair plain gloss of "coincide". |
+
+### inside-the-constitution / checks-and-balances
+
+| Quotation as printed | Level(s) | Verdict | Source URL | Source's exact words / notes |
+|---|---|---|---|---|
+| Madison explained the reasoning in 1788: "Ambition must be made to counteract ambition." | Adv, RM-S, RM-F | CONFIRMED. NOTE (authorship label) | https://press-pubs.uchicago.edu/founders/documents/v1ch10s16.html ; https://avalon.law.yale.edu/18th_century/fed51.asp | Founders' Constitution: "James Madison, Federalist, no. 51 ... 6 Feb. 1788 ... Ambition must be made to counteract ambition." Exact. NOTE: the Avalon copy is headed "HAMILTON OR MADISON" (New York Packet, Friday, February 8, 1788) because authorship was once disputed. The University of Chicago edition assigns it to Madison, which is the modern scholarly attribution, so the textbook stands. Same wording at all three levels. |
+| "It is emphatically the province and duty of the judicial department to say what the law is," he wrote. | Adv | CONFIRMED | https://www.law.cornell.edu/supremecourt/text/5/137 | Marbury v. Madison, 5 U.S. 137, "February Term, 1803": "It is emphatically the province and duty of the judicial department to say what the law is. Those who apply the rule to particular cases, must of necessity expound and interpret that rule." |
+| Veto is Latin for "I forbid." | RM-S, RM-F | CONFIRMED (etymology) | https://www.ahdictionary.com/word/search.html?q=veto | "From Latin vetō, first person sing. present tense of vetāre, to forbid." |
+
+---
+
+### Same quotation worded differently across levels
+
+Only one place, and the difference is outside the quotation marks:
+
+- two-plans-and-the-great-compromise, Franklin: Advanced and Read More simplified say "carpenter"; Read More standard says "The builder, he said,". Franklin's own word was "the artist". The quoted words are identical at all three levels.
+
+Everything else that appears at more than one level ("a firm league of friendship", the Northwest Ordinance lands promise, "an assembly of demigods", "three fifths of all other Persons", "We the People", the Preamble phrases, "few and defined" / "numerous and indefinite", "Ambition must be made to counteract ambition.") is worded identically, or is a shorter or longer cut of the same source sentence.
+
+### Fixes needed
+
+No item is WRONG or NOT CONFIRMED, so nothing has to be cut. Optional clean-ups from the notes above:
+
+1. **two-plans-and-the-great-compromise** (readMore.content.standard), consistency. Current: `The builder, he said, "takes a little from both, and makes a good joint."` Replacement: `The carpenter, he said, "takes a little from both, and makes a good joint."` (matches Advanced and Read More simplified). If the teacher would rather keep Franklin's own noun out of dispute, an alternative for all three places is to drop the noun: `Franklin said the worker "takes a little from both, and makes a good joint."` Franklin's actual word is "the artist".
+
+2. **compromises-over-slavery** (content.advanced), sequence. Current: `Northern delegates objected that southern law treated enslaved people as property. Gouverneur Morris of Pennsylvania called slavery "a nefarious institution" on the convention floor. In July, the delegates agreed that three out of every five enslaved people would be counted. This rule was the Three-Fifths Compromise, and the Constitution describes the people it counted only as "three fifths of all other Persons."` Morris spoke on August 8, after the July vote. Suggested replacement: `Northern delegates objected that southern law treated enslaved people as property. In July, the delegates agreed that three out of every five enslaved people would be counted. This rule was the Three-Fifths Compromise, and the Constitution describes the people it counted only as "three fifths of all other Persons." In August, Gouverneur Morris of Pennsylvania attacked the rule on the convention floor and called slavery "a nefarious institution."` (Leaving the text as is would not be a misquotation; it only implies the wrong order.)
+
+3. **two-plans-and-the-great-compromise** (content.advanced), no text change needed. `"I do not, gentlemen, trust you."` comes from Robert Yates's notes for June 30, not Madison's. Keep it uncited as now, or cite Yates if a source is ever added. Do not attribute it to Madison's notes.
+
+4. **checks-and-balances**, no text change needed. Federalist 51 is attributed to Madison by modern editions; one older online copy (Avalon) still labels it "Hamilton or Madison".
+
+## Quotations: Chapters 4 and 5
+
+Unit: building-a-government. Seven sections, every level (level0, simplified, standard, advanced) plus Read More (simplified, standard). Skipped as instructed: "What Historians Argue" paragraphs, primarySource boxes, and quotation marks that only mention a word.
+
+Method: each source page was downloaded and the passage pulled out of the page text with a script, so the "source's exact words" below are copied from the page, not from memory. Founders Online refused direct fetches (HTTP 202, empty body); the two Founders Online documents were read through a page-extraction tool instead and came back complete.
+
+Result: 24 quotations checked. 23 CONFIRMED, 1 WRONG (capitalization only), 0 NOT CONFIRMED. Three confirmed items carry a note about the words around the quotation. No quotation is worded differently at different levels of the same section.
+
+Level key: L0 = level0, Sim = simplified, Std = standard, Adv = advanced, RM-Sim / RM-Std = readMore.
+
+---
+
+### nations-within-a-nation
+
+| Quotation as printed | Level(s) | Verdict | Source URL | Source's exact words / correction |
+|---|---|---|---|---|
+| "with the Indian Tribes." (L0); "with foreign Nations, and among the several States, and with the Indian Tribes." (Sim, Std, Adv); "to regulate Commerce with foreign Nations, and among the several States, and with the Indian Tribes." (RM-Sim, RM-Std). Attributed to Article I, Section 8, the Commerce Clause. | L0, Sim, Std, Adv, RM-Sim, RM-Std | CONFIRMED | https://www.archives.gov/founding-docs/constitution-transcript | "To regulate Commerce with foreign Nations, and among the several States, and with the Indian Tribes;" (Article I, Section 8). Capitalization matches. The source clause ends in a semicolon and starts with capital "To"; the printed versions run it into a sentence, which is normal. The three lengths are the same words, so no level conflict. |
+| "possess the right of the Soil," | Adv | CONFIRMED | https://founders.archives.gov/documents/Washington/05-02-02-0357-0002 | "The Indians being the prior occupants possess the right of the Soil—It cannot be taken from them unless by their free consent, or by the right of Conquest in case of a just War—" Enclosure headed "War-Office June 15th 1789", signed "H. Knox", closing "All which is humbly submitted to the President of the United States." So "In 1789, Secretary of War Henry Knox advised Washington" holds. Capital "Soil" matches. |
+| "unless by their free consent, or by the right of Conquest in case of a just War." | Adv | CONFIRMED | same | Same sentence as above. Capital "Conquest" and "War" match. Source has a dash where the printed text ends with a period. |
+| "distinct, independent political communities." ("In 1832, Chief Justice John Marshall wrote that Native nations had always been ...") | Adv | CONFIRMED (note) | https://www.law.cornell.edu/supremecourt/text/31/515 | "The Indian nations had always been considered as distinct, independent political communities, retaining their original natural rights, as the undisputed possessors of the soil, from time immemorial, ..." Worcester v. Georgia, 31 U.S. 515, January Term 1832; "Mr Chief Justice MARSHALL delivered the opinion of the Court." Quoted words, author and year all correct. Note: Marshall wrote "had always been considered as"; the lead-in drops "considered". Optional tightening is in the notes at the end. |
+
+Not quotations, checked in passing: nothing else in quotation marks in this section. "Time immemorial" is not in quotation marks in the text (Marshall happens to use the phrase in the same sentence).
+
+### the-treaty-of-greenville
+
+| Quotation as printed | Level(s) | Verdict | Source URL | Source's exact words / correction |
+|---|---|---|---|---|
+| "shall never be taken from them without their consent." ("The Northwest Ordinance of 1787 had promised that Native lands ...") | Adv | CONFIRMED | https://avalon.law.yale.edu/18th_century/nworder.asp | Art. 3: "The utmost good faith shall always be observed towards the Indians; their lands and property shall never be taken from them without their consent; and, in their property, rights, and liberty, they shall never be invaded or disturbed, unless in just and lawful wars authorized by Congress;" |
+| "so long as they please, without any molestation from the United States." (Treaty of Greenville) | Adv, RM-Sim, RM-Std | CONFIRMED | https://avalon.law.yale.edu/18th_century/greenvil.asp | Art. 5: "the Indian tribes who have a right to those lands, are quietly to enjoy them, hunting, planting, and dwelling thereon, so long as they please, without any molestation from the United States; but when those tribes, or any of them, shall be disposed to sell their lands, or any part of them, they are to be sold only to the United States;" Identical wording at all three levels. The Read More paraphrase "live, hunt and plant" and "could sell it only to the United States" also match Art. 5. |
+
+Facts attached to the quotation, confirmed on the same Avalon page: treaty dated August 3, 1795; Art. 4 goods of $20,000 and $9,500 a year; "Meshekunnoghquoh, or Little Turtle" and "Weyapiersenwaw, or Blue Jacket" among the signers.
+
+"the biggest victory American Indians ever won." (Calloway) is inside What Historians Argue: skipped as instructed.
+
+Etymology-type claim in Read More: "Molestation here means being bothered or interfered with" is a gloss, consistent with the treaty's use; nothing to correct.
+
+### the-supreme-law-of-the-land
+
+| Quotation as printed | Level(s) | Verdict | Source URL | Source's exact words / correction |
+|---|---|---|---|---|
+| "the supreme Law of the Land." (Article VI; Supremacy Clause) | L0, Sim, Std, Adv, RM-Sim, RM-Std | CONFIRMED | https://www.archives.gov/founding-docs/constitution-transcript | Article VI: "This Constitution, and the Laws of the United States which shall be made in Pursuance thereof; and all Treaties made, or which shall be made, under the Authority of the United States, shall be the supreme Law of the Land; and the Judges in every State shall be bound thereby, any Thing in the Constitution or Laws of any State to the Contrary notwithstanding." Capitalization matches at every level. The paraphrases "the Constitution, the laws of the United States, and all treaties" and "Every judge in every state must follow it" match too. L0 does not name Article VI; the others do; no conflict. |
+| "the right of taking fish, at all usual and accustomed grounds and stations." | Adv | CONFIRMED (note) | https://goia.wa.gov/resources/treaties/treaty-medicine-creek-1854 | Treaty of Medicine Creek, Article 3: "The right of taking fish, at all usual and accustomed grounds and stations, is further secured to said Indians in common with all citizens of the Territory, and of erecting temporary houses for the purpose of curing, ..." Same page: made "this twenty-sixth day of December, in the year one thousand eight hundred and fifty-four, by Isaac I. Stevens, governor and superintendent of Indian affairs of the said Territory". See note below on Point Elliott. |
+| "at all usual and accustomed grounds and stations." ("These treaties promised that tribes could keep fishing ...", right after naming Medicine Creek and Point Elliott) | RM-Sim, RM-Std | CONFIRMED (note) | same, plus https://goia.wa.gov/resources/treaties/treaty-point-elliott-1855 and https://www.law.cornell.edu/supremecourt/text/443/658 | Medicine Creek: as above, word for word. Point Elliott, Article 5, on the GOIA page reads: "The right of taking fish at usual and accustomed grounds and stations is further secured to said Indians in common with all citizens of the Territory" (no "all", no comma). The U.S. Supreme Court, speaking of the 1854 and 1855 Stevens treaties together, quotes the Medicine Creek form: "The pertinent articles provide: 'The right of taking fish, at all usual and accustomed grounds and stations, is further secured to said Indians, in common with all citizens of the Territory ...'" (Washington v. Washington State Commercial Passenger Fishing Vessel Assn., 443 U.S. 658, decided July 2, 1979). So the wording is exact for Medicine Creek and is the form the Court uses for the group, but the word "all" is not in Point Elliott as GOIA prints it. Optional tightening in the notes at the end. |
+| "in common with" ("the treaties' promise that the tribes would fish 'in common with' other citizens") | Adv | CONFIRMED | https://goia.wa.gov/resources/treaties/treaty-medicine-creek-1854 ; https://goia.wa.gov/resources/treaties/treaty-point-elliott-1855 | Both treaties: "in common with all citizens of the Territory". |
+| "fish-ins." / "fish-ins," | RM-Sim, RM-Std | Not a quotation | n/a | Quotation marks mention a term. Exempt. (Punctuation differs only because of the sentence around it.) |
+
+Facts attached, confirmed on the Cornell page: "Decided July 2, 1979", so "In 1979, the U.S. Supreme Court agreed" holds.
+
+Meaning claim: "reservation, because the tribes reserved, or held on to, it" is a statement about the word, not a quotation. It matches the treaty's own language on the GOIA Medicine Creek page, Article 2: "There is, however, reserved for the present use and occupation of the said tribes and bands, the following tracts of land, viz: ..."
+
+### the-great-debate
+
+| Quotation as printed | Level(s) | Verdict | Source URL | Source's exact words / correction |
+|---|---|---|---|---|
+| "There is no Declaration of Rights." ("he soon wrote out his objections. The first one read, ...") | Adv, RM-Sim, RM-Std | CONFIRMED | https://www.archives.gov/files/legislative/resources/education/bill-of-rights/images/mason.pdf | National Archives transcription, "George Mason's 'Objections to This Constitution of Government' September 1787", item 1: "There is no Declaration of Rights, and the laws of the general government being paramount to the laws and constitution of the several States, the Declarations of Rights in the separate States are no security." First objection, capitalization matches. The original sentence continues after a comma; the printed text stops it with a period, which is ordinary truncation. Identical at all three levels. (The Founders' Constitution prints the same opening inside Iredell's reply, with lower-case "declaration of rights": https://press-pubs.uchicago.edu/founders/documents/v1ch14s36.html. The capitalized form follows the National Archives transcription.) |
+| "not only unnecessary in the proposed Constitution, but would even be dangerous." ("In one of them, Hamilton wrote that a bill of rights was ...") | Adv | CONFIRMED | https://avalon.law.yale.edu/18th_century/fed84.asp | Federalist No. 84, headed HAMILTON: "I go further, and affirm that bills of rights, in the sense and to the extent in which they are contended for, are not only unnecessary in the proposed Constitution, but would even be dangerous." |
+| "A Columbian Patriot." / "A Columbian Patriot," (pen name of Mercy Otis Warren) | RM-Sim, RM-Std | CONFIRMED | https://www.gutenberg.org/cache/epub/72627/pg72627-images.html | Old South Leaflets No. 226 reprint of the 1788 pamphlet: title "Observations on the New Constitution, and on the Federal and State Conventions By a Columbian Patriot"; prefatory note: "For many years this pamphlet was attributed to a leading Anti-Federalist, Elbridge Gerry. However, the publication of Mercy Otis Warren's statement of authorship in a letter of May, 1788, and evidence within the work that she was its author and Gerry was not, would seem to indicate that she should be given the honors." |
+
+Fact attached to the Mason quotation, checked against Madison's notes for September 12, 1787 (https://avalon.law.yale.edu/18th_century/debates_912.asp): "He wished the plan had been prefaced with a Bill of Rights, & would second a Motion if made for the purpose. ... Mr. GERRY concurred in the idea & moved for a Committee to prepare a Bill of Rights. Col: MASON 2ded. the motion. ... On the question for a Come. to prepare a Bill of Rights N. H. no. Mas. abst. Ct. no. N. J. no. Pa. no. Del no. Md. no. Va. no. N. C. no. S. C. no. Geo. no." So the date and "Not one state voted for the idea" hold (ten no, Massachusetts abstaining). Detail for the teacher: Gerry made the motion and Mason seconded it; the text's "asked the delegates to add a list of rights" is a fair summary and is not a quotation.
+
+### changing-the-constitution
+
+| Quotation as printed | Level(s) | Verdict | Source URL | Source's exact words / correction |
+|---|---|---|---|---|
+| "will be necessary" ("At the convention, George Mason said that amendments ...") | Adv | CONFIRMED | https://avalon.law.yale.edu/18th_century/debates_611.asp | Madison's notes, Monday June 11, 1787: "Col. MASON urged the necessity of such a provision. The plan now to be formed will certainly be defective, as the Confederation has been found on trial to be. Amendments therefore will be necessary, and it will be better to provide for them, in an easy, regular and Constitutional way than to trust to chance and violence." |
+| "in an easy, regular and Constitutional way than to trust to chance and violence." | Adv | CONFIRMED | same | Same sentence. Capital "Constitutional" matches. Note for the teacher only: these are Madison's notes of Mason's remarks, which is the standard record and the usual way they are quoted. |
+
+No other quotations in this section at any level.
+
+### the-bill-of-rights
+
+| Quotation as printed | Level(s) | Verdict | Source URL | Source's exact words / correction |
+|---|---|---|---|---|
+| "a bill of rights is what the people are entitled to against every government on earth." ("Thomas Jefferson wrote to him from Paris in December 1787 that ...") | Adv | CONFIRMED | https://founders.archives.gov/documents/Jefferson/01-12-02-0454 (also https://press-pubs.uchicago.edu/founders/documents/v1ch14s30.html) | Headed "To James Madison", "Paris Dec. 20. 1787.": "Let me add that a bill of rights is what the people are entitled to against every government on earth, general or particular, and what no just government should refuse, or rest on inference." Wording, writer, recipient, place and month all correct. The original continues after a comma. |
+| "unreasonable searches and seizures," (Fourth Amendment) | Adv | CONFIRMED | https://www.archives.gov/founding-docs/bill-of-rights-transcript | Amendment IV: "The right of the people to be secure in their persons, houses, papers, and effects, against unreasonable searches and seizures, shall not be violated, and no Warrants shall issue, but upon probable cause, ..." |
+| "shed their constitutional rights to freedom of speech or expression at the schoolhouse gate." (Justice Abe Fortas; 1969; Read More adds "On February 24, 1969, the justices ruled 7 to 2") | Adv, RM-Sim, RM-Std | CONFIRMED | https://www.law.cornell.edu/supremecourt/text/393/503 ; vote count: https://www.uscourts.gov/about-federal-courts/educational-resources/supreme-court-landmarks/tinker-v-des-moines-podcast | Tinker v. Des Moines, 393 U.S. 503: "It can hardly be argued that either students or teachers shed their constitutional rights to freedom of speech or expression at the schoolhouse gate." "Mr. Justice FORTAS delivered the opinion of the Court." "Argued Nov. 12, 1968. Decided Feb. 24, 1969." Dissents by Black and Harlan only. U.S. Courts page: "In 1969 the United States Supreme Court ruled in a 7-2 decision in favor of the students." Identical wording at all three levels. |
+| "to keep and bear arms." / "to keep and bear arms," (Second Amendment) | RM-Sim, RM-Std | WRONG (capitalization only) | https://www.archives.gov/founding-docs/bill-of-rights-transcript | Amendment II: "A well regulated Militia, being necessary to the security of a free State, the right of the people to keep and bear Arms, shall not be infringed." The source capitalizes "Arms". Every other constitutional quotation in these two segments keeps the original capitals ("supreme Law of the Land", "Indian Tribes"), so this one should too. Correct to "to keep and bear Arms". |
+| "without due process of law." (Fifth Amendment) | RM-Sim, RM-Std | CONFIRMED | https://www.archives.gov/founding-docs/bill-of-rights-transcript | Amendment V: "nor be deprived of life, liberty, or property, without due process of law; nor shall private property be taken for public use, without just compensation." The lead-in "no person can lose life, liberty or property" matches. |
+| "cruel and unusual punishments." (Eighth Amendment) | RM-Sim, RM-Std | CONFIRMED | https://www.archives.gov/founding-docs/bill-of-rights-transcript | Amendment VIII: "Excessive bail shall not be required, nor excessive fines imposed, nor cruel and unusual punishments inflicted." |
+
+Fact attached to the Second Amendment quotation ("In 2008, the Supreme Court ruled that it protects the right of a person to keep a handgun at home for self-defense"), not a quotation but checked: District of Columbia v. Heller syllabus, https://www.law.cornell.edu/supct/html/07-290.ZS.html : "Argued March 18, 2008—Decided June 26, 2008"; "Held: 1. The Second Amendment protects an individual right to possess a firearm unconnected with service in a militia ..."; "3. The handgun ban and the trigger-lock requirement (as applied to self-defense) violate the Second Amendment. The District's total ban on handgun possession in the home amounts to a prohibition on an entire class of 'arms' ..." The printed summary is accurate.
+
+### widening-we-the-people
+
+| Quotation as printed | Level(s) | Verdict | Source URL | Source's exact words / correction |
+|---|---|---|---|---|
+| "It was we, the people, not we, the white male citizens, nor yet we, the male citizens; but we, the whole people, who formed this Union," ("In speeches before her trial ... she said") | Adv | CONFIRMED | https://www.gutenberg.org/cache/epub/18281/pg18281-images.html (transcription of the 1874 book An Account of the Proceedings on the Trial of Susan B. Anthony) | Appendix headed "ADDRESS OF SUSAN B. ANTHONY, Delivered in twenty-nine of the Post Office Districts of Monroe, and twenty-one of Ontario, in her canvass of those Counties, prior to her trial in June, 1873.": "It was we, the people, not we, the white male citizens, nor yet we, the male citizens; but we, the whole people, who formed this Union." Word for word, including the commas and semicolon; the printed text swaps the final period for a comma because the sentence goes on ("she said"). "In speeches before her trial" matches the heading. A second transcription agrees: https://etc.usf.edu/lit2go/185/civil-rights-and-conflict-in-the-united-states-selected-speeches/4855/is-it-a-crime-for-a-citizen-of-the-united-states-to-vote/ . (Some websites print "formed the Union" with semicolons throughout; the 1874 printed text has "this Union".) |
+| "the equal protection of the laws." (Fourteenth Amendment) | Adv, RM-Sim, RM-Std | CONFIRMED | https://www.archives.gov/founding-docs/amendments-11-27 | Amendment XIV, Section 1: "nor shall any State deprive any person of life, liberty, or property, without due process of law; nor deny to any person within its jurisdiction the equal protection of the laws." Page gives "Ratified July 9, 1868". Identical at all three levels. |
+| "on account of race, color, or previous condition of servitude." (Fifteenth Amendment) | Adv | CONFIRMED | https://www.archives.gov/founding-docs/amendments-11-27 | Amendment XV, Section 1: "The right of citizens of the United States to vote shall not be denied or abridged by the United States or by any State on account of race, color, or previous condition of servitude--" Page gives "Ratified February 3, 1870". |
+| "shall not be denied or abridged by the United States or by any State on account of sex." (Nineteenth Amendment; "In 1919, Congress proposed") | RM-Sim, RM-Std | CONFIRMED | https://www.archives.gov/founding-docs/amendments-11-27 | Amendment XIX: "The right of citizens of the United States to vote shall not be denied or abridged by the United States or by any State on account of sex." Page gives "Passed by Congress June 4, 1919. Ratified August 18, 1920." Identical at both levels. |
+
+"second founding." (Foner) is inside What Historians Argue: skipped as instructed.
+
+---
+
+### Same quotation worded differently across levels
+
+None found. Where a quotation appears at more than one level it is either identical or a shorter cut of the same words (Commerce Clause: three lengths; Medicine Creek fishing clause: Adv starts at "the right of taking fish," and Read More starts at "at all usual"). Trailing commas and periods inside the closing quotation mark change only with the sentence around them.
+
+### Fixes needed
+
+1. Section `the-bill-of-rights`, readMore.simplified. WRONG (capitalization).
+   - Current: `The Second Amendment protects the right "to keep and bear arms." Americans disagree about how far that right reaches.`
+   - Replace with: `The Second Amendment protects the right "to keep and bear Arms." Americans disagree about how far that right reaches.`
+   - Source: https://www.archives.gov/founding-docs/bill-of-rights-transcript ("the right of the people to keep and bear Arms, shall not be infringed.")
+
+2. Section `the-bill-of-rights`, readMore.standard. WRONG (capitalization).
+   - Current: `The Second Amendment protects the right "to keep and bear arms," and Americans disagree about how far that right reaches.`
+   - Replace with: `The Second Amendment protects the right "to keep and bear Arms," and Americans disagree about how far that right reaches.`
+   - Source: same.
+
+No item is NOT CONFIRMED, so nothing needs to be cut.
+
+### Optional tightening (quotations are confirmed; these concern the words around them)
+
+A. Section `nations-within-a-nation`, content.advanced. Marshall wrote "had always been considered as", and the lead-in drops "considered".
+   - Current: `In 1832, Chief Justice John Marshall wrote that Native nations had always been "distinct, independent political communities."`
+   - Suggested: `In 1832, Chief Justice John Marshall wrote that Native nations had always been considered "distinct, independent political communities."`
+
+B. Section `the-supreme-law-of-the-land`, readMore.simplified and readMore.standard. The word "all" is in the Treaty of Medicine Creek but not in the Treaty of Point Elliott as the Governor's Office of Indian Affairs prints it ("at usual and accustomed grounds and stations"). The Supreme Court quotes the "at all" form for the Stevens treaties as a group, so the current text is defensible. To be exact:
+   - Current (both levels): `These treaties promised that tribes could keep fishing "at all usual and accustomed grounds and stations."`
+   - Suggested: `These treaties promised that tribes could keep fishing at their "usual and accustomed grounds and stations."` (words common to both treaties)
+   - The same point applies to content.advanced: `The treaties promised them "the right of taking fish, at all usual and accustomed grounds and stations."` Suggested: `The Treaty of Medicine Creek promised them "the right of taking fish, at all usual and accustomed grounds and stations."` Note that any change to section text drops student highlights on the changed words.
+
+C. Section `the-great-debate` (all levels), not a quotation: on September 12, 1787, Elbridge Gerry made the motion for a bill of rights and Mason seconded it after saying he "wished the plan had been prefaced with a Bill of Rights". The text says Mason "asked the delegates to add a list of rights", which is a fair summary; change only if the teacher wants the motion credited to Gerry.
+
+### What could not be opened
+
+- founders.archives.gov by direct fetch (empty response). Both documents needed were read in full through a page-extraction tool at the URLs given above.
+- The Founders' Constitution page for Mason's "Objections" itself was not located; the National Archives transcription was used, with Iredell's 1788 reply on the Founders' Constitution as a second witness to the opening words.
+- The Boldt decision on Justia (HTTP 403). Not needed for any quotation: the text quotes the treaties, which were read at goia.wa.gov, and the 1979 Supreme Court opinion was read at Cornell LII.
 
