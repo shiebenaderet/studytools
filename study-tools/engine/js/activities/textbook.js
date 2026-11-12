@@ -197,6 +197,13 @@ StudyEngine.registerActivity({
                                     }
                                 }
                             }
+                            if (!secId) {
+                                // A chapter link: start at the first section not yet read
+                                var secs = self._content.segments[si].sections;
+                                for (var ui = 0; ui < secs.length; ui++) {
+                                    if (!self._isSectionRead(segId, secs[ui].id)) { self._currentSection = ui; break; }
+                                }
+                            }
                             deepLinked = true;
                             break;
                         }
@@ -939,12 +946,19 @@ StudyEngine.registerActivity({
             overlay.appendChild(cap);
         }
 
+        var self = this;
+        var closed = false;
         function onKey(e) { if (e.key === 'Escape') close(); }
         function close() {
+            if (closed) return;
+            closed = true;
+            self._closeFigure = null;
             document.removeEventListener('keydown', onKey);
             overlay.remove();
-            if (opener && opener.focus) opener.focus();
+            if (opener && opener.isConnected && opener.focus) opener.focus();
         }
+        if (this._closeFigure) this._closeFigure();
+        this._closeFigure = close;   // deactivate() closes an open picture
         closeBtn.addEventListener('click', close);
         // A click anywhere closes it, the picture included: students expect
         // a second tap to put the picture back.
@@ -1580,6 +1594,7 @@ StudyEngine.registerActivity({
     activate() {},
 
     deactivate() {
+        if (this._closeFigure) this._closeFigure();
         this._removePopup();
         if (typeof TextbookHighlights !== 'undefined') TextbookHighlights.detach();
         if (this._docClickHandler) {
