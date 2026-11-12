@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.85] - 2026-11-11
+
+### Fixed
+- Unit 3 Deep readings: every "What Historians Argue" paragraph was checked against sources, and 12 of the 17 needed corrections (two more got a small precision edit). Three claims that could not be confirmed were cut (one each about Edmund Morgan, Colin Calloway and the name Anti-Federalist), and an unsupported line about textbooks and John Marshall was reworded. Other fixes: the 1791 battle does have a name (St. Clair's Defeat); the Washington treaties were written in English and explained through Chinook Jargon, not held in it; Gregory Ablavsky's and Jack Rakove's arguments are no longer overstated; the Thirteenth Amendment is no longer described as passed after the Civil War; and examples that were the textbook's own are no longer credited to Richard Neustadt or Akhil Reed Amar. The claim-by-claim record with sources is in `docs/plans/2026-11-11-unit3-historians-audit.md`. Only the Deep level changed. Requested by the teacher.
+
 ## [8.55.84] - 2026-11-11
 
 ### Changed
