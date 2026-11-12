@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.89] - 2026-11-11
+
+### Fixed
+- Learn Mode, three problems found in code review of the changes in 8.55.86, before any of it went live:
+  - In a warm-up fill-in question, tapping an answer and then **I don't know yet** within a second and a half counted the question twice and skipped the next one unseen. Each question now reports one result, and choosing an answer disables the button.
+  - A writing card could ask about a term from an earlier group when a later group had no question. A check now counts only for its own group and its own session.
+  - A multiple-choice question about "Anti-Federalists" or "The Federalist Papers" could be credited to the term "Federalist" (and "republican" to "republic"), so the writing card asked about the wrong term. A question now counts for a term only when it names that whole term.
+
 ## [8.55.88] - 2026-11-11
 
 ### Fixed

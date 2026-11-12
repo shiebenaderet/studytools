@@ -658,6 +658,12 @@ StudyEngine.registerActivity({
         wrap.appendChild(note);
     },
 
+    // A question reports its result once, however many buttons get pressed.
+    _once: function(fn) {
+        var done = false;
+        return function(x) { if (done) return; done = true; fn(x); };
+    },
+
     // "I don't know yet": shows the answer and counts as not known.
     _assessmentSkip: function(wrap, reveal, callback) {
         var self = this;
@@ -681,6 +687,7 @@ StudyEngine.registerActivity({
         var wrap = this._el('div');
         wrap.style.cssText = 'max-width:560px;margin:0 auto;padding:20px;';
 
+        callback = this._once(callback);
         this._assessmentIntro(wrap);
         var label = this._el('div', null, this._assessPhase === 'pre' ? 'Warm-up' : 'Quick Check');
         label.style.cssText = 'color:var(--accent-text);font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:12px;';
@@ -749,6 +756,7 @@ StudyEngine.registerActivity({
         var wrap = this._el('div');
         wrap.style.cssText = 'max-width:560px;margin:0 auto;padding:20px;';
 
+        callback = this._once(callback);
         this._assessmentIntro(wrap);
         var label = this._el('div', null, this._assessPhase === 'pre' ? 'Warm-up: fill in the blank' : 'Fill in the Blank');
         label.style.cssText = 'color:var(--accent-text);font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:12px;';
@@ -772,9 +780,10 @@ StudyEngine.registerActivity({
                 chip.addEventListener('click', function() {
                     var isCorrect = opt.toLowerCase() === fib.answer.toLowerCase();
                     var chips = chipWrap.querySelectorAll('button');
-                    for (var c = 0; c < chips.length; c++) {
-                        chips[c].disabled = true;
-                        chips[c].style.cursor = 'default';
+                    var every = wrap.querySelectorAll('button');   // the skip button too
+                    for (var c = 0; c < every.length; c++) {
+                        every[c].disabled = true;
+                        every[c].style.cursor = 'default';
                     }
                     if (isCorrect) {
                         chip.style.background = '#1a5c2a';
@@ -904,6 +913,7 @@ StudyEngine.registerActivity({
     _beginLearning: function() {
         this._slideSequence = this._buildSlideSequence(this._scope, this._preResults);
         this._slideIndex = 0;
+        this._lastCheck = null;
         this._renderSlideContainer();
     },
 
@@ -1152,6 +1162,10 @@ StudyEngine.registerActivity({
         // checks its answer; a multiple-choice question checks a term named in
         // the question or its correct option.
         var allCandidates = mcCandidates.concat(fibCandidates);
+        var esc = function(t) { return t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); };
+        // Whole term only (plural allowed), not part of a hyphenated or longer word
+        var names = function(hay, t) { return new RegExp('(^|[^a-z0-9-])' + esc(t) + '(?:s|es)?(?![a-z0-9-])').test(hay); };
+        var unitTerms = (config.vocabulary || []).map(function(v) { return v.term.toLowerCase(); });
         for (var c = 0; c < allCandidates.length; c++) {
             var cand = allCandidates[c];
             var hay = cand.type === 'fib'
@@ -1159,9 +1173,10 @@ StudyEngine.registerActivity({
                 : (String(cand.data.question || '') + ' ' + String((cand.data.options || [])[cand.data.correct] || '')).toLowerCase();
             for (var g = 0; g < group.length; g++) {
                 var name = termNames[g];
+                // "Federalist" inside "The Federalist Papers" is a different term
                 var hit = cand.type === 'fib'
                     ? String(cand.data.answer || '').toLowerCase() === name
-                    : new RegExp('\\b' + name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).test(hay);
+                    : names(hay, name) && !unitTerms.some(function(o) { return o !== name && o.indexOf(name) !== -1 && names(hay, o); });
                 if (hit) { cand.term = group[g].term; break; }
             }
         }
@@ -1235,6 +1250,8 @@ StudyEngine.registerActivity({
         this._saveCurrentSession();
 
         if (slide.type === 'term') {
+            // A new group of terms: an earlier group's check no longer counts
+            this._lastCheck = null;
             this._renderTermCard(slideArea, slide.data, slide.tier, slide.keyIdea);
         } else if (slide.type === 'mc') {
             this._lastCheck = { term: slide.term || null, correct: null };
