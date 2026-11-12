@@ -316,11 +316,11 @@
         {
             "term": "veto",
             "pos": "verb",
-            "definition": "A president's power to reject a bill passed by Congress",
+            "definition": "To reject a bill passed by Congress. Only a president can veto.",
             "simpleExplanation": "From a Latin word meaning \"I forbid.\" Congress can override it with a two-thirds vote.",
             "example": "In 1792, George Washington sent a bill back to Congress unsigned for the first time.",
             "category": "Inside the Constitution",
-            "typingSnippet": "A veto is a president's rejection of a bill. Congress can override it with a two-thirds vote in both houses.",
+            "typingSnippet": "To veto a bill is to reject it. Only a president can veto, and Congress can override a veto with a two-thirds vote in both houses.",
             "tier": "encounter"
         },
         {
@@ -766,7 +766,7 @@
             "category": "Inside the Constitution"
         },
         {
-            "sentence": "A president's rejection of a bill is called a _____.",
+            "sentence": "A president can _____, or reject, a bill passed by Congress.",
             "answer": "veto",
             "category": "Inside the Constitution"
         },

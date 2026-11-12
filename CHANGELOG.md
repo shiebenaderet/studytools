@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.87] - 2026-11-11
+
+### Changed
+- Unit 3: **veto** is defined as a verb ("To reject a bill passed by Congress. Only a president can veto."), to match its part-of-speech tag and the way the textbook first uses it. Its typing passage and Fill in the Blank sentence were reworded the same way. Requested by the teacher.
+
 ## [8.55.86] - 2026-11-11
 
 ### Changed
