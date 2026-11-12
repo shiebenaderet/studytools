@@ -44,7 +44,7 @@ test('typos are forgiven, more for longer answers', () => {
     assert(m('amendmant', 'amendment', unit3));
     assert(m('delegates', 'delegate', unit3));
     assert(m('treatty', 'treaty', unit3));
-    assert(m('vito', 'veto', unit3));   // 4 letters: one typo allowed
+    assert(m('Great Compromize', 'Great Compromise', unit3));
     assert(!m('cat', 'cede'));
 });
 test('a different term is never accepted as a typo', () => {
@@ -57,6 +57,12 @@ test('a different term is never accepted as a typo', () => {
     assert(!m('Supremacy Clause', 'Commerce Clause', unit3));
     assert(!m('New Jersey Plan', 'Virginia Plan', unit3));
     assert(!m('reserved powers', 'concurrent powers', unit3));
+});
+test('short answers get little slack, so a different real word is not accepted', () => {
+    assert(!m('code', 'cede', unit3));
+    assert(!m('vito', 'veto', unit3));
+    assert(!m('republican', 'republic', unit3));
+    assert(m('republc', 'republic', unit3));
 });
 test('wrong answers stay wrong', () => {
     assert(!m('Congress', 'convention', unit3));

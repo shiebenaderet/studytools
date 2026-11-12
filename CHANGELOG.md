@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.90] - 2026-11-11
+
+### Changed
+- Typed answers: short answers get less slack for typos than 8.55.84 gave them. Code review found that "code" was accepted for "cede" and "republican" for "republic." Answers under 5 letters now need the exact letters, 5 to 9 letters allow one typo, 10 to 12 allow two, 13 to 19 three, and longer ones four. The forgiveness for hyphens, spacing and number forms ("3/5 Compromise") is unchanged. A typo that happens to spell a different real word outside the unit's terms ("convection" for "convention") is still accepted.
+
 ## [8.55.89] - 2026-11-11
 
 ### Fixed

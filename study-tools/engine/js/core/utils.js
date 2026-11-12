@@ -89,7 +89,7 @@ const StudyUtils = {
         s = s.replace(/\b(\d{1,2})\s*[\/-]\s*(\d{1,2})(?:ths?|rds?|nds?)?\b/g, function(m, a, b) {
             if (+b < 2 || +a > 20 || +b > 20) return m;
             var den = +b === 2 ? 'half' : self._numWord(b, true);
-            return self._numWord(a) + ' ' + den + (+a > 1 && +b !== 2 ? 's' : (+a > 1 ? 's' : ''));
+            return self._numWord(a) + ' ' + den + (+a > 1 ? 's' : '');
         }).replace(/halfs\b/g, 'halves');
         // Ordinals and plain numbers: 14th -> fourteenth, 13 -> thirteen
         s = s.replace(/\b(\d{1,2})(st|nd|rd|th)\b/g, function(m, n) { return self._numWord(n, true); });
@@ -99,8 +99,11 @@ const StudyUtils = {
     },
 
     // How many wrong letters are forgiven, by the length of the answer.
+    // Short answers get none or one: "code" must not pass for "cede", nor
+    // "republican" for "republic". Long answers, where a slip is likelier and
+    // a different real word is not, get more.
     typoAllowance(len) {
-        return len >= 20 ? 4 : len >= 13 ? 3 : len >= 8 ? 2 : len >= 4 ? 1 : 0;
+        return len >= 20 ? 4 : len >= 13 ? 3 : len >= 10 ? 2 : len >= 5 ? 1 : 0;
     },
 
     // Lenient check for a typed answer. Case, punctuation, hyphens, spacing and

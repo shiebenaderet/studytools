@@ -105,8 +105,8 @@ A unit is `study-tools/units/<id>/config.json` plus `textbook.json`, listed in
 - **Typed answers** go through `StudyUtils.answerMatches(typed, answer)`,
   which forgives case, punctuation, hyphens, spacing, a leading "the", "a" or
   "an", digits for number words ("3/5" for "three-fifths", "14th" for
-  "fourteenth") and a few typos (one for 4 to 7 letters, up to four for long
-  answers). Pass the unit's other terms as the third argument so a guess that
+  "fourteenth") and a few typos (none under 5 letters, one for 5 to 9, up to four for
+  long answers). Pass the unit's other terms as the third argument so a guess that
   is closer to a different term ("legislative" for "legislature") stays wrong.
   Do not write a new matcher. Tests: `answer-matches.test.js`.
 - **Text selection features** (the highlighter) must coexist with the
