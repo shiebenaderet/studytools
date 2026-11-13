@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.98] - 2026-11-13
+
+### Changed
+- Unit 3: Chapter 3 (Inside the Constitution) now unlocks on November 23, not November 19, to match the Power Sort lesson. The practice question "What does the Supremacy Clause say?" moved from Chapter 3 to Chapter 4 (Treaties and Sovereignty), where the clause is taught. Requested by the teacher after reviewing the lesson plans.
+
 ## [8.55.97] - 2026-11-13
 
 ### Added

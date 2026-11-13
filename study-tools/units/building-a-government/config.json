@@ -38,7 +38,7 @@
     "categorySchedule": {
         "Why the Articles Failed": "2026-11-16",
         "Compromises in Philadelphia": "2026-11-18",
-        "Inside the Constitution": "2026-11-19",
+        "Inside the Constitution": "2026-11-23",
         "Treaties and Sovereignty": "2026-11-30",
         "Ratification and Rights": "2026-12-02"
     },
@@ -1307,7 +1307,7 @@
             ],
             "correct": 2,
             "explanation": "Article VI makes the Constitution, federal laws and treaties supreme. A state law that conflicts with them cannot stand.",
-            "topic": "Inside the Constitution"
+            "topic": "Treaties and Sovereignty"
         },
         {
             "question": "Why did the framers make the Constitution possible to amend, but hard to amend?",
