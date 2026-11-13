@@ -22,12 +22,13 @@ Downloaded Nov 13 2026 from Wikimedia Commons, 500 px wide. Each file's Commons 
 - `cede.jpg` (cede): The Treaty of Greenville, painted in 1795 by an unidentified artist (Chicago History Museum). Commons: Treaty_of_Greenville.jpg. Public domain.
 - `supremacy-clause.jpg` (Supremacy Clause): The opening of Article VI in the handwritten Constitution, 1787 (National Archives). Cropped from the National Archives scan of the Constitution, page 4. Public domain.
 
+- `three-fifths-compromise.jpg` (Three-Fifths Compromise): the kneeling figure and banner cropped from `am-i-not-a-man.jpg`, an 1837 American antislavery broadside whose image first appeared on a 1787 English medallion (Library of Congress). Public domain.
+
 ## Flashcard pictures that reuse a textbook picture
 
 - Articles of Confederation: `articles-of-confederation.jpg` (The Articles of Confederation).
 - convention: `state-house-1800.jpg` (The Pennsylvania State House, where the convention met).
 - Great Compromise: `roger-sherman.jpg` (Roger Sherman, who proposed it).
-- Three-Fifths Compromise: `am-i-not-a-man.jpg` (Antislavery medallion, 1787).
 - Virginia Plan: `james-madison.jpg` (James Madison, who helped write it).
 - preamble: `constitution-page-1.jpg` (The first page of the Constitution).
 - separation of powers: `three-branches.png` (Diagram of the three branches).
