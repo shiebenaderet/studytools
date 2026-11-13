@@ -2110,5 +2110,251 @@
             ]
         }
     ],
-    "goDeeper": []
+    "goDeeper": [
+        {
+            "category": "Why the Articles Failed",
+            "type": "video",
+            "title": "The Complexities of the Articles of Confederation",
+            "source": "Ken Burns in the Classroom, PBS LearningMedia, grades 6–8",
+            "url": "https://www.pbslearningmedia.org/resource/the-complexities-articles-confederation-gallery/the-american-revolution/"
+        },
+        {
+            "category": "Why the Articles Failed",
+            "type": "video",
+            "title": "The Birth of American Government: Independence, the Articles, and the Constitution",
+            "source": "Georgia Stories, PBS LearningMedia, grades 6–8",
+            "minutes": 9,
+            "url": "https://www.pbslearningmedia.org/resource/birth-of-american-government-video/georgia-stories/"
+        },
+        {
+            "category": "Why the Articles Failed",
+            "type": "video",
+            "title": "The Constitution, the Articles, and Federalism",
+            "source": "Crash Course US History #8",
+            "minutes": 13,
+            "url": "https://www.youtube.com/watch?v=bO7FQsCcbD8"
+        },
+        {
+            "category": "Why the Articles Failed",
+            "type": "reading",
+            "level": "challenge",
+            "title": "Shays's Rebellion",
+            "source": "The American Yawp, ch. 6 sec. II",
+            "url": "https://www.americanyawp.com/text/06-a-new-nation/#II_Shayss_Rebellion"
+        },
+        {
+            "category": "Why the Articles Failed",
+            "type": "reading",
+            "level": "challenge",
+            "title": "A Confederation of Native Peoples Seeks Peace with the United States, 1786 (full text)",
+            "source": "The American Yawp Reader",
+            "url": "https://www.americanyawp.com/reader/a-new-nation/a-confederation-of-native-peoples-seek-peace-with-the-united-states-1786/"
+        },
+        {
+            "category": "Why the Articles Failed",
+            "type": "reference",
+            "title": "Articles of Confederation",
+            "source": "Britannica Kids",
+            "url": "https://kids.britannica.com/kids/article/Articles-of-Confederation/352788"
+        },
+        {
+            "category": "Compromises in Philadelphia",
+            "type": "video",
+            "title": "Compromise and the Constitution of the United States",
+            "source": "Ken Burns, Benjamin Franklin (PBS)",
+            "minutes": 7,
+            "url": "https://www.pbs.org/video/compromise-and-constitution-united-states-iezxca/"
+        },
+        {
+            "category": "Compromises in Philadelphia",
+            "type": "video",
+            "title": "Debating Slavery at the Constitutional Convention",
+            "source": "Africans in America, PBS LearningMedia, grades 6–8",
+            "minutes": 1,
+            "url": "https://www.pbslearningmedia.org/resource/adlit08.ush.rev.slavery/debating-slavery/"
+        },
+        {
+            "category": "Compromises in Philadelphia",
+            "type": "video",
+            "title": "The Making of the American Constitution",
+            "source": "TED-Ed, Judy Walton",
+            "minutes": 4,
+            "url": "https://ed.ted.com/lessons/who-made-the-american-constitution-judy-walton"
+        },
+        {
+            "category": "Compromises in Philadelphia",
+            "type": "reading",
+            "level": "challenge",
+            "title": "The Constitutional Convention",
+            "source": "The American Yawp, ch. 6 sec. III",
+            "url": "https://www.americanyawp.com/text/06-a-new-nation/#III_The_Constitutional_Convention"
+        },
+        {
+            "category": "Compromises in Philadelphia",
+            "type": "reading",
+            "level": "challenge",
+            "title": "Rights and Compromises: Slavery in the Constitution",
+            "source": "The American Yawp, ch. 6 sec. V",
+            "url": "https://www.americanyawp.com/text/06-a-new-nation/#V_Rights_and_Compromises"
+        },
+        {
+            "category": "Compromises in Philadelphia",
+            "type": "reference",
+            "title": "Constitutional Convention",
+            "source": "Britannica Kids",
+            "url": "https://kids.britannica.com/kids/article/Constitutional-Convention/627434"
+        },
+        {
+            "category": "Inside the Constitution",
+            "type": "video",
+            "title": "Foundations of the Constitution: Federalism, Separation of Powers, Checks and Balances",
+            "source": "The Constitution EXPLAINED, PBS LearningMedia, grades 6–8",
+            "minutes": 2,
+            "url": "https://www.pbslearningmedia.org/resource/civ23-soc-foundconstitution/foundations-of-the-constitution-the-constitution-explained/"
+        },
+        {
+            "category": "Inside the Constitution",
+            "type": "video",
+            "title": "Explaining the Electoral College",
+            "source": "Politics on Point, PBS LearningMedia, grades 6–8",
+            "minutes": 3,
+            "url": "https://www.pbslearningmedia.org/resource/electoral-college-explainer-video/wviz-politics-on-point/"
+        },
+        {
+            "category": "Inside the Constitution",
+            "type": "video",
+            "title": "The Haudenosaunee Confederacy and the Birth of American Democracy",
+            "source": "PBS LearningMedia, grades 6–8",
+            "minutes": 2,
+            "url": "https://www.pbslearningmedia.org/resource/civ23-soc-haudenosauneeconfederacy/the-haudenosaunee-confederacy-the-birth-of-american-democracy/"
+        },
+        {
+            "category": "Inside the Constitution",
+            "type": "video",
+            "title": "How is power divided in the United States government?",
+            "source": "TED-Ed, Belinda Stutzman",
+            "minutes": 4,
+            "url": "https://ed.ted.com/lessons/how-is-power-divided-in-the-united-states-government-belinda-stutzman"
+        },
+        {
+            "category": "Inside the Constitution",
+            "type": "reading",
+            "title": "The Constitution: What Does It Say?",
+            "source": "National Archives",
+            "url": "https://www.archives.gov/founding-docs/constitution/what-does-it-say"
+        },
+        {
+            "category": "Inside the Constitution",
+            "type": "reading",
+            "level": "challenge",
+            "title": "The Interactive Constitution: Every Clause, Explained by Scholars",
+            "source": "National Constitution Center",
+            "url": "https://constitutioncenter.org/the-constitution"
+        },
+        {
+            "category": "Inside the Constitution",
+            "type": "reference",
+            "title": "Checks and Balances",
+            "source": "Britannica Kids",
+            "url": "https://kids.britannica.com/kids/article/checks-and-balances/646630"
+        },
+        {
+            "category": "Treaties and Sovereignty",
+            "type": "video",
+            "title": "Federal Law: The Supreme Law of the Land",
+            "source": "The Constitution EXPLAINED, PBS LearningMedia, grades 6–8",
+            "minutes": 2,
+            "url": "https://www.pbslearningmedia.org/resource/civ23-soc-fedlaw/federal-law-the-supreme-law-of-the-land-the-constitution-explained/"
+        },
+        {
+            "category": "Treaties and Sovereignty",
+            "type": "video",
+            "title": "Treaties and Sovereignty: An Interview with John Echohawk",
+            "source": "Indian Pride, PBS LearningMedia, grades 6–8",
+            "minutes": 10,
+            "url": "https://www.pbslearningmedia.org/resource/ac76218b-3b0c-4ffa-a315-fe92eb217a72/indian-pride-treaties-and-sovereignty-part-2/"
+        },
+        {
+            "category": "Treaties and Sovereignty",
+            "type": "video",
+            "title": "Tribal Sovereignty Explained",
+            "source": "Crash Course Native American History #2",
+            "minutes": 11,
+            "url": "https://www.youtube.com/watch?v=GgzR-RSfc9U"
+        },
+        {
+            "category": "Treaties and Sovereignty",
+            "type": "reading",
+            "title": "Summer 1795: The Treaty of Greenville Creates an Uneasy Peace",
+            "source": "National Park Service, by Eric Hemenway (Little Traverse Bay Bands of Odawa Indians)",
+            "url": "https://www.nps.gov/articles/a-long-legacy.htm"
+        },
+        {
+            "category": "Treaties and Sovereignty",
+            "type": "reference",
+            "title": "Medicine Creek Treaty, 1854: See the Original Document",
+            "source": "Nation to Nation, Smithsonian National Museum of the American Indian",
+            "url": "https://americanindian.si.edu/nationtonation/medicine-creek-treaty.html"
+        },
+        {
+            "category": "Treaties and Sovereignty",
+            "type": "reference",
+            "title": "Stevens Treaties: Washington's Treaties and the Fight for Fishing Rights",
+            "source": "Britannica Students",
+            "url": "https://kids.britannica.com/students/article/Stevens-Treaties/631907"
+        },
+        {
+            "category": "Treaties and Sovereignty",
+            "type": "reading",
+            "level": "challenge",
+            "title": "Treaty of Medicine Creek, 1854 (full text)",
+            "source": "HistoryLink.org",
+            "url": "https://www.historylink.org/File/5253"
+        },
+        {
+            "category": "Ratification and Rights",
+            "type": "video",
+            "title": "Amending the U.S. Constitution",
+            "source": "The Constitution EXPLAINED, PBS LearningMedia, grades 6–8",
+            "minutes": 2,
+            "url": "https://www.pbslearningmedia.org/resource/civ23-soc-amendingconstitution/amending-the-us-constitution-the-constitution-explained/"
+        },
+        {
+            "category": "Ratification and Rights",
+            "type": "reference",
+            "title": "The History of Voting Rights (interactive timeline)",
+            "source": "PBS LearningMedia, grades 6–8",
+            "url": "https://www.pbslearningmedia.org/resource/ush22-soc-votinghistory/the-history-of-voting-rights-interactive-timeline/"
+        },
+        {
+            "category": "Ratification and Rights",
+            "type": "video",
+            "title": "Why wasn't the Bill of Rights originally in the US Constitution?",
+            "source": "TED-Ed, James Coll",
+            "minutes": 5,
+            "url": "https://ed.ted.com/lessons/why-wasn-t-the-bill-of-rights-originally-in-the-us-constitution-james-coll"
+        },
+        {
+            "category": "Ratification and Rights",
+            "type": "reading",
+            "title": "The Bill of Rights: A Transcription (full text)",
+            "source": "National Archives",
+            "url": "https://www.archives.gov/founding-docs/bill-of-rights-transcript"
+        },
+        {
+            "category": "Ratification and Rights",
+            "type": "reading",
+            "level": "challenge",
+            "title": "Ratifying the Constitution",
+            "source": "The American Yawp, ch. 6 sec. IV",
+            "url": "https://www.americanyawp.com/text/06-a-new-nation/#IV_Ratifying_the_Constitution"
+        },
+        {
+            "category": "Ratification and Rights",
+            "type": "reference",
+            "title": "Anti-Federalists",
+            "source": "Britannica Kids",
+            "url": "https://kids.britannica.com/kids/article/Anti-Federalists/628041"
+        }
+    ]
 }

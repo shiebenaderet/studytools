@@ -379,3 +379,7 @@ Spares opened: "Explore the Bill of Rights, Interactive Lesson" (PBS LearningMed
   }
 ]
 ```
+
+## Approved (Nov 12, 2026)
+
+The teacher approved all 32 links on Nov 12, and they were added to the unit's `goDeeper` list in 8.55.93.

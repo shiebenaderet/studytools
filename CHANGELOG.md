@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.93] - 2026-11-12
+
+### Added
+- Unit 3 **Go Deeper** links: 32 links across the five chapters (six or seven each), shown on the Resources page and in the "Keep going" box at the end of each textbook chapter. They are PBS LearningMedia and PBS clips first, then one fast-paced video per chapter, Britannica Kids and National Archives readings, American Yawp sections marked as a challenge, and Washington sources on the Medicine Creek treaty for Chapter 4. Every link opens in a new tab and nothing is embedded. Approved by the teacher on Nov 12; the vetting table is in `docs/plans/2026-11-11-unit3-go-deeper.md`.
+
 ## [8.55.92] - 2026-11-12
 
 ### Fixed
