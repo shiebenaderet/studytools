@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.95] - 2026-11-13
+
+### Fixed
+- Privacy page corrected to match what the site does. It said the site collects a first name; the sign-up form asks for first name and last initial. It now also lists the recovery word (stored scrambled), highlights and Learn Mode reflections, written answers sent to the teacher, and feedback reports with browser type and screen size. "Who Can See Your Data" no longer implies the database key is private: it says written answers and feedback are readable only by the teacher, and that names, progress and scores are not protected by individual passwords. The deletion section mentions Reset My Progress, and the COPPA line states what is and is not asked for without a legal conclusion. Found in the review of the starting-check plan; wording approved by the teacher.
+
 ## [8.55.94] - 2026-11-13
 
 ### Changed

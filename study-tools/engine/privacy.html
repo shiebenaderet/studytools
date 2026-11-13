@@ -145,7 +145,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Your first name</td>
+                            <td>Your first name and last initial</td>
                             <td>To identify you on the leaderboard and for your teacher</td>
                         </tr>
                         <tr>
@@ -153,8 +153,16 @@
                             <td>To group students by class for the leaderboard and dashboard</td>
                         </tr>
                         <tr>
+                            <td>A recovery word</td>
+                            <td>So you can get your progress back on another device. Only a scrambled version is stored, not the word itself.</td>
+                        </tr>
+                        <tr>
                             <td>Activity progress</td>
-                            <td>Flashcard mastery, test scores, and activity completion</td>
+                            <td>Flashcard mastery, test scores, activity completion, textbook sections read, your highlights, and reflections you write in Learn Mode</td>
+                        </tr>
+                        <tr>
+                            <td>Written answers</td>
+                            <td>Answers you choose to send to your teacher from Short Answer, Response Builder and Read More questions</td>
                         </tr>
                         <tr>
                             <td>Study time</td>
@@ -164,6 +172,10 @@
                             <td>Leaderboard scores</td>
                             <td>Composite score for class rankings (requires teacher approval to appear)</td>
                         </tr>
+                        <tr>
+                            <td>Feedback you send</td>
+                            <td>Bug reports and suggestions, with your browser type and screen size so a problem can be reproduced</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -171,7 +183,7 @@
             <div class="privacy-section">
                 <h2><i class="fas fa-ban"></i> What We Do NOT Collect</h2>
                 <ul>
-                    <li>No student email addresses or passwords (there are no accounts)</li>
+                    <li>No student email addresses or passwords. You sign in with your name and class period.</li>
                     <li>No location data</li>
                     <li>No device identifiers or fingerprinting</li>
                     <li>No cookies for tracking or advertising</li>
@@ -189,23 +201,23 @@
                 <h2><i class="fas fa-user-shield"></i> Who Can See Your Data</h2>
                 <ul>
                     <li><strong>You</strong> can see your own progress on the site</li>
-                    <li><strong>Your teacher</strong> can see student names, study time, and progress via a private dashboard</li>
-                    <li><strong>Your classmates</strong> can see first names and scores on the leaderboard (only after teacher approval)</li>
-                    <li><strong>No one else</strong> is given access. The site's database is reachable only through the site's own access key, and only the teacher can delete or approve records. We are tightening it further so that each student's data is accessible only to that student and the teacher.</li>
+                    <li><strong>Your teacher</strong> can see student names, study time, progress, written answers and feedback via a private dashboard</li>
+                    <li><strong>Your classmates</strong> can see names and scores on the leaderboard (only after teacher approval). They never see your written answers.</li>
+                    <li><strong>No one else</strong> is given access. Written answers and feedback can be read only by the teacher, and only the teacher can delete records or approve leaderboard entries. Names, class periods, progress and scores work differently: students have no passwords, so the database cannot tell one student's browser from another's. A person with technical skill could read or change those records. Closing that gap needs individual sign-ins, which this site does not have yet.</li>
                 </ul>
             </div>
 
             <div class="privacy-section">
                 <h2><i class="fas fa-trash-alt"></i> Deleting Your Data</h2>
-                <p>You can reset your local progress at any time by clearing your browser's site data. If cloud sync is enabled, ask your teacher to remove your entry from the system.</p>
+                <p>The Reset My Progress button in Edit Profile clears your progress for a unit, on your device and in the cloud. Clearing your browser's site data removes what is stored on that device. Written answers you have sent stay until your teacher removes them. To have everything about you removed, ask your teacher.</p>
             </div>
 
             <div class="privacy-section">
                 <h2><i class="fas fa-child"></i> COPPA &amp; FERPA Compliance</h2>
                 <p>This tool is designed for use in K-12 classrooms. We take student privacy seriously:</p>
                 <ul>
-                    <li><strong>COPPA:</strong> This site collects only a student's first name and class period, which alone do not constitute personal information under COPPA. When cloud sync is enabled in a school setting, the teacher or school acts as the consenting party on behalf of parents under the COPPA school exception. Data is used solely for educational purposes.</li>
-                    <li><strong>FERPA:</strong> Student progress data (scores, study time) is classified as education records when linked to a student name. Access is intended for the student and their teacher (see "Who Can See Your Data"). No data is shared with third parties.</li>
+                    <li><strong>COPPA:</strong> This site asks for a student's first name, last initial and class period. It does not ask for a full name, address, email or phone number. When cloud sync is enabled in a school setting, the teacher or school acts as the consenting party on behalf of parents under the COPPA school exception. Data is used solely for educational purposes.</li>
+                    <li><strong>FERPA:</strong> Student progress data (scores, study time, written answers) is classified as education records when linked to a student name. Access is intended for the student and their teacher (see "Who Can See Your Data"). No data is shared with third parties.</li>
                     <li><strong>Data minimization:</strong> We collect only what is needed for the tool to function. No unnecessary personal information is gathered.</li>
                 </ul>
             </div>
@@ -225,7 +237,7 @@
                 <p>If you have questions about this privacy policy or how student data is handled, please contact your child's teacher or open an issue on the project's GitHub repository.</p>
             </div>
 
-            <p style="color:var(--text-muted);font-size:0.8em;text-align:center;margin-top:24px;">Last updated: October 2026</p>
+            <p style="color:var(--text-muted);font-size:0.8em;text-align:center;margin-top:24px;">Last updated: November 2026</p>
         </div>
     </div>
 
