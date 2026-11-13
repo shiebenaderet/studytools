@@ -67,6 +67,18 @@ ids.forEach(function(id) {
   var mustKnow = vocab.filter(function(v) { return !v.tier || v.tier === 'must-know'; }).length;
   if (vocab.length && mustKnow < 6) warn(id, 'only ' + mustKnow + ' must-know terms; games pad with other tiers below 6');
 
+  // Practice question tiers: "extra" questions wait until the core ones are answered right
+  var pq = cfg.practiceQuestions || [];
+  var coreBy = {}, extraBy = {};
+  pq.forEach(function(q, i) {
+    if (q.tier !== undefined && q.tier !== 'extra' && q.tier !== 'core') err(id, 'practiceQuestions[' + i + ']: tier must be "extra" or "core" (or left out, which means core)');
+    var bucket = q.tier === 'extra' ? extraBy : coreBy;
+    bucket[q.topic] = (bucket[q.topic] || 0) + 1;
+  });
+  Object.keys(extraBy).forEach(function(t) {
+    if ((coreBy[t] || 0) < 4) warn(id, 'practice questions for "' + t + '": only ' + (coreBy[t] || 0) + ' core; extras stay hidden until the core ones are answered right, so keep at least 4 core per chapter');
+  });
+
   // Power Sort sets
   var vocabCats = {};
   vocab.forEach(function(v) { vocabCats[v.category] = true; });

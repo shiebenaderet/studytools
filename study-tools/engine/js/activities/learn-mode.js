@@ -514,6 +514,19 @@ StudyEngine.registerActivity({
         return scopeCategories.length > 0 ? scopeCategories : unlocked.slice();
     },
 
+    // Core questions first: an extra practice question is skipped until the student
+    // has answered every open core question right once (see MasteryManager).
+    _extraHeld: function(q) {
+        if (!q || q.tier !== 'extra') return false;
+        var cfg = this._config, unitId = cfg.unit.id;
+        if (!this._tierOpen || this._tierOpenAt !== this._slideIndex + ':' + (this._assessPhase || '')) {
+            var open = MasteryManager.getUnlockedQuestions(unitId, cfg, 'practiceQuestions') || [];
+            this._tierOpen = MasteryManager.getTieredQuestions(unitId, cfg, open);
+            this._tierOpenAt = this._slideIndex + ':' + (this._assessPhase || '');
+        }
+        return this._tierOpen.indexOf(q) === -1;
+    },
+
     _findVocabByTerm: function(term) {
         var vocab = this._config.vocabulary || [];
         for (var i = 0; i < vocab.length; i++) {
@@ -537,6 +550,7 @@ StudyEngine.registerActivity({
             var q = pq[i];
             if (!q.topic) continue;
             if (q.topic === 'Connections' && !allMastered) continue;
+            if (this._extraHeld(q)) continue;
             if (scope.indexOf(q.topic) !== -1) {
                 pool.push({ type: 'mc', data: q, index: i });
             }
@@ -709,6 +723,7 @@ StudyEngine.registerActivity({
                 btn.addEventListener('mouseleave', function() { btn.style.borderColor = 'rgba(255,255,255,0.08)'; });
                 btn.addEventListener('click', function() {
                     var isCorrect = origIdx === q.correct;
+                    if (isCorrect) MasteryManager.noteQuestionRight(self._config.unit.id, self._config, q);
                     // Disable all buttons
                     var btns = wrap.querySelectorAll('button');
                     for (var b = 0; b < btns.length; b++) {
@@ -1142,6 +1157,7 @@ StudyEngine.registerActivity({
         var mcCandidates = [];
         for (var i = 0; i < pq.length; i++) {
             if (this._questionsUsed.indexOf(i) !== -1) continue;
+            if (this._extraHeld(pq[i])) continue;
             if (pq[i].topic && categories.indexOf(pq[i].topic) !== -1) {
                 mcCandidates.push({ type: 'mc', data: pq[i], index: i });
             }
@@ -1450,6 +1466,7 @@ StudyEngine.registerActivity({
                     }
 
                     if (self._lastCheck) self._lastCheck.correct = isCorrect;
+                    if (isCorrect) MasteryManager.noteQuestionRight(self._config.unit.id, self._config, q);
                     if (isCorrect) {
                         btn.style.background = '#1a5c2a';
                         btn.style.borderColor = '#2ecc71';
@@ -2261,6 +2278,7 @@ StudyEngine.registerActivity({
             var q = pq[i];
             if (!q.topic) continue;
             if (q.topic === 'Connections' && !allMastered) continue;
+            if (this._extraHeld(q)) continue;
             if (scope.indexOf(q.topic) !== -1) {
                 pool.push({ type: 'mc', data: q, index: i });
             }

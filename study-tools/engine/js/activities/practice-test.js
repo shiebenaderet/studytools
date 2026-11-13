@@ -74,6 +74,8 @@ StudyEngine.registerActivity({
 var allQuestions = this._config.unit.id === 'westward-expansion'
     ? (this._config.practiceQuestions || []).slice()
     : (MasteryManager.getUnlockedQuestions(this._config.unit.id, this._config, 'practiceQuestions') || []);
+        // Core questions first: extras join once every open core question has been answered right
+        allQuestions = MasteryManager.getTieredQuestions(this._config.unit.id, this._config, allQuestions);
         var masteredIds = this._masteryData.mastered || [];
         var self = this;
 
@@ -121,6 +123,8 @@ var allQuestions = this._config.unit.id === 'westward-expansion'
         var allQuestions = config.unit.id === 'westward-expansion'
             ? (config.practiceQuestions || []).slice()
             : (MasteryManager.getUnlockedQuestions(config.unit.id, config, 'practiceQuestions') || []);
+        this._heldBack = MasteryManager.heldBackCount(config.unit.id, config, allQuestions);
+        allQuestions = MasteryManager.getTieredQuestions(config.unit.id, config, allQuestions);
         this._questions = allQuestions;
 
         // Check if all mastered
@@ -177,6 +181,13 @@ var allQuestions = this._config.unit.id === 'westward-expansion'
         progressLabel.className = 'pt-mastery-label';
         progressLabel.textContent = masteredCount + ' / ' + totalCount + ' questions mastered (' + pct + '%)';
         progressDiv.appendChild(progressLabel);
+
+        if (this._heldBack > 0) {
+            var heldLabel = document.createElement('div');
+            heldLabel.className = 'pt-sessions-label pt-held-label';
+            heldLabel.textContent = 'These are the core questions. ' + this._heldBack + ' extra question' + (this._heldBack === 1 ? '' : 's') + ' will unlock when you have answered every one of these right once.';
+            progressDiv.appendChild(heldLabel);
+        }
 
         if (this._masteryData.sessions > 0) {
             var sessionsLabel = document.createElement('div');

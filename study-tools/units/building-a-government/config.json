@@ -871,7 +871,8 @@
             ],
             "correct": 2,
             "explanation": "Every change needed all thirteen states, so one state could block any fix. Rhode Island's no vote stopped a national tax in 1782.",
-            "topic": "Why the Articles Failed"
+            "topic": "Why the Articles Failed",
+            "tier": "extra"
         },
         {
             "question": "What was Shays' Rebellion?",
@@ -931,7 +932,8 @@
             ],
             "correct": 0,
             "explanation": "Rhode Island, which liked the weak system that let it act on its own, sent no one. Only twelve states took part.",
-            "topic": "Why the Articles Failed"
+            "topic": "Why the Articles Failed",
+            "tier": "extra"
         },
         {
             "question": "Which group of people was included at the meeting in Philadelphia?",
@@ -943,7 +945,8 @@
             ],
             "correct": 0,
             "explanation": "All 55 delegates were white men, and most were wealthy. Women, enslaved people, free Black Americans and Native nations had no one there.",
-            "topic": "Why the Articles Failed"
+            "topic": "Why the Articles Failed",
+            "tier": "extra"
         },
         {
             "question": "Why did the delegates keep their meetings secret?",
@@ -955,7 +958,8 @@
             ],
             "correct": 2,
             "explanation": "With the windows shut and guards at the door, delegates could change positions without public pressure. Most of what we know comes from James Madison's notes.",
-            "topic": "Why the Articles Failed"
+            "topic": "Why the Articles Failed",
+            "tier": "extra"
         },
         {
             "question": "Who was chosen to lead the meeting in Philadelphia?",
@@ -967,7 +971,8 @@
             ],
             "correct": 3,
             "explanation": "The delegates elected George Washington to preside. His reputation gave the meeting trust.",
-            "topic": "Why the Articles Failed"
+            "topic": "Why the Articles Failed",
+            "tier": "extra"
         },
         {
             "question": "What did the Virginia Plan propose?",
@@ -991,7 +996,8 @@
             ],
             "correct": 0,
             "explanation": "If seats depended on population, big states would control every vote. Small states wanted each state to count equally.",
-            "topic": "Compromises in Philadelphia"
+            "topic": "Compromises in Philadelphia",
+            "tier": "extra"
         },
         {
             "question": "How did the Great Compromise settle the fight between large and small states?",
@@ -1015,7 +1021,8 @@
             ],
             "correct": 3,
             "explanation": "Roger Sherman, from a middle-sized state, suggested a plan with something for both sides. It passed by one vote on July 16, 1787.",
-            "topic": "Compromises in Philadelphia"
+            "topic": "Compromises in Philadelphia",
+            "tier": "extra"
         },
         {
             "question": "What does bicameral mean?",
@@ -1075,7 +1082,8 @@
             ],
             "correct": 1,
             "explanation": "The clause required free states to return people who had escaped slavery, which tied the whole nation to protecting slavery.",
-            "topic": "Compromises in Philadelphia"
+            "topic": "Compromises in Philadelphia",
+            "tier": "extra"
         },
         {
             "question": "Which statement about the Constitution and slavery is accurate?",
@@ -1099,7 +1107,8 @@
             ],
             "correct": 2,
             "explanation": "The compromises got all the states to sign, but they protected slavery and pushed the conflict to a later generation.",
-            "topic": "Compromises in Philadelphia"
+            "topic": "Compromises in Philadelphia",
+            "tier": "extra"
         },
         {
             "question": "What do the words \"We the People\" at the start of the Constitution show?",
@@ -1123,7 +1132,8 @@
             ],
             "correct": 3,
             "explanation": "The preamble lists six goals, including to form a more perfect union, establish justice and secure the blessings of liberty.",
-            "topic": "Inside the Constitution"
+            "topic": "Inside the Constitution",
+            "tier": "extra"
         },
         {
             "question": "Which branch of government makes laws?",
@@ -1147,7 +1157,8 @@
             ],
             "correct": 0,
             "explanation": "Article I covers Congress, Article II the president, and Article III the courts.",
-            "topic": "Inside the Constitution"
+            "topic": "Inside the Constitution",
+            "tier": "extra"
         },
         {
             "question": "What is the job of the judicial branch?",
@@ -1195,7 +1206,8 @@
             ],
             "correct": 3,
             "explanation": "Judicial review lets courts strike down laws that break the Constitution. The Supreme Court first used it in Marbury v. Madison in 1803.",
-            "topic": "Inside the Constitution"
+            "topic": "Inside the Constitution",
+            "tier": "extra"
         },
         {
             "question": "Which is a check that Congress has on the president?",
@@ -1219,7 +1231,8 @@
             ],
             "correct": 0,
             "explanation": "Impeachment is an accusation. The Senate then holds a trial, and two-thirds must vote to remove the official.",
-            "topic": "Inside the Constitution"
+            "topic": "Inside the Constitution",
+            "tier": "extra"
         },
         {
             "question": "How is the president chosen?",
@@ -1243,7 +1256,8 @@
             ],
             "correct": 2,
             "explanation": "Each state's electoral votes equal its House seats plus two senators. More people means more House seats.",
-            "topic": "Inside the Constitution"
+            "topic": "Inside the Constitution",
+            "tier": "extra"
         },
         {
             "question": "What is federalism?",
@@ -1267,7 +1281,8 @@
             ],
             "correct": 3,
             "explanation": "Printing money, declaring war and making treaties are national powers. Schools and licenses are reserved to the states.",
-            "topic": "Inside the Constitution"
+            "topic": "Inside the Constitution",
+            "tier": "extra"
         },
         {
             "question": "Collecting taxes and building roads are examples of what kind of powers?",
@@ -1279,7 +1294,8 @@
             ],
             "correct": 0,
             "explanation": "Concurrent powers are shared by the national and state governments.",
-            "topic": "Inside the Constitution"
+            "topic": "Inside the Constitution",
+            "tier": "extra"
         },
         {
             "question": "What does the Supremacy Clause say?",
@@ -1303,7 +1319,8 @@
             ],
             "correct": 1,
             "explanation": "An amendment needs two-thirds of Congress to propose it and three-fourths of the states to ratify it. Only 27 have passed.",
-            "topic": "Inside the Constitution"
+            "topic": "Inside the Constitution",
+            "tier": "extra"
         },
         {
             "question": "How did the Constitution treat Native nations?",
@@ -1351,7 +1368,8 @@
             ],
             "correct": 2,
             "explanation": "General Anthony Wayne's army defeated the Western Confederacy, which led to the Treaty of Greenville the next year.",
-            "topic": "Treaties and Sovereignty"
+            "topic": "Treaties and Sovereignty",
+            "tier": "extra"
         },
         {
             "question": "What did Native nations give up in the Treaty of Greenville (1795)?",
@@ -1363,7 +1381,8 @@
             ],
             "correct": 3,
             "explanation": "The nations ceded most of Ohio south of the Greenville line, while the United States promised the land north of the line was theirs.",
-            "topic": "Treaties and Sovereignty"
+            "topic": "Treaties and Sovereignty",
+            "tier": "extra"
         },
         {
             "question": "Why can tribes in Washington state fish in places where state rules might not allow it?",
@@ -1399,7 +1418,8 @@
             ],
             "correct": 2,
             "explanation": "Tribes reserved, or kept, that land when they gave up other land. The United States did not give it to them.",
-            "topic": "Treaties and Sovereignty"
+            "topic": "Treaties and Sovereignty",
+            "tier": "extra"
         },
         {
             "question": "Which statement about treaties between the United States and Native nations is accurate?",
@@ -1411,7 +1431,8 @@
             ],
             "correct": 0,
             "explanation": "Settlers and the government repeatedly broke treaty promises, but tribes have used the treaties in court to defend their rights.",
-            "topic": "Treaties and Sovereignty"
+            "topic": "Treaties and Sovereignty",
+            "tier": "extra"
         },
         {
             "question": "How many states had to ratify the Constitution for it to take effect?",
@@ -1423,7 +1444,8 @@
             ],
             "correct": 3,
             "explanation": "Nine states were needed. New Hampshire became the ninth on June 21, 1788.",
-            "topic": "Ratification and Rights"
+            "topic": "Ratification and Rights",
+            "tier": "extra"
         },
         {
             "question": "What did Federalists believe?",
@@ -1459,7 +1481,8 @@
             ],
             "correct": 0,
             "explanation": "Alexander Hamilton, James Madison and John Jay wrote them under the name Publius to persuade New Yorkers.",
-            "topic": "Ratification and Rights"
+            "topic": "Ratification and Rights",
+            "tier": "extra"
         },
         {
             "question": "How did Federalists win ratification in states like Massachusetts and Virginia?",
@@ -1471,7 +1494,8 @@
             ],
             "correct": 2,
             "explanation": "The promise of amendments won over enough doubters. Madison kept it by proposing amendments in 1789.",
-            "topic": "Ratification and Rights"
+            "topic": "Ratification and Rights",
+            "tier": "extra"
         },
         {
             "question": "What is the Bill of Rights?",
@@ -1507,7 +1531,8 @@
             ],
             "correct": 3,
             "explanation": "Police usually need a warrant, signed by a judge, before searching a home.",
-            "topic": "Ratification and Rights"
+            "topic": "Ratification and Rights",
+            "tier": "extra"
         },
         {
             "question": "What does due process mean?",
@@ -1531,7 +1556,8 @@
             ],
             "correct": 2,
             "explanation": "The Tenth Amendment protects reserved powers, a key part of federalism.",
-            "topic": "Ratification and Rights"
+            "topic": "Ratification and Rights",
+            "tier": "extra"
         },
         {
             "question": "Which amendment ended slavery?",
@@ -1543,7 +1569,8 @@
             ],
             "correct": 3,
             "explanation": "The Thirteenth Amendment, ratified in 1865, abolished slavery. Later amendments widened who counted as \"the People.\"",
-            "topic": "Ratification and Rights"
+            "topic": "Ratification and Rights",
+            "tier": "extra"
         },
         {
             "question": "Which amendment gave women the right to vote?",
@@ -1555,7 +1582,8 @@
             ],
             "correct": 1,
             "explanation": "The Nineteenth Amendment was ratified in 1920 after decades of work by activists such as Alice Paul.",
-            "topic": "Ratification and Rights"
+            "topic": "Ratification and Rights",
+            "tier": "extra"
         }
     ],
     "shortAnswerQuestions": [

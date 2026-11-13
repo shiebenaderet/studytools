@@ -38,6 +38,13 @@ A unit is `study-tools/units/<id>/config.json` plus `textbook.json`, listed in
    "Keep going" box.
 2. **At least 6 must-know terms per unit,** ideally per category. Games pad
    with other tiers below 6. Who Am I Challenge mode uses every tier.
+   **Practice questions have tiers too.** Tag the less central ones
+   `"tier": "extra"`; untagged questions are core. Extras stay hidden in
+   Practice Test, Learn Mode, Quiz Race and Tower Defense until the student
+   has answered every open core question right once
+   (`MasteryManager.getTieredQuestions`). Aim for about half core, at least 4
+   per chapter, and keep the right answer from being the longest choice. The
+   teacher approves the split.
 3. **Vocab `example` and `simpleExplanation` may name the term.** Who Am I
    replaces the whole term with one blank per word ("Intolerable Acts"
    becomes "___ ___"), absorbing plural and possessive endings, plus verb

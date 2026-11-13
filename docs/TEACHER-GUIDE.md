@@ -352,7 +352,7 @@ Add any of these to your `activities` array:
 #### 📝 Practice Activities
 | Activity ID | What it does | Required content |
 |------------|-------------|-----------------|
-| `practice-test` | Multiple choice quiz | `practiceQuestions` |
+| `practice-test` | Multiple choice quiz, 10 questions a sitting. A question tagged `"tier": "extra"` is held back until the student has answered every core question in their open chapters right once; untagged questions are core. Learn Mode, Quiz Race and Tower Defense follow the same rule. Keep at least 4 core questions per chapter. | `practiceQuestions` |
 | `fill-in-blank` | Complete sentences with terms, from a word bank or by typing. Typed answers forgive case, hyphens, spacing, a few typos and digits for number words ("3/5 Compromise"), but never accept a different term from the unit. Write the blank as three or more underscores. | `fillInBlankSentences` |
 | `short-answer` | Open-ended response with rubric | `shortAnswerQuestions` |
 | `timeline` | Order events chronologically | `timelineEvents` |

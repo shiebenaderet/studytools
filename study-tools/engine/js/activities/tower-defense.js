@@ -1136,7 +1136,7 @@ StudyEngine.registerActivity({
         this._questionQueue = [];
 
         // Pull from practiceQuestions
-        var pq = config.practiceQuestions || [];
+        var pq = MasteryManager.getTieredQuestions(config.unit.id, config, config.practiceQuestions || []);
         var self = this;
         pq.forEach(function(q) {
             self._questionQueue.push({
@@ -1277,6 +1277,7 @@ StudyEngine.registerActivity({
         clearInterval(this._questionTimerId);
         var q = this._activeQuestion;
         var correct = selectedIdx === q.correct;
+        if (correct && this._config) MasteryManager.noteQuestionRight(this._config.unit.id, this._config, q);
 
         if (correct) {
             var reward = 50 + this._streak * 10;

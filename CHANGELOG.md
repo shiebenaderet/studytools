@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.97] - 2026-11-13
+
+### Added
+- **Core and extra practice questions.** A practice question can be tagged `"tier": "extra"`. Extra questions stay hidden until the student has answered every core question in their open chapters right once, so every student meets the questions that matter most first. Practice Test says how many extras are waiting. Learn Mode, Quiz Race and Tower Defense follow the same rule, and a right answer in Learn Mode or Tower Defense counts toward it. Untagged questions are core, so other units are unchanged. Requested by the teacher, who asked whether 60 questions was too many and proposed a core set with the rest unlocking after mastery.
+- Unit 3: 32 of its 60 practice questions are core and 28 are extra, split by the teacher (5 to 9 core per chapter).
+- `question-tiers.test.js`, and a content-check rule for the `tier` field.
+
 ## [8.55.96] - 2026-11-13
 
 ### Changed

@@ -226,6 +226,46 @@ const MasteryManager = {
      * Returns config[questionsKey] filtered to unlocked categories.
      * Items with topic "Connections" or no topic only show when ALL categories are mastered.
      */
+    // ── Question tiers ──────────────────────────────────────────
+    // A practice question tagged "tier": "extra" is held back until the student
+    // has answered every core question in the list right once. Untagged
+    // questions are core, so a unit with no tags behaves as it always has.
+    // "Answered right" is the shared record Practice Test keeps
+    // (practice-test-mastery.mastered, keyed by the start of the question text).
+    questionId(q) {
+        return ((q && q.question) || '').substring(0, 80);
+    },
+
+    getTieredQuestions(unitId, config, questions) {
+        questions = questions || [];
+        const core = questions.filter(q => q && q.tier !== 'extra');
+        if (core.length === questions.length || core.length === 0) return questions;
+        const data = ProgressManager.getActivityProgress(unitId, 'practice-test-mastery') || {};
+        const done = data.mastered || [];
+        const coreDone = core.every(q => done.indexOf(this.questionId(q)) !== -1);
+        return coreDone ? questions : core;
+    },
+
+    // How many extra questions are still held back in this list (0 once they open).
+    heldBackCount(unitId, config, questions) {
+        return (questions || []).length - this.getTieredQuestions(unitId, config, questions).length;
+    },
+
+    // Records a right answer to a practice question from any activity, so the
+    // core-first rule sees work done outside Practice Test.
+    noteQuestionRight(unitId, config, q) {
+        const id = this.questionId(q);
+        if (!id || !(config.practiceQuestions || []).some(p => this.questionId(p) === id)) return;
+        const data = ProgressManager.getActivityProgress(unitId, 'practice-test-mastery') || { mastered: [], wrong: [], sessions: 0 };
+        data.mastered = data.mastered || [];
+        data.wrong = data.wrong || [];
+        if (data.mastered.indexOf(id) !== -1) return;
+        data.mastered.push(id);
+        const w = data.wrong.indexOf(id);
+        if (w !== -1) data.wrong.splice(w, 1);
+        ProgressManager.saveActivityProgress(unitId, 'practice-test-mastery', data);
+    },
+
     getUnlockedQuestions(unitId, config, questionsKey) {
         const questions = config[questionsKey];
         if (!questions || !Array.isArray(questions)) return [];

@@ -8,7 +8,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 
 [![Live Site](https://img.shields.io/badge/Live_Site-study.mrbsocialstudies.org-1669C5?style=for-the-badge&logo=google-chrome&logoColor=white)](https://study.mrbsocialstudies.org)
 [![License](https://img.shields.io/badge/License-Educational_Use-22c55e?style=for-the-badge)](#license)
-[![Version](https://img.shields.io/badge/Version-8.55.96-f59e0b?style=for-the-badge)](#)
+[![Version](https://img.shields.io/badge/Version-8.55.97-f59e0b?style=for-the-badge)](#)
 
 ---
 
@@ -37,7 +37,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 ### 📝 Practice
 | Activity | Description |
 |----------|-------------|
-| **Practice Test** | 10-question mastery loop — tracks progress across sessions until every question answered correctly; wrong answers feed back to flashcards |
+| **Practice Test** | 10-question mastery loop — tracks progress across sessions until every question answered correctly; wrong answers feed back to flashcards. Questions can be tagged core or extra: extras unlock once the core questions are answered right |
 | **Fill-in-the-Blank** | One-at-a-time stepper with word bank or type-it mode |
 | **Timeline** | Drag events into chronological order with shuffle, remove, and challenge mode |
 | **Power Sort** | Tap each power into its branch or level of government (Legislative / Executive / Judicial, National / State / Both); untimed, explains every answer, replays missed items (1.25x analysis tier) |
