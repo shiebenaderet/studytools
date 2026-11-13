@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.100] - 2026-11-13
+
+### Added
+- Unit 3 flashcard pictures for 30 of the 50 terms. Fifteen are new public-domain pictures from Wikimedia Commons and the National Archives (for example the 1832 "King Andrew the First" cartoon for veto, the 1868 impeachment trial, and an 1892 map of reservations). Fifteen reuse a picture already in the unit's textbook. No two terms share a picture. The other 20 terms are ideas with nothing concrete to show. Pictures appear on flashcards, in Learn Mode and on the Resources page. Sources are listed in the unit's `images/CREDITS.md`. Reviewed by the teacher.
+
 ## [8.55.99] - 2026-11-13
 
 ### Added

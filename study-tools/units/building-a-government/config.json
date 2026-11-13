@@ -51,7 +51,8 @@
             "example": "Under the Articles of Confederation, Congress could only ask the states for money, and Rhode Island's no vote blocked a national tax in 1782.",
             "category": "Why the Articles Failed",
             "typingSnippet": "The Articles of Confederation were the first written plan of government for the United States. They created a weak national government with no president and no power to tax.",
-            "tier": "must-know"
+            "tier": "must-know",
+            "imageUrl": "images/articles-of-confederation.jpg"
         },
         {
             "term": "confederation",
@@ -71,7 +72,8 @@
             "example": "Because of the Northwest Ordinance, Ohio, Indiana and Illinois later joined the union as free states.",
             "category": "Why the Articles Failed",
             "typingSnippet": "The Northwest Ordinance of 1787 explained how land north of the Ohio River could become new states. It also banned slavery in that region.",
-            "tier": "must-know"
+            "tier": "must-know",
+            "imageUrl": "images/vocab/northwest-ordinance.jpg"
         },
         {
             "term": "convention",
@@ -81,7 +83,8 @@
             "example": "In the summer of 1787, delegates from twelve states met at a convention in Philadelphia.",
             "category": "Why the Articles Failed",
             "typingSnippet": "A convention is a formal meeting held for a special purpose. The meeting in Philadelphia in 1787 wrote the Constitution.",
-            "tier": "must-know"
+            "tier": "must-know",
+            "imageUrl": "images/state-house-1800.jpg"
         },
         {
             "term": "delegate",
@@ -91,7 +94,8 @@
             "example": "Virginia sent seven men to Philadelphia, including James Madison and George Washington, to speak for the state.",
             "category": "Why the Articles Failed",
             "typingSnippet": "A delegate is a person chosen to represent others. Each state sent delegates to the meeting in Philadelphia.",
-            "tier": "must-know"
+            "tier": "must-know",
+            "imageUrl": "images/vocab/delegate.jpg"
         },
         {
             "term": "included",
@@ -131,7 +135,8 @@
             "example": "Congress, with its House and Senate, writes the nation's laws.",
             "category": "Compromises in Philadelphia",
             "typingSnippet": "A legislature is a group of people who make laws. The national one is Congress.",
-            "tier": "must-know"
+            "tier": "must-know",
+            "imageUrl": "images/vocab/legislature.jpg"
         },
         {
             "term": "bicameral",
@@ -171,7 +176,8 @@
             "example": "Roger Sherman of Connecticut suggested the plan, and it passed on July 16, 1787, by one vote.",
             "category": "Compromises in Philadelphia",
             "typingSnippet": "The Great Compromise created a Congress with two houses. Seats in the House depend on population, and every state has two senators.",
-            "tier": "must-know"
+            "tier": "must-know",
+            "imageUrl": "images/roger-sherman.jpg"
         },
         {
             "term": "Three-Fifths Compromise",
@@ -181,7 +187,8 @@
             "example": "Because of this rule, southern states gained extra seats in the House until 1868.",
             "category": "Compromises in Philadelphia",
             "typingSnippet": "The Three-Fifths Compromise counted three out of every five enslaved people when dividing House seats. It gave slaveholding states more power.",
-            "tier": "must-know"
+            "tier": "must-know",
+            "imageUrl": "images/am-i-not-a-man.jpg"
         },
         {
             "term": "Virginia Plan",
@@ -191,7 +198,8 @@
             "example": "Edmund Randolph presented this plan on May 29, 1787, and it favored the states with the most people.",
             "category": "Compromises in Philadelphia",
             "typingSnippet": "The Virginia Plan gave each state seats in Congress based on its population. Large states supported it.",
-            "tier": "encounter"
+            "tier": "encounter",
+            "imageUrl": "images/james-madison.jpg"
         },
         {
             "term": "New Jersey Plan",
@@ -201,7 +209,8 @@
             "example": "William Paterson offered this plan on June 15, 1787, to protect the small states.",
             "category": "Compromises in Philadelphia",
             "typingSnippet": "The New Jersey Plan gave every state one vote in a one-house Congress. Small states supported it.",
-            "tier": "encounter"
+            "tier": "encounter",
+            "imageUrl": "images/vocab/new-jersey-plan.jpg"
         },
         {
             "term": "preamble",
@@ -211,7 +220,8 @@
             "example": "The opening sentence lists six goals, from forming a more perfect union to protecting liberty for the future.",
             "category": "Inside the Constitution",
             "typingSnippet": "The preamble is the introduction to the Constitution. It explains six goals of the new government.",
-            "tier": "must-know"
+            "tier": "must-know",
+            "imageUrl": "images/constitution-page-1.jpg"
         },
         {
             "term": "popular sovereignty",
@@ -231,7 +241,8 @@
             "example": "Congress makes the laws, the president carries them out, and the courts decide what they mean.",
             "category": "Inside the Constitution",
             "typingSnippet": "Separation of powers divides the government into three branches. Each branch has its own job.",
-            "tier": "must-know"
+            "tier": "must-know",
+            "imageUrl": "images/three-branches.png"
         },
         {
             "term": "legislative",
@@ -241,7 +252,8 @@
             "example": "Article I describes this branch, which includes the House of Representatives and the Senate.",
             "category": "Inside the Constitution",
             "typingSnippet": "The legislative branch makes the laws. It is Congress, created by Article I of the Constitution.",
-            "tier": "encounter"
+            "tier": "encounter",
+            "imageUrl": "images/vocab/legislative.jpg"
         },
         {
             "term": "executive",
@@ -251,7 +263,8 @@
             "example": "Article II describes this branch, which commands the army and navy.",
             "category": "Inside the Constitution",
             "typingSnippet": "The executive branch carries out the laws. It is led by the president and created by Article II.",
-            "tier": "encounter"
+            "tier": "encounter",
+            "imageUrl": "images/vocab/executive.jpg"
         },
         {
             "term": "judicial",
@@ -261,7 +274,8 @@
             "example": "Article III creates the Supreme Court, and its judges serve for life.",
             "category": "Inside the Constitution",
             "typingSnippet": "The judicial branch is the courts. It decides what laws mean and was created by Article III.",
-            "tier": "encounter"
+            "tier": "encounter",
+            "imageUrl": "images/vocab/judicial.jpg"
         },
         {
             "term": "Electoral College",
@@ -271,7 +285,8 @@
             "example": "Washington state casts 12 of these votes, and a candidate needs 270 of the 538 to win.",
             "category": "Inside the Constitution",
             "typingSnippet": "The Electoral College is the group of electors who choose the president. A candidate needs 270 electoral votes to win.",
-            "tier": "must-know"
+            "tier": "must-know",
+            "imageUrl": "images/electoral-college.png"
         },
         {
             "term": "federalism",
@@ -321,7 +336,8 @@
             "example": "In 1792, George Washington sent a bill back to Congress unsigned for the first time.",
             "category": "Inside the Constitution",
             "typingSnippet": "To veto a bill is to reject it. Only a president can veto, and Congress can override a veto with a two-thirds vote in both houses.",
-            "tier": "encounter"
+            "tier": "encounter",
+            "imageUrl": "images/vocab/veto.jpg"
         },
         {
             "term": "impeachment",
@@ -331,7 +347,8 @@
             "example": "Andrew Johnson was formally accused by the House in 1868, and the Senate fell one vote short of removing him.",
             "category": "Inside the Constitution",
             "typingSnippet": "Impeachment is a formal accusation by the House. The Senate then holds a trial to decide whether to remove the official.",
-            "tier": "encounter"
+            "tier": "encounter",
+            "imageUrl": "images/vocab/impeachment.jpg"
         },
         {
             "term": "judicial review",
@@ -341,7 +358,8 @@
             "example": "In 1803, Chief Justice John Marshall ruled in Marbury v. Madison that part of a law could not stand.",
             "category": "Inside the Constitution",
             "typingSnippet": "Judicial review lets courts decide whether laws follow the Constitution. The Supreme Court first used it in 1803.",
-            "tier": "encounter"
+            "tier": "encounter",
+            "imageUrl": "images/john-marshall.jpg"
         },
         {
             "term": "sovereignty",
@@ -361,7 +379,8 @@
             "example": "In 1855, tribes around Puget Sound signed agreements with the United States that promised they could keep fishing.",
             "category": "Treaties and Sovereignty",
             "typingSnippet": "A treaty is a formal agreement between nations. Two-thirds of the Senate must approve each one.",
-            "tier": "must-know"
+            "tier": "must-know",
+            "imageUrl": "images/medicine-creek-treaty-1854-article-3.jpg"
         },
         {
             "term": "Commerce Clause",
@@ -381,7 +400,8 @@
             "example": "In 1974, a federal judge ruled that treaty fishing rights beat Washington's state fishing laws.",
             "category": "Treaties and Sovereignty",
             "typingSnippet": "The Supremacy Clause makes the Constitution, national laws and treaties the highest law. State laws cannot conflict with them.",
-            "tier": "must-know"
+            "tier": "must-know",
+            "imageUrl": "images/vocab/supremacy-clause.jpg"
         },
         {
             "term": "time immemorial",
@@ -401,7 +421,8 @@
             "example": "The Nisqually kept a small part of their homeland in the 1854 Treaty of Medicine Creek.",
             "category": "Treaties and Sovereignty",
             "typingSnippet": "A reservation is land a tribe kept in a treaty. The tribe held on to it while giving up other land.",
-            "tier": "encounter"
+            "tier": "encounter",
+            "imageUrl": "images/vocab/reservation.jpg"
         },
         {
             "term": "cede",
@@ -411,7 +432,8 @@
             "example": "At Greenville in 1795, Native nations gave up most of present-day Ohio to the United States.",
             "category": "Treaties and Sovereignty",
             "typingSnippet": "To cede means to give up land. In the Treaty of Greenville, Native nations gave up most of Ohio.",
-            "tier": "encounter"
+            "tier": "encounter",
+            "imageUrl": "images/vocab/cede.jpg"
         },
         {
             "term": "boundary",
@@ -421,7 +443,8 @@
             "example": "The Greenville Treaty Line ran across Ohio from Lake Erie to the Ohio River.",
             "category": "Treaties and Sovereignty",
             "typingSnippet": "A boundary is a line marking the edge of a territory. The Greenville Treaty drew one across Ohio.",
-            "tier": "encounter"
+            "tier": "encounter",
+            "imageUrl": "images/greenville-treaty-line.png"
         },
         {
             "term": "guarantee",
@@ -441,7 +464,8 @@
             "example": "New Hampshire became the ninth state to approve the Constitution on June 21, 1788.",
             "category": "Ratification and Rights",
             "typingSnippet": "To ratify means to formally approve. Nine states had to ratify the Constitution before it became law.",
-            "tier": "must-know"
+            "tier": "must-know",
+            "imageUrl": "images/ratification-banner-1920.jpg"
         },
         {
             "term": "Federalist",
@@ -451,7 +475,8 @@
             "example": "Alexander Hamilton and James Madison argued for the new plan in newspaper essays.",
             "category": "Ratification and Rights",
             "typingSnippet": "A Federalist supported the Constitution. Federalists believed a stronger national government would fix the country's problems.",
-            "tier": "must-know"
+            "tier": "must-know",
+            "imageUrl": "images/vocab/federalist.jpg"
         },
         {
             "term": "Anti-Federalist",
@@ -461,7 +486,8 @@
             "example": "George Mason and Patrick Henry worried that the new government could take away people's freedoms.",
             "category": "Ratification and Rights",
             "typingSnippet": "An Anti-Federalist opposed the Constitution. They feared it gave the national government too much power.",
-            "tier": "must-know"
+            "tier": "must-know",
+            "imageUrl": "images/vocab/anti-federalist.jpg"
         },
         {
             "term": "The Federalist Papers",
@@ -471,7 +497,8 @@
             "example": "Madison explained checks and balances in one of these essays in 1788.",
             "category": "Ratification and Rights",
             "typingSnippet": "The Federalist Papers were 85 essays supporting the Constitution. Hamilton, Madison and Jay wrote them.",
-            "tier": "encounter"
+            "tier": "encounter",
+            "imageUrl": "images/the-federalist-1788.jpg"
         },
         {
             "term": "amendment",
@@ -481,7 +508,8 @@
             "example": "The Nineteenth gave women the right to vote in 1920.",
             "category": "Ratification and Rights",
             "typingSnippet": "An amendment is a change to the Constitution. It must be proposed and then ratified by three-fourths of the states.",
-            "tier": "must-know"
+            "tier": "must-know",
+            "imageUrl": "images/amending-the-constitution.png"
         },
         {
             "term": "proposal",
@@ -501,7 +529,8 @@
             "example": "James Madison proposed these amendments in 1789 to keep a promise made during ratification.",
             "category": "Ratification and Rights",
             "typingSnippet": "The Bill of Rights is the first ten amendments to the Constitution. It protects freedoms such as speech and religion.",
-            "tier": "must-know"
+            "tier": "must-know",
+            "imageUrl": "images/bill-of-rights.jpg"
         },
         {
             "term": "individual rights",
@@ -521,7 +550,8 @@
             "example": "In 1969, the Supreme Court ruled that Mary Beth Tinker's black armband was protected.",
             "category": "Ratification and Rights",
             "typingSnippet": "Freedom of speech is the right to say what you think without government punishment. The First Amendment protects it.",
-            "tier": "must-know"
+            "tier": "must-know",
+            "imageUrl": "images/vocab/freedom-of-speech.jpg"
         },
         {
             "term": "due process",
