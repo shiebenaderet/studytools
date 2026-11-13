@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.94] - 2026-11-13
+
+### Changed
+- Unit 3 (Building a Government) now opens to students on Monday, November 16, not November 13. The unit's opening date and its first chapter's unlock date both moved. Students take an ungraded starting check in Canvas at the start of class on Monday, before they begin the unit. Requested by the teacher.
+
 ## [8.55.93] - 2026-11-12
 
 ### Added
