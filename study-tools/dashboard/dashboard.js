@@ -3151,13 +3151,19 @@ const Dashboard = {
             });
             countSpan.textContent = '(' + shown.length + ')';
             list.textContent = '';
-            shown.forEach(function(r) { list.appendChild(self._buildResponseRow(r)); });
+            shown.forEach(function(r) {
+                list.appendChild(self._buildResponseRow(r, function() {
+                    var at = rows.indexOf(r);
+                    if (at !== -1) rows.splice(at, 1);
+                    repaint();
+                }));
+            });
         }
         [sourceSel, itemSel, featBox].forEach(function(el) { el.addEventListener('change', repaint); });
         repaint();
     },
 
-    _buildResponseRow(r) {
+    _buildResponseRow(r, onDeleted) {
         var self = this;
         var row = document.createElement('div');
         row.className = 'feedback-row response-row' + (r.featured ? ' response-featured' : '');
@@ -3203,6 +3209,28 @@ const Dashboard = {
         meta.className = 'feedback-row-meta';
         meta.textContent = [r.unit_id, r.word_count + ' words', this._formatFeedbackDate(r.updated_at)].join(' · ');
         header.appendChild(meta);
+
+        // Delete one answer (a test, a mistake, something sent to the wrong class).
+        // The database lets only a teacher do this.
+        var del = document.createElement('button');
+        del.type = 'button';
+        del.className = 'response-delete';
+        del.title = 'Delete this answer';
+        del.setAttribute('aria-label', 'Delete this answer from ' + (r.student_name || 'this student'));
+        var delIcon = document.createElement('i');
+        delIcon.className = 'fas fa-trash-alt';
+        del.appendChild(delIcon);
+        del.addEventListener('click', async function() {
+            if (!confirm('Delete this answer from ' + (r.student_name || 'this student') + '? This cannot be undone.')) return;
+            del.disabled = true;
+            // .select() returns the rows actually removed, so a refusal by the database is not mistaken for success
+            var res = await self.supabase.from('responses').delete().eq('id', r.id).select('id');
+            del.disabled = false;
+            if (res.error) { alert('Could not delete the answer: ' + res.error.message); return; }
+            if (!res.data || !res.data.length) { alert('The answer was not deleted. Sign in to the dashboard again and try once more.'); return; }
+            if (onDeleted) onDeleted(); else row.remove();
+        });
+        header.appendChild(del);
         row.appendChild(header);
 
         if (r.question_text) {

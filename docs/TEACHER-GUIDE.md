@@ -569,7 +569,7 @@ A student who opens a game before writing any short answer sees one reminder per
 
 ### Reading responses in the dashboard
 
-Open the teacher dashboard and choose the **Responses** tab. It lists every sent Short Answer, Response Builder and Read More Check answer with the student's name, class, word count and time. The Class, Unit and date filters at the top apply. Inside the tab, narrow to one source or one question, and click the star to mark a response as a good example; **Starred only** shows just those. A student who edits and resends an answer keeps your star.
+Open the teacher dashboard and choose the **Responses** tab. It lists every sent Short Answer, Response Builder and Read More Check answer with the student's name, class, word count and time. The Class, Unit and date filters at the top apply. Inside the tab, narrow to one source or one question, and click the star to mark a response as a good example; **Starred only** shows just those. A student who edits and resends an answer keeps your star. To remove one answer (a test, or something sent by mistake), click the trash icon on its card; the student's own copy stays on their device, so an answer they send again will reappear.
 
 ### Check a unit before it goes live
 

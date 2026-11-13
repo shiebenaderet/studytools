@@ -1405,6 +1405,9 @@ body {
 .response-featured { border-left-color: #B8893B; background: #fffaf0; }
 .response-star { background: none; border: none; cursor: pointer; color: #B8893B; font-size: 1.05em; padding: 0 0.2rem; }
 .response-star:disabled { opacity: 0.5; cursor: default; }
+.response-delete { background: none; border: none; cursor: pointer; color: #8a8f9c; font-size: 0.95em; padding: 0.15rem 0.4rem; margin-left: 0.5rem; border-radius: 6px; }
+.response-delete:hover, .response-delete:focus-visible { color: #b3261e; background: rgba(179, 38, 30, 0.08); }
+.response-delete:disabled { opacity: 0.5; cursor: default; }
 .response-source-short-answer { background: #e8edf4; color: #1B2D45; }
 .response-source-read-more { background: #fdf3dc; color: #7a5a16; }
 .response-question { color: #4a5568; font-size: 0.9em; font-style: italic; margin-bottom: 0.35rem; }

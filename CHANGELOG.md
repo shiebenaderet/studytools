@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.99] - 2026-11-13
+
+### Added
+- Teacher dashboard, Responses tab: each answer has a trash icon that deletes it after a confirmation. There was no way to remove a test answer or one sent by mistake. Only a signed-in teacher can delete, which the database already enforced. The student's own copy stays on their device. Requested by the teacher.
+
 ## [8.55.98] - 2026-11-13
 
 ### Changed
