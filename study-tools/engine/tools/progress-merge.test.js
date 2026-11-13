@@ -43,12 +43,35 @@ test('streak: later lastDate wins', () => {
     const r = merge('streak', { current: 5, lastDate: 'Thu Oct 29 2026' }, { current: 9, lastDate: 'Mon Oct 26 2026' });
     assert.strictEqual(r.current, 5);
 });
-test('learn-mode-streak: keeps later day and longest best', () => {
+test('learn-mode-streak: a gap of two days or more keeps the later day, and the longest best', () => {
+    const r = merge('learn-mode-streak',
+        { currentStreak: 1, longestStreak: 1, lastSessionDate: 'Wed Oct 28 2026' },
+        { currentStreak: 20, longestStreak: 20, lastSessionDate: 'Mon Oct 26 2026' });
+    assert.strictEqual(r.currentStreak, 1);
+    assert.strictEqual(r.longestStreak, 20);
+});
+test('streak: next-day sign-in on a second device carries the real streak on', () => {
+    const r = merge('streak', { current: 1, lastDate: 'Thu Oct 29 2026' }, { current: 19, lastDate: 'Wed Oct 28 2026' });
+    assert.strictEqual(r.current, 20);
+    assert.strictEqual(r.lastDate, 'Thu Oct 29 2026');
+    // same thing with the devices the other way round
+    const r2 = merge('streak', { current: 19, lastDate: 'Wed Oct 28 2026' }, { current: 1, lastDate: 'Thu Oct 29 2026' });
+    assert.strictEqual(r2.current, 20);
+});
+test('streak: next-day copy that already counted yesterday is left alone', () => {
+    const r = merge('streak', { current: 20, lastDate: 'Thu Oct 29 2026' }, { current: 19, lastDate: 'Wed Oct 28 2026' });
+    assert.strictEqual(r.current, 20);
+});
+test('streak: carries across the autumn clock change', () => {
+    const r = merge('streak', { current: 1, lastDate: 'Sun Nov 01 2026' }, { current: 7, lastDate: 'Sat Oct 31 2026' });
+    assert.strictEqual(r.current, 8);
+});
+test('learn-mode-streak: next-day carry also raises the longest streak', () => {
     const r = merge('learn-mode-streak',
         { currentStreak: 1, longestStreak: 1, lastSessionDate: 'Wed Oct 28 2026' },
         { currentStreak: 20, longestStreak: 20, lastSessionDate: 'Tue Oct 27 2026' });
-    assert.strictEqual(r.currentStreak, 1);
-    assert.strictEqual(r.longestStreak, 20);
+    assert.strictEqual(r.currentStreak, 21);
+    assert.strictEqual(r.longestStreak, 21);
 });
 test('learn-mode-streak: same-day tie keeps higher count', () => {
     const r = merge('learn-mode-streak',
@@ -72,6 +95,35 @@ test('learn-mode-tiers: union of terms, device wins a clash', () => {
 test('weakness_tracker: union of terms', () => {
     const r = merge('weakness_tracker', { terms: { Boycott: 1 } }, { terms: { Loyalist: 2 } });
     assert.deepStrictEqual(r.terms, { Boycott: 1, Loyalist: 2 });
+});
+test('weakness_tracker: higher count wins a clash', () => {
+    const r = merge('weakness_tracker', { terms: { Boycott: 1 } }, { terms: { Boycott: 5 } });
+    assert.strictEqual(r.terms.Boycott, 5);
+});
+test('weakness_tracker: a term cleared on one device does not come back from the other', () => {
+    const r = merge('weakness_tracker',
+        { terms: {}, cleared: { Boycott: 2000 } },
+        { terms: { Boycott: 3, Loyalist: 1 }, at: { Boycott: 1000, Loyalist: 1000 } });
+    assert.deepStrictEqual(r.terms, { Loyalist: 1 });
+    assert.strictEqual(r.cleared.Boycott, 2000);
+    // an older cloud copy with no times is treated as older than the clear
+    const r2 = merge('weakness_tracker', { terms: {}, cleared: { Boycott: 2000 } }, { terms: { Boycott: 3 } });
+    assert.deepStrictEqual(r2.terms, {});
+});
+test('weakness_tracker: a miss after the clear keeps the term', () => {
+    const r = merge('weakness_tracker',
+        { terms: {}, cleared: { Boycott: 2000 } },
+        { terms: { Boycott: 1 }, at: { Boycott: 3000 } });
+    assert.deepStrictEqual(r.terms, { Boycott: 1 });
+});
+test('sameData: key order does not matter, content does', () => {
+    assert.strictEqual(ctx.PM._sameData({ a: 1, b: { c: [1, 2], d: 2 } }, { b: { d: 2, c: [1, 2] }, a: 1 }), true);
+    assert.strictEqual(ctx.PM._sameData({ a: 1 }, { a: 2 }), false);
+    assert.strictEqual(ctx.PM._sameData(['a', 'b'], ['b', 'a']), false);
+    ['term-mastery', 'learn-mode-tiers', 'weakness_tracker', 'badges', 'learn-mode-reflections'].forEach(k => {
+        const v = k === 'badges' ? ['a', 'b'] : k === 'learn-mode-reflections' ? [{ text: 'a', timestamp: 1 }] : k === 'term-mastery' ? { Repeal: { sources: ['wordle'], count: { wordle: 1 } } } : k === 'weakness_tracker' ? { terms: { Boycott: 1 } } : { tyranny: 3 };
+        assert.strictEqual(ctx.PM._sameData(ctx.PM.mergeActivityData(k, v, JSON.parse(JSON.stringify(v))), v), true, k + ' unchanged after merging with itself');
+    });
 });
 test('reflections: both devices kept, no duplicates, oldest first', () => {
     const a = { text: 'a', timestamp: 1 }, b = { text: 'b', timestamp: 2 }, c = { text: 'c', timestamp: 3 };

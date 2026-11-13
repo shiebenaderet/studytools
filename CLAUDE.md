@@ -121,7 +121,9 @@ A unit is `study-tools/units/<id>/config.json` plus `textbook.json`, listed in
 - **Progress sync.** Progress saves to localStorage and syncs to Supabase.
   `ProgressManager.mergeActivityData` decides how two devices combine. Any new
   progress field that a student builds up over time (highlights, sections
-  read) needs a merge rule there, or the last device to save wins.
+  read) needs a merge rule there, or the last device to save wins. Record a
+  missed term with `ProgressManager.markWeakTerm` and clear one with
+  `clearWeakTerm`; they keep the times the merge rule depends on.
 - **Harder modes** keep a separate best score (`bestChallengeScore`) so the
   classic best stays comparable, and record mastery the same way.
 - **Feedback.** Bug reports carry the browser and screen size. Ask which

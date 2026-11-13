@@ -269,9 +269,7 @@ StudyEngine.registerActivity({
 
             // Track weakness
             if (typeof ProgressManager !== 'undefined') {
-                const weakData = ProgressManager.load(this._config.unit.id, 'weakness_tracker') || { terms: {} };
-                weakData.terms[this._current.term] = (weakData.terms[this._current.term] || 0) + 1;
-                ProgressManager.save(this._config.unit.id, 'weakness_tracker', weakData);
+                ProgressManager.markWeakTerm(this._config.unit.id, this._current.term);
             }
         }
 

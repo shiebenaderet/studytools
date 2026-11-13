@@ -745,11 +745,7 @@ StudyEngine.registerActivity({
             }
 
             // Clear weakness for this term since they practiced it
-            var weakData = ProgressManager.load(this._config.unit.id, 'weakness_tracker');
-            if (weakData && weakData.terms && weakData.terms[termName]) {
-                delete weakData.terms[termName];
-                ProgressManager.save(this._config.unit.id, 'weakness_tracker', weakData);
-            }
+            ProgressManager.clearWeakTerm(this._config.unit.id, termName);
         } else {
             var completed = saved.completed || {};
             completed[this._selectedCategory] = {

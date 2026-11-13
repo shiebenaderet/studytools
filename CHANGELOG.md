@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.92] - 2026-11-12
+
+### Fixed
+- Progress sync between two devices, three problems found in code review. All three were already on the live site.
+  - **Streaks.** A student who studied yesterday on one device and signed in on another today could have the new 1-day streak replace the real one. The fix in 8.55.67 covered only two copies from the same day. When one copy is from the day before the other, the streak now carries on from the older copy (19 days yesterday plus today is 20). The same rule applies to the Learn Mode streak.
+  - **Weak terms.** A term cleared by Typing Practice on one device came back at the next sync from another device, and a lower count could replace a higher one. Misses and clears are now recorded with a time, a term cleared after its last miss stays cleared, and the higher count is kept.
+  - **Needless uploads.** Term mastery, Learn Mode records, weak terms and badges were rewritten and sent to the database at every sign-in even when nothing had changed. They are now compared by content first.
+
 ## [8.55.91] - 2026-11-11
 
 ### Fixed

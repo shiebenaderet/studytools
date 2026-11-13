@@ -466,6 +466,17 @@ const ProgressManager = {
             var ld = Date.parse(local[dateKey]) || 0;
             var rd = Date.parse(remote[dateKey]) || 0;
             var pick = (rd > ld || (rd === ld && (remote[countKey] || 0) > (local[countKey] || 0))) ? remote : local;
+            // One copy is from the day before the other: the student studied on
+            // both days, so the streak carries on from the older copy. Without
+            // this, signing in on a second device the next morning (which
+            // writes a 1-day streak dated today) replaced the real streak.
+            var older = pick === remote ? local : remote;
+            var gapDays = Math.round(Math.abs(rd - ld) / 86400000);
+            if (ld && rd && gapDays === 1 && (older[countKey] || 0) + 1 > (pick[countKey] || 0)) {
+                var carried = {};
+                carried[countKey] = (older[countKey] || 0) + 1;
+                pick = Object.assign({}, pick, carried);
+            }
             if (activity === 'learn-mode-streak') {
                 var best = Math.max(local.longestStreak || 0, remote.longestStreak || 0, pick.currentStreak || 0);
                 if (best !== (pick.longestStreak || 0)) pick = Object.assign({}, pick, { longestStreak: best });
@@ -499,10 +510,28 @@ const ProgressManager = {
         if (activity === 'learn-mode-tiers') {
             return Object.assign({}, remote, local);
         }
+        // weakness_tracker: { terms: {term: misses}, at: {term: last miss ms},
+        // cleared: {term: ms} }. Keep the higher count for a term on both
+        // devices, and drop a term that was cleared (practiced) after its last
+        // miss, so it does not come back from the other device.
         if (activity === 'weakness_tracker') {
-            return Object.assign({}, remote, local, {
-                terms: Object.assign({}, remote.terms || {}, local.terms || {})
+            var lT = local.terms || {}, rT = remote.terms || {};
+            var lAt = local.at || {}, rAt = remote.at || {};
+            var cleared = Object.assign({}, remote.cleared || {});
+            Object.keys(local.cleared || {}).forEach(function(t) {
+                cleared[t] = Math.max(cleared[t] || 0, local.cleared[t] || 0);
             });
+            var wTerms = {}, wAt = {};
+            Object.keys(Object.assign({}, rT, lT)).forEach(function(t) {
+                var missedAt = Math.max(lT[t] ? (lAt[t] || 0) : 0, rT[t] ? (rAt[t] || 0) : 0);
+                if (cleared[t] && cleared[t] >= missedAt) return;
+                wTerms[t] = Math.max(lT[t] || 0, rT[t] || 0);
+                if (missedAt) wAt[t] = missedAt;
+            });
+            var wMerged = Object.assign({}, remote, local, { terms: wTerms });
+            if (Object.keys(wAt).length || local.at || remote.at) wMerged.at = wAt;
+            if (Object.keys(cleared).length) wMerged.cleared = cleared;
+            return wMerged;
         }
 
         // Timestamped lists the student writes over time: union by timestamp
@@ -531,6 +560,41 @@ const ProgressManager = {
         return remoteTime > localTime ? remote : local;
     },
 
+    // Same content, whatever order the keys are in.
+    _sameData(a, b) {
+        var canon = function(v) {
+            if (Array.isArray(v)) return v.map(canon);
+            if (v && typeof v === 'object') {
+                var o = {};
+                Object.keys(v).sort().forEach(function(k) { o[k] = canon(v[k]); });
+                return o;
+            }
+            return v;
+        };
+        return JSON.stringify(canon(a)) === JSON.stringify(canon(b));
+    },
+
+    // Weak terms: one place records a miss and one place clears a term, each
+    // with a time, so two devices can tell which happened last.
+    markWeakTerm(unitId, term) {
+        var w = this.load(unitId, 'weakness_tracker') || { terms: {} };
+        if (!w.terms) w.terms = {};
+        w.terms[term] = (w.terms[term] || 0) + 1;
+        w.at = w.at || {};
+        w.at[term] = Date.now();
+        this.save(unitId, 'weakness_tracker', w);
+        return w;
+    },
+    clearWeakTerm(unitId, term) {
+        var w = this.load(unitId, 'weakness_tracker');
+        if (!w || !w.terms || !w.terms[term]) return;
+        delete w.terms[term];
+        if (w.at) delete w.at[term];
+        w.cleared = w.cleared || {};
+        w.cleared[term] = Date.now();
+        this.save(unitId, 'weakness_tracker', w);
+    },
+
     async syncFromSupabase() {
         if (!this.supabase || !this.studentId) return;
         try {
@@ -542,10 +606,16 @@ const ProgressManager = {
             for (const row of rows) {
                 const localData = this.load(row.unit_id, row.activity);
                 const merged = this.mergeActivityData(row.activity, localData, row.data);
+                // The merge rules build new objects, so compare by content: an
+                // unchanged copy is neither rewritten here nor sent back.
                 if (merged !== localData) {
-                    localStorage.setItem(this.getKey(row.unit_id, row.activity), JSON.stringify(merged));
-                    // Mark dirty so the merged result syncs back to Supabase
-                    this.dirty[`${row.unit_id}:${row.activity}`] = Date.now();
+                    if (!this._sameData(merged, localData)) {
+                        localStorage.setItem(this.getKey(row.unit_id, row.activity), JSON.stringify(merged));
+                    }
+                    // Send the merged result back only if the cloud copy lacks something
+                    if (!this._sameData(merged, row.data)) {
+                        this.dirty[`${row.unit_id}:${row.activity}`] = Date.now();
+                    }
                 }
             }
         } catch (err) {

@@ -133,12 +133,11 @@ var NudgeManager = {
             var termName = missedTermNames[i];
             for (var j = 0; j < vocab.length; j++) {
                 if (vocab[j].term.toLowerCase() === termName.toLowerCase()) {
-                    weakData.terms[vocab[j].term] = (weakData.terms[vocab[j].term] || 0) + 1;
+                    weakData = ProgressManager.markWeakTerm(unitId, vocab[j].term);
                     break;
                 }
             }
         }
-        ProgressManager.save(unitId, 'weakness_tracker', weakData);
 
         var fcProgress = ProgressManager.getActivityProgress(unitId, 'flashcards') || {};
         var mastered = fcProgress.mastered ? fcProgress.mastered.slice() : [];
