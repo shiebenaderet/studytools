@@ -13,9 +13,12 @@ feature has been built. Whether to build one is decided after Unit 3's results.
 
 ## Decisions (teacher, Nov 12)
 
-1. **Unit 3:** the starting check is a Canvas quiz in class, in the first 10 minutes of each
-   period, before any Unit 3 teaching. 15 questions, three per chapter, with "I don't know
-   yet" as a fifth choice on each.
+1. **Unit 3:** the starting check is a Canvas quiz in class on Monday, November 16, in the
+   first 10 minutes of each period, before any Unit 3 teaching. Unit 3 goes live on the site
+   the same day. There are 15 questions, three per chapter (one definition, one "use it"
+   situation and one idea question), with "I don't know yet" as a fifth choice on each. The
+   first draft had ten definition questions that echoed the flashcards; five were swapped
+   for "use it" questions so growth shows more than flashcard study.
 2. **Never graded,** and growth is never graded either.
 3. **End of unit:** the same 15 questions return as an ungraded reflection, separate from
    the unit quiz, with about 5 new ones. Students see no answers and no score until then.
