@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.96] - 2026-11-13
+
+### Changed
+- Unit 3 practice questions: answer choices reworded in 30 questions so the right answer no longer stands out as the longest. It was the single longest choice in 44 of 61 questions and more than 10 characters longer than any other in 24; it is now the longest in 15 of 60 and never by more than 10 characters. Wrong answers were lengthened to match, and the right answer was shortened in three questions (Shays' Rebellion, the Northwest Ordinance, the Great Compromise). No question, right answer's meaning or explanation changed. Found in the review of the starting-check plan; reviewed by the teacher.
+- The right answers are now spread evenly across the four positions (they were the first choice in 48 of 61). The site already shuffles choices on screen; this matters for quizzes exported to Canvas, which keep the stored order.
+
+### Removed
+- The Unit 3 practice question on Tinker v. Des Moines. Students argue that case in class before they learn how the Court ruled. Requested by the teacher.
+
 ## [8.55.95] - 2026-11-13
 
 ### Fixed

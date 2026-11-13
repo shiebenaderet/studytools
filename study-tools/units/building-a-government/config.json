@@ -840,12 +840,12 @@
         {
             "question": "Why did the first plan of government make the national government weak on purpose?",
             "options": [
-                "Americans feared a strong central power after fighting a king",
                 "The states wanted Britain to keep control of trade",
                 "Congress wanted the president to hold most of the power",
-                "The Native nations demanded a weak government"
+                "The Native nations demanded a weak government",
+                "Americans feared a strong central power after fighting a king"
             ],
-            "correct": 0,
+            "correct": 3,
             "explanation": "Americans had just fought a war against a king and Parliament, so they gave the new national government as little power as possible.",
             "topic": "Why the Articles Failed"
         },
@@ -853,11 +853,11 @@
             "question": "Which power did Congress NOT have under the Articles of Confederation?",
             "options": [
                 "Making treaties with other nations",
-                "Declaring war",
                 "Collecting taxes from the people",
+                "Declaring war",
                 "Running a post office"
             ],
-            "correct": 2,
+            "correct": 1,
             "explanation": "Congress could only ask the states for money. It had no power to tax, so it was always short of funds.",
             "topic": "Why the Articles Failed"
         },
@@ -866,20 +866,20 @@
             "options": [
                 "Seven of the thirteen",
                 "Nine of the thirteen",
-                "Two-thirds of Congress",
-                "All thirteen"
+                "All thirteen",
+                "Two-thirds of Congress"
             ],
-            "correct": 3,
+            "correct": 2,
             "explanation": "Every change needed all thirteen states, so one state could block any fix. Rhode Island's no vote stopped a national tax in 1782.",
             "topic": "Why the Articles Failed"
         },
         {
             "question": "What was Shays' Rebellion?",
             "options": [
-                "A 1786 uprising of Massachusetts farmers facing debt and lost farms",
-                "A slave revolt in Virginia in 1787",
-                "A protest by small states at the convention",
-                "A British attack on the Northwest Territory"
+                "An uprising of Massachusetts farmers facing debt and lost farms",
+                "A revolt by enslaved people on Virginia tobacco farms in 1787",
+                "A protest by small-state delegates who walked out of the convention",
+                "A British attack on American forts in the Northwest Territory"
             ],
             "correct": 0,
             "explanation": "Farmers led by Daniel Shays, a war veteran, closed courts to stop judges from taking their farms for unpaid debts and taxes.",
@@ -888,72 +888,72 @@
         {
             "question": "Why did Shays' Rebellion worry leaders like George Washington?",
             "options": [
+                "It showed that Britain was planning to return with an army",
                 "It proved the national government could not keep order",
-                "It showed that Britain was planning to return",
-                "It caused Congress to raise taxes too high",
+                "It caused Congress to raise taxes on every farmer",
                 "It made the states give up their militias"
             ],
-            "correct": 0,
+            "correct": 1,
             "explanation": "Congress had no army to send. Massachusetts had to pay for its own militia, which showed the national government was too weak to protect the country.",
             "topic": "Why the Articles Failed"
         },
         {
             "question": "What did the Northwest Ordinance of 1787 do?",
             "options": [
-                "Set up a way for western land to become new states and banned slavery there",
-                "Gave the western land back to Britain",
-                "Created the Supreme Court",
-                "Allowed each state to print its own money"
+                "Gave the western land back to Britain in exchange for a trade agreement",
+                "Created the Supreme Court and the other national courts",
+                "Allowed each state to print its own money and set its own taxes on trade",
+                "Set up a way for western land to become states and banned slavery there"
             ],
-            "correct": 0,
+            "correct": 3,
             "explanation": "The Northwest Ordinance explained how territories north of the Ohio River could become states equal to the original thirteen, and it banned slavery there.",
             "topic": "Why the Articles Failed"
         },
         {
             "question": "What was the original job of the delegates who met in Philadelphia in May 1787?",
             "options": [
+                "To declare independence from Britain a second time",
+                "To elect the first president of the country",
                 "To fix, or revise, the Articles of Confederation",
-                "To declare independence from Britain",
-                "To elect the first president",
-                "To write a bill of rights"
+                "To write a bill of rights for the states"
             ],
-            "correct": 0,
+            "correct": 2,
             "explanation": "Congress called the meeting only to revise the Articles. The delegates decided instead to write an entirely new plan.",
             "topic": "Why the Articles Failed"
         },
         {
             "question": "Which state refused to send delegates to Philadelphia in 1787?",
             "options": [
-                "Virginia",
                 "Rhode Island",
+                "Virginia",
                 "New York",
                 "Pennsylvania"
             ],
-            "correct": 1,
+            "correct": 0,
             "explanation": "Rhode Island, which liked the weak system that let it act on its own, sent no one. Only twelve states took part.",
             "topic": "Why the Articles Failed"
         },
         {
             "question": "Which group of people was included at the meeting in Philadelphia?",
             "options": [
+                "White men, many of them wealthy",
                 "Women who owned property",
                 "Enslaved people",
-                "Leaders of Native nations",
-                "White men, many of them wealthy"
+                "Leaders of Native nations"
             ],
-            "correct": 3,
+            "correct": 0,
             "explanation": "All 55 delegates were white men, and most were wealthy. Women, enslaved people, free Black Americans and Native nations had no one there.",
             "topic": "Why the Articles Failed"
         },
         {
             "question": "Why did the delegates keep their meetings secret?",
             "options": [
-                "So they could change their minds and argue freely",
                 "Because Britain had spies in Philadelphia",
                 "Because Congress had banned the meeting",
+                "So they could change their minds and argue freely",
                 "So the newspapers would not report on Washington"
             ],
-            "correct": 0,
+            "correct": 2,
             "explanation": "With the windows shut and guards at the door, delegates could change positions without public pressure. Most of what we know comes from James Madison's notes.",
             "topic": "Why the Articles Failed"
         },
@@ -962,10 +962,10 @@
             "options": [
                 "Benjamin Franklin",
                 "James Madison",
-                "George Washington",
-                "Alexander Hamilton"
+                "Alexander Hamilton",
+                "George Washington"
             ],
-            "correct": 2,
+            "correct": 3,
             "explanation": "The delegates elected George Washington to preside. His reputation gave the meeting trust.",
             "topic": "Why the Articles Failed"
         },
@@ -996,36 +996,36 @@
         {
             "question": "How did the Great Compromise settle the fight between large and small states?",
             "options": [
-                "It created one house based on population and one house with equal votes per state",
-                "It gave every state the same number of seats in both houses",
-                "It let the president decide how many seats each state gets",
-                "It ended Congress and gave all power to the states"
+                "It gave every state the same number of seats in both houses of Congress",
+                "It created one house based on population and one with equal votes per state",
+                "It let the president decide how many seats each state would get in each house",
+                "It ended Congress and gave all lawmaking power back to the thirteen states"
             ],
-            "correct": 0,
+            "correct": 1,
             "explanation": "The House of Representatives is based on population; the Senate gives every state two senators. Congress became bicameral.",
             "topic": "Compromises in Philadelphia"
         },
         {
             "question": "Who proposed the Great Compromise?",
             "options": [
-                "George Washington",
-                "Roger Sherman of Connecticut",
-                "Patrick Henry",
-                "John Jay"
+                "George Washington of Virginia",
+                "Patrick Henry of Virginia",
+                "John Jay of New York",
+                "Roger Sherman of Connecticut"
             ],
-            "correct": 1,
+            "correct": 3,
             "explanation": "Roger Sherman, from a middle-sized state, suggested a plan with something for both sides. It passed by one vote on July 16, 1787.",
             "topic": "Compromises in Philadelphia"
         },
         {
             "question": "What does bicameral mean?",
             "options": [
+                "Having two presidents who share the job",
+                "Having two capitals in different states",
                 "Having two houses in a lawmaking body",
-                "Having two presidents",
-                "Having two capitals",
-                "Having two constitutions"
+                "Having two constitutions at one time"
             ],
-            "correct": 0,
+            "correct": 2,
             "explanation": "Bicameral comes from Latin words for \"two rooms.\" Congress has the House and the Senate.",
             "topic": "Compromises in Philadelphia"
         },
@@ -1045,35 +1045,35 @@
             "question": "Under the Three-Fifths Compromise, how were enslaved people counted?",
             "options": [
                 "Each enslaved person counted as one full person",
-                "Three out of every five enslaved people were counted",
                 "Enslaved people were not counted at all",
+                "Three out of every five enslaved people were counted",
                 "Five out of every three were counted"
             ],
-            "correct": 1,
+            "correct": 2,
             "explanation": "Three out of every five enslaved people were added to a state's population for House seats and for direct taxes.",
             "topic": "Compromises in Philadelphia"
         },
         {
             "question": "What did delegates agree about the Atlantic slave trade?",
             "options": [
-                "Congress could not ban it before 1808",
                 "It was banned immediately",
                 "Each state had to ban it by 1790",
-                "It was left out of the Constitution forever"
+                "It was left out of the Constitution forever",
+                "Congress could not ban it before 1808"
             ],
-            "correct": 0,
+            "correct": 3,
             "explanation": "To keep Georgia and South Carolina in the union, the delegates agreed that Congress could not end the trade before 1808. Congress banned it that year.",
             "topic": "Compromises in Philadelphia"
         },
         {
             "question": "What did the Fugitive Slave Clause require?",
             "options": [
+                "Free states had to ban slavery within twenty years of joining the union",
                 "People who escaped slavery had to be returned, even from free states",
-                "Free states had to ban slavery",
-                "Enslaved people could buy their freedom",
+                "Enslaved people could buy their freedom after ten years of work",
                 "Congress had to pay slaveholders for escaped people"
             ],
-            "correct": 0,
+            "correct": 1,
             "explanation": "The clause required free states to return people who had escaped slavery, which tied the whole nation to protecting slavery.",
             "topic": "Compromises in Philadelphia"
         },
@@ -1081,8 +1081,8 @@
             "question": "Which statement about the Constitution and slavery is accurate?",
             "options": [
                 "It protected slavery without ever using the word \"slave\"",
-                "It banned slavery in all thirteen states",
-                "It said nothing that affected slavery",
+                "It banned slavery in all thirteen states after the year 1808",
+                "It said nothing that affected slavery in any way",
                 "It gave enslaved people the right to vote"
             ],
             "correct": 0,
@@ -1092,36 +1092,36 @@
         {
             "question": "Why do historians say the compromises over slavery came at a cost?",
             "options": [
+                "They made the Constitution too long for most Americans of the time to read",
+                "They gave Britain power over trade in the southern states",
                 "They kept the union together while leaving millions of people enslaved",
-                "They made the Constitution too long to read",
-                "They gave Britain power over the South",
                 "They forced northern states to adopt slavery"
             ],
-            "correct": 0,
+            "correct": 2,
             "explanation": "The compromises got all the states to sign, but they protected slavery and pushed the conflict to a later generation.",
             "topic": "Compromises in Philadelphia"
         },
         {
             "question": "What do the words \"We the People\" at the start of the Constitution show?",
             "options": [
-                "The government's power comes from the people",
                 "The states are more powerful than the nation",
+                "The government's power comes from the people",
                 "The president holds all power",
                 "Only property owners could read it"
             ],
-            "correct": 0,
+            "correct": 1,
             "explanation": "This is popular sovereignty. The Articles began with the states; the Constitution begins with the people.",
             "topic": "Inside the Constitution"
         },
         {
             "question": "Which of these is one of the goals listed in the preamble?",
             "options": [
-                "To form a more perfect union",
                 "To create a national religion",
                 "To guarantee every citizen a job",
-                "To expand west to the Pacific"
+                "To expand west to the Pacific",
+                "To form a more perfect union"
             ],
-            "correct": 0,
+            "correct": 3,
             "explanation": "The preamble lists six goals, including to form a more perfect union, establish justice and secure the blessings of liberty.",
             "topic": "Inside the Constitution"
         },
@@ -1140,36 +1140,36 @@
         {
             "question": "Which article of the Constitution describes the president and the executive branch?",
             "options": [
-                "Article I",
                 "Article II",
+                "Article I",
                 "Article III",
                 "Article VII"
             ],
-            "correct": 1,
+            "correct": 0,
             "explanation": "Article I covers Congress, Article II the president, and Article III the courts.",
             "topic": "Inside the Constitution"
         },
         {
             "question": "What is the job of the judicial branch?",
             "options": [
-                "To decide what laws mean and settle disputes",
-                "To make new laws",
-                "To command the army",
-                "To collect taxes"
+                "To make new laws for the whole country to follow",
+                "To command the army and the navy",
+                "To collect taxes from the states",
+                "To decide what laws mean and settle disputes"
             ],
-            "correct": 0,
+            "correct": 3,
             "explanation": "The Supreme Court and other federal courts interpret laws and decide cases.",
             "topic": "Inside the Constitution"
         },
         {
             "question": "Why did the framers divide the government into three branches?",
             "options": [
+                "Because there were three large states at the convention",
                 "So no single person or group could hold all the power",
-                "Because there were three large states",
                 "So each branch could make its own laws",
-                "Because Britain had three branches"
+                "Because Britain's government had three branches too"
             ],
-            "correct": 0,
+            "correct": 1,
             "explanation": "This is separation of powers. The framers believed concentrated power leads to tyranny.",
             "topic": "Inside the Constitution"
         },
@@ -1177,35 +1177,35 @@
             "question": "The president vetoes a bill. What can Congress do?",
             "options": [
                 "Nothing; the bill is dead forever",
-                "Override the veto with a two-thirds vote in both houses",
                 "Ask the Supreme Court to sign it",
+                "Override the veto with a two-thirds vote in both houses",
                 "Pass it with a simple majority in the House only"
             ],
-            "correct": 1,
+            "correct": 2,
             "explanation": "An override needs two-thirds of both the House and the Senate. This is a check on the president.",
             "topic": "Inside the Constitution"
         },
         {
             "question": "Which is an example of the judicial branch checking Congress?",
             "options": [
-                "Ruling that a law goes against the Constitution",
-                "Vetoing a bill",
-                "Approving a treaty",
-                "Declaring war"
+                "Vetoing a bill that both houses have passed",
+                "Approving a treaty that the president has signed",
+                "Declaring war on another country after a vote",
+                "Ruling that a law goes against the Constitution"
             ],
-            "correct": 0,
+            "correct": 3,
             "explanation": "Judicial review lets courts strike down laws that break the Constitution. The Supreme Court first used it in Marbury v. Madison in 1803.",
             "topic": "Inside the Constitution"
         },
         {
             "question": "Which is a check that Congress has on the president?",
             "options": [
+                "Choosing the president's cabinet without asking the president",
                 "Approving or rejecting the president's choices for judges",
-                "Choosing the president's cabinet without asking",
-                "Serving as commander in chief",
-                "Interpreting the Constitution"
+                "Serving as commander in chief of the army",
+                "Interpreting the Constitution in court cases"
             ],
-            "correct": 0,
+            "correct": 1,
             "explanation": "The Senate must approve the president's nominations for judges and other top jobs, and Congress can impeach and remove a president.",
             "topic": "Inside the Constitution"
         },
@@ -1213,9 +1213,9 @@
             "question": "What does impeachment mean?",
             "options": [
                 "The House formally accuses an official of serious wrongdoing",
-                "The president is automatically removed from office",
+                "The president is automatically removed from office by the courts",
                 "The Supreme Court cancels an election",
-                "A state leaves the union"
+                "A state votes to leave the union"
             ],
             "correct": 0,
             "explanation": "Impeachment is an accusation. The Senate then holds a trial, and two-thirds must vote to remove the official.",
@@ -1225,8 +1225,8 @@
             "question": "How is the president chosen?",
             "options": [
                 "Voters choose electors, and the Electoral College elects the president",
-                "Congress votes for the president",
-                "The Supreme Court picks the president",
+                "Congress votes for the president from a list the states send in",
+                "The Supreme Court picks the president from among the two leading candidates",
                 "Governors of each state choose the president"
             ],
             "correct": 0,
@@ -1236,36 +1236,36 @@
         {
             "question": "Why does a state like California have more electoral votes than Washington?",
             "options": [
+                "California joined the union earlier, and older states receive more votes",
+                "Every state gets the same number of electoral votes no matter its size",
                 "Electoral votes equal a state's seats in the House plus its two senators",
-                "California joined the union earlier",
-                "Every state gets the same number of electoral votes",
-                "California pays more taxes"
+                "California pays more in taxes, and votes are based on taxes paid"
             ],
-            "correct": 0,
+            "correct": 2,
             "explanation": "Each state's electoral votes equal its House seats plus two senators. More people means more House seats.",
             "topic": "Inside the Constitution"
         },
         {
             "question": "What is federalism?",
             "options": [
+                "Giving all power to the national government and none to the states",
                 "Dividing power between the national government and the states",
-                "Giving all power to the national government",
                 "Letting each city write its own constitution",
                 "Combining the three branches into one"
             ],
-            "correct": 0,
+            "correct": 1,
             "explanation": "Under federalism, some powers belong to the nation, some to the states, and some are shared.",
             "topic": "Inside the Constitution"
         },
         {
             "question": "Which power belongs only to the national government?",
             "options": [
-                "Printing money",
                 "Running public schools",
                 "Issuing driver's licenses",
-                "Holding state elections"
+                "Holding state elections",
+                "Printing money"
             ],
-            "correct": 0,
+            "correct": 3,
             "explanation": "Printing money, declaring war and making treaties are national powers. Schools and licenses are reserved to the states.",
             "topic": "Inside the Constitution"
         },
@@ -1284,48 +1284,48 @@
         {
             "question": "What does the Supremacy Clause say?",
             "options": [
+                "The president is above the law while serving a term in office",
+                "State laws override national laws whenever the two disagree with each other",
                 "The Constitution, national laws and treaties are the highest law of the land",
-                "The president is above the law",
-                "State laws override national laws",
-                "The Supreme Court can write new laws"
+                "The Supreme Court can write new laws when Congress fails to act"
             ],
-            "correct": 0,
+            "correct": 2,
             "explanation": "Article VI makes the Constitution, federal laws and treaties supreme. A state law that conflicts with them cannot stand.",
             "topic": "Inside the Constitution"
         },
         {
             "question": "Why did the framers make the Constitution possible to amend, but hard to amend?",
             "options": [
+                "So only the president could change it, and only once",
                 "So it could change over time, but not on a whim",
-                "So only the president could change it",
                 "So it would never need to change",
                 "So each state could change it alone"
             ],
-            "correct": 0,
+            "correct": 1,
             "explanation": "An amendment needs two-thirds of Congress to propose it and three-fourths of the states to ratify it. Only 27 have passed.",
             "topic": "Inside the Constitution"
         },
         {
             "question": "How did the Constitution treat Native nations?",
             "options": [
-                "As separate nations that the United States dealt with by treaty",
-                "As part of the states they lived near",
-                "As citizens of the United States",
-                "It did not mention them at all"
+                "As part of the states they lived near, under each state's laws",
+                "As citizens of the United States with the right to vote for Congress",
+                "It did not mention them at all",
+                "As separate nations that the United States dealt with by treaty"
             ],
-            "correct": 0,
+            "correct": 3,
             "explanation": "The Commerce Clause names \"the Indian Tribes\" alongside foreign nations and states, and the government made treaties with them.",
             "topic": "Treaties and Sovereignty"
         },
         {
             "question": "What does the Commerce Clause give Congress power over?",
             "options": [
+                "All schools in the country, both public and private",
                 "Trade with foreign nations, among the states, and with tribes",
-                "All schools in the country",
-                "The choice of state governors",
-                "The size of the Supreme Court"
+                "The choice of state governors and the length of their terms",
+                "The size of the Supreme Court and the pay of its judges and clerks"
             ],
-            "correct": 0,
+            "correct": 1,
             "explanation": "Article I, Section 8 lists these three kinds of trade. Naming tribes there treated them as nations.",
             "topic": "Treaties and Sovereignty"
         },
@@ -1344,60 +1344,60 @@
         {
             "question": "What happened at the Battle of Fallen Timbers in 1794?",
             "options": [
+                "Britain won back the Northwest Territory from the United States",
+                "Native nations captured Philadelphia and held it for a winter",
                 "American troops defeated a confederacy of Native nations in Ohio",
-                "Britain won back the Northwest Territory",
-                "Native nations captured Philadelphia",
-                "The Constitution was signed"
+                "The Constitution was signed by delegates from twelve of the states"
             ],
-            "correct": 0,
+            "correct": 2,
             "explanation": "General Anthony Wayne's army defeated the Western Confederacy, which led to the Treaty of Greenville the next year.",
             "topic": "Treaties and Sovereignty"
         },
         {
             "question": "What did Native nations give up in the Treaty of Greenville (1795)?",
             "options": [
-                "Most of present-day Ohio",
                 "All land east of the Mississippi River",
                 "Their right to govern themselves",
-                "Nothing; they gained land"
+                "Nothing; they gained land",
+                "Most of present-day Ohio"
             ],
-            "correct": 0,
+            "correct": 3,
             "explanation": "The nations ceded most of Ohio south of the Greenville line, while the United States promised the land north of the line was theirs.",
             "topic": "Treaties and Sovereignty"
         },
         {
             "question": "Why can tribes in Washington state fish in places where state rules might not allow it?",
             "options": [
-                "Treaties promised those rights, and treaties are the supreme law of the land",
-                "Washington never made fishing laws",
-                "Tribes bought the rivers from the state",
-                "The president gave special permission each year"
+                "Washington never made any fishing laws for its rivers or its coast",
+                "Tribes bought the rivers from the state when Washington joined the union",
+                "The president gives the tribes special permission to fish there each spring",
+                "Treaties promised those rights, and treaties are the supreme law of the land"
             ],
-            "correct": 0,
+            "correct": 3,
             "explanation": "The 1850s treaties reserved fishing rights. In 1974 a federal judge ruled that, under the Supremacy Clause, the treaties override state law.",
             "topic": "Treaties and Sovereignty"
         },
         {
             "question": "What does sovereignty mean for a tribal nation today?",
             "options": [
+                "The tribe must follow only state laws and has no leaders of its own",
                 "The tribe governs itself with its own leaders, laws and courts",
-                "The tribe must follow only state laws",
                 "The tribe belongs to the nearest city",
                 "The tribe has no government"
             ],
-            "correct": 0,
+            "correct": 1,
             "explanation": "Washington has 29 federally recognized tribes. Each is a sovereign nation that governs itself.",
             "topic": "Treaties and Sovereignty"
         },
         {
             "question": "What is a reservation?",
             "options": [
-                "Land a tribe kept for itself in a treaty",
                 "Land the government gave to tribes as a gift",
                 "A national park",
+                "Land a tribe kept for itself in a treaty",
                 "A city founded by settlers"
             ],
-            "correct": 0,
+            "correct": 2,
             "explanation": "Tribes reserved, or kept, that land when they gave up other land. The United States did not give it to them.",
             "topic": "Treaties and Sovereignty"
         },
@@ -1417,35 +1417,35 @@
             "question": "How many states had to ratify the Constitution for it to take effect?",
             "options": [
                 "All thirteen",
-                "Nine",
                 "Seven",
-                "Eleven"
+                "Eleven",
+                "Nine"
             ],
-            "correct": 1,
+            "correct": 3,
             "explanation": "Nine states were needed. New Hampshire became the ninth on June 21, 1788.",
             "topic": "Ratification and Rights"
         },
         {
             "question": "What did Federalists believe?",
             "options": [
+                "The Articles of Confederation worked well and needed no changes at all",
                 "A stronger national government would fix the country's problems",
-                "The Articles of Confederation worked well",
                 "The states should leave the union",
                 "The country needed a king"
             ],
-            "correct": 0,
+            "correct": 1,
             "explanation": "Federalists like Hamilton and Madison argued that the Articles had failed and the Constitution would bring order.",
             "topic": "Ratification and Rights"
         },
         {
             "question": "What was the main thing Anti-Federalists wanted added to the Constitution?",
             "options": [
-                "A bill of rights",
                 "A king",
                 "A state religion",
+                "A bill of rights",
                 "More power for the president"
             ],
-            "correct": 0,
+            "correct": 2,
             "explanation": "Anti-Federalists feared a strong government could take away freedoms unless rights were written down.",
             "topic": "Ratification and Rights"
         },
@@ -1464,24 +1464,24 @@
         {
             "question": "How did Federalists win ratification in states like Massachusetts and Virginia?",
             "options": [
-                "They promised to add a bill of rights after ratification",
                 "They threatened to bring back the king",
                 "They paid each delegate",
+                "They promised to add a bill of rights after ratification",
                 "They let those states write their own constitutions"
             ],
-            "correct": 0,
+            "correct": 2,
             "explanation": "The promise of amendments won over enough doubters. Madison kept it by proposing amendments in 1789.",
             "topic": "Ratification and Rights"
         },
         {
             "question": "What is the Bill of Rights?",
             "options": [
+                "The Declaration of Independence and its signers",
                 "The first ten amendments to the Constitution",
-                "The Declaration of Independence",
                 "The list of the president's powers",
                 "A law passed by the first Congress"
             ],
-            "correct": 0,
+            "correct": 1,
             "explanation": "The Bill of Rights was ratified in 1791 and protects freedoms such as speech, religion and a fair trial.",
             "topic": "Ratification and Rights"
         },
@@ -1489,7 +1489,7 @@
             "question": "Which freedoms does the First Amendment protect?",
             "options": [
                 "Religion, speech, press, assembly and petition",
-                "The right to bear arms",
+                "The right to bear arms and to serve in a militia",
                 "Protection from unreasonable searches",
                 "The right to a jury trial"
             ],
@@ -1500,60 +1500,48 @@
         {
             "question": "What does the Fourth Amendment protect against?",
             "options": [
-                "Unreasonable searches and seizures",
                 "Cruel and unusual punishment",
                 "Being forced to house soldiers",
-                "Losing the right to vote"
+                "Losing the right to vote",
+                "Unreasonable searches and seizures"
             ],
-            "correct": 0,
+            "correct": 3,
             "explanation": "Police usually need a warrant, signed by a judge, before searching a home.",
             "topic": "Ratification and Rights"
         },
         {
             "question": "What does due process mean?",
             "options": [
+                "Police can arrest anyone at any time without giving a reason to a judge",
                 "The government must follow fair procedures before punishing anyone",
-                "Police can arrest anyone at any time",
                 "The president decides who goes to jail",
                 "Courts must finish every case in a week"
             ],
-            "correct": 0,
+            "correct": 1,
             "explanation": "The Fifth Amendment says no person can lose life, liberty or property without due process of law.",
             "topic": "Ratification and Rights"
         },
         {
             "question": "What does the Tenth Amendment say?",
             "options": [
-                "Powers not given to the national government belong to the states or the people",
-                "The president can serve only two terms",
+                "Congress cannot pass any law that limits the freedom of speech or of the press",
                 "Women have the right to vote",
-                "Slavery is banned"
+                "Powers not given to the national government belong to the states or the people",
+                "Slavery is banned in every state"
             ],
-            "correct": 0,
+            "correct": 2,
             "explanation": "The Tenth Amendment protects reserved powers, a key part of federalism.",
-            "topic": "Ratification and Rights"
-        },
-        {
-            "question": "In Tinker v. Des Moines (1969), what did the Supreme Court decide?",
-            "options": [
-                "Students keep their right to free speech at school",
-                "Schools can ban any student opinion",
-                "Students have no rights until age 18",
-                "Only teachers have free speech at school"
-            ],
-            "correct": 0,
-            "explanation": "The court ruled that students wearing black armbands to protest a war were protected, as long as they did not seriously disrupt school.",
             "topic": "Ratification and Rights"
         },
         {
             "question": "Which amendment ended slavery?",
             "options": [
-                "The Thirteenth Amendment",
                 "The First Amendment",
                 "The Tenth Amendment",
-                "The Nineteenth Amendment"
+                "The Nineteenth Amendment",
+                "The Thirteenth Amendment"
             ],
-            "correct": 0,
+            "correct": 3,
             "explanation": "The Thirteenth Amendment, ratified in 1865, abolished slavery. Later amendments widened who counted as \"the People.\"",
             "topic": "Ratification and Rights"
         },
