@@ -78,3 +78,7 @@ or three small steps keeps any surprise easy to find and undo.
 3. Should the filter bar hide on tabs that do not use it?
 4. Is there anything on the dashboard that is wrong, slow or annoying that this plan does
    not mention?
+
+## Decided and Built (Nov 13, 2026)
+
+The teacher approved the six-tab grouping and the hidden filter bar. Built in 8.55.105 as one step. One addition found while building: Overview's Top Students table is the same list as "What students see," so it is no longer shown. The exporter links stay in the header and were not repeated on Setup.

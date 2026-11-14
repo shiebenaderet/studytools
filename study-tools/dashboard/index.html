@@ -80,7 +80,10 @@
             </button>
         </div>
 
-        <!-- Tab Navigation -->
+        <!-- Tab Navigation: six tabs. Scores, the student-facing leaderboard and the
+             ranking sections that used to sit on Overview share one tab; Activity
+             Usage and Vocab Insights sit under Students; Class Codes and Schedule
+             share Setup; Wiki Entries is a Source choice inside Responses. -->
         <nav class="tab-nav">
             <button class="tab-btn active" data-tab="overview" onclick="Dashboard.switchTab('overview')">
                 <i class="fas fa-chart-pie"></i> Overview
@@ -88,32 +91,17 @@
             <button class="tab-btn" data-tab="students" onclick="Dashboard.switchTab('students')">
                 <i class="fas fa-users"></i> Students
             </button>
-            <button class="tab-btn" data-tab="units" onclick="Dashboard.switchTab('units')">
-                <i class="fas fa-chart-bar"></i> Activity Usage
-            </button>
-            <button class="tab-btn" data-tab="classes" onclick="Dashboard.switchTab('classes')">
-                <i class="fas fa-key"></i> Class Codes
-            </button>
-            <button class="tab-btn" data-tab="scores" onclick="Dashboard.switchTab('scores')">
-                <i class="fas fa-trophy"></i> Scores
-            </button>
-            <button class="tab-btn" data-tab="vocab" onclick="Dashboard.switchTab('vocab')">
-                <i class="fas fa-brain"></i> Vocab Insights
-            </button>
             <button class="tab-btn" data-tab="leaderboard" onclick="Dashboard.switchTab('leaderboard')">
-                <i class="fas fa-medal"></i> Leaderboard
-            </button>
-            <button class="tab-btn" data-tab="wiki" onclick="Dashboard.switchTab('wiki')">
-                <i class="fas fa-pen-fancy"></i> Wiki Entries
-            </button>
-            <button class="tab-btn" data-tab="schedule" onclick="Dashboard.switchTab('schedule')">
-                <i class="fas fa-calendar-alt"></i> Schedule
+                <i class="fas fa-trophy"></i> Leaderboard
             </button>
             <button class="tab-btn" data-tab="responses" onclick="Dashboard.switchTab('responses')">
                 <i class="fas fa-pen-nib"></i> Responses
             </button>
             <button class="tab-btn" data-tab="feedback" onclick="Dashboard.switchTab('feedback')">
                 <i class="fas fa-comment-dots"></i> Feedback
+            </button>
+            <button class="tab-btn" data-tab="setup" onclick="Dashboard.switchTab('setup')">
+                <i class="fas fa-sliders-h"></i> Setup
             </button>
         </nav>
 
@@ -124,50 +112,43 @@
                 <div id="overview-trend" class="overview-panel"></div>
                 <div id="overview-feed" class="overview-panel"></div>
             </div>
-            <div id="overview-class-lb"></div>
-            <div id="overview-rankings-viz"></div>
-            <div id="overview-replay"></div>
-            <div id="overview-leaderboard"></div>
         </div>
 
         <div id="tab-students" class="tab-content">
             <div id="students-table-container"></div>
-        </div>
-
-        <div id="tab-units" class="tab-content">
+            <h2 class="tab-section-title"><i class="fas fa-chart-bar"></i> Activity usage</h2>
             <div id="units-chart-container"></div>
-        </div>
-
-        <div id="tab-classes" class="tab-content">
-            <div id="classes-container"></div>
-        </div>
-
-        <div id="tab-scores" class="tab-content">
-            <div id="scores-container"></div>
-        </div>
-
-        <div id="tab-vocab" class="tab-content">
+            <h2 class="tab-section-title"><i class="fas fa-brain"></i> Vocab insights</h2>
             <div id="vocab-container"></div>
         </div>
 
         <div id="tab-leaderboard" class="tab-content">
+            <h2 class="tab-section-title tab-section-first"><i class="fas fa-check-circle"></i> Scores and approvals</h2>
+            <div id="scores-container"></div>
+            <h2 class="tab-section-title"><i class="fas fa-medal"></i> What students see</h2>
             <div id="leaderboard-container"></div>
-        </div>
-
-        <div id="tab-wiki" class="tab-content">
-            <div id="wiki-container"></div>
-        </div>
-
-        <div id="tab-schedule" class="tab-content">
-            <div id="schedule-container"></div>
+            <!-- These four are filled by loadOverview(), as before; only their place changed. -->
+            <div id="overview-class-lb"></div>
+            <!-- Top Students repeats "What students see" above, so it is kept for loadOverview() but not shown. -->
+            <div id="overview-leaderboard" class="hidden"></div>
+            <div id="overview-rankings-viz"></div>
+            <div id="overview-replay"></div>
         </div>
 
         <div id="tab-responses" class="tab-content">
             <div id="responses-container"></div>
+            <div id="wiki-container" class="hidden"></div>
         </div>
 
         <div id="tab-feedback" class="tab-content">
             <div id="feedback-container"></div>
+        </div>
+
+        <div id="tab-setup" class="tab-content">
+            <h2 class="tab-section-title tab-section-first"><i class="fas fa-key"></i> Class codes</h2>
+            <div id="classes-container"></div>
+            <h2 class="tab-section-title"><i class="fas fa-calendar-alt"></i> Schedule</h2>
+            <div id="schedule-container"></div>
         </div>
 
         <!-- Student Edit Modal -->

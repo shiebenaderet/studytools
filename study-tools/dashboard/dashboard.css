@@ -311,6 +311,21 @@ body {
     font-weight: 600;
 }
 
+/* A heading between the sections that share one tab */
+.tab-section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text, #1e293b);
+    margin: 32px 0 14px;
+    padding-top: 22px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.tab-section-title i { color: var(--primary); }
+.tab-section-title.tab-section-first { margin-top: 0; padding-top: 0; border-top: none; }
+
 /* ---- Tab Content ---- */
 .tab-content {
     display: none;

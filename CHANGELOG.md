@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.105] - 2026-11-13
+
+### Changed
+- **Teacher dashboard regrouped from eleven tabs to six.** Nothing was removed; sections moved.
+  - **Overview** keeps the headline numbers, daily activity and recently active students.
+  - **Students** now also holds Activity Usage and Vocab Insights, below the student table.
+  - **Leaderboard** now holds what were three places for the same rankings: the Scores tab (approvals), the Leaderboard tab (what students see), and Overview's Class Standings, rankings chart and Replay. Overview's Top Students table repeated "What students see" and is no longer shown.
+  - **Responses** gains **Wiki entries** as a choice in its Source filter, replacing the Wiki Entries tab.
+  - **Setup** holds Class Codes and Schedule.
+  - **Feedback** is unchanged.
+- The Class, Unit and date filters are hidden on Feedback and Setup, which never used them.
+
+Requested by the teacher, who said the dashboard was getting unwieldy. Plan: `docs/plans/2026-11-13-dashboard-cleanup.md`. Checked against a stand-in database with sample rows; the teacher's sign-in and live data are needed to check it for real.
+
 ## [8.55.104] - 2026-11-13
 
 ### Fixed

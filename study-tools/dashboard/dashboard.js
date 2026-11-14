@@ -609,6 +609,10 @@ const Dashboard = {
             el.classList.toggle('active', el.id === 'tab-' + tabName);
         });
 
+        // The Class, Unit and date filters do nothing on these two tabs, so they are hidden there
+        var bar = document.querySelector('.filter-bar');
+        if (bar) bar.classList.toggle('hidden', tabName === 'feedback' || tabName === 'setup');
+
         const filters = this.getFilters();
 
         switch (tabName) {
@@ -617,33 +621,25 @@ const Dashboard = {
                 break;
             case 'students':
                 this.loadStudents(filters);
-                break;
-            case 'units':
                 this.loadUnits(filters);
-                break;
-            case 'classes':
-                this.loadClassCodes();
-                break;
-            case 'scores':
-                this.loadScores(filters);
-                break;
-            case 'vocab':
                 this.loadVocabInsights(filters);
                 break;
             case 'leaderboard':
+                this.loadScores(filters);
                 this.loadLeaderboardPreview(filters);
-                break;
-            case 'wiki':
-                this.loadWikiEntries(filters);
-                break;
-            case 'schedule':
-                this.renderSchedule();
+                // Class Standings, Top Students, the rankings chart and the Replay are
+                // drawn by loadOverview() into containers that now live on this tab
+                this.loadOverview(filters);
                 break;
             case 'responses':
                 this.loadResponses(filters);
                 break;
             case 'feedback':
                 this.loadFeedback();
+                break;
+            case 'setup':
+                this.loadClassCodes();
+                this.renderSchedule();
                 break;
         }
     },
@@ -3100,7 +3096,8 @@ const Dashboard = {
             { value: 'all', label: 'All' },
             { value: 'short-answer', label: 'Short Answer' },
             { value: 'read-more', label: 'Read More Checks' },
-            { value: 'reading', label: 'Reading questions' }
+            { value: 'reading', label: 'Reading questions' },
+            { value: 'wiki', label: 'Wiki entries' }
         ]);
 
         // One entry per question, labeled with its text, newest question first.
@@ -3128,17 +3125,26 @@ const Dashboard = {
         bar.appendChild(countSpan);
         container.appendChild(bar);
 
-        if (rows.length === 0) {
-            container.appendChild(this._emptyState('fas fa-pen-nib', 'No responses yet. They appear here when signed-in students send a Short Answer, a Response Builder answer or a Read More Check.'));
-            return;
-        }
-
+        var empty = this._emptyState('fas fa-pen-nib', 'No responses yet. They appear here when signed-in students send a Short Answer, a Response Builder answer, a Read More Check or a reading question.');
+        container.appendChild(empty);
         var list = document.createElement('div');
         list.className = 'feedback-list';
         container.appendChild(list);
+        var wikiBox = document.getElementById('wiki-container');
+        var itemLabel = itemSel.parentNode;
 
         function repaint() {
             var src = sourceSel.value, item = itemSel.value, feat = featBox.checked;
+            // Wiki entries are a different kind of record (Learn Mode's bonus writing,
+            // kept with progress). Choosing them swaps the list for the wiki view.
+            var wiki = src === 'wiki';
+            if (wikiBox) wikiBox.classList.toggle('hidden', !wiki);
+            list.classList.toggle('hidden', wiki);
+            itemLabel.classList.toggle('hidden', wiki);
+            featLabel.classList.toggle('hidden', wiki);
+            countSpan.classList.toggle('hidden', wiki);
+            empty.classList.toggle('hidden', wiki || rows.length > 0);
+            if (wiki) { self.loadWikiEntries(self.getFilters()); return; }
             Array.prototype.forEach.call(itemSel.options, function(o) {
                 if (o.value === 'all') return;
                 o.hidden = src !== 'all' && o.value.split('|')[1] !== src;
