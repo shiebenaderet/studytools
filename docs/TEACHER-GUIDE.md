@@ -587,6 +587,10 @@ The dashboard has six tabs: **Overview** (four headline numbers, each labelled w
 
 Open the teacher dashboard and choose the **Responses** tab. Its Source filter also has **Wiki entries**, for Learn Mode's bonus writing. It lists every sent Short Answer, Response Builder and Read More Check answer with the student's name, class, word count and time. The Class, Unit and date filters at the top apply. Inside the tab, narrow to one source or one question, and click the star to mark a response as a good example; **Starred only** shows just those. A student who edits and resends an answer keeps your star. To remove one answer (a test, or something sent by mistake), click the trash icon on its card; the student's own copy stays on their device, so an answer they send again will reappear.
 
+### Your own test account
+
+If you try the site with a student account of your own, sign in to the dashboard in the same browser. The site records no visits from a browser that is signed in to the teacher dashboard, so your testing stays out of Recently Active, "studied this week" and the daily bars. Your test account's progress and written answers still save, and it still appears as a student in the class view and the nudge list.
+
 ### The class view
 
 On the dashboard's **Students** tab, **Class view** has one line per class period. The line gives the period's counts (students, visited this week, away or not started, games only, no reading, no flashcards). Click it to open the period.

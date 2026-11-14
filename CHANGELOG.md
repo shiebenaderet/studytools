@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.120] - 2026-11-13
+
+### Changed
+- **The teacher's own visits are no longer counted.** The teacher reaches the dashboard through the study site and tries activities with a test account, and every page load was recorded as a student visit: it showed in Recently Active, in "studied this week" and in the daily bars. The site now records no visit from a browser that is signed in to the teacher dashboard. Progress and written answers from the test account still save, so the teacher can keep testing as a student would. Students are not affected: they have no dashboard sign-in.
+
+Asked for by the teacher. Visits already recorded stay until they age out of the last 24 hours and the last 7 days.
+
 ## [8.55.119] - 2026-11-13
 
 ### Changed

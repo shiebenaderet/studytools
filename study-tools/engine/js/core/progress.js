@@ -662,9 +662,24 @@ const ProgressManager = {
         }, 30000);
     },
 
+    // True when this browser is signed in to the teacher dashboard. Students
+    // have no sign-in of that kind; only a teacher does.
+    async _isTeacherBrowser() {
+        try {
+            const { data } = await this.supabase.auth.getSession();
+            return !!(data && data.session && data.session.user);
+        } catch (e) {
+            return false;
+        }
+    },
+
     async startSession() {
         if (!this.supabase || !this.studentId) return;
         try {
+            // The teacher trying the site with a test account is not a student
+            // visit. Every page load they made on the way to the dashboard was
+            // being counted in "studied this week" and Recently Active.
+            if (await this._isTeacherBrowser()) return;
             const unitId = (typeof StudyEngine !== 'undefined' && StudyEngine.config && StudyEngine.config.unit)
                 ? StudyEngine.config.unit.id
                 : 'unknown';
