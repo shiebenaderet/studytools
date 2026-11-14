@@ -311,6 +311,11 @@ body {
     font-weight: 600;
 }
 
+.unit-subhead { font-size: 0.95rem; font-weight: 700; color: var(--text-light); margin: 22px 0 10px; text-transform: none; }
+.period-table details summary { cursor: pointer; color: var(--primary-dark); font-weight: 600; }
+.period-table .period-names { margin-top: 6px; font-size: 0.9rem; color: var(--text-light); line-height: 1.5; max-width: 36rem; }
+.period-table td { vertical-align: top; }
+
 /* A heading between the sections that share one tab */
 .tab-section-title {
     font-size: 1.1rem;

@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.106] - 2026-11-13
+
+### Fixed
+- **Teacher dashboard was reading only the first 1,000 rows of its largest tables.** The database returns at most 1,000 rows per request, and the progress and sessions tables are much larger, so totals and averages were worked out from a fraction of the class. The dashboard now pages through every row on the Overview, the Students table and the per-unit section. The clue was the Overview's "Avg Session Length" of 175 minutes, which was the total study time divided by exactly 1,000 sessions.
+- The Students table's **Vocab Mastered** and **Best Test** columns, and the per-unit averages, looked for progress under the wrong names and so showed 0 or a dash for everyone. They now read flashcard mastery and practice test scores.
+- **Avg Session Length** is replaced by **Typical Visit**: the middle value of visits between one minute and three hours, so visits that were never closed and tabs left open all day no longer distort it. Total Study Hours now uses active study time unless a date range is set.
+
+### Changed
+- The "Activity Usage" section, which the teacher found confusing, is rebuilt as **By unit and class period** on the Students tab. For each unit it shows how many students have started, their average must-know terms mastered and best practice test, a table by class period (enrolled, started, who has not started by name, and the two averages), and the activities students have opened under their real names. The site's own record-keeping entries (streak, study days, daily time and so on) are no longer listed as activities.
+
+Reported by the teacher. Checked against a stand-in database with more than 1,000 rows per table; the live data could not be seen from here.
+
 ## [8.55.105] - 2026-11-13
 
 ### Changed

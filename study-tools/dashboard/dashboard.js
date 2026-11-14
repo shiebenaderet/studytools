@@ -582,6 +582,31 @@ const Dashboard = {
         document.getElementById('login-form').reset();
     },
 
+    // ---- Fetching ----
+
+    // The database returns at most 1,000 rows per request. The progress and
+    // sessions tables are far larger than that, so a plain select silently
+    // dropped most of the class (the Overview's average session was the total
+    // study time divided by exactly 1,000 sessions). This asks for page after
+    // page until a short one comes back. `build` must return a fresh query
+    // each time it is called, because a query can only be run once.
+    async _fetchAll(build) {
+        var PAGE = 1000, rows = [];
+        for (var page = 0; page < 200; page++) {
+            var res = await build().order('id').range(page * PAGE, page * PAGE + PAGE - 1);
+            if (res.error) return { data: null, error: res.error };
+            rows = rows.concat(res.data || []);
+            if (!res.data || res.data.length < PAGE) break;
+        }
+        return { data: rows, error: null };
+    },
+
+    // Progress rows are stored as "activity_<id>"; older code here looked for the
+    // bare id and so never found flashcard mastery or test scores.
+    _isActivity(row, id) {
+        return row.activity === 'activity_' + id || row.activity === id;
+    },
+
     // ---- Filters ----
 
     getFilters() {
@@ -759,21 +784,28 @@ const Dashboard = {
 
             var weekAgo = new Date();
             weekAgo.setDate(weekAgo.getDate() - 7);
-            var activeQuery = this.supabase.from('sessions').select('student_id');
-            if (filters.dateStart) {
-                activeQuery = activeQuery.gte('started_at', filters.dateStart);
-            } else {
-                activeQuery = activeQuery.gte('started_at', weekAgo.toISOString());
-            }
-            if (filters.dateEnd) activeQuery = activeQuery.lte('started_at', filters.dateEnd + 'T23:59:59');
+            var sb = this.supabase;
+            // Each of these is a function so _fetchAll can run it once per page of 1,000 rows.
+            var activeQuery = function() {
+                var q = sb.from('sessions').select('student_id');
+                q = q.gte('started_at', filters.dateStart ? filters.dateStart : weekAgo.toISOString());
+                if (filters.dateEnd) q = q.lte('started_at', filters.dateEnd + 'T23:59:59');
+                return q;
+            };
 
-            var hoursQuery = this.supabase.from('sessions').select('duration_seconds, student_id');
-            if (filters.unitId) hoursQuery = hoursQuery.eq('unit_id', filters.unitId);
-            if (filters.dateStart) hoursQuery = hoursQuery.gte('started_at', filters.dateStart);
-            if (filters.dateEnd) hoursQuery = hoursQuery.lte('started_at', filters.dateEnd + 'T23:59:59');
+            var hoursQuery = function() {
+                var q = sb.from('sessions').select('duration_seconds, student_id');
+                if (filters.unitId) q = q.eq('unit_id', filters.unitId);
+                if (filters.dateStart) q = q.gte('started_at', filters.dateStart);
+                if (filters.dateEnd) q = q.lte('started_at', filters.dateEnd + 'T23:59:59');
+                return q;
+            };
 
-            var progressQuery = this.supabase.from('progress').select('student_id, data, unit_id').eq('activity', 'studyTime');
-            if (filters.unitId) progressQuery = progressQuery.eq('unit_id', filters.unitId);
+            var progressQuery = function() {
+                var q = sb.from('progress').select('student_id, data, unit_id').eq('activity', 'studyTime');
+                if (filters.unitId) q = q.eq('unit_id', filters.unitId);
+                return q;
+            };
 
             var lbQuery = this.supabase.from('leaderboard')
                 .select('student_id, score, vocab_mastered, best_test_score, study_time_seconds, map_best_time, map_bonus, approved')
@@ -785,10 +817,12 @@ const Dashboard = {
             var trendStart = new Date();
             trendStart.setDate(trendStart.getDate() - 6);
             trendStart.setHours(0, 0, 0, 0);
-            var trendQuery = this.supabase.from('sessions')
-                .select('student_id, started_at, duration_seconds, activities_used')
-                .gte('started_at', trendStart.toISOString())
-                .order('started_at', { ascending: false });
+            var trendQuery = function() {
+                return sb.from('sessions')
+                    .select('student_id, started_at, duration_seconds, activities_used')
+                    .gte('started_at', trendStart.toISOString())
+                    .order('started_at', { ascending: false });
+            };
 
             // Class leaderboard: all leaderboard + all students with class info + all classes
             var allLbQuery = this.supabase.from('leaderboard')
@@ -799,15 +833,15 @@ const Dashboard = {
             // Run ALL queries in parallel
             var [studentRes, activeRes, hoursRes, progressRes, lbRes, classStudentRes, allStudentRes, trendRes, allLbRes, classesRes, allStudentsWithClassRes] = await Promise.all([
                 studentQuery,
-                activeQuery,
-                hoursQuery,
-                progressQuery,
+                this._fetchAll(activeQuery),
+                this._fetchAll(hoursQuery),
+                this._fetchAll(progressQuery),
                 lbQuery,
                 filters.classId
                     ? this.supabase.from('students').select('id').eq('class_id', filters.classId)
                     : Promise.resolve({ data: null }),
                 this.supabase.from('students').select('id, name'),
-                trendQuery,
+                this._fetchAll(trendQuery),
                 allLbQuery,
                 this.supabase.from('classes').select('id, code, name').order('name'),
                 this.supabase.from('students').select('id, name, class_id')
@@ -856,10 +890,21 @@ const Dashboard = {
                 }
             });
 
-            var totalSeconds = Math.max(sessionSeconds, progressSeconds);
+            // Study hours: the progress figure counts only active time (the timer
+            // pauses when a student is idle). Session lengths run from opening the
+            // site to closing the tab, idle time included, so they are used only
+            // when a date range is set, since progress totals have no dates.
+            var datesSet = !!(filters.dateStart || filters.dateEnd);
+            var totalSeconds = datesSet ? sessionSeconds : (progressSeconds || sessionSeconds);
             var totalHours = (totalSeconds / 3600).toFixed(1);
-            var sessionCount = hoursRes.data ? hoursRes.data.length : 0;
-            var avgMinutes = sessionCount > 0 ? Math.round(totalSeconds / sessionCount / 60) : 0;
+            // A typical visit: the middle value of visits between one minute and
+            // three hours. Unclosed visits (0) and tabs left open all day are left out.
+            var visitLengths = (hoursRes.data || [])
+                .filter(function(s) { return !classIdSet || classIdSet.has(s.student_id); })
+                .map(function(s) { return s.duration_seconds || 0; })
+                .filter(function(d) { return d >= 60 && d <= 3 * 3600; })
+                .sort(function(a, b) { return a - b; });
+            var avgMinutes = visitLengths.length ? Math.round(visitLengths[Math.floor(visitLengths.length / 2)] / 60) : 0;
 
             // Render stat cards
             container.textContent = '';
@@ -867,7 +912,7 @@ const Dashboard = {
                 { icon: 'fas fa-users', value: studentRes.count || 0, label: 'Total Students' },
                 { icon: 'fas fa-bolt', value: activeCount, label: 'Active This Week' },
                 { icon: 'fas fa-clock', value: totalHours, label: 'Total Study Hours' },
-                { icon: 'fas fa-stopwatch', value: avgMinutes + ' min', label: 'Avg Session Length' }
+                { icon: 'fas fa-stopwatch', value: avgMinutes + ' min', label: 'Typical Visit' }
             ];
 
             var self = this;
@@ -1559,16 +1604,17 @@ const Dashboard = {
             var studentIds = students.map(function(s) { return s.id; });
 
             // Run sessions + progress queries in parallel
-            var sessionsQuery = this.supabase
-                .from('sessions')
-                .select('student_id, started_at, duration_seconds')
-                .in('student_id', studentIds);
-            if (filters.dateStart) sessionsQuery = sessionsQuery.gte('started_at', filters.dateStart);
-            if (filters.dateEnd) sessionsQuery = sessionsQuery.lte('started_at', filters.dateEnd + 'T23:59:59');
+            var sbS = this.supabase;
+            var sessionsQuery = function() {
+                var q = sbS.from('sessions').select('student_id, started_at, duration_seconds').in('student_id', studentIds);
+                if (filters.dateStart) q = q.gte('started_at', filters.dateStart);
+                if (filters.dateEnd) q = q.lte('started_at', filters.dateEnd + 'T23:59:59');
+                return q;
+            };
 
             var [sessRes, progRes] = await Promise.all([
-                sessionsQuery,
-                this.supabase.from('progress').select('student_id, unit_id, activity, data').in('student_id', studentIds)
+                this._fetchAll(sessionsQuery),
+                this._fetchAll(function() { return sbS.from('progress').select('student_id, unit_id, activity, data').in('student_id', studentIds); })
             ]);
             if (sessRes.error) throw sessRes.error;
             if (progRes.error) throw progRes.error;
@@ -1592,10 +1638,10 @@ const Dashboard = {
             var progressMap = {};
             (progRes.data || []).forEach(function(p) {
                 if (!progressMap[p.student_id]) progressMap[p.student_id] = { vocabMastered: 0, bestTestScore: null, studyTimeMs: 0 };
-                if (p.activity === 'flashcards' && p.data && p.data.mastered) {
+                if (self._isActivity(p, 'flashcards') && p.data && p.data.mastered) {
                     progressMap[p.student_id].vocabMastered += self._countMustKnowMasteredSync(p.unit_id, p.data.mastered);
                 }
-                if (p.activity === 'practice-test' && p.data && typeof p.data.bestScore === 'number') {
+                if (self._isActivity(p, 'practice-test') && p.data && typeof p.data.bestScore === 'number') {
                     var current = progressMap[p.student_id].bestTestScore;
                     if (current === null || p.data.bestScore > current) progressMap[p.student_id].bestTestScore = p.data.bestScore;
                 }
@@ -1898,157 +1944,185 @@ const Dashboard = {
         }
     },
 
+    // Friendly names for the activity ids found in progress rows.
+    ACTIVITY_NAMES: {
+        'textbook': 'Textbook', 'flashcards': 'Flashcards', 'fill-in-blank': 'Fill in the Blank', 'typing-practice': 'Typing Practice',
+        'practice-test': 'Practice Test', 'timeline': 'Timeline', 'power-sort': 'Power Sort', 'wordle': 'Wordle', 'hangman': 'Hangman',
+        'flip-match': 'Flip Match', 'lightning-round': 'Lightning Round', 'crossword': 'Crossword', 'term-catcher': 'Term Catcher',
+        'tower-defense': 'Tower Defense', 'quiz-race': 'Quiz Race', 'sort-it-out': 'Sort It Out', 'who-am-i': 'Who Am I?',
+        'four-corners': 'Four Corners', 'learn-mode': 'Learn Mode', 'source-analysis': 'Source Analysis', 'short-answer': 'Short Answer',
+        'response-builder': 'Response Builder', 'resources': 'Resources', 'sketch-match': 'Sketch & Match', 'sift-practice': 'SIFT Practice',
+        'map-quiz': 'Map Quiz', 'maps-hub': 'Maps'
+    },
+
+    // Which activity a progress row belongs to, or null for the site's own
+    // bookkeeping (streaks, study days, mastery lists and so on). A row is
+    // written as "activity_<id>" when an activity saves, and as
+    // "dailyActivityTime_<id>" or "lastUsed_<id>" whenever one is opened.
+    _activityIdOf(key) {
+        var m = /^(?:activity|dailyActivityTime|lastUsed)_(.+)$/.exec(key || '');
+        if (!m) return null;
+        var id = m[1].replace(/^short-answer-\d+$/, 'short-answer');
+        if (id === 'practice-test-mastery') return 'practice-test';
+        return id;
+    },
+
+    _unitTitle(unitId) {
+        return String(unitId).replace(/-/g, ' ').replace(/\b\w/g, function(c) { return c.toUpperCase(); });
+    },
+
+    // "By unit and class period": for each unit, who has started it in each
+    // period, who has not, how they are doing, and which activities they use.
     async loadUnits(filters) {
         var container = document.getElementById('units-chart-container');
         container.textContent = '';
         container.appendChild(this._loading());
 
         try {
-            // Fetch all progress records
-            var { data: progressData, error: progErr } = await this.supabase
-                .from('progress')
-                .select('student_id, unit_id, activity, data');
-            if (progErr) throw progErr;
+            var sb = this.supabase, self = this;
+            var results = await Promise.all([
+                this._fetchAll(function() {
+                    var q = sb.from('progress').select('student_id, unit_id, activity, data');
+                    if (filters.unitId) q = q.eq('unit_id', filters.unitId);
+                    return q;
+                }),
+                this._fetchAll(function() { return sb.from('students').select('id, name, class_id'); }),
+                sb.from('classes').select('id, code, name').order('name')
+            ]);
+            if (results[0].error) throw results[0].error;
+            if (results[1].error) throw results[1].error;
+            if (results[2].error) throw results[2].error;
+            var progressData = results[0].data || [];
+            var students = results[1].data || [];
+            var classes = (results[2].data || []).filter(function(c) { return !filters.classId || c.id === filters.classId; });
 
-            if (!progressData || progressData.length === 0) {
+            if (progressData.length === 0) {
                 container.textContent = '';
-                container.appendChild(
-                    this._emptyState('fas fa-chart-bar', 'No activity data yet.')
-                );
+                container.appendChild(this._emptyState('fas fa-chart-bar', filters.unitId ? 'No one has started this unit yet.' : 'No activity data yet.'));
                 return;
             }
 
-            // If filtering by class, get valid student IDs
-            var validStudentIds = null;
-            if (filters.classId) {
-                var { data: classStudents, error: csErr } = await this.supabase
-                    .from('students')
-                    .select('id')
-                    .eq('class_id', filters.classId);
-                if (csErr) throw csErr;
-                validStudentIds = new Set((classStudents || []).map(function(s) { return s.id; }));
-            }
+            var studentById = {};
+            students.forEach(function(st) { studentById[st.id] = st; });
+            var roster = {};      // class id -> students enrolled
+            classes.forEach(function(c) { roster[c.id] = []; });
+            students.forEach(function(st) { if (roster[st.class_id]) roster[st.class_id].push(st); });
 
-            // Preload unit configs for tier filtering
             var unitIdsForConfig = {};
             progressData.forEach(function(p) { if (p.unit_id) unitIdsForConfig[p.unit_id] = true; });
             await this._preloadUnitConfigs(Object.keys(unitIdsForConfig));
 
-            // Group by unit
-            var self = this;
+            // Per unit, per student: what they used, vocabulary mastered, best test
             var units = {};
             progressData.forEach(function(p) {
-                if (validStudentIds && !validStudentIds.has(p.student_id)) return;
-                if (!units[p.unit_id]) {
-                    units[p.unit_id] = {
-                        students: new Set(),
-                        activities: {},
-                        vocabMastered: 0,
-                        testScores: [],
-                        flashcardStudents: 0
-                    };
+                var st = studentById[p.student_id];
+                if (!st) return;                                   // a row whose student was deleted
+                if (filters.classId && st.class_id !== filters.classId) return;
+                var u = units[p.unit_id] || (units[p.unit_id] = { per: {}, activities: {} });
+                var mine = u.per[p.student_id] || (u.per[p.student_id] = { vocab: null, test: null });
+                var act = self._activityIdOf(p.activity);
+                if (act) (u.activities[act] || (u.activities[act] = new Set())).add(p.student_id);
+                if (self._isActivity(p, 'flashcards') && p.data && p.data.mastered) {
+                    mine.vocab = self._countMustKnowMasteredSync(p.unit_id, p.data.mastered);
                 }
-                var unit = units[p.unit_id];
-                unit.students.add(p.student_id);
-
-                // Count activity usage
-                if (!unit.activities[p.activity]) unit.activities[p.activity] = new Set();
-                unit.activities[p.activity].add(p.student_id);
-
-                // Vocab mastery — only count must-know terms
-                if (p.activity === 'flashcards' && p.data && p.data.mastered) {
-                    unit.vocabMastered += self._countMustKnowMasteredSync(p.unit_id, p.data.mastered);
-                    unit.flashcardStudents++;
-                }
-
-                // Test scores
-                if (p.activity === 'practice-test' && p.data && typeof p.data.bestScore === 'number') {
-                    unit.testScores.push(p.data.bestScore);
+                if (self._isActivity(p, 'practice-test') && p.data && typeof p.data.bestScore === 'number') {
+                    mine.test = p.data.bestScore;
                 }
             });
 
             container.textContent = '';
-
-            var unitIds = Object.keys(units).sort();
+            var unitIds = Object.keys(units).sort(function(a, b) { return Object.keys(units[b].per).length - Object.keys(units[a].per).length; });
             if (unitIds.length === 0) {
-                container.appendChild(
-                    this._emptyState('fas fa-chart-bar', 'No activity data matches the current filters.')
-                );
+                container.appendChild(this._emptyState('fas fa-chart-bar', 'No activity data matches the current filters.'));
                 return;
             }
 
+            var avg = function(list) {
+                var nums = list.filter(function(n) { return typeof n === 'number'; });
+                return nums.length ? Math.round(nums.reduce(function(a, c) { return a + c; }, 0) / nums.length) : null;
+            };
+            var cell = function(tag, text, cls) { var e = document.createElement(tag); if (cls) e.className = cls; e.textContent = text; return e; };
+
             unitIds.forEach(function(unitId) {
                 var unit = units[unitId];
+                var started = Object.keys(unit.per);
                 var section = document.createElement('div');
                 section.className = 'unit-section';
+                section.appendChild(cell('h3', self._unitTitle(unitId)));
 
-                var heading = document.createElement('h3');
-                heading.textContent = unitId.replace(/-/g, ' ').replace(/\b\w/g, function(c) { return c.toUpperCase(); });
-                section.appendChild(heading);
-
-                // Summary stats
+                // Headline numbers for the unit
                 var statsRow = document.createElement('div');
                 statsRow.className = 'unit-stats-row';
-
-                var studentCount = unit.students.size;
-                var avgVocab = unit.flashcardStudents > 0 ? Math.round(unit.vocabMastered / unit.flashcardStudents) : 0;
-                var avgTest = unit.testScores.length > 0 ? Math.round(unit.testScores.reduce(function(a, b) { return a + b; }, 0) / unit.testScores.length) : null;
-                var activityCount = Object.keys(unit.activities).length;
-
-                var summaryItems = [
-                    { icon: 'fas fa-users', value: studentCount, label: 'Students' },
-                    { icon: 'fas fa-book', value: avgVocab, label: 'Avg Vocab Mastered' },
-                    { icon: 'fas fa-pen', value: avgTest !== null ? avgTest + '%' : '-', label: 'Avg Test Score' },
-                    { icon: 'fas fa-puzzle-piece', value: activityCount, label: 'Activities Used' }
-                ];
-
-                summaryItems.forEach(function(item) {
+                var vocabAvg = avg(started.map(function(id) { return unit.per[id].vocab; }));
+                var testAvg = avg(started.map(function(id) { return unit.per[id].test; }));
+                [
+                    { value: started.length, label: 'Students who have started' },
+                    { value: vocabAvg === null ? '-' : vocabAvg, label: 'Avg must-know terms mastered' },
+                    { value: testAvg === null ? '-' : testAvg + '%', label: 'Avg best practice test' },
+                    { value: Object.keys(unit.activities).length, label: 'Activities used' }
+                ].forEach(function(item) {
                     var stat = document.createElement('div');
                     stat.className = 'unit-stat-mini';
-                    var val = document.createElement('div');
-                    val.className = 'unit-stat-val';
-                    val.textContent = item.value;
-                    stat.appendChild(val);
-                    var lbl = document.createElement('div');
-                    lbl.className = 'unit-stat-lbl';
-                    lbl.textContent = item.label;
-                    stat.appendChild(lbl);
+                    stat.appendChild(cell('div', item.value, 'unit-stat-val'));
+                    stat.appendChild(cell('div', item.label, 'unit-stat-lbl'));
                     statsRow.appendChild(stat);
                 });
-
                 section.appendChild(statsRow);
 
-                // Activity engagement bars
-                var sorted = Object.entries(unit.activities)
-                    .map(function(pair) { return [pair[0], pair[1].size]; })
-                    .sort(function(a, b) { return b[1] - a[1]; });
-                var maxStudents = sorted.length > 0 ? sorted[0][1] : 1;
+                // By class period: started, not started (with names), averages
+                if (classes.length) {
+                    section.appendChild(cell('h4', 'By class period', 'unit-subhead'));
+                    var wrap = document.createElement('div');
+                    wrap.className = 'data-table-wrapper';
+                    var table = document.createElement('table');
+                    table.className = 'data-table period-table';
+                    var thead = document.createElement('thead'), hr = document.createElement('tr');
+                    ['Class', 'Enrolled', 'Started', 'Not started', 'Avg terms mastered', 'Avg best test'].forEach(function(h) { hr.appendChild(cell('th', h)); });
+                    thead.appendChild(hr); table.appendChild(thead);
+                    var tbody = document.createElement('tbody');
+                    classes.forEach(function(c) {
+                        var enrolled = roster[c.id] || [];
+                        var inUnit = enrolled.filter(function(st) { return unit.per[st.id]; });
+                        var missing = enrolled.filter(function(st) { return !unit.per[st.id]; });
+                        var tr = document.createElement('tr');
+                        tr.appendChild(cell('td', c.name || c.code));
+                        tr.appendChild(cell('td', enrolled.length));
+                        tr.appendChild(cell('td', inUnit.length + (enrolled.length ? ' (' + Math.round(100 * inUnit.length / enrolled.length) + '%)' : '')));
+                        var td = document.createElement('td');
+                        if (!missing.length) td.textContent = enrolled.length ? 'Everyone has started' : '-';
+                        else {
+                            var det = document.createElement('details');
+                            det.appendChild(cell('summary', missing.length + (missing.length === 1 ? ' student' : ' students')));
+                            det.appendChild(cell('div', missing.map(function(st) { return st.name; }).sort().join(', '), 'period-names'));
+                            td.appendChild(det);
+                        }
+                        tr.appendChild(td);
+                        var v = avg(inUnit.map(function(st) { return unit.per[st.id].vocab; }));
+                        var t = avg(inUnit.map(function(st) { return unit.per[st.id].test; }));
+                        tr.appendChild(cell('td', v === null ? '-' : v));
+                        tr.appendChild(cell('td', t === null ? '-' : t + '%'));
+                        tbody.appendChild(tr);
+                    });
+                    table.appendChild(tbody); wrap.appendChild(table); section.appendChild(wrap);
+                }
 
+                // Which activities students have opened
+                var sorted = Object.keys(unit.activities)
+                    .map(function(id) { return [id, unit.activities[id].size]; })
+                    .sort(function(a, b) { return b[1] - a[1]; });
+                if (sorted.length) section.appendChild(cell('h4', 'Activities students have opened', 'unit-subhead'));
                 sorted.forEach(function(pair) {
-                    var activity = pair[0], count = pair[1];
                     var row = document.createElement('div');
                     row.className = 'activity-bar-row';
-
-                    var label = document.createElement('div');
-                    label.className = 'activity-bar-label';
-                    label.textContent = activity.replace(/-/g, ' ');
-
+                    row.appendChild(cell('div', self.ACTIVITY_NAMES[pair[0]] || self._unitTitle(pair[0]), 'activity-bar-label'));
                     var track = document.createElement('div');
                     track.className = 'activity-bar-track';
-
                     var fill = document.createElement('div');
                     fill.className = 'activity-bar-fill';
-                    fill.style.width = Math.round((count / maxStudents) * 100) + '%';
-
+                    fill.style.width = Math.round((pair[1] / Math.max(1, started.length)) * 100) + '%';
                     track.appendChild(fill);
-
-                    var countEl = document.createElement('div');
-                    countEl.className = 'activity-bar-count';
-                    countEl.textContent = count + ' student' + (count !== 1 ? 's' : '');
-
-                    row.appendChild(label);
                     row.appendChild(track);
-                    row.appendChild(countEl);
+                    row.appendChild(cell('div', pair[1] + ' of ' + started.length, 'activity-bar-count'));
                     section.appendChild(row);
                 });
 
