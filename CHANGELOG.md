@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.110] - 2026-11-13
+
+### Added
+- **Slide pictures of the leaderboard.** The dashboard's Leaderboard tab has a new **Graphics for class** section with two buttons. **Class standings picture** and **Top ten picture** each save a 1920 by 1080 PNG to the Downloads folder, ready to drop into a slide, with the unit's name, the date and a line saying what the numbers measure. A preview appears on the page.
+  - They cover the unit in the Unit filter (the current unit unless another is chosen). With a class chosen in the Class filter, the top ten is that class's.
+  - Only students whose scores are approved appear, by first name and last initial, the same rule as the leaderboard students see. A name stored in full is shortened before it is drawn.
+  - Class periods are ranked by points added together, as on the student site; a menu switches to average points per student.
+  - Each class period keeps one colour from week to week, and the colours were checked for colour-blind separation.
+  - The pictures are drawn in the browser. Nothing is sent to another service.
+
+Requested by the teacher (a leaderboard graphic).
+
 ## [8.55.109] - 2026-11-13
 
 ### Fixed

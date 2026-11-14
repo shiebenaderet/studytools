@@ -655,6 +655,7 @@ const Dashboard = {
             case 'leaderboard':
                 this.loadScores(filters);
                 this.loadLeaderboardPreview(filters);
+                this.loadGraphics(filters);
                 // Class Standings, Top Students, the rankings chart and the Replay are
                 // drawn by loadOverview() into containers that now live on this tab
                 this.loadOverview(filters);
@@ -1377,6 +1378,223 @@ const Dashboard = {
                 this._emptyState('fas fa-exclamation-triangle', 'Failed to load overview data. Please try again.')
             );
         }
+    },
+
+    // ---- Graphics for class ----
+
+    // What the pictures need for one unit: the class periods, each student's
+    // short name, and every approved score. A student whose score the teacher
+    // has not approved never appears, the same rule as the students' leaderboard.
+    async _graphicsData(filters) {
+        var unitId = filters.unitId || this._currentUnitId();
+        if (!unitId) throw new Error('Choose a unit in the Unit filter first.');
+        var sb = this.supabase;
+        var res = await Promise.all([
+            sb.from('classes').select('id, code, name').order('name'),
+            this._fetchAll(function() { return sb.from('students').select('id, name, class_id'); }),
+            this._fetchAll(function() {
+                return sb.from('leaderboard').select('id, student_id, score, approved').eq('unit_id', unitId).eq('approved', true);
+            })
+        ]);
+        for (var i = 0; i < res.length; i++) { if (res[i].error) throw res[i].error; }
+
+        var classes = (res[0].data || []).map(function(c) { return { id: c.id, name: c.name || c.code }; });
+        var classNames = {};
+        classes.forEach(function(c) { classNames[c.id] = c.name; });
+        var students = {};
+        (res[1].data || []).forEach(function(st) {
+            if (!st.class_id || !classNames[st.class_id]) return;
+            students[st.id] = { name: ClassGraphics.shortName(st.name), classId: st.class_id };
+        });
+        var scores = (res[2].data || []).filter(function(e) { return e.approved && students[e.student_id]; })
+            .map(function(e) { return { studentId: e.student_id, score: e.score || 0 }; });
+
+        var meta = (this._unitsMeta || {})[unitId] || {};
+        return {
+            unitId: unitId,
+            unitTitle: String(meta.title || this._unitTitle(unitId)).replace(/\s*Study Tool$/i, ''),
+            header: (meta.theme && meta.theme.primary) || '#0f766e',
+            classes: classes,
+            classNames: classNames,
+            colors: ClassGraphics.classColors(classes),
+            students: students,
+            scores: scores
+        };
+    },
+
+    // The class periods ranked, by points added together (what students see on
+    // the site) or by average per student.
+    _standingsScene(d, measure) {
+        var byClass = {};
+        d.scores.forEach(function(e) {
+            var cid = d.students[e.studentId].classId;
+            if (!byClass[cid]) byClass[cid] = { total: 0, count: 0 };
+            byClass[cid].total += e.score;
+            byClass[cid].count++;
+        });
+        var rows = d.classes.filter(function(c) { return byClass[c.id]; }).map(function(c) {
+            var t = byClass[c.id], avg = t.total / t.count;
+            var who = t.count + (t.count === 1 ? ' student' : ' students');
+            return {
+                name: c.name,
+                color: d.colors[c.id],
+                value: measure === 'average' ? avg : t.total,
+                sub: measure === 'average' ? who + ' \u00B7 ' + ClassGraphics.points(t.total) + ' in all'
+                                           : who + ' \u00B7 average ' + ClassGraphics.points(avg)
+            };
+        });
+        if (!rows.length) throw new Error('No approved scores in ' + d.unitTitle + ' yet.');
+        rows.sort(function(a, b) { return b.value - a.value || a.name.localeCompare(b.name); });
+        rows.forEach(function(r, i) { r.pos = i; });
+        return {
+            title: 'Class Standings',
+            subtitle: d.unitTitle,
+            dateText: ClassGraphics.longDate(new Date()),
+            header: d.header,
+            footer: measure === 'average' ? 'Average points per student in this unit.'
+                                          : 'Points earned in this unit by everyone in the period, added together.',
+            legend: null,
+            slots: Math.max(rows.length, 2),
+            max: rows[0].value,
+            rows: rows
+        };
+    },
+
+    // The ten highest scores, for every class or for the class in the filter
+    _topTenScene(d, classId) {
+        var list = d.scores.filter(function(e) { return !classId || d.students[e.studentId].classId === classId; })
+            .map(function(e) {
+                var st = d.students[e.studentId];
+                return { name: st.name, sub: classId ? '' : d.classNames[st.classId], color: d.colors[st.classId], value: e.score };
+            });
+        if (!list.length) throw new Error('No approved scores here yet.');
+        list.sort(function(a, b) { return b.value - a.value || a.name.localeCompare(b.name); });
+        var rows = list.slice(0, 10);
+        rows.forEach(function(r, i) { r.pos = i; });
+        return {
+            title: 'Top Ten' + (classId ? ': ' + d.classNames[classId] : ''),
+            subtitle: d.unitTitle,
+            dateText: ClassGraphics.longDate(new Date()),
+            header: d.header,
+            footer: 'Points earned in this unit.',
+            legend: classId ? null : d.classes.filter(function(c) {
+                return rows.some(function(r) { return r.sub === c.name; });
+            }).map(function(c) { return { name: c.name, color: d.colors[c.id] }; }),
+            slots: Math.max(rows.length, 5),
+            max: rows[0].value,
+            rows: rows
+        };
+    },
+
+    _slug(text) {
+        return String(text).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    },
+
+    // The "Graphics for class" panel on the Leaderboard tab
+    loadGraphics(filters) {
+        var container = document.getElementById('graphics-container');
+        if (!container || typeof ClassGraphics === 'undefined') return;
+        container.textContent = '';
+        var self = this;
+
+        var unitId = filters.unitId || this._currentUnitId();
+        var meta = (this._unitsMeta || {})[unitId] || {};
+        var unitName = unitId ? String(meta.title || this._unitTitle(unitId)).replace(/\s*Study Tool$/i, '') : '';
+
+        var intro = document.createElement('p');
+        intro.className = 'panel-note';
+        intro.textContent = (unitName ? 'For ' + unitName + '. ' : '') +
+            'Each button makes a file and saves it to your Downloads folder, ready to drop into a slide. ' +
+            'Only approved students appear, by first name and last initial. ' +
+            'The files are made on this computer; nothing is uploaded.';
+        container.appendChild(intro);
+
+        var controls = document.createElement('div');
+        controls.className = 'graphics-controls';
+
+        var measureWrap = document.createElement('label');
+        measureWrap.className = 'graphics-measure';
+        measureWrap.appendChild(document.createTextNode('Rank class periods by '));
+        var measure = document.createElement('select');
+        measure.id = 'graphics-measure';
+        [['total', 'points added together (what students see)'], ['average', 'average points per student']].forEach(function(o) {
+            var opt = document.createElement('option');
+            opt.value = o[0];
+            opt.textContent = o[1];
+            measure.appendChild(opt);
+        });
+        measureWrap.appendChild(measure);
+        controls.appendChild(measureWrap);
+
+        var buttons = document.createElement('div');
+        buttons.className = 'graphics-buttons';
+        controls.appendChild(buttons);
+        container.appendChild(controls);
+
+        var status = document.createElement('p');
+        status.className = 'graphics-status';
+        status.setAttribute('role', 'status');
+        container.appendChild(status);
+
+        var preview = document.createElement('div');
+        preview.className = 'graphics-preview';
+        container.appendChild(preview);
+
+        var previewUrl = null;
+        function show(blob, alt) {
+            if (previewUrl) URL.revokeObjectURL(previewUrl);
+            previewUrl = URL.createObjectURL(blob);
+            preview.textContent = '';
+            var img = document.createElement('img');
+            img.src = previewUrl;
+            img.alt = alt;
+            preview.appendChild(img);
+        }
+
+        // build() returns { blob, filename, alt }. One file at a time.
+        function addButton(id, icon, label, build) {
+            var btn = document.createElement('button');
+            btn.className = 'btn btn-primary';
+            btn.id = id;
+            btn.appendChild(self._icon(icon));
+            btn.appendChild(document.createTextNode(' ' + label));
+            btn.addEventListener('click', async function() {
+                var all = buttons.querySelectorAll('button');
+                all.forEach(function(b) { b.disabled = true; });
+                status.textContent = 'Making the file\u2026';
+                try {
+                    var out = await build(function(text) { status.textContent = text; });
+                    show(out.blob, out.alt);
+                    ClassGraphics.save(out.blob, out.filename);
+                    status.textContent = 'Saved ' + out.filename + ' to your Downloads folder. A preview is below.';
+                } catch (err) {
+                    console.error('Graphic failed:', err);
+                    status.textContent = (err && err.message) || 'The file could not be made. Please try again.';
+                } finally {
+                    all.forEach(function(b) { b.disabled = false; });
+                }
+            });
+            buttons.appendChild(btn);
+        }
+
+        var stamp = function() { return self._localDateKey(new Date()); };
+
+        addButton('graphic-standings', 'fas fa-image', 'Class standings picture', async function() {
+            var d = await self._graphicsData(filters);
+            var scene = self._standingsScene(d, measure.value);
+            var blob = await ClassGraphics.pngBlob(ClassGraphics.still(scene));
+            return { blob: blob, filename: 'class-standings-' + d.unitId + '-' + stamp() + '.png',
+                     alt: 'Class standings for ' + d.unitTitle + ': ' + scene.rows.map(function(r) { return r.name + ', ' + ClassGraphics.points(r.value); }).join('; ') };
+        });
+
+        addButton('graphic-top-ten', 'fas fa-image', 'Top ten picture', async function() {
+            var d = await self._graphicsData(filters);
+            var scene = self._topTenScene(d, filters.classId);
+            var blob = await ClassGraphics.pngBlob(ClassGraphics.still(scene));
+            var who = filters.classId ? '-' + self._slug(d.classNames[filters.classId] || 'class') : '';
+            return { blob: blob, filename: 'top-ten' + who + '-' + d.unitId + '-' + stamp() + '.png',
+                     alt: scene.title + ' for ' + d.unitTitle + ': ' + scene.rows.map(function(r) { return r.name + ', ' + ClassGraphics.points(r.value); }).join('; ') };
+        });
     },
 
     async _renderReplay(container, filters, studentNameMap, studentClassMap, classes) {

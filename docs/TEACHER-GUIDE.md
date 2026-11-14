@@ -583,9 +583,23 @@ A student who opens a game before writing any short answer sees one reminder per
 
 ### Reading responses in the dashboard
 
-The dashboard has six tabs: **Overview** (four headline numbers, each labelled with what it counts; how many different students studied on each of the last seven days; and who was active recently), **Students** (the student table; then, for each unit, who has started it in each class period, who has not, their averages and the activities they have opened; then vocab insights), **Leaderboard** (scores to approve, what students see, class standings and the replay), **Responses**, **Feedback**, and **Setup** (class codes and the schedule). The Class, Unit and date filters are hidden on Feedback and Setup, where they do nothing. The Unit filter opens on the current unit (the newest one whose `opens` date has arrived), so rankings show scores since that unit began; choose **All Units** to combine them.
+The dashboard has six tabs: **Overview** (four headline numbers, each labelled with what it counts; how many different students studied on each of the last seven days; and who was active recently), **Students** (the student table; then, for each unit, who has started it in each class period, who has not, their averages and the activities they have opened; then vocab insights), **Leaderboard** (scores to approve, what students see, class standings, graphics for class, and the replay), **Responses**, **Feedback**, and **Setup** (class codes and the schedule). The Class, Unit and date filters are hidden on Feedback and Setup, where they do nothing. The Unit filter opens on the current unit (the newest one whose `opens` date has arrived), so rankings show scores since that unit began; choose **All Units** to combine them.
 
 Open the teacher dashboard and choose the **Responses** tab. Its Source filter also has **Wiki entries**, for Learn Mode's bonus writing. It lists every sent Short Answer, Response Builder and Read More Check answer with the student's name, class, word count and time. The Class, Unit and date filters at the top apply. Inside the tab, narrow to one source or one question, and click the star to mark a response as a good example; **Starred only** shows just those. A student who edits and resends an answer keeps your star. To remove one answer (a test, or something sent by mistake), click the trash icon on its card; the student's own copy stays on their device, so an answer they send again will reappear.
+
+### Graphics for class
+
+On the dashboard's **Leaderboard** tab, **Graphics for class** makes files to show on the classroom screen. Each button saves a file to your Downloads folder and shows a preview.
+
+| Button | What you get |
+|---|---|
+| **Class standings picture** | A slide-sized picture (1920 by 1080) of the class periods in order, with each period's points, student count and average. |
+| **Top ten picture** | A slide-sized picture of the ten highest scores. Choose a class in the Class filter first to get that class's top ten. |
+
+- The graphics cover the unit in the Unit filter, which opens on the current unit.
+- Only students whose scores you have approved appear, as first name and last initial.
+- **Rank class periods by** chooses between points added together (the order students see on the site, which rewards a whole class taking part) and average points per student (fairer when class sizes differ).
+- The files are made in your browser. Nothing is uploaded.
 
 ### Check a unit before it goes live
 
