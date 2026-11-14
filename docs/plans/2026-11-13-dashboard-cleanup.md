@@ -82,3 +82,56 @@ or three small steps keeps any surprise easy to find and undo.
 ## Decided and Built (Nov 13, 2026)
 
 The teacher approved the six-tab grouping and the hidden filter bar. Built in 8.55.105 as one step. One addition found while building: Overview's Top Students table is the same list as "What students see," so it is no longer shown. The exporter links stay in the header and were not repeated on Setup.
+
+## Fixed Along the Way (8.55.106)
+
+The teacher called the Activity Usage section confusing and asked about a 175-minute average
+session. Both traced to the same faults:
+
+- The dashboard read only the first 1,000 rows of the progress and sessions tables, which
+  hold many times that. It now pages through all of them.
+- The Students table and the per-unit averages looked for flashcard and test progress under
+  the wrong names, so they showed 0 or a dash.
+- Activity Usage listed the site's own record-keeping entries as activities. It was rebuilt
+  as "By unit and class period": started and not started by period, with names, averages,
+  and the activities students open.
+
+## Next Refinements (proposed Nov 13, not built)
+
+The teacher asked for more: a way to export the study graphic as a GIF or video to show each
+Friday, a leaderboard graphic, and scores that reset each unit.
+
+### Findings
+
+- **The study graphic** is the Class Rankings chart on the Leaderboard tab: a line chart and
+  an animated bar race of each period's average score, day by day, built from a daily
+  snapshot of the leaderboard. It can only be watched on the dashboard today.
+- **Scores are already kept per unit.** Each leaderboard row and each daily snapshot belongs
+  to one unit, and a student starts a new unit at zero on the site. The dashboard does not
+  show it that way: its Unit filter opens on "All Units," so rankings there mix every unit.
+- **A browser can make these files itself.** A drawing on a canvas can be saved as a PNG, and
+  a sequence of canvas frames can be encoded as a GIF by a small script shipped with the
+  site, or recorded as a video. Nothing has to be sent to another service.
+- **Names.** The student leaderboard shows first name and last initial, and only for students
+  the teacher has approved. A graphic shown to the whole class should follow the same rule,
+  or show class periods only.
+
+### Proposals
+
+| | What | Size |
+|---|---|---|
+| A | **Friday race.** A "Make this week's graphic" button on the Leaderboard tab that builds the bar race for the current unit as a GIF (1280 by 720, about 10 seconds, loops) and downloads it. A GIF plays in Slides, Canvas pages and email without a player. | Medium to large |
+| B | **Leaderboard still.** A slide-sized PNG (1920 by 1080) of the current unit: class standings, or the top ten students, or both as separate images, with the unit name and date. | Small to medium |
+| C | **Current unit by default.** The dashboard opens with the Unit filter set to the current unit, so every ranking shows scores since that unit began. "All Units" stays as a choice. | Small |
+| D | **Needs a nudge.** On the Students tab, a list by period of students with no activity in the last seven days, ready to read out or print. | Small |
+| E | **Growth.** After the Canvas starting check, a section under Students that shows start and end results by period and by question. | Medium, after Monday's data |
+
+### Decisions for the Teacher
+
+1. GIF, video, or both for the Friday race?
+2. Should graphics show class periods only, or students by first name and last initial?
+3. Which stills: class standings, top ten students, or both?
+4. Should the dashboard open on the current unit?
+5. Build the "needs a nudge" list?
+6. Which comes first?
+
