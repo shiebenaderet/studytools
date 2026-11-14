@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.113] - 2026-11-13
+
+### Fixed
+- **The dashboard read stored times eight hours late.** The teacher saw eight visits by their own test account under Recently Active, all marked "Just now", while not on the study site. The visits were real but hours old. The database keeps these times in UTC without a zone marker, and the dashboard read them as Pacific time, so any visit from the last eight hours looked as if it had not happened yet and was shown as "Just now". Times are now read as UTC.
+  - Recently Active shows the true age of each visit.
+  - Students Studying Each Day counted any visit after 4 pm Pacific on the next day. Evening study is now counted on the evening it happened.
+  - "Last active" on the Students tab, the last-visit dates under Needs a nudge, and the dates on feedback and class codes had the same shift.
+
+Reported by the teacher. Reproduced with stand-in data in a browser set to Pacific time; the live rows could not be seen from here.
+
 ## [8.55.112] - 2026-11-13
 
 ### Added

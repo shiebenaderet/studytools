@@ -205,6 +205,21 @@ const Dashboard = {
     // YYYY-MM-DD in the teacher's local time zone. Supabase timestamps are
     // UTC, and toISOString() is UTC too: after 5 pm Pacific both already read
     // as tomorrow, which shifted every day's sessions one bar to the left.
+    // A stored time as a Date. The visits, progress and class tables keep times
+    // in UTC with no zone marker ("2026-11-14T04:28:40"), and JavaScript reads
+    // such a string as local time: eight hours late in Pacific time. A visit
+    // from this afternoon then looked like it was still to come, so it showed
+    // as "Just now", and evening study was counted on the next day. A time
+    // that already carries a zone (the responses table) is left as it is.
+    _when(ts) {
+        if (ts instanceof Date) return ts;
+        var s = String(ts == null ? '' : ts);
+        if (/^\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}/.test(s) && !/(Z|[+-]\d{2}(:?\d{2})?)$/.test(s)) {
+            s = s.replace(' ', 'T') + 'Z';
+        }
+        return new Date(s);
+    },
+
     _localDateKey(d) {
         var y = d.getFullYear();
         var m = String(d.getMonth() + 1).padStart(2, '0');
@@ -1001,7 +1016,7 @@ const Dashboard = {
                 // shown beside it: one student who opens the site three times is
                 // three visits, which is what the bare number used to be.
                 trendSessions.forEach(function(s) {
-                    var dayKey = Dashboard._localDateKey(new Date(s.started_at));
+                    var dayKey = Dashboard._localDateKey(Dashboard._when(s.started_at));
                     var day = dayCounts[dayKey];
                     if (!day) return;
                     day.visits++;
@@ -1060,7 +1075,7 @@ const Dashboard = {
                 var now = new Date();
                 var dayAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
                 var recentSessions = trendRes.data.filter(function(s) {
-                    var match = new Date(s.started_at) >= dayAgo;
+                    var match = Dashboard._when(s.started_at) >= dayAgo;
                     if (classIdSet) match = match && classIdSet.has(s.student_id);
                     return match;
                 }).slice(0, 8);
@@ -1124,7 +1139,7 @@ const Dashboard = {
 
                         var timeEl = document.createElement('div');
                         timeEl.className = 'feed-time';
-                        var diffMs = now - new Date(s.started_at);
+                        var diffMs = now - Dashboard._when(s.started_at);
                         var diffMin = Math.max(0, Math.round(diffMs / 60000));
                         if (diffMin < 2) {
                             timeEl.textContent = 'Just now';
@@ -1166,7 +1181,7 @@ const Dashboard = {
                 var classDailyMinutes = {};
                 var todayStr = Dashboard._localDateKey(new Date());
                 (trendRes.data || []).forEach(function(s) {
-                    if (Dashboard._localDateKey(new Date(s.started_at)) !== todayStr) return;
+                    if (Dashboard._localDateKey(Dashboard._when(s.started_at)) !== todayStr) return;
                     var cid = studentClassMap[s.student_id];
                     if (!cid) return;
                     if (!classDailyMinutes[cid]) classDailyMinutes[cid] = 0;
@@ -2138,7 +2153,7 @@ const Dashboard = {
 
             var lastVisit = {};
             (sessRes.data || []).forEach(function(s) {
-                var when = new Date(s.started_at);
+                var when = Dashboard._when(s.started_at);
                 if (!lastVisit[s.student_id] || when > lastVisit[s.student_id]) lastVisit[s.student_id] = when;
             });
             this._renderNudge(students, lastVisit);
@@ -2147,11 +2162,11 @@ const Dashboard = {
             var toDate = filters.dateEnd ? new Date(filters.dateEnd + 'T23:59:59') : null;
             var sessionMap = {};
             (sessRes.data || []).forEach(function(s) {
-                var at = new Date(s.started_at);
+                var at = Dashboard._when(s.started_at);
                 if ((fromDate && at < fromDate) || (toDate && at > toDate)) return;
                 if (!sessionMap[s.student_id]) sessionMap[s.student_id] = { totalSeconds: 0, lastActive: null };
                 sessionMap[s.student_id].totalSeconds += (s.duration_seconds || 0);
-                var started = new Date(s.started_at);
+                var started = Dashboard._when(s.started_at);
                 if (!sessionMap[s.student_id].lastActive || started > sessionMap[s.student_id].lastActive) {
                     sessionMap[s.student_id].lastActive = started;
                 }
@@ -2359,7 +2374,7 @@ const Dashboard = {
 
                 var dateEl = document.createElement('div');
                 dateEl.className = 'class-code-date';
-                dateEl.textContent = 'Created ' + new Date(cls.created_at).toLocaleDateString();
+                dateEl.textContent = 'Created ' + Dashboard._when(cls.created_at).toLocaleDateString();
                 card.appendChild(dateEl);
 
                 // Delete button
@@ -3970,7 +3985,7 @@ const Dashboard = {
 
     _formatFeedbackDate(iso) {
         if (!iso) return '';
-        var d = new Date(iso);
+        var d = this._when(iso);
         if (isNaN(d.getTime())) return '';
         return d.toLocaleString(undefined, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
     },
