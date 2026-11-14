@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.116] - 2026-11-13
+
+### Changed
+- **The Students tab's table is now a class view, one fold per class period.** The teacher asked for an easier way to see each period: who has and has not been active, and what students do when they are on the site.
+  - Each period is one line to click, with its counts: students, how many visited this week, how many are away or not started, games only, no reading, no flashcards.
+  - Inside, one row per student: last visit, visits, textbook sections read, must-know terms mastered, best practice test, what they used, and a note. Sections and terms are counted against the chapters open so far, for the unit in the Unit filter.
+  - **Used** lists each activity the student used in the last seven days (or in the From and To dates), marked Reading, Study or Game by an icon and a coloured edge, with the minutes from the last day they used it.
+  - **Note** says what to look at: "No visits yet", "Away 9 days", "Games only this week", "No reading yet", "No flashcards yet". Students with a note come first, and every column sorts.
+  - The pen still opens the edit window. With one class chosen in the Class filter, its fold opens by itself.
+- The Class column and the all-time Study Time column are gone from this table; class is now the fold, and study time is on the Leaderboard tab.
+
+Requested by the teacher. Checked against stand-in data; the live data could not be seen from here.
+
 ## [8.55.115] - 2026-11-13
 
 ### Changed

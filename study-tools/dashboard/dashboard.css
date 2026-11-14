@@ -1641,3 +1641,94 @@ body {
     border-bottom: 1px solid var(--border);
 }
 
+/* ---- Class view (Students tab): one fold per class period ---- */
+.class-period {
+    margin-bottom: 10px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--white);
+}
+
+.class-period > summary {
+    cursor: pointer;
+    padding: 10px 14px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 14px;
+    color: var(--text);
+}
+
+.class-period > summary:hover {
+    background: var(--bg);
+}
+
+.class-period[open] > summary {
+    border-bottom: 1px solid var(--border);
+}
+
+.class-period-facts {
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
+.class-period .data-table-wrapper {
+    box-shadow: none;
+    border-radius: 0 0 var(--radius) var(--radius);
+}
+
+.class-period .data-table th,
+.class-period .data-table td {
+    padding: 8px 10px;
+}
+
+.class-period td {
+    vertical-align: top;
+}
+
+.class-name {
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.class-note {
+    font-weight: 600;
+    color: #9a3412;
+    white-space: nowrap;
+}
+
+.class-row-away td {
+    background: #fff7ed;
+}
+
+/* What a student used. The icon and the tooltip say which kind; colour only repeats it. */
+.used-cell {
+    min-width: 200px;
+}
+
+.used-chip {
+    display: inline-block;
+    margin: 0 6px 4px 0;
+    padding: 2px 8px;
+    border: 1px solid var(--border);
+    border-left-width: 4px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    color: var(--text);
+    background: var(--white);
+    white-space: nowrap;
+}
+
+.used-chip i {
+    color: var(--text-light);
+}
+
+.used-reading { border-left-color: #2a78d6; }
+.used-study { border-left-color: #1baf7a; }
+.used-game { border-left-color: #eb6834; }
+
+.used-legend {
+    margin: 0 0 10px;
+    font-size: 0.8rem;
+}
+

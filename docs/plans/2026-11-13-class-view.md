@@ -50,3 +50,25 @@ the Games group.
 3. Which days should "what they used" cover?
 4. Is the Reading, Study, Games grouping right?
 5. Record minutes per activity from now on (B)?
+
+## Decided and Built (Nov 13)
+
+The teacher answered on the decisions page: build the class view; replace the All students
+table; cover the last 7 days, or the From and To dates when set; use the grouping as proposed;
+record minutes per activity after the class view is built.
+
+The class view shipped as 8.55.116. One thing differs from the proposal:
+
+- **"Used" shows minutes from the last day, not counts of visits.** The proposal said the view
+  could show "Wordle in 5 of 6 visits" from the list of activities saved with each visit. That
+  list turned out to be unreliable: the site clears it every 30 seconds when it syncs, so a
+  visit records only what changed in its last half minute. The view uses the two records the
+  site keeps per activity instead: the minutes on the last day it was used, and when it was
+  last finished. That answers "did this student use Wordle this week, and for how long on the
+  last day," but not "how much Wordle in total."
+- With From and To dates set, an activity appears only if the last time the student used it
+  falls inside those dates. An activity used inside the dates and again later is not shown.
+
+Both limits go away with proposal B (minutes per activity per day), which is the next piece
+and is not built yet.
+

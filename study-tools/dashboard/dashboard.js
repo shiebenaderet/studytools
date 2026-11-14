@@ -2176,109 +2176,234 @@ const Dashboard = {
             });
             this._renderNudge(students, lastVisit);
 
-            var fromDate = filters.dateStart ? new Date(filters.dateStart) : null;
-            var toDate = filters.dateEnd ? new Date(filters.dateEnd + 'T23:59:59') : null;
-            var sessionMap = {};
+            // ---- Class view: one table per class period ----
+            var self = this;
+            var DAY = 86400000;
+            var now = new Date();
+            var datesSet = !!(filters.dateStart || filters.dateEnd);
+            var winStart = filters.dateStart ? new Date(filters.dateStart + 'T00:00:00') : new Date(now.getTime() - 7 * DAY);
+            var winEnd = filters.dateEnd ? new Date(filters.dateEnd + 'T23:59:59') : now;
+            var winStartDay = new Date(winStart.getFullYear(), winStart.getMonth(), winStart.getDate());
+
+            // Reading and terms are for one unit: the one in the filter, or the current one
+            var unitId = filters.unitId || this._currentUnitId();
+            var open = unitId ? await this._unitOpenContent(unitId) : null;
+
+            var visits = {};
             (sessRes.data || []).forEach(function(s) {
                 var at = Dashboard._when(s.started_at);
-                if ((fromDate && at < fromDate) || (toDate && at > toDate)) return;
-                if (!sessionMap[s.student_id]) sessionMap[s.student_id] = { totalSeconds: 0, lastActive: null };
-                sessionMap[s.student_id].totalSeconds += (s.duration_seconds || 0);
-                var started = Dashboard._when(s.started_at);
-                if (!sessionMap[s.student_id].lastActive || started > sessionMap[s.student_id].lastActive) {
-                    sessionMap[s.student_id].lastActive = started;
-                }
+                if (at < winStart || at > winEnd) return;
+                visits[s.student_id] = (visits[s.student_id] || 0) + 1;
             });
 
-            var self = this;
-            var progressMap = {};
+            var per = {};
+            var slot = function(id) {
+                if (!per[id]) per[id] = { read: 0, mastered: 0, bestTest: null, used: {} };
+                return per[id];
+            };
             (progRes.data || []).forEach(function(p) {
-                if (!progressMap[p.student_id]) progressMap[p.student_id] = { vocabMastered: 0, bestTestScore: null, studyTimeMs: 0 };
-                if (self._isActivity(p, 'flashcards') && p.data && p.data.mastered) {
-                    progressMap[p.student_id].vocabMastered += self._countMustKnowMasteredSync(p.unit_id, p.data.mastered);
+                if (unitId && p.unit_id !== unitId) return;
+                var st = slot(p.student_id);
+                if (self._isActivity(p, 'flashcards') && p.data && Array.isArray(p.data.mastered)) {
+                    st.mastered += open ? p.data.mastered.filter(function(t) { return open.mustKnow[t]; }).length
+                                        : self._countMustKnowMasteredSync(p.unit_id, p.data.mastered);
                 }
                 if (self._isActivity(p, 'practice-test') && p.data && typeof p.data.bestScore === 'number') {
-                    var current = progressMap[p.student_id].bestTestScore;
-                    if (current === null || p.data.bestScore > current) progressMap[p.student_id].bestTestScore = p.data.bestScore;
+                    if (st.bestTest === null || p.data.bestScore > st.bestTest) st.bestTest = p.data.bestScore;
                 }
-                if (p.activity === 'studyTime' && typeof p.data === 'number') {
-                    progressMap[p.student_id].studyTimeMs = p.data;
+                if (self._isActivity(p, 'textbook') && p.data && p.data.sectionsRead && open) {
+                    st.read += Object.keys(p.data.sectionsRead).filter(function(k) { return p.data.sectionsRead[k] === true && open.sections[k]; }).length;
                 }
+                // What the student used, from the two records the site keeps for
+                // each activity: the minutes on the last day it was used, and the
+                // time it was last finished. (The list of activities saved with
+                // each visit is not used: it holds only what changed in the last
+                // half minute before the student left.)
+                var actId = self._activityIdOf(p.activity);
+                if (!actId) return;
+                var day = null, ms = 0;
+                if (/^dailyActivityTime_/.test(p.activity) && p.data && p.data.date) {
+                    day = new Date(p.data.date);
+                    ms = p.data.ms || 0;
+                } else if (/^lastUsed_/.test(p.activity) && typeof p.data === 'number') {
+                    day = new Date(p.data);
+                }
+                if (!day || isNaN(day) || day < winStartDay || day > winEnd) return;
+                var u = st.used[actId] || (st.used[actId] = { day: day, ms: 0 });
+                if (day > u.day) u.day = day;
+                u.ms += ms;
             });
 
-            var enriched = students.map(function(s) {
-                var sess = sessionMap[s.id] || { totalSeconds: 0, lastActive: null };
-                var prog = progressMap[s.id] || { vocabMastered: 0, bestTestScore: null, studyTimeMs: 0 };
-                var studyMinutes = prog.studyTimeMs > 0 ? Math.round(prog.studyTimeMs / 60000) : Math.round(sess.totalSeconds / 60);
+            var windowWords = datesSet ? 'in these dates' : 'this week';
+            var rows = students.map(function(s) {
+                var st = per[s.id] || { read: 0, mastered: 0, bestTest: null, used: {} };
+                var last = lastVisit[s.id] || null;
+                var usedList = Object.keys(st.used).map(function(id) {
+                    return { id: id, group: self._activityGroup(id), name: self.ACTIVITY_NAMES[id] || self._unitTitle(id),
+                             minutes: Math.round(st.used[id].ms / 60000), day: st.used[id].day };
+                });
+                var groupOrder = { reading: 0, study: 1, game: 2 };
+                usedList.sort(function(a, b) { return groupOrder[a.group] - groupOrder[b.group] || b.minutes - a.minutes || a.name.localeCompare(b.name); });
+
+                // The note: what, if anything, the teacher should look at. Lower is more urgent.
+                var notes = [], severity = 9;
+                var flag = function(text, level) { notes.push(text); if (level < severity) severity = level; };
+                if (!last) flag('No visits yet', 0);
+                else if (now - last > 7 * DAY) flag('Away ' + Math.floor((now - last) / DAY) + ' days', 0);
+                else {
+                    if (usedList.length && usedList.every(function(u) { return u.group === 'game'; })) flag('Games only ' + windowWords, 1);
+                    if (open && open.sectionCount && st.read === 0) flag('No reading yet', 2);
+                    if (open && open.mustKnowCount && st.mastered === 0) flag('No flashcards yet', 3);
+                }
                 return {
                     id: s.id, name: s.name, classId: s.class_id,
-                    className: s.classes ? s.classes.name : null,
+                    className: s.classes ? (s.classes.name || s.classes.code) : 'No class',
                     classCode: s.classes ? s.classes.code : '-',
-                    lastActive: sess.lastActive,
-                    studyMinutes: studyMinutes,
-                    vocabMastered: prog.vocabMastered,
-                    bestTestScore: prog.bestTestScore
+                    lastActive: last, visits: visits[s.id] || 0,
+                    read: st.read, mastered: st.mastered, bestTestScore: st.bestTest,
+                    used: usedList, notes: notes, severity: severity
                 };
-            });
-
-            enriched.sort(function(a, b) {
-                if (!a.lastActive && !b.lastActive) return 0;
-                if (!a.lastActive) return 1;
-                if (!b.lastActive) return -1;
-                return b.lastActive - a.lastActive;
             });
 
             container.textContent = '';
 
+            var intro = document.createElement('p');
+            intro.className = 'panel-note';
+            var unitName = unitId ? String(((this._unitsMeta || {})[unitId] || {}).title || this._unitTitle(unitId)).replace(/\s*Study Tool$/i, '') : '';
+            intro.textContent = (unitId ? 'Read (textbook sections), Terms (must-know terms mastered) and Test (best practice test) are for ' + unitName +
+                    (open && open.sectionCount ? ', counted against the chapters open so far' : '') + '. ' : '') +
+                'Visits and Used cover ' + (datesSet ? 'the dates in the filter' : 'the last 7 days') + '. ' +
+                'The minutes beside an activity are for the last day the student used it. Students who need a look come first. Click a class period to open it.';
+            container.appendChild(intro);
+
+            var legend = document.createElement('p');
+            legend.className = 'used-legend';
+            [['reading', 'Reading'], ['study', 'Study'], ['game', 'Game']].forEach(function(g) {
+                var chip = document.createElement('span');
+                chip.className = 'used-chip used-' + g[0];
+                chip.appendChild(self._icon(self.GROUP_ICONS[g[0]]));
+                chip.appendChild(document.createTextNode(' ' + g[1]));
+                legend.appendChild(chip);
+            });
+            container.appendChild(legend);
+
+            var dayWord = function(d) {
+                if (!d) return 'Never';
+                var k = self._localDateKey(d);
+                if (k === self._localDateKey(now)) return 'Today';
+                if (k === self._localDateKey(new Date(now.getTime() - DAY))) return 'Yesterday';
+                return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            };
+
             var columns = [
                 { label: 'Name', key: 'name', defaultAsc: true, getValue: function(r) { return r.name || ''; } },
-                { label: 'Class', key: 'class', defaultAsc: true, getValue: function(r) { return r.classCode || ''; } },
-                { label: 'Last Active', key: 'lastActive', getValue: function(r) { return r.lastActive ? r.lastActive.getTime() : -Infinity; } },
-                { label: 'Study Time', key: 'studyMinutes', getValue: function(r) { return r.studyMinutes; } },
-                { label: 'Vocab Mastered', key: 'vocabMastered', getValue: function(r) { return r.vocabMastered; } },
-                { label: 'Best Test', key: 'bestTestScore', getValue: function(r) { return r.bestTestScore != null ? r.bestTestScore : -1; } },
+                { label: 'Last visit', key: 'lastActive', getValue: function(r) { return r.lastActive ? r.lastActive.getTime() : -Infinity; } },
+                { label: 'Visits', key: 'visits', getValue: function(r) { return r.visits; } },
+                { label: 'Read', key: 'read', getValue: function(r) { return r.read; } },
+                { label: 'Terms', key: 'mastered', getValue: function(r) { return r.mastered; } },
+                { label: 'Test', key: 'bestTestScore', getValue: function(r) { return r.bestTestScore != null ? r.bestTestScore : -1; } },
+                { label: 'Used', key: 'used', getValue: function(r) { return r.used.length; } },
+                { label: 'Note', key: 'severity', defaultAsc: true, getValue: function(r) { return r.severity; } },
                 { label: '', key: null, getValue: function() { return 0; } }
             ];
 
-            var tableWrapper = this._sortableTable(columns, enriched, function(student) {
+            var cell = function(tr, text, cls) {
+                var td = document.createElement('td');
+                if (cls) td.className = cls;
+                td.textContent = text;
+                tr.appendChild(td);
+                return td;
+            };
+
+            var renderRow = function(r) {
                 var tr = document.createElement('tr');
+                if (r.severity === 0) tr.className = 'class-row-away';
+                cell(tr, r.name || 'Unknown', 'class-name');
+                cell(tr, dayWord(r.lastActive));
+                cell(tr, String(r.visits));
+                cell(tr, open && open.sectionCount ? r.read + ' of ' + open.sectionCount : (open ? '\u2014' : String(r.read)));
+                cell(tr, open && open.mustKnowCount ? r.mastered + ' of ' + open.mustKnowCount : String(r.mastered));
+                cell(tr, r.bestTestScore !== null ? r.bestTestScore + '%' : '\u2014');
 
-                var tdName = document.createElement('td');
-                tdName.textContent = student.name;
-                tr.appendChild(tdName);
+                var tdUsed = document.createElement('td');
+                tdUsed.className = 'used-cell';
+                if (!r.used.length) {
+                    tdUsed.textContent = '\u2014';
+                } else {
+                    r.used.forEach(function(u) {
+                        var chip = document.createElement('span');
+                        chip.className = 'used-chip used-' + u.group;
+                        chip.title = ({ reading: 'Reading', study: 'Study', game: 'Game' })[u.group] + '. Last used ' +
+                            u.day.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }) +
+                            (u.minutes ? ', ' + u.minutes + ' min that day' : '');
+                        chip.appendChild(self._icon(self.GROUP_ICONS[u.group]));
+                        chip.appendChild(document.createTextNode(' ' + u.name + (u.minutes ? ' \u00B7 ' + u.minutes + ' min' : '')));
+                        tdUsed.appendChild(chip);
+                    });
+                }
+                tr.appendChild(tdUsed);
 
-                var tdClass = document.createElement('td');
-                tdClass.textContent = student.classCode;
-                tr.appendChild(tdClass);
-
-                var tdActive = document.createElement('td');
-                tdActive.textContent = student.lastActive ? student.lastActive.toLocaleDateString() : 'Never';
-                tr.appendChild(tdActive);
-
-                var tdTime = document.createElement('td');
-                tdTime.textContent = student.studyMinutes >= 60 ? (student.studyMinutes / 60).toFixed(1) + ' hrs' : student.studyMinutes + ' min';
-                tr.appendChild(tdTime);
-
-                var tdVocab = document.createElement('td');
-                tdVocab.textContent = student.vocabMastered;
-                tr.appendChild(tdVocab);
-
-                var tdScore = document.createElement('td');
-                tdScore.textContent = student.bestTestScore !== null ? student.bestTestScore + '%' : '-';
-                tr.appendChild(tdScore);
+                var tdNote = cell(tr, '', 'class-note');
+                r.notes.forEach(function(n) {
+                    var line = document.createElement('div');
+                    line.textContent = n;
+                    tdNote.appendChild(line);
+                });
 
                 var tdEdit = document.createElement('td');
                 var editBtn = document.createElement('button');
                 editBtn.className = 'btn btn-edit-student';
+                editBtn.title = 'Edit ' + (r.name || 'student');
                 editBtn.appendChild(Dashboard._icon('fas fa-pen'));
-                editBtn.addEventListener('click', function() { Dashboard.openStudentModal(student); });
+                editBtn.addEventListener('click', function() { Dashboard.openStudentModal(r); });
                 tdEdit.appendChild(editBtn);
                 tr.appendChild(tdEdit);
-
                 return tr;
-            });
+            };
 
-            container.appendChild(tableWrapper);
+            // One fold per class period, with its counts on the line you click
+            var periods = {}, order = [];
+            rows.forEach(function(r) {
+                if (!periods[r.className]) { periods[r.className] = []; order.push(r.className); }
+                periods[r.className].push(r);
+            });
+            order.sort(function(a, b) { return a.localeCompare(b, undefined, { numeric: true }); });
+            if (!this._classOpen) this._classOpen = {};
+
+            order.forEach(function(name) {
+                var list = periods[name];
+                list.sort(function(a, b) { return a.severity - b.severity || (a.name || '').localeCompare(b.name || ''); });
+                var count = function(test) { return list.filter(test).length; };
+                var away = count(function(r) { return r.severity === 0; });
+                var games = count(function(r) { return r.notes.some(function(n) { return /^Games only/.test(n); }); });
+                var noRead = count(function(r) { return r.notes.indexOf('No reading yet') !== -1; });
+                var noCards = count(function(r) { return r.notes.indexOf('No flashcards yet') !== -1; });
+                var active = count(function(r) { return r.visits > 0; });
+
+                var fold = document.createElement('details');
+                fold.className = 'class-period';
+                fold.open = name in self._classOpen ? self._classOpen[name] : order.length === 1;
+                fold.addEventListener('toggle', function() { self._classOpen[name] = fold.open; });
+
+                var head = document.createElement('summary');
+                var title = document.createElement('strong');
+                title.textContent = name;
+                head.appendChild(title);
+                var facts = [list.length + (list.length === 1 ? ' student' : ' students'),
+                             active + ' visited ' + windowWords];
+                if (away) facts.push(away + ' away or not started');
+                if (games) facts.push(games + ' games only');
+                if (noRead) facts.push(noRead + ' no reading');
+                if (noCards) facts.push(noCards + ' no flashcards');
+                var factsEl = document.createElement('span');
+                factsEl.className = 'class-period-facts';
+                factsEl.textContent = facts.join(' \u00B7 ');
+                head.appendChild(factsEl);
+                fold.appendChild(head);
+
+                fold.appendChild(self._sortableTable(columns, list, renderRow));
+                container.appendChild(fold);
+            });
 
         } catch (err) {
             console.error('Failed to load students:', err);
@@ -2521,6 +2646,53 @@ const Dashboard = {
         var id = m[1].replace(/^short-answer-\d+$/, 'short-answer');
         if (id === 'practice-test-mastery') return 'practice-test';
         return id;
+    },
+
+    // Reading, Study or Game, as the teacher approved. Anything not listed is Study.
+    ACTIVITY_GROUPS: {
+        reading: ['textbook'],
+        game: ['wordle', 'hangman', 'flip-match', 'term-catcher', 'tower-defense', 'crossword', 'quiz-race', 'lightning-round']
+    },
+    GROUP_ICONS: { reading: 'fas fa-book-open', study: 'fas fa-pen', game: 'fas fa-gamepad' },
+
+    _activityGroup(id) {
+        if (this.ACTIVITY_GROUPS.reading.indexOf(id) !== -1) return 'reading';
+        if (this.ACTIVITY_GROUPS.game.indexOf(id) !== -1) return 'game';
+        return 'study';
+    },
+
+    // What a unit has open today: the textbook sections and must-know terms in
+    // chapters whose date in the schedule has arrived. Reading and terms are
+    // counted against these, so nobody is marked behind on a closed chapter.
+    async _unitOpenContent(unitId) {
+        await this._preloadUnitConfigs([unitId]);
+        var config = this._unitConfigCache[unitId] || {};
+        if (!this._textbookCache) this._textbookCache = {};
+        if (!(unitId in this._textbookCache)) {
+            try {
+                var resp = await fetch('../units/' + unitId + '/textbook.json', { cache: 'no-cache' });
+                var book = resp.ok ? await resp.json() : null;
+                this._textbookCache[unitId] = (book && book.textbookContent && book.textbookContent.segments) || [];
+            } catch (e) {
+                this._textbookCache[unitId] = [];
+            }
+        }
+        var schedule = config.categorySchedule || {};
+        var today = this._localDateKey(new Date());
+        var isOpen = function(category) { return !schedule[category] || schedule[category] <= today; };
+
+        var sections = {}, sectionCount = 0;
+        this._textbookCache[unitId].forEach(function(seg) {
+            if (!isOpen(seg.category)) return;
+            (seg.sections || []).forEach(function(sec) { sections[seg.id + '/' + sec.id] = true; sectionCount++; });
+        });
+        var mustKnow = {}, mustKnowCount = 0;
+        (config.vocabulary || []).forEach(function(v) {
+            if ((v.tier && v.tier !== 'must-know') || !isOpen(v.category) || mustKnow[v.term]) return;
+            mustKnow[v.term] = true;
+            mustKnowCount++;
+        });
+        return { sections: sections, sectionCount: sectionCount, mustKnow: mustKnow, mustKnowCount: mustKnowCount };
     },
 
     _unitTitle(unitId) {

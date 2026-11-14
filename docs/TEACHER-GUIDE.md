@@ -583,9 +583,28 @@ A student who opens a game before writing any short answer sees one reminder per
 
 ### Reading responses in the dashboard
 
-The dashboard has six tabs: **Overview** (four headline numbers, each labelled with what it counts; how many different students studied on each of the last seven days; and who was active recently), **Students** (first **Needs a nudge**: by class period, the students who have not visited the site in the last seven days, with the date of each one's last visit and a button to copy the names; then the student table; then, for each unit, who has started it in each class period, who has not, their averages and the activities they have opened; then vocab insights), **Leaderboard** (scores waiting for your approval, with approved scores folded away under them; what students see, class standings, pictures and race animations for class, and the replay), **Responses**, **Feedback**, and **Setup** (class codes and the schedule). The Class, Unit and date filters are hidden on Feedback and Setup, where they do nothing. The Unit filter opens on the current unit (the newest one whose `opens` date has arrived), so rankings show scores since that unit began; choose **All Units** to combine them.
+The dashboard has six tabs: **Overview** (four headline numbers, each labelled with what it counts; how many different students studied on each of the last seven days; and who was active recently), **Students** (first **Needs a nudge**: by class period, the students who have not visited the site in the last seven days, with the date of each one's last visit and a button to copy the names; then the **class view**, one fold per class period (see below); then, for each unit, who has started it in each class period, who has not, their averages and the activities they have opened; then vocab insights), **Leaderboard** (scores waiting for your approval, with approved scores folded away under them; what students see, class standings, pictures and race animations for class, and the replay), **Responses**, **Feedback**, and **Setup** (class codes and the schedule). The Class, Unit and date filters are hidden on Feedback and Setup, where they do nothing. The Unit filter opens on the current unit (the newest one whose `opens` date has arrived), so rankings show scores since that unit began; choose **All Units** to combine them.
 
 Open the teacher dashboard and choose the **Responses** tab. Its Source filter also has **Wiki entries**, for Learn Mode's bonus writing. It lists every sent Short Answer, Response Builder and Read More Check answer with the student's name, class, word count and time. The Class, Unit and date filters at the top apply. Inside the tab, narrow to one source or one question, and click the star to mark a response as a good example; **Starred only** shows just those. A student who edits and resends an answer keeps your star. To remove one answer (a test, or something sent by mistake), click the trash icon on its card; the student's own copy stays on their device, so an answer they send again will reappear.
+
+### The class view
+
+On the dashboard's **Students** tab, **Class view** has one line per class period. The line gives the period's counts (students, visited this week, away or not started, games only, no reading, no flashcards). Click it to open the period.
+
+| Column | What it shows |
+|---|---|
+| **Last visit** | The last day the student opened the site. |
+| **Visits** | Visits in the last seven days, or in the From and To dates if you set them. |
+| **Read** | Textbook sections marked as read, out of the sections in chapters open so far. |
+| **Terms** | Must-know terms mastered in Flashcards, out of those in chapters open so far. |
+| **Test** | Best practice test score. |
+| **Used** | Each activity used in the same days as Visits, marked Reading, Study or Game, with the minutes from the last day the student used it. |
+| **Note** | What to look at: "No visits yet", "Away 9 days", "Games only this week", "No reading yet", "No flashcards yet". |
+
+- Read, Terms and Test are for the unit in the Unit filter, which opens on the current unit.
+- Students with a note come first. Click any column heading to sort by it.
+- Games are Wordle, Hangman, Flip Match, Term Catcher, Tower Defense, Crossword, Quiz Race and Lightning Round. Reading is the Textbook. Everything else is Study.
+- The minutes are only for the last day a student used that activity; the site does not yet keep a running total per activity.
 
 ### Graphics for class
 
