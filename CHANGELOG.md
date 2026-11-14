@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.121] - 2026-11-13
+
+### Fixed
+- **A score could fail to submit on page load with an error in the console.** When a signed-in student's first sync returned before the rest of the site's scripts had loaded, the leaderboard code looked for a part of the site that did not exist yet and stopped with "StudyEngine is not defined". It now waits; the regular 30-second sync submits the score. Found by a test that answers the first sync instantly, which a fast connection can also do.
+
 ## [8.55.120] - 2026-11-13
 
 ### Changed

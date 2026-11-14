@@ -72,6 +72,10 @@ var LeaderboardManager = {
     // Submit or update student's leaderboard entry
     async submitScore() {
         if (!ProgressManager.supabase || !ProgressManager.studentId) return;
+        // progress.js calls this as soon as the first sync returns, which on a
+        // fast connection can be before app.js has loaded and defined
+        // StudyEngine. The sync loop submits the score again 30 seconds later.
+        if (typeof StudyEngine === 'undefined') return;
         var config = StudyEngine.config;
         if (!config) return;
         var unitId = config.unit.id;
