@@ -3099,7 +3099,8 @@ const Dashboard = {
         var sourceSel = addSelect('Source ', [
             { value: 'all', label: 'All' },
             { value: 'short-answer', label: 'Short Answer' },
-            { value: 'read-more', label: 'Read More Checks' }
+            { value: 'read-more', label: 'Read More Checks' },
+            { value: 'reading', label: 'Reading questions' }
         ]);
 
         // One entry per question, labeled with its text, newest question first.
@@ -3108,7 +3109,7 @@ const Dashboard = {
             var k = r.unit_id + '|' + r.source + '|' + r.item_key;
             if (seen[k]) return;
             seen[k] = true;
-            var label = (r.source === 'read-more' ? 'Read More: ' : 'Short Answer ' + (parseInt(r.item_key, 10) + 1) + ': ') + (r.question_text || r.item_key);
+            var label = (r.source === 'read-more' ? 'Read More: ' : r.source === 'reading' ? 'Reading: ' : 'Short Answer ' + (parseInt(r.item_key, 10) + 1) + ': ') + (r.question_text || r.item_key);
             if (label.length > 90) label = label.slice(0, 87) + '...';
             items.push({ value: k, label: label, source: r.source });
         });
@@ -3197,7 +3198,7 @@ const Dashboard = {
 
         var badge = document.createElement('span');
         badge.className = 'feedback-type-badge response-source-' + r.source;
-        badge.textContent = r.source === 'read-more' ? 'Read More' : 'Short Answer';
+        badge.textContent = r.source === 'read-more' ? 'Read More' : r.source === 'reading' ? 'Reading' : 'Short Answer';
         header.appendChild(badge);
 
         var who = document.createElement('span');

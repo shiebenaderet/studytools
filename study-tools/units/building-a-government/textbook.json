@@ -306,6 +306,10 @@
                                     "question": "Thomas Jefferson called the delegates \"an assembly of demigods.\" Using what the reading says about who was in the room and who was left out, do you agree with him? Explain."
                                 }
                             }
+                        },
+                        "prompt": {
+                            "label": "Tell Mr. B",
+                            "question": "The delegates were sent to fix the Articles of Confederation. They decided to write a new plan instead. Was that the right choice? Explain why or why not."
                         }
                     }
                 ]
@@ -461,6 +465,10 @@
                                     "question": "Luther Martin argued that the slave trade went against the ideals of the Revolution. Why did the delegates protect slavery anyway? Use evidence from the reading."
                                 }
                             }
+                        },
+                        "prompt": {
+                            "label": "Tell Mr. B",
+                            "question": "The Three-Fifths Compromise gave southern states more seats in Congress. Did it help enslaved people in any way? Explain, using the reading."
                         }
                     }
                 ]
@@ -818,6 +826,10 @@
                                     "question": "How did Washington's 1792 veto end? What does that show about how checks and balances are supposed to work?"
                                 }
                             }
+                        },
+                        "prompt": {
+                            "label": "Tell Mr. B",
+                            "question": "Choose one check from the reading, such as the veto. Explain how it keeps one branch from having too much power."
                         }
                     }
                 ]
@@ -1054,6 +1066,10 @@
                                     "question": "Billy Frank Jr. was arrested more than fifty times. Why do you think he kept fishing? Use evidence from the reading about what the treaties promised."
                                 }
                             }
+                        },
+                        "prompt": {
+                            "label": "Tell Mr. B",
+                            "question": "Billy Frank Jr. believed a treaty gave his people the right to fish. How does the Supremacy Clause support him? Explain."
                         }
                     }
                 ]
@@ -1358,6 +1374,10 @@
                                     "question": "Native Americans became citizens by law in 1924, but some states did not let them vote until 1948. What does this show about the difference between having a right on paper and being able to use it?"
                                 }
                             }
+                        },
+                        "prompt": {
+                            "label": "Tell Mr. B",
+                            "question": "The words \"We the People\" never changed, but who they include did. Describe one change from the reading and the people it included."
                         }
                     }
                 ]

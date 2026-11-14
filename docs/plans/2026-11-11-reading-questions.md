@@ -67,3 +67,7 @@ choices and badges each answer "Short Answer" or "Read More".
    in the dashboard filter.
 5. **Timing.** Chapter 1 opens Friday, Nov 13. This can ship after the unit opens; students
    who have already read a section would simply find a new optional box there.
+
+## Decided and Built (Nov 13, 2026)
+
+The teacher chose: optional for the student, no points to start, one question per chapter on the chapter's last section (five for Unit 3), a separate `reading` source with its own dashboard label, and no rush on timing. The teacher approved four questions as drafted and asked for the Chapter 2 question to be more direct; it was reworded. The teacher ran the database script on Nov 13. Shipped in 8.55.102.

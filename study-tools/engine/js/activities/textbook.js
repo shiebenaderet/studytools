@@ -708,6 +708,10 @@ StudyEngine.registerActivity({
             this._renderQuickCheck(readingArea, section, seg.id);
         }
 
+        // An optional written question about the brief reading. It never blocks
+        // Mark as Read or the unlock, and earns no points.
+        if (section.prompt && section.prompt.question) this._renderReadingPrompt(readingArea, seg, section);
+
         // Read More: the longer version of the section, closed by default.
         // It never counts toward the reading gate.
         if (section.readMore) this._renderReadMore(readingArea, seg, section, listenHost, contentDiv);
@@ -1083,6 +1087,138 @@ StudyEngine.registerActivity({
     // student types, final on Send) and sent to the teacher through
     // ResponseCapture. readMore.check = { quickCheck, prompt: { label, question } }.
     READ_MORE_MIN_WORDS: 20,
+
+    // section.prompt = { label, question }: one optional written question under
+    // the brief reading, the same at every reading level. The answer is kept on
+    // the device as the student types and goes to the teacher's Responses tab
+    // (source 'reading') when they press Send. State lives in
+    // progress.readingPrompts[segment/section] = { draft, answer, words, savedAt, sent }.
+    _renderReadingPrompt(parent, seg, section) {
+        var self = this;
+        var prompt = section.prompt;
+        var key = seg.id + '/' + section.id;
+        if (!this._progress.readingPrompts) this._progress.readingPrompts = {};
+        var state = this._progress.readingPrompts[key] || {};
+
+        var box = document.createElement('div');
+        box.className = 'tb-callout tb-callout-qc tb-reading-prompt';
+        var title = document.createElement('div');
+        title.className = 'tb-callout-title';
+        var tIcon = document.createElement('i');
+        tIcon.className = 'fas fa-pen-to-square';
+        title.appendChild(tIcon);
+        title.appendChild(document.createTextNode(' ' + (prompt.label || 'Tell your teacher')));
+        var opt = document.createElement('span');
+        opt.className = 'tb-prompt-optional';
+        opt.textContent = 'Optional';
+        title.appendChild(opt);
+        box.appendChild(title);
+
+        var taId = 'tb-prompt-answer-' + seg.id + '-' + section.id;
+        var label = document.createElement('label');
+        label.className = 'tb-rm-label';
+        label.htmlFor = taId;
+        label.textContent = prompt.question;
+        box.appendChild(label);
+
+        var ta = document.createElement('textarea');
+        ta.id = taId;
+        ta.className = 'tb-rm-answer';
+        ta.rows = 3;
+        ta.value = state.draft != null ? state.draft : (state.answer || '');
+        ta.setAttribute('autocapitalize', 'sentences');
+        box.appendChild(ta);
+        ResponseCapture.guardPaste(ta);
+
+        var row = document.createElement('div');
+        row.className = 'tb-rm-row';
+        var counter = document.createElement('span');
+        counter.className = 'tb-rm-count';
+        row.appendChild(counter);
+        var send = document.createElement('button');
+        send.type = 'button';
+        send.className = 'tb-rm-send';
+        var sIcon = document.createElement('i');
+        sIcon.className = 'fas fa-paper-plane';
+        send.appendChild(sIcon);
+        send.appendChild(document.createTextNode(' Send'));
+        row.appendChild(send);
+        box.appendChild(row);
+
+        var status = document.createElement('div');
+        status.className = 'tb-rm-status';
+        status.setAttribute('role', 'status');
+        box.appendChild(status);
+
+        function refreshStatus(reason) {
+            var st = self._progress.readingPrompts[key] || {};
+            status.className = 'tb-rm-status';
+            if (st.sent && (st.answer || '') === ta.value.trim()) {
+                status.classList.add('done');
+                status.textContent = 'Sent to your teacher.';
+            } else if (st.sent) {
+                status.textContent = 'You changed your answer. Tap Send to send the new one.';
+            } else if (st.answer && !ResponseCapture.canSend()) {
+                status.textContent = 'Saved on this device. Sign in with your class to send it.';
+            } else if (st.answer) {
+                status.textContent = reason === 'rejected'
+                    ? 'Saved on this device. It could not be sent yet.'
+                    : 'Saved on this device, not sent yet. Tap Send to try again.';
+            } else {
+                status.textContent = '';
+            }
+        }
+        var updateCount = function() {
+            var n = ResponseCapture.countWords(ta.value);
+            counter.textContent = n + (n === 1 ? ' word' : ' words');
+            send.disabled = n === 0;
+        };
+        updateCount();
+
+        var draftTimer = null;
+        ta.addEventListener('input', function() {
+            updateCount();
+            refreshStatus();
+            clearTimeout(draftTimer);
+            draftTimer = setTimeout(function() {
+                var st = self._progress.readingPrompts[key] || {};
+                st.draft = ta.value;
+                self._progress.readingPrompts[key] = st;
+                self._saveProgress();
+            }, 600);
+        });
+
+        send.addEventListener('click', function() {
+            var text = ta.value.trim();
+            if (!text) return;
+            clearTimeout(draftTimer);
+            var st = self._progress.readingPrompts[key] || {};
+            st.answer = text;
+            st.draft = text;
+            st.words = ResponseCapture.countWords(text);
+            st.savedAt = Date.now();
+            st.sent = false;
+            self._progress.readingPrompts[key] = st;
+            self._saveProgress();
+            send.disabled = true;
+            status.className = 'tb-rm-status';
+            status.textContent = 'Sending...';
+            ResponseCapture.capture(self._config.unit.id, 'reading', key, prompt.question, text).then(function(res) {
+                var cur = self._progress.readingPrompts[key] || {};
+                if (res.ok && cur.savedAt === st.savedAt) {
+                    cur.sent = true;
+                    cur.words = res.words;
+                    self._progress.readingPrompts[key] = cur;
+                    self._saveProgress();
+                }
+                send.disabled = ResponseCapture.countWords(ta.value) === 0;
+                refreshStatus(res.ok ? null : res.reason);
+            });
+        });
+
+        refreshStatus();
+        parent.appendChild(box);
+    },
 
     _readMoreExtras(body, seg, section) {
         var check = section.readMore && section.readMore.check;

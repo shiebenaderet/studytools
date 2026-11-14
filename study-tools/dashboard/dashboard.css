@@ -1410,4 +1410,5 @@ body {
 .response-delete:disabled { opacity: 0.5; cursor: default; }
 .response-source-short-answer { background: #e8edf4; color: #1B2D45; }
 .response-source-read-more { background: #fdf3dc; color: #7a5a16; }
+.response-source-reading { background: #e3f1e7; color: #1f5c36; }
 .response-question { color: #4a5568; font-size: 0.9em; font-style: italic; margin-bottom: 0.35rem; }

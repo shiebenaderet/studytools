@@ -6167,6 +6167,8 @@ body.light-mode .tb-vocab-popup { --tb-noun: #c62828; --tb-verb: #1b7a34; --tb-a
 .tb-rm-check .tb-callout-qc { margin: 12px 0; border: 0; padding: 0; background: transparent; }
 .tb-rm-check .tb-callout-qc > .tb-callout-title { display: none; }
 .tb-rm-label { display: block; margin: 14px 0 8px; line-height: 1.5; }
+.tb-reading-prompt .tb-rm-label { margin-top: 6px; font-weight: 600; }
+.tb-prompt-optional { margin-left: 10px; font-size: 0.72em; font-weight: 600; letter-spacing: 0; text-transform: none; padding: 1px 8px; border-radius: 999px; background: rgba(148,163,184,0.18); color: var(--text-secondary); }
 .tb-rm-answer {
     width: 100%; box-sizing: border-box; min-height: 110px; resize: vertical;
     padding: 10px 12px; border-radius: var(--radius-md); font: inherit; font-size: 1em;

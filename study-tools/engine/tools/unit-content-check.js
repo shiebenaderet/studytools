@@ -162,6 +162,12 @@ ids.forEach(function(id) {
             if (!q.image.credit) err(id, where + ': primarySource image has no credit');
           }
         });
+        // Optional written question under the brief reading
+        if (sec.prompt !== undefined) {
+          if (!sec.prompt || !sec.prompt.question) err(id, where + ': prompt needs a question');
+          else if (sec.prompt.question.length > 300) warn(id, where + ': prompt question is long (' + sec.prompt.question.length + ' characters)');
+          if (sec.readMore && sec.readMore.check && sec.readMore.check.prompt && sec.prompt && sec.readMore.check.prompt.question === sec.prompt.question) err(id, where + ': prompt repeats the Read More question');
+        }
         // Section picture, and its larger file for the enlarged view
         if (sec.image) ['src', 'full'].forEach(function(k) {
           if (sec.image[k] && !/^https?:/.test(sec.image[k]) && !fs.existsSync(path.join(unitsDir, '..', 'engine', sec.image[k]))) err(id, where + ': image ' + k + ' not found: ' + sec.image[k]);

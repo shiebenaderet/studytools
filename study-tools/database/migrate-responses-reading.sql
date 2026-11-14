@@ -1,7 +1,7 @@
 -- Responses: a third kind of written answer, 'reading', November 2026.
 --
--- NOT YET APPLIED. The teacher runs this once in the Supabase SQL editor. When it
--- has been run, replace this line with the date, as in migrate-responses.sql.
+-- APPLIED to production 2026-11-13 by the teacher in the Supabase SQL editor
+-- (reported as finished without an error; the checks at the bottom were not run).
 --
 -- Why: a brief textbook reading can end with one optional written question
 -- (docs/plans/2026-11-11-reading-questions.md). Its answers are sent with

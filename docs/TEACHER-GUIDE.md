@@ -533,6 +533,20 @@ A textbook section can carry one picture in `image`:
 - `full` is optional: a bigger file (about 1800 px wide) that loads only when the picture is enlarged. Use it for documents and maps a student should be able to read. Without it, the enlarged view shows `src`.
 - Keep `src` about 900 px wide. `float` is `right` or `left`; leave it out for a full-width picture.
 
+### A written question under a reading (optional)
+
+A textbook section can end with one optional written question:
+
+```json
+"prompt": { "label": "Tell Mr. B", "question": "Choose one check from the reading, such as the veto. Explain how it keeps one branch from having too much power." }
+```
+
+- It shows as a box under the brief reading, above Mark as Read, and is the same at every reading level. Write it so it can be answered from the brief reading alone.
+- It is optional for the student: it never blocks Mark as Read or the terms from unlocking, and it earns no points.
+- The answer is saved on the device as the student types. **Send** puts it in the dashboard's **Responses** tab with the **Reading** label. A guest's answer stays on the device.
+- Use it sparingly: Unit 3 has one per chapter, on the chapter's last section. Do not repeat the section's Read More question.
+- The database must accept the `reading` kind of answer (`database/migrate-responses-reading.sql`, run once).
+
 ### Read More panels (optional)
 
 A textbook section can carry a longer version of itself in `readMore`. It shows as a closed **Read More** panel under the section. Opening it never counts toward the reading gate, so the short text stays the only required reading. Listen and the highlighter follow whichever text is open, and Read More highlights are saved separately from the short text's.

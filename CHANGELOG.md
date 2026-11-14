@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.102] - 2026-11-13
+
+### Added
+- **Written questions on the brief readings.** A textbook section can end with one optional question (`prompt`), shown as a "Tell Mr. B" box under the reading and above Mark as Read. It is the same at every reading level, never blocks Mark as Read or the unlock, and earns no points. The answer saves on the device as the student types; Send puts it in the dashboard's Responses tab under a new **Reading** label, with its own choice in the Source filter. A guest's answer stays on the device. Answers combine across two devices the way Read More answers do. Requested by the teacher; decisions in `docs/plans/2026-11-11-reading-questions.md`.
+- Unit 3 has five, one on each chapter's last section, approved by the teacher.
+- The database script `migrate-responses-reading.sql`, which the teacher ran on November 13, lets the database accept the new kind of answer.
+
 ## [8.55.101] - 2026-11-13
 
 ### Changed

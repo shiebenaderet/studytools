@@ -140,6 +140,15 @@ test('learn-mode-sessions: union keeps the 20 newest', () => {
 test('badges: union', () => {
     assert.deepStrictEqual(merge('badges', ['a'], ['b', 'a']).sort(), ['a', 'b']);
 });
+test('textbook: a written answer on a brief reading keeps the later save, and a sent copy on a tie', () => {
+    const k = 'seg/sec';
+    let m = merge('activity_textbook', { readingPrompts: { [k]: { answer: 'new', savedAt: 5, sent: false } } }, { readingPrompts: { [k]: { answer: 'old', savedAt: 1, sent: true } } });
+    assert.strictEqual(m.readingPrompts[k].answer, 'new');
+    m = merge('activity_textbook', { readingPrompts: { [k]: { answer: 'same', savedAt: 5, sent: false } } }, { readingPrompts: { [k]: { answer: 'same', savedAt: 5, sent: true } } });
+    assert.strictEqual(m.readingPrompts[k].sent, true);
+    m = merge('activity_textbook', { readingPrompts: { a: { answer: 'x', savedAt: 1 } } }, { readingPrompts: { b: { answer: 'y', savedAt: 2 } } });
+    assert.deepStrictEqual(Object.keys(m.readingPrompts).sort(), ['a', 'b']);
+});
 // Rules that arrived with Unit 3 and now share the function with the ones above.
 test('short answer: newer draft wins, earned points stay earned', () => {
     const m = merge('activity_short-answer-2', { answer: 'new draft', updatedAt: 5 }, { answer: 'old', updatedAt: 1, complete: true });

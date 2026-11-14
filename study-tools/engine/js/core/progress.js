@@ -320,6 +320,15 @@ const ProgressManager = {
                 rm[k] = tb > ta ? b : ta > tb ? a : (b.sent ? b : a);
             });
             if (Object.keys(rm).length) tbMerged.readMore = rm;
+            // Written answers on the brief readings follow the same rule.
+            var rpA = remote.readingPrompts || {}, rpB = local.readingPrompts || {}, rp = {};
+            Object.keys(rpA).concat(Object.keys(rpB)).forEach(function(k) {
+                var a = rpA[k], b = rpB[k];
+                if (!a || !b) { rp[k] = a || b; return; }
+                var ta = a.savedAt || 0, tb = b.savedAt || 0;
+                rp[k] = tb > ta ? b : ta > tb ? a : (b.sent ? b : a);
+            });
+            if (Object.keys(rp).length) tbMerged.readingPrompts = rp;
             var hl = {};
             [remote.highlights, local.highlights].forEach(function(src) {
                 Object.keys(src || {}).forEach(function(key) {
