@@ -456,6 +456,25 @@ const ProgressManager = {
             return saMerged;
         }
 
+        // Time per activity per day. Each device adds up its own time, so for
+        // each day and activity keep the larger figure: adding the two would
+        // count the same minutes again on every sync. Six weeks are kept.
+        if (activity === 'activityTimeByDay') {
+            var allDays = {};
+            [remote, local].forEach(function(src) {
+                var d = (src && src.days) || {};
+                Object.keys(d).forEach(function(day) {
+                    if (!allDays[day]) allDays[day] = {};
+                    Object.keys(d[day] || {}).forEach(function(id) {
+                        allDays[day][id] = Math.max(allDays[day][id] || 0, d[day][id] || 0);
+                    });
+                });
+            });
+            var keptDays = {};
+            Object.keys(allDays).sort().slice(-42).forEach(function(day) { keptDays[day] = allDays[day]; });
+            return { days: keptDays };
+        }
+
         // studyTime is a bare number of ms with no updatedAt, so the default
         // below always picked the local copy. A fresh login whose timer had
         // already ticked a few seconds then overwrote hours of cloud time.

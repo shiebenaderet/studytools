@@ -153,6 +153,27 @@ const ActivityTimer = {
         }
         data.ms += ms; // track total time even past cap (for display)
         ProgressManager.save(unitId, key, data);
+        this._addActivityTimeByDay(unitId, activityId, ms);
+    },
+
+    // Time in each activity on each day, kept for six weeks, so the teacher's
+    // class view can show what a student spent the week on ("Wordle 42 min,
+    // Flashcards 6 min"). dailyActivityTime above holds only the latest day
+    // and is overwritten the next. Real time, past the daily cap, in ms:
+    //   { days: { '2026-11-16': { wordle: 2520000, flashcards: 360000 } } }
+    ACTIVITY_DAYS_KEPT: 42,
+
+    _addActivityTimeByDay(unitId, activityId, ms) {
+        if (!activityId || !(ms > 0)) return;
+        var now = new Date();
+        var day = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
+        var data = ProgressManager.load(unitId, 'activityTimeByDay');
+        if (!data || typeof data !== 'object' || !data.days) data = { days: {} };
+        if (!data.days[day]) data.days[day] = {};
+        data.days[day][activityId] = (data.days[day][activityId] || 0) + Math.round(ms);
+        var keys = Object.keys(data.days).sort();
+        while (keys.length > this.ACTIVITY_DAYS_KEPT) delete data.days[keys.shift()];
+        ProgressManager.save(unitId, 'activityTimeByDay', data);
     },
 
     _isActivityCappedToday(unitId, activityId) {

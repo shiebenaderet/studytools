@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.117] - 2026-11-13
+
+### Added
+- **The site records the time spent in each activity on each day.** Until now it kept one day of minutes per activity and overwrote it the next day, so the teacher's class view could show only the last day's figure. Each student's progress now holds the time in each activity for each of the last six weeks (`activityTimeByDay`), counted the same way as study time: only while the student is active.
+  - The class view's **Used** column shows the total for the days in view ("Wordle · 40 min") wherever these totals exist, and falls back to the last-day figure for time before this version. Pointing at an activity says which it is.
+  - A new note, **Mostly games this week**, appears when games are more than half of a student's timed minutes and at least 10 minutes.
+  - Two devices are combined by keeping the larger figure for each day and activity, so syncing never counts the same minutes twice.
+- The privacy page's Study time row now says that time in each activity per day is kept for six weeks.
+
+Approved by the teacher with the class view. Totals start counting from the day this version goes live.
+
 ## [8.55.116] - 2026-11-13
 
 ### Changed

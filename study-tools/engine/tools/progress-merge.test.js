@@ -161,4 +161,26 @@ test('power sort: better score per sort is kept from either device', () => {
     assert.deepStrictEqual(m.best, { branches: 9, federalism: 4 });
 });
 
+test('activityTimeByDay: each day and activity keeps the larger figure, never the sum', () => {
+    const local = { days: { '2026-11-16': { wordle: 600000, flashcards: 120000 }, '2026-11-17': { textbook: 300000 } } };
+    const remote = { days: { '2026-11-16': { wordle: 900000, hangman: 60000 }, '2026-11-15': { flashcards: 240000 } } };
+    assert.deepStrictEqual(merge('activityTimeByDay', local, remote), { days: {
+        '2026-11-15': { flashcards: 240000 },
+        '2026-11-16': { wordle: 900000, hangman: 60000, flashcards: 120000 },
+        '2026-11-17': { textbook: 300000 } } });
+});
+test('activityTimeByDay: merging the result again changes nothing', () => {
+    const a = { days: { '2026-11-16': { wordle: 600000 } } }, b = { days: { '2026-11-16': { wordle: 900000 } } };
+    const once = merge('activityTimeByDay', a, b);
+    assert.deepStrictEqual(merge('activityTimeByDay', once, b), once);
+    assert.deepStrictEqual(merge('activityTimeByDay', a, once), once);
+});
+test('activityTimeByDay: only the newest six weeks are kept, and a missing side falls back', () => {
+    const days = {}; for (let i = 1; i <= 50; i++) days['2026-' + String(10 + Math.floor((i - 1) / 28)).padStart(2, '0') + '-' + String(1 + (i - 1) % 28).padStart(2, '0')] = { wordle: i };
+    const m = merge('activityTimeByDay', { days }, { days: {} });
+    assert.strictEqual(Object.keys(m.days).length, 42);
+    assert.ok(!('2026-10-01' in m.days) && ('2026-11-22' in m.days));
+    assert.deepStrictEqual(merge('activityTimeByDay', null, { days: { '2026-11-16': { wordle: 5 } } }), { days: { '2026-11-16': { wordle: 5 } } });
+});
+
 console.log(passed + ' passed');

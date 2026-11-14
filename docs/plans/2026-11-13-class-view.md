@@ -72,3 +72,7 @@ The class view shipped as 8.55.116. One thing differs from the proposal:
 Both limits go away with proposal B (minutes per activity per day), which is the next piece
 and is not built yet.
 
+Proposal B shipped as 8.55.117: the site keeps the time in each activity for each day of the
+last six weeks, the class view uses those totals where they exist, and a "Mostly games" note
+was added. Totals start from the day that version goes live.
+

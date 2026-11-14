@@ -2198,9 +2198,10 @@ const Dashboard = {
 
             var per = {};
             var slot = function(id) {
-                if (!per[id]) per[id] = { read: 0, mastered: 0, bestTest: null, used: {} };
+                if (!per[id]) per[id] = { read: 0, mastered: 0, bestTest: null, used: {}, totals: {} };
                 return per[id];
             };
+            var winStartKey = this._localDateKey(winStart), winEndKey = this._localDateKey(winEnd);
             (progRes.data || []).forEach(function(p) {
                 if (unitId && p.unit_id !== unitId) return;
                 var st = slot(p.student_id);
@@ -2219,6 +2220,22 @@ const Dashboard = {
                 // time it was last finished. (The list of activities saved with
                 // each visit is not used: it holds only what changed in the last
                 // half minute before the student left.)
+                // Since 8.55.117 the site also keeps the time in each activity on
+                // each day. Where a student has that, it gives the true total for
+                // the days shown and replaces the last-day figure below.
+                if (p.activity === 'activityTimeByDay' && p.data && p.data.days) {
+                    Object.keys(p.data.days).forEach(function(dayKey) {
+                        if (dayKey < winStartKey || dayKey > winEndKey) return;
+                        var dayData = p.data.days[dayKey] || {};
+                        Object.keys(dayData).forEach(function(rawId) {
+                            var id = self._activityIdOf('activity_' + rawId);
+                            var t = st.totals[id] || (st.totals[id] = { ms: 0, dayKey: dayKey });
+                            t.ms += dayData[rawId] || 0;
+                            if (dayKey > t.dayKey) t.dayKey = dayKey;
+                        });
+                    });
+                    return;
+                }
                 var actId = self._activityIdOf(p.activity);
                 if (!actId) return;
                 var day = null, ms = 0;
@@ -2236,12 +2253,19 @@ const Dashboard = {
 
             var windowWords = datesSet ? 'in these dates' : 'this week';
             var rows = students.map(function(s) {
-                var st = per[s.id] || { read: 0, mastered: 0, bestTest: null, used: {} };
+                var st = per[s.id] || { read: 0, mastered: 0, bestTest: null, used: {}, totals: {} };
                 var last = lastVisit[s.id] || null;
+                Object.keys(st.totals).forEach(function(id) {
+                    st.used[id] = { day: new Date(st.totals[id].dayKey + 'T12:00:00'), ms: st.totals[id].ms, total: true };
+                });
                 var usedList = Object.keys(st.used).map(function(id) {
                     return { id: id, group: self._activityGroup(id), name: self.ACTIVITY_NAMES[id] || self._unitTitle(id),
-                             minutes: Math.round(st.used[id].ms / 60000), day: st.used[id].day };
+                             minutes: Math.round(st.used[id].ms / 60000), day: st.used[id].day, total: !!st.used[id].total };
                 });
+                // "Too much Wordle?": with true totals, games can be weighed against the rest
+                var timed = usedList.filter(function(u) { return u.total; });
+                var gameMin = 0, allMin = 0;
+                timed.forEach(function(u) { allMin += u.minutes; if (u.group === 'game') gameMin += u.minutes; });
                 var groupOrder = { reading: 0, study: 1, game: 2 };
                 usedList.sort(function(a, b) { return groupOrder[a.group] - groupOrder[b.group] || b.minutes - a.minutes || a.name.localeCompare(b.name); });
 
@@ -2252,6 +2276,7 @@ const Dashboard = {
                 else if (now - last > 7 * DAY) flag('Away ' + Math.floor((now - last) / DAY) + ' days', 0);
                 else {
                     if (usedList.length && usedList.every(function(u) { return u.group === 'game'; })) flag('Games only ' + windowWords, 1);
+                    else if (gameMin >= 10 && gameMin > allMin / 2) flag('Mostly games ' + windowWords, 1);
                     if (open && open.sectionCount && st.read === 0) flag('No reading yet', 2);
                     if (open && open.mustKnowCount && st.mastered === 0) flag('No flashcards yet', 3);
                 }
@@ -2273,7 +2298,8 @@ const Dashboard = {
             intro.textContent = (unitId ? 'Read (textbook sections), Terms (must-know terms mastered) and Test (best practice test) are for ' + unitName +
                     (open && open.sectionCount ? ', counted against the chapters open so far' : '') + '. ' : '') +
                 'Visits and Used cover ' + (datesSet ? 'the dates in the filter' : 'the last 7 days') + '. ' +
-                'The minutes beside an activity are for the last day the student used it. Students who need a look come first. Click a class period to open it.';
+                'The minutes beside an activity are its total for those days where the site has one, and otherwise the minutes on the last day the student used it; point at an activity to see which. ' +
+                'Students who need a look come first. Click a class period to open it.';
             container.appendChild(intro);
 
             var legend = document.createElement('p');
@@ -2333,9 +2359,10 @@ const Dashboard = {
                     r.used.forEach(function(u) {
                         var chip = document.createElement('span');
                         chip.className = 'used-chip used-' + u.group;
-                        chip.title = ({ reading: 'Reading', study: 'Study', game: 'Game' })[u.group] + '. Last used ' +
-                            u.day.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }) +
-                            (u.minutes ? ', ' + u.minutes + ' min that day' : '');
+                        var lastDay = u.day.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+                        chip.title = ({ reading: 'Reading', study: 'Study', game: 'Game' })[u.group] + '. ' +
+                            (u.total ? u.minutes + ' min in ' + (datesSet ? 'these dates' : 'the last 7 days') + '. Last used ' + lastDay
+                                     : 'Last used ' + lastDay + (u.minutes ? ', ' + u.minutes + ' min that day' : ''));
                         chip.appendChild(self._icon(self.GROUP_ICONS[u.group]));
                         chip.appendChild(document.createTextNode(' ' + u.name + (u.minutes ? ' \u00B7 ' + u.minutes + ' min' : '')));
                         tdUsed.appendChild(chip);
@@ -2376,6 +2403,7 @@ const Dashboard = {
                 var count = function(test) { return list.filter(test).length; };
                 var away = count(function(r) { return r.severity === 0; });
                 var games = count(function(r) { return r.notes.some(function(n) { return /^Games only/.test(n); }); });
+                var mostly = count(function(r) { return r.notes.some(function(n) { return /^Mostly games/.test(n); }); });
                 var noRead = count(function(r) { return r.notes.indexOf('No reading yet') !== -1; });
                 var noCards = count(function(r) { return r.notes.indexOf('No flashcards yet') !== -1; });
                 var active = count(function(r) { return r.visits > 0; });
@@ -2393,6 +2421,7 @@ const Dashboard = {
                              active + ' visited ' + windowWords];
                 if (away) facts.push(away + ' away or not started');
                 if (games) facts.push(games + ' games only');
+                if (mostly) facts.push(mostly + ' mostly games');
                 if (noRead) facts.push(noRead + ' no reading');
                 if (noCards) facts.push(noCards + ' no flashcards');
                 var factsEl = document.createElement('span');

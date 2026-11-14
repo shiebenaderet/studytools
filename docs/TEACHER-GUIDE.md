@@ -598,13 +598,14 @@ On the dashboard's **Students** tab, **Class view** has one line per class perio
 | **Read** | Textbook sections marked as read, out of the sections in chapters open so far. |
 | **Terms** | Must-know terms mastered in Flashcards, out of those in chapters open so far. |
 | **Test** | Best practice test score. |
-| **Used** | Each activity used in the same days as Visits, marked Reading, Study or Game, with the minutes from the last day the student used it. |
-| **Note** | What to look at: "No visits yet", "Away 9 days", "Games only this week", "No reading yet", "No flashcards yet". |
+| **Used** | Each activity used in the same days as Visits, marked Reading, Study or Game, with its minutes for those days. |
+| **Note** | What to look at: "No visits yet", "Away 9 days", "Games only this week", "Mostly games this week", "No reading yet", "No flashcards yet". |
 
 - Read, Terms and Test are for the unit in the Unit filter, which opens on the current unit.
 - Students with a note come first. Click any column heading to sort by it.
 - Games are Wordle, Hangman, Flip Match, Term Catcher, Tower Defense, Crossword, Quiz Race and Lightning Round. Reading is the Textbook. Everything else is Study.
-- The minutes are only for the last day a student used that activity; the site does not yet keep a running total per activity.
+- The site keeps the time in each activity for each day of the last six weeks, starting with version 8.55.117. For activity before that, the minutes shown are for the last day the student used it. Point at an activity to see which figure it is.
+- "Mostly games" means games are more than half of the student's timed minutes in those days, and at least 10 minutes. Only time while the student is active counts.
 
 ### Graphics for class
 
