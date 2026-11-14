@@ -937,14 +937,21 @@ const Dashboard = {
             var datesSet = !!(filters.dateStart || filters.dateEnd);
             var totalSeconds = datesSet ? sessionSeconds : (progressSeconds || sessionSeconds);
             var totalHours = (totalSeconds / 3600).toFixed(1);
-            // A typical visit: the middle value of visits between one minute and
-            // three hours. Unclosed visits (0) and tabs left open all day are left out.
-            var visitLengths = (hoursRes.data || [])
-                .filter(function(s) { return !classIdSet || classIdSet.has(s.student_id); })
-                .map(function(s) { return s.duration_seconds || 0; })
-                .filter(function(d) { return d >= 60 && d <= 3 * 3600; })
-                .sort(function(a, b) { return a - b; });
-            var avgMinutes = visitLengths.length ? Math.round(visitLengths[Math.floor(visitLengths.length / 2)] / 60) : 0;
+            // A typical student: the middle value of active study time among
+            // students who have studied. This replaced "Typical Visit": a visit's
+            // length is saved only when the page closes cleanly, which phones and
+            // Chromebooks often skip, and every page load starts a new visit, so
+            // the visits table gave one minute for a class that studies for hours.
+            var perStudentMs = {};
+            (progressRes.data || []).forEach(function(r) {
+                if ((!classIdSet || classIdSet.has(r.student_id)) && typeof r.data === 'number' && r.data > 0) {
+                    perStudentMs[r.student_id] = (perStudentMs[r.student_id] || 0) + r.data;
+                }
+            });
+            var studied = Object.keys(perStudentMs).map(function(id) { return perStudentMs[id]; }).sort(function(a, b) { return a - b; });
+            var typicalMin = studied.length ? Math.round(studied[Math.floor(studied.length / 2)] / 60000) : 0;
+            var typicalText = typicalMin >= 90 ? (typicalMin / 60).toFixed(1) : typicalMin;
+            var typicalUnit = typicalMin >= 90 ? 'hours' : 'min';
 
             // Render stat cards
             container.textContent = '';
@@ -960,8 +967,8 @@ const Dashboard = {
                   sub: 'out of ' + enrolled + (filters.dateStart ? '' : ', in the last 7 days') },
                 { icon: 'fas fa-clock', value: totalHours, unit: 'hours', label: 'Total Study Time',
                   sub: 'added together, ' + scope },
-                { icon: 'fas fa-stopwatch', value: avgMinutes, unit: 'min', label: 'Typical Visit',
-                  sub: 'how long one sitting lasts' }
+                { icon: 'fas fa-stopwatch', value: typicalText, unit: typicalUnit, label: 'Typical Student',
+                  sub: 'study time ' + (filters.unitId ? 'in this unit' : 'in every unit') + '; half of the ' + studied.length + ' who studied have more' }
             ];
 
             var self = this;
@@ -1071,94 +1078,68 @@ const Dashboard = {
             }
 
             // ---- Render Recently Active Feed ----
+            // One row per student, not per visit. The site records a visit on
+            // every page load, so one person reloading eight times used to fill
+            // the whole panel.
             if (feedContainer && trendRes.data) {
                 var now = new Date();
                 var dayAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
-                var recentSessions = trendRes.data.filter(function(s) {
-                    var match = Dashboard._when(s.started_at) >= dayAgo;
-                    if (classIdSet) match = match && classIdSet.has(s.student_id);
-                    return match;
-                }).slice(0, 8);
+                var byStudent = {}, recent = [];
+                trendRes.data.forEach(function(s) {
+                    var at = Dashboard._when(s.started_at);
+                    if (at < dayAgo || (classIdSet && !classIdSet.has(s.student_id))) return;
+                    var r = byStudent[s.student_id];
+                    if (!r) { r = byStudent[s.student_id] = { id: s.student_id, visits: 0, last: at }; recent.push(r); }
+                    r.visits++;
+                    if (at > r.last) r.last = at;
+                });
+                recent.sort(function(a, b) { return b.last - a.last; });
 
                 var heading = document.createElement('h3');
                 heading.appendChild(self._icon('fas fa-stream'));
                 heading.appendChild(document.createTextNode(' Recently Active'));
                 feedContainer.appendChild(heading);
 
-                if (recentSessions.length === 0) {
-                    var empty = document.createElement('p');
-                    empty.style.cssText = 'color:var(--text-light);font-size:0.875rem;text-align:center;padding:20px 0;';
-                    empty.textContent = 'No activity in the last 24 hours';
-                    feedContainer.appendChild(empty);
-                } else {
-                    // Activity name prettifier
-                    var activityNames = {
-                        flashcards: 'Flashcards', 'practice-test': 'Practice Test',
-                        'fill-in-blank': 'Fill in the Blank', 'typing-practice': 'Typing Practice',
-                        textbook: 'Textbook', 'source-analysis': 'Source Analysis',
-                        'lightning-round': 'Lightning Round', wordle: 'Wordle',
-                        hangman: 'Hangman', 'flip-match': 'Flip Match',
-                        'term-catcher': 'Term Catcher', 'tower-defense': 'Tower Defense',
-                        crossword: 'Crossword', 'quiz-race': 'Quiz Race',
-                        'map-quiz': 'Map Quiz', timeline: 'Timeline',
-                        'resource-library': 'Resource Library', 'how-to-study': 'How to Study'
-                    };
+                var feedNote = document.createElement('p');
+                feedNote.className = 'panel-note';
+                feedNote.textContent = recent.length
+                    ? recent.length + (recent.length === 1 ? ' student has' : ' students have') + ' opened the site in the last 24 hours. Newest first.'
+                    : 'Nobody has opened the site in the last 24 hours.';
+                feedContainer.appendChild(feedNote);
 
-                    recentSessions.forEach(function(s) {
-                        var item = document.createElement('div');
-                        item.className = 'feed-item';
+                recent.slice(0, 8).forEach(function(r) {
+                    var item = document.createElement('div');
+                    item.className = 'feed-item';
 
-                        var name = studentNameMap[s.student_id] || 'Unknown';
-                        var avatar = document.createElement('div');
-                        avatar.className = 'feed-avatar';
-                        avatar.textContent = name.charAt(0).toUpperCase();
+                    var name = studentNameMap[r.id] || 'Unknown';
+                    var avatar = document.createElement('div');
+                    avatar.className = 'feed-avatar';
+                    avatar.textContent = name.charAt(0).toUpperCase();
 
-                        var details = document.createElement('div');
-                        details.className = 'feed-details';
+                    var details = document.createElement('div');
+                    details.className = 'feed-details';
+                    var nameEl = document.createElement('div');
+                    nameEl.className = 'feed-name';
+                    nameEl.textContent = name;
+                    var actEl = document.createElement('div');
+                    actEl.className = 'feed-activity';
+                    actEl.textContent = r.visits === 1 ? 'Opened the site once' : 'Opened the site ' + r.visits + ' times';
+                    details.appendChild(nameEl);
+                    details.appendChild(actEl);
 
-                        var nameEl = document.createElement('div');
-                        nameEl.className = 'feed-name';
-                        nameEl.textContent = name;
+                    var meta = document.createElement('div');
+                    meta.className = 'feed-meta';
+                    var timeEl = document.createElement('div');
+                    timeEl.className = 'feed-duration';
+                    var diffMin = Math.max(0, Math.round((now - r.last) / 60000));
+                    timeEl.textContent = diffMin < 2 ? 'Just now' : diffMin < 60 ? diffMin + ' min ago' : Math.round(diffMin / 60) + ' hr ago';
+                    meta.appendChild(timeEl);
 
-                        var actEl = document.createElement('div');
-                        actEl.className = 'feed-activity';
-                        var activities = s.activities_used || [];
-                        var prettyActivities = activities.map(function(a) { return activityNames[a] || a; });
-                        actEl.textContent = prettyActivities.length > 0 ? prettyActivities.join(', ') : 'Studying';
-
-                        details.appendChild(nameEl);
-                        details.appendChild(actEl);
-
-                        var meta = document.createElement('div');
-                        meta.className = 'feed-meta';
-
-                        var durEl = document.createElement('div');
-                        durEl.className = 'feed-duration';
-                        var durMin = Math.round((s.duration_seconds || 0) / 60);
-                        durEl.textContent = durMin > 0 ? durMin + ' min' : '<1 min';
-
-                        var timeEl = document.createElement('div');
-                        timeEl.className = 'feed-time';
-                        var diffMs = now - Dashboard._when(s.started_at);
-                        var diffMin = Math.max(0, Math.round(diffMs / 60000));
-                        if (diffMin < 2) {
-                            timeEl.textContent = 'Just now';
-                        } else if (diffMin < 60) {
-                            timeEl.textContent = diffMin + 'm ago';
-                        } else {
-                            var diffHr = Math.round(diffMin / 60);
-                            timeEl.textContent = diffHr + 'h ago';
-                        }
-
-                        meta.appendChild(durEl);
-                        meta.appendChild(timeEl);
-
-                        item.appendChild(avatar);
-                        item.appendChild(details);
-                        item.appendChild(meta);
-                        feedContainer.appendChild(item);
-                    });
-                }
+                    item.appendChild(avatar);
+                    item.appendChild(details);
+                    item.appendChild(meta);
+                    feedContainer.appendChild(item);
+                });
             }
 
             // ---- Render Class Leaderboard ----

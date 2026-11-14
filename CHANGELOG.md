@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.119] - 2026-11-13
+
+### Changed
+- **Recently Active lists students, not visits.** The site records a visit on every page load, so one person opening the site eight times filled the whole panel; the teacher saw eight rows of their own test account. Each student now has one row, with how many times they opened the site in the last 24 hours and when the latest was. A line above says how many students that is.
+- **"Typical Visit" is replaced by "Typical Student".** With real data the card read "1 min". A visit's length is saved only when the page closes cleanly, which phones and Chromebooks often skip, and every page load starts a new visit, so visit lengths say little. The card now shows the middle value of active study time among students who have studied in the unit, which the site measures reliably.
+
+Reported by the teacher. Checked against stand-in data.
+
 ## [8.55.118] - 2026-11-13
 
 ### Changed
