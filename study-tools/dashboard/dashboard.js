@@ -1987,6 +1987,112 @@ const Dashboard = {
         loadDay(currentIdx);
     },
 
+    // "Needs a nudge": students with no visit to the site in the last seven
+    // days, by class period, with the day of their last visit. Students who
+    // have never visited come first.
+    _renderNudge(students, lastVisit) {
+        var container = document.getElementById('nudge-container');
+        if (!container) return;
+        container.textContent = '';
+        var self = this;
+        var DAYS = 7;
+        var cutoff = new Date(Date.now() - DAYS * 86400000);
+
+        var groups = {}, order = [];
+        students.forEach(function(st) {
+            var name = st.classes ? (st.classes.name || st.classes.code) : 'No class';
+            if (!groups[name]) { groups[name] = { name: name, enrolled: 0, idle: [] }; order.push(name); }
+            groups[name].enrolled++;
+            var last = lastVisit[st.id] || null;
+            if (!last || last < cutoff) groups[name].idle.push({ name: st.name || 'Unknown', last: last });
+        });
+        order.sort(function(a, b) { return a.localeCompare(b, undefined, { numeric: true }); });
+
+        var totalIdle = 0;
+        order.forEach(function(n) { totalIdle += groups[n].idle.length; });
+
+        var note = document.createElement('p');
+        note.className = 'panel-note';
+        note.textContent = totalIdle === 0
+            ? 'Every student has visited the study site in the last ' + DAYS + ' days.'
+            : totalIdle + (totalIdle === 1 ? ' student has' : ' students have') + ' not visited the study site in the last ' + DAYS +
+              ' days. The date after each name is the last visit.';
+        container.appendChild(note);
+        if (totalIdle === 0) return;
+
+        var listText = function(g) {
+            return g.name + ': ' + g.idle.map(function(x) { return x.name; }).join(', ');
+        };
+        var copyButton = function(label, getText) {
+            var btn = document.createElement('button');
+            btn.className = 'btn nudge-copy';
+            btn.appendChild(self._icon('fas fa-copy'));
+            btn.appendChild(document.createTextNode(' ' + label));
+            btn.addEventListener('click', function() {
+                var done = function(ok) {
+                    btn.lastChild.textContent = ok ? ' Copied' : ' Could not copy';
+                    setTimeout(function() { btn.lastChild.textContent = ' ' + label; }, 1800);
+                };
+                try {
+                    navigator.clipboard.writeText(getText()).then(function() { done(true); }, function() { done(false); });
+                } catch (err) { done(false); }
+            });
+            return btn;
+        };
+
+        var grid = document.createElement('div');
+        grid.className = 'nudge-grid';
+        order.forEach(function(n) {
+            var g = groups[n];
+            g.idle.sort(function(a, b) {
+                if (!a.last !== !b.last) return a.last ? 1 : -1;
+                return (a.last ? a.last - b.last : 0) || a.name.localeCompare(b.name);
+            });
+            var card = document.createElement('div');
+            card.className = 'nudge-card';
+
+            var head = document.createElement('div');
+            head.className = 'nudge-head';
+            var title = document.createElement('strong');
+            title.textContent = g.name;
+            var count = document.createElement('span');
+            count.className = 'nudge-count';
+            count.textContent = g.idle.length + ' of ' + g.enrolled + (g.enrolled === 1 ? ' student' : ' students');
+            head.appendChild(title);
+            head.appendChild(count);
+            card.appendChild(head);
+
+            if (g.idle.length === 0) {
+                var none = document.createElement('p');
+                none.className = 'nudge-none';
+                none.textContent = 'Everyone has visited this week.';
+                card.appendChild(none);
+            } else {
+                var list = document.createElement('ul');
+                list.className = 'nudge-list';
+                g.idle.forEach(function(x) {
+                    var li = document.createElement('li');
+                    li.appendChild(document.createTextNode(x.name));
+                    var when = document.createElement('span');
+                    when.className = 'nudge-when';
+                    when.textContent = x.last ? x.last.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : 'never';
+                    li.appendChild(when);
+                    list.appendChild(li);
+                });
+                card.appendChild(list);
+                card.appendChild(copyButton('Copy names', function() { return listText(g); }));
+            }
+            grid.appendChild(card);
+        });
+        container.appendChild(grid);
+
+        if (order.length > 1) {
+            container.appendChild(copyButton('Copy every period', function() {
+                return order.filter(function(n) { return groups[n].idle.length; }).map(function(n) { return listText(groups[n]); }).join('\n');
+            }));
+        }
+    },
+
     async loadStudents(filters) {
         var container = document.getElementById('students-table-container');
         container.textContent = '';
@@ -2011,11 +2117,11 @@ const Dashboard = {
 
             // Run sessions + progress queries in parallel
             var sbS = this.supabase;
+            // Every visit, whatever the dates in the filter: the "needs a nudge"
+            // list has to know each student's last visit ever. The date filter
+            // is applied below, to the table's totals only.
             var sessionsQuery = function() {
-                var q = sbS.from('sessions').select('student_id, started_at, duration_seconds').in('student_id', studentIds);
-                if (filters.dateStart) q = q.gte('started_at', filters.dateStart);
-                if (filters.dateEnd) q = q.lte('started_at', filters.dateEnd + 'T23:59:59');
-                return q;
+                return sbS.from('sessions').select('student_id, started_at, duration_seconds').in('student_id', studentIds);
             };
 
             var [sessRes, progRes] = await Promise.all([
@@ -2030,8 +2136,19 @@ const Dashboard = {
             (progRes.data || []).forEach(function(p) { if (p.unit_id) progUnitIds[p.unit_id] = true; });
             await this._preloadUnitConfigs(Object.keys(progUnitIds));
 
+            var lastVisit = {};
+            (sessRes.data || []).forEach(function(s) {
+                var when = new Date(s.started_at);
+                if (!lastVisit[s.student_id] || when > lastVisit[s.student_id]) lastVisit[s.student_id] = when;
+            });
+            this._renderNudge(students, lastVisit);
+
+            var fromDate = filters.dateStart ? new Date(filters.dateStart) : null;
+            var toDate = filters.dateEnd ? new Date(filters.dateEnd + 'T23:59:59') : null;
             var sessionMap = {};
             (sessRes.data || []).forEach(function(s) {
+                var at = new Date(s.started_at);
+                if ((fromDate && at < fromDate) || (toDate && at > toDate)) return;
                 if (!sessionMap[s.student_id]) sessionMap[s.student_id] = { totalSeconds: 0, lastActive: null };
                 sessionMap[s.student_id].totalSeconds += (s.duration_seconds || 0);
                 var started = new Date(s.started_at);

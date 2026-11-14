@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.112] - 2026-11-13
+
+### Added
+- **"Needs a nudge" on the dashboard's Students tab.** The tab now opens with a card for each class period listing the students who have not visited the study site in the last seven days, with the date of each one's last visit. Students who have never visited come first. **Copy names** copies one period's list and **Copy every period** copies them all, ready to paste into a note or an email. The Class filter narrows it to one class; the date filter does not change it.
+
+Proposed to the teacher with the dashboard refinements and approved.
+
 ## [8.55.111] - 2026-11-13
 
 ### Added
