@@ -2720,22 +2720,21 @@ const Dashboard = {
                 }
             }
 
-            // Build leaderboard query with server-side filters
-            var lbQuery = this.supabase
-                .from('leaderboard')
-                .select('id, student_id, unit_id, score, vocab_mastered, best_test_score, study_time_seconds, map_best_time, map_bonus, approved, updated_at')
-                .order('updated_at', { ascending: false });
-
-            if (filters && filters.unitId) {
-                lbQuery = lbQuery.eq('unit_id', filters.unitId);
-            }
-            if (classStudentIds) {
-                lbQuery = lbQuery.in('student_id', classStudentIds);
-            }
+            // Build leaderboard query with server-side filters. Paged, because
+            // with "All Units" chosen there can be more than 1,000 scores.
+            var sbL = this.supabase;
+            var lbQuery = function() {
+                var q = sbL.from('leaderboard')
+                    .select('id, student_id, unit_id, score, vocab_mastered, best_test_score, study_time_seconds, map_best_time, map_bonus, approved, updated_at')
+                    .order('updated_at', { ascending: false });
+                if (filters && filters.unitId) q = q.eq('unit_id', filters.unitId);
+                if (classStudentIds) q = q.in('student_id', classStudentIds);
+                return q;
+            };
 
             // Run leaderboard + all students queries in parallel
             var [lbResult, studentResult] = await Promise.all([
-                lbQuery,
+                this._fetchAll(lbQuery),
                 this.supabase.from('students').select('id, name, class_id, classes(code, name)')
             ]);
 
@@ -2762,7 +2761,9 @@ const Dashboard = {
             approveAllBtn.className = 'btn btn-primary';
             approveAllBtn.appendChild(this._icon('fas fa-check-double'));
             var approveText = document.createElement('span');
-            approveText.textContent = ' Approve All Pending';
+            var pendingNow = entries.filter(function(e) { return !e.approved; }).length;
+            approveText.textContent = pendingNow ? ' Approve all ' + pendingNow + ' waiting' : ' Nothing to approve';
+            approveAllBtn.disabled = !pendingNow;
             approveAllBtn.appendChild(approveText);
             approveAllBtn.addEventListener('click', async function() {
                 var pendingIds = entries.filter(function(e) { return !e.approved; }).map(function(e) { return e.id; });
@@ -2778,14 +2779,10 @@ const Dashboard = {
 
             container.appendChild(actions);
 
-            var pendingCount = entries.filter(function(e) { return !e.approved; }).length;
-
-            var summary = document.createElement('div');
-            summary.className = 'scores-summary';
-            summary.textContent = pendingCount + ' pending approval, ' + (entries.length - pendingCount) + ' approved';
-            container.appendChild(summary);
-
-            // Build table
+            // One table builder, used twice: scores waiting for approval, which
+            // are shown, and approved scores, which are folded away until wanted.
+            var self = this;
+            function buildTable(entries) {
             var wrapper = document.createElement('div');
             wrapper.className = 'data-table-wrapper';
 
@@ -2854,7 +2851,6 @@ const Dashboard = {
             table.appendChild(thead);
 
             var tbody = document.createElement('tbody');
-            var self = this;
 
             function renderRows() {
                 tbody.textContent = '';
@@ -2977,7 +2973,37 @@ const Dashboard = {
             renderRows();
             table.appendChild(tbody);
             wrapper.appendChild(table);
-            container.appendChild(wrapper);
+            return wrapper;
+            }
+
+            var pending = entries.filter(function(e) { return !e.approved; });
+            var approved = entries.filter(function(e) { return e.approved; });
+
+            var pendingTitle = document.createElement('h3');
+            pendingTitle.className = 'scores-group-title';
+            pendingTitle.textContent = 'Waiting for your approval (' + pending.length + ')';
+            container.appendChild(pendingTitle);
+            if (pending.length) {
+                container.appendChild(buildTable(pending));
+            } else {
+                var none = document.createElement('p');
+                none.className = 'panel-note scores-none';
+                none.textContent = 'No scores are waiting. New scores appear here as students study.';
+                container.appendChild(none);
+            }
+
+            if (approved.length) {
+                var fold = document.createElement('details');
+                fold.className = 'scores-approved';
+                // Stays as the teacher left it while they approve scores one by one
+                fold.open = !!Dashboard._approvedOpen;
+                fold.addEventListener('toggle', function() { Dashboard._approvedOpen = fold.open; });
+                var foldTitle = document.createElement('summary');
+                foldTitle.textContent = 'Approved (' + approved.length + ')';
+                fold.appendChild(foldTitle);
+                fold.appendChild(buildTable(approved));
+                container.appendChild(fold);
+            }
 
         } catch (err) {
             console.error('Failed to load scores:', err);

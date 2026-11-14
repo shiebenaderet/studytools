@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.115] - 2026-11-13
+
+### Changed
+- **Scores and approvals shows what is waiting and folds the rest away.** The list was one long table with pending and approved scores mixed. It now opens with **Waiting for your approval**, holding only the pending scores, and puts the approved ones under an **Approved (74)** line that opens on a click. It stays open or closed as you left it while you approve scores. The button reads "Approve all 7 waiting" and switches off when nothing is waiting.
+- The list reads every score when "All Units" is chosen, not the first 1,000.
+
+Requested by the teacher.
+
 ## [8.55.114] - 2026-11-13
 
 ### Fixed

@@ -1612,3 +1612,32 @@ body {
     background: var(--bg);
 }
 
+/* ---- Scores and approvals: waiting scores shown, approved ones folded away ---- */
+.scores-group-title {
+    font-size: 1rem;
+    color: var(--text);
+    margin: 14px 0 8px;
+}
+
+.scores-approved {
+    margin-top: 16px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--white);
+}
+
+.scores-approved > summary {
+    cursor: pointer;
+    padding: 10px 14px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.scores-approved > summary:hover {
+    background: var(--bg);
+}
+
+.scores-approved[open] > summary {
+    border-bottom: 1px solid var(--border);
+}
+
