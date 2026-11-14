@@ -1944,17 +1944,20 @@
                 {
                     "id": "legislative",
                     "label": "Legislative",
-                    "hint": "Congress, Article I"
+                    "hint": "Congress, Article I",
+                    "icon": "fas fa-landmark"
                 },
                 {
                     "id": "executive",
                     "label": "Executive",
-                    "hint": "President, Article II"
+                    "hint": "President, Article II",
+                    "icon": "fas fa-user-tie"
                 },
                 {
                     "id": "judicial",
                     "label": "Judicial",
-                    "hint": "Courts, Article III"
+                    "hint": "Courts, Article III",
+                    "icon": "fas fa-scale-balanced"
                 }
             ],
             "items": [
@@ -2054,17 +2057,20 @@
                 {
                     "id": "national",
                     "label": "National",
-                    "hint": "Delegated powers"
+                    "hint": "Delegated powers",
+                    "icon": "fas fa-flag-usa"
                 },
                 {
                     "id": "state",
                     "label": "State",
-                    "hint": "Reserved powers"
+                    "hint": "Reserved powers",
+                    "icon": "fas fa-map-location-dot"
                 },
                 {
                     "id": "both",
                     "label": "Both",
-                    "hint": "Concurrent powers"
+                    "hint": "Concurrent powers",
+                    "icon": "fas fa-handshake"
                 }
             ],
             "items": [

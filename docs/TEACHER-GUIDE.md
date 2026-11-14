@@ -690,9 +690,9 @@ These optional fields customize Learn Mode behavior per unit:
     "category": "Inside the Constitution",
     "prompt": "Which branch of the national government has this power?",
     "bins": [
-        { "id": "legislative", "label": "Legislative", "hint": "Congress, Article I" },
-        { "id": "executive", "label": "Executive", "hint": "President, Article II" },
-        { "id": "judicial", "label": "Judicial", "hint": "Courts, Article III" }
+        { "id": "legislative", "label": "Legislative", "hint": "Congress, Article I", "icon": "fas fa-landmark" },
+        { "id": "executive", "label": "Executive", "hint": "President, Article II", "icon": "fas fa-user-tie" },
+        { "id": "judicial", "label": "Judicial", "hint": "Courts, Article III", "icon": "fas fa-scale-balanced" }
     ],
     "items": [
         { "text": "Writes and passes laws", "bin": "legislative", "explanation": "Article I gives Congress the power to make laws." }
@@ -706,10 +706,10 @@ These optional fields customize Learn Mode behavior per unit:
 | `title` | Yes | Shown on the sort's card |
 | `category` | | A vocabulary category; the sort stays locked until that category unlocks |
 | `prompt` | | The question above each item |
-| `bins` | Yes | Two to four bins, each with an `id`, a `label` and an optional `hint` |
+| `bins` | Yes | Two to four bins, each with an `id`, a `label`, an optional `hint` and an optional `icon` (a Font Awesome name such as `fas fa-landmark`). A bin with no `icon` gets a plain shape. Each bin's colour comes from its position |
 | `items` | Yes | Each has `text`, the `bin` id it belongs in, and an `explanation` shown after the student answers |
 
-Items come in a random order and there is no timer. Missed items are listed with their explanations at the end, and **Practice the ones I missed** replays only those. The best score for each sort syncs across devices.
+Items come in a random order and there is no timer. Each bin shows its symbol, its colour and how many items it holds so far; on a keyboard, the number keys 1 to 4 choose a bin. The end screen is a finished chart of every item under the bin where it belongs, with the missed ones marked. Missed items are also listed with their explanations, and **Practice the ones I missed** replays only those. The best score for each sort syncs across devices.
 
 ### Theme colors
 

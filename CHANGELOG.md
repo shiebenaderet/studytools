@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.122] - 2026-11-13
+
+### Changed
+- **Power Sort is larger, clearer and has symbols.** The teacher asked for bigger text and symbols or colour for contrast.
+  - The statement to sort is about half again as large (30 px on a Chromebook), bin names went from 14 to 22 px and the hint under each from 11 to 16 px.
+  - Each bin has its own colour and its own symbol: a capitol, a person in a tie and scales for the three branches; a flag, a map pin and a handshake for National, State and Both. Colour is never the only cue.
+  - Bins are tall tiles with a solid border in place of three look-alike dark boxes, and each shows how many items it holds so far.
+  - After an answer, the right bin gets a tick and a wrong choice gets a cross on the tile itself, and the bin that was not involved fades back.
+  - On a keyboard, the number keys 1 to 4 choose a bin.
+  - The end screen is a finished chart: every item listed under the bin where it belongs, with the missed ones marked, to study from.
+  - The Next button and the progress bar were the unit's dark navy on a dark page and could barely be seen; both now show.
+- A bin in `powerSorts` can name its symbol with `"icon"`. Unit 3's six bins have one; a bin without gets a plain shape.
+
+Requested by the teacher.
+
 ## [8.55.121] - 2026-11-13
 
 ### Fixed
