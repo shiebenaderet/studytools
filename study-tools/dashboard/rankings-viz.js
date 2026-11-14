@@ -72,6 +72,12 @@ var RankingsViz = {
         heading.appendChild(document.createTextNode(' Class Rankings Over Time'));
         container.appendChild(heading);
 
+        // Says what the lines and bars measure; the numbers had no unit
+        var note = document.createElement('p');
+        note.className = 'panel-note';
+        note.textContent = 'Each class period\'s average score: the points of its approved students divided by how many there are, at the end of each day.';
+        container.appendChild(note);
+
         var lineContainer = document.createElement('div');
         lineContainer.className = 'rankings-line-chart';
         container.appendChild(lineContainer);
@@ -210,7 +216,7 @@ var RankingsViz = {
                 nameSpan.textContent = cls.name;
                 tooltip.appendChild(nameSpan);
                 tooltip.appendChild(document.createElement('br'));
-                tooltip.appendChild(document.createTextNode(dateStr + ': ' + closest.avg + ' avg'));
+                tooltip.appendChild(document.createTextNode(dateStr + ': ' + closest.avg + ' pts average'));
                 tooltip.style.display = 'block';
                 tooltip.style.left = Math.min(closest.x + 12, width - 120) + 'px';
                 tooltip.style.top = (closest.y - 10) + 'px';
@@ -360,7 +366,7 @@ var RankingsViz = {
 
         var positions = {};
         var labelWidth = 100;
-        var barAreaW = width - labelWidth - 60;
+        var barAreaW = width - labelWidth - 84;
 
         function initPositions(dayIdx) {
             var snap = daySnapshots[dayIdx] || [];
@@ -416,7 +422,7 @@ var RankingsViz = {
 
                 ctx.fillStyle = '#666';
                 ctx.textAlign = 'left';
-                ctx.fillText(Math.round(p.avg), labelWidth + bw + 8, p.y + barHeight / 2 + 5);
+                ctx.fillText(Math.round(p.avg) + ' pts', labelWidth + bw + 8, p.y + barHeight / 2 + 5);
             }
         }
 

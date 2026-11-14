@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.109] - 2026-11-13
+
+### Fixed
+- **The rankings chart and the Replay were missing most days.** Both read the daily score snapshots, which hold one row per student per day, and both hit the same 1,000-row limit fixed in 8.55.106. The Class Rankings chart and Class Race showed only about the first ten days of a unit, and the Leaderboard Replay offered only the newest day or two. Both now read every day, for the unit chosen in the filter.
+
+### Changed
+- The Class Rankings chart says what it measures (each period's average score per approved student), and the race bars and the chart's pop-up label their numbers "pts".
+
+Found while preparing the Friday graphics the teacher asked for. Checked against a stand-in database with 40 days of scores; the live data could not be seen from here.
+
 ## [8.55.108] - 2026-11-13
 
 ### Changed

@@ -1259,12 +1259,16 @@ const Dashboard = {
             if (vizContainer && typeof RankingsViz !== 'undefined') {
                 if (vizContainer._raceCleanup) vizContainer._raceCleanup();
 
-                var vizQuery = this.supabase.from('leaderboard_snapshots')
-                    .select('student_id, score, class_id, snapshot_date')
-                    .order('snapshot_date', { ascending: true })
-                    .limit(5000);
-                if (filters.unitId) vizQuery = vizQuery.eq('unit_id', filters.unitId);
-                var vizRes = await vizQuery;
+                // One row per student per day, so a unit passes 1,000 rows in about
+                // ten days. Asking for 5,000 did not help: the server stops at 1,000,
+                // and the chart showed only a unit's first days.
+                var vizRes = await this._fetchAll(function() {
+                    var q = sb.from('leaderboard_snapshots')
+                        .select('student_id, score, class_id, snapshot_date')
+                        .order('snapshot_date', { ascending: true });
+                    if (filters.unitId) q = q.eq('unit_id', filters.unitId);
+                    return q;
+                });
                 var vizData = vizRes.data || [];
 
                 if (filters.classId) {
@@ -1380,11 +1384,17 @@ const Dashboard = {
         var self = this;
 
         // Check if snapshots table has data
-        var datesRes = await this.supabase
-            .from('leaderboard_snapshots')
-            .select('snapshot_date')
-            .order('snapshot_date', { ascending: false })
-            .limit(100);
+        // Every day that has scores, for the unit chosen. This used to read the
+        // newest 100 rows, which is one day of one class set, so the Replay
+        // offered only the last day or two.
+        var sbR = this.supabase;
+        var datesRes = await this._fetchAll(function() {
+            var q = sbR.from('leaderboard_snapshots')
+                .select('snapshot_date')
+                .order('snapshot_date', { ascending: false });
+            if (filters.unitId) q = q.eq('unit_id', filters.unitId);
+            return q;
+        });
 
         if (datesRes.error || !datesRes.data || datesRes.data.length === 0) return;
 
