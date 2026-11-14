@@ -932,11 +932,20 @@ const Dashboard = {
 
             // Render stat cards
             container.textContent = '';
+            // Every number says what it counts: the teacher could not tell
+            // students from visits from hours when the cards showed bare numbers.
+            var enrolled = studentRes.count || 0;
+            var scope = (filters.classId ? 'this class' : 'all classes') + (filters.unitId ? ', this unit' : ', every unit');
             var stats = [
-                { icon: 'fas fa-users', value: studentRes.count || 0, label: 'Total Students' },
-                { icon: 'fas fa-bolt', value: activeCount, label: 'Active This Week' },
-                { icon: 'fas fa-clock', value: totalHours, label: 'Total Study Hours' },
-                { icon: 'fas fa-stopwatch', value: avgMinutes + ' min', label: 'Typical Visit' }
+                { icon: 'fas fa-users', value: enrolled, unit: enrolled === 1 ? 'student' : 'students', label: 'Signed Up',
+                  sub: filters.classId ? 'in this class' : 'in all classes' },
+                { icon: 'fas fa-bolt', value: activeCount, unit: activeCount === 1 ? 'student' : 'students',
+                  label: filters.dateStart ? 'Studied In These Dates' : 'Studied This Week',
+                  sub: 'out of ' + enrolled + (filters.dateStart ? '' : ', in the last 7 days') },
+                { icon: 'fas fa-clock', value: totalHours, unit: 'hours', label: 'Total Study Time',
+                  sub: 'added together, ' + scope },
+                { icon: 'fas fa-stopwatch', value: avgMinutes, unit: 'min', label: 'Typical Visit',
+                  sub: 'how long one sitting lasts' }
             ];
 
             var self = this;
@@ -951,14 +960,23 @@ const Dashboard = {
                 var valueDiv = document.createElement('div');
                 valueDiv.className = 'stat-value';
                 valueDiv.textContent = stat.value;
+                var unitSpan = document.createElement('span');
+                unitSpan.className = 'stat-unit';
+                unitSpan.textContent = ' ' + stat.unit;
+                valueDiv.appendChild(unitSpan);
 
                 var labelDiv = document.createElement('div');
                 labelDiv.className = 'stat-label';
                 labelDiv.textContent = stat.label;
 
+                var subDiv = document.createElement('div');
+                subDiv.className = 'stat-sub';
+                subDiv.textContent = stat.sub;
+
                 card.appendChild(iconDiv);
                 card.appendChild(valueDiv);
                 card.appendChild(labelDiv);
+                card.appendChild(subDiv);
                 container.appendChild(card);
             });
 
@@ -976,11 +994,17 @@ const Dashboard = {
                     var day = new Date();
                     day.setDate(day.getDate() - (6 - d));
                     var key = Dashboard._localDateKey(day);
-                    dayCounts[key] = { count: 0, label: dayNames[day.getDay()], isToday: d === 6 };
+                    dayCounts[key] = { count: 0, visits: 0, seen: {}, label: dayNames[day.getDay()], isToday: d === 6 };
                 }
+                // The bar is the number of different students that day. Visits are
+                // shown beside it: one student who opens the site three times is
+                // three visits, which is what the bare number used to be.
                 trendSessions.forEach(function(s) {
                     var dayKey = Dashboard._localDateKey(new Date(s.started_at));
-                    if (dayCounts[dayKey]) dayCounts[dayKey].count++;
+                    var day = dayCounts[dayKey];
+                    if (!day) return;
+                    day.visits++;
+                    if (!day.seen[s.student_id]) { day.seen[s.student_id] = true; day.count++; }
                 });
 
                 var maxCount = 0;
@@ -989,8 +1013,13 @@ const Dashboard = {
 
                 var heading = document.createElement('h3');
                 heading.appendChild(self._icon('fas fa-chart-bar'));
-                heading.appendChild(document.createTextNode(' Daily Activity'));
+                heading.appendChild(document.createTextNode(' Students Studying Each Day'));
                 trendContainer.appendChild(heading);
+
+                var trendNote = document.createElement('p');
+                trendNote.className = 'panel-note';
+                trendNote.textContent = 'The last 7 days' + (filters.classId ? ', this class' : ', all classes') + '. Each bar is how many different students opened the site that day. Today is orange.';
+                trendContainer.appendChild(trendNote);
 
                 dayKeys.forEach(function(k) {
                     var row = document.createElement('div');
@@ -1010,7 +1039,12 @@ const Dashboard = {
 
                     var count = document.createElement('span');
                     count.className = 'trend-count';
-                    count.textContent = dayCounts[k].count;
+                    var day = dayCounts[k];
+                    count.textContent = day.count + (day.count === 1 ? ' student' : ' students');
+                    var visitsEl = document.createElement('span');
+                    visitsEl.className = 'trend-visits';
+                    visitsEl.textContent = day.visits + (day.visits === 1 ? ' visit' : ' visits');
+                    count.appendChild(visitsEl);
 
                     track.appendChild(fill);
                     row.appendChild(label);
@@ -1181,7 +1215,7 @@ const Dashboard = {
 
                         var statsEl = document.createElement('div');
                         statsEl.className = 'class-lb-stats';
-                        statsEl.textContent = cls.studentCount + ' students \u00B7 avg ' + cls.avgScore + ' pts';
+                        statsEl.textContent = cls.studentCount + (cls.studentCount === 1 ? ' student' : ' students') + ' with a score \u00B7 average ' + cls.avgScore + ' pts each';
 
                         info.appendChild(nameEl);
                         info.appendChild(statsEl);
@@ -1191,7 +1225,8 @@ const Dashboard = {
 
                         var totalEl = document.createElement('div');
                         totalEl.className = 'class-lb-total';
-                        totalEl.textContent = cls.totalScore.toLocaleString();
+                        totalEl.textContent = cls.totalScore.toLocaleString() + ' pts';
+                        totalEl.title = 'Every approved student\'s score in this class, added together';
 
                         var dailyEl = document.createElement('div');
                         dailyEl.className = 'class-lb-daily';

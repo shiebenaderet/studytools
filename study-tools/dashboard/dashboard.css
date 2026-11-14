@@ -368,6 +368,20 @@ body {
     line-height: 1.2;
 }
 
+/* The unit after a headline number ("58 students", "12 min") */
+.stat-card .stat-unit {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-light);
+}
+
+/* One plain line under the label saying what was counted */
+.stat-card .stat-sub {
+    font-size: 0.78rem;
+    color: var(--text-light);
+    margin-top: 2px;
+}
+
 .stat-card .stat-label {
     font-size: 0.85rem;
     color: var(--text-light);
@@ -951,10 +965,26 @@ body {
 }
 
 .trend-count {
-    min-width: 28px;
+    min-width: 132px;
+    font-size: 0.8rem;
+    color: var(--text);
+    font-weight: 600;
+    text-align: left;
+    white-space: nowrap;
+}
+
+/* The count of visits sits beside the count of students, quieter */
+.trend-visits {
+    margin-left: 8px;
+    color: var(--text-light);
+    font-weight: 400;
+}
+
+.panel-note {
     font-size: 0.8rem;
     color: var(--text-light);
-    text-align: right;
+    margin: -6px 0 12px;
+    line-height: 1.4;
 }
 
 /* ---- Recently Active Feed ---- */

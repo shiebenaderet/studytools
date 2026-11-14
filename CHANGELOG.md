@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.108] - 2026-11-13
+
+### Changed
+- **Every number on the dashboard's Overview says what it counts.** The teacher could not tell what the bare numbers meant. The four cards now read "114 students, signed up", "58 students, studied this week, out of 114", "212 hours, total study time" and "12 min, typical visit", each with one line underneath saying what was counted.
+- **Daily Activity is now "Students Studying Each Day."** The bars used to count visits, so a student who opened the site three times counted three times, and the number had no label. Each bar is now the number of different students that day, with the count of visits beside it, and a line above the chart says which days and classes it covers.
+- Class Standings totals are labelled "pts", and each class shows how many students have a score and their average.
+
+Reported by the teacher.
+
 ## [8.55.107] - 2026-11-13
 
 ### Changed
