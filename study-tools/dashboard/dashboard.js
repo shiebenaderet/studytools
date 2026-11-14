@@ -1293,6 +1293,9 @@ const Dashboard = {
 
                 var vizClassMap = {};
                 (classesRes.data || []).forEach(function(c) { vizClassMap[c.id] = c.name || c.code; });
+                if (typeof ClassGraphics !== 'undefined') {
+                    RankingsViz.colorMap = ClassGraphics.classColors(classesRes.data || []);
+                }
 
                 RankingsViz.render(vizContainer, vizData, vizClassMap);
             }
@@ -1706,11 +1709,14 @@ const Dashboard = {
 
         // The races: about ten seconds, looping, from the unit's first day of
         // scores (or the From date) to today
+        var forceMeasure = null;
         async function race(kind, name, progress) {
+            var by = forceMeasure || measure.value;
+            forceMeasure = null;
             var d = await self._graphicsData(filters);
             var days = await self._raceDays(d, filters);
             var classId = kind === 'students' ? filters.classId : null;
-            var model = self._raceModel(d, days, kind, measure.value, classId);
+            var model = self._raceModel(d, days, kind, by, classId);
             var blob = await ClassGraphics.raceGif(model, function(done) {
                 progress('Drawing the race\u2026 ' + Math.round(done * 100) + '%');
             });
@@ -1729,6 +1735,18 @@ const Dashboard = {
         addButton('graphic-top-ten-race', 'fas fa-film', 'Top ten race (GIF)', function(progress) {
             return race('students', 'top-ten-race', progress);
         });
+
+        // "Save as a GIF" under the Class Race further down the tab. That chart
+        // shows averages, so this one file is made the same way whatever the
+        // menu says, and the page moves up to this panel, where the progress
+        // and the preview appear.
+        if (typeof RankingsViz !== 'undefined') {
+            RankingsViz.onSaveGif = function() {
+                forceMeasure = 'average';
+                container.scrollIntoView({ block: 'center' });
+                document.getElementById('graphic-class-race').click();
+            };
+        }
     },
 
     async _renderReplay(container, filters, studentNameMap, studentClassMap, classes) {

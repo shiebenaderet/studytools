@@ -1596,3 +1596,19 @@ body {
     background: var(--bg);
 }
 
+/* "Save as a GIF" beside the Class Race's play button */
+.race-save-btn {
+    margin-left: auto;
+    font-size: 0.8rem;
+    padding: 5px 10px;
+    border: 1px solid var(--border);
+    background: var(--white);
+    color: var(--text);
+    border-radius: var(--radius);
+    cursor: pointer;
+}
+
+.race-save-btn:hover {
+    background: var(--bg);
+}
+

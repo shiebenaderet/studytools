@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.114] - 2026-11-13
+
+### Fixed
+- **Class names were cut off in the Class Race.** The chart gave names a fixed width, so "Period 2 US History" lost its first letters. The name column is now as wide as the longest class name. The slide pictures and GIFs size their name column the same way.
+
+### Added
+- **Save as a GIF** beside the Class Race's play button. The teacher looked for the export on the race itself; the buttons were further up the tab under Graphics for class. The new button makes the class race GIF, ranked by average as that chart is, and moves the page to the preview.
+
+### Changed
+- The Class Rankings chart and Class Race now use the same colour for each class period as the slide pictures and GIFs.
+
+Reported by the teacher.
+
 ## [8.55.113] - 2026-11-13
 
 ### Fixed

@@ -42,7 +42,9 @@ var RankingsViz = {
             }
             classes[cid] = {
                 name: classNameMap[cid] || 'Unknown',
-                color: this.COLORS[c % this.COLORS.length],
+                // One colour per class, the same one the class graphics use, when the
+                // dashboard has supplied the map; otherwise by position.
+                color: (this.colorMap && this.colorMap[cid]) || this.COLORS[c % this.COLORS.length],
                 averages: averages
             };
         }
@@ -331,6 +333,16 @@ var RankingsViz = {
         progress.className = 'race-progress';
         controls.appendChild(progress);
 
+        // The dashboard supplies this: it makes the file with "Graphics for class"
+        if (typeof self.onSaveGif === 'function') {
+            var saveBtn = document.createElement('button');
+            saveBtn.className = 'btn race-save-btn';
+            saveBtn.appendChild(self._icon('fas fa-download'));
+            saveBtn.appendChild(document.createTextNode(' Save as a GIF'));
+            saveBtn.addEventListener('click', function() { self.onSaveGif(); });
+            controls.appendChild(saveBtn);
+        }
+
         container.appendChild(controls);
 
         if (dates.length <= 1) {
@@ -364,8 +376,15 @@ var RankingsViz = {
             }
         }
 
+        // The name column is as wide as the longest class name ("Period 2 US
+        // History" was cut off at a fixed 100), up to 45% of the chart.
         var positions = {};
         var labelWidth = 100;
+        ctx.font = '13px system-ui, sans-serif';
+        for (var n = 0; n < classIds.length; n++) {
+            labelWidth = Math.max(labelWidth, Math.ceil(ctx.measureText(data.classes[classIds[n]].name).width) + 20);
+        }
+        labelWidth = Math.min(labelWidth, Math.round(width * 0.45));
         var barAreaW = width - labelWidth - 84;
 
         function initPositions(dayIdx) {

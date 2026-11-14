@@ -118,7 +118,22 @@ var ClassGraphics = {
         var big = rowH >= 80;
         var nameSize = big ? 30 : 22, subSize = big ? 18 : 15, rankSize = big ? 34 : 24;
         var barH = Math.min(Math.round(rowH * 0.62), 58);
-        var nameX = 108, nameW = big ? 300 : 250;
+        // The name column is as wide as the longest name that can appear, so a
+        // class called "Period 2 US History" is not cut short. In a race every
+        // frame must use the same width, so it is worked out once and kept.
+        var nameX = 108;
+        var layout = scene.layout || {};
+        if (layout.nameW == null) {
+            var widest = 0;
+            var names = scene.labels || (scene.rows || []).map(function(r) { return r.name; });
+            var subs = scene.subLabels || (scene.rows || []).map(function(r) { return r.sub || ''; });
+            ctx.font = '700 ' + nameSize + 'px ' + F;
+            names.forEach(function(t) { widest = Math.max(widest, ctx.measureText(t).width); });
+            ctx.font = '400 ' + subSize + 'px ' + F;
+            subs.forEach(function(t) { widest = Math.max(widest, ctx.measureText(t).width); });
+            layout.nameW = Math.max(170, Math.min(470, Math.ceil(widest) + 4));
+        }
+        var nameW = layout.nameW;
         var barX = nameX + nameW + 20;
         var valueW = big ? 190 : 150;
         var barMax = W - PAD - barX - valueW;
@@ -225,7 +240,13 @@ var ClassGraphics = {
             ranks.push(row);
             maxes.push(present.length ? Math.max(1, model.items[present[0]].values[d]) : 1);
         }
-        return { ranks: ranks, maxes: maxes };
+        return {
+            ranks: ranks,
+            maxes: maxes,
+            layout: {},
+            labels: model.items.map(function(it) { return it.name; }),
+            subLabels: model.items.map(function(it) { return it.sub || ''; })
+        };
     },
 
     _dayLabel(key) {
@@ -262,6 +283,9 @@ var ClassGraphics = {
             footer: model.footer,
             legend: model.legend,
             slots: model.slots,
+            layout: pre.layout,
+            labels: pre.labels,
+            subLabels: pre.subLabels,
             dateText: this._dayLabel(model.days[day]),
             dateSub: 'Day ' + (day + 1) + ' of ' + model.days.length,
             max: pre.maxes[d0] + (pre.maxes[d1] - pre.maxes[d0]) * f,

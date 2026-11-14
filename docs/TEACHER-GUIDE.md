@@ -601,6 +601,7 @@ On the dashboard's **Leaderboard** tab, **Graphics for class** makes files to sh
 - The graphics cover the unit in the Unit filter, which opens on the current unit.
 - Only students whose scores you have approved appear, as first name and last initial.
 - **Rank class periods by** chooses between points added together (the order students see on the site, which rewards a whole class taking part) and average points per student (fairer when class sizes differ).
+- The **Class Race** chart further down the tab has its own **Save as a GIF** button, which makes the class race ranked by average, as that chart is.
 - A GIF plays by itself in Google Slides, a Canvas page or an email: insert it like any picture. The files are 1280 by 720 and usually 1 to 5 MB.
 - A race needs at least two days of scores, so it is not available on a unit's first day. To show only part of a unit, set the **From** and **To** dates before making it.
 - The last frame of a race uses the live scores, so it matches the pictures and what students see on the site at that moment.
