@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.104] - 2026-11-13
+
+### Fixed
+- **Wordle ran out of words.** It used only must-know, one-word terms, which left seven words in Unit 1 and would have left four in the first week of Unit 3, and it avoided only the most recent half of them. It now uses every one-word term of 4 to 12 letters in the student's open chapters (vocabulary of any tier, plus the textbook's one-word key terms, shown with their notes), plays the whole list before any word repeats, and remembers what has been played between visits. Unit 1 goes from 7 words to 15; Unit 3 from 14 to 62, with 12 in its first week. If a clue uses the answer itself, that word is blanked out. Suggested by a period 3 student.
+
 ## [8.55.103] - 2026-11-13
 
 ### Fixed

@@ -23,21 +23,17 @@ StudyEngine.registerActivity({
 
     render(container, config) {
         this._container = container;
-        this._filteredVocab = MasteryManager.getMustKnowVocabulary(config.unit.id, config)
-            .filter(v => {
-                const cleaned = v.term.replace(/[^a-zA-Z]/g, '');
-                // Only single-word terms (no spaces) that are 4-12 letters
-                return !/\s/.test(v.term.trim()) && cleaned.length >= 4 && cleaned.length <= 12;
-            })
-            .map(v => {
-                const word = v.term.replace(/[^a-zA-Z]/g, '').toUpperCase();
-                return { vocab: v, word: word };
-            });
+        this._filteredVocab = this._buildPool(config);
 
-        // Load saved stats
+        // Load saved stats, and the words already played so they do not come
+        // round again until the whole list has been used
         const saved = ProgressManager.getActivityProgress(config.unit.id, 'wordle');
+        this._recentWords = [];
         if (saved) {
             this._stats = { wins: saved.wins || 0, losses: saved.losses || 0, streak: saved.streak || 0 };
+            const inPool = {};
+            this._filteredVocab.forEach(v => { inPool[v.word] = true; });
+            this._recentWords = (saved.seen || []).filter(w => inPool[w]);
         }
 
         // Main wrapper
@@ -48,6 +44,41 @@ StudyEngine.registerActivity({
         container.appendChild(wrapper);
 
         this._newGame();
+    },
+
+    // Every one-word term of 4 to 12 letters in the chapters the student has open:
+    // vocabulary of any tier, then the textbook's key terms (shown with their
+    // note). A student reported that the old list, must-know terms only, was
+    // seven words long in one unit and repeated within a few games.
+    _buildPool(config) {
+        const unitId = config.unit.id;
+        const pool = [], have = {};
+        const add = (term, vocab) => {
+            const word = String(term || '').replace(/[^a-zA-Z]/g, '').toUpperCase();
+            if (/\s/.test(String(term).trim()) || word.length < 4 || word.length > 12 || have[word]) return;
+            have[word] = true;
+            pool.push({ vocab: vocab, word: word });
+        };
+        (MasteryManager.getUnlockedVocabulary(unitId, config) || []).forEach(v => add(v.term, v));
+        const tb = MasteryManager._textbookCache && MasteryManager._textbookCache[unitId];
+        if (tb && tb.segments) {
+            const open = MasteryManager.getUnlockedCategories(unitId, config);
+            tb.segments.forEach(seg => {
+                if (open.indexOf(seg.category || seg.title) === -1) return;
+                (seg.sections || []).forEach(sec => (sec.keyTerms || []).forEach(k => {
+                    if (k && k.term && k.note) add(k.term, { term: k.term, definition: k.note });
+                }));
+            });
+        }
+        return pool;
+    },
+
+    // The clue is the term's meaning. If the meaning uses the word itself
+    // ("Only a president can veto"), that word is blanked out.
+    _clueFor(vocab, word) {
+        const w = word.toLowerCase();
+        const stem = w.length <= 5 ? w.replace(/[es]$/, '') : w.slice(0, -2);
+        return String(vocab.definition || '').replace(new RegExp('\\b' + stem + '[a-z]*', 'gi'), '_____');
     },
 
     _newGame() {
@@ -62,15 +93,19 @@ StudyEngine.registerActivity({
         if (this._filteredVocab.length === 0) return;
         var available = this._filteredVocab.filter(v => this._recentWords.indexOf(v.word) === -1);
         if (available.length === 0) {
-            this._recentWords = [];
-            available = this._filteredVocab;
+            // Every word has been played: start the list again, but not with
+            // the word the student just had
+            var last = this._recentWords[this._recentWords.length - 1];
+            this._recentWords = this._filteredVocab.length > 1 && last ? [last] : [];
+            available = this._filteredVocab.filter(v => this._recentWords.indexOf(v.word) === -1);
         }
         const pick = available[Math.floor(Math.random() * available.length)];
         this._targetWord = pick.word;
         this._targetVocab = pick.vocab;
         this._recentWords.push(pick.word);
-        // Keep history to half the pool size so words cycle back eventually
-        var maxHistory = Math.max(1, Math.floor(this._filteredVocab.length / 2));
+        this._saveProgress();
+        // (history is the whole list now; it is trimmed only as a safety net)
+        var maxHistory = Math.max(1, this._filteredVocab.length);
         if (this._recentWords.length > maxHistory) {
             this._recentWords = this._recentWords.slice(-maxHistory);
         }
@@ -95,7 +130,7 @@ StudyEngine.registerActivity({
         clueBox.appendChild(clueLabel);
 
         const clueDef = document.createElement('div');
-        clueDef.textContent = this._targetVocab.definition;
+        clueDef.textContent = this._clueFor(this._targetVocab, this._targetWord);
         clueBox.appendChild(clueDef);
 
         const lengthHint = document.createElement('div');
@@ -428,7 +463,8 @@ StudyEngine.registerActivity({
         ProgressManager.saveActivityProgress(StudyEngine.config.unit.id, 'wordle', {
             wins: this._stats.wins,
             losses: this._stats.losses,
-            streak: this._stats.streak
+            streak: this._stats.streak,
+            seen: this._recentWords.slice()
         });
     },
 

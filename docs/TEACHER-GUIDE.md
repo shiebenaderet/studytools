@@ -361,7 +361,7 @@ Add any of these to your `activities` array:
 #### 🎮 Games
 | Activity ID | What it does | Required content |
 |------------|-------------|-----------------|
-| `wordle` | Guess the term in 6 tries | `vocabulary` |
+| `wordle` | Guess the term in 6 tries. Uses every one-word term of 4 to 12 letters in the student's open chapters: vocabulary of any tier, plus the textbook's one-word key terms. Plays the whole list before a word repeats. | `vocabulary`, textbook `keyTerms` (optional) |
 | `hangman` | Classic word guessing | `vocabulary` |
 | `flip-match` | Memory matching (terms to definitions) | `vocabulary` |
 | `term-catcher` | Catch the falling correct term | `vocabulary` |
