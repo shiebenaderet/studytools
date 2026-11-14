@@ -487,8 +487,11 @@ const Dashboard = {
         document.getElementById('dashboard').classList.remove('hidden');
         // Run all init tasks in parallel
         this.loadVersion();
-        Promise.all([this.loadClasses(), this.loadUnitFilter()]);
-        this.switchTab('overview');
+        // The first tab waits for the Unit menu, so it opens on the current unit
+        // and not on every unit mixed together.
+        var self = this;
+        var start = function() { self.switchTab('overview'); };
+        Promise.all([this.loadClasses(), this.loadUnitFilter()]).then(start, start);
     },
 
     async loadVersion() {
@@ -721,10 +724,12 @@ const Dashboard = {
             try {
                 var unitsResp = await fetch('../units/units.json', { cache: 'no-cache' });
                 var unitsData = await unitsResp.json();
+                Dashboard._unitsMeta = {};
                 (unitsData.units || []).forEach(function(u) {
                     // Last year's units are hidden from students; leave them out here too.
                     // If old progress for one is still in the database it is added below.
                     if (u.hidden || u.draft) return;
+                    Dashboard._unitsMeta[u.id] = u;
                     if (!seen[u.id]) {
                         seen[u.id] = true;
                         unitIds.push(u.id);
@@ -748,15 +753,34 @@ const Dashboard = {
                 });
             }
 
+            var current = this._currentUnitId();
             unitIds.forEach(function(uid) {
                 var opt = document.createElement('option');
                 opt.value = uid;
-                opt.textContent = uid.replace(/-/g, ' ').replace(/\b\w/g, function(c) { return c.toUpperCase(); });
+                opt.textContent = Dashboard._unitTitle(uid) + (uid === current ? ' (current)' : '');
                 select.appendChild(opt);
             });
+            // Scores are kept per unit, so the dashboard opens on the unit students
+            // are in now. "All Units" is still in the menu.
+            if (current) select.value = current;
         } catch (err) {
             console.error('Failed to load unit filter:', err);
         }
+    },
+
+    // The unit students are working in now: of the units students can see, the
+    // one whose "opens" date is the latest that is not in the future. Null when
+    // units.json could not be read or no unit has opened.
+    _currentUnitId() {
+        var meta = this._unitsMeta || {};
+        var today = this._localDateKey(new Date());
+        var best = null;
+        Object.keys(meta).forEach(function(id) {
+            var opens = meta[id].opens;
+            if (!opens || opens > today) return;
+            if (!best || opens > meta[best].opens) best = id;
+        });
+        return best;
     },
 
     async loadOverview(filters) {

@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.107] - 2026-11-13
+
+### Changed
+- **The teacher dashboard opens on the current unit.** Scores have always been kept per unit, and a student starts each new unit at zero, but the dashboard's Unit filter opened on "All Units" and so mixed every unit's scores together. It now opens on the unit students are in: of the units students can see, the one whose `opens` date in `units.json` is the latest that has arrived. That unit is marked "(current)" in the menu, and "All Units" is still a choice.
+
+Requested by the teacher ("scoring should reset each unit").
+
 ## [8.55.106] - 2026-11-13
 
 ### Fixed
