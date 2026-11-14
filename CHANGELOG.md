@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.103] - 2026-11-13
+
+### Fixed
+- Teacher dashboard: the tab bar no longer runs off the side of the page. Eleven tabs did not fit on one line, so the bar overflowed, the last tabs sat outside the page and long labels broke onto two lines. The bar now wraps onto a second row, each label stays on one line, and the active tab is shown as a filled pill. Reported by the teacher.
+
 ## [8.55.102] - 2026-11-13
 
 ### Added
