@@ -1486,6 +1486,99 @@ const Dashboard = {
         };
     },
 
+    // Every day of scores for the unit, as the race needs them: one list of
+    // days, and for each approved student a score on each day. A day with no
+    // row for a student keeps the score from the day before. Today is taken
+    // from the live leaderboard, so the last frame matches what students see now.
+    async _raceDays(d, filters) {
+        var sb = this.supabase;
+        var res = await this._fetchAll(function() {
+            var q = sb.from('leaderboard_snapshots').select('student_id, score, snapshot_date').eq('unit_id', d.unitId);
+            if (filters.dateStart) q = q.gte('snapshot_date', filters.dateStart);
+            if (filters.dateEnd) q = q.lte('snapshot_date', filters.dateEnd);
+            return q;
+        });
+        if (res.error) throw res.error;
+
+        var today = this._localDateKey(new Date());
+        var live = {};
+        d.scores.forEach(function(e) { live[e.studentId] = e.score; });
+        var useToday = !filters.dateEnd || filters.dateEnd >= today;
+
+        var daySet = {};
+        var byStudent = {};
+        (res.data || []).forEach(function(r) {
+            if (!(r.student_id in live) || r.snapshot_date > today) return;
+            if (useToday && r.snapshot_date === today) return;
+            daySet[r.snapshot_date] = true;
+            if (!byStudent[r.student_id]) byStudent[r.student_id] = {};
+            byStudent[r.student_id][r.snapshot_date] = r.score || 0;
+        });
+        if (useToday) {
+            daySet[today] = true;
+            Object.keys(live).forEach(function(id) {
+                if (!byStudent[id]) byStudent[id] = {};
+                byStudent[id][today] = live[id];
+            });
+        }
+        var days = Object.keys(daySet).sort();
+        var series = {};
+        Object.keys(byStudent).forEach(function(id) {
+            var lastSeen = null;
+            series[id] = days.map(function(day) {
+                if (byStudent[id][day] != null) lastSeen = byStudent[id][day];
+                return lastSeen;
+            });
+        });
+        return { days: days, series: series };
+    },
+
+    // kind: 'classes' (the periods race) or 'students' (the top ten race)
+    _raceModel(d, race, kind, measure, classId) {
+        var items;
+        if (kind === 'classes') {
+            items = d.classes.map(function(c) {
+                var values = race.days.map(function(_, day) {
+                    var total = 0, count = 0;
+                    Object.keys(race.series).forEach(function(id) {
+                        var v = race.series[id][day];
+                        if (v == null || d.students[id].classId !== c.id) return;
+                        total += v;
+                        count++;
+                    });
+                    return count ? (measure === 'average' ? total / count : total) : null;
+                });
+                return { name: c.name, sub: '', color: d.colors[c.id], values: values };
+            }).filter(function(it) { return it.values.some(function(v) { return v != null; }); });
+        } else {
+            items = Object.keys(race.series).filter(function(id) {
+                return !classId || d.students[id].classId === classId;
+            }).map(function(id) {
+                var st = d.students[id];
+                return { name: st.name, sub: classId ? '' : d.classNames[st.classId], color: d.colors[st.classId], values: race.series[id] };
+            });
+        }
+        if (!items.length) throw new Error('No approved scores here yet.');
+        if (race.days.length < 2) {
+            throw new Error('A race needs at least two days of scores, and ' + d.unitTitle + ' has ' + race.days.length + ' so far. Try again tomorrow, or clear the From and To dates if they are set.');
+        }
+        var students = kind === 'students';
+        return {
+            title: students ? 'Top Ten Race' + (classId ? ': ' + d.classNames[classId] : '') : 'Class Race',
+            subtitle: d.unitTitle,
+            header: d.header,
+            footer: students ? 'Points earned in this unit.'
+                : (measure === 'average' ? 'Average points per student in this unit.'
+                                         : 'Points earned in this unit by everyone in the period, added together.'),
+            legend: students && !classId ? d.classes.filter(function(c) {
+                return items.some(function(it) { return it.sub === c.name; });
+            }).map(function(c) { return { name: c.name, color: d.colors[c.id] }; }) : null,
+            slots: students ? Math.min(10, Math.max(items.length, 5)) : Math.max(items.length, 2),
+            days: race.days,
+            items: items
+        };
+    },
+
     _slug(text) {
         return String(text).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
     },
@@ -1594,6 +1687,32 @@ const Dashboard = {
             var who = filters.classId ? '-' + self._slug(d.classNames[filters.classId] || 'class') : '';
             return { blob: blob, filename: 'top-ten' + who + '-' + d.unitId + '-' + stamp() + '.png',
                      alt: scene.title + ' for ' + d.unitTitle + ': ' + scene.rows.map(function(r) { return r.name + ', ' + ClassGraphics.points(r.value); }).join('; ') };
+        });
+
+        // The races: about ten seconds, looping, from the unit's first day of
+        // scores (or the From date) to today
+        async function race(kind, name, progress) {
+            var d = await self._graphicsData(filters);
+            var days = await self._raceDays(d, filters);
+            var classId = kind === 'students' ? filters.classId : null;
+            var model = self._raceModel(d, days, kind, measure.value, classId);
+            var blob = await ClassGraphics.raceGif(model, function(done) {
+                progress('Drawing the race\u2026 ' + Math.round(done * 100) + '%');
+            });
+            var end = ClassGraphics.raceScene(model, model.days.length - 1).rows
+                .sort(function(a, b) { return a.pos - b.pos; }).slice(0, model.slots);
+            var who = classId ? '-' + self._slug(d.classNames[classId] || 'class') : '';
+            return { blob: blob, filename: name + who + '-' + d.unitId + '-' + stamp() + '.gif',
+                     alt: model.title + ' for ' + d.unitTitle + ', ' + model.days.length + ' days. It ends: ' +
+                          end.map(function(r) { return r.name + ', ' + ClassGraphics.points(r.value); }).join('; ') };
+        }
+
+        addButton('graphic-class-race', 'fas fa-film', 'Class race (GIF)', function(progress) {
+            return race('classes', 'class-race', progress);
+        });
+
+        addButton('graphic-top-ten-race', 'fas fa-film', 'Top ten race (GIF)', function(progress) {
+            return race('students', 'top-ten-race', progress);
         });
     },
 

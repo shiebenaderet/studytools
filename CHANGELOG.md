@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.111] - 2026-11-13
+
+### Added
+- **The Friday race, as a GIF.** **Graphics for class** on the dashboard's Leaderboard tab has two more buttons. **Class race (GIF)** and **Top ten race (GIF)** each save a looping animation, 1280 by 720, of scores growing day by day from the unit's first day to now, with bars sliding past one another when the order changes. It runs about 10 to 15 seconds and pauses on the last day. A GIF plays by itself in Google Slides, a Canvas page or an email.
+  - Same rules as the pictures: the unit in the Unit filter, approved students only, first name and last initial, class periods ranked by points added together unless the menu says average. The From and To dates limit the days shown.
+  - The last frame uses the live scores, so it matches the pictures and the student site.
+  - The GIF is written by the dashboard itself (`class-graphics.js`), with no outside library and nothing uploaded. Each frame stores only the part that changed, which keeps a class race under 1 MB and a top ten race at a few MB.
+- `class-graphics.test.js` checks the GIF writer by decoding its output with a separate decoder, and checks the name rule and the race's order and values.
+
+Requested by the teacher (a way to export the study graphic to show each Friday).
+
 ## [8.55.110] - 2026-11-13
 
 ### Added
