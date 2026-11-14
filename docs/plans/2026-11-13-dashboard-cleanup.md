@@ -135,3 +135,31 @@ Friday, a leaderboard graphic, and scores that reset each unit.
 5. Build the "needs a nudge" list?
 6. Which comes first?
 
+### Decided and Built (Nov 13)
+
+The teacher answered on the decisions page: a GIF for the race; students may appear by first
+name and last initial, approved students only; both stills; open on the current unit, which is
+what "scores reset each unit" meant; build the nudge list; smallest first.
+
+| Version | What |
+|---|---|
+| 8.55.107 | The dashboard opens on the current unit. |
+| 8.55.108 | Every Overview number says what it counts; the daily bars count students, with visits beside them. Raised by the teacher while this was being built. |
+| 8.55.109 | The rankings chart and the Replay read every day of scores. Both had the 1,000-row limit: the chart showed about a unit's first ten days and the Replay only the newest day or two. |
+| 8.55.110 | Class standings and top ten pictures (1920 by 1080 PNG). |
+| 8.55.111 | Class race and top ten race as looping GIFs (1280 by 720). |
+| 8.55.112 | "Needs a nudge" on the Students tab. |
+
+Two things differ from the proposal:
+
+- **Class periods are ranked by points added together,** the order students see on the site,
+  with a menu to rank by average instead. The proposal said average. A slide that ranked the
+  periods differently from the students' own leaderboard would have contradicted it.
+- **There is a top ten race as well as a class race,** since students may appear on graphics.
+
+Not built: the growth section (E), which waits for Monday's Canvas results.
+
+Open: the Class Rankings chart on the dashboard still uses averages and its own colours, so its
+order and colours can differ from the new graphics. Everything was tested against a stand-in
+database; the live data could not be seen from the build session.
+
