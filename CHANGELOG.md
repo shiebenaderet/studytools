@@ -18,7 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Link `hint`, link `type: "pattern"`, and event `threadOnly` and `sort` fields, documented in the teacher guide and checked by the content checker.
 
-Requested and approved by the teacher on Nov 14; the final wording waits for the teacher's read before going live.
+Requested by the teacher, and the final wording approved, on Nov 14.
 
 ## [8.55.124] - 2026-11-13
 
