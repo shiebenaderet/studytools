@@ -90,3 +90,81 @@ Puget Sound) would need a second, small map.
 4. Hide Map Speed Run where a unit has no map?
 5. Are the ten core events right?
 6. Which timeline approach: ten core events only, eras, or eras with the "why" lines?
+
+## Decided Nov 14
+
+The teacher approved the map as proposed (the fifteen places, the leaderboard bonus, hiding Map
+Speed Run where a unit has no map). It shipped as 8.55.123, with Power Sort as 8.55.122.
+
+On the timeline the teacher wrote: "there are so many events in the same years that it seems like
+it would be confusing. Also the point of using timelines is to help students tell the story of
+events so I'd like us to consider ways to order events so they put them in logical order rather
+than focusing on the dates."
+
+## Timeline Redesign: Story Threads (proposed, not built)
+
+The ten core events are split into three **threads**. Each thread is one short chain in which
+every event led to the next. Students put a thread in order by asking "what had to happen
+first?", with the years hidden. When a thread is right, a line appears between each pair saying
+why one led to the other.
+
+Because every link in a thread is a real cause, its order and its dates always agree, so there is
+no conflict between "logical" and "correct". The threads overlap in time: the Northwest Ordinance
+passed while the Convention was meeting. A last screen lays all three threads along one line of
+years, so students see that history runs in several stories at once.
+
+### The threads and the lines between events (drafts for the teacher)
+
+**1. Why a new government? (3 events)**
+
+- Articles of Confederation take effect, 1781 → Shays' Rebellion begins, 1786:
+  "Under the Articles, Congress could not tax, so the states raised their own taxes to pay war
+  debts. In Massachusetts, farmers who could not pay those taxes rose up."
+- Shays' Rebellion → Constitutional Convention opens in Philadelphia, 1787:
+  "Congress had no money to send an army to stop the rebellion. Many leaders decided the Articles
+  had to change, and delegates met in Philadelphia in May 1787."
+
+**2. From plan to government (4 events)**
+
+- Delegates sign the Constitution, 1787 → New Hampshire becomes the ninth state to ratify, 1788:
+  "The Constitution would take effect once nine states ratified it, so each state held a
+  convention to vote on it."
+- New Hampshire, ninth state → George Washington becomes the first president, 1789:
+  "With nine states in, the new government could begin. Electors chose Washington, and he took
+  office in April 1789."
+- Washington, first president → Bill of Rights is ratified, 1791:
+  "Several states ratified only after being promised a list of rights. The first Congress wrote
+  the amendments in 1789, and the states ratified ten of them by 1791."
+
+**3. Land, treaties and the supreme law (3 events)**
+
+- Northwest Ordinance passes, 1787 → Treaty of Medicine Creek, 1854:
+  "The Ordinance promised that Native land would not be taken without consent, so the United
+  States gained land by treaty. As it spread to the Pacific it kept making treaties, and in 1854
+  it signed the Treaty of Medicine Creek with the Nisqually, Puyallup and other nations."
+  (This link is a pattern more than a direct cause; the teacher should judge it.)
+- Treaty of Medicine Creek → Boldt decision, 1974:
+  "The treaty promised the right to fish at 'usual and accustomed' places. When Washington State
+  arrested Native fishers, the tribes went to court, and in 1974 Judge George Boldt ruled the
+  treaty was the supreme law of the land."
+
+### Other choices
+
+- **A wrong order:** the first link that is out of place is marked, with a nudge ("Could this
+  happen before that? Read both cards again."), and the student tries again. No penalty.
+- **The years:** hidden while ordering; a "Show years" button stays as help, and every year
+  appears on the closing screen.
+- **The nine other events:** drop them from the timeline, or keep them as a "Full timeline"
+  bonus, ordered by date with years shown, for students who want more.
+
+### Decisions for the teacher
+
+1. Use story threads?
+2. Are the three threads right?
+3. Approve, or edit, the seven lines.
+4. How a wrong order is handled.
+5. What happens to the nine other events.
+
+Size: medium. The timeline activity is rebuilt for threads; the events and lines live in the
+unit's config, so other units keep the old timeline until they get threads of their own.
+
