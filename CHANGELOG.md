@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.124] - 2026-11-13
+
+### Changed
+- **Unit 3's timeline is now three story threads.** The teacher found the 19-event timeline confusing, with many events in the same year, and asked for students to put events in logical order to tell the story rather than to memorize dates. The ten core events are split into three short threads, each a chain in which every event led to the next:
+  1. Why a new government? (the Articles, Shays' Rebellion, the Convention)
+  2. From plan to government (signing, the ninth state, Washington, the Bill of Rights)
+  3. Land, treaties and the supreme law (the Northwest Ordinance, the Treaty of Medicine Creek, the Boldt decision)
+  - Students put a thread in story order with up and down arrows, with each event's description showing and the years hidden. Because every link is a real cause, the story order and the date order always agree.
+  - On a wrong check, the first pair out of order is marked with a nudge ("Could this happen before that? Read both cards again.") and they try again. No penalty.
+  - Once the order is right, the teacher asked that students connect each step themselves: they choose what connects each event to the next from three choices. A wrong choice is crossed out; the right one shows a "why" line the teacher approved.
+  - When all three threads are done, a screen lays every event on one line of years, showing that the threads overlap: the Northwest Ordinance passed while the Convention met.
+  - The full timeline of all 19 events, ordered by date with years shown, opens as a bonus once the three threads are done.
+- Units without threads keep the dated timeline as before.
+
+### Added
+- `timelineThreads` in a unit's config, documented in the teacher guide. The content checker reports a thread whose events are missing or out of date order, a missing link or wrong choice, and warns when the right cause is the longest choice. Thread progress merges across devices: a thread finished on either stays finished.
+
+Requested by the teacher; threads, lines and rules approved Nov 14. The two wrong choices for each link are new and wait for the teacher's review.
+
 ## [8.55.123] - 2026-11-13
 
 ### Added

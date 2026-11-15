@@ -456,6 +456,23 @@ const ProgressManager = {
             return saMerged;
         }
 
+        // Timeline: a story thread finished on either device stays finished, and
+        // the dated timeline's counts keep the higher figure.
+        if (activity === 'activity_timeline') {
+            var thA = remote.threads || {}, thB = local.threads || {}, th = {};
+            Object.keys(thA).concat(Object.keys(thB)).forEach(function(id) {
+                var a = thA[id] || {}, b = thB[id] || {};
+                th[id] = { done: !!(a.done || b.done), firstTry: !!(a.firstTry || b.firstTry), plays: Math.max(a.plays || 0, b.plays || 0) };
+            });
+            var tlMerged = Object.assign({}, remote, local, {
+                attempts: Math.max(local.attempts || 0, remote.attempts || 0),
+                perfectCount: Math.max(local.perfectCount || 0, remote.perfectCount || 0),
+                updatedAt: Math.max(local.updatedAt || 0, remote.updatedAt || 0)
+            });
+            if (Object.keys(th).length) tlMerged.threads = th;
+            return tlMerged;
+        }
+
         // Time per activity per day. Each device adds up its own time, so for
         // each day and activity keep the larger figure: adding the two would
         // count the same minutes again on every sync. Six weeks are kept.

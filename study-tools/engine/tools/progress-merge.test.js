@@ -183,4 +183,12 @@ test('activityTimeByDay: only the newest six weeks are kept, and a missing side 
     assert.deepStrictEqual(merge('activityTimeByDay', null, { days: { '2026-11-16': { wordle: 5 } } }), { days: { '2026-11-16': { wordle: 5 } } });
 });
 
+test('timeline: a thread finished on either device stays finished; counts keep the higher figure', () => {
+    const local = { attempts: 2, perfectCount: 0, threads: { 'new-government': { done: true, firstTry: false, plays: 1 } }, updatedAt: 5 };
+    const remote = { attempts: 7, perfectCount: 1, threads: { 'plan-to-government': { done: true, firstTry: true, plays: 2 }, 'new-government': { done: false, firstTry: false, plays: 0 } }, updatedAt: 9 };
+    const m = merge('activity_timeline', local, remote);
+    assert.strictEqual(m.attempts, 7); assert.strictEqual(m.perfectCount, 1); assert.strictEqual(m.updatedAt, 9);
+    assert.deepStrictEqual(m.threads, { 'plan-to-government': { done: true, firstTry: true, plays: 2 }, 'new-government': { done: true, firstTry: false, plays: 1 } });
+});
+
 console.log(passed + ' passed');

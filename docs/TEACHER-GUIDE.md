@@ -355,7 +355,7 @@ Add any of these to your `activities` array:
 | `practice-test` | Multiple choice quiz, 10 questions a sitting. A question tagged `"tier": "extra"` is held back until the student has answered every core question in their open chapters right once; untagged questions are core. Learn Mode, Quiz Race and Tower Defense follow the same rule. Keep at least 4 core questions per chapter. | `practiceQuestions` |
 | `fill-in-blank` | Complete sentences with terms, from a word bank or by typing. Typed answers forgive case, hyphens, spacing, a few typos and digits for number words ("3/5 Compromise"), but never accept a different term from the unit. Write the blank as three or more underscores. | `fillInBlankSentences` |
 | `short-answer` | Open-ended response with rubric | `shortAnswerQuestions` |
-| `timeline` | Order events chronologically | `timelineEvents` |
+| `timeline` | Order events chronologically. With `timelineThreads`, it becomes **story threads**: short chains of events put in cause order with the years hidden, a choice of what connects each pair, a "why" line once it is right, a view of every thread on one line of years, and the full dated timeline as a bonus once every thread is done. | `timelineEvents`, `timelineThreads` (optional) |
 | `power-sort` | Tap each power or job into the branch or level of government that holds it, with an explanation after every answer | `powerSorts` |
 
 #### 🎮 Games
@@ -679,6 +679,34 @@ These optional fields customize Learn Mode behavior per unit:
 | `correct` | Yes | Index of correct answer (0-3) |
 | `explanation` | | Why the answer is correct |
 | `topic` | | Category name — links to vocabulary categories for weakness tracking |
+
+### Timeline story threads
+
+`timelineThreads` turns the timeline into short chains of cause and effect. Each thread lists events from `timelineEvents` by `id`, in the order they happened, which must also be the order in which each led to the next. Between each pair is a link: the right `cause`, two `wrong` causes, and the `why` line shown once the student picks the right one.
+
+```json
+"timelineThreads": [{
+    "id": "new-government",
+    "title": "Why a new government?",
+    "events": [1, 3, 4],
+    "links": [
+        {
+            "cause": "Congress could not tax, so states taxed farmers to pay war debts.",
+            "wrong": ["The president sent soldiers into Massachusetts to collect debts from farmers.", "Congress passed a national tax on farms that farmers refused to pay."],
+            "why": "Under the Articles, Congress could not tax, so the states raised their own taxes to pay war debts. In Massachusetts, farmers who could not pay those taxes rose up."
+        }
+    ]
+}]
+```
+
+How students use it:
+
+- They put each thread in story order with up and down arrows, with the event descriptions showing and the years hidden ("Show years" stays as help). On a wrong check, the first pair out of order is marked with a nudge, and they try again.
+- Once the order is right, they choose what connects each event to the next, top to bottom. A wrong choice is crossed out; the right one shows the `why` line.
+- When every thread is done, they can see all of them on one line of years, and the full dated timeline of every event opens as a bonus.
+- A thread finished on any device stays finished.
+
+Write each wrong cause as a real misconception from the unit (for example "the president" under the Articles, which had none), and keep the right cause from being the longest choice; the checker warns when it is. Keep thread ids stable once students start.
 
 ### Power Sort fields
 

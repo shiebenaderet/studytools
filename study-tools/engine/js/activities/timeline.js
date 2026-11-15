@@ -14,7 +14,22 @@ StudyEngine.registerActivity({
     _selectedCard: null,
     _selectedSlot: null,
 
+    // A unit with `timelineThreads` gets story threads: short chains of events
+    // in cause order, with a "why" link to choose between each pair, and the
+    // full dated timeline below as a bonus once every thread is done. A unit
+    // without threads gets the dated timeline straight away, as before.
     render(container, config) {
+        this._container = container;
+        this._config = config;
+        if ((config.timelineThreads || []).length) {
+            this._showYears = false;
+            this._showThreads();
+            return;
+        }
+        this._renderClassic(container, config);
+    },
+
+    _renderClassic(container, config) {
         this._container = container;
         this._config = config;
         this._selectedCard = null;
@@ -32,6 +47,18 @@ StudyEngine.registerActivity({
         var wrapper = document.createElement('div');
         wrapper.className = 'tl-wrapper';
         wrapper.id = 'tl-wrapper';
+        var self = this;
+
+        if ((config.timelineThreads || []).length) {
+            var backToThreads = document.createElement('button');
+            backToThreads.className = 'tl-link-btn';
+            var backIcon = document.createElement('i');
+            backIcon.className = 'fas fa-chevron-left';
+            backToThreads.appendChild(backIcon);
+            backToThreads.appendChild(document.createTextNode(' Story threads'));
+            backToThreads.addEventListener('click', function() { self._showThreads(); });
+            wrapper.appendChild(backToThreads);
+        }
 
         // Header
         var header = document.createElement('div');
@@ -41,7 +68,7 @@ StudyEngine.registerActivity({
         var titleIcon = document.createElement('i');
         titleIcon.className = 'fas fa-history';
         title.appendChild(titleIcon);
-        title.appendChild(document.createTextNode(' Timeline Challenge'));
+        title.appendChild(document.createTextNode((config.timelineThreads || []).length ? ' Full Timeline' : ' Timeline Challenge'));
         header.appendChild(title);
 
         var controls = document.createElement('div');
@@ -54,12 +81,11 @@ StudyEngine.registerActivity({
         eyeIcon.className = this._showYears ? 'fas fa-eye-slash' : 'fas fa-eye';
         toggleBtn.appendChild(eyeIcon);
         toggleBtn.appendChild(document.createTextNode(this._showYears ? ' Hide Years' : ' Show Years'));
-        var self = this;
         toggleBtn.addEventListener('click', function() {
             self._showYears = !self._showYears;
             var oldWrapper = document.getElementById('tl-wrapper');
             if (oldWrapper) oldWrapper.remove();
-            self.render(self._container, self._config);
+            self._renderClassic(self._container, self._config);
         });
         controls.appendChild(toggleBtn);
 
@@ -404,15 +430,402 @@ StudyEngine.registerActivity({
         if (this._container && this._config) {
             var wrapper = document.getElementById('tl-wrapper');
             if (wrapper) wrapper.remove();
-            this.render(this._container, this._config);
+            this._renderClassic(this._container, this._config);
         }
     },
 
     _saveProgress() {
-        ProgressManager.saveActivityProgress(StudyEngine.config.unit.id, 'timeline', {
-            attempts: this._attempts,
-            perfectCount: this._perfectCount
+        this._save({ attempts: this._attempts, perfectCount: this._perfectCount });
+    },
+
+    // Saving replaces the whole record, so merge into what is there: the dated
+    // timeline's counts and the story threads share one record.
+    _save(changes) {
+        var unitId = (this._config || StudyEngine.config).unit.id;
+        var saved = ProgressManager.getActivityProgress(unitId, 'timeline') || {};
+        var next = Object.assign({}, saved, changes);
+        delete next.updatedAt;
+        ProgressManager.saveActivityProgress(unitId, 'timeline', next);
+    },
+
+    // ─── Story threads ─────────────────────────────────────
+
+    _el(tag, cls, text) {
+        var e = document.createElement(tag);
+        if (cls) e.className = cls;
+        if (text !== undefined) e.textContent = text;
+        return e;
+    },
+
+    _icon(cls) { var i = document.createElement('i'); i.className = cls; i.setAttribute('aria-hidden', 'true'); return i; },
+
+    _event(id) {
+        return (this._config.timelineEvents || []).filter(function(e) { return e.id === id; })[0];
+    },
+
+    _threadState() {
+        var saved = ProgressManager.getActivityProgress(this._config.unit.id, 'timeline') || {};
+        return saved.threads || {};
+    },
+
+    _allThreadsDone() {
+        var st = this._threadState();
+        return (this._config.timelineThreads || []).every(function(t) { return st[t.id] && st[t.id].done; });
+    },
+
+    _THREAD_COLORS: 3,
+
+    _showThreads() {
+        var self = this;
+        var c = this._container;
+        c.textContent = '';
+        var wrap = this._el('div', 'tl-wrapper tl-threads');
+        wrap.id = 'tl-wrapper';
+
+        var head = this._el('div', 'tl-header');
+        var h = this._el('h2');
+        h.appendChild(this._icon('fas fa-project-diagram'));
+        h.appendChild(document.createTextNode(' Story Threads'));
+        head.appendChild(h);
+        wrap.appendChild(head);
+        wrap.appendChild(this._el('p', 'tl-instructions',
+            'A timeline tells a story. Each thread is a short chain where every event led to the next. ' +
+            'Put the events in story order by asking what had to happen first, then choose what connects each one to the next.'));
+
+        var st = this._threadState();
+        var list = this._el('div', 'tl-thread-list');
+        this._config.timelineThreads.forEach(function(t, i) {
+            var done = st[t.id] && st[t.id].done;
+            var card = self._el('button', 'tl-thread-card tl-th' + (i % self._THREAD_COLORS) + (done ? ' tl-thread-done' : ''));
+            card.type = 'button';
+            var num = self._el('span', 'tl-thread-num', String(i + 1));
+            num.setAttribute('aria-hidden', 'true');
+            card.appendChild(num);
+            var body = self._el('span', 'tl-thread-body');
+            body.appendChild(self._el('span', 'tl-thread-title', t.title));
+            body.appendChild(self._el('span', 'tl-thread-meta', t.events.length + ' events' + (done ? ' · done' + (st[t.id].firstTry ? ', right first time' : '') : '')));
+            card.appendChild(body);
+            if (done) card.appendChild(self._icon('fas fa-check-circle tl-thread-check'));
+            card.addEventListener('click', function() { self._startThread(t, i); });
+            list.appendChild(card);
         });
+        wrap.appendChild(list);
+
+        var allDone = this._allThreadsDone();
+        var bonusOpen = allDone || sessionStorage.getItem('teacher-unlock') === 'true';
+        var row = this._el('div', 'tl-thread-extra');
+        if (allDone) {
+            var story = this._el('button', 'tl-btn tl-btn-check', '');
+            story.type = 'button';
+            story.appendChild(this._icon('fas fa-stream'));
+            story.appendChild(document.createTextNode(' See all three on one line of years'));
+            story.addEventListener('click', function() { self._showOneLine(); });
+            row.appendChild(story);
+        }
+        var bonus = this._el('button', 'tl-btn tl-btn-reset' + (bonusOpen ? '' : ' tl-locked'));
+        bonus.type = 'button';
+        bonus.disabled = !bonusOpen;
+        bonus.appendChild(this._icon(bonusOpen ? 'fas fa-history' : 'fas fa-lock'));
+        bonus.appendChild(document.createTextNode(' Full timeline: all ' + (this._config.timelineEvents || []).length + ' events by date' + (bonusOpen ? '' : ' (opens when all three threads are done)')));
+        bonus.addEventListener('click', function() {
+            self._showYears = true;
+            c.textContent = '';
+            self._renderClassic(c, self._config);
+        });
+        row.appendChild(bonus);
+        wrap.appendChild(row);
+        c.appendChild(wrap);
+    },
+
+    _startThread(thread, index) {
+        this._thread = thread;
+        this._threadIndex = index;
+        this._order = this._shuffle(thread.events.slice());
+        // Never start already in order: that would skip the thinking
+        if (this._order.join() === thread.events.join()) this._order.push(this._order.shift());
+        this._checks = 0;
+        this._linkPos = 0;
+        this._solved = false;
+        this._choices = null;
+        this._renderThread();
+    },
+
+    _renderThread(nudgeAt) {
+        var self = this;
+        var thread = this._thread;
+        var solved = this._order.join() === thread.events.join() && this._checks > 0 && this._solved;
+        var c = this._container;
+        c.textContent = '';
+        var wrap = this._el('div', 'tl-wrapper tl-threads tl-th' + (this._threadIndex % this._THREAD_COLORS));
+        wrap.id = 'tl-wrapper';
+
+        var back = this._el('button', 'tl-link-btn');
+        back.type = 'button';
+        back.appendChild(this._icon('fas fa-chevron-left'));
+        back.appendChild(document.createTextNode(' All threads'));
+        back.addEventListener('click', function() { self._showThreads(); });
+        wrap.appendChild(back);
+
+        var head = this._el('div', 'tl-header');
+        var h = this._el('h2');
+        var num = this._el('span', 'tl-thread-num', String(this._threadIndex + 1));
+        num.setAttribute('aria-hidden', 'true');
+        h.appendChild(num);
+        h.appendChild(document.createTextNode(' ' + thread.title));
+        head.appendChild(h);
+        if (!solved) {
+            var yearsBtn = this._el('button', 'tl-toggle-btn');
+            yearsBtn.type = 'button';
+            yearsBtn.appendChild(this._icon(this._showYears ? 'fas fa-eye-slash' : 'fas fa-eye'));
+            yearsBtn.appendChild(document.createTextNode(this._showYears ? ' Hide years' : ' Show years'));
+            yearsBtn.addEventListener('click', function() { self._showYears = !self._showYears; self._renderThread(); });
+            head.appendChild(yearsBtn);
+        }
+        wrap.appendChild(head);
+
+        wrap.appendChild(this._el('p', 'tl-instructions', solved
+            ? 'In order. Now choose what connects each event to the next.'
+            : 'Put these in story order, first at the top. Ask: what had to happen first? Use the arrows to move an event.'));
+
+        var chain = this._el('ol', 'tl-chain');
+        this._order.forEach(function(id, pos) {
+            var ev = self._event(id);
+            var li = self._el('li', 'tl-step' + (nudgeAt !== undefined && (pos === nudgeAt || pos === nudgeAt + 1) ? ' tl-step-nudge' : ''));
+            var card = self._el('div', 'tl-step-card');
+            var text = self._el('div', 'tl-step-text');
+            if (self._showYears || solved) text.appendChild(self._el('span', 'tl-card-year', ev.year + ' '));
+            text.appendChild(self._el('div', 'tl-step-title', ev.title));
+            if (ev.description) text.appendChild(self._el('div', 'tl-step-desc', ev.description));
+            card.appendChild(text);
+            if (!solved) {
+                var moves = self._el('div', 'tl-step-moves');
+                [['up', -1, 'fas fa-arrow-up', 'Move up'], ['down', 1, 'fas fa-arrow-down', 'Move down']].forEach(function(m) {
+                    var b = self._el('button', 'tl-move-btn');
+                    b.type = 'button';
+                    b.setAttribute('aria-label', m[3] + ': ' + ev.title);
+                    b.appendChild(self._icon(m[2]));
+                    var to = pos + m[1];
+                    b.disabled = to < 0 || to >= self._order.length;
+                    b.addEventListener('click', function() {
+                        var t = self._order[to]; self._order[to] = self._order[pos]; self._order[pos] = t;
+                        self._renderThread();
+                        var again = self._container.querySelectorAll('.tl-step')[to];
+                        if (again) { var btn = again.querySelector('.tl-move-btn:not(:disabled)'); if (btn) btn.focus(); }
+                    });
+                    moves.appendChild(b);
+                });
+                card.appendChild(moves);
+            }
+            li.appendChild(card);
+            chain.appendChild(li);
+
+            // Between this event and the next: the link, once the order is right
+            if (solved && pos < self._order.length - 1) chain.appendChild(self._renderLink(pos));
+        });
+        wrap.appendChild(chain);
+
+        var feedback = this._el('div', 'tl-thread-feedback');
+        feedback.setAttribute('aria-live', 'polite');
+        if (nudgeAt !== undefined) {
+            var a = this._event(this._order[nudgeAt]), b = this._event(this._order[nudgeAt + 1]);
+            feedback.className += ' tl-thread-nudge';
+            feedback.appendChild(this._icon('fas fa-lightbulb'));
+            feedback.appendChild(document.createTextNode(' Could \u201c' + a.title + '\u201d happen before \u201c' + b.title + '\u201d? Read both cards again.'));
+        }
+        wrap.appendChild(feedback);
+
+        if (!solved) {
+            var check = this._el('button', 'tl-btn tl-btn-check');
+            check.type = 'button';
+            check.appendChild(this._icon('fas fa-check'));
+            check.appendChild(document.createTextNode(' Check the order'));
+            check.addEventListener('click', function() { self._checkThread(); });
+            var row = this._el('div', 'tl-btn-row');
+            row.appendChild(check);
+            wrap.appendChild(row);
+        } else if (this._linkPos >= thread.links.length) {
+            wrap.appendChild(this._renderThreadDone());
+        }
+        c.appendChild(wrap);
+    },
+
+    _checkThread() {
+        var correct = this._thread.events;
+        this._checks++;
+        // The first link out of place: a pair whose two events are in the wrong order
+        var rank = {};
+        correct.forEach(function(id, i) { rank[id] = i; });
+        for (var i = 0; i < this._order.length - 1; i++) {
+            if (rank[this._order[i]] > rank[this._order[i + 1]]) {
+                this._renderThread(i);
+                return;
+            }
+        }
+        this._solved = true;
+        this._firstTry = this._checks === 1;
+        this._linkPos = 0;
+        this._linkMisses = 0;
+        this._renderThread();
+    },
+
+    _renderLink(pos) {
+        var self = this;
+        var link = this._thread.links[pos];
+        var li = this._el('li', 'tl-link' + (pos < this._linkPos ? ' tl-link-done' : pos === this._linkPos ? ' tl-link-open' : ' tl-link-waiting'));
+        li.setAttribute('aria-label', 'What connects these two events');
+        var arrow = this._el('div', 'tl-link-arrow');
+        arrow.appendChild(this._icon('fas fa-arrow-down'));
+        li.appendChild(arrow);
+        var box = this._el('div', 'tl-link-box');
+        if (pos < this._linkPos) {
+            var lead = this._el('div', 'tl-link-label');
+            lead.appendChild(this._icon('fas fa-link'));
+            lead.appendChild(document.createTextNode(' Why it led to the next'));
+            box.appendChild(lead);
+            box.appendChild(this._el('p', 'tl-link-why', link.why));
+        } else if (pos === this._linkPos) {
+            box.appendChild(this._el('div', 'tl-link-label', 'What connects these two?'));
+            if (!this._choices || this._choicesFor !== pos) {
+                this._choices = this._shuffle([link.cause].concat(link.wrong || []));
+                this._choicesFor = pos;
+                this._wrongPicked = {};
+            }
+            var opts = this._el('div', 'tl-link-choices');
+            this._choices.forEach(function(text) {
+                var b = self._el('button', 'tl-link-choice' + (self._wrongPicked[text] ? ' tl-link-wrong' : ''));
+                b.type = 'button';
+                if (self._wrongPicked[text]) { b.disabled = true; b.appendChild(self._icon('fas fa-xmark')); b.appendChild(document.createTextNode(' ')); }
+                b.appendChild(document.createTextNode(text));
+                b.addEventListener('click', function() {
+                    if (text === link.cause) {
+                        self._linkPos++;
+                        self._choices = null;
+                        if (self._linkPos >= self._thread.links.length) self._finishThread();
+                        self._renderThread();
+                    } else {
+                        self._wrongPicked[text] = true;
+                        self._linkMisses++;
+                        self._renderThread();
+                        var fb = self._container.querySelector('.tl-link-open .tl-link-hint');
+                        if (fb) fb.focus();
+                    }
+                });
+                opts.appendChild(b);
+            });
+            box.appendChild(opts);
+            if (Object.keys(this._wrongPicked).length) {
+                var hint = this._el('p', 'tl-link-hint', 'Not that one. Read the event above and the one below it again.');
+                hint.tabIndex = -1;
+                box.appendChild(hint);
+            }
+        } else {
+            box.appendChild(this._el('div', 'tl-link-label tl-link-muted', 'Connect the one above first'));
+        }
+        li.appendChild(box);
+        return li;
+    },
+
+    _finishThread() {
+        var threads = Object.assign({}, this._threadState());
+        var before = threads[this._thread.id] || {};
+        threads[this._thread.id] = {
+            done: true,
+            firstTry: !!(before.firstTry || (this._firstTry && this._linkMisses === 0)),
+            plays: (before.plays || 0) + 1
+        };
+        this._save({ threads: threads });
+        if (this._allThreadsDone() && typeof AchievementManager !== 'undefined') {
+            AchievementManager.checkAndAward({ activity: 'timeline', event: 'perfect' });
+        }
+    },
+
+    _renderThreadDone() {
+        var self = this;
+        var box = this._el('div', 'tl-result tl-result-success tl-thread-done-box');
+        var perfect = this._firstTry && this._linkMisses === 0;
+        box.appendChild(this._el('div', 'tl-thread-done-title', perfect ? 'Thread complete, right first time!' : 'Thread complete!'));
+        box.appendChild(this._el('p', null, 'You can tell this part of the story from start to finish. The years are on the cards now.'));
+        var row = this._el('div', 'tl-btn-row');
+        var threads = this._config.timelineThreads;
+        var next = threads[this._threadIndex + 1];
+        if (next) {
+            var n = this._el('button', 'tl-btn tl-btn-check');
+            n.type = 'button';
+            n.appendChild(document.createTextNode('Next thread: ' + next.title + ' '));
+            n.appendChild(this._icon('fas fa-arrow-right'));
+            n.addEventListener('click', function() { self._startThread(next, self._threadIndex + 1); });
+            row.appendChild(n);
+        } else if (this._allThreadsDone()) {
+            var line = this._el('button', 'tl-btn tl-btn-check');
+            line.type = 'button';
+            line.appendChild(this._icon('fas fa-stream'));
+            line.appendChild(document.createTextNode(' See all three on one line of years'));
+            line.addEventListener('click', function() { self._showOneLine(); });
+            row.appendChild(line);
+        }
+        var all = this._el('button', 'tl-btn tl-btn-reset', 'All threads');
+        all.type = 'button';
+        all.addEventListener('click', function() { self._showThreads(); });
+        row.appendChild(all);
+        box.appendChild(row);
+        return box;
+    },
+
+    // Every thread's events on one line of years, to show that they overlap
+    _MONTHS: { Jan: 1, Feb: 2, Mar: 3, Apr: 4, May: 5, Jun: 6, Jul: 7, Aug: 8, Sep: 9, Oct: 10, Nov: 11, Dec: 12 },
+
+    _when(ev) {
+        var m = /^(?:([A-Z][a-z]{2})\s+)?(\d{3,4})/.exec(String(ev.year || ''));
+        return m ? Number(m[2]) * 100 + (m[1] ? this._MONTHS[m[1]] || 0 : 0) : 0;
+    },
+
+    _showOneLine() {
+        var self = this;
+        var c = this._container;
+        c.textContent = '';
+        var wrap = this._el('div', 'tl-wrapper tl-threads');
+        wrap.id = 'tl-wrapper';
+        var back = this._el('button', 'tl-link-btn');
+        back.type = 'button';
+        back.appendChild(this._icon('fas fa-chevron-left'));
+        back.appendChild(document.createTextNode(' All threads'));
+        back.addEventListener('click', function() { self._showThreads(); });
+        wrap.appendChild(back);
+        var head = this._el('div', 'tl-header');
+        var h = this._el('h2');
+        h.appendChild(this._icon('fas fa-stream'));
+        h.appendChild(document.createTextNode(' One Line of Years'));
+        head.appendChild(h);
+        wrap.appendChild(head);
+        wrap.appendChild(this._el('p', 'tl-instructions',
+            'All three threads, by date. The stories overlap: while the delegates were writing the Constitution in 1787, Congress under the Articles passed the Northwest Ordinance.'));
+
+        var items = [];
+        this._config.timelineThreads.forEach(function(t, i) {
+            t.events.forEach(function(id) { items.push({ ev: self._event(id), thread: t, index: i }); });
+        });
+        items.sort(function(a, b) { return self._when(a.ev) - self._when(b.ev); });
+        var list = this._el('ol', 'tl-oneline');
+        items.forEach(function(it) {
+            var li = self._el('li', 'tl-oneline-row tl-th' + (it.index % self._THREAD_COLORS));
+            li.appendChild(self._el('span', 'tl-oneline-year', it.ev.year));
+            var num = self._el('span', 'tl-thread-num', String(it.index + 1));
+            num.title = it.thread.title;
+            li.appendChild(num);
+            var t = self._el('span', 'tl-oneline-title', it.ev.title);
+            li.appendChild(t);
+            list.appendChild(li);
+        });
+        wrap.appendChild(list);
+        var key = this._el('div', 'tl-oneline-key');
+        this._config.timelineThreads.forEach(function(t, i) {
+            var k = self._el('span', 'tl-oneline-keyitem tl-th' + (i % self._THREAD_COLORS));
+            k.appendChild(self._el('span', 'tl-thread-num', String(i + 1)));
+            k.appendChild(document.createTextNode(' ' + t.title));
+            key.appendChild(k);
+        });
+        wrap.appendChild(key);
+        c.appendChild(wrap);
     },
 
     _shuffle(array) {
@@ -429,7 +842,7 @@ StudyEngine.registerActivity({
     deactivate() {},
 
     getProgress() {
-        return ProgressManager.getActivityProgress(StudyEngine.config.unit.id, 'timeline');
+        return ProgressManager.getActivityProgress((this._config || StudyEngine.config).unit.id, 'timeline');
     },
 
     loadProgress(data) {

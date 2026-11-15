@@ -576,6 +576,98 @@
             "tier": "encounter"
         }
     ],
+    "timelineThreads": [
+        {
+            "id": "new-government",
+            "title": "Why a new government?",
+            "events": [
+                1,
+                3,
+                4
+            ],
+            "links": [
+                {
+                    "cause": "Congress could not tax, so states taxed farmers to pay war debts.",
+                    "wrong": [
+                        "The president sent soldiers into Massachusetts to collect debts from farmers.",
+                        "Congress passed a national tax on farms that farmers refused to pay."
+                    ],
+                    "why": "Under the Articles, Congress could not tax, so the states raised their own taxes to pay war debts. In Massachusetts, farmers who could not pay those taxes rose up."
+                },
+                {
+                    "cause": "Congress had no money for an army, so the Articles looked too weak.",
+                    "wrong": [
+                        "The rebels took over Massachusetts and demanded that the states write a new government.",
+                        "The Supreme Court ruled that the Articles had failed."
+                    ],
+                    "why": "Congress had no money to send an army to stop the rebellion. Many leaders decided the Articles had to change, and delegates met in Philadelphia in May 1787."
+                }
+            ]
+        },
+        {
+            "id": "plan-to-government",
+            "title": "From plan to government",
+            "events": [
+                7,
+                9,
+                10,
+                11
+            ],
+            "links": [
+                {
+                    "cause": "It would take effect once nine states ratified it.",
+                    "wrong": [
+                        "Every state had to approve it, and New Hampshire voted last.",
+                        "The president had to sign it before it became law."
+                    ],
+                    "why": "The Constitution would take effect once nine states ratified it, so each state held a convention to vote on it."
+                },
+                {
+                    "cause": "Nine states let the government begin, and electors chose a president.",
+                    "wrong": [
+                        "The first state to ratify, Delaware, chose the president.",
+                        "The people voted directly for president, with no electors needed at all."
+                    ],
+                    "why": "With nine states in, the new government could begin. Electors chose Washington, and he took office in April 1789."
+                },
+                {
+                    "cause": "Several states ratified only after being promised a list of rights.",
+                    "wrong": [
+                        "Washington wrote the Bill of Rights himself during his first year as president.",
+                        "The Supreme Court ordered Congress to add rights to the Constitution."
+                    ],
+                    "why": "Several states ratified only after being promised a list of rights. The first Congress wrote the amendments in 1789, and the states ratified ten of them by 1791."
+                }
+            ]
+        },
+        {
+            "id": "land-and-treaties",
+            "title": "Land, treaties and the supreme law",
+            "events": [
+                5,
+                16,
+                19
+            ],
+            "links": [
+                {
+                    "cause": "The nation kept gaining Native land by treaty as it spread west.",
+                    "wrong": [
+                        "The Northwest Ordinance gave the Pacific Northwest to the United States.",
+                        "The Constitution banned treaties with Native nations, so tribes had no say."
+                    ],
+                    "why": "The Ordinance promised that Native land would not be taken without consent, so the United States gained land by treaty. As it spread to the Pacific it kept making treaties, and in 1854 it signed the Treaty of Medicine Creek with the Nisqually, Puyallup and other nations."
+                },
+                {
+                    "cause": "The state arrested Native fishers, so the tribes sued to enforce the treaty.",
+                    "wrong": [
+                        "Congress canceled the treaty's fishing rights in 1974, so the tribes lost them.",
+                        "The tribes sold their fishing rights to Washington State."
+                    ],
+                    "why": "The treaty promised the right to fish at \"usual and accustomed\" places. When Washington State arrested Native fishers, the tribes went to court, and in 1974 Judge George Boldt ruled the treaty was the supreme law of the land."
+                }
+            ]
+        }
+    ],
     "timelineEvents": [
         {
             "title": "Articles of Confederation take effect",
