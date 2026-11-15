@@ -24,6 +24,7 @@
         "response-builder",
         "timeline",
         "power-sort",
+        "new-nation-map",
         "wordle",
         "hangman",
         "flip-match",
@@ -35,6 +36,7 @@
         "sort-it-out",
         "quiz-race"
     ],
+    "leaderboardMapActivities": [{ "id": "new-nation-map", "maxScore": 15 }],
     "categorySchedule": {
         "Why the Articles Failed": "2026-11-16",
         "Compromises in Philadelphia": "2026-11-18",

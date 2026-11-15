@@ -7761,3 +7761,34 @@ body.light-mode .feedback-fab {
 .ps-chart-missed i { color: var(--danger, #dc2626) !important; }
 .ps-chart-note { color: var(--text-secondary); font-size: 0.9em; }
 .ps-result-btns { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; align-items: center; }
+
+/* ===================== The New Nation map (Unit 3) =================== */
+.nn-context-label { fill: #6b6457; font-family: 'Outfit', system-ui, sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 3px; opacity: 0.75; }
+.nn-territory-label { font-size: 13px; font-style: normal; font-weight: 700; fill: #2f5a2b; letter-spacing: 0.5px; }
+.nn-lakes-label { font-size: 12px; font-weight: 700; }
+.nn-land, .nn-river, .nn-lake, .nn-mountains { transition: fill 0.15s, stroke 0.15s, stroke-opacity 0.15s; }
+.nn-land.nn-flash-select { fill: #f59e0b; }
+.nn-land.nn-flash-correct { fill: #22c55e; }
+.nn-land.nn-flash-wrong { fill: #ef4444; }
+.nn-city.nn-flash-select .cg-city-dot, .nn-city.nn-flash-correct .cg-city-dot { fill: #22c55e; r: 8; }
+.nn-city.nn-flash-wrong .cg-city-dot { fill: #ef4444; r: 8; }
+.nn-river.nn-flash-select, .nn-river.nn-flash-correct, .nn-river.nn-flash-wrong { stroke-width: 5; }
+.nn-river.nn-flash-wrong[stroke="#3b8ac4"] { stroke: #dc2626; }
+.nn-lake.nn-flash-select, .nn-lake.nn-flash-correct { fill: #4ade80; }
+.nn-lake.nn-flash-wrong { fill: #f87171; }
+.nn-mountains.nn-flash-select, .nn-mountains.nn-flash-correct { stroke: #16a34a; stroke-opacity: 0.8; }
+.nn-mountains.nn-flash-wrong { stroke: #dc2626; stroke-opacity: 0.8; }
+.nn-place-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.nn-place-btn {
+    background: var(--bg-elevated); border: 1px solid var(--border-card); color: var(--text-primary);
+    border-radius: 999px; padding: 6px 12px; font: inherit; font-size: 0.9em; cursor: pointer; min-height: 36px;
+}
+.nn-place-btn:hover { border-color: var(--primary-text); }
+.nn-place-btn.active { background: var(--primary-text); color: var(--bg-main, #0b1120); border-color: transparent; font-weight: 700; }
+/* Phones: the shared map layout puts the panel above the map so a quiz
+   question stays in view. Explore's list of fifteen places would push the
+   map off the screen, so there it goes below the map. */
+@media (max-width: 899px) {
+    .nn-map.cw-map-learn .cw-map-panel { order: 1; }
+}
+

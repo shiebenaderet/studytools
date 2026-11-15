@@ -69,6 +69,21 @@ var LeaderboardManager = {
         return 1 + 0.05 * (days - 1);
     },
 
+    // True when the unit has a map whose perfect runs count for the map bonus:
+    // one listed in leaderboardMapActivities, or the older default, map-quiz.
+    unitHasMap(config) {
+        if (!config) return false;
+        var acts = config.activities || [];
+        var listed = config.leaderboardMapActivities;
+        if (listed && listed.length) {
+            return listed.some(function(e) {
+                var id = typeof e === 'string' ? e : e.id;
+                return acts.indexOf(id) !== -1 || (config.mapsHub && (config.mapsHub.maps || []).some(function(m) { return m.id === id; }));
+            });
+        }
+        return acts.indexOf('map-quiz') !== -1;
+    },
+
     // Submit or update student's leaderboard entry
     async submitScore() {
         if (!ProgressManager.supabase || !ProgressManager.studentId) return;
@@ -216,6 +231,8 @@ var LeaderboardManager = {
             { id: 'classes', label: 'Class Battle', icon: 'fas fa-users' },
             { id: 'achievements', label: 'Achievements', icon: 'fas fa-medal' }
         ];
+        // A unit without a map that counts would show an empty speed-run board
+        if (!this.unitHasMap(StudyEngine.config)) tabs = tabs.filter(function(t) { return t.id !== 'map'; });
         var contentArea = document.createElement('div');
         contentArea.className = 'lb-content';
 
@@ -463,7 +480,7 @@ var LeaderboardManager = {
 
             var desc = document.createElement('p');
             desc.className = 'lb-explainer';
-            desc.textContent = 'Get 100% on a map quiz (under Maps) to post your time. Faster = more bonus points!';
+            desc.textContent = 'Get every place right on the unit\'s map quiz to post your time. Faster = more bonus points!';
             container.appendChild(desc);
 
             if (entries.length === 0) {

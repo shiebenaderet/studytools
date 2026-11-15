@@ -8,7 +8,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 
 [![Live Site](https://img.shields.io/badge/Live_Site-study.mrbsocialstudies.org-1669C5?style=for-the-badge&logo=google-chrome&logoColor=white)](https://study.mrbsocialstudies.org)
 [![License](https://img.shields.io/badge/License-Educational_Use-22c55e?style=for-the-badge)](#license)
-[![Version](https://img.shields.io/badge/Version-8.55.122-f59e0b?style=for-the-badge)](#)
+[![Version](https://img.shields.io/badge/Version-8.55.123-f59e0b?style=for-the-badge)](#)
 
 ---
 
@@ -41,6 +41,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 | **Fill-in-the-Blank** | One-at-a-time stepper with word bank or type-it mode |
 | **Timeline** | Drag events into chronological order with shuffle, remove, and challenge mode |
 | **Power Sort** | Tap each power into its branch or level of government (Legislative / Executive / Judicial, National / State / Both); untimed, explains every answer, replays missed items (1.25x analysis tier) |
+| **The New Nation Map** | Unit 3's map of the United States around 1790: seven states from the story, the Northwest Territory, the first two capitals, and the rivers, lakes and mountains around them; Explore with a fact for every place, then a timed quiz whose perfect runs count for the leaderboard's Map Speed Run |
 
 ### 🎮 Games
 | Activity | Description |

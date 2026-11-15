@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.123] - 2026-11-13
+
+### Added
+- **The New Nation Map for Unit 3.** The leaderboard's Map Speed Run tab was empty in Unit 3 because the unit had no map. The teacher asked for a map with fewer places to click than last year's states and territories quiz, and with features such as the Mississippi River. Built on the eastern United States base map the site already had, it shows the country around 1790 with fifteen places the teacher approved:
+  - seven states from the story (Massachusetts, Virginia, New Jersey, Connecticut, New Hampshire, Rhode Island, Pennsylvania), the Northwest Territory, Philadelphia and New York City;
+  - the Mississippi and Ohio rivers, the Great Lakes, the Appalachian Mountains and the Atlantic Ocean.
+  - **Explore** labels every place and shows a two- or three-sentence fact when a place is tapped, on the map or in a list of all fifteen. Spanish Louisiana, Spanish Florida and British Canada are labeled for context. Maine and West Virginia are drawn as part of Massachusetts and Virginia, as they were in 1790.
+  - **Map Quiz** asks for all fifteen in a random order and is timed. A wrong state answer says which state was tapped; a tap in open water on a state question is ignored. A tap just outside the border of a small state such as Rhode Island counts for it, since those states are smaller than a fingertip on a phone.
+  - A perfect run earns the leaderboard's map bonus, the same as Unit 2's 13 Colonies map.
+- **The leaderboard hides Map Speed Run in a unit that has no map,** instead of showing an empty board.
+
+Requested by the teacher.
+
 ## [8.55.122] - 2026-11-13
 
 ### Changed
