@@ -7864,6 +7864,12 @@ body.light-mode .feedback-fab {
 .nn-mountains.nn-flash-select, .nn-mountains.nn-flash-correct { stroke: #16a34a; stroke-opacity: 0.8; }
 .nn-mountains.nn-flash-wrong { stroke: #dc2626; stroke-opacity: 0.8; }
 .nn-place-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.nn-native-land { margin: 16px 0 0; }
+.nn-native-land .gd-head { color: var(--text-primary); }
+.nn-native-land .gd-intro { line-height: 1.45; }
+.nn-native-land .gd-links { flex-direction: column; }
+.nn-native-land .gd-chip { min-height: 40px; }
+.nn-native-land .gd-chip-ext { margin-left: auto; }
 .nn-place-btn {
     background: var(--bg-elevated); border: 1px solid var(--border-card); color: var(--text-primary);
     border-radius: 999px; padding: 6px 12px; font: inherit; font-size: 0.9em; cursor: pointer; min-height: 36px;

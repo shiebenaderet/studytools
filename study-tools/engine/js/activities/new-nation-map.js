@@ -498,6 +498,30 @@ StudyEngine.registerActivity({
             list.appendChild(b);
         });
         panel.appendChild(list);
+
+        var nl = this._data().nativeLand;
+        if (nl) {
+            // Styled like Go Deeper, so students recognize an outside link
+            var box = this._el('div', 'gd-box nn-native-land');
+            box.appendChild(this._el('div', 'gd-head', nl.title));
+            box.appendChild(this._el('p', 'gd-intro', nl.text));
+            var links = this._el('div', 'gd-links');
+            nl.links.forEach(function(l) {
+                var a = self._el('a', 'gd-chip gd-chip-reading');
+                a.href = l.url;
+                a.target = '_blank';
+                a.rel = 'noopener noreferrer';
+                a.setAttribute('aria-label', l.label + ' (opens in a new tab)');
+                a.appendChild(self._el('i', 'fas fa-map-location-dot'));
+                var t = self._el('span', 'gd-chip-text');
+                t.appendChild(self._el('span', 'gd-chip-title', l.label));
+                a.appendChild(t);
+                a.appendChild(self._el('i', 'fas fa-arrow-up-right-from-square gd-chip-ext'));
+                links.appendChild(a);
+            });
+            box.appendChild(links);
+            panel.appendChild(box);
+        }
         this._container.appendChild(panel);
     },
 

@@ -374,7 +374,7 @@ Add any of these to your `activities` array:
 | `sort-it-out` | Sort terms into their categories | `vocabulary` (2+ categories) |
 | `four-corners` | Find the term that does not belong | `vocabulary` (2+ categories) |
 | `map-quiz` | Click-on-the-map geography quiz | Custom (see source) |
-| `new-nation-map` | Unit 3's map of the United States around 1790: fifteen places (seven states, the Northwest Territory, Philadelphia, New York City, the Mississippi and Ohio rivers, the Great Lakes, the Appalachians, the Atlantic). Explore labels every place with a short fact; the timed quiz asks for all fifteen. A tap just outside a small state's border counts for it. | Built in; list it in `leaderboardMapActivities` as `{ "id": "new-nation-map", "maxScore": 15 }` so a perfect run earns the map bonus |
+| `new-nation-map` | Unit 3's map of the United States around 1790: fifteen places (seven states, the Northwest Territory, Philadelphia, New York City, the Mississippi and Ohio rivers, the Great Lakes, the Appalachians, the Atlantic). Explore labels every place with a short fact and ends with a "Whose land was this?" box: links (new tab) to the Native Land Digital map and its pages for the Treaty of Greenville (cession 11) and the Treaty of Medicine Creek (cession 345). Native homelands stay off the 1790 map itself. The links and wording are in `nativeLand` in `js/data/new-nation-data.js`. The timed quiz asks for all fifteen. A tap just outside a small state's border counts for it. | Built in; list it in `leaderboardMapActivities` as `{ "id": "new-nation-map", "maxScore": 15 }` so a perfect run earns the map bonus |
 
 ### Vocabulary fields
 

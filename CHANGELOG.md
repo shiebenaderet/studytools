@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.127] - 2026-11-14
+
+### Added
+- **"Whose land was this?" on the New Nation map.** The map shows the United States as it saw itself in 1790, so the teacher asked for a way to see Native homelands without crowding the map. Explore now ends with a short box, styled like Go Deeper, that links in a new tab to the Native Land Digital map and to its pages outlining the land taken in the Treaty of Greenville (1795) and the Treaty of Medicine Creek (1854), the two treaties in the unit's readings and story threads. The box says the map was made with help from Native communities, that borders overlap, and that it is not an official map.
+
+Requested by the teacher on Nov 14.
+
 ## [8.55.126] - 2026-11-14
 
 ### Fixed

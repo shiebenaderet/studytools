@@ -59,6 +59,18 @@
             { text: 'BRITISH CANADA', x: 560, y: 70, angle: 0 }
         ],
 
+        // Explore's "Whose land was this?" box: Native homelands stay off this
+        // 1790 map (the teacher's call); students open Native Land Digital in a new tab.
+        nativeLand: {
+            title: 'Whose land was this?',
+            text: 'This map shows the United States as it saw itself in 1790. Native nations held most of the land west of the Appalachians. The Native Land map, made with help from Native communities, shows their homelands. Borders overlap, and it is not an official map.',
+            links: [
+                { label: 'Open the Native Land map', url: 'https://native-land.ca/maps/native-land' },
+                { label: 'Treaty of Greenville lands', url: 'https://native-land.ca/listings/treaties/cession-11' },
+                { label: 'Treaty of Medicine Creek lands', url: 'https://native-land.ca/listings/treaties/cession-345' }
+            ]
+        },
+
         places: [
             { id: 'massachusetts', name: 'Massachusetts', type: 'state', states: ['Massachusetts', 'Maine'],
               fact: 'In 1786 and 1787, farmers in western Massachusetts led by Daniel Shays closed courts to stop them from taking farms for unpaid debts and taxes. Shays\' Rebellion convinced many leaders that the national government under the Articles was too weak. Maine was part of Massachusetts until 1820.' },
