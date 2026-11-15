@@ -582,25 +582,37 @@
             "title": "Why a new government?",
             "events": [
                 1,
+                20,
                 3,
                 4
             ],
             "links": [
                 {
-                    "cause": "Congress could not tax, so states taxed farmers to pay war debts.",
+                    "cause": "Congress couldn't collect taxes, so the states had to.",
                     "wrong": [
-                        "The president sent soldiers into Massachusetts to collect debts from farmers.",
-                        "Congress passed a national tax on farms that farmers refused to pay."
+                        "Congress taxed the states directly, and the states passed it on.",
+                        "The king of Britain still collected taxes from the states."
                     ],
-                    "why": "Under the Articles, Congress could not tax, so the states raised their own taxes to pay war debts. In Massachusetts, farmers who could not pay those taxes rose up."
+                    "why": "The Articles did not let Congress tax anyone. To pay the money owed from the war, each state taxed its own people.",
+                    "hint": "Look at what the Articles card says Congress could not do."
                 },
                 {
-                    "cause": "Congress had no money for an army, so the Articles looked too weak.",
+                    "cause": "Farmers couldn't pay and started losing their farms.",
                     "wrong": [
-                        "The rebels took over Massachusetts and demanded that the states write a new government.",
-                        "The Supreme Court ruled that the Articles had failed."
+                        "Farmers were angry that Congress had raised their taxes.",
+                        "Farmers wanted Massachusetts to join Britain again."
                     ],
-                    "why": "Congress had no money to send an army to stop the rebellion. Many leaders decided the Articles had to change, and delegates met in Philadelphia in May 1787."
+                    "why": "Taxes had to be paid in coins, and many farmers had none. When courts took their farms, farmers in Massachusetts rose up.",
+                    "hint": "Read the Shays' Rebellion card. What were the farmers afraid of losing?"
+                },
+                {
+                    "cause": "Congress had no army to stop the rebels, so the Articles looked too weak.",
+                    "wrong": [
+                        "The rebels won, so the states had to write a new plan for them.",
+                        "The president called the states to Philadelphia to end the rebellion quickly."
+                    ],
+                    "why": "Congress could not send soldiers to stop the rebellion. Leaders worried the country could fall apart, so they met in Philadelphia to fix the government.",
+                    "hint": "The Shays' card says something Congress did not have. Why would that worry leaders?"
                 }
             ]
         },
@@ -615,28 +627,31 @@
             ],
             "links": [
                 {
-                    "cause": "It would take effect once nine states ratified it.",
+                    "cause": "The Constitution only counted once nine states said yes.",
                     "wrong": [
-                        "Every state had to approve it, and New Hampshire voted last.",
-                        "The president had to sign it before it became law."
+                        "Every state had to vote yes, and New Hampshire voted last.",
+                        "Congress had to sign the Constitution before the states could see it."
                     ],
-                    "why": "The Constitution would take effect once nine states ratified it, so each state held a convention to vote on it."
+                    "why": "The Constitution said it would start once nine of the thirteen states ratified it, or voted yes. New Hampshire was the ninth.",
+                    "hint": "Read the last sentence on the signing card."
                 },
                 {
-                    "cause": "Nine states let the government begin, and electors chose a president.",
+                    "cause": "With nine yes votes, the government could start and choose a president.",
                     "wrong": [
-                        "The first state to ratify, Delaware, chose the president.",
-                        "The people voted directly for president, with no electors needed at all."
+                        "The states that voted yes first got to pick the president by themselves.",
+                        "The people voted directly for president, with no electors at all."
                     ],
-                    "why": "With nine states in, the new government could begin. Electors chose Washington, and he took office in April 1789."
+                    "why": "Once the Constitution was in effect, the country could choose its first president. Electors, people each state picked to vote for president, all chose Washington.",
+                    "hint": "Could there be a president before the Constitution took effect?"
                 },
                 {
-                    "cause": "Several states ratified only after being promised a list of rights.",
+                    "cause": "The new government kept a promise made to win the yes votes.",
                     "wrong": [
-                        "Washington wrote the Bill of Rights himself during his first year as president.",
+                        "Washington wrote the Bill of Rights by himself during his first year.",
                         "The Supreme Court ordered Congress to add rights to the Constitution."
                     ],
-                    "why": "Several states ratified only after being promised a list of rights. The first Congress wrote the amendments in 1789, and the states ratified ten of them by 1791."
+                    "why": "Some states voted yes only after they were promised a list of rights. Once the new government was running, Congress wrote the Bill of Rights, and the states approved it in 1791.",
+                    "hint": "Read the New Hampshire card again. What did Virginia and New York get?"
                 }
             ]
         },
@@ -645,25 +660,48 @@
             "title": "Land, treaties and the supreme law",
             "events": [
                 5,
+                13,
                 16,
+                21,
                 19
             ],
             "links": [
                 {
-                    "cause": "The nation kept gaining Native land by treaty as it spread west.",
+                    "cause": "Settlers moved onto Native land, war broke out, and the losing nations signed a treaty.",
                     "wrong": [
-                        "The Northwest Ordinance gave the Pacific Northwest to the United States.",
-                        "The Constitution banned treaties with Native nations, so tribes had no say."
+                        "The Northwest Ordinance gave all of Ohio to Native nations forever, so no settlers came.",
+                        "The British bought Ohio from Native nations and gave it to the United States."
                     ],
-                    "why": "The Ordinance promised that Native land would not be taken without consent, so the United States gained land by treaty. As it spread to the Pacific it kept making treaties, and in 1854 it signed the Treaty of Medicine Creek with the Nisqually, Puyallup and other nations."
+                    "why": "The Ordinance opened the Northwest Territory to American settlers. Native nations fought to keep their land, and after they lost the Battle of Fallen Timbers in 1794, they signed the Treaty of Greenville, giving up most of Ohio.",
+                    "hint": "The Ordinance opened land to settlers. Who already lived on that land?"
                 },
                 {
-                    "cause": "The state arrested Native fishers, so the tribes sued to enforce the treaty.",
+                    "type": "pattern",
+                    "cause": "As settlers moved west, the United States made treaties to get Native land.",
                     "wrong": [
-                        "Congress canceled the treaty's fishing rights in 1974, so the tribes lost them.",
-                        "The tribes sold their fishing rights to Washington State."
+                        "The Treaty of Greenville gave the United States the land around Puget Sound.",
+                        "Native nations in Washington copied the Treaty of Greenville word for word."
                     ],
-                    "why": "The treaty promised the right to fish at \"usual and accustomed\" places. When Washington State arrested Native fishers, the tribes went to court, and in 1974 Judge George Boldt ruled the treaty was the supreme law of the land."
+                    "why": "The same thing happened again as the country grew. In 1854, as settlers came to Washington Territory, the United States made the Treaty of Medicine Creek with the Nisqually, Puyallup and other nations.",
+                    "hint": "Both are treaties. What was happening each time, just before the treaty was signed?"
+                },
+                {
+                    "cause": "The state ignored the treaty's promise about fishing.",
+                    "wrong": [
+                        "The tribes broke the treaty by fishing in new places far from home.",
+                        "Congress canceled the treaty, so fishing became against the law."
+                    ],
+                    "why": "The treaty promised the tribes they could keep fishing in their usual places. Washington State later made rules against it and arrested Native fishers.",
+                    "hint": "Read the Medicine Creek card. What did the tribes keep the right to do?"
+                },
+                {
+                    "cause": "The tribes went to court to make the state follow the treaty.",
+                    "wrong": [
+                        "The tribes stopped fishing and sold their rights to the state.",
+                        "Congress passed a new law that took away all fishing rights."
+                    ],
+                    "why": "The tribes and the United States took Washington State to court. In 1974 Judge George Boldt ruled that the treaty, as the supreme law of the land, came before state law.",
+                    "hint": "When someone breaks a promise that is the supreme law of the land, where do you go?"
                 }
             ]
         }
@@ -782,6 +820,22 @@
             "year": "Feb 1974",
             "description": "A federal judge rules that Washington tribes' treaty fishing rights override state law.",
             "id": 19
+        },
+        {
+            "title": "States raise taxes to pay war debts",
+            "year": "1780s",
+            "sort": "1785",
+            "threadOnly": true,
+            "id": 20,
+            "description": "Congress can only ask the states for money. States like Massachusetts raise taxes that must be paid in coins, and many farmers have none."
+        },
+        {
+            "title": "Native fishers are arrested in the \"Fish Wars\"",
+            "year": "1960s",
+            "sort": "1964",
+            "threadOnly": true,
+            "id": 21,
+            "description": "Washington State arrests Billy Frank Jr. and other Native fishers again and again for fishing where the treaty said they could."
         }
     ],
     "reflectionPrompts": [

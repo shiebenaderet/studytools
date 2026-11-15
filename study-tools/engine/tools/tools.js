@@ -542,7 +542,7 @@ const StudyTools = {
             doc.body.appendChild(h2);
 
             const list = doc.createElement('div');
-            config.timelineEvents.forEach(evt => {
+            config.timelineEvents.filter(evt => !evt.threadOnly).forEach(evt => {
                 const item = doc.createElement('div');
                 item.className = 'tl-item';
                 const year = doc.createElement('span');

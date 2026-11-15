@@ -706,7 +706,16 @@ How students use it:
 - When every thread is done, they can see all of them on one line of years, and the full dated timeline of every event opens as a bonus.
 - A thread finished on any device stays finished.
 
-Write each wrong cause as a real misconception from the unit (for example "the president" under the Articles, which had none), and keep the right cause from being the longest choice; the checker warns when it is. Keep thread ids stable once students start.
+Optional fields:
+
+| Field | Where | Description |
+|-------|-------|-------------|
+| `hint` | link | Shown when the student taps **Need a hint?**. Point to the clue on the cards instead of giving the answer ("Look at what the Articles card says Congress could not do"). The checker warns when a link has none. |
+| `type: "pattern"` | link | For two events that did not cause each other but show the same thing happening again. The link asks "What pattern repeats in these two?" instead of "What connects these two?", so students are never told something caused something it did not. |
+| `threadOnly: true` | event | A card made for a thread to fill a step the story would otherwise skip. It appears only in threads: not in the dated bonus, the question exporter or the printed study sheet. |
+| `sort` | event | A year that places a card with a loose date, such as `"1780s"`, among the others. Give every `threadOnly` card one. |
+
+Write each wrong cause as a real misconception from the unit (for example "the president" under the Articles, which had none), and keep the right cause from being the longest choice; the checker warns when it is. When a link would need a step that is on neither card, add that step as a `threadOnly` card rather than expecting students to imagine it. Keep thread ids stable once students start.
 
 ### Power Sort fields
 

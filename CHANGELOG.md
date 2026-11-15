@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.125] - 2026-11-13
+
+### Changed
+- **Unit 3's story threads have clearer links.** Reviewing the threads before they went live, the teacher said some connections would not be clear to 8th graders. About half the links skipped a step or joined events that did not cause each other.
+  - **Two new cards fill the skipped steps,** so students place the step themselves: "States raise taxes to pay war debts" (1780s) between the Articles and Shays' Rebellion, and "Native fishers are arrested in the Fish Wars" (1960s), naming Billy Frank Jr., between the Treaty of Medicine Creek and the Boldt decision.
+  - **Thread 3 is rebuilt:** Northwest Ordinance, Treaty of Greenville, Treaty of Medicine Creek, the Fish Wars, the Boldt decision. The step from Greenville to Medicine Creek is a repeated pattern, not a cause, so it asks "What pattern repeats in these two?" instead of "What connects these two?"
+  - **Plainer wording:** each choice is a short "because" phrase, and each "why" line is two short sentences that explain hard words where they appear ("Electors, people each state picked to vote for president..."). The last link of thread 2 now names the real cause of the Bill of Rights: the promise made to win ratification.
+  - **Need a hint?** on every link points to the clue on the cards without giving the answer.
+- The two new cards appear only in threads: not in the dated bonus, the question exporter or the printed study sheet, since "1780s" and "1960s" have no exact date to quiz on.
+
+### Added
+- Link `hint`, link `type: "pattern"`, and event `threadOnly` and `sort` fields, documented in the teacher guide and checked by the content checker.
+
+Requested and approved by the teacher on Nov 14; the final wording waits for the teacher's read before going live.
+
 ## [8.55.124] - 2026-11-13
 
 ### Changed

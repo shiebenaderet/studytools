@@ -39,7 +39,7 @@ StudyEngine.registerActivity({
         this._attempts = saved?.attempts || 0;
         this._perfectCount = saved?.perfectCount || 0;
 
-        var events = config.timelineEvents;
+        var events = this._classicEvents();
         if (!events || events.length === 0) return;
 
         var shuffled = this._shuffle([...events]);
@@ -345,7 +345,7 @@ StudyEngine.registerActivity({
         var resultArea = document.getElementById('tl-result');
         if (!slotsContainer || !resultArea) return;
 
-        var events = this._config.timelineEvents;
+        var events = this._classicEvents();
         var slots = slotsContainer.querySelectorAll('.tl-slot');
 
         var allFilled = true;
@@ -448,6 +448,12 @@ StudyEngine.registerActivity({
         ProgressManager.saveActivityProgress(unitId, 'timeline', next);
     },
 
+    // The dated timeline leaves out cards made only for a story thread (for
+    // example "1780s"), which have no exact date to order by.
+    _classicEvents() {
+        return (this._config.timelineEvents || []).filter(function(e) { return e && !e.threadOnly; });
+    },
+
     // ─── Story threads ─────────────────────────────────────
 
     _el(tag, cls, text) {
@@ -526,7 +532,7 @@ StudyEngine.registerActivity({
         bonus.type = 'button';
         bonus.disabled = !bonusOpen;
         bonus.appendChild(this._icon(bonusOpen ? 'fas fa-history' : 'fas fa-lock'));
-        bonus.appendChild(document.createTextNode(' Full timeline: all ' + (this._config.timelineEvents || []).length + ' events by date' + (bonusOpen ? '' : ' (opens when all three threads are done)')));
+        bonus.appendChild(document.createTextNode(' Full timeline: all ' + this._classicEvents().length + ' events by date' + (bonusOpen ? '' : ' (opens when all three threads are done)')));
         bonus.addEventListener('click', function() {
             self._showYears = true;
             c.textContent = '';
@@ -671,24 +677,28 @@ StudyEngine.registerActivity({
     _renderLink(pos) {
         var self = this;
         var link = this._thread.links[pos];
-        var li = this._el('li', 'tl-link' + (pos < this._linkPos ? ' tl-link-done' : pos === this._linkPos ? ' tl-link-open' : ' tl-link-waiting'));
-        li.setAttribute('aria-label', 'What connects these two events');
+        var pattern = link.type === 'pattern';
+        var li = this._el('li', 'tl-link' + (pattern ? ' tl-link-pattern' : '') + (pos < this._linkPos ? ' tl-link-done' : pos === this._linkPos ? ' tl-link-open' : ' tl-link-waiting'));
+        li.setAttribute('aria-label', pattern ? 'What pattern these two events share' : 'What connects these two events');
         var arrow = this._el('div', 'tl-link-arrow');
         arrow.appendChild(this._icon('fas fa-arrow-down'));
         li.appendChild(arrow);
         var box = this._el('div', 'tl-link-box');
         if (pos < this._linkPos) {
             var lead = this._el('div', 'tl-link-label');
-            lead.appendChild(this._icon('fas fa-link'));
-            lead.appendChild(document.createTextNode(' Why it led to the next'));
+            lead.appendChild(this._icon(pattern ? 'fas fa-redo' : 'fas fa-link'));
+            lead.appendChild(document.createTextNode(pattern ? ' The pattern' : ' Why it led to the next'));
             box.appendChild(lead);
             box.appendChild(this._el('p', 'tl-link-why', link.why));
         } else if (pos === this._linkPos) {
-            box.appendChild(this._el('div', 'tl-link-label', 'What connects these two?'));
+            // A pattern link joins two events that did not cause each other
+            // but show the same thing happening again
+            box.appendChild(this._el('div', 'tl-link-label', pattern ? 'What pattern repeats in these two?' : 'What connects these two?'));
             if (!this._choices || this._choicesFor !== pos) {
                 this._choices = this._shuffle([link.cause].concat(link.wrong || []));
                 this._choicesFor = pos;
                 this._wrongPicked = {};
+                this._hintShown = false;
             }
             var opts = this._el('div', 'tl-link-choices');
             this._choices.forEach(function(text) {
@@ -713,6 +723,26 @@ StudyEngine.registerActivity({
                 opts.appendChild(b);
             });
             box.appendChild(opts);
+            if (link.hint) {
+                if (this._hintShown) {
+                    var hintText = this._el('p', 'tl-link-hinttext');
+                    hintText.appendChild(this._icon('fas fa-lightbulb'));
+                    hintText.appendChild(document.createTextNode(' ' + link.hint));
+                    box.appendChild(hintText);
+                } else {
+                    var hintBtn = this._el('button', 'tl-hint-btn');
+                    hintBtn.type = 'button';
+                    hintBtn.appendChild(this._icon('fas fa-lightbulb'));
+                    hintBtn.appendChild(document.createTextNode(' Need a hint?'));
+                    hintBtn.addEventListener('click', function() {
+                        self._hintShown = true;
+                        self._renderThread();
+                        var t = self._container.querySelector('.tl-link-open .tl-link-hinttext');
+                        if (t) { t.tabIndex = -1; t.focus(); }
+                    });
+                    box.appendChild(hintBtn);
+                }
+            }
             if (Object.keys(this._wrongPicked).length) {
                 var hint = this._el('p', 'tl-link-hint', 'Not that one. Read the event above and the one below it again.');
                 hint.tabIndex = -1;
@@ -775,7 +805,8 @@ StudyEngine.registerActivity({
     _MONTHS: { Jan: 1, Feb: 2, Mar: 3, Apr: 4, May: 5, Jun: 6, Jul: 7, Aug: 8, Sep: 9, Oct: 10, Nov: 11, Dec: 12 },
 
     _when(ev) {
-        var m = /^(?:([A-Z][a-z]{2})\s+)?(\d{3,4})/.exec(String(ev.year || ''));
+        // `sort` places a card with a loose date, such as "1780s", among the others
+        var m = /^(?:([A-Z][a-z]{2})\s+)?(\d{3,4})/.exec(String(ev.sort || ev.year || ''));
         return m ? Number(m[2]) * 100 + (m[1] ? this._MONTHS[m[1]] || 0 : 0) : 0;
     },
 

@@ -101,7 +101,9 @@
   }
   function normalizeTimeline(config, shuffleFn) {
     shuffleFn = shuffleFn || defaultShuffle;
-    var events = (config && config.timelineEvents) || [];
+    // Cards made only for a story thread have loose dates ("1780s"), so they
+    // never become "When did this happen?" questions
+    var events = ((config && config.timelineEvents) || []).filter(function (e) { return e && !e.threadOnly; });
     var years = [];
     events.forEach(function (e) {
       var y = e && timelineYear(e.year);

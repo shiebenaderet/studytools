@@ -352,7 +352,7 @@
     { id: 'vocab', name: 'Vocabulary', desc: 'Defaults to must-know. Becomes 4-option MC with auto distractors from the same chapter.', count: function (c) { return (c.vocabulary||[]).length; } },
     { id: 'fib', name: 'Fill-in-the-blank', desc: 'The sentence becomes the question; the answer is correct; 3 same-chapter distractors.', count: function (c) { return (c.fillInBlankSentences||[]).length; } },
     { id: 'shortAnswer', name: 'Short-answer essays', desc: 'Open-ended prompts with key terms and sentence starters. Canvas only.', count: function (c) { return (c.shortAnswerQuestions||[]).length; }, canvasOnly: true, canvasNote: 'Essays export only to Canvas.' },
-    { id: 'timeline', name: 'Timeline', desc: '"When did this happen?" for each timeline event, with 4 year choices from nearby events.', count: function (c) { return (c.timelineEvents||[]).length; }, unit: 'events' },
+    { id: 'timeline', name: 'Timeline', desc: '"When did this happen?" for each timeline event, with 4 year choices from nearby events.', count: function (c) { return (c.timelineEvents||[]).filter(function (e) { return !e.threadOnly; }).length; }, unit: 'events' },
     { id: 'mapRegions', name: 'Map regions', desc: '"Which region is highlighted on the map below?" with a picture of the map. Pick the map below. Canvas only.', count: function () { return window.MapRender.getRegions(state.mapKey).length; }, canvasOnly: true, canvasNote: 'Map questions need images, which only Canvas supports.', unit: 'regions' }
   ];
 

@@ -101,13 +101,14 @@ ids.forEach(function(id) {
   var tlIds = {};
   (cfg.timelineEvents || []).forEach(function(e) { tlIds[e.id] = e; });
   var MON = { Jan: 1, Feb: 2, Mar: 3, Apr: 4, May: 5, Jun: 6, Jul: 7, Aug: 8, Sep: 9, Oct: 10, Nov: 11, Dec: 12 };
-  var when = function(ev) { var m = /^(?:([A-Z][a-z]{2})\s+)?(\d{3,4})/.exec(String(ev.year || '')); return m ? Number(m[2]) * 100 + (m[1] ? MON[m[1]] || 0 : 0) : 0; };
+  var when = function(ev) { var m = /^(?:([A-Z][a-z]{2})\s+)?(\d{3,4})/.exec(String(ev.sort || ev.year || '')); return m ? Number(m[2]) * 100 + (m[1] ? MON[m[1]] || 0 : 0) : 0; };
   (cfg.timelineThreads || []).forEach(function(t, i) {
     var where = 'timelineThreads[' + i + '] "' + (t.title || t.id || '') + '"';
     if (!t.id) err(id, where + ' has no id');
     var evs = t.events || [];
     if (evs.length < 2) err(id, where + ' needs at least 2 events');
     evs.forEach(function(e) { if (!tlIds[e]) err(id, where + ' names event ' + e + ', which is not in timelineEvents'); });
+    evs.forEach(function(e) { if (tlIds[e] && tlIds[e].threadOnly && !/^\d{3,4}$/.test(String(tlIds[e].sort || ''))) warn(id, where + ': thread-only event ' + e + ' has no "sort" year to place it among the others'); });
     for (var k = 1; k < evs.length; k++) {
       if (tlIds[evs[k - 1]] && tlIds[evs[k]] && when(tlIds[evs[k - 1]]) > when(tlIds[evs[k]])) err(id, where + ': event ' + evs[k - 1] + ' comes after event ' + evs[k] + '; a thread must be in date order');
     }
@@ -115,6 +116,8 @@ ids.forEach(function(id) {
     (t.links || []).forEach(function(l, j) {
       if (!l.cause || !l.why) err(id, where + ' link ' + (j + 1) + ' needs a cause and a why line');
       if (!l.wrong || l.wrong.length < 2) err(id, where + ' link ' + (j + 1) + ' needs two wrong choices');
+      if (l.type && l.type !== 'pattern') err(id, where + ' link ' + (j + 1) + ' has unknown type "' + l.type + '" (use "pattern" or leave it out)');
+      if (!l.hint) warn(id, where + ' link ' + (j + 1) + ' has no hint');
       if (l.cause && l.wrong && l.wrong.every(function(w) { return w.length < l.cause.length; })) warn(id, where + ' link ' + (j + 1) + ': the right cause is the longest choice');
     });
   });

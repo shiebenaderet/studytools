@@ -1780,6 +1780,12 @@ body.light-mode .fc-back .fc-tier-badge {
 .tl-link-choice.tl-link-wrong { border-color: var(--danger); opacity: 0.6; cursor: default; text-decoration: line-through; }
 .tl-link-choice.tl-link-wrong i { color: var(--danger); }
 .tl-link-hint { color: var(--text-secondary); margin: 8px 0 0; outline: none; }
+.tl-hint-btn { margin-top: 10px; background: none; border: 1px dashed var(--border-card); color: var(--accent-text); border-radius: 8px; padding: 8px 12px; font: inherit; font-size: 0.95em; cursor: pointer; min-height: 40px; }
+.tl-hint-btn:hover { border-style: solid; }
+.tl-link-hinttext { margin: 10px 0 0; padding: 10px 12px; border-radius: 8px; background: rgba(245, 158, 11, 0.12); color: var(--text-primary); line-height: 1.45; outline: none; }
+.tl-link-hinttext i { color: var(--accent-text); }
+.tl-link-pattern .tl-link-arrow { color: var(--text-secondary); }
+.tl-link-pattern.tl-link-open .tl-link-box { border-style: dashed; }
 .tl-thread-done-box { text-align: center; }
 .tl-thread-done-title { font-size: 1.2em; font-weight: 700; margin-bottom: 6px; }
 .tl-oneline { list-style: none; margin: 12px 0; padding: 0 0 0 4px; border-left: 3px solid var(--border-card); }
