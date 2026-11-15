@@ -92,7 +92,7 @@
               fact: 'The northern edge of the Northwest Territory and part of the border with British Canada. After 1783 Britain kept forts on the American side of the lakes, including Detroit, until 1796.' },
             { id: 'appalachian-mountains', name: 'Appalachian Mountains', type: 'mountain', hitPath: APPALACHIANS, hitRadius: 45,
               x: 468, y: 468, angle: -53,
-              fact: 'The mountains between the coastal states and the West. By 1790, tens of thousands of settlers had crossed them into Kentucky, Tennessee and the Ohio Valley.' },
+              fact: 'The mountains between the coastal states and the West. By 1790, more than 100,000 people lived west of them in Kentucky and Tennessee, and settlers were moving into the Ohio Valley.' },
             { id: 'atlantic-ocean', name: 'Atlantic Ocean', type: 'water', hitRadius: 90,
               x: 780, y: 450, angle: -75,
               fact: 'The thirteen states lay along the Atlantic coast, and most of their trade crossed it by ship. Under the Articles, Congress could not tax that trade; under the Constitution, it could.' }

@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.126] - 2026-11-14
+
+### Fixed
+- **Four accuracy fixes in Unit 3,** found in a content audit before the unit opens:
+  - **Shays' Rebellion:** "Congress had no army" becomes "almost no army and no money to pay one," matching the readings. Congress had a small army on the frontier and voted to raise more troops in 1786, but could not pay them. Changed on the timeline card and thread link, a practice-question explanation, the short-answer rubric and exemplar, the Response Builder evidence sentence and a Read More check.
+  - **Treaty of Greenville timeline card:** "promises the land north of the line is theirs" becomes "gives up its claim to their land beyond the line," the wording of the treaty's Article 4.
+  - **Power Sort:** "Spending bills start in the House" becomes "Bills to raise taxes must start in the House," which is what the Constitution requires; spending bills start there only by custom.
+  - **New Nation map, Appalachian Mountains:** "tens of thousands of settlers" by 1790 becomes "more than 100,000 people" in Kentucky and Tennessee, from the 1790 census.
+
+Approved by the teacher on Nov 14.
+
 ## [8.55.125] - 2026-11-13
 
 ### Changed

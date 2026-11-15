@@ -606,13 +606,13 @@
                     "hint": "Read the Shays' Rebellion card. What were the farmers afraid of losing?"
                 },
                 {
-                    "cause": "Congress had no army to stop the rebels, so the Articles looked too weak.",
+                    "cause": "Congress couldn't stop the rebels, so the Articles looked too weak.",
                     "wrong": [
                         "The rebels won, so the states had to write a new plan for them.",
                         "The president called the states to Philadelphia to end the rebellion quickly."
                     ],
-                    "why": "Congress could not send soldiers to stop the rebellion. Leaders worried the country could fall apart, so they met in Philadelphia to fix the government.",
-                    "hint": "The Shays' card says something Congress did not have. Why would that worry leaders?"
+                    "why": "Congress had almost no army and no money to pay one, so Massachusetts had to raise its own militia. Leaders worried the country could fall apart, so they met in Philadelphia to fix the government.",
+                    "hint": "The Shays' card says what Congress was missing. Why would that worry leaders?"
                 }
             ]
         },
@@ -722,7 +722,7 @@
         {
             "title": "Shays' Rebellion begins",
             "year": "Aug 1786",
-            "description": "Massachusetts farmers facing debt and lost farms close courts. Congress has no army to send.",
+            "description": "Massachusetts farmers facing debt and lost farms close courts. Congress has almost no army and no money to pay one.",
             "id": 3
         },
         {
@@ -782,7 +782,7 @@
         {
             "title": "Treaty of Greenville",
             "year": "Aug 1795",
-            "description": "Native nations cede most of present-day Ohio. The United States promises the land north of the line is theirs.",
+            "description": "Native nations cede most of present-day Ohio. The United States gives up its claim to their land beyond the line.",
             "id": 13
         },
         {
@@ -1073,7 +1073,7 @@
                 "It made the states give up their militias"
             ],
             "correct": 1,
-            "explanation": "Congress had no army to send. Massachusetts had to pay for its own militia, which showed the national government was too weak to protect the country.",
+            "explanation": "Congress had almost no army and no money to pay one. Massachusetts had to pay for its own militia, which showed the national government was too weak to protect the country.",
             "topic": "Why the Articles Failed"
         },
         {
@@ -1774,8 +1774,8 @@
                 "Shays' Rebellion",
                 "tax"
             ],
-            "rubric": "Strong response names two specific weaknesses (no power to tax, no army, every change needed all thirteen states, no president or courts) and connects each to a real result, such as unpaid debts or Shays' Rebellion.",
-            "exemplar": "The Articles of Confederation failed because the national government was too weak to solve the country's problems. First, Congress had no power to tax, so it could only ask the states for money. When the states did not pay, Congress could not pay its war debts or its soldiers. Second, Congress had no army. When farmers in Massachusetts rebelled in 1786, Congress could not stop them, so Massachusetts had to raise its own militia. Shays' Rebellion showed leaders like George Washington that the country needed a stronger government.",
+            "rubric": "Strong response names two specific weaknesses (no power to tax, almost no army, every change needed all thirteen states, no president or courts) and connects each to a real result, such as unpaid debts or Shays' Rebellion.",
+            "exemplar": "The Articles of Confederation failed because the national government was too weak to solve the country's problems. First, Congress had no power to tax, so it could only ask the states for money. When the states did not pay, Congress could not pay its war debts or its soldiers. Second, Congress had almost no army and no money to pay one. When farmers in Massachusetts rebelled in 1786, Congress could not stop them, so Massachusetts had to raise its own militia. Shays' Rebellion showed leaders like George Washington that the country needed a stronger government.",
             "plan": [
                 {
                     "role": "claim",
@@ -1787,7 +1787,7 @@
                 },
                 {
                     "role": "evidence",
-                    "text": "Congress had no army, so it could not stop Shays' Rebellion in 1786."
+                    "text": "Congress had almost no army and no money, so it could not stop Shays' Rebellion in 1786."
                 },
                 {
                     "role": "reasoning",
@@ -2122,7 +2122,7 @@
                 {
                     "text": "Decides how to spend the nation's money",
                     "bin": "legislative",
-                    "explanation": "Congress controls the budget. Spending bills start in the House."
+                    "explanation": "Congress controls the budget. Bills to raise taxes must start in the House."
                 },
                 {
                     "text": "Overrides a veto with a two-thirds vote",
