@@ -168,3 +168,37 @@ years, so students see that history runs in several stories at once.
 Size: medium. The timeline activity is rebuilt for threads; the events and lines live in the
 unit's config, so other units keep the old timeline until they get threads of their own.
 
+## Story Threads, Round 2: Clearer Links (proposed Nov 14, not built)
+
+Threads shipped locally as 8.55.124 (not pushed). Reviewing it, the teacher wrote: "some of the
+connections won't be clear to 8th graders... How can we improve this?"
+
+### Findings, link by link
+
+| Link | Problem |
+|---|---|
+| Articles → Shays' Rebellion | Skips a step: Congress could not tax, so the states taxed their people hard. That step is on neither card. |
+| Shays' → Convention | Clear: the Shays' card says Congress had no army to send. |
+| Signing → ninth state | Clear: the signing card says nine states must ratify. |
+| Ninth state → Washington | "Electors" is never explained. |
+| Washington → Bill of Rights | Not a cause. The cause is the promise made to win ratification. |
+| Northwest Ordinance → Medicine Creek | A pattern 67 years apart, not a cause. |
+| Medicine Creek → Boldt | Skips 120 years; the arrests (the Fish Wars) are on no card. |
+
+### Proposals
+
+1. **Add the missing step as its own card** where a link jumps: "States raise taxes to pay war
+   debts (1780s)" in thread 1, and "Native fishers are arrested in the Fish Wars (1960s)" in
+   thread 3. Students then place the step themselves instead of having to imagine it.
+2. **Thread 3 rebuilt** as Northwest Ordinance → Treaty of Greenville (already an event) →
+   Treaty of Medicine Creek → Fish Wars → Boldt decision. The Ordinance-to-Greenville link is a
+   real cause (settlers moved in, war, a treaty). The Greenville-to-Medicine Creek link is a
+   pattern, so it asks "What pattern repeats?" instead of "What connects these?"
+3. **Rewrite every link in plain words:** the choice reads as a short "because" phrase, and the
+   why line is two short sentences that explain any hard word (ratify, electors) in place.
+4. **A "Need a hint?" button** on each link that points to the clue on the cards ("Look at what
+   the Articles card says Congress could not do").
+
+Thread 2 keeps its four events; its last link is reworded around the real cause, the promise.
+Size: small to medium; mostly new wording, plus the hint button and the pattern question.
+
