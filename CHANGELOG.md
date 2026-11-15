@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.128] - 2026-11-15
+
+### Fixed
+- **Unit 3 fact check: 24 wording fixes** before the unit opens on Nov 16. Five checkers, one per chapter, read every reading at all four levels, the Read Mores, quotations, vocabulary, practice questions, short answers and typing passages against primary sources (Madison's notes, the Constitution, Founders Online, treaty texts). All 60 practice-question answer keys and about 50 quotations were correct. The fixes, each approved by the teacher:
+  - **Chapter 1:** the typing passage no longer says Congress could not raise an army or settle fights between states (Article IX allowed both); Leonard Richards found that towns deep in debt were no more likely to rebel, not that "few were in debt"; Jefferson's "demigods" note keeps his objection to the secrecy rule; the population figures say "By 1790."
+  - **Chapter 2:** South Carolina and Georgia said they would not *join* the new union over the slave trade, not "leave" it, matching the chapter's Read More; a practice explanation no longer says the compromises "got all the states to sign."
+  - **Chapter 3:** "We the People" was already in the August 6 draft, so the Read More, Deep reading and check now say Morris replaced the list of states with "the United States"; the July 17 vote was on cancelling state laws that went against national laws or treaties, not "any state law"; voters for the ratifying conventions were men who owned property or paid taxes, nearly all white; Marbury was the first time the Supreme Court struck down a federal law, not its first use of judicial review (vocabulary, practice and Power Sort); the Checks and Balances Read More no longer says judicial review came "not from the delegates," only that the Constitution does not spell it out; the amendment explanation says how every amendment so far was proposed and that 27 have been ratified; only a president can veto "a bill passed by Congress"; "almost no army and no navy," matching the rest of the unit; impeachment is for "serious wrongdoing," not only "serious crimes."
+  - **Chapter 4:** the treaty *protected* the Nisqually people's right to fish rather than "gave" it, because tribes kept rights they already had (*U.S. v. Winans*, 1905), in the readings, the Read More and the "Tell Mr. B" question; the Clear Read More says the United States promised to protect rights the tribes kept; the Treaty of Point Elliott reached north to the Lummi, near Canada (with a pronunciation guide); the short-answer example says "Washington's treaty tribes," since not all 29 tribes signed treaties.
+  - **Chapter 5:** Madison argued against a bill of rights during ratification, not in Philadelphia; the Fourteenth Amendment made "almost everyone" born here a citizen; Prohibition was ratified in 1919 and began in 1920; "many" Anti-Federalists, not all, held out for a bill of rights; George Mason refused to sign "partly" over the missing bill of rights.
+
+Approved by the teacher on Nov 15. One more finding (citizenship before 1924) was left as is at the teacher's call. Plan: `docs/plans/2026-11-14-unit3-fact-check.md`.
+
 ## [8.55.127] - 2026-11-14
 
 ### Added

@@ -337,14 +337,14 @@
             "simpleExplanation": "From a Latin word meaning \"I forbid.\" Congress can override it with a two-thirds vote.",
             "example": "In 1792, George Washington sent a bill back to Congress unsigned for the first time.",
             "category": "Inside the Constitution",
-            "typingSnippet": "To veto a bill is to reject it. Only a president can veto, and Congress can override a veto with a two-thirds vote in both houses.",
+            "typingSnippet": "To veto a bill is to reject it. Only a president can veto a bill passed by Congress, and Congress can override a veto with a two-thirds vote in both houses.",
             "tier": "encounter",
             "imageUrl": "images/vocab/veto.jpg"
         },
         {
             "term": "impeachment",
             "pos": "noun",
-            "definition": "The process in which the House formally accuses an official of serious crimes, followed by a trial in the Senate",
+            "definition": "The process in which the House formally accuses an official of serious wrongdoing, followed by a trial in the Senate",
             "simpleExplanation": "It is an accusation, not a removal. The Senate must hold a trial and vote to remove.",
             "example": "Andrew Johnson was formally accused by the House in 1868, and the Senate fell one vote short of removing him.",
             "category": "Inside the Constitution",
@@ -359,7 +359,7 @@
             "simpleExplanation": "The courts can cancel a law that breaks the Constitution.",
             "example": "In 1803, Chief Justice John Marshall ruled in Marbury v. Madison that part of a law could not stand.",
             "category": "Inside the Constitution",
-            "typingSnippet": "Judicial review lets courts decide whether laws follow the Constitution. The Supreme Court first used it in 1803.",
+            "typingSnippet": "Judicial review lets courts decide whether laws follow the Constitution. The Supreme Court first struck down a federal law in 1803.",
             "tier": "encounter",
             "imageUrl": "images/john-marshall.jpg"
         },
@@ -1284,7 +1284,7 @@
                 "They forced northern states to adopt slavery"
             ],
             "correct": 2,
-            "explanation": "The compromises got all the states to sign, but they protected slavery and pushed the conflict to a later generation.",
+            "explanation": "The compromises won the southern states' support, but they protected slavery and pushed the conflict to a later generation.",
             "topic": "Compromises in Philadelphia",
             "tier": "extra"
         },
@@ -1383,7 +1383,7 @@
                 "Ruling that a law goes against the Constitution"
             ],
             "correct": 3,
-            "explanation": "Judicial review lets courts strike down laws that break the Constitution. The Supreme Court first used it in Marbury v. Madison in 1803.",
+            "explanation": "Judicial review lets courts strike down laws that break the Constitution. The Supreme Court first struck down a federal law in Marbury v. Madison in 1803.",
             "topic": "Inside the Constitution",
             "tier": "extra"
         },
@@ -1496,7 +1496,7 @@
                 "So each state could change it alone"
             ],
             "correct": 1,
-            "explanation": "An amendment needs two-thirds of Congress to propose it and three-fourths of the states to ratify it. Only 27 have passed.",
+            "explanation": "Every amendment so far was proposed by two-thirds of both houses of Congress, and three-fourths of the states must ratify one. Only 27 have been ratified.",
             "topic": "Inside the Constitution",
             "tier": "extra"
         },
@@ -1918,7 +1918,7 @@
                 "reservation"
             ],
             "rubric": "Strong response explains that the Constitution treats tribes as nations (Commerce Clause, treaties), that the Supremacy Clause makes treaties the supreme law, and connects this to a real example such as treaty fishing rights and the 1974 Boldt decision.",
-            "exemplar": "Treaties with Native nations are still important because the Constitution makes them part of the supreme law of the land. The Commerce Clause names tribes alongside foreign nations, which shows that the United States treated them as sovereign nations. In the 1850s, tribes around Puget Sound signed treaties that promised they could keep fishing in their usual places. When Washington tried to limit that fishing, a federal judge ruled in 1974 that the treaties override state law because of the Supremacy Clause. Today, Washington's 29 tribes still use those treaties to protect their rights.",
+            "exemplar": "Treaties with Native nations are still important because the Constitution makes them part of the supreme law of the land. The Commerce Clause names tribes alongside foreign nations, which shows that the United States treated them as sovereign nations. In the 1850s, tribes around Puget Sound signed treaties that promised they could keep fishing in their usual places. When Washington tried to limit that fishing, a federal judge ruled in 1974 that the treaties override state law because of the Supremacy Clause. Today, Washington's treaty tribes still use those treaties to protect their rights.",
             "plan": [
                 {
                     "role": "claim",
@@ -1954,7 +1954,7 @@
                 "freedom of speech"
             ],
             "rubric": "Strong response names a specific right and amendment, explains why it matters with a realistic example, and connects to the Anti-Federalist fear that a strong national government could take away freedoms.",
-            "exemplar": "The right that matters most to me is freedom of speech, which the First Amendment protects. It lets me share my opinions, even if the government or other people disagree. In 1969, the Supreme Court ruled in Tinker v. Des Moines that students keep this right at school. The Anti-Federalists wanted rights like this written down because they had just fought a king who punished people for speaking out. They feared a strong national government could do the same, so they refused to support the Constitution until Federalists promised to add a bill of rights.",
+            "exemplar": "The right that matters most to me is freedom of speech, which the First Amendment protects. It lets me share my opinions, even if the government or other people disagree. In 1969, the Supreme Court ruled in Tinker v. Des Moines that students keep this right at school. The Anti-Federalists wanted rights like this written down because they had just fought a king who punished people for speaking out. They feared a strong national government could do the same, so many would not support the Constitution until Federalists promised to add a bill of rights.",
             "plan": [
                 {
                     "role": "claim",
@@ -1966,7 +1966,7 @@
                 },
                 {
                     "role": "evidence",
-                    "text": "Anti-Federalists refused to support the Constitution until a bill of rights was promised."
+                    "text": "Many delegates would not support the Constitution until a bill of rights was promised."
                 },
                 {
                     "role": "reasoning",
@@ -1985,7 +1985,7 @@
             "category": "Why the Articles Failed",
             "title": "A Government Too Weak to Work",
             "source": "Written for the Building a Government unit",
-            "passage": "After the Revolution, Americans feared a powerful central government, so the Articles of Confederation kept the states strong and Congress weak. Congress could not collect taxes, raise an army or settle fights between states, and every change needed all thirteen states to agree. When Massachusetts farmers rose up in Shays' Rebellion in 1786, Congress had no way to stop them. Leaders like George Washington decided the country needed a stronger plan, and in May 1787 delegates met in Philadelphia."
+            "passage": "After the Revolution, Americans feared a powerful central government, so the Articles of Confederation kept the states strong and Congress weak. Congress could not collect taxes, had almost no army and could not make the states obey its decisions, and every change needed all thirteen states to agree. When Massachusetts farmers rose up in Shays' Rebellion in 1786, Congress had no way to stop them. Leaders like George Washington decided the country needed a stronger plan, and in May 1787 delegates met in Philadelphia."
         },
         {
             "category": "Compromises in Philadelphia",
@@ -2177,7 +2177,7 @@
                 {
                     "text": "Decides whether a law follows the Constitution",
                     "bin": "judicial",
-                    "explanation": "This is judicial review, first used in Marbury v. Madison in 1803."
+                    "explanation": "This is judicial review. In Marbury v. Madison in 1803, the Supreme Court first used it to strike down a federal law."
                 },
                 {
                     "text": "Decides what a law means in a real case",
