@@ -22,7 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - `timelineThreads` in a unit's config, documented in the teacher guide. The content checker reports a thread whose events are missing or out of date order, a missing link or wrong choice, and warns when the right cause is the longest choice. Thread progress merges across devices: a thread finished on either stays finished.
 
-Requested by the teacher; threads, lines and rules approved Nov 14. The two wrong choices for each link are new and wait for the teacher's review.
+Requested by the teacher; threads, lines, rules and the wrong choices for each link approved Nov 14.
 
 ## [8.55.123] - 2026-11-13
 
