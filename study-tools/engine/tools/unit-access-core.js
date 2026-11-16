@@ -38,6 +38,20 @@
     return dated.reduce(function (a, b) { return b.opens > a.opens ? b : a; });
   };
 
+  // Units from earlier this year, newest first, for the landing page's "Study an
+  // earlier unit" list (teacher request, 2026-11-16). Open units only, so last
+  // year's hidden units, drafts and future units never appear; the current unit
+  // is left out because it already has its own card. Undated open units go last.
+  api.earlierUnits = function (units, today) {
+    var current = api.currentUnit(units, today);
+    return (units || [])
+      .filter(function (u) { return api.isOpen(u, today) && u !== current; })
+      .sort(function (a, b) {
+        if (!a.opens || !b.opens) return a.opens ? -1 : b.opens ? 1 : 0;
+        return a.opens < b.opens ? 1 : a.opens > b.opens ? -1 : 0;
+      });
+  };
+
   // Can the engine load this unit id? Unknown ids are allowed (the engine shows its
   // own "not found" error) so a typo is not reported as "not open yet".
   // Returns { ok, reason: 'hidden' | 'not-open' | null, unit }.

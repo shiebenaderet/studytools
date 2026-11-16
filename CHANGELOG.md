@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.129] - 2026-11-16
+
+### Added
+- **"Study an earlier unit" on the landing page.** The landing page shows only the current unit, so once Unit 3 opened, Revolution was reachable only from a saved link. A fold under the current unit's card now lists the units that opened earlier this year, newest first, each with a "Review" link. It shows only units that have opened and are not hidden or drafts, so last year's units and future units stay off the page, and it is not drawn at all when there is no earlier unit. The rule lives in `UnitAccess.earlierUnits` with tests. Requested by the teacher on Nov 16.
+
 ## [8.55.128] - 2026-11-15
 
 ### Fixed

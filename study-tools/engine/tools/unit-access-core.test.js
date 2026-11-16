@@ -26,6 +26,15 @@ eq('hidden never current', core.currentUnit([{ id: 'a', hidden: true }], '2026-1
 eq('undated counts as open', core.currentUnit([{ id: 'a' }], '2026-10-04').id, 'a');
 eq('dated beats undated', core.currentUnit([{ id: 'a' }, { id: 'b', opens: '2026-01-01' }], '2026-10-04').id, 'b');
 
+function ids(list) { return list.map(function (u) { return u.id; }); }
+eq('earlier units, newest first, without current, hidden, draft or future',
+  ids(core.earlierUnits(units, '2026-11-01')), ['colonies']);
+eq('earlier units once a later unit opens', ids(core.earlierUnits(units, '2026-11-23')), ['revolution', 'colonies']);
+eq('no earlier units before the second unit opens', ids(core.earlierUnits(units, '2026-09-10')), []);
+eq('nothing open, nothing earlier', ids(core.earlierUnits(units, '2026-08-01')), []);
+eq('undated earlier units go last',
+  ids(core.earlierUnits([{ id: 'a' }, { id: 'b', opens: '2026-01-01' }, { id: 'c', opens: '2026-02-01' }], '2026-10-04')), ['b', 'a']);
+
 eq('future blocked', core.canOpen(units, 'constitution', '2026-10-04', false).reason, 'not-open');
 eq('hidden blocked', core.canOpen(units, 'civil-war', '2026-10-04', false).reason, 'hidden');
 eq('earlier unit still opens by link', core.canOpen(units, 'colonies', '2026-10-04', false).ok, true);

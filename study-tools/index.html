@@ -171,6 +171,105 @@
             display: block;
         }
 
+        /* "Study an earlier unit": a fold under the current unit's card */
+        .earlier-units {
+            margin: -20px 0 40px;
+        }
+
+        .earlier-units summary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            min-height: 44px;
+            padding: 10px 20px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.16);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            list-style: none;
+            transition: background 0.2s;
+        }
+
+        .earlier-units summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .earlier-units summary:hover,
+        .earlier-units summary:focus-visible {
+            background: rgba(255, 255, 255, 0.26);
+        }
+
+        .earlier-units summary:focus-visible {
+            outline: 3px solid white;
+            outline-offset: 2px;
+        }
+
+        .earlier-units .fold-icon {
+            font-size: 0.8em;
+            transition: transform 0.2s;
+        }
+
+        .earlier-units[open] .fold-icon {
+            transform: rotate(180deg);
+        }
+
+        .earlier-units-list {
+            margin-top: 12px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .earlier-units-list p {
+            padding: 16px 20px 4px;
+            color: #4b5563;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        .earlier-unit-link {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            min-height: 56px;
+            padding: 12px 20px;
+            color: #333;
+            text-decoration: none;
+            border-top: 1px solid #eef0f3;
+        }
+
+        .earlier-units-list p + .earlier-unit-link {
+            border-top: none;
+        }
+
+        .earlier-unit-link:hover,
+        .earlier-unit-link:focus-visible {
+            background: #f5f7fa;
+        }
+
+        .earlier-unit-swatch {
+            flex-shrink: 0;
+            width: 10px;
+            height: 32px;
+            border-radius: 5px;
+        }
+
+        .earlier-unit-title {
+            flex: 1;
+            font-weight: 600;
+            line-height: 1.35;
+        }
+
+        .earlier-unit-go {
+            flex-shrink: 0;
+            color: #4b5563;
+            font-size: 0.9em;
+            white-space: nowrap;
+        }
+
         .loading-message {
             text-align: center;
             color: white;
@@ -298,6 +397,13 @@
         <div id="units-list" class="units-list">
             <div class="loading-message">Loading units...</div>
         </div>
+
+        <details id="earlier-units" class="earlier-units" hidden>
+            <summary><i class="fas fa-history" aria-hidden="true"></i> Study an earlier unit <i class="fas fa-chevron-down fold-icon" aria-hidden="true"></i></summary>
+            <div class="earlier-units-list" id="earlier-units-list">
+                <p>Review a unit from earlier this year.</p>
+            </div>
+        </details>
     </div>
 
     <footer>
@@ -463,6 +569,40 @@
                     card.appendChild(body);
                     container.appendChild(card);
                 });
+
+                // Earlier units this year, for review (open, not hidden, not current).
+                const earlier = UnitAccess.earlierUnits ? UnitAccess.earlierUnits(data.units || [], UnitAccess.today()) : [];
+                if (earlier.length) {
+                    const list = document.getElementById('earlier-units-list');
+                    earlier.forEach(unit => {
+                        const link = document.createElement('a');
+                        link.className = 'earlier-unit-link';
+                        link.href = 'engine/?unit=' + encodeURIComponent(unit.id);
+
+                        const swatch = document.createElement('span');
+                        swatch.className = 'earlier-unit-swatch';
+                        swatch.style.background = (unit.theme && unit.theme.primary) || '#1669C5';
+                        swatch.setAttribute('aria-hidden', 'true');
+                        link.appendChild(swatch);
+
+                        const name = document.createElement('span');
+                        name.className = 'earlier-unit-title';
+                        name.textContent = unit.title;
+                        link.appendChild(name);
+
+                        const go = document.createElement('span');
+                        go.className = 'earlier-unit-go';
+                        go.textContent = 'Review ';
+                        const arrow = document.createElement('i');
+                        arrow.className = 'fas fa-arrow-right';
+                        arrow.setAttribute('aria-hidden', 'true');
+                        go.appendChild(arrow);
+                        link.appendChild(go);
+
+                        list.appendChild(link);
+                    });
+                    document.getElementById('earlier-units').hidden = false;
+                }
 
             } catch (err) {
                 container.textContent = '';

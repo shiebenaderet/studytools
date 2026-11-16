@@ -413,6 +413,16 @@ Add `quizDate` (and, if you like, `quizLabel`) inside the `unit` block to show a
 - If the quiz moves, change the date and push; students see the new date the next time they open the unit.
 - Leave `quizDate` out and nothing is shown.
 
+### Which units students see (`opens` and `hidden` in units.json)
+
+Each unit in `study-tools/units/units.json` can carry:
+
+- `"opens": "YYYY-MM-DD"`: the first day students can see the unit (your local date, from midnight).
+- `"hidden": true`: never shown to students. Use it for last year's units you keep for the dashboard and Question Export.
+- `"draft": true`: work in progress, treated like hidden on the landing page.
+
+The landing page shows one card: the **current unit**, the newest unit whose `opens` date has arrived. Units that opened earlier this year move under a **Study an earlier unit** fold below the card, newest first, so students can go back and review them. Hidden units, drafts and units that have not opened yet never appear there. Any unit still opens from a direct link for you when the teacher unlock is on.
+
 ### Scheduled category unlocks (optional)
 
 For multi-week units, you can set calendar-based unlock dates so each category opens on a chosen day regardless of whether students have mastered the previous one. This prevents students who fall behind in week 1 from being locked out of week 2+ content.
