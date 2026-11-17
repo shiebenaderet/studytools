@@ -964,7 +964,7 @@
         "A law giving each colony two elected seats in the House of Commons",
         "A law ending the tax on tea for good so that the boycotts would stop",
         "The Declaratory Act, saying it could make colony laws \"in all cases whatsoever\"",
-        "A law closing Boston Harbor until every unused stamp was paid for in full"
+        "A law closing Boston Harbor until the colonists paid in full for every unused stamp"
       ],
       "correct": 2,
       "explanation": "Repeal was not surrender: the Declaratory Act said Parliament still had full power over the colonies.",
@@ -975,8 +975,8 @@
       "options": [
         "Britain had tried to limit colonial settlement on their land",
         "Britain promised them seats in Parliament",
-        "The colonists refused to trade with them at all",
-        "France ordered its old allies to fight for Britain"
+        "The colonists refused to trade with any Native nation at all",
+        "France ordered its old Native allies to fight alongside Britain"
       ],
       "correct": 0,
       "explanation": "The Proclamation Line had tried to keep settlers out. Native leaders judged that a colonial victory would cost them their homelands.",
@@ -987,7 +987,7 @@
       "options": [
         "Free land in Canada to every Loyalist family who left the colonies",
         "A lower tax on tea for any colonist who stayed loyal to the king",
-        "A year of pay to any Patriot soldier who switched to the British side",
+        "A year of pay to any Patriot soldier who switched over to fight on the British side",
         "Freedom to enslaved people who escaped Patriot enslavers and fought for Britain"
       ],
       "correct": 3,
@@ -997,7 +997,7 @@
     {
       "question": "Who were the minutemen?",
       "options": [
-        "British soldiers housed in colonists' homes",
+        "British soldiers who were housed in colonists' own homes",
         "Colonial militia ready to fight at a minute's notice",
         "Messengers who carried letters to the king",
         "Loyalists who spied for the British army"
@@ -1012,7 +1012,7 @@
         "Each side's response made the next conflict bigger",
         "Colonists moved west across the mountains",
         "Britain slowly lowered its taxes over time",
-        "The colonies voted on each new law together"
+        "The colonies voted together on each new law from Britain"
       ],
       "correct": 0,
       "explanation": "Taxes led to boycotts, troops led to the Boston Massacre, the Tea Party led to the Intolerable Acts, and those led to war.",
@@ -1033,7 +1033,7 @@
     {
       "question": "What did Thomas Paine argue in Common Sense (January 1776)?",
       "options": [
-        "The colonies should pay Britain's war debt quickly",
+        "The colonies should pay off Britain's war debt as quickly as possible",
         "Colonists should stay neutral in the war",
         "Parliament should give the colonies more seats",
         "The colonies should break away from Britain completely"
@@ -1142,7 +1142,7 @@
       "question": "Who are \"overlooked voices\" in the history of the Revolution?",
       "options": [
         "Only the 56 men who signed the Declaration of Independence in 1776",
-        "British leaders in Parliament who made the laws for the colonies",
+        "British leaders in Parliament who made and passed the laws for the thirteen colonies",
         "People whose real roles rarely make it into the usual telling of the story",
         "Colonists who never left their own towns during the whole war"
       ],

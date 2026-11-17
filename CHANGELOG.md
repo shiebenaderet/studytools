@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.138] - 2026-11-16
+
+### Fixed
+- **Practice questions no longer give away the answer by length.** In 10 Unit 3 questions and 7 Revolution questions, the right answer was at least 8% longer than every wrong choice, a tell a careful student can learn. Each now has a wrong choice at least as long, written to stay clearly wrong (for example "Impeachment powers" in place of "Veto powers" beside "Concurrent powers"). No question text changed, so students' progress on these questions is kept. Where the right answer sits was already spread evenly across the four places in both units. Unit 3: questions 0, 8, 11, 17, 24, 28, 36, 51, 52, 55. Revolution: 34, 35, 36, 37, 38, 40, 49.
+
+### Added
+- **The content checker warns about long right answers.** `unit-content-check.js` now flags any practice question whose right answer is at least 8% (and 2 characters) longer than every wrong choice. Unit 3 and Revolution pass; the three hidden units from last year have 48 such questions between them, to fix when they are rebuilt.
+
+Requested by the teacher on Nov 16.
+
 ## [8.55.137] - 2026-11-16
 
 ### Added

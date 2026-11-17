@@ -74,6 +74,13 @@ ids.forEach(function(id) {
     if (q.tier !== undefined && q.tier !== 'extra' && q.tier !== 'core') err(id, 'practiceQuestions[' + i + ']: tier must be "extra" or "core" (or left out, which means core)');
     var bucket = q.tier === 'extra' ? extraBy : coreBy;
     bucket[q.topic] = (bucket[q.topic] || 0) + 1;
+    // A right answer clearly longer than every wrong one gives itself away.
+    var opts = q.options || [];
+    if (typeof q.correct === 'number' && opts[q.correct] && opts.length > 1) {
+      var right = String(opts[q.correct]).length;
+      var longestWrong = Math.max.apply(null, opts.filter(function(o, k) { return k !== q.correct; }).map(function(o) { return String(o).length; }));
+      if (right >= longestWrong * 1.08 && right - longestWrong >= 2) warn(id, 'practiceQuestions[' + i + ']: the right answer is the longest choice (' + right + ' characters, longest wrong ' + longestWrong + '); lengthen a wrong choice or trim the right one');
+    }
   });
   Object.keys(extraBy).forEach(function(t) {
     if ((coreBy[t] || 0) < 4) warn(id, 'practice questions for "' + t + '": only ' + (coreBy[t] || 0) + ' core; extras stay hidden until the core ones are answered right, so keep at least 4 core per chapter');

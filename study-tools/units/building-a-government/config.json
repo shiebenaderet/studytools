@@ -1018,8 +1018,8 @@
         {
             "question": "Why did the first plan of government make the national government weak on purpose?",
             "options": [
-                "The states wanted Britain to keep control of trade",
-                "Congress wanted the president to hold most of the power",
+                "The states wanted Britain to keep control of trade after the war",
+                "Congress wanted the president to hold most of the power instead",
                 "The Native nations demanded a weak government",
                 "Americans feared a strong central power after fighting a king"
             ],
@@ -1117,9 +1117,9 @@
             "question": "Which group of people was included at the meeting in Philadelphia?",
             "options": [
                 "White men, many of them wealthy",
-                "Women who owned property",
+                "Women who owned land or businesses",
                 "Enslaved people",
-                "Leaders of Native nations"
+                "Leaders of Native nations near the states"
             ],
             "correct": 0,
             "explanation": "All 55 delegates were white men, and most were wealthy. Women, enslaved people, free Black Americans and Native nations had no one there.",
@@ -1155,10 +1155,10 @@
         {
             "question": "What did the Virginia Plan propose?",
             "options": [
-                "Every state gets one vote in Congress",
+                "Every state gets exactly one vote in Congress, as before",
                 "States with more people get more seats in Congress",
                 "The president chooses members of Congress",
-                "Congress is removed and replaced by a king"
+                "Congress is replaced by a king chosen by the states"
             ],
             "correct": 1,
             "explanation": "James Madison's plan tied representation to population, which favored large states like Virginia.",
@@ -1229,7 +1229,7 @@
         {
             "question": "Under the Three-Fifths Compromise, how were enslaved people counted?",
             "options": [
-                "Each enslaved person counted as one full person",
+                "Each enslaved person counted as one full person for seats",
                 "Enslaved people were not counted at all",
                 "Three out of every five enslaved people were counted",
                 "Five out of every three were counted"
@@ -1319,7 +1319,7 @@
                 "The executive branch",
                 "The judicial branch",
                 "The legislative branch",
-                "The state branch"
+                "The administrative branch"
             ],
             "correct": 2,
             "explanation": "The legislative branch, Congress, is described in Article I and makes the laws.",
@@ -1366,9 +1366,9 @@
             "question": "The president vetoes a bill. What can Congress do?",
             "options": [
                 "Nothing; the bill is dead forever",
-                "Ask the Supreme Court to sign it",
+                "Ask the Supreme Court to sign it into law instead",
                 "Override the veto with a two-thirds vote in both houses",
-                "Pass it with a simple majority in the House only"
+                "Pass it again with a simple majority vote in the House only"
             ],
             "correct": 2,
             "explanation": "An override needs two-thirds of both the House and the Senate. This is a check on the president.",
@@ -1467,7 +1467,7 @@
             "options": [
                 "Concurrent powers",
                 "Reserved powers",
-                "Veto powers",
+                "Impeachment powers",
                 "Judicial powers"
             ],
             "correct": 0,
@@ -1653,8 +1653,8 @@
             "question": "What were The Federalist Papers?",
             "options": [
                 "85 newspaper essays arguing for the Constitution",
-                "The minutes of the Philadelphia meeting",
-                "Letters from Anti-Federalists to the king",
+                "The secret minutes kept during the Philadelphia meeting",
+                "Letters from Anti-Federalists asking the king for help",
                 "The first ten amendments"
             ],
             "correct": 0,
@@ -1668,7 +1668,7 @@
                 "They threatened to bring back the king",
                 "They paid each delegate",
                 "They promised to add a bill of rights after ratification",
-                "They let those states write their own constitutions"
+                "They let those states rewrite their own state constitutions"
             ],
             "correct": 2,
             "explanation": "The promise of amendments won over enough doubters. Madison kept it by proposing amendments in 1789.",
@@ -1703,7 +1703,7 @@
             "question": "What does the Fourth Amendment protect against?",
             "options": [
                 "Cruel and unusual punishment",
-                "Being forced to house soldiers",
+                "Being forced to house soldiers in your home",
                 "Losing the right to vote",
                 "Unreasonable searches and seizures"
             ],
