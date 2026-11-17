@@ -1,4 +1,4 @@
-const CACHE_NAME = 'studytools-v88';
+const CACHE_NAME = 'studytools-v89';
 const APP_SHELL = [
     './',
     'index.html',
@@ -18,6 +18,8 @@ const APP_SHELL = [
     'js/core/supabase-config.js',
     'js/core/app.js',
     'tools/tools.js',
+    'tools/notebook-core.js',
+    'tools/notebook-companion.js',
     'js/data/map-1861-data.js',
     'js/data/civil-war-map-data.js',
     'js/data/civil-war-map-base.js',

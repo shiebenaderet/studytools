@@ -521,6 +521,7 @@ const StudyEngine = {
         }
 
         this.renderQuizCountdown();
+        if (typeof NotebookCompanion !== 'undefined') NotebookCompanion.renderHomeReminder(this.config);
     },
 
     // Small quiz-date note under the essential question (unit.quizDate).
@@ -1059,6 +1060,7 @@ const StudyEngine = {
         grid.className = 'tools-grid';
 
         const tools = [
+            { icon: 'fas fa-book', title: 'Notebook Companion', desc: 'What to put in your notebook before the quiz: key terms to check off, questions you missed, short-answer outlines and what to reread.', action: 'NotebookCompanion.open()', button: 'Open' },
             { icon: 'fas fa-edit', title: 'My Study Guide', desc: 'See what you\'ve mastered, what needs review, and add personal notes.', action: 'StudyTools.openNotes()' },
             { icon: 'fas fa-hourglass', title: 'Focused Study Timer', desc: 'Set a timer for focused study sessions.', action: 'StudyTools.openTimer()' },
             { icon: 'fas fa-print', title: 'Print Study Guide', desc: 'Print a formatted study guide.', action: 'StudyTools.openPrint()' },
@@ -1083,7 +1085,7 @@ const StudyEngine = {
 
             const btn = document.createElement('button');
             btn.className = 'tool-button';
-            btn.textContent = tool.title.split(' ').pop(); // Last word as button text
+            btn.textContent = tool.button || tool.title.split(' ').pop(); // Last word as button text
             btn.setAttribute('onclick', tool.action);
             card.appendChild(btn);
 

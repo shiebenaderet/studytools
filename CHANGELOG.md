@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.132] - 2026-11-16
+
+### Added
+- **Notebook Companion, a new page under Tools.** It tells each student what to put in their notebook before the quiz, from how they have been studying, in four parts:
+  - **Read and reread:** sections to reread now, sections not yet read in the open chapters, and the next rereads with dates. A section comes back about 2 days and about 7 days after its first read, and in the 2 days before `quizDate`; one that teaches a term the student has missed twice or more since last reading it is due right away. Sections read before today count from the chapter's `categorySchedule` date.
+  - **Vocabulary checklist:** the core terms with definitions, by chapter, to tick off as each vocabulary half-sheet is glued in. Ticks save and sync (`activity_notebook`; for each term the later tick or untick wins). Terms missed twice or more and mastered terms are marked.
+  - **Questions you have missed:** practice questions missed in Practice Test, Learn Mode or Tower Defense and not yet answered right, with the answer behind **Show answer**.
+  - **Short-answer outlines:** each short-answer question, which the quiz uses too, as an empty Claim / Evidence / Evidence / Reasoning frame with the terms to use and the sections to reread.
+
+  **Print this list** prints all four parts. When a reread is due, a small **Reread today** note next to the quiz countdown on the unit home screen opens the page. The site cannot send notifications, so reminders appear only when a student opens the unit. It works in every unit with a quiz date and needs no config. Rules in `tools/notebook-core.js` with tests (`notebook-core.test.js`). Requested by the teacher on Nov 16. Plan: `docs/plans/2026-11-16-notebook-companion.md`.
+
 ## [8.55.131] - 2026-11-16
 
 ### Added

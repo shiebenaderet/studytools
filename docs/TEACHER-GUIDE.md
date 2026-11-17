@@ -302,6 +302,7 @@ When using AI to generate your content, here's a checklist of things to review b
 - [ ] **The rubric matches the question** — Make sure the rubric bullet points actually address what the question asks
 - [ ] **Key terms are relevant** — The `keyTerms` array should contain terms a good answer would naturally include
 - [ ] **The exemplar response would score full marks** — Read the exemplar against your own rubric to make sure it hits every point
+- [ ] **They match the quiz** — Notebook Companion tells students these are the short-answer questions on the quiz, so update them if the quiz changes
 
 ### Go Deeper links
 
@@ -412,6 +413,25 @@ Add `quizDate` (and, if you like, `quizLabel`) inside the `unit` block to show a
 - It disappears on its own the day after the quiz, and it is hidden while a student is inside an activity.
 - If the quiz moves, change the date and push; students see the new date the next time they open the unit.
 - Leave `quizDate` out and nothing is shown.
+
+### Notebook Companion (Tools)
+
+**Tools > Notebook Companion** tells each student what to put in their notebook before the quiz, from how they have been studying. It needs no new config: it reads the unit's vocabulary, practice questions, short-answer questions, textbook, `quizDate` and `categorySchedule`. It has four parts:
+
+| Part | What the student sees | Where it comes from |
+|------|----------------------|---------------------|
+| **Read and reread** | Sections to reread now, sections not yet read in the open chapters, and the next five rereads with dates | The textbook and the student's reading |
+| **Vocabulary checklist** | The core (must-know) terms with definitions, by chapter, to tick off as each half-sheet goes in the notebook. Terms missed twice or more and mastered terms are marked | `vocabulary`; ticks save and sync |
+| **Questions you have missed** | Practice questions missed in Practice Test, Learn Mode or Tower Defense and not yet answered right, with the answer behind **Show answer** | `practiceQuestions` |
+| **Short-answer outlines** | Each short-answer question as an empty Claim / Evidence / Evidence / Reasoning frame, the terms to use, the sections to reread, and whether they have a draft | `shortAnswerQuestions` (`plan` roles and `keyTerms`) |
+
+A **Print this list** button prints all four parts, with blank lines for the outlines.
+
+**The reread schedule.** When a student marks a section read, the date is saved. The section comes back about 2 days later, about 7 days later, and in the 2 days before `quizDate`. A step that would crowd the quiz is dropped. A reread counts if it happens no more than a day early. A section that teaches a term the student has missed twice or more since last reading it is due right away. When a reread is due, the section's button in the textbook reads **Mark as Reread**. Sections read before Nov 16, 2026 have no date, so they count from the chapter's `categorySchedule` date.
+
+**On the home screen,** a small "Reread today" note sits next to the quiz countdown when a reread is due and opens the page. It is hidden inside activities. The site cannot send notifications or email, so students see reminders only when they open the unit. Everything disappears the day after the quiz.
+
+The short-answer outlines say the questions are the ones on the quiz, so keep `shortAnswerQuestions` matched to the quiz you give.
 
 ### Which units students see (`opens` and `hidden` in units.json)
 
@@ -831,6 +851,13 @@ Edit files on a branch other than `main`. GitHub Pages only deploys from `main`,
 <summary><strong>How do I show students when the quiz is?</strong></summary>
 
 Add `"quizDate": "YYYY-MM-DD"` to the `unit` block of `config.json`. A small "Quiz: date · N days to go" note appears under the essential question and goes away the day after. See [Quiz date countdown](#quiz-date-countdown-optional).
+
+</details>
+
+<details>
+<summary><strong>How do students know what to put in their notebooks?</strong></summary>
+
+**Tools > Notebook Companion** lists the core terms to tick off as each vocabulary half-sheet goes in, the practice questions they keep missing, an outline frame for each short-answer question, and which sections to read or reread before the quiz. It builds itself from the unit config and each student's progress; there is nothing to set up. See [Notebook Companion](#notebook-companion-tools).
 
 </details>
 

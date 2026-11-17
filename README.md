@@ -8,7 +8,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 
 [![Live Site](https://img.shields.io/badge/Live_Site-study.mrbsocialstudies.org-1669C5?style=for-the-badge&logo=google-chrome&logoColor=white)](https://study.mrbsocialstudies.org)
 [![License](https://img.shields.io/badge/License-Educational_Use-22c55e?style=for-the-badge)](#license)
-[![Version](https://img.shields.io/badge/Version-8.55.131-f59e0b?style=for-the-badge)](#)
+[![Version](https://img.shields.io/badge/Version-8.55.132-f59e0b?style=for-the-badge)](#)
 
 ---
 
@@ -63,7 +63,8 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 
 ## 🧠 Smart Learning
 
-- **Cross-activity weakness tracking** — wrong answers feed a shared tracker that surfaces weak terms across Flashcards, Practice Test, Fill-in-the-Blank, Lightning Round, and Typing Practice
+- **Cross-activity weakness tracking** — wrong answers feed a shared tracker that surfaces weak terms across Flashcards, Practice Test, Fill-in-the-Blank, Lightning Round, and Typing Practice. Practice questions missed in Practice Test, Learn Mode and Tower Defense stay on a missed list until answered right
+- **Spaced rereading** — each section's first-read date sets a reread schedule (about 2 and 7 days later, and just before the quiz); sections that teach a term a student keeps missing come up sooner
 - **Auto study time tracking** — time in activities counts automatically; pauses on inactivity or hidden tab
 - **Mastery gating** — Read > Study > Practice > Play flow: students read the textbook chapter before flashcards unlock, then master terms to unlock games. Vocabulary tiers (must-know/encounter/bonus) focus study on tested terms
 - **Scheduled unlocks** — Optional per-unit `categorySchedule` opens categories on a calendar (e.g. one per week) so students who fall behind never get fully shut out. Mastery still accelerates ahead of the schedule
@@ -83,6 +84,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 - Settings gear with theme toggle, dyslexic font, and search
 - Command palette (`/` or `Cmd+K`)
 - OpenDyslexic font toggle
+- Notebook Companion: core terms to tick off as they go in the notebook, missed questions, short-answer outlines, and a reread schedule counting down to the quiz, with a "Reread today" note on the home screen
 - Study timer, notes, printable guide
 - Music player with auto-shuffle, loop, playlist
 - Deep linking to activities (`#activity-name`)
@@ -120,7 +122,7 @@ study-tools/
 │   ├── css/styles.css      # Theming via CSS custom properties
 │   ├── js/core/            # App shell, progress, mastery, leaderboard
 │   ├── js/activities/      # One file per activity (plugin system)
-│   ├── tools/              # Study tools (notes, timer, music, export) + unit-content-check.js
+│   ├── tools/              # Study tools (notes, timer, music, export, Notebook Companion) + unit-content-check.js
 │   ├── vendor/             # Self-hosted fonts, icons, Supabase SDK
 │   └── index.html          # Main app shell
 ├── units/                  # Your content goes here

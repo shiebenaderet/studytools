@@ -365,6 +365,20 @@ const ProgressManager = {
             return tbMerged;
         }
 
+        // Notebook Companion checklist: for each term, the later tick or
+        // untick wins, so a phone and a Chromebook add up.
+        if (activity === 'activity_notebook') {
+            var nbA = remote.terms || {}, nbB = local.terms || {}, nb = {};
+            Object.keys(nbA).concat(Object.keys(nbB)).forEach(function(k) {
+                var a = nbA[k], b = nbB[k];
+                nb[k] = !a ? b : !b ? a : ((b.at || 0) >= (a.at || 0) ? b : a);
+            });
+            return Object.assign({}, remote, local, {
+                terms: nb,
+                updatedAt: Math.max(local.updatedAt || 0, remote.updatedAt || 0)
+            });
+        }
+
         // For flashcards: union mastered arrays, merge ratings keeping latest
         if (activity === 'activity_flashcards') {
             var localMastered = local.mastered || [];

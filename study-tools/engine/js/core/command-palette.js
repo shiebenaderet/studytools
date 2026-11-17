@@ -52,6 +52,7 @@ const CommandPalette = {
         }
 
         // Tools
+        cmds.push({ id: 'tool-notebook', label: 'Notebook Companion', icon: 'fas fa-book', category: 'Tools', action: () => { NotebookCompanion.open(); } });
         cmds.push({ id: 'tool-notes', label: 'My Study Guide', icon: 'fas fa-edit', category: 'Tools', action: () => { StudyTools.openNotes(); } });
         cmds.push({ id: 'tool-timer', label: 'Focused Study Timer', icon: 'fas fa-hourglass', category: 'Tools', action: () => { StudyTools.openTimer(); } });
         cmds.push({ id: 'tool-print', label: 'Print Study Guide', icon: 'fas fa-print', category: 'Tools', action: () => { StudyTools.openPrint(); } });

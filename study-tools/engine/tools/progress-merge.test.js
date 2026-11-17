@@ -208,4 +208,12 @@ test('textbook: no read dates on either side adds no empty fields', () => {
     assert.strictEqual('readAt' in m, false); assert.strictEqual('rereads' in m, false);
 });
 
+test('notebook: the later tick or untick wins per term', () => {
+    const local = { terms: { Alpha: { on: true, at: 5 }, Beta: { on: true, at: 1 } }, updatedAt: 5 };
+    const remote = { terms: { Alpha: { on: false, at: 2 }, Beta: { on: false, at: 3 }, Gamma: { on: true, at: 4 } }, updatedAt: 4 };
+    const m = merge('activity_notebook', local, remote);
+    assert.deepStrictEqual(m.terms, { Alpha: { on: true, at: 5 }, Beta: { on: false, at: 3 }, Gamma: { on: true, at: 4 } });
+    assert.strictEqual(m.updatedAt, 5);
+});
+
 console.log(passed + ' passed');
