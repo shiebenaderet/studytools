@@ -4,3 +4,11 @@
 # Per-unit source materials — local-only working files (lesson plans, scans,
 # drafts) that should never reach the public site
 study-tools/units/*/_source-materials/
+
+# Screenshots straight off a Mac or phone. This repository is public, and a
+# screenshot can catch an address, a student record or a signed-in page.
+# Look at it, then rename it (e.g. "peer-review-rubric.png") to commit it.
+Screenshot *.png
+Screen Shot *.png
+Screenshot_*.png
+IMG_*.PNG

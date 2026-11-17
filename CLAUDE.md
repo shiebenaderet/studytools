@@ -16,6 +16,10 @@ changing a unit.
   it answers by period, never by student name. Credit the student in the
   README's Student Contributors table instead (first name, last initial).
 - Never put a model name or ID in commits, code or docs.
+- The repository is public. Look at every image before committing it; never
+  commit one that shows an address, a student's name or record, or a signed-in
+  page. Raw screenshots (`Screenshot *.png` and the like) are git-ignored, so
+  one must be looked at and renamed before it can be added.
 - New engine scripts go in both `study-tools/engine/index.html` and the
   precache list in `study-tools/engine/sw.js`.
 - When a change alters what a teacher configures or a student sees, update
@@ -44,7 +48,12 @@ A unit is `study-tools/units/<id>/config.json` plus `textbook.json`, listed in
    has answered every open core question right once
    (`MasteryManager.getTieredQuestions`). Aim for about half core, at least 4
    per chapter, and keep the right answer from being the longest choice. The
-   teacher approves the split.
+   teacher approves the split. The checker enforces length: a right answer at
+   least 8% longer than every wrong choice is an ERROR in a unit students can
+   open and a WARN in a hidden unit, so clear those warnings before a unit
+   opens. Fix one by lengthening a wrong choice (keeping it clearly wrong);
+   never change question text, which is the key progress is saved under
+   (`MasteryManager.questionId`).
 3. **Vocab `example` and `simpleExplanation` may name the term.** Who Am I
    replaces the whole term with one blank per word ("Intolerable Acts"
    becomes "___ ___"), absorbing plural and possessive endings, plus verb
@@ -131,6 +140,17 @@ A unit is `study-tools/units/<id>/config.json` plus `textbook.json`, listed in
   read) needs a merge rule there, or the last device to save wins. Record a
   missed term with `ProgressManager.markWeakTerm` and clear one with
   `clearWeakTerm`; they keep the times the merge rule depends on.
+- **Practice question choices are always shuffled on screen.** Any activity
+  that shows a practice question's choices shuffles them and tracks where the
+  right answer went (Practice Test, Learn Mode, Quiz Race and Tower Defense do).
+  Tower Defense once shuffled only the question order; check the choices too.
+  The Question Exporter keeps stored order, so keep right answers spread across
+  the four places in the bank.
+- **Nudges** go through `NudgeManager._toast` (toasts) or `logShown` and
+  `logFollowed` (cards and notes), so each is shown at most once a day and
+  counted for the dashboard. Give a new nudge a short lowercase id and a name in
+  `NudgeCore.NAMES` (`tools/nudge-core.js`), lead its wording with why the step
+  helps, and keep to one toast per activity open or close.
 - **Harder modes** keep a separate best score (`bestChallengeScore`) so the
   classic best stays comparable, and record mastery the same way.
 - **Feedback.** Bug reports carry the browser and screen size. Ask which

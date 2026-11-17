@@ -23,6 +23,13 @@ if (ids.length === 0) {
 var errors = 0;
 function err(unit, msg) { errors++; console.log('ERROR ' + unit + ': ' + msg); }
 function warn(unit, msg) { console.log('WARN  ' + unit + ': ' + msg); }
+// Units students can open (listed in units.json and not hidden). Some rules are
+// errors there and warnings in a hidden unit that is still being built.
+var listed = {};
+try {
+  JSON.parse(fs.readFileSync(path.join(unitsDir, 'units.json'), 'utf8')).units.forEach(function(u) { listed[u.id] = u; });
+} catch (e) {}
+function isOpen(unit) { return !!(listed[unit] && !listed[unit].hidden); }
 
 ids.forEach(function(id) {
   var cfgPath = path.join(unitsDir, id, 'config.json');
@@ -79,7 +86,8 @@ ids.forEach(function(id) {
     if (typeof q.correct === 'number' && opts[q.correct] && opts.length > 1) {
       var right = String(opts[q.correct]).length;
       var longestWrong = Math.max.apply(null, opts.filter(function(o, k) { return k !== q.correct; }).map(function(o) { return String(o).length; }));
-      if (right >= longestWrong * 1.08 && right - longestWrong >= 2) warn(id, 'practiceQuestions[' + i + ']: the right answer is the longest choice (' + right + ' characters, longest wrong ' + longestWrong + '); lengthen a wrong choice or trim the right one');
+      // An error in a unit students can open, so a revision cannot bring it back.
+      if (right >= longestWrong * 1.08 && right - longestWrong >= 2) (isOpen(id) ? err : warn)(id, 'practiceQuestions[' + i + ']: the right answer is the longest choice (' + right + ' characters, longest wrong ' + longestWrong + '); lengthen a wrong choice (keeping it clearly wrong) or trim the right one');
     }
   });
   Object.keys(extraBy).forEach(function(t) {

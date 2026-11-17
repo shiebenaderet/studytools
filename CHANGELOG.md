@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.141] - 2026-11-16
+
+### Changed
+- **Checks so today's mistakes stay fixed.** The teacher asked that the next unit and future revisions keep these in mind:
+  - The content checker treats a right answer clearly longer than every wrong one as an **error** in a unit students can open (Unit 3, Revolution), so a revision cannot bring one back, and as a warning in a hidden unit still being built.
+  - Raw screenshots (`Screenshot *.png` and similar) are git-ignored, since the repository is public; a screenshot must be looked at and renamed before it can be committed.
+  - The project notes (`CLAUDE.md`) now say: shuffle practice-question choices in any activity that shows them, look at every image before committing, never change question text when fixing choices, and route every new nudge through the nudge log with a dashboard name.
+
+### Security
+- The three screenshots kept out of the repo on Nov 16 (a home address, a student activity record, a signed-in page) are now ignored by git, so they cannot be added by accident.
+
+Requested by the teacher on Nov 16.
+
 ## [8.55.140] - 2026-11-16
 
 ### Changed
