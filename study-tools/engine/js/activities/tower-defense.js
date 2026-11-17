@@ -1139,10 +1139,17 @@ StudyEngine.registerActivity({
         var pq = MasteryManager.getTieredQuestions(config.unit.id, config, config.practiceQuestions || []);
         var self = this;
         pq.forEach(function(q) {
+            // Shuffle the choices too, as Practice Test and Learn Mode do, so the
+            // right answer is not always in the same place.
+            var order = q.options.map(function(_, k) { return k; });
+            for (var s = order.length - 1; s > 0; s--) {
+                var r = Math.floor(Math.random() * (s + 1));
+                var t = order[s]; order[s] = order[r]; order[r] = t;
+            }
             self._questionQueue.push({
                 question: q.question,
-                options: q.options.slice(),
-                correct: q.correct,
+                options: order.map(function(k) { return q.options[k]; }),
+                correct: order.indexOf(q.correct),
                 topic: q.topic || ''
             });
         });

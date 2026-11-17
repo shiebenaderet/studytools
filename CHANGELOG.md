@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.139] - 2026-11-16
+
+### Fixed
+- **Tower Defense shuffles the answer choices.** It shuffled which practice question came next but showed the choices in their stored order, so a student could learn where the right answer usually sat. Choices are now shuffled for every question, as in Practice Test, Learn Mode and Quiz Race. Tower Defense is only in the three hidden units, so no student has met this yet. Found while checking answer shuffling for the teacher on Nov 16.
+
 ## [8.55.138] - 2026-11-16
 
 ### Fixed
