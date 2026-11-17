@@ -191,4 +191,21 @@ test('timeline: a thread finished on either device stays finished; counts keep t
     assert.deepStrictEqual(m.threads, { 'plan-to-government': { done: true, firstTry: true, plays: 2 }, 'new-government': { done: true, firstTry: false, plays: 1 } });
 });
 
+test('textbook: read dates keep the earliest first read from either device', () => {
+    const m = merge('activity_textbook', { readAt: { 'a/1': 50, 'a/2': 10 } }, { readAt: { 'a/1': 20, 'b/1': 5 } });
+    assert.deepStrictEqual(m.readAt, { 'a/1': 20, 'a/2': 10, 'b/1': 5 });
+});
+
+test('textbook: rereads from both devices add up, sorted, newest 10 kept', () => {
+    let m = merge('activity_textbook', { rereads: { 'a/1': [30, 10] } }, { rereads: { 'a/1': [10, 20], 'b/1': [5] } });
+    assert.deepStrictEqual(m.rereads, { 'a/1': [10, 20, 30], 'b/1': [5] });
+    m = merge('activity_textbook', { rereads: { k: [1, 2, 3, 4, 5, 6] } }, { rereads: { k: [7, 8, 9, 10, 11, 12] } });
+    assert.deepStrictEqual(m.rereads.k, [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+});
+
+test('textbook: no read dates on either side adds no empty fields', () => {
+    const m = merge('activity_textbook', { sectionsRead: { 'a/1': true } }, { sectionsRead: {} });
+    assert.strictEqual('readAt' in m, false); assert.strictEqual('rereads' in m, false);
+});
+
 console.log(passed + ' passed');

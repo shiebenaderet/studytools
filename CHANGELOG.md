@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.131] - 2026-11-16
+
+### Added
+- **The textbook remembers when each section was read, and marks rereads.** Reading progress only said whether a section was read, not when, so nothing could space out rereading. Marking a section read now also saves the date (`readAt`), and a section that is due for a reread on Notebook Companion's schedule shows **Mark as Reread** instead of "Section Complete", which saves the reread (`rereads`). Both sync between devices: the earliest first-read date wins, and rereads from a phone and a Chromebook add up (the newest 10 per section are kept). Tests in `progress-merge.test.js`. Requested by the teacher on Nov 16.
+
 ## [8.55.130] - 2026-11-16
 
 ### Changed

@@ -341,6 +341,27 @@ const ProgressManager = {
                 });
             });
             if (Object.keys(hl).length) tbMerged.highlights = hl;
+            // Read dates (Notebook Companion's reread schedule): the earliest
+            // first read, and every reread from either device, newest 10 kept.
+            var ra = {};
+            [remote.readAt, local.readAt].forEach(function(src) {
+                Object.keys(src || {}).forEach(function(k) {
+                    var t = src[k];
+                    if (typeof t === 'number') ra[k] = ra[k] ? Math.min(ra[k], t) : t;
+                });
+            });
+            if (Object.keys(ra).length) tbMerged.readAt = ra;
+            var rr = {};
+            [remote.rereads, local.rereads].forEach(function(src) {
+                Object.keys(src || {}).forEach(function(k) {
+                    rr[k] = rr[k] || [];
+                    (src[k] || []).forEach(function(t) {
+                        if (typeof t === 'number' && rr[k].indexOf(t) === -1) rr[k].push(t);
+                    });
+                });
+            });
+            Object.keys(rr).forEach(function(k) { rr[k] = rr[k].sort(function(a, b) { return a - b; }).slice(-10); });
+            if (Object.keys(rr).length) tbMerged.rereads = rr;
             return tbMerged;
         }
 

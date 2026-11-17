@@ -740,6 +740,25 @@ StudyEngine.registerActivity({
                 self._updateTocState();
             });
         }
+        // A section already read can come back on Notebook Companion's reread
+        // schedule; when it is due, the student marks the reread here.
+        if (isRead && this._isRereadDue(seg.id, section.id)) {
+            markBtn.className = 'tb-mark-read tb-mark-reread';
+            markBtn.textContent = '';
+            var rrIcon = document.createElement('i');
+            rrIcon.className = 'fas fa-redo';
+            markBtn.appendChild(rrIcon);
+            markBtn.appendChild(document.createTextNode(' Mark as Reread'));
+            markBtn.addEventListener('click', function() {
+                self._markSectionReread(seg.id, section.id);
+                markBtn.className = 'tb-mark-read read';
+                markBtn.textContent = '';
+                var doneIcon = document.createElement('i');
+                doneIcon.className = 'fas fa-check-circle';
+                markBtn.appendChild(doneIcon);
+                markBtn.appendChild(document.createTextNode(' Reread Done'));
+            }, { once: true });
+        }
         // Mark as Read sits above Read More, so the required step comes first
         // and the optional longer reading follows it.
         var rmBox = readingArea.querySelector('.tb-readmore');
@@ -1654,8 +1673,32 @@ StudyEngine.registerActivity({
     },
 
     _markSectionRead(segId, sectionId) {
-        this._progress.sectionsRead[segId + '/' + sectionId] = true;
+        var key = segId + '/' + sectionId;
+        this._progress.sectionsRead[key] = true;
+        // The first-read date drives Notebook Companion's reread schedule.
+        this._progress.readAt = this._progress.readAt || {};
+        if (!this._progress.readAt[key]) this._progress.readAt[key] = Date.now();
         this._saveProgress();
+    },
+
+    _markSectionReread(segId, sectionId) {
+        var key = segId + '/' + sectionId;
+        this._progress.rereads = this._progress.rereads || {};
+        var list = (this._progress.rereads[key] || []).concat([Date.now()]);
+        this._progress.rereads[key] = list.slice(-10);
+        this._saveProgress();
+    },
+
+    // Is a reread of this section due on Notebook Companion's schedule?
+    _isRereadDue(segId, sectionId) {
+        if (typeof NotebookCore === 'undefined') return false;
+        var unitId = this._config.unit.id;
+        return NotebookCore.isRereadDue({
+            config: this._config,
+            textbook: this._content,
+            tbProgress: this._progress,
+            weak: ProgressManager.load(unitId, 'weakness_tracker') || {}
+        }, segId, sectionId);
     },
 
     _getSegmentReadCount(seg) {
