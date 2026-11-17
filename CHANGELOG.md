@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.135] - 2026-11-16
+
+### Security
+- **The nudge log is checked before it is counted.** The dashboard's "Are nudges working?" table adds up logs read from the database, which a student with technical skill could edit. Nudge ids that are not short lowercase names (such as `__proto__` or `constructor`) are now ignored, counts must be whole non-negative numbers, and the totals are kept in an object with no prototype, so an edited log cannot break the table or the teacher's browser page. The sync merge rule drops the same ids. Tests in `nudge-core.test.js` and `progress-merge.test.js`. Found by an automated security review.
+
 ## [8.55.134] - 2026-11-16
 
 ### Added

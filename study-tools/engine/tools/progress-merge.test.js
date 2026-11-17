@@ -225,4 +225,11 @@ test('nudge log: higher counts, later times, latest target', () => {
     assert.deepStrictEqual(m['come-back'], { shown: 2, followed: 2, lastShown: 7, lastFollowed: 8 });
 });
 
+test('nudge log: ids that are not slugs (such as __proto__) are dropped', () => {
+    const remote = JSON.parse('{"__proto__": {"shown": 9}, "constructor": {"shown": 2}, "Bad Id": {"shown": 1}, "card-read": {"shown": 1, "lastShown": 3}}');
+    const m = merge('nudge_log', {}, remote);
+    assert.deepStrictEqual(Object.keys(m), ['card-read']);
+    assert.strictEqual(Object.getPrototypeOf(m), Object.prototype);
+});
+
 console.log(passed + ' passed');

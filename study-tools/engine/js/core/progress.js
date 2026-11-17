@@ -368,9 +368,12 @@ const ProgressManager = {
         // Nudge log: for each nudge, the higher counts and later times from
         // either device, and the target of the latest showing.
         if (activity === 'nudge_log') {
+            // Ids are lowercase slugs; anything else (such as "__proto__")
+            // is dropped, since the cloud copy could have been edited.
             var nl = {};
             [remote, local].forEach(function(src) {
                 Object.keys(src || {}).forEach(function(id) {
+                    if (!/^[a-z0-9-]{1,40}$/.test(id) || id === 'constructor' || id === 'prototype') return;
                     var e = src[id];
                     if (!e || typeof e !== 'object') return;
                     var m = nl[id];

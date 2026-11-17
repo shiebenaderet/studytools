@@ -39,5 +39,12 @@ eq('summary order, counts, rates and capped follows', sum.map(function (s) { ret
   ['card-read', 1, 2, 2, 100], ['learn-first', 2, 10, 3, 30], ['zz-new', 1, 1, 1, 100]]);
 eq('summary names', sum[1].name, 'Toast: Start with Learn Mode');
 
+// Logs come back from the database and could have been edited.
+var evil = JSON.parse('{"__proto__": {"shown": 5, "followed": 1}, "constructor": {"shown": 3}, "Bad Id!": {"shown": 2}, "learn-first": {"shown": "4", "followed": "9"}, "come-back": {"shown": -3, "followed": 1}}');
+var safe = core.summarize([{ student_id: 'x', data: evil }, { student_id: 'y', data: ['not', 'a', 'log'] }]);
+eq('hostile log: only valid ids, numbers coerced, follows capped', safe.map(function (s) { return [s.id, s.students, s.shown, s.followed]; }), [['learn-first', 1, 4, 4]]);
+eq('hostile log: no prototype pollution', ({}).students, undefined);
+eq('hostile ids cannot be marked', [core.markShown({}, '__proto__', null, 1), core.markFollowed({}, 'constructor', 1)], [false, false]);
+
 if (failures.length) { console.error(failures.join('\n')); process.exit(1); }
 console.log('nudge-core: all tests passed');

@@ -34,6 +34,18 @@
     'come-back': 'Toast: Come back to an activity'
   };
 
+  // Nudge ids are short lowercase slugs. Logs come back from the database,
+  // which a student could edit, so anything else (including "__proto__") is
+  // ignored, and counts must be whole non-negative numbers.
+  var ID = /^[a-z0-9-]{1,40}$/;
+  var RESERVED = { constructor: 1, prototype: 1 };
+  api.validId = function (id) { return typeof id === 'string' && ID.test(id) && !RESERVED[id]; };
+  function count(n) {
+    n = Number(n);
+    return isFinite(n) && n > 0 ? Math.min(Math.floor(n), 100000) : 0;
+  }
+  api.count = count;
+
   function dayKey(t) {
     var d = new Date(t);
     return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
@@ -53,7 +65,7 @@
 
   // Count a showing (once a day). Returns true if it counted.
   api.markShown = function (log, id, target, now) {
-    if (api.shownToday(log, id, now)) return false;
+    if (!api.validId(id) || api.shownToday(log, id, now)) return false;
     var e = log[id] || (log[id] = { shown: 0, followed: 0 });
     e.shown = (e.shown || 0) + 1;
     e.lastShown = now;
@@ -63,6 +75,7 @@
 
   // Count a follow, at most once per showing. Returns true if it counted.
   api.markFollowed = function (log, id, now) {
+    if (!api.validId(id)) return false;
     var e = log && log[id];
     if (!e || !e.lastShown) return false;
     if (e.lastFollowed && e.lastFollowed >= e.lastShown) return false;
@@ -75,7 +88,7 @@
   api.followedBy = function (log, target, now) {
     return Object.keys(log || {}).filter(function (id) {
       var e = log[id];
-      return e.target === target && e.lastShown && now - e.lastShown <= api.FOLLOW_WINDOW &&
+      return api.validId(id) && e && typeof e === 'object' && e.target === target && e.lastShown && now - e.lastShown <= api.FOLLOW_WINDOW &&
         !(e.lastFollowed && e.lastFollowed >= e.lastShown);
     });
   };
@@ -84,17 +97,21 @@
   // Returns [{ id, name, students, shown, followed, rate }] in NAMES order,
   // then any unknown ids.
   api.summarize = function (rows) {
-    var by = {};
+    var by = Object.create(null);
     (rows || []).forEach(function (r) {
       var log = r && r.data;
-      if (!log || typeof log !== 'object') return;
+      if (!log || typeof log !== 'object' || Array.isArray(log)) return;
       Object.keys(log).forEach(function (id) {
+        if (!api.validId(id)) return;
         var e = log[id];
-        if (!e || typeof e !== 'object' || !e.shown) return;
-        var s = by[id] || (by[id] = { id: id, name: api.NAMES[id] || id, students: 0, shown: 0, followed: 0 });
+        if (!e || typeof e !== 'object') return;
+        var shown = count(e.shown);
+        if (!shown) return;
+        var name = Object.prototype.hasOwnProperty.call(api.NAMES, id) ? api.NAMES[id] : id;
+        var s = by[id] || (by[id] = { id: id, name: name, students: 0, shown: 0, followed: 0 });
         s.students++;
-        s.shown += e.shown || 0;
-        s.followed += Math.min(e.followed || 0, e.shown || 0);
+        s.shown += shown;
+        s.followed += Math.min(count(e.followed), shown);
       });
     });
     var order = Object.keys(api.NAMES);
