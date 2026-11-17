@@ -339,24 +339,23 @@
   </div>
 </div>
 
-<!-- Load the 1861 map data file directly. -->
-<script src="../js/data/map-1861-data.js"></script>
-
-<!-- Embed territorial expansion regions inline (extracted from map-quiz.js). -->
-<script src="map-exporter-territorial.js"></script>
-
-<!-- 50-states data, same viewBox (900x700), shape-compatible with the exporter. -->
-<script src="../js/data/fifty-states-data.js"></script>
-
+<script>
+  // Stamp each script per visit, so a reload cannot pair this page with an
+  // older copy of a script the browser kept (GitHub Pages allows 10 minutes).
+  window.EXPORTER_STAMP = Date.now();
+  function exporterScript(src) { document.write('<script src="' + src + '?v=' + window.EXPORTER_STAMP + '"><\/script>'); }
+  exporterScript('../js/data/map-1861-data.js');          // 1861 map data
+  exporterScript('map-exporter-territorial.js');          // territorial expansion regions
+  exporterScript('../js/data/fifty-states-data.js');      // 50 states, same 900x700 viewBox
+</script>
 <!-- 13 Colonies: the study site's activity file carries the data. A stub keeps its
      registerActivity() call harmless outside the engine. -->
 <script>window.StudyEngine = window.StudyEngine || { registerActivity: function() {} };</script>
-<script src="../js/activities/thirteen-colonies-map.js"></script>
-
-<!-- Handout-tab logic. -->
-<!-- Shared map drawing (also used by the Question Exporter). -->
-<script src="map-render.js"></script>
-<script src="map-handout.js"></script>
+<script>
+  exporterScript('../js/activities/thirteen-colonies-map.js');
+  exporterScript('map-render.js');   // shared map drawing (also used by the Question Exporter)
+  exporterScript('map-handout.js');  // Handout tab
+</script>
 
 <script>
 'use strict';

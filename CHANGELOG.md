@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.143] - 2026-11-16
+
+### Fixed
+- **The Question Exporter stopped responding after an update.** Right after 8.55.142 went live, clicking Practice questions or Vocabulary did nothing for the teacher until the browser cache was cleared. GitHub Pages lets browsers keep files for 10 minutes, and a reload fetches the page fresh but can reuse a kept script, so the new page ran with the old `question-export-core.js`, which lacked the new chapter functions. The Question and Map Exporters now load every script with a per-visit stamp, as the dashboard already did, and the Question Exporter keeps working (without chapter numbers) even if an old core file is loaded. Reported by the teacher on Nov 16.
+
+### Added
+- **The Question Exporter shows the site version** under its name in the sidebar, so it is easy to tell whether an update has arrived.
+- **`tool-pages-stamped.test.js`** fails if a teacher page (the exporters, the dashboard) loads a local script without a stamp.
+
 ## [8.55.142] - 2026-11-16
 
 ### Added

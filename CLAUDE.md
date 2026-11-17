@@ -22,6 +22,11 @@ changing a unit.
   one must be looked at and renamed before it can be added.
 - New engine scripts go in both `study-tools/engine/index.html` and the
   precache list in `study-tools/engine/sw.js`.
+- Teacher pages outside the student app (the dashboard, the Question and Map
+  Exporters) load their local scripts through a per-visit stamp (`?v=`), never a
+  plain `<script src>`: browsers keep GitHub Pages files for 10 minutes, and a
+  reload can pair a new page with an old script. `tool-pages-stamped.test.js`
+  checks it; add any new teacher page to its list.
 - When a change alters what a teacher configures or a student sees, update
   `README.md` (feature tables, version badge) and `docs/TEACHER-GUIDE.md`
   (activity table, field reference, section 7 checklists, FAQ) in the same

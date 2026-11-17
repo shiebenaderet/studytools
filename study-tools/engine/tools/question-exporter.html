@@ -41,6 +41,7 @@
   .wizard { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; background: var(--bg); }
   .rail { background: #1a1a1a; color: #f4efe6; padding: 28px 22px; display: flex; flex-direction: column; gap: 22px; }
   .rail-brand { font-family: Georgia, "Iowan Old Style", serif; font-style: italic; font-size: 20px; letter-spacing: -0.01em; }
+  .rail-version { font-size: 11px; opacity: .65; margin-top: -4px; font-family: ui-monospace, Menlo, monospace; }
   .rail-step { display: grid; grid-template-columns: 28px 1fr; gap: 12px; align-items: start; padding: 4px 0; color: rgba(255,255,255,.55); cursor: pointer; background: none; border: 0; text-align: left; font: inherit; }
   .rail-step .rs-badge { width: 28px; height: 28px; border: 1px solid rgba(255,255,255,.3); border-radius: 50%; display: inline-grid; place-items: center; font-family: ui-monospace, Menlo, monospace; font-weight: 700; font-size: 12px; }
   .rail-step .rs-title { font-style: italic; font-size: 14px; margin-top: 4px; }
@@ -97,6 +98,7 @@
 <div class="wizard">
   <nav class="rail">
     <div class="rail-brand">Exporter &mdash;</div>
+    <div class="rail-version" id="railVersion"></div>
     <button class="rail-step" data-go="0">
       <span class="rs-badge">0</span>
       <span><div class="rs-title">Unit</div><div class="rs-desc rs-desc-unit">(none)</div></span>
@@ -181,19 +183,35 @@
   </main>
 </div>
 
-<script src="../vendor/jszip.min.js"></script>
-<script src="question-export-core.js"></script>
-<script src="question-exporter-zip.js"></script>
-<!-- Map data + shared drawing for the Map Regions source (same files the Map Exporter loads). -->
-<script src="../js/data/map-1861-data.js"></script>
-<script src="map-exporter-territorial.js"></script>
-<script src="../js/data/fifty-states-data.js"></script>
+<script>
+  // Stamp each script per visit. GitHub Pages lets browsers keep files for 10
+  // minutes, and a reload fetches the page fresh but can reuse a kept script,
+  // so a new page could run with an old question-export-core.js and stop
+  // working. document.write keeps them in order and parser-blocking.
+  window.EXPORTER_STAMP = Date.now();
+  function exporterScript(src) { document.write('<script src="' + src + '?v=' + window.EXPORTER_STAMP + '"><\/script>'); }
+  exporterScript('../vendor/jszip.min.js');
+  exporterScript('question-export-core.js');
+  exporterScript('question-exporter-zip.js');
+  // Map data + shared drawing for the Map Regions source (same files the Map Exporter loads).
+  exporterScript('../js/data/map-1861-data.js');
+  exporterScript('map-exporter-territorial.js');
+  exporterScript('../js/data/fifty-states-data.js');
+</script>
 <script>window.StudyEngine = window.StudyEngine || { registerActivity: function() {} };</script>
-<script src="../js/activities/thirteen-colonies-map.js"></script>
-<script src="map-render.js"></script>
+<script>
+  exporterScript('../js/activities/thirteen-colonies-map.js');
+  exporterScript('map-render.js');
+</script>
 <script>
 (function () {
   var UNITS_URL = '../../units/units.json';
+
+  // Which version of the site this page is, so it can be checked after a deploy.
+  fetch('../version.json', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (v) {
+    var el = document.getElementById('railVersion');
+    if (el && v && v.version) el.textContent = 'Version ' + v.version;
+  }).catch(function () {});
   var stepEls = function () { return document.querySelectorAll('section[data-step]'); };
   function showStep(n) {
     state.step = n;
@@ -289,12 +307,12 @@
     return n ? 'Chapter ' + n + ': ' + topic : topic;
   }
   function chapterIndexNow() {
-    return window.QExport.chapterIndex(state.rawConfig || {});
+    return window.QExport.chapterIndex ? window.QExport.chapterIndex(state.rawConfig || {}) : {};
   }
   // The chapters the selected questions come from (null if all, or not chapters).
   function selectedChapters() {
     var topics = state.questions.filter(function (q) { return state.selected[q.id]; }).map(function (q) { return q.topic; });
-    return window.QExport.chapterSummary(topics, chapterIndexNow());
+    return window.QExport.chapterSummary ? window.QExport.chapterSummary(topics, chapterIndexNow()) : null;
   }
   function chapterTagNow() {
     var s = selectedChapters();
