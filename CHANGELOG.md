@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.136] - 2026-11-16
+
+### Changed
+- **Leaving toasts fire however a student leaves an activity.** They used to appear only on the way back to Home, so a student who went from Flashcards to Learn Mode through the tabs never saw one; the teacher noticed nudges were slow to show up while testing. Now going to another activity, Tools or the Leaderboard counts too. Still one toast at a time: when a leaving toast shows, the next activity's opening toast is skipped; a toast never suggests the activity the student is already opening; and no toast follows for 2 seconds after **Open** is tapped. Requested by the teacher on Nov 16.
+
 ## [8.55.135] - 2026-11-16
 
 ### Security

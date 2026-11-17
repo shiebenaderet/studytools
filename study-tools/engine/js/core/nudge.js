@@ -63,6 +63,9 @@ var NudgeManager = {
     // target gets an Open button. Returns true if it was shown.
     _toast(unitId, id, message, target) {
         var now = Date.now();
+        // Just after a student tapped Open on a toast, stay quiet: the page
+        // change it causes should not set off another toast.
+        if (this._quietUntil && now < this._quietUntil) return false;
         var duration = typeof NudgeCore !== 'undefined' ? NudgeCore.toastDuration(message) : 6000;
         if (typeof NudgeCore !== 'undefined') {
             var log = this._loadLog(unitId);
@@ -71,7 +74,7 @@ var NudgeManager = {
         }
         var self = this;
         StudyUtils.showToast(message, 'info', duration, target ? {
-            actionLabel: 'Open', onAction: function() { self._openTarget(target); }
+            actionLabel: 'Open', onAction: function() { self._quietUntil = Date.now() + 2000; self._openTarget(target); }
         } : null);
         return true;
     },
@@ -115,7 +118,8 @@ var NudgeManager = {
     },
 
     // ── Opening an activity: at most one toast ──
-    checkSmartNudge(activityId, config) {
+    // opts.quiet: a leaving toast was just shown, so show no opening toast.
+    checkSmartNudge(activityId, config, opts) {
         var unitId = config && config.unit ? config.unit.id : null;
         if (!unitId) return;
 
@@ -131,6 +135,7 @@ var NudgeManager = {
         this._sessionActivityCounts[activityId] = (this._sessionActivityCounts[activityId] || 0) + 1;
 
         // Don't nudge if teacher-unlock is active or guest
+        if (opts && opts.quiet) return;
         if (sessionStorage.getItem('teacher-unlock') === 'true') return;
         if (!ProgressManager.studentInfo || ProgressManager.studentInfo.isGuest) return;
         if (this._smartNudgeCount >= this.MAX_SMART_NUDGES) return;
@@ -583,8 +588,11 @@ var NudgeManager = {
     },
 
     // ── Leaving an activity: at most one toast ──
-    onActivityComplete(activityId, config) {
-        if (!config || !config.unit) return;
+    // Runs however the student leaves: Home, another activity, Tools or the
+    // Leaderboard. Returns true if a toast was shown. nextId: the activity the
+    // student is switching to; a toast pointing there is skipped.
+    onActivityComplete(activityId, config, nextId) {
+        if (!config || !config.unit) return false;
         var unitId = config.unit.id;
         ProgressManager.save(unitId, 'lastUsed_' + activityId, Date.now());
 
@@ -594,10 +602,11 @@ var NudgeManager = {
         var opened = this._wrongAtOpen;
         this._wrongAtOpen = null;
 
-        if (sessionStorage.getItem('teacher-unlock') === 'true') return;
-        if (this._sessionNudgeCount >= this.MAX_NUDGES_PER_SESSION) return;
+        if (sessionStorage.getItem('teacher-unlock') === 'true') return false;
+        if (this._sessionNudgeCount >= this.MAX_NUDGES_PER_SESSION) return false;
         var self = this;
         var shown = function(id, text, target) {
+            if (nextId && target === nextId) return false;
             if (self._toast(unitId, id, self._say(text), target)) { self._sessionNudgeCount++; return true; }
             return false;
         };
@@ -605,20 +614,20 @@ var NudgeManager = {
         // New missed questions: they are on the Notebook Companion list.
         if (this.QUESTION_ACTIVITIES.indexOf(activityId) !== -1 && opened && opened.activity === activityId
             && this._missedCount(unitId) > opened.count && typeof NotebookCompanion !== 'undefined') {
-            if (shown('notebook-missed', 'the questions you missed are on your Notebook Companion list. Copy them into your notebook with the right answers.', 'notebook')) return;
+            if (shown('notebook-missed', 'the questions you missed are on your Notebook Companion list. Copy them into your notebook with the right answers.', 'notebook')) return true;
         }
 
         if (wasConsecutive && consecutiveCount >= 2) {
             var other = this._pickDifferentActivity(activityId, unitId, config);
             if (other && this.ACTIVITY_INFO[other]
-                && shown('mix-it-up', 'switching activities helps you remember more than repeating one. Try ' + this.ACTIVITY_INFO[other].name + ' next.', other)) return;
+                && shown('mix-it-up', 'switching activities helps you remember more than repeating one. Try ' + this.ACTIVITY_INFO[other].name + ' next.', other)) return true;
         }
 
         if (this._getWeakTermCount(unitId) > 0) {
             var remediation = this._pickRemediationActivity(unitId, this._getTriedActivities(unitId));
             if (remediation && remediation !== activityId && this.ACTIVITY_INFO[remediation]) {
                 var how = remediation === 'flashcards' ? ' goes over exactly those terms.' : ' will help you practice them.';
-                if (shown('review-missed', 'you have missed a few terms more than once. ' + this.ACTIVITY_INFO[remediation].name + how, remediation)) return;
+                if (shown('review-missed', 'you have missed a few terms more than once. ' + this.ACTIVITY_INFO[remediation].name + how, remediation)) return true;
             }
         }
 
@@ -633,13 +642,14 @@ var NudgeManager = {
             : (config.vocabulary ? config.vocabulary.length : 0);
         var flowNext = this._findFlowGap(unitId, this._getTriedActivities(unitId), masteredCount, totalVocab);
         if (flowNext && flowNext !== activityId && this.ACTIVITY_INFO[flowNext]) {
-            if (shown('next-step', 'nice work! Next step in your study plan: ' + this.ACTIVITY_INFO[flowNext].name + '.', flowNext)) return;
+            if (shown('next-step', 'nice work! Next step in your study plan: ' + this.ACTIVITY_INFO[flowNext].name + '.', flowNext)) return true;
         }
 
         var stale = this._getStaleActivity(unitId, config);
         if (stale && stale.id !== activityId && this.ACTIVITY_INFO[stale.id]) {
-            shown('come-back', 'it has been ' + stale.days + ' days since you tried ' + this.ACTIVITY_INFO[stale.id].name + '. Coming back to it after a break helps it stick.', stale.id);
+            return shown('come-back', 'it has been ' + stale.days + ' days since you tried ' + this.ACTIVITY_INFO[stale.id].name + '. Coming back to it after a break helps it stick.', stale.id);
         }
+        return false;
     },
 
     _pickDifferentActivity(currentId, unitId, config) {

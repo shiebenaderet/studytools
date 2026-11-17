@@ -875,6 +875,13 @@ const StudyEngine = {
             return;
         }
 
+        // Leaving one activity for another counts as leaving it: it may get
+        // the leaving toast, and then the new one gets no opening toast.
+        let leftWithToast = false;
+        if (this.activeActivity && this.activeActivity !== activityId && typeof NudgeManager !== 'undefined') {
+            leftWithToast = NudgeManager.onActivityComplete(this.activeActivity, this.config, activityId) === true;
+        }
+
         // Deactivate current
         if (this.activeActivity && this.activities[this.activeActivity]) {
             this.activities[this.activeActivity].deactivate?.();
@@ -913,7 +920,7 @@ const StudyEngine = {
 
         // Smart nudges
         if (typeof NudgeManager !== 'undefined') {
-            NudgeManager.checkSmartNudge(activityId, this.config);
+            NudgeManager.checkSmartNudge(activityId, this.config, { quiet: leftWithToast });
         }
 
         // Update streak
@@ -1026,6 +1033,9 @@ const StudyEngine = {
         document.body.classList.remove('activity-active');
         var topbar = document.getElementById('activity-topbar');
         if (topbar) topbar.textContent = '';
+        if (this.activeActivity && typeof NudgeManager !== 'undefined' && this.config) {
+            NudgeManager.onActivityComplete(this.activeActivity, this.config);
+        }
         if (this.activeActivity && this.activities[this.activeActivity]) {
             this.activities[this.activeActivity].deactivate?.();
             this.activeActivity = null;
@@ -1048,6 +1058,9 @@ const StudyEngine = {
         document.body.classList.remove('activity-active');
         var topbar = document.getElementById('activity-topbar');
         if (topbar) topbar.textContent = '';
+        if (this.activeActivity && typeof NudgeManager !== 'undefined' && this.config) {
+            NudgeManager.onActivityComplete(this.activeActivity, this.config);
+        }
         if (this.activeActivity && this.activities[this.activeActivity]) {
             this.activities[this.activeActivity].deactivate?.();
             this.activeActivity = null;
