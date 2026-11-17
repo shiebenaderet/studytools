@@ -340,6 +340,22 @@ var redQ = mq.map(function (q, i) { return i ? q : Object.assign({}, q, { questi
 eq('map color word rule', core.validateForCanvas(redQ, mopts).errors.some(function (e) { return e.ruleId === 'map-prompt-color-neutral'; }), true);
 eq('map validate ok', core.validateForCanvas(mq, mopts).ok, true);
 
+// Chapter titles in the exporter (teacher request, Nov 16)
+var chCfg = { vocabulary: [
+  { term: 'a', category: 'Why the Articles Failed' }, { term: 'b', category: 'Why the Articles Failed' },
+  { term: 'c', category: 'Compromises in Philadelphia' }, { term: 'd', category: 'Inside the Constitution' },
+  { term: 'e', category: 'Treaties and Sovereignty' }, { term: 'f', category: 'Ratification and Rights' }] };
+var chIdx = core.chapterIndex(chCfg);
+deepEq('chapter index follows vocabulary order', chIdx, { 'Why the Articles Failed': 1, 'Compromises in Philadelphia': 2, 'Inside the Constitution': 3, 'Treaties and Sovereignty': 4, 'Ratification and Rights': 5 });
+deepEq('one chapter', core.chapterSummary(['Compromises in Philadelphia'], chIdx), { numbers: [2], label: 'Chapter 2: Compromises in Philadelphia', tag: 'ch2' });
+deepEq('a run of chapters', core.chapterSummary(['Inside the Constitution', 'Why the Articles Failed', 'Compromises in Philadelphia'], chIdx), { numbers: [1, 2, 3], label: 'Chapters 1\u20133', tag: 'ch1-2-3' });
+deepEq('separate chapters', core.chapterSummary(['Ratification and Rights', 'Why the Articles Failed', 'Inside the Constitution'], chIdx), { numbers: [1, 3, 5], label: 'Chapters 1, 3 and 5', tag: 'ch1-3-5' });
+eq('every chapter: no label', core.chapterSummary(Object.keys(chIdx), chIdx), null);
+eq('topics that are not chapters: no label', core.chapterSummary(['Regions', 'Rivers'], chIdx), null);
+eq('a "__proto__" topic is ignored', core.chapterSummary(['__proto__'], chIdx), null);
+eq('id without chapters is unchanged', core.canvasAssessmentId({ unitId: 'building-a-government', source: 'vocab' }), 'building-a-government-vocab');
+eq('id with chapters', core.canvasAssessmentId({ unitId: 'building-a-government', source: 'vocab', chapterTag: 'ch1-2' }), 'building-a-government-vocab-ch1-2');
+
 if (failures.length) {
   console.log('FAIL (' + failures.length + ')');
   failures.forEach(function (f) { console.log('- ' + f); });

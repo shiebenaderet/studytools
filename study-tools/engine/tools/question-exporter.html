@@ -278,8 +278,27 @@
       qs.forEach(function (q) { state.selected[q.id] = cb.checked; });
       render();
     };
-    head.append(cb, document.createTextNode(' ' + topic));
+    head.append(cb, document.createTextNode(' ' + chapterTitle(topic)));
     return head;
+  }
+
+  // "Chapter 1: Why the Articles Failed" when the topic is one of the unit's
+  // chapters (numbered in vocabulary order, the textbook's order); else as is.
+  function chapterTitle(topic) {
+    var n = chapterIndexNow()[topic];
+    return n ? 'Chapter ' + n + ': ' + topic : topic;
+  }
+  function chapterIndexNow() {
+    return window.QExport.chapterIndex(state.rawConfig || {});
+  }
+  // The chapters the selected questions come from (null if all, or not chapters).
+  function selectedChapters() {
+    var topics = state.questions.filter(function (q) { return state.selected[q.id]; }).map(function (q) { return q.topic; });
+    return window.QExport.chapterSummary(topics, chapterIndexNow());
+  }
+  function chapterTagNow() {
+    var s = selectedChapters();
+    return s ? s.tag : undefined;
   }
 
   // Map questions all share one prompt, so the row names the region instead.
@@ -547,7 +566,8 @@
     var dest = state.destination;
     var src = state.source === 'fib' ? 'fib' : (state.source === 'vocab' ? 'vocabulary' : (state.source === 'timeline' ? 'timeline' : 'practice'));
     var suffix = (state.source === 'fib' && state.fibTyped && dest === 'gimkit') ? 'gimkit-typed' : dest;
-    return state.unitId + '-' + src + '-' + suffix + '.csv';
+    var tag = chapterTagNow();
+    return state.unitId + '-' + src + (tag ? '-' + tag : '') + '-' + suffix + '.csv';
   }
   function isCanvasOnlySource() {
     return SOURCES.some(function (s) { return s.id === state.source && s.canvasOnly; });
@@ -615,14 +635,20 @@
     var unitTitle = (u && u.title) || state.unitId || 'Quiz';
     var srcLabel = ({ practice: 'Practice', vocab: 'Vocabulary', fib: 'Fill-in-the-Blank', shortAnswer: 'Short-Answer', timeline: 'Timeline' })[state.source] || state.source;
     if (state.source === 'mapRegions') srcLabel = mapTitle(state.mapKey) + ' Map';
-    return unitTitle + ' — ' + srcLabel;
+    unitTitle = unitTitle.replace(/\s+Study Tool$/, '');
+    var ch = selectedChapters();
+    return unitTitle + ' — ' + srcLabel + (ch ? ' — ' + ch.label : '');
   }
 
   function renderCanvasPanel() {
     var host = document.getElementById('canvasPanel');
     host.textContent = '';
 
-    if (!state.canvasOpts.title) state.canvasOpts.title = defaultCanvasTitle();
+    // The title follows the selection (chapters) until the teacher types one.
+    if (!state.canvasOpts.title || state.canvasOpts.title === state.canvasOpts.autoTitle) {
+      state.canvasOpts.title = defaultCanvasTitle();
+      state.canvasOpts.autoTitle = state.canvasOpts.title;
+    }
 
     var card = el('div', 'canvas-card');
     var row = el('div', 'row');
@@ -666,7 +692,7 @@
     var v = document.getElementById('canvasValidate');
     if (!v) return;
     var qs = selectedList();
-    var opts = { title: state.canvasOpts.title, source: state.source, unitId: state.unitId, mapKey: mapKeyOpt() };
+    var opts = { title: state.canvasOpts.title, source: state.source, unitId: state.unitId, mapKey: mapKeyOpt(), chapterTag: chapterTagNow() };
     var result = window.QExport.validateForCanvas(qs, opts);
     v.textContent = '';
     var ul = el('ul');
@@ -684,7 +710,7 @@
 
     var build = document.getElementById('canvasBuildBtn');
     var fn = document.getElementById('canvasFn');
-    var assessmentId = window.QExport.canvasAssessmentId({ unitId: state.unitId, source: state.source, mapKey: mapKeyOpt() });
+    var assessmentId = window.QExport.canvasAssessmentId({ unitId: state.unitId, source: state.source, mapKey: mapKeyOpt(), chapterTag: chapterTagNow() });
     fn.textContent = 'Filename: ' + assessmentId + '-canvas.zip';
     if (result.ok) {
       build.disabled = false;
@@ -731,7 +757,7 @@
   }
 
   function finishCanvasBuild(qs, images) {
-    var opts = { title: state.canvasOpts.title, maxAttempts: state.canvasOpts.maxAttempts, source: state.source, unitId: state.unitId, mapKey: mapKeyOpt(), images: images };
+    var opts = { title: state.canvasOpts.title, maxAttempts: state.canvasOpts.maxAttempts, source: state.source, unitId: state.unitId, mapKey: mapKeyOpt(), chapterTag: chapterTagNow(), images: images };
     var pkg = window.QExport.buildCanvasPackage(qs, opts);
     var selfErrors = window.QExport.selfCheckPackage(pkg);
     var status = document.getElementById('canvasStatus');

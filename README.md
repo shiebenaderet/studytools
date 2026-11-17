@@ -8,7 +8,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 
 [![Live Site](https://img.shields.io/badge/Live_Site-study.mrbsocialstudies.org-1669C5?style=for-the-badge&logo=google-chrome&logoColor=white)](https://study.mrbsocialstudies.org)
 [![License](https://img.shields.io/badge/License-Educational_Use-22c55e?style=for-the-badge)](#license)
-[![Version](https://img.shields.io/badge/Version-8.55.141-f59e0b?style=for-the-badge)](#)
+[![Version](https://img.shields.io/badge/Version-8.55.142-f59e0b?style=for-the-badge)](#)
 
 ---
 
@@ -106,7 +106,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 - Leaderboard with teacher approval
 - Class-vs-class competition view
 - Analytics: activity popularity, weak topics, and which nudges students follow (Overview > Are nudges working?)
-- Question Exporter — turn a unit's practice questions, vocabulary, fill-in-the-blanks and timeline into Blooket or GiMKit CSVs, or build Canvas QTI quizzes (including short-answer essays and map questions with pictures)
+- Question Exporter — turn a unit's practice questions, vocabulary, fill-in-the-blanks and timeline into Blooket or GiMKit CSVs, or build Canvas QTI quizzes (including short-answer essays and map questions with pictures); questions are grouped under chapter titles, and a quiz from some chapters names them in its title and file name
 - Privacy-first — [see privacy policy](study-tools/engine/privacy.html)
 
 </td>

@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.142] - 2026-11-16
+
+### Added
+- **Chapter titles in the Question Exporter.** On the Refine step, each group of questions or terms is headed with its chapter number and title ("Chapter 1: Why the Articles Failed"), numbered in the textbook's order. When the selection covers some chapters but not all, the default Canvas quiz title names them ("Building a Government — Vocabulary — Chapter 1: Why the Articles Failed", or "Chapters 1–2"), and so do the CSV and Canvas file names (`...-vocabulary-ch1-blooket.csv`, `...-vocab-ch1-canvas.zip`). The title follows the selection until you type your own. The chapter numbers in the Canvas quiz's id also keep a Chapter 1 quiz and a Chapter 2 quiz from colliding when both are imported into one course. The unit title in the default quiz title drops "Study Tool". Rules in `question-export-core.js` with tests. Requested by the teacher on Nov 16.
+
 ## [8.55.141] - 2026-11-16
 
 ### Changed

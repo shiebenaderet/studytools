@@ -354,11 +354,52 @@
   }
 
   // Map quizzes get the map in the id, so two maps from one unit don't collide.
+  // A quiz from some chapters gets their numbers (chapterTag "ch1-2") for the
+  // same reason: a Chapter 1 quiz and a Chapter 2 quiz stay separate in Canvas.
   function canvasAssessmentId(opts) {
     opts = opts || {};
     var parts = [opts.unitId || 'quiz', opts.source || 'set'];
     if (opts.mapKey) parts.push(opts.mapKey);
+    if (opts.chapterTag) parts.push(opts.chapterTag);
     return slugify(parts.join('-'));
+  }
+
+  // Chapter numbers, in the order the unit's vocabulary names its categories,
+  // which is the textbook's chapter order: { "Why the Articles Failed": 1, ... }
+  function chapterIndex(config) {
+    var index = {}, n = 0;
+    ((config && config.vocabulary) || []).forEach(function (v) {
+      if (v && v.category && !Object.prototype.hasOwnProperty.call(index, v.category)) index[v.category] = ++n;
+    });
+    return index;
+  }
+
+  // What a set of selected topics covers, for titles and file names.
+  // Returns null when the topics are not chapters, or when every chapter is in.
+  // Otherwise { numbers, label, tag }: "Chapter 2: Compromises in Philadelphia"
+  // and "ch2" for one chapter; "Chapters 1-3" or "Chapters 1, 3 and 5" and
+  // "ch1-2-3" or "ch1-3-5" for several.
+  function chapterSummary(topics, index) {
+    index = index || {};
+    var names = Object.keys(index);
+    var nums = [], byNum = {};
+    (topics || []).forEach(function (t) {
+      if (!Object.prototype.hasOwnProperty.call(index, t)) return;
+      var n = index[t];
+      if (nums.indexOf(n) === -1) { nums.push(n); byNum[n] = t; }
+    });
+    if (!nums.length || nums.length === names.length) return null;
+    nums.sort(function (a, b) { return a - b; });
+    var label;
+    if (nums.length === 1) {
+      label = 'Chapter ' + nums[0] + ': ' + byNum[nums[0]];
+    } else {
+      var contiguous = nums[nums.length - 1] - nums[0] === nums.length - 1;
+      label = 'Chapters ' + (contiguous
+        ? nums[0] + '\u2013' + nums[nums.length - 1]
+        : nums.slice(0, -1).join(', ') + ' and ' + nums[nums.length - 1]);
+    }
+    return { numbers: nums, label: label, tag: 'ch' + nums.join('-') };
   }
   function buildCanvasPackage(questions, opts) {
     opts = opts || {};
@@ -463,5 +504,5 @@
     });
     return errors;
   }
-  return { csvField: csvField, toCsv: toCsv, normalizeQuestions: normalizeQuestions, formatBlooket: formatBlooket, formatGimkit: formatGimkit, formatGimkitTyped: formatGimkitTyped, pickDistractors: pickDistractors, normalizeFib: normalizeFib, normalizeVocab: normalizeVocab, normalizeTimeline: normalizeTimeline, timelineYear: timelineYear, normalizeMapRegions: normalizeMapRegions, mapImageFile: mapImageFile, MAP_PROMPT: MAP_PROMPT, renderImageMCItem: renderImageMCItem, canvasAssessmentId: canvasAssessmentId, xmlEscape: xmlEscape, slugify: slugify, renderMCItem: renderMCItem, renderShortAnswerItem: renderShortAnswerItem, renderEssayItem: renderEssayItem, buildAssessmentXml: buildAssessmentXml, buildManifestXml: buildManifestXml, buildCanvasPackage: buildCanvasPackage, validateForCanvas: validateForCanvas, CANVAS_RULES: CANVAS_RULES, selfCheckPackage: selfCheckPackage };
+  return { csvField: csvField, toCsv: toCsv, normalizeQuestions: normalizeQuestions, formatBlooket: formatBlooket, formatGimkit: formatGimkit, formatGimkitTyped: formatGimkitTyped, pickDistractors: pickDistractors, normalizeFib: normalizeFib, normalizeVocab: normalizeVocab, normalizeTimeline: normalizeTimeline, timelineYear: timelineYear, normalizeMapRegions: normalizeMapRegions, mapImageFile: mapImageFile, MAP_PROMPT: MAP_PROMPT, renderImageMCItem: renderImageMCItem, canvasAssessmentId: canvasAssessmentId, chapterIndex: chapterIndex, chapterSummary: chapterSummary, xmlEscape: xmlEscape, slugify: slugify, renderMCItem: renderMCItem, renderShortAnswerItem: renderShortAnswerItem, renderEssayItem: renderEssayItem, buildAssessmentXml: buildAssessmentXml, buildManifestXml: buildManifestXml, buildCanvasPackage: buildCanvasPackage, validateForCanvas: validateForCanvas, CANVAS_RULES: CANVAS_RULES, selfCheckPackage: selfCheckPackage };
 });
