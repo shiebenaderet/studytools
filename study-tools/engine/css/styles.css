@@ -3411,6 +3411,8 @@ body.timer-active header {
     transform: translateX(-50%) translateY(0);
     opacity: 1;
 }
+.toast { white-space: pre-line; width: max-content; max-width: min(90vw, 480px); box-sizing: border-box; }
+.toast-action { display: block; margin: 8px auto 0; padding: 6px 18px; min-height: 36px; font: inherit; font-weight: 600; color: #1e3a8a; background: #fff; border: 0; border-radius: 6px; cursor: pointer; }
 .toast-success { background: #22c55e; }
 .toast-error { background: #ef4444; }
 .toast-info { background: #3b82f6; }

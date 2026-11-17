@@ -54,11 +54,15 @@ const NotebookCompanion = {
         const config = StudyEngine.config;
         if (!config || typeof NotebookCore === 'undefined') return;
         const data = await this._gather();
+        if (typeof NudgeManager !== 'undefined') NudgeManager.noteOpened(data.unitId, 'notebook');
 
+        // Opened from a toast or card, an activity may still be running:
+        // showTools closes it cleanly (timer, header) before the page is drawn.
+        StudyEngine.showTools();
+        document.querySelectorAll('.nav-btn').forEach(b => {
+            b.classList.toggle('active', b.dataset.group === 'tools');
+        });
         const container = document.getElementById('activity-container');
-        container.classList.add('active');
-        document.getElementById('home-section').classList.remove('active');
-        document.getElementById('sub-nav').classList.remove('active');
         container.textContent = '';
 
         const backBtn = this._el('button', 'nav-button');
@@ -333,7 +337,8 @@ const NotebookCompanion = {
     },
 
     // ── Home screen note ──
-    // One line under the quiz countdown when a reread is due.
+    // One line next to the quiz countdown: "Reread today" when a reread is
+    // due, or, in the last 3 days before the quiz, "Quiz in N days".
     async renderHomeReminder(config) {
         const old = document.getElementById('nb-reminder');
         if (old) old.remove();
@@ -347,15 +352,31 @@ const NotebookCompanion = {
             weak: ProgressManager.load(unitId, 'weakness_tracker') || {},
             openCategories: MasteryManager.getEarnedCategories(unitId, config)
         });
-        if (!plan.reread.length || document.getElementById('nb-reminder')) return;
+        const days = typeof QuizCountdown !== 'undefined' ? QuizCountdown.daysUntil(config.unit.quizDate) : null;
+        const quizSoon = days !== null && days >= 0 && days <= 3;
+        if ((!plan.reread.length && !quizSoon) || document.getElementById('nb-reminder')) return;
         const note = this._el('button', 'nb-reminder');
         note.id = 'nb-reminder';
         note.type = 'button';
-        note.appendChild(this._icon('fas fa-redo'));
-        const first = plan.reread[0].heading;
-        const more = plan.reread.length - 1;
-        note.appendChild(document.createTextNode(' Reread today: ' + first + (more ? ' and ' + more + ' more' : '')));
-        note.addEventListener('click', () => this.open());
+        let nudgeId;
+        if (plan.reread.length) {
+            nudgeId = 'reminder-reread';
+            note.appendChild(this._icon('fas fa-redo'));
+            const first = plan.reread[0].heading;
+            const more = plan.reread.length - 1;
+            note.appendChild(document.createTextNode(' Reread today: ' + first + (more ? ' and ' + more + ' more' : '')));
+        } else {
+            nudgeId = 'reminder-quiz';
+            note.appendChild(this._icon('fas fa-book'));
+            const label = config.unit.quizLabel || 'Quiz';
+            const when = days === 0 ? ' today' : days === 1 ? ' tomorrow' : ' in ' + days + ' days';
+            note.appendChild(document.createTextNode(' ' + label + when + ': check your notebook'));
+        }
+        if (typeof NudgeManager !== 'undefined') NudgeManager.logShown(unitId, nudgeId);
+        note.addEventListener('click', () => {
+            if (typeof NudgeManager !== 'undefined') NudgeManager.logFollowed(unitId, nudgeId);
+            this.open();
+        });
         document.getElementById('site-header').appendChild(note);
     }
 };

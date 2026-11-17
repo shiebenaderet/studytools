@@ -730,6 +730,12 @@ StudyEngine.registerActivity({
         if (!isRead) {
             markBtn.addEventListener('click', function() {
                 self._markSectionRead(seg.id, section.id);
+                // Finishing a chapter: time to glue in its vocabulary half-sheet.
+                var chapterDone = seg.sections.every(function(s) { return self._isSectionRead(seg.id, s.id); });
+                if (chapterDone && typeof NudgeManager !== 'undefined' && typeof NotebookCompanion !== 'undefined') {
+                    NudgeManager._toast(self._config.unit.id, 'notebook-chapter',
+                        NudgeManager._say('chapter done! Glue in its vocabulary half-sheet, then tick the terms off in Notebook Companion.'), 'notebook');
+                }
                 markBtn.className = 'tb-mark-read read';
                 markBtn.textContent = '';
                 var doneIcon = document.createElement('i');

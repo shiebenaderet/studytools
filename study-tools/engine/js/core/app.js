@@ -280,6 +280,8 @@ const ActivityTimer = {
                     var sugs = NudgeManager.getSuggestions(StudyEngine.config);
                     for (var i = 0; i < sugs.length; i++) {
                         if (sugs[i].name === suggestion) {
+                            NudgeManager.logFollowed(StudyEngine.config.unit.id, sugs[i].nudgeId);
+                            if (sugs[i].action) { sugs[i].action(); return; }
                             StudyEngine.activateActivity(sugs[i].activityId);
                             return;
                         }
@@ -1106,6 +1108,12 @@ const StudyEngine = {
         }
 
         const homeCards = document.getElementById('home-cards');
+        // "What to Do Next" is redrawn every time Home opens, so it follows
+        // what the student just did.
+        if (homeCards && homeCards.children.length > 0 && typeof NudgeManager !== 'undefined') {
+            NudgeManager.renderSuggestions(homeCards, this.config);
+        }
+        if (typeof NotebookCompanion !== 'undefined') NotebookCompanion.renderHomeReminder(this.config);
         if (homeCards && homeCards.children.length === 0) {
             homeCards.textContent = '';
 

@@ -131,11 +131,24 @@ const StudyUtils = {
         return true;
     },
 
-    showToast(message, type, duration) {
+    showToast(message, type, duration, opts) {
         // type: 'success', 'error', 'info'
+        // opts: { actionLabel, onAction } adds a button (nudges use "Open").
         const toast = document.createElement('div');
         toast.className = 'toast toast-' + (type || 'info');
         toast.textContent = message;
+        if (opts && opts.actionLabel && typeof opts.onAction === 'function') {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'toast-action';
+            btn.textContent = opts.actionLabel;
+            btn.addEventListener('click', () => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 300);
+                opts.onAction();
+            });
+            toast.appendChild(btn);
+        }
         // Toasts that overlap in time stack downward instead of covering
         // each other (an achievement and a mastery nudge often fire together).
         const visible = document.querySelectorAll('.toast').length;

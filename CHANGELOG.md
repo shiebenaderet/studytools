@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.133] - 2026-11-16
+
+### Added
+- **Nudges toward Notebook Companion.** A **Get your notebook ready** card in What to Do Next when a reread is due or a practice question is on the missed list, at the top of the list in the 7 days before the quiz; a toast after leaving Practice Test, Learn Mode or Tower Defense with new misses ("the questions you missed are on your Notebook Companion list"); a toast on finishing a textbook chapter to glue in its vocabulary half-sheet; and, in the last 3 days, the home-screen note reads "Quiz in N days: check your notebook".
+- **Every nudge is counted.** Each student's device logs how often each card, toast and home-screen note was shown (at most once a day) and followed (clicked, **Open** tapped, or the suggested activity opened within 15 minutes), saved as `nudge_log` and synced with a merge rule that keeps the higher counts. Rules in `tools/nudge-core.js` with tests. Until now nothing recorded whether a nudge worked.
+
+### Changed
+- **Toasts are readable and rarer.** Each nudge toast is shown at most once a day, at most one when an activity opens and one when it closes, stays up about a second per 15 characters (5 to 15 seconds, was 3), wraps across the screen on phones, and has an **Open** button.
+- **Toasts lead with why the step helps,** with points as a second line (six of nine were about points).
+- **Missed terms point to Flashcards first,** which reviews exactly those terms; before, a student who had once tried Typing Practice was always sent there.
+- **Privacy page** now lists textbook read and reread dates, the Notebook Companion checklist, and the nudge log.
+
+### Fixed
+- **What to Do Next went stale.** It was drawn once per page load, so "Read Chapter 1" stayed after the chapter was read. It is now redrawn each time Home opens.
+- **"Last used" dates were saved only on the way back to Home,** so a student who went from one activity straight to another had none, and "you haven't tried X in N days" could be wrong. They are now saved when an activity opens too.
+- Removed a nudge function nothing called.
+
+Requested by the teacher on Nov 16. Plan and toast wording: `docs/plans/2026-11-16-nudges.md`.
+
 ## [8.55.132] - 2026-11-16
 
 ### Added

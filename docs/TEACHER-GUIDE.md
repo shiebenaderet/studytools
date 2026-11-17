@@ -620,6 +620,12 @@ Open the teacher dashboard and choose the **Responses** tab. Its Source filter a
 
 ### Your own test account
 
+### Nudges
+
+The site nudges students in three ways: **What to Do Next** cards on the unit home screen, a short message (toast) when they open or leave an activity, and the small note next to the quiz countdown. Each student's device counts every nudge it showed and whether the student followed it (clicked the card or note, tapped **Open** on the toast, or opened the suggested activity within 15 minutes), and the count syncs with their progress. Guests and teacher-unlocked browsers get no toasts.
+
+**How the nudges behave:** at most one toast when a student opens an activity and one when they leave it; each toast stays up about a second per 15 characters (5 to 15 seconds) and has an **Open** button. Toasts lead with why the step helps and mention points second. What to Do Next is redrawn each time the student returns Home. A **Get your notebook ready** card appears when a reread is due or a practice question is on the missed list, and goes to the top of the list in the 7 days before `quizDate`; in the last 3 days, the home-screen note reads "Quiz in N days: check your notebook". Missed terms point to Flashcards first. Finishing a textbook chapter brings a toast to glue in its vocabulary half-sheet.
+
 If you try the site with a student account of your own, sign in to the dashboard in the same browser. The site records no visits from a browser that is signed in to the teacher dashboard, so your testing stays out of Recently Active, "studied this week" and the daily bars. Your test account's progress and written answers still save, and it still appears as a student in the class view and the nudge list.
 
 ### The class view

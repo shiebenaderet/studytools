@@ -1,4 +1,4 @@
-const CACHE_NAME = 'studytools-v89';
+const CACHE_NAME = 'studytools-v90';
 const APP_SHELL = [
     './',
     'index.html',
@@ -19,6 +19,7 @@ const APP_SHELL = [
     'js/core/app.js',
     'tools/tools.js',
     'tools/notebook-core.js',
+    'tools/nudge-core.js',
     'tools/notebook-companion.js',
     'js/data/map-1861-data.js',
     'js/data/civil-war-map-data.js',

@@ -8,7 +8,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 
 [![Live Site](https://img.shields.io/badge/Live_Site-study.mrbsocialstudies.org-1669C5?style=for-the-badge&logo=google-chrome&logoColor=white)](https://study.mrbsocialstudies.org)
 [![License](https://img.shields.io/badge/License-Educational_Use-22c55e?style=for-the-badge)](#license)
-[![Version](https://img.shields.io/badge/Version-8.55.132-f59e0b?style=for-the-badge)](#)
+[![Version](https://img.shields.io/badge/Version-8.55.133-f59e0b?style=for-the-badge)](#)
 
 ---
 
@@ -64,6 +64,7 @@ Built for GitHub Pages. Powered by a single config file. No coding required to c
 ## 🧠 Smart Learning
 
 - **Cross-activity weakness tracking** — wrong answers feed a shared tracker that surfaces weak terms across Flashcards, Practice Test, Fill-in-the-Blank, Lightning Round, and Typing Practice. Practice questions missed in Practice Test, Learn Mode and Tower Defense stay on a missed list until answered right
+- **Nudges that are measured** — What to Do Next cards, one short toast per activity open or close (each at most once a day, with an Open button, leading with why it helps), a "Get your notebook ready" card in quiz week, and a log of which nudges each student followed, totalled on the dashboard
 - **Spaced rereading** — each section's first-read date sets a reread schedule (about 2 and 7 days later, and just before the quiz); sections that teach a term a student keeps missing come up sooner
 - **Auto study time tracking** — time in activities counts automatically; pauses on inactivity or hidden tab
 - **Mastery gating** — Read > Study > Practice > Play flow: students read the textbook chapter before flashcards unlock, then master terms to unlock games. Vocabulary tiers (must-know/encounter/bonus) focus study on tested terms

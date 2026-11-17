@@ -365,6 +365,29 @@ const ProgressManager = {
             return tbMerged;
         }
 
+        // Nudge log: for each nudge, the higher counts and later times from
+        // either device, and the target of the latest showing.
+        if (activity === 'nudge_log') {
+            var nl = {};
+            [remote, local].forEach(function(src) {
+                Object.keys(src || {}).forEach(function(id) {
+                    var e = src[id];
+                    if (!e || typeof e !== 'object') return;
+                    var m = nl[id];
+                    if (!m) { nl[id] = Object.assign({}, e); return; }
+                    var later = (e.lastShown || 0) > (m.lastShown || 0) ? e : m;
+                    nl[id] = {
+                        shown: Math.max(m.shown || 0, e.shown || 0),
+                        followed: Math.max(m.followed || 0, e.followed || 0),
+                        lastShown: Math.max(m.lastShown || 0, e.lastShown || 0),
+                        lastFollowed: Math.max(m.lastFollowed || 0, e.lastFollowed || 0)
+                    };
+                    if (later.target) nl[id].target = later.target;
+                });
+            });
+            return nl;
+        }
+
         // Notebook Companion checklist: for each term, the later tick or
         // untick wins, so a phone and a Chromebook add up.
         if (activity === 'activity_notebook') {

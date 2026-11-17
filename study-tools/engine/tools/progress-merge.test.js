@@ -216,4 +216,13 @@ test('notebook: the later tick or untick wins per term', () => {
     assert.strictEqual(m.updatedAt, 5);
 });
 
+test('nudge log: higher counts, later times, latest target', () => {
+    const local = { 'learn-first': { shown: 3, followed: 1, lastShown: 50, lastFollowed: 40, target: 'learn-mode' }, 'card-read': { shown: 1, followed: 0, lastShown: 9 } };
+    const remote = { 'learn-first': { shown: 5, followed: 0, lastShown: 60, target: 'flashcards' }, 'come-back': { shown: 2, followed: 2, lastShown: 7, lastFollowed: 8 } };
+    const m = merge('nudge_log', local, remote);
+    assert.deepStrictEqual(m['learn-first'], { shown: 5, followed: 1, lastShown: 60, lastFollowed: 40, target: 'flashcards' });
+    assert.deepStrictEqual(m['card-read'], { shown: 1, followed: 0, lastShown: 9 });
+    assert.deepStrictEqual(m['come-back'], { shown: 2, followed: 2, lastShown: 7, lastFollowed: 8 });
+});
+
 console.log(passed + ' passed');
