@@ -112,6 +112,8 @@
                 <div id="overview-trend" class="overview-panel"></div>
                 <div id="overview-feed" class="overview-panel"></div>
             </div>
+            <h2 class="tab-section-title"><i class="fas fa-hand-point-right"></i> Are nudges working?</h2>
+            <div id="overview-nudges"></div>
         </div>
 
         <div id="tab-students" class="tab-content">
@@ -192,6 +194,7 @@
         // document.write keeps them parser-blocking so DOMContentLoaded waits.
         (function () {
             var v = Date.now();
+            document.write('<script src="../engine/tools/nudge-core.js?v=' + v + '"><\/script>');
             document.write('<script src="rankings-viz.js?v=' + v + '"><\/script>');
             document.write('<script src="class-graphics.js?v=' + v + '"><\/script>');
             document.write('<script src="dashboard.js?v=' + v + '"><\/script>');

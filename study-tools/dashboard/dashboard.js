@@ -661,6 +661,7 @@ const Dashboard = {
         switch (tabName) {
             case 'overview':
                 this.loadOverview(filters);
+                this.loadNudgeStats(filters);
                 break;
             case 'students':
                 this.loadStudents(filters);
@@ -797,6 +798,60 @@ const Dashboard = {
             if (!best || opens > meta[best].opens) best = id;
         });
         return best;
+    },
+
+    // How often students follow each nudge (toasts, What to Do Next cards,
+    // the home-screen note), from each student's synced nudge_log.
+    async loadNudgeStats(filters) {
+        var container = document.getElementById('overview-nudges');
+        if (!container || typeof NudgeCore === 'undefined') return;
+        container.textContent = '';
+        container.appendChild(this._loading());
+        try {
+            var sb = this.supabase;
+            var res = await this._fetchAll(function() {
+                var q = sb.from('progress').select('student_id, unit_id, data').eq('activity', 'nudge_log');
+                if (filters.unitId) q = q.eq('unit_id', filters.unitId);
+                return q;
+            });
+            if (res.error) throw res.error;
+            var rows = res.data || [];
+            if (filters.classId) {
+                var cls = await sb.from('students').select('id').eq('class_id', filters.classId);
+                var ids = new Set((cls.data || []).map(function(s) { return s.id; }));
+                rows = rows.filter(function(r) { return ids.has(r.student_id); });
+            }
+            var stats = NudgeCore.summarize(rows);
+            container.textContent = '';
+            var note = document.createElement('p');
+            note.className = 'panel-note';
+            note.textContent = 'Each nudge is shown to a student at most once a day. "Followed" means the student clicked it, or opened the activity it suggested within 15 minutes. Counting started with version 8.55.133 (Nov 16, 2026). The Class and Unit filters apply.';
+            container.appendChild(note);
+            if (!stats.length) {
+                container.appendChild(this._emptyState('fas fa-hand-point-right', 'No nudges recorded yet. Check back after students have used the site for a few days.'));
+                return;
+            }
+            var self = this;
+            container.appendChild(this._sortableTable([
+                { label: 'Nudge', key: 'name', getValue: function(s) { return s.name; }, defaultAsc: true },
+                { label: 'Students', key: 'students', getValue: function(s) { return s.students; } },
+                { label: 'Days shown', key: 'shown', getValue: function(s) { return s.shown; } },
+                { label: 'Followed', key: 'followed', getValue: function(s) { return s.followed; } },
+                { label: 'Follow rate', key: 'rate', getValue: function(s) { return s.rate; } }
+            ], stats, function(s) {
+                var tr = document.createElement('tr');
+                [s.name, s.students, s.shown, s.followed, s.rate + '%'].forEach(function(v) {
+                    var td = document.createElement('td');
+                    td.textContent = v;
+                    tr.appendChild(td);
+                });
+                return tr;
+            }));
+        } catch (err) {
+            console.error('Nudge stats error:', err);
+            container.textContent = '';
+            container.appendChild(this._emptyState('fas fa-exclamation-triangle', 'Could not load nudge data.'));
+        }
     },
 
     async loadOverview(filters) {

@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.134] - 2026-11-16
+
+### Added
+- **Dashboard: Are nudges working?** A table on the Overview tab adds up every student's nudge log: for each card, toast and home-screen note, how many students saw it, on how many days, how often they followed it, and the follow rate, sortable by any column. The Class and Unit filters apply. It answers the teacher's question of whether nudges help, once two or three weeks of counts are in. Requested by the teacher on Nov 16.
+
 ## [8.55.133] - 2026-11-16
 
 ### Added
