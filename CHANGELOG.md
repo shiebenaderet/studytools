@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.137] - 2026-11-16
+
+### Added
+- **Saved image files that were sitting outside the repo:** three Lincoln–Douglas debate pictures for the Civil War unit (`civil-war/images/events/`) and ten class-material screenshots from last spring in `early-republic/images/sources/` (a rubric, a map, a seal, handout pages). None is used by a unit yet. Three other screenshots in that folder were left out on purpose because they show personal information (a home address, a student activity record, a signed-in quiz page) and this repository is public. Requested by the teacher on Nov 16.
+
 ## [8.55.136] - 2026-11-16
 
 ### Changed
