@@ -724,6 +724,7 @@ StudyEngine.registerActivity({
                 btn.addEventListener('click', function() {
                     var isCorrect = origIdx === q.correct;
                     if (isCorrect) MasteryManager.noteQuestionRight(self._config.unit.id, self._config, q);
+                    else MasteryManager.noteQuestionWrong(self._config.unit.id, self._config, q);
                     // Disable all buttons
                     var btns = wrap.querySelectorAll('button');
                     for (var b = 0; b < btns.length; b++) {
@@ -1467,6 +1468,7 @@ StudyEngine.registerActivity({
 
                     if (self._lastCheck) self._lastCheck.correct = isCorrect;
                     if (isCorrect) MasteryManager.noteQuestionRight(self._config.unit.id, self._config, q);
+                    else MasteryManager.noteQuestionWrong(self._config.unit.id, self._config, q);
                     if (isCorrect) {
                         btn.style.background = '#1a5c2a';
                         btn.style.borderColor = '#2ecc71';

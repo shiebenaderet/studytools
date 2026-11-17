@@ -1278,6 +1278,7 @@ StudyEngine.registerActivity({
         var q = this._activeQuestion;
         var correct = selectedIdx === q.correct;
         if (correct && this._config) MasteryManager.noteQuestionRight(this._config.unit.id, this._config, q);
+        else if (this._config) MasteryManager.noteQuestionWrong(this._config.unit.id, this._config, q);
 
         if (correct) {
             var reward = 50 + this._streak * 10;

@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.130] - 2026-11-16
+
+### Changed
+- **Learn Mode and Tower Defense now record missed practice questions.** Until now only Practice Test kept a list of the questions a student missed, so a student who practiced mostly in games had almost none on record. A miss in either activity now goes on the same list (`MasteryManager.noteQuestionWrong`), and a right answer anywhere still takes it off. Quiz Race is left out because two students share one screen there. The list feeds the new Notebook Companion page. Requested by the teacher on Nov 16.
+
 ## [8.55.129] - 2026-11-16
 
 ### Added

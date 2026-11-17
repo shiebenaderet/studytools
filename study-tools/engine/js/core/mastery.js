@@ -266,6 +266,20 @@ const MasteryManager = {
         ProgressManager.saveActivityProgress(unitId, 'practice-test-mastery', data);
     },
 
+    // Records a missed practice question from any activity, so Notebook
+    // Companion lists it. A question answered right once stays off the list,
+    // matching the merge rule for practice-test-mastery.
+    noteQuestionWrong(unitId, config, q) {
+        const id = this.questionId(q);
+        if (!id || !(config.practiceQuestions || []).some(p => this.questionId(p) === id)) return;
+        const data = ProgressManager.getActivityProgress(unitId, 'practice-test-mastery') || { mastered: [], wrong: [], sessions: 0 };
+        data.mastered = data.mastered || [];
+        data.wrong = data.wrong || [];
+        if (data.mastered.indexOf(id) !== -1 || data.wrong.indexOf(id) !== -1) return;
+        data.wrong.push(id);
+        ProgressManager.saveActivityProgress(unitId, 'practice-test-mastery', data);
+    },
+
     getUnlockedQuestions(unitId, config, questionsKey) {
         const questions = config[questionsKey];
         if (!questions || !Array.isArray(questions)) return [];
