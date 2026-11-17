@@ -135,3 +135,16 @@ Not part of the starting check, and not yet acted on:
 
 - Streaks, the consistency bonus and the leaderboard formula.
 - Learn Mode's warm-up, which stays a per-session check.
+
+## Follow-up (Nov 16, 2026)
+
+- **Practice bank:** the figures above are out of date; the Nov 15 fact check had already
+  spread the right answers across all four places. A right answer clearly longer than every
+  wrong one remained in 10 Unit 3 and 7 Revolution questions; fixed in 8.55.138, and the
+  content checker now warns about it. Tower Defense did not shuffle choices; fixed in 8.55.139.
+- **Database sign-ups:** confirmed from the project's public auth settings on Nov 16: public
+  sign-ups are off (`disable_signup: true`) and anonymous sign-ins are off; only email
+  sign-in (the teacher's dashboard login) is on.
+- **Privacy page:** all three points were already fixed: it says first name and last initial,
+  lists written answers, and says plainly that progress records can be read or changed by
+  someone with technical skill until students have their own sign-ins.

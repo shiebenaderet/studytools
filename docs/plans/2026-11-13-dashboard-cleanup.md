@@ -160,6 +160,7 @@ Two things differ from the proposal:
 Not built: the growth section (E), which waits for Monday's Canvas results.
 
 Open: the Class Rankings chart on the dashboard still uses averages and its own colours, so its
-order and colours can differ from the new graphics. Everything was tested against a stand-in
+order and colours can differ from the new graphics. (Nov 16: the colours already matched; 8.55.140
+makes the chart rank by points added together by default, with the same menu as the graphics.) Everything was tested against a stand-in
 database; the live data could not be seen from the build session.
 

@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.140] - 2026-11-16
+
+### Changed
+- **The dashboard's Class Rankings chart ranks the way students see it.** The line chart and class race showed each period's average score, so their order could differ from the students' leaderboard and the class graphics, which add points together. They now add points together by default, with the same "Rank class periods by" menu as the graphics to switch to averages; the note and tooltips say which is shown. The colours already matched the graphics. Requested by the teacher on Nov 16 (open item from the Nov 13 dashboard plan).
+
 ## [8.55.139] - 2026-11-16
 
 ### Fixed

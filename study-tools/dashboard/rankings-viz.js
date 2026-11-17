@@ -9,10 +9,17 @@ var RankingsViz = {
         return i;
     },
 
-    // Process raw snapshot rows into per-class, per-date averages
+    // How class periods are ranked: 'total' (points added together, the order
+    // students see on their leaderboard, and the class graphics' default) or
+    // 'average' (points per approved student).
+    measure: 'total',
+
+    // Process raw snapshot rows into per-class, per-date values
     // Input: array of { student_id, score, class_id, snapshot_date }
-    // Output: { dates: ['2026-03-15', ...], classes: { classId: { name, color, averages: [avg, ...] } } }
-    processData(snapshots, classNameMap) {
+    // Output: { dates: ['2026-03-15', ...], classes: { classId: { name, color, averages: [value, ...] } } }
+    // (`averages` holds totals when measure is 'total'.)
+    processData(snapshots, classNameMap, measure) {
+        var byAverage = (measure || this.measure) === 'average';
         var dateSet = {};
         for (var i = 0; i < snapshots.length; i++) {
             dateSet[snapshots[i].snapshot_date] = true;
@@ -38,7 +45,7 @@ var RankingsViz = {
             var averages = [];
             for (var d = 0; d < dates.length; d++) {
                 var entry = classDateTotals[cid][dates[d]];
-                averages.push(entry ? Math.round(entry.total / entry.count) : null);
+                averages.push(entry ? (byAverage ? Math.round(entry.total / entry.count) : entry.total) : null);
             }
             classes[cid] = {
                 name: classNameMap[cid] || 'Unknown',
@@ -57,7 +64,9 @@ var RankingsViz = {
 
         if (!snapshots || snapshots.length === 0) return;
 
-        var data = this.processData(snapshots, classNameMap);
+        var self = this;
+        var byAverage = this.measure === 'average';
+        var data = this.processData(snapshots, classNameMap, this.measure);
         var classIds = Object.keys(data.classes);
 
         if (classIds.length === 0) {
@@ -77,8 +86,29 @@ var RankingsViz = {
         // Says what the lines and bars measure; the numbers had no unit
         var note = document.createElement('p');
         note.className = 'panel-note';
-        note.textContent = 'Each class period\'s average score: the points of its approved students divided by how many there are, at the end of each day.';
+        note.textContent = byAverage
+            ? 'Each class period\'s average score: the points of its approved students divided by how many there are, at the end of each day.'
+            : 'Each class period\'s points added together: the points of its approved students at the end of each day. This is the order students see on their leaderboard.';
         container.appendChild(note);
+
+        // Same choice as the class graphics, so the chart and the slides agree.
+        var measureWrap = document.createElement('label');
+        measureWrap.className = 'graphics-measure';
+        measureWrap.appendChild(document.createTextNode('Rank class periods by '));
+        var measureSel = document.createElement('select');
+        [['total', 'points added together (what students see)'], ['average', 'average points per student']].forEach(function(o) {
+            var opt = document.createElement('option');
+            opt.value = o[0];
+            opt.textContent = o[1];
+            measureSel.appendChild(opt);
+        });
+        measureSel.value = byAverage ? 'average' : 'total';
+        measureSel.addEventListener('change', function() {
+            self.measure = measureSel.value;
+            self.render(container, snapshots, classNameMap);
+        });
+        measureWrap.appendChild(measureSel);
+        container.appendChild(measureWrap);
 
         var lineContainer = document.createElement('div');
         lineContainer.className = 'rankings-line-chart';
@@ -218,7 +248,7 @@ var RankingsViz = {
                 nameSpan.textContent = cls.name;
                 tooltip.appendChild(nameSpan);
                 tooltip.appendChild(document.createElement('br'));
-                tooltip.appendChild(document.createTextNode(dateStr + ': ' + closest.avg + ' pts average'));
+                tooltip.appendChild(document.createTextNode(dateStr + ': ' + closest.avg + (RankingsViz.measure === 'average' ? ' pts average' : ' pts in all')));
                 tooltip.style.display = 'block';
                 tooltip.style.left = Math.min(closest.x + 12, width - 120) + 'px';
                 tooltip.style.top = (closest.y - 10) + 'px';
