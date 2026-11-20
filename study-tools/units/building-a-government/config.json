@@ -2193,6 +2193,11 @@
                     "text": "Can declare an action of the president unconstitutional",
                     "bin": "judicial",
                     "explanation": "The courts check the president as well as Congress."
+                },
+                {
+                    "text": "Presides over the president's impeachment trial",
+                    "bin": "judicial",
+                    "explanation": "The Senate holds the trial, but when a president is tried, the Chief Justice runs it (Article I, Section 3)."
                 }
             ]
         },

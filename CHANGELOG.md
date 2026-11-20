@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.55.144] - 2026-11-20
+
+### Added
+- **One more power in "Which Branch?" (Building a Government).** The sort now includes "Presides over the president's impeachment trial," which belongs to the judicial branch: the Senate holds the trial, but the Chief Justice runs it when a president is tried. The sort now has 18 powers, the same 18 as the printed Power Sort cards students use in class on Nov 23, in the same wording. Requested by the teacher on Nov 20.
+
 ## [8.55.143] - 2026-11-16
 
 ### Fixed
